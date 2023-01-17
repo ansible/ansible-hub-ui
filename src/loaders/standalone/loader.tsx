@@ -1,3 +1,4 @@
+import '../app.scss';
 import '@patternfly/patternfly/patternfly.scss';
 import React, { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { AlertType, UIVersion } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
-import '../app.scss';
 import { StandaloneLayout } from './layout';
 import { StandaloneRoutes } from './routes';
 

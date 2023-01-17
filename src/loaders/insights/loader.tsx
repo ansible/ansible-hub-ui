@@ -1,3 +1,4 @@
+import '../app.scss';
 import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -8,7 +9,6 @@ import { AlertType, UIVersion } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
-import '../app.scss';
 import { loadContext } from '../load-context';
 import { InsightsRoutes } from './routes';
 
