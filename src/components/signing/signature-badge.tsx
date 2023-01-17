@@ -5,7 +5,6 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-import { useContext } from 'src/loaders/app-context';
 
 interface Props extends LabelProps {
   signState: 'signed' | 'unsigned';
@@ -16,12 +15,6 @@ export const SignatureBadge: FC<Props> = ({
   isCompact = false,
   ...props
 }) => {
-  const { display_signatures } = useContext()?.featureFlags || {};
-
-  if (!display_signatures) {
-    return null;
-  }
-
   const text = () => {
     switch (signState) {
       case 'signed':

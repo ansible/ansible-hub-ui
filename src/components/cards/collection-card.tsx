@@ -23,6 +23,7 @@ import { Constants } from 'src/constants';
 
 interface IProps extends CollectionListType {
   className?: string;
+  displaySignatures: boolean;
   footer?: React.ReactNode;
   repo?: string;
   menu?: React.ReactNode;
@@ -37,6 +38,7 @@ export class CollectionCard extends React.Component<IProps> {
       latest_version,
       namespace,
       className,
+      displaySignatures,
       footer,
       repo,
       sign_state,
@@ -58,7 +60,9 @@ export class CollectionCard extends React.Component<IProps> {
             flexGrow
           />
           <TextContent>{this.getCertification(repo)}</TextContent>
-          <SignatureBadge isCompact signState={sign_state} />
+          {displaySignatures ? (
+            <SignatureBadge isCompact signState={sign_state} />
+          ) : null}
           {menu}
         </CardHeader>
         <CardHeader>

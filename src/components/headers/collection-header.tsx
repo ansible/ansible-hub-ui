@@ -53,7 +53,7 @@ import {
 import { Paths, formatPath } from 'src/paths';
 import {
   waitForTask,
-  canSign as canSignNS,
+  canSignNamespace,
   parsePulpIDFromURL,
 } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -185,7 +185,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const latestVersion = collection.latest_version.created_at;
 
     const { display_signatures, can_upload_signatures } =
-      this.context?.featureFlags || {};
+      this.context.featureFlags;
 
     const signedString = (v) => {
       if (display_signatures && 'sign_state' in v) {
@@ -206,7 +206,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Redirect push to={redirect} />;
     }
 
-    const canSign = canSignNS(this.context, namespace);
+    const canSign = canSignNamespace(this.context, namespace);
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({
@@ -469,10 +469,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Trans>
                 </span>
               ) : null}
-              <SignatureBadge
-                isCompact
-                signState={collection.latest_version.sign_state}
-              />
+              {display_signatures ? (
+                <SignatureBadge
+                  isCompact
+                  signState={collection.latest_version.sign_state}
+                />
+              ) : null}
             </div>
           }
           pageControls={

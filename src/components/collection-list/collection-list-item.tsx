@@ -30,6 +30,7 @@ import { SignatureBadge } from '../signing';
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
   controls?: React.ReactNode;
+  displaySignatures: boolean;
   repo?: string;
 }
 
@@ -42,6 +43,7 @@ export class CollectionListItem extends React.Component<IProps> {
       showNamespace,
       controls,
       deprecated,
+      displaySignatures,
       repo,
       sign_state,
     } = this.props;
@@ -119,7 +121,9 @@ export class CollectionListItem extends React.Component<IProps> {
           </Trans>
         </div>
         <div className='hub-entry'>v{latest_version.version}</div>
-        <SignatureBadge className='hub-entry' signState={sign_state} />
+        {displaySignatures ? (
+          <SignatureBadge className='hub-entry' signState={sign_state} />
+        ) : null}
       </DataListCell>,
     );
 

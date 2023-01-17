@@ -320,7 +320,7 @@ class CertificationDashboard extends React.Component<
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
     if (version.repository_list.includes(Constants.PUBLISHED)) {
-      const { display_signatures } = this.context?.featureFlags || {};
+      const { display_signatures } = this.context.featureFlags;
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
           {display_signatures && version.sign_state === 'signed'
@@ -338,7 +338,7 @@ class CertificationDashboard extends React.Component<
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
       const { can_upload_signatures, require_upload_signatures } =
-        this.context?.featureFlags || {};
+        this.context.featureFlags;
       return (
         <Label
           variant='outline'
@@ -400,7 +400,7 @@ class CertificationDashboard extends React.Component<
       can_upload_signatures,
       collection_auto_sign,
       require_upload_signatures,
-    } = this.context?.featureFlags || {};
+    } = this.context.featureFlags;
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
     }

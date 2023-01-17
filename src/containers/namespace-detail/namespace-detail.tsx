@@ -59,7 +59,7 @@ import {
   filterIsSet,
   errorMessage,
   waitForTask,
-  canSign as canSignNS,
+  canSignNamespace,
   DeleteCollectionUtils,
 } from 'src/utilities';
 
@@ -390,6 +390,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   renderCollectionControls={(collection) =>
                     this.renderCollectionControls(collection)
                   }
+                  displaySignatures={
+                    this.context.featureFlags.display_signatures
+                  }
                 />
               </section>
             )
@@ -618,7 +621,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
           showControls: !!val[2],
-          canSign: canSignNS(this.context, val[2]?.data),
+          canSign: canSignNamespace(this.context, val[2]?.data),
         });
 
         this.loadAllRepos(val[0].data.meta.count);
@@ -669,7 +672,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { canSign, collections } = this.state;
-    const { can_upload_signatures } = this.context?.featureFlags || {};
+    const { can_upload_signatures } = this.context.featureFlags;
 
     const dropdownItems = [
       <DropdownItem
@@ -735,9 +738,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
     ].filter(Boolean);
+
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls'></div>;
     }
+
     return (
       <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
         {' '}
