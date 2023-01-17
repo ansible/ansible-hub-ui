@@ -5,3 +5,7 @@ tabWidth: 2
 jsxSingleQuote: true
 jsxBracketSameLine: false
 bracketSpacing: true
+importOrder:
+  - "^src/"
+  - "^[./]"
+importOrderSortSpecifiers: true
