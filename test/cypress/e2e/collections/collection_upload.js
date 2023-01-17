@@ -35,7 +35,7 @@ describe('Collection Upload Tests', () => {
         `${uiPrefix}repo/published?page_size=10&view_type=card&keywords=testcollection`,
       );
       cy.contains('testcollection');
-      cy.get('[aria-label=Actions]').click();
+      cy.get('[aria-label="Actions"]').click();
       cy.contains('Upload new version').click();
       cy.contains("You don't have rights to do this operation.");
     });
@@ -44,7 +44,7 @@ describe('Collection Upload Tests', () => {
       cy.login(userName, userPassword);
       cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
       cy.contains('testcollection');
-      cy.get('button[aria-label=Actions]').click();
+      cy.get('button[aria-label="Actions"]').click();
       cy.contains('Upload new version').click();
       cy.contains("You don't have rights to do this operation.");
     });
@@ -62,7 +62,7 @@ describe('Collection Upload Tests', () => {
         `${uiPrefix}repo/published?page_size=10&view_type=card&keywords=testcollection`,
       );
       cy.contains('testcollection');
-      cy.get('button[aria-label=Actions]').click();
+      cy.get('button[aria-label="Actions"]').click();
       cy.contains('Upload new version').click();
       cy.contains('New version of testcollection');
     });
@@ -72,7 +72,7 @@ describe('Collection Upload Tests', () => {
     cy.login();
     cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
     cy.contains('testcollection');
-    cy.get('main button[aria-label=Actions]').click();
+    cy.get('[data-cy="kebab-toggle"] button[aria-label="Actions"]').click();
     cy.contains('Upload new version').click();
     cy.contains('New version of testcollection');
   });

@@ -14,7 +14,7 @@ describe('Collections list Tests', () => {
     cy.get(container).contains('my_collection2').should('not.exist');
     cy.get(container).contains('my_collection0');
 
-    cy.get('main [aria-label=Actions]').click();
+    cy.get('.collection-container [aria-label="Actions"]').click();
     cy.contains('Deprecate').click();
     cy.contains('No results found', { timeout: 10000 });
   }
@@ -22,7 +22,7 @@ describe('Collections list Tests', () => {
   function undeprecate() {
     cy.visit(`${uiPrefix}repo/published/my_namespace/my_collection0`);
     cy.contains('This collection has been deprecated.');
-    cy.get('main [aria-label=Actions]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.contains('Undeprecate').click();
     cy.contains('This collection has been deprecated.', {
       timeout: 10000,
@@ -143,7 +143,7 @@ describe('Collections list Tests', () => {
     cy.get('.hub-list').contains('my_collection2').should('not.exist');
     cy.get('.hub-list').contains('my_collection0');
 
-    cy.get('main [aria-label=Actions]').click();
+    cy.get('.collection-container [aria-label="Actions"]').click();
     cy.contains('Delete entire collection').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
@@ -171,7 +171,7 @@ describe('Collections list Tests', () => {
     });
     cy.get('.body').contains('my_collection1');
 
-    cy.get('.body [aria-label=Actions]').click();
+    cy.get('.body [aria-label="Actions"]').click();
     cy.contains('Delete entire collection').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
