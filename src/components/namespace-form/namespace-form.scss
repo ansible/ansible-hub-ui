@@ -1,4 +1,4 @@
-@import '../../global-variables.scss';
+$breakpoint-md: 1000px;
 
 .hub-card-row {
   @media (max-width: $breakpoint-md) {

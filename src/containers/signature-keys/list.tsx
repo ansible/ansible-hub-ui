@@ -8,7 +8,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet, errorMessage } from '../../utilities';
+import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
 import {
   AlertList,
   AlertType,

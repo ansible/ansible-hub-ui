@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
 import { Logo } from 'src/components';
 
-import { LegacyNamespaceDetailType } from 'src/api/response-types/legacy-namespace';
+import { LegacyNamespaceDetailType } from 'src/api';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;

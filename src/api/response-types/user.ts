@@ -28,11 +28,3 @@ export class UserType {
   is_superuser?: boolean;
   is_anonymous?: boolean;
 }
-
-export class MeType {
-  username: string;
-  first_name?: string;
-  last_name?: string;
-  model_permissions: ModelPermissionsType;
-  groups: GroupType[];
-}

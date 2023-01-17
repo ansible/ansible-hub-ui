@@ -170,7 +170,7 @@ jobs:
         grep jboss/keycloak "$FROM"/default/chrome.js
         docker pull jboss/keycloak
 
-        npm run start &
+        npm run start-insights &
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'

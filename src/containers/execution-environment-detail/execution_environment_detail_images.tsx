@@ -47,7 +47,7 @@ import {
   DeleteModal,
   LoadingPageSpinner,
   ListItemActions,
-} from '../../components';
+} from 'src/components';
 
 import {
   withContainerParamFix,

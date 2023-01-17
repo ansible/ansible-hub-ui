@@ -9,8 +9,7 @@ npm i -g npm-run-all
 
 # build
 if [ $IS_PR = true ]; then
-  #npm run verify
-  npm-run-all build:prod 'lint:!(po|yaml)'
+  npm-run-all build-insights 'lint:!(po|yaml)'
 else
   npm run deploy
 fi

@@ -10,25 +10,34 @@ This project can now be run as a container alongside the API. Just follow the in
 
 ## Develop without containers
 
-This app can be developed in standalone mode or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
+This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and Roles.
 
-### Develop in Standalone Mode
+For every mode, you first need to:
 
-1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the instructions for starting up the API.
+1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the setup instructions
 2. Install node. Node v16+ is known to work. Older versions may work as well.
-3. `npm install`
-4. `npm run start-standalone`
+3. `npm install` in the UI
+
+### Develop in Standalone Mode (default)
+
+1. Start the API with `COMPOSE_PROFILE=standalone` (compose) or `COMPOSE_PROFILE=galaxy_ng/base` (oci-env)
+2. `npm run start-standalone`
 
 The app will run on http://localhost:8002/ui and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
+
+### Develop in Community Mode
+
+1. Start the API with `COMPOSE_PROFILE=standalone-community` (compose)
+2. `npm run start-community`
+
+The app will run on http://localhost:8002/ui and proxy requests for `/api` to the api on `http://localhost:5001`.
 
 ### Develop in Insights Mode
 
 **NOTE:** This option is only relevant to Red Hat employees. Community contributors should follow setup for [standalone mode](#develop-in-standalone-mode)
 
-1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and start the API with `COMPOSE_PROFILE=insights`.
-2. Install node. Node v14+ is known to work. Older versions may work as well.
-3. `npm install`
-4. `npm run start`
+1. Start the API with `COMPOSE_PROFILE=insights` (compose) or `COMPOSE_PROFILE=galaxy_ng/base:galaxy_ng/insights` (oci-env)
+2. `npm run start-insights`
 
 The app will run on http://localhost:8002/beta/ansible/automation-hub and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
 

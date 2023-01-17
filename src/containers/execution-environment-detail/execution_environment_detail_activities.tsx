@@ -8,10 +8,10 @@ import {
   ShaLabel,
   TagLabel,
   DateComponent,
-} from '../../components';
+} from 'src/components';
 import { FlexItem, Flex, Button } from '@patternfly/react-core';
-import { formatEEPath, Paths } from '../../paths';
-import { ActivitiesAPI } from '../../api';
+import { formatEEPath, Paths } from 'src/paths';
+import { ActivitiesAPI } from 'src/api';
 import './execution-environment-detail.scss';
 
 import {

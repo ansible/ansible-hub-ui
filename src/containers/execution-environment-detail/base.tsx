@@ -9,7 +9,7 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { formatPath, formatEEPath, Paths } from '../../paths';
+import { formatPath, formatEEPath, Paths } from 'src/paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,

@@ -21,14 +21,14 @@ at the directory's root.
 Correct way to import:
 
 ```
-import { CollectionList, PartnerHeader } from '../../components';
+import { CollectionList, PartnerHeader } from 'src/components';
 ```
 
 Incorrect way to import:
 
 ```
-import { CollectionList } from '../../components/collection-list/collection-list'
-import { PartnerHeader } from '../../components/headers/partner-header'
+import { CollectionList } from 'src/components/collection-list/collection-list'
+import { PartnerHeader } from 'src/components/headers/partner-header'
 ```
 
 Not only is this a lot cleaner to read and update, but it also makes it easier to reorganize

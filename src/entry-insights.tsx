@@ -14,4 +14,5 @@ const AnsibleHub = () => (
   </React.StrictMode>
 );
 
+// ignore unused exports default
 export default AnsibleHub;

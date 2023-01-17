@@ -2,15 +2,13 @@ import { t } from '@lingui/macro';
 
 import * as React from 'react';
 import {
-  parsePulpIDFromURL,
-  errorMessage,
   ErrorMessagesType,
-  translateLockedRolesDescription,
-} from 'src/utilities';
-import {
+  errorMessage,
   mapNetworkErrors,
+  parsePulpIDFromURL,
+  translateLockedRolesDescription,
   validateInput,
-} from 'src/containers/role-management/map-role-errors';
+} from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
 
