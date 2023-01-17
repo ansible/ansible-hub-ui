@@ -1,12 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import { errorMessage, DeleteCollectionUtils } from 'src/utilities';
-import './header.scss';
-
-import { Navigate } from 'react-router-dom';
-
-import * as moment from 'moment';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Button,
@@ -21,47 +13,51 @@ import {
   SelectVariant,
   Text,
 } from '@patternfly/react-core';
-import { AppContext } from 'src/loaders/app-context';
-
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import * as moment from 'moment';
+import * as React from 'react';
+import { Navigate } from 'react-router-dom';
 import {
-  BaseHeader,
-  Breadcrumbs,
-  BreadcrumbType,
-  LinkTabs,
-  Logo,
-  RepoSelector,
-  Pagination,
-  AlertList,
-  AlertType,
-  closeAlertMixin,
-  StatefulDropdown,
-  SignSingleCertificateModal,
-  SignAllCertificatesModal,
-  UploadSingCertificateModal,
-  ImportModal,
-  DeleteCollectionModal,
-} from 'src/components';
-
-import {
+  CertificateUploadAPI,
   CollectionAPI,
   CollectionDetailType,
-  SignCollectionAPI,
   CollectionListType,
-  MyNamespaceAPI,
   CollectionVersion,
+  MyNamespaceAPI,
   Repositories,
-  CertificateUploadAPI,
+  SignCollectionAPI,
 } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
 import {
-  waitForTask,
+  AlertList,
+  AlertType,
+  BaseHeader,
+  BreadcrumbType,
+  Breadcrumbs,
+  DeleteCollectionModal,
+  ImportModal,
+  LinkTabs,
+  Logo,
+  Pagination,
+  RepoSelector,
+  SignAllCertificatesModal,
+  SignSingleCertificateModal,
+  StatefulDropdown,
+  UploadSingCertificateModal,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
+import {
   canSignNamespace,
   parsePulpIDFromURL,
+  waitForTask,
 } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
-import { Constants } from 'src/constants';
 import { SignatureBadge } from '../signing';
+import './header.scss';
 
 interface IProps {
   collection: CollectionDetailType;

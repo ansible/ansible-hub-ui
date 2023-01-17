@@ -1,23 +1,22 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter } from 'src/utilities';
 import {
   ExecutionEnvironmentNamespaceAPI,
-  GroupType,
   GroupAPI,
+  GroupType,
   RoleType,
 } from 'src/api';
 import { OwnersTab } from 'src/components';
-import { formatEEPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatEEPath } from 'src/paths';
+import { withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage } from 'src/utilities';
-import './execution-environment-detail.scss';
-
 import {
+  IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
-  IDetailSharedProps,
 } from './base';
+import './execution-environment-detail.scss';
 
 interface IState {
   name: string;

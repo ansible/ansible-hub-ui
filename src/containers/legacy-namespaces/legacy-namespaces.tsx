@@ -1,9 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './legacy-namespaces.scss';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { DataList } from '@patternfly/react-core';
+import * as React from 'react';
+import { LegacyNamespaceListType } from 'src/api';
+import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
 import {
   BaseHeader,
   CollectionFilter,
@@ -12,9 +11,9 @@ import {
   LoadingPageSpinner,
   Pagination,
 } from 'src/components';
-import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
-import { LegacyNamespaceListType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { RouteProps, withRouter } from 'src/utilities';
+import './legacy-namespaces.scss';
 
 interface LegacyNamespacesProps {
   legacynamespaces: LegacyNamespaceListType[];

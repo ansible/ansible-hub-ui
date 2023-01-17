@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { i18n } from '@lingui/core';
+import { t } from '@lingui/macro';
 import {
   Button,
   Toolbar,
@@ -6,11 +7,9 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import * as React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RouteProps } from 'src/utilities';
-import { t } from '@lingui/macro';
-
-import { ParamHelper } from 'src/utilities/param-helper';
+import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -28,13 +27,12 @@ import {
   Sort,
   closeAlertMixin,
 } from 'src/components';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { errorMessage, filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
-import { i18n } from '@lingui/core';
-
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { RouteProps } from 'src/utilities';
+import { errorMessage, filterIsSet } from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
 import './namespace-list.scss';
 
 interface IState {

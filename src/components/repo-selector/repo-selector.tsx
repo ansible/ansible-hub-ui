@@ -1,7 +1,5 @@
-import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { t } from '@lingui/macro';
 import {
   Flex,
   FlexItem,
@@ -10,9 +8,10 @@ import {
   Select,
   SelectOption,
 } from '@patternfly/react-core';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
-
 import './repo-selector.scss';
 
 interface IProps {

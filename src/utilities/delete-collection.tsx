@@ -1,6 +1,6 @@
-import { t, Trans } from '@lingui/macro';
-import React from 'react';
+import { Trans, t } from '@lingui/macro';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import React from 'react';
 import { CollectionAPI } from 'src/api';
 import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 

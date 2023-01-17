@@ -1,9 +1,5 @@
 /* eslint react/prop-types: 0 */
 import { t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { reject, some } from 'lodash';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import {
   Nav,
   NavExpandable,
@@ -11,6 +7,10 @@ import {
   NavItem,
   NavList,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { reject, some } from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
 

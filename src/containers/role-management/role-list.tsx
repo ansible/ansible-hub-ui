@@ -1,28 +1,4 @@
-import React from 'react';
-import { t, Trans } from '@lingui/macro';
-import { AppContext } from 'src/loaders/app-context';
-import { Link, Navigate } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
-import {
-  AlertType,
-  Pagination,
-  BaseHeader,
-  closeAlertMixin,
-  CompoundFilter,
-  EmptyStateFilter,
-  LoadingPageSpinner,
-  Main,
-  AlertList,
-  EmptyStateUnauthorized,
-  EmptyStateNoData,
-  AppliedFilters,
-  DeleteModal,
-  RoleListTable,
-  ExpandableRow,
-  ListItemActions,
-  DateComponent,
-  PermissionCategories,
-} from 'src/components';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -32,17 +8,40 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { RoleType } from 'src/api/response-types/role';
+import { RoleAPI } from 'src/api/role';
 import {
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
+  CompoundFilter,
+  DateComponent,
+  DeleteModal,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  ExpandableRow,
+  ListItemActions,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  PermissionCategories,
+  RoleListTable,
+  closeAlertMixin,
+} from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import {
+  ParamHelper,
   errorMessage,
   filterIsSet,
-  ParamHelper,
   parsePulpIDFromURL,
   translateLockedRolesDescription,
 } from 'src/utilities';
-
-import { RoleAPI } from 'src/api/role';
-import { Paths, formatPath } from 'src/paths';
 
 interface IState {
   roles: RoleType[];

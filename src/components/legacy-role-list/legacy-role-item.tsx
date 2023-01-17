@@ -1,24 +1,20 @@
-import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
-import './legacy-role-item.scss';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   LabelGroup,
-  TextContent,
   Text,
+  TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Paths, formatPath } from 'src/paths';
-import { Tag, Logo, DateComponent } from 'src/components';
-
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
+import { DateComponent, Logo, Tag } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
   role: LegacyRoleDetailType;

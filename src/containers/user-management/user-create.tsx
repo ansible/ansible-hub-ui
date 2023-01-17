@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
-import { UserType, UserAPI } from 'src/api';
+import { UserAPI, UserType } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
@@ -11,10 +11,10 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  mapErrorMessages,
   ErrorMessagesType,
-  withRouter,
   RouteProps,
+  mapErrorMessages,
+  withRouter,
 } from 'src/utilities';
 
 interface IState {

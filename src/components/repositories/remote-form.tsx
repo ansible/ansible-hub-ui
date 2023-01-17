@@ -1,34 +1,28 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import * as FileSaver from 'file-saver';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  Form,
-  FormGroup,
-  TextInput,
-  Flex,
-  FlexItem,
   Button,
-  Modal,
   Checkbox,
   ExpandableSection,
+  Flex,
+  FlexItem,
+  Form,
+  FormGroup,
+  Modal,
   Switch,
+  TextInput,
 } from '@patternfly/react-core';
-
-import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
-
-import { AppContext } from 'src/loaders/app-context';
-
 import {
   DownloadIcon,
-  ExclamationTriangleIcon,
   ExclamationCircleIcon,
+  ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-
+import * as FileSaver from 'file-saver';
+import * as React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
+import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
-import { isFieldSet, isWriteOnly, ErrorMessagesType } from 'src/utilities';
-
+import { AppContext } from 'src/loaders/app-context';
+import { ErrorMessagesType, isFieldSet, isWriteOnly } from 'src/utilities';
 import { validateURLHelper } from 'src/utilities';
 
 interface IProps {

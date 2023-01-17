@@ -1,18 +1,18 @@
 import { t } from '@lingui/macro';
-import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
   Button,
   DropdownItem,
   Label,
-  Tooltip,
   LabelGroup,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
 import { UserPlusIcon } from '@patternfly/react-icons';
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
   AlertList,
@@ -25,12 +25,12 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  ListItemActions,
   LoadingPageSpinner,
   Main,
   Pagination,
   SortTable,
   closeAlertMixin,
-  ListItemActions,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';

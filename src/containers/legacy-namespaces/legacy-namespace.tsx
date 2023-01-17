@@ -1,18 +1,16 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './legacy-namespace.scss';
-
-import { Link } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
-
 import {
   DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { LegacyNamespaceListType, LegacyRoleListType } from 'src/api';
+import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
+import { LegacyRoleAPI } from 'src/api/legacyrole';
 import {
   BaseHeader,
   EmptyStateNoData,
@@ -21,11 +19,10 @@ import {
   Logo,
   Pagination,
 } from 'src/components';
-import { Paths, formatPath } from 'src/paths';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
-import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
-import { LegacyNamespaceListType, LegacyRoleListType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import './legacy-namespace.scss';
 
 interface LegacyNamespaceRolesProps {
   namespace: LegacyNamespaceListType;

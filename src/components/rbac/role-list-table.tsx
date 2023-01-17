@@ -1,16 +1,14 @@
 import { t } from '@lingui/macro';
-
-import React, { useState } from 'react';
-
-import { SortTable } from 'src/components';
-
 import {
+  ExpandableRowContent,
   TableComposable,
-  Tr,
   Tbody,
   Td,
-  ExpandableRowContent,
+  Tr,
 } from '@patternfly/react-table';
+import React, { useState } from 'react';
+import { SortTable } from 'src/components';
+
 interface Props {
   params?: object;
   updateParams?: (params) => void;

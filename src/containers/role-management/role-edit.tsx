@@ -1,6 +1,20 @@
 import { t } from '@lingui/macro';
-
 import * as React from 'react';
+import { Navigate } from 'react-router-dom';
+import { RoleType } from 'src/api/response-types/role';
+import { RoleAPI } from 'src/api/role';
+import {
+  AlertList,
+  AlertType,
+  EmptyStateUnauthorized,
+  LoadingPageWithHeader,
+  Main,
+  RoleForm,
+  RoleHeader,
+  closeAlertMixin,
+} from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import {
   ErrorMessagesType,
   errorMessage,
@@ -9,26 +23,7 @@ import {
   translateLockedRolesDescription,
   validateInput,
 } from 'src/utilities';
-
-import { RoleAPI } from 'src/api/role';
-
-import { Navigate } from 'react-router-dom';
 import { RouteProps, withRouter } from 'src/utilities';
-
-import {
-  AlertList,
-  AlertType,
-  closeAlertMixin,
-  EmptyStateUnauthorized,
-  LoadingPageWithHeader,
-  Main,
-  RoleForm,
-  RoleHeader,
-} from 'src/components';
-
-import { Paths, formatPath } from 'src/paths';
-import { AppContext } from 'src/loaders/app-context';
-import { RoleType } from 'src/api/response-types/role';
 
 interface IState {
   role: RoleType;

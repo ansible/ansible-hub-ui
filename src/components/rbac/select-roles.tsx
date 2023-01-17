@@ -1,16 +1,16 @@
-import { t, Trans } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
+import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
-import { RoleType, RoleAPI } from 'src/api';
+import React, { useEffect, useState } from 'react';
+import { RoleAPI, RoleType } from 'src/api';
 import {
-  CompoundFilter,
-  RoleListTable,
-  Pagination,
   AppliedFilters,
-  LoadingPageSpinner,
   CheckboxRow,
+  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  LoadingPageSpinner,
+  Pagination,
+  RoleListTable,
 } from 'src/components';
 import { filterIsSet, translateLockedRolesDescription } from 'src/utilities';
 

@@ -1,6 +1,6 @@
+import * as moment from 'moment';
 import * as React from 'react';
 import { Tooltip } from 'src/components';
-import * as moment from 'moment';
 
 interface IProps {
   date: string;

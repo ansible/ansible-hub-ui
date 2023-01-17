@@ -1,5 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
+import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Button,
@@ -14,27 +13,28 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AlertType,
-  APISearchTypeAhead,
-  HelperText,
-  AlertList,
-  closeAlertMixin,
-} from 'src/components';
 import {
   ContainerDistributionAPI,
   ExecutionEnvironmentRegistryAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
+import {
+  APISearchTypeAhead,
+  AlertList,
+  AlertType,
+  HelperText,
+  closeAlertMixin,
+} from 'src/components';
 import { Paths, formatEEPath } from 'src/paths';
 import {
-  errorMessage,
   ErrorMessagesType,
+  alertErrorsWithoutFields,
+  errorMessage,
   isFieldValid,
   isFormValid,
   mapErrorMessages,
-  alertErrorsWithoutFields,
 } from 'src/utilities';
 
 interface IProps {

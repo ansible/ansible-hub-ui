@@ -1,30 +1,26 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './my-imports.scss';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { cloneDeep } from 'lodash';
-
+import * as React from 'react';
 import {
+  CollectionVersion,
+  CollectionVersionAPI,
+  ImportAPI,
+  ImportDetailType,
+  ImportListType,
+  PulpStatus,
+} from 'src/api';
+import {
+  AlertList,
+  AlertType,
   BaseHeader,
   ImportConsole,
   ImportList,
   Main,
   closeAlertMixin,
-  AlertType,
-  AlertList,
 } from 'src/components';
-
-import {
-  ImportAPI,
-  ImportDetailType,
-  ImportListType,
-  PulpStatus,
-  CollectionVersion,
-  CollectionVersionAPI,
-} from 'src/api';
-
+import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
+import './my-imports.scss';
 
 interface IState {
   selectedImport: ImportListType;

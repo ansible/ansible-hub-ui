@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
@@ -9,8 +9,8 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
+import React, { FC, useState } from 'react';
 import { CollectionVersionDetail } from 'src/api/response-types/collection';
-import { t } from '@lingui/macro';
 import { useContext } from 'src/loaders/app-context';
 
 interface Props {

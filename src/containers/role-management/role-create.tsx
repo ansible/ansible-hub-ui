@@ -1,14 +1,7 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import {
-  RouteProps,
-  errorMessage,
-  mapNetworkErrors,
-  validateInput,
-  withRouter,
-} from 'src/utilities';
-
+import { RoleAPI } from 'src/api/role';
 import {
   AlertType,
   EmptyStateUnauthorized,
@@ -16,10 +9,15 @@ import {
   RoleForm,
   RoleHeader,
 } from 'src/components';
-
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleAPI } from 'src/api/role';
+import { Paths, formatPath } from 'src/paths';
+import {
+  RouteProps,
+  errorMessage,
+  mapNetworkErrors,
+  validateInput,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   saving: boolean;

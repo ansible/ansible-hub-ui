@@ -1,9 +1,28 @@
 import { t } from '@lingui/macro';
+import {
+  Button,
+  ButtonVariant,
+  DropdownItem,
+  Label,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
+import {
+  CheckCircleIcon,
+  DownloadIcon,
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+} from '@patternfly/react-icons';
 import * as React from 'react';
-import './certification-dashboard.scss';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { Link } from 'react-router-dom';
+import {
+  CertificateUploadAPI,
+  CollectionAPI,
+  CollectionVersion,
+  CollectionVersionAPI,
+  Repositories,
+} from 'src/api';
 import {
   BaseHeader,
   DateComponent,
@@ -14,51 +33,29 @@ import {
   Main,
 } from 'src/components';
 import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
-  DropdownItem,
-  Label,
-  ButtonVariant,
-} from '@patternfly/react-core';
-
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  CompoundFilter,
+  LoadingPageSpinner,
+  LoadingPageWithHeader,
+  Pagination,
+  SortTable,
+  UploadSingCertificateModal,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
-  ExclamationTriangleIcon,
-  ExclamationCircleIcon,
-  CheckCircleIcon,
-  DownloadIcon,
-} from '@patternfly/react-icons';
-
-import {
-  CollectionVersionAPI,
-  CollectionVersion,
-  CertificateUploadAPI,
-  Repositories,
-  CollectionAPI,
-} from 'src/api';
-import {
+  ParamHelper,
   errorMessage,
   filterIsSet,
-  ParamHelper,
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
-import {
-  LoadingPageWithHeader,
-  CompoundFilter,
-  LoadingPageSpinner,
-  AppliedFilters,
-  Pagination,
-  AlertList,
-  closeAlertMixin,
-  AlertType,
-  SortTable,
-  UploadSingCertificateModal,
-} from 'src/components';
-import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import './certification-dashboard.scss';
 
 interface IState {
   params: {
