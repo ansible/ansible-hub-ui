@@ -106,7 +106,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
       });
 
     return (
-      <React.Fragment>
+      <>
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
@@ -169,7 +169,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

@@ -41,7 +41,7 @@ export const CollectionList = (props: IProps) => {
   } = props;
 
   return (
-    <React.Fragment>
+    <>
       <DataList aria-label={t`List of Collections`}>
         {collections.length > 0 ? (
           collections.map((c, i) => (
@@ -70,6 +70,6 @@ export const CollectionList = (props: IProps) => {
         updateParams={(p) => updateParams(p)}
         count={itemCount}
       />
-    </React.Fragment>
+    </>
   );
 };

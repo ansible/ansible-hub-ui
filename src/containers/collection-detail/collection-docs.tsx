@@ -127,7 +127,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     // }
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           reload={() => this.loadCollection(true)}
           collections={collections}
@@ -199,7 +199,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             </div>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

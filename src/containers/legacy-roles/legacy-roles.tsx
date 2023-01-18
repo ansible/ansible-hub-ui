@@ -126,7 +126,7 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
     return (
       <div>
         <BaseHeader title={t`Legacy Roles`}></BaseHeader>
-        <React.Fragment>
+        <>
           {loading ? (
             <LoadingPageSpinner />
           ) : noData ? (
@@ -168,7 +168,7 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
               />
             </div>
           )}
-        </React.Fragment>
+        </>
       </div>
     );
   }

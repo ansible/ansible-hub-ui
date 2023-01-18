@@ -82,7 +82,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           reload={() => this.loadData(true)}
           collections={collections}
@@ -110,7 +110,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

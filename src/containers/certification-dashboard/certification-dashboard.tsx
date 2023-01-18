@@ -198,7 +198,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <BaseHeader title={t`Approval dashboard`}></BaseHeader>
         <AlertList
           alerts={this.state.alerts}
@@ -328,7 +328,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

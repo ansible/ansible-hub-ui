@@ -82,7 +82,7 @@ export class PermissionCategories extends React.Component<IProps> {
       : withActive.filter((group) => group.selectedPermissions.length);
 
     return (
-      <React.Fragment>
+      <>
         {groupsToShow.length ? null : (
           <Flex
             style={{ marginTop: '16px' }}
@@ -132,7 +132,7 @@ export class PermissionCategories extends React.Component<IProps> {
             </FlexItem>
           </Flex>
         ))}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -117,7 +117,7 @@ class LegacyNamespaces extends React.Component<
     return (
       <div>
         <BaseHeader title={t`Legacy Namespaces`}></BaseHeader>
-        <React.Fragment>
+        <>
           {loading ? (
             <LoadingPageSpinner />
           ) : noData ? (
@@ -156,7 +156,7 @@ class LegacyNamespaces extends React.Component<
               />
             </div>
           )}
-        </React.Fragment>
+        </>
       </div>
     );
   }

@@ -117,7 +117,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
     return loading ? (
       <LoadingPageSpinner />
     ) : (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -342,21 +342,21 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                       {t`Error message`}
                     </Title>
                     <br />
-                    <React.Fragment>
+                    <>
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
                       <CodeBlock className={'hub-code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
-                    </React.Fragment>
+                    </>
                   </section>
                 )}
               </FlexItem>
             </Flex>
           </Flex>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

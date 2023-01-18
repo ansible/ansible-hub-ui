@@ -47,10 +47,10 @@ class UserEdit extends React.Component<RouteProps, IState> {
 
     if (unauthorized) {
       return (
-        <React.Fragment>
+        <>
           <BaseHeader title={title}></BaseHeader>
           <EmptyStateUnauthorized />
-        </React.Fragment>
+        </>
       );
     }
 

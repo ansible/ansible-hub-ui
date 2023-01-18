@@ -166,7 +166,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -200,7 +200,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           {params.tab == 'access' ? this.renderGroupDetail() : null}
           {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

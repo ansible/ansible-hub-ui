@@ -139,7 +139,7 @@ export const Page = function <
       const name = item?.name || transformParams(routeParams)?.name || null;
 
       return (
-        <React.Fragment>
+        <>
           <AlertList
             alerts={alerts}
             closeAlert={(i) => this.closeAlert(i)}
@@ -184,7 +184,7 @@ export const Page = function <
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

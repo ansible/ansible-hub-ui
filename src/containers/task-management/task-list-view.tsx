@@ -117,7 +117,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -221,7 +221,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

@@ -114,7 +114,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     const noDependencies = !Object.keys(version.dependencies).length;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           reload={() => this.loadData(true)}
@@ -175,7 +175,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
             </div>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

@@ -82,7 +82,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -160,7 +160,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

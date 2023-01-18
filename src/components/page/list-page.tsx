@@ -216,7 +216,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       };
 
       return (
-        <React.Fragment>
+        <>
           <AlertList
             alerts={alerts}
             closeAlert={(i) => this.closeAlert(i)}
@@ -295,7 +295,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

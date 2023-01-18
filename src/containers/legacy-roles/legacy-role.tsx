@@ -381,7 +381,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <DataList aria-label={t`Role Header`}>
           <DataListItem data-cy='LegacyRoleListItem'>
             {/* This renders a bit too small ...? */}
@@ -417,7 +417,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         <Main>
           <section className='body'>{renderContent()}</section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 }

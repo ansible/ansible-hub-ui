@@ -138,7 +138,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 )}
 
                 {this.state.markdownEditing && (
-                  <React.Fragment>
+                  <>
                     <div data-cy='save-readme'>
                       <Button
                         variant={'primary'}
@@ -163,7 +163,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     >
                       {t`Cancel`}
                     </Button>
-                  </React.Fragment>
+                  </>
                 )}
               </CardBody>
             </Card>

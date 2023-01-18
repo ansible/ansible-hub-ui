@@ -131,31 +131,31 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   });
                   if (removed) {
                     activityDescription = (
-                      <React.Fragment>
+                      <>
                         <Trans>
                           <TagLink tag={action.tag_name} /> was moved to{' '}
                           <ShaLink digest={action.manifest_digest} /> from{' '}
                           <ShaLink digest={removed.manifest_digest} />
                         </Trans>
-                      </React.Fragment>
+                      </>
                     );
                   } else {
                     activityDescription = (
-                      <React.Fragment>
+                      <>
                         <Trans>
                           <TagLink tag={action.tag_name} /> was added to{' '}
                           <ShaLink digest={action.manifest_digest} />
                         </Trans>
-                      </React.Fragment>
+                      </>
                     );
                   }
                 } else {
                   activityDescription = (
-                    <React.Fragment>
+                    <>
                       <Trans>
                         <ShaLink digest={action.manifest_digest} /> was added
                       </Trans>
-                    </React.Fragment>
+                    </>
                   );
                 }
                 activities.push({
@@ -172,12 +172,12 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     })
                   ) {
                     activityDescription = (
-                      <React.Fragment>
+                      <>
                         <Trans>
                           <TagLabel tag={action.tag_name} /> was removed from{' '}
                           <ShaLink digest={action.manifest_digest} />
                         </Trans>
-                      </React.Fragment>
+                      </>
                     );
                   } else {
                     // skip one added as moved
@@ -185,11 +185,11 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   }
                 } else {
                   activityDescription = (
-                    <React.Fragment>
+                    <>
                       <Trans>
                         <ShaLabel digest={action.manifest_digest} /> was removed
                       </Trans>
-                    </React.Fragment>
+                    </>
                   );
                 }
                 activities.push({
@@ -219,9 +219,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               activities.push({
                 created: lastActivity.created,
                 action: (
-                  <React.Fragment>
-                    {t`${this.props.containerRepository.name} was added`}
-                  </React.Fragment>
+                  <>{t`${this.props.containerRepository.name} was added`}</>
                 ),
               });
             }

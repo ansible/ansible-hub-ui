@@ -133,7 +133,7 @@ class LegacyNamespaceRoles extends React.Component<
 
     return (
       <div>
-        <React.Fragment>
+        <>
           {loading ? (
             <LoadingPageSpinner />
           ) : noData ? (
@@ -160,7 +160,7 @@ class LegacyNamespaceRoles extends React.Component<
               />
             </div>
           )}
-        </React.Fragment>
+        </>
       </div>
     );
   }
@@ -291,7 +291,7 @@ class LegacyNamespace extends React.Component<
     }
 
     return (
-      <React.Fragment>
+      <>
         {this.state.isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
@@ -316,7 +316,7 @@ class LegacyNamespace extends React.Component<
         </DataList>
 
         <LegacyNamespaceRoles namespace={this.state.namespace} />
-      </React.Fragment>
+      </>
     );
   }
 }

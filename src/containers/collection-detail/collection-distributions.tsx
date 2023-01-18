@@ -199,7 +199,7 @@ const CollectionDistributions = (props: RouteProps) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <CollectionHeader
         reload={() => loadCollections(true)}
         collections={collections}
@@ -281,7 +281,7 @@ const CollectionDistributions = (props: RouteProps) => {
           />
         </section>
       </Main>
-    </React.Fragment>
+    </>
   );
 };
 

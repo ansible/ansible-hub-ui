@@ -296,7 +296,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     delete tabParams.group;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <ImportModal
           isOpen={showImportModal}
@@ -563,7 +563,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             }}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 

@@ -75,7 +75,7 @@ class CollectionDetail extends React.Component<
     ];
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -116,7 +116,7 @@ class CollectionDetail extends React.Component<
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

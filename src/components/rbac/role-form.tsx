@@ -67,7 +67,7 @@ export class RoleForm extends React.Component<IProps, IState> {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Form>
           <div>
             <div style={{ paddingBottom: '8px' }}>
@@ -149,7 +149,7 @@ export class RoleForm extends React.Component<IProps, IState> {
             {saving ? <Spinner></Spinner> : null}
           </ActionGroup>
         </Form>
-      </React.Fragment>
+      </>
     );
   }
 }

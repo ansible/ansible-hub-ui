@@ -152,7 +152,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ) : null;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -301,7 +301,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

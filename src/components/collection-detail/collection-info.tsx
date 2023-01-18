@@ -102,10 +102,10 @@ export const CollectionInfo = ({
                 isInline
                 variant='warning'
                 title={
-                  <React.Fragment>
+                  <>
                     {t`You have to be logged in to be able to download the tarball.`}{' '}
                     <LoginLink />
-                  </React.Fragment>
+                  </>
                 }
               />
             ) : (

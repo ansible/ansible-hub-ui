@@ -42,7 +42,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
     const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -107,7 +107,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
             </Card>
           )}
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

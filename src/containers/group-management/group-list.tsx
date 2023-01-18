@@ -130,7 +130,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -233,7 +233,7 @@ class GroupList extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

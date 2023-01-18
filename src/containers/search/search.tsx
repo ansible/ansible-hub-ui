@@ -255,7 +255,7 @@ class Search extends React.Component<RouteProps, IState> {
             description={t`Collections will appear once uploaded`}
           />
         ) : (
-          <React.Fragment>
+          <>
             <section className='collection-container'>
               {this.renderCollections(collections, params, updateParams)}
             </section>
@@ -269,7 +269,7 @@ class Search extends React.Component<RouteProps, IState> {
                 count={numberOfResults}
               />
             </section>
-          </React.Fragment>
+          </>
         )}
       </div>
     );

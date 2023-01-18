@@ -278,7 +278,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       );
 
     return (
-      <React.Fragment>
+      <>
         {showImportModal && (
           <ImportModal
             isOpen={showImportModal}
@@ -536,7 +536,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </div>
           </div>
         </BaseHeader>
-      </React.Fragment>
+      </>
     );
   }
 

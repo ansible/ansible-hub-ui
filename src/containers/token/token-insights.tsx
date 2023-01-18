@@ -85,7 +85,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     }" --fail --silent --show-error --output /dev/null`;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -220,7 +220,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             </p>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
