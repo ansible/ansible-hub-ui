@@ -34,6 +34,7 @@ jobs:
         - 'groups_and_users'
         - 'imports'
         - 'insights'
+        - 'insights_collections'
         - 'misc'
         - 'namespaces'
         - 'repo'
@@ -50,7 +51,17 @@ jobs:
     - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-        COMPOSE_PROFILE=`[ "${{ matrix.test }}" = 'insights' ] && echo 'insights' || echo 'standalone'`
+
+        case "${{ matrix.test }}" in
+          insights*)
+            COMPOSE_PROFILE=insights
+            echo "insights"
+            ;;
+          *)
+            COMPOSE_PROFILE=standalone
+            echo "standalone"
+            ;;
+        esac
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV

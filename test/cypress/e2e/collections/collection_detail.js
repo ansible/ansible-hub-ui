@@ -4,13 +4,13 @@ describe('Collection detail', () => {
   const baseURL = `${uiPrefix}repo/published/collection_detail_test_namespace/collection_detail_test_collection`;
 
   function deprecate() {
-    cy.get('[aria-label=Actions]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.contains('Deprecate').click();
     cy.contains('This collection has been deprecated.', { timeout: 10000 });
   }
 
   function undeprecate() {
-    cy.get('[aria-label=Actions]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.contains('Undeprecate').click();
     cy.contains('This collection has been deprecated.', {
       timeout: 10000,
@@ -19,9 +19,9 @@ describe('Collection detail', () => {
 
   before(() => {
     cy.deleteNamespacesAndCollections();
-
-    cy.galaxykit(
-      '-i collection upload collection_detail_test_namespace collection_detail_test_collection',
+    cy.createApprovedCollection(
+      'collection_detail_test_namespace',
+      'collection_detail_test_collection',
     );
   });
 
