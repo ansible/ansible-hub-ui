@@ -5,7 +5,8 @@ import {
   DropdownToggle,
   KebabToggle,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 
 interface IProps {
   /** List of patternfly DropdownItem components */

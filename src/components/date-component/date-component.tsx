@@ -1,5 +1,4 @@
 import * as moment from 'moment';
-import * as React from 'react';
 import { Tooltip } from 'src/components';
 
 interface IProps {

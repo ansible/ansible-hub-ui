@@ -1,5 +1,5 @@
 import { Button, DropdownItem } from '@patternfly/react-core';
-import React from 'react';
+import * as React from 'react';
 import { Tooltip } from 'src/components';
 import { type PermissionContextType } from 'src/permissions';
 

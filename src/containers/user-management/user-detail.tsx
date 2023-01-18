@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-import React from 'react';
+import { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
@@ -25,7 +25,7 @@ interface IState {
   unauthorised: boolean;
 }
 
-class UserDetail extends React.Component<RouteProps, IState> {
+class UserDetail extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

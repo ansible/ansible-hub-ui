@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-import React from 'react';
+import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ActiveUserAPI, UserType } from 'src/api';
 import {
@@ -23,7 +23,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserProfile extends React.Component<RouteProps, IState> {
+class UserProfile extends Component<RouteProps, IState> {
   private initialState: UserType;
 
   constructor(props) {

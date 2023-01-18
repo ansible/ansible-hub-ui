@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Paths } from 'src/paths';
 

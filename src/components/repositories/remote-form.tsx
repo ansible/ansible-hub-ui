@@ -18,7 +18,7 @@ import {
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-import React from 'react';
+import { Component } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -57,7 +57,7 @@ interface IState {
   };
 }
 
-export class RemoteForm extends React.Component<IProps, IState> {
+export class RemoteForm extends Component<IProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

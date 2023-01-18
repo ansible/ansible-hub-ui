@@ -1,5 +1,4 @@
 import { Label } from '@patternfly/react-core';
-import React from 'react';
 import './tag.scss';
 
 interface IProps {

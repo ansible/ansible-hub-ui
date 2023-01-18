@@ -5,7 +5,7 @@ import {
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
-import React from 'react';
+import * as React from 'react';
 
 interface Props {
   name: string;

@@ -3,7 +3,6 @@ import {
   AlertActionCloseButton,
   AlertProps,
 } from '@patternfly/react-core';
-import React from 'react';
 
 interface IProps {
   /** List of alerts to display */

@@ -3,7 +3,6 @@ import {
   FileUploadProps,
   FileUpload as PFFileUpload,
 } from '@patternfly/react-core';
-import React from 'react';
 
 export const FileUpload = (props: FileUploadProps) => (
   <PFFileUpload

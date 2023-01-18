@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 import { UserPlusIcon } from '@patternfly/react-icons';
-import React from 'react';
+import { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
@@ -59,7 +59,7 @@ interface IState {
   inputText: string;
 }
 
-class UserList extends React.Component<RouteProps, IState> {
+class UserList extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

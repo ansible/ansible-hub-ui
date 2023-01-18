@@ -10,7 +10,7 @@ import {
   Spinner,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,

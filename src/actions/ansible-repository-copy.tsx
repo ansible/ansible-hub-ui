@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import React from 'react';
 import { getRepoUrl } from 'src/utilities';
 import { Action } from './action';
 

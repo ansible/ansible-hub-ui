@@ -11,7 +11,8 @@ import {
   ExternalLinkAltIcon,
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import {

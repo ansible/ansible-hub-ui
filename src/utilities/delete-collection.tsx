@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
-import React from 'react';
 import {
   CollectionAPI,
   CollectionVersionAPI,

@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import React from 'react';
 
 export const DeprecatedTag = () => (
   <div

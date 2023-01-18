@@ -2,7 +2,7 @@ import '../app.scss';
 import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType, UIVersion } from 'src/components';
 import { hasPermission } from 'src/utilities';

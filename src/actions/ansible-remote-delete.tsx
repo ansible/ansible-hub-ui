@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import React from 'react';
 import { AnsibleRemoteAPI } from 'src/api';
 import { DeleteAnsibleRemoteModal } from 'src/components';
 import { canDeleteAnsibleRemote } from 'src/permissions';

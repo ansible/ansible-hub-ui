@@ -9,7 +9,7 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AnsibleDistributionAPI,
   CollectionAPI,
@@ -41,7 +41,7 @@ export const DownloadSignatureGridItem = ({
     return null;
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (show && isLoading) {
       AnsibleDistributionAPI.list({
         repository: repository.pulp_href,

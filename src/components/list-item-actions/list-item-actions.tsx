@@ -1,5 +1,5 @@
 import { List } from '@patternfly/react-core';
-import React from 'react';
+import * as React from 'react';
 import { StatefulDropdown } from '../patternfly-wrappers/stateful-dropdown';
 
 interface IProps {

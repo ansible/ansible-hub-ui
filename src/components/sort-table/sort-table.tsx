@@ -3,7 +3,6 @@ import {
   LongArrowAltDownIcon,
   LongArrowAltUpIcon,
 } from '@patternfly/react-icons';
-import React from 'react';
 import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 

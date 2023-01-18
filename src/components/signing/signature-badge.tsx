@@ -4,7 +4,7 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface Props extends LabelProps {
   signState: 'signed' | 'unsigned';

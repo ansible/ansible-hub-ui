@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import { Label, LabelGroup } from '@patternfly/react-core';
-import React from 'react';
 
 export const PulpLabels = ({
   labels,

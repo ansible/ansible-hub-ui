@@ -7,7 +7,7 @@ import {
   OutlinedClockIcon,
   SyncAltIcon,
 } from '@patternfly/react-icons';
-import React from 'react';
+import * as React from 'react';
 import { PulpStatus } from 'src/api';
 
 interface IProps {

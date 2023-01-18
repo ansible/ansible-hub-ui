@@ -5,7 +5,7 @@ import {
   CodeBlockAction,
   CodeBlockCode,
 } from '@patternfly/react-core';
-import React from 'react';
+import { useState } from 'react';
 import { AnsibleRemoteType } from 'src/api';
 import { CopyURL, Details, LazyRepositories } from 'src/components';
 
@@ -15,7 +15,7 @@ interface TabProps {
 }
 
 const PFCodeBlock = ({ code }: { code: string }) => {
-  const [copied, setCopied] = React.useState(false);
+  const [copied, setCopied] = useState(false);
 
   const clipboardCopyFunc = (event, text) => {
     navigator.clipboard.writeText(text.toString());

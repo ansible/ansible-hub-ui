@@ -4,7 +4,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import * as React from 'react';
 import { ActionType } from 'src/actions';
 import { LoadingPageSpinner } from 'src/components';
 import {

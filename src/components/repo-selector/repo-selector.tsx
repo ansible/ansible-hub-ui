@@ -5,7 +5,6 @@ import {
   InputGroup,
   InputGroupText,
 } from '@patternfly/react-core';
-import React from 'react';
 
 interface IProps {
   selectedRepo: string;

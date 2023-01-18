@@ -5,7 +5,6 @@ import {
   Wizard as PFWizard,
   WizardStep,
 } from '@patternfly/react-core';
-import React from 'react';
 
 interface Props {
   steps: WizardStep[];

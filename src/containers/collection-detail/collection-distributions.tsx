@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import {
   AppliedFilters,

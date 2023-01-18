@@ -1,5 +1,4 @@
 import { Label, Tooltip } from '@patternfly/react-core';
-import React from 'react';
 import { truncateSha } from 'src/utilities';
 
 interface IProps {

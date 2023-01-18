@@ -3,7 +3,6 @@ import {
   Pagination as PaginationPF,
   PaginationVariant,
 } from '@patternfly/react-core';
-import React from 'react';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities/param-helper';
 
