@@ -13,42 +13,40 @@ interface IProps {
   className?: string;
 }
 
-export class CardListSwitcher extends React.Component<IProps> {
-  static defaultProps = {
-    size: 'sm',
-  };
+export const CardListSwitcher: React.FunctionComponent<IProps> = ({
+  params,
+  updateParams,
+  size = 'sm',
+  className,
+}) => {
+  let disp = params.view_type;
 
-  render() {
-    let disp = this.props.params.view_type;
-    const { updateParams, params, size, className } = this.props;
-
-    if (!disp) {
-      disp = 'card';
-    }
-
-    const iconClasses = ['icon', 'clickable'];
-
-    return (
-      <div className={className}>
-        <span data-cy='view_type_card'>
-          <ThLargeIcon
-            size={size}
-            className={cx(iconClasses, { selected: disp === 'card' })}
-            onClick={() =>
-              updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
-            }
-          />
-        </span>
-        <span data-cy='view_type_list'>
-          <ListIcon
-            size={size}
-            className={cx(iconClasses, { selected: disp === 'list' })}
-            onClick={() =>
-              updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
-            }
-          />
-        </span>
-      </div>
-    );
+  if (!disp) {
+    disp = 'card';
   }
-}
+
+  const iconClasses = ['icon', 'clickable'];
+
+  return (
+    <div className={className}>
+      <span data-cy='view_type_card'>
+        <ThLargeIcon
+          size={size}
+          className={cx(iconClasses, { selected: disp === 'card' })}
+          onClick={() =>
+            updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
+          }
+        />
+      </span>
+      <span data-cy='view_type_list'>
+        <ListIcon
+          size={size}
+          className={cx(iconClasses, { selected: disp === 'list' })}
+          onClick={() =>
+            updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
+          }
+        />
+      </span>
+    </div>
+  );
+};
