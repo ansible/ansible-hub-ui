@@ -9,11 +9,6 @@ import { errorMessage } from 'src/utilities';
 interface IProps {
   distributionPath: string;
 }
-interface IState {
-  collectionCount: number;
-  alerts: AlertType[];
-  loading: boolean;
-}
 
 export const CollectionCount = ({ distributionPath }: IProps) => {
   const [collectionCount, setCollectionCount] = useState(null);
