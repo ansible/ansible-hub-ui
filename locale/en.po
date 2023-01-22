@@ -65,7 +65,7 @@ msgstr "<0>Note:</0> The following links may be blocked by your browser. Copy an
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:404
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 
@@ -114,7 +114,7 @@ msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, d
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:508
+#: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "API Error: Failed to set deprecation."
 msgstr "API Error: Failed to set deprecation."
 
@@ -127,9 +127,9 @@ msgstr "API Error: Failed to set deprecation."
 msgid "API Error: {ex}"
 msgstr "API Error: {ex}"
 
-#: src/components/headers/collection-header.tsx:690
-#: src/components/headers/collection-header.tsx:741
-#: src/containers/namespace-detail/namespace-detail.tsx:527
+#: src/components/headers/collection-header.tsx:692
+#: src/components/headers/collection-header.tsx:743
+#: src/containers/namespace-detail/namespace-detail.tsx:530
 msgid "API Error: {status}"
 msgstr "API Error: {status}"
 
@@ -183,8 +183,8 @@ msgstr "Activity"
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
 #: src/containers/group-management/group-detail.tsx:285
-#: src/containers/group-management/group-detail.tsx:515
-#: src/containers/group-management/group-detail.tsx:566
+#: src/containers/group-management/group-detail.tsx:512
+#: src/containers/group-management/group-detail.tsx:563
 msgid "Add"
 msgstr "Add"
 
@@ -390,7 +390,7 @@ msgstr "Cancel"
 msgid "Canceled"
 msgstr "Canceled"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:702
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 
@@ -399,7 +399,7 @@ msgstr "Cannot delete namespace until <0/>collections' dependencies have <1/>bee
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 
-#: src/components/headers/collection-header.tsx:644
+#: src/components/headers/collection-header.tsx:646
 #: src/containers/certification-dashboard/certification-dashboard.tsx:553
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
@@ -408,7 +408,7 @@ msgstr "Certificate for collection \"{0} {1} v{2}\" has been successfully upload
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 
-#: src/components/cards/collection-card.tsx:105
+#: src/components/cards/collection-card.tsx:109
 msgid "Certified"
 msgstr "Certified"
 
@@ -542,30 +542,30 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collection"
 
-#: src/components/headers/collection-header.tsx:824
-#: src/containers/search/search.tsx:358
+#: src/components/headers/collection-header.tsx:826
+#: src/containers/search/search.tsx:359
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "Collection \"{0}\" could not be deprecated."
 
-#: src/components/headers/collection-header.tsx:825
-#: src/containers/search/search.tsx:359
+#: src/components/headers/collection-header.tsx:827
+#: src/containers/search/search.tsx:360
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "Collection \"{0}\" could not be undeprecated."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:493
+#: src/containers/namespace-detail/namespace-detail.tsx:496
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "Collection \"{0}\" has been successfully deprecated."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:492
+#: src/containers/namespace-detail/namespace-detail.tsx:495
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "Collection \"{0}\" has been successfully undeprecated."
 
-#: src/components/headers/collection-header.tsx:939
+#: src/components/headers/collection-header.tsx:941
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 
-#: src/components/headers/collection-header.tsx:868
-#: src/components/headers/collection-header.tsx:883
+#: src/components/headers/collection-header.tsx:870
+#: src/components/headers/collection-header.tsx:885
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 
@@ -614,7 +614,7 @@ msgstr "Collection does not have dependencies."
 msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:658
+#: src/containers/namespace-detail/namespace-detail.tsx:661
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -739,7 +739,7 @@ msgstr "Content"
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
-#: src/components/headers/collection-header.tsx:582
+#: src/components/headers/collection-header.tsx:584
 msgid "Contents"
 msgstr "Contents"
 
@@ -823,7 +823,7 @@ msgstr "Create, delete and change collection namespaces. Upload and delete colle
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:300
-#: src/containers/group-management/group-detail.tsx:639
+#: src/containers/group-management/group-detail.tsx:636
 #: src/containers/role-management/role-list.tsx:180
 #: src/containers/user-management/user-list.tsx:285
 msgid "Created"
@@ -960,8 +960,8 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:693
-#: src/containers/namespace-detail/namespace-detail.tsx:707
+#: src/containers/namespace-detail/namespace-detail.tsx:696
+#: src/containers/namespace-detail/namespace-detail.tsx:710
 msgid "Delete namespace"
 msgstr "Delete namespace"
 
@@ -1042,7 +1042,7 @@ msgstr "Deleting this group will affect {count} users."
 msgid "Deleting yourself is not allowed."
 msgstr "Deleting yourself is not allowed."
 
-#: src/components/headers/collection-header.tsx:596
+#: src/components/headers/collection-header.tsx:598
 #: src/containers/collection-detail/collection-dependencies.tsx:109
 #: src/containers/collection-detail/collection-dependencies.tsx:139
 msgid "Dependencies"
@@ -1052,7 +1052,7 @@ msgstr "Dependencies"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "Dependencies for collection \"{name}\" could not be displayed."
 
-#: src/components/headers/collection-header.tsx:909
+#: src/components/headers/collection-header.tsx:911
 msgid "Dependent collections"
 msgstr "Dependent collections"
 
@@ -1061,12 +1061,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "Dependent collections could not be displayed."
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
-#: src/containers/search/search.tsx:384
+#: src/containers/namespace-detail/namespace-detail.tsx:867
+#: src/containers/search/search.tsx:385
 msgid "Deprecate"
 msgstr "Deprecate"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:479
+#: src/containers/namespace-detail/namespace-detail.tsx:482
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "Deprecation status update starting for collection \"{0}\"."
 
@@ -1114,9 +1114,9 @@ msgstr "Distribution name"
 msgid "Docs site"
 msgstr "Docs site"
 
-#: src/components/headers/collection-header.tsx:577
+#: src/components/headers/collection-header.tsx:579
 #: src/containers/collection-detail/collection-docs.tsx:124
-#: src/loaders/standalone/standalone-loader.tsx:392
+#: src/loaders/standalone/standalone-loader.tsx:394
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -1177,7 +1177,7 @@ msgstr "Dropdown"
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
 #: src/containers/execution-environment-list/execution_environment_list.tsx:356
 #: src/containers/role-management/role-list.tsx:467
-#: src/containers/settings/user-profile.tsx:96
+#: src/containers/settings/user-profile.tsx:93
 #: src/containers/user-management/user-detail.tsx:119
 #: src/containers/user-management/user-edit.tsx:67
 #: src/containers/user-management/user-list.tsx:327
@@ -1196,7 +1196,7 @@ msgstr "Edit execution environment"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:686
 msgid "Edit namespace"
 msgstr "Edit namespace"
 
@@ -1239,8 +1239,8 @@ msgid "Editable"
 msgstr "Editable"
 
 #: src/components/rbac/user-form.tsx:91
-#: src/containers/group-management/group-detail.tsx:552
-#: src/containers/group-management/group-detail.tsx:624
+#: src/containers/group-management/group-detail.tsx:549
+#: src/containers/group-management/group-detail.tsx:621
 #: src/containers/user-management/user-list.tsx:173
 #: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:275
@@ -1481,11 +1481,11 @@ msgstr "Failed"
 msgid "Failed to retrieve user data."
 msgstr "Failed to retrieve user data."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:526
+#: src/containers/namespace-detail/namespace-detail.tsx:529
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
-#: src/components/headers/collection-header.tsx:689
+#: src/components/headers/collection-header.tsx:691
 msgid "Failed to sign all versions in the collection."
 msgstr "Failed to sign all versions in the collection."
 
@@ -1494,7 +1494,7 @@ msgstr "Failed to sign all versions in the collection."
 msgid "Failed to sign the container version."
 msgstr "Failed to sign the container version."
 
-#: src/components/headers/collection-header.tsx:740
+#: src/components/headers/collection-header.tsx:742
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
@@ -1535,8 +1535,8 @@ msgid "Finished at"
 msgstr "Finished at"
 
 #: src/components/rbac/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:544
-#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/group-management/group-detail.tsx:541
+#: src/containers/group-management/group-detail.tsx:631
 #: src/containers/user-management/user-list.tsx:165
 #: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:263
@@ -1614,7 +1614,7 @@ msgstr "Group \"{group}\" could not be deleted."
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "Group \"{group}\" has been successfully deleted."
 
-#: src/containers/group-management/group-detail.tsx:743
+#: src/containers/group-management/group-detail.tsx:742
 msgid "Group could not be displayed."
 msgstr "Group could not be displayed."
 
@@ -1643,7 +1643,7 @@ msgstr "Group {groupId}"
 #: src/containers/group-management/group-detail.tsx:194
 #: src/containers/group-management/group-list.tsx:145
 #: src/containers/user-management/user-list.tsx:281
-#: src/loaders/standalone/standalone-loader.tsx:404
+#: src/loaders/standalone/standalone-loader.tsx:406
 msgid "Groups"
 msgstr "Groups"
 
@@ -1715,12 +1715,12 @@ msgstr "Import and auto approve"
 msgid "Import and move to staging"
 msgstr "Import and move to staging"
 
-#: src/components/headers/collection-header.tsx:591
+#: src/components/headers/collection-header.tsx:593
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "Import log"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:724
+#: src/containers/namespace-detail/namespace-detail.tsx:727
 msgid "Imports"
 msgstr "Imports"
 
@@ -1745,7 +1745,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Indexing started for execution environment \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:572
+#: src/components/headers/collection-header.tsx:574
 msgid "Install"
 msgstr "Install"
 
@@ -1806,8 +1806,8 @@ msgid "Last modified"
 msgstr "Last modified"
 
 #: src/components/rbac/user-form.tsx:90
-#: src/containers/group-management/group-detail.tsx:548
-#: src/containers/group-management/group-detail.tsx:629
+#: src/containers/group-management/group-detail.tsx:545
+#: src/containers/group-management/group-detail.tsx:626
 #: src/containers/user-management/user-list.tsx:169
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:269
@@ -1856,8 +1856,8 @@ msgstr "Link URL"
 msgid "Link text"
 msgstr "Link text"
 
-#: src/components/collection-list/collection-list.tsx:45
-#: src/containers/search/search.tsx:506
+#: src/components/collection-list/collection-list.tsx:47
+#: src/containers/search/search.tsx:507
 msgid "List of Collections"
 msgstr "List of Collections"
 
@@ -1941,8 +1941,8 @@ msgstr "My imports"
 msgid "My namespaces"
 msgstr "My namespaces"
 
-#: src/containers/settings/user-profile.tsx:77
-#: src/containers/settings/user-profile.tsx:78
+#: src/containers/settings/user-profile.tsx:74
+#: src/containers/settings/user-profile.tsx:75
 #: src/loaders/standalone/standalone-loader.tsx:126
 msgid "My profile"
 msgstr "My profile"
@@ -2001,11 +2001,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:809
+#: src/containers/namespace-detail/namespace-detail.tsx:814
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:788
+#: src/containers/namespace-detail/namespace-detail.tsx:793
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" has been successfully deleted."
 
@@ -2188,7 +2188,7 @@ msgstr "No tasks yet"
 msgid "No users will be affected."
 msgstr "No users will be affected."
 
-#: src/containers/group-management/group-detail.tsx:505
+#: src/containers/group-management/group-detail.tsx:502
 #: src/containers/user-management/user-list.tsx:244
 msgid "No users yet"
 msgstr "No users yet"
@@ -2378,8 +2378,8 @@ msgstr "Preview"
 msgid "Progress messages"
 msgstr "Progress messages"
 
-#: src/components/cards/collection-card.tsx:79
-#: src/components/collection-list/collection-list-item.tsx:87
+#: src/components/cards/collection-card.tsx:83
+#: src/components/collection-list/collection-list-item.tsx:89
 msgid "Provided by {company}"
 msgstr "Provided by {company}"
 
@@ -2630,7 +2630,7 @@ msgstr "Remote registry \"{name}\" has been successfully deleted."
 msgid "Remote repositories will appear once added"
 msgstr "Remote repositories will appear once added"
 
-#: src/containers/group-management/group-detail.tsx:678
+#: src/containers/group-management/group-detail.tsx:676
 msgid "Remove"
 msgstr "Remove"
 
@@ -2747,7 +2747,7 @@ msgstr "Role {0} has been successfully added to {1}."
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
 #: src/containers/role-management/role-list.tsx:227
-#: src/loaders/standalone/standalone-loader.tsx:408
+#: src/loaders/standalone/standalone-loader.tsx:410
 msgid "Roles"
 msgstr "Roles"
 
@@ -2791,7 +2791,7 @@ msgstr "Saved changes to execution environment \"{0}\"."
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "Saved changes to namespace \"{0}\"."
 
-#: src/containers/settings/user-profile.tsx:122
+#: src/containers/settings/user-profile.tsx:119
 msgid "Saved changes to user \"{username}\"."
 msgstr "Saved changes to user \"{username}\"."
 
@@ -2896,7 +2896,7 @@ msgstr "Server error. Please come back later."
 msgid "Server version"
 msgstr "Server version"
 
-#: src/containers/settings/user-profile.tsx:77
+#: src/containers/settings/user-profile.tsx:74
 msgid "Settings"
 msgstr "Settings"
 
@@ -2922,7 +2922,7 @@ msgid "Sign all"
 msgstr "Sign all"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:734
+#: src/containers/namespace-detail/namespace-detail.tsx:737
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2969,7 +2969,7 @@ msgid "Signature keys will appear once created."
 msgstr "Signature keys will appear once created."
 
 #: src/components/collection-list/collection-filter.tsx:71
-#: src/components/signing/signature-badge.tsx:28
+#: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "Signed"
 
@@ -2989,15 +2989,15 @@ msgstr "Signed version(s)"
 msgid "Signing service selector:"
 msgstr "Signing service selector:"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:536
+#: src/containers/namespace-detail/namespace-detail.tsx:539
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
-#: src/components/headers/collection-header.tsx:699
+#: src/components/headers/collection-header.tsx:701
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "Signing started for all versions in collection \"{0}\""
 
-#: src/components/headers/collection-header.tsx:750
+#: src/components/headers/collection-header.tsx:752
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Signing started for collection \"{0} v{1}\"."
 
@@ -3113,7 +3113,7 @@ msgid "Super users have all system permissions regardless of what groups they ar
 msgstr "Super users have all system permissions regardless of what groups they are in."
 
 #: src/components/repositories/remote-repository-table.tsx:180
-#: src/containers/search/search.tsx:428
+#: src/containers/search/search.tsx:429
 msgid "Sync"
 msgstr "Sync"
 
@@ -3249,22 +3249,22 @@ msgstr "The URL needs to be in 'http(s)://' format."
 msgid "The URL of an external content source."
 msgstr "The URL of an external content source."
 
-#: src/components/headers/collection-header.tsx:655
+#: src/components/headers/collection-header.tsx:657
 #: src/containers/certification-dashboard/certification-dashboard.tsx:564
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "The certificate for \"{0} {1} v{2}\" could not be saved."
 
-#: src/components/headers/collection-header.tsx:623
+#: src/components/headers/collection-header.tsx:625
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "The certificate for \"{0} {1} v{2}\" is being uploaded."
 
-#: src/components/headers/collection-header.tsx:799
-#: src/containers/search/search.tsx:336
+#: src/components/headers/collection-header.tsx:801
+#: src/containers/search/search.tsx:337
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "The collection \"{0}\" has been successfully deprecated."
 
-#: src/components/headers/collection-header.tsx:800
-#: src/containers/search/search.tsx:337
+#: src/components/headers/collection-header.tsx:802
+#: src/containers/search/search.tsx:338
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "The collection \"{0}\" has been successfully undeprecated."
 
@@ -3296,7 +3296,7 @@ msgstr "The password to be used for authentication when syncing. This is not req
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "The selected roles will be added to this specific Execution Environment."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:434
+#: src/containers/namespace-detail/namespace-detail.tsx:437
 msgid "The selected roles will be added to this specific namespace."
 msgstr "The selected roles will be added to this specific namespace."
 
@@ -3361,7 +3361,7 @@ msgstr "This account is not set up to manage any namespaces"
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:490
+#: src/components/headers/collection-header.tsx:492
 msgid "This collection has been deprecated."
 msgstr "This collection has been deprecated."
 
@@ -3463,13 +3463,13 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
-#: src/containers/search/search.tsx:384
+#: src/containers/namespace-detail/namespace-detail.tsx:867
+#: src/containers/search/search.tsx:385
 msgid "Undeprecate"
 msgstr "Undeprecate"
 
 #: src/components/collection-list/collection-filter.tsx:72
-#: src/components/signing/signature-badge.tsx:30
+#: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "Unsigned"
 
@@ -3481,7 +3481,7 @@ msgstr "Unsigned version(s)"
 msgid "Update container information"
 msgstr "Update container information"
 
-#: src/components/collection-list/collection-list-item.tsx:117
+#: src/components/collection-list/collection-list-item.tsx:119
 msgid "Updated <0/>"
 msgstr "Updated <0/>"
 
@@ -3495,14 +3495,14 @@ msgid "Upload and modify collections."
 msgstr "Upload and modify collections."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:375
-#: src/containers/namespace-detail/namespace-detail.tsx:746
+#: src/containers/namespace-detail/namespace-detail.tsx:751
 msgid "Upload collection"
 msgstr "Upload collection"
 
 #: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:841
-#: src/containers/search/search.tsx:394
-#: src/containers/search/search.tsx:406
+#: src/containers/namespace-detail/namespace-detail.tsx:846
+#: src/containers/search/search.tsx:395
+#: src/containers/search/search.tsx:407
 msgid "Upload new version"
 msgstr "Upload new version"
 
@@ -3576,7 +3576,7 @@ msgstr "User \"{0}\" could not be added to group \"{1}\"."
 msgid "User \"{0}\" could not be deleted."
 msgstr "User \"{0}\" could not be deleted."
 
-#: src/containers/group-management/group-detail.tsx:774
+#: src/containers/group-management/group-detail.tsx:773
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "User \"{0}\" could not be removed from group \"{name}\"."
 
@@ -3588,7 +3588,7 @@ msgstr "User \"{0}\" has been successfully added to group \"{1}\"."
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "User \"{0}\" has been successfully deleted."
 
-#: src/containers/group-management/group-detail.tsx:766
+#: src/containers/group-management/group-detail.tsx:765
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr "User \"{0}\" has been successfully removed from group \"{name}\"."
 
@@ -3604,7 +3604,7 @@ msgstr "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
 #~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 #~ msgstr "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 
-#: src/loaders/standalone/standalone-loader.tsx:399
+#: src/loaders/standalone/standalone-loader.tsx:401
 msgid "User Access"
 msgstr "User Access"
 
@@ -3616,7 +3616,7 @@ msgstr "User Groups"
 msgid "User details"
 msgstr "User details"
 
-#: src/containers/group-management/group-detail.tsx:653
+#: src/containers/group-management/group-detail.tsx:650
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "User list"
@@ -3628,8 +3628,8 @@ msgstr "User type"
 #: src/components/about-modal/about-modal.tsx:95
 #: src/components/rbac/user-form.tsx:88
 #: src/components/repositories/remote-form.tsx:355
-#: src/containers/group-management/group-detail.tsx:540
-#: src/containers/group-management/group-detail.tsx:619
+#: src/containers/group-management/group-detail.tsx:537
+#: src/containers/group-management/group-detail.tsx:616
 #: src/containers/login/login.tsx:52
 #: src/containers/user-management/user-list.tsx:161
 #: src/containers/user-management/user-list.tsx:209
@@ -3647,19 +3647,19 @@ msgstr "Username: {0}"
 #: src/containers/user-management/user-detail.tsx:80
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:138
-#: src/loaders/standalone/standalone-loader.tsx:400
+#: src/loaders/standalone/standalone-loader.tsx:402
 msgid "Users"
 msgstr "Users"
 
 #: src/containers/group-management/group-detail.tsx:316
 #: src/containers/group-management/group-detail.tsx:465
-#: src/containers/group-management/group-detail.tsx:725
+#: src/containers/group-management/group-detail.tsx:724
 #: src/containers/group-management/group-list.tsx:321
 #: src/containers/user-management/user-list.tsx:418
 msgid "Users list could not be displayed."
 msgstr "Users list could not be displayed."
 
-#: src/containers/group-management/group-detail.tsx:506
+#: src/containers/group-management/group-detail.tsx:503
 msgid "Users will appear once added to this group"
 msgstr "Users will appear once added to this group"
 
@@ -3857,8 +3857,8 @@ msgstr "You don't have permission to display users."
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:530
-#: src/containers/search/search.tsx:441
+#: src/components/headers/collection-header.tsx:532
+#: src/containers/search/search.tsx:442
 msgid "You don't have rights to do this operation."
 msgstr "You don't have rights to do this operation."
 
@@ -3969,9 +3969,9 @@ msgstr "{0} was added"
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}'s versions."
 
-#: src/components/cards/collection-card.tsx:53
+#: src/components/cards/collection-card.tsx:55
 #: src/components/cards/namespace-card.tsx:36
-#: src/components/collection-list/collection-list-item.tsx:57
+#: src/components/collection-list/collection-list-item.tsx:59
 #: src/components/headers/collection-header.tsx:396
 #: src/components/headers/partner-header.tsx:50
 msgid "{company} logo"
