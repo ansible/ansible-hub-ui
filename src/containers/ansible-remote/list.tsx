@@ -31,6 +31,10 @@ export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
     },
   ],
   headerActions: [ansibleRemoteCreateAction], // Add remote
+  noDataButton: ansibleRemoteCreateAction.button(
+    null,
+    null,
+  ) as React.ReactElement,
   noDataDescription: t`Remotes will appear once created.`,
   noDataTitle: t`No remotes yet`,
   query: ({ params }) => AnsibleRemoteAPI.list(params),

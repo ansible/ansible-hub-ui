@@ -79,6 +79,7 @@ interface ListPageParams<T, ExtraState> {
   extraState?: ExtraState;
   filterConfig: FilterOption[];
   headerActions?: ActionType[];
+  noDataButton?: React.ReactElement;
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;
@@ -108,6 +109,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   // displayed after filters
   headerActions,
   // EmptyStateNoData
+  noDataButton,
   noDataDescription,
   noDataTitle,
   // ({ params }) => Promise<{ data: { count, results[] } }>
@@ -200,8 +202,9 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
             <EmptyStateNoData
-              title={noDataTitle}
+              button={noDataButton}
               description={noDataDescription}
+              title={noDataTitle}
             />
           ) : (
             <Main>
