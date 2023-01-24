@@ -6,9 +6,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { useContext } from 'src/loaders/app-context';
 import './collection-filter.scss';
 
 interface IProps {
@@ -23,30 +24,16 @@ interface IProps {
   updateParams: (p) => void;
 }
 
-interface IState {
-  inputText: string;
-}
+export const CollectionFilter = ( (props : IProps) => {
+  const context = useContext();
+  const [inputText, setInputText] = useState(props.params.keywords || '');
 
-export class CollectionFilter extends React.Component<IProps, IState> {
-  static contextType = AppContext;
+    useEffect( () => {
+      setInputText(props.params['keywords'] || '' );
+    }, [props.params.keywords]);
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inputText: props.params.keywords || '',
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.params.keywords !== this.props.params['keywords']) {
-      this.setState({ inputText: this.props.params['keywords'] || '' });
-    }
-  }
-
-  render() {
-    const { ignoredParams, params, updateParams } = this.props;
-    const { display_signatures } = this.context.featureFlags;
+    const { ignoredParams, params, updateParams } = props;
+    const { display_signatures } = context.featureFlags;
     const display_tags = ignoredParams.includes('tags') === false;
 
     const filterConfig = [
@@ -80,8 +67,8 @@ export class CollectionFilter extends React.Component<IProps, IState> {
           <ToolbarGroup style={{ marginLeft: 0 }}>
             <ToolbarItem>
               <CompoundFilter
-                inputText={this.state.inputText}
-                onChange={(text) => this.setState({ inputText: text })}
+                inputText={inputText}
+                onChange={(text) => setInputText(text )}
                 updateParams={updateParams}
                 params={params}
                 filterConfig={filterConfig}
@@ -104,5 +91,5 @@ export class CollectionFilter extends React.Component<IProps, IState> {
         </ToolbarContent>
       </Toolbar>
     );
-  }
-}
+  });
+
