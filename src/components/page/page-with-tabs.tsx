@@ -161,7 +161,7 @@ export const PageWithTabs = function <
                       {headerActions?.length &&
                         headerActions.map((action) => (
                           <ToolbarItem key={action.title}>
-                            {action.button(null, actionContext)}
+                            {action.button(item, actionContext)}
                           </ToolbarItem>
                         ))}
                     </ToolbarGroup>

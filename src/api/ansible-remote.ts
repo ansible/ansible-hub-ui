@@ -5,6 +5,7 @@ class API extends PulpAPI {
   useOrdering = true;
 
   // list(params?)
+  // delete(uuid)
 }
 
 export const AnsibleRemoteAPI = new API();

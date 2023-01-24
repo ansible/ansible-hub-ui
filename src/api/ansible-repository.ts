@@ -9,6 +9,8 @@ class API extends PulpAPI {
   listVersions(uuid, params?) {
     return this.list(params, this.getPath(null) + uuid + '/versions/');
   }
+
+  // delete(uuid)
 }
 
 export const AnsibleRepositoryAPI = new API();
