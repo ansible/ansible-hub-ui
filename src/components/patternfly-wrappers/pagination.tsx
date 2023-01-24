@@ -3,7 +3,7 @@ import {
   Pagination as PaginationPF,
   PaginationVariant,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities/param-helper';
 
@@ -48,47 +48,49 @@ const ToggleTemplate = ({
   </Trans>
 );
 
-export class Pagination extends React.Component<IProps> {
-  render() {
-    const { count, params, updateParams, isTop, perPageOptions, isCompact } =
-      this.props;
-
-    const extraProps = {};
-    if (!isTop) {
-      extraProps['widgetId'] = 'pagination-options-menu-bottom';
-      extraProps['variant'] = PaginationVariant.bottom;
-    }
-
-    return (
-      <PaginationPF
-        itemCount={count}
-        perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-        page={params.page || 1}
-        onSetPage={(_, p) =>
-          updateParams(ParamHelper.setParam(params, 'page', p))
-        }
-        onPerPageSelect={(_, p) => {
-          updateParams({ ...params, page: 1, page_size: p });
-        }}
-        {...extraProps}
-        isCompact={isTop || isCompact}
-        perPageOptions={this.mapPerPageOptions(
-          perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
-        )}
-        titles={{
-          ofWord: t`of`,
-          perPageSuffix: t`per page`,
-          items: null,
-        }}
-        toggleTemplate={(props) => <ToggleTemplate {...props} />}
-      />
-    );
+export const Pagination = ({
+  count,
+  params,
+  updateParams,
+  isTop,
+  perPageOptions,
+  isCompact,
+}: IProps) => {
+  const extraProps = {};
+  if (!isTop) {
+    extraProps['widgetId'] = 'pagination-options-menu-bottom';
+    extraProps['variant'] = PaginationVariant.bottom;
   }
 
-  private mapPerPageOptions(options) {
-    return options.map((option) => ({
-      title: String(option),
-      value: option,
-    }));
-  }
+  return (
+    <PaginationPF
+      itemCount={count}
+      perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+      page={params.page || 1}
+      onSetPage={(_, p) =>
+        updateParams(ParamHelper.setParam(params, 'page', p))
+      }
+      onPerPageSelect={(_, p) => {
+        updateParams({ ...params, page: 1, page_size: p });
+      }}
+      {...extraProps}
+      isCompact={isTop || isCompact}
+      perPageOptions={mapPerPageOptions(
+        perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
+      )}
+      titles={{
+        ofWord: t`of`,
+        perPageSuffix: t`per page`,
+        items: null,
+      }}
+      toggleTemplate={(props) => <ToggleTemplate {...props} />}
+    />
+  );
+};
+
+function mapPerPageOptions(options) {
+  return options.map((option) => ({
+    title: String(option),
+    value: option,
+  }));
 }
