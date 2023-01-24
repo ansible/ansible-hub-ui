@@ -3,7 +3,7 @@ import {
   LongArrowAltDownIcon,
   LongArrowAltUpIcon,
 } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 
@@ -16,35 +16,34 @@ interface IProps {
       className?: string;
     }[];
   };
-  params: object;
+  params: {
+    sort?: string;
+  };
   updateParams: (params) => void;
 }
 
-export class SortTable extends React.Component<IProps> {
-  private sort(id, isMinus) {
+export const SortTable = ({ options, params, updateParams }: IProps) => {
+  function sort(id, isMinus) {
     // Alphabetical sorting is inverted in Django, so flip it here to make
     // things match up with the UI.
     isMinus = !isMinus;
-    this.props.updateParams({
-      ...ParamHelper.setParam(
-        this.props.params,
-        'sort',
-        (isMinus ? '-' : '') + id,
-      ),
+    updateParams({
+      ...ParamHelper.setParam(params, 'sort', (isMinus ? '-' : '') + id),
       page: 1,
     });
   }
-  private getIcon(type, id) {
+
+  function getIcon(type, id) {
     if (type == 'none') {
       return;
     }
+
     let Icon;
-    const activeIcon =
-      !!this.props.params['sort'] &&
-      id == this.props.params['sort'].replace('-', '');
     let isMinus = false;
+
+    const activeIcon = !!params.sort && id == params.sort.replace('-', '');
     if (activeIcon) {
-      isMinus = this.props.params['sort'].includes('-');
+      isMinus = params.sort.includes('-');
       let up = isMinus;
       if (type == 'alpha') {
         up = !up;
@@ -58,29 +57,23 @@ export class SortTable extends React.Component<IProps> {
       <Icon
         data-cy={'sort_' + id}
         size='sm'
-        onClick={() => this.sort(id, isMinus)}
+        onClick={() => sort(id, isMinus)}
         className={'clickable ' + (activeIcon ? 'active' : 'inactive')}
       />
     );
   }
 
-  private getHeaderItem(item) {
-    return (
-      <th key={item.id} className={item?.className}>
-        {item.title} {this.getIcon(item.type, item.id)}
-      </th>
-    );
-  }
+  const getHeaderItem = (item) => (
+    <th key={item.id} className={item?.className}>
+      {item.title} {getIcon(item.type, item.id)}
+    </th>
+  );
 
-  render() {
-    return (
-      <thead>
-        <tr className='hub-SortTable-headers' data-cy='SortTable-headers'>
-          {this.props.options['headers'].map((element) =>
-            this.getHeaderItem(element),
-          )}
-        </tr>
-      </thead>
-    );
-  }
-}
+  return (
+    <thead>
+      <tr className='hub-SortTable-headers' data-cy='SortTable-headers'>
+        {options.headers.map((element) => getHeaderItem(element))}
+      </tr>
+    </thead>
+  );
+};
