@@ -6,16 +6,14 @@ interface IProps {
   date: string;
 }
 
-export class DateComponent extends React.Component<IProps> {
-  render() {
-    const { date } = this.props;
+export const DateComponent = (props: IProps) => {
+  const { date } = props;
 
-    return (
-      date && (
-        <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
-          {moment(date).fromNow()}
-        </Tooltip>
-      )
-    );
-  }
-}
+  return (
+    date && (
+      <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
+        {moment(date).fromNow()}
+      </Tooltip>
+    )
+  );
+};
