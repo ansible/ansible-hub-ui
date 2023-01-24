@@ -5,7 +5,7 @@ import {
   DropdownToggle,
   KebabToggle,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React, { useState } from 'react';
 
 interface IProps {
   /** List of patternfly DropdownItem components */
@@ -29,87 +29,59 @@ interface IProps {
   ariaLabel?: string;
 }
 
-interface IState {
-  isOpen: boolean;
-  selected: string;
+export const StatefulDropdown = ({
+  items,
+  onSelect: onSelectProp,
+  toggleType = 'kebab',
+  position,
+  defaultText,
+  isPlain = true,
+  ariaLabel,
+}: IProps) => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>(undefined);
+  const onToggle = (open) => setOpen(open);
+
+  return (
+    <Dropdown
+      onSelect={(e) =>
+        onSelect(e, { isOpen, onSelectProp, setOpen, setSelected })
+      }
+      toggle={renderToggle({ toggleType, defaultText, onToggle, selected })}
+      isOpen={isOpen}
+      isPlain={isPlain}
+      dropdownItems={items}
+      position={position || DropdownPosition.right}
+      autoFocus={false}
+      aria-label={ariaLabel}
+    />
+  );
+};
+
+function renderToggle({ toggleType, defaultText, onToggle, selected }) {
+  switch (toggleType) {
+    case 'dropdown':
+      return (
+        <DropdownToggle onToggle={onToggle}>
+          {selected ? selected : defaultText || t`Dropdown`}
+        </DropdownToggle>
+      );
+    case 'icon':
+      return (
+        <DropdownToggle toggleIndicator={null} onToggle={onToggle}>
+          {selected ? selected : defaultText || t`Dropdown`}
+        </DropdownToggle>
+      );
+    case 'kebab':
+      return <KebabToggle onToggle={onToggle} />;
+  }
 }
 
-export class StatefulDropdown extends React.Component<IProps, IState> {
-  static defaultProps = {
-    isPlain: true,
-    toggleType: 'kebab',
-  };
+function onSelect(event, { isOpen, onSelectProp, setOpen, setSelected }) {
+  setOpen(!isOpen);
+  setSelected(event.currentTarget.value);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      selected: undefined,
-    };
-  }
-
-  render() {
-    const { isOpen } = this.state;
-    const { items, toggleType, defaultText, position, isPlain, ariaLabel } =
-      this.props;
-
-    return (
-      <Dropdown
-        onSelect={(e) => this.onSelect(e)}
-        toggle={this.renderToggle(toggleType, defaultText)}
-        isOpen={isOpen}
-        isPlain={isPlain}
-        dropdownItems={items}
-        position={position || DropdownPosition.right}
-        autoFocus={false}
-        aria-label={ariaLabel}
-      />
-    );
-  }
-
-  private renderToggle(toggleType, defaultText) {
-    switch (toggleType) {
-      case 'dropdown':
-        return (
-          <DropdownToggle onToggle={(e) => this.onToggle(e)}>
-            {this.state.selected
-              ? this.state.selected
-              : defaultText || t`Dropdown`}
-          </DropdownToggle>
-        );
-      case 'icon':
-        return (
-          <DropdownToggle
-            toggleIndicator={null}
-            onToggle={(e) => this.onToggle(e)}
-          >
-            {this.state.selected
-              ? this.state.selected
-              : defaultText || t`Dropdown`}
-          </DropdownToggle>
-        );
-      case 'kebab':
-        return <KebabToggle onToggle={(e) => this.onToggle(e)} />;
-    }
-  }
-
-  private onToggle(isOpen) {
-    this.setState({
-      isOpen,
-    });
-  }
-
-  private onSelect(event) {
-    this.setState(
-      {
-        isOpen: !this.state.isOpen,
-        selected: event.currentTarget.value,
-      },
-      () => {
-        if (this.props.onSelect) {
-          this.props.onSelect(event);
-        }
-      },
-    );
+  if (onSelectProp) {
+    onSelectProp(event);
   }
 }
