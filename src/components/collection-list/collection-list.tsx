@@ -27,52 +27,48 @@ interface IProps {
 }
 
 // only used in namespace detail, collections uses individual items
-export class CollectionList extends React.Component<IProps> {
-  render() {
-    const {
-      collections,
-      displaySignatures,
-      params,
-      updateParams,
-      ignoredParams,
-      itemCount,
-      showControls,
-      repo,
-    } = this.props;
+export const CollectionList = (props: IProps) => {
+  const {
+    collections,
+    displaySignatures,
+    params,
+    updateParams,
+    ignoredParams,
+    itemCount,
+    showControls,
+    repo,
+  } = props;
 
-    return (
-      <React.Fragment>
-        <DataList aria-label={t`List of Collections`}>
-          {collections.length > 0 ? (
-            collections.map((c) => (
-              <CollectionListItem
-                controls={
-                  showControls ? this.props.renderCollectionControls(c) : null
-                }
-                key={c.id}
-                {...c}
-                repo={repo}
-                displaySignatures={displaySignatures}
-              />
-            ))
-          ) : (
-            <EmptyStateFilter
-              clearAllFilters={() => {
-                ParamHelper.clearAllFilters({
-                  params,
-                  ignoredParams,
-                  updateParams,
-                });
-              }}
+  return (
+    <React.Fragment>
+      <DataList aria-label={t`List of Collections`}>
+        {collections.length > 0 ? (
+          collections.map((c) => (
+            <CollectionListItem
+              controls={showControls ? props.renderCollectionControls(c) : null}
+              key={c.id}
+              {...c}
+              repo={repo}
+              displaySignatures={displaySignatures}
             />
-          )}
-        </DataList>
-        <Pagination
-          params={params}
-          updateParams={(p) => updateParams(p)}
-          count={itemCount}
-        />
-      </React.Fragment>
-    );
-  }
-}
+          ))
+        ) : (
+          <EmptyStateFilter
+            clearAllFilters={() => {
+              ParamHelper.clearAllFilters({
+                params,
+                ignoredParams,
+                updateParams,
+              });
+            }}
+          />
+        )}
+      </DataList>
+      <Pagination
+        params={params}
+        updateParams={(p) => updateParams(p)}
+        count={itemCount}
+      />
+    </React.Fragment>
+  );
+};
