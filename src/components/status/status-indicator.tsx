@@ -7,7 +7,7 @@ import {
   OutlinedClockIcon,
   SyncAltIcon,
 } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { PulpStatus } from 'src/api';
 
 interface IProps {
@@ -22,71 +22,67 @@ interface LabelPropType {
   text: string;
 }
 
-export class StatusIndicator extends React.Component<IProps> {
-  static defaultProps = {
-    type: 'primary',
-  };
+const typeToVariantMap: Record<string, LabelProps['variant']> = {
+  primary: 'outline',
+  secondary: 'filled',
+};
 
-  typeToVariantMap: Record<string, LabelProps['variant']> = {
-    primary: 'outline',
-    secondary: 'filled',
-  };
+const statusToProps = (status): LabelPropType => {
+  switch (status) {
+    case PulpStatus.waiting:
+      return {
+        color: 'blue',
+        text: t`Pending`,
+        icon: <OutlinedClockIcon />,
+      };
 
-  render() {
-    let labelProps: LabelPropType;
-    const { status, type } = this.props;
+    // TODO: what does skipped mean in pulp
+    case PulpStatus.skipped:
+    case PulpStatus.canceled:
+      return {
+        color: 'orange',
+        text: t`Canceled`,
+        icon: <ExclamationIcon />,
+      };
 
-    switch (status) {
-      case PulpStatus.waiting:
-        labelProps = {
-          color: 'blue',
-          text: t`Pending`,
-          icon: <OutlinedClockIcon />,
-        };
-        break;
+    case PulpStatus.running:
+      return { color: 'blue', text: t`Running`, icon: <SyncAltIcon /> };
 
-      // TODO: what does skipped mean in pulp
-      case PulpStatus.skipped:
-      case PulpStatus.canceled:
-        labelProps = {
-          color: 'orange',
-          text: t`Canceled`,
-          icon: <ExclamationIcon />,
-        };
-        break;
+    case PulpStatus.completed:
+      return {
+        color: 'green',
+        text: t`Completed`,
+        icon: <CheckCircleIcon />,
+      };
 
-      case PulpStatus.running:
-        labelProps = { color: 'blue', text: t`Running`, icon: <SyncAltIcon /> };
-        break;
-
-      case PulpStatus.completed:
-        labelProps = {
-          color: 'green',
-          text: t`Completed`,
-          icon: <CheckCircleIcon />,
-        };
-        break;
-
-      case PulpStatus.failed:
-        labelProps = {
-          color: 'red',
-          text: t`Failed`,
-          icon: <ExclamationCircleIcon />,
-        };
-        break;
-      default:
-        return '---';
-    }
-
-    return (
-      <Label
-        variant={this.typeToVariantMap[type]}
-        color={labelProps.color}
-        icon={labelProps.icon}
-        className={this.props.className}
-      >
-        {labelProps.text}
-      </Label>
-    );
+    case PulpStatus.failed:
+      return {
+        color: 'red',
+        text: t`Failed`,
+        icon: <ExclamationCircleIcon />,
+      };
   }
-}
+  return null;
+};
+
+export const StatusIndicator = ({
+  status,
+  type = 'primary',
+  className,
+}: IProps) => {
+  const labelProps = statusToProps(status);
+  if (!labelProps) {
+    return <>---</>;
+  }
+
+  return (
+    <Label
+      variant={typeToVariantMap[type]}
+      color={labelProps.color}
+      icon={labelProps.icon}
+      className={className}
+    >
+      {labelProps.text}
+    </Label>
+  );
+};
