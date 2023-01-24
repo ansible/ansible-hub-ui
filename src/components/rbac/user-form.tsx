@@ -10,7 +10,7 @@ import {
   TextInputTypes,
   Tooltip,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { GroupAPI, UserType } from 'src/api';
 import { APISearchTypeAhead, AlertType, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';

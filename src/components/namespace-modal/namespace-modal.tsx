@@ -8,7 +8,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { NamespaceAPI } from 'src/api';
 import { HelperText } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';

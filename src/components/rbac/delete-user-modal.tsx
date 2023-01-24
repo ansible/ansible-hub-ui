@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import * as React from 'react';
+import React from 'react';
 import { UserAPI, UserType } from 'src/api';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 import { AppContext } from 'src/loaders/app-context';

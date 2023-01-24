@@ -13,7 +13,7 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   APISearchTypeAhead,

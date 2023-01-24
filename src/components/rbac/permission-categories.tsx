@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';

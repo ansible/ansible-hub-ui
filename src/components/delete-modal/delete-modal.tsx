@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Modal, ModalProps, Spinner } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 
 export interface IProps {
   cancelAction: () => void;

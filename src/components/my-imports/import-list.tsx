@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Pagination, Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import {
   ImportListType,
   MyNamespaceAPI,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 // had to declare *.svg in src/index.d.ts
 import DefaultLogo from 'src/../static/images/default-logo.svg';
 

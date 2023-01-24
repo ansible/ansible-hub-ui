@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { UserType } from 'src/api';
 import {
   BaseHeader,

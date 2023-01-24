@@ -7,7 +7,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { sortBy } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { GroupType, RoleType } from 'src/api';
 import {

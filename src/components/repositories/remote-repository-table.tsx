@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { PulpStatus, RemoteType, UserType } from 'src/api';
 import { DateComponent, ListItemActions, SortTable } from 'src/components';
 import { Constants } from 'src/constants';

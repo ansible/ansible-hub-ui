@@ -11,7 +11,7 @@ import {
   PlusCircleIcon,
   TrashIcon,
 } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { NamespaceType } from 'src/api';
 import { NamespaceCard } from 'src/components';

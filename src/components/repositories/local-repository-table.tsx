@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
+import React from 'react';
 import { CollectionCount } from 'src/components';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';

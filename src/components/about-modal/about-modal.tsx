@@ -8,7 +8,7 @@ import {
   TextListVariants,
 } from '@patternfly/react-core';
 import { detect } from 'detect-browser';
-import * as React from 'react';
+import React from 'react';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ApplicationInfoAPI, UserType } from 'src/api';
 

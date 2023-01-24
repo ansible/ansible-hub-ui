@@ -17,7 +17,7 @@ import {
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
 import * as FileSaver from 'file-saver';
-import * as React from 'react';
+import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
