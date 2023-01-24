@@ -1,5 +1,5 @@
 import { Label, Tooltip } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { truncateSha } from 'src/utilities';
 
 interface IProps {
@@ -8,16 +8,10 @@ interface IProps {
   long?: boolean;
 }
 
-export class ShaLabel extends React.Component<IProps> {
-  render() {
-    const { digest, grey, long } = this.props;
-
-    return (
-      <Tooltip content={digest}>
-        <Label color={grey ? 'grey' : 'blue'}>
-          {long ? digest : truncateSha(digest)}
-        </Label>
-      </Tooltip>
-    );
-  }
-}
+export const ShaLabel = ({ digest, grey, long }: IProps) => (
+  <Tooltip content={digest}>
+    <Label color={grey ? 'grey' : 'blue'}>
+      {long ? digest : truncateSha(digest)}
+    </Label>
+  </Tooltip>
+);
