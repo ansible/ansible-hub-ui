@@ -3,7 +3,7 @@ import {
   AlertActionCloseButton,
   AlertProps,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 
 interface IProps {
   /** List of alerts to display */
@@ -20,47 +20,43 @@ export class AlertType {
   description?: string | JSX.Element;
 }
 
-export class AlertList extends React.Component<IProps> {
-  render() {
-    const { alerts, closeAlert } = this.props;
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          right: '5px',
-          top: '80px',
-          zIndex: 300,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-        data-cy='AlertList'
+export const AlertList = ({ alerts, closeAlert }: IProps) => (
+  <div
+    style={{
+      position: 'fixed',
+      right: '5px',
+      top: '80px',
+      zIndex: 300,
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+    data-cy='AlertList'
+  >
+    {alerts.map((alert, i) => (
+      <Alert
+        style={{ marginBottom: '16px' }}
+        key={i}
+        title={alert.title}
+        variant={alert.variant}
+        actionClose={<AlertActionCloseButton onClose={() => closeAlert(i)} />}
       >
-        {alerts.map((alert, i) => (
-          <Alert
-            style={{ marginBottom: '16px' }}
-            key={i}
-            title={alert.title}
-            variant={alert.variant}
-            actionClose={
-              <AlertActionCloseButton onClose={() => closeAlert(i)} />
-            }
-          >
-            {alert.description}
-          </Alert>
-        ))}
-      </div>
-    );
-  }
+        {alert.description}
+      </Alert>
+    ))}
+  </div>
+);
+
+export function closeAlert(alertIndex, { alerts, setAlerts }) {
+  const newList = [...alerts];
+  newList.splice(alertIndex, 1);
+  setAlerts(newList);
 }
 
 export function closeAlertMixin(alertStateVariable) {
   return function (alertIndex) {
-    const newList = [...this.state['alerts']];
-    newList.splice(alertIndex, 1);
-
-    const newState = {};
-    newState[alertStateVariable] = newList;
-
-    this.setState(newState);
+    closeAlert(alertIndex, {
+      alerts: this.state[alertStateVariable],
+      setAlerts: (newList) => this.setState({ [alertStateVariable]: newList }),
+    });
   };
 }
