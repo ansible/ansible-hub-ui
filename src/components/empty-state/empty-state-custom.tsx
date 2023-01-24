@@ -18,26 +18,21 @@ interface IProps {
   variant?: 'xs' | 'small' | 'large' | 'xl' | 'full';
 }
 
-export class EmptyStateCustom extends React.Component<IProps> {
-  static defaultProps = {
-    variant: 'small',
-  };
-
-  render() {
-    return (
-      <EmptyState
-        variant={EmptyStateVariant[this.props.variant]}
-        data-cy='EmptyState'
-      >
-        <EmptyStateIcon icon={this.props.icon} />
-        <Title headingLevel='h4' size='lg'>
-          {this.props.title}
-        </Title>
-        <EmptyStateBody>{this.props.description}</EmptyStateBody>
-        {this.props.button && (
-          <EmptyStatePrimary>{this.props.button}</EmptyStatePrimary>
-        )}
-      </EmptyState>
-    );
-  }
-}
+export const EmptyStateCustom = ({
+  icon,
+  title,
+  description,
+  button,
+  variant = 'small',
+}: IProps) => {
+  return (
+    <EmptyState variant={EmptyStateVariant[variant]} data-cy='EmptyState'>
+      <EmptyStateIcon icon={icon} />
+      <Title headingLevel='h4' size='lg'>
+        {title}
+      </Title>
+      <EmptyStateBody>{description}</EmptyStateBody>
+      {button && <EmptyStatePrimary>{button}</EmptyStatePrimary>}
+    </EmptyState>
+  );
+};

@@ -9,15 +9,13 @@ interface IProps {
   description: ReactNode;
 }
 
-export class EmptyStateNoData extends React.Component<IProps> {
-  render() {
-    return (
-      <EmptyStateCustom
-        icon={this.props.button ? PlusCircleIcon : CubesIcon}
-        title={this.props.title}
-        description={this.props.description}
-        button={this.props.button}
-      />
-    );
-  }
-}
+export const EmptyStateNoData = (props: IProps) => {
+  return (
+    <EmptyStateCustom
+      icon={props.button ? PlusCircleIcon : CubesIcon}
+      title={props.title}
+      description={props.description}
+      button={props.button}
+    />
+  );
+};
