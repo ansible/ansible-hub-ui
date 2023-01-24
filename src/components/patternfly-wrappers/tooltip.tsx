@@ -1,18 +1,13 @@
 import { Tooltip as PFTooltip } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 
 interface IProps {
   children: React.ReactNode;
   content: string;
 }
 
-export class Tooltip extends React.Component<IProps> {
-  render() {
-    const { content, children } = this.props;
-    return (
-      <PFTooltip content={content}>
-        <span>{children}</span>
-      </PFTooltip>
-    );
-  }
-}
+export const Tooltip = ({ content, children }: IProps) => (
+  <PFTooltip content={content}>
+    <span>{children}</span>
+  </PFTooltip>
+);
