@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export class BreadcrumbType {
@@ -12,23 +12,12 @@ interface IProps {
   links: BreadcrumbType[];
 }
 
-export class Breadcrumbs extends React.Component<IProps> {
-  render() {
-    return (
-      <Breadcrumb>
-        {this.props.links.map((link, i) => this.renderLink(link, i))}
-      </Breadcrumb>
-    );
-  }
-
-  renderLink(link, index) {
-    return (
-      <BreadcrumbItem
-        key={index}
-        isActive={index + 1 === this.props.links.length}
-      >
+export const Breadcrumbs = ({ links }: IProps) => (
+  <Breadcrumb>
+    {links.map((link, index) => (
+      <BreadcrumbItem key={index} isActive={index + 1 === links.length}>
         {link.url ? <Link to={link.url}>{link.name}</Link> : link.name}
       </BreadcrumbItem>
-    );
-  }
-}
+    ))}
+  </Breadcrumb>
+);
