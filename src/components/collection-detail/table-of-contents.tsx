@@ -45,8 +45,8 @@ interface IProps {
 }
 
 export const TableOfContents = (props: IProps) => {
-  const [docsBlob, setDocsBlob] = useState(null);
-  const [table, setTable] = useState(null);
+  const [docsBlob, setDocsBlob] = useState<DocsBlobType>(null);
+  const [table, setTable] = useState<Table>(null);
   const context = useContext();
 
   const collapsedCategories = [];

@@ -2,6 +2,7 @@ import { t } from '@lingui/macro';
 import { Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { CollectionAPI, CollectionExcludesType } from 'src/api';
+import { AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
@@ -10,7 +11,7 @@ interface IProps {
 
 export const CollectionCount = ({ distributionPath }: IProps) => {
   const [collectionCount, setCollectionCount] = useState(null);
-  const [alerts, setAlerts] = useState([]);
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [loading, setLoading] = useState(true);
 
   const getCollectionCount = (repo) => {
