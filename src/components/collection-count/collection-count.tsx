@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import { Spinner } from '@patternfly/react-core';
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CollectionAPI, CollectionExcludesType } from 'src/api';
 import { errorMessage } from 'src/utilities';
 
