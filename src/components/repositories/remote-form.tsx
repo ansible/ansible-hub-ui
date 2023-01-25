@@ -35,7 +35,7 @@ interface IProps {
   closeModal: () => void;
   errorMessages: ErrorMessagesType;
   remote: RemoteType;
-  remoteType?: 'registry';
+  remoteType?: 'registry' | 'ansible-remote';
   saveRemote: () => void;
   showModal?: boolean;
   showMain?: boolean;
@@ -118,6 +118,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
     switch (remoteType) {
       case 'none':
         // require only name, url; nothing disabled
+        break;
+
+      case 'ansible-remote':
+        requiredFields = requiredFields.concat(['auth_url']);
+        disabledFields = disabledFields.concat(['requirements_file']);
         break;
 
       case 'certified':
@@ -741,7 +746,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
       }
     }
 
-    if (['community', 'certified', 'none'].includes(remoteType)) {
+    if (
+      ['community', 'certified', 'none', 'ansible-remote'].includes(remoteType)
+    ) {
       // only required in remotes, not registries
       if (remote.download_concurrency < 1) {
         return false;
@@ -755,7 +762,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
     return true;
   }
 
-  private getRemoteType(url: string): 'community' | 'certified' | 'none' {
+  private getRemoteType(
+    url: string,
+  ): 'community' | 'certified' | 'none' | 'ansible-remote' {
     for (const host of Constants.UPSTREAM_HOSTS) {
       if (url.includes(host)) {
         return 'community';
