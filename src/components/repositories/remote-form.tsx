@@ -32,7 +32,8 @@ interface IProps {
   remote: RemoteType;
   remoteType?: 'registry';
   saveRemote: () => void;
-  showModal: boolean;
+  showModal?: boolean;
+  showMain?: boolean;
   title?: string;
   updateRemote: (remote) => void;
 }
@@ -91,7 +92,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { remote } = this.props;
+    const {
+      allowEditName,
+      closeModal,
+      remote,
+      saveRemote,
+      showMain,
+      showModal,
+      title,
+    } = this.props;
     if (!remote) {
       return null;
     }
@@ -99,7 +108,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     const remoteType = this.props.remoteType || this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
-    let disabledFields = this.props.allowEditName ? [] : ['name'];
+    let disabledFields = allowEditName ? [] : ['name'];
 
     if (remoteType === 'certified') {
       requiredFields = requiredFields.concat(['auth_url']);
@@ -120,29 +129,39 @@ export class RemoteForm extends React.Component<IProps, IState> {
       ]);
     }
 
+    const save = (
+      <Button
+        isDisabled={!this.isValid(requiredFields, remoteType)}
+        key='confirm'
+        variant='primary'
+        onClick={() => saveRemote()}
+      >
+        {t`Save`}
+      </Button>
+    );
+    const cancel = (
+      <Button key='cancel' variant='link' onClick={() => closeModal()}>
+        {t`Cancel`}
+      </Button>
+    );
+
+    if (showMain) {
+      return (
+        <>
+          {this.renderForm(requiredFields, disabledFields)}
+          {save}
+          {cancel}
+        </>
+      );
+    }
+
     return (
       <Modal
-        isOpen={this.props.showModal}
-        title={this.props.title || t`Edit remote`}
+        isOpen={showModal}
+        title={title || t`Edit remote`}
         variant='small'
-        onClose={() => this.props.closeModal()}
-        actions={[
-          <Button
-            isDisabled={!this.isValid(requiredFields, remoteType)}
-            key='confirm'
-            variant='primary'
-            onClick={() => this.props.saveRemote()}
-          >
-            {t`Save`}
-          </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.props.closeModal()}
-          >
-            {t`Cancel`}
-          </Button>,
-        ]}
+        onClose={() => closeModal()}
+        actions={[save, cancel]}
       >
         {this.renderForm(requiredFields, disabledFields)}
       </Modal>
