@@ -185,9 +185,10 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
-        state: this.state,
-        setState: (s) => this.setState(s),
+        navigate: this.props.navigate,
         query: () => this.query(),
+        setState: (s) => this.setState(s),
+        state: this.state,
       };
 
       return (

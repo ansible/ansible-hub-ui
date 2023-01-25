@@ -20,6 +20,10 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
   query: ({ name }) =>
     AnsibleRemoteAPI.list({ name }).then(({ data: { results } }) => results[0]),
   title: ({ name }) => wip + (name || t`Add new remote`),
+  transformParams: ({ name, ...rest }) => ({
+    ...rest,
+    name: name !== '_' ? name : null,
+  }),
   render: (item, actionContext) => <div>{JSON.stringify(item, null, 2)}</div>,
 });
 

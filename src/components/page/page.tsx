@@ -44,6 +44,7 @@ interface PageParams<T, ExtraState> {
   headerActions?: ActionType[];
   query: ({ name }) => Promise<T>;
   title: ({ name }) => string;
+  transformParams: (routeParams) => Record<string, string>;
   renderModals?: RenderModals;
   render: any;
 }
@@ -69,6 +70,7 @@ export const Page = function <
   // () => Promise<T>
   query,
   title,
+  transformParams,
   // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
   renderModals,
   render,
@@ -110,12 +112,13 @@ export const Page = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
-        state: this.state,
-        setState: (s) => this.setState(s),
+        navigate: this.props.navigate,
         query: () => this.query(),
+        setState: (s) => this.setState(s),
+        state: this.state,
       };
 
-      const name = item?.name || routeParams.name;
+      const name = item?.name || transformParams(routeParams)?.name || null;
 
       return (
         <React.Fragment>
@@ -168,7 +171,12 @@ export const Page = function <
     }
 
     private query() {
-      const { name } = this.props.routeParams;
+      const { name } = transformParams(this.props.routeParams);
+
+      if (!name) {
+        this.setState({ loading: false });
+        return;
+      }
 
       this.setState({ loading: true }, () => {
         query({ name })

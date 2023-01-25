@@ -25,6 +25,10 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       ({ data: { results } }) => results[0],
     ),
   title: ({ name }) => wip + (name || t`Add new repository`),
+  transformParams: ({ name, ...rest }) => ({
+    ...rest,
+    name: name !== '_' ? name : null,
+  }),
   render: (item, actionContext) => <div>{JSON.stringify(item, null, 2)}</div>,
 });
 
