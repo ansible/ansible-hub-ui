@@ -14,6 +14,16 @@ const userLanguage =
 async function activate(locale: string) {
   const { messages } = await import(`src/../locale/${locale}.js`);
 
+  const searchParams = Object.fromEntries(
+    new URLSearchParams(window.location.search),
+  );
+  if (searchParams.pseudolocalization === 'true') {
+    window.localStorage.test_l10n = 'true';
+  }
+  if (searchParams.pseudolocalization === 'false') {
+    delete window.localStorage.test_l10n;
+  }
+
   if (window.localStorage.test_l10n === 'true') {
     Object.keys(messages).forEach((key) => {
       if (Array.isArray(messages[key])) {
