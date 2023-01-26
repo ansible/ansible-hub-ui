@@ -43,7 +43,6 @@ class CollectionDetail extends React.Component<
 
   render() {
     const { collection, params, alerts } = this.state;
-
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }

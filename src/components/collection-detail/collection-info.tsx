@@ -31,6 +31,7 @@ export const CollectionInfo = ({
   latest_version,
   namespace,
   params,
+  addAlert,
 }: IProps) => {
   const downloadLinkRef = React.useRef<HTMLAnchorElement>(null);
   const context = useContext();
@@ -104,6 +105,7 @@ export const CollectionInfo = ({
                         name,
                         latest_version,
                         downloadLinkRef,
+                        addAlert,
                       )
                     }
                   >
@@ -159,7 +161,14 @@ export const CollectionInfo = ({
   );
 };
 
-function download(reponame, namespace, name, latest_version, downloadLinkRef) {
+function download(
+  reponame,
+  namespace,
+  name,
+  latest_version,
+  downloadLinkRef,
+  addAlert,
+) {
   CollectionAPI.getDownloadURL(
     reponame,
     namespace.name,
@@ -177,7 +186,7 @@ function download(reponame, namespace, name, latest_version, downloadLinkRef) {
     })
     .catch((e) => {
       const { status, statusText } = e.response;
-      this.props.addAlert(
+      addAlert(
         'danger',
         t`Collection "${name}" could not be downloaded.`,
         errorMessage(status, statusText),

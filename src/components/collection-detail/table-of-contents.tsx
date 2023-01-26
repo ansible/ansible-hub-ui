@@ -150,7 +150,7 @@ function parseLinks(docs_blob: DocsBlobType, props, context): Table {
           table.playbooks.push(getContentEntry(content, baseUrlParams));
           break;
         default:
-          table.plugins.push(this.getContentEntry(content, baseUrlParams));
+          table.plugins.push(getContentEntry(content, baseUrlParams));
           break;
       }
     }
