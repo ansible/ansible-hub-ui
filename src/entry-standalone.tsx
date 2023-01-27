@@ -3,6 +3,7 @@ import { I18nProvider } from '@lingui/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { HubI18nextProvider } from 'src/components';
 import 'src/l10n';
 import App from './loaders/standalone/loader';
 
@@ -16,9 +17,11 @@ if (!window.location.pathname.includes(UI_BASE_PATH)) {
 ReactDOM.render(
   <React.StrictMode>
     <Router basename={UI_BASE_PATH}>
-      <I18nProvider i18n={i18n}>
-        <App />
-      </I18nProvider>
+      <HubI18nextProvider>
+        <I18nProvider i18n={i18n}>
+          <App />
+        </I18nProvider>
+      </HubI18nextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root'),

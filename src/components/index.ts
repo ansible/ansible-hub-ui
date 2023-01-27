@@ -104,3 +104,4 @@ export { SelectGroup } from './rbac/select-group';
 
 export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
 export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespace-item';
+export { HubI18nextProvider } from './i18next-provider/i18next-provider';

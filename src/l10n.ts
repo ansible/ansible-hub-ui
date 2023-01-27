@@ -1,8 +1,10 @@
 import { i18n } from '@lingui/core';
+import i18next from 'i18next';
 import * as plurals from 'make-plural/plurals';
 import * as moment from 'moment';
+import { initReactI18next } from 'react-i18next';
 
-// remember to update .linguirc as well
+// remember to update .linguirc & i18next-parser.config.mjs locales as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
 
 // map missing moment locales (node_modules/moment/src/locale/<locale>.js must exist, except for english)
@@ -10,7 +12,7 @@ const momentLocales = {
   zh: 'zh-cn',
 };
 
-async function activate(locale: string, pseudolocalization = false) {
+async function activateLingui(locale: string, pseudolocalization = false) {
   const { messages } = await import(`src/../locale/${locale}.js`);
 
   if (pseudolocalization) {
@@ -28,8 +30,33 @@ async function activate(locale: string, pseudolocalization = false) {
   i18n.loadLocaleData(locale, { plurals: plurals[locale] });
   i18n.load(locale, messages);
   i18n.activate(locale);
+}
 
+async function activateMoment(locale: string) {
   moment.locale(momentLocales[locale] || locale);
+}
+
+async function activateI18next(locale: string, pseudolocalization = false) {
+  const { default: messages } = await import(`src/../locale/${locale}.json`);
+
+  if (pseudolocalization) {
+    Object.keys(messages).forEach((key) => {
+      messages[key] = '»' + (messages[key] || key) + '«';
+    });
+  }
+
+  i18next.use(initReactI18next);
+  i18next.init({
+    interpolation: { escapeValue: false },
+    keySeparator: false,
+    lng: locale,
+    nsSeparator: false,
+    react: { useSuspense: false },
+    resources: { [locale]: { translation: messages } },
+    returnEmptyString: false,
+    returnNull: false,
+    supportedLngs: [...availableLanguages, 'dev'],
+  });
 }
 
 // Accept-Language
@@ -79,4 +106,6 @@ if (pseudolocalization) {
   );
 }
 
-activate(language, pseudolocalization);
+activateLingui(language, pseudolocalization);
+activateMoment(language);
+export const i18nextPromise = activateI18next(language, pseudolocalization);
