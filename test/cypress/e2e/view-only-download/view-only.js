@@ -16,7 +16,7 @@ describe('view-only mode - with download', () => {
 
     [
       'Collections > Repository Management',
-      'Collections > API token management',
+      'Collections > API token',
       'Collections > Approval',
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',

@@ -52,7 +52,7 @@ function standaloneMenu({ repository }) {
         condition: ({ user }) => !user.is_anonymous,
         url: formatPath(Paths.repositories),
       }),
-      menuItem(t`API token management`, {
+      menuItem(t`API token`, {
         url: formatPath(Paths.token),
         condition: ({ user }) => !user.is_anonymous,
       }),

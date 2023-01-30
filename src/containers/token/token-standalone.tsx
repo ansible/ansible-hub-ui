@@ -47,7 +47,7 @@ class TokenPage extends React.Component<RouteProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={t`API token management`}></BaseHeader>
+        <BaseHeader title={t`API token`}></BaseHeader>
         <Main>
           {unauthorised ? (
             <EmptyStateUnauthorized />
