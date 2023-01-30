@@ -1,6 +1,11 @@
 import { defineMessage, t } from '@lingui/macro';
+import { t as t2 } from 'i18next';
 
 export class Constants {
+  static get STATIC_TRANSLATION_TEST() {
+    return t2('static translation text');
+  }
+
   static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
   static readonly DEFAULT_PAGE_SIZE = 10;
   static readonly DEFAULT_PAGINATION_OPTIONS = [10, 20, 50, 100];

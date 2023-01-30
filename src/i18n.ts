@@ -6,17 +6,31 @@ import { initReactI18next } from 'react-i18next';
 // have a look at the Quick start guide
 // for passing in lng and translations on init
 
+const en = require('../locale/en.json');
+
+const messages = en;
+
+window.localStorage.test_l10n = true;
+
+if (window.localStorage.test_l10n === 'true') {
+  Object.keys(messages).forEach((key) => {
+    // simple string
+    messages[key] = '»' + messages[key] + '«';
+  });
+}
+
 i18next.use(initReactI18next);
+i18next.use(LanguageDetector);
 i18next.init({
-  lng: 'en', // if you're using a language detector, do not define the lng option
   debug: true,
+  fallbackLng: 'en',
   resources: {
     en: {
-      translation: {
-        key: 'hello world',
-      },
+      translation: en,
     },
   },
+  keySeparator: '>>>>',
+  nsSeparator: '||||',
 });
 
 export default i18next;

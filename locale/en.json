@@ -1,0 +1,13 @@
+{
+  "This.This is the hello world application: Test for simple translation." : "That.That is my translated hello world application: Test for really simple translation.",
+  "transTest" : "<5>Translated empty link reversed order test</5> Hello from translation: <1>{{name}}</1>. This is translated {{componentName}} test.",
+  "empty translation": "",
+  "Escaped code example." : "Escaped code: <a href='#'>Link<a/>",
+  "order_one": "{{count}}st place",
+  "order_two": "{{count}}nd place",
+  "order_few": "{{count}}rd place",
+  "order_other": "{{count}}th place",
+  "role_one": "{{count}} role",
+  "role_other": "{{count}} roles",
+  "static translation text" : "Static translation text is working."
+}
