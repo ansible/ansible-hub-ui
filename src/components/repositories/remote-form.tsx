@@ -16,14 +16,18 @@ import {
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-import * as FileSaver from 'file-saver';
-import * as React from 'react';
+import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { ErrorMessagesType, isFieldSet, isWriteOnly } from 'src/utilities';
-import { validateURLHelper } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  downloadString,
+  isFieldSet,
+  isWriteOnly,
+  validateURLHelper,
+} from 'src/utilities';
 
 interface IProps {
   allowEditName?: boolean;
@@ -325,14 +329,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <FlexItem>
                 <Button
                   isDisabled={!this.props.remote.requirements_file}
-                  onClick={() => {
-                    FileSaver.saveAs(
-                      new Blob([this.props.remote.requirements_file], {
-                        type: 'text/plain;charset=utf-8',
-                      }),
+                  onClick={() =>
+                    downloadString(
+                      this.props.remote.requirements_file,
                       filenames.requirements_file.name,
-                    );
-                  }}
+                    )
+                  }
                   variant='plain'
                   aria-label={t`Download requirements file`}
                 >
@@ -571,14 +573,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   <Button
                     data-cy='client_cert'
                     isDisabled={!this.props.remote.client_cert}
-                    onClick={() => {
-                      FileSaver.saveAs(
-                        new Blob([this.props.remote.client_cert], {
-                          type: 'text/plain;charset=utf-8',
-                        }),
+                    onClick={() =>
+                      downloadString(
+                        this.props.remote.client_cert,
                         filenames.client_cert.name,
-                      );
-                    }}
+                      )
+                    }
                     variant='plain'
                     aria-label={t`Download client certification file`}
                   >
@@ -617,14 +617,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   <Button
                     data-cy='ca_cert'
                     isDisabled={!this.props.remote.ca_cert}
-                    onClick={() => {
-                      FileSaver.saveAs(
-                        new Blob([this.props.remote.ca_cert], {
-                          type: 'text/plain;charset=utf-8',
-                        }),
+                    onClick={() =>
+                      downloadString(
+                        this.props.remote.ca_cert,
                         filenames.ca_cert.name,
-                      );
-                    }}
+                      )
+                    }
                     variant='plain'
                     aria-label={t`Download CA certification file`}
                   >
