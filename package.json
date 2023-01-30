@@ -6,7 +6,7 @@
     "private": true,
     "dependencies": {
         "@babel/runtime": "^7.20.7",
-        "@lingui/react": "^3.15.0",
+        "@lingui/react": "^3.16.1",
         "@patternfly/patternfly": "^4.222.4",
         "@patternfly/react-core": "^4.231.8",
         "@patternfly/react-table": "^4.112.6",
