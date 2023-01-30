@@ -53,7 +53,7 @@ export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
       ansibleRemoteDownloadCAAction,
       // Delete
       ansibleRemoteDeleteAction,
-    ].map((action) => action.dropdownItem({ name, id }, actionContext));
+    ].map((action) => action.dropdownItem({ ...item, id }, actionContext));
 
     return (
       <tr key={index}>

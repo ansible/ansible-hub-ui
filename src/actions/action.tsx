@@ -16,6 +16,7 @@ export class ActionType {
   button: (item, actionContext) => React.ReactNode | null;
   dropdownItem: (item, actionContext) => React.ReactNode | null;
   modal?: ModalType;
+  visible: (item) => boolean;
 }
 
 export const Action = ({
@@ -43,4 +44,5 @@ export const Action = ({
       </DropdownItem>
     ) : null,
   modal,
+  visible,
 });

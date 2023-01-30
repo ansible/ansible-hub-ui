@@ -155,20 +155,24 @@ export const PageWithTabs = function <
               />
             }
             pageControls={
-              <div className='hub-list-toolbar'>
-                <Toolbar>
-                  <ToolbarContent>
-                    <ToolbarGroup>
-                      {headerActions?.length &&
-                        headerActions.map((action) => (
-                          <ToolbarItem key={action.title}>
-                            {action.button(item, actionContext)}
-                          </ToolbarItem>
-                        ))}
-                    </ToolbarGroup>
-                  </ToolbarContent>
-                </Toolbar>
-              </div>
+              loading ? null : (
+                <div className='hub-list-toolbar'>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <ToolbarGroup>
+                        {headerActions?.length &&
+                          headerActions.map((action) =>
+                            action.visible(item) ? (
+                              <ToolbarItem key={action.title}>
+                                {action.button(item, actionContext)}
+                              </ToolbarItem>
+                            ) : null,
+                          )}
+                      </ToolbarGroup>
+                    </ToolbarContent>
+                  </Toolbar>
+                </div>
+              )
             }
           >
             <div className='hub-tab-link-container'>
