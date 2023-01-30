@@ -35,118 +35,114 @@ interface IProps {
   updateParams: (params) => void;
 }
 
-export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
-  private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
+export const CollectionUsedbyDependenciesList = ({
+  params,
+  usedByDependencies,
+  itemCount,
+  updateParams,
+  usedByDependenciesLoading,
+}: IProps) => {
+  const ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
 
-  render() {
-    const {
-      params,
-      usedByDependencies,
-      itemCount,
-      updateParams,
-      usedByDependenciesLoading,
-    } = this.props;
-
-    if (!itemCount && !filterIsSet(params, ['name__icontains'])) {
-      return (
-        <EmptyStateNoData
-          title={t`Not required for use by other collections`}
-          description={t`Collection is not being used by any collection.`}
-        />
-      );
-    }
-
+  if (!itemCount && !filterIsSet(params, ['name__icontains'])) {
     return (
-      <>
-        <div className='hub-toolbar'>
-          <Toolbar>
-            <ToolbarGroup>
-              <ToolbarItem>
-                <SearchInput
-                  value={params.name__icontains || ''}
-                  onChange={(val) =>
-                    updateParams(
-                      ParamHelper.setParam(params, 'name__icontains', val),
-                    )
-                  }
-                  onClear={() =>
-                    updateParams(
-                      ParamHelper.setParam(params, 'name__icontains', ''),
-                    )
-                  }
-                  aria-label='filter-collection-name'
-                  placeholder={t`Filter by name`}
-                />
-              </ToolbarItem>
-              <ToolbarItem>
-                <Sort
-                  options={[
-                    { title: t`Collection`, id: 'collection', type: 'alpha' },
-                  ]}
-                  params={params}
-                  updateParams={({ sort }) =>
-                    updateParams(ParamHelper.setParam(params, 'sort', sort))
-                  }
-                />
-              </ToolbarItem>
-            </ToolbarGroup>
-          </Toolbar>
-          {!!itemCount && (
-            <Pagination
-              params={params}
-              updateParams={(p) => updateParams(p)}
-              count={itemCount}
-              isTop
-            />
-          )}
-        </div>
-
-        {usedByDependenciesLoading ? (
-          <LoadingPageSpinner />
-        ) : (
-          <>
-            {!itemCount ? (
-              <EmptyStateFilter />
-            ) : (
-              <>
-                <table className='hub-c-table-content pf-c-table pf-m-compact'>
-                  <tbody>
-                    {usedByDependencies.map(
-                      ({ name, namespace, version, repository_list }, i) => (
-                        <tr key={i}>
-                          <td>
-                            <Link
-                              to={formatPath(
-                                Paths.collectionByRepo,
-                                {
-                                  collection: name,
-                                  namespace,
-                                  repo: repository_list[0],
-                                },
-                                ParamHelper.getReduced(
-                                  { version },
-                                  this.ignoredParams,
-                                ),
-                              )}
-                            >
-                              {namespace + '.' + name} v{version}
-                            </Link>
-                          </td>
-                        </tr>
-                      ),
-                    )}
-                  </tbody>
-                </table>
-                <Pagination
-                  params={params}
-                  updateParams={(params) => updateParams(params)}
-                  count={itemCount}
-                />
-              </>
-            )}
-          </>
-        )}
-      </>
+      <EmptyStateNoData
+        title={t`Not required for use by other collections`}
+        description={t`Collection is not being used by any collection.`}
+      />
     );
   }
-}
+
+  return (
+    <>
+      <div className='hub-toolbar'>
+        <Toolbar>
+          <ToolbarGroup>
+            <ToolbarItem>
+              <SearchInput
+                value={params.name__icontains || ''}
+                onChange={(val) =>
+                  updateParams(
+                    ParamHelper.setParam(params, 'name__icontains', val),
+                  )
+                }
+                onClear={() =>
+                  updateParams(
+                    ParamHelper.setParam(params, 'name__icontains', ''),
+                  )
+                }
+                aria-label='filter-collection-name'
+                placeholder={t`Filter by name`}
+              />
+            </ToolbarItem>
+            <ToolbarItem>
+              <Sort
+                options={[
+                  { title: t`Collection`, id: 'collection', type: 'alpha' },
+                ]}
+                params={params}
+                updateParams={({ sort }) =>
+                  updateParams(ParamHelper.setParam(params, 'sort', sort))
+                }
+              />
+            </ToolbarItem>
+          </ToolbarGroup>
+        </Toolbar>
+        {!!itemCount && (
+          <Pagination
+            params={params}
+            updateParams={(p) => updateParams(p)}
+            count={itemCount}
+            isTop
+          />
+        )}
+      </div>
+
+      {usedByDependenciesLoading ? (
+        <LoadingPageSpinner />
+      ) : (
+        <>
+          {!itemCount ? (
+            <EmptyStateFilter />
+          ) : (
+            <>
+              <table className='hub-c-table-content pf-c-table pf-m-compact'>
+                <tbody>
+                  {usedByDependencies.map(
+                    ({ name, namespace, version, repository_list }, i) => (
+                      <tr key={i}>
+                        <td>
+                          <Link
+                            to={formatPath(
+                              Paths.collectionByRepo,
+                              {
+                                collection: name,
+                                namespace,
+                                repo: repository_list[0],
+                              },
+                              ParamHelper.getReduced(
+                                { version },
+                                ignoredParams,
+                              ),
+                            )}
+                          >
+                            {namespace + '.' + name} v{version}
+                          </Link>
+                        </td>
+                      </tr>
+                    ),
+                  )}
+                </tbody>
+              </table>
+              <Pagination
+                params={params}
+                updateParams={(params) => updateParams(params)}
+                count={itemCount}
+              />
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+};

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Spinner } from '@patternfly/react-core';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CollectionAPI, CollectionExcludesType } from 'src/api';
 import { AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
@@ -8,40 +8,19 @@ import { errorMessage } from 'src/utilities';
 interface IProps {
   distributionPath: string;
 }
-interface IState {
-  collectionCount: number;
-  alerts: AlertType[];
-  loading: boolean;
-}
 
-export class CollectionCount extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collectionCount: null,
-      alerts: [],
-      loading: true,
-    };
-  }
+export const CollectionCount = ({ distributionPath }: IProps) => {
+  const [collectionCount, setCollectionCount] = useState(null);
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.getCollectionCount(this.props.distributionPath);
-  }
-
-  render() {
-    const { collectionCount, loading } = this.state;
-    return !loading ? <>{collectionCount}</> : <Spinner size='sm' />;
-  }
-
-  private getCollectionCount(repo) {
-    const { distributionPath } = this.props;
+  const getCollectionCount = (repo) => {
     const promises = [];
     promises.push(
       CollectionAPI.getPublishedCount(repo).then((count) => {
         return count;
       }),
     );
-
     promises.push(
       CollectionAPI.getExcludesCount(repo).then(
         (results: CollectionExcludesType) => {
@@ -55,29 +34,36 @@ export class CollectionCount extends React.Component<IProps, IState> {
     Promise.all(promises)
       .then((results) => {
         const count = results[0] - results[1];
-        this.setState({ collectionCount: count, loading: false });
+        setCollectionCount(count);
+        setLoading(false);
       })
       .catch((err) => {
-        this.setState({ loading: false });
+        setLoading(false);
         const { status, statusText } = err.response;
-        this.addAlert(
+        addAlert(
           t`Collection count for "${distributionPath}" could not be displayed.`,
           'danger',
           errorMessage(status, statusText),
+          setAlerts,
+          alerts,
         );
       });
-  }
+  };
 
-  private addAlert(title, variant, description?) {
-    this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
-    });
-  }
+  useEffect(() => {
+    getCollectionCount(distributionPath);
+  }, []);
+
+  return !loading ? <>{collectionCount}</> : <Spinner size='sm' />;
+};
+
+function addAlert(title, variant, description, setAlerts, alerts) {
+  setAlerts([
+    ...alerts,
+    {
+      description,
+      title,
+      variant,
+    },
+  ]);
 }

@@ -9,15 +9,15 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { CollectionVersionDetail } from 'src/api/response-types/collection';
 import { useContext } from 'src/loaders/app-context';
 
-interface Props {
+interface IProps {
   version: CollectionVersionDetail;
 }
 
-export const DownloadSignatureGridItem: FC<Props> = ({ version }) => {
+export const DownloadSignatureGridItem = ({ version }: IProps) => {
   const { display_signatures } = useContext().featureFlags;
   const [show, setShow] = useState(false);
 
