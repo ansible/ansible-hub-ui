@@ -1,8 +1,7 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import {
   Pagination as PaginationPF,
   PaginationVariant,
-  ToggleTemplate,
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Constants } from 'src/constants';
@@ -30,6 +29,24 @@ interface IProps {
   /** Options for the number of items that can be displayed per page */
   perPageOptions?: number[];
 }
+
+// AAP-3737 - support both "1 - 2 of 3" and "3 的 1 - 2"
+const ToggleTemplate = ({
+  firstIndex = 0,
+  lastIndex = 0,
+  itemCount = 0,
+}: {
+  firstIndex?: number;
+  lastIndex?: number;
+  itemCount?: number;
+}) => (
+  <Trans>
+    <b>
+      {firstIndex} - {lastIndex}
+    </b>{' '}
+    of <b>{itemCount}</b>
+  </Trans>
+);
 
 export class Pagination extends React.Component<IProps> {
   render() {
@@ -63,7 +80,7 @@ export class Pagination extends React.Component<IProps> {
           perPageSuffix: t`per page`,
           items: null,
         }}
-        toggleTemplate={(props) => <ToggleTemplate ofWord={t`of`} {...props} />}
+        toggleTemplate={(props) => <ToggleTemplate {...props} />}
       />
     );
   }
