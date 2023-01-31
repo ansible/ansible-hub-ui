@@ -4,22 +4,22 @@ import { Link } from 'react-router-dom';
 
 import { List, ListItem, ListVariant } from '@patternfly/react-core';
 
-import { EmptyStateNoData } from 'src/components';
+import { EmptyStateNoData, HelperText } from 'src/components';
 
-import { CollectionDetailType } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
+import { CollectionDetailType, CollectionVersion } from 'src/api';
 
 import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   collection: CollectionDetailType;
-  repo: string;
+  dependencies_repos: (CollectionVersion & {
+    path?: string;
+  })[];
 }
 
 export class CollectionDependenciesList extends React.Component<IProps> {
   render() {
-    const { collection, repo } = this.props;
-
+    const { collection, dependencies_repos } = this.props;
     const { dependencies } = collection.latest_version.metadata;
 
     if (!Object.keys(dependencies).length) {
@@ -33,35 +33,32 @@ export class CollectionDependenciesList extends React.Component<IProps> {
 
     return (
       <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
-        {Object.keys(dependencies).map((dependency, i) => (
-          <ListItem key={i} style={{ marginRight: '70px' }}>
-            <Link
-              to={formatPath(
-                Paths.collectionByRepo,
-                {
-                  collection: this.splitDependencyName(dependency).collection,
-                  namespace: this.splitDependencyName(dependency).namespace,
-                  repo,
-                },
-                this.separateVersion(dependencies[dependency]),
-              )}
-            >
-              {this.splitDependencyName(dependency).namespace}.
-              {this.splitDependencyName(dependency).collection}
-            </Link>
-          </ListItem>
-        ))}
+        {dependencies_repos.map((dependency, i) =>
+          this.listDep(dependency, i, dependencies),
+        )}
       </List>
     );
   }
 
-  private splitDependencyName(dependency) {
-    const [namespace, collection] = dependency.split('.');
-    return { namespace, collection };
-  }
+  private listDep(dependency, i, dependencies) {
+    const fqn = dependency.namespace + '.' + dependency.name;
+    const version_range = dependencies[fqn];
 
-  private separateVersion(version) {
-    const v = version.match(/((\d+\.*)+)/);
-    return v ? { version: v[0] } : {};
+    if (dependency.path) {
+      return (
+        <ListItem key={i} style={{ marginRight: '70px' }}>
+          <Link to={dependency.path}>{fqn}</Link>: {version_range}
+        </ListItem>
+      );
+    } else {
+      return (
+        <ListItem key={i} style={{ marginRight: '70px' }}>
+          {fqn}: {version_range}
+          <HelperText
+            content={t`No version of ${fqn} exists that matches ${version_range}.`}
+          />
+        </ListItem>
+      );
+    }
   }
 }
