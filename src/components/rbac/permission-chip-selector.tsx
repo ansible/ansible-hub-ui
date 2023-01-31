@@ -8,6 +8,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { AppContext } from 'src/loaders/app-context';
+import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
   availablePermissions?: string[];
@@ -72,6 +73,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       <Select
         menuAppendTo='inline'
         variant={SelectVariant.typeaheadMulti}
+        chipGroupProps={chipGroupProps()}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={(isOpen) => this.setState({ isOpen })}
         onSelect={(event, permission) =>

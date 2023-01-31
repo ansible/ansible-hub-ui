@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button, Chip, ChipGroup } from '@patternfly/react-core';
 import * as React from 'react';
-import { ParamHelper } from 'src/utilities';
+import { ParamHelper, chipGroupProps } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */
@@ -61,7 +61,7 @@ export class AppliedFilters extends React.Component<IProps> {
 
     return (
       <div style={{ display: 'inline', marginRight: '8px' }} key={key}>
-        <ChipGroup categoryName={niceNames[key] || key}>
+        <ChipGroup categoryName={niceNames[key] || key} {...chipGroupProps()}>
           {chips.map((v, i) => (
             <Chip
               key={i}

@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import * as React from 'react';
+import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
   results: { name: string; id: number | string }[];
@@ -61,6 +62,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
         isDisabled={this.props.isDisabled}
         toggleIcon={this.props.toggleIcon}
         style={this.props.style}
+        chipGroupProps={chipGroupProps()}
       >
         {this.getOptions()}
       </Select>
