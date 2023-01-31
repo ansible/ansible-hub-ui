@@ -221,6 +221,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         }}
                         params={params}
                         ignoredParams={['page_size', 'page', 'sort']}
+                        niceNames={{ keywords: t`keywords` }}
                       />
                     </ToolbarItem>
                   </ToolbarGroup>
