@@ -15,7 +15,8 @@ describe('view-only mode - with download', () => {
     ].forEach((item) => cy.menuPresent(item));
 
     [
-      'Collections > Repository Management',
+      'Collections > Repositories',
+      'Collections > Remotes',
       'Collections > API token',
       'Collections > Approval',
       'Execution Environments > Execution Environments',
