@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
@@ -92,7 +92,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                     onChange={onNameChange}
                     type='text'
                     validated={nameValidated}
-                    placeholder='Role name'
+                    placeholder={t`Role name`}
                   />
                 </InputGroup>
               </FormGroup>
@@ -112,7 +112,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                   onChange={onDescriptionChange}
                   type='text'
                   validated={descriptionValidated}
-                  placeholder='Add a role description here'
+                  placeholder={t`Add a role description here`}
                 />
               </FormGroup>
             </div>
@@ -121,7 +121,9 @@ export class RoleForm extends React.Component<IProps, IState> {
             <br />
             <Divider />
             <br />
-            <Title headingLevel='h2'>Permissions</Title>
+            <Title headingLevel='h2'>
+              <Trans>Permissions</Trans>
+            </Title>
 
             <PermissionCategories
               permissions={permissions}
