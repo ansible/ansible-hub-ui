@@ -1,5 +1,9 @@
-import { i18n } from '@lingui/core';
-import { t } from '@lingui/macro';
+/*import { i18n } from '@lingui/core';
+import { t } from '@lingui/macro';*/
+debugger;
+
+import i18next from 'src/i18n';
+
 import {
   Button,
   Toolbar,
