@@ -138,7 +138,9 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
             ))}
           </LabelGroup>
 
-          <div style={{ padding: '4px 0' }}>Size: {size}</div>
+          <div style={{ padding: '4px 0' }}>
+            <Trans>Size: {size}</Trans>
+          </div>
         </BaseHeader>
 
         <Main>

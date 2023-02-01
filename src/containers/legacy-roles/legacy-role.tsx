@@ -51,7 +51,9 @@ class LegacyRoleInstall extends React.Component<RoleMeta, RoleMeta> {
     const installCMD = `ansible-galaxy role install ${this.props.github_user}.${this.props.name}`;
     return (
       <>
-        <h1>Installation:</h1>
+        <h1>
+          <Trans>Installation:</Trans>
+        </h1>
         <ClipboardCopy isCode isReadOnly variant={'expansion'}>
           {installCMD}
         </ClipboardCopy>
