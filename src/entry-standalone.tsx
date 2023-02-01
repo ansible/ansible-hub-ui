@@ -41,7 +41,10 @@ function HelloWorld() {
           'This.This is the hello world application: Test for simple translation.',
         )}
       </h1>
-      <div>{t('non existing key - have to show this text untranslated')}</div>
+      <div>
+        Non existing key - should be blank or left alone:{' '}
+        {t('non existing key - have to show this text untranslated')}
+      </div>
       <Trans i18nKey='transTest'>
         Hello <strong>{{ name }}</strong>: this is {{ componentName }} test.{' '}
         <a href='/'>Empty link</a>
