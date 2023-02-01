@@ -32,7 +32,3 @@ i18next.init({
   keySeparator: '>>>>',
   nsSeparator: '||||',
 });
-
-export default i18next;
-
-

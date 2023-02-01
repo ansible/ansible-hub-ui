@@ -1,9 +1,3 @@
-/*import { i18n } from '@lingui/core';
-import { t } from '@lingui/macro';*/
-debugger;
-
-import i18next from 'src/i18n';
-
 import {
   Button,
   Toolbar,
@@ -11,6 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import i18next from 'i18next';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
@@ -38,6 +33,8 @@ import { RouteProps } from 'src/utilities';
 import { errorMessage, filterIsSet } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './namespace-list.scss';
+
+const t = i18next.t;
 
 interface IState {
   alerts: AlertType[];
@@ -130,7 +127,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             () =>
               this.addAlert({
                 variant: 'danger',
-                title: t`Namespaces list could not be displayed.`,
+                title: t('Namespaces list could not be displayed.'),
                 description: errorMessage(status, statusText),
               }),
           );
@@ -160,7 +157,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     // Namespaces or Partners
-    const title = i18n._(namespaceBreadcrumb.name);
+    const title = t(namespaceBreadcrumb.name);
 
     return (
       <div className='hub-namespace-page'>
@@ -188,12 +185,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 <LinkTabs
                   tabs={[
                     {
-                      title: t`All`,
+                      title: t('All'),
                       link: formatPath(Paths[NAMESPACE_TERM]),
                       active: !filterOwner,
                     },
                     {
-                      title: t`My namespaces`,
+                      title: t('My namespaces'),
                       link: formatPath(Paths.myNamespaces),
                       active: filterOwner,
                     },
@@ -215,7 +212,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
                           this.updateParams(p, () => this.loadNamespaces())
                         }
                         params={params}
-                        filterConfig={[{ id: 'keywords', title: t`keywords` }]}
+                        filterConfig={[
+                          { id: 'keywords', title: t('keywords') },
+                        ]}
                       />
                       <AppliedFilters
                         style={{ marginTop: '16px' }}
@@ -233,7 +232,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                     <ToolbarItem>
                       <Sort
                         options={[
-                          { title: t`Name`, id: 'name', type: 'alpha' },
+                          { title: t('Name'), id: 'name', type: 'alpha' },
                         ]}
                         params={params}
                         updateParams={(p) =>
@@ -247,7 +246,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                           variant='primary'
                           onClick={this.handleModalToggle}
                         >
-                          {t`Create`}
+                          {t('Create')}
                         </Button>
                       </ToolbarItem>
                     )}
@@ -290,14 +289,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { namespacePath, filterOwner } = this.props;
     const { hasPermission } = this.context;
 
-    const noDataTitle = t`No namespaces yet`;
+    const noDataTitle = t('No namespaces yet');
     const noDataDescription = !filterOwner
-      ? t`Namespaces will appear once created`
-      : t`This account is not set up to manage any namespaces`;
+      ? t('Namespaces will appear once created')
+      : t('This account is not set up to manage any namespaces');
 
     const noDataButton = hasPermission('galaxy.add_namespace') ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
-        {t`Create`}
+        {t('Create')}
       </Button>
     ) : null;
 
@@ -368,7 +367,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             () =>
               this.addAlert({
                 variant: 'danger',
-                title: t`Namespaces list could not be displayed.`,
+                title: t('Namespaces list could not be displayed.'),
                 description: errorMessage(status, statusText),
               }),
           );
