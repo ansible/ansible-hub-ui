@@ -53,6 +53,9 @@ interface IState {
   inputText: string;
 }
 
+const maybeTranslate = (name) =>
+  (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
+
 export class TaskListView extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
@@ -280,15 +283,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
       <tr key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip
-              content={
-                (Constants.TASK_NAMES[name] &&
-                  i18n._(Constants.TASK_NAMES[name])) ||
-                name
-              }
-            >
-              {name}
-            </Tooltip>
+            <Tooltip content={maybeTranslate(name)}>{name}</Tooltip>
           </Link>
         </td>
         <td>
@@ -346,9 +341,9 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 
   private renderCancelModal() {
-    const name =
-      Constants.TASK_NAMES[this.state.selectedTask.name] ||
-      this.state.selectedTask.name;
+    const { selectedTask } = this.state;
+    const name = maybeTranslate(selectedTask.name);
+
     return (
       <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
