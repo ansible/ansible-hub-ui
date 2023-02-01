@@ -5,6 +5,11 @@ import * as moment from 'moment';
 // remember to update .linguirc as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
 
+// map missing moment locales (node_modules/moment/src/locale/<locale>.js must exist, except for english)
+const momentLocales = {
+  zh: 'zh-cn',
+};
+
 async function activate(locale: string, pseudolocalization = false) {
   const { messages } = await import(`src/../locale/${locale}.js`);
 
@@ -24,7 +29,7 @@ async function activate(locale: string, pseudolocalization = false) {
   i18n.load(locale, messages);
   i18n.activate(locale);
 
-  moment.locale(locale);
+  moment.locale(momentLocales[locale] || locale);
 }
 
 // Accept-Language

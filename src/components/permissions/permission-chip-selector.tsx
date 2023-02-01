@@ -9,6 +9,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
+import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
   availablePermissions: string[];
@@ -64,6 +65,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       <Select
         menuAppendTo={this.props.menuAppendTo}
         variant={SelectVariant.typeaheadMulti}
+        chipGroupProps={chipGroupProps()}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={this.onToggle}
         onSelect={this.onSelect}
