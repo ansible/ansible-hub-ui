@@ -58,6 +58,9 @@ interface IState {
   polling: ReturnType<typeof setInterval>;
 }
 
+const maybeTranslate = (name) =>
+  (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
+
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
@@ -209,9 +212,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {(Constants.TASK_NAMES[parentTask.name] &&
-                              i18n._(Constants.TASK_NAMES[parentTask.name])) ||
-                              parentTask.name}
+                            {maybeTranslate(parentTask.name)}
                           </Link>
                         ) : (
                           t`No parent task`
@@ -233,11 +234,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                       task: childTaskId,
                                     })}
                                   >
-                                    {(Constants.TASK_NAMES[childTask.name] &&
-                                      i18n._(
-                                        Constants.TASK_NAMES[childTask.name],
-                                      )) ||
-                                      childTask.name}
+                                    {maybeTranslate(childTask.name)}
                                   </Link>
                                   <br />
                                 </React.Fragment>
@@ -511,10 +508,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             childTasks,
             parentTask,
             loading: false,
-            taskName:
-              (Constants.TASK_NAMES[result.data.name] &&
-                i18n._(Constants.TASK_NAMES[result.data.name])) ||
-              result.data.name,
+            taskName: maybeTranslate(result.data.name),
             resources,
           });
         });
