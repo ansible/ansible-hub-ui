@@ -1,6 +1,6 @@
-import { t } from '@lingui/macro';
 import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
 import * as React from 'react';
+import { withTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -149,6 +149,8 @@ class Search extends React.Component<RouteProps, IState> {
     const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
 
+    const t = this.props['t'];
+
     return (
       <div className='search-page'>
         <AlertList
@@ -197,7 +199,7 @@ class Search extends React.Component<RouteProps, IState> {
         )}
         <BaseHeader
           className='header'
-          title={t`Collections`}
+          title={t('Collections')}
           contextSelector={
             <RepoSelector
               path={Paths.searchByRepo}
@@ -251,8 +253,8 @@ class Search extends React.Component<RouteProps, IState> {
           <LoadingPageSpinner />
         ) : noData ? (
           <EmptyStateNoData
-            title={t`No collections yet`}
-            description={t`Collections will appear once uploaded`}
+            title={t('No collections yet')}
+            description={t('Collections will appear once uploaded')}
           />
         ) : (
           <React.Fragment>
@@ -306,6 +308,7 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderCards(collections) {
+    const t = this.props['t'];
     return (
       <div className='hub-cards'>
         {collections.map((c) => {
@@ -326,6 +329,7 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private handleControlClick(collection) {
+    const t = this.props['t'];
     CollectionAPI.setDeprecation(
       collection,
       !collection.deprecated,
@@ -335,8 +339,12 @@ class Search extends React.Component<RouteProps, IState> {
         const taskId = parsePulpIDFromURL(res.data.task);
         return waitForTask(taskId).then(() => {
           const title = !collection.deprecated
-            ? t`The collection "${collection.name}" has been successfully deprecated.`
-            : t`The collection "${collection.name}" has been successfully undeprecated.`;
+            ? t(
+                'The collection "${collection.name}" has been successfully deprecated.',
+              )
+            : t(
+                'The collection "${collection.name}" has been successfully undeprecated.',
+              );
           this.setState({
             alerts: [
               ...this.state.alerts,
@@ -357,8 +365,10 @@ class Search extends React.Component<RouteProps, IState> {
             {
               variant: 'danger',
               title: !collection.deprecated
-                ? t`Collection "${collection.name}" could not be deprecated.`
-                : t`Collection "${collection.name}" could not be undeprecated.`,
+                ? t('Collection "${collection.name}" could not be deprecated.')
+                : t(
+                    'Collection "${collection.name}" could not be undeprecated.',
+                  ),
               description: errorMessage(status, statusText),
             },
           ],
@@ -367,6 +377,7 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderMenu(list, collection) {
+    const t = this.props['t'];
     const { hasPermission } = this.context;
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
@@ -383,7 +394,7 @@ class Search extends React.Component<RouteProps, IState> {
         onClick={() => this.handleControlClick(collection)}
         key='deprecate'
       >
-        {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+        {collection.deprecated ? t('Undeprecate') : t('Deprecate')}
       </DropdownItem>,
     ];
 
@@ -393,7 +404,7 @@ class Search extends React.Component<RouteProps, IState> {
           onClick={() => this.checkUploadPrivilleges(collection)}
           key='upload new version'
         >
-          {t`Upload new version`}
+          {t('Upload new version')}
         </DropdownItem>,
       );
     }
@@ -405,7 +416,7 @@ class Search extends React.Component<RouteProps, IState> {
             onClick={() => this.checkUploadPrivilleges(collection)}
             variant='secondary'
           >
-            {t`Upload new version`}
+            {t('Upload new version')}
           </Button>
         )}
         <StatefulDropdown
@@ -417,6 +428,7 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderSyncToogle(name: string, namespace: string): React.ReactNode {
+    const t = this.props['t'];
     const { synclist } = this.state;
 
     if (!synclist) {
@@ -427,7 +439,7 @@ class Search extends React.Component<RouteProps, IState> {
       <Switch
         id={namespace + '.' + name}
         className='sync-toggle'
-        label={t`Sync`}
+        label={t('Sync')}
         isChecked={this.isCollectionSynced(name, namespace)}
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />
@@ -435,12 +447,13 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private checkUploadPrivilleges(collection) {
+    const t = this.props['t'];
     const addAlert = () => {
       this.setState({
         alerts: [
           ...this.state.alerts,
           {
-            title: t`You don't have rights to do this operation.`,
+            title: t("You don't have rights to do this operation."),
             variant: 'warning',
           },
         ],
@@ -502,10 +515,11 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderList(collections) {
+    const t = this.props['t'];
     return (
       <div className='list-container'>
         <div className='hub-list'>
-          <DataList className='data-list' aria-label={t`List of Collections`}>
+          <DataList className='data-list' aria-label={t('List of Collections')}>
             {collections.map((c) => (
               <CollectionListItem
                 showNamespace={true}
@@ -564,6 +578,6 @@ class Search extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(Search);
+export default withRouter(withTranslation()(Search));
 
 Search.contextType = AppContext;
