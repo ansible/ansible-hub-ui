@@ -1,4 +1,3 @@
-import { Trans, t } from '@lingui/macro';
 import {
   Badge,
   Card,
@@ -12,6 +11,7 @@ import {
 } from '@patternfly/react-core';
 import cx from 'classnames';
 import * as React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { CollectionListType } from 'src/api';
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
@@ -43,18 +43,20 @@ export const CollectionCard = ({
   const company = namespace.company || namespace.name;
   const contentSummary = convertContentSummaryCounts(latest_version.metadata);
 
+  const { t } = useTranslation();
+
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
       <CardHeader className='logo-row'>
         <Logo
-          alt={t`${company} logo`}
+          alt={t('${company} logo')}
           fallbackToDefault
           image={namespace.avatar_url}
           size='40px'
           unlockWidth
           flexGrow
         />
-        <TextContent>{getCertification(repo)}</TextContent>
+        <TextContent>{getCertification(repo, t)}</TextContent>
         {displaySignatures ? (
           <SignatureBadge isCompact signState={sign_state} />
         ) : null}
@@ -100,11 +102,11 @@ export const CollectionCard = ({
   );
 };
 
-function getCertification(repo) {
+function getCertification(repo, t) {
   if (repo === Constants.CERTIFIED_REPO) {
     return (
       <Text component={TextVariants.small}>
-        <Badge isRead>{t`Certified`}</Badge>
+        <Badge isRead>{t('Certified')}</Badge>
       </Text>
     );
   }
