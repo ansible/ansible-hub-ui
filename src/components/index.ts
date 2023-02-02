@@ -33,6 +33,7 @@ export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
 export { EmptyStateUnauthorized } from './empty-state/empty-state-unauthorized';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
+export { EulaModalUser } from './eula-modal/user';
 export { GroupModal } from './rbac/group-modal';
 export { GroupRolePermissions } from './rbac/group-role-permissions';
 export { HelperText } from './helper-text/helper-text';

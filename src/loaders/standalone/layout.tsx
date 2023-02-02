@@ -22,6 +22,7 @@ import {
 } from 'src/api';
 import {
   AboutModalWindow,
+  EulaModalUser,
   LoginLink,
   SmallLogo,
   StatefulDropdown,
@@ -177,6 +178,7 @@ export const StandaloneLayout = ({
     <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
       {children}
       {aboutModalVisible && aboutModal}
+      <EulaModalUser />
     </Page>
   );
 };
