@@ -80,3 +80,36 @@ if (pseudolocalization) {
 }
 
 activate(language, pseudolocalization);
+
+//----------------------------------------------------------------------------------------------------------------------------
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+// don't want to use this?
+// have a look at the Quick start guide
+// for passing in lng and translations on init
+
+const messages = require(`../locale/${language}.json`);
+
+if (pseudolocalization) {
+  Object.keys(messages).forEach((key) => {
+    // simple string
+    messages[key] = '»' + messages[key] + '«';
+  });
+}
+
+const resources = {};
+resources[language] = {
+  translation: messages,
+};
+
+i18next.use(initReactI18next);
+i18next.init({
+  interpolation: { escapeValue: false },
+  debug: true,
+  lng: language,
+  fallbackLng: 'en',
+  resources: resources,
+  keySeparator: false,
+  nsSeparator: false,
+});

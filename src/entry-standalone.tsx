@@ -5,7 +5,6 @@ import * as ReactDOM from 'react-dom';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Constants } from 'src/constants';
-import 'src/i18n';
 import 'src/l10n';
 import App from './loaders/standalone/loader';
 
@@ -24,8 +23,6 @@ function HelloWorld() {
 
   const comp = "<a href='#'></a>";
   const result = t('Hello', { name: comp });
-
-  debugger;
 
   return (
     <div>
