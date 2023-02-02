@@ -5,7 +5,6 @@ import * as ReactDOM from 'react-dom';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Constants } from 'src/constants';
-// constants must be imported after the translation library, so the translations will be loaded sooner than constants
 import 'src/i18n';
 import 'src/l10n';
 import App from './loaders/standalone/loader';
@@ -21,6 +20,12 @@ function HelloWorld() {
 
   const name = 'Ansible';
   const componentName = 'Trans';
+  const randomText = 'asdasdsdadasdassad';
+
+  const comp = "<a href='#'></a>";
+  const result = t('Hello', { name: comp });
+
+  debugger;
 
   return (
     <div>
@@ -31,14 +36,15 @@ function HelloWorld() {
       </h1>
       <div>
         Non existing key - should be blank or left alone:{' '}
-        {t('non existing key - have to show this text untranslated')}
+        {t(
+          'non existing key - have to show this text untranslated' + randomText,
+        )}
       </div>
       <Trans i18nKey='transTest'>
         Hello <strong>{{ name }}</strong>: this is {{ componentName }} test.{' '}
         <a href='/'>Empty link</a>
       </Trans>
       <div>This should show empty string after={t('empty translation')}</div>
-      <div>{t('Escaped code example.')}</div>
       <div>
         Orders:
         {t('order', { count: 1, ordinal: true })},

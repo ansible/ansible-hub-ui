@@ -22,6 +22,7 @@ if (window.localStorage.test_l10n === 'true') {
 i18next.use(initReactI18next);
 i18next.use(LanguageDetector);
 i18next.init({
+  interpolation: { escapeValue: false },
   debug: true,
   fallbackLng: 'en',
   resources: {
@@ -29,6 +30,6 @@ i18next.init({
       translation: en,
     },
   },
-  keySeparator: '>>>>',
-  nsSeparator: '||||',
+  keySeparator: false,
+  nsSeparator: false,
 });

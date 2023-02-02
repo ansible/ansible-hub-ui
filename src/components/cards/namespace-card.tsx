@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+//import { t } from '@lingui/macro';
 import {
   Card,
   CardBody,
@@ -8,10 +8,13 @@ import {
   CardTitle,
   Tooltip,
 } from '@patternfly/react-core';
+import i18next from 'i18next';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'src/components';
 import './cards.scss';
+
+const t = i18next.t;
 
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
@@ -34,7 +37,7 @@ export const NamespaceCard = ({
       <CardHeader>
         <CardHeaderMain>
           <Logo
-            alt={t`${company} logo`}
+            alt={t('${company} logo')}
             fallbackToDefault
             image={avatar_url}
             size='40px'
@@ -53,7 +56,7 @@ export const NamespaceCard = ({
 
       {namespaceURL && (
         <CardFooter>
-          <Link to={namespaceURL}>{t`View collections`}</Link>
+          <Link to={namespaceURL}>{t('View collections')}</Link>
         </CardFooter>
       )}
     </Card>
