@@ -1,6 +1,9 @@
 import { i18n } from '@lingui/core';
+//----------------------------------------------------------------------------------------------------------------------------
+import i18next from 'i18next';
 import * as plurals from 'make-plural/plurals';
 import * as moment from 'moment';
+import { initReactI18next } from 'react-i18next';
 
 // remember to update .linguirc as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
@@ -80,10 +83,6 @@ if (pseudolocalization) {
 }
 
 activate(language, pseudolocalization);
-
-//----------------------------------------------------------------------------------------------------------------------------
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
 
 // don't want to use this?
 // have a look at the Quick start guide
