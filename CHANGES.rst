@@ -1,3 +1,33 @@
+4.5.5 (2023-02-02)
+==================
+
+Features
+--------
+
+- Display boolean values in docs as true/false (was yes/no)
+  `AAH-1859 <https://issues.redhat.com/browse/AAH-1859>`_
+
+
+Bugfixes
+--------
+
+- Repair list of collection dependencies - add namespace to the link caption.
+  `AAH-1807 <https://issues.redhat.com/browse/AAH-1807>`_
+- Repair error mesages in EE form.
+  `AAH-1845 <https://issues.redhat.com/browse/AAH-1845>`_
+- Fix podman pull URLs when latest tag not present, fix digest urls
+  `AAH-1988 <https://issues.redhat.com/browse/AAH-1988>`_
+- Fix a bug where the UI was falsely reporting that collection dependencies don't exist.
+  `AAH-2018 <https://issues.redhat.com/browse/AAH-2018>`_
+- License fields on AH - blank or formatted incorrectly - Add comma separator between licences. And also hide license field when empty.
+  `AAH-2048 <https://issues.redhat.com/browse/AAH-2048>`_
+- Fix bug where the resource type on "reserved resources" on the task management page always returns "api".
+  `AAH-2055 <https://issues.redhat.com/browse/AAH-2055>`_
+
+
+----
+
+
 4.5.4 (2022-11-21)
 ==================
 

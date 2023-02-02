@@ -1,1 +1,0 @@
-Fix a bug where the UI was falsely reporting that collection dependencies don't exist.
