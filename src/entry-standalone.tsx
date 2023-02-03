@@ -1,11 +1,11 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Trans, useTranslation, withTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Constants } from 'src/constants';
-import 'src/l10n';
+import { translationInfo } from 'src/l10n';
 import App from './loaders/standalone/loader';
 
 // Entrypoint for compiling the app to run in standalone mode
@@ -104,17 +104,19 @@ class ClassHelloWorldBase extends React.Component {
   }
 }
 
-const ClassHelloWorld = withTranslation()(ClassHelloWorldBase);
+translationInfo.onLoad = () => {
+  const ClassHelloWorld = withTranslation()(ClassHelloWorldBase);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Router basename={UI_BASE_PATH}>
-      <I18nProvider i18n={i18n}>
-        <HelloWorld />
-        <ClassHelloWorld />
-        <App />
-      </I18nProvider>
-    </Router>
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+  ReactDOM.render(
+    <React.StrictMode>
+      <Router basename={UI_BASE_PATH}>
+        <I18nProvider i18n={i18n}>
+          <HelloWorld />
+          <ClassHelloWorld />
+          <App />
+        </I18nProvider>
+      </Router>
+    </React.StrictMode>,
+    document.getElementById('root'),
+  );
+};

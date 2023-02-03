@@ -625,5 +625,6 @@
   "Cannot delete until collections <1></1>that depend on this collection <3></3>have been deleted.": "Cannot delete until collections <1></1>that depend on this collection <3></3>have been deleted.",
   "Delete entire collection": "Delete entire collection",
   "Collection &quot;{name}&quot; has been successfully deleted.": "Collection &quot;{name}&quot; has been successfully deleted.",
-  "Hello" : "TRANSLATED Hello {{name}}"
+  "Hello" : "TRANSLATED Hello {{name}}",
+  "Test" : "TRANSLATED Test"
 }

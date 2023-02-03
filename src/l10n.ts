@@ -1,5 +1,4 @@
 import { i18n } from '@lingui/core';
-//----------------------------------------------------------------------------------------------------------------------------
 import i18next from 'i18next';
 import * as plurals from 'make-plural/plurals';
 import * as moment from 'moment';
@@ -84,31 +83,43 @@ if (pseudolocalization) {
 
 activate(language, pseudolocalization);
 
-// don't want to use this?
-// have a look at the Quick start guide
-// for passing in lng and translations on init
+//--------------------------------------------------------------------------------------------------------
+// i18next
 
-const messages = require(`../locale/${language}.json`);
+loadTranslations(language, pseudolocalization);
 
-if (pseudolocalization) {
-  Object.keys(messages).forEach((key) => {
-    // simple string
-    messages[key] = '»' + messages[key] + '«';
+let translationInfo = { onLoad: null };
+export { translationInfo };
+
+async function loadTranslations(language, pseudolocalization) {
+  let messages = await import(`src/../locale/${language}.json`);
+
+  if (pseudolocalization) {
+    const newMessages = {};
+    Object.keys(messages).forEach((key) => {
+      // simple string
+      newMessages[key] = '»' + messages[key] + '«';
+    });
+    messages = newMessages;
+  }
+
+  const resources = {};
+  resources[language] = {
+    translation: messages,
+  };
+
+  i18next.use(initReactI18next);
+  i18next.init({
+    interpolation: { escapeValue: false },
+    debug: true,
+    lng: language,
+    resources: resources,
+    supportedLngs: availableLanguages,
+    keySeparator: false,
+    nsSeparator: false,
   });
+
+  if (translationInfo.onLoad) {
+    translationInfo.onLoad();
+  }
 }
-
-const resources = {};
-resources[language] = {
-  translation: messages,
-};
-
-i18next.use(initReactI18next);
-i18next.init({
-  interpolation: { escapeValue: false },
-  debug: true,
-  lng: language,
-  fallbackLng: 'en',
-  resources: resources,
-  keySeparator: false,
-  nsSeparator: false,
-});
