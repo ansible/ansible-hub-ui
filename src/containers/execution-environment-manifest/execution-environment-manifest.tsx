@@ -27,8 +27,12 @@ import {
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { getHumanSize } from 'src/utilities';
+import {
+  RouteProps,
+  chipGroupProps,
+  getHumanSize,
+  withRouter,
+} from 'src/utilities';
 import { withContainerParamFix } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
@@ -132,7 +136,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
             </ClipboardCopyButton>
           </div>
 
-          <LabelGroup numLabels={6}>
+          <LabelGroup {...chipGroupProps()} numLabels={6}>
             {labels.map((label) => (
               <TagLabel tag={label} key={label} />
             ))}

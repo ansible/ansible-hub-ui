@@ -50,7 +50,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       }));
 
       return (
-        <LabelGroup>
+        <LabelGroup {...chipGroupProps()}>
           {items.length ? null : (
             <Label key='placeholder'>{t`No permission`}</Label>
           )}
