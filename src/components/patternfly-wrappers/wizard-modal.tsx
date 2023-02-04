@@ -33,6 +33,10 @@ export const WizardModal = ({
       hasNoBodyPadding
       navAriaLabel={t`${title} steps`}
       mainAriaLabel={t`${title} content`}
+      backButtonText={t`Back`}
+      cancelButtonText={t`Cancel`}
+      closeButtonAriaLabel={t`Close`}
+      nextButtonText={t`Next`}
       titleId='wizard-modal-title'
       descriptionId='wizard-modal-description'
       title={title}
