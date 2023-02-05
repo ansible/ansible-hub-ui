@@ -48,7 +48,7 @@ msgstr "<0/> が削除されました"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> が <1/> から削除されました"
 
-#: src/components/collection-detail/collection-info.tsx:76
+#: src/components/collection-detail/collection-info.tsx:74
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注記:</0> ansible-galaxy を使用したコレクションのインストールは、ansible 2.9+ でのみサポートされます"
 
@@ -87,6 +87,10 @@ msgstr "<0>{0}</0> が削除されます。"
 #: src/components/rbac/delete-user-modal.tsx:57
 msgid "<0>{0}</0> will be permanently deleted."
 msgstr "<0>{0}</0> は完全に削除されます。"
+
+#: src/components/patternfly-wrappers/pagination.tsx:43
+msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
+msgstr ""
 
 #: src/components/rbac/delete-group-modal.tsx:27
 msgid "<0>{name}</0> will be permanently deleted."
@@ -195,6 +199,10 @@ msgstr "追加"
 msgid "Add a README with instructions for using this container."
 msgstr "このコンテナーの使用手順を記載した README を追加します。"
 
+#: src/components/rbac/role-form.tsx:115
+msgid "Add a role description here"
+msgstr ""
+
 #: src/constants.tsx:115
 #~ msgid "Add collection remote"
 #~ msgstr "コレクションリモートの追加"
@@ -284,7 +292,7 @@ msgstr "タスクのすべてのアクションを許可します。"
 msgid "Allow all actions on a taskschedule."
 msgstr "taskschedule のすべてのアクションを許可します。"
 
-#: src/components/about-modal/about-modal.tsx:97
+#: src/components/about-modal/about-modal.tsx:85
 msgid "Ansible Automation Platform"
 msgstr ""
 
@@ -319,15 +327,19 @@ msgstr "承認済"
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
 
+#: src/components/patternfly-wrappers/wizard-modal.tsx:36
+msgid "Back"
+msgstr ""
+
 #: src/components/patternfly-wrappers/fileupload.tsx:12
 msgid "Browse..."
 msgstr "参照..."
 
-#: src/components/about-modal/about-modal.tsx:114
+#: src/components/about-modal/about-modal.tsx:102
 msgid "Browser OS"
 msgstr "ブラウザー OS"
 
-#: src/components/about-modal/about-modal.tsx:111
+#: src/components/about-modal/about-modal.tsx:99
 msgid "Browser Version"
 msgstr "ブラウザーバージョン"
 
@@ -376,10 +388,11 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
 #: src/components/namespace-modal/namespace-modal.tsx:110
+#: src/components/patternfly-wrappers/wizard-modal.tsx:37
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/owners-tab.tsx:339
 #: src/components/rbac/owners-tab.tsx:410
-#: src/components/rbac/role-form.tsx:146
+#: src/components/rbac/role-form.tsx:148
 #: src/components/rbac/user-form.tsx:224
 #: src/components/repositories/remote-form.tsx:143
 #: src/components/signing/sign-all-certificates-modal.tsx:47
@@ -509,7 +522,7 @@ msgstr "ロール \"{name}\" の変更を保存できませんでした。"
 msgid "Checking for affected users... <0/>"
 msgstr "影響を受けるユーザーを確認中... <0/>"
 
-#: src/containers/task-management/task_detail.tsx:217
+#: src/containers/task-management/task_detail.tsx:218
 msgid "Child tasks"
 msgstr "子タスク"
 
@@ -536,14 +549,15 @@ msgid "Client key"
 msgstr "クライアントキー"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "閉じる"
 
-#: src/containers/task-management/task_detail.tsx:317
+#: src/containers/task-management/task_detail.tsx:314
 msgid "Code"
 msgstr "コード"
 
-#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:84
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:81
 #: src/containers/certification-dashboard/certification-dashboard.tsx:268
 msgid "Collection"
 msgstr "コレクション"
@@ -579,7 +593,7 @@ msgstr "コレクション \"{name} v{collectionVersion}\" が正常に削除さ
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "コレクション \"{name}\" を削除できませんでした。"
 
-#: src/components/collection-detail/collection-info.tsx:187
+#: src/components/collection-detail/collection-info.tsx:191
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "コレクション \"{name}\" をダウンロードできませんでした。"
 
@@ -603,7 +617,7 @@ msgstr "コレクション名"
 msgid "Collection count"
 msgstr "コレクション数"
 
-#: src/components/collection-count/collection-count.tsx:64
+#: src/components/collection-count/collection-count.tsx:44
 msgid "Collection count for \"{distributionPath}\" could not be displayed."
 msgstr "\"{distributionPath}\" のコレクション数を表示できませんでした。"
 
@@ -612,11 +626,11 @@ msgstr "\"{distributionPath}\" のコレクション数を表示できません�
 msgid "Collection does not have any dependencies."
 msgstr "コレクションには依存関係が何もありません。"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:25
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:26
 msgid "Collection does not have dependencies."
 msgstr "コレクションには依存関係がありません。"
 
-#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:54
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:51
 msgid "Collection is not being used by any collection."
 msgstr "コレクションはどのコレクションでも使用されていません。"
 
@@ -656,7 +670,7 @@ msgstr "コレクション"
 msgid "Collections will appear once uploaded"
 msgstr "コレクションはアップロードされると表示されます"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:209
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:211
 msgid "Command"
 msgstr "コマンド"
 
@@ -664,7 +678,7 @@ msgstr "コマンド"
 msgid "Community"
 msgstr "コミュニティー"
 
-#: src/components/collection-detail/collection-content-list.tsx:145
+#: src/components/collection-detail/collection-content-list.tsx:147
 #: src/containers/collection-detail/collection-docs.tsx:273
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "コミュニティーコレクションにはドキュメントやコンテンツ数はありませんが、すべてのコンテンツが同期されます"
@@ -676,7 +690,7 @@ msgstr "会社名"
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:65
 #: src/constants.tsx:168
-#: src/containers/task-management/task-list-view.tsx:163
+#: src/containers/task-management/task-list-view.tsx:166
 msgid "Completed"
 msgstr "完了済み"
 
@@ -781,8 +795,8 @@ msgstr "インポートログを読み込むことができませんでした"
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:157
 #: src/containers/group-management/group-list.tsx:194
-#: src/containers/namespace-list/namespace-list.tsx:245
-#: src/containers/namespace-list/namespace-list.tsx:295
+#: src/containers/namespace-list/namespace-list.tsx:246
+#: src/containers/namespace-list/namespace-list.tsx:296
 #: src/containers/user-management/user-list.tsx:181
 #: src/containers/user-management/user-list.tsx:246
 msgid "Create"
@@ -843,8 +857,8 @@ msgid "Created"
 msgstr "作成済み"
 
 #: src/containers/signature-keys/list.tsx:186
-#: src/containers/task-management/task-list-view.tsx:238
-#: src/containers/task-management/task_detail.tsx:177
+#: src/containers/task-management/task-list-view.tsx:241
+#: src/containers/task-management/task_detail.tsx:180
 msgid "Created on"
 msgstr "作成日時"
 
@@ -900,8 +914,8 @@ msgstr "作成日"
 #: src/containers/group-management/group-detail.tsx:220
 #: src/containers/group-management/group-list.tsx:417
 #: src/containers/role-management/role-list.tsx:413
-#: src/containers/task-management/task-list-view.tsx:317
-#: src/containers/task-management/task-list-view.tsx:333
+#: src/containers/task-management/task-list-view.tsx:312
+#: src/containers/task-management/task-list-view.tsx:328
 #: src/containers/user-management/user-detail.tsx:119
 #: src/containers/user-management/user-list.tsx:332
 msgid "Delete"
@@ -1082,7 +1096,7 @@ msgstr "非推奨"
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始されています。"
 
-#: src/components/collection-detail/collection-content-list.tsx:105
+#: src/components/collection-detail/collection-content-list.tsx:107
 #: src/components/execution-environment/repository-form.tsx:358
 #: src/components/namespace-form/namespace-form.tsx:119
 #: src/components/rbac/role-form.tsx:105
@@ -1091,11 +1105,11 @@ msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始
 #: src/containers/execution-environment-list/execution_environment_list.tsx:294
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
 #: src/containers/role-management/role-list.tsx:149
-#: src/containers/task-management/task_detail.tsx:349
+#: src/containers/task-management/task_detail.tsx:346
 msgid "Description"
 msgstr "説明"
 
-#: src/containers/task-management/task_detail.tsx:164
+#: src/containers/task-management/task_detail.tsx:167
 msgid "Descriptive name"
 msgstr "分かりやすい名前"
 
@@ -1137,7 +1151,7 @@ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be
 msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するドキュメントは、「<1>こちら</1>」を参照してください。以下のパラメーターを使用してクライアントを設定します。"
 
 #: src/components/my-imports/import-console.tsx:103
-#: src/containers/task-management/task_detail.tsx:319
+#: src/containers/task-management/task_detail.tsx:316
 msgid "Done"
 msgstr "完了"
 
@@ -1165,7 +1179,7 @@ msgstr "署名済みコレクションのみのダウンロード"
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
-#: src/components/collection-detail/collection-info.tsx:115
+#: src/components/collection-detail/collection-info.tsx:112
 msgid "Download tarball"
 msgstr "tarball のダウンロード"
 
@@ -1259,7 +1273,7 @@ msgstr "編集可能"
 msgid "Email"
 msgstr "メール"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:221
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:223
 msgid "Environment"
 msgstr "環境"
 
@@ -1374,7 +1388,7 @@ msgstr "環境の読み込みエラー。"
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx:345
+#: src/containers/task-management/task_detail.tsx:342
 msgid "Error message"
 msgstr "エラーメッセージ"
 
@@ -1481,7 +1495,7 @@ msgstr "有効期限"
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:73
 #: src/constants.tsx:169
-#: src/containers/task-management/task-list-view.tsx:167
+#: src/containers/task-management/task-list-view.tsx:170
 msgid "Failed"
 msgstr "失敗"
 
@@ -1514,7 +1528,7 @@ msgstr "バージョンへの署名に失敗しました。"
 msgid "Failed to {operation} tag \"{tag}\"."
 msgstr "タグ \"{tag}\" の {operation} に失敗しました。"
 
-#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:78
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:75
 msgid "Filter by name"
 msgstr "名前別にフィルター"
 
@@ -1532,8 +1546,8 @@ msgstr "{0} 別にフィルター"
 #~ msgid "Find a group"
 #~ msgstr "Find a group"
 
-#: src/components/collection-detail/collection-content-list.tsx:76
-#: src/components/collection-detail/table-of-contents.tsx:97
+#: src/components/collection-detail/collection-content-list.tsx:78
+#: src/components/collection-detail/table-of-contents.tsx:75
 msgid "Find content"
 msgstr "コンテンツの検索"
 
@@ -1541,8 +1555,8 @@ msgstr "コンテンツの検索"
 msgid "Find execution environments in this registry"
 msgstr "このレジストリーでの実行環境の検索"
 
-#: src/containers/task-management/task-list-view.tsx:248
-#: src/containers/task-management/task_detail.tsx:171
+#: src/containers/task-management/task-list-view.tsx:251
+#: src/containers/task-management/task_detail.tsx:174
 msgid "Finished at"
 msgstr "終了日時"
 
@@ -1575,7 +1589,7 @@ msgstr "トークンの取得"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 回試行した後に、タスクの待機を中止します。"
 
-#: src/components/collection-detail/collection-info.tsx:158
+#: src/components/collection-detail/collection-info.tsx:155
 msgid "Go to documentation"
 msgstr "ドキュメントに移動"
 
@@ -1711,8 +1725,8 @@ msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "イメージ \"{digest}\" が正常に削除されました。"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:101
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:164
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:169
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:166
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:171
 msgid "Image layers"
 msgstr "イメージレイヤー"
 
@@ -1763,7 +1777,7 @@ msgstr "実行環境のインデックス作成は、registry.redhat.io のみ�
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" のインデックス化が開始されました。"
 
-#: src/components/collection-detail/collection-info.tsx:49
+#: src/components/collection-detail/collection-info.tsx:47
 #: src/components/headers/collection-header.tsx:589
 msgid "Install"
 msgstr "インストール"
@@ -1772,9 +1786,13 @@ msgstr "インストール"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:72
+#: src/components/collection-detail/collection-info.tsx:70
 msgid "Installation"
 msgstr "インストール"
+
+#: src/containers/legacy-roles/legacy-role.tsx:55
+msgid "Installation:"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:80
 msgid "Instructions"
@@ -1873,7 +1891,7 @@ msgstr ""
 msgid "Legacy Roles"
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:61
+#: src/components/collection-detail/collection-info.tsx:59
 msgid "License"
 msgstr "ライセンス"
 
@@ -1903,7 +1921,7 @@ msgstr ""
 msgid "List of Legacy Roles"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx:168
+#: src/containers/legacy-roles/legacy-role.tsx:170
 msgid "List of versions"
 msgstr ""
 
@@ -1951,11 +1969,11 @@ msgstr "タグの管理"
 msgid "Manage tokens"
 msgstr "トークンの管理"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:146
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:148
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "マニフェストリストはこの画面ではサポートされていません。<0>Images</0> タブを使用してマニフェスト一覧の詳細を確認してください。"
 
-#: src/containers/task-management/task_detail.tsx:316
+#: src/containers/task-management/task_detail.tsx:313
 msgid "Message"
 msgstr "メッセージ"
 
@@ -1993,7 +2011,7 @@ msgstr "自分の名前空間"
 msgid "My profile"
 msgstr "自分のプロファイル"
 
-#: src/components/collection-detail/collection-content-list.tsx:103
+#: src/components/collection-detail/collection-content-list.tsx:105
 #: src/components/execution-environment/repository-form.tsx:165
 #: src/components/execution-environment/repository-form.tsx:193
 #: src/components/my-imports/import-list.tsx:84
@@ -2013,11 +2031,11 @@ msgstr "自分のプロファイル"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:259
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:329
-#: src/containers/namespace-list/namespace-list.tsx:231
+#: src/containers/namespace-list/namespace-list.tsx:232
 #: src/containers/signature-keys/list.tsx:122
 #: src/containers/signature-keys/list.tsx:148
 #: src/containers/signature-keys/list.tsx:176
-#: src/containers/task-management/task_detail.tsx:275
+#: src/containers/task-management/task_detail.tsx:272
 msgid "Name"
 msgstr "名前"
 
@@ -2084,11 +2102,11 @@ msgstr "名前空間"
 
 #: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:129
-#: src/containers/namespace-list/namespace-list.tsx:366
+#: src/containers/namespace-list/namespace-list.tsx:367
 msgid "Namespaces list could not be displayed."
 msgstr "名前空間リストを表示できませんでした。"
 
-#: src/containers/namespace-list/namespace-list.tsx:290
+#: src/containers/namespace-list/namespace-list.tsx:291
 msgid "Namespaces will appear once created"
 msgstr "名前空間は作成後に表示されます"
 
@@ -2117,6 +2135,10 @@ msgstr "新規コレクション"
 msgid "New version of {0}"
 msgstr "{0} の新規バージョン"
 
+#: src/components/patternfly-wrappers/wizard-modal.tsx:39
+msgid "Next"
+msgstr ""
+
 #: src/components/execution-environment/tag-manifest-modal.tsx:187
 msgid "No"
 msgstr "不可"
@@ -2141,7 +2163,7 @@ msgstr "割り当て可能なグループはありません。"
 msgid "No assignable roles."
 msgstr "割り当て可能なロールはありません。"
 
-#: src/containers/task-management/task_detail.tsx:241
+#: src/containers/task-management/task_detail.tsx:238
 msgid "No child task"
 msgstr "子タスクなし"
 
@@ -2160,7 +2182,7 @@ msgstr "まだコンテナーリポジトリーはありません"
 msgid "No data"
 msgstr "データなし"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:24
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:25
 #: src/containers/collection-detail/collection-dependencies.tsx:139
 #: src/containers/collection-detail/collection-dependencies.tsx:147
 msgid "No dependencies"
@@ -2191,16 +2213,16 @@ msgid "No namespace selected."
 msgstr "名前空間が選択されていません。"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx:124
-#: src/containers/namespace-list/namespace-list.tsx:288
+#: src/containers/namespace-list/namespace-list.tsx:289
 msgid "No namespaces yet"
 msgstr "まだ名前空間はありません"
 
-#: src/containers/task-management/task_detail.tsx:212
+#: src/containers/task-management/task_detail.tsx:213
 msgid "No parent task"
 msgstr "親タスクなし"
 
-#: src/components/rbac/permission-chip-selector.tsx:54
-#: src/components/rbac/permission-chip-selector.tsx:87
+#: src/components/rbac/permission-chip-selector.tsx:55
+#: src/components/rbac/permission-chip-selector.tsx:89
 msgid "No permission"
 msgstr "パーミッションなし"
 
@@ -2237,7 +2259,7 @@ msgstr "署名鍵はまだありません"
 msgid "No tag or digest selected."
 msgstr "タグまたはダイジェストが選択されていません。"
 
-#: src/containers/task-management/task_detail.tsx:195
+#: src/containers/task-management/task_detail.tsx:198
 msgid "No task group"
 msgstr "タスクグループなし"
 
@@ -2245,7 +2267,7 @@ msgstr "タスクグループなし"
 msgid "No task messages available"
 msgstr "利用可能なタスクメッセージはありません"
 
-#: src/containers/task-management/task-list-view.tsx:128
+#: src/containers/task-management/task-list-view.tsx:131
 msgid "No tasks yet"
 msgstr "まだタスクはありません"
 
@@ -2258,11 +2280,11 @@ msgstr "影響を受けるユーザーはありません。"
 msgid "No users yet"
 msgstr "まだユーザーはありません"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:54
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:55
 msgid "No version of {fqn} exists that matches {version_range}."
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx:161
+#: src/containers/legacy-roles/legacy-role.tsx:163
 msgid "No versions"
 msgstr ""
 
@@ -2270,8 +2292,8 @@ msgstr ""
 msgid "Not a super user"
 msgstr "スーパーユーザーではありません"
 
-#: src/components/rbac/permission-chip-selector.tsx:97
-#: src/components/typeahead/typeahead.tsx:88
+#: src/components/rbac/permission-chip-selector.tsx:99
+#: src/components/typeahead/typeahead.tsx:90
 #: src/containers/collection-detail/collection-docs.tsx:262
 msgid "Not found"
 msgstr "見つかりません"
@@ -2280,7 +2302,7 @@ msgstr "見つかりません"
 msgid "Not found image"
 msgstr "イメージが見つかりません"
 
-#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:53
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:50
 msgid "Not required for use by other collections"
 msgstr "他のコレクションでの使用には必要ありません"
 
@@ -2313,7 +2335,7 @@ msgstr "所有者"
 #~ msgid "Page logo"
 #~ msgstr "Page logo"
 
-#: src/containers/task-management/task_detail.tsx:199
+#: src/containers/task-management/task_detail.tsx:202
 msgid "Parent task"
 msgstr "親タスク"
 
@@ -2395,9 +2417,9 @@ msgstr "保留中"
 #~ msgid "Permission {permission} was not added."
 #~ msgstr "Permission {permission} was not added."
 
-#: src/containers/group-management/group-detail.tsx:187
-#~ msgid "Permissions"
-#~ msgstr "Permissions"
+#: src/components/rbac/role-form.tsx:125
+msgid "Permissions"
+msgstr "Permissions"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:94
 msgid "Permissions for group \"{0}\" could not be displayed."
@@ -2432,7 +2454,7 @@ msgstr "ファイルを 1 つだけ選択してください。"
 msgid "Please, provide the namespace name"
 msgstr "名前空間名を記入してください"
 
-#: src/containers/task-management/task_detail.tsx:267
+#: src/containers/task-management/task_detail.tsx:264
 msgid "Plugin"
 msgstr ""
 
@@ -2447,7 +2469,7 @@ msgstr "プレビュー"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx:299
+#: src/containers/task-management/task_detail.tsx:296
 msgid "Progress messages"
 msgstr "進捗メッセージ"
 
@@ -2455,7 +2477,7 @@ msgstr "進捗メッセージ"
 msgid "Provided by <0>{0}</0>"
 msgstr ""
 
-#: src/components/cards/collection-card.tsx:81
+#: src/components/cards/collection-card.tsx:78
 #: src/components/collection-list/collection-list-item.tsx:86
 msgid "Provided by {company}"
 msgstr "{company} により提供"
@@ -2494,7 +2516,7 @@ msgstr "公開"
 msgid "Pull this image"
 msgstr "このイメージのプル"
 
-#: src/components/about-modal/about-modal.tsx:92
+#: src/components/about-modal/about-modal.tsx:80
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible バージョン"
 
@@ -2638,7 +2660,7 @@ msgstr "速度制限"
 msgid "Raw Markdown"
 msgstr "ロー形式の Markdown"
 
-#: src/components/collection-detail/table-of-contents.tsx:137
+#: src/components/collection-detail/table-of-contents.tsx:118
 msgid "Readme"
 msgstr "Readme"
 
@@ -2676,7 +2698,7 @@ msgstr "拒否"
 msgid "Rejected"
 msgstr "拒否"
 
-#: src/containers/legacy-roles/legacy-role.tsx:112
+#: src/containers/legacy-roles/legacy-role.tsx:114
 msgid "Released <0/>"
 msgstr ""
 
@@ -2763,7 +2785,7 @@ msgstr "リポジトリー管理"
 msgid "Repository name"
 msgstr "リポジトリー名"
 
-#: src/components/collection-detail/collection-info.tsx:127
+#: src/components/collection-detail/collection-info.tsx:124
 msgid "Requires Ansible"
 msgstr "Ansible が必要です"
 
@@ -2771,7 +2793,7 @@ msgstr "Ansible が必要です"
 msgid "Requires super user permissions to edit."
 msgstr "編集にはスーパーユーザー権限が必要です。"
 
-#: src/containers/task-management/task_detail.tsx:250
+#: src/containers/task-management/task_detail.tsx:247
 msgid "Reserve resources"
 msgstr "リソースの予約"
 
@@ -2810,10 +2832,11 @@ msgstr "ロール \"{name}\" を削除できませんでした。"
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr "ロール \"{name}\" が正常に削除されました。"
 
-#: src/containers/legacy-roles/legacy-role.tsx:383
+#: src/containers/legacy-roles/legacy-role.tsx:385
 msgid "Role Header"
 msgstr ""
 
+#: src/components/rbac/role-form.tsx:95
 #: src/containers/role-management/role-list.tsx:144
 #: src/containers/role-management/role-list.tsx:233
 #: src/containers/role-management/role-list.tsx:281
@@ -2847,7 +2870,7 @@ msgstr ""
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:59
 #: src/constants.tsx:170
-#: src/containers/task-management/task-list-view.tsx:171
+#: src/containers/task-management/task-list-view.tsx:174
 msgid "Running"
 msgstr "実行中"
 
@@ -2859,7 +2882,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:151
 #: src/components/execution-environment/tag-manifest-modal.tsx:115
 #: src/components/rbac/group-modal.tsx:57
-#: src/components/rbac/role-form.tsx:140
+#: src/components/rbac/role-form.tsx:142
 #: src/components/rbac/user-form.tsx:221
 #: src/components/repositories/remote-form.tsx:136
 #: src/containers/edit-namespace/edit-namespace.tsx:156
@@ -2945,8 +2968,8 @@ msgstr "グループの選択"
 msgid "Select namespace"
 msgstr "名前空間の選択"
 
-#: src/components/rbac/permission-chip-selector.tsx:75
-#: src/components/rbac/permission-chip-selector.tsx:85
+#: src/components/rbac/permission-chip-selector.tsx:77
+#: src/components/rbac/permission-chip-selector.tsx:87
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
@@ -2981,13 +3004,17 @@ msgstr "サーバーの URL を表示できませんでした。"
 msgid "Server error. Please come back later."
 msgstr "サーバーエラー。後でもう一度お試しください。"
 
-#: src/components/about-modal/about-modal.tsx:85
+#: src/components/about-modal/about-modal.tsx:73
 msgid "Server version"
 msgstr "サーバーバージョン"
 
 #: src/containers/settings/user-profile.tsx:73
 msgid "Settings"
 msgstr "設定"
+
+#: src/utilities/chip-group-props.ts:7
+msgid "Show Less"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:416
 msgid "Show advanced options"
@@ -2997,7 +3024,7 @@ msgstr "詳細オプションの表示"
 msgid "Show the signature"
 msgstr "署名の表示"
 
-#: src/components/collection-detail/collection-content-list.tsx:81
+#: src/components/collection-detail/collection-content-list.tsx:83
 msgid "Showing:"
 msgstr "表示:"
 
@@ -3102,15 +3129,19 @@ msgstr "シングルサインオン URL。"
 msgid "Size"
 msgstr "サイズ"
 
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:142
+msgid "Size: {size}"
+msgstr ""
+
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Sort results"
 msgstr "結果のソート"
 
-#: src/containers/task-management/task-list-view.tsx:243
+#: src/containers/task-management/task-list-view.tsx:246
 msgid "Started at"
 msgstr "開始日時"
 
-#: src/containers/task-management/task_detail.tsx:318
+#: src/containers/task-management/task_detail.tsx:315
 msgid "State"
 msgstr "状態"
 
@@ -3119,9 +3150,9 @@ msgstr "状態"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:170
 #: src/containers/certification-dashboard/certification-dashboard.tsx:218
 #: src/containers/certification-dashboard/certification-dashboard.tsx:283
-#: src/containers/task-management/task-list-view.tsx:158
-#: src/containers/task-management/task-list-view.tsx:204
-#: src/containers/task-management/task-list-view.tsx:253
+#: src/containers/task-management/task-list-view.tsx:161
+#: src/containers/task-management/task-list-view.tsx:207
+#: src/containers/task-management/task-list-view.tsx:256
 msgid "Status"
 msgstr "ステータス"
 
@@ -3129,14 +3160,14 @@ msgstr "ステータス"
 msgid "Status:"
 msgstr "ステータス:"
 
-#: src/containers/task-management/task-list-view.tsx:326
-#: src/containers/task-management/task-list-view.tsx:342
-#: src/containers/task-management/task_detail.tsx:132
-#: src/containers/task-management/task_detail.tsx:372
+#: src/containers/task-management/task-list-view.tsx:321
+#: src/containers/task-management/task-list-view.tsx:337
+#: src/containers/task-management/task_detail.tsx:135
+#: src/containers/task-management/task_detail.tsx:369
 msgid "Stop task"
 msgstr "タスクの停止"
 
-#: src/containers/task-management/task-list-view.tsx:355
+#: src/containers/task-management/task-list-view.tsx:350
 msgid "Stop task?"
 msgstr "タスクを停止しますか?"
 
@@ -3251,28 +3282,28 @@ msgstr "タグ"
 msgid "Tags could not be displayed."
 msgstr "タグを表示できませんでした。"
 
-#: src/containers/task-management/task-list-view.tsx:393
+#: src/containers/task-management/task-list-view.tsx:388
 msgid "Task \"{name}\" could not be stopped."
 msgstr "タスク \"{name}\" を停止できませんでした。"
 
-#: src/containers/task-management/task-list-view.tsx:377
+#: src/containers/task-management/task-list-view.tsx:372
 msgid "Task \"{name}\" stopped successfully."
 msgstr "タスク \"{name}\" が正常に停止しました。"
 
-#: src/containers/task-management/task_detail.tsx:411
+#: src/containers/task-management/task_detail.tsx:408
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "タスク \"{taskName}\" を停止できませんでした。"
 
-#: src/containers/task-management/task_detail.tsx:395
+#: src/containers/task-management/task_detail.tsx:392
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "タスク \"{taskName}\" が正常に停止しました。"
 
-#: src/containers/task-management/task-list-view.tsx:123
+#: src/containers/task-management/task-list-view.tsx:126
 #: src/loaders/standalone/menu.tsx:94
 msgid "Task Management"
 msgstr "タスク管理"
 
-#: src/containers/task-management/task_detail.tsx:152
+#: src/containers/task-management/task_detail.tsx:155
 msgid "Task detail"
 msgstr "タスクの詳細"
 
@@ -3280,26 +3311,26 @@ msgstr "タスクの詳細"
 msgid "Task failed without error message."
 msgstr "エラーメッセージなしでタスクに失敗しました。"
 
-#: src/containers/task-management/task_detail.tsx:193
+#: src/containers/task-management/task_detail.tsx:196
 msgid "Task group"
 msgstr "タスクグループ"
 
-#: src/containers/task-management/task_detail.tsx:188
+#: src/containers/task-management/task_detail.tsx:191
 msgid "Task groups"
 msgstr "タスクグループ"
 
-#: src/containers/task-management/task-list-view.tsx:262
+#: src/containers/task-management/task-list-view.tsx:265
 msgid "Task list"
 msgstr "タスク一覧"
 
-#: src/containers/task-management/task_detail.tsx:103
+#: src/containers/task-management/task_detail.tsx:106
 msgid "Task management"
 msgstr "タスク管理"
 
-#: src/containers/task-management/task-list-view.tsx:154
-#: src/containers/task-management/task-list-view.tsx:203
-#: src/containers/task-management/task-list-view.tsx:233
-#: src/containers/task-management/task_detail.tsx:157
+#: src/containers/task-management/task-list-view.tsx:157
+#: src/containers/task-management/task-list-view.tsx:206
+#: src/containers/task-management/task-list-view.tsx:236
+#: src/containers/task-management/task_detail.tsx:160
 msgid "Task name"
 msgstr "タスク名"
 
@@ -3307,11 +3338,11 @@ msgstr "タスク名"
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "タグ \"{0}\" を変更するタスクを完了できませんでした。"
 
-#: src/containers/task-management/task-list-view.tsx:425
+#: src/containers/task-management/task-list-view.tsx:420
 msgid "Tasks list could not be displayed."
 msgstr "タスクリストを表示できませんでした。"
 
-#: src/containers/task-management/task-list-view.tsx:129
+#: src/containers/task-management/task-list-view.tsx:132
 msgid "Tasks will appear once created."
 msgstr "タスクは作成後に表示されます。"
 
@@ -3380,7 +3411,7 @@ msgstr "同期時に認証に使用するパスワード。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
-#: src/containers/legacy-roles/legacy-role.tsx:162
+#: src/containers/legacy-roles/legacy-role.tsx:164
 msgid "The role is versionless and will always install from the head/main/master branch."
 msgstr ""
 
@@ -3432,12 +3463,12 @@ msgstr "このリモートに関連付けられているリポジトリーはあ
 msgid "There have not been any imports on this namespace."
 msgstr "この名前空間へのインポートはありません。"
 
-#: src/containers/task-management/task_detail.tsx:336
-#: src/containers/task-management/task_detail.tsx:337
+#: src/containers/task-management/task_detail.tsx:333
+#: src/containers/task-management/task_detail.tsx:334
 msgid "There is no progress message."
 msgstr "進捗メッセージはありません。"
 
-#: src/containers/task-management/task_detail.tsx:286
+#: src/containers/task-management/task_detail.tsx:283
 msgid "There's no resource record"
 msgstr "リソースレコードがありません"
 
@@ -3445,7 +3476,7 @@ msgstr "リソースレコードがありません"
 msgid "These users will lose access to the group content:"
 msgstr "以下のユーザーは、グループコンテンツにアクセスできなくなります:"
 
-#: src/containers/namespace-list/namespace-list.tsx:291
+#: src/containers/namespace-list/namespace-list.tsx:292
 msgid "This account is not set up to manage any namespaces"
 msgstr "このアカウントは、名前空間の管理設定がされていません"
 
@@ -3525,7 +3556,7 @@ msgstr "サーバー URL に対する認証に使用するトークンです。"
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
-#: src/containers/task-management/task_detail.tsx:351
+#: src/containers/task-management/task_detail.tsx:348
 msgid "Traceback"
 msgstr "トレースバック"
 
@@ -3533,12 +3564,12 @@ msgstr "トレースバック"
 msgid "Training <0/>"
 msgstr "トレーニング <0/>"
 
-#: src/components/collection-detail/collection-content-list.tsx:104
-#: src/containers/task-management/task_detail.tsx:260
+#: src/components/collection-detail/collection-content-list.tsx:106
+#: src/containers/task-management/task_detail.tsx:257
 msgid "Type"
 msgstr "タイプ"
 
-#: src/components/about-modal/about-modal.tsx:102
+#: src/components/about-modal/about-modal.tsx:90
 msgid "UI Version"
 msgstr "UI バージョン"
 
@@ -3575,7 +3606,7 @@ msgstr "未署名バージョン"
 
 #: src/components/collection-list/collection-list-item.tsx:116
 #: src/components/legacy-role-list/legacy-role-item.tsx:102
-#: src/containers/legacy-roles/legacy-role.tsx:310
+#: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
 msgstr "<0/> に更新"
 
@@ -3702,7 +3733,7 @@ msgstr "ユーザー <0>{username}</0> がグループ <1>{groupname}</1> から
 msgid "User Access"
 msgstr "ユーザーアクセス"
 
-#: src/components/about-modal/about-modal.tsx:108
+#: src/components/about-modal/about-modal.tsx:96
 msgid "User Groups"
 msgstr "ユーザーグループ"
 
@@ -3719,7 +3750,7 @@ msgstr "ユーザーリスト"
 msgid "User type"
 msgstr "ユーザータイプ"
 
-#: src/components/about-modal/about-modal.tsx:105
+#: src/components/about-modal/about-modal.tsx:93
 #: src/components/rbac/user-form.tsx:86
 #: src/components/repositories/remote-form.tsx:349
 #: src/containers/group-management/group-detail.tsx:525
@@ -3789,7 +3820,7 @@ msgstr "インポートログの表示"
 #~ msgid "View collection remote"
 #~ msgstr "コレクションリモートの表示"
 
-#: src/components/cards/namespace-card.tsx:51
+#: src/components/cards/namespace-card.tsx:56
 msgid "View collections"
 msgstr "コレクションの表示"
 
@@ -3851,7 +3882,7 @@ msgstr "タスクを表示およびキャンセルします。"
 
 #: src/components/my-imports/import-list.tsx:105
 #: src/constants.tsx:171
-#: src/containers/task-management/task-list-view.tsx:175
+#: src/containers/task-management/task-list-view.tsx:178
 msgid "Waiting"
 msgstr "待機中"
 
@@ -3859,7 +3890,7 @@ msgstr "待機中"
 msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "{pendingTasks} タスクが完了するのを待機中。"
 
-#: src/components/collection-detail/collection-content-list.tsx:144
+#: src/components/collection-detail/collection-content-list.tsx:146
 #: src/containers/collection-detail/collection-docs.tsx:272
 msgid "Warning"
 msgstr "警告"
@@ -3885,8 +3916,8 @@ msgstr "YAML 要件"
 msgid "Yes"
 msgstr "はい"
 
-#: src/containers/task-management/task-list-view.tsx:357
-#: src/containers/task-management/task_detail.tsx:373
+#: src/containers/task-management/task-list-view.tsx:352
+#: src/containers/task-management/task_detail.tsx:370
 msgid "Yes, stop"
 msgstr "はい、停止します"
 
@@ -3938,7 +3969,7 @@ msgstr "現在、リモートレジストリーがありません。"
 msgid "You do not have access to Automation Hub"
 msgstr "Automation Hub にアクセスできません"
 
-#: src/containers/task-management/task-list-view.tsx:96
+#: src/containers/task-management/task-list-view.tsx:99
 msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
 msgstr "すべてのタスクを表示するパーミッションがありません。自分が作成したタスクのみを表示できます。"
 
@@ -3959,7 +3990,7 @@ msgstr "ユーザーを表示するパーミッションがありません。"
 msgid "You don't have rights to do this operation."
 msgstr "この操作を行う権限がありません。"
 
-#: src/components/collection-detail/collection-info.tsx:90
+#: src/components/collection-detail/collection-info.tsx:88
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "tarball をダウンロードするには、ログインしている必要があります。"
 
@@ -3979,8 +4010,8 @@ msgstr "承認"
 msgid "could not be determined yet"
 msgstr "まだ判断できません"
 
-#: src/components/collection-detail/collection-content-list.tsx:75
-#: src/components/collection-detail/table-of-contents.tsx:96
+#: src/components/collection-detail/collection-content-list.tsx:77
+#: src/components/collection-detail/table-of-contents.tsx:74
 msgid "find-content"
 msgstr "find-content"
 
@@ -3990,15 +4021,15 @@ msgstr "非表示の値"
 
 #: src/components/collection-list/collection-filter.tsx:94
 #: src/containers/namespace-list/namespace-list.tsx:214
+#: src/containers/namespace-list/namespace-list.tsx:224
 msgid "keywords"
 msgstr "キーワード"
 
-#: src/components/patternfly-wrappers/pagination.tsx:62
-#: src/components/patternfly-wrappers/pagination.tsx:66
+#: src/components/patternfly-wrappers/pagination.tsx:79
 msgid "of"
 msgstr "/"
 
-#: src/components/patternfly-wrappers/pagination.tsx:63
+#: src/components/patternfly-wrappers/pagination.tsx:80
 msgid "per page"
 msgstr "項目/ページ"
 
@@ -4015,7 +4046,7 @@ msgstr "拒否"
 #~ msgstr "released {0}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:64
-#: src/containers/legacy-roles/legacy-role.tsx:276
+#: src/containers/legacy-roles/legacy-role.tsx:278
 msgid "role.github_user logo"
 msgstr ""
 
@@ -4071,8 +4102,8 @@ msgstr "{0} が追加されました"
 msgid "{collectionName}'s versions."
 msgstr "{collectionName} のバージョン。"
 
-#: src/components/cards/collection-card.tsx:53
-#: src/components/cards/namespace-card.tsx:34
+#: src/components/cards/collection-card.tsx:50
+#: src/components/cards/namespace-card.tsx:37
 #: src/components/collection-list/collection-list-item.tsx:56
 #: src/components/headers/collection-header.tsx:401
 #: src/components/headers/partner-header.tsx:48
@@ -4095,15 +4126,19 @@ msgstr "{count, plural, one {Plugin} other {Plugins}}"
 msgid "{count, plural, one {Role} other {Roles}}"
 msgstr "{count, plural, one {Role} other {Roles}}"
 
+#: src/utilities/chip-group-props.ts:6
+msgid "{count} more"
+msgstr ""
+
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/containers/task-management/task-list-view.tsx:358
+#: src/containers/task-management/task-list-view.tsx:353
 msgid "{name} will be cancelled."
 msgstr "{name} はキャンセルされます。"
 
-#: src/containers/task-management/task_detail.tsx:375
+#: src/containers/task-management/task_detail.tsx:372
 msgid "{name} will stop running."
 msgstr "{name} は実行を停止します。"
 
