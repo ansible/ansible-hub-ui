@@ -88,6 +88,10 @@ msgstr "<0>{0}</0> 将被删除。"
 msgid "<0>{0}</0> will be permanently deleted."
 msgstr "<0>{0}</0> 将被永久删除。"
 
+#: src/components/patternfly-wrappers/pagination.tsx:43
+msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
+msgstr ""
+
 #: src/components/rbac/delete-group-modal.tsx:27
 msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> 将被永久删除。"
@@ -194,6 +198,10 @@ msgstr "添加 Ansible 发布"
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
 msgid "Add a README with instructions for using this container."
 msgstr "添加一个包括使用这个容器信息的 README。"
+
+#: src/components/rbac/role-form.tsx:123
+msgid "Add a role description here"
+msgstr ""
 
 #: src/constants.tsx:155
 msgid "Add collection remote"
@@ -316,6 +324,10 @@ msgstr "批准"
 msgid "Authentication provider"
 msgstr "身份验证供应商"
 
+#: src/components/patternfly-wrappers/wizard-modal.tsx:36
+msgid "Back"
+msgstr ""
+
 #: src/components/patternfly-wrappers/fileupload.tsx:13
 msgid "Browse..."
 msgstr "浏览......"
@@ -369,10 +381,11 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:111
+#: src/components/patternfly-wrappers/wizard-modal.tsx:37
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/owners-tab.tsx:344
 #: src/components/rbac/owners-tab.tsx:413
-#: src/components/rbac/role-form.tsx:214
+#: src/components/rbac/role-form.tsx:216
 #: src/components/rbac/user-form.tsx:226
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:47
@@ -502,7 +515,7 @@ msgstr "无法保存对角色 \"{name}\" 的更改。"
 msgid "Checking for affected users... <0/>"
 msgstr "检查受影响的用户… <0/>"
 
-#: src/containers/task-management/task_detail.tsx:222
+#: src/containers/task-management/task_detail.tsx:223
 msgid "Child tasks"
 msgstr "子任务"
 
@@ -512,7 +525,7 @@ msgid "Clear"
 msgstr "清除"
 
 #: src/components/empty-state/empty-state-filter.tsx:21
-#: src/components/patternfly-wrappers/applied-filters.tsx:44
+#: src/components/patternfly-wrappers/applied-filters.tsx:42
 msgid "Clear all filters"
 msgstr "清除所有过滤器"
 
@@ -529,10 +542,11 @@ msgid "Client key"
 msgstr "客户端密钥"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "关闭"
 
-#: src/containers/task-management/task_detail.tsx:322
+#: src/containers/task-management/task_detail.tsx:319
 msgid "Code"
 msgstr "代码"
 
@@ -605,7 +619,7 @@ msgstr "无法显示集合 \"{distributionPath}\" 的计数。"
 msgid "Collection does not have any dependencies."
 msgstr "集合没有任何依赖项。"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:27
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:29
 msgid "Collection does not have dependencies."
 msgstr "集合没有依赖项。"
 
@@ -629,8 +643,8 @@ msgid "Collection versions"
 msgstr "集合版本"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr "系统中没有找到集合。您必须上传它。"
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr "系统中没有找到集合。您必须上传它。"
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -646,7 +660,7 @@ msgstr "集合"
 msgid "Collections will appear once uploaded"
 msgstr "上传后会出现集合"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:210
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:212
 msgid "Command"
 msgstr "命令"
 
@@ -666,7 +680,7 @@ msgstr "公司名称"
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:372
-#: src/containers/task-management/task-list-view.tsx:162
+#: src/containers/task-management/task-list-view.tsx:165
 msgid "Completed"
 msgstr "完成"
 
@@ -771,8 +785,8 @@ msgstr "无法加载导入日志"
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:161
 #: src/containers/group-management/group-list.tsx:198
-#: src/containers/namespace-list/namespace-list.tsx:243
-#: src/containers/namespace-list/namespace-list.tsx:293
+#: src/containers/namespace-list/namespace-list.tsx:244
+#: src/containers/namespace-list/namespace-list.tsx:294
 #: src/containers/user-management/user-list.tsx:183
 #: src/containers/user-management/user-list.tsx:248
 msgid "Create"
@@ -829,8 +843,8 @@ msgid "Created"
 msgstr "创建"
 
 #: src/containers/signature-keys/list.tsx:189
-#: src/containers/task-management/task-list-view.tsx:237
-#: src/containers/task-management/task_detail.tsx:182
+#: src/containers/task-management/task-list-view.tsx:240
+#: src/containers/task-management/task_detail.tsx:185
 msgid "Created on"
 msgstr "创建于"
 
@@ -886,8 +900,8 @@ msgstr "创建日期"
 #: src/containers/group-management/group-detail.tsx:232
 #: src/containers/group-management/group-list.tsx:420
 #: src/containers/role-management/role-list.tsx:481
-#: src/containers/task-management/task-list-view.tsx:316
-#: src/containers/task-management/task-list-view.tsx:332
+#: src/containers/task-management/task-list-view.tsx:311
+#: src/containers/task-management/task-list-view.tsx:327
 #: src/containers/user-management/user-detail.tsx:129
 #: src/containers/user-management/user-list.tsx:339
 msgid "Delete"
@@ -1055,7 +1069,7 @@ msgstr "无法显示集合 \"{name}\" 的依赖项。"
 msgid "Dependent collections"
 msgstr "依赖性集合"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:272
 msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
@@ -1078,11 +1092,11 @@ msgstr "为集合 \"{0}\" 开始的弃用状态更新。"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:295
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
 #: src/containers/role-management/role-list.tsx:175
-#: src/containers/task-management/task_detail.tsx:354
+#: src/containers/task-management/task_detail.tsx:351
 msgid "Description"
 msgstr "描述"
 
-#: src/containers/task-management/task_detail.tsx:169
+#: src/containers/task-management/task_detail.tsx:172
 msgid "Descriptive name"
 msgstr "描述性名称"
 
@@ -1124,7 +1138,7 @@ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be
 msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这里</1>。使用下列参数来配置客户端。"
 
 #: src/components/my-imports/import-console.tsx:107
-#: src/containers/task-management/task_detail.tsx:324
+#: src/containers/task-management/task_detail.tsx:321
 msgid "Done"
 msgstr "完成"
 
@@ -1246,7 +1260,7 @@ msgstr "可编辑"
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:222
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:224
 msgid "Environment"
 msgstr "环境"
 
@@ -1361,7 +1375,7 @@ msgstr "加载环境时出错。"
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx:350
+#: src/containers/task-management/task_detail.tsx:347
 msgid "Error message"
 msgstr "错误消息"
 
@@ -1468,7 +1482,7 @@ msgstr "过期"
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:373
-#: src/containers/task-management/task-list-view.tsx:166
+#: src/containers/task-management/task-list-view.tsx:169
 msgid "Failed"
 msgstr "失败"
 
@@ -1528,8 +1542,8 @@ msgstr "查找内容"
 msgid "Find execution environments in this registry"
 msgstr "在此注册表中查找执行环境"
 
-#: src/containers/task-management/task-list-view.tsx:247
-#: src/containers/task-management/task_detail.tsx:176
+#: src/containers/task-management/task-list-view.tsx:250
+#: src/containers/task-management/task_detail.tsx:179
 msgid "Finished at"
 msgstr "完成于"
 
@@ -1691,8 +1705,8 @@ msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "镜像 \"{digest}\" 已成功删除。"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:102
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:165
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:170
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:167
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:172
 msgid "Image layers"
 msgstr "镜像层"
 
@@ -1904,11 +1918,11 @@ msgstr "管理标签"
 msgid "Manage tokens"
 msgstr "管理令牌"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:147
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:149
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "此屏幕目前不支持清单列表，请使用 <0>Images</0> 标签页来查看清单列表详细信息。"
 
-#: src/containers/task-management/task_detail.tsx:321
+#: src/containers/task-management/task_detail.tsx:318
 msgid "Message"
 msgstr "信息"
 
@@ -1966,11 +1980,11 @@ msgstr "我的配置集"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:260
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
-#: src/containers/namespace-list/namespace-list.tsx:229
+#: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
 #: src/containers/signature-keys/list.tsx:179
-#: src/containers/task-management/task_detail.tsx:280
+#: src/containers/task-management/task_detail.tsx:277
 msgid "Name"
 msgstr "名称"
 
@@ -2033,11 +2047,11 @@ msgstr "命名空间"
 
 #: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
-#: src/containers/namespace-list/namespace-list.tsx:366
+#: src/containers/namespace-list/namespace-list.tsx:367
 msgid "Namespaces list could not be displayed."
 msgstr "无法显示命名空间列表。"
 
-#: src/containers/namespace-list/namespace-list.tsx:288
+#: src/containers/namespace-list/namespace-list.tsx:289
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
 
@@ -2061,6 +2075,10 @@ msgstr "新集合"
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New version of {0}"
 msgstr "{0} 的新版本"
+
+#: src/components/patternfly-wrappers/wizard-modal.tsx:39
+msgid "Next"
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:192
 msgid "No"
@@ -2086,7 +2104,7 @@ msgstr "没有可分配组。"
 msgid "No assignable roles."
 msgstr "无可分配角色。"
 
-#: src/containers/task-management/task_detail.tsx:246
+#: src/containers/task-management/task_detail.tsx:243
 msgid "No child task"
 msgstr "没有子任务"
 
@@ -2105,7 +2123,7 @@ msgstr "还没有容器仓库"
 msgid "No data"
 msgstr "没有数据"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:26
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:28
 #: src/containers/collection-detail/collection-dependencies.tsx:144
 #: src/containers/collection-detail/collection-dependencies.tsx:152
 msgid "No dependencies"
@@ -2135,15 +2153,15 @@ msgstr "还没有受管集合"
 msgid "No namespace selected."
 msgstr "没有选择命名空间。"
 
-#: src/containers/namespace-list/namespace-list.tsx:286
+#: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
 
-#: src/containers/task-management/task_detail.tsx:217
+#: src/containers/task-management/task_detail.tsx:218
 msgid "No parent task"
 msgstr "没有父任务"
 
-#: src/components/rbac/permission-chip-selector.tsx:98
+#: src/components/rbac/permission-chip-selector.tsx:100
 msgid "No permission"
 msgstr "没有权限"
 
@@ -2171,7 +2189,7 @@ msgstr "还没有签名密钥"
 msgid "No tag or digest selected."
 msgstr "没有选择标签或摘要。"
 
-#: src/containers/task-management/task_detail.tsx:200
+#: src/containers/task-management/task_detail.tsx:203
 msgid "No task group"
 msgstr "没有任务组"
 
@@ -2179,7 +2197,7 @@ msgstr "没有任务组"
 msgid "No task messages available"
 msgstr "没有可用的任务消息"
 
-#: src/containers/task-management/task-list-view.tsx:127
+#: src/containers/task-management/task-list-view.tsx:130
 msgid "No tasks yet"
 msgstr "还没有任务"
 
@@ -2192,12 +2210,16 @@ msgstr "任何用户都不会受到影响。"
 msgid "No users yet"
 msgstr "还没有用户"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:58
+msgid "No version of {fqn} exists that matches {version_range}."
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:204
 msgid "Not a super user"
 msgstr "不是一个超级用户"
 
-#: src/components/rbac/permission-chip-selector.tsx:82
-#: src/components/typeahead/typeahead.tsx:88
+#: src/components/rbac/permission-chip-selector.tsx:84
+#: src/components/typeahead/typeahead.tsx:90
 #: src/containers/collection-detail/collection-docs.tsx:275
 msgid "Not found"
 msgstr "未找到"
@@ -2239,7 +2261,7 @@ msgstr "所有者"
 #~ msgid "Page logo"
 #~ msgstr "Page logo"
 
-#: src/containers/task-management/task_detail.tsx:204
+#: src/containers/task-management/task_detail.tsx:207
 msgid "Parent task"
 msgstr "父任务"
 
@@ -2321,9 +2343,9 @@ msgstr "待处理"
 #~ msgid "Permission {permission} was not added."
 #~ msgstr "Permission {permission} was not added."
 
-#: src/containers/group-management/group-detail.tsx:187
-#~ msgid "Permissions"
-#~ msgstr "Permissions"
+#: src/components/rbac/role-form.tsx:133
+msgid "Permissions"
+msgstr "Permissions"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:101
 msgid "Permissions for group \"{0}\" could not be displayed."
@@ -2358,7 +2380,7 @@ msgstr "请只选择一个文件。"
 msgid "Please, provide the namespace name"
 msgstr "请提供命名空间名称"
 
-#: src/containers/task-management/task_detail.tsx:272
+#: src/containers/task-management/task_detail.tsx:269
 msgid "Plugin"
 msgstr ""
 
@@ -2373,7 +2395,7 @@ msgstr "预览"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx:304
+#: src/containers/task-management/task_detail.tsx:301
 msgid "Progress messages"
 msgstr "进度消息"
 
@@ -2690,7 +2712,7 @@ msgstr "需要 Ansible"
 msgid "Requires super user permissions to edit."
 msgstr "需要超级用户权限进行编辑。"
 
-#: src/containers/task-management/task_detail.tsx:255
+#: src/containers/task-management/task_detail.tsx:252
 msgid "Reserve resources"
 msgstr "保留资源"
 
@@ -2729,6 +2751,7 @@ msgstr "角色 \"{name}\" 无法被删除。"
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr "角色 \"{name}\" 已成功删除。"
 
+#: src/components/rbac/role-form.tsx:103
 #: src/containers/role-management/role-list.tsx:170
 #: src/containers/role-management/role-list.tsx:259
 #: src/containers/role-management/role-list.tsx:307
@@ -2757,7 +2780,7 @@ msgstr "无法显示角色列表。"
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:374
-#: src/containers/task-management/task-list-view.tsx:170
+#: src/containers/task-management/task-list-view.tsx:173
 msgid "Running"
 msgstr "运行中"
 
@@ -2769,7 +2792,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:151
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/rbac/group-modal.tsx:57
-#: src/components/rbac/role-form.tsx:208
+#: src/components/rbac/role-form.tsx:210
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
 #: src/containers/edit-namespace/edit-namespace.tsx:155
@@ -2855,8 +2878,8 @@ msgstr "选择组"
 msgid "Select namespace"
 msgstr "选择命名空间"
 
-#: src/components/rbac/permission-chip-selector.tsx:68
-#: src/components/rbac/permission-chip-selector.tsx:96
+#: src/components/rbac/permission-chip-selector.tsx:70
+#: src/components/rbac/permission-chip-selector.tsx:98
 msgid "Select permissions"
 msgstr "选择权限"
 
@@ -2898,6 +2921,10 @@ msgstr "服务器版本"
 #: src/containers/settings/user-profile.tsx:74
 msgid "Settings"
 msgstr "设置"
+
+#: src/utilities/chip-group-props.ts:7
+msgid "Show Less"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:422
 msgid "Show advanced options"
@@ -3012,15 +3039,19 @@ msgstr "单点登录。"
 msgid "Size"
 msgstr "大小"
 
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:143
+msgid "Size: {size}"
+msgstr ""
+
 #: src/components/patternfly-wrappers/sort.tsx:147
 msgid "Sort results"
 msgstr "对结果进行排序"
 
-#: src/containers/task-management/task-list-view.tsx:242
+#: src/containers/task-management/task-list-view.tsx:245
 msgid "Started at"
 msgstr "开始于"
 
-#: src/containers/task-management/task_detail.tsx:323
+#: src/containers/task-management/task_detail.tsx:320
 msgid "State"
 msgstr "状态"
 
@@ -3029,9 +3060,9 @@ msgstr "状态"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:174
 #: src/containers/certification-dashboard/certification-dashboard.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:287
-#: src/containers/task-management/task-list-view.tsx:157
-#: src/containers/task-management/task-list-view.tsx:203
-#: src/containers/task-management/task-list-view.tsx:252
+#: src/containers/task-management/task-list-view.tsx:160
+#: src/containers/task-management/task-list-view.tsx:206
+#: src/containers/task-management/task-list-view.tsx:255
 msgid "Status"
 msgstr "状态"
 
@@ -3039,14 +3070,14 @@ msgstr "状态"
 msgid "Status:"
 msgstr "状态："
 
-#: src/containers/task-management/task-list-view.tsx:325
-#: src/containers/task-management/task-list-view.tsx:341
-#: src/containers/task-management/task_detail.tsx:137
-#: src/containers/task-management/task_detail.tsx:377
+#: src/containers/task-management/task-list-view.tsx:320
+#: src/containers/task-management/task-list-view.tsx:336
+#: src/containers/task-management/task_detail.tsx:140
+#: src/containers/task-management/task_detail.tsx:374
 msgid "Stop task"
 msgstr "停止任务"
 
-#: src/containers/task-management/task-list-view.tsx:354
+#: src/containers/task-management/task-list-view.tsx:349
 msgid "Stop task?"
 msgstr "停止任务？"
 
@@ -3161,29 +3192,29 @@ msgstr "标签"
 msgid "Tags could not be displayed."
 msgstr "无法显示标签。"
 
-#: src/containers/task-management/task-list-view.tsx:392
+#: src/containers/task-management/task-list-view.tsx:387
 msgid "Task \"{name}\" could not be stopped."
 msgstr "任务 \"{name}\" 无法被停止。"
 
-#: src/containers/task-management/task-list-view.tsx:376
+#: src/containers/task-management/task-list-view.tsx:371
 msgid "Task \"{name}\" stopped successfully."
 msgstr "任务 \"{name}\" 成功停止。"
 
-#: src/containers/task-management/task_detail.tsx:416
+#: src/containers/task-management/task_detail.tsx:413
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "任务 \"{taskName}\" 无法被停止。"
 
-#: src/containers/task-management/task_detail.tsx:400
+#: src/containers/task-management/task_detail.tsx:397
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "任务 \"{taskName}\" 成功停止。"
 
 #: src/constants.tsx:105
-#: src/containers/task-management/task-list-view.tsx:122
+#: src/containers/task-management/task-list-view.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:384
 msgid "Task Management"
 msgstr "任务管理"
 
-#: src/containers/task-management/task_detail.tsx:157
+#: src/containers/task-management/task_detail.tsx:160
 msgid "Task detail"
 msgstr "任务详情"
 
@@ -3191,26 +3222,26 @@ msgstr "任务详情"
 msgid "Task failed without error message."
 msgstr "任务失败，没有错误消息。"
 
-#: src/containers/task-management/task_detail.tsx:198
+#: src/containers/task-management/task_detail.tsx:201
 msgid "Task group"
 msgstr "任务组"
 
-#: src/containers/task-management/task_detail.tsx:193
+#: src/containers/task-management/task_detail.tsx:196
 msgid "Task groups"
 msgstr "任务组"
 
-#: src/containers/task-management/task-list-view.tsx:261
+#: src/containers/task-management/task-list-view.tsx:264
 msgid "Task list"
 msgstr "任务列表"
 
-#: src/containers/task-management/task_detail.tsx:108
+#: src/containers/task-management/task_detail.tsx:111
 msgid "Task management"
 msgstr "任务管理"
 
-#: src/containers/task-management/task-list-view.tsx:153
-#: src/containers/task-management/task-list-view.tsx:202
-#: src/containers/task-management/task-list-view.tsx:232
-#: src/containers/task-management/task_detail.tsx:162
+#: src/containers/task-management/task-list-view.tsx:156
+#: src/containers/task-management/task-list-view.tsx:205
+#: src/containers/task-management/task-list-view.tsx:235
+#: src/containers/task-management/task_detail.tsx:165
 msgid "Task name"
 msgstr "任务名称"
 
@@ -3218,11 +3249,11 @@ msgstr "任务名称"
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "更改标签 \"{0}\" 的任务无法完成。"
 
-#: src/containers/task-management/task-list-view.tsx:424
+#: src/containers/task-management/task-list-view.tsx:419
 msgid "Tasks list could not be displayed."
 msgstr "无法显示任务列表。"
 
-#: src/containers/task-management/task-list-view.tsx:128
+#: src/containers/task-management/task-list-view.tsx:131
 msgid "Tasks will appear once created."
 msgstr "任务在创建后将显示。"
 
@@ -3339,12 +3370,12 @@ msgstr "此远程没有关联任何仓库。"
 msgid "There have not been any imports on this namespace."
 msgstr "此命名空间中没有任何导入。"
 
-#: src/containers/task-management/task_detail.tsx:341
-#: src/containers/task-management/task_detail.tsx:342
+#: src/containers/task-management/task_detail.tsx:338
+#: src/containers/task-management/task_detail.tsx:339
 msgid "There is no progress message."
 msgstr "没有进度消息。"
 
-#: src/containers/task-management/task_detail.tsx:291
+#: src/containers/task-management/task_detail.tsx:288
 msgid "There's no resource record"
 msgstr "没有资源记录"
 
@@ -3352,7 +3383,7 @@ msgstr "没有资源记录"
 msgid "These users will lose access to the group content:"
 msgstr "这些用户将丢失对组群内容的访问权限："
 
-#: src/containers/namespace-list/namespace-list.tsx:289
+#: src/containers/namespace-list/namespace-list.tsx:290
 msgid "This account is not set up to manage any namespaces"
 msgstr "此帐户没有设置为管理任何命名空间"
 
@@ -3432,7 +3463,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
-#: src/containers/task-management/task_detail.tsx:356
+#: src/containers/task-management/task_detail.tsx:353
 msgid "Traceback"
 msgstr "追溯"
 
@@ -3441,7 +3472,7 @@ msgid "Training <0/>"
 msgstr "培训 <0/>"
 
 #: src/components/collection-detail/collection-content-list.tsx:108
-#: src/containers/task-management/task_detail.tsx:265
+#: src/containers/task-management/task_detail.tsx:262
 msgid "Type"
 msgstr "类型"
 
@@ -3757,7 +3788,7 @@ msgstr "查看和取消任何任务。"
 
 #: src/components/my-imports/import-list.tsx:105
 #: src/constants.tsx:375
-#: src/containers/task-management/task-list-view.tsx:174
+#: src/containers/task-management/task-list-view.tsx:177
 msgid "Waiting"
 msgstr "等待"
 
@@ -3787,8 +3818,8 @@ msgstr "YAML 要求"
 msgid "Yes"
 msgstr "是"
 
-#: src/containers/task-management/task-list-view.tsx:356
-#: src/containers/task-management/task_detail.tsx:378
+#: src/containers/task-management/task-list-view.tsx:351
+#: src/containers/task-management/task_detail.tsx:375
 msgid "Yes, stop"
 msgstr "是，停止"
 
@@ -3840,7 +3871,7 @@ msgstr "您目前没有远程注册表。"
 msgid "You do not have access to Automation Hub"
 msgstr "您无法访问 Automation Hub"
 
-#: src/containers/task-management/task-list-view.tsx:95
+#: src/containers/task-management/task-list-view.tsx:98
 msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
 msgstr "您没有查看所有任务的权限。只有您所创建的任务是可见的。"
 
@@ -3892,15 +3923,15 @@ msgstr "隐藏值"
 
 #: src/components/collection-list/collection-filter.tsx:94
 #: src/containers/namespace-list/namespace-list.tsx:212
+#: src/containers/namespace-list/namespace-list.tsx:222
 msgid "keywords"
 msgstr "关键字"
 
-#: src/components/patternfly-wrappers/pagination.tsx:64
-#: src/components/patternfly-wrappers/pagination.tsx:68
+#: src/components/patternfly-wrappers/pagination.tsx:79
 msgid "of"
 msgstr "的"
 
-#: src/components/patternfly-wrappers/pagination.tsx:65
+#: src/components/patternfly-wrappers/pagination.tsx:80
 msgid "per page"
 msgstr "每页"
 
@@ -3992,15 +4023,19 @@ msgstr "{count, plural, one {Plugin} other {Plugins}}"
 msgid "{count, plural, one {Role} other {Roles}}"
 msgstr "{count, plural, one {Role} other {Roles}}"
 
+#: src/utilities/chip-group-props.ts:6
+msgid "{count} more"
+msgstr ""
+
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/containers/task-management/task-list-view.tsx:357
+#: src/containers/task-management/task-list-view.tsx:352
 msgid "{name} will be cancelled."
 msgstr "{name} 将被取消。"
 
-#: src/containers/task-management/task_detail.tsx:380
+#: src/containers/task-management/task_detail.tsx:377
 msgid "{name} will stop running."
 msgstr "{name} 将停止运行。"
 
