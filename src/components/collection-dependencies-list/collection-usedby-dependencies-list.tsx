@@ -68,7 +68,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
               <ToolbarItem>
                 <SearchInput
                   value={params.name__icontains || ''}
-                  onChange={(val) =>
+                  onChange={(_e, val) =>
                     updateParams(
                       ParamHelper.setParam(params, 'name__icontains', val),
                     )

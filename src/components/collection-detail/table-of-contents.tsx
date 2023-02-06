@@ -90,9 +90,9 @@ export class TableOfContents extends React.Component<IProps, IState> {
               <SearchInput
                 ref={this.props.searchBarRef}
                 value={params.keywords}
-                onChange={(val) => {
-                  updateParams(ParamHelper.setParam(params, 'keywords', val));
-                }}
+                onChange={(_e, val) =>
+                  updateParams(ParamHelper.setParam(params, 'keywords', val))
+                }
                 onClear={() =>
                   updateParams(ParamHelper.setParam(params, 'keywords', ''))
                 }
