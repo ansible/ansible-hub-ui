@@ -28,45 +28,43 @@ describe('Group Roles Tests', () => {
     },
   };
 
+  const cleanup = () => {
+    cy.galaxykit('-i group delete', 'empty_group');
+    cy.galaxykit('-i group delete', groupName);
+    cy.galaxykit('-i role delete', testContainerRole.name);
+    cy.galaxykit('-i role delete', testRole.name);
+  };
+
+  const createRole = ({ name, description, permissions }) =>
+    cy.createRole(name, description, Object.keys(permissions), true);
+
   beforeEach(() => {
     cy.login();
   });
 
   before(() => {
-    cy.login();
+    cleanup();
+
     cy.galaxykit('-i group create', groupName);
-    cy.createRole(
-      testContainerRole.name,
-      testContainerRole.description,
-      Object.keys(testContainerRole.permissions),
-    );
+    createRole(testContainerRole);
+    createRole(testRole);
   });
 
-  after(() => {
-    cy.galaxykit('group delete', groupName);
-    cy.galaxykit('group delete', 'empty_group');
-    cy.galaxykit('role delete', testRole.name);
-  });
+  after(() => cleanup());
 
   it('should add a new role to group', () => {
-    cy.createRole(
-      testRole.name,
-      testRole.description,
-      Object.keys(testRole.permissions),
-    );
-
     cy.intercept('GET', `${apiPrefix}_ui/v1/groups/*`).as('groups');
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.wait('@groups');
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('[aria-label="Items per page"]').click();
+    cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
     cy.contains('100 per page').click();
 
-    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"]`)
-      .find('input')
-      .click();
+    cy.get(
+      `[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"] input`,
+    ).click({ force: true });
 
     cy.get('.pf-c-wizard__footer > button').contains('Next').click();
 
@@ -81,7 +79,7 @@ describe('Group Roles Tests', () => {
       `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] .pf-c-table__toggle`,
     ).click();
 
-    cy.contains('2 more').click();
+    cy.contains('1 more').click();
     Object.values(testRole.permissions).forEach((perm) => {
       cy.contains(perm);
     });

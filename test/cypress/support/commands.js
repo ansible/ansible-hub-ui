@@ -195,19 +195,6 @@ Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
 });
 
 Cypress.Commands.add(
-  'createRole',
-  {},
-  (name, description, permissions = [], ignoreError = false) => {
-    cy.galaxykit(
-      `${ignoreError ? '-i' : ''} role create`,
-      name,
-      description,
-      `--permissions=${permissions.join(',')}`,
-    );
-  },
-);
-
-Cypress.Commands.add(
   'removeUserFromGroupManually',
   {},
   (groupName, userName) => {
