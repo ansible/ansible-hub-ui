@@ -68,7 +68,7 @@ export const CollectionContentList = ({
             <ToolbarItem>
               <SearchInput
                 value={params.keywords || ''}
-                onChange={(val) =>
+                onChange={(_e, val) =>
                   updateParams(ParamHelper.setParam(params, 'keywords', val))
                 }
                 onClear={() =>

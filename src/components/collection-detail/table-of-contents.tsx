@@ -65,9 +65,9 @@ export const TableOfContents = (props: IProps) => {
             <SearchInput
               ref={props.searchBarRef}
               value={params.keywords}
-              onChange={(val) => {
-                updateParams(ParamHelper.setParam(params, 'keywords', val));
-              }}
+              onChange={(_e, val) =>
+                updateParams(ParamHelper.setParam(params, 'keywords', val))
+              }
               onClear={() =>
                 updateParams(ParamHelper.setParam(params, 'keywords', ''))
               }
