@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export interface IProps {
@@ -11,31 +11,23 @@ export interface IProps {
   }[];
 }
 
-// We're not using the Tab react component because they don't support links.
-export class LinkTabs extends React.Component<IProps> {
-  render() {
-    return (
-      <div className='pf-c-tabs'>
-        <ul className='pf-c-tabs__list'>
-          {this.props.tabs.map((tab) => this.renderTab(tab))}
-        </ul>
-      </div>
-    );
-  }
+const renderTab = ({ link, title, active = false }) => (
+  <li
+    className={cx({
+      'pf-c-tabs__item': true,
+      'pf-m-current': active,
+    })}
+    key={title}
+  >
+    <Link to={link} className='pf-c-tabs__link'>
+      <span className='pf-c-tabs__item-text'>{title}</span>
+    </Link>
+  </li>
+);
 
-  private renderTab({ link, title, active = false }) {
-    return (
-      <li
-        className={cx({
-          'pf-c-tabs__item': true,
-          'pf-m-current': active,
-        })}
-        key={title}
-      >
-        <Link to={link} className='pf-c-tabs__link'>
-          <span className='pf-c-tabs__item-text'>{title}</span>
-        </Link>
-      </li>
-    );
-  }
-}
+// We're not using the Tab react component because they don't support links.
+export const LinkTabs = ({ tabs }: IProps) => (
+  <div className='pf-c-tabs'>
+    <ul className='pf-c-tabs__list'>{tabs.map((tab) => renderTab(tab))}</ul>
+  </div>
+);

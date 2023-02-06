@@ -56,7 +56,7 @@ interface IState {
   loading: boolean;
   images: ContainerManifestType[];
   numberOfImages: number;
-  params: { page?: number; page_size?: number };
+  params: { page?: number; page_size?: number; sort?: string };
   redirect: string;
   inputText: string;
 

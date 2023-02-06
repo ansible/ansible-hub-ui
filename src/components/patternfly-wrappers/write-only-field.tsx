@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 
 interface IProps {
   /** Specify if the value is set on the backend already */
@@ -13,28 +13,21 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export class WriteOnlyField extends React.Component<IProps> {
-  render() {
-    const { onClear, isValueSet, children } = this.props;
-
-    if (!isValueSet) {
-      return children;
-    }
-
-    return (
-      <InputGroup>
-        <TextInput
-          aria-label={t`hidden value`}
-          placeholder='••••••••••••••••••••••'
-          type='password'
-          isDisabled={isValueSet}
-        />
-        {isValueSet && (
-          <Button onClick={() => onClear()} variant='control'>
-            {t`Clear`}
-          </Button>
-        )}
-      </InputGroup>
-    );
-  }
-}
+export const WriteOnlyField = ({ onClear, isValueSet, children }: IProps) =>
+  !isValueSet ? (
+    <>{children}</>
+  ) : (
+    <InputGroup>
+      <TextInput
+        aria-label={t`hidden value`}
+        placeholder='••••••••••••••••••••••'
+        type='password'
+        isDisabled={isValueSet}
+      />
+      {isValueSet && (
+        <Button onClick={() => onClear()} variant='control'>
+          {t`Clear`}
+        </Button>
+      )}
+    </InputGroup>
+  );

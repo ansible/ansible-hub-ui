@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
+import React from 'react';
 import { NamespaceType } from 'src/api';
 import { MarkdownEditor } from '..';
 import './namespace-form.scss';
@@ -23,24 +23,12 @@ interface IProps {
   updateNamespace: (data) => void;
 }
 
-export class ResourcesForm extends React.Component<IProps> {
-  render() {
-    const { namespace } = this.props;
-
-    return (
-      <MarkdownEditor
-        text={namespace.resources}
-        placeholder={placeholder}
-        helperText={t`You can can customize the Resources tab on your profile by entering custom markdown here.`}
-        updateText={(value) => this.updateResources(value)}
-        editing={true}
-      />
-    );
-  }
-
-  private updateResources(data) {
-    const update = { ...this.props.namespace };
-    update.resources = data;
-    this.props.updateNamespace(update);
-  }
-}
+export const ResourcesForm = ({ namespace, updateNamespace }: IProps) => (
+  <MarkdownEditor
+    text={namespace.resources}
+    placeholder={placeholder}
+    helperText={t`You can can customize the Resources tab on your profile by entering custom markdown here.`}
+    updateText={(resources) => updateNamespace({ ...namespace, resources })}
+    editing={true}
+  />
+);

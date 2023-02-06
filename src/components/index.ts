@@ -2,6 +2,7 @@ export { APISearchTypeAhead } from './typeahead/typeahead';
 export {
   AlertList,
   AlertType,
+  closeAlert,
   closeAlertMixin,
 } from './patternfly-wrappers/alert-list';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';

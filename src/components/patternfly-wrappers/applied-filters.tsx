@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Chip, ChipGroup } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { ParamHelper, chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -23,65 +23,53 @@ interface IProps {
   className?: string;
 }
 
-export class AppliedFilters extends React.Component<IProps> {
-  static defaultProps = {
-    ignoredParams: [],
-    niceNames: {},
-  };
-
-  render() {
-    const { params, ignoredParams, className, style } = this.props;
-
-    if (Object.keys(ParamHelper.getReduced(params, ignoredParams)).length > 0) {
-      return (
-        <div className={className} style={style}>
-          {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(
-            (key) => this.renderGroup(key),
-          )}
-          <Button onClick={this.clearAllFilters} variant='link'>
-            {t`Clear all filters`}
-          </Button>
-        </div>
-      );
-    } else {
-      return null;
-    }
+export const AppliedFilters = ({
+  className,
+  ignoredParams = [],
+  niceNames = {},
+  niceValues,
+  params,
+  style,
+  updateParams,
+}: IProps) => {
+  const filters = Object.keys(ParamHelper.getReduced(params, ignoredParams));
+  if (!filters.length) {
+    return null;
   }
 
-  private renderGroup(key: string) {
-    const { niceNames, niceValues, params, updateParams } = this.props;
+  const renderGroup = (key) => {
+    const chips = Array.isArray(params[key]) ? params[key] : [params[key]];
 
-    let chips;
-
-    if (Array.isArray(params[key])) {
-      chips = params[key];
-    } else {
-      chips = [params[key]];
-    }
+    const unsetFilter = (v) =>
+      updateParams({
+        ...ParamHelper.deleteParam(params, key, v),
+        page: 1,
+      });
 
     return (
       <div style={{ display: 'inline', marginRight: '8px' }} key={key}>
         <ChipGroup categoryName={niceNames[key] || key} {...chipGroupProps()}>
           {chips.map((v, i) => (
-            <Chip
-              key={i}
-              onClick={() =>
-                updateParams({
-                  ...ParamHelper.deleteParam(params, key, v),
-                  page: 1,
-                })
-              }
-            >
+            <Chip key={i} onClick={() => unsetFilter(v)}>
               {niceValues?.[key]?.[v] || v}
             </Chip>
           ))}
         </ChipGroup>
       </div>
     );
-  }
-
-  private clearAllFilters = () => {
-    const { params, ignoredParams, updateParams } = this.props;
-    ParamHelper.clearAllFilters({ params, ignoredParams, updateParams });
   };
-}
+
+  return (
+    <div className={className} style={style}>
+      {filters.map((key) => renderGroup(key))}
+      <Button
+        onClick={() =>
+          ParamHelper.clearAllFilters({ params, ignoredParams, updateParams })
+        }
+        variant='link'
+      >
+        {t`Clear all filters`}
+      </Button>
+    </div>
+  );
+};
