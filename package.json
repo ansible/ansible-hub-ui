@@ -10,7 +10,7 @@
         "@patternfly/patternfly": "^4.222.4",
         "@patternfly/react-core": "^4.267.6",
         "@redhat-cloud-services/frontend-components-utilities": "^3.3.11",
-        "@types/node": "^16.18.11",
+        "@types/node": "^16.18.12",
         "@types/react": "^16.14.25",
         "@types/react-dom": "^16.9.15",
         "@types/react-router-dom": "^5.3.3",
