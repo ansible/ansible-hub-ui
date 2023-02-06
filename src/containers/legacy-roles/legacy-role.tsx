@@ -32,7 +32,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { RouteProps, chipGroupProps, withRouter } from 'src/utilities';
 import './legacy-roles.scss';
 
 interface RoleMeta {
@@ -297,7 +297,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
           </div>
           <div className='hub-entry'>{this.state.role.description}</div>
           <div className='hub-entry'>
-            <LabelGroup>
+            <LabelGroup {...chipGroupProps()}>
               {this.state.role.summary_fields.tags.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}

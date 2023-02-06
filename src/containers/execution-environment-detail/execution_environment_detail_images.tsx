@@ -34,15 +34,16 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
 import {
   ParamHelper,
+  chipGroupProps,
+  errorMessage,
   filterIsSet,
   getContainersURL,
   getHumanSize,
   waitForTask,
+  withRouter,
 } from 'src/utilities';
-import { withRouter } from 'src/utilities';
 import {
   IDetailSharedProps,
   withContainerParamFix,
@@ -435,7 +436,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ) : null}
           </td>
           <td>
-            <LabelGroup className={'hub-c-label-group-tags-column'}>
+            <LabelGroup
+              {...chipGroupProps()}
+              className={'hub-c-label-group-tags-column'}
+            >
               {image.tags
                 .sort()
                 .map((tag) =>

@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
 import { DateComponent, Logo, Tag } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import { chipGroupProps } from 'src/utilities';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -87,7 +88,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
         </div>
         <div className='hub-entry'>{role.description}</div>
         <div className='hub-entry'>
-          <LabelGroup>
+          <LabelGroup {...chipGroupProps()}>
             {role.summary_fields.tags.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
             ))}
