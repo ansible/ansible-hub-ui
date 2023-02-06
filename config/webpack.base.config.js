@@ -120,15 +120,20 @@ module.exports = (inputConfigs) => {
         },
         registry: [
           ({ app }) => {
-            app.get('/api/featureflags/v0', (_req, res) => {
-              res.send({ toggles: [] });
-            });
-            app.post('/api/featureflags/v0/client/metrics', (_req, res) => {
-              res.send({});
-            });
-            app.get('/api/quickstarts/v1/progress', (_req, res) => {
-              res.send({});
-            });
+            app.get('/api/featureflags/v0', (_req, res) =>
+              res.send({ toggles: [] }),
+            );
+            app.get('/api/quickstarts/v1/progress', (_req, res) =>
+              res.send({ data: [] }),
+            );
+            app.get('/api/rbac/v1/cross-account-requests', (_req, res) =>
+              res.send({ data: [] }),
+            );
+            app.get('/api/rbac/v1/access', (_req, res) => res.send(null));
+
+            app.post('/api/featureflags/v0/client/metrics', (_req, res) =>
+              res.send(null),
+            );
           },
         ],
       }),
