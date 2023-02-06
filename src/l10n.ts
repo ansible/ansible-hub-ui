@@ -86,12 +86,7 @@ activate(language, pseudolocalization);
 //--------------------------------------------------------------------------------------------------------
 // i18next
 
-loadTranslations(language, pseudolocalization);
-
-let translationInfo = { onLoad: null };
-export { translationInfo };
-
-async function loadTranslations(language, pseudolocalization) {
+export async function loadTranslations() {
   let messages = await import(`src/../locale/${language}.json`);
 
   if (pseudolocalization) {
@@ -118,8 +113,4 @@ async function loadTranslations(language, pseudolocalization) {
     keySeparator: false,
     nsSeparator: false,
   });
-
-  if (translationInfo.onLoad) {
-    translationInfo.onLoad();
-  }
 }

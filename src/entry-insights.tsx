@@ -1,6 +1,8 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import React from 'react';
+import { I18nextProvider } from 'src/components';
+import 'src/l10n';
 import 'src/l10n';
 import App from './loaders/insights/loader';
 
@@ -8,9 +10,11 @@ import App from './loaders/insights/loader';
 
 const AnsibleHub = () => (
   <React.StrictMode>
-    <I18nProvider i18n={i18n}>
-      <App />
-    </I18nProvider>
+    <I18nextProvider>
+      <I18nProvider i18n={i18n}>
+        <App />
+      </I18nProvider>
+    </I18nextProvider>
   </React.StrictMode>
 );
 
