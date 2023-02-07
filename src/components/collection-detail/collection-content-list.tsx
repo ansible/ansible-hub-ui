@@ -1,19 +1,17 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './collection-content-list.scss';
-
-import { Link } from 'react-router-dom';
 import {
   TextInput,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-
+import cx from 'classnames';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { ContentSummaryType } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { AppContext } from 'src/loaders/app-context';
+import './collection-content-list.scss';
 
 interface IProps {
   contents: ContentSummaryType[];

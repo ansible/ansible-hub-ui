@@ -1,20 +1,16 @@
+import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
-  PartnerHeader,
-  NamespaceForm,
-  ResourcesForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
   Main,
+  NamespaceForm,
+  PartnerHeader,
+  ResourcesForm,
+  closeAlertMixin,
 } from 'src/components';
-import { MyNamespaceAPI, NamespaceType, NamespaceLinkType } from 'src/api';
-
-import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
-
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
 

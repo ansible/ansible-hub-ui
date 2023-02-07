@@ -1,21 +1,17 @@
-import * as React from 'react';
-
 import {
-  Toolbar as ToolbarPF,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
-  TextInput,
-  InputGroup,
   Button,
   ButtonVariant,
+  InputGroup,
+  TextInput,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Toolbar as ToolbarPF,
 } from '@patternfly/react-core';
-
 import { SearchIcon } from '@patternfly/react-icons';
-
-import { ParamHelper } from 'src/utilities/param-helper';
+import * as React from 'react';
 import { Sort } from 'src/components';
-
+import { ParamHelper } from 'src/utilities/param-helper';
 import { SortFieldType } from './sort';
 
 interface IProps {

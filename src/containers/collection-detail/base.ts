@@ -1,4 +1,4 @@
-import { CollectionDetailType, CollectionAPI } from 'src/api';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import { Paths } from 'src/paths';
 
 export interface IBaseCollectionState {

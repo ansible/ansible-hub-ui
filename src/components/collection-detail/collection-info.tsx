@@ -1,27 +1,23 @@
-import * as React from 'react';
-import './collection-info.scss';
-
-import * as moment from 'moment';
-import { Link } from 'react-router-dom';
-
 import {
+  Button,
   ClipboardCopy,
-  Split,
-  SplitItem,
-  Grid,
-  GridItem,
   FormSelect,
   FormSelectOption,
-  Button,
+  Grid,
+  GridItem,
+  Split,
+  SplitItem,
 } from '@patternfly/react-core';
-
 import { DownloadIcon } from '@patternfly/react-icons';
-
-import { CollectionDetailType, CollectionAPI } from 'src/api';
+import * as moment from 'moment';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import { Tag } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { AppContext } from 'src/loaders/app-context';
+import './collection-info.scss';
 
 interface IProps extends CollectionDetailType {
   params: {

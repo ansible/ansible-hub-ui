@@ -1,9 +1,7 @@
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
-import { NamespaceDetail } from './namespace-detail';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Paths } from 'src/paths';
+import { NamespaceDetail } from './namespace-detail';
 
 interface IProps extends RouteComponentProps {
   selectedRepo: string;

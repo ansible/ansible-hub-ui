@@ -1,38 +1,35 @@
-import * as React from 'react';
-import './search.scss';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
+  Button,
   DataList,
   EmptyState,
+  EmptyStateBody,
   EmptyStateIcon,
+  EmptyStateVariant,
+  Switch,
   Title,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  EmptyStateBody,
-  EmptyStateVariant,
-  Button,
-  ToolbarContent,
-  Switch,
 } from '@patternfly/react-core';
-
 import { SearchIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionAPI, CollectionListType } from 'src/api';
 import {
+  AppliedFilters,
   BaseHeader,
-  CollectionCard,
   CardListSwitcher,
+  CollectionCard,
   CollectionListItem,
   CompoundFilter,
-  Pagination,
   LoadingPageSpinner,
-  AppliedFilters,
+  Pagination,
 } from 'src/components';
-import { CollectionAPI, CollectionListType } from 'src/api';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];

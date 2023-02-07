@@ -1,10 +1,8 @@
+import { Button, ClipboardCopy } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ClipboardCopy, Button } from '@patternfly/react-core';
-
-import { BaseHeader, Main } from 'src/components';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ActiveUserAPI } from 'src/api';
+import { BaseHeader, Main } from 'src/components';
 
 interface IState {
   token: string;

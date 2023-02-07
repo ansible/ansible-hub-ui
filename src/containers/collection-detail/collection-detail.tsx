@@ -1,17 +1,15 @@
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   CollectionHeader,
   CollectionInfo,
   LoadingPageWithHeader,
   Main,
 } from 'src/components';
-import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from 'src/utilities/param-helper';
-import { formatPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
 class CollectionDetail extends React.Component<

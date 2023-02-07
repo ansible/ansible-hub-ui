@@ -1,22 +1,20 @@
-import * as React from 'react';
-
-import { Link } from 'react-router-dom';
-
 import {
+  ClipboardCopy,
   DropdownItem,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
   Title,
-  ClipboardCopy,
 } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { Constants } from 'src/constants';
-import { getRepoUrl } from 'src/utilities';
 import { Paths, formatPath } from 'src/paths';
+import { getRepoUrl } from 'src/utilities';
+import { SortTable, StatefulDropdown } from '..';
 
 interface IProps {
   repositories: {}[];

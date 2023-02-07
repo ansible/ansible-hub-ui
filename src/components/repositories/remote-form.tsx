@@ -1,24 +1,20 @@
-import * as React from 'react';
-import * as FileSaver from 'file-saver';
-
 import {
-  Form,
-  FormGroup,
-  TextInput,
+  Button,
+  Checkbox,
+  ExpandableSection,
   FileUpload,
   Flex,
   FlexItem,
-  Button,
+  Form,
+  FormGroup,
   Modal,
-  Checkbox,
-  ExpandableSection,
+  TextInput,
 } from '@patternfly/react-core';
-
-import { WriteOnlyField, HelperText } from 'src/components';
-
 import { DownloadIcon } from '@patternfly/react-icons';
-
+import * as FileSaver from 'file-saver';
+import * as React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
+import { HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
 import { isFieldSet } from 'src/utilities';
 

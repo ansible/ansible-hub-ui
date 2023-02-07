@@ -1,32 +1,30 @@
-import * as React from 'react';
-import './namespace-list.scss';
-
-import { RouteComponentProps } from 'react-router-dom';
 import {
   EmptyState,
-  EmptyStateIcon,
-  Title,
   EmptyStateBody,
+  EmptyStateIcon,
   EmptyStateVariant,
+  Title,
 } from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
-
-import { ParamHelper } from 'src/utilities/param-helper';
-import {
-  BaseHeader,
-  NamespaceCard,
-  Toolbar,
-  Pagination,
-  NamespaceModal,
-  LoadingPageWithHeader,
-  LoadingPageSpinner,
-} from 'src/components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
+import { SearchIcon } from '@patternfly/react-icons';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
+import {
+  BaseHeader,
+  LoadingPageSpinner,
+  LoadingPageWithHeader,
+  NamespaceCard,
+  NamespaceModal,
+  Pagination,
+  Toolbar,
+} from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './namespace-list.scss';
 
 interface IState {
   namespaces: NamespaceListType[];

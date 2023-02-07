@@ -1,26 +1,3 @@
-import * as React from 'react';
-
-import {
-  withRouter,
-  RouteComponentProps,
-  Redirect,
-  Link,
-} from 'react-router-dom';
-import { GroupAPI } from 'src/api';
-import { mapErrorMessages, ParamHelper } from 'src/utilities';
-import {
-  AlertList,
-  AlertType,
-  AppliedFilters,
-  BaseHeader,
-  closeAlertMixin,
-  CompoundFilter,
-  GroupModal,
-  LoadingPageSpinner,
-  Main,
-  Pagination,
-  SortTable,
-} from 'src/components';
 import {
   Button,
   EmptyState,
@@ -35,11 +12,33 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import {
-  WarningTriangleIcon,
   ExclamationTriangleIcon,
+  WarningTriangleIcon,
 } from '@patternfly/react-icons';
-import { formatPath, Paths } from 'src/paths';
+import * as React from 'react';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { GroupAPI } from 'src/api';
+import {
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
+  CompoundFilter,
+  GroupModal,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  SortTable,
+  closeAlertMixin,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   params: {

@@ -1,14 +1,11 @@
-import * as React from 'react';
-
-import { capitalize } from 'lodash';
-import { Link } from 'react-router-dom';
-
 import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
-
+import { capitalize } from 'lodash';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { DocsBlobType } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
-import { AppContext } from 'src/loaders/app-context';
 
 class DocsEntry {
   display: string;

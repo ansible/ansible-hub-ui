@@ -1,15 +1,13 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './header.scss';
-
-import { Link } from 'react-router-dom';
+import { Alert, FormSelect, FormSelectOption } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
-
-import { BaseHeader, Breadcrumbs, APIButton } from 'src/components';
+import cx from 'classnames';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { CollectionDetailType } from 'src/api';
+import { APIButton, BaseHeader, Breadcrumbs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
+import './header.scss';
 
 interface IProps {
   collection: CollectionDetailType;

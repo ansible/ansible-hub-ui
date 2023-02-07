@@ -1,37 +1,35 @@
 import '../app.scss';
-import * as React from 'react';
-import {
-  withRouter,
-  Link,
-  RouteComponentProps,
-  matchPath,
-} from 'react-router-dom';
-
 import '@patternfly/patternfly/patternfly.scss';
 import {
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageHeaderTools,
-  Nav,
-  NavList,
-  NavItem,
   DropdownItem,
   DropdownSeparator,
+  Nav,
   NavGroup,
+  NavItem,
+  NavList,
+  Page,
+  PageHeader,
+  PageHeaderTools,
+  PageSidebar,
   Select,
   SelectOption,
 } from '@patternfly/react-core';
-
-import { Routes } from './routes';
-import { Paths, formatPath } from 'src/paths';
+import { QuestionCircleIcon } from '@patternfly/react-icons';
+import * as React from 'react';
+import {
+  Link,
+  RouteComponentProps,
+  matchPath,
+  withRouter,
+} from 'react-router-dom';
+import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI, UserType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
-import { AboutModalWindow } from 'src/containers';
-import { AppContext } from '../app-context';
 import { Constants } from 'src/constants';
-import { QuestionCircleIcon } from '@patternfly/react-icons';
-import Logo from 'src/../static/images/logo_large.svg';
+import { AboutModalWindow } from 'src/containers';
+import { Paths, formatPath } from 'src/paths';
+import { AppContext } from '../app-context';
+import { Routes } from './routes';
 
 interface IState {
   user: UserType;

@@ -1,37 +1,31 @@
-import * as React from 'react';
-
-import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 import {
-  Button,
-  DropdownItem,
   Alert,
   AlertActionCloseButton,
+  Button,
   ClipboardCopy,
+  DropdownItem,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
-
+import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 import {
-  CollectionListType,
   CollectionAPI,
+  CollectionListType,
   NamespaceAPI,
   NamespaceType,
 } from 'src/api';
-
 import {
+  APIButton,
   CollectionList,
-  PartnerHeader,
-  StatefulDropdown,
   LoadingPageWithHeader,
   Main,
-  APIButton,
+  PartnerHeader,
+  StatefulDropdown,
 } from 'src/components';
-
-import { ImportModal } from './import-modal/import-modal';
-
-import { ParamHelper, getRepoUrl } from 'src/utilities';
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, getRepoUrl } from 'src/utilities';
+import { ImportModal } from './import-modal/import-modal';
 
 interface IState {
   collections: CollectionListType[];

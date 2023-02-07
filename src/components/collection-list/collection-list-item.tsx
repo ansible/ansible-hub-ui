@@ -1,23 +1,20 @@
-import * as React from 'react';
-import './list-item.scss';
-
 import {
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
-  TextContent,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   Text,
+  TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-
-import { Link } from 'react-router-dom';
 import * as moment from 'moment';
-
-import { Paths, formatPath } from 'src/paths';
-import { NumericLabel, Tag, Logo, DeprecatedTag } from 'src/components';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { CollectionListType } from 'src/api';
+import { DeprecatedTag, Logo, NumericLabel, Tag } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
+import './list-item.scss';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;

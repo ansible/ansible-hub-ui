@@ -1,27 +1,3 @@
-import * as React from 'react';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-
-import {
-  AlertList,
-  AlertType,
-  APISearchTypeAhead,
-  AppliedFilters,
-  BaseHeader,
-  Breadcrumbs,
-  closeAlertMixin,
-  CompoundFilter,
-  LoadingPageWithHeader,
-  Main,
-  Pagination,
-  PermissionChipSelector,
-  SortTable,
-  StatefulDropdown,
-  Tabs,
-} from 'src/components';
-import { GroupAPI, UserAPI, UserType } from 'src/api';
-import { ParamHelper, twoWayMapper } from 'src/utilities';
-import { formatPath, Paths } from 'src/paths';
 import {
   Button,
   DropdownItem,
@@ -38,10 +14,32 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Constants } from 'src/constants';
-import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
+import * as moment from 'moment';
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { GroupAPI, UserAPI, UserType } from 'src/api';
+import {
+  APISearchTypeAhead,
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
+  Breadcrumbs,
+  CompoundFilter,
+  LoadingPageWithHeader,
+  Main,
+  Pagination,
+  PermissionChipSelector,
+  SortTable,
+  StatefulDropdown,
+  Tabs,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, twoWayMapper } from 'src/utilities';
 
 interface IState {
   group: any;

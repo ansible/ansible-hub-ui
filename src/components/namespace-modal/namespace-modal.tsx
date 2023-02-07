@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { Modal, Tooltip } from '@patternfly/react-core';
 import { Form, FormGroup } from '@patternfly/react-core';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
-
+import * as React from 'react';
+import { GroupObjectPermissionType, NamespaceAPI } from 'src/api';
 import { HelperText, ObjectPermissionField } from 'src/components';
 
 interface IProps {

@@ -1,6 +1,3 @@
-import * as React from 'react';
-import './cards.scss';
-
 import {
   Card,
   CardBody,
@@ -9,10 +6,11 @@ import {
   CardHeaderMain,
   CardTitle,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Logo } from 'src/components';
+import './cards.scss';
+
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
 interface IProps {

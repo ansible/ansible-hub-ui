@@ -1,10 +1,8 @@
-import * as React from 'react';
-import './header.scss';
-
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-
-import { BaseHeader, Tabs, Breadcrumbs } from 'src/components';
+import * as React from 'react';
 import { NamespaceType } from 'src/api';
+import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
+import './header.scss';
 
 interface IProps {
   namespace: NamespaceType;

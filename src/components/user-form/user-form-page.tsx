@@ -1,7 +1,6 @@
 import * as React from 'react';
-
-import { BaseHeader, Main, Breadcrumbs, UserForm } from 'src/components';
 import { UserType } from 'src/api';
+import { BaseHeader, Breadcrumbs, Main, UserForm } from 'src/components';
 
 interface IProps {
   title: string;

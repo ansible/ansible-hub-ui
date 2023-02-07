@@ -1,5 +1,5 @@
-import { BaseAPI } from './base';
 import { Constants } from 'src/constants';
+import { BaseAPI } from './base';
 
 class API extends BaseAPI {
   apiPath = this.getUIPath('me/');

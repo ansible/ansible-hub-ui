@@ -1,6 +1,6 @@
-import { BaseAPI } from './base';
-import { RemoteType } from '.';
 import { clearSetFieldsFromRequest } from 'src/utilities';
+import { RemoteType } from '.';
+import { BaseAPI } from './base';
 
 class API extends BaseAPI {
   apiPath = this.getUIPath('remotes/');

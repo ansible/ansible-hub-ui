@@ -1,7 +1,5 @@
+import { Tabs as PFTabs, Tab } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { Tab, Tabs as PFTabs } from '@patternfly/react-core';
-
 import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
