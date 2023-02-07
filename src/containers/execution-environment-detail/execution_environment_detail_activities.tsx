@@ -7,10 +7,10 @@ import {
   ShaLabel,
   TagLabel,
   DateComponent,
-} from '../../components';
+} from 'src/components';
 import { FlexItem, Flex, Button } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
-import { ActivitiesAPI } from '../../api';
+import { formatPath, Paths } from 'src/paths';
+import { ActivitiesAPI } from 'src/api';
 import './execution-environment-detail.scss';
 
 import { withContainerRepo, IDetailSharedProps } from './base';

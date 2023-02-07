@@ -46,7 +46,7 @@ import {
   DeleteModal,
   LoadingPageSpinner,
   ListItemActions,
-} from '../../components';
+} from 'src/components';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
 import './execution-environment-detail_images.scss';
