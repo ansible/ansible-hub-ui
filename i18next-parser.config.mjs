@@ -2,7 +2,7 @@ export default {
   contextSeparator: '_',
   // Key separator used in your translation keys
 
-  createOldCatalogs: true,
+  createOldCatalogs: false,
   // Save the \_old files
 
   defaultNamespace: 'translation',
@@ -24,12 +24,6 @@ export default {
 
   // see below for more details
   lexers: {
-    hbs: ['HandlebarsLexer'],
-    handlebars: ['HandlebarsLexer'],
-
-    htm: ['HTMLLexer'],
-    html: ['HTMLLexer'],
-
     mjs: ['JavascriptLexer'],
     js: ['JavascriptLexer'], // if you're writing jsx inside .js files, change this to JsxLexer
     ts: ['JavascriptLexer'],
@@ -42,7 +36,7 @@ export default {
   lineEnding: 'auto',
   // Control the line ending. See options at https://github.com/ryanve/eol
 
-  locales: ['en'],
+  locales: ["en", "es", "fr", "ko", "nl", "ja", "zh"],
   // An array of the locales in your applications
 
   namespaceSeparator: false,
@@ -58,11 +52,11 @@ export default {
   // Plural separator used in your translation keys
   // If you want to use plain english keys, separators such as `_` might conflict. You might want to set `pluralSeparator` to a different string that does not occur in your keys.
 
-  input: undefined,
+  input: 'src/**/*.{js,jsx,ts,tsx}',
   // An array of globs that describe where to look for source files
   // relative to the location of the configuration file
 
-  sort: false,
+  sort: true,
   // Whether or not to sort the catalog. Can also be a [compareFunction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#parameters)
 
   verbose: false,
