@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   AboutModal,
   TextContent,
@@ -8,9 +7,10 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from '@patternfly/react-core';
+import { detect } from 'detect-browser';
+import * as React from 'react';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ApplicationInfoAPI, UserType } from 'src/api';
-import { detect } from 'detect-browser';
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <TextListItem component={TextListItemVariants.dt}>{children}</TextListItem>

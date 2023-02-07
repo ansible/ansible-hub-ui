@@ -1,5 +1,5 @@
-import { Constants } from 'src/constants';
 import { i18n } from '@lingui/core';
+import { Constants } from 'src/constants';
 
 // Locked roles description can't be translated on the API
 // To solve this problem, description for the locked roles

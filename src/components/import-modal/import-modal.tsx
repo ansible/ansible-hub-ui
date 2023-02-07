@@ -1,16 +1,14 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './import-modal.scss';
-import axios from 'axios';
-
-import { Modal, Button } from '@patternfly/react-core';
+import { Button, Modal } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
-
+import axios from 'axios';
+import * as React from 'react';
 import {
-  CollectionListType,
   CollectionAPI,
+  CollectionListType,
   CollectionUploadType,
 } from 'src/api';
+import './import-modal.scss';
 
 enum Status {
   uploading = 'uploading',

@@ -1,10 +1,11 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import * as React from 'react';
-import { UserType, UserAPI } from 'src/api';
-import { mapErrorMessages } from 'src/utilities';
-import { AppContext } from 'src/loaders/app-context';
+import { UserAPI, UserType } from 'src/api';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { AppContext } from 'src/loaders/app-context';
+import { mapErrorMessages } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
+
 interface IState {
   isWaitingForResponse: boolean;
 }

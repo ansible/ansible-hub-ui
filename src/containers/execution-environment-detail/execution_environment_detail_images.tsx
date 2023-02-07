@@ -1,22 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './execution-environment-detail.scss';
-import { errorMessage } from 'src/utilities';
-
-import { sum } from 'lodash';
-import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
-import {
-  ParamHelper,
-  filterIsSet,
-  getContainersURL,
-  getHumanSize,
-  waitForTask,
-} from 'src/utilities';
-import { AppContext } from 'src/loaders/app-context';
-
-import { Link, withRouter } from 'react-router-dom';
-
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Checkbox,
@@ -29,26 +11,39 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
-
+import { sum } from 'lodash';
+import * as React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
+  ClipboardCopy,
   CompoundFilter,
-  Pagination,
-  SortTable,
-  EmptyStateNoData,
+  DateComponent,
+  DeleteModal,
   EmptyStateFilter,
+  EmptyStateNoData,
+  ListItemActions,
+  LoadingPageSpinner,
+  Pagination,
+  PublishToControllerModal,
   ShaLabel,
+  SortTable,
   TagLabel,
   TagManifestModal,
-  PublishToControllerModal,
-  DateComponent,
-  ClipboardCopy,
-  DeleteModal,
-  LoadingPageSpinner,
-  ListItemActions,
 } from 'src/components';
-
-import { withContainerRepo, IDetailSharedProps } from './base';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { errorMessage } from 'src/utilities';
+import {
+  ParamHelper,
+  filterIsSet,
+  getContainersURL,
+  getHumanSize,
+  waitForTask,
+} from 'src/utilities';
+import { IDetailSharedProps, withContainerRepo } from './base';
+import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 
 interface IState {

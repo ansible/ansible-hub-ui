@@ -1,22 +1,22 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import { withRouter } from 'react-router-dom';
 import {
-  EmptyStateNoData,
-  MarkdownEditor,
-  ClipboardCopy,
-} from 'src/components';
-import {
-  FlexItem,
-  Flex,
-  Title,
   Button,
   Card,
   CardBody,
+  Flex,
+  FlexItem,
+  Title,
 } from '@patternfly/react-core';
-import { withContainerRepo, IDetailSharedProps } from './base';
+import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
+import {
+  ClipboardCopy,
+  EmptyStateNoData,
+  MarkdownEditor,
+} from 'src/components';
 import { getContainersURL } from 'src/utilities';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {

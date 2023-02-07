@@ -1,9 +1,8 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-
-import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
-import { getRepoUrl } from 'src/utilities';
 import { CollectionCount } from 'src/components';
+import { getRepoUrl } from 'src/utilities';
+import { ClipboardCopy, DateComponent, EmptyStateNoData, SortTable } from '..';
 
 interface IProps {
   repositories: {

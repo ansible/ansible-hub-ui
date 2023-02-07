@@ -3,12 +3,11 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { ExecutionEnvironmentNamespaceAPI, GroupType } from 'src/api';
 import { OwnersTab } from 'src/components';
-import { formatPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
-
-import { withContainerRepo, IDetailSharedProps } from './base';
 
 interface IState {
   name: string;

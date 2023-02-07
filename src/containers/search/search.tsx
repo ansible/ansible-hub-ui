@@ -1,39 +1,38 @@
 import { t } from '@lingui/macro';
+import { Button, DataList, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-import './search.scss';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionAPI, CollectionListType, MyNamespaceAPI } from 'src/api';
 import {
-  errorMessage,
-  DeleteCollectionUtils,
-  filterIsSet,
-  waitForTask,
-  parsePulpIDFromURL,
-} from 'src/utilities';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import { DataList, DropdownItem, Button } from '@patternfly/react-core';
-import {
+  AlertList,
+  AlertType,
   BaseHeader,
   CardListSwitcher,
   CollectionCard,
   CollectionFilter,
   CollectionListItem,
+  DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  ImportModal,
   LoadingPageSpinner,
   Pagination,
   RepoSelector,
   StatefulDropdown,
-  AlertList,
-  AlertType,
   closeAlertMixin,
-  ImportModal,
-  DeleteCollectionModal,
 } from 'src/components';
-import { CollectionAPI, CollectionListType, MyNamespaceAPI } from 'src/api';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
+import {
+  DeleteCollectionUtils,
+  errorMessage,
+  filterIsSet,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];

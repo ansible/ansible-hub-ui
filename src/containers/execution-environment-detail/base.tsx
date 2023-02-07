@@ -1,14 +1,12 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Button, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
-import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,
   AlertType,
@@ -21,15 +19,15 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  parsePulpIDFromURL,
-  waitForTask,
   RepoSigningUtils,
   canSignEE,
+  parsePulpIDFromURL,
+  waitForTask,
 } from 'src/utilities';
-
-import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };

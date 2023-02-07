@@ -1,30 +1,27 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionDetailType,
   CollectionUsedByDependencies,
-  CollectionVersionAPI,
   CollectionVersion,
+  CollectionVersionAPI,
 } from 'src/api';
 import {
-  CollectionHeader,
-  LoadingPageWithHeader,
-  Main,
+  AlertList,
+  AlertType,
   CollectionDependenciesList,
+  CollectionHeader,
   CollectionUsedbyDependenciesList,
   EmptyStateNoData,
-  AlertType,
-  AlertList,
+  LoadingPageWithHeader,
+  Main,
   closeAlertMixin,
 } from 'src/components';
-
-import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './collection-dependencies.scss';
 
 interface IState {

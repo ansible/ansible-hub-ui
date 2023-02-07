@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-import { CollectionAPI, CollectionExcludesType } from 'src/api';
 import { Spinner } from '@patternfly/react-core';
+import * as React from 'react';
+import { CollectionAPI, CollectionExcludesType } from 'src/api';
 import { AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
 

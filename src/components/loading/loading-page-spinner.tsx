@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Bullseye, Spinner } from '@patternfly/react-core';
+import * as React from 'react';
 
 export class LoadingPageSpinner extends React.Component {
   render() {

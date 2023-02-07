@@ -1,23 +1,33 @@
-import { t, Trans } from '@lingui/macro';
-
-import * as React from 'react';
-import { errorMessage } from 'src/utilities';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  withRouter,
-  RouteComponentProps,
+  Button,
+  DropdownItem,
+  Modal,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
+import * as React from 'react';
+import {
   Link,
   Redirect,
+  RouteComponentProps,
+  withRouter,
 } from 'react-router-dom';
-
 import {
+  GroupAPI,
+  GroupObjectPermissionType,
+  UserAPI,
+  UserType,
+} from 'src/api';
+import {
+  APISearchTypeAhead,
   AlertList,
   AlertType,
-  APISearchTypeAhead,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
-  closeAlertMixin,
   CompoundFilter,
   DateComponent,
   DeleteGroupModal,
@@ -31,27 +41,12 @@ import {
   Pagination,
   SortTable,
   Tabs,
+  closeAlertMixin,
 } from 'src/components';
-import {
-  GroupAPI,
-  UserAPI,
-  UserType,
-  GroupObjectPermissionType,
-} from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
-import { formatPath, Paths } from 'src/paths';
-import {
-  Button,
-  DropdownItem,
-  Modal,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
-
 import { AppContext } from 'src/loaders/app-context';
-
+import { Paths, formatPath } from 'src/paths';
+import { errorMessage } from 'src/utilities';
+import { ParamHelper, filterIsSet } from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {

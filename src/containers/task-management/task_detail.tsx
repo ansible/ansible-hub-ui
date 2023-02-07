@@ -1,26 +1,5 @@
-import * as React from 'react';
-import './task.scss';
 import { i18n } from '@lingui/core';
-import { t, Trans } from '@lingui/macro';
-import {
-  Link,
-  withRouter,
-  Redirect,
-  RouteComponentProps,
-} from 'react-router-dom';
-import {
-  AlertList,
-  AlertType,
-  BaseHeader,
-  Breadcrumbs,
-  closeAlertMixin,
-  ConfirmModal,
-  DateComponent,
-  EmptyStateCustom,
-  LoadingPageSpinner,
-  Main,
-  StatusIndicator,
-} from 'src/components';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   CodeBlock,
@@ -33,13 +12,34 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { TaskType } from 'src/api/response-types/task';
-import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import { capitalize } from 'lodash';
+import * as React from 'react';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
+import { TaskType } from 'src/api/response-types/task';
+import {
+  AlertList,
+  AlertType,
+  BaseHeader,
+  Breadcrumbs,
+  ConfirmModal,
+  DateComponent,
+  EmptyStateCustom,
+  LoadingPageSpinner,
+  Main,
+  StatusIndicator,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import './task.scss';
 
 interface IState {
   loading: boolean;

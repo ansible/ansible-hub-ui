@@ -1,10 +1,10 @@
-import { HubAPI } from './hub';
+import axios from 'axios';
 import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
 } from 'src/api';
-import axios from 'axios';
+import { HubAPI } from './hub';
 
 function filterContents(contents) {
   if (contents) {

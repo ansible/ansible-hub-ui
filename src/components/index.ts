@@ -49,9 +49,7 @@ export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { NamespaceCard } from './cards/namespace-card';
 export { NamespaceForm } from './namespace-form/namespace-form';
 export { NamespaceModal } from './namespace-modal/namespace-modal';
-export {
-  CollectionNumericLabel,
-} from './numeric-label/numeric-label';
+export { CollectionNumericLabel } from './numeric-label/numeric-label';
 export { OwnersTab } from './rbac/owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';

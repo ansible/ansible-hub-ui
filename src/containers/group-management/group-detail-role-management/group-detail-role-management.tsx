@@ -1,37 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-
-import React, { useEffect, useState } from 'react';
-
-import {
-  AppliedFilters,
-  CompoundFilter,
-  DeleteModal,
-  EmptyStateNoData,
-  RolePermissions,
-  LoadingPageWithHeader,
-  Pagination,
-  RoleListTable,
-  SelectRoles,
-  PreviewRoles,
-  ExpandableRow,
-  WizardModal,
-  EmptyStateFilter,
-  ListItemActions,
-} from 'src/components';
-import {
-  GroupRoleAPI,
-  GroupObjectPermissionType,
-  GroupRoleType,
-  RoleType,
-} from 'src/api';
-
-import {
-  errorMessage,
-  filterIsSet,
-  ParamHelper,
-  parsePulpIDFromURL,
-  translateLockedRolesDescription,
-} from 'src/utilities';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -40,11 +7,38 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-
-import { IAppContextType } from 'src/loaders/app-context';
-
+import React, { useEffect, useState } from 'react';
+import {
+  GroupObjectPermissionType,
+  GroupRoleAPI,
+  GroupRoleType,
+  RoleType,
+} from 'src/api';
+import {
+  AppliedFilters,
+  CompoundFilter,
+  DeleteModal,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  ExpandableRow,
+  ListItemActions,
+  LoadingPageWithHeader,
+  Pagination,
+  PreviewRoles,
+  RoleListTable,
+  RolePermissions,
+  SelectRoles,
+  WizardModal,
+} from 'src/components';
 import { Constants } from 'src/constants';
-
+import { IAppContextType } from 'src/loaders/app-context';
+import {
+  ParamHelper,
+  errorMessage,
+  filterIsSet,
+  parsePulpIDFromURL,
+  translateLockedRolesDescription,
+} from 'src/utilities';
 import './group-detail-role-management.scss';
 
 interface Props {

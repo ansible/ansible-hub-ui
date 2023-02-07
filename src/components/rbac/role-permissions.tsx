@@ -1,9 +1,9 @@
-import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-import * as React from 'react';
+import { t } from '@lingui/macro';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import { Constants } from 'src/constants';
+import * as React from 'react';
 import { PermissionChipSelector } from 'src/components';
+import { Constants } from 'src/constants';
 import { twoWayMapper } from 'src/utilities';
 
 interface IProps {

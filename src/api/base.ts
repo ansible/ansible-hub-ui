@@ -1,7 +1,7 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
-import Cookies from 'js-cookie';
 
 export class BaseAPI {
   apiPath: string;
