@@ -1,8 +1,20 @@
 import { t } from '@lingui/macro';
+import {
+  Button,
+  DropdownItem,
+  Label,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+} from '@patternfly/react-icons';
 import * as React from 'react';
-import './certification-dashboard.scss';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionVersion, CollectionVersionAPI } from 'src/api';
 import {
   BaseHeader,
   DateComponent,
@@ -13,41 +25,26 @@ import {
   Main,
 } from 'src/components';
 import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
-  DropdownItem,
-  Label,
-} from '@patternfly/react-core';
-
-import {
-  ExclamationTriangleIcon,
-  ExclamationCircleIcon,
-  CheckCircleIcon,
-} from '@patternfly/react-icons';
-
-import { CollectionVersionAPI, CollectionVersion } from 'src/api';
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  CompoundFilter,
+  LoadingPageSpinner,
+  LoadingPageWithHeader,
+  Pagination,
+  SortTable,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   errorMessage,
   filterIsSet,
   waitForTask,
 } from 'src/utilities';
-import {
-  LoadingPageWithHeader,
-  CompoundFilter,
-  LoadingPageSpinner,
-  AppliedFilters,
-  Pagination,
-  AlertList,
-  closeAlertMixin,
-  AlertType,
-  SortTable,
-} from 'src/components';
-import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import './certification-dashboard.scss';
 
 interface IState {
   params: {

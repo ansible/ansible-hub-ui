@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   EmptyState,
   EmptyStateBody,
@@ -7,6 +6,7 @@ import {
   EmptyStateVariant,
   Title,
 } from '@patternfly/react-core';
+import * as React from 'react';
 import { ComponentClass } from 'react';
 import { ReactElement, ReactNode } from 'react';
 

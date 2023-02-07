@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   Alert,
   Button,
@@ -14,15 +13,15 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { TagIcon } from '@patternfly/react-icons';
-import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty, isEqual, xorWith } from 'lodash';
+import * as React from 'react';
 import {
   ContainerDistributionAPI,
-  GroupObjectPermissionType,
   ExecutionEnvironmentNamespaceAPI,
   ExecutionEnvironmentRegistryAPI,
   ExecutionEnvironmentRemoteAPI,
+  GroupObjectPermissionType,
 } from 'src/api';
-import { Constants } from 'src/constants';
 import {
   APISearchTypeAhead,
   AlertList,
@@ -31,6 +30,7 @@ import {
   ObjectPermissionField,
   closeAlertMixin,
 } from 'src/components';
+import { Constants } from 'src/constants';
 import {
   ErrorMessagesType,
   alertErrorsWithoutFields,

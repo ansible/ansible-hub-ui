@@ -1,32 +1,31 @@
 import { t } from '@lingui/macro';
+import { Button, ToolbarItem } from '@patternfly/react-core';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
-  BaseHeader,
-  LoadingPageSpinner,
-  Main,
-  Tabs,
-  RemoteRepositoryTable,
-  LocalRepositoryTable,
-  RemoteForm,
-  EmptyStateNoData,
-  EmptyStateUnauthorized,
-} from 'src/components';
-import {
-  ParamHelper,
-  ErrorMessagesType,
-  mapErrorMessages,
-} from 'src/utilities';
-import {
-  RemoteAPI,
-  RemoteType,
   DistributionAPI,
   DistributionType,
+  RemoteAPI,
+  RemoteType,
 } from 'src/api';
+import {
+  BaseHeader,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  LoadingPageSpinner,
+  LocalRepositoryTable,
+  Main,
+  RemoteForm,
+  RemoteRepositoryTable,
+  Tabs,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Button, ToolbarItem } from '@patternfly/react-core';
 import { Paths } from 'src/paths';
+import {
+  ErrorMessagesType,
+  ParamHelper,
+  mapErrorMessages,
+} from 'src/utilities';
 
 export class Repository {
   name: string;

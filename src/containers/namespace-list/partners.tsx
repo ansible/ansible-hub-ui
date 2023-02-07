@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
-import { NamespaceList } from './namespace-list';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Paths } from 'src/paths';
+import { NamespaceList } from './namespace-list';
 
 class Partners extends React.Component<RouteComponentProps> {
   render() {

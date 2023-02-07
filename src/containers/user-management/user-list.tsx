@@ -1,29 +1,24 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './user-management.scss';
-
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
   Button,
   DropdownItem,
   Label,
-  Tooltip,
   LabelGroup,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
-
 import { UserPlusIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
-import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -35,16 +30,17 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  ListItemActions,
   LoadingPageSpinner,
   Main,
   Pagination,
   SortTable,
   closeAlertMixin,
-  ListItemActions,
 } from 'src/components';
-
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import './user-management.scss';
 
 interface IState {
   params: {

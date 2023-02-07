@@ -1,20 +1,20 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import cx from 'classnames';
-import './my-imports.scss';
 import {
-  Pagination,
   FormSelect,
   FormSelectOption,
+  Pagination,
   Spinner,
   Toolbar,
 } from '@patternfly/react-core';
+import cx from 'classnames';
+import * as React from 'react';
+import { ImportListType, NamespaceType, PulpStatus } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';
-import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
-import { ParamHelper } from 'src/utilities/param-helper';
-import { filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
-import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
+import { filterIsSet } from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { DateComponent, EmptyStateFilter, EmptyStateNoData } from '..';
+import './my-imports.scss';
 
 interface IProps {
   namespaces: NamespaceType[];

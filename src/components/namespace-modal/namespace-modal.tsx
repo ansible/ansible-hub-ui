@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   Alert,
   Button,
@@ -10,10 +9,10 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-
-import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
+import * as React from 'react';
+import { GroupObjectPermissionType, NamespaceAPI } from 'src/api';
 import { AlertType, HelperText, ObjectPermissionField } from 'src/components';
-import { errorMessage, ErrorMessagesType } from 'src/utilities';
+import { ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;

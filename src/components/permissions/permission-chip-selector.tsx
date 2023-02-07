@@ -1,7 +1,5 @@
-import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
-import * as React from 'react';
+import { t } from '@lingui/macro';
 import {
   Label,
   LabelGroup,
@@ -9,6 +7,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
+import * as React from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {

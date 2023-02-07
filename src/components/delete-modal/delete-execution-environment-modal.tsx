@@ -1,11 +1,10 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Checkbox, Text } from '@patternfly/react-core';
 import * as React from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
-import { waitForTask } from 'src/utilities';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { waitForTask } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
-
-import { Checkbox, Text } from '@patternfly/react-core';
 
 interface IState {
   confirmDelete: boolean;

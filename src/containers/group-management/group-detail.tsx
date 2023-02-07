@@ -1,24 +1,38 @@
-import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
-import * as React from 'react';
-import { errorMessage } from 'src/utilities';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  withRouter,
-  RouteComponentProps,
+  ActionGroup,
+  Button,
+  DropdownItem,
+  Flex,
+  FlexItem,
+  Form,
+  Modal,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
+import * as React from 'react';
+import {
   Link,
   Redirect,
+  RouteComponentProps,
+  withRouter,
 } from 'react-router-dom';
-
 import {
+  GroupAPI,
+  GroupObjectPermissionType,
+  UserAPI,
+  UserType,
+} from 'src/api';
+import {
+  APISearchTypeAhead,
   AlertList,
   AlertType,
-  APISearchTypeAhead,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
-  closeAlertMixin,
   CompoundFilter,
   DateComponent,
   DeleteGroupModal,
@@ -33,30 +47,13 @@ import {
   PermissionChipSelector,
   SortTable,
   Tabs,
+  closeAlertMixin,
 } from 'src/components';
-import {
-  GroupAPI,
-  UserAPI,
-  UserType,
-  GroupObjectPermissionType,
-} from 'src/api';
-import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
-import { formatPath, Paths } from 'src/paths';
-import {
-  ActionGroup,
-  Button,
-  DropdownItem,
-  Flex,
-  FlexItem,
-  Form,
-  Modal,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { errorMessage } from 'src/utilities';
+import { ParamHelper, filterIsSet, twoWayMapper } from 'src/utilities';
 
 interface IState {
   group: GroupObjectPermissionType;

@@ -23,9 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-import shell from 'shell-escape-tag';
 import { range } from 'lodash';
+import shell from 'shell-escape-tag';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);

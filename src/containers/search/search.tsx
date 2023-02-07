@@ -1,9 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './search.scss';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { DataList } from '@patternfly/react-core';
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionAPI, CollectionListType } from 'src/api';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -16,12 +15,12 @@ import {
   Pagination,
   RepoSelector,
 } from 'src/components';
-import { CollectionAPI, CollectionListType } from 'src/api';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { filterIsSet } from 'src/utilities';
 import { Paths } from 'src/paths';
+import { filterIsSet } from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];

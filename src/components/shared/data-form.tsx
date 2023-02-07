@@ -1,11 +1,10 @@
-import * as React from 'react';
 import {
   Form,
   FormGroup,
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {

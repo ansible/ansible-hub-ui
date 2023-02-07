@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   ClipboardCopyButton,
@@ -14,6 +13,7 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
+import * as React from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   APISearchTypeAhead,

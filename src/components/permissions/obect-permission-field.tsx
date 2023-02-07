@@ -1,17 +1,15 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
-
 import { TrashIcon } from '@patternfly/react-icons';
-
-import { GroupObjectPermissionType, GroupAPI } from 'src/api';
+import * as React from 'react';
+import { GroupAPI, GroupObjectPermissionType } from 'src/api';
 import {
-  AlertType,
   APISearchTypeAhead,
+  AlertType,
   PermissionChipSelector,
 } from 'src/components';
-import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
+import { twoWayMapper } from 'src/utilities';
 
 interface IProps {
   groups: GroupObjectPermissionType[];

@@ -1,8 +1,8 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
+import { Trans, t } from '@lingui/macro';
 import { List, ListItem, Spinner } from '@patternfly/react-core';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import * as React from 'react';
 import { UserType } from 'src/api';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IProps {
   count?: number;
