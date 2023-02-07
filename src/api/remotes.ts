@@ -1,6 +1,6 @@
-import { HubAPI } from './hub';
-import { RemoteType } from '.';
 import { clearSetFieldsFromRequest } from 'src/utilities';
+import { RemoteType } from '.';
+import { HubAPI } from './hub';
 
 // removes unchanged values and write only fields before updating
 export function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {

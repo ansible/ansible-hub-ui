@@ -1,28 +1,26 @@
 import { t } from '@lingui/macro';
+import { Button } from '@patternfly/react-core';
 import * as React from 'react';
 import {
-  withRouter,
-  RouteComponentProps,
   Link,
   Redirect,
+  RouteComponentProps,
+  withRouter,
 } from 'react-router-dom';
-
-import { Button } from '@patternfly/react-core';
-
+import { UserAPI, UserType } from 'src/api';
 import {
-  LoadingPageWithHeader,
-  AlertType,
   AlertList,
-  closeAlertMixin,
-  UserFormPage,
-  EmptyStateUnauthorized,
+  AlertType,
   BaseHeader,
   Breadcrumbs,
+  EmptyStateUnauthorized,
+  LoadingPageWithHeader,
+  UserFormPage,
+  closeAlertMixin,
 } from 'src/components';
-import { UserType, UserAPI } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteUserModal } from './delete-user-modal';
-import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   userDetail: UserType;

@@ -1,8 +1,19 @@
 import { t } from '@lingui/macro';
+import {
+  Button,
+  DropdownItem,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  InfoCircleIcon,
+} from '@patternfly/react-icons';
 import * as React from 'react';
-import './certification-dashboard.scss';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionVersion, CollectionVersionAPI, TaskAPI } from 'src/api';
 import {
   BaseHeader,
   DateComponent,
@@ -12,36 +23,22 @@ import {
   Main,
 } from 'src/components';
 import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
-  DropdownItem,
-} from '@patternfly/react-core';
-
-import {
-  InfoCircleIcon,
-  ExclamationCircleIcon,
-  CheckCircleIcon,
-} from '@patternfly/react-icons';
-
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
-import {
-  LoadingPageWithHeader,
-  StatefulDropdown,
+  AlertList,
+  AlertType,
+  AppliedFilters,
   CompoundFilter,
   LoadingPageSpinner,
-  AppliedFilters,
+  LoadingPageWithHeader,
   Pagination,
-  AlertList,
-  closeAlertMixin,
-  AlertType,
   SortTable,
+  StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
-import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, filterIsSet } from 'src/utilities';
+import './certification-dashboard.scss';
 
 interface IState {
   params: {

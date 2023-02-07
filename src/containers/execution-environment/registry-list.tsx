@@ -1,7 +1,4 @@
-import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -11,15 +8,9 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
-import {
-  ParamHelper,
-  filterIsSet,
-  lastSyncStatus,
-  lastSynced,
-  mapErrorMessages,
-  parsePulpIDFromURL,
-} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -30,6 +21,7 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -37,11 +29,17 @@ import {
   SortTable,
   StatefulDropdown,
   closeAlertMixin,
-  EmptyStateUnauthorized,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-
 import { Paths, formatPath } from 'src/paths';
+import {
+  ParamHelper,
+  filterIsSet,
+  lastSyncStatus,
+  lastSynced,
+  mapErrorMessages,
+  parsePulpIDFromURL,
+} from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];

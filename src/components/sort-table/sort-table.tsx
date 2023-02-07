@@ -1,11 +1,10 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-
 import {
-  LongArrowAltUpIcon,
-  LongArrowAltDownIcon,
   ArrowsAltVIcon,
+  LongArrowAltDownIcon,
+  LongArrowAltUpIcon,
 } from '@patternfly/react-icons';
+import * as React from 'react';
 import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 

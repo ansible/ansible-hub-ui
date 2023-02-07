@@ -1,17 +1,15 @@
 import { t } from '@lingui/macro';
+import { Button, DataList, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-import './list.scss';
-
-import { Button, DropdownItem, DataList } from '@patternfly/react-core';
-
 import { CollectionListType } from 'src/api';
 import {
   CollectionListItem,
+  EmptyStateFilter,
   Pagination,
   StatefulDropdown,
-  EmptyStateFilter,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities/param-helper';
+import './list.scss';
 
 interface IProps {
   collections: CollectionListType[];

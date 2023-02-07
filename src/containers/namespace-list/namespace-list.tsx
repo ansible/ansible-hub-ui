@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { t } from '@lingui/macro';
 import {
   Button,
   Toolbar,
@@ -6,10 +6,9 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
-import { t } from '@lingui/macro';
-
-import { ParamHelper } from 'src/utilities/param-helper';
+import * as React from 'react';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
 import {
   AlertList,
   AppliedFilters,
@@ -26,12 +25,11 @@ import {
   Pagination,
   Sort,
 } from 'src/components';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
-
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { filterIsSet } from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
 import './namespace-list.scss';
 
 interface IState {

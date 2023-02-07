@@ -1,20 +1,18 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { ActiveUserAPI } from 'src/api';
 import {
-  BaseHeader,
-  Main,
-  ClipboardCopy,
-  EmptyStateUnauthorized,
-  DateComponent,
   AlertList,
   AlertType,
+  BaseHeader,
+  ClipboardCopy,
+  DateComponent,
+  EmptyStateUnauthorized,
+  Main,
   closeAlertMixin,
 } from 'src/components';
-import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {

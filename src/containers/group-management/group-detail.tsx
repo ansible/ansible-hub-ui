@@ -1,39 +1,5 @@
-import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
-import * as React from 'react';
-
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-
-import {
-  AlertList,
-  AlertType,
-  APISearchTypeAhead,
-  AppliedFilters,
-  BaseHeader,
-  Breadcrumbs,
-  closeAlertMixin,
-  CompoundFilter,
-  DateComponent,
-  EmptyStateFilter,
-  EmptyStateNoData,
-  EmptyStateUnauthorized,
-  LoadingPageWithHeader,
-  Main,
-  Pagination,
-  PermissionChipSelector,
-  SortTable,
-  StatefulDropdown,
-  Tabs,
-} from 'src/components';
-import { GroupAPI, UserAPI, UserType } from 'src/api';
-import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
-import { formatPath, Paths } from 'src/paths';
+import { Trans, t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
@@ -47,10 +13,41 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import * as React from 'react';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { GroupAPI, UserAPI, UserType } from 'src/api';
+import {
+  APISearchTypeAhead,
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
+  Breadcrumbs,
+  CompoundFilter,
+  DateComponent,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  LoadingPageWithHeader,
+  Main,
+  Pagination,
+  PermissionChipSelector,
+  SortTable,
+  StatefulDropdown,
+  Tabs,
+  closeAlertMixin,
+} from 'src/components';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, filterIsSet, twoWayMapper } from 'src/utilities';
 import { DeleteGroupModal } from './delete-group-modal';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   group: any;

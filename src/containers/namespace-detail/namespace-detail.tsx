@@ -1,56 +1,50 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './namespace-detail.scss';
-
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   AlertActionCloseButton,
   Button,
-  DropdownItem,
-  Tooltip,
-  Text,
   Checkbox,
+  DropdownItem,
+  Text,
+  Tooltip,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
-
 import {
-  CollectionListType,
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import {
   CollectionAPI,
-  NamespaceAPI,
+  CollectionListType,
   MyNamespaceAPI,
+  NamespaceAPI,
   NamespaceType,
 } from 'src/api';
-
 import {
-  CollectionList,
+  AlertList,
+  AlertType,
+  ClipboardCopy,
   CollectionFilter,
+  CollectionList,
+  ConfirmModal,
+  EmptyStateNoData,
   LoadingPageWithHeader,
   Main,
   Pagination,
   PartnerHeader,
-  EmptyStateNoData,
   RepoSelector,
   StatefulDropdown,
-  ClipboardCopy,
-  ConfirmModal,
-  AlertList,
   closeAlertMixin,
-  AlertType,
 } from 'src/components';
-
-import { ImportModal } from './import-modal/import-modal';
-
-import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { ParamHelper, filterIsSet, getRepoUrl } from 'src/utilities';
+import { ImportModal } from './import-modal/import-modal';
+import './namespace-detail.scss';
 
 interface IState {
   collections: CollectionListType[];

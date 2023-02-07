@@ -1,8 +1,6 @@
 import { t } from '@lingui/macro';
+import { Button, Chip, ChipGroup } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { Chip, ChipGroup, Button } from '@patternfly/react-core';
-
 import { ParamHelper } from 'src/utilities';
 
 interface IProps {

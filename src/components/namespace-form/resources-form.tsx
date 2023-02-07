@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import './namespace-form.scss';
 import { NamespaceType } from 'src/api';
 import { MarkdownEditor } from '..';
+import './namespace-form.scss';
 
 const placeholder = `## Custom resources
 

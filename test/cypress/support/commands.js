@@ -23,8 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 import shell from 'shell-escape-tag';
+
 const urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {

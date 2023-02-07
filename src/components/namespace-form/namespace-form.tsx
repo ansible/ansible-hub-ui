@@ -1,22 +1,20 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './namespace-form.scss';
-
 import {
+  Alert,
   Form,
   FormGroup,
-  TextInput,
   TextArea,
-  Alert,
+  TextInput,
 } from '@patternfly/react-core';
 import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import { NamespaceType } from 'src/api';
 import {
+  AlertType,
   NamespaceCard,
   ObjectPermissionField,
-  AlertType,
 } from 'src/components';
-import { NamespaceType } from 'src/api';
+import './namespace-form.scss';
 
 interface IProps {
   namespace: NamespaceType;

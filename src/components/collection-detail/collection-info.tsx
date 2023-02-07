@@ -1,24 +1,20 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './collection-info.scss';
-
-import { Link } from 'react-router-dom';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  Split,
-  SplitItem,
+  Alert,
+  Button,
   Grid,
   GridItem,
-  Button,
-  Alert,
+  Split,
+  SplitItem,
 } from '@patternfly/react-core';
-
 import { DownloadIcon } from '@patternfly/react-icons';
-
-import { CollectionDetailType, CollectionAPI } from 'src/api';
-import { Tag, ClipboardCopy, LoginLink } from 'src/components';
-import { Paths, formatPath } from 'src/paths';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
+import { ClipboardCopy, LoginLink, Tag } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import './collection-info.scss';
 
 interface IProps extends CollectionDetailType {
   params: {

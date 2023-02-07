@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { plural } from '@lingui/macro';
+import * as React from 'react';
 
 interface IProps {
   number: number;

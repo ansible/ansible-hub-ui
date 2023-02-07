@@ -1,9 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import cx from 'classnames';
-import './collection-content-list.scss';
-
-import { Link } from 'react-router-dom';
 import {
   SearchInput,
   TextInput,
@@ -11,15 +6,16 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
-
-import { EmptyStateCustom } from 'src/components';
-
+import cx from 'classnames';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { ContentSummaryType } from 'src/api';
+import { EmptyStateCustom } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { AppContext } from 'src/loaders/app-context';
+import './collection-content-list.scss';
 
 interface IProps {
   contents: ContentSummaryType[];

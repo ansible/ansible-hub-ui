@@ -1,26 +1,22 @@
 import { t } from '@lingui/macro';
+import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
-  PartnerHeader,
-  NamespaceForm,
-  ResourcesForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
-  Main,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
+  Main,
+  NamespaceForm,
+  PartnerHeader,
+  ResourcesForm,
+  closeAlertMixin,
 } from 'src/components';
-import { MyNamespaceAPI, NamespaceType, NamespaceLinkType } from 'src/api';
-
-import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
-
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
-import { ParamHelper, mapErrorMessages } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;
