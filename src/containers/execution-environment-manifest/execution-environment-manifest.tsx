@@ -8,7 +8,7 @@ import {
   Main,
   TagLabel,
   ShaLabel,
-} from '../../components';
+} from 'src/components';
 import {
   DataList,
   DataListItem,
@@ -25,8 +25,8 @@ import {
   CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import { Paths, formatPath } from '../../paths';
-import { ExecutionEnvironmentAPI } from '../../api';
+import { Paths, formatPath } from 'src/paths';
+import { ExecutionEnvironmentAPI } from 'src/api';
 import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
 

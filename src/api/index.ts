@@ -18,15 +18,11 @@ export {
   PluginOption,
   ReturnedValue,
 } from './response-types/collection';
-export {
-  ImportListType,
-  ImportDetailType,
-  ImportMessageCodes,
-} from './response-types/import';
+export { ImportListType, ImportDetailType } from './response-types/import';
 export { PulpStatus } from './response-types/pulp';
 export { ImportAPI } from './import';
 export { ActiveUserAPI } from './active-user';
-export { UserType, MeType } from './response-types/user';
+export { UserType } from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
 export { MyNamespaceAPI } from './my-namespace';
 export { UserAPI } from './user';
@@ -59,4 +55,3 @@ export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
 export { SettingsType } from './response-types/settings';
 export { SignCollectionAPI } from './sign-collections';
-export { RoleType } from './response-types/role';

@@ -47,10 +47,7 @@ export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { NamespaceCard } from './cards/namespace-card';
 export { NamespaceForm } from './namespace-form/namespace-form';
 export { NamespaceModal } from './namespace-modal/namespace-modal';
-export {
-  NumericLabel,
-  CollectionNumericLabel,
-} from './numeric-label/numeric-label';
+export { CollectionNumericLabel } from './numeric-label/numeric-label';
 export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
@@ -65,7 +62,7 @@ export { ResourcesForm } from './namespace-form/resources-form';
 export { TagManifestModal } from './execution-environment/tag-manifest-modal';
 export { ShaLabel } from './sha-label/sha-label';
 export { SmallLogo } from './logo/small-logo';
-export { Sort, SortFieldType } from './patternfly-wrappers/sort';
+export { Sort } from './patternfly-wrappers/sort';
 export {
   SignSingleCertificateModal,
   SignAllCertificatesModal,
@@ -82,12 +79,6 @@ export { Tooltip } from './patternfly-wrappers/tooltip';
 export { UIVersion } from './shared/ui-version';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';
-export {
-  RoleListTable,
-  ExpandableRow,
-  CheckboxRow,
-  RadioRow,
-} from './role-list-table/role-list-table';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
