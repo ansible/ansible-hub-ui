@@ -1,6 +1,6 @@
+import '../app.scss';
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import '../app.scss';
 import {
   withRouter,
   Link,
