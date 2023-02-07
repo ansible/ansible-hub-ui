@@ -624,6 +624,5 @@
   "User Access": "User Access",
   "Cannot delete until collections <1></1>that depend on this collection <3></3>have been deleted.": "Cannot delete until collections <1></1>that depend on this collection <3></3>have been deleted.",
   "Delete entire collection": "Delete entire collection",
-  "Collection &quot;{name}&quot; has been successfully deleted.": "Collection &quot;{name}&quot; has been successfully deleted.",
-  "Hello" : "TRANSLATED Hello {{name}}"
+  "Collection &quot;{name}&quot; has been successfully deleted.": "Collection &quot;{name}&quot; has been successfully deleted."
 }

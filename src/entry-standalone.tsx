@@ -23,10 +23,12 @@ function HelloWorld() {
   const randomText = 'asdasdsdadasdassad';
 
   const comp = "<a href='#'></a>";
-  const result = t('Hello', { name: comp });
+  let result = t('Hello', { name: comp });
 
   return (
     <div>
+      <div>{t('Test')}</div>
+      <div>{t('Hello', { name: 'Ansible' })}</div>
       <h1>
         {t(
           'This.This is the hello world application: Test for simple translation.',

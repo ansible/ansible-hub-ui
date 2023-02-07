@@ -86,26 +86,47 @@ activate(language, pseudolocalization);
 //--------------------------------------------------------------------------------------------------------
 // i18next
 
+function getPseudolocalization(messages) {
+  const newMessages = {};
+  Object.keys(messages).forEach((key) => {
+    // simple string
+    newMessages[key] = '»' + messages[key] + '«';
+  });
+  return newMessages;
+}
+
 export async function loadTranslations() {
   let messages = await import(`src/../locale/${language}.json`);
-
-  if (pseudolocalization) {
-    const newMessages = {};
-    Object.keys(messages).forEach((key) => {
-      // simple string
-      newMessages[key] = '»' + messages[key] + '«';
-    });
-    messages = newMessages;
-  }
+  let enMessages = null;
 
   const resources = {};
+
+  if (language != 'en') {
+    let en_lng = 'en';
+    enMessages = await import(`src/../locale/${en_lng}.json`);
+  }
+
+  if (pseudolocalization) {
+    messages = getPseudolocalization(messages);
+    if (enMessages) {
+      enMessages = getPseudolocalization(enMessages);
+    }
+  }
+
   resources[language] = {
     translation: messages,
   };
 
+  if (enMessages) {
+    resources['en'] = {
+      translation: enMessages,
+    };
+  }
+
   i18next.use(initReactI18next);
   i18next.init({
-    interpolation: { escapeValue: false },
+    interpolation: { escapeValue: true },
+    fallbackLng: ['en'],
     debug: true,
     lng: language,
     resources: resources,

@@ -609,7 +609,7 @@
   "role_few": "{{count}} roles",
   "role_other": "{{count}} roles",
   "non existing key - have to show this text untranslated": "But key already extracted from the extraction tool.",
-  "Escaped code example.": "Should not show link <a href='#'>link</a>",
+  "Escaped code example.": "Should show link <a href='#'>link</a>",
   "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.": "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.",
   "Username: {user.username}": "Username: {user.username}",
   "Logout": "Logout",
@@ -627,4 +627,4 @@
   "Collection &quot;{name}&quot; has been successfully deleted.": "Collection &quot;{name}&quot; has been successfully deleted.",
   "Hello" : "TRANSLATED Hello {{name}}",
   "Test" : "TRANSLATED Test"
-}
+  }
