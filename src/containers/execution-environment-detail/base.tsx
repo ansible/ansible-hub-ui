@@ -7,7 +7,7 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { formatPath, Paths } from '../../paths';
+import { formatPath, Paths } from 'src/paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,

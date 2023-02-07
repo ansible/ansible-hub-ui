@@ -46,7 +46,7 @@ import {
   DeleteModal,
   LoadingPageWithHeader,
   LoadingPageSpinner,
-} from '../../components';
+} from 'src/components';
 
 import { TagManifestModal } from './tag-manifest-modal';
 

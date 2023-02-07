@@ -12,7 +12,7 @@ import {
   ToolbarItem,
   ToolbarContent,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet } from '../../utilities';
+import { ParamHelper, filterIsSet } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
   AlertList,

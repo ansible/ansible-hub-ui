@@ -42,10 +42,7 @@ export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { NamespaceCard } from './cards/namespace-card';
 export { NamespaceForm } from './namespace-form/namespace-form';
 export { NamespaceModal } from './namespace-modal/namespace-modal';
-export {
-  NumericLabel,
-  CollectionNumericLabel,
-} from './numeric-label/numeric-label';
+export { CollectionNumericLabel } from './numeric-label/numeric-label';
 export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
@@ -59,7 +56,7 @@ export { RepositoryForm } from './execution-environment/repository-form';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { ShaLabel } from './sha-label/sha-label';
 export { SmallLogo } from './logo/small-logo';
-export { Sort, SortFieldType } from './patternfly-wrappers/sort';
+export { Sort } from './patternfly-wrappers/sort';
 export { SortTable } from './sort-table/sort-table';
 export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
 export { StatusIndicator } from './status/status-indicator';

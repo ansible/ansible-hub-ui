@@ -44,7 +44,7 @@ import {
   closeAlertMixin,
   EmptyStateUnauthorized,
 } from 'src/components';
-import { formatPath, Paths } from '../../paths';
+import { formatPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
