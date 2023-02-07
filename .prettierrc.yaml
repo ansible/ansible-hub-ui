@@ -1,7 +1,10 @@
-printWidth: 80
 singleQuote: true
-trailingComma: 'all'
-tabWidth: 2
 jsxSingleQuote: true
+trailingComma: 'all'
 bracketSameLine: false
-bracketSpacing: true
+importOrder:
+  - '^[.][.]/app.scss'
+  - '<THIRD_PARTY_MODULES>'
+  - "^src/"
+  - "^[./]"
+importOrderSortSpecifiers: true
