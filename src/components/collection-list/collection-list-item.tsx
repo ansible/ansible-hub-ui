@@ -1,31 +1,28 @@
-import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
-import './list-item.scss';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   LabelGroup,
-  TextContent,
   Text,
+  TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Paths, formatPath } from 'src/paths';
+import { CollectionListType } from 'src/api';
 import {
   CollectionNumericLabel,
-  Tag,
-  Logo,
-  DeprecatedTag,
   DateComponent,
+  DeprecatedTag,
+  Logo,
+  Tag,
 } from 'src/components';
-import { CollectionListType } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
+import './list-item.scss';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;

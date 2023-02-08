@@ -1,7 +1,6 @@
+import { Label } from '@patternfly/react-core';
 import * as React from 'react';
 import './tag.scss';
-
-import { Label } from '@patternfly/react-core';
 
 interface IProps {
   /** Value to display in the tag */

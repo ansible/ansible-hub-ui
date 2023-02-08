@@ -53,7 +53,6 @@ export enum Paths {
   namespaceByRepo = '/repo/:repo/:namespace',
   collection = '/:namespace/:collection',
   namespace = '/:namespace',
-  partners = '/partners',
   namespaces = '/namespaces',
   notFound = '/not-found',
   token = '/token',
@@ -68,9 +67,6 @@ export enum Paths {
 }
 
 export const namespaceBreadcrumb = {
-  name: {
-    namespaces: t`Namespaces`,
-    partners: t`Partners`,
-  }[NAMESPACE_TERM],
-  url: Paths[NAMESPACE_TERM],
+  name: t`Namespaces`,
+  url: Paths.namespaces,
 };

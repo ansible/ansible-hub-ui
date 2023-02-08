@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { Trans, t } from '@lingui/macro';
-
 import {
   Pagination as PaginationPF,
   PaginationVariant,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities/param-helper';
 

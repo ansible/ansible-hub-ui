@@ -1,11 +1,9 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './header.scss';
-
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-
-import { BaseHeader, Logo, Tabs, TabsType, Breadcrumbs } from 'src/components';
+import * as React from 'react';
 import { NamespaceType } from 'src/api';
+import { BaseHeader, Breadcrumbs, Logo, Tabs, TabsType } from 'src/components';
+import './header.scss';
 
 interface IProps {
   namespace: NamespaceType;

@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro';
+
 export function errorMessage(statusCode: number, statusText: string) {
   const messages = {
     500: t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`,

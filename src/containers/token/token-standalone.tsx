@@ -1,23 +1,21 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Button, Card, CardBody, CardTitle } from '@patternfly/react-core';
 import * as React from 'react';
-import './token.scss';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Button, Card, CardTitle, CardBody } from '@patternfly/react-core';
-
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { ActiveUserAPI } from 'src/api';
 import {
-  BaseHeader,
-  Main,
-  ClipboardCopy,
-  EmptyStateUnauthorized,
-  DateComponent,
   AlertList,
   AlertType,
+  BaseHeader,
+  ClipboardCopy,
+  DateComponent,
+  EmptyStateUnauthorized,
+  Main,
   closeAlertMixin,
 } from 'src/components';
-import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 import { errorMessage } from 'src/utilities';
+import './token.scss';
 
 interface IState {
   token: string;

@@ -1,12 +1,11 @@
 import * as React from 'react';
-import './render-plugin-doc.scss';
-
 import {
   PluginContentType,
   PluginDoc,
   PluginOption,
   ReturnedValue,
 } from 'src/api';
+import './render-plugin-doc.scss';
 
 // Documentation for module doc string spec
 // https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_documenting.html

@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import { Label, LabelProps } from '@patternfly/react-core';
-import React, { FC } from 'react';
 import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
+import React, { FC } from 'react';
 import { useContext } from 'src/loaders/app-context';
 
 interface Props extends LabelProps {

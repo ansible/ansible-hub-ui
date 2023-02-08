@@ -1,50 +1,48 @@
 import * as React from 'react';
-import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-
-import {
-  CertificationDashboard,
-  CollectionContent,
-  CollectionDetail,
-  CollectionDocs,
-  CollectionImportLog,
-  CollectionDependencies,
-  EditNamespace,
-  LoginPage,
-  MyImports,
-  NamespaceDetail,
-  MyNamespaces,
-  Partners,
-  NotFound,
-  Search,
-  TokenPageStandalone,
-  UserList,
-  EditUser,
-  UserDetail,
-  UserCreate,
-  UserProfile,
-  GroupList,
-  GroupDetail,
-  RepositoryList,
-  ExecutionEnvironmentList,
-  ExecutionEnvironmentRegistryList,
-  ExecutionEnvironmentDetail,
-  ExecutionEnvironmentDetailActivities,
-  ExecutionEnvironmentDetailImages,
-  ExecutionEnvironmentManifest,
-  TaskListView,
-  TaskDetail,
-} from 'src/containers';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import {
   ActiveUserAPI,
   FeatureFlagsAPI,
   FeatureFlagsType,
   SettingsAPI,
-  UserType,
   SettingsType,
+  UserType,
 } from 'src/api';
-import { AppContext } from '../app-context';
-
+import {
+  CertificationDashboard,
+  CollectionContent,
+  CollectionDependencies,
+  CollectionDetail,
+  CollectionDocs,
+  CollectionImportLog,
+  EditNamespace,
+  EditUser,
+  ExecutionEnvironmentDetail,
+  ExecutionEnvironmentDetailActivities,
+  ExecutionEnvironmentDetailImages,
+  ExecutionEnvironmentList,
+  ExecutionEnvironmentManifest,
+  ExecutionEnvironmentRegistryList,
+  GroupDetail,
+  GroupList,
+  LoginPage,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  RepositoryList,
+  Search,
+  TaskDetail,
+  TaskListView,
+  TokenPageStandalone,
+  UserCreate,
+  UserDetail,
+  UserList,
+  UserProfile,
+} from 'src/containers';
 import { Paths, formatPath } from 'src/paths';
+import { AppContext } from '../app-context';
 
 interface IRoutesProps {
   updateInitialData: (
@@ -220,7 +218,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CertificationDashboard, path: Paths.approvalDashboard },
       { comp: NotFound, path: Paths.notFound },
       { comp: TokenPageStandalone, path: Paths.token },
-      { comp: Partners, path: Paths[NAMESPACE_TERM] },
+      { comp: Partners, path: Paths.namespaces },
       { comp: EditNamespace, path: Paths.editNamespace },
       { comp: NamespaceDetail, path: Paths.myCollections },
       { comp: NamespaceDetail, path: Paths.myCollectionsByRepo },

@@ -1,9 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './markdown-editor.scss';
-
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
+import './markdown-editor.scss';
 
 interface IProps {
   text: string;

@@ -1,9 +1,5 @@
-import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
-
-type GetUserReturn = Awaited<
-  Promise<ReturnType<typeof window.insights.chrome.auth.getUser>>
->;
+import { UserType } from './response-types/user';
 
 class API extends HubAPI {
   apiPath = this.getUIPath('me/');
@@ -12,26 +8,15 @@ class API extends HubAPI {
     super();
   }
 
-  getUser(): Promise<GetUserReturn['identity']> {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        window.insights.chrome.auth
-          .getUser()
-          // we don't care about entitlements stuff in the UI, so just
-          // return the user's identity
-          .then((result) => resolve(result.identity))
-          .catch((result) => reject(result));
-      });
-    } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        this.http
-          .get(this.apiPath)
-          .then((result) => {
-            resolve(result.data);
-          })
-          .catch((result) => reject(result));
-      });
-    }
+  getUser(): Promise<UserType> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(this.apiPath)
+        .then((result) => {
+          resolve(result.data);
+        })
+        .catch((result) => reject(result));
+    });
   }
 
   getActiveUser() {
@@ -42,19 +27,8 @@ class API extends HubAPI {
     return this.http.put(this.apiPath, data);
   }
 
-  // insights has some asinine way of loading tokens that involves forcing the
-  // page to refresh before loading the token that can't be done witha single
-  // API request.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getToken(): Promise<any> {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        reject(
-          'Use window.insights.chrome.auth to get tokens for insights deployments',
-        );
-      });
-    }
-
     return this.http.post('v3/auth/token/', {});
   }
 

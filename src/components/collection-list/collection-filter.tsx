@@ -1,16 +1,15 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './collection-filter.scss';
 import {
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import './collection-filter.scss';
 
 interface IProps {
   ignoredParams: string[];

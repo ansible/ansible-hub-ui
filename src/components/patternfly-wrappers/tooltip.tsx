@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Tooltip as PFTooltip } from '@patternfly/react-core';
+import * as React from 'react';
 
 interface IProps {
   children: React.ReactNode;

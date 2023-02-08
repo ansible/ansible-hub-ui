@@ -1,32 +1,32 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  ClipboardCopyButton,
+  DataList,
+  DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
+  Flex,
+  FlexItem,
+  LabelGroup,
+  Title,
+} from '@patternfly/react-core';
+import { sum } from 'lodash';
 import * as React from 'react';
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
   LoadingPageWithHeader,
   Main,
-  TagLabel,
   ShaLabel,
-} from '../../components';
-import {
-  DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  DataListCell,
-  Flex,
-  FlexItem,
-  LabelGroup,
-  Title,
-  ClipboardCopyButton,
-  Card,
-  CardBody,
-  CardTitle,
-} from '@patternfly/react-core';
-import { sum } from 'lodash';
-import { Paths, formatPath } from '../../paths';
-import { ExecutionEnvironmentAPI } from '../../api';
+  TagLabel,
+} from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
 

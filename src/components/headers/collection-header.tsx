@@ -1,55 +1,51 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import { errorMessage } from 'src/utilities';
-import './header.scss';
-
-import { Redirect } from 'react-router-dom';
-
-import * as moment from 'moment';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { Trans, t } from '@lingui/macro';
 import {
-  Select,
-  SelectOption,
-  SelectVariant,
+  Alert,
+  Button,
+  Checkbox,
+  DropdownItem,
   List,
   ListItem,
   Modal,
-  Alert,
+  Select,
+  SelectOption,
+  SelectVariant,
   Text,
-  Button,
-  DropdownItem,
   Tooltip,
-  Checkbox,
 } from '@patternfly/react-core';
-import { AppContext } from 'src/loaders/app-context';
-
-import {
-  BaseHeader,
-  Breadcrumbs,
-  LinkTabs,
-  Logo,
-  RepoSelector,
-  Pagination,
-  AlertList,
-  AlertType,
-  closeAlertMixin,
-  StatefulDropdown,
-  DeleteModal,
-  SignSingleCertificateModal,
-  SignAllCertificatesModal,
-} from 'src/components';
-
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import * as moment from 'moment';
+import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionDetailType,
   SignCollectionAPI,
 } from 'src/api';
+import {
+  AlertList,
+  AlertType,
+  BaseHeader,
+  Breadcrumbs,
+  DeleteModal,
+  LinkTabs,
+  Logo,
+  Pagination,
+  RepoSelector,
+  SignAllCertificatesModal,
+  SignSingleCertificateModal,
+  StatefulDropdown,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask, canSign as canSignNS } from 'src/utilities';
+import { errorMessage } from 'src/utilities';
+import { canSign as canSignNS, waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
-import { Constants } from 'src/constants';
 import { SignatureBadge } from '../signing';
+import './header.scss';
 
 interface IProps {
   collection: CollectionDetailType;
