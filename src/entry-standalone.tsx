@@ -18,12 +18,18 @@ if (!window.location.pathname.includes(UI_BASE_PATH)) {
 function HelloWorld() {
   const { t } = useTranslation();
 
+  function defineTranslation(msg) {
+    return msg;
+  }
+
   const name = 'Ansible';
   const componentName = 'Trans';
   const randomText = 'asdasdsdadasdassad';
 
   const comp = "<a href='#'></a>";
   let result = t('Hello', { name: comp });
+  debugger;
+  const define = defineTranslation('defined translation, but not translated');
 
   return (
     <div>
@@ -40,6 +46,9 @@ function HelloWorld() {
           'non existing key - have to show this text untranslated' + randomText,
         )}
       </div>
+      <Trans i18nKey='transTest2'>
+        <div>{{ comp }}</div>
+      </Trans>
       <Trans i18nKey='transTest'>
         Hello <strong>{{ name }}</strong>: this is {{ componentName }} test.{' '}
         <a href='/'>Empty link</a>

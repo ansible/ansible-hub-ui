@@ -27,8 +27,11 @@ export default {
     mjs: ['JavascriptLexer'],
     js: ['JavascriptLexer'], // if you're writing jsx inside .js files, change this to JsxLexer
     ts: ['JavascriptLexer'],
+    tsx: [{
+      lexer: 'JsxLexer',
+      functions: ['t', 'defineTranslation']
+    }],
     jsx: ['JsxLexer'],
-    tsx: ['JsxLexer'],
 
     default: ['JavascriptLexer'],
   },
