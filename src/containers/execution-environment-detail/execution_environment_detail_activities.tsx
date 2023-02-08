@@ -1,19 +1,18 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { ActivitiesAPI } from 'src/api';
 import {
-  SortTable,
+  DateComponent,
   EmptyStateNoData,
   ShaLabel,
+  SortTable,
   TagLabel,
-  DateComponent,
-} from '../../components';
-import { FlexItem, Flex, Button } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
-import { ActivitiesAPI } from '../../api';
+} from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
-
-import { withContainerRepo, IDetailSharedProps } from './base';
 
 interface IState {
   loading: boolean;

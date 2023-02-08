@@ -5,7 +5,7 @@ import * as moment from 'moment';
 const availableLanguages = ['en', 'es', 'fr', 'nl', 'ja', 'zh'];
 
 // Accept-Language
-export const userLanguage =
+const userLanguage =
   navigator.languages
     .map((lang) => lang.replace(/[-_].*/, ''))
     .filter((lang) => availableLanguages.includes(lang))[0] || 'en';

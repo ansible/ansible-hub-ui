@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
+import { Button, Popover, PopoverPosition } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import * as React from 'react';
 import './helper-text.scss';
 
 interface IProps {

@@ -1,4 +1,4 @@
-import { t, defineMessage } from '@lingui/macro';
+import { defineMessage, t } from '@lingui/macro';
 
 export class Constants {
   static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
@@ -7,16 +7,11 @@ export class Constants {
 
   static readonly CARD_DEFAULT_PAGE_SIZE = 10;
   static readonly CARD_DEFAULT_PAGINATION_OPTIONS = [10, 20, 50, 100];
-  static readonly INSIGHTS_DEPLOYMENT_MODE = 'insights';
-  static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
   static readonly ADMIN_GROUP = 'system:partner-engineers';
   static PUBLISHED = 'published';
 
-  static CERTIFIED_REPO =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'published'
-      : 'rh-certified';
+  static CERTIFIED_REPO = 'rh-certified';
 
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
@@ -74,10 +69,6 @@ export class Constants {
       name: 'containers',
       label: defineMessage({ message: `Containers` }),
       object_permissions: [
-        // Turning off private container permissions since they aren't supported yet
-        // 'container.namespace_pull_containerdistribution',
-        // 'container.namespace_view_containerdistribution',
-
         // 'container.add_containerrepository', // (model_permissions.add_containerrepository)
         // 'container.change_containerrepository', // (model_permissions.change_containerrepository)
         'container.delete_containerrepository', // model_permissions.delete_containerrepository
@@ -109,37 +100,6 @@ export class Constants {
         'core.view_task',
       ],
     },
-
-    // These aren't currently used. Removing them to reduce confusion in the UI
-    // {
-    //   name: 'distribution',
-    //   label: '...',
-    //   object_permissions: [
-    //     'ansible.view_ansibledistribution', // (model_permissions.view_distribution)
-    //     'ansible.add_ansibledistribution', // (model_permissions.add_distribution)
-    //     'ansible.change_ansibledistribution', // (model_permissions.change_distribution)
-    //     'ansible.delete_ansibledistribution', // (model_permissions.delete_distribution)
-    //   ],
-    // },
-    // {
-    //   name: 'synclists',
-    //   label: '...',
-    //   object_permissions: [
-    //     'galaxy.delete_synclist',
-    //     'galaxy.change_synclist',
-    //     'galaxy.view_synclist',
-    //     'galaxy.add_synclist',
-    //   ],
-    // },
-    // {
-    //   name: 'container_distribution',
-    //   label: '...',
-    //   object_permissions: [
-    //     'container.add_containerdistribution', // (model_permissions.add_containerdistribution)
-    //     'container.change_containerdistribution', // (model_permissions.change_containerdistribution)
-    //     'container.delete_containerdistribution', // (model_permissions.delete_containerdistribution)
-    //   ],
-    // },
   ];
 
   static USER_GROUP_MGMT_PERMISSIONS = [

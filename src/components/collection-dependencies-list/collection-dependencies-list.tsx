@@ -1,15 +1,11 @@
 import { t } from '@lingui/macro';
+import { List, ListItem, ListVariant } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { List, ListItem, ListVariant } from '@patternfly/react-core';
-
-import { EmptyStateNoData } from 'src/components';
-
 import { CollectionDetailType } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
-
+import { EmptyStateNoData } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
+import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   collection: CollectionDetailType;

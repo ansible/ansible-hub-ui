@@ -1,5 +1,5 @@
-import { HubAPI } from './hub';
 import { RemoteType } from '.';
+import { HubAPI } from './hub';
 import { smartUpdate } from './remotes';
 
 class API extends HubAPI {

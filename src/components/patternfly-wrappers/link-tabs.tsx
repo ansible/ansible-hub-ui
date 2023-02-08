@@ -1,6 +1,5 @@
-import * as React from 'react';
 import cx from 'classnames';
-
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export interface IProps {

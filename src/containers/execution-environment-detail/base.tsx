@@ -1,14 +1,12 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Button, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { formatPath, Paths } from '../../paths';
-import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,
   AlertType,
@@ -20,6 +18,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 interface IState {

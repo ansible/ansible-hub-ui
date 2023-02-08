@@ -10,7 +10,7 @@ This project can now be run as a container alongside the API. Just follow the in
 
 ## Develop without containers
 
-This app can be developed in standalone mode or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights) and requires access to the Red Hat VPN as well as the insights proxy. Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
+Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
 ### Develop in Standalone Mode
 

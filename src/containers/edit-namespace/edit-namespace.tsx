@@ -1,31 +1,22 @@
 import { t } from '@lingui/macro';
+import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
-  PartnerHeader,
-  NamespaceForm,
-  ResourcesForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
-  Main,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
+  Main,
+  NamespaceForm,
+  PartnerHeader,
+  ResourcesForm,
+  closeAlertMixin,
 } from 'src/components';
-import {
-  MyNamespaceAPI,
-  NamespaceType,
-  ActiveUserAPI,
-  NamespaceLinkType,
-} from 'src/api';
-
-import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
-
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
-import { ParamHelper, mapErrorMessages } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;
@@ -40,7 +31,6 @@ interface IState {
   params: {
     tab?: string;
   };
-  userId: string;
   unauthorized: boolean;
 }
 
@@ -60,7 +50,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       loading: false,
       alerts: [],
       namespace: null,
-      userId: '',
       newLinkURL: '',
       newLinkName: '',
       errorMessages: {},
@@ -73,35 +62,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({ loading: true }, () => {
-      ActiveUserAPI.getUser()
-        .then((result) => {
-          this.setState({ userId: result.account_number }, () =>
-            this.loadNamespace(),
-          );
-        })
-        .catch((e) =>
-          this.setState(
-            {
-              loading: false,
-              redirect: formatPath(Paths.namespaceByRepo, {
-                namespace: this.props.match.params['namespace'],
-                repo: this.context.selectedRepo,
-              }),
-            },
-            () => {
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
-                  variant: 'danger',
-                  title: t`Error loading active user.`,
-                  description: e?.message,
-                },
-              ]);
-            },
-          ),
-        );
-    });
+    this.setState({ loading: true }, () => this.loadNamespace());
   }
 
   render() {
@@ -111,7 +72,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       saving,
       redirect,
       params,
-      userId,
       unauthorized,
       loading,
     } = this.state;
@@ -162,7 +122,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             <section className='body'>
               {params.tab.toLowerCase() === 'edit-details' ? (
                 <NamespaceForm
-                  userId={userId}
                   namespace={namespace}
                   errorMessages={errorMessages}
                   updateNamespace={(namespace) =>

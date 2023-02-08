@@ -1,50 +1,46 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './user-management.scss';
-
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
   Button,
   DropdownItem,
   Label,
-  Tooltip,
   LabelGroup,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
-
 import { UserPlusIcon } from '@patternfly/react-icons';
-
-import { UserAPI, UserType } from 'src/api';
-import { ParamHelper, filterIsSet } from 'src/utilities';
+import * as React from 'react';
 import {
-  StatefulDropdown,
-  CompoundFilter,
-  LoadingPageSpinner,
-  AppliedFilters,
-  Pagination,
-  SortTable,
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { UserAPI, UserType } from 'src/api';
+import {
   AlertList,
-  closeAlertMixin,
   AlertType,
+  AppliedFilters,
   BaseHeader,
-  Main,
+  CompoundFilter,
+  DateComponent,
+  EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  EmptyStateFilter,
-  DateComponent,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  SortTable,
+  StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
-import { DeleteUserModal } from './delete-user-modal';
-
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, filterIsSet } from 'src/utilities';
+import { DeleteUserModal } from './delete-user-modal';
+import './user-management.scss';
 
 interface IState {
   params: {

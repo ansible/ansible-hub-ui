@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   Button,
   Form,
@@ -7,6 +6,7 @@ import {
   Modal,
   TextInput,
 } from '@patternfly/react-core';
+import * as React from 'react';
 
 interface IProps {
   onCancel?: () => void;

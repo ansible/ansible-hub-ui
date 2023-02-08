@@ -1,47 +1,43 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './header.scss';
-
-import { Redirect, Link } from 'react-router-dom';
-
-import * as moment from 'moment';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { Trans, t } from '@lingui/macro';
 import {
-  Select,
-  SelectOption,
-  SelectVariant,
+  Alert,
+  Button,
+  Checkbox,
+  DropdownItem,
   List,
   ListItem,
   Modal,
-  Alert,
+  Select,
+  SelectOption,
+  SelectVariant,
   Text,
-  Button,
-  DropdownItem,
   Tooltip,
-  Checkbox,
 } from '@patternfly/react-core';
-import { AppContext } from 'src/loaders/app-context';
-
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import * as moment from 'moment';
+import * as React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import {
-  BaseHeader,
-  Breadcrumbs,
-  LinkTabs,
-  Logo,
-  RepoSelector,
-  Pagination,
   AlertList,
   AlertType,
-  closeAlertMixin,
+  BaseHeader,
+  Breadcrumbs,
   ConfirmModal,
+  LinkTabs,
+  Logo,
+  Pagination,
+  RepoSelector,
   StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
-
-import { CollectionAPI, CollectionDetailType } from 'src/api';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
-import { Constants } from 'src/constants';
+import './header.scss';
 
 interface IProps {
   collection: CollectionDetailType;

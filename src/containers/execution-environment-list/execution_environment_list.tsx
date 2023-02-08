@@ -1,8 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './execution-environment.scss';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Checkbox,
@@ -13,17 +9,14 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
 } from 'src/api';
-import {
-  filterIsSet,
-  parsePulpIDFromURL,
-  waitForTask,
-  ParamHelper,
-} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -33,6 +26,7 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -42,12 +36,17 @@ import {
   StatefulDropdown,
   Tooltip,
   closeAlertMixin,
-  EmptyStateUnauthorized,
 } from 'src/components';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from 'src/loaders/app-context';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import {
+  ParamHelper,
+  filterIsSet,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
+import './execution-environment.scss';
 
 interface IState {
   alerts: AlertType[];

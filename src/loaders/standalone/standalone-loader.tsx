@@ -1,14 +1,5 @@
-import { t, Trans } from '@lingui/macro';
-// import PropTypes from 'prop-types';
-import * as React from 'react';
 import '../app.scss';
-import {
-  withRouter,
-  Link,
-  RouteComponentProps,
-  matchPath,
-} from 'react-router-dom';
-
+import { Trans, t } from '@lingui/macro';
 import '@patternfly/patternfly/patternfly.scss';
 import {
   DropdownItem,
@@ -28,14 +19,19 @@ import {
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
 import { reject, some } from 'lodash';
-
-import { Routes } from './routes';
-import { Paths, formatPath } from 'src/paths';
+import * as React from 'react';
+import {
+  Link,
+  RouteComponentProps,
+  matchPath,
+  withRouter,
+} from 'react-router-dom';
+import Logo from 'src/../static/images/logo_large.svg';
 import {
   ActiveUserAPI,
-  UserType,
   FeatureFlagsType,
   SettingsType,
+  UserType,
 } from 'src/api';
 import {
   AlertType,
@@ -44,8 +40,9 @@ import {
   StatefulDropdown,
 } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from '../app-context';
-import Logo from 'src/../static/images/logo_large.svg';
+import { Routes } from './routes';
 
 interface IState {
   user: UserType;
@@ -341,7 +338,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             !user.is_anonymous,
         }),
         menuItem(t`Namespaces`, {
-          url: Paths[NAMESPACE_TERM],
+          url: Paths.namespaces,
           condition: ({ settings, user }) =>
             settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
             !user.is_anonymous,
