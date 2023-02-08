@@ -187,10 +187,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private renderForm(requiredFields, disabledFields, extra?) {
-    const { errorMessages, remote } = this.props;
+    const { errorMessages, remote, remoteType } = this.props;
     const { filenames } = this.state;
     const { collection_signing } = this.context.featureFlags;
-    const writeOnlyFields = remote['write_only_fields'];
+    const writeOnlyFields =
+      remote[
+        remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields'
+      ];
 
     const docsAnsibleLink = (
       <a
@@ -778,8 +781,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private updateIsSet(fieldName: string, value: boolean) {
-    const { remote } = this.props;
-    const hiddenFieldsName = 'write_only_fields';
+    const { remote, remoteType } = this.props;
+    const hiddenFieldsName =
+      remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields';
 
     const newFields: WriteOnlyFieldType[] = remote[hiddenFieldsName].map(
       (field) =>
