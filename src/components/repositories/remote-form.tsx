@@ -106,6 +106,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       showModal,
       title,
     } = this.props;
+
     if (!remote) {
       return null;
     }
@@ -116,13 +117,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
     let disabledFields = allowEditName ? [] : ['name'];
 
     switch (remoteType) {
+      case 'ansible-remote':
       case 'none':
         // require only name, url; nothing disabled
-        break;
-
-      case 'ansible-remote':
-        requiredFields = requiredFields.concat(['auth_url']);
-        disabledFields = disabledFields.concat(['requirements_file']);
         break;
 
       case 'certified':
