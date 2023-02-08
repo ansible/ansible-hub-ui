@@ -4,8 +4,30 @@ import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { Details, Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
+import { parsePulpIDFromURL } from 'src/utilities';
 
-const wip = '🚧 ';
+const initialRemote = {
+  name: '',
+  url: '',
+  ca_cert: null,
+  client_cert: null,
+  tls_validation: true,
+  proxy_url: null,
+  download_concurrency: null,
+  rate_limit: null,
+  requirements_file: null,
+  auth_url: null,
+  signed_only: false,
+
+  hidden_fields: [
+    'client_key',
+    'proxy_username',
+    'proxy_password',
+    'username',
+    'password',
+    'token',
+  ].map((name) => ({ name, is_set: false })),
+};
 
 export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
   breadcrumbs: ({ name }) =>
@@ -14,27 +36,23 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
       name && { url: formatPath(Paths.ansibleRemoteDetail, { name }), name },
       name ? { name: t`Edit` } : { name: t`Add` },
     ].filter(Boolean),
+
   condition: isLoggedIn,
   displayName: 'AnsibleRemoteEdit',
   errorTitle: t`Remote could not be displayed.`,
   query: ({ name }) =>
     AnsibleRemoteAPI.list({ name }).then(({ data: { results } }) => results[0]),
-  title: ({ name }) => wip + (name || t`Add new remote`),
+
+  title: ({ name }) => name || t`Add new remote`,
   transformParams: ({ name, ...rest }) => ({
     ...rest,
     name: name !== '_' ? name : null,
   }),
-  render: (item, { query, state, setState }) => {
+
+  render: (item, { navigate, state, setState }) => {
     if (!state.remoteToEdit) {
       const remoteToEdit = {
-        name: '',
-        url: '',
-        write_only_fields: [
-          { name: 'token', is_set: false },
-          { name: 'password', is_set: false },
-          { name: 'proxy_password', is_set: false },
-          { name: 'client_key', is_set: false },
-        ],
+        ...initialRemote,
         ...item,
       };
       setState({ remoteToEdit, errorMessages: {} });
@@ -46,52 +64,73 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
     }
 
     return (
-      <>
-        <Details item={item} />
+      <RemoteForm
+        allowEditName={!item}
+        remote={remoteToEdit}
+        updateRemote={(r) => setState({ remoteToEdit: r })}
+        remoteType='ansible-remote'
+        showMain={true}
+        saveRemote={() => {
+          const { remoteToEdit } = state;
 
-        <RemoteForm
-          allowEditName={!item}
-          remote={remoteToEdit}
-          updateRemote={(r) => setState({ remoteToEdit: r })}
-          remoteType='ansible-remote'
-          showMain={true}
-          saveRemote={() => {
-            const { remoteToEdit } = state;
-            console.log(remoteToEdit);
+          const data = { ...remoteToEdit };
 
-            try {
-              const distro_path =
-                remoteToEdit.repositories[0].distributions[0].base_path;
+          if (!item) {
+            // prevent "This field may not be blank." when writing in and then deleting username/password/etc
+            // only when creating, edit diffs with item
+            Object.keys(data).forEach((k) => {
+              if (data[k] === '' || data[k] == null) {
+                delete data[k];
+              }
+            });
 
-              console.log({
-                distro_path,
-                remoteToEdit,
-              });
-              //                .then(() => {
-              //                  setState(
-              //                    {
-              //                      errorMessages: {},
-              //                      remoteToEdit: undefined,
-              //                    },
-              //                    () => query(),
-              //                  );
-              //                })
-              //                .catch((err) =>
-              //                  setState({ errorMessages: mapErrorMessages(err) }),
-              //                );
-            } catch {
+            delete data.hidden_fields;
+          }
+
+          // api requires traling slash, fix the trivial case
+          if (data.url && !data.url.includes('?') && !data.url.endsWith('/')) {
+            data.url += '/';
+          }
+
+          const promise = !item
+            ? AnsibleRemoteAPI.create(data)
+            : AnsibleRemoteAPI.smartUpdate(
+                parsePulpIDFromURL(item.pulp_href),
+                data,
+                item,
+              );
+
+          promise
+            .then(() => {
               setState({
-                errorMessages: {
-                  __nofield: t`Can't update remote without a distribution attached to it.`,
-                },
+                errorMessages: {},
+                remoteToEdit: undefined,
               });
-            }
-          }}
-          errorMessages={errorMessages}
-          closeModal={() => setState({ errorMessages: {} })}
-        />
-        <Details item={remoteToEdit} />
-      </>
+              // TODO context addAlert, task variant on update
+              navigate(
+                formatPath(Paths.ansibleRemoteDetail, {
+                  name: data.name,
+                }),
+              );
+            })
+            .catch(({ response: { data } }) =>
+              setState({
+                errorMessages: { __nofield: data.non_field_errors, ...data },
+              }),
+            );
+        }}
+        errorMessages={errorMessages}
+        closeModal={() => {
+          setState({ errorMessages: {}, remoteToEdit: undefined });
+          navigate(
+            item
+              ? formatPath(Paths.ansibleRemoteDetail, {
+                  name: item.name,
+                })
+              : formatPath(Paths.ansibleRemotes),
+          );
+        }}
+      />
     );
   },
 });

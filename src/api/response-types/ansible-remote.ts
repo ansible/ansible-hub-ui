@@ -1,4 +1,5 @@
 export class AnsibleRemoteType {
+  auth_url: string;
   ca_cert: string;
   client_cert: string;
   download_concurrency: number;
@@ -10,7 +11,6 @@ export class AnsibleRemoteType {
   tls_validation: boolean;
   url: string;
 
-  // auth_url
   // connect_timeout
   // headers
   // max_retries
@@ -23,4 +23,9 @@ export class AnsibleRemoteType {
   // sock_read_timeout
   // sync_dependencies
   // total_timeout
+
+  hidden_fields: {
+    is_set: boolean;
+    name: string;
+  }[];
 }
