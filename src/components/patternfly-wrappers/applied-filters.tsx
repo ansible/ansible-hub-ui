@@ -1,8 +1,6 @@
+import { Button, Chip, ChipGroup } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { Chip, ChipGroup, Button } from '@patternfly/react-core';
-
-import { ParamHelper } from '../../utilities';
+import { ParamHelper } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */

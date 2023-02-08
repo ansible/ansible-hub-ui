@@ -1,21 +1,18 @@
-import * as React from 'react';
-
 import {
-  TextInput,
-  InputGroup,
   Button,
   ButtonVariant,
   DropdownItem,
+  InputGroup,
   Select,
   SelectGroup,
   SelectOption,
   SelectVariant,
+  TextInput,
 } from '@patternfly/react-core';
-
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
-
-import { StatefulDropdown } from '../../components';
-import { ParamHelper } from '../../utilities';
+import * as React from 'react';
+import { StatefulDropdown } from 'src/components';
+import { ParamHelper } from 'src/utilities';
 
 class FilterOption {
   id: string;

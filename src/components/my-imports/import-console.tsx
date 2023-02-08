@@ -1,21 +1,17 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './my-imports.scss';
-
 import { Spinner, Tooltip } from '@patternfly/react-core';
+import cx from 'classnames';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { formatPath, Paths } from '../../paths';
 import {
-  ImportListType,
-  ImportDetailType,
-  PulpStatus,
   CollectionVersion,
-} from '../../api';
-
-import { StatusIndicator } from '../../components';
-
-import { Constants } from '../../constants';
+  ImportDetailType,
+  ImportListType,
+  PulpStatus,
+} from 'src/api';
+import { StatusIndicator } from 'src/components';
+import { Constants } from 'src/constants';
+import { Paths, formatPath } from 'src/paths';
+import './my-imports.scss';
 
 interface IProps {
   task: ImportDetailType;

@@ -1,49 +1,45 @@
-import * as React from 'react';
-
-import * as moment from 'moment';
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
   Button,
   DropdownItem,
   EmptyState,
-  EmptyStateIcon,
-  Title,
   EmptyStateBody,
+  EmptyStateIcon,
   EmptyStateVariant,
   Label,
+  Title,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
-
-import { WarningTriangleIcon, UserPlusIcon } from '@patternfly/react-icons';
-
-import { UserAPI, UserType } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { UserPlusIcon, WarningTriangleIcon } from '@patternfly/react-icons';
+import * as moment from 'moment';
+import * as React from 'react';
 import {
-  StatefulDropdown,
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { UserAPI, UserType } from 'src/api';
+import {
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
   CompoundFilter,
   LoadingPageSpinner,
-  AppliedFilters,
+  Main,
   Pagination,
   SortTable,
-  AlertList,
+  StatefulDropdown,
   closeAlertMixin,
-  AlertType,
-  BaseHeader,
-  Main,
-} from '../../components';
+} from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities';
 import { DeleteUserModal } from './delete-user-modal';
-
-import { Paths, formatPath } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {

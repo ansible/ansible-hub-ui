@@ -8,7 +8,7 @@ const isBuild = process.env.NODE_ENV === 'production';
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
-// a normal webpack config. See config/insights.prod.webpack.config.js for an
+// a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
 
 // hardcoded to 4.2 instead of running git when HUB_UI_VERSION is not provided
@@ -21,19 +21,15 @@ const defaultConfigs = [
   { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
-  { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
-  { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
-  { name: 'USE_FAVICON', default: true, scope: 'webpack' },
 ];
 
 module.exports = (inputConfigs) => {
@@ -54,24 +50,16 @@ module.exports = (inputConfigs) => {
     }
   });
 
-  const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
-
   // config for HtmlWebpackPlugin
   const htmlPluginConfig = {
     // used by src/index.html
     applicationName: customConfigs.APPLICATION_NAME,
-    targetEnv: customConfigs.DEPLOYMENT_MODE,
+
+    favicon: 'static/images/favicon.ico',
 
     // standalone needs injecting js and css into dist/index.html
-    inject: isStandalone,
+    inject: true,
   };
-
-  // being able to turn off the favicon is useful for deploying to insights mode
-  // console.redhat.com sets its own favicon and ours tends to override it if we
-  // set one
-  if (customConfigs.USE_FAVICON) {
-    htmlPluginConfig['favicon'] = 'static/images/favicon.ico';
-  }
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
@@ -82,11 +70,11 @@ module.exports = (inputConfigs) => {
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
-    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
-    bundlePfModules: isStandalone,
+    // frontend-components-config 4.5.0+: don't remove patternfly from builds
+    bundlePfModules: true,
 
     // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: !isStandalone,
+    useChromeTemplate: false,
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -150,13 +138,11 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
   }
 
-  if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
-    console.log('Overriding configs for standalone mode.');
+  console.log('Overriding configs for standalone mode.');
 
-    const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    console.log(`New entry.App: ${newEntry}`);
-    newWebpackConfig.entry.App = newEntry;
-  }
+  const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
+  console.log(`New entry.App: ${newEntry}`);
+  newWebpackConfig.entry.App = newEntry;
 
   plugins.push(new ForkTsCheckerWebpackPlugin());
 

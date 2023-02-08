@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { ActiveUserAPI } from 'src/api';
 import {
   CertificationDashboard,
   CollectionContent,
@@ -8,28 +8,26 @@ import {
   CollectionDocs,
   CollectionImportLog,
   EditNamespace,
+  EditUser,
+  GroupDetail,
+  GroupList,
   LoginPage,
-  MyImports,
   ManageNamespace,
-  PartnerDetail,
+  MyImports,
   MyNamespaces,
-  Partners,
   NotFound,
+  PartnerDetail,
+  Partners,
+  RepositoryList,
   Search,
   TokenPageStandalone,
-  UserList,
-  EditUser,
-  UserDetail,
   UserCreate,
+  UserDetail,
+  UserList,
   UserProfile,
-  GroupList,
-  GroupDetail,
-  RepositoryList,
-} from '../../containers';
-import { ActiveUserAPI } from '../../api';
+} from 'src/containers';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from '../app-context';
-
-import { Paths, formatPath } from '../../paths';
 
 interface IProps extends RouteComponentProps {
   Component: any;
@@ -95,7 +93,7 @@ export class Routes extends React.Component<any> {
     { comp: CertificationDashboard, path: Paths.approvalDashboard },
     { comp: NotFound, path: Paths.notFound },
     { comp: TokenPageStandalone, path: Paths.token },
-    { comp: Partners, path: Paths[NAMESPACE_TERM] },
+    { comp: Partners, path: Paths.namespaces },
     { comp: EditNamespace, path: Paths.editNamespace },
     { comp: ManageNamespace, path: Paths.myCollections },
     { comp: ManageNamespace, path: Paths.myCollectionsByRepo },

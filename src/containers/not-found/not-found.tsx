@@ -1,12 +1,9 @@
-import * as React from 'react';
-import './not-found.scss';
-// had to declare *.gif in src/index.d.ts
-import NotFoundImage from '../../../static/images/not_found.svg';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Bullseye } from '@patternfly/react-core';
-
-import { BaseHeader, Main } from '../../components';
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import NotFoundImage from 'src/../static/images/not_found.svg';
+import { BaseHeader, Main } from 'src/components';
+import './not-found.scss';
 
 class NotFound extends React.Component<RouteComponentProps, {}> {
   render() {

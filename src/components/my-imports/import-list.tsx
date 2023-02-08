@@ -1,10 +1,3 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './my-imports.scss';
-
-import * as moment from 'moment';
-import { cloneDeep } from 'lodash';
-
 import {
   Button,
   ButtonVariant,
@@ -20,10 +13,14 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
-
-import { PulpStatus, NamespaceType, ImportListType } from '../../api';
-import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
+import cx from 'classnames';
+import { cloneDeep } from 'lodash';
+import * as moment from 'moment';
+import * as React from 'react';
+import { ImportListType, NamespaceType, PulpStatus } from 'src/api';
+import { Constants } from 'src/constants';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './my-imports.scss';
 
 interface IProps {
   namespaces: NamespaceType[];

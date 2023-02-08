@@ -1,11 +1,11 @@
-import { BaseAPI } from './base';
+import axios from 'axios';
 import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
   UserType,
-} from '../api';
-import axios from 'axios';
+} from 'src/api';
+import { BaseAPI } from './base';
 
 export class API extends BaseAPI {
   apiPath = this.getUIPath('repo/');

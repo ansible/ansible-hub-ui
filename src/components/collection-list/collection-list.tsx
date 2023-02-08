@@ -1,27 +1,25 @@
-import * as React from 'react';
-import './list.scss';
-
 import {
-  TextInput,
   Button,
-  DropdownItem,
   DataList,
+  DropdownItem,
   EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateVariant,
   EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStateVariant,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-
-import { CollectionListType } from '../../api';
+import * as React from 'react';
+import { CollectionListType } from 'src/api';
 import {
   CollectionListItem,
-  Toolbar,
   Pagination,
   StatefulDropdown,
-} from '../../components';
-import { ParamHelper } from '../../utilities/param-helper';
+  Toolbar,
+} from 'src/components';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './list.scss';
 
 interface IProps {
   collections: CollectionListType[];

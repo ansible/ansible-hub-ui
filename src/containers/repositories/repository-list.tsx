@@ -1,26 +1,23 @@
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import {
+  DistributionAPI,
+  DistributionType,
+  RemoteAPI,
+  RemoteType,
+} from 'src/api';
 import {
   BaseHeader,
   LoadingPageSpinner,
-  Main,
-  Tabs,
-  RemoteRepositoryTable,
   LocalRepositoryTable,
+  Main,
   RemoteForm,
-} from '../../components';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
-import { Constants } from '../../constants';
-import {
-  RemoteAPI,
-  RemoteType,
-  DistributionAPI,
-  MyDistributionAPI,
-  DistributionType,
-} from '../../api';
-import { AppContext } from '../../loaders/app-context';
+  RemoteRepositoryTable,
+  Tabs,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 export class Repository {
   name: string;

@@ -1,43 +1,35 @@
-import * as React from 'react';
-import './search.scss';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
+  Button,
   DataList,
   EmptyState,
+  EmptyStateBody,
   EmptyStateIcon,
+  EmptyStateVariant,
+  Switch,
   Title,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  EmptyStateBody,
-  EmptyStateVariant,
-  Button,
-  ToolbarContent,
-  Switch,
 } from '@patternfly/react-core';
-
 import { SearchIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionAPI, CollectionListType } from 'src/api';
 import {
+  AppliedFilters,
   BaseHeader,
-  CollectionCard,
   CardListSwitcher,
+  CollectionCard,
   CollectionListItem,
   CompoundFilter,
-  Pagination,
   LoadingPageSpinner,
-  AppliedFilters,
-} from '../../components';
-import {
-  CollectionAPI,
-  CollectionListType,
-  SyncListType,
-  MySyncListAPI,
-} from '../../api';
-import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+  Pagination,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];
@@ -50,7 +42,6 @@ interface IState {
     view_type?: string;
   };
   loading: boolean;
-  synclist: SyncListType;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -81,7 +72,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       params: params,
       numberOfResults: 0,
       loading: true,
-      synclist: undefined,
     };
   }
 
@@ -251,61 +241,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderSyncToggle(c.name, c.namespace.name)}
               repo={this.context.selectedRepo}
             />
           );
         })}
       </div>
     );
-  }
-
-  private renderSyncToggle(name: string, namespace: string): React.ReactNode {
-    const { synclist } = this.state;
-    if (!synclist) {
-      return null;
-    }
-    return (
-      <Switch
-        id={namespace + '.' + name}
-        className='sync-toggle'
-        label='Sync'
-        isChecked={this.isCollectionSynced(name, namespace)}
-        onChange={() => this.toggleCollectionSync(name, namespace)}
-      />
-    );
-  }
-
-  private toggleCollectionSync(name: string, namespace: string) {
-    const synclist = { ...this.state.synclist };
-
-    const colIndex = synclist.collections.findIndex(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (colIndex < 0) {
-      synclist.collections.push({ name: name, namespace: namespace });
-    } else {
-      synclist.collections.splice(colIndex, 1);
-    }
-
-    MySyncListAPI.update(synclist.id, synclist).then((response) => {
-      this.setState({ synclist: response.data });
-      MySyncListAPI.curate(synclist.id).then(() => null);
-    });
-  }
-
-  private isCollectionSynced(name: string, namespace: string): boolean {
-    const { synclist } = this.state;
-    const found = synclist.collections.find(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (synclist.policy === 'include') {
-      return !(found === undefined);
-    } else {
-      return found === undefined;
-    }
   }
 
   private renderList(collections) {
@@ -318,7 +259,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={this.renderSyncToggle(c.name, c.namespace.name)}
                 repo={this.context.selectedRepo}
               />
             ))}

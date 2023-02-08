@@ -1,12 +1,10 @@
-import * as React from 'react';
-
 import {
   Pagination as PaginationPF,
   PaginationVariant,
 } from '@patternfly/react-core';
-
-import { Constants } from '../../constants';
-import { ParamHelper } from '../../utilities/param-helper';
+import * as React from 'react';
+import { Constants } from 'src/constants';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
   /** Number of total items returned by the query */

@@ -1,11 +1,10 @@
-import * as React from 'react';
-
 import {
-  LongArrowAltUpIcon,
-  LongArrowAltDownIcon,
   ArrowsAltVIcon,
+  LongArrowAltDownIcon,
+  LongArrowAltUpIcon,
 } from '@patternfly/react-icons';
-import { ParamHelper } from '../../utilities';
+import * as React from 'react';
+import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 
 interface IProps {

@@ -1,19 +1,10 @@
 // Fool TypeScript into thinking that we actually have typings for these components.
 // This will tell typescript that anything from this module is of type any.
 
-declare module 'react-markdown';
-declare module 'react-router-hash-link';
-declare module 'file-saver';
-declare module '*.gif';
 declare module '*.svg';
 
 // Declare configuration globals here so that TypeScript compiles
-declare var API_HOST;
 declare var API_BASE_PATH;
-declare var UI_BASE_PATH;
-declare var DEPLOYMENT_MODE;
-declare var NAMESPACE_TERM;
+declare var API_HOST;
 declare var APPLICATION_NAME;
-
-// HACK: ensure l10n marked strings can be backported without breaking
-declare var _;
+declare var UI_BASE_PATH;

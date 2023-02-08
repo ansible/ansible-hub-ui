@@ -1,20 +1,15 @@
-import * as React from 'react';
-import './collection-detail.scss';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
-
 import {
+  Alert,
   EmptyState,
   EmptyStateBody,
+  EmptyStateIcon,
   EmptyStateVariant,
   Title,
-  EmptyStateIcon,
-  Alert,
 } from '@patternfly/react-core';
-
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import {
   CollectionHeader,
   LoadingPageWithHeader,
@@ -22,11 +17,11 @@ import {
   RenderPluginDoc,
   TableOfContents,
 } from 'src/components';
-
-import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
+import { IBaseCollectionState, loadCollection } from './base';
+import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -54,8 +49,6 @@ class CollectionDocs extends React.Component<
   render() {
     const { params, collection } = this.state;
     const urlFields = this.props.match.params;
-    const name =
-      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -104,7 +97,7 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      { url: Paths[NAMESPACE_TERM], name: name },
+      { url: Paths.namespaces, name: 'Namespaces' },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

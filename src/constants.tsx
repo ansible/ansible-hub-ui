@@ -51,23 +51,6 @@ export class Constants {
         'ansible.view_collectionremote',
       ],
     },
-    // These aren't currently used. Removing them to reduce confusion in the UI
-    // {
-    //   name: 'distribution',
-    //   object_permissions: [
-    //     'ansible.change_ansibledistribution',
-    //     'ansible.view_ansibledistribution',
-    //   ],
-    // },
-    // {
-    //   name: 'synclists',
-    //   object_permissions: [
-    //     'galaxy.delete_synclist',
-    //     'galaxy.change_synclist',
-    //     'galaxy.view_synclist',
-    //     'galaxy.add_synclist',
-    //   ],
-    // },
   ];
   static HUMAN_PERMISSIONS = {
     'galaxy.add_namespace': 'Add namespace',

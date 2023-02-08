@@ -1,10 +1,8 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './header.scss';
-
 import { Title } from '@patternfly/react-core';
-
-import { Logo } from '../../components';
+import cx from 'classnames';
+import * as React from 'react';
+import { Logo } from 'src/components';
+import './header.scss';
 
 interface IProps {
   title: string;

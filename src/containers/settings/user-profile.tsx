@@ -1,19 +1,17 @@
-import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-
 import { Button } from '@patternfly/react-core';
-
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { ActiveUserAPI, UserType } from 'src/api';
 import {
+  AlertList,
+  AlertType,
   LoadingPageWithHeader,
   UserFormPage,
-  AlertType,
-  AlertList,
   closeAlertMixin,
-} from '../../components';
-import { UserType, ActiveUserAPI } from '../../api';
-import { Paths } from '../../paths';
-import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths } from 'src/paths';
+import { mapErrorMessages } from 'src/utilities';
 
 interface IState {
   user: UserType;

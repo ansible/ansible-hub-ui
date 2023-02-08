@@ -1,23 +1,19 @@
-import * as React from 'react';
-import './my-imports.scss';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
-
-import { BaseHeader, ImportConsole, ImportList, Main } from '../../components';
-
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {
+  CollectionVersion,
+  CollectionVersionAPI,
   ImportAPI,
   ImportDetailType,
   ImportListType,
+  MyNamespaceAPI,
   NamespaceType,
   PulpStatus,
-  MyNamespaceAPI,
-  CollectionVersion,
-  CollectionVersionAPI,
-} from '../../api';
-
-import { ParamHelper } from '../../utilities/param-helper';
+} from 'src/api';
+import { BaseHeader, ImportConsole, ImportList, Main } from 'src/components';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './my-imports.scss';
 
 interface IState {
   selectedImport: ImportListType;

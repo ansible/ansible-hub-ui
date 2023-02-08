@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Modal, Button, Spinner } from '@patternfly/react-core';
+import { Button, Modal, Spinner } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
-import { UserType, UserAPI } from '../../api';
-import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/app-context';
+import * as React from 'react';
+import { UserAPI, UserType } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
+import { mapErrorMessages } from 'src/utilities';
 
 interface IState {
   isWaitingForResponse: boolean;

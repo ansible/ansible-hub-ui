@@ -1,15 +1,13 @@
-import * as React from 'react';
-import './sort.scss';
-
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import {
-  SortAmountDownIcon,
-  SortAmountUpIcon,
   SortAlphaDownIcon,
   SortAlphaUpIcon,
+  SortAmountDownIcon,
+  SortAmountUpIcon,
 } from '@patternfly/react-icons';
-
-import { ParamHelper } from '../../utilities/param-helper';
+import * as React from 'react';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './sort.scss';
 
 export class SortFieldType {
   id: string;

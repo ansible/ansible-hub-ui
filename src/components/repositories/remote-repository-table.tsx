@@ -1,6 +1,3 @@
-import * as React from 'react';
-import * as moment from 'moment';
-
 import {
   Button,
   DropdownItem,
@@ -8,21 +5,21 @@ import {
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
+  Popover,
   Title,
   Tooltip,
-  Popover,
 } from '@patternfly/react-core';
 import {
+  ExclamationCircleIcon,
   WarningTriangleIcon,
   WrenchIcon,
-  ExclamationCircleIcon,
 } from '@patternfly/react-icons';
-
-import { RemoteType, UserType, PulpStatus } from '../../api';
+import * as moment from 'moment';
+import * as React from 'react';
+import { PulpStatus, RemoteType, UserType } from 'src/api';
+import { StatusIndicator } from 'src/components';
+import { Constants } from 'src/constants';
 import { HelperText, SortTable, StatefulDropdown } from '..';
-import { StatusIndicator } from '../../components';
-
-import { Constants } from '../../constants';
 
 interface IProps {
   remotes: RemoteType[];

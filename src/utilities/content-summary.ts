@@ -1,4 +1,4 @@
-import { ContentSummaryType } from '../api';
+import { ContentSummaryType } from 'src/api';
 
 class Summary {
   total_count: number;

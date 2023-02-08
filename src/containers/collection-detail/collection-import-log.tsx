@@ -1,19 +1,16 @@
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
-import { ImportAPI, ImportDetailType, ImportListType } from '../../api';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
   CollectionHeader,
-  LoadingPageWithHeader,
   ImportConsole,
+  LoadingPageWithHeader,
   Main,
-} from '../../components';
-
-import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from '../../utilities/param-helper';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { IBaseCollectionState, loadCollection } from './base';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;
@@ -51,15 +48,13 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
       selectedImport,
       apiError,
     } = this.state;
-    const name =
-      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const breadcrumbs = [
-      { url: Paths[NAMESPACE_TERM], name: name },
+      { url: Paths.namespaces, name: 'Namespaces' },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

@@ -1,51 +1,48 @@
-import * as React from 'react';
-import './certification-dashboard.scss';
-
-import * as moment from 'moment';
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import { BaseHeader, Main } from '../../components';
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
   Button,
   DropdownItem,
   EmptyState,
-  EmptyStateIcon,
-  Title,
   EmptyStateBody,
+  EmptyStateIcon,
   EmptyStateVariant,
+  Title,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
 } from '@patternfly/react-core';
-
 import {
-  InfoCircleIcon,
-  ExclamationCircleIcon,
   CheckCircleIcon,
+  ExclamationCircleIcon,
+  InfoCircleIcon,
   WarningTriangleIcon,
 } from '@patternfly/react-icons';
-
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
-import { ParamHelper } from '../../utilities';
+import * as moment from 'moment';
+import * as React from 'react';
 import {
-  LoadingPageWithHeader,
-  StatefulDropdown,
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { CollectionVersion, CollectionVersionAPI, TaskAPI } from 'src/api';
+import { BaseHeader, Main } from 'src/components';
+import {
+  AlertList,
+  AlertType,
+  AppliedFilters,
   CompoundFilter,
   LoadingPageSpinner,
-  AppliedFilters,
+  LoadingPageWithHeader,
   Pagination,
-  AlertList,
-  closeAlertMixin,
-  AlertType,
   SortTable,
-} from '../../components';
-import { Paths, formatPath } from '../../paths';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+  StatefulDropdown,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities';
+import './certification-dashboard.scss';
 
 interface IState {
   params: {

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Constants } from '../constants';
-import { ParamHelper } from '../utilities';
 import Cookies from 'js-cookie';
+import { Constants } from 'src/constants';
+import { ParamHelper } from 'src/utilities';
 
 export class BaseAPI {
   UI_API_VERSION = 'v1';

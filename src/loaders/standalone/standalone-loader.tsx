@@ -1,37 +1,35 @@
-import * as React from 'react';
 import '../app.scss';
-import {
-  withRouter,
-  Link,
-  RouteComponentProps,
-  matchPath,
-} from 'react-router-dom';
-
 import '@patternfly/patternfly/patternfly.scss';
 import {
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageHeaderTools,
-  Nav,
-  NavList,
-  NavItem,
   DropdownItem,
   DropdownSeparator,
+  Nav,
   NavGroup,
+  NavItem,
+  NavList,
+  Page,
+  PageHeader,
+  PageHeaderTools,
+  PageSidebar,
   Select,
   SelectOption,
 } from '@patternfly/react-core';
-
-import { Routes } from './routes';
-import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserType } from '../../api';
-import { SmallLogo, StatefulDropdown } from '../../components';
-import { AboutModalWindow } from '../../containers';
-import { AppContext } from '../app-context';
-import { Constants } from '../../constants';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
-import Logo from '../../../static/images/logo_large.svg';
+import * as React from 'react';
+import {
+  Link,
+  RouteComponentProps,
+  matchPath,
+  withRouter,
+} from 'react-router-dom';
+import Logo from 'src/../static/images/logo_large.svg';
+import { ActiveUserAPI, UserType } from 'src/api';
+import { SmallLogo, StatefulDropdown } from 'src/components';
+import { Constants } from 'src/constants';
+import { AboutModalWindow } from 'src/containers';
+import { Paths, formatPath } from 'src/paths';
+import { AppContext } from '../app-context';
+import { Routes } from './routes';
 
 interface IState {
   user: UserType;
@@ -262,7 +260,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                 </Link>
               </NavItem>
               <NavItem>
-                <Link to={Paths[NAMESPACE_TERM]}>Namespaces</Link>
+                <Link to={Paths.namespaces}>Namespaces</Link>
               </NavItem>
               <NavItem>
                 <Link to={Paths.myNamespaces}>My Namespaces</Link>

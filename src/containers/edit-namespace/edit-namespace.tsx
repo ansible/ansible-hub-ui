@@ -1,27 +1,18 @@
+import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
-  PartnerHeader,
-  NamespaceForm,
-  ResourcesForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
   Main,
-} from '../../components';
-import {
-  MyNamespaceAPI,
-  NamespaceType,
-  ActiveUserAPI,
-  NamespaceLinkType,
-} from '../../api';
-
-import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
-
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
+  NamespaceForm,
+  PartnerHeader,
+  ResourcesForm,
+  closeAlertMixin,
+} from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;
@@ -35,7 +26,6 @@ interface IState {
   params: {
     tab?: string;
   };
-  userId: string;
 }
 
 class EditNamespace extends React.Component<RouteComponentProps, IState> {
@@ -53,7 +43,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     this.state = {
       alerts: [],
       namespace: null,
-      userId: '',
       newLinkURL: '',
       newLinkName: '',
       errorMessages: {},
@@ -65,16 +54,11 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    ActiveUserAPI.getUser().then((result) => {
-      this.setState({ userId: result.account_number }, () =>
-        this.loadNamespace(),
-      );
-    });
+    this.loadNamespace();
   }
 
   render() {
-    const { namespace, errorMessages, saving, redirect, params, userId } =
-      this.state;
+    const { namespace, errorMessages, saving, redirect, params } = this.state;
 
     if (redirect) {
       return <Redirect to={redirect} />;
@@ -109,7 +93,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           <section className='body'>
             {params.tab.toLowerCase() === 'edit details' ? (
               <NamespaceForm
-                userId={userId}
                 namespace={namespace}
                 errorMessages={errorMessages}
                 updateNamespace={(namespace) =>

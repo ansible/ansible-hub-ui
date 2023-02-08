@@ -1,21 +1,18 @@
-import * as React from 'react';
-
 import {
-  Form,
-  FormGroup,
-  TextInput,
   ActionGroup,
   Button,
   Chip,
   ChipGroup,
+  Form,
+  FormGroup,
   Label,
+  TextInput,
   Tooltip,
 } from '@patternfly/react-core';
 import { UserPlusIcon } from '@patternfly/react-icons';
-
-import { APISearchTypeAhead, HelperText } from '../../components';
-
-import { UserType, GroupAPI } from '../../api';
+import * as React from 'react';
+import { GroupAPI, UserType } from 'src/api';
+import { APISearchTypeAhead, HelperText } from 'src/components';
 
 interface IProps {
   /** User to edit */
