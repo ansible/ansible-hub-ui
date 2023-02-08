@@ -110,23 +110,29 @@ export class RemoteForm extends React.Component<IProps, IState> {
     let requiredFields = ['name', 'url'];
     let disabledFields = allowEditName ? [] : ['name'];
 
-    if (remoteType === 'certified') {
-      requiredFields = requiredFields.concat(['auth_url']);
-      disabledFields = disabledFields.concat(['requirements_file']);
-    }
+    switch (remoteType) {
+      case 'none':
+        // require only name, url; nothing disabled
+        break;
 
-    if (remoteType === 'community') {
-      requiredFields = requiredFields.concat(['requirements_file']);
-      disabledFields = disabledFields.concat(['auth_url', 'token']);
-    }
+      case 'certified':
+        requiredFields = requiredFields.concat(['auth_url']);
+        disabledFields = disabledFields.concat(['requirements_file']);
+        break;
 
-    if (remoteType === 'registry') {
-      disabledFields = disabledFields.concat([
-        'auth_url',
-        'token',
-        'requirements_file',
-        'signed_only',
-      ]);
+      case 'community':
+        requiredFields = requiredFields.concat(['requirements_file']);
+        disabledFields = disabledFields.concat(['auth_url', 'token']);
+        break;
+
+      case 'registry':
+        disabledFields = disabledFields.concat([
+          'auth_url',
+          'token',
+          'requirements_file',
+          'signed_only',
+        ]);
+        break;
     }
 
     const save = (
