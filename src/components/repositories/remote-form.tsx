@@ -258,7 +258,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <Switch
               id='signed_only'
-              isChecked={remote.signed_only}
+              isChecked={!!remote.signed_only}
               onChange={(value) => this.updateRemote(value, 'signed_only')}
             />
           </FormGroup>
