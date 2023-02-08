@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
+  ActionGroup,
   Button,
   Checkbox,
   ExpandableSection,
@@ -154,9 +155,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (showMain) {
       return (
         <>
-          {this.renderForm(requiredFields, disabledFields)}
-          {save}
-          {cancel}
+          {this.renderForm(
+            requiredFields,
+            disabledFields,
+            <ActionGroup key='actions'>
+              {save}
+              {cancel}
+            </ActionGroup>,
+          )}
         </>
       );
     }
@@ -174,7 +180,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     );
   }
 
-  private renderForm(requiredFields, disabledFields) {
+  private renderForm(requiredFields, disabledFields, extra?) {
     const { errorMessages, remote } = this.props;
     const { filenames } = this.state;
     const { collection_signing } = this.context.featureFlags;
@@ -723,6 +729,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             {errorMessages['__nofield']}
           </span>
         ) : null}
+        {extra}
       </Form>
     );
   }
