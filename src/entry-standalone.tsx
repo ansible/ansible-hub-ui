@@ -30,9 +30,18 @@ function HelloWorld() {
   let result = t('Hello', { name: comp });
   debugger;
   const define = defineTranslation('defined translation, but not translated');
+  let something = 'something on my mind';
 
   return (
     <div>
+      <div>
+        {t('2: new string with {{something}}', { something: something })}
+      </div>
+      <div>{t('new string with {{something}}', { something: something })}</div>
+      <div>{t('new string test')}</div>
+      <Trans i18nKey='transTest4'>
+        <div>Here is some component: {{ comp }}</div>
+      </Trans>
       <div>{t('Test')}</div>
       <div>{t('Hello', { name: 'Ansible' })}</div>
       <h1>
@@ -53,6 +62,10 @@ function HelloWorld() {
         Hello <strong>{{ name }}</strong>: this is {{ componentName }} test.{' '}
         <a href='/'>Empty link</a>
       </Trans>
+      <Trans i18nKey='transTest3'>
+        <b>Note:</b> Something {{ something }}
+      </Trans>
+
       <div>This should show empty string after={t('empty translation')}</div>
       <div>
         Orders:
@@ -79,6 +92,7 @@ class ClassHelloWorldBase extends React.Component {
     const name = 'Ansible';
     const componentName = 'Trans';
     const t = this.props['t'];
+
     return (
       <div>
         ClassHelloWorld component
