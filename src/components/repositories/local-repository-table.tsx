@@ -1,10 +1,8 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-
-import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
-import { Constants } from 'src/constants';
-import { getRepoUrl } from 'src/utilities';
 import { CollectionCount } from 'src/components';
+import { getRepoUrl } from 'src/utilities';
+import { ClipboardCopy, DateComponent, EmptyStateNoData, SortTable } from '..';
 
 interface IProps {
   repositories: {
@@ -74,12 +72,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       ],
     };
 
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      sortTableOptions.headers = sortTableOptions.headers.filter((object) => {
-        return object.id !== 'updated_at' && object.id !== 'cli_config';
-      });
-    }
-
     return (
       <table
         aria-label={t`Collection versions`}
@@ -114,9 +106,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <td>
           <CollectionCount distributionPath={distribution.base_path} />
         </td>
-        {DEPLOYMENT_MODE ===
-        Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
-            .pulp_last_updated ? (
+        {distribution.repository.pulp_last_updated ? (
           <td>
             <DateComponent date={distribution.repository.pulp_last_updated} />
           </td>
@@ -128,13 +118,11 @@ export class LocalRepositoryTable extends React.Component<IProps> {
             {getRepoUrl(distribution.base_path)}
           </ClipboardCopy>
         </td>
-        {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
-          <td>
-            <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-              {cliConfig.join('\n')}
-            </ClipboardCopy>
-          </td>
-        )}
+        <td>
+          <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+            {cliConfig.join('\n')}
+          </ClipboardCopy>
+        </td>
       </tr>
     );
   }

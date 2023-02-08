@@ -1,16 +1,16 @@
-import { t, Trans } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
+import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
-import { GroupType, GroupAPI } from 'src/api';
+import React, { useEffect, useState } from 'react';
+import { GroupAPI, GroupType } from 'src/api';
 import {
-  CompoundFilter,
-  RoleListTable,
-  Pagination,
   AppliedFilters,
-  LoadingPageSpinner,
-  RadioRow,
+  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  LoadingPageSpinner,
+  Pagination,
+  RadioRow,
+  RoleListTable,
 } from 'src/components';
 import { filterIsSet } from 'src/utilities';
 

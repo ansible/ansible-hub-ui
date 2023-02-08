@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import { RoleAPI } from 'src/api';
+import { LoadingPageSpinner, RolePermissions } from 'src/components';
 import { Constants } from 'src/constants';
-import { RolePermissions, LoadingPageSpinner } from 'src/components';
 import { translateLockedRolesDescription } from 'src/utilities';
 
 interface IProps {

@@ -1,25 +1,23 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import cx from 'classnames';
+import { Trans, t } from '@lingui/macro';
 import {
+  Badge,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  TextContent,
+  CardHeader,
   Text,
+  TextContent,
   TextVariants,
-  Badge,
   Tooltip,
 } from '@patternfly/react-core';
-
+import cx from 'classnames';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { CollectionListType } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
-import { convertContentSummaryCounts } from 'src/utilities';
+import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
+import { Paths, formatPath } from 'src/paths';
+import { convertContentSummaryCounts } from 'src/utilities';
 
 interface IProps extends CollectionListType {
   className?: string;

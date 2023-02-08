@@ -1,7 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './namespace-form.scss';
-
+import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Form,
@@ -14,12 +11,13 @@ import {
   PlusCircleIcon,
   TrashIcon,
 } from '@patternfly/react-icons';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
 import { NamespaceType } from 'src/api';
 import { NamespaceCard } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
+import './namespace-form.scss';
 
 interface IProps {
   namespace: NamespaceType;

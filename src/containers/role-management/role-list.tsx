@@ -1,57 +1,56 @@
-import React from 'react';
-import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-import { AppContext } from 'src/loaders/app-context';
-import {
-  Link,
-  RouteComponentProps,
-  withRouter,
-  Redirect,
-} from 'react-router-dom';
-import {
-  AlertType,
-  Pagination,
-  BaseHeader,
-  closeAlertMixin,
-  CompoundFilter,
-  EmptyStateFilter,
-  LoadingPageSpinner,
-  Main,
-  AlertList,
-  EmptyStateUnauthorized,
-  EmptyStateNoData,
-  AppliedFilters,
-  DeleteModal,
-  RoleListTable,
-  ExpandableRow,
-  ListItemActions,
-  PermissionChipSelector,
-  DateComponent,
-} from 'src/components';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
+  Flex,
+  FlexItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Flex,
-  FlexItem,
   Tooltip,
 } from '@patternfly/react-core';
-import { RoleType } from 'src/api/response-types/role';
+import React from 'react';
 import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
+import { RoleType } from 'src/api/response-types/role';
+import { RoleAPI } from 'src/api/role';
+import {
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  BaseHeader,
+  CompoundFilter,
+  DateComponent,
+  DeleteModal,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  ExpandableRow,
+  ListItemActions,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  PermissionChipSelector,
+  RoleListTable,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import {
+  ParamHelper,
   errorMessage,
   filterIsSet,
-  ParamHelper,
   parsePulpIDFromURL,
-  twoWayMapper,
   translateLockedRolesDescription,
+  twoWayMapper,
 } from 'src/utilities';
-
-import { RoleAPI } from 'src/api/role';
-import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
 
 interface IState {
   roles: RoleType[];

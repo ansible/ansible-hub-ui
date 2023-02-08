@@ -1,24 +1,23 @@
-import { Trans, t } from '@lingui/macro';
-import * as React from 'react';
 import { i18n } from '@lingui/core';
-import { PermissionChipSelector } from 'src/components';
+import { Trans, t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
+  Divider,
   Flex,
   FlexItem,
   Form,
-  TextInput,
-  InputGroup,
   FormGroup,
-  Title,
-  Divider,
+  InputGroup,
   Spinner,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
+import { PermissionChipSelector } from 'src/components';
+import { Constants } from 'src/constants';
 import { twoWayMapper } from 'src/utilities';
 
-import { Constants } from 'src/constants';
 interface IState {
   permissions: string[];
 }

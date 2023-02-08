@@ -1,8 +1,8 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { t } from '@lingui/macro';
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   button?: boolean;

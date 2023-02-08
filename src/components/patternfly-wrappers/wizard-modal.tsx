@@ -1,11 +1,11 @@
 import { t } from '@lingui/macro';
-import React from 'react';
 import {
   Modal,
   ModalVariant,
   Wizard as PFWizard,
   WizardStep,
 } from '@patternfly/react-core';
+import React from 'react';
 
 interface Props {
   steps: WizardStep[];

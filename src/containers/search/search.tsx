@@ -1,45 +1,38 @@
 import { t } from '@lingui/macro';
+import { Button, DataList, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-import './search.scss';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { CollectionAPI, CollectionListType, MyNamespaceAPI } from 'src/api';
 import {
-  errorMessage,
-  DeleteCollectionUtils,
-  filterIsSet,
-  waitForTask,
-  parsePulpIDFromURL,
-} from 'src/utilities';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
-import {
+  AlertList,
+  AlertType,
   BaseHeader,
   CardListSwitcher,
   CollectionCard,
   CollectionFilter,
   CollectionListItem,
+  DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  ImportModal,
   LoadingPageSpinner,
   Pagination,
   RepoSelector,
   StatefulDropdown,
-  AlertList,
-  AlertType,
   closeAlertMixin,
-  ImportModal,
-  DeleteCollectionModal,
 } from 'src/components';
-import {
-  CollectionAPI,
-  CollectionListType,
-  SyncListType,
-  MySyncListAPI,
-  MyNamespaceAPI,
-} from 'src/api';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
+import {
+  DeleteCollectionUtils,
+  errorMessage,
+  filterIsSet,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];
@@ -52,7 +45,6 @@ interface IState {
     view_type?: string;
   };
   loading: boolean;
-  synclist: SyncListType;
   alerts: AlertType[];
   updateCollection: CollectionListType;
   showImportModal: boolean;
@@ -91,7 +83,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       params: params,
       numberOfResults: 0,
       loading: true,
-      synclist: undefined,
       alerts: [],
       updateCollection: null,
       showImportModal: false,
@@ -109,10 +100,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   private load() {
     this.queryCollections();
-
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      this.getSynclist();
-    }
   }
 
   private addAlert(alert: AlertType) {
@@ -313,7 +300,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderSyncToogle(c.name, c.namespace.name)}
               repo={this.context.selectedRepo}
               menu={this.renderMenu(false, c)}
               displaySignatures={this.context.featureFlags.display_signatures}
@@ -415,24 +401,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderSyncToogle(name: string, namespace: string): React.ReactNode {
-    const { synclist } = this.state;
-
-    if (!synclist) {
-      return null;
-    }
-
-    return (
-      <Switch
-        id={namespace + '.' + name}
-        className='sync-toggle'
-        label={t`Sync`}
-        isChecked={this.isCollectionSynced(name, namespace)}
-        onChange={() => this.toggleCollectionSync(name, namespace)}
-      />
-    );
-  }
-
   private checkUploadPrivilleges(collection) {
     const addAlert = () => {
       this.setState({
@@ -468,38 +436,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       });
   }
 
-  private toggleCollectionSync(name: string, namespace: string) {
-    const synclist = { ...this.state.synclist };
-
-    const colIndex = synclist.collections.findIndex(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (colIndex < 0) {
-      synclist.collections.push({ name: name, namespace: namespace });
-    } else {
-      synclist.collections.splice(colIndex, 1);
-    }
-
-    MySyncListAPI.update(synclist.id, synclist).then((response) => {
-      this.setState({ synclist: response.data });
-      MySyncListAPI.curate(synclist.id).then(() => null);
-    });
-  }
-
-  private isCollectionSynced(name: string, namespace: string): boolean {
-    const { synclist } = this.state;
-    const found = synclist.collections.find(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (synclist.policy === 'include') {
-      return !(found === undefined);
-    } else {
-      return found === undefined;
-    }
-  }
-
   private renderList(collections) {
     return (
       <div className='list-container'>
@@ -510,12 +446,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={
-                  <>
-                    {this.renderSyncToogle(c.name, c.namespace.name)}
-                    {this.renderMenu(true, c)}
-                  </>
-                }
+                controls={this.renderMenu(true, c)}
                 repo={this.context.selectedRepo}
                 displaySignatures={this.context.featureFlags.display_signatures}
               />
@@ -524,20 +455,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
         </div>
       </div>
     );
-  }
-
-  private getSynclist() {
-    MySyncListAPI.list().then((result) => {
-      // ignore results if more than 1 is returned
-      // TODO: should we throw an error for this or just ignore it?
-      if (result.data.meta.count === 1) {
-        this.setState({ synclist: result.data.data[0] });
-      } else {
-        console.error(
-          `my-synclist returned ${result.data.meta.count} synclists`,
-        );
-      }
-    });
   }
 
   private queryCollections() {

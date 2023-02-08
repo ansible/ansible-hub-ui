@@ -1,7 +1,6 @@
 // https://on.cypress.io/custom-commands
-
-import shell from 'shell-escape-tag';
 import { range } from 'lodash';
+import shell from 'shell-escape-tag';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);

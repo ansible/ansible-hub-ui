@@ -1,7 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { sortBy } from 'lodash';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -9,7 +6,9 @@ import {
   ToolbarContent,
   ToolbarItem,
 } from '@patternfly/react-core';
-
+import { sortBy } from 'lodash';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { GroupType, RoleType } from 'src/api';
 import {
   DeleteModal,

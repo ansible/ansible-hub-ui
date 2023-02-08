@@ -1,35 +1,30 @@
 import { t } from '@lingui/macro';
-
 import * as React from 'react';
-import {
-  parsePulpIDFromURL,
-  errorMessage,
-  ErrorMessagesType,
-  translateLockedRolesDescription,
-} from 'src/utilities';
-import {
-  mapNetworkErrors,
-  validateInput,
-} from 'src/containers/role-management/map-role-errors';
-
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { RoleType } from 'src/api/response-types/role';
 import { RoleAPI } from 'src/api/role';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
 import {
   AlertList,
   AlertType,
-  closeAlertMixin,
   EmptyStateUnauthorized,
   LoadingPageWithHeader,
   Main,
   RoleForm,
   RoleHeader,
+  closeAlertMixin,
 } from 'src/components';
-
-import { Paths } from 'src/paths';
+import {
+  mapNetworkErrors,
+  validateInput,
+} from 'src/containers/role-management/map-role-errors';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleType } from 'src/api/response-types/role';
+import { Paths } from 'src/paths';
+import {
+  ErrorMessagesType,
+  errorMessage,
+  parsePulpIDFromURL,
+  translateLockedRolesDescription,
+} from 'src/utilities';
 
 interface IState {
   role: RoleType;

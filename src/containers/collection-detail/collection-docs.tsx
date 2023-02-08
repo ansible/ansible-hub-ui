@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './collection-detail.scss';
-
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
-
 import { Alert } from '@patternfly/react-core';
-
+import {
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+} from '@patternfly/react-icons';
+import * as React from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import {
   CollectionHeader,
   EmptyStateCustom,
@@ -15,16 +15,11 @@ import {
   RenderPluginDoc,
   TableOfContents,
 } from 'src/components';
-
-import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-
-import {
-  ExclamationTriangleIcon,
-  ExclamationCircleIcon,
-} from '@patternfly/react-icons';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
+import { IBaseCollectionState, loadCollection } from './base';
+import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<

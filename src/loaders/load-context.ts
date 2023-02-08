@@ -3,8 +3,8 @@ import {
   FeatureFlagsAPI,
   FeatureFlagsType,
   SettingsAPI,
-  UserType,
   SettingsType,
+  UserType,
 } from 'src/api';
 import { AlertType } from 'src/components';
 

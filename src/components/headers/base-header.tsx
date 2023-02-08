@@ -1,9 +1,7 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './header.scss';
-
 import { Title } from '@patternfly/react-core';
-import { Constants } from 'src/constants';
+import cx from 'classnames';
+import * as React from 'react';
+import './header.scss';
 
 interface IProps {
   title: string;
@@ -31,8 +29,7 @@ export class BaseHeader extends React.Component<IProps> {
       status,
     } = this.props;
 
-    const showRepoSelector =
-      contextSelector && DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE;
+    const showRepoSelector = contextSelector;
 
     return (
       <div className={cx('background', className)}>

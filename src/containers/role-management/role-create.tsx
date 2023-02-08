@@ -1,24 +1,21 @@
 import { t } from '@lingui/macro';
-import { errorMessage } from 'src/utilities';
-
+import * as React from 'react';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import { RoleAPI } from 'src/api/role';
+import {
+  AlertType,
+  EmptyStateUnauthorized,
+  Main,
+  RoleForm,
+  RoleHeader,
+} from 'src/components';
 import {
   mapNetworkErrors,
   validateInput,
 } from 'src/containers/role-management/map-role-errors';
-import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
-import {
-  RoleForm,
-  RoleHeader,
-  AlertType,
-  EmptyStateUnauthorized,
-  Main,
-} from 'src/components';
-
-import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleAPI } from 'src/api/role';
+import { Paths } from 'src/paths';
+import { errorMessage } from 'src/utilities';
 
 interface IState {
   saving: boolean;

@@ -1,49 +1,48 @@
 import * as React from 'react';
-import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { AlertType } from 'src/components';
 import {
   CertificationDashboard,
   CollectionContent,
+  CollectionDependencies,
   CollectionDetail,
   CollectionDocs,
   CollectionImportLog,
-  CollectionDependencies,
   EditNamespace,
-  LoginPage,
-  MyImports,
-  NamespaceDetail,
-  MyNamespaces,
-  Partners,
-  NotFound,
-  Search,
-  TokenPageStandalone,
-  UserList,
-  EditUser,
-  UserDetail,
-  UserCreate,
-  UserProfile,
-  GroupList,
-  GroupDetail,
-  RoleList,
-  RoleCreate,
   EditRole,
-  RepositoryList,
-  SignatureKeysList,
-  ExecutionEnvironmentList,
-  ExecutionEnvironmentRegistryList,
+  EditUser,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentDetailOwners,
+  ExecutionEnvironmentList,
   ExecutionEnvironmentManifest,
-  TaskListView,
+  ExecutionEnvironmentRegistryList,
+  GroupDetail,
+  GroupList,
+  LoginPage,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  RepositoryList,
+  RoleCreate,
+  RoleList,
+  Search,
+  SignatureKeysList,
   TaskDetail,
+  TaskListView,
+  TokenPageStandalone,
+  UserCreate,
+  UserDetail,
+  UserList,
+  UserProfile,
 } from 'src/containers';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from '../app-context';
 import { loadContext } from '../load-context';
-import { Paths, formatPath } from 'src/paths';
-import { AlertType } from 'src/components';
 
 interface IRoutesProps {
   updateInitialData: (
@@ -219,7 +218,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CertificationDashboard, path: Paths.approvalDashboard },
       { comp: NotFound, path: Paths.notFound },
       { comp: TokenPageStandalone, path: Paths.token },
-      { comp: Partners, path: Paths[NAMESPACE_TERM] },
+      { comp: Partners, path: Paths.namespaces },
       { comp: EditNamespace, path: Paths.editNamespace },
       { comp: NamespaceDetail, path: Paths.myCollections },
       { comp: NamespaceDetail, path: Paths.myCollectionsByRepo },

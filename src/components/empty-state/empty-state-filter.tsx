@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
+import * as React from 'react';
 import { EmptyStateCustom } from './empty-state-custom';
 
 interface IProps {

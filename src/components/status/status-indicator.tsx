@@ -1,15 +1,13 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-
 import { Label, LabelProps } from '@patternfly/react-core';
 import {
-  OutlinedClockIcon,
-  ExclamationIcon,
-  SyncAltIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
+  ExclamationIcon,
+  OutlinedClockIcon,
+  SyncAltIcon,
 } from '@patternfly/react-icons';
-
+import * as React from 'react';
 import { PulpStatus } from 'src/api';
 
 interface IProps {
