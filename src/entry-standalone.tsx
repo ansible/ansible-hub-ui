@@ -28,13 +28,17 @@ function HelloWorld() {
 
   const comp = "<a href='#'></a>";
   let result = t('Hello', { name: comp });
-  debugger;
+
   const define = defineTranslation('defined translation, but not translated');
   let something = 'something on my mind';
+
+  let r = t('new string with', { something: something });
+  let r2 = t('new string with {something}', { something: something });
 
   return (
     <div>
       <div>
+        {t('3: new string with {something}', { something: something })}
         {t('2: new string with {{something}}', { something: something })}
       </div>
       <div>{t('new string with {{something}}', { something: something })}</div>
