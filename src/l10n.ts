@@ -125,7 +125,7 @@ export async function loadTranslations() {
 
   i18next.use(initReactI18next);
   i18next.init({
-    interpolation: { escapeValue: true },
+    interpolation: { escapeValue: false },
     fallbackLng: ['en'],
     debug: true,
     lng: language,

@@ -26,23 +26,24 @@ function HelloWorld() {
   const componentName = 'Trans';
   const randomText = 'asdasdsdadasdassad';
 
-  const comp = "<a href='#'></a>";
+  let url = 'http://www.url.com';
+  let comp: any = `<a href='${url}'></a>`;
+  //comp = 4 < 5;
+
   let result = t('Hello', { name: comp });
 
   const define = defineTranslation('defined translation, but not translated');
   let something = 'something on my mind';
 
   let r = t('new string with', { something: something });
-  let r2 = t('new string with {something}', { something: something });
+  let r2 = t('2: new string with {{something}}', { something: something });
 
   return (
     <div>
-      <div>
-        {t('3: new string with {something}', { something: something })}
-        {t('2: new string with {{something}}', { something: something })}
-      </div>
-      <div>{t('new string with {{something}}', { something: something })}</div>
-      <div>{t('new string test')}</div>
+      <div>{t('3: new string with {something}', { something: something })}</div>
+      <Trans i18nKey='transTest4'>
+        <div>Here is some component: {4 < 5}</div>
+      </Trans>
       <Trans i18nKey='transTest4'>
         <div>Here is some component: {{ comp }}</div>
       </Trans>
