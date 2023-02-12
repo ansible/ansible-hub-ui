@@ -39,7 +39,12 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  chipGroupProps,
+  errorMessage,
+  filterIsSet,
+} from 'src/utilities';
 import './user-management.scss';
 
 interface IState {
@@ -361,7 +366,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.last_name}</td>
         <td>{user.email}</td>
         <td>
-          <LabelGroup>
+          <LabelGroup {...chipGroupProps()}>
             {user.groups.map((g) => (
               <Label key={g.id}>{g.name}</Label>
             ))}

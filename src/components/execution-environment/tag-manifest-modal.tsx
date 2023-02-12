@@ -23,7 +23,7 @@ import {
   TaskAPI,
 } from 'src/api';
 import { AlertType } from 'src/components';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { chipGroupProps, parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {
   tagsToAdd: string[];
@@ -192,7 +192,11 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           )}
 
           <FormGroup fieldId='remove-tag' label={t`Current tags`}>
-            <LabelGroup id='remove-tag' defaultIsOpen={true}>
+            <LabelGroup
+              {...chipGroupProps()}
+              id='remove-tag'
+              defaultIsOpen={true}
+            >
               {this.getCurrentTags().map((tag) => (
                 <Label
                   disabled={isSaving}

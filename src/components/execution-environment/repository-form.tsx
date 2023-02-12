@@ -34,6 +34,7 @@ import { Constants } from 'src/constants';
 import {
   ErrorMessagesType,
   alertErrorsWithoutFields,
+  chipGroupProps,
   errorMessage,
   isFieldValid,
   isFormValid,
@@ -308,7 +309,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently included tags`}
               >
-                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                <LabelGroup
+                  {...chipGroupProps()}
+                  id='remove-tag'
+                  defaultIsOpen={true}
+                >
                   {includeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -351,7 +356,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently excluded tags`}
               >
-                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                <LabelGroup
+                  {...chipGroupProps()}
+                  id='remove-tag'
+                  defaultIsOpen={true}
+                >
                   {excludeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}

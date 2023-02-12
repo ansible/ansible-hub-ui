@@ -36,9 +36,10 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
 import {
   ParamHelper,
+  chipGroupProps,
+  errorMessage,
   filterIsSet,
   getContainersURL,
   getHumanSize,
@@ -437,7 +438,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ) : null}
           </td>
           <td>
-            <LabelGroup className={'hub-c-label-group-tags-column'}>
+            <LabelGroup
+              {...chipGroupProps()}
+              className={'hub-c-label-group-tags-column'}
+            >
               {image.tags
                 .sort()
                 .map((tag) =>
