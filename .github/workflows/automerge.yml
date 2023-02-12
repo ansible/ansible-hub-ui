@@ -1,0 +1,33 @@
+name: Automerge
+
+on:
+  pull_request_target:
+    branches: [ 'master', 'stable-*', 'feature/*' ]
+
+jobs:
+  automerge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v3
+
+    - name: "Install node 16"
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: "Run automerge.js"
+      working-directory: ".github/workflows"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        node automerge.js "${{ github.head_ref }}" "${{ github.event.pull_request.title }}" "${{ github.actor }}"
+
+    - name: "Automerge the PR"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Automerge of PR"
+        gh pr merge "${{ github.event.pull_request.number }}" -s --auto
