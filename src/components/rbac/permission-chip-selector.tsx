@@ -39,7 +39,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         ? this.props.selectedPermissions
         : [this.placeholderText()];
       return (
-        <LabelGroup>
+        <LabelGroup {...chipGroupProps()}>
           {items.map((text) => (
             <Label key={text}>
               {this.props.multilingual ? i18n._(text) : text}

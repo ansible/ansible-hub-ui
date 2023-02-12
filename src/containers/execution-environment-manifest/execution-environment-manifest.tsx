@@ -27,7 +27,7 @@ import {
   TagLabel,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { getHumanSize } from 'src/utilities';
+import { chipGroupProps, getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
 
 interface IState {
@@ -133,7 +133,7 @@ class ExecutionEnvironmentManifest extends React.Component<
             </ClipboardCopyButton>
           </div>
 
-          <LabelGroup numLabels={6}>
+          <LabelGroup {...chipGroupProps()} numLabels={6}>
             {labels.map((label) => (
               <TagLabel tag={label} key={label} />
             ))}
