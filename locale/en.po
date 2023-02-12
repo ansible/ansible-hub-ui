@@ -110,7 +110,7 @@ msgstr "A PEM encoded client certificate used for authentication."
 msgid "A PEM encoded private key used for authentication."
 msgstr "A PEM encoded private key used for authentication."
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:361
+#: src/components/execution-environment/tag-manifest-modal.tsx:365
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 
@@ -179,8 +179,8 @@ msgstr "Activities will appear once you push something"
 msgid "Activity"
 msgstr "Activity"
 
-#: src/components/execution-environment/repository-form.tsx:288
-#: src/components/execution-environment/repository-form.tsx:331
+#: src/components/execution-environment/repository-form.tsx:289
+#: src/components/execution-environment/repository-form.tsx:336
 #: src/components/execution-environment/tag-manifest-modal.tsx:164
 #: src/components/rbac/owners-tab.tsx:365
 #: src/components/rbac/owners-tab.tsx:417
@@ -216,7 +216,7 @@ msgstr "Add a role description here"
 #~ msgid "Add container repository"
 #~ msgstr "Add container repository"
 
-#: src/components/execution-environment/repository-form.tsx:142
+#: src/components/execution-environment/repository-form.tsx:143
 #: src/containers/execution-environment-list/execution_environment_list.tsx:155
 msgid "Add execution environment"
 msgstr "Add execution environment"
@@ -257,11 +257,11 @@ msgstr "Add selected users to group"
 #~ msgid "Add synclist"
 #~ msgstr "Add synclist"
 
-#: src/components/execution-environment/repository-form.tsx:312
+#: src/components/execution-environment/repository-form.tsx:317
 msgid "Add tag(s) to exclude"
 msgstr "Add tag(s) to exclude"
 
-#: src/components/execution-environment/repository-form.tsx:269
+#: src/components/execution-environment/repository-form.tsx:270
 msgid "Add tag(s) to include"
 msgstr "Add tag(s) to include"
 
@@ -332,7 +332,7 @@ msgstr "Authentication provider"
 msgid "Back"
 msgstr "Back"
 
-#: src/components/patternfly-wrappers/fileupload.tsx:12
+#: src/components/patternfly-wrappers/fileupload.tsx:10
 msgid "Browse..."
 msgstr "Browse..."
 
@@ -385,7 +385,7 @@ msgstr "Can't update remote without a distribution attached to it."
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
 #: src/components/delete-modal/delete-modal.tsx:47
-#: src/components/execution-environment/repository-form.tsx:154
+#: src/components/execution-environment/repository-form.tsx:155
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
 #: src/components/namespace-modal/namespace-modal.tsx:110
@@ -406,7 +406,7 @@ msgstr "Can't update remote without a distribution attached to it."
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/status/status-indicator.tsx:53
+#: src/components/status/status-indicator.tsx:44
 msgid "Canceled"
 msgstr "Canceled"
 
@@ -527,13 +527,13 @@ msgstr "Checking for affected users... <0/>"
 msgid "Child tasks"
 msgstr "Child tasks"
 
-#: src/components/patternfly-wrappers/fileupload.tsx:13
-#: src/components/patternfly-wrappers/write-only-field.tsx:34
+#: src/components/patternfly-wrappers/fileupload.tsx:11
+#: src/components/patternfly-wrappers/write-only-field.tsx:29
 msgid "Clear"
 msgstr "Clear"
 
 #: src/components/empty-state/empty-state-filter.tsx:21
-#: src/components/patternfly-wrappers/applied-filters.tsx:42
+#: src/components/patternfly-wrappers/applied-filters.tsx:71
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
@@ -671,7 +671,7 @@ msgstr "Collections"
 msgid "Collections will appear once uploaded"
 msgstr "Collections will appear once uploaded"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:211
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:215
 msgid "Command"
 msgstr "Command"
 
@@ -689,7 +689,7 @@ msgid "Company name"
 msgstr "Company name"
 
 #: src/components/my-imports/import-list.tsx:93
-#: src/components/status/status-indicator.tsx:65
+#: src/components/status/status-indicator.tsx:54
 #: src/constants.tsx:168
 #: src/containers/task-management/task-list-view.tsx:166
 msgid "Completed"
@@ -734,11 +734,11 @@ msgstr "Contact your organization administrator for more information."
 msgid "Container must be synchronized with remote repository first."
 msgstr "Container must be synchronized with remote repository first."
 
-#: src/components/execution-environment/repository-form.tsx:412
+#: src/components/execution-environment/repository-form.tsx:421
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 msgstr "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 
-#: src/components/execution-environment/repository-form.tsx:177
+#: src/components/execution-environment/repository-form.tsx:178
 msgid "Container namespace"
 msgstr "Container namespace"
 
@@ -778,8 +778,8 @@ msgstr "Controllers list could not be displayed."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:229
 #: src/components/execution-environment/publish-to-controller-modal.tsx:232
-#: src/components/patternfly-wrappers/clipboard-copy.tsx:15
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:129
+#: src/components/patternfly-wrappers/clipboard-copy.tsx:12
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
 msgstr "Copy to clipboard"
 
@@ -798,8 +798,8 @@ msgstr "Could not load import log"
 #: src/containers/group-management/group-list.tsx:194
 #: src/containers/namespace-list/namespace-list.tsx:246
 #: src/containers/namespace-list/namespace-list.tsx:296
-#: src/containers/user-management/user-list.tsx:181
-#: src/containers/user-management/user-list.tsx:246
+#: src/containers/user-management/user-list.tsx:182
+#: src/containers/user-management/user-list.tsx:247
 msgid "Create"
 msgstr "Create"
 
@@ -853,7 +853,7 @@ msgstr "Create, delete and change collection namespaces. Upload and delete colle
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
 #: src/containers/group-management/group-detail.tsx:624
 #: src/containers/role-management/role-list.tsx:154
-#: src/containers/user-management/user-list.tsx:283
+#: src/containers/user-management/user-list.tsx:284
 msgid "Created"
 msgstr "Created"
 
@@ -879,11 +879,11 @@ msgstr "Curate synclist repository batch"
 msgid "Current tags"
 msgstr "Current tags"
 
-#: src/components/execution-environment/repository-form.tsx:338
+#: src/components/execution-environment/repository-form.tsx:343
 msgid "Currently excluded tags"
 msgstr "Currently excluded tags"
 
-#: src/components/execution-environment/repository-form.tsx:295
+#: src/components/execution-environment/repository-form.tsx:296
 msgid "Currently included tags"
 msgstr "Currently included tags"
 
@@ -895,7 +895,7 @@ msgstr "Custom permissions"
 msgid "Customer Support <0/>"
 msgstr "Customer Support <0/>"
 
-#: src/components/tags/deprecated-tag.tsx:21
+#: src/components/tags/deprecated-tag.tsx:19
 msgid "DEPRECATED"
 msgstr "DEPRECATED"
 
@@ -910,7 +910,7 @@ msgstr "Date created"
 #: src/components/delete-modal/delete-modal.tsx:42
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:411
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
 #: src/containers/execution-environment-list/execution_environment_list.tsx:384
 #: src/containers/group-management/group-detail.tsx:220
 #: src/containers/group-management/group-list.tsx:417
@@ -918,7 +918,7 @@ msgstr "Date created"
 #: src/containers/task-management/task-list-view.tsx:312
 #: src/containers/task-management/task-list-view.tsx:328
 #: src/containers/user-management/user-detail.tsx:119
-#: src/containers/user-management/user-list.tsx:332
+#: src/containers/user-management/user-list.tsx:333
 msgid "Delete"
 msgstr "Delete"
 
@@ -983,7 +983,7 @@ msgstr "Delete entire collection"
 msgid "Delete group?"
 msgstr "Delete group?"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:201
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:202
 msgid "Delete image?"
 msgstr "Delete image?"
 
@@ -1045,7 +1045,7 @@ msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Deleting <0>{0}</0> and its data will be lost."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:214
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:215
 msgid "Deleting <0>{digest}</0> and its data will be lost."
 msgstr "Deleting <0>{digest}</0> and its data will be lost."
 
@@ -1098,7 +1098,7 @@ msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "Deprecation status update starting for collection \"{0}\"."
 
 #: src/components/collection-detail/collection-content-list.tsx:107
-#: src/components/execution-environment/repository-form.tsx:358
+#: src/components/execution-environment/repository-form.tsx:367
 #: src/components/namespace-form/namespace-form.tsx:119
 #: src/components/rbac/role-form.tsx:105
 #: src/components/rbac/role-list-table.tsx:47
@@ -1123,9 +1123,9 @@ msgid "Details"
 msgstr "Details"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:348
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:173
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:269
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:484
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
 msgid "Digest"
 msgstr "Digest"
 
@@ -1184,7 +1184,7 @@ msgstr "Download requirements file"
 msgid "Download tarball"
 msgstr "Download tarball"
 
-#: src/components/patternfly-wrappers/fileupload.tsx:14
+#: src/components/patternfly-wrappers/fileupload.tsx:12
 msgid "Drag a file here or browse to upload"
 msgstr "Drag a file here or browse to upload"
 
@@ -1192,8 +1192,8 @@ msgstr "Drag a file here or browse to upload"
 msgid "Drag and drop a file or upload one'"
 msgstr "Drag and drop a file or upload one'"
 
-#: src/components/patternfly-wrappers/stateful-dropdown.tsx:77
-#: src/components/patternfly-wrappers/stateful-dropdown.tsx:88
+#: src/components/patternfly-wrappers/stateful-dropdown.tsx:66
+#: src/components/patternfly-wrappers/stateful-dropdown.tsx:72
 msgid "Dropdown"
 msgstr "Dropdown"
 
@@ -1207,7 +1207,7 @@ msgstr "Dropdown"
 #: src/containers/settings/user-profile.tsx:92
 #: src/containers/user-management/user-detail.tsx:109
 #: src/containers/user-management/user-edit.tsx:67
-#: src/containers/user-management/user-list.tsx:323
+#: src/containers/user-management/user-list.tsx:324
 msgid "Edit"
 msgstr "Edit"
 
@@ -1215,7 +1215,7 @@ msgstr "Edit"
 msgid "Edit details"
 msgstr "Edit details"
 
-#: src/components/execution-environment/repository-form.tsx:142
+#: src/components/execution-environment/repository-form.tsx:143
 msgid "Edit execution environment"
 msgstr "Edit execution environment"
 
@@ -1268,13 +1268,13 @@ msgstr "Editable"
 #: src/components/rbac/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:537
 #: src/containers/group-management/group-detail.tsx:609
-#: src/containers/user-management/user-list.tsx:171
-#: src/containers/user-management/user-list.tsx:210
-#: src/containers/user-management/user-list.tsx:273
+#: src/containers/user-management/user-list.tsx:172
+#: src/containers/user-management/user-list.tsx:211
+#: src/containers/user-management/user-list.tsx:274
 msgid "Email"
 msgstr "Email"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:223
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:227
 msgid "Environment"
 msgstr "Environment"
 
@@ -1410,7 +1410,7 @@ msgstr "Error message:"
 #~ msgid "Error updating users."
 #~ msgstr "Error updating users."
 
-#: src/components/execution-environment/repository-form.tsx:514
+#: src/components/execution-environment/repository-form.tsx:523
 msgid "Error when saving registry."
 msgstr "Error when saving registry."
 
@@ -1454,7 +1454,7 @@ msgstr "Execution Environment"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:40
 #: src/containers/execution-environment-list/execution_environment_list.tsx:173
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:106
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:110
 #: src/loaders/standalone/menu.tsx:66
 #: src/loaders/standalone/menu.tsx:72
 msgid "Execution Environments"
@@ -1494,7 +1494,7 @@ msgstr "Expiration"
 
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:97
-#: src/components/status/status-indicator.tsx:73
+#: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:169
 #: src/containers/task-management/task-list-view.tsx:170
 msgid "Failed"
@@ -1525,7 +1525,7 @@ msgstr "Failed to sign the container version."
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:244
+#: src/components/execution-environment/tag-manifest-modal.tsx:248
 msgid "Failed to {operation} tag \"{tag}\"."
 msgstr "Failed to {operation} tag \"{tag}\"."
 
@@ -1564,9 +1564,9 @@ msgstr "Finished at"
 #: src/components/rbac/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:529
 #: src/containers/group-management/group-detail.tsx:619
-#: src/containers/user-management/user-list.tsx:163
-#: src/containers/user-management/user-list.tsx:208
-#: src/containers/user-management/user-list.tsx:261
+#: src/containers/user-management/user-list.tsx:164
+#: src/containers/user-management/user-list.tsx:209
+#: src/containers/user-management/user-list.tsx:262
 msgid "First name"
 msgstr "First name"
 
@@ -1676,7 +1676,7 @@ msgstr "Group {groupId}"
 #: src/components/rbac/user-form.tsx:161
 #: src/containers/group-management/group-detail.tsx:182
 #: src/containers/group-management/group-list.tsx:141
-#: src/containers/user-management/user-list.tsx:279
+#: src/containers/user-management/user-list.tsx:280
 #: src/loaders/standalone/menu.tsx:116
 msgid "Groups"
 msgstr "Groups"
@@ -1690,7 +1690,7 @@ msgstr "Groups list could not be displayed."
 msgid "Groups will appear once created"
 msgstr "Groups will appear once created"
 
-#: src/components/execution-environment/repository-form.tsx:375
+#: src/components/execution-environment/repository-form.tsx:384
 msgid "Groups with access"
 msgstr "Groups with access"
 
@@ -1704,7 +1704,7 @@ msgstr "Hide the signature"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:54
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
 #: src/containers/namespace-detail/namespace-detail.tsx:348
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
@@ -1717,26 +1717,26 @@ msgstr "If selected, TLS peer validation must be performed."
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "If the Controller is not listed in the table, check settings.py."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:614
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "Image \"{digest}\" could not be deleted."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:592
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:596
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "Image \"{digest}\" has been successfully deleted."
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:101
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:166
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:171
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:105
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:170
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:175
 msgid "Image layers"
 msgstr "Image layers"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:26
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:304
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:305
 msgid "Images"
 msgstr "Images"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:137
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:138
 msgid "Images will appear once uploaded"
 msgstr "Images will appear once uploaded"
 
@@ -1827,7 +1827,7 @@ msgstr "Issue tracker"
 #~ msgid "It's safe to close this window. These tasks will finish in the"
 #~ msgstr "It's safe to close this window. These tasks will finish in the"
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:216
+#: src/components/execution-environment/tag-manifest-modal.tsx:220
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "It's safe to close this window. These tasks will finish in the background."
 
@@ -1846,9 +1846,9 @@ msgstr "Last modified"
 #: src/components/rbac/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:533
 #: src/containers/group-management/group-detail.tsx:614
-#: src/containers/user-management/user-list.tsx:167
-#: src/containers/user-management/user-list.tsx:209
-#: src/containers/user-management/user-list.tsx:267
+#: src/containers/user-management/user-list.tsx:168
+#: src/containers/user-management/user-list.tsx:210
+#: src/containers/user-management/user-list.tsx:268
 msgid "Last name"
 msgstr "Last name"
 
@@ -1870,7 +1870,7 @@ msgstr "Last updated <0/>"
 msgid "Last updated from registry {0}"
 msgstr "Last updated from registry {0}"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:163
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:164
 msgid "Layers"
 msgstr "Layers"
 
@@ -1944,8 +1944,8 @@ msgstr "Log In"
 msgid "Log in to your account"
 msgstr "Log in to your account"
 
-#: src/components/shared/login-link.tsx:23
-#: src/components/shared/login-link.tsx:30
+#: src/components/shared/login-link.tsx:18
+#: src/components/shared/login-link.tsx:24
 msgid "Login"
 msgstr "Login"
 
@@ -1962,7 +1962,7 @@ msgid "Manage all content types."
 msgstr "Manage all content types."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:387
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:388
 msgid "Manage tags"
 msgstr "Manage tags"
 
@@ -1970,7 +1970,7 @@ msgstr "Manage tags"
 msgid "Manage tokens"
 msgstr "Manage tokens"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:148
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:152
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 
@@ -1986,11 +1986,11 @@ msgstr "Message"
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
 msgstr "Moved to the <0>Namespace owners</0> <1/> tab"
 
-#: src/components/execution-environment/repository-form.tsx:385
+#: src/components/execution-environment/repository-form.tsx:394
 msgid "Moved to the <0>Owners</0> <1/> tab"
 msgstr "Moved to the <0>Owners</0> <1/> tab"
 
-#: src/components/execution-environment/repository-form.tsx:381
+#: src/components/execution-environment/repository-form.tsx:390
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "Moved to the <0>Owners</0> tab"
 
@@ -2013,8 +2013,8 @@ msgid "My profile"
 msgstr "My profile"
 
 #: src/components/collection-detail/collection-content-list.tsx:105
-#: src/components/execution-environment/repository-form.tsx:165
-#: src/components/execution-environment/repository-form.tsx:193
+#: src/components/execution-environment/repository-form.tsx:166
+#: src/components/execution-environment/repository-form.tsx:194
 #: src/components/my-imports/import-list.tsx:84
 #: src/components/my-imports/import-list.tsx:121
 #: src/components/namespace-form/namespace-form.tsx:44
@@ -2193,7 +2193,7 @@ msgstr "No dependencies"
 msgid "No groups yet"
 msgstr "No groups yet"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:136
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:137
 msgid "No images yet"
 msgstr "No images yet"
 
@@ -2277,7 +2277,7 @@ msgid "No users will be affected."
 msgstr "No users will be affected."
 
 #: src/containers/group-management/group-detail.tsx:490
-#: src/containers/user-management/user-list.tsx:242
+#: src/containers/user-management/user-list.tsx:243
 msgid "No users yet"
 msgstr "No users yet"
 
@@ -2319,7 +2319,7 @@ msgstr "Not required for use by other collections"
 msgid "Number must be greater than 0"
 msgstr "Number must be greater than 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:489
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:493
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
@@ -2366,7 +2366,7 @@ msgstr "Password confirmation"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/components/status/status-indicator.tsx:43
+#: src/components/status/status-indicator.tsx:35
 msgid "Pending"
 msgstr "Pending"
 
@@ -2474,7 +2474,7 @@ msgstr "Preview"
 msgid "Progress messages"
 msgstr "Progress messages"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx:82
+#: src/components/legacy-role-list/legacy-role-item.tsx:83
 msgid "Provided by <0>{0}</0>"
 msgstr "Provided by <0>{0}</0>"
 
@@ -2500,7 +2500,7 @@ msgid "Public key"
 msgstr "Public key"
 
 #: src/constants.tsx:46
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:158
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:159
 msgid "Published"
 msgstr "Published"
 
@@ -2665,7 +2665,7 @@ msgstr "Raw Markdown"
 msgid "Readme"
 msgstr "Readme"
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:329
+#: src/components/execution-environment/tag-manifest-modal.tsx:333
 msgid "Reason: task {0}"
 msgstr "Reason: task {0}"
 
@@ -2673,11 +2673,11 @@ msgstr "Reason: task {0}"
 msgid "Red Hat Certified"
 msgstr "Red Hat Certified"
 
-#: src/components/execution-environment/repository-form.tsx:108
+#: src/components/execution-environment/repository-form.tsx:109
 msgid "Registries list could not be displayed."
 msgstr "Registries list could not be displayed."
 
-#: src/components/execution-environment/repository-form.tsx:230
+#: src/components/execution-environment/repository-form.tsx:231
 msgid "Registry"
 msgstr "Registry"
 
@@ -2869,7 +2869,7 @@ msgid "Roles will appear once imported"
 msgstr "Roles will appear once imported"
 
 #: src/components/my-imports/import-list.tsx:101
-#: src/components/status/status-indicator.tsx:59
+#: src/components/status/status-indicator.tsx:49
 #: src/constants.tsx:170
 #: src/containers/task-management/task-list-view.tsx:174
 msgid "Running"
@@ -2880,7 +2880,7 @@ msgstr "Running"
 msgid "SSO URL"
 msgstr "SSO URL"
 
-#: src/components/execution-environment/repository-form.tsx:151
+#: src/components/execution-environment/repository-form.tsx:152
 #: src/components/execution-environment/tag-manifest-modal.tsx:115
 #: src/components/rbac/group-modal.tsx:57
 #: src/components/rbac/role-form.tsx:142
@@ -2940,7 +2940,7 @@ msgstr "See the task management <0>detail page</0>for the status of this task."
 msgid "Select a group"
 msgstr "Select a group"
 
-#: src/components/execution-environment/repository-form.tsx:256
+#: src/components/execution-environment/repository-form.tsx:257
 msgid "Select a registry"
 msgstr "Select a registry"
 
@@ -3126,11 +3126,11 @@ msgstr "Signing started for container \"{0}\"."
 msgid "Single sign on URL."
 msgstr "Single sign on URL."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:168
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:169
 msgid "Size"
 msgstr "Size"
 
-#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:142
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:146
 msgid "Size: {size}"
 msgstr "Size: {size}"
 
@@ -3180,7 +3180,7 @@ msgstr "Stop task?"
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
 
-#: src/components/patternfly-wrappers/clipboard-copy.tsx:16
+#: src/components/patternfly-wrappers/clipboard-copy.tsx:13
 msgid "Successfully copied to clipboard!"
 msgstr "Successfully copied to clipboard!"
 
@@ -3220,7 +3220,7 @@ msgstr "Successfully copied to clipboard!"
 #~ msgstr "Successfully stopped task."
 
 #: src/components/rbac/user-form.tsx:201
-#: src/containers/user-management/user-list.tsx:350
+#: src/containers/user-management/user-list.tsx:351
 msgid "Super user"
 msgstr "Super user"
 
@@ -3229,7 +3229,7 @@ msgid "Super users can't disable themselves."
 msgstr "Super users can't disable themselves."
 
 #: src/components/rbac/user-form.tsx:193
-#: src/containers/user-management/user-list.tsx:347
+#: src/containers/user-management/user-list.tsx:348
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Super users have all system permissions regardless of what groups they are in."
 
@@ -3274,8 +3274,8 @@ msgstr "TLS validation"
 
 #: src/components/collection-list/collection-filter.tsx:59
 #: src/components/execution-environment/publish-to-controller-modal.tsx:318
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:153
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:265
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "Tag"
 
@@ -3335,7 +3335,7 @@ msgstr "Task management"
 msgid "Task name"
 msgstr "Task name"
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:328
+#: src/components/execution-environment/tag-manifest-modal.tsx:332
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "Task to change tag \"{0}\" could not be completed."
 
@@ -3521,7 +3521,7 @@ msgstr "This group can include users"
 msgid "This tag already exists on another image. Do you want to move it to this image?"
 msgstr "This tag already exists on another image. Do you want to move it to this image?"
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:366
+#: src/components/execution-environment/tag-manifest-modal.tsx:370
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "This tag is already selected for this image. You cannot add it twice."
 
@@ -3606,7 +3606,7 @@ msgstr "Unsigned version(s)"
 #~ msgstr "Update container information"
 
 #: src/components/collection-list/collection-list-item.tsx:116
-#: src/components/legacy-role-list/legacy-role-item.tsx:102
+#: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
 msgstr "Updated <0/>"
@@ -3642,13 +3642,13 @@ msgstr "Upload signature"
 #~ msgid "Upload to namespace"
 #~ msgstr "Upload to namespace"
 
-#: src/components/execution-environment/repository-form.tsx:212
+#: src/components/execution-environment/repository-form.tsx:213
 msgid "Upstream name"
 msgstr "Upstream name"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:283
 #: src/containers/execution-environment-detail/base.tsx:160
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
 #: src/containers/execution-environment-list/execution_environment_list.tsx:375
 msgid "Use in Controller"
 msgstr "Use in Controller"
@@ -3657,7 +3657,7 @@ msgstr "Use in Controller"
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 
-#: src/components/execution-environment/repository-form.tsx:216
+#: src/components/execution-environment/repository-form.tsx:217
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 msgstr "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 
@@ -3743,7 +3743,7 @@ msgid "User details"
 msgstr "User details"
 
 #: src/containers/group-management/group-detail.tsx:638
-#: src/containers/user-management/user-list.tsx:297
+#: src/containers/user-management/user-list.tsx:298
 msgid "User list"
 msgstr "User list"
 
@@ -3757,9 +3757,9 @@ msgstr "User type"
 #: src/containers/group-management/group-detail.tsx:525
 #: src/containers/group-management/group-detail.tsx:604
 #: src/containers/login/login.tsx:51
-#: src/containers/user-management/user-list.tsx:159
-#: src/containers/user-management/user-list.tsx:207
-#: src/containers/user-management/user-list.tsx:256
+#: src/containers/user-management/user-list.tsx:160
+#: src/containers/user-management/user-list.tsx:208
+#: src/containers/user-management/user-list.tsx:257
 msgid "Username"
 msgstr "Username"
 
@@ -3771,7 +3771,7 @@ msgstr "Username: {0}"
 #: src/containers/user-management/user-create.tsx:53
 #: src/containers/user-management/user-detail.tsx:70
 #: src/containers/user-management/user-edit.tsx:62
-#: src/containers/user-management/user-list.tsx:136
+#: src/containers/user-management/user-list.tsx:137
 #: src/loaders/standalone/menu.tsx:112
 msgid "Users"
 msgstr "Users"
@@ -3780,7 +3780,7 @@ msgstr "Users"
 #: src/containers/group-management/group-detail.tsx:453
 #: src/containers/group-management/group-detail.tsx:710
 #: src/containers/group-management/group-list.tsx:318
-#: src/containers/user-management/user-list.tsx:411
+#: src/containers/user-management/user-list.tsx:412
 msgid "Users list could not be displayed."
 msgstr "Users list could not be displayed."
 
@@ -3788,7 +3788,7 @@ msgstr "Users list could not be displayed."
 msgid "Users will appear once added to this group"
 msgstr "Users will appear once added to this group"
 
-#: src/containers/user-management/user-list.tsx:243
+#: src/containers/user-management/user-list.tsx:244
 msgid "Users will appear once created"
 msgstr "Users will appear once created"
 
@@ -3887,7 +3887,7 @@ msgstr "View, and cancel any task."
 msgid "Waiting"
 msgstr "Waiting"
 
-#: src/components/execution-environment/tag-manifest-modal.tsx:213
+#: src/components/execution-environment/tag-manifest-modal.tsx:217
 msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "Waiting for {pendingTasks} task(s) to finish."
 
@@ -3954,7 +3954,7 @@ msgstr "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgid "You are an SSO user. Your token will expire <0/>."
 msgstr "You are an SSO user. Your token will expire <0/>."
 
-#: src/components/namespace-form/resources-form.tsx:34
+#: src/components/namespace-form/resources-form.tsx:30
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "You can can customize the Resources tab on your profile by entering custom markdown here."
 
@@ -4016,7 +4016,7 @@ msgstr "could not be determined yet"
 msgid "find-content"
 msgstr "find-content"
 
-#: src/components/patternfly-wrappers/write-only-field.tsx:27
+#: src/components/patternfly-wrappers/write-only-field.tsx:22
 msgid "hidden value"
 msgstr "hidden value"
 
@@ -4026,11 +4026,11 @@ msgstr "hidden value"
 msgid "keywords"
 msgstr "keywords"
 
-#: src/components/patternfly-wrappers/pagination.tsx:79
+#: src/components/patternfly-wrappers/pagination.tsx:82
 msgid "of"
 msgstr "of"
 
-#: src/components/patternfly-wrappers/pagination.tsx:80
+#: src/components/patternfly-wrappers/pagination.tsx:83
 msgid "per page"
 msgstr "per page"
 
@@ -4046,7 +4046,7 @@ msgstr "rejected"
 #~ msgid "released {0}"
 #~ msgstr "released {0}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx:64
+#: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
 msgid "role.github_user logo"
 msgstr "role.github_user logo"
@@ -4111,19 +4111,19 @@ msgstr "{collectionName}'s versions."
 msgid "{company} logo"
 msgstr "{company} logo"
 
-#: src/components/numeric-label/numeric-label.tsx:84
+#: src/components/numeric-label/numeric-label.tsx:72
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
 msgstr "{count, plural, one {Dependency} other {Dependencies}}"
 
-#: src/components/numeric-label/numeric-label.tsx:72
+#: src/components/numeric-label/numeric-label.tsx:60
 msgid "{count, plural, one {Module} other {Modules}}"
 msgstr "{count, plural, one {Module} other {Modules}}"
 
-#: src/components/numeric-label/numeric-label.tsx:80
+#: src/components/numeric-label/numeric-label.tsx:68
 msgid "{count, plural, one {Plugin} other {Plugins}}"
 msgstr "{count, plural, one {Plugin} other {Plugins}}"
 
-#: src/components/numeric-label/numeric-label.tsx:76
+#: src/components/numeric-label/numeric-label.tsx:64
 msgid "{count, plural, one {Role} other {Roles}}"
 msgstr "{count, plural, one {Role} other {Roles}}"
 
@@ -4143,7 +4143,7 @@ msgstr "{name} will be cancelled."
 msgid "{name} will stop running."
 msgstr "{name} will stop running."
 
-#: src/components/rbac/role-header.tsx:25
+#: src/components/rbac/role-header.tsx:18
 msgid "{subTitle}"
 msgstr "{subTitle}"
 
