@@ -31,9 +31,6 @@ module.exports = webpackBase({
   // Enables webpack debug mode. Options: true, false
   UI_DEBUG: true,
 
-  // Target compilation environment. Options: dev, prod
-  TARGET_ENVIRONMENT: 'dev',
-
   // Login URI to allow stand alone with and without keycloak
   UI_EXTERNAL_LOGIN_URI: uiExternalLoginURI,
 

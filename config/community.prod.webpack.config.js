@@ -10,7 +10,6 @@ module.exports = webpackBase({
   NAMESPACE_TERM: 'namespaces',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
-  TARGET_ENVIRONMENT: 'prod',
   UI_EXTERNAL_LOGIN_URI: '/login/github/',
   WEBPACK_PUBLIC_PATH: '/',
 });

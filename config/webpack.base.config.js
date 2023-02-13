@@ -37,11 +37,9 @@ const defaultConfigs = [
   // build time
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
-  { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
-  { name: 'USE_FAVICON', default: true, scope: 'webpack' },
   { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
@@ -108,18 +106,11 @@ module.exports = (inputConfigs) => {
   const htmlPluginConfig = {
     // used by src/index.html
     applicationName: customConfigs.APPLICATION_NAME,
-    targetEnv: customConfigs.DEPLOYMENT_MODE,
 
     // standalone needs injecting js and css into dist/index.html
     inject: isStandalone,
+    favicon: isStandalone ? 'static/images/favicon.ico' : '',
   };
-
-  // being able to turn off the favicon is useful for deploying to insights mode
-  // console.redhat.com sets its own favicon and ours tends to override it if we
-  // set one
-  if (customConfigs.USE_FAVICON) {
-    htmlPluginConfig['favicon'] = 'static/images/favicon.ico';
-  }
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
