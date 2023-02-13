@@ -5,6 +5,7 @@ const {
   defaultServices,
 } = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
@@ -102,20 +103,9 @@ module.exports = (inputConfigs) => {
 
   const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
 
-  // config for HtmlWebpackPlugin
-  const htmlPluginConfig = {
-    // used by src/index.html
-    applicationName: customConfigs.APPLICATION_NAME,
-
-    // standalone needs injecting js and css into dist/index.html
-    inject: isStandalone,
-    favicon: isStandalone ? 'static/images/favicon.ico' : '',
-  };
-
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     definePlugin: globals,
-    htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
     // defines port for dev server
@@ -123,9 +113,6 @@ module.exports = (inputConfigs) => {
 
     // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
     bundlePfModules: isStandalone,
-
-    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: !isStandalone,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
     useFileHash: true,
@@ -223,6 +210,17 @@ module.exports = (inputConfigs) => {
   }
 
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
+
+  // keep HtmlWebpackPlugin for standalone, inject src/index.html
+  if (isStandalone) {
+    plugins.push(
+      new HtmlWebpackPlugin({
+        applicationName: customConfigs.APPLICATION_NAME,
+        favicon: 'static/images/favicon.ico',
+        template: resolve(__dirname, '../src/index.html'),
+      }),
+    );
+  }
 
   if (customConfigs.DEPLOYMENT_MODE === 'insights') {
     /**
