@@ -27,10 +27,11 @@ function HelloWorld() {
   const randomText = 'asdasdsdadasdassad';
 
   let url = 'http://www.url.com';
-  let comp: any = `<a href='${url}'></a>`;
+  let Comp: any = (props) => <a href='{props.param}'>{props.param}</a>;
   //comp = 4 < 5;
+  let comp = 'adadad';
 
-  let result = t('Hello', { name: comp });
+  let result = t('Hello', { name: Comp });
 
   const define = defineTranslation('defined translation, but not translated');
   let something = 'something on my mind';
@@ -38,16 +39,40 @@ function HelloWorld() {
   let r = t('new string with', { something: something });
   let r2 = t('2: new string with {{something}}', { something: something });
 
+  let exp1 = 'dsda'.concat('asasa');
+  let exp2 = 4 + 5;
+
   return (
     <div>
-      <div>{t('3: new string with {something}', { something: something })}</div>
-      <Trans i18nKey='transTest4'>
-        <div>Here is some component: {4 < 5}</div>
+      {t('reordering of params {{exp1}}, {{exp2}}', { exp1, exp2 })}
+      <Trans>
+        <div>
+          Reordering of params: exp1: {{ exp1 }}, exp2: {{ exp2: 4 + 5 }}{' '}
+        </div>
       </Trans>
-      <Trans i18nKey='transTest4'>
-        <div>Here is some component: {{ comp }}</div>
+      <Trans>
+        <div>
+          Here is some component: <Comp param='hello' />{' '}
+        </div>
+      </Trans>
+      <div>
+        {'SOMETHING' +
+          t('2: new string with {{something}}', { something: something })}
+      </div>
+      ----------------------------
+      <Trans>
+        <div>
+          Here is some component (test2): {exp1} other: {exp2} ggg
+        </div>
+      </Trans>
+      <Trans>
+        <div>
+          Here is some component: {'dsda'.concat('asasa')} other: {4 + 5 + ''}{' '}
+          ggg
+        </div>
       </Trans>
       <div>{t('Test')}</div>
+      <div>{t('Testasdasdasddasasd {value}', { value: 'dsaasd' })}</div>
       <div>{t('Hello', { name: 'Ansible' })}</div>
       <h1>
         {t(
@@ -70,7 +95,6 @@ function HelloWorld() {
       <Trans i18nKey='transTest3'>
         <b>Note:</b> Something {{ something }}
       </Trans>
-
       <div>This should show empty string after={t('empty translation')}</div>
       <div>
         Orders:

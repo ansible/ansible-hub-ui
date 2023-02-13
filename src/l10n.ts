@@ -89,8 +89,9 @@ activate(language, pseudolocalization);
 function getPseudolocalization(messages) {
   const newMessages = {};
   Object.keys(messages).forEach((key) => {
-    // simple string
-    newMessages[key] = '»' + messages[key] + '«';
+    if (messages[key]) {
+      newMessages[key] = '»' + messages[key] + '«';
+    }
   });
   return newMessages;
 }
@@ -125,6 +126,7 @@ export async function loadTranslations() {
 
   i18next.use(initReactI18next);
   i18next.init({
+    returnEmptyString: false,
     interpolation: { escapeValue: false },
     fallbackLng: ['en'],
     debug: true,
