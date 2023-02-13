@@ -20,7 +20,7 @@ import {
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts } from 'src/utilities';
+import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
@@ -99,7 +99,7 @@ export const CollectionListItem = (props: IProps) => {
         ))}
       </div>
       <div className='hub-entry pf-l-flex pf-m-wrap'>
-        <LabelGroup>
+        <LabelGroup {...chipGroupProps()}>
           {latest_version.metadata.tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
