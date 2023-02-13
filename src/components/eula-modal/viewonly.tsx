@@ -22,8 +22,8 @@ export const EulaModalViewonly = ({ title, children }: IProps) => {
     return null;
   }
 
-  title ||= t`Ansible Galaxy EULA`;
-  children ||= <>🚧 Lorem ipsum...</>;
+  title ||= t`Terms of use`;
+  children ||= <>Lorem ipsum... 🚧</>;
 
   const setConfirmed = () => {
     window.localStorage.viewonly_eula_confirmed = 'true';
@@ -34,14 +34,13 @@ export const EulaModalViewonly = ({ title, children }: IProps) => {
     <Modal
       actions={[
         <Button key='confirm' onClick={setConfirmed} variant='primary'>
-          {t`Confirm`}
+          {t`Ok`}
         </Button>,
       ]}
       isOpen={true}
-      showClose={false}
+      showClose={true}
       title={title}
-      titleIconVariant='info'
-      variant='small'
+      variant='medium'
     >
       {children}
     </Modal>
