@@ -1,7 +1,8 @@
 import { t } from '@lingui/macro';
-import { Button, Modal, Spinner } from '@patternfly/react-core';
+import { Alert, Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'src/loaders/app-context';
+import { errorMessage } from 'src/utilities';
 
 interface IProps {
   children?: React.ReactNode;
@@ -12,11 +13,11 @@ interface IProps {
 const FakeUserAPI = {
   eulaAccept: (user) => {
     console.log('TODO accept eula api', user);
-    return Promise.resolve();
+    return new Promise((resolve) => setTimeout(resolve, 2000));
   },
   eulaDecline: (user) => {
     console.log('TODO decline eula api', user);
-    return Promise.resolve();
+    return Promise.reject({ response: { status: 500, statusText: 'TODO' } });
   },
 };
 
@@ -26,6 +27,7 @@ const FakeUserAPI = {
 // both submit to API
 export const EulaModalUser = ({ title, children }: IProps) => {
   const { user } = useContext();
+  const [error, setError] = useState(null);
   const [isOpen, setOpen] = useState(false);
   const [spinner, setSpinner] = useState(false);
 
@@ -39,19 +41,20 @@ export const EulaModalUser = ({ title, children }: IProps) => {
     return null;
   }
 
-  title ||= t`Ansible Galaxy EULA`;
-  children ||= <>🚧 Lorem ipsum...</>;
+  title ||= t`Project Wisdom Participation Agreement`;
+  children ||= <>Lorem ipsum... 🚧</>;
 
-  const handle = (api) => () => {
+  const handle = (apiCall) => () => {
     setSpinner(true);
-    api
+    apiCall()
       .then(() => {
         setSpinner(false);
         setOpen(false);
       })
       .catch((e) => {
-        console.log('TODO handle', e);
+        const { status, statusText } = e.response;
         setSpinner(false);
+        setError(errorMessage(status, statusText));
       });
   };
   const accept = handle(() => FakeUserAPI.eulaAccept(user));
@@ -61,20 +64,24 @@ export const EulaModalUser = ({ title, children }: IProps) => {
     <Modal
       actions={[
         <Button key='confirm' onClick={accept} variant='primary'>
-          {t`Accept`}
+          {t`Agree`}
         </Button>,
         <Button key='cancel' onClick={decline} variant='secondary'>
-          {t`Decline`}
+          {t`Disagree`}
         </Button>,
         spinner ? <Spinner size='sm'></Spinner> : null,
       ]}
       isOpen={true}
-      showClose={false}
+      showClose={!!error}
       title={title}
-      titleIconVariant='info'
-      variant='small'
+      variant='medium'
     >
       {children}
+      {error ? (
+        <Alert title={t`Failed to submit response`} variant='danger' isInline>
+          {error}
+        </Alert>
+      ) : null}
     </Modal>
   );
 };
