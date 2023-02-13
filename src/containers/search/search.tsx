@@ -41,6 +41,7 @@ import {
 } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './search.scss';
+import { I18nextTest } from './test.i18next';
 
 interface IState {
   collections: CollectionListType[];
@@ -247,30 +248,9 @@ class Search extends React.Component<RouteProps, IState> {
             </div>
           )}
         </BaseHeader>
-        {loading ? (
-          <LoadingPageSpinner />
-        ) : noData ? (
-          <EmptyStateNoData
-            title={t`No collections yet`}
-            description={t`Collections will appear once uploaded`}
-          />
-        ) : (
-          <React.Fragment>
-            <section className='collection-container'>
-              {this.renderCollections(collections, params, updateParams)}
-            </section>
-            <section className='footer'>
-              <Pagination
-                params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                count={numberOfResults}
-              />
-            </section>
-          </React.Fragment>
-        )}
+        <section className='body'>
+          <I18nextTest />
+        </section>
       </div>
     );
   }

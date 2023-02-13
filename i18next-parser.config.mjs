@@ -13,7 +13,7 @@ const locales = ["en", "es", "fr", "ko", "nl", "ja", "zh"];
 // https://github.com/i18next/i18next-parser#options
 export default {
   createOldCatalogs: false,
-  input: ['src/**/*.{js,jsx,ts,tsx}'],
+  input: ['src/**/*.i18next.{js,jsx,ts,tsx}'],
   keySeparator: false,
   lexers,
   locales,
