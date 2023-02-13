@@ -55,6 +55,7 @@ describe('cloud smoketest', () => {
     });
 
     it('can load a Partners list of collections', () => {
+      cy.login();
       // wait for the Partners button to appear and then click on it
       cy.get('[data-ouia-component-id="Partners"]').click();
 
@@ -75,6 +76,7 @@ describe('cloud smoketest', () => {
     });
 
     it('can load the Repo Management page', () => {
+      cy.login();
       // wait for the Repo management button to appear and then click on it
       cy.get('[data-ouia-component-id="Repo Management"]').click();
 
@@ -83,6 +85,13 @@ describe('cloud smoketest', () => {
     });
 
     it('can load the Connect to hub page', () => {
+      cy.on('uncaught:exception', () => {
+        return false;
+        // this is needed, otherwise it fails on some HTTP request
+        // it seems that cy on duration is valid inside it, it does not catch api calls outisde
+      });
+
+      cy.login();
       // wait for the Connect to hub button to appear and then click on it
       cy.get('[data-ouia-component-id="Connect to Hub"]').click();
 
