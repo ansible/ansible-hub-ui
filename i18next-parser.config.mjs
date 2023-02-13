@@ -20,4 +20,5 @@ export default {
   namespaceSeparator: false,
   output: 'locale/$LOCALE.json',
   sort: true,
+  verbose: true,
 }

@@ -47,6 +47,7 @@ async function activateI18next(locale: string, pseudolocalization = false) {
 
   i18next.use(initReactI18next);
   i18next.init({
+    debug: true,
     interpolation: { escapeValue: false },
     keySeparator: false,
     lng: locale,
