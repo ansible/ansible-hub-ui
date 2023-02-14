@@ -1,0 +1,21 @@
+{
+  "\t": "\\t",
+  "\"": "",
+  "{{count}} bytes_one": "",
+  "{{count}} bytes_other": "",
+  "foo&quot;": "foo&quot;",
+  "Hello {{name}}": "",
+  "Hello #{{number}}": "",
+  "Hello World!": "",
+  "Hello World?": "",
+  "Rello0 world!": "",
+  "Rello1 {{name}}": "",
+  "Rello2 {{number}}": "",
+  "Rello3 {{expr}}": "",
+  "Rello4 {{expr}}": "",
+  "Rello5 {String(5 + 4)}": "",
+  "Rello6 {5 + 4}": "",
+  "Rello7 {truthy && <Foobar true={truthy} />}{falsy && <Foobar false={falsy} />}": "",
+  "Rello8 <1></1> <3></3>": "",
+  "Rello9 {{expr}}": ""
+}
