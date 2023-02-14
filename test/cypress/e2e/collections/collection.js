@@ -55,11 +55,7 @@ describe('collection tests', () => {
   it('deletes a collection version', () => {
     cy.createApprovedCollection('my_namespace', 'my_collection');
 
-    if (insightsLogin) {
-      cy.visit(`${uiPrefix}`);
-    } else {
-      cy.menuGo('Collections > Collections');
-    }
+    cy.visit(`${uiPrefix}repo/published`);
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
       'reload',
