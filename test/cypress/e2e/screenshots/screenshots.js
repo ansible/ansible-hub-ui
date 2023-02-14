@@ -25,7 +25,13 @@ describe('screenshots', () => {
     const screenshot = (path) => {
       cy.visit(`${uiPrefix}${path}`.replace('//', '/'));
       cy.wait(3000);
-      cy.screenshot(path.replaceAll('/', '__'));
+      cy.screenshot(
+        path
+          .replaceAll('/', '__')
+          .replaceAll('?', '_')
+          .replaceAll('&', '_')
+          .replaceAll('=', '_'),
+      );
       cy.wait(1000);
     };
 
@@ -44,5 +50,9 @@ describe('screenshots', () => {
     screenshot('/group-list');
 
     // screenshot('/roles');  // TODO fake empty API response
+    screenshot('/?lang=en&pseudolocalization=false');
+    screenshot('/?lang=en&pseudolocalization=true');
+    screenshot('/?lang=fr&pseudolocalization=false');
+    screenshot('/?lang=fr&pseudolocalization=true');
   });
 });
