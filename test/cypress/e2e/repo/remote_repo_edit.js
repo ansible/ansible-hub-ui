@@ -105,18 +105,18 @@ describe('edit a remote repository', () => {
     );
     cy.contains('Show advanced options').click();
     // enter new values
-    clearField('password');
-    clearField('proxy_password');
     cy.get('input[id="url"]').type(
       'https://cloud.redhat.com/api/automation-hub/',
     );
     cy.get('input[id="username"]').clear();
     cy.get('input[id="username"]').type('test');
+    cy.get('input[id="password"]').clear();
     cy.get('input[id="password"]').type('test');
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').clear();
     cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').clear();
     cy.get('input[id="proxy_password"]').type('test');
     cy.intercept('PUT', `${apiPrefix}content/rh-certified/v3/sync/config/`).as(
       'editRemote',

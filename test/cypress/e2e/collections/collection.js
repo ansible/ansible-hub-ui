@@ -1,6 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 describe('collection tests', () => {
   before(() => {
