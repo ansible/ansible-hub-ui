@@ -68,7 +68,7 @@ const initialState = {
   tag: null,
   tagResults: [],
   tagSelection: [],
-  tags: [],
+  //tags: [],
   inputText: '',
 };
 
@@ -93,7 +93,8 @@ export const PublishToControllerModal = (props: IProps) => {
   const [tag, setTag] = useState(initialState.tag);
   const [tagResults, setTagResults] = useState(initialState.tagResults);
   const [tagSelection, setTagSelection] = useState(initialState.tagSelection);
-  const [tags, setTags] = useState(initialState.tags);
+
+  //const [tags, setTags] = useState(initialState.tags);
   const [inputText, setInputText] = useState(initialState.inputText);
 
   /*componentDidUpdate(prevProps) {
@@ -127,7 +128,7 @@ export const PublishToControllerModal = (props: IProps) => {
       setTag(initialState.tag);
       setTagResults(initialState.tagResults);
       setTagSelection(initialState.tagSelection);
-      setTags(initialState.tags);
+      //setTags(initialState.tags);
       setInputText(initialState.inputText);
     }
   }, [props.isOpen]);
@@ -226,9 +227,8 @@ export const PublishToControllerModal = (props: IProps) => {
         });*/
         setDigestByTag(digestByTag);
         setTagResults(tagResults);
-        setTags(tags);
-
-        return tags;
+        //setTags(tags);
+        return { digestByTag, tags };
       })
       .catch((e) => {
         const { status, statusText } = e.response;
@@ -299,7 +299,11 @@ export const PublishToControllerModal = (props: IProps) => {
 
   function fetchData(image) {
     const controllers = fetchControllers();
-    const tagsPromises = fetchTags(image).then(() => {
+    const tagsPromises = fetchTags(image).then(({ tags, digestByTag }) => {
+      // tags and digestByTag must be passed this way from fetchTags, otherwise, closure
+      // will see old value of both variables set in fetchTags
+      // and additionaly, tags state is not needed at all because of that
+
       // preselect tag if present
       let { digest, tag } = props;
       tag ||= tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
