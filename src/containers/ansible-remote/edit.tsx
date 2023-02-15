@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
-import { Details, Page, RemoteForm } from 'src/components';
+import { Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import { parsePulpIDFromURL } from 'src/utilities';
 
-const initialRemote = {
+const initialRemote: AnsibleRemoteType = {
   name: '',
   url: '',
   ca_cert: null,
@@ -63,6 +63,67 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
       return null;
     }
 
+    const saveRemote = () => {
+      const { remoteToEdit } = state;
+
+      const data = { ...remoteToEdit };
+
+      if (!item) {
+        // prevent "This field may not be blank." when writing in and then deleting username/password/etc
+        // only when creating, edit diffs with item
+        Object.keys(data).forEach((k) => {
+          if (data[k] === '' || data[k] == null) {
+            delete data[k];
+          }
+        });
+
+        delete data.hidden_fields;
+      }
+
+      // api requires traling slash, fix the trivial case
+      if (data.url && !data.url.includes('?') && !data.url.endsWith('/')) {
+        data.url += '/';
+      }
+
+      const promise = !item
+        ? AnsibleRemoteAPI.create(data)
+        : AnsibleRemoteAPI.smartUpdate(
+            parsePulpIDFromURL(item.pulp_href),
+            data,
+            item,
+          );
+
+      promise
+        .then(() => {
+          setState({
+            errorMessages: {},
+            remoteToEdit: undefined,
+          });
+          // TODO context addAlert, task variant on update
+          navigate(
+            formatPath(Paths.ansibleRemoteDetail, {
+              name: data.name,
+            }),
+          );
+        })
+        .catch(({ response: { data } }) =>
+          setState({
+            errorMessages: { __nofield: data.non_field_errors, ...data },
+          }),
+        );
+    };
+
+    const closeModal = () => {
+      setState({ errorMessages: {}, remoteToEdit: undefined });
+      navigate(
+        item
+          ? formatPath(Paths.ansibleRemoteDetail, {
+              name: item.name,
+            })
+          : formatPath(Paths.ansibleRemotes),
+      );
+    };
+
     return (
       <RemoteForm
         allowEditName={!item}
@@ -70,66 +131,9 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
         updateRemote={(r) => setState({ remoteToEdit: r })}
         remoteType='ansible-remote'
         showMain={true}
-        saveRemote={() => {
-          const { remoteToEdit } = state;
-
-          const data = { ...remoteToEdit };
-
-          if (!item) {
-            // prevent "This field may not be blank." when writing in and then deleting username/password/etc
-            // only when creating, edit diffs with item
-            Object.keys(data).forEach((k) => {
-              if (data[k] === '' || data[k] == null) {
-                delete data[k];
-              }
-            });
-
-            delete data.hidden_fields;
-          }
-
-          // api requires traling slash, fix the trivial case
-          if (data.url && !data.url.includes('?') && !data.url.endsWith('/')) {
-            data.url += '/';
-          }
-
-          const promise = !item
-            ? AnsibleRemoteAPI.create(data)
-            : AnsibleRemoteAPI.smartUpdate(
-                parsePulpIDFromURL(item.pulp_href),
-                data,
-                item,
-              );
-
-          promise
-            .then(() => {
-              setState({
-                errorMessages: {},
-                remoteToEdit: undefined,
-              });
-              // TODO context addAlert, task variant on update
-              navigate(
-                formatPath(Paths.ansibleRemoteDetail, {
-                  name: data.name,
-                }),
-              );
-            })
-            .catch(({ response: { data } }) =>
-              setState({
-                errorMessages: { __nofield: data.non_field_errors, ...data },
-              }),
-            );
-        }}
+        saveRemote={saveRemote}
         errorMessages={errorMessages}
-        closeModal={() => {
-          setState({ errorMessages: {}, remoteToEdit: undefined });
-          navigate(
-            item
-              ? formatPath(Paths.ansibleRemoteDetail, {
-                  name: item.name,
-                })
-              : formatPath(Paths.ansibleRemotes),
-          );
-        }}
+        closeModal={closeModal}
       />
     );
   },

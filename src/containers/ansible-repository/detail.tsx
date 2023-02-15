@@ -46,6 +46,10 @@ const DetailsTab = ({ item, actionContext }: TabProps) => (
         label: wip + t`Labels`,
         value: JSON.stringify(item?.pulp_labels, null, 2),
       }, //TODO
+      {
+        label: wip + t`Remote`,
+        value: JSON.stringify(item?.remote, null, 2),
+      }, //TODO
     ]}
   />
 );

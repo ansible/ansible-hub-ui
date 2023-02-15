@@ -7,6 +7,7 @@ export {
 } from './patternfly-wrappers/alert-list';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';
 export { AboutModalWindow } from './about-modal/about-modal';
+export { AnsibleRepositoryForm } from './repositories/ansible-repository-form';
 export { BaseHeader } from './headers/base-header';
 export { Breadcrumbs, BreadcrumbType } from './patternfly-wrappers/breadcrumbs';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
