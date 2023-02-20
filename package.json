@@ -5,7 +5,7 @@
     "author": "Red Hat, Inc.",
     "private": true,
     "dependencies": {
-        "@babel/runtime": "^7.20.7",
+        "@babel/runtime": "^7.21.0",
         "@lingui/react": "^3.16.1",
         "@patternfly/patternfly": "^4.224.2",
         "@patternfly/react-core": "^4.276.6",
