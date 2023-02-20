@@ -1,16 +1,14 @@
 describe('Hub User Management Tests', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-  let username = 'test';
-  let password = 'p@ssword1';
+  const adminUsername = Cypress.env('username');
+  const username = 'test';
+  const password = 'p@ssword1';
 
   /*
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
-    cy.cookieReset();
 
-    cy.cookieLogin(adminUsername, adminPassword);
+    cy.login();
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
     cy.contains('[data-cy="UserList-row-test"]', 'Test F');
@@ -24,7 +22,7 @@ describe('Hub User Management Tests', () => {
   describe('basic check of user page', () => {
     /*
     beforeEach(() => {
-      cy.cookieLogin(adminUsername, adminPassword);
+      cy.login();
       cy.menuGo('User Access > Users');
     });
     */
@@ -36,7 +34,7 @@ describe('Hub User Management Tests', () => {
 
   describe('Creation and management of users', () => {
     // beforeEach(() => {
-    //   cy.cookieLogin(adminUsername, adminPassword);
+    //   cy.login();
     //   cy.menuGo('User Access > Users');
     // });
 
@@ -60,17 +58,17 @@ describe('Hub User Management Tests', () => {
     }
 
     it.skip("an ordinary user can't delete themselves", () => {
-      cy.cookieLogin(username, password);
+      cy.login(username, password);
       attemptToDelete(username);
     });
 
     it.skip("an ordinary user can't delete the super-user", () => {
-      cy.cookieLogin(username, password);
+      cy.login(username, password);
       attemptToDelete(adminUsername);
     });
 
     it("the super-user can't delete themselves", () => {
-      cy.cookieLogin(adminUsername, adminPassword);
+      cy.login();
       attemptToDelete(adminUsername);
     });
   });
