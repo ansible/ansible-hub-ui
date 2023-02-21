@@ -40,7 +40,7 @@ describe('Namespace detail screen', () => {
     cy.get('.pf-c-tabs__link').eq(1).click();
     cy.get('[aria-label="Copyable input"]')
       .invoke('val')
-      .should('contain', '/inbound-namespace_detail_test/');
+      .should('contain', '/namespace_detail_test/');
   });
 
   it('should show an error when tring to upload a new collecting wiht invalid name', () => {

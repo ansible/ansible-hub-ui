@@ -97,7 +97,6 @@ export class API extends HubAPI {
   }
 
   upload(
-    repositoryPath: string,
     data: CollectionUploadType,
     progressCallback: (e) => void,
     cancelToken?,
@@ -116,11 +115,7 @@ export class API extends HubAPI {
     if (cancelToken) {
       config['cancelToken'] = cancelToken.token;
     }
-    return this.http.post(
-      'content/' + repositoryPath + '/v3/artifacts/collections/',
-      formData,
-      config,
-    );
+    return this.http.post('v3/artifacts/collections/', formData, config);
   }
 
   getCancelToken() {
