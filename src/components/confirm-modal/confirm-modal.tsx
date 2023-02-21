@@ -12,42 +12,40 @@ interface IProps {
   confirmButtonTitle?: string;
 }
 
-export class ConfirmModal extends React.Component<IProps> {
-  render() {
-    const {
-      cancelAction,
-      children,
-      confirmAction,
-      isDisabled,
-      title,
-      spinner,
-      confirmButtonTitle,
-    } = this.props;
+export const ConfirmModal = (props: IProps) => {
+  const {
+    cancelAction,
+    children,
+    confirmAction,
+    isDisabled,
+    title,
+    spinner,
+    confirmButtonTitle,
+  } = props;
 
-    return (
-      <Modal
-        actions={[
-          <Button
-            key='confirm'
-            onClick={confirmAction}
-            variant='primary'
-            isDisabled={isDisabled}
-          >
-            {confirmButtonTitle ? confirmButtonTitle : t`Yes`}
-            {spinner && <Spinner size='sm'></Spinner>}
-          </Button>,
-          <Button key='cancel' onClick={cancelAction} variant='link'>
-            {t`Cancel`}
-          </Button>,
-        ]}
-        isOpen={true}
-        onClose={cancelAction}
-        title={title}
-        titleIconVariant='warning'
-        variant='small'
-      >
-        {children}
-      </Modal>
-    );
-  }
-}
+  return (
+    <Modal
+      actions={[
+        <Button
+          key='confirm'
+          onClick={confirmAction}
+          variant='primary'
+          isDisabled={isDisabled}
+        >
+          {confirmButtonTitle ? confirmButtonTitle : t`Yes`}
+          {spinner && <Spinner size='sm'></Spinner>}
+        </Button>,
+        <Button key='cancel' onClick={cancelAction} variant='link'>
+          {t`Cancel`}
+        </Button>,
+      ]}
+      isOpen={true}
+      onClose={cancelAction}
+      title={title}
+      titleIconVariant='warning'
+      variant='small'
+    >
+      {children}
+    </Modal>
+  );
+};
