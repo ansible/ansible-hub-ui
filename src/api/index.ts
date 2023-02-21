@@ -1,3 +1,5 @@
+import { wisdomDenyIndexAPI } from './wisdom-deny-index';
+
 export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
 export {
@@ -78,3 +80,5 @@ export {
   LegacyNamespaceDetailType,
   LegacyNamespaceListType,
 } from './response-types/legacy-namespace';
+
+export { wisdomDenyIndexAPI } from './wisdom-deny-index';
