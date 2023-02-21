@@ -380,6 +380,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         </FormGroup>
 
         <FormGroup
+          data-cy='password'
           fieldId={'password'}
           label={t`Password`}
           labelIcon={
@@ -464,6 +465,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
 
             <FormGroup
+              data-cy='proxy_password'
               fieldId={'proxy_password'}
               label={t`Proxy password`}
               isRequired={requiredFields.includes('proxy_password')}

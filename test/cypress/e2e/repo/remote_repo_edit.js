@@ -1,6 +1,10 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
+function clearField(name) {
+  cy.contains(`[data-cy="${name}"] button`, 'Clear').click();
+}
+
 describe('edit a remote repository', () => {
   let remoteRepoUrl = `${uiPrefix}repositories?tab=remote`;
 
@@ -30,9 +34,12 @@ describe('edit a remote repository', () => {
 
     // enter new values
     cy.get('input[id="url"]').type('https://galaxy.ansible.com/api/');
+    cy.get('input[id="username"]').clear();
     cy.get('input[id="username"]').type('test');
     cy.get('input[id="password"]').type('test');
+    cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').clear();
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
     cy.fixture('/yaml/test.yaml')
@@ -65,9 +72,8 @@ describe('edit a remote repository', () => {
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     cy.get('input[id="username"]').clear();
-    cy.get('input[type="password"]')
-      .siblings('button')
-      .click({ multiple: true });
+    clearField('password');
+    clearField('proxy_password');
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
     cy.contains('Save').click();
@@ -102,11 +108,15 @@ describe('edit a remote repository', () => {
     cy.get('input[id="url"]').type(
       'https://cloud.redhat.com/api/automation-hub/',
     );
+    cy.get('input[id="username"]').clear();
     cy.get('input[id="username"]').type('test');
+    cy.get('input[id="password"]').clear();
     cy.get('input[id="password"]').type('test');
-
+    cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').clear();
     cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').clear();
     cy.get('input[id="proxy_password"]').type('test');
     cy.intercept('PUT', `${apiPrefix}content/rh-certified/v3/sync/config/`).as(
       'editRemote',
@@ -134,9 +144,9 @@ describe('edit a remote repository', () => {
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     cy.get('input[id="username"]').clear();
-    cy.get('input[type="password"]')
-      .siblings('button')
-      .click({ multiple: true });
+    clearField('password');
+    clearField('proxy_password');
+
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
     cy.contains('Save').click();
