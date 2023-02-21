@@ -5,8 +5,13 @@ const insightsLogin = Cypress.env('insightsLogin');
 
 const sessionOptions = {
   cacheAcrossSpecs: true,
-  validate: () =>
-    cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+  validate: insightsLogin
+    ? () => {
+        cy.visit(uiPrefix);
+        cy.get('#UserMenu');
+      }
+    : () =>
+        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
 };
 
 function apiLogin(username, password) {
