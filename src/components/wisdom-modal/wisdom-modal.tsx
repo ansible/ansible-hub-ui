@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, ButtonVariant, Modal, Spinner } from '@patternfly/react-core';
+import { totalmem } from 'os';
 import React, { useEffect, useState } from 'react';
 import { wisdomDenyIndexAPI } from 'src/api';
 import { AlertList, AlertType } from 'src/components';
@@ -15,6 +16,26 @@ export const WisdomModal = (props: IProps) => {
   const [isInDenyIndex, setIsInDenyIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
+
+  let titleAddFailed = '';
+  let titleRemoveFailed = '';
+  let titleWillBeUsed = '';
+  let titleWillNotBeUsed = '';
+  const namespace = props.reference;
+
+  if (props.scope == 'namespace') {
+    titleAddFailed = t`Failed to add namespace to Ansible Wisdom.`;
+    titleRemoveFailed = t`Failed to remove namespace from Ansible Wisdom.`;
+    titleWillBeUsed = t`The namespace ${namespace} will be used by Ansible Wisdom`;
+    titleWillNotBeUsed = t`The namespace ${namespace} will not be used by Ansible Wisdom`;
+  }
+
+  if (props.scope == 'legacy_namespace') {
+    titleAddFailed = t`Failed to add legacy namespace to Ansible Wisdom.`;
+    titleRemoveFailed = t`Failed to remove legacy namespace from Ansible Wisdom.`;
+    titleWillBeUsed = t`The legacy namespace ${namespace} will be used by Ansible Wisdom`;
+    titleWillNotBeUsed = t`The legacy namespace ${namespace} will not be used by Ansible Wisdom`;
+  }
 
   useEffect(() => {
     wisdomDenyIndexAPI
@@ -43,7 +64,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to add namespace to Ansible Wisdom.`,
+          title: titleAddFailed,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -61,7 +82,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to remove namespace from Ansible Wisdom.`,
+          title: titleRemoveFailed,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -101,13 +122,12 @@ export const WisdomModal = (props: IProps) => {
     );
   }
 
-  const namespace = props.reference;
   return (
     <Modal
       actions={actions}
       isOpen={true}
       onClose={props.cancelAction}
-      title={t`Wisdom namespace modal`}
+      title={t`Wisdom Modal`}
       titleIconVariant='warning'
       variant='small'
     >
@@ -117,9 +137,7 @@ export const WisdomModal = (props: IProps) => {
       ) : (
         <div>
           <div>
-            {!loading && isInDenyIndex
-              ? t`The namespace ${namespace} will not be used by Ansible Wisdom`
-              : t`The namespace ${namespace} will be used by Ansible Wisdom`}
+            {!loading && isInDenyIndex ? titleWillNotBeUsed : titleWillBeUsed}
           </div>
           <br />
           <div>

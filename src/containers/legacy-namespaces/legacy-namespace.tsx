@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import {
+  Button,
   DataList,
   DataListCell,
   DataListItem,
@@ -18,6 +19,7 @@ import {
   LoadingPageSpinner,
   Logo,
   Pagination,
+  WisdomModal,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -174,6 +176,7 @@ interface LegacyNamespaceProps {
   };
   updateParams: (params) => void;
   ignoredParams: string[];
+  isOpenWisdomModal: boolean;
 }
 
 class LegacyNamespace extends React.Component<
@@ -191,6 +194,7 @@ class LegacyNamespace extends React.Component<
       namespaceid: namespaceid,
       namespace: null,
       roles: null,
+      isOpenWisdomModal: false,
     };
   }
 
@@ -210,6 +214,8 @@ class LegacyNamespace extends React.Component<
     if (this.state.loading === true) {
       return <LoadingPageSpinner />;
     }
+
+    const { ai_deny_index } = this.context.featureFlags;
 
     const infocells = [];
 
@@ -237,10 +243,29 @@ class LegacyNamespace extends React.Component<
           <BaseHeader title={this.state.namespace.name}></BaseHeader>
         </DataListCell>,
       );
+      if (ai_deny_index) {
+        infocells.push(
+          <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
+            <div>
+              <Button
+                className='wisdom_button'
+                onClick={() => this.setState({ isOpenWisdomModal: true })}
+              >{t`Wisdom Settings`}</Button>
+            </div>
+          </DataListCell>,
+        );
+      }
     }
 
     return (
       <React.Fragment>
+        {this.state.isOpenWisdomModal && (
+          <WisdomModal
+            cancelAction={() => this.setState({ isOpenWisdomModal: false })}
+            scope={'legacy_namespace'}
+            reference={this.state.namespace.name}
+          />
+        )}
         <DataList aria-label={t`Namespace Header`}>
           <DataListItem data-cy='LegacyNamespace'>
             <DataListItemRow>
