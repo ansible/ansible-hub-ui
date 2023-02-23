@@ -11,7 +11,7 @@ interface IProps {
   cancelAction: () => void;
 }
 
-export const WisdomNamespaceModal = (props: IProps) => {
+export const WisdomModal = (props: IProps) => {
   const [isInDenyIndex, setIsInDenyIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);

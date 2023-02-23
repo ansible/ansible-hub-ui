@@ -40,7 +40,7 @@ import {
   RepoSelector,
   SignAllCertificatesModal,
   StatefulDropdown,
-  WisdomNamespaceModal,
+  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
@@ -356,7 +356,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </DeleteModal>
         )}
         {isOpenWisdomModal && (
-          <WisdomNamespaceModal
+          <WisdomModal
             cancelAction={() => this.setState({ isOpenWisdomModal: false })}
             scope={'namespace'}
             reference={this.state.namespace.name}
