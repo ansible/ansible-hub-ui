@@ -100,12 +100,12 @@ msgstr "<0>{name}</0>이/가 영구적으로 삭제됩니다."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:550
+#: src/components/repositories/remote-form.tsx:596
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 클라이언트 인증서입니다."
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:520
 msgid "A PEM encoded private key used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 개인 키입니다."
 
@@ -361,7 +361,7 @@ msgstr "기본 제공 역할은 편집하거나 삭제할 수 없습니다."
 msgid "Built-in roles cannot be edited."
 msgstr "기본 제공 역할은 편집할 수 없습니다."
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:593
 msgid "CA certificate"
 msgstr "CA 인증서"
 
@@ -382,8 +382,8 @@ msgstr ""
 msgid "Can't update remote without a distribution attached to it."
 msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수 없습니다."
 
-#: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:47
+#: src/components/confirm-modal/confirm-modal.tsx:39
+#: src/components/delete-modal/delete-modal.tsx:40
 #: src/components/execution-environment/repository-form.tsx:155
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
@@ -531,7 +531,7 @@ msgstr "하위 작업"
 msgid "Clear"
 msgstr "지우기"
 
-#: src/components/empty-state/empty-state-filter.tsx:21
+#: src/components/empty-state/empty-state-filter.tsx:20
 #: src/components/patternfly-wrappers/applied-filters.tsx:71
 msgid "Clear all filters"
 msgstr "모든 필터 지우기"
@@ -540,11 +540,11 @@ msgstr "모든 필터 지우기"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:547
 msgid "Client certificate"
 msgstr "클라이언트 인증서"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:517
 msgid "Client key"
 msgstr "클라이언트 키"
 
@@ -718,7 +718,7 @@ msgstr "보안 URL(https://)을 사용하는 것이 좋습니다."
 #~ msgid "Contact you organization administrator for more information."
 #~ msgstr "Contact you organization administrator for more information."
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:15
+#: src/components/empty-state/empty-state-unauthorized.tsx:14
 msgid "Contact your organization administrator for more information."
 msgstr "자세한 내용은 조직 관리자에게 문의하십시오."
 
@@ -906,7 +906,7 @@ msgstr "날짜"
 msgid "Date created"
 msgstr "생성된 날짜"
 
-#: src/components/delete-modal/delete-modal.tsx:42
+#: src/components/delete-modal/delete-modal.tsx:35
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
@@ -933,11 +933,11 @@ msgstr "삭제"
 #~ msgid "Delete collection remote"
 #~ msgstr "원격 컬렉션 삭제"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:38
+#: src/components/delete-modal/delete-collection-modal.tsx:37
 msgid "Delete collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:39
+#: src/components/delete-modal/delete-collection-modal.tsx:38
 msgid "Delete collection?"
 msgstr "컬렉션을 삭제하시겠습니까?"
 
@@ -961,7 +961,7 @@ msgstr "컬렉션을 삭제하시겠습니까?"
 #~ msgid "Delete container's namespace"
 #~ msgstr "컨테이너의 네임스페이스 삭제"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:25
 msgid "Delete container?"
 msgstr "컨테이너를 삭제하시겠습니까?"
 
@@ -1031,15 +1031,15 @@ msgstr "사용자를 삭제하시겠습니까?"
 msgid "Delete version {0}"
 msgstr "버전 삭제 {0}"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:47
+#: src/components/delete-modal/delete-collection-modal.tsx:46
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실되어 전체 컬렉션이 삭제됩니다."
 
-#: src/components/delete-modal/delete-collection-modal.tsx:56
+#: src/components/delete-modal/delete-collection-modal.tsx:55
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실됩니다."
 
-#: src/components/delete-modal/delete-collection-modal.tsx:66
+#: src/components/delete-modal/delete-collection-modal.tsx:65
 #: src/containers/namespace-detail/namespace-detail.tsx:341
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
@@ -1052,7 +1052,7 @@ msgstr "<0>{digest}</0>을/를 삭제하면 해당 데이터가 손실됩니다.
 #~ msgid "Deleting <0>{name}</0> and its data will be lost."
 #~ msgstr "Deleting <0>{name}</0> and its data will be lost."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:47
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:38
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
 msgstr "<0>{selectedItem}</0>을/를 삭제하면 해당 데이터가 손실됩니다. "
 
@@ -1155,15 +1155,15 @@ msgstr "<0>ansible-octets</0> 클라이언트를 구성하는 방법에 대한 �
 msgid "Done"
 msgstr "완료"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:629
 msgid "Download CA certification file"
 msgstr "CA 인증서 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:583
 msgid "Download client certification file"
 msgstr "클라이언트 인증 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:639
 msgid "Download concurrency"
 msgstr "동시 다운로드"
 
@@ -1471,11 +1471,11 @@ msgstr "실행 환경 \"{name}\"을/를 인덱싱할 수 없습니다."
 #~ msgid "Execution environment \"{name}\" has been added successfully."
 #~ msgstr "Execution environment \"{name}\" has been added successfully."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:90
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:84
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
 msgstr "실행 환경 \"{selectedItem}\"을/를 삭제할 수 없습니다."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:74
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:70
 msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgstr "실행 환경 \"{selectedItem}\"이/가 성공적으로 삭제되었습니다."
 
@@ -1693,7 +1693,7 @@ msgstr "그룹이 생성되면 나타납니다."
 msgid "Groups with access"
 msgstr "액세스 권한이 있는 그룹"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:416
 msgid "Hide advanced options"
 msgstr "고급 옵션 숨기기"
 
@@ -1701,14 +1701,14 @@ msgstr "고급 옵션 숨기기"
 msgid "Hide the signature"
 msgstr "서명 숨기기"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:75
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:54
+#: src/components/delete-modal/delete-collection-modal.tsx:73
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
 #: src/containers/namespace-detail/namespace-detail.tsx:348
 msgid "I understand that this action cannot be undone."
 msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:501
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
@@ -1834,7 +1834,7 @@ msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라�
 msgid "Key fingerprint"
 msgstr "키 지문"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:42
 msgid "Keywords"
 msgstr "키워드"
 
@@ -1895,7 +1895,7 @@ msgstr ""
 msgid "License"
 msgstr "라이센스"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:674
 msgid "Limits total download rate in requests per second."
 msgstr "초당 요청의 총 다운로드 속도를 제한합니다."
 
@@ -1907,7 +1907,7 @@ msgstr "링크 URL"
 msgid "Link text"
 msgstr "링크 텍스트"
 
-#: src/components/collection-list/collection-list.tsx:45
+#: src/components/collection-list/collection-list.tsx:44
 #: src/containers/search/search.tsx:508
 msgid "List of Collections"
 msgstr "컬렉션 목록"
@@ -1993,7 +1993,7 @@ msgstr "<0>소유자</0> <1/> 탭으로 이동합니다."
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "<0>소유자</0> 탭으로 이동합니다."
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:683
 msgid "Must be an integer."
 msgstr "정수여야 합니다."
 
@@ -2238,11 +2238,11 @@ msgstr "원격 레지스트리 없음"
 msgid "No remote repositories yet"
 msgstr "아직 원격 리포지토리가 없음"
 
-#: src/components/empty-state/empty-state-filter.tsx:15
+#: src/components/empty-state/empty-state-filter.tsx:14
 msgid "No results found"
 msgstr "결과를 찾을 수 없음"
 
-#: src/components/empty-state/empty-state-filter.tsx:16
+#: src/components/empty-state/empty-state-filter.tsx:15
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 변경하십시오."
 
@@ -2314,7 +2314,7 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:651
 msgid "Number must be greater than 0"
 msgstr "이 필드는 0보다 커야 합니다."
 
@@ -2352,7 +2352,7 @@ msgid "Partners"
 msgstr "파트너"
 
 #: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:384
+#: src/components/repositories/remote-form.tsx:385
 #: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "암호"
@@ -2478,19 +2478,19 @@ msgid "Provided by <0>{0}</0>"
 msgstr ""
 
 #: src/components/cards/collection-card.tsx:78
-#: src/components/collection-list/collection-list-item.tsx:86
+#: src/components/collection-list/collection-list-item.tsx:85
 msgid "Provided by {company}"
 msgstr "{company} 제공"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Proxy URL"
 msgstr "프록시 URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "프록시 암호"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:441
 msgid "Proxy username"
 msgstr "프록시 사용자 이름"
 
@@ -2652,7 +2652,7 @@ msgstr "실행 환경을 푸시하고 변경합니다."
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "실행 환경을 푸시, 삭제 및 변경합니다. 원격 레지스트리를 생성, 삭제 및 변경합니다."
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:671
 msgid "Rate Limit"
 msgstr "속도 제한"
 
@@ -3016,7 +3016,7 @@ msgstr "설정"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:417
 msgid "Show advanced options"
 msgstr "고급 옵션 표시"
 
@@ -3051,7 +3051,7 @@ msgstr "서명 및 승인"
 msgid "Sign entire collection"
 msgstr "전체 컬렉션에 서명"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:55
 msgid "Sign state"
 msgstr "서명 상태"
 
@@ -3084,7 +3084,7 @@ msgstr "서명 키를 표시할 수 없습니다."
 msgid "Signature keys will appear once created."
 msgstr "서명 키가 생성된 후 표시됩니다"
 
-#: src/components/collection-list/collection-filter.tsx:71
+#: src/components/collection-list/collection-filter.tsx:58
 #: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "서명됨"
@@ -3267,11 +3267,11 @@ msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습
 msgid "Sync status"
 msgstr "동기화 상태"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:498
 msgid "TLS validation"
 msgstr "TLS 인증"
 
-#: src/components/collection-list/collection-filter.tsx:59
+#: src/components/collection-list/collection-filter.tsx:46
 #: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
@@ -3403,11 +3403,11 @@ msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니�
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "다음 역할이 다음 그룹에 적용됩니다. <0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "동기화 시 인증에 사용할 암호입니다."
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "동기화 시 인증에 사용할 암호입니다. 토큰을 사용할 때는 필요하지 않습니다."
 
@@ -3552,7 +3552,7 @@ msgstr "서버 URL을 인증하는 데 사용되는 토큰입니다."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:642
 msgid "Total number of simultaneous connections."
 msgstr "총 동시 연결 수입니다."
 
@@ -3591,7 +3591,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
-#: src/components/collection-list/collection-filter.tsx:72
+#: src/components/collection-list/collection-filter.tsx:59
 #: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "서명되지 않음"
@@ -3604,7 +3604,7 @@ msgstr "서명되지 않은 버전"
 #~ msgid "Update container information"
 #~ msgstr "컨테이너 정보 업데이트"
 
-#: src/components/collection-list/collection-list-item.tsx:116
+#: src/components/collection-list/collection-list-item.tsx:115
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
@@ -3911,7 +3911,7 @@ msgstr "웹 사이트"
 msgid "YAML requirements"
 msgstr "YAML 요구 사항"
 
-#: src/components/confirm-modal/confirm-modal.tsx:36
+#: src/components/confirm-modal/confirm-modal.tsx:35
 #: src/components/execution-environment/tag-manifest-modal.tsx:182
 msgid "Yes"
 msgstr "제공됨"
@@ -3965,7 +3965,7 @@ msgstr "현재 컨테이너 리포지토리가 없습니다. 시작하려면 CLI
 msgid "You currently have no remote registries."
 msgstr "현재 원격 레지스트리가 없습니다."
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:12
+#: src/components/empty-state/empty-state-unauthorized.tsx:11
 msgid "You do not have access to Automation Hub"
 msgstr "Automation Hub에 액세스할 수 없습니다."
 
@@ -4019,7 +4019,7 @@ msgstr "콘텐츠 찾기"
 msgid "hidden value"
 msgstr "숨겨진 값"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:81
 #: src/containers/namespace-list/namespace-list.tsx:214
 #: src/containers/namespace-list/namespace-list.tsx:224
 msgid "keywords"
@@ -4058,11 +4058,11 @@ msgstr ""
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:92
+#: src/components/collection-list/collection-filter.tsx:79
 msgid "sign state"
 msgstr "서명 상태"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:80
 msgid "tags"
 msgstr "태그"
 
@@ -4104,7 +4104,7 @@ msgstr "{collectionName}의 버전입니다."
 
 #: src/components/cards/collection-card.tsx:50
 #: src/components/cards/namespace-card.tsx:37
-#: src/components/collection-list/collection-list-item.tsx:56
+#: src/components/collection-list/collection-list-item.tsx:55
 #: src/components/headers/collection-header.tsx:401
 #: src/components/headers/partner-header.tsx:48
 msgid "{company} logo"

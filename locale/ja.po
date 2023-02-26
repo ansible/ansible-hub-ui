@@ -100,12 +100,12 @@ msgstr "<0>{name}</0> は完全に削除されます。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:550
+#: src/components/repositories/remote-form.tsx:596
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "認証に使用する PEM でエンコードされたクライアント証明書。"
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:520
 msgid "A PEM encoded private key used for authentication."
 msgstr "認証に使用する PEM でエンコードされた秘密鍵。"
 
@@ -361,7 +361,7 @@ msgstr "組み込みのロールは、編集または削除できません。"
 msgid "Built-in roles cannot be edited."
 msgstr "組み込みのロールは編集できません。"
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:593
 msgid "CA certificate"
 msgstr "CA 証明書"
 
@@ -382,8 +382,8 @@ msgstr ""
 msgid "Can't update remote without a distribution attached to it."
 msgstr "ディストリビューションをアタッチせずにリモートは更新できません。"
 
-#: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:47
+#: src/components/confirm-modal/confirm-modal.tsx:39
+#: src/components/delete-modal/delete-modal.tsx:40
 #: src/components/execution-environment/repository-form.tsx:155
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
@@ -531,7 +531,7 @@ msgstr "子タスク"
 msgid "Clear"
 msgstr "消去"
 
-#: src/components/empty-state/empty-state-filter.tsx:21
+#: src/components/empty-state/empty-state-filter.tsx:20
 #: src/components/patternfly-wrappers/applied-filters.tsx:71
 msgid "Clear all filters"
 msgstr "すべてのフィルターの解除"
@@ -540,11 +540,11 @@ msgstr "すべてのフィルターの解除"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログインして (必要な場合)、手順に従い、設定を完了します。"
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:547
 msgid "Client certificate"
 msgstr "クライアント証明書"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:517
 msgid "Client key"
 msgstr "クライアントキー"
 
@@ -718,7 +718,7 @@ msgstr "セキュアな URL (https://) の使用を検討してください。"
 #~ msgid "Contact you organization administrator for more information."
 #~ msgstr "Contact you organization administrator for more information."
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:15
+#: src/components/empty-state/empty-state-unauthorized.tsx:14
 msgid "Contact your organization administrator for more information."
 msgstr "詳細は、組織の管理者にお問い合わせください。"
 
@@ -906,7 +906,7 @@ msgstr "日付"
 msgid "Date created"
 msgstr "作成日"
 
-#: src/components/delete-modal/delete-modal.tsx:42
+#: src/components/delete-modal/delete-modal.tsx:35
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
@@ -933,11 +933,11 @@ msgstr "削除"
 #~ msgid "Delete collection remote"
 #~ msgstr "コレクションリモートの削除"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:38
+#: src/components/delete-modal/delete-collection-modal.tsx:37
 msgid "Delete collection version?"
 msgstr "コレクションのバージョンを削除しますか?"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:39
+#: src/components/delete-modal/delete-collection-modal.tsx:38
 msgid "Delete collection?"
 msgstr "コレクションを削除しますか?"
 
@@ -961,7 +961,7 @@ msgstr "コレクションを削除しますか?"
 #~ msgid "Delete container's namespace"
 #~ msgstr "コンテナーの名前空間の削除"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:25
 msgid "Delete container?"
 msgstr "コンテナーを削除しますか?"
 
@@ -1031,15 +1031,15 @@ msgstr "ユーザーを削除しますか?"
 msgid "Delete version {0}"
 msgstr "バージョン {0} の削除"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:47
+#: src/components/delete-modal/delete-collection-modal.tsx:46
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0> を削除するとそのデータが失われ、コレクション全体が削除されます。"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:56
+#: src/components/delete-modal/delete-collection-modal.tsx:55
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:66
+#: src/components/delete-modal/delete-collection-modal.tsx:65
 #: src/containers/namespace-detail/namespace-detail.tsx:341
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> を削除すると、そのデータが失われます。"
@@ -1052,7 +1052,7 @@ msgstr "<0>{digest}</0> を削除すると、そのデータが失われます�
 #~ msgid "Deleting <0>{name}</0> and its data will be lost."
 #~ msgstr "Deleting <0>{name}</0> and its data will be lost."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:47
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:38
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
 msgstr "<0>{selectedItem}</0> を削除すると、そのデータが失われます。"
 
@@ -1155,15 +1155,15 @@ msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するド�
 msgid "Done"
 msgstr "完了"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:629
 msgid "Download CA certification file"
 msgstr "CA 証明書ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:583
 msgid "Download client certification file"
 msgstr "クライアント認定ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:639
 msgid "Download concurrency"
 msgstr "同時実行のダウンロード"
 
@@ -1471,11 +1471,11 @@ msgstr "実行環境 \"{name}\" をインデックス化できませんでした
 #~ msgid "Execution environment \"{name}\" has been added successfully."
 #~ msgstr "Execution environment \"{name}\" has been added successfully."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:90
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:84
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
 msgstr "実行環境 \"{selectedItem}\" を削除できませんでした。"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:74
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:70
 msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgstr "実行環境 \"{selectedItem}\" が正常に削除されました。"
 
@@ -1693,7 +1693,7 @@ msgstr "グループは作成後に表示されます"
 msgid "Groups with access"
 msgstr "アクセス権のあるグループ"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:416
 msgid "Hide advanced options"
 msgstr "詳細オプションの非表示"
 
@@ -1701,14 +1701,14 @@ msgstr "詳細オプションの非表示"
 msgid "Hide the signature"
 msgstr "署名の非表示"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:75
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:54
+#: src/components/delete-modal/delete-collection-modal.tsx:73
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
 #: src/containers/namespace-detail/namespace-detail.tsx:348
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:501
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
@@ -1834,7 +1834,7 @@ msgstr "このウィンドウを安全に閉じることができます。この
 msgid "Key fingerprint"
 msgstr "キーフィンガープリント"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:42
 msgid "Keywords"
 msgstr "キーワード"
 
@@ -1895,7 +1895,7 @@ msgstr ""
 msgid "License"
 msgstr "ライセンス"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:674
 msgid "Limits total download rate in requests per second."
 msgstr "1 秒あたりの要求の合計ダウンロード速度を制限します。"
 
@@ -1907,7 +1907,7 @@ msgstr "リンク URL"
 msgid "Link text"
 msgstr "リンクテキスト"
 
-#: src/components/collection-list/collection-list.tsx:45
+#: src/components/collection-list/collection-list.tsx:44
 #: src/containers/search/search.tsx:508
 msgid "List of Collections"
 msgstr "コレクションの一覧"
@@ -1993,7 +1993,7 @@ msgstr "<0>Owners</0> <1/> タブに移動しました"
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "<0>Owners</0> タブに移動しました"
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:683
 msgid "Must be an integer."
 msgstr "整数でなければなりません。"
 
@@ -2238,11 +2238,11 @@ msgstr "リモートレジストリーなし"
 msgid "No remote repositories yet"
 msgstr "まだリモートリポジトリーはありません"
 
-#: src/components/empty-state/empty-state-filter.tsx:15
+#: src/components/empty-state/empty-state-filter.tsx:14
 msgid "No results found"
 msgstr "結果が見つかりません"
 
-#: src/components/empty-state/empty-state-filter.tsx:16
+#: src/components/empty-state/empty-state-filter.tsx:15
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "絞り込みの基準と一致する結果がありません。フィルター設定を変更してみてください。"
 
@@ -2314,7 +2314,7 @@ msgstr "他のコレクションでの使用には必要ありません"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:651
 msgid "Number must be greater than 0"
 msgstr "数字は 0 より大きくなければなりません"
 
@@ -2352,7 +2352,7 @@ msgid "Partners"
 msgstr "パートナー"
 
 #: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:384
+#: src/components/repositories/remote-form.tsx:385
 #: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "パスワード"
@@ -2478,19 +2478,19 @@ msgid "Provided by <0>{0}</0>"
 msgstr ""
 
 #: src/components/cards/collection-card.tsx:78
-#: src/components/collection-list/collection-list-item.tsx:86
+#: src/components/collection-list/collection-list-item.tsx:85
 msgid "Provided by {company}"
 msgstr "{company} により提供"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Proxy URL"
 msgstr "プロキシー URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "プロキシーパスワード"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:441
 msgid "Proxy username"
 msgstr "プロキシーユーザー名"
 
@@ -2652,7 +2652,7 @@ msgstr "プッシュし、実行環境を変更します。"
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "実行環境をプッシュ、削除、および変更します。リモートレジストリーを作成、削除、および変更します。"
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:671
 msgid "Rate Limit"
 msgstr "速度制限"
 
@@ -3016,7 +3016,7 @@ msgstr "設定"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:417
 msgid "Show advanced options"
 msgstr "詳細オプションの表示"
 
@@ -3051,7 +3051,7 @@ msgstr "署名および承認"
 msgid "Sign entire collection"
 msgstr "コレクション全体への署名"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:55
 msgid "Sign state"
 msgstr "署名状態"
 
@@ -3084,7 +3084,7 @@ msgstr "署名キーを表示できませんでした。"
 msgid "Signature keys will appear once created."
 msgstr "署名キーが作成されると表示されます。"
 
-#: src/components/collection-list/collection-filter.tsx:71
+#: src/components/collection-list/collection-filter.tsx:58
 #: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "署名済み"
@@ -3267,11 +3267,11 @@ msgstr "リモートレジストリー \"{name}\" の同期が開始されまし
 msgid "Sync status"
 msgstr "同期のステータス"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:498
 msgid "TLS validation"
 msgstr "TLS 検証"
 
-#: src/components/collection-list/collection-filter.tsx:59
+#: src/components/collection-list/collection-filter.tsx:46
 #: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
@@ -3403,11 +3403,11 @@ msgstr "このファイルは、このバージョンの {collectionName} では
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "グループには、以下のロールが適用されます: <0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "同期時に認証に使用するパスワード。"
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
@@ -3552,7 +3552,7 @@ msgstr "サーバー URL に対する認証に使用するトークンです。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:642
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
@@ -3591,7 +3591,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "非推奨解除"
 
-#: src/components/collection-list/collection-filter.tsx:72
+#: src/components/collection-list/collection-filter.tsx:59
 #: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "未署名"
@@ -3604,7 +3604,7 @@ msgstr "未署名バージョン"
 #~ msgid "Update container information"
 #~ msgstr "コンテナー情報の更新"
 
-#: src/components/collection-list/collection-list-item.tsx:116
+#: src/components/collection-list/collection-list-item.tsx:115
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
@@ -3911,7 +3911,7 @@ msgstr "Web サイト"
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
-#: src/components/confirm-modal/confirm-modal.tsx:36
+#: src/components/confirm-modal/confirm-modal.tsx:35
 #: src/components/execution-environment/tag-manifest-modal.tsx:182
 msgid "Yes"
 msgstr "はい"
@@ -3965,7 +3965,7 @@ msgstr "現在、コンテナーリポジトリーはありません。開始す
 msgid "You currently have no remote registries."
 msgstr "現在、リモートレジストリーがありません。"
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:12
+#: src/components/empty-state/empty-state-unauthorized.tsx:11
 msgid "You do not have access to Automation Hub"
 msgstr "Automation Hub にアクセスできません"
 
@@ -4019,7 +4019,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "非表示の値"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:81
 #: src/containers/namespace-list/namespace-list.tsx:214
 #: src/containers/namespace-list/namespace-list.tsx:224
 msgid "keywords"
@@ -4058,11 +4058,11 @@ msgstr ""
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:92
+#: src/components/collection-list/collection-filter.tsx:79
 msgid "sign state"
 msgstr "署名状態"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:80
 msgid "tags"
 msgstr "タグ"
 
@@ -4104,7 +4104,7 @@ msgstr "{collectionName} のバージョン。"
 
 #: src/components/cards/collection-card.tsx:50
 #: src/components/cards/namespace-card.tsx:37
-#: src/components/collection-list/collection-list-item.tsx:56
+#: src/components/collection-list/collection-list-item.tsx:55
 #: src/components/headers/collection-header.tsx:401
 #: src/components/headers/partner-header.tsx:48
 msgid "{company} logo"

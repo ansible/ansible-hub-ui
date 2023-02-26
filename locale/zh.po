@@ -100,12 +100,12 @@ msgstr "<0>{name}</0> 将被永久删除。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:550
+#: src/components/repositories/remote-form.tsx:596
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "用于身份验证的 PEM 编码客户端证书。"
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:520
 msgid "A PEM encoded private key used for authentication."
 msgstr "用于验证的 PEM 编码私钥。"
 
@@ -361,7 +361,7 @@ msgstr "无法编辑或删除内置角色。"
 msgid "Built-in roles cannot be edited."
 msgstr "无法编辑内置角色。"
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:593
 msgid "CA certificate"
 msgstr "CA 证书"
 
@@ -382,8 +382,8 @@ msgstr ""
 msgid "Can't update remote without a distribution attached to it."
 msgstr "在未将一个发布附加到它时，无法远程更新。"
 
-#: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:47
+#: src/components/confirm-modal/confirm-modal.tsx:39
+#: src/components/delete-modal/delete-modal.tsx:40
 #: src/components/execution-environment/repository-form.tsx:155
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
@@ -531,7 +531,7 @@ msgstr "子任务"
 msgid "Clear"
 msgstr "清除"
 
-#: src/components/empty-state/empty-state-filter.tsx:21
+#: src/components/empty-state/empty-state-filter.tsx:20
 #: src/components/patternfly-wrappers/applied-filters.tsx:71
 msgid "Clear all filters"
 msgstr "清除所有过滤器"
@@ -540,11 +540,11 @@ msgstr "清除所有过滤器"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的控制器 URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:547
 msgid "Client certificate"
 msgstr "客户端证书"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:517
 msgid "Client key"
 msgstr "客户端密钥"
 
@@ -718,7 +718,7 @@ msgstr "考虑使用一个安全 URL(https://)。"
 #~ msgid "Contact you organization administrator for more information."
 #~ msgstr "Contact you organization administrator for more information."
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:15
+#: src/components/empty-state/empty-state-unauthorized.tsx:14
 msgid "Contact your organization administrator for more information."
 msgstr "如需更多信息，请联系您的机构管理员。"
 
@@ -906,7 +906,7 @@ msgstr "日期"
 msgid "Date created"
 msgstr "创建日期"
 
-#: src/components/delete-modal/delete-modal.tsx:42
+#: src/components/delete-modal/delete-modal.tsx:35
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
@@ -933,11 +933,11 @@ msgstr "删除"
 #~ msgid "Delete collection remote"
 #~ msgstr "删除集合远程"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:38
+#: src/components/delete-modal/delete-collection-modal.tsx:37
 msgid "Delete collection version?"
 msgstr "删除集合版本？"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:39
+#: src/components/delete-modal/delete-collection-modal.tsx:38
 msgid "Delete collection?"
 msgstr "删除集合？"
 
@@ -961,7 +961,7 @@ msgstr "删除集合？"
 #~ msgid "Delete container's namespace"
 #~ msgstr "删除容器的命名空间"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:25
 msgid "Delete container?"
 msgstr "删除容器？"
 
@@ -1031,15 +1031,15 @@ msgstr "删除用户？"
 msgid "Delete version {0}"
 msgstr "删除版本 {0}"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:47
+#: src/components/delete-modal/delete-collection-modal.tsx:46
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失，这会导致整个集合被删除。"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:56
+#: src/components/delete-modal/delete-collection-modal.tsx:55
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:66
+#: src/components/delete-modal/delete-collection-modal.tsx:65
 #: src/containers/namespace-detail/namespace-detail.tsx:341
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
@@ -1052,7 +1052,7 @@ msgstr "删除 <0>{digest}</0> 其数据将会丢失。"
 #~ msgid "Deleting <0>{name}</0> and its data will be lost."
 #~ msgstr "Deleting <0>{name}</0> and its data will be lost."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:47
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:38
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
 msgstr "删除 <0>{selectedItem}</0> 其数据将会丢失。"
 
@@ -1155,15 +1155,15 @@ msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这�
 msgid "Done"
 msgstr "完成"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:629
 msgid "Download CA certification file"
 msgstr "下载 CA 认证文件"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:583
 msgid "Download client certification file"
 msgstr "下载客户端认证文件"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:639
 msgid "Download concurrency"
 msgstr "下载并发"
 
@@ -1471,11 +1471,11 @@ msgstr "执行环境 \"{name}\" 无法被索引。"
 #~ msgid "Execution environment \"{name}\" has been added successfully."
 #~ msgstr "Execution environment \"{name}\" has been added successfully."
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:90
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:84
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
 msgstr "无法删除执行环境 \"{selectedItem}\"。"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:74
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:70
 msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgstr "执行环境 \"{selectedItem}\" 已成功删除。"
 
@@ -1693,7 +1693,7 @@ msgstr "组在创建后会出现"
 msgid "Groups with access"
 msgstr "带有访问权限的组"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:416
 msgid "Hide advanced options"
 msgstr "隐藏高级选项"
 
@@ -1701,14 +1701,14 @@ msgstr "隐藏高级选项"
 msgid "Hide the signature"
 msgstr "隐藏签名"
 
-#: src/components/delete-modal/delete-collection-modal.tsx:75
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:54
+#: src/components/delete-modal/delete-collection-modal.tsx:73
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
 #: src/containers/namespace-detail/namespace-detail.tsx:348
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:501
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
@@ -1834,7 +1834,7 @@ msgstr "关闭这个窗口是安全的。这些任务将在后台结束。"
 msgid "Key fingerprint"
 msgstr "密钥指纹"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:42
 msgid "Keywords"
 msgstr "关键字"
 
@@ -1895,7 +1895,7 @@ msgstr ""
 msgid "License"
 msgstr "许可证"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:674
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
@@ -1907,7 +1907,7 @@ msgstr "链接 URL"
 msgid "Link text"
 msgstr "链接文本"
 
-#: src/components/collection-list/collection-list.tsx:45
+#: src/components/collection-list/collection-list.tsx:44
 #: src/containers/search/search.tsx:508
 msgid "List of Collections"
 msgstr "集合列表"
@@ -1993,7 +1993,7 @@ msgstr "移到 <0>所有者</0> <1/> 标签页"
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "移到 <0>所有者</0> 标签页"
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:683
 msgid "Must be an integer."
 msgstr "必须是整数。"
 
@@ -2238,11 +2238,11 @@ msgstr "没有远程注册表"
 msgid "No remote repositories yet"
 msgstr "还没有远程软件仓库"
 
-#: src/components/empty-state/empty-state-filter.tsx:15
+#: src/components/empty-state/empty-state-filter.tsx:14
 msgid "No results found"
 msgstr "没有找到结果"
 
-#: src/components/empty-state/empty-state-filter.tsx:16
+#: src/components/empty-state/empty-state-filter.tsx:15
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "没有结果与过滤条件匹配。尝试更改过滤器设置。"
 
@@ -2314,7 +2314,7 @@ msgstr "其他集合不需要使用"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:651
 msgid "Number must be greater than 0"
 msgstr "此字段必须大于 0"
 
@@ -2352,7 +2352,7 @@ msgid "Partners"
 msgstr "合作伙伴"
 
 #: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:384
+#: src/components/repositories/remote-form.tsx:385
 #: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "密码"
@@ -2478,19 +2478,19 @@ msgid "Provided by <0>{0}</0>"
 msgstr ""
 
 #: src/components/cards/collection-card.tsx:78
-#: src/components/collection-list/collection-list-item.tsx:86
+#: src/components/collection-list/collection-list-item.tsx:85
 msgid "Provided by {company}"
 msgstr "由 {company} 提供"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Proxy URL"
 msgstr "代理 URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "代理密码"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:441
 msgid "Proxy username"
 msgstr "代理用户名"
 
@@ -2652,7 +2652,7 @@ msgstr "推送和更改执行环境。"
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "推送、删除和更改执行环境。创建、删除和更改远程 registry。"
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:671
 msgid "Rate Limit"
 msgstr "速率限制"
 
@@ -3016,7 +3016,7 @@ msgstr "设置"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:417
 msgid "Show advanced options"
 msgstr "显示高级选项"
 
@@ -3051,7 +3051,7 @@ msgstr "签发并批准"
 msgid "Sign entire collection"
 msgstr "删除整个集合"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:55
 msgid "Sign state"
 msgstr "集群状态"
 
@@ -3084,7 +3084,7 @@ msgstr "无法显示签名密钥。"
 msgid "Signature keys will appear once created."
 msgstr "签名密钥在创建后会显示。"
 
-#: src/components/collection-list/collection-filter.tsx:71
+#: src/components/collection-list/collection-filter.tsx:58
 #: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "已签名"
@@ -3267,11 +3267,11 @@ msgstr "远程注册表\"{name}\" 的同步开始。"
 msgid "Sync status"
 msgstr "同步状态"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:498
 msgid "TLS validation"
 msgstr "TLS 验证"
 
-#: src/components/collection-list/collection-filter.tsx:59
+#: src/components/collection-list/collection-filter.tsx:46
 #: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
@@ -3403,11 +3403,11 @@ msgstr "文件不适用于 {collectionName} 的这个版本"
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "以下角色将应用到组：<0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "同步时用于身份验证的密码。"
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
@@ -3552,7 +3552,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:642
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
@@ -3591,7 +3591,7 @@ msgstr "URL：{0}"
 msgid "Undeprecate"
 msgstr "取消弃用"
 
-#: src/components/collection-list/collection-filter.tsx:72
+#: src/components/collection-list/collection-filter.tsx:59
 #: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "未签名"
@@ -3604,7 +3604,7 @@ msgstr "未签名的版本"
 #~ msgid "Update container information"
 #~ msgstr "更新容器信息"
 
-#: src/components/collection-list/collection-list-item.tsx:116
+#: src/components/collection-list/collection-list-item.tsx:115
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
@@ -3911,7 +3911,7 @@ msgstr "网站"
 msgid "YAML requirements"
 msgstr "YAML 要求"
 
-#: src/components/confirm-modal/confirm-modal.tsx:36
+#: src/components/confirm-modal/confirm-modal.tsx:35
 #: src/components/execution-environment/tag-manifest-modal.tsx:182
 msgid "Yes"
 msgstr "是"
@@ -3965,7 +3965,7 @@ msgstr "您当前没有容器仓库。通过 CLI 添加容器仓库以开始。"
 msgid "You currently have no remote registries."
 msgstr "您目前没有远程注册表。"
 
-#: src/components/empty-state/empty-state-unauthorized.tsx:12
+#: src/components/empty-state/empty-state-unauthorized.tsx:11
 msgid "You do not have access to Automation Hub"
 msgstr "您无法访问 Automation Hub"
 
@@ -4019,7 +4019,7 @@ msgstr "查找内容"
 msgid "hidden value"
 msgstr "隐藏值"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:81
 #: src/containers/namespace-list/namespace-list.tsx:214
 #: src/containers/namespace-list/namespace-list.tsx:224
 msgid "keywords"
@@ -4058,11 +4058,11 @@ msgstr ""
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:92
+#: src/components/collection-list/collection-filter.tsx:79
 msgid "sign state"
 msgstr "签发状态"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:80
 msgid "tags"
 msgstr "标签"
 
@@ -4104,7 +4104,7 @@ msgstr "{collectionName}的版本。"
 
 #: src/components/cards/collection-card.tsx:50
 #: src/components/cards/namespace-card.tsx:37
-#: src/components/collection-list/collection-list-item.tsx:56
+#: src/components/collection-list/collection-list-item.tsx:55
 #: src/components/headers/collection-header.tsx:401
 #: src/components/headers/partner-header.tsx:48
 msgid "{company} logo"
