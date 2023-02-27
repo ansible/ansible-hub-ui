@@ -244,7 +244,15 @@ class LegacyNamespace extends React.Component<
         </DataListCell>,
       );
 
-      if (ai_deny_index) {
+      const summary_fields: any = this.state.namespace.summary_fields;
+      const userOwnsLegacyNamespace = summary_fields?.owners?.filter(
+        (n) => n.username == this.context.user.username,
+      ).length;
+
+      if (
+        ai_deny_index &&
+        (this.context.user.is_superuser || userOwnsLegacyNamespace)
+      ) {
         infocells.push(
           <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
             <Button
