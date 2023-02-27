@@ -17,24 +17,19 @@ export const WisdomModal = (props: IProps) => {
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
 
-  let titleAddFailed = '';
-  let titleRemoveFailed = '';
-  let titleWillBeUsed = '';
-  let titleWillNotBeUsed = '';
-  const namespace = props.reference;
+  const titleAddFailed = t`Failed to opt in to Wisdom.`;
+  const titleRemoveFailed = t`Failed to opt out of Wisdom.`;
+  const titleWillBeUsed = t`The ${props.reference} is opt in Wisdom.`;
+  const titleWillNotBeUsed = t`The ${props.reference} is opt out from Wisdom.`;
 
-  if (props.scope == 'namespace') {
-    titleAddFailed = t`Failed to add namespace to Ansible Wisdom.`;
-    titleRemoveFailed = t`Failed to remove namespace from Ansible Wisdom.`;
-    titleWillBeUsed = t`The namespace ${namespace} will be used by Ansible Wisdom`;
-    titleWillNotBeUsed = t`The namespace ${namespace} will not be used by Ansible Wisdom`;
-  }
-
-  if (props.scope == 'legacy_namespace') {
-    titleAddFailed = t`Failed to add legacy namespace to Ansible Wisdom.`;
-    titleRemoveFailed = t`Failed to remove legacy namespace from Ansible Wisdom.`;
-    titleWillBeUsed = t`The legacy namespace ${namespace} will be used by Ansible Wisdom`;
-    titleWillNotBeUsed = t`The legacy namespace ${namespace} will not be used by Ansible Wisdom`;
+  let title = '';
+  switch (props.scope) {
+    case 'namespace':
+      title = t`Wisdom modal for namespace.`;
+      break;
+    case 'legacy_namespace':
+      title = t`Wisdom modal for legacy namespace.`;
+      break;
   }
 
   useEffect(() => {
@@ -100,7 +95,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Add to Ansible wisdom`}
+          {t`Opt in Wisdom.`}
         </Button>,
       );
     } else {
@@ -110,7 +105,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={addToDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Remove from Ansible wisdom`}
+          {t`Opt out of Wisdom.`}
         </Button>,
       );
     }
@@ -127,7 +122,7 @@ export const WisdomModal = (props: IProps) => {
       actions={actions}
       isOpen={true}
       onClose={props.cancelAction}
-      title={t`Wisdom Modal`}
+      title={title}
       titleIconVariant='warning'
       variant='small'
     >

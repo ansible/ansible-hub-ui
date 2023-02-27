@@ -243,15 +243,14 @@ class LegacyNamespace extends React.Component<
           <BaseHeader title={this.state.namespace.name}></BaseHeader>
         </DataListCell>,
       );
+
       if (ai_deny_index) {
         infocells.push(
           <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
-            <div>
-              <Button
-                className='wisdom_button'
-                onClick={() => this.setState({ isOpenWisdomModal: true })}
-              >{t`Wisdom Settings`}</Button>
-            </div>
+            <Button
+              className='wisdom_button'
+              onClick={() => this.setState({ isOpenWisdomModal: true })}
+            >{t`Wisdom Settings`}</Button>
           </DataListCell>,
         );
       }
@@ -266,7 +265,10 @@ class LegacyNamespace extends React.Component<
             reference={this.state.namespace.name}
           />
         )}
-        <DataList aria-label={t`Namespace Header`}>
+        <DataList
+          aria-label={t`Namespace Header`}
+          className='legacy-namespace-page'
+        >
           <DataListItem data-cy='LegacyNamespace'>
             <DataListItemRow>
               <DataListItemCells dataListCells={infocells} />
