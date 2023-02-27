@@ -36,7 +36,7 @@ jobs:
         git push -f --tags
 
     - name: "Cache ~/.npm"
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ env.GITHUB_REF }}-${{ hashFiles('**/package-lock.json') }}
