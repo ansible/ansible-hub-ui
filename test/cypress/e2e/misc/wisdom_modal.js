@@ -10,9 +10,9 @@ describe('Wisdom Modal Test', () => {
     cy.login();
     cy.visit(`${uiPrefix}repo/published/testns1`);
     cy.get('main button[aria-label="Actions"]').click();
-    cy.contains('main', 'Wisdom Settings').click();
-    cy.contains('main', 'Opt out of Wisdom.').click();
-    cy.contains('main', 'Opt in Wisdom.').click();
-    cy.contains('main', 'Opt out of Wisdom.');
+    cy.contains('main a', 'Wisdom Settings').click();
+    cy.contains('button', 'Opt out of Wisdom').click();
+    cy.contains('button', 'Opt in Wisdom').click();
+    cy.contains('button', 'Opt out of Wisdom');
   });
 });

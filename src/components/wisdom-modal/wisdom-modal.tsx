@@ -94,7 +94,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt in Wisdom.`}
+          {t`Opt in Wisdom`}
         </Button>,
       );
     } else {
@@ -104,7 +104,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={addToDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt out of Wisdom.`}
+          {t`Opt out of Wisdom`}
         </Button>,
       );
     }
