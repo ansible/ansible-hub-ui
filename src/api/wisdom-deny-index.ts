@@ -4,7 +4,6 @@ export class API extends HubAPI {
   path = this.getUIPath('ai_deny_index/');
 
   isInDenyIndex(scope, reference) {
-    const params = { scope, reference };
     return this.http
       .get(this.path + `/?scope=${scope}&reference=${reference}`)
       .then((response) => {
@@ -13,7 +12,6 @@ export class API extends HubAPI {
   }
 
   removeFromDenyIndex(scope, reference) {
-    const params = { scope, reference };
     const removePath = this.path + scope + '/' + reference + '/';
     return this.http.delete(removePath);
   }

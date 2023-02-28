@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import { Button, ButtonVariant, Modal, Spinner } from '@patternfly/react-core';
-import { totalmem } from 'os';
 import React, { useEffect, useState } from 'react';
 import { wisdomDenyIndexAPI } from 'src/api';
 import { AlertList, AlertType } from 'src/components';
@@ -53,7 +52,7 @@ export const WisdomModal = (props: IProps) => {
     setLoading(true);
     wisdomDenyIndexAPI
       .removeFromDenyIndex(props.scope, props.reference)
-      .then((result) => {
+      .then(() => {
         setIsInDenyIndex(false);
         setLoading(false);
       })
@@ -71,7 +70,7 @@ export const WisdomModal = (props: IProps) => {
     setLoading(true);
     wisdomDenyIndexAPI
       .addToDenyIndex(props.scope, props.reference)
-      .then((result) => {
+      .then(() => {
         setIsInDenyIndex(true);
         setLoading(false);
       })
@@ -85,7 +84,7 @@ export const WisdomModal = (props: IProps) => {
       });
   };
 
-  let actions = [];
+  const actions = [];
 
   if (!loading) {
     if (isInDenyIndex) {
