@@ -8,12 +8,12 @@
 }
 
 #page-sidebar > div {
-  padding-top: 0px;
+  padding-top: 0;
 }
+
 #page-sidebar {
-  border-top-style: solid;
-  border-top-width: var(--pf-global--BorderWidth--sm);
-  border-top-color: var(--pf-global--palette--black-800);
+  border-top: var(--pf-global--BorderWidth--sm) solid
+    var(--pf-global--palette--black-800);
 }
 
 section.pf-c-nav__section.nav-title > h2 {

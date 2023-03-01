@@ -1,7 +1,8 @@
-@import '../../global-variables.scss';
+@import '../../global-variables';
 
 .page-container {
   display: flex;
+
   .import-list {
     width: 400px;
   }

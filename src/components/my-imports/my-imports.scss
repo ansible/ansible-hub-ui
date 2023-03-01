@@ -1,4 +1,4 @@
-@import '../../global-variables.scss';
+@import '../../global-variables';
 
 .selected-item {
   background-color: #edf8ff;
@@ -43,19 +43,24 @@
   & > div {
     margin-bottom: 16px;
   }
+
   .pf-c-toolbar {
     padding: 0;
   }
+
   .pf-c-toolbar__content-section {
     margin: 0;
   }
+
   .list-container {
     display: flex;
     align-items: center;
     padding: 10px;
+
     .left {
       margin-right: 10px;
     }
+
     border-bottom: 1px solid #ededed;
   }
 
@@ -96,10 +101,12 @@
 
   .title-container {
     display: inline-block;
+
     .title {
       display: inline;
       font-size: 18px;
     }
+
     .refreshing-icon {
       display: inline;
       font-size: 18px;
@@ -107,6 +114,7 @@
       opacity: 0;
       transition: 2s ease;
     }
+
     .refreshing-icon.refreshing {
       opacity: 1;
     }
@@ -148,9 +156,11 @@
 .failed {
   color: $red;
 }
+
 .warning {
   color: $warning;
 }
+
 .success {
   color: $green;
 }

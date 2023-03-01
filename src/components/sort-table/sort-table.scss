@@ -1,8 +1,9 @@
-@import '../../global-variables.scss';
+@import '../../global-variables';
 
 .active {
   color: $blue;
 }
+
 .inactive {
   color: $grey;
 }
