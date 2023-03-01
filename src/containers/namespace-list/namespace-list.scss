@@ -8,6 +8,7 @@
     margin-top: 24px;
     margin-left: 24px;
     flex-grow: 1;
+
     .card-layout {
       display: flex;
       flex-wrap: wrap;
@@ -25,7 +26,7 @@
   }
 
   .pf-c-toolbar__content {
-    padding-left: 0px;
+    padding-left: 0;
   }
 
   .footer {
