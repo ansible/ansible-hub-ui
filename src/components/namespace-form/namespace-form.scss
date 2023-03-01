@@ -1,4 +1,4 @@
-@import '../../global-variables.scss';
+@import '../../global-variables';
 .card-row {
   @media (max-width: $breakpoint-md) {
     flex-direction: column-reverse;
