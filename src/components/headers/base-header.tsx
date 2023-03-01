@@ -16,55 +16,51 @@ interface IProps {
   status?: React.ReactNode;
 }
 
-export class BaseHeader extends React.Component<IProps> {
-  render() {
-    const {
-      title,
-      logo,
-      pageControls,
-      children,
-      breadcrumbs,
-      className,
-      contextSelector,
-      versionControl,
-      status,
-    } = this.props;
+export const BaseHeader = (props: IProps) => {
+  const {
+    title,
+    logo,
+    pageControls,
+    children,
+    breadcrumbs,
+    className,
+    contextSelector,
+    versionControl,
+    status,
+  } = props;
 
-    const showRepoSelector =
-      contextSelector && DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE;
+  const showRepoSelector =
+    contextSelector && DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE;
 
-    return (
-      <div className={cx('background', className)}>
-        {showRepoSelector && (
-          <div className='breadcrumb-container'>{contextSelector}</div>
-        )}
-        {breadcrumbs && (
-          <div className='breadcrumb-container'>{breadcrumbs}</div>
-        )}
-        {!breadcrumbs && !showRepoSelector && <div className='placeholder' />}
+  return (
+    <div className={cx('background', className)}>
+      {showRepoSelector && (
+        <div className='breadcrumb-container'>{contextSelector}</div>
+      )}
+      {breadcrumbs && <div className='breadcrumb-container'>{breadcrumbs}</div>}
+      {!breadcrumbs && !showRepoSelector && <div className='placeholder' />}
 
-        <div className='column-section'>
-          <div className='title-box'>
-            {logo}
-            <div>
-              <Title headingLevel='h1' size='2xl'>
-                {title}
-                {status}
-              </Title>
-            </div>
+      <div className='column-section'>
+        <div className='title-box'>
+          {logo}
+          <div>
+            <Title headingLevel='h1' size='2xl'>
+              {title}
+              {status}
+            </Title>
           </div>
-          {pageControls ? (
-            <div className='header-right'>{pageControls}</div>
-          ) : null}
         </div>
-        {versionControl ? <>{versionControl}</> : null}
-
-        {children ? (
-          <div className='header-bottom'>{children}</div>
-        ) : (
-          <div className='placeholder' />
-        )}
+        {pageControls ? (
+          <div className='header-right'>{pageControls}</div>
+        ) : null}
       </div>
-    );
-  }
-}
+      {versionControl ? <>{versionControl}</> : null}
+
+      {children ? (
+        <div className='header-bottom'>{children}</div>
+      ) : (
+        <div className='placeholder' />
+      )}
+    </div>
+  );
+};
