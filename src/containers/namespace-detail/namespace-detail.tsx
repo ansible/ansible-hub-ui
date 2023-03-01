@@ -858,7 +858,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           key='wisdom-settings'
           onClick={() => this.setState({ isOpenWisdomModal: true })}
         >
-          {t`Wisdom Settings`}
+          {t`Wisdom settings`}
         </DropdownItem>
       ),
     ].filter(Boolean);

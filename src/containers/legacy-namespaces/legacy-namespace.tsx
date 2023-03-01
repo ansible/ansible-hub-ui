@@ -258,7 +258,7 @@ class LegacyNamespace extends React.Component<
             <Button
               className='wisdom_button'
               onClick={() => this.setState({ isOpenWisdomModal: true })}
-            >{t`Wisdom Settings`}</Button>
+            >{t`Wisdom settings`}</Button>
           </DataListCell>,
         );
       }

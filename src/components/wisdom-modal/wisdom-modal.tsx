@@ -16,19 +16,38 @@ export const WisdomModal = (props: IProps) => {
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
 
-  const titleAddFailed = t`Failed to opt in to Wisdom.`;
+  const titleAddFailed = t`Failed to opt into Wisdom.`;
   const titleRemoveFailed = t`Failed to opt out of Wisdom.`;
-  const titleWillBeUsed = t`The ${props.reference} is opt in Wisdom.`;
-  const titleWillNotBeUsed = t`The ${props.reference} is opt out from Wisdom.`;
 
-  let title = '';
-  switch (props.scope) {
-    case 'namespace':
-      title = t`Wisdom modal for namespace.`;
-      break;
-    case 'legacy_namespace':
-      title = t`Wisdom modal for legacy namespace.`;
-      break;
+  let titleWillBeUsed = null;
+  let titleWillNotBeUsed = null;
+
+  const name = props.reference;
+
+  if (props.scope == 'namespace') {
+    titleWillBeUsed = (
+      <>
+        Namespace <b>{name}</b> is opted into Wisdom.
+      </>
+    );
+    titleWillNotBeUsed = (
+      <>
+        Namespace <b>{name}</b> is opted out of Wisdom.
+      </>
+    );
+  }
+
+  if (props.scope == 'legacy_namespace') {
+    titleWillBeUsed = (
+      <>
+        Legacy namespace <b>{name}</b> is opted in to Wisdom.
+      </>
+    );
+    titleWillNotBeUsed = (
+      <>
+        Legacy namespace <b>{name}</b> is opted out of Wisdom.
+      </>
+    );
   }
 
   useEffect(() => {
@@ -94,7 +113,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt in Wisdom`}
+          {t`Opt into Wisdom`}
         </Button>,
       );
     } else {
@@ -121,7 +140,7 @@ export const WisdomModal = (props: IProps) => {
       actions={actions}
       isOpen={true}
       onClose={props.cancelAction}
-      title={title}
+      title={t`Wisdom modal`}
       titleIconVariant='warning'
       variant='small'
     >
