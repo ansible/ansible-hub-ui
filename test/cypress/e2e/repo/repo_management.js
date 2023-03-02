@@ -76,7 +76,7 @@ describe('Repo Management tests', () => {
     ).click(); //show expandable content
     cy.get(
       '.pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre:first',
-    ).contains(`${apiPrefix}content/community/`); // check content of input
+    ).contains(apiPrefix); // check content of input
 
     cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
   });

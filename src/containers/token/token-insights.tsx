@@ -186,9 +186,7 @@ class TokenPage extends React.Component<RouteProps, IState> {
                 download content from Automation Hub.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>
-              {getRepoUrl(this.state.repoUrl)}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoUrl()}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>

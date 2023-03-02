@@ -260,7 +260,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         : null,
     ].filter(Boolean);
 
-    const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
+    const repositoryUrl = getRepoUrl();
 
     const noData = itemCount === 0 && !filterIsSet(params, ['keywords']);
 

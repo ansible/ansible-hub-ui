@@ -102,7 +102,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       `server_list = ${distribution.repository.name}_repo`,
       '',
       `[galaxy_server.${distribution.repository.name}_repo]`,
-      `url=${getRepoUrl(distribution.base_path)}`,
+      `url=${getRepoUrl()}`,
       'token=<put your token here>',
     ];
 
@@ -123,9 +123,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           <td>{'---'}</td>
         )}
         <td>
-          <ClipboardCopy isReadOnly>
-            {getRepoUrl(distribution.base_path)}
-          </ClipboardCopy>
+          <ClipboardCopy isReadOnly>{getRepoUrl()}</ClipboardCopy>
         </td>
         {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
           <td>

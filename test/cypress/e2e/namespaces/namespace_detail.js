@@ -1,4 +1,5 @@
 const uiPrefix = Cypress.env('uiPrefix');
+const apiPrefix = Cypress.env('apiPrefix');
 const disableRepoSwitch = Cypress.env('disableRepoSwitch');
 
 describe('Namespace detail screen', () => {
@@ -40,7 +41,7 @@ describe('Namespace detail screen', () => {
     cy.get('.pf-c-tabs__link').eq(1).click();
     cy.get('[aria-label="Copyable input"]')
       .invoke('val')
-      .should('contain', '/inbound-namespace_detail_test/');
+      .should('contain', apiPrefix);
   });
 
   it('should show an error when tring to upload a new collecting wiht invalid name', () => {
