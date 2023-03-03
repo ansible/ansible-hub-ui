@@ -9,6 +9,7 @@ interface IProps {
   scope: string;
   reference: string;
   cancelAction: () => void;
+  addAlert?: (alert) => void;
 }
 
 export const WisdomModal = (props: IProps) => {
@@ -67,13 +68,29 @@ export const WisdomModal = (props: IProps) => {
     setAlerts([]);
   };
 
+  const finishAction = (isInDenyIndex) => {
+    props.cancelAction();
+
+    if (props.addAlert) {
+      let alert = '';
+      if (isInDenyIndex) {
+        alert = titleWillNotBeUsed;
+      } else {
+        alert = titleWillBeUsed;
+      }
+
+      props.addAlert({
+        title: alert,
+      });
+    }
+  };
+
   const removeFromDenyIndex = () => {
     setLoading(true);
     wisdomDenyIndexAPI
       .removeFromDenyIndex(props.scope, props.reference)
       .then(() => {
-        setIsInDenyIndex(false);
-        setLoading(false);
+        finishAction(false);
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
@@ -90,8 +107,7 @@ export const WisdomModal = (props: IProps) => {
     wisdomDenyIndexAPI
       .addToDenyIndex(props.scope, props.reference)
       .then(() => {
-        setIsInDenyIndex(true);
-        setLoading(false);
+        finishAction(true);
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
