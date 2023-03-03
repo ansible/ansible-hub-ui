@@ -1,11 +1,11 @@
 import { t } from '@lingui/macro';
 import {
-  Button,
   DataList,
   DataListCell,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
+  DropdownItem,
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -13,13 +13,17 @@ import { LegacyNamespaceListType, LegacyRoleListType } from 'src/api';
 import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
 import { LegacyRoleAPI } from 'src/api/legacyrole';
 import {
+  AlertList,
+  AlertType,
   BaseHeader,
   EmptyStateNoData,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Logo,
   Pagination,
+  StatefulDropdown,
   WisdomModal,
+  closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -177,6 +181,7 @@ interface LegacyNamespaceProps {
   updateParams: (params) => void;
   ignoredParams: string[];
   isOpenWisdomModal: boolean;
+  alerts: AlertType[];
 }
 
 class LegacyNamespace extends React.Component<
@@ -195,7 +200,18 @@ class LegacyNamespace extends React.Component<
       namespace: null,
       roles: null,
       isOpenWisdomModal: false,
+      alerts: [],
     };
+  }
+
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 
   componentDidMount() {
@@ -249,30 +265,45 @@ class LegacyNamespace extends React.Component<
         (n) => n.username == this.context.user.username,
       ).length;
 
+      const dropdownItems = [];
       if (
         ai_deny_index &&
         (this.context.user.is_superuser || userOwnsLegacyNamespace)
       ) {
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
-            <Button
-              className='wisdom_button'
-              onClick={() => this.setState({ isOpenWisdomModal: true })}
-            >{t`Wisdom settings`}</Button>
-          </DataListCell>,
+        dropdownItems.push(
+          <DropdownItem
+            onClick={() => this.setState({ isOpenWisdomModal: true })}
+          >
+            {t`Wisdom settings`}
+          </DropdownItem>,
         );
       }
+
+      infocells.push(
+        <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
+          {dropdownItems.length > 0 && (
+            <div data-cy='ns-kebab-toggle'>
+              <StatefulDropdown items={dropdownItems} />
+            </div>
+          )}
+        </DataListCell>,
+      );
     }
 
     return (
       <React.Fragment>
         {this.state.isOpenWisdomModal && (
           <WisdomModal
+            addAlert={(alert) => this.addAlert(alert)}
             cancelAction={() => this.setState({ isOpenWisdomModal: false })}
             scope={'legacy_namespace'}
             reference={this.state.namespace.name}
           />
         )}
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <DataList
           aria-label={t`Namespace Header`}
           className='legacy-namespace-page'
