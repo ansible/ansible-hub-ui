@@ -140,8 +140,8 @@ msgstr "API 错误：{status}"
 #~ msgid "API Token"
 #~ msgstr "API Token"
 
-#: src/components/import-modal/import-modal.tsx:220
-#: src/components/import-modal/import-modal.tsx:225
+#: src/components/import-modal/import-modal.tsx:219
+#: src/components/import-modal/import-modal.tsx:224
 msgid "API error. Status code: {0}"
 msgstr "API 错误。状态代码：{0}"
 
@@ -374,7 +374,7 @@ msgstr "CA 证书"
 msgid "CLI configuration"
 msgstr "CLI 配置"
 
-#: src/containers/token/token-insights.tsx:206
+#: src/containers/token/token-insights.tsx:204
 msgid "CRC public key"
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr "集合没有被任何集合使用。"
 msgid "Collection repositories could not be displayed."
 msgstr "无法显示集合仓库。"
 
-#: src/components/import-modal/import-modal.tsx:242
+#: src/components/import-modal/import-modal.tsx:241
 msgid "Collection upload canceled"
 msgstr "集合上传已取消"
 
@@ -2875,7 +2875,7 @@ msgid "Running"
 msgstr "运行中"
 
 #: src/components/repositories/remote-form.tsx:274
-#: src/containers/token/token-insights.tsx:194
+#: src/containers/token/token-insights.tsx:192
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3672,7 +3672,7 @@ msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的 AP
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:196
+#: src/containers/token/token-insights.tsx:194
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的验证 URL。"
 
@@ -3899,7 +3899,7 @@ msgstr "警告"
 msgid "We couldn't find the page you're looking for!"
 msgstr "我们无法找到您要查找的页面！"
 
-#: src/containers/token/token-insights.tsx:208
+#: src/containers/token/token-insights.tsx:206
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr ""
 

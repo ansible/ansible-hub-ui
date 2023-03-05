@@ -140,8 +140,8 @@ msgstr "API エラー: {status}"
 #~ msgid "API Token"
 #~ msgstr "API Token"
 
-#: src/components/import-modal/import-modal.tsx:220
-#: src/components/import-modal/import-modal.tsx:225
+#: src/components/import-modal/import-modal.tsx:219
+#: src/components/import-modal/import-modal.tsx:224
 msgid "API error. Status code: {0}"
 msgstr "API エラー。ステータスコード: {0}"
 
@@ -374,7 +374,7 @@ msgstr "CA 証明書"
 msgid "CLI configuration"
 msgstr "CLI 設定"
 
-#: src/containers/token/token-insights.tsx:206
+#: src/containers/token/token-insights.tsx:204
 msgid "CRC public key"
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr "コレクションはどのコレクションでも使用されていま
 msgid "Collection repositories could not be displayed."
 msgstr "コレクションリポジトリーを表示できませんでした。"
 
-#: src/components/import-modal/import-modal.tsx:242
+#: src/components/import-modal/import-modal.tsx:241
 msgid "Collection upload canceled"
 msgstr "コレクションのアップロードが取り消されました"
 
@@ -2875,7 +2875,7 @@ msgid "Running"
 msgstr "実行中"
 
 #: src/components/repositories/remote-form.tsx:274
-#: src/containers/token/token-insights.tsx:194
+#: src/containers/token/token-insights.tsx:192
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3672,7 +3672,7 @@ msgstr "この URL を使用してクライアントが必要とする API エ�
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:196
+#: src/containers/token/token-insights.tsx:194
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "この URL を使用して、クライアントが Automation Hub からコンテンツをダウンロードする必要のある認証 URL を設定します。"
 
@@ -3899,7 +3899,7 @@ msgstr "警告"
 msgid "We couldn't find the page you're looking for!"
 msgstr "お探しのページは見つかりませんでした!"
 
-#: src/containers/token/token-insights.tsx:208
+#: src/containers/token/token-insights.tsx:206
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr ""
 

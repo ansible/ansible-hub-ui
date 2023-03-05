@@ -140,8 +140,8 @@ msgstr "Erreur d’API : {status}"
 #~ msgid "API Token"
 #~ msgstr "API Token"
 
-#: src/components/import-modal/import-modal.tsx:220
-#: src/components/import-modal/import-modal.tsx:225
+#: src/components/import-modal/import-modal.tsx:219
+#: src/components/import-modal/import-modal.tsx:224
 msgid "API error. Status code: {0}"
 msgstr "Erreur API. Statut code: {0}"
 
@@ -374,7 +374,7 @@ msgstr "Certificat CA"
 msgid "CLI configuration"
 msgstr "Configuration CLI"
 
-#: src/containers/token/token-insights.tsx:206
+#: src/containers/token/token-insights.tsx:204
 msgid "CRC public key"
 msgstr ""
 
@@ -642,7 +642,7 @@ msgstr "La collection n'est pas utilisée par une autre collection."
 msgid "Collection repositories could not be displayed."
 msgstr "Les référentiels de la collection n’ont pas pu être affichés."
 
-#: src/components/import-modal/import-modal.tsx:242
+#: src/components/import-modal/import-modal.tsx:241
 msgid "Collection upload canceled"
 msgstr "Le téléchargement de la collection a été annulé"
 
@@ -2879,7 +2879,7 @@ msgid "Running"
 msgstr "En cours d'exécution"
 
 #: src/components/repositories/remote-form.tsx:274
-#: src/containers/token/token-insights.tsx:194
+#: src/containers/token/token-insights.tsx:192
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3676,7 +3676,7 @@ msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API qu
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:196
+#: src/containers/token/token-insights.tsx:194
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "Utilisez cette URL pour configurer les URL d'authentification dont les clients ont besoin pour télécharger du contenu depuis Automation Hub."
 
@@ -3903,7 +3903,7 @@ msgstr "Avertissement"
 msgid "We couldn't find the page you're looking for!"
 msgstr "Nous n'avons pas trouvé la page que vous recherchez !"
 
-#: src/containers/token/token-insights.tsx:208
+#: src/containers/token/token-insights.tsx:206
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr ""
 

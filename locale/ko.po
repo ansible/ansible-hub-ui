@@ -140,8 +140,8 @@ msgstr "API 오류: {status}"
 #~ msgid "API Token"
 #~ msgstr "API Token"
 
-#: src/components/import-modal/import-modal.tsx:220
-#: src/components/import-modal/import-modal.tsx:225
+#: src/components/import-modal/import-modal.tsx:219
+#: src/components/import-modal/import-modal.tsx:224
 msgid "API error. Status code: {0}"
 msgstr "API 오류. 상태 코드: {0}"
 
@@ -374,7 +374,7 @@ msgstr "CA 인증서"
 msgid "CLI configuration"
 msgstr "CLI 구성"
 
-#: src/containers/token/token-insights.tsx:206
+#: src/containers/token/token-insights.tsx:204
 msgid "CRC public key"
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr "컬렉션은 어떤 컬렉션에서도 사용되고 있지 않습니다.
 msgid "Collection repositories could not be displayed."
 msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 
-#: src/components/import-modal/import-modal.tsx:242
+#: src/components/import-modal/import-modal.tsx:241
 msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
@@ -2875,7 +2875,7 @@ msgid "Running"
 msgstr "실행 중"
 
 #: src/components/repositories/remote-form.tsx:274
-#: src/containers/token/token-insights.tsx:194
+#: src/containers/token/token-insights.tsx:192
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3672,7 +3672,7 @@ msgstr "이 URL을 사용하여 클라이언트가 Automation Hub에서 콘텐�
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:196
+#: src/containers/token/token-insights.tsx:194
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "이 URL을 사용하여 클라이언트가 Automation Hub에서 콘텐츠를 다운로드하는 데 필요한 인증 URL을 구성합니다."
 
@@ -3899,7 +3899,7 @@ msgstr "경고"
 msgid "We couldn't find the page you're looking for!"
 msgstr "페이지를 찾을 수 없습니다."
 
-#: src/containers/token/token-insights.tsx:208
+#: src/containers/token/token-insights.tsx:206
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr ""
 
