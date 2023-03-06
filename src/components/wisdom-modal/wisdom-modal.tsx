@@ -57,6 +57,14 @@ export const WisdomModal = (props: IProps) => {
       .then((result) => {
         setIsInDenyIndex(result);
         setLoading(false);
+      })
+      .catch(({ response: { status, statusText } }) => {
+        props.cancelAction();
+        props.addAlert({
+          title: t`Failed to load Wisdom information.`,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
       });
   }, []);
 
