@@ -1,5 +1,3 @@
-import { wisdomDenyIndexAPI } from './wisdom-deny-index';
-
 export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
 export {
