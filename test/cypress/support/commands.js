@@ -264,12 +264,13 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
     typeof args[args.length - 1] == 'object' &&
     args.splice(args.length - 1, 1)[0]) || { failOnNonZeroExit: false };
 
-  cy.log(`${galaxykitCommand} ${operation} ${args}`);
   const cmd = shell`${shell.preserve(
     galaxykitCommand,
   )} -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
     operation,
   )} ${args}`;
+
+  cy.log(cmd);
 
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
