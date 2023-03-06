@@ -18,8 +18,8 @@ function opt(operation) {
   }
 
   if (operation == 'in') {
-    cy.contains('button', 'Opt into Wisdom').click();
-    cy.contains('Namespace testns1 is opted into Wisdom.');
+    cy.contains('button', 'Opt in to Wisdom').click();
+    cy.contains('Namespace testns1 is opted in to Wisdom.');
   }
 }
 

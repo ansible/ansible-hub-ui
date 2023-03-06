@@ -17,7 +17,7 @@ export const WisdomModal = (props: IProps) => {
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
 
-  const titleAddFailed = t`Failed to opt into Wisdom.`;
+  const titleAddFailed = t`Failed to opt in to Wisdom.`;
   const titleRemoveFailed = t`Failed to opt out of Wisdom.`;
 
   let titleWillBeUsed = null;
@@ -28,7 +28,7 @@ export const WisdomModal = (props: IProps) => {
   if (props.scope == 'namespace') {
     titleWillBeUsed = (
       <>
-        Namespace <b>{name}</b> is opted into Wisdom.
+        Namespace <b>{name}</b> is opted in to Wisdom.
       </>
     );
     titleWillNotBeUsed = (
@@ -129,7 +129,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt into Wisdom`}
+          {t`Opt in to Wisdom`}
         </Button>,
       );
     } else {
@@ -156,7 +156,7 @@ export const WisdomModal = (props: IProps) => {
       actions={actions}
       isOpen={true}
       onClose={props.cancelAction}
-      title={t`Wisdom modal`}
+      title={t`Wisdom settings`}
       titleIconVariant='warning'
       variant='small'
     >
