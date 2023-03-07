@@ -3,6 +3,7 @@ import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
+  RepositoryDistributionsAPI,
 } from 'src/api';
 import { HubAPI } from './hub';
 
@@ -156,15 +157,37 @@ export class API extends HubAPI {
       });
   }
 
-  getDownloadURL(distro_base_path, namespace, name, version) {
+  getDownloadURL(repository, namespace, name, version) {
     // UI API doesn't have tarball download link, so query it separately here
     return new Promise((resolve, reject) => {
-      this.http
-        .get(
-          `v3/plugin/ansible/content/${distro_base_path}/collections/index/${namespace}/${name}/versions/${version}/`,
-        )
+      // get distro_base_path first
+      RepositoryDistributionsAPI.list({
+        repository: repository.pulp_href,
+      })
         .then((result) => {
-          resolve(result.data['download_url']);
+          const { results, count } = result.data;
+          let basePath;
+
+          // find correct distro
+          if (count === 0) {
+            // if distribution doesn't exist, use repository name
+            basePath = repository.name;
+          } else {
+            // try to look for match by name, if not, just use the first distro
+            const distro = results.find(
+              (distro) => distro.name === repository.name,
+            );
+            basePath = distro ? distro.base_path : distro[0].base_path;
+          }
+
+          this.http
+            .get(
+              `v3/plugin/ansible/content/${basePath}/collections/index/${namespace}/${name}/versions/${version}/`,
+            )
+            .then((result) => {
+              resolve(result.data['download_url']);
+            })
+            .catch((err) => reject(err));
         })
         .catch((err) => reject(err));
     });

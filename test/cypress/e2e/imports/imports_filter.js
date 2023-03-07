@@ -59,7 +59,7 @@ describe('Imports filter test', () => {
     );
     cy.intercept(
       'GET',
-      `${apiPrefix}_ui/v1/collection-versions/?namespace=test_namespace&name=*`,
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=test_namespace&name=*`,
     ).as('collectionVersions');
 
     cy.get('[placeholder="Select namespace"]').clear();
@@ -81,7 +81,7 @@ describe('Imports filter test', () => {
     );
     cy.intercept(
       'GET',
-      `${apiPrefix}_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*`,
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=filter_test_namespace&name=*`,
     ).as('collectionVersions2');
 
     cy.get('[placeholder="Select namespace"]').click();

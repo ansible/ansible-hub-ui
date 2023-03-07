@@ -43,7 +43,10 @@ export { ApplicationInfoAPI } from './application-info';
 export { RemoteType } from './response-types/remote';
 export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
-export { DistributionType } from './response-types/distribution';
+export {
+  DistributionType,
+  PulpAnsibleDistributionType,
+} from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {
@@ -78,6 +81,7 @@ export {
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
 } from './response-types/ansible-repository';
+export { RepositoryDistributionsAPI } from './repository-distributions';
 export { RepositoryDistributions } from './repository-distributions';
 export { SignContainersAPI } from './sign-containers';
 export {

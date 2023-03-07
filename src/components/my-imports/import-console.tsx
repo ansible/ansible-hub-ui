@@ -4,7 +4,7 @@ import cx from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  CollectionVersion,
+  CollectionVersionSearch,
   ImportDetailType,
   ImportListType,
   PulpStatus,
@@ -24,7 +24,7 @@ interface IProps {
 
   setFollowMessages: (follow: boolean) => void;
   hideCollectionName?: boolean;
-  collectionVersion?: CollectionVersion;
+  collection?: CollectionVersionSearch;
 }
 
 export class ImportConsole extends React.Component<IProps> {
@@ -125,7 +125,7 @@ export class ImportConsole extends React.Component<IProps> {
   }
 
   private renderTitle(selectedImport) {
-    const { task, hideCollectionName, collectionVersion, empty } = this.props;
+    const { task, hideCollectionName, collection, empty } = this.props;
 
     if (empty) {
       return;
@@ -138,13 +138,13 @@ export class ImportConsole extends React.Component<IProps> {
     );
     let approvalStatus = t`waiting for import to finish`;
 
-    if (collectionVersion) {
-      const rlist = collectionVersion.repository_list;
-      if (rlist.includes(Constants.NOTCERTIFIED)) {
+    if (collection) {
+      const repoStatus = collection.repository.pulp_labels?.pipeline;
+      if (repoStatus === Constants.NOTCERTIFIED) {
         approvalStatus = t`rejected`;
-      } else if (rlist.includes(Constants.NEEDSREVIEW)) {
+      } else if (repoStatus === Constants.NEEDSREVIEW) {
         approvalStatus = t`waiting for approval`;
-      } else if (rlist.includes(Constants.PUBLISHED)) {
+      } else if (repoStatus === Constants.APPROVED) {
         approvalStatus = t`approved`;
       } else {
         approvalStatus = t`could not be determined yet`;
@@ -158,7 +158,7 @@ export class ImportConsole extends React.Component<IProps> {
             {
               namespace: selectedImport.namespace,
               collection: selectedImport.name,
-              repo: rlist[0],
+              repo: collection?.repository.name,
             },
             {
               version: selectedImport.version,
