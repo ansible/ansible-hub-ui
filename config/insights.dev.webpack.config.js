@@ -34,16 +34,9 @@ module.exports = webpackBase({
   // Determines the title of the app
   APPLICATION_NAME: 'Automation Hub',
 
-  // Disables custom favicons. Used to turn off our favicon so we inherit
-  // the correct one from console.redhat.com
-  USE_FAVICON: false,
-
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 
   // Enables webpack debug mode. Options: true, false
   UI_DEBUG: true,
-
-  // Target compilation environment. Options: dev, prod
-  TARGET_ENVIRONMENT: 'dev',
 });
