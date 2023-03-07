@@ -7,7 +7,7 @@ export class API extends HubAPI {
     return this.http
       .get(
         this.apiPath +
-          `/?scope=${encodeURIComponent(scope)}&reference=${encodeURIComponent(
+          `?scope=${encodeURIComponent(scope)}&reference=${encodeURIComponent(
             reference,
           )}`,
       )
