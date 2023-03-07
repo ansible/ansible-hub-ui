@@ -1,24 +1,34 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  path = this.getUIPath('ai_deny_index/');
+  apiPath = this.getUIPath('ai_deny_index/');
 
   isInDenyIndex(scope, reference) {
     return this.http
-      .get(this.path + `/?scope=${scope}&reference=${reference}`)
+      .get(
+        this.apiPath +
+          `/?scope=${encodeURIComponent(scope)}&reference=${encodeURIComponent(
+            reference,
+          )}`,
+      )
       .then((response) => {
         return response.data.count > 0 ? true : false;
       });
   }
 
   removeFromDenyIndex(scope, reference) {
-    const removePath = this.path + scope + '/' + reference + '/';
+    const removePath =
+      this.apiPath +
+      encodeURIComponent(scope) +
+      '/' +
+      encodeURIComponent(reference) +
+      '/';
     return this.http.delete(removePath);
   }
 
   addToDenyIndex(scope, reference) {
     const params = { reference };
-    const addPath = this.path + scope + '/';
+    const addPath = this.apiPath + encodeURIComponent(scope) + '/';
     return this.http.post(addPath, params);
   }
 }

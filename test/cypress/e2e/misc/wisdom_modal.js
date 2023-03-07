@@ -9,26 +9,16 @@ function clickWisdomSettings() {
   });
 }
 
-function opt(operation) {
-  clickWisdomSettings();
-
-  if (operation == 'out') {
-    cy.contains('button', 'Opt out of Wisdom').click();
-    cy.contains('Namespace testns1 is opted out of Wisdom.');
-  }
-
-  if (operation == 'in') {
-    cy.contains('button', 'Opt in to Wisdom').click();
-    cy.contains('Namespace testns1 is opted in to Wisdom.');
-  }
-}
-
 function optIn() {
-  opt('in');
+  clickWisdomSettings();
+  cy.contains('button', 'Opt in to Wisdom').click();
+  cy.contains('Namespace testns1 is opted in to Wisdom.');
 }
 
 function optOut() {
-  opt('out');
+  clickWisdomSettings();
+  cy.contains('button', 'Opt out of Wisdom').click();
+  cy.contains('Namespace testns1 is opted out of Wisdom.');
 }
 
 describe('Wisdom Modal Test', () => {

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import { Button, ButtonVariant, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { wisdomDenyIndexAPI } from 'src/api';
@@ -6,9 +6,9 @@ import { AlertList, AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
-  scope: string;
+  scope: 'namespace' | 'legacy_namespace';
   reference: string;
-  cancelAction: () => void;
+  closeAction: () => void;
   addAlert?: (alert) => void;
 }
 
@@ -27,22 +27,22 @@ export const WisdomModal = (props: IProps) => {
 
   if (props.scope == 'namespace') {
     titleWillBeUsed = (
-      <>
+      <Trans>
         Namespace <b>{name}</b> is opted in to Wisdom.
-      </>
+      </Trans>
     );
     titleWillNotBeUsed = (
-      <>
+      <Trans>
         Namespace <b>{name}</b> is opted out of Wisdom.
-      </>
+      </Trans>
     );
   }
 
   if (props.scope == 'legacy_namespace') {
     titleWillBeUsed = (
-      <>
+      <Trans>
         Legacy namespace <b>{name}</b> is opted in to Wisdom.
-      </>
+      </Trans>
     );
     titleWillNotBeUsed = (
       <>
@@ -59,7 +59,7 @@ export const WisdomModal = (props: IProps) => {
         setLoading(false);
       })
       .catch(({ response: { status, statusText } }) => {
-        props.cancelAction();
+        props.closeAction();
         props.addAlert({
           title: t`Failed to load Wisdom information.`,
           variant: 'danger',
@@ -77,7 +77,7 @@ export const WisdomModal = (props: IProps) => {
   };
 
   const finishAction = (isInDenyIndex) => {
-    props.cancelAction();
+    props.closeAction();
 
     if (props.addAlert) {
       let alert = '';
@@ -153,7 +153,7 @@ export const WisdomModal = (props: IProps) => {
     }
 
     actions.push(
-      <Button key='add' onClick={() => props.cancelAction()} variant='link'>
+      <Button key='add' onClick={() => props.closeAction()} variant='link'>
         {t`Cancel`}
       </Button>,
     );
@@ -163,7 +163,7 @@ export const WisdomModal = (props: IProps) => {
     <Modal
       actions={actions}
       isOpen={true}
-      onClose={props.cancelAction}
+      onClose={props.closeAction}
       title={t`Wisdom settings`}
       titleIconVariant='warning'
       variant='small'
@@ -178,8 +178,10 @@ export const WisdomModal = (props: IProps) => {
           </div>
           <br />
           <div>
-            Some information about Ansible Wisdom and why it is good to have
-            namespaces included in the project.
+            <Trans>
+              Some information about Ansible Wisdom and why it is good to have
+              namespaces included in the project.
+            </Trans>
           </div>
         </div>
       )}

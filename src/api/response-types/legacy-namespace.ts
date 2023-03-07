@@ -1,7 +1,7 @@
 export class LegacyNamespaceListType {
   id: number;
   url: string;
-  summary_fields: unknown;
+  summary_fields: any;
   created: string;
   modified: string;
   name: string;
@@ -13,7 +13,7 @@ export class LegacyNamespaceListType {
 export class LegacyNamespaceDetailType {
   id: number;
   url: string;
-  summary_fields: unknown;
+  summary_fields: any;
   created: string;
   modified: string;
   name: string;

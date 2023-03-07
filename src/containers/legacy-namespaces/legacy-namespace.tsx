@@ -260,7 +260,7 @@ class LegacyNamespace extends React.Component<
         </DataListCell>,
       );
 
-      const summary_fields: any = this.state.namespace.summary_fields;
+      const summary_fields = this.state.namespace.summary_fields;
       const userOwnsLegacyNamespace = summary_fields?.owners?.filter(
         (n) => n.username == this.context.user.username,
       ).length;
@@ -295,7 +295,7 @@ class LegacyNamespace extends React.Component<
         {this.state.isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
-            cancelAction={() => this.setState({ isOpenWisdomModal: false })}
+            closeAction={() => this.setState({ isOpenWisdomModal: false })}
             scope={'legacy_namespace'}
             reference={this.state.namespace.name}
           />
@@ -306,7 +306,7 @@ class LegacyNamespace extends React.Component<
         />
         <DataList
           aria-label={t`Namespace Header`}
-          className='legacy-namespace-page'
+          className='hub-legacy-namespace-page'
         >
           <DataListItem data-cy='LegacyNamespace'>
             <DataListItemRow>

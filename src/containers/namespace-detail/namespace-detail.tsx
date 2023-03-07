@@ -358,7 +358,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
-            cancelAction={() => this.setState({ isOpenWisdomModal: false })}
+            closeAction={() => this.setState({ isOpenWisdomModal: false })}
             scope={'namespace'}
             reference={this.state.namespace.name}
           />
