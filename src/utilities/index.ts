@@ -1,7 +1,7 @@
 export { chipGroupProps } from './chip-group-props';
 export { convertContentSummaryCounts } from './content-summary';
 export { downloadString } from './download-data';
-export { ParamHelper } from './param-helper';
+export { ParamHelper, type ParamType } from './param-helper';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export {
   ErrorMessagesType,

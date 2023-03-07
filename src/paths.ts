@@ -1,12 +1,8 @@
 import { t } from '@lingui/macro';
 import { Constants } from 'src/constants';
-import { ParamHelper } from 'src/utilities';
+import { ParamHelper, ParamType } from 'src/utilities';
 
-export function formatPath(
-  path: Paths,
-  data = {},
-  params?: Record<string, string | boolean>,
-) {
+export function formatPath(path: Paths, data = {}, params?: ParamType) {
   // insights router has basename="/" or "/beta/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
   let url =
     DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
