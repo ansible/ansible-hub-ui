@@ -4,7 +4,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 
 const sessionOptions = {
-  cacheAcrossSpecs: true,
   validate: insightsLogin
     ? () => {
         cy.visit(uiPrefix);
