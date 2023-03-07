@@ -12,6 +12,7 @@ export {
   CollectionUploadType,
   CollectionUsedByDependencies,
   CollectionVersion,
+  CollectionVersionSearch,
   ContentSummaryType,
   DocsBlobType,
   PluginContentType,
@@ -77,6 +78,7 @@ export {
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
 } from './response-types/ansible-repository';
+export { RepositoryDistributions } from './repository-distributions';
 export { SignContainersAPI } from './sign-containers';
 export {
   LegacyRoleDetailType,
