@@ -1,12 +1,10 @@
 import { t } from '@lingui/macro';
-import { ParamHelper } from './utilities/param-helper';
+import { ParamHelper, ParamType } from 'src/utilities';
 
-export function formatPath(
-  path: Paths,
-  data,
-  params?: Record<string, string | boolean>,
-) {
-  let url = path as string;
+export function formatPath(path: Paths, data = {}, params?: ParamType) {
+  // insights router has basename="/" or "/beta/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
+  let url = (path as string) + '/';
+  url = url.replaceAll('//', '/');
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k + '+', data[k]).replace(':' + k, data[k]);
