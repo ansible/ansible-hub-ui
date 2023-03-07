@@ -45,6 +45,40 @@ const defaultConfigs = [
   { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
+const insightsMockAPIs = ({ app }) => {
+  // GET
+  [
+    {
+      url: '/api/chrome-service/v1/user',
+      response: {
+        data: {
+          lastVisited: [],
+          favoritePages: [],
+          visitedBundles: {},
+        },
+      },
+    },
+    { url: '/api/featureflags/v0', response: { toggles: [] } },
+    { url: '/api/quickstarts/v1/progress', response: { data: [] } },
+    { url: '/api/rbac/v1/access', response: { data: [] } },
+    { url: '/api/rbac/v1/cross-account-requests', response: { data: [] } },
+  ].forEach(({ url, response }) =>
+    app.get(url, (_req, res) => res.send(response)),
+  );
+
+  // POST
+  [
+    { url: '/api/chrome-service/v1/last-visited', response: { data: [] } },
+    {
+      url: '/api/chrome-service/v1/user/visited-bundles',
+      response: { data: [] },
+    },
+    { url: '/api/featureflags/v0/client/metrics', response: {} },
+  ].forEach(({ url, response }) =>
+    app.post(url, (_req, res) => res.send(response)),
+  );
+};
+
 module.exports = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
@@ -118,24 +152,7 @@ module.exports = (inputConfigs) => {
           rbac,
           ...defaultServices,
         },
-        registry: [
-          ({ app }) => {
-            app.get('/api/featureflags/v0', (_req, res) =>
-              res.send({ toggles: [] }),
-            );
-            app.get('/api/quickstarts/v1/progress', (_req, res) =>
-              res.send({ data: [] }),
-            );
-            app.get('/api/rbac/v1/cross-account-requests', (_req, res) =>
-              res.send({ data: [] }),
-            );
-            app.get('/api/rbac/v1/access', (_req, res) => res.send(null));
-
-            app.post('/api/featureflags/v0/client/metrics', (_req, res) =>
-              res.send(null),
-            );
-          },
-        ],
+        registry: [insightsMockAPIs],
       }),
 
     // insights deployments from master
