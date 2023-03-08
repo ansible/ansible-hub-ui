@@ -10,7 +10,7 @@ import {
   ansibleRemoteEditAction,
 } from 'src/actions';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
-import { ListItemActions, ListPage } from 'src/components';
+import { CopyURL, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import { parsePulpIDFromURL } from 'src/utilities';
@@ -62,7 +62,9 @@ export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
             {name}
           </Link>
         </td>
-        <td>{url}</td>
+        <td>
+          <CopyURL url={url} />
+        </td>
         <ListItemActions kebabItems={kebabItems} />
       </tr>
     );

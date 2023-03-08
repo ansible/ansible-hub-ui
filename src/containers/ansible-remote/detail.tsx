@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import {
   Button,
-  ClipboardCopy,
   ClipboardCopyButton,
   CodeBlock,
   CodeBlockAction,
@@ -16,7 +15,7 @@ import {
   ansibleRemoteEditAction,
 } from 'src/actions';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
-import { Details, PageWithTabs } from 'src/components';
+import { CopyURL, Details, PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 
@@ -31,20 +30,6 @@ interface TabProps {
   item: AnsibleRemoteType;
   actionContext: object;
 }
-
-const MaybeURL = ({ url }) =>
-  url ? (
-    <ClipboardCopy
-      hoverTip={t`Copy`}
-      clickTip={t`Copied`}
-      variant='inline-compact'
-      isCode
-    >
-      {url}
-    </ClipboardCopy>
-  ) : (
-    <>{t`None`}</>
-  );
 
 const PFCodeBlock = ({ code }) => {
   const [copied, setCopied] = React.useState(false);
@@ -94,9 +79,12 @@ const DetailsTab = ({ item, actionContext }: TabProps) => (
       { label: t`Remote name`, value: item?.name },
       {
         label: t`URL`,
-        value: <MaybeURL url={item?.url} />,
+        value: <CopyURL url={item?.url} fallback />,
       },
-      { label: t`Proxy URL`, value: <MaybeURL url={item?.proxy_url} /> },
+      {
+        label: t`Proxy URL`,
+        value: <CopyURL url={item?.proxy_url} fallback />,
+      },
       {
         label: t`TLS validation`,
         value: item?.tls_validation ? t`Enabled` : t`Disabled`,
