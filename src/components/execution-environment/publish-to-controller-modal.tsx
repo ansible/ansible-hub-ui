@@ -145,7 +145,7 @@ export const PublishToControllerModal = (props: IProps) => {
       })
       .catch((e) => {
         const { status, statusText } = e.response;
-        this.setAlerts([
+        setAlerts([
           ...alerts,
           {
             variant: 'danger',
@@ -180,7 +180,6 @@ export const PublishToControllerModal = (props: IProps) => {
 
   function renderControllers() {
     const { image, isOpen } = props;
-    //const { controllers, digest, tag } = this.state;
     const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     if (!isOpen || !controllers) {
