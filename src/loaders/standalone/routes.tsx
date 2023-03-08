@@ -111,12 +111,14 @@ class AuthHandler extends React.Component<
     promises.push(ActiveUserAPI.getUser());
     promises.push(SettingsAPI.get());
 
-    Promise.all(promises).then((results) => {
-      this.props.updateInitialData({
-        user: results[1],
-        settings: results[2].data,
-      });
-    });
+    Promise.all(promises)
+      .then((results) => {
+        this.props.updateInitialData({
+          user: results[1],
+          settings: results[2].data,
+        });
+      })
+      .catch((_e) => null);
 
     // don't render until all requests are processed
     Promise.allSettled(promises).then(() =>
