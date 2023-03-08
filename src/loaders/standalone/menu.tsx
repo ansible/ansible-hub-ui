@@ -55,11 +55,11 @@ function standaloneMenu({ repository }) {
       }),
       menuItem(t`Repositories`, {
         condition: isLoggedIn,
-        url: Paths.ansibleRepositories,
+        url: formatPath(Paths.ansibleRepositories),
       }),
       menuItem(t`Remotes`, {
         condition: isLoggedIn,
-        url: Paths.ansibleRemotes,
+        url: formatPath(Paths.ansibleRemotes),
       }),
       menuItem(t`API token`, {
         url: formatPath(Paths.token),
