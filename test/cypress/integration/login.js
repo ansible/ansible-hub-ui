@@ -12,6 +12,9 @@ describe('Login helpers', () => {
   });
 
   it('can login manually and logout as admin or different user', () => {
+    // prevent blowing up on unauthenticated requests on the login page
+    cy.on('uncaught:exception', () => false);
+
     cy.manualLogin(username, password);
     cy.contains(username);
     cy.logout();
@@ -20,6 +23,9 @@ describe('Login helpers', () => {
   });
 
   it('can use apiLogin', () => {
+    // prevent blowing up on unauthenticated requests on the login page
+    cy.on('uncaught:exception', () => false);
+
     cy.apiLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);
 
