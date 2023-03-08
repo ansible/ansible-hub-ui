@@ -23,6 +23,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import {
+  AccessTab,
   AlertList,
   AlertType,
   ClipboardCopy,
@@ -34,7 +35,6 @@ import {
   ImportModal,
   LoadingPageWithHeader,
   Main,
-  OwnersTab,
   Pagination,
   PartnerHeader,
   RepoSelector,
@@ -227,7 +227,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       { id: 'collections', name: t`Collections` },
       showControls && { id: 'cli-configuration', name: t`CLI configuration` },
       namespace.resources && { id: 'resources', name: t`Resources` },
-      { id: 'owners', name: t`Namespace owners` },
+      { id: 'access', name: t`Access` },
     ].filter(Boolean);
 
     const tab = params['tab'] || 'collections';
@@ -237,16 +237,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       {
         name: namespace.name,
         url:
-          tab === 'owners'
+          tab === 'access'
             ? formatPath(Paths.namespaceByRepo, {
                 repo: this.context.selectedRepo,
                 namespace: namespace.name,
               })
             : null,
       },
-      tab === 'owners'
+      tab === 'access'
         ? {
-            name: t`Namespace owners`,
+            name: t`Access`,
             url: params.group
               ? formatPath(
                   Paths.namespaceByRepo,
@@ -254,12 +254,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     repo: this.context.selectedRepo,
                     namespace: namespace.name,
                   },
-                  { tab: 'owners' },
+                  { tab: 'access' },
                 )
               : null,
           }
         : null,
-      tab === 'owners' && params.group
+      tab === 'access' && params.group
         ? { name: t`Group ${params.group}` }
         : null,
     ].filter(Boolean);
@@ -288,7 +288,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         'galaxy.change_namespace',
       ) || hasPermission('galaxy.change_namespace');
 
-    // remove ?group (owners tab) when switching tabs
+    // remove ?group (access tab) when switching tabs
     const tabParams = { ...params };
     delete tabParams.group;
 
@@ -472,8 +472,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             </section>
           ) : null}
           {tab === 'resources' ? this.renderResources(namespace) : null}
-          {tab === 'owners' ? (
-            <OwnersTab
+          {tab === 'access' ? (
+            <AccessTab
               showGroupRemoveModal={this.state.showGroupRemoveModal}
               showGroupSelectWizard={this.state.showGroupSelectWizard}
               showRoleRemoveModal={this.state.showRoleRemoveModal}

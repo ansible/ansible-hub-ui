@@ -24,7 +24,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
       { id: 'detail', name: t`Detail` },
       { id: 'activity', name: t`Activity` },
       { id: 'images', name: t`Images` },
-      { id: 'owners', name: t`Owners` },
+      { id: 'access', name: t`Access` },
     ];
 
     const last_sync_task = container.pulp.repository.remote?.last_sync_task;
@@ -42,23 +42,23 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
               {
                 name: container.name,
                 url:
-                  tab === 'owners'
+                  tab === 'access'
                     ? formatEEPath(Paths.executionEnvironmentDetail, {
                         container: container.name,
                       })
                     : null,
               },
-              tab === 'owners'
+              tab === 'access'
                 ? {
-                    name: t`Owners`,
+                    name: t`Access`,
                     url: groupId
-                      ? formatEEPath(Paths.executionEnvironmentDetailOwners, {
+                      ? formatEEPath(Paths.executionEnvironmentDetailAccess, {
                           container: container.name,
                         })
                       : null,
                   }
                 : null,
-              tab === 'owners' && groupId
+              tab === 'access' && groupId
                 ? { name: t`Group ${groupId}` }
                 : null,
             ].filter(Boolean)}

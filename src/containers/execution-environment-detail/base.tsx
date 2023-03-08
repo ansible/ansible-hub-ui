@@ -112,7 +112,7 @@ export function withContainerRepo(WrappedComponent) {
         images: formatEEPath(Paths.executionEnvironmentDetailImages, {
           container,
         }),
-        owners: formatEEPath(Paths.executionEnvironmentDetailOwners, {
+        access: formatEEPath(Paths.executionEnvironmentDetailAccess, {
           container,
         }),
         notFound: formatPath(Paths.notFound),
@@ -322,11 +322,11 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private getTab() {
-      const tabs = ['detail', 'images', 'activity', 'owners'];
+      const tabs = ['detail', 'images', 'activity', 'access'];
       const location = this.props.location.pathname.split('/');
       const index = location.findIndex((s) => s === '_content');
 
-      // match /containers/owners/_content/owners but not /containers/owners
+      // match /containers/access/_content/access but not /containers/access
       // also handles /containers/:name/_content/images/:digest
       if (index !== -1) {
         const loc = location[index + 1];

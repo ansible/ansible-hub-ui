@@ -29,7 +29,7 @@ export { default as ExecutionEnvironmentRegistryList } from './execution-environ
 export { default as ExecutionEnvironmentDetail } from './execution-environment-detail/execution_environment_detail';
 export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution_environment_detail_activities';
 export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
-export { default as ExecutionEnvironmentDetailOwners } from './execution-environment-detail/execution_environment_detail_owners';
+export { default as ExecutionEnvironmentDetailAccess } from './execution-environment-detail/execution_environment_detail_access';
 export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
 export { default as TaskDetail } from './task-management/task_detail';
 export { default as TaskListView } from './task-management/task-list-view';

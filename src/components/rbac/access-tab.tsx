@@ -45,7 +45,7 @@ interface IProps {
   updateProps: (prop) => void;
 }
 
-export class OwnersTab extends React.Component<IProps> {
+export class AccessTab extends React.Component<IProps> {
   render() {
     const { groups, group, canEditOwners } = this.props;
     const { showGroupRemoveModal, showGroupSelectWizard } = this.props;
@@ -155,7 +155,7 @@ export class OwnersTab extends React.Component<IProps> {
     ];
 
     return (
-      <tr data-cy={`OwnersTab-row-${group.name}`} key={index}>
+      <tr data-cy={`AccessTab-row-${group.name}`} key={index}>
         <td>
           <Link
             to={
@@ -163,7 +163,7 @@ export class OwnersTab extends React.Component<IProps> {
               '?' +
               ParamHelper.getQueryString({
                 group: group?.id || group?.name,
-                tab: 'owners',
+                tab: 'access',
               })
             }
           >
