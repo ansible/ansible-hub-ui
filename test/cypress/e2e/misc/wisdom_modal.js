@@ -36,7 +36,8 @@ describe('Wisdom Modal Test', () => {
     cy.contains('button', 'Opt out of Wisdom');
   });
 
-  it('does remove namespace from deny list when namespace deleted.', () => {
+  // We will unskip this test after this functionality is implemented on the backend
+  it.skip('does remove namespace from deny list when namespace deleted.', () => {
     cy.login();
     cy.visit(`${uiPrefix}repo/published/testns1`);
 

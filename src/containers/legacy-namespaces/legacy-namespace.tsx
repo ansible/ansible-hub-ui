@@ -282,7 +282,7 @@ class LegacyNamespace extends React.Component<
       infocells.push(
         <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
           {dropdownItems.length > 0 && (
-            <div data-cy='ns-kebab-toggle'>
+            <div data-cy='ns-kebab-toggle' className='kebab-toggle'>
               <StatefulDropdown items={dropdownItems} />
             </div>
           )}

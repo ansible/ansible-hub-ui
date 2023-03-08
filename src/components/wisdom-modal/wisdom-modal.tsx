@@ -45,9 +45,9 @@ export const WisdomModal = (props: IProps) => {
       </Trans>
     );
     titleWillNotBeUsed = (
-      <>
+      <Trans>
         Legacy namespace <b>{name}</b> is opted out of Wisdom.
-      </>
+      </Trans>
     );
   }
 
@@ -59,7 +59,6 @@ export const WisdomModal = (props: IProps) => {
         setLoading(false);
       })
       .catch(({ response: { status, statusText } }) => {
-        props.closeAction();
         props.addAlert({
           title: t`Failed to load Wisdom information.`,
           variant: 'danger',
@@ -165,7 +164,7 @@ export const WisdomModal = (props: IProps) => {
       isOpen={true}
       onClose={props.closeAction}
       title={t`Wisdom settings`}
-      titleIconVariant='warning'
+      titleIconVariant='default'
       variant='small'
     >
       <AlertList alerts={alerts} closeAlert={() => closeAlert()} />
