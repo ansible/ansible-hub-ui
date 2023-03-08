@@ -56,7 +56,7 @@ const PFCodeBlock = ({ code }) => {
           variant='plain'
           onTooltipHidden={() => setCopied(false)}
         >
-          {copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'}
+          {copied ? t`Successfully copied to clipboard` : t`Copy to clipboard`}
         </ClipboardCopyButton>
       </CodeBlockAction>
     </React.Fragment>
