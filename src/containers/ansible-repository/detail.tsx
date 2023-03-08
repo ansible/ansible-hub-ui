@@ -1,5 +1,7 @@
 import { t } from '@lingui/macro';
+import { Label, LabelGroup } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ansibleRepositoryCopyAction,
   ansibleRepositoryDeleteAction,
@@ -7,6 +9,8 @@ import {
   ansibleRepositorySyncAction,
 } from 'src/actions';
 import {
+  AnsibleRemoteAPI,
+  AnsibleRemoteType,
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CollectionVersionAPI,
@@ -30,29 +34,66 @@ interface TabProps {
   actionContext: any;
 }
 
-const DetailsTab = ({ item, actionContext }: TabProps) => (
-  <Details
-    item={item}
-    fields={[
-      { label: t`Repository name`, value: item?.name },
-      { label: t`Description`, value: item?.description },
-      {
-        label: t`Retained version count`,
-        value: item?.retain_repo_versions,
-      },
-      { label: wip + t`Repository type`, value: 'TODO' }, // TODO by .remote?
-      { label: wip + t`Distribution`, value: 'TODO' }, // TODO hide?
-      {
-        label: wip + t`Labels`,
-        value: JSON.stringify(item?.pulp_labels, null, 2),
-      }, //TODO
-      {
-        label: wip + t`Remote`,
-        value: JSON.stringify(item?.remote, null, 2),
-      }, //TODO
-    ]}
-  />
-);
+const PulpLabels = ({ labels }) => {
+  if (!labels || !Object.keys(labels).length) {
+    return <>{t`None`}</>;
+  }
+  return (
+    <LabelGroup>
+      {Object.entries(labels).map(([k, v]) => (
+        <Label key={k}>
+          {k}
+          {v ? ': ' + v : null}
+        </Label>
+      ))}
+    </LabelGroup>
+  );
+};
+
+const DetailsTab = ({ item, actionContext }: TabProps) => {
+  const [remote, setRemote] = useState<AnsibleRemoteType>(null);
+
+  useEffect(() => {
+    const pk = item.remote && parsePulpIDFromURL(item.remote);
+    if (pk) {
+      AnsibleRemoteAPI.get(pk).then(({ data }) => setRemote(data));
+    } else {
+      setRemote(null);
+    }
+  }, [item.remote]);
+
+  return (
+    <Details
+      item={item}
+      fields={[
+        { label: t`Repository name`, value: item?.name },
+        { label: t`Description`, value: item?.description },
+        {
+          label: t`Retained version count`,
+          value: item?.retain_repo_versions,
+        },
+        { label: wip + t`Repository type`, value: 'TODO' }, // TODO by .remote?
+        { label: wip + t`Distribution`, value: 'TODO' }, // TODO hide? nope, name, just no link
+        {
+          label: t`Labels`,
+          value: <PulpLabels labels={item?.pulp_labels} />,
+        },
+        {
+          label: t`Remote`,
+          value: remote ? (
+            <Link
+              to={formatPath(Paths.ansibleRemoteDetail, { name: remote.name })}
+            >
+              {remote.name}
+            </Link>
+          ) : (
+            t`None`
+          ),
+        },
+      ]}
+    />
+  );
+};
 
 const AccessTab = ({ item, actionContext }: TabProps) => (
   <Details item={item} />

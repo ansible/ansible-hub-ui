@@ -1,4 +1,12 @@
 import { t } from '@lingui/macro';
+import {
+  Button,
+  ClipboardCopy,
+  ClipboardCopyButton,
+  CodeBlock,
+  CodeBlockAction,
+  CodeBlockCode,
+} from '@patternfly/react-core';
 import React from 'react';
 import {
   ansibleRemoteDeleteAction,
@@ -24,29 +32,86 @@ interface TabProps {
   actionContext: object;
 }
 
+const MaybeURL = ({ url }) =>
+  url ? (
+    <ClipboardCopy
+      hoverTip={t`Copy`}
+      clickTip={t`Copied`}
+      variant='inline-compact'
+      isCode
+    >
+      {url}
+    </ClipboardCopy>
+  ) : (
+    <>{t`None`}</>
+  );
+
+const PFCodeBlock = ({ code }) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const clipboardCopyFunc = (event, text) => {
+    navigator.clipboard.writeText(text.toString());
+  };
+
+  const onClick = (event, text) => {
+    clipboardCopyFunc(event, text);
+    setCopied(true);
+  };
+
+  const actions = (
+    <React.Fragment>
+      <CodeBlockAction>
+        <ClipboardCopyButton
+          id='basic-copy-button'
+          textId='code-content'
+          aria-label='Copy to clipboard'
+          onClick={(e) => onClick(e, code)}
+          exitDelay={copied ? 1500 : 600}
+          maxWidth='110px'
+          variant='plain'
+          onTooltipHidden={() => setCopied(false)}
+        >
+          {copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'}
+        </ClipboardCopyButton>
+      </CodeBlockAction>
+    </React.Fragment>
+  );
+
+  return (
+    <CodeBlock actions={actions}>
+      <CodeBlockCode id='code-content'>{code}</CodeBlockCode>
+    </CodeBlock>
+  );
+};
+
+const MaybeCode = ({ code }) =>
+  code ? <PFCodeBlock code={code} /> : <>{t`None`}</>;
+
 const DetailsTab = ({ item, actionContext }: TabProps) => (
   <Details
     item={item}
     fields={[
       { label: t`Remote name`, value: item?.name },
-      { label: t`Description`, value: 'TODO' },
-      { label: t`URL`, value: item?.url },
-      { label: wip + t`Username`, value: 'TODO' },
-      { label: t`Proxy URL`, value: item?.proxy_url },
-      { label: wip + t`Proxy username`, value: 'TODO' },
+      {
+        label: t`URL`,
+        value: <MaybeURL url={item?.url} />,
+      },
+      { label: t`Proxy URL`, value: <MaybeURL url={item?.proxy_url} /> },
       {
         label: t`TLS validation`,
-        value: item?.tls_validation ? t`true` : t`false`,
+        value: item?.tls_validation ? t`Enabled` : t`Disabled`,
       },
-      { label: wip + t`Client key`, value: 'TODO' },
-      { label: t`Client certificate`, value: item?.client_cert },
-      { label: t`CA certificate`, value: item?.ca_cert },
+      { label: t`Client certificate`, value: item?.client_cert || t`None` },
+      { label: t`CA certificate`, value: item?.ca_cert || t`None` },
       {
         label: t`Download concurrency`,
-        value: item?.download_concurrency,
+        value: item?.download_concurrency ?? t`None`,
       },
-      { label: t`Rate limit`, value: item?.rate_limit },
-      { label: wip + t`YAML requirements`, value: item?.requirements_file },
+      { label: t`Rate limit`, value: item?.rate_limit ?? t`None` },
+      {
+        label: t`YAML requirements`,
+        value: <MaybeCode code={item?.requirements_file} />,
+      },
     ]}
   />
 );
