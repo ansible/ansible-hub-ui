@@ -89,7 +89,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it.skip('checks a user without edit permissions', () => {
-    cy.logout();
+    // cy.logout();
     cy.get('input[id="pf-login-username-id"]').type('testUser');
     cy.get('input[id="pf-login-password-id"]').type('testUserpassword');
     cy.get('button[type="submit"]').click();

@@ -1,6 +1,4 @@
 describe('Hub Menu Tests', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
   let username = 'nopermission';
   let password = 'n0permissi0n';
 
@@ -20,13 +18,12 @@ describe('Hub Menu Tests', () => {
 
   before(() => {
     cy.deleteTestUsers();
-    cy.cookieReset();
 
     cy.galaxykit('user create', username, password);
   });
 
   it('admin user sees complete menu', () => {
-    cy.cookieLogin(adminUsername, adminPassword);
+    cy.login();
 
     menuItems.forEach((item) => cy.menuPresent(item));
   });
@@ -50,14 +47,14 @@ describe('Hub Menu Tests', () => {
     ];
 
     it('sees limited menu', () => {
-      cy.cookieLogin(username, password);
+      cy.login(username, password);
 
       visibleMenuItems.forEach((item) => cy.menuPresent(item));
       missingMenuItems.forEach((item) => cy.menuMissing(item));
     });
 
     it('has Documentation tab', () => {
-      cy.cookieLogin(username, password);
+      cy.login(username, password);
 
       cy.menuPresent('Documentation').should(
         'have.attr',
