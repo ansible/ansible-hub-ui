@@ -16,6 +16,7 @@ import {
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
+  CopyURL,
   DateComponent,
   DeleteModal,
   EmptyStateFilter,
@@ -431,7 +432,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         <td>
           <DateComponent date={item.updated_at} />
         </td>
-        <td>{item.url}</td>
+        <td>
+          <CopyURL url={item.url} />
+        </td>
         <td>
           {lastSyncStatus(item) || '---'}
           {lastSynced(item)}
