@@ -8,7 +8,6 @@ describe('Token Management Tests', () => {
   });
 
   beforeEach(() => {
-    cy.visit('/');
     cy.login(adminUsername, adminPassword);
   });
 

@@ -3,7 +3,6 @@ describe('Token Management Tests', () => {
   const adminPassword = Cypress.env('password');
 
   beforeEach(() => {
-    cy.visit('/');
     cy.login(adminUsername, adminPassword);
   });
 

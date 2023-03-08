@@ -14,6 +14,7 @@ describe('Login helpers', () => {
   it('can login manually and logout as admin or different user', () => {
     cy.manualLogin(username, password);
     cy.contains(username);
+    // TODO
     cy.logout();
     cy.manualLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);

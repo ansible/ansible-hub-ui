@@ -3,13 +3,11 @@ describe('Remote Registry Tests', () => {
   const adminPassword = Cypress.env('password');
 
   before(() => {
-    cy.visit('/');
     cy.login(adminUsername, adminPassword);
     cy.deleteRegistries();
   });
 
   beforeEach(() => {
-    cy.visit('/');
     cy.login(adminUsername, adminPassword);
   });
 
