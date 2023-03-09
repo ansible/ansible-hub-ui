@@ -14,6 +14,7 @@ import {
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
+import { pseudoRandomBytes } from 'crypto';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -23,7 +24,9 @@ import {
   CollectionVersionAPI,
   Repositories,
 } from 'src/api';
+import { Repository } from 'src/api/response-types/repositories';
 import {
+  ApproveModal,
   BaseHeader,
   DateComponent,
   EmptyStateFilter,
@@ -74,6 +77,10 @@ interface IState {
   inputText: string;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersion;
+  approveModalInfo: {
+    collectionVersion: CollectionVersion;
+    repositoryList: Repository[];
+  };
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -108,6 +115,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       inputText: '',
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
+      approveModalInfo: null,
     };
   }
 
@@ -240,6 +248,21 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
             />
+            {this.state.approveModalInfo && (
+              <ApproveModal
+                closeAction={() => {
+                  this.setState({ approveModalInfo: null });
+                }}
+                confirmAction={(selectedRepos, addApproveModalAlert) => {
+                  this.updateCertificationToMultipleRepos(
+                    this.state.approveModalInfo.collectionVersion,
+                    selectedRepos,
+                    addApproveModalAlert,
+                  );
+                }}
+                repositoryList={this.state.approveModalInfo.repositoryList}
+              />
+            )}
           </Main>
         )}
       </React.Fragment>
@@ -418,13 +441,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         key='approve'
         isDisabled={mustUploadSignature}
         data-cy='approve-button'
-        onClick={() =>
-          this.updateCertification(
-            version,
-            Constants.NEEDSREVIEW,
-            Constants.PUBLISHED,
-          )
-        }
+        onClick={() => this.updateCertification(version)}
       >
         {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
@@ -453,9 +470,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
     const certifyDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
-        onClick={() =>
-          this.updateCertification(version, originalRepo, Constants.PUBLISHED)
-        }
+        onClick={() => this.updateCertification(version)}
         isDisabled={isDisabled}
         key='certify'
       >
@@ -466,10 +481,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     const rejectDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(
+          this.finishUpdateCertification(
             version,
             originalRepo,
             Constants.NOTCERTIFIED,
+            null,
           )
         }
         isDisabled={isDisabled}
@@ -565,9 +581,73 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       .finally(() => this.closeUploadCertificateModal());
   }
 
-  private updateCertification(version, originalRepo, destinationRepo) {
-    this.setState({ updatingVersions: [version] });
+  private updateCertification(collectionVersion) {
+    Repositories.listApproved()
+      .then((data) => {
+        this.setState({ loading: false });
+        if (data.data.results.length == 1) {
+          this.finishUpdateCertification(
+            collectionVersion,
+            collectionVersion.repoList[0],
+            data.data.results[0]['name'],
+            null,
+          );
+        }
 
+        if (data.data.results.length > 1) {
+          this.setState({
+            approveModalInfo: {
+              collectionVersion,
+              repositoryList: data.data.results,
+            },
+          });
+          this.setState({ loading: false });
+        }
+
+        if (data.data.results.length == 0) {
+          this.addAlertObj({
+            title: t`No Repository to publish have been found, so no collections can be approved.`,
+            variant: 'danger',
+            description: '',
+          });
+        }
+      })
+      .catch(({ response: { status, statusText } }) => {
+        this.addAlertObj({
+          title: t`Failed to load repositories.`,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
+      });
+  }
+
+  private updateCertificationToMultipleRepos(
+    collectionVersion,
+    selectedRepos,
+    addApproveModalAlert,
+  ) {
+    if (selectedRepos.length == 1) {
+      this.finishUpdateCertification(
+        collectionVersion,
+        collectionVersion.repository_list[0],
+        selectedRepos[0],
+        addApproveModalAlert,
+      );
+    }
+  }
+
+  private finishUpdateCertification(
+    version,
+    originalRepo,
+    destinationRepo,
+    addApproveModalAlert,
+  ) {
+    // this is either running with modal, so alert any errors to modal, or it is not running with the modal (in case of single published repo)
+    if (!addApproveModalAlert) {
+      addApproveModalAlert = this.addAlert;
+    }
+
+    this.setState({ updatingVersions: [version] });
     return CollectionVersionAPI.setRepository(
       version.namespace,
       version.name,
@@ -650,6 +730,10 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         },
       ],
     });
+  }
+
+  private addAlertObj(alert) {
+    this.addAlert(alert.title, alert.variant, alert.description);
   }
 }
 
