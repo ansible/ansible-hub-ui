@@ -59,7 +59,7 @@ export const WisdomModal = (props: IProps) => {
         setLoading(false);
       })
       .catch(({ response: { status, statusText } }) => {
-        props.addAlert({
+        addAlert({
           title: t`Failed to load Wisdom information.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
