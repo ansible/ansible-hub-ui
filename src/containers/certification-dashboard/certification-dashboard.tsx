@@ -253,14 +253,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 closeAction={() => {
                   this.setState({ approveModalInfo: null });
                 }}
-                confirmAction={(selectedRepos, addApproveModalAlert) => {
-                  this.updateCertificationToMultipleRepos(
-                    this.state.approveModalInfo.collectionVersion,
-                    selectedRepos,
-                    addApproveModalAlert,
-                  );
-                }}
                 repositoryList={this.state.approveModalInfo.repositoryList}
+                collectionVersion={
+                  this.state.approveModalInfo.collectionVersion
+                }
+                addAlert={(alert) => this.addAlertObj(alert)}
               />
             )}
           </Main>
@@ -485,7 +482,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             version,
             originalRepo,
             Constants.NOTCERTIFIED,
-            null,
           )
         }
         isDisabled={isDisabled}
@@ -586,11 +582,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       .then((data) => {
         this.setState({ loading: false });
         if (data.data.results.length == 1) {
+          // maintain old functionality without modal
           this.finishUpdateCertification(
             collectionVersion,
             collectionVersion.repoList[0],
             data.data.results[0]['name'],
-            null,
           );
         }
 
@@ -621,32 +617,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       });
   }
 
-  private updateCertificationToMultipleRepos(
-    collectionVersion,
-    selectedRepos,
-    addApproveModalAlert,
-  ) {
-    if (selectedRepos.length == 1) {
-      this.finishUpdateCertification(
-        collectionVersion,
-        collectionVersion.repository_list[0],
-        selectedRepos[0],
-        addApproveModalAlert,
-      );
-    }
-  }
-
-  private finishUpdateCertification(
-    version,
-    originalRepo,
-    destinationRepo,
-    addApproveModalAlert,
-  ) {
-    // this is either running with modal, so alert any errors to modal, or it is not running with the modal (in case of single published repo)
-    if (!addApproveModalAlert) {
-      addApproveModalAlert = this.addAlert;
-    }
-
+  private finishUpdateCertification(version, originalRepo, destinationRepo) {
     this.setState({ updatingVersions: [version] });
     return CollectionVersionAPI.setRepository(
       version.namespace,
