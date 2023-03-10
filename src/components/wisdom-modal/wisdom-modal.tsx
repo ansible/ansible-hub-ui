@@ -1,5 +1,12 @@
 import { Trans, t } from '@lingui/macro';
-import { Button, ButtonVariant, Modal, Spinner } from '@patternfly/react-core';
+import {
+  Button,
+  ButtonVariant,
+  ExpandableSection,
+  Modal,
+  Spinner,
+} from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { wisdomDenyIndexAPI } from 'src/api';
 import { AlertList, AlertType } from 'src/components';
@@ -23,6 +30,9 @@ export const WisdomModal = (props: IProps) => {
   let titleWillBeUsed = null;
   let titleWillNotBeUsed = null;
 
+  let areYouSureToOptIn = null;
+  let areYouSureToOptOut = null;
+
   const name = props.reference;
 
   if (props.scope == 'namespace') {
@@ -36,6 +46,16 @@ export const WisdomModal = (props: IProps) => {
         Namespace <b>{name}</b> is opted out of Wisdom.
       </Trans>
     );
+    areYouSureToOptIn = (
+      <Trans>
+        Are you sure you want to opt the following namespace in to Wisdom?
+      </Trans>
+    );
+    areYouSureToOptOut = (
+      <Trans>
+        Are you sure you want to opt the following namespace out of Wisdom?
+      </Trans>
+    );
   }
 
   if (props.scope == 'legacy_namespace') {
@@ -47,6 +67,18 @@ export const WisdomModal = (props: IProps) => {
     titleWillNotBeUsed = (
       <Trans>
         Legacy namespace <b>{name}</b> is opted out of Wisdom.
+      </Trans>
+    );
+    areYouSureToOptIn = (
+      <Trans>
+        Are you sure you want to opt the following legacy namespace in to
+        Wisdom?
+      </Trans>
+    );
+    areYouSureToOptOut = (
+      <Trans>
+        Are you sure you want to opt the following legacy namespace out of
+        Wisdom?
       </Trans>
     );
   }
@@ -158,12 +190,13 @@ export const WisdomModal = (props: IProps) => {
     );
   }
 
+  const expandableTitle = t`Learn more about Ansible Wisdom.`;
   return (
     <Modal
       actions={actions}
       isOpen={true}
       onClose={props.closeAction}
-      title={t`Wisdom settings`}
+      title={isInDenyIndex ? t`Opt in to Wisdom` : t`Opt out of Wisdom`}
       titleIconVariant='default'
       variant='small'
     >
@@ -173,14 +206,44 @@ export const WisdomModal = (props: IProps) => {
       ) : (
         <div>
           <div>
-            {!loading && isInDenyIndex ? titleWillNotBeUsed : titleWillBeUsed}
+            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
           </div>
           <br />
           <div>
-            <Trans>
-              Some information about Ansible Wisdom and why it is good to have
-              namespaces included in the project.
-            </Trans>
+            <ExpandableSection
+              toggleTextExpanded={expandableTitle}
+              toggleTextCollapsed={expandableTitle}
+            >
+              <div>
+                <Trans>
+                  <p>
+                    Red Hat is working on exciting new Ansible content
+                    development capabilities within the context of{' '}
+                    <a
+                      href='https://www.redhat.com/en/engage/project-wisdom'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      Project Wisdom
+                    </a>{' '}
+                    <ExternalLinkAltIcon /> to help other automators build
+                    Ansible content.
+                  </p>
+                  <p>
+                    Your roles and collections may be used as training data for
+                    a machine learning model that provides Ansible automation
+                    content recommendations.
+                  </p>
+                  <p>
+                    If you have concerns, please contact the Ansible team at{' '}
+                    <a href='mailto:ansible-content-ai@redhat.com'>
+                      ansible-content-ai@redhat.com
+                    </a>
+                    .
+                  </p>
+                </Trans>
+              </div>
+            </ExpandableSection>
           </div>
         </div>
       )}
