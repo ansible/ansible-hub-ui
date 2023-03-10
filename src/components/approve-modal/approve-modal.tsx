@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CollectionVersionAPI } from 'src/api';
 import { CollectionVersion } from 'src/api/response-types/collection';
 import { Repository } from 'src/api/response-types/repositories';
@@ -16,16 +16,27 @@ interface IProps {
 
 export const ApproveModal = (props: IProps) => {
   const [alerts, setAlerts] = useState([]);
-  const [selectedRepos, setSelectedRepos] = useState([]);
+  const [selectedRepos, setSelectedRepos] = useState(
+    props.repositoryList.map((item) => item.name),
+  );
   const [loading, setLoading] = useState(false);
 
+  // TODO - mix data - this must be removed and repositoryList must have again type Repository
+  useEffect(() => {
+    eval("props.repositoryList.push({name : 'testRepo123'})");
+  }, []);
+
+  let errors = [];
+
   const addAlert = (alert: AlertType) => {
-    setAlerts([...alerts, alert]);
+    setAlerts((prevAlerts) => [...prevAlerts, alert]);
   };
 
   const closeAlert = () => {
     setAlerts([]);
   };
+
+  let movedRepo = null;
 
   const changeSelection = (name) => {
     const checked = selectedRepos.includes(name);
@@ -39,7 +50,12 @@ export const ApproveModal = (props: IProps) => {
     }
   };
 
-  const buttonClick = () => {
+  // TODO - selection of test, published and testRepo123 dont work
+  const buttonClick = async () => {
+    errors = selectedRepos.map((item) => {
+      return { success: false, destinationRepo: item };
+    });
+
     // do the operation
     if (selectedRepos.length == 0) {
       addAlert({
@@ -48,30 +64,60 @@ export const ApproveModal = (props: IProps) => {
       });
     }
 
-    moveOrCopy(
-      props.collectionVersion.repository_list[0],
-      selectedRepos[0],
-      true,
-    )
-      .then(() => {
-        if (selectedRepos.length == 1) {
-          return;
-        }
-        const promises = [];
+    const listToApprove = [...selectedRepos.reverse()];
 
-        selectedRepos.forEach((repo, i) => {
-          if (i == 0) {
-            return;
-          }
+    // move sequentialy, call move until first collection is moved with successs
+    while (!movedRepo && listToApprove.length > 0) {
+      debugger;
 
-          promises.push(moveOrCopy(selectedRepos[0], repo, false));
-        });
+      await moveOrCopy(
+        props.collectionVersion.repository_list[0],
+        listToApprove[listToApprove.length - 1],
+        true,
+      );
+      listToApprove.pop();
+    }
 
-        return Promise.all(promises);
-      })
-      .then(() => {
-        // TODO ?
-      });
+    debugger;
+
+    const promises = [];
+
+    // copy the rest of the repos, this can be done in paralel, using moved repo
+    listToApprove.forEach((repo, i) => {
+      promises.push(moveOrCopy(movedRepo, repo, false));
+    });
+
+    await Promise.all(promises);
+
+    debugger;
+
+    const error = errors.filter((item) => item.success == false).length > 0;
+
+    const title = t`Approval results`;
+    let description = '';
+    const variant = error ? 'danger' : 'success';
+    const repoOk = errors
+      .filter((item) => item.success == true)
+      .map((item) => item.destinationRepo)
+      .join(', ');
+    const repoFailed = errors
+      .filter((item) => item.success == false)
+      .map((item) => item.destinationRepo)
+      .join(', ');
+    const allFailed = errors.filter((item) => item.success == true).length == 0;
+
+    if (error) {
+      if (!allFailed) {
+        description = t`Error occured during approval. Collection was moved to those repositories: ${repoOk}. But failed to move to those repositories: ${repoFailed}.`;
+      } else {
+        description = t`Error occured during approval. Failed to move to all selected repositories: ${repoFailed}.`;
+      }
+      addAlert({ id: 'approvalAlert', title, description, variant });
+    } else {
+      description = t`Collection was sucessfuly moved to all selected repositories: ${repoOk}.`;
+      props.addAlert({ id: 'approvalAlert', title, description, variant });
+      props.closeAction();
+    }
   };
 
   const moveOrCopy = (originalRepo, destinationRepo, move: boolean) => {
@@ -101,11 +147,13 @@ export const ApproveModal = (props: IProps) => {
         return waitForTask(id, { waitMs: 500 });
       })
       .then(() => {
-        addAlert({
-          title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated to ${destinationRepo} repository.`,
-          variant: 'success',
-          id: destinationRepo,
-        });
+        errors[
+          errors.findIndex((item) => item.destinationRepo == destinationRepo)
+        ] = { success: true, destinationRepo };
+        if (move) {
+          movedRepo = destinationRepo;
+        }
+        debugger;
       })
       .catch((error) => {
         const description = !error.response
@@ -115,8 +163,13 @@ export const ApproveModal = (props: IProps) => {
         addAlert({
           title: t`Changes to certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" could not be saved to ${destinationRepo} repository.`,
           variant: 'danger',
-          id: destinationRepo,
+          id: 'approvalAlert',
+          description,
         });
+
+        errors[
+          errors.findIndex((item) => item.destinationRepo == destinationRepo)
+        ] = { success: false, destinationRepo };
       });
   };
 
