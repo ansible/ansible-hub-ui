@@ -585,7 +585,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           // maintain old functionality without modal
           this.finishUpdateCertification(
             collectionVersion,
-            collectionVersion.repoList[0],
+            collectionVersion.repository_list[0],
             data.data.results[0]['name'],
           );
         }
