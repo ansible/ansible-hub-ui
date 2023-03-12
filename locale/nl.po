@@ -1676,7 +1676,7 @@ msgstr "Groep {groupId}"
 #: src/containers/group-management/group-detail.tsx:182
 #: src/containers/group-management/group-list.tsx:141
 #: src/containers/user-management/user-list.tsx:280
-#: src/loaders/standalone/menu.tsx:116
+#: src/loaders/standalone/menu.tsx:121
 msgid "Groups"
 msgstr "Groepen"
 
@@ -2854,7 +2854,7 @@ msgstr "Rol \"{0}\" is toegevoegd aan \"{1}\"."
 #: src/containers/role-management/role-create.tsx:59
 #: src/containers/role-management/role-edit.tsx:143
 #: src/containers/role-management/role-list.tsx:201
-#: src/loaders/standalone/menu.tsx:120
+#: src/loaders/standalone/menu.tsx:125
 msgid "Roles"
 msgstr "Rollen"
 
@@ -3352,6 +3352,10 @@ msgstr "Taken verschijnen zodra ze zijn aangemaakt."
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
+#: src/loaders/standalone/menu.tsx:111
+msgid "Terms of Use"
+msgstr ""
+
 #: src/components/namespace-form/namespace-form.tsx:159
 msgid "Text: {0}"
 msgstr "Tekst: {0}"
@@ -3729,7 +3733,7 @@ msgstr "Gebruiker <0>{username}</0> zal worden verwijderd uit groep<1>{groupname
 #~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 #~ msgstr "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 
-#: src/loaders/standalone/menu.tsx:111
+#: src/loaders/standalone/menu.tsx:116
 msgid "User Access"
 msgstr "Toegang gebruiker"
 
@@ -3771,7 +3775,7 @@ msgstr "Gebruikersnaam: {0}"
 #: src/containers/user-management/user-detail.tsx:70
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:137
-#: src/loaders/standalone/menu.tsx:112
+#: src/loaders/standalone/menu.tsx:117
 msgid "Users"
 msgstr "Gebruikers"
 
