@@ -70,7 +70,7 @@ const DetailsTab = ({ item, actionContext }: TabProps) => {
         { label: t`Description`, value: item?.description },
         {
           label: t`Retained version count`,
-          value: item?.retain_repo_versions,
+          value: item?.retain_repo_versions ?? t`None`,
         },
         { label: wip + t`Repository type`, value: 'TODO' }, // TODO by .remote?
         { label: wip + t`Distribution`, value: 'TODO' }, // TODO hide? nope, name, just no link
