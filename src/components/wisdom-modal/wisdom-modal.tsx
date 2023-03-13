@@ -81,6 +81,9 @@ export const WisdomModal = (props: IProps) => {
   }
 
   useEffect(() => {
+    setIsInDenyIndex(null);
+    setLoading(true);
+
     WisdomDenyIndexAPI.isInDenyIndex(props.scope, props.reference)
       .then((result) => {
         setIsInDenyIndex(result);
@@ -93,7 +96,7 @@ export const WisdomModal = (props: IProps) => {
           description: errorMessage(status, statusText),
         });
       });
-  }, []);
+  }, [props.scope, props.reference]);
 
   const addAlert = (alert: AlertType) => {
     setAlerts([...alerts, alert]);
