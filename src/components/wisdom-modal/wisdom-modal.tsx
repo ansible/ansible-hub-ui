@@ -184,7 +184,6 @@ export const WisdomModal = (props: IProps) => {
       isOpen={true}
       onClose={props.closeAction}
       title={isInDenyIndex ? t`Opt in to Wisdom` : t`Opt out of Wisdom`}
-      titleIconVariant='default'
       variant='small'
     >
       <AlertList
