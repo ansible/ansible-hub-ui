@@ -21,11 +21,6 @@ export const ApproveModal = (props: IProps) => {
   );
   const [loading, setLoading] = useState(false);
 
-  // TODO - mix data - this must be removed and repositoryList must have again type Repository
-  useEffect(() => {
-    eval("props.repositoryList.push({name : 'testRepo123'})");
-  }, []);
-
   let errors = [];
 
   const addAlert = (alert: AlertType) => {
@@ -50,7 +45,6 @@ export const ApproveModal = (props: IProps) => {
     }
   };
 
-  // TODO - selection of test, published and testRepo123 dont work
   const buttonClick = async () => {
     errors = selectedRepos.map((item) => {
       return { success: false, destinationRepo: item };
