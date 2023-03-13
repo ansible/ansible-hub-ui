@@ -106,15 +106,9 @@ export const WisdomModal = (props: IProps) => {
     props.closeAction();
 
     if (props.addAlert) {
-      let alert = '';
-      if (isInDenyIndex) {
-        alert = titleWillNotBeUsed;
-      } else {
-        alert = titleWillBeUsed;
-      }
-
       props.addAlert({
-        title: alert,
+        title: isInDenyIndex ? titleWillNotBeUsed : titleWillBeUsed,
+        variant: 'success',
       });
     }
   };
