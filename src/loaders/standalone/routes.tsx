@@ -84,37 +84,46 @@ class AuthHandler extends React.Component<
   IAuthHandlerState
 > {
   static contextType = AppContext;
+
   constructor(props, context) {
     super(props);
-    this.state = { isLoading: !context.user };
+
+    this.state = {
+      isLoading: !context.user || !context.settings || !context.featureFlags,
+    };
   }
 
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user, settings } = this.context;
-    if (!user || !settings) {
-      const promises = [];
-      promises.push(
-        FeatureFlagsAPI.get().then(({ data }) => {
-          // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
-          this.props.updateInitialData({ featureFlags: data });
-        }),
-      );
-      promises.push(ActiveUserAPI.getUser());
-      promises.push(SettingsAPI.get());
-      Promise.all(promises)
-        .then((results) => {
-          this.props.updateInitialData(
-            {
-              user: results[1],
-              settings: results[2].data,
-            },
-            () => this.setState({ isLoading: false }),
-          );
-        })
-        .catch(() => this.setState({ isLoading: false }));
+    const { user, settings, featureFlags } = this.context;
+    if (user && settings && featureFlags) {
+      return;
     }
+
+    const promises = [];
+    promises.push(
+      FeatureFlagsAPI.get().then(({ data }) => {
+        // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
+        this.props.updateInitialData({ featureFlags: data });
+      }),
+    );
+    promises.push(ActiveUserAPI.getUser());
+    promises.push(SettingsAPI.get());
+
+    Promise.all(promises)
+      .then((results) => {
+        this.props.updateInitialData({
+          user: results[1],
+          settings: results[2].data,
+        });
+      })
+      .catch((_e) => null);
+
+    // don't render until all requests are processed
+    Promise.allSettled(promises).then(() =>
+      this.setState({ isLoading: false }),
+    );
   }
 
   render() {
