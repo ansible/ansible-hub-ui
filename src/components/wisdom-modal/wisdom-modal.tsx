@@ -9,7 +9,7 @@ import {
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { WisdomDenyIndexAPI } from 'src/api';
-import { AlertList, AlertType } from 'src/components';
+import { AlertList, AlertType, closeAlert } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
@@ -100,10 +100,6 @@ export const WisdomModal = (props: IProps) => {
 
   const addAlert = (alert: AlertType) => {
     setAlerts([...alerts, alert]);
-  };
-
-  const closeAlert = () => {
-    setAlerts([]);
   };
 
   const finishAction = (isInDenyIndex) => {
@@ -197,7 +193,10 @@ export const WisdomModal = (props: IProps) => {
       titleIconVariant='default'
       variant='small'
     >
-      <AlertList alerts={alerts} closeAlert={() => closeAlert()} />
+      <AlertList
+        alerts={alerts}
+        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+      />
       {loading ? (
         <Spinner />
       ) : (
