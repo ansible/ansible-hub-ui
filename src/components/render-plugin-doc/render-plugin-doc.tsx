@@ -1,3 +1,4 @@
+import { dom, parse } from 'antsibull-docs';
 import * as React from 'react';
 import {
   PluginContentType,
@@ -17,7 +18,11 @@ interface IState {
 interface IProps {
   plugin: PluginContentType;
 
-  renderModuleLink: (moduleName: string) => React.ReactElement;
+  renderPluginLink: (
+    pluginName: string,
+    pluginType: string,
+    text: React.ReactNode | undefined,
+  ) => React.ReactElement;
   renderDocLink: (name: string, href: string) => React.ReactElement;
   renderTableOfContentsLink: (
     title: string,
@@ -27,10 +32,6 @@ interface IProps {
 }
 
 export class RenderPluginDoc extends React.Component<IProps, IState> {
-  // checks if I(), B(), M(), U(), L(), or C() exists. Returns type (ex: B)
-  // and value in parenthesis. Based off of formatters in ansible:
-  // https://github.com/ansible/ansible/blob/devel/hacking/build_library/build_ansible/jinja2/filters.py#L26
-  CUSTOM_FORMATTERS = /([IBMULC])\(([^)]+)\)/gm;
   subOptionsMaxDepth: number;
   returnContainMaxDepth: number;
 
@@ -232,34 +233,148 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     return returnValues;
   }
 
-  // This functions similar to how string.replace() works, except it returns
-  // a react object instead of a string
-  private reactReplace(
-    text: string,
-    reg: RegExp,
-    replacement: (matches: string[]) => React.ReactNode,
+  private formatPartError(part: dom.ErrorPart): React.ReactNode {
+    return <span className='error'>ERROR while parsing: {part.message}</span>;
+  }
+
+  private formatPartBold(part: dom.BoldPart): React.ReactNode {
+    return <b>{part.text}</b>;
+  }
+
+  private formatPartCode(part: dom.CodePart): React.ReactNode {
+    return <span className='inline-code'>{part.text}</span>;
+  }
+
+  private formatPartHorizontalLine(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    part: dom.HorizontalLinePart,
   ): React.ReactNode {
-    const fragments = [];
+    return <hr />;
+  }
 
-    let match: string[];
-    let prevIndex = 0;
-    while ((match = reg.exec(text)) !== null) {
-      fragments.push(
-        text.substr(prevIndex, reg.lastIndex - prevIndex - match[0].length),
+  private formatPartItalic(part: dom.ItalicPart): React.ReactNode {
+    return <i>{part.text}</i>;
+  }
+
+  private formatPartLink(part: dom.LinkPart): React.ReactNode {
+    return this.props.renderDocLink(part.text, part.url);
+  }
+
+  private formatPartModule(part: dom.ModulePart): React.ReactNode {
+    return this.props.renderPluginLink(part.fqcn, 'module', undefined);
+  }
+
+  private formatPartRstRef(part: dom.RSTRefPart): React.ReactNode {
+    return part.text;
+  }
+
+  private formatPartURL(part: dom.URLPart): React.ReactNode {
+    return (
+      <a href={part.url} target='_blank' rel='noreferrer'>
+        {part.url}
+      </a>
+    );
+  }
+
+  private formatPartText(part: dom.TextPart): React.ReactNode {
+    return part.text;
+  }
+
+  private formatPartEnvVariable(part: dom.EnvVariablePart): React.ReactNode {
+    return <span className='inline-code'>{part.name}</span>;
+  }
+
+  private formatPartOptionNameReturnValue(
+    part: dom.OptionNamePart | dom.ReturnValuePart,
+  ): React.ReactNode {
+    const content =
+      part.value === undefined ? (
+        <span className='inline-code'>
+          <b>{part.name}</b>
+        </span>
+      ) : (
+        <span className='inline-code'>
+          {part.name}={part.value}
+        </span>
       );
-      fragments.push(replacement(match));
-      prevIndex = reg.lastIndex;
+    if (!part.plugin) {
+      return content;
+    }
+    return this.props.renderPluginLink(
+      part.plugin.fqcn,
+      part.plugin.type,
+      content,
+    );
+  }
+
+  private formatPartOptionValue(part: dom.OptionValuePart): React.ReactNode {
+    return <span className='inline-code'>{part.value}</span>;
+  }
+
+  private formatPartPlugin(part: dom.PluginPart): React.ReactNode {
+    return this.props.renderPluginLink(
+      part.plugin.fqcn,
+      part.plugin.type,
+      undefined,
+    );
+  }
+
+  private formatPart(part: dom.Part): React.ReactNode {
+    switch (part.type) {
+      case dom.PartType.ERROR:
+        return this.formatPartError(part as dom.ErrorPart);
+      case dom.PartType.BOLD:
+        return this.formatPartBold(part as dom.BoldPart);
+      case dom.PartType.CODE:
+        return this.formatPartCode(part as dom.CodePart);
+      case dom.PartType.HORIZONTAL_LINE:
+        return this.formatPartHorizontalLine(part as dom.HorizontalLinePart);
+      case dom.PartType.ITALIC:
+        return this.formatPartItalic(part as dom.ItalicPart);
+      case dom.PartType.LINK:
+        return this.formatPartLink(part as dom.LinkPart);
+      case dom.PartType.MODULE:
+        return this.formatPartModule(part as dom.ModulePart);
+      case dom.PartType.RST_REF:
+        return this.formatPartRstRef(part as dom.RSTRefPart);
+      case dom.PartType.URL:
+        return this.formatPartURL(part as dom.URLPart);
+      case dom.PartType.TEXT:
+        return this.formatPartText(part as dom.TextPart);
+      case dom.PartType.ENV_VARIABLE:
+        return this.formatPartEnvVariable(part as dom.EnvVariablePart);
+      case dom.PartType.OPTION_NAME:
+        return this.formatPartOptionNameReturnValue(part as dom.OptionNamePart);
+      case dom.PartType.OPTION_VALUE:
+        return this.formatPartOptionValue(part as dom.OptionValuePart);
+      case dom.PartType.PLUGIN:
+        return this.formatPartPlugin(part as dom.PluginPart);
+      case dom.PartType.RETURN_VALUE:
+        return this.formatPartOptionNameReturnValue(
+          part as dom.ReturnValuePart,
+        );
+    }
+  }
+
+  private applyDocFormatters(text: string): React.ReactNode {
+    // TODO: pass current plugin's type and name, and (if role) the current entrypoint as well
+    const parsed = parse(text);
+
+    // Special case: result is a single paragraph consisting of a single text part
+    if (
+      parsed.length === 1 &&
+      parsed[0].length === 1 &&
+      parsed[0][0].type === dom.PartType.TEXT
+    ) {
+      return <span>{parsed[0][0].text}</span>;
     }
 
-    if (fragments.length === 0) {
-      return <span>{text}</span>;
+    const fragments = [];
+    for (const paragraph of parsed) {
+      for (const part of paragraph) {
+        fragments.push(this.formatPart(part));
+      }
     }
-
-    // append any text after the last match
-    if (prevIndex != text.length - 1) {
-      fragments.push(text.substring(prevIndex));
-    }
-
     return (
       <span>
         {fragments.map((x, i) => (
@@ -267,43 +382,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         ))}
       </span>
     );
-  }
-
-  private applyDocFormatters(text: string): React.ReactNode {
-    const { renderModuleLink, renderDocLink } = this.props;
-
-    const nstring = this.reactReplace(text, this.CUSTOM_FORMATTERS, (match) => {
-      const fullMatch = match[0];
-      const type = match[1];
-      const textMatch = match[2];
-
-      switch (type) {
-        case 'L': {
-          const url = textMatch.split(',');
-          return renderDocLink(url[0], url[1]);
-        }
-        case 'U':
-          return (
-            <a href={textMatch} target='_blank' rel='noreferrer'>
-              {textMatch}
-            </a>
-          );
-        case 'I':
-          return <i>{textMatch}</i>;
-        case 'C':
-          return <span className='inline-code'>{textMatch}</span>;
-        case 'M':
-          return renderModuleLink(textMatch);
-
-        case 'B':
-          return <b>{textMatch}</b>;
-
-        default:
-          return fullMatch;
-      }
-    });
-
-    return nstring;
   }
 
   private ensureListofStrings(v) {
