@@ -133,6 +133,7 @@ export const PageWithTabs = function <
         query: () => this.query(),
         setState: (s) => this.setState(s),
         state: this.state,
+        hasPermission: this.context.hasPermission,
       };
 
       const name = item?.name || routeParams.name;
@@ -162,7 +163,7 @@ export const PageWithTabs = function <
                       <ToolbarGroup>
                         {headerActions?.length &&
                           headerActions.map((action) =>
-                            action.visible(item) ? (
+                            action.visible(item, actionContext) ? (
                               <ToolbarItem key={action.title}>
                                 {action.button(item, actionContext)}
                               </ToolbarItem>

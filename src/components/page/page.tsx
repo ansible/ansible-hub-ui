@@ -116,6 +116,7 @@ export const Page = function <
         query: () => this.query(),
         setState: (s) => this.setState(s),
         state: this.state,
+        hasPermission: this.context.hasPermission,
       };
 
       const name = item?.name || transformParams(routeParams)?.name || null;

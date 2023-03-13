@@ -1,5 +1,6 @@
 import { Button, DropdownItem } from '@patternfly/react-core';
 import React from 'react';
+import { Tooltip } from 'src/components';
 
 type ModalType = ({ addAlert, state, setState, query }) => React.ReactNode;
 
@@ -8,7 +9,8 @@ interface ActionParams {
   modal?: ModalType;
   onClick: (item, actionContext) => void;
   title: string;
-  visible?: (item) => boolean;
+  visible?: (item, actionContext) => boolean;
+  disabled?: (item, actionContext) => string | null;
 }
 
 export class ActionType {
@@ -16,7 +18,8 @@ export class ActionType {
   button: (item, actionContext) => React.ReactNode | null;
   dropdownItem: (item, actionContext) => React.ReactNode | null;
   modal?: ModalType;
-  visible: (item) => boolean;
+  visible: (item, actionContext) => boolean;
+  disabled: (item, actionContext) => string | null;
 }
 
 export const Action = ({
@@ -25,24 +28,44 @@ export const Action = ({
   onClick,
   modal = null,
   visible = () => true,
+  disabled = () => null,
 }: ActionParams): ActionType => ({
   title,
   button: (item, actionContext) =>
-    visible(item) ? (
-      <Button
-        variant={buttonVariant}
-        key={title}
-        onClick={() => onClick(item, actionContext)}
-      >
-        {title}
-      </Button>
+    visible(item, actionContext) ? (
+      disabled(item, actionContext) ? (
+        <Tooltip content={disabled(item, actionContext)} key={title}>
+          <Button variant={buttonVariant} isDisabled>
+            {title}
+          </Button>
+        </Tooltip>
+      ) : (
+        <Button
+          variant={buttonVariant}
+          key={title}
+          onClick={() => onClick(item, actionContext)}
+        >
+          {title}
+        </Button>
+      )
     ) : null,
   dropdownItem: (item, actionContext) =>
-    visible(item) ? (
-      <DropdownItem key={title} onClick={() => onClick(item, actionContext)}>
-        {title}
-      </DropdownItem>
+    visible(item, actionContext) ? (
+      disabled(item, actionContext) ? (
+        <DropdownItem
+          key={title}
+          description={disabled(item, actionContext)}
+          isDisabled
+        >
+          {title}
+        </DropdownItem>
+      ) : (
+        <DropdownItem key={title} onClick={() => onClick(item, actionContext)}>
+          {title}
+        </DropdownItem>
+      )
     ) : null,
   modal,
   visible,
+  disabled,
 });

@@ -189,6 +189,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         query: () => this.query(),
         setState: (s) => this.setState(s),
         state: this.state,
+        hasPermission: this.context.hasPermission,
       };
 
       return (
