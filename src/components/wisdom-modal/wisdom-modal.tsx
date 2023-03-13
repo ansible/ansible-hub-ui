@@ -171,7 +171,7 @@ export const WisdomModal = (props: IProps) => {
     }
 
     actions.push(
-      <Button key='add' onClick={() => props.closeAction()} variant='link'>
+      <Button key='close' onClick={() => props.closeAction()} variant='link'>
         {t`Cancel`}
       </Button>,
     );
