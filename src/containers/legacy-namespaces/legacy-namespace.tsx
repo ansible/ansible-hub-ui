@@ -279,15 +279,15 @@ class LegacyNamespace extends React.Component<
         );
       }
 
-      infocells.push(
-        <DataListCell isFilled={false} alignRight={true} key='ns-wisdom'>
-          {dropdownItems.length > 0 && (
+      if (dropdownItems.length) {
+        infocells.push(
+          <DataListCell isFilled={false} alignRight={true} key='kebab'>
             <div data-cy='ns-kebab-toggle' className='hub-kebab-toggle'>
               <StatefulDropdown items={dropdownItems} />
             </div>
-          )}
-        </DataListCell>,
-      );
+          </DataListCell>,
+        );
+      }
     }
 
     return (
