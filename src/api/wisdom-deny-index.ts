@@ -11,9 +11,7 @@ export class API extends HubAPI {
             reference,
           )}`,
       )
-      .then((response) => {
-        return response.data.count > 0 ? true : false;
-      });
+      .then(({ data }) => data.count > 0);
   }
 
   removeFromDenyIndex(scope, reference) {
