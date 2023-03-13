@@ -79,4 +79,4 @@ export {
   LegacyNamespaceListType,
 } from './response-types/legacy-namespace';
 
-export { wisdomDenyIndexAPI } from './wisdom-deny-index';
+export { WisdomDenyIndexAPI } from './wisdom-deny-index';

@@ -8,7 +8,7 @@ import {
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
-import { wisdomDenyIndexAPI } from 'src/api';
+import { WisdomDenyIndexAPI } from 'src/api';
 import { AlertList, AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
@@ -84,8 +84,7 @@ export const WisdomModal = (props: IProps) => {
   }
 
   useEffect(() => {
-    wisdomDenyIndexAPI
-      .isInDenyIndex(props.scope, props.reference)
+    WisdomDenyIndexAPI.isInDenyIndex(props.scope, props.reference)
       .then((result) => {
         setIsInDenyIndex(result);
         setLoading(false);
@@ -126,8 +125,7 @@ export const WisdomModal = (props: IProps) => {
 
   const removeFromDenyIndex = () => {
     setLoading(true);
-    wisdomDenyIndexAPI
-      .removeFromDenyIndex(props.scope, props.reference)
+    WisdomDenyIndexAPI.removeFromDenyIndex(props.scope, props.reference)
       .then(() => {
         finishAction(false);
       })
@@ -143,8 +141,7 @@ export const WisdomModal = (props: IProps) => {
 
   const addToDenyIndex = () => {
     setLoading(true);
-    wisdomDenyIndexAPI
-      .addToDenyIndex(props.scope, props.reference)
+    WisdomDenyIndexAPI.addToDenyIndex(props.scope, props.reference)
       .then(() => {
         finishAction(true);
       })
