@@ -16,7 +16,7 @@ interface IProps {
   scope: 'namespace' | 'legacy_namespace';
   reference: string;
   closeAction: () => void;
-  addAlert?: (alert) => void;
+  addAlert: (alert) => void;
 }
 
 export const WisdomModal = (props: IProps) => {
