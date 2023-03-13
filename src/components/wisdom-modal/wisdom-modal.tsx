@@ -24,9 +24,6 @@ export const WisdomModal = (props: IProps) => {
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
 
-  const titleAddFailed = t`Failed to opt in to Wisdom.`;
-  const titleRemoveFailed = t`Failed to opt out of Wisdom.`;
-
   let titleWillBeUsed = null;
   let titleWillNotBeUsed = null;
 
@@ -127,7 +124,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: titleAddFailed,
+          title: t`Failed to opt in to Wisdom.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -143,7 +140,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: titleRemoveFailed,
+          title: t`Failed to opt out of Wisdom.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
