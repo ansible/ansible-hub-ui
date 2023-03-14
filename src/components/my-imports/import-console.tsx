@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Spinner, Tooltip } from '@patternfly/react-core';
 import cx from 'classnames';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersion,
@@ -27,96 +27,87 @@ interface IProps {
   collectionVersion?: CollectionVersion;
 }
 
-export class ImportConsole extends React.Component<IProps> {
-  lastImport: React.RefObject<HTMLDivElement>;
-  isLoading = false;
+export const ImportConsole = (props: IProps) => {
+  let lastImport: React.RefObject<HTMLDivElement> = null;
+  let isLoading = false;
 
-  constructor(props) {
-    super(props);
+  lastImport = React.createRef();
 
-    this.lastImport = React.createRef();
-  }
+  useEffect(() => {
+    followLogs();
+  }, []);
 
-  componentDidUpdate() {
-    this.followLogs();
-  }
+  useEffect(() => {
+    followLogs();
+  });
 
-  componentDidMount() {
-    this.followLogs();
-  }
+  const { selectedImport, task, apiError, loading } = props;
 
-  render() {
-    const { selectedImport, task, apiError, loading } = this.props;
-
-    if (loading || apiError) {
-      return (
-        <div className='hub-import-console'>
-          {selectedImport ? this.renderTitle(selectedImport) : null}
-          <div className='loading message-list'>
-            {apiError ? <div className='message'>{apiError}</div> : <Spinner />}
-          </div>
-        </div>
-      );
-    }
-
-    this.isLoading =
-      selectedImport.state === PulpStatus.running ||
-      selectedImport.state === PulpStatus.waiting;
-
+  if (loading || apiError) {
     return (
-      <div
-        className='hub-import-console pf-c-content'
-        data-cy={'ImportConsole'}
-      >
-        {this.renderTitle(selectedImport)}
-        <div className='message-list'>
-          <div
-            className={cx({
-              'follow-active': this.props.followMessages,
-              'log-follow-button': true,
-            })}
-          >
-            <Tooltip
-              position='left'
-              content={this.isLoading ? t`Follow logs` : t`Scroll to end`}
-            >
-              <span
-                onClick={() => this.handleScrollClick()}
-                className='fa fa-arrow-circle-down clickable'
-              />
-            </Tooltip>
-          </div>
-
-          {task.messages.map((x, i) => {
-            return this.renderMessage(x, i);
-          })}
-
-          {task.messages.length === 0 ? (
-            <div className='message'>
-              <span className='error'>{t`No task messages available`}</span>
-            </div>
-          ) : null}
-
-          {task.state === PulpStatus.completed && (
-            <div className='message'>
-              <br />
-              <span className='success'>{t`Done`}</span>
-            </div>
-          )}
-
-          {task.state === PulpStatus.failed && (
-            <div className='message'>
-              <br />
-              <span className='failed'>{t`Failed`}</span>
-            </div>
-          )}
+      <div className='hub-import-console'>
+        {selectedImport ? renderTitle(selectedImport) : null}
+        <div className='loading message-list'>
+          {apiError ? <div className='message'>{apiError}</div> : <Spinner />}
         </div>
-        <div className='last-message' key={'last'} ref={this.lastImport} />
       </div>
     );
   }
 
-  private renderMessage(item, i) {
+  isLoading =
+    selectedImport.state === PulpStatus.running ||
+    selectedImport.state === PulpStatus.waiting;
+
+  return (
+    <div className='hub-import-console pf-c-content' data-cy={'ImportConsole'}>
+      {renderTitle(selectedImport)}
+      <div className='message-list'>
+        <div
+          className={cx({
+            'follow-active': props.followMessages,
+            'log-follow-button': true,
+          })}
+        >
+          <Tooltip
+            position='left'
+            content={isLoading ? t`Follow logs` : t`Scroll to end`}
+          >
+            <span
+              onClick={() => handleScrollClick()}
+              className='fa fa-arrow-circle-down clickable'
+            />
+          </Tooltip>
+        </div>
+
+        {task.messages.map((x, i) => {
+          return renderMessage(x, i);
+        })}
+
+        {task.messages.length === 0 ? (
+          <div className='message'>
+            <span className='error'>{t`No task messages available`}</span>
+          </div>
+        ) : null}
+
+        {task.state === PulpStatus.completed && (
+          <div className='message'>
+            <br />
+            <span className='success'>{t`Done`}</span>
+          </div>
+        )}
+
+        {task.state === PulpStatus.failed && (
+          <div className='message'>
+            <br />
+            <span className='failed'>{t`Failed`}</span>
+          </div>
+        )}
+      </div>
+      <div className='last-message' key={'last'} ref={lastImport} />
+    </div>
+  );
+
+  function renderMessage(item, i) {
     return (
       <div className='message' key={i}>
         <span className={item.level.toLowerCase()}>{item.message}&nbsp;</span>
@@ -124,8 +115,8 @@ export class ImportConsole extends React.Component<IProps> {
     );
   }
 
-  private renderTitle(selectedImport) {
-    const { task, hideCollectionName, collectionVersion, empty } = this.props;
+  function renderTitle(selectedImport) {
+    const { task, hideCollectionName, collectionVersion, empty } = props;
 
     if (empty) {
       return;
@@ -207,23 +198,23 @@ export class ImportConsole extends React.Component<IProps> {
     );
   }
 
-  private handleScrollClick() {
-    if (this.isLoading) {
-      this.props.setFollowMessages(!this.props.followMessages);
+  function handleScrollClick() {
+    if (isLoading) {
+      props.setFollowMessages(!props.followMessages);
     } else {
-      this.lastImport.current.scrollIntoView({ behavior: 'smooth' });
+      lastImport.current.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  private followLogs() {
-    if (this.props.followMessages && this.lastImport.current) {
+  function followLogs() {
+    if (props.followMessages && lastImport.current) {
       window.requestAnimationFrame(() => {
-        this.lastImport.current.scrollIntoView({ behavior: 'smooth' });
+        lastImport.current.scrollIntoView({ behavior: 'smooth' });
 
-        if (!this.isLoading) {
-          this.props.setFollowMessages(false);
+        if (!isLoading) {
+          props.setFollowMessages(false);
         }
       });
     }
   }
-}
+};
