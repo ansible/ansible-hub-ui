@@ -1,9 +1,7 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { AnsibleRepositoryAPI } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
-import { handleHttpError, parsePulpIDFromURL } from 'src/utilities';
+import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositorySyncAction = Action({
@@ -12,22 +10,8 @@ export const ansibleRepositorySyncAction = Action({
     const pulpId = parsePulpIDFromURL(pulp_href);
     AnsibleRepositoryAPI.sync(pulpId)
       .then(({ data }) => {
-        const task = parsePulpIDFromURL(data.task);
-        addAlert({
-          title: t`Sync started for repository "${name}".`,
-          variant: 'info',
-          description: (
-            <span>
-              <Trans>
-                See the task management{' '}
-                <Link to={formatPath(Paths.taskDetail, { task })}>
-                  detail page{' '}
-                </Link>
-                for the status of this task.
-              </Trans>
-            </span>
-          ),
-        });
+        const task_id = parsePulpIDFromURL(data.task);
+        addAlert(taskAlert(task_id, t`Sync started for repository "${name}".`));
 
         query();
       })
