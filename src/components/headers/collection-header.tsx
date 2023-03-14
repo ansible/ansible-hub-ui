@@ -46,7 +46,6 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
 import {
@@ -73,6 +72,7 @@ interface IProps {
   reload: () => void;
 }
 
+/*
 interface IState {
   isOpenVersionsSelect: boolean;
   isOpenVersionsModal: boolean;
@@ -93,7 +93,7 @@ interface IState {
   showImportModal: boolean;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate: CollectionVersion;
-}
+}*/
 
 export const CollectionHeader = (props: IProps) => {
   let ignoreParams = ['showing', 'keywords'];
@@ -130,19 +130,21 @@ export const CollectionHeader = (props: IProps) => {
     page: 1,
     pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
   });
-  const [deleteCollection, setDeleteCollection] = useState(null);
-  const [collectionVersion, setCollectionVersion] = useState(null);
+  const [deleteCollection, setDeleteCollection] =
+    useState<CollectionDetailType>(null);
+  const [collectionVersion, setCollectionVersion] = useState<string>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [alerts, setAlerts] = useState([]);
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [redirect, setRedirect] = useState(null);
   const [noDependencies, setNoDependencies] = useState(false);
   const [isDeletionPending, setIsDeletionPending] = useState(false);
-  const [updateCollection, setUpdateCollection] = useState(null);
+  const [updateCollection, setUpdateCollection] =
+    useState<CollectionListType>(null);
   const [showImportModal, setShowImportModal] = useState(false);
   const [uploadCertificateModalOpen, setUploadCertificateModalOpen] =
     useState(false);
   const [versionToUploadCertificate, setVersionToUploadCertificate] =
-    useState(undefined);
+    useState<CollectionVersion>(undefined);
 
   useEffect(() => {
     const { collection } = props;
@@ -696,10 +698,6 @@ export const CollectionHeader = (props: IProps) => {
     setDeleteCollection(props.collection);
     setCollectionVersion(version);
     setConfirmDelete(false);
-  };
-
-  const closeModal = () => {
-    setDeleteCollection(null);
   };
 
   const addAlert = (alert: AlertType) => {
