@@ -135,6 +135,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           activeTab='documentation'
           className='header'
           repo={this.context.selectedRepo}
+          module={contentType === 'module' ? contentName : null}
         />
         <Main className='main'>
           <section className='docs-container'>

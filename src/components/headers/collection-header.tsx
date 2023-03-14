@@ -12,11 +12,13 @@ import {
   SelectOption,
   SelectVariant,
   Text,
+  Tooltip,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import * as moment from 'moment';
 import * as React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import FileContractIcon from 'src/../static/images/file-contract.svg';
 import {
   CertificateUploadAPI,
   CollectionAPI,
@@ -71,6 +73,7 @@ interface IProps {
   className?: string;
   repo?: string;
   reload: () => void;
+  module?: string;
 }
 
 interface IState {
@@ -140,6 +143,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       breadcrumbs,
       activeTab,
       className,
+      module,
     } = this.props;
 
     const {
@@ -269,6 +273,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       encodeURIComponent(
         `${namespace.name}-${collectionName}-${collection.latest_version.version}`,
       );
+
+    const moduleReportLink =
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE && module
+        ? `/ansible/automation-analytics/reports/module_usage_by_task?TODO.module=${encodeURIComponent(
+            module,
+          )}`
+        : null;
 
     return (
       <React.Fragment>
@@ -514,6 +525,23 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
+              {moduleReportLink ? (
+                <div>
+                  <Tooltip
+                    content={t`View module report in Automation Analytics`}
+                  >
+                    <Link to={moduleReportLink}>
+                      <img
+                        alt={t`Automation Analytics`}
+                        height={16}
+                        width={16}
+                        style={{ maxHeight: '16px' }}
+                        src={FileContractIcon}
+                      />
+                    </Link>
+                  </Tooltip>
+                </div>
+              ) : null}
               <div>
                 <ExternalLinkAltIcon />
               </div>
