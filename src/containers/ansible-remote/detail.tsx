@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import {
-  Button,
   ClipboardCopyButton,
   CodeBlock,
   CodeBlockAction,
@@ -31,7 +30,7 @@ interface TabProps {
   actionContext: object;
 }
 
-const PFCodeBlock = ({ code }) => {
+const PFCodeBlock = ({ code }: { code: string }) => {
   const [copied, setCopied] = React.useState(false);
 
   const clipboardCopyFunc = (event, text) => {
@@ -69,10 +68,10 @@ const PFCodeBlock = ({ code }) => {
   );
 };
 
-const MaybeCode = ({ code }) =>
+const MaybeCode = ({ code }: { code: string }) =>
   code ? <PFCodeBlock code={code} /> : <>{t`None`}</>;
 
-const DetailsTab = ({ item, actionContext }: TabProps) => (
+const DetailsTab = ({ item }: TabProps) => (
   <Details
     fields={[
       { label: t`Remote name`, value: item?.name },
@@ -103,9 +102,7 @@ const DetailsTab = ({ item, actionContext }: TabProps) => (
   />
 );
 
-const AccessTab = ({ item, actionContext }: TabProps) => (
-  <Details item={item} />
-);
+const AccessTab = ({ item }: TabProps) => <Details item={item} />;
 
 export const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
   breadcrumbs: ({ name, tab }) => [

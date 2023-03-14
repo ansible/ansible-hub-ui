@@ -2,7 +2,10 @@ import React from 'react';
 
 interface IProps {
   item?: object;
-  fields?: { label: string; value: any }[];
+  fields?: {
+    label: string;
+    value: string | number | boolean | React.ReactNode;
+  }[];
 }
 
 export const Details = ({ item, fields = [] }: IProps) => (

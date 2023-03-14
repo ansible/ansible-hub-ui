@@ -36,10 +36,10 @@ const tabs = [
 
 interface TabProps {
   item: AnsibleRepositoryType;
-  actionContext: any;
+  actionContext: { addAlert: (alert) => void };
 }
 
-const PulpLabels = ({ labels }) => {
+const PulpLabels = ({ labels }: { labels: { [key: string]: string } }) => {
   if (!labels || !Object.keys(labels).length) {
     return <>{t`None`}</>;
   }
@@ -55,7 +55,7 @@ const PulpLabels = ({ labels }) => {
   );
 };
 
-const DetailsTab = ({ item, actionContext }: TabProps) => {
+const DetailsTab = ({ item }: TabProps) => {
   const [remote, setRemote] = useState<AnsibleRemoteType>(null);
 
   useEffect(() => {
@@ -99,9 +99,7 @@ const DetailsTab = ({ item, actionContext }: TabProps) => {
   );
 };
 
-const AccessTab = ({ item, actionContext }: TabProps) => (
-  <Details item={item} />
-);
+const AccessTab = ({ item }: TabProps) => <Details item={item} />;
 
 const CollectionVersionsTab = ({
   item,

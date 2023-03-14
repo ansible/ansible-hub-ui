@@ -54,7 +54,7 @@ interface PageWithTabsParams<T, ExtraState> {
   headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
-  renderTab: any;
+  renderTab: (tab, item, actionContext) => React.ReactNode;
   tabs: { id: string; name: string }[];
 }
 

@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import React from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';

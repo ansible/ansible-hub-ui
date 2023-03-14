@@ -46,7 +46,7 @@ interface PageParams<T, ExtraState> {
   title: ({ name }) => string;
   transformParams: (routeParams) => Record<string, string>;
   renderModals?: RenderModals;
-  render: any;
+  render: (item, actionContext) => React.ReactNode;
 }
 
 export const Page = function <

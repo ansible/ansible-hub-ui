@@ -15,8 +15,6 @@ import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import { parsePulpIDFromURL } from 'src/utilities';
 
-interface IState {}
-
 const listItemActions = [
   // Edit
   ansibleRemoteEditAction,
@@ -30,7 +28,7 @@ const listItemActions = [
   ansibleRemoteDeleteAction,
 ];
 
-export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
+export const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   condition: isLoggedIn,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI } from 'src/api';
 import { DeleteAnsibleRemoteModal } from 'src/components';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';

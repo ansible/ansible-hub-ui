@@ -3,7 +3,7 @@ export class AnsibleRepositoryType {
   name: string;
   pulp_created?: string;
   pulp_href?: string;
-  pulp_labels?: any;
+  pulp_labels?: { [key: string]: string };
   retain_repo_versions: number;
   remote?: string;
 
