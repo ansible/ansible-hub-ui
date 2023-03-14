@@ -215,7 +215,6 @@ export function withContainerRepo(WrappedComponent) {
             ></DeleteExecutionEnvironmentModal>
           )}
           <ExecutionEnvironmentHeader
-            id={this.props.routeParams.container}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
             groupId={groupId}

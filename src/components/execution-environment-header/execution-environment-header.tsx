@@ -7,7 +7,6 @@ import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 
 interface IProps {
-  id: string;
   tab: string;
   updateState: (any) => void;
   container: ContainerRepositoryType;
@@ -17,7 +16,14 @@ interface IProps {
 }
 
 export const ExecutionEnvironmentHeader = (props: IProps) => {
-  const { container, groupId, tab, displaySignatures } = props;
+  const {
+    container,
+    groupId,
+    tab,
+    displaySignatures,
+    pageControls,
+    updateState,
+  } = props;
 
   const tabs = [
     { id: 'detail', name: t`Detail` },
@@ -61,13 +67,13 @@ export const ExecutionEnvironmentHeader = (props: IProps) => {
           ].filter(Boolean)}
         />
       }
-      pageControls={props.pageControls}
+      pageControls={pageControls}
     >
-      {displaySignatures && props.container.pulp.repository.sign_state && (
+      {displaySignatures && container.pulp.repository.sign_state && (
         <SignatureBadge
           isCompact
           signState={
-            props.container.pulp.repository.sign_state == 'signed'
+            container.pulp.repository.sign_state == 'signed'
               ? 'signed'
               : 'unsigned'
           }
@@ -94,7 +100,7 @@ export const ExecutionEnvironmentHeader = (props: IProps) => {
           <Tabs
             tabs={tabs}
             params={{ tab }}
-            updateParams={({ tab }) => props.updateState({ redirect: tab })}
+            updateParams={({ tab }) => updateState({ redirect: tab })}
           />
         </div>
       </div>
