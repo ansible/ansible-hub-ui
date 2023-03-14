@@ -106,6 +106,8 @@ export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { DeleteCollectionModal } from './delete-modal/delete-collection-modal';
+export { DeleteAnsibleRemoteModal } from './delete-modal/delete-ansible-remote-modal';
+export { DeleteAnsibleRepositoryModal } from './delete-modal/delete-ansible-repository-modal';
 export { WizardModal } from './patternfly-wrappers/wizard-modal';
 export { PreviewRoles } from './rbac/preview-roles';
 export { SelectRoles } from './rbac/select-roles';
