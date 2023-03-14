@@ -69,7 +69,6 @@ const DetailsTab = ({ item, actionContext }: TabProps) => {
 
   return (
     <Details
-      item={item}
       fields={[
         { label: t`Repository name`, value: item?.name },
         { label: t`Description`, value: item?.description },

@@ -74,7 +74,6 @@ const MaybeCode = ({ code }) =>
 
 const DetailsTab = ({ item, actionContext }: TabProps) => (
   <Details
-    item={item}
     fields={[
       { label: t`Remote name`, value: item?.name },
       {
