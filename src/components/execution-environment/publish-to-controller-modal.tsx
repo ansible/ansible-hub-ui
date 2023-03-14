@@ -25,7 +25,7 @@ import {
   LoadingPageSpinner,
   Pagination,
   ShaLabel,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { errorMessage, filterIsSet, getContainersURL } from 'src/utilities';
 
@@ -273,7 +273,10 @@ export const PublishToControllerModal = (props: IProps) => {
         </Button>,
       ]}
     >
-      <AlertList alerts={alerts} closeAlert={() => closeAlert()}></AlertList>
+      <AlertList
+        alerts={alerts}
+        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+      ></AlertList>
       {loading && (
         <div style={{ padding: '16px' }}>
           <LoadingPageSpinner />
@@ -408,8 +411,4 @@ export const PublishToControllerModal = (props: IProps) => {
       )}
     </Modal>
   );
-
-  function closeAlert() {
-    return closeAlertMixin('alerts');
-  }
 };
