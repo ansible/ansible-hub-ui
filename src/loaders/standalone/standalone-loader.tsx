@@ -128,7 +128,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           key='documentation'
           onClick={() =>
             window.open(
-              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2',
               '_blank',
             )
           }
