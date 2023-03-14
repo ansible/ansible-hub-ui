@@ -10,19 +10,17 @@ interface IProps {
   header?: React.ReactNode;
 }
 
-export class HelperText extends React.Component<IProps> {
-  render() {
-    return (
-      <Popover
-        aria-label={t`popover example`}
-        position={PopoverPosition.top}
-        bodyContent={this.props.content}
-        headerContent={this.props.header}
-      >
-        <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
-          <OutlinedQuestionCircleIcon />
-        </Button>
-      </Popover>
-    );
-  }
-}
+export const HelperText = (props: IProps) => {
+  return (
+    <Popover
+      aria-label={t`popover example`}
+      position={PopoverPosition.top}
+      bodyContent={props.content}
+      headerContent={props.header}
+    >
+      <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
+        <OutlinedQuestionCircleIcon />
+      </Button>
+    </Popover>
+  );
+};
