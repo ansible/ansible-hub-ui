@@ -6,31 +6,29 @@ interface IProps {
   kebabItems?: React.ReactNode[];
   buttons?: React.ReactNode[];
 }
-export class ListItemActions extends React.Component<IProps> {
-  render() {
-    const buttons = this.props.buttons?.filter(Boolean);
-    const kebabItems = this.props.kebabItems?.filter(Boolean);
+export const ListItemActions = (props: IProps) => {
+  const buttons = props.buttons?.filter(Boolean);
+  const kebabItems = props.kebabItems?.filter(Boolean);
 
-    return (
-      <td
-        style={{
-          paddingRight: '0px',
-          textAlign: 'right',
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}
-      >
-        {buttons?.length ? (
-          <>
-            <List>{buttons}</List>{' '}
-          </>
-        ) : null}
-        {kebabItems?.length ? (
-          <div data-cy='kebab-toggle'>
-            <StatefulDropdown items={kebabItems} />{' '}
-          </div>
-        ) : null}
-      </td>
-    );
-  }
-}
+  return (
+    <td
+      style={{
+        paddingRight: '0px',
+        textAlign: 'right',
+        display: 'flex',
+        justifyContent: 'flex-end',
+      }}
+    >
+      {buttons?.length ? (
+        <>
+          <List>{buttons}</List>{' '}
+        </>
+      ) : null}
+      {kebabItems?.length ? (
+        <div data-cy='kebab-toggle'>
+          <StatefulDropdown items={kebabItems} />{' '}
+        </div>
+      ) : null}
+    </td>
+  );
+};
