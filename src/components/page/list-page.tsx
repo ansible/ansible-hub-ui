@@ -80,7 +80,7 @@ interface ListPageParams<T, ExtraState> {
   filterConfig: FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
-  noDataButton?: React.ReactElement;
+  noDataButton?: (item, actionContext) => React.ReactNode;
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;
@@ -218,7 +218,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
             <EmptyStateNoData
-              button={noDataButton}
+              button={<>{noDataButton?.(null, actionContext)}</>}
               description={noDataDescription}
               title={noDataTitle}
             />

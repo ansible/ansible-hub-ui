@@ -40,10 +40,7 @@ export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   ],
   headerActions: [ansibleRepositoryCreateAction], // Add repository
   listItemActions,
-  noDataButton: ansibleRepositoryCreateAction.button(
-    null,
-    null,
-  ) as React.ReactElement,
+  noDataButton: ansibleRepositoryCreateAction.button,
   noDataDescription: t`Repositories will appear once created.`,
   noDataTitle: t`No repositories yet`,
   query: ({ params }) => AnsibleRepositoryAPI.list(params),
