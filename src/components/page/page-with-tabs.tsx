@@ -51,6 +51,7 @@ interface PageWithTabsParams<T, ExtraState> {
   errorTitle: string;
   extraState?: ExtraState;
   headerActions?: ActionType[];
+  headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
   renderTab: any;
@@ -75,6 +76,8 @@ export const PageWithTabs = function <
   extraState,
   // displayed after filters
   headerActions,
+  // under title
+  headerDetails,
   // () => Promise<T>
   query,
   // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
@@ -176,6 +179,7 @@ export const PageWithTabs = function <
               )
             }
           >
+            {headerDetails?.(item)}
             <div className='hub-tab-link-container'>
               <div className='tabs'>
                 <Tabs

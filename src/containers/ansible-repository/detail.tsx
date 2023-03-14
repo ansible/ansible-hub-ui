@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import { Label, LabelGroup } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,12 @@ import {
 import { Details, PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL } from 'src/utilities';
+import {
+  handleHttpError,
+  lastSyncStatus,
+  lastSynced,
+  parsePulpIDFromURL,
+} from 'src/utilities';
 
 const wip = '🚧 ';
 
@@ -157,6 +162,16 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     ansibleRepositoryCopyAction,
     ansibleRepositoryDeleteAction,
   ],
+  headerDetails: (item) => (
+    <>
+      {item?.last_sync_task && (
+        <p className='hub-m-truncated'>
+          <Trans>Last updated from registry {lastSynced(item)}</Trans>{' '}
+          {lastSyncStatus(item)}
+        </p>
+      )}
+    </>
+  ),
   query: ({ name }) =>
     AnsibleRepositoryAPI.list({ name }).then(
       ({ data: { results } }) => results[0],

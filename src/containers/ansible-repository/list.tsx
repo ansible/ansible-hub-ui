@@ -12,7 +12,7 @@ import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {}
 
@@ -59,6 +59,8 @@ export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType, IState>({
             {name}
           </Link>
         </td>
+        <td>{lastSyncStatus(item) || '---'}</td>
+        <td>{lastSynced(item) || '---'}</td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
@@ -72,17 +74,16 @@ export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType, IState>({
       type: 'alpha',
       id: 'name',
     },
-    // TODO
-    // {
-    //  title: t`Sync status`,
-    //  type: 'none',
-    //  id: 'last_sync_task.error',
-    // },
-    // {
-    //   title: t`Last synced`,
-    //   type: 'none',
-    //   id: 'last_synced_metadata_time',
-    // },
+    {
+      title: t`Sync status`,
+      type: 'none',
+      id: 'lastSyncStatus',
+    },
+    {
+      title: t`Last synced`,
+      type: 'none',
+      id: 'lastSynced',
+    },
     {
       title: t`Created date`,
       type: 'numeric',
