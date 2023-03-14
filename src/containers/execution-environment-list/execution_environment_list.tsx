@@ -131,7 +131,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
         variant='link'
         onClick={() =>
           window.open(
-            'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1/html-single/managing_containers_in_private_automation_hub/index',
+            'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.3/html-single/managing_containers_in_private_automation_hub/index',
             '_blank',
           )
         }

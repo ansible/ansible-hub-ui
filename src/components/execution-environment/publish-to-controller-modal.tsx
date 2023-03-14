@@ -237,8 +237,9 @@ export const PublishToControllerModal = (props: IProps) => {
 
   const { image, isOpen, onClose } = props;
 
+  // redirects to ./2.x (latest)
   const docsLink =
-    'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1';
+    'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/';
 
   const noData =
     controllers?.length === 0 &&
