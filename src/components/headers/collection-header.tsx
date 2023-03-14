@@ -616,6 +616,7 @@ export const CollectionHeader = (props: IProps) => {
             setDeleteCollection(null);
             setCollectionVersion(null);
             setIsDeletionPending(false);
+
             addAlert({
               variant: 'success',
               title: (
@@ -627,15 +628,18 @@ export const CollectionHeader = (props: IProps) => {
             });
           } else {
             // last version in collection => collection will be deleted => redirect
-            addAlert({
-              variant: 'success',
-              title: (
-                <Trans>
-                  Collection &quot;{name} v{collectionVersion}&quot; has been
-                  successfully deleted.
-                </Trans>
-              ),
-            });
+            context.setAlerts([
+              ...context.alerts,
+              {
+                variant: 'success',
+                title: (
+                  <Trans>
+                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    successfully deleted.
+                  </Trans>
+                ),
+              },
+            ]);
 
             setRedirect(
               formatPath(Paths.namespaceByRepo, {
