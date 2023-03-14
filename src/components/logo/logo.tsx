@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 // had to declare *.svg in src/index.d.ts
 import DefaultLogo from 'src/../static/images/default-logo.svg';
 
@@ -14,61 +14,47 @@ interface IProps {
   flexGrow?: boolean;
 }
 
-interface IState {
-  failed: boolean;
-}
+export const Logo = (props: IProps) => {
+  const [failed, setFailed] = useState(false);
 
-export class Logo extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    this.state = { failed: false };
+  const {
+    alt,
+    className,
+    fallbackToDefault,
+    image,
+    size,
+    unlockWidth,
+    width,
+    flexGrow,
+  } = props;
+
+  const style = {
+    height: size,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: width,
+  };
+
+  if (flexGrow) {
+    style['flexGrow'] = 1;
   }
 
-  render() {
-    const {
-      alt,
-      className,
-      fallbackToDefault,
-      image,
-      size,
-      unlockWidth,
-      width,
-      flexGrow,
-    } = this.props;
-    const { failed } = this.state;
-
-    const style = {
-      height: size,
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      width: width,
-    };
-
-    if (flexGrow) {
-      style['flexGrow'] = 1;
-    }
-
-    if (unlockWidth) {
-      style['minWidth'] = size;
-    } else {
-      style['width'] = size;
-    }
-
-    // use inline css so we can set size
-    return (
-      <div className={className} style={style}>
-        <img
-          style={{ objectFit: 'contain', maxHeight: size }}
-          src={failed ? DefaultLogo : image || DefaultLogo}
-          alt={alt}
-          onError={
-            fallbackToDefault
-              ? () => this.setState({ failed: true })
-              : () => null
-          }
-        />
-      </div>
-    );
+  if (unlockWidth) {
+    style['minWidth'] = size;
+  } else {
+    style['width'] = size;
   }
-}
+
+  // use inline css so we can set size
+  return (
+    <div className={className} style={style}>
+      <img
+        style={{ objectFit: 'contain', maxHeight: size }}
+        src={failed ? DefaultLogo : image || DefaultLogo}
+        alt={alt}
+        onError={fallbackToDefault ? () => setFailed(true) : () => null}
+      />
+    </div>
+  );
+};
