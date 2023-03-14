@@ -40,6 +40,7 @@ import {
   RepoSelector,
   SignAllCertificatesModal,
   StatefulDropdown,
+  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
@@ -79,6 +80,7 @@ interface IState {
   showControls: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
+  isOpenWisdomModal: boolean;
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
@@ -125,6 +127,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
+      isOpenWisdomModal: false,
       isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
@@ -204,6 +207,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       warning,
       updateCollection,
       isOpenNamespaceModal,
+      isOpenWisdomModal,
       confirmDelete,
       isNamespacePending,
       alerts,
@@ -350,6 +354,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               />
             </>
           </DeleteModal>
+        )}
+        {isOpenWisdomModal && (
+          <WisdomModal
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() => this.setState({ isOpenWisdomModal: false })}
+            scope={'namespace'}
+            reference={this.state.namespace.name}
+          />
         )}
         {warning ? (
           <Alert
@@ -776,6 +788,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderPageControls() {
     const { canSign, collections } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
+    const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
 
     const dropdownItems = [
@@ -839,6 +852,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           onClick={() => this.setState({ isOpenSignModal: true })}
         >
           {t`Sign all collections`}
+        </DropdownItem>
+      ),
+      ai_deny_index && (
+        <DropdownItem
+          key='wisdom-settings'
+          onClick={() => this.setState({ isOpenWisdomModal: true })}
+        >
+          {t`Wisdom settings`}
         </DropdownItem>
       ),
     ].filter(Boolean);
