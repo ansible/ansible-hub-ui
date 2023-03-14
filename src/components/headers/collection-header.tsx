@@ -72,55 +72,9 @@ interface IProps {
   reload: () => void;
 }
 
-/*
-interface IState {
-  isOpenVersionsSelect: boolean;
-  isOpenVersionsModal: boolean;
-  isOpenSignModal: boolean;
-  isOpenSignAllModal: boolean;
-  modalPagination: {
-    page: number;
-    pageSize: number;
-  };
-  deleteCollection: CollectionDetailType;
-  collectionVersion: string | null;
-  confirmDelete: boolean;
-  alerts: AlertType[];
-  redirect: string;
-  noDependencies: boolean;
-  isDeletionPending: boolean;
-  updateCollection: CollectionListType;
-  showImportModal: boolean;
-  uploadCertificateModalOpen: boolean;
-  versionToUploadCertificate: CollectionVersion;
-}*/
-
 export const CollectionHeader = (props: IProps) => {
   const ignoreParams = ['showing', 'keywords'];
   const context = useContext();
-
-  /*this.state = {
-      isOpenVersionsSelect: false,
-      isOpenVersionsModal: false,
-      isOpenSignModal: false,
-      isOpenSignAllModal: false,
-      modalPagination: {
-        page: 1,
-        pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
-      },
-      deleteCollection: null,
-      collectionVersion: null,
-      confirmDelete: false,
-      alerts: [],
-      redirect: null,
-      noDependencies: false,
-      isDeletionPending: false,
-      updateCollection: null,
-      showImportModal: false,
-      uploadCertificateModalOpen: false,
-      versionToUploadCertificate: undefined,
-    };
-  }*/
 
   const [isOpenVersionsSelect, setIsOpenVersionsSelect] = useState(false);
   const [isOpenVersionsModal, setIsOpenVersionsModal] = useState(false);
@@ -161,20 +115,6 @@ export const CollectionHeader = (props: IProps) => {
     activeTab,
     className,
   } = props;
-
-  /*const {
-      modalPagination,
-      isOpenVersionsModal,
-      isOpenVersionsSelect,
-      redirect,
-      noDependencies,
-      collectionVersion,
-      deleteCollection,
-      confirmDelete,
-      isDeletionPending,
-      showImportModal,
-      updateCollection,
-    } = this.state;*/
 
   const numOfshownVersions = 10;
 
@@ -258,14 +198,9 @@ export const CollectionHeader = (props: IProps) => {
         key='sign-version'
         onClick={() => {
           if (can_upload_signatures) {
-            /*this.setState({
-                uploadCertificateModalOpen: true,
-                versionToUploadCertificate: collection.latest_version,
-              });*/
             setUploadCertificateModalOpen(true);
             setVersionToUploadCertificate(collection.latest_version);
           } else {
-            //this.setState({ isOpenSignModal: true });
             setIsOpenSignAllModal(true);
           }
         }}
@@ -541,19 +476,7 @@ export const CollectionHeader = (props: IProps) => {
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        /*this.setState({
-          collectionVersion: null,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: !collection.deprecated
-                ? t`Collection "${collection.name}" could not be deprecated.`
-                : t`Collection "${collection.name}" could not be undeprecated.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });*/
+
         setCollectionVersion(null);
         addAlert({
           variant: 'danger',
@@ -567,12 +490,6 @@ export const CollectionHeader = (props: IProps) => {
 
   const deleteCollectionVersion = (collectionVersion) => {
     // what is this?
-    /*
-    const {
-      deleteCollection,
-      deleteCollection: { name },
-    } = this.state;*/
-
     CollectionAPI.deleteCollectionVersion(
       context.selectedRepo,
       deleteCollection,
@@ -594,24 +511,6 @@ export const CollectionHeader = (props: IProps) => {
                 topVersion[0].version,
               ),
             );
-
-            /*this.setState({
-              deleteCollection: null,
-              collectionVersion: null,
-              isDeletionPending: false,
-              alerts: [
-                ...this.state.alerts,
-                {
-                  variant: 'success',
-                  title: (
-                    <Trans>
-                      Collection &quot;{name} v{collectionVersion}&quot; has
-                      been successfully deleted.
-                    </Trans>
-                  ),
-                },
-              ],
-            });*/
 
             setDeleteCollection(null);
             setCollectionVersion(null);
@@ -762,7 +661,6 @@ export const CollectionHeader = (props: IProps) => {
             isOpen={isOpenSignAllModal}
             onSubmit={signCollection}
             onCancel={() => {
-              //this.setState({ isOpenSignAllModal: false });
               setIsOpenSignAllModal(false);
             }}
           />
@@ -811,7 +709,6 @@ export const CollectionHeader = (props: IProps) => {
                       v.version.toString(),
                     ),
                   );
-                  //this.setState({ isOpenVersionsModal: false });
                   setIsOpenVersionsModal(false);
                 }}
               >
