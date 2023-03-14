@@ -15,42 +15,40 @@ interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;
 }
 
-export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProps> {
-  render() {
-    const { namespace } = this.props;
-    const namespace_url = formatPath(Paths.legacyNamespace, {
-      namespaceid: namespace.id,
-    });
+export const LegacyNamespaceListItem = (props: LegacyNamespaceProps) => {
+  const { namespace } = props;
+  const namespace_url = formatPath(Paths.legacyNamespace, {
+    namespaceid: namespace.id,
+  });
 
-    const cells = [];
+  const cells = [];
 
-    cells.push(
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
-        <Logo
-          alt='logo'
-          fallbackToDefault
-          image={namespace.avatar_url}
-          size='40px'
-          unlockWidth
-          width='97px'
-        ></Logo>
-      </DataListCell>,
-    );
+  cells.push(
+    <DataListCell isFilled={false} alignRight={false} key='ns'>
+      <Logo
+        alt='logo'
+        fallbackToDefault
+        image={namespace.avatar_url}
+        size='40px'
+        unlockWidth
+        width='97px'
+      ></Logo>
+    </DataListCell>,
+  );
 
-    cells.push(
-      <DataListCell key='content'>
-        <div>
-          <Link to={namespace_url}>{namespace.name}</Link>
-        </div>
-      </DataListCell>,
-    );
+  cells.push(
+    <DataListCell key='content'>
+      <div>
+        <Link to={namespace_url}>{namespace.name}</Link>
+      </div>
+    </DataListCell>,
+  );
 
-    return (
-      <DataListItem data-cy='LegacyNamespaceListItem'>
-        <DataListItemRow>
-          <DataListItemCells dataListCells={cells} />
-        </DataListItemRow>
-      </DataListItem>
-    );
-  }
-}
+  return (
+    <DataListItem data-cy='LegacyNamespaceListItem'>
+      <DataListItemRow>
+        <DataListItemCells dataListCells={cells} />
+      </DataListItemRow>
+    </DataListItem>
+  );
+};
