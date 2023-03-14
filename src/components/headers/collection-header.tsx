@@ -96,7 +96,7 @@ interface IState {
 }*/
 
 export const CollectionHeader = (props: IProps) => {
-  let ignoreParams = ['showing', 'keywords'];
+  const ignoreParams = ['showing', 'keywords'];
   const context = useContext();
 
   /*this.state = {
@@ -709,12 +709,18 @@ export const CollectionHeader = (props: IProps) => {
   };
 
   const setArbitraryState = (state) => {
-    // there should be either dynamic approach, or big switch
     Object.keys(state).forEach((key) => {
       const value = state[key];
-      const methodName = 'set' + key.charAt(0).toUpperCase() + key.slice(1);
-      const code = `$methodName($value)`;
-      eval(code);
+
+      if (key == 'redirect') {
+        setRedirect(value);
+      }
+      if (key == 'deleteCollection') {
+        setDeleteCollection(value);
+      }
+      if (key == 'isDeletionPending') {
+        setIsDeletionPending(value);
+      }
     });
   };
 
