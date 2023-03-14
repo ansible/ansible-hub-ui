@@ -1,5 +1,12 @@
 import { Trans, t } from '@lingui/macro';
-import { Label, LabelGroup } from '@patternfly/react-core';
+import {
+  Button,
+  Label,
+  LabelGroup,
+  Spinner,
+  Tooltip,
+} from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -9,6 +16,7 @@ import {
   ansibleRepositorySyncAction,
 } from 'src/actions';
 import {
+  AnsibleDistributionAPI,
   AnsibleRemoteAPI,
   AnsibleRemoteType,
   AnsibleRepositoryAPI,
@@ -19,6 +27,7 @@ import { Details, PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import {
+  errorMessage,
   handleHttpError,
   lastSyncStatus,
   lastSynced,
@@ -55,6 +64,44 @@ const PulpLabels = ({ labels }: { labels: { [key: string]: string } }) => {
   );
 };
 
+const LazyDistributions = ({ repositoryHref }: { repositoryHref: string }) => {
+  const [distributions, setDistributions] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setDistributions([]);
+    setLoading(true);
+
+    AnsibleDistributionAPI.list({ repository: repositoryHref })
+      .then(({ data }) => {
+        setDistributions(data.results);
+        setLoading(false);
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        setError(errorMessage(status, statusText));
+        setLoading(false);
+      });
+  }, [repositoryHref]);
+
+  const errorElement = error && (
+    <Tooltip content={t`Failed to load distributions: ${error}`} key='empty'>
+      <Button variant='plain'>
+        <ExclamationCircleIcon />
+      </Button>
+    </Tooltip>
+  );
+
+  return loading ? (
+    <Spinner size='sm' />
+  ) : error ? (
+    errorElement
+  ) : (
+    <>{distributions?.map?.(({ name }) => name)?.join?.(', ') || '---'}</>
+  );
+};
+
 const DetailsTab = ({ item }: TabProps) => {
   const [remote, setRemote] = useState<AnsibleRemoteType>(null);
 
@@ -71,13 +118,16 @@ const DetailsTab = ({ item }: TabProps) => {
     <Details
       fields={[
         { label: t`Repository name`, value: item?.name },
-        { label: t`Description`, value: item?.description },
+        { label: t`Description`, value: item?.description || t`None` },
         {
           label: t`Retained version count`,
           value: item?.retain_repo_versions ?? t`None`,
         },
         { label: wip + t`Repository type`, value: 'TODO' }, // TODO by .remote?
-        { label: wip + t`Distribution`, value: 'TODO' }, // TODO hide? nope, name, just no link
+        {
+          label: t`Distribution`,
+          value: <LazyDistributions repositoryHref={item.pulp_href} />,
+        },
         {
           label: t`Labels`,
           value: <PulpLabels labels={item?.pulp_labels} />,
