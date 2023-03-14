@@ -12,35 +12,33 @@ interface IProps {
   editing: boolean;
 }
 
-export class MarkdownEditor extends React.Component<IProps> {
-  render() {
-    const { text, placeholder, updateText, helperText, editing } = this.props;
+export const MarkdownEditor = (props: IProps) => {
+  const { text, placeholder, updateText, helperText, editing } = props;
 
-    return (
-      <Form>
-        <div className='markdown-editor'>
-          {editing && (
-            <div className='column editor'>
-              <FormGroup fieldId='resources' helperText={helperText}>
-                <div id='markdown-title'>{t`Raw Markdown`}</div>
-                <TextArea
-                  aria-labelledby='markdown-title'
-                  id='resources'
-                  value={text}
-                  onChange={(value) => updateText(value)}
-                  placeholder={placeholder}
-                />
-              </FormGroup>
-            </div>
-          )}
-          <div className='column preview-container'>
-            {editing && t`Preview`}
-            <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
-              <ReactMarkdown>{text || placeholder}</ReactMarkdown>
-            </div>
+  return (
+    <Form>
+      <div className='markdown-editor'>
+        {editing && (
+          <div className='column editor'>
+            <FormGroup fieldId='resources' helperText={helperText}>
+              <div id='markdown-title'>{t`Raw Markdown`}</div>
+              <TextArea
+                aria-labelledby='markdown-title'
+                id='resources'
+                value={text}
+                onChange={(value) => updateText(value)}
+                placeholder={placeholder}
+              />
+            </FormGroup>
+          </div>
+        )}
+        <div className='column preview-container'>
+          {editing && t`Preview`}
+          <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
+            <ReactMarkdown>{text || placeholder}</ReactMarkdown>
           </div>
         </div>
-      </Form>
-    );
-  }
-}
+      </div>
+    </Form>
+  );
+};
