@@ -16,6 +16,17 @@ import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {}
 
+const listItemActions = [
+  // Edit
+  ansibleRepositoryEditAction,
+  // Sync
+  ansibleRepositorySyncAction,
+  // Copy CLI configuration
+  ansibleRepositoryCopyAction,
+  // Delete
+  ansibleRepositoryDeleteAction,
+];
+
 export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType, IState>({
   condition: isLoggedIn,
   defaultPageSize: 10,
@@ -30,6 +41,7 @@ export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType, IState>({
     },
   ],
   headerActions: [ansibleRepositoryCreateAction], // Add repository
+  listItemActions,
   noDataButton: ansibleRepositoryCreateAction.button(
     null,
     null,
@@ -41,16 +53,9 @@ export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType, IState>({
     const { name, pulp_created, pulp_href } = item;
     const id = parsePulpIDFromURL(pulp_href);
 
-    const kebabItems = [
-      // Edit
-      ansibleRepositoryEditAction,
-      // Sync
-      ansibleRepositorySyncAction,
-      // Copy CLI configuration
-      ansibleRepositoryCopyAction,
-      // Delete
-      ansibleRepositoryDeleteAction,
-    ].map((action) => action.dropdownItem({ ...item, id }, actionContext));
+    const kebabItems = listItemActions.map((action) =>
+      action.dropdownItem({ ...item, id }, actionContext),
+    );
 
     return (
       <tr key={index}>

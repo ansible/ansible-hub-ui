@@ -17,6 +17,19 @@ import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {}
 
+const listItemActions = [
+  // Edit
+  ansibleRemoteEditAction,
+  // Download requirements.yaml
+  ansibleRemoteDownloadRequirementsAction,
+  // Download client certificate
+  ansibleRemoteDownloadClientAction,
+  // Download CA certificate
+  ansibleRemoteDownloadCAAction,
+  // Delete
+  ansibleRemoteDeleteAction,
+];
+
 export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
   condition: isLoggedIn,
   defaultPageSize: 10,
@@ -31,6 +44,7 @@ export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
     },
   ],
   headerActions: [ansibleRemoteCreateAction], // Add remote
+  listItemActions,
   noDataButton: ansibleRemoteCreateAction.button(
     null,
     null,
@@ -42,18 +56,9 @@ export const AnsibleRemoteList = ListPage<AnsibleRemoteType, IState>({
     const { name, pulp_href, url } = item;
     const id = parsePulpIDFromURL(pulp_href);
 
-    const kebabItems = [
-      // Edit
-      ansibleRemoteEditAction,
-      // Download requirements.yaml
-      ansibleRemoteDownloadRequirementsAction,
-      // Download client certificate
-      ansibleRemoteDownloadClientAction,
-      // Download CA certificate
-      ansibleRemoteDownloadCAAction,
-      // Delete
-      ansibleRemoteDeleteAction,
-    ].map((action) => action.dropdownItem({ ...item, id }, actionContext));
+    const kebabItems = listItemActions.map((action) =>
+      action.dropdownItem({ ...item, id }, actionContext),
+    );
 
     return (
       <tr key={index}>

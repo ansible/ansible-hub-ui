@@ -79,6 +79,7 @@ interface ListPageParams<T, ExtraState> {
   extraState?: ExtraState;
   filterConfig: FilterOption[];
   headerActions?: ActionType[];
+  listItemActions?: ActionType[];
   noDataButton?: React.ReactElement;
   noDataDescription: string;
   noDataTitle: string;
@@ -108,6 +109,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   filterConfig,
   // displayed after filters
   headerActions,
+  // only used for modals; renderTableRow handles the rest
+  listItemActions,
   // EmptyStateNoData
   noDataButton,
   noDataDescription,
@@ -123,6 +126,17 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   // container title
   title,
 }: ListPageParams<T, ExtraState>) {
+  renderModals ||= function (actionContext) {
+    return (
+      <>
+        {headerActions?.length &&
+          headerActions.map((action) => action?.modal?.(actionContext))}
+        {listItemActions?.length &&
+          listItemActions.map((action) => action?.modal?.(actionContext))}
+      </>
+    );
+  };
+
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;

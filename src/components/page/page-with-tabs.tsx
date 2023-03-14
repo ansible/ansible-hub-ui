@@ -86,6 +86,15 @@ export const PageWithTabs = function <
   // [{ id, name }]
   tabs,
 }: PageWithTabsParams<T, ExtraState>) {
+  renderModals ||= function (actionContext) {
+    return (
+      <>
+        {headerActions?.length &&
+          headerActions.map((action) => action?.modal?.(actionContext))}
+      </>
+    );
+  };
+
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
