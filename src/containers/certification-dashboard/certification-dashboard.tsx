@@ -25,6 +25,7 @@ import {
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
+  ApproveModal,
   BaseHeader,
   DateComponent,
   EmptyStateFilter,
@@ -262,6 +263,17 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
             />
+            {this.state.approveModalInfo && (
+              <ApproveModal
+                closeAction={() => {
+                  this.setState({ approveModalInfo: null });
+                }}
+                collectionVersion={
+                  this.state.approveModalInfo.collectionVersion
+                }
+                addAlert={(alert) => this.addAlertObj(alert)}
+              />
+            )}
           </Main>
         )}
       </React.Fragment>
