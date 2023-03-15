@@ -28,6 +28,10 @@ class API extends PulpAPI {
       )}`,
     );
   }
+
+  list(params?) {
+    return super.list(params, this.apiPath);
+  }
 }
 
 export const Repositories = new API();
