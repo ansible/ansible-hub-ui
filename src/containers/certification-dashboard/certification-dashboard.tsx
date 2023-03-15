@@ -23,6 +23,7 @@ import {
   CollectionVersionAPI,
   Repositories,
 } from 'src/api';
+import { Repository } from 'src/api/response-types/repositories';
 import {
   BaseHeader,
   DateComponent,
@@ -74,6 +75,10 @@ interface IState {
   inputText: string;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersion;
+  approveModalInfo: {
+    collectionVersion: CollectionVersion;
+  };
+  repositoryList: Repository[];
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -108,6 +113,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       inputText: '',
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
+      approveModalInfo: null,
+      repositoryList: [],
     };
   }
 
@@ -120,7 +127,22 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     ) {
       this.setState({ unauthorized: true });
     } else {
-      this.queryCollections();
+      this.setState({ loading: true });
+
+      Repositories.listApproved()
+        .then((data) => {
+          //data.data.results = data.data.results.filter( (res) => res.name == 'published');
+          this.setState({ repositoryList: data.data.results });
+          this.queryCollections();
+        })
+        .catch(({ response: { status, statusText } }) => {
+          this.setState({ loading: false });
+          this.addAlertObj({
+            title: t`Failed to load repositories.`,
+            variant: 'danger',
+            description: errorMessage(status, statusText),
+          });
+        });
     }
   }
 
@@ -315,7 +337,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (this.state.updatingVersions.includes(version)) {
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
-    if (version.repository_list.includes(Constants.PUBLISHED)) {
+    if (this.isApproved(version)) {
       const { display_signatures } = this.context.featureFlags;
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
@@ -354,7 +376,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   private renderRow(version: CollectionVersion, index) {
     return (
       <tr key={index} data-cy='CertificationDashboard-row'>
-        <td>{version.namespace}</td>
+        <td>
+          {version.namespace + '(' + version.repository_list.join(', ') + ')'}
+        </td>
         <td>{version.name}</td>
         <td>
           <Link
@@ -418,13 +442,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         key='approve'
         isDisabled={mustUploadSignature}
         data-cy='approve-button'
-        onClick={() =>
-          this.updateCertification(
-            version,
-            Constants.NEEDSREVIEW,
-            Constants.PUBLISHED,
-          )
-        }
+        onClick={() => {
+          this.approve(version);
+        }}
       >
         {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
@@ -451,11 +471,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       />
     );
 
-    const certifyDropDown = (isDisabled: boolean, originalRepo) => (
+    const certifyDropDown = (isDisabled: boolean) => (
       <DropdownItem
-        onClick={() =>
-          this.updateCertification(version, originalRepo, Constants.PUBLISHED)
-        }
+        onClick={() => this.approve(version)}
         isDisabled={isDisabled}
         key='certify'
       >
@@ -463,15 +481,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       </DropdownItem>
     );
 
-    const rejectDropDown = (isDisabled: boolean, originalRepo) => (
+    const rejectDropDown = (isDisabled: boolean) => (
       <DropdownItem
-        onClick={() =>
-          this.updateCertification(
-            version,
-            originalRepo,
-            Constants.NOTCERTIFIED,
-          )
-        }
+        onClick={() => {
+          this.reject(version);
+        }}
         isDisabled={isDisabled}
         className='rejected-icon'
         key='reject'
@@ -480,12 +494,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       </DropdownItem>
     );
 
-    if (version.repository_list.includes(Constants.PUBLISHED)) {
+    if (this.isApproved(version)) {
       return (
         <ListItemActions
           kebabItems={[
-            certifyDropDown(true, Constants.PUBLISHED),
-            rejectDropDown(false, Constants.PUBLISHED),
+            certifyDropDown(true),
+            rejectDropDown(false),
             importsLink,
           ]}
         />
@@ -495,8 +509,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return (
         <ListItemActions
           kebabItems={[
-            certifyDropDown(false, Constants.NOTCERTIFIED),
-            rejectDropDown(true, Constants.NOTCERTIFIED),
+            certifyDropDown(false),
+            rejectDropDown(true),
             importsLink,
           ]}
         />
@@ -505,10 +519,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
       return (
         <ListItemActions
-          kebabItems={[
-            rejectDropDown(false, Constants.NEEDSREVIEW),
-            importsLink,
-          ]}
+          kebabItems={[rejectDropDown(false), importsLink]}
           buttons={approveButton}
         />
       );
@@ -563,6 +574,78 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         );
       })
       .finally(() => this.closeUploadCertificateModal());
+  }
+
+  private isApproved(version) {
+    let approvedRepoFound = false;
+
+    this.state.repositoryList.forEach((repo: Repository) => {
+      if (version.repository_list.includes(repo.name)) {
+        approvedRepoFound = true;
+      }
+    });
+
+    return approvedRepoFound;
+  }
+
+  private approve(version) {
+    if (version.repository_list.length == 0) {
+      // I hope that this may not occure ever, but to be sure...
+      this.addAlert(
+        t`Approval failed.`,
+        'danger',
+        t`Collection not found in any repository.`,
+      );
+      return;
+    }
+
+    if (this.state.repositoryList.length == 1) {
+      if (
+        version.repository_list[0] == Constants.NEEDSREVIEW ||
+        version.repository_list[0] == Constants.NOTCERTIFIED
+      ) {
+        this.updateCertification(
+          version,
+          version.repository_list[0],
+          this.state.repositoryList[0].name,
+        );
+      } else {
+        // I hope that this may not occure ever, but to be sure...
+        this.addAlert(
+          t`Approval failed.`,
+          'danger',
+          t`Collection has to be only in rejected or staging repository.`,
+        );
+      }
+    } else {
+      this.setState({ approveModalInfo: { collectionVersion: version } });
+    }
+  }
+
+  private reject(version) {
+    // test
+    //CollectionVersionAPI.setRepository(version.namespace, version.name, version.version, version.repository_list[0], 'test');
+    //return;
+
+    if (version.repository_list.length == 0) {
+      // I hope that this may not occure ever, but to be sure...
+      this.addAlert(
+        t`Rejection failed.`,
+        'danger',
+        t`Collection not found in any repository.`,
+      );
+      return;
+    }
+
+    if (version.repository_list.length == 1) {
+      this.updateCertification(
+        version,
+        version.repository_list[0],
+        Constants.NOTCERTIFIED,
+      );
+    } else {
+      // TODO use new API
+    }
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
@@ -650,6 +733,10 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         },
       ],
     });
+  }
+
+  private addAlertObj(alert) {
+    this.addAlert(alert.title, alert.variant, alert.description);
   }
 }
 
