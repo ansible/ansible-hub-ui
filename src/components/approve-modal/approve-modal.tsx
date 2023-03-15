@@ -34,21 +34,33 @@ export const ApproveModal = (props: IProps) => {
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [params, setParams] = useState({ page: 1, page_size: 2, sort: 'name' });
+  const [params, setParams] = useState({
+    page: 1,
+    page_size: 10,
+    sort: 'name',
+  });
 
-  const buttonClick = () => {
+  function buttonClick() {
     // TODO - waiting for API
-  };
+  }
 
-  const addAlert = (alert: AlertType) => {
+  function addAlert(alert: AlertType) {
     setAlerts((prevAlerts) => [...prevAlerts, alert]);
-  };
+  }
 
-  const closeAlert = () => {
+  function closeAlert() {
     setAlerts([]);
-  };
+  }
 
-  const changeSelection = (name) => {
+  function selectAll() {
+    setSelectedRepos(repositoryList.map((item) => item.name));
+  }
+
+  function unselectAll() {
+    setSelectedRepos([]);
+  }
+
+  function changeSelection(name) {
     const checked = selectedRepos.includes(name);
 
     if (checked) {
@@ -58,9 +70,9 @@ export const ApproveModal = (props: IProps) => {
       // add
       setSelectedRepos([...selectedRepos, name]);
     }
-  };
+  }
 
-  const loadRepos = () => {
+  function loadRepos() {
     // modify params
     const par = { ...params };
     par['pulp_label_select'] = 'pipeline=approved';
@@ -81,7 +93,7 @@ export const ApproveModal = (props: IProps) => {
           description: errorMessage(status, statusText),
         });
       });
-  };
+  }
 
   useEffect(() => {
     loadRepos();
@@ -152,6 +164,7 @@ export const ApproveModal = (props: IProps) => {
         variant='large'
       >
         <section className='modal-body' data-cy='modal-body'>
+          {t`Collection will be moved to all of the selected repositories.`}
           <div className='toolbar hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
@@ -191,6 +204,12 @@ export const ApproveModal = (props: IProps) => {
               ignoredParams={['page_size', 'page', 'sort']}
             />
           </div>
+          <Button key='selectAll' onClick={selectAll} variant='link'>
+            {t`Select all`}
+          </Button>
+          <Button key='unselectAll' onClick={unselectAll} variant='link'>
+            {t`Unselect all`}
+          </Button>
           {loading ? <Spinner /> : renderTable()}
 
           <div className='footer'>

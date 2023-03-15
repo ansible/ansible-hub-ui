@@ -388,10 +388,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   private renderRow(version: CollectionVersion, index) {
     return (
       <tr key={index} data-cy='CertificationDashboard-row'>
-        <td>
-          {version.namespace + '(' + version.repository_list.join(', ') + ')'}
-        </td>
-        <td>{version.name}</td>
+        <td>{version.namespace}</td>
+        <td>{version.name + '(' + version.repository_list.join(', ') + ')'}</td>
         <td>
           <Link
             to={formatPath(
