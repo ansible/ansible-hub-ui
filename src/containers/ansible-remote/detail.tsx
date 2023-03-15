@@ -14,7 +14,12 @@ import {
   ansibleRemoteEditAction,
 } from 'src/actions';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
-import { CopyURL, Details, PageWithTabs } from 'src/components';
+import {
+  CopyURL,
+  Details,
+  LazyRepositories,
+  PageWithTabs,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 
@@ -94,6 +99,10 @@ const DetailsTab = ({ item }: TabProps) => (
         value: item?.download_concurrency ?? t`None`,
       },
       { label: t`Rate limit`, value: item?.rate_limit ?? t`None` },
+      {
+        label: t`Repositories`,
+        value: <LazyRepositories remoteHref={item?.pulp_href} />,
+      },
       {
         label: t`YAML requirements`,
         value: <MaybeCode code={item?.requirements_file} />,
