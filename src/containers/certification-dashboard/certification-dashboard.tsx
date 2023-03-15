@@ -81,7 +81,6 @@ interface IState {
   inputText: string;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersionSearch['collection_version'];
-  repoHrefToDistro: object;
   approveModalInfo: {
     collectionVersion: CollectionVersion;
   };
@@ -490,7 +489,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     const approveButton = [
       canUploadSignature && (
         <React.Fragment key='upload'>
-          <Button onClick={() => this.openUploadCertificateModal(version)}>
+          <Button
+            onClick={() => this.openUploadCertificateModal(collectionData)}
+          >
             {t`Upload signature`}
           </Button>{' '}
         </React.Fragment>
@@ -588,9 +589,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
-  private openUploadCertificateModal(
-    version: CollectionVersionSearch['collection_version'],
-  ) {
+  private openUploadCertificateModal(version: CollectionVersionSearch) {
     this.setState({
       uploadCertificateModalOpen: true,
       versionToUploadCertificate: version,
@@ -605,23 +604,19 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private submitCertificate(file: File) {
-    const version = this.state.versionToUploadCertificate;
-    const signed_collection = version.pulp_href;
-
-    return Repositories.getRepository({
-      name: 'staging',
+    const { collection_version, repository } =
+      this.state.versionToUploadCertificate;
+    const signed_collection = collection_version.pulp_href;
+    const { name, namespace, version } = collection_version;
+    CertificateUploadAPI.upload({
+      file,
+      repository: repository.pulp_href,
+      signed_collection,
     })
-      .then((response) =>
-        CertificateUploadAPI.upload({
-          file,
-          repository: response.data.results[0].pulp_href,
-          signed_collection,
-        }),
-      )
       .then((result) => waitForTask(parsePulpIDFromURL(result.data.task)))
       .then(() =>
         this.addAlert(
-          t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
+          t`Certificate for collection "${namespace} ${name} v${version}" has been successfully uploaded.`,
           'success',
         ),
       )
@@ -632,7 +627,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           : errorMessage(error.response.status, error.response.statusText);
 
         this.addAlert(
-          t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          t`The certificate for "${namespace} ${name} v${version}" could not be saved.`,
           'danger',
           description,
         );

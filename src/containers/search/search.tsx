@@ -57,7 +57,7 @@ interface IState {
   loading: boolean;
   synclist: SyncListType;
   alerts: AlertType[];
-  updateCollection: CollectionListType;
+  updateCollection: CollectionVersionSearch;
   showImportModal: boolean;
   redirect: string;
   noDependencies: boolean;
@@ -186,15 +186,15 @@ class Search extends React.Component<RouteProps, IState> {
                   Paths.myImports,
                   {},
                   {
-                    namespace: updateCollection.namespace.name,
+                    namespace: updateCollection.collection_version.namespace,
                   },
                 ),
               })
             }
             // onCancel
             setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
-            collection={updateCollection}
-            namespace={updateCollection.namespace.name}
+            collection={updateCollection.collection_version}
+            namespace={updateCollection.collection_version.namespace}
           />
         )}
         <BaseHeader

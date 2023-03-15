@@ -5,7 +5,6 @@ import axios from 'axios';
 import * as React from 'react';
 import {
   CollectionAPI,
-  CollectionListType,
   CollectionUploadType,
   CollectionVersionSearch,
 } from 'src/api';
@@ -21,9 +20,7 @@ interface IProps {
   setOpen: (isOpen, warnings?) => void;
   onUploadSuccess: (result) => void;
 
-  collection?:
-    | CollectionListType // FIXME: collection-header is still using CollectionListType
-    | CollectionVersionSearch['collection_version'];
+  collection?: CollectionVersionSearch['collection_version'];
   namespace: string;
 }
 
