@@ -48,6 +48,8 @@ export { ImportModal } from './import-modal/import-modal';
 export { ListPage } from './page/list-page';
 export { PageWithTabs } from './page/page-with-tabs';
 export { Page } from './page/page';
+export { PulpLabels } from './repositories/pulp-labels';
+export { LazyDistributions } from './repositories/lazy-distributions';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';

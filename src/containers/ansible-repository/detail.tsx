@@ -1,12 +1,4 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  Label,
-  LabelGroup,
-  Spinner,
-  Tooltip,
-} from '@patternfly/react-core';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -16,18 +8,21 @@ import {
   ansibleRepositorySyncAction,
 } from 'src/actions';
 import {
-  AnsibleDistributionAPI,
   AnsibleRemoteAPI,
   AnsibleRemoteType,
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CollectionVersionAPI,
 } from 'src/api';
-import { Details, PageWithTabs } from 'src/components';
+import {
+  Details,
+  LazyDistributions,
+  PageWithTabs,
+  PulpLabels,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import {
-  errorMessage,
   handleHttpError,
   lastSyncStatus,
   lastSynced,
@@ -47,60 +42,6 @@ interface TabProps {
   item: AnsibleRepositoryType;
   actionContext: { addAlert: (alert) => void };
 }
-
-const PulpLabels = ({ labels }: { labels: { [key: string]: string } }) => {
-  if (!labels || !Object.keys(labels).length) {
-    return <>{t`None`}</>;
-  }
-  return (
-    <LabelGroup>
-      {Object.entries(labels).map(([k, v]) => (
-        <Label key={k}>
-          {k}
-          {v ? ': ' + v : null}
-        </Label>
-      ))}
-    </LabelGroup>
-  );
-};
-
-const LazyDistributions = ({ repositoryHref }: { repositoryHref: string }) => {
-  const [distributions, setDistributions] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setDistributions([]);
-    setLoading(true);
-
-    AnsibleDistributionAPI.list({ repository: repositoryHref })
-      .then(({ data }) => {
-        setDistributions(data.results);
-        setLoading(false);
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        setError(errorMessage(status, statusText));
-        setLoading(false);
-      });
-  }, [repositoryHref]);
-
-  const errorElement = error && (
-    <Tooltip content={t`Failed to load distributions: ${error}`} key='empty'>
-      <Button variant='plain'>
-        <ExclamationCircleIcon />
-      </Button>
-    </Tooltip>
-  );
-
-  return loading ? (
-    <Spinner size='sm' />
-  ) : error ? (
-    errorElement
-  ) : (
-    <>{distributions?.map?.(({ name }) => name)?.join?.(', ') || '---'}</>
-  );
-};
 
 const DetailsTab = ({ item }: TabProps) => {
   const [remote, setRemote] = useState<AnsibleRemoteType>(null);
