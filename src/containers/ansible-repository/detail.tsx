@@ -64,7 +64,6 @@ const DetailsTab = ({ item }: TabProps) => {
           label: t`Retained version count`,
           value: item?.retain_repo_versions ?? t`None`,
         },
-        { label: wip + t`Repository type`, value: 'TODO' }, // TODO by .remote?
         {
           label: t`Distribution`,
           value: <LazyDistributions repositoryHref={item.pulp_href} />,

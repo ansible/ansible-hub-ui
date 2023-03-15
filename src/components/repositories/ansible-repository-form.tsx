@@ -5,12 +5,17 @@ import {
   Checkbox,
   Form,
   FormGroup,
+  Spinner,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
-import { AnsibleRepositoryType } from 'src/api';
-import { LazyDistributions, PulpLabels } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import React, { useEffect, useState } from 'react';
+import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
+import {
+  APISearchTypeAhead,
+  LazyDistributions,
+  PulpLabels,
+} from 'src/components';
+import { ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
   allowEditName: boolean;
@@ -59,7 +64,6 @@ export const AnsibleRepositoryForm = ({
     inputField(fieldName, label, { type: 'text' });
   const numericField = (fieldName, label) =>
     inputField(fieldName, label, { type: 'number' });
-  const wip = '🚧 ';
 
   const isValid = !requiredFields.find((field) => !repository[field]);
 
@@ -77,15 +81,30 @@ export const AnsibleRepositoryForm = ({
 
   const createLabel = repository?.pulp_labels?.content !== 'approved_for_use';
 
+  const [remotes, setRemotes] = useState(null);
+  const [remotesError, setRemotesError] = useState(null);
+  const loadRemotes = (name?) => {
+    setRemotesError(null);
+    AnsibleRemoteAPI.list({ ...(name ? { name__icontains: name } : {}) })
+      .then(({ data }) => setRemotes(data.results))
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        setRemotes([]);
+        setRemotesError(errorMessage(status, statusText));
+      });
+  };
+
+  useEffect(() => loadRemotes(), []);
+
+  const selectedRemote = remotes?.find?.(
+    ({ pulp_href }) => pulp_href === repository?.remote,
+  );
+
   return (
     <Form>
       {stringField('name', t`Name`)}
       {stringField('description', t`Description`)}
       {numericField('retain_repo_versions', t`Retained number of versions`)}
-      {inputField('none', t`Repository type`, {
-        isDisabled: true,
-        placeholder: wip,
-      })}
       <FormGroup
         key={'distributions'}
         fieldId={'distributions'}
@@ -115,7 +134,39 @@ export const AnsibleRepositoryForm = ({
           id='create_label'
         />
       </FormGroup>
-      {inputField('none', t`Remote`, { isDisabled: true, placeholder: wip })}
+
+      <FormGroup key='remote' fieldId='remote' label={t`Remote`}>
+        {remotes ? (
+          <APISearchTypeAhead
+            loadResults={loadRemotes}
+            onClear={() => updateRepository({ ...repository, remote: null })}
+            onSelect={(_event, value) =>
+              updateRepository({
+                ...repository,
+                remote: remotes.find(({ name }) => name === value)?.pulp_href,
+              })
+            }
+            placeholderText={t`Select a remote`}
+            results={remotes}
+            selections={
+              selectedRemote
+                ? [{ name: selectedRemote.name, id: selectedRemote.pulp_href }]
+                : []
+            }
+          />
+        ) : null}
+        {remotesError ? (
+          <span
+            style={{
+              color: 'var(--pf-global--danger-color--200)',
+            }}
+          >
+            {t`Failed to load remotes: ${remotesError}`}
+          </span>
+        ) : null}
+        {!remotes && !remotesError ? <Spinner size='sm' /> : null}
+      </FormGroup>
+
       {errorMessages['__nofield'] ? (
         <span
           style={{
