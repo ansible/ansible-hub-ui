@@ -2,19 +2,21 @@ import { t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
+  Checkbox,
   Form,
   FormGroup,
   TextInput,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { useState } from 'react';
 import { AnsibleRepositoryType } from 'src/api';
+import { LazyDistributions, PulpLabels } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   allowEditName: boolean;
   errorMessages: ErrorMessagesType;
   onCancel: () => void;
-  onSave: () => void;
+  onSave: ({ createDistribution, createLabel }) => void;
   repository: AnsibleRepositoryType;
   updateRepository: (r) => void;
 }
@@ -61,6 +63,20 @@ export const AnsibleRepositoryForm = ({
 
   const isValid = !requiredFields.find((field) => !repository[field]);
 
+  const [createDistribution, setCreateDistribution] = useState(true);
+  const [disabledDistribution, setDisabledDistribution] = useState(false);
+  const onDistributionsLoad = (distributions) => {
+    if (distributions?.find?.(({ name }) => name === repository.name)) {
+      setCreateDistribution(false);
+      setDisabledDistribution(true);
+    } else {
+      setCreateDistribution(true);
+      setDisabledDistribution(false);
+    }
+  };
+
+  const createLabel = repository?.pulp_labels?.content !== 'approved_for_use';
+
   return (
     <Form>
       {stringField('name', t`Name`)}
@@ -70,11 +86,35 @@ export const AnsibleRepositoryForm = ({
         isDisabled: true,
         placeholder: wip,
       })}
-      {inputField('none', t`Distribution`, {
-        isDisabled: true,
-        placeholder: wip,
-      })}
-      {inputField('none', t`Labels`, { isDisabled: true, placeholder: wip })}
+      <FormGroup
+        key={'distributions'}
+        fieldId={'distributions'}
+        label={t`Distributions`}
+      >
+        <LazyDistributions
+          emptyText={t`None`}
+          repositoryHref={repository.pulp_href}
+          onLoad={onDistributionsLoad}
+        />
+        <br />
+        <Checkbox
+          isChecked={createDistribution}
+          isDisabled={disabledDistribution}
+          onChange={(value) => setCreateDistribution(value)}
+          label={t`Create a "${repository.name}" distribution`}
+          id='create_distribution'
+        />
+      </FormGroup>
+      <FormGroup key={'labels'} fieldId={'labels'} label={t`Labels`}>
+        <PulpLabels labels={repository.pulp_labels} />
+        <br />
+        <Checkbox
+          isChecked={createLabel}
+          isDisabled={true}
+          label={t`Create a "content: approved_for_use" label`}
+          id='create_label'
+        />
+      </FormGroup>
       {inputField('none', t`Remote`, { isDisabled: true, placeholder: wip })}
       {errorMessages['__nofield'] ? (
         <span
@@ -90,7 +130,7 @@ export const AnsibleRepositoryForm = ({
           isDisabled={!isValid}
           key='confirm'
           variant='primary'
-          onClick={onSave}
+          onClick={() => onSave({ createDistribution, createLabel })}
         >
           {t`Save`}
         </Button>

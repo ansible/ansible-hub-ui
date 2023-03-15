@@ -1,17 +1,19 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import {
+  AnsibleDistributionAPI,
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
+} from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import { parsePulpIDFromURL } from 'src/utilities';
 
-const wip = '🚧 ';
-
 const initialRepository: AnsibleRepositoryType = {
   name: '',
   description: '',
-  retain_repo_versions: 0,
+  retain_repo_versions: 1,
 };
 
 export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
@@ -33,7 +35,7 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       ({ data: { results } }) => results[0],
     ),
 
-  title: ({ name }) => wip + (name || t`Add new repository`),
+  title: ({ name }) => name || t`Add new repository`,
   transformParams: ({ name, ...rest }) => ({
     ...rest,
     name: name !== '_' ? name : null,
@@ -53,7 +55,7 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       return null;
     }
 
-    const saveRepository = () => {
+    const saveRepository = ({ createDistribution, createLabel }) => {
       const { repositoryToEdit } = state;
 
       const data = { ...repositoryToEdit };
@@ -68,11 +70,36 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
         });
       }
 
+      //TODO still 403 on the PUT
+      if (item) {
+        delete data.last_sync_task;
+        delete data.last_synced_metadata_time;
+        delete data.latest_version_href;
+        delete data.pulp_created;
+        delete data.pulp_href;
+        delete data.versions_href;
+      }
+
+      if (createLabel) {
+        data.pulp_labels ||= {};
+        data.pulp_labels.content = 'approved_for_use';
+      }
+
       const promise = !item
         ? AnsibleRepositoryAPI.create(data)
         : AnsibleRepositoryAPI.update(parsePulpIDFromURL(item.pulp_href), data);
 
       promise
+        .then(
+          createDistribution
+            ? ({ data: newData }) =>
+                AnsibleDistributionAPI.create({
+                  name: data.name,
+                  base_path: data.name,
+                  repository: newData.pulp_href,
+                })
+            : () => null,
+        )
         .then(() => {
           setState({
             errorMessages: {},
@@ -87,7 +114,10 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
         })
         .catch(({ response: { data } }) =>
           setState({
-            errorMessages: { __nofield: data.non_field_errors, ...data },
+            errorMessages: {
+              __nofield: data.non_field_errors || data.detail,
+              ...data,
+            },
           }),
         );
     };
