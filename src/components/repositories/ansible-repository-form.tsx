@@ -5,6 +5,8 @@ import {
   Checkbox,
   Form,
   FormGroup,
+  Select,
+  SelectOption,
   Spinner,
   TextInput,
 } from '@patternfly/react-core';
@@ -21,7 +23,13 @@ interface IProps {
   allowEditName: boolean;
   errorMessages: ErrorMessagesType;
   onCancel: () => void;
-  onSave: ({ createDistribution, createLabel }) => void;
+  onSave: ({
+    createDistribution,
+    createLabel,
+    hideFromSearch,
+    isPrivate,
+    pipeline,
+  }) => void;
   repository: AnsibleRepositoryType;
   updateRepository: (r) => void;
 }
@@ -80,6 +88,16 @@ export const AnsibleRepositoryForm = ({
   };
 
   const createLabel = repository?.pulp_labels?.content !== 'approved_for_use';
+  const [hideFromSearch, setHideFromSearch] = useState(
+    repository?.pulp_labels?.hide_from_search === '',
+  );
+  const [isPrivate, setIsPrivate] = useState(
+    repository?.pulp_labels?.is_private === 'true',
+  );
+  const [pipeline, setPipeline] = useState(repository?.pulp_labels?.pipeline);
+  const [disableHideFromSearch, setDisableHideFromSearch] = useState(
+    hideFromSearch && pipeline === 'staging',
+  );
 
   const [remotes, setRemotes] = useState(null);
   const [remotesError, setRemotesError] = useState(null);
@@ -100,11 +118,49 @@ export const AnsibleRepositoryForm = ({
     ({ pulp_href }) => pulp_href === repository?.remote,
   );
 
+  const [selectedPipeline, setSelectedPipeline] = useState(
+    hideFromSearch && pipeline === 'staging'
+      ? 'staging'
+      : pipeline === 'approved'
+      ? 'approved'
+      : 'none',
+  );
+
+  const [selectOpen, setSelectOpen] = useState(false);
+
+  const selectPipeline = (value) => {
+    if (disableHideFromSearch && value !== 'staging') {
+      setHideFromSearch(repository?.pulp_labels?.hide_from_search === '');
+    }
+    if (value === 'staging') {
+      setSelectedPipeline(value);
+      setPipeline(value);
+      setHideFromSearch(true);
+      setDisableHideFromSearch(true);
+    } else if (value === 'approved') {
+      setSelectedPipeline(value);
+      setPipeline(value);
+      setDisableHideFromSearch(false);
+    } else {
+      setSelectedPipeline('none');
+      setPipeline(null);
+      setDisableHideFromSearch(false);
+    }
+    setSelectOpen(false);
+  };
+
+  const selectOptions = {
+    staging: { id: 'staging', toString: () => t`Staging` },
+    approved: { id: 'approved', toString: () => t`Approved` },
+    none: { id: 'none', toString: () => t`None` },
+  };
+
   return (
     <Form>
       {stringField('name', t`Name`)}
       {stringField('description', t`Description`)}
       {numericField('retain_repo_versions', t`Retained number of versions`)}
+
       <FormGroup
         key={'distributions'}
         fieldId={'distributions'}
@@ -124,15 +180,44 @@ export const AnsibleRepositoryForm = ({
           id='create_distribution'
         />
       </FormGroup>
+
+      <FormGroup key='pipeline' fieldId='pipeline' label={t`Pipeline`}>
+        <Select
+          variant='single'
+          isOpen={selectOpen}
+          onToggle={() => setSelectOpen(!selectOpen)}
+          onSelect={(_e, value: { id }) => selectPipeline(value.id)}
+          selections={selectOptions[selectedPipeline]}
+        >
+          {Object.entries(selectOptions).map(([k, v]) => (
+            <SelectOption key={k} value={v} />
+          ))}
+        </Select>
+      </FormGroup>
+
       <FormGroup key={'labels'} fieldId={'labels'} label={t`Labels`}>
         <PulpLabels labels={repository.pulp_labels} />
-        <br />
-        <Checkbox
-          isChecked={createLabel}
-          isDisabled={true}
-          label={t`Create a "content: approved_for_use" label`}
-          id='create_label'
-        />
+        <div style={{ marginTop: '12px' }}>
+          <Checkbox
+            isChecked={createLabel}
+            isDisabled={true}
+            label={t`Create a "content: approved_for_use" label`}
+            id='create_label'
+          />
+          <Checkbox
+            isChecked={hideFromSearch}
+            isDisabled={disableHideFromSearch}
+            label={t`Hide from search`}
+            id='hide_from_search'
+            onChange={(value) => setHideFromSearch(value)}
+          />
+          <Checkbox
+            isChecked={isPrivate}
+            label={t`Make private`}
+            id='is_private'
+            onChange={(value) => setIsPrivate(value)}
+          />
+        </div>
       </FormGroup>
 
       <FormGroup key='remote' fieldId='remote' label={t`Remote`}>
@@ -176,12 +261,21 @@ export const AnsibleRepositoryForm = ({
           {errorMessages['__nofield']}
         </span>
       ) : null}
+
       <ActionGroup key='actions'>
         <Button
           isDisabled={!isValid}
           key='confirm'
           variant='primary'
-          onClick={() => onSave({ createDistribution, createLabel })}
+          onClick={() =>
+            onSave({
+              createDistribution,
+              createLabel,
+              hideFromSearch,
+              isPrivate,
+              pipeline,
+            })
+          }
         >
           {t`Save`}
         </Button>

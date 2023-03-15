@@ -55,7 +55,13 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       return null;
     }
 
-    const saveRepository = ({ createDistribution, createLabel }) => {
+    const saveRepository = ({
+      createDistribution,
+      createLabel,
+      hideFromSearch,
+      isPrivate,
+      pipeline,
+    }) => {
       const { repositoryToEdit } = state;
 
       const data = { ...repositoryToEdit };
@@ -69,8 +75,9 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
           }
         });
       }
+      // TODO update cant remove description, use ^
+      // TODO default retain null, not 1
 
-      //TODO still 403 on the PUT
       if (item) {
         delete data.last_sync_task;
         delete data.last_synced_metadata_time;
@@ -80,9 +87,24 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
         delete data.versions_href;
       }
 
+      data.pulp_labels ||= {};
       if (createLabel) {
-        data.pulp_labels ||= {};
         data.pulp_labels.content = 'approved_for_use';
+      }
+      if (hideFromSearch) {
+        data.pulp_labels.hide_from_search = '';
+      } else {
+        delete data.pulp_labels.hide_from_search;
+      }
+      if (isPrivate) {
+        data.pulp_labels.is_private = 'true';
+      } else {
+        delete data.pulp_labels.is_private;
+      }
+      if (pipeline) {
+        data.pulp_labels.pipeline = pipeline;
+      } else {
+        delete data.pulp_labels.pipeline;
       }
 
       const promise = !item
@@ -105,7 +127,7 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
             errorMessages: {},
             repositoryToEdit: undefined,
           });
-          // TODO context addAlert, task variant on update
+          // TODO context addAlert, task variant on update?
           navigate(
             formatPath(Paths.ansibleRepositoryDetail, {
               name: data.name,
