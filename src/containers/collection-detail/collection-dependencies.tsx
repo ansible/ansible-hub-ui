@@ -2,10 +2,11 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
   CollectionAPI,
-  CollectionDetailType,
   CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionAPI,
+  CollectionVersionContentType,
+  CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
@@ -26,7 +27,9 @@ import { loadCollection } from './base';
 import './collection-dependencies.scss';
 
 interface IState {
-  collection: CollectionDetailType;
+  collections: CollectionVersionSearch[];
+  collection: CollectionVersionSearch;
+  content: CollectionVersionContentType;
   dependencies_repos: CollectionVersion[];
   params: {
     page?: number;
@@ -56,7 +59,9 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     params['sort'] = !params['sort'] ? '-collection' : 'collection';
 
     this.state = {
-      collection: undefined,
+      collections: [],
+      collection: null,
+      content: null,
       dependencies_repos: [],
       params: params,
       usedByDependencies: [],
@@ -72,7 +77,9 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   render() {
     const {
+      collections,
       collection,
+      content,
       params,
       usedByDependencies,
       usedByDependenciesCount,
@@ -80,26 +87,28 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       alerts,
     } = this.state;
 
-    if (!collection) {
+    if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
+    const { collection_version: version } = collection;
 
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
         url: formatPath(Paths.namespaceByRepo, {
-          namespace: collection.namespace.name,
+          namespace: version.namespace,
           repo: this.context.selectedRepo,
         }),
-        name: collection.namespace.name,
+        name: version.namespace,
       },
       {
         url: formatPath(Paths.collectionByRepo, {
-          namespace: collection.namespace.name,
-          collection: collection.name,
+          namespace: version.namespace,
+          collection: version.name,
           repo: this.context.selectedRepo,
         }),
-        name: collection.name,
+        name: version.name,
       },
       { name: t`Dependencies` },
     ];
@@ -108,16 +117,16 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
     const dependenciesParams = ParamHelper.getReduced(params, ['version']);
 
-    const noDependencies = !Object.keys(
-      collection.latest_version.metadata.dependencies,
-    ).length;
+    const noDependencies = !Object.keys(version.dependencies).length;
 
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           reload={() => this.loadData(true)}
+          collections={collections}
           collection={collection}
+          content={content}
           params={headerParams}
           updateParams={(p) => {
             this.updateParams(this.combineParams(this.state.params, p), () =>
@@ -185,8 +194,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
   }
 
   private loadCollectionsDependenciesRepos(callback) {
-    const dependencies =
-      this.state.collection.latest_version.metadata.dependencies;
+    const dependencies = this.state.collection.collection_version.dependencies;
     const dependencies_repos = [];
     const promises = [];
 
@@ -242,9 +250,11 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
       this.cancelToken = CollectionAPI.getCancelToken();
 
+      const { name, namespace } = this.state.collection.collection_version;
+
       CollectionAPI.getUsedDependenciesByCollection(
-        this.state.collection.namespace.name,
-        this.state.collection.name,
+        namespace,
+        name,
         ParamHelper.getReduced(this.state.params, ['version']),
         this.cancelToken,
       )
@@ -283,7 +293,8 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
       selectedRepo: this.context.selectedRepo,
-      setCollection: (collection) => this.setState({ collection }, callback),
+      setCollection: (collections, collection, content) =>
+        this.setState({ collections, collection, content }, callback),
       stateParams: this.state.params.version
         ? { version: this.state.params.version }
         : {},

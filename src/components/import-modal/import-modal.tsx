@@ -22,7 +22,7 @@ interface IProps {
   onUploadSuccess: (result) => void;
 
   collection?:
-    | CollectionListType // TODO: collection-header is still using CollectionListType
+    | CollectionListType // FIXME: collection-header is still using CollectionListType
     | CollectionVersionSearch['collection_version'];
   namespace: string;
 }

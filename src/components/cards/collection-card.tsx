@@ -13,35 +13,45 @@ import {
 import cx from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionListType } from 'src/api';
+import { CollectionVersionSearch } from 'src/api';
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
 
-interface IProps extends CollectionListType {
+interface IProps extends CollectionVersionSearch {
   className?: string;
   displaySignatures: boolean;
   footer?: React.ReactNode;
-  repo?: string;
   menu?: React.ReactNode;
 }
 
 export const CollectionCard = ({
-  name,
-  latest_version,
-  namespace,
+  collection_version,
+  namespace_metadata: namespace,
+  repository,
+  is_signed,
   className,
   displaySignatures,
-  footer,
-  repo,
-  sign_state,
   menu,
+  footer,
 }: IProps) => {
   const MAX_DESCRIPTION_LENGTH = 60;
 
+  // FIXME: remove when API switch to AnsibleNamespaceMetadata
+  const mockNamespace = {
+    pulp_href: '',
+    name: collection_version.namespace,
+    company: 'xaz',
+    description: 'foo bar',
+    avatar: '',
+    avatar_url: '',
+    email: 'foo',
+  };
+  namespace = mockNamespace;
+
   const company = namespace.company || namespace.name;
-  const contentSummary = convertContentSummaryCounts(latest_version.metadata);
+  const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
@@ -54,9 +64,12 @@ export const CollectionCard = ({
           unlockWidth
           flexGrow
         />
-        <TextContent>{getCertification(repo)}</TextContent>
+        <TextContent>{getCertification(repository.name)}</TextContent>
         {displaySignatures ? (
-          <SignatureBadge isCompact signState={sign_state} />
+          <SignatureBadge
+            isCompact
+            signState={is_signed ? 'signed' : 'unsigned'}
+          />
         ) : null}
         {menu}
       </CardHeader>
@@ -64,12 +77,12 @@ export const CollectionCard = ({
         <div className='name'>
           <Link
             to={formatPath(Paths.collectionByRepo, {
-              collection: name,
+              collection: collection_version.name,
               namespace: namespace.name,
-              repo: repo,
+              repo: repository.name,
             })}
           >
-            {name}
+            {collection_version.name}
           </Link>
         </div>
         <div className='author'>
@@ -81,10 +94,10 @@ export const CollectionCard = ({
         </div>
       </CardHeader>
       <CardBody>
-        <Tooltip content={<div>{latest_version.metadata.description}</div>}>
+        <Tooltip content={<div>{collection_version.description}</div>}>
           <div className='description'>
             {getDescription(
-              latest_version.metadata.description,
+              collection_version.description,
               MAX_DESCRIPTION_LENGTH,
             )}
           </div>

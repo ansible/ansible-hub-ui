@@ -51,12 +51,12 @@ export const CollectionFilter = (props: IProps) => {
       })),
     },
     display_signatures && {
-      id: 'sign_state',
+      id: 'is_signed',
       title: t`Sign state`,
       inputType: 'select' as const,
       options: [
-        { id: 'signed', title: t`Signed` },
-        { id: 'unsigned', title: t`Unsigned` },
+        { id: 'true', title: t`Signed` },
+        { id: 'false', title: t`Unsigned` },
       ],
     },
   ].filter(Boolean);
@@ -76,9 +76,15 @@ export const CollectionFilter = (props: IProps) => {
             <ToolbarItem>
               <AppliedFilters
                 niceNames={{
-                  sign_state: t`sign state`,
+                  is_signed: t`sign state`,
                   tags: t`tags`,
                   keywords: t`keywords`,
+                }}
+                niceValues={{
+                  is_signed: {
+                    false: t`unsigned`,
+                    true: t`signed`,
+                  },
                 }}
                 style={{ marginTop: '16px' }}
                 updateParams={updateParams}

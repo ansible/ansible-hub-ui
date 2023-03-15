@@ -32,7 +32,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      collection: undefined,
+      collections: [],
+      collection: null,
+      content: null,
       params: params,
     };
     this.docsRef = React.createRef();
@@ -44,10 +46,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection } = this.state;
+    const { params, collection, collections, content } = this.state;
     const urlFields = this.props.routeParams;
 
-    if (!collection) {
+    if (!collection || !content) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
@@ -60,11 +62,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const contentName = urlFields['name'] || urlFields['page'] || null;
 
     if (contentType === 'docs' && contentName) {
-      if (collection.latest_version.docs_blob.documentation_files) {
-        const file =
-          collection.latest_version.docs_blob.documentation_files.find(
-            (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
-          );
+      if (content.docs_blob.documentation_files) {
+        const file = content.docs_blob.documentation_files.find(
+          (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
+        );
 
         if (file) {
           displayHTML = file.html;
@@ -72,24 +73,23 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       }
     } else if (contentName) {
       // check if contents exists
-      if (collection.latest_version.docs_blob.contents) {
-        const content = collection.latest_version.docs_blob.contents.find(
+      if (content.docs_blob.contents) {
+        const selectedContent = content.docs_blob.contents.find(
           (x) =>
             x.content_type === contentType && x.content_name === contentName,
         );
 
-        if (content) {
+        if (selectedContent) {
           if (contentType === 'role') {
-            displayHTML = content['readme_html'];
+            displayHTML = selectedContent['readme_html'];
           } else {
-            pluginData = content;
+            pluginData = selectedContent;
           }
         }
       }
     } else {
-      if (collection.latest_version.docs_blob.collection_readme) {
-        displayHTML =
-          collection.latest_version.docs_blob.collection_readme.html;
+      if (content.docs_blob.collection_readme) {
+        displayHTML = content.docs_blob.collection_readme.html;
       }
     }
 
@@ -97,18 +97,18 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       namespaceBreadcrumb,
       {
         url: formatPath(Paths.namespaceByRepo, {
-          namespace: collection.namespace.name,
+          namespace: collection.collection_version.namespace,
           repo: this.context.selectedRepo,
         }),
-        name: collection.namespace.name,
+        name: collection.collection_version.namespace,
       },
       {
         url: formatPath(Paths.collectionByRepo, {
-          namespace: collection.namespace.name,
-          collection: collection.name,
+          namespace: collection.collection_version.namespace,
+          collection: collection.collection_version.name,
           repo: this.context.selectedRepo,
         }),
-        name: collection.name,
+        name: collection.collection_version.name,
       },
       { name: t`Documentation` },
     ];
@@ -127,6 +127,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         <CollectionHeader
           reload={() => this.loadCollection(true)}
           collection={collection}
+          collections={collections}
+          content={content}
           params={params}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollection(true))
@@ -140,9 +142,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           <section className='docs-container'>
             <TableOfContents
               className='sidebar'
-              namespace={collection.namespace.name}
-              collection={collection.name}
-              docs_blob={collection.latest_version.docs_blob}
+              namespace={collection.collection_version.namespace}
+              collection={collection.collection_version.name}
+              docs_blob={content.docs_blob}
               selectedName={contentName}
               selectedType={contentType}
               params={params}
@@ -169,7 +171,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                         moduleName,
                         collection,
                         params,
-                        collection.latest_version.metadata.contents,
+                        content.contents,
                       )
                     }
                     renderDocLink={(name, href) =>
@@ -184,10 +186,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                   />
                 )
               ) : this.context.selectedRepo === 'community' &&
-                !collection.latest_version.docs_blob.contents ? (
+                !content.docs_blob.contents ? (
                 this.renderCommunityWarningMessage()
               ) : (
-                this.renderNotFound(collection.name)
+                this.renderNotFound(collection.collection_version.name)
               )}
             </div>
           </section>
@@ -282,7 +284,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
       selectedRepo: this.context.selectedRepo,
-      setCollection: (collection) => this.setState({ collection }),
+      setCollection: (collections, collection, content) => {
+        this.setState({ collections, collection, content });
+      },
       stateParams: this.state.params,
     });
   }

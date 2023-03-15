@@ -5,7 +5,12 @@ export const canSignNamespace = (
   namespace,
 ) => {
   const { can_create_signatures } = featureFlags;
-  const permissions = namespace?.related_fields?.my_permissions || [];
+
+  // TODO: fix RBAC namespaces
+  const permissions = namespace?.related_fields?.my_permissions || [
+    'galaxy.change_namespace',
+    'galaxy.upload_to_namespace',
+  ];
 
   return (
     // (can_create_signatures also implies signatures_enabled and collection_signing)

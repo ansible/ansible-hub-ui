@@ -1,11 +1,12 @@
 import { Trans, t } from '@lingui/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
 import React from 'react';
-import { CollectionDetailType, CollectionListType } from 'src/api';
+import { CollectionVersionSearch } from 'src/api';
 import { DeleteModal } from 'src/components';
 
 interface IProps {
-  deleteCollection: CollectionDetailType | CollectionListType;
+  deleteCollection: CollectionVersionSearch;
+  collections: CollectionVersionSearch[];
   isDeletionPending: boolean;
   confirmDelete: boolean;
   collectionVersion?: string;
@@ -17,6 +18,7 @@ interface IProps {
 export const DeleteCollectionModal = (props: IProps) => {
   const {
     deleteCollection,
+    collections,
     isDeletionPending,
     confirmDelete,
     collectionVersion,
@@ -41,12 +43,12 @@ export const DeleteCollectionModal = (props: IProps) => {
         <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
           {collectionVersion ? (
             <>
-              {(deleteCollection as CollectionDetailType).all_versions
-                .length === 1 ? (
+              {(collections as CollectionVersionSearch[]).length === 1 ? (
                 <Trans>
                   Deleting{' '}
                   <b>
-                    {deleteCollection.name} v{collectionVersion}
+                    {deleteCollection.collection_version.name} v
+                    {collectionVersion}
                   </b>{' '}
                   and its data will be lost and this will cause the entire
                   collection to be deleted.
@@ -55,7 +57,8 @@ export const DeleteCollectionModal = (props: IProps) => {
                 <Trans>
                   Deleting{' '}
                   <b>
-                    {deleteCollection.name} v{collectionVersion}
+                    {deleteCollection.collection_version.name} v
+                    {collectionVersion}
                   </b>{' '}
                   and its data will be lost.
                 </Trans>
@@ -63,7 +66,8 @@ export const DeleteCollectionModal = (props: IProps) => {
             </>
           ) : (
             <Trans>
-              Deleting <b>{deleteCollection.name}</b> and its data will be lost.
+              Deleting <b>{deleteCollection.collection_version.name}</b> and its
+              data will be lost.
             </Trans>
           )}
         </Text>

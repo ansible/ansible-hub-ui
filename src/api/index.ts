@@ -1,4 +1,4 @@
-export { CollectionAPI } from './collection';
+export { CollectionAPI, findDistroBasePathByRepo } from './collection';
 export { NamespaceAPI } from './namespace';
 export {
   NamespaceType,
@@ -13,6 +13,7 @@ export {
   CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionSearch,
+  CollectionVersionContentType,
   ContentSummaryType,
   DocsBlobType,
   PluginContentType,

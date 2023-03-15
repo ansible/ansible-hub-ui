@@ -1,4 +1,4 @@
-import { CollectionVersion } from 'src/api';
+import { CollectionVersionSearch } from 'src/api';
 
 class Summary {
   total_count: number;
@@ -11,10 +11,10 @@ class Summary {
   };
 }
 
-export function convertContentSummaryCounts(
-  metadata: CollectionVersion['metadata'],
-): Summary {
-  const { contents: content, dependencies } = metadata;
+export function convertContentSummaryCounts({
+  contents: content,
+  dependencies,
+}: CollectionVersionSearch['collection_version']): Summary {
   const summary: Summary = {
     total_count: content.length,
     contents: {
