@@ -230,7 +230,7 @@ export const PageWithTabs = function <
         return null;
       }
 
-      return renderTab(tab, item, actionContext) || <div>TODO {tab}</div>;
+      return renderTab(tab, item, actionContext);
     }
 
     private query() {

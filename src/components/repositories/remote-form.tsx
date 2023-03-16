@@ -350,7 +350,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
-                {/* TODO yaml requirements direct input */}
+                {/* TODO yaml requirements direct input - AAH-2044 */}
                 <FileUpload
                   validated={this.toError(
                     !('requirements_file' in errorMessages),
