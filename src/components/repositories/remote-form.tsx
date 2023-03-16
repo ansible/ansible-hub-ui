@@ -18,6 +18,7 @@ import {
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
 import React from 'react';
+import MonacoEditor from 'react-monaco-editor';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
@@ -350,7 +351,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
-                {/* TODO yaml requirements direct input - AAH-2044 */}
                 <FileUpload
                   validated={this.toError(
                     !('requirements_file' in errorMessages),
@@ -378,6 +378,24 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 >
                   <DownloadIcon />
                 </Button>
+              </FlexItem>
+            </Flex>
+            <Flex>
+              <FlexItem grow={{ default: 'grow' }}>
+                {/* TODO better placement, sizing */}
+                {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
+                <MonacoEditor
+                  width='800'
+                  height='600'
+                  language='yaml'
+                  theme='vs-dark'
+                  value={this.props.remote.requirements_file}
+                  options={{ selectOnLineNumbers: true }}
+                  onChange={(value) =>
+                    this.updateRemote(value, 'requirements_file')
+                  }
+                  editorDidMount={(editor) => editor.focus()}
+                />
               </FlexItem>
             </Flex>
           </FormGroup>
