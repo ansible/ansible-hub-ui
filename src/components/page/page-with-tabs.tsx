@@ -102,9 +102,7 @@ export const PageWithTabs = function <
     constructor(props) {
       super(props);
 
-      const params = ParamHelper.parseParamString(props.location.search, [
-        'tab',
-      ]);
+      const params = ParamHelper.parseParamString(props.location.search);
 
       if (!params['tab']) {
         params['tab'] = tabs[0].id;
