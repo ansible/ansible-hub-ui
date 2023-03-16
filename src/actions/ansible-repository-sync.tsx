@@ -9,8 +9,9 @@ export const ansibleRepositorySyncAction = Action({
     const pulpId = parsePulpIDFromURL(pulp_href);
     AnsibleRepositoryAPI.sync(pulpId)
       .then(({ data }) => {
-        const task_id = parsePulpIDFromURL(data.task);
-        addAlert(taskAlert(task_id, t`Sync started for repository "${name}".`));
+        addAlert(
+          taskAlert(data.task, t`Sync started for repository "${name}".`),
+        );
 
         query();
       })

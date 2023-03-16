@@ -29,8 +29,7 @@ export const ansibleRemoteDeleteAction = Action({
 function deleteRemote({ name, pulpId }, { addAlert, setState, query }) {
   return AnsibleRemoteAPI.delete(pulpId)
     .then(({ data }) => {
-      const task_id = parsePulpIDFromURL(data.task);
-      addAlert(taskAlert(task_id, t`Removal started for remote ${name}`));
+      addAlert(taskAlert(data.task, t`Removal started for remote ${name}`));
 
       setState({ deleteModalOpen: null });
       query();

@@ -29,8 +29,7 @@ export const ansibleRepositoryDeleteAction = Action({
 function deleteRepository({ name, pulpId }, { addAlert, setState, query }) {
   return AnsibleRepositoryAPI.delete(pulpId)
     .then(({ data }) => {
-      const task_id = parsePulpIDFromURL(data.task);
-      addAlert(taskAlert(task_id, t`Removal started for repository ${name}`));
+      addAlert(taskAlert(data.task, t`Removal started for repository ${name}`));
 
       setState({ deleteModalOpen: null });
       query();
