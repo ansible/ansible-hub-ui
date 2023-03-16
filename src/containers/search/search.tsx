@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
-  CollectionListType,
   CollectionVersionAPI,
   CollectionVersionSearch,
   MyNamespaceAPI,
@@ -25,7 +24,6 @@ import {
   ImportModal,
   LoadingPageSpinner,
   Pagination,
-  RepoSelector,
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
@@ -53,6 +51,8 @@ interface IState {
     keywords?: string;
     tags?: string[];
     view_type?: string;
+    repository_name?: string;
+    namespace?: string;
   };
   loading: boolean;
   synclist: SyncListType;
@@ -146,7 +146,13 @@ class Search extends React.Component<RouteProps, IState> {
     } = this.state;
     const noData =
       collections.length === 0 &&
-      !filterIsSet(params, ['keywords', 'tags', 'is_signed']);
+      !filterIsSet(params, [
+        'keywords',
+        'tags',
+        'is_signed',
+        'repository_name',
+        'namespace',
+      ]);
 
     const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
@@ -197,16 +203,7 @@ class Search extends React.Component<RouteProps, IState> {
             namespace={updateCollection.collection_version.namespace}
           />
         )}
-        <BaseHeader
-          className='header'
-          title={t`Collections`}
-          contextSelector={
-            <RepoSelector
-              path={Paths.searchByRepo}
-              selectedRepo={this.context.selectedRepo}
-            />
-          }
-        >
+        <BaseHeader className='header' title={t`Collections`}>
           {!noData && (
             <div className='hub-toolbar-wrapper'>
               <div className='toolbar'>
@@ -448,26 +445,26 @@ class Search extends React.Component<RouteProps, IState> {
       });
     };
 
-    MyNamespaceAPI.get(collection.namespace.name, {
-      include_related: 'my_permissions',
-    })
-      .then((value) => {
-        if (
-          value.data.related_fields.my_permissions.includes(
-            'galaxy.upload_to_namespace',
-          )
-        ) {
-          this.setState({
-            updateCollection: collection,
-            showImportModal: true,
-          });
-        } else {
-          addAlert();
-        }
-      })
-      .catch(() => {
-        addAlert();
-      });
+    // MyNamespaceAPI.get(collection.namespace.name, {
+    //   include_related: 'my_permissions',
+    // })
+    //   .then((value) => {
+    //     if (
+    //       value.data.related_fields.my_permissions.includes(
+    //         'galaxy.upload_to_namespace',
+    //       )
+    //     ) {
+    //       this.setState({
+    //         updateCollection: collection,
+    //         showImportModal: true,
+    //       });
+    //     } else {
+    //       addAlert();
+    //     }
+    //   })
+    //   .catch(() => {
+    //     addAlert();
+    //   });
   }
 
   private toggleCollectionSync(name: string, namespace: string) {
@@ -521,7 +518,6 @@ class Search extends React.Component<RouteProps, IState> {
                     {this.renderMenu(true, c)}
                   </>
                 }
-                repo={this.context.selectedRepo}
                 displaySignatures={this.context.featureFlags.display_signatures}
               />
             ))}
@@ -550,8 +546,8 @@ class Search extends React.Component<RouteProps, IState> {
       CollectionVersionAPI.list({
         ...ParamHelper.getReduced(this.state.params, ['view_type']),
         is_deprecated: false,
-        repository_name: this.context.selectedRepo,
         repository_label: '!hide_from_search',
+        is_highest: true,
       }).then((result) => {
         this.setState({
           collections: result.data.data,

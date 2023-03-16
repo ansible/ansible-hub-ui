@@ -24,38 +24,39 @@ export function loadCollection({
   forceReload,
   matchParams,
   navigate,
-  selectedRepo,
   setCollection,
   stateParams,
 }) {
   const { version } = stateParams;
+  const { collection: name, namespace, repo } = matchParams;
+
   CollectionVersionAPI.getCached(
     {
-      repository_name: selectedRepo,
-      namespace: matchParams['namespace'],
-      name: matchParams['collection'],
+      repository_name: repo,
+      namespace,
+      name,
       order_by: '-version',
     },
     forceReload,
-  )
-    .then((collections: CollectionVersionSearch[]) => {
-      const collection = version
-        ? collections.find(
-            ({ collection_version }) => collection_version.version == version,
-          )
-        : collections.find((cv) => cv.is_highest);
+  ).then((collections: CollectionVersionSearch[]) => {
+    const collection = version
+      ? collections.find(
+          ({ collection_version }) => collection_version.version == version,
+        )
+      : collections.find((cv) => cv.is_highest);
 
-      // TODO: cache the content as well
-      CollectionAPI.getContent(
-        matchParams['namespace'],
-        matchParams['collection'],
-        collection.collection_version.version,
-      ).then((res) => {
-        const content = res.data.results[0];
-        setCollection(collections, collection, content);
-      });
-    })
-    .catch(() => {
-      navigate(formatPath(Paths.notFound));
+    console.log(collections);
+    // TODO: cache the content as well
+    CollectionAPI.getContent(
+      namespace,
+      name,
+      collection.collection_version.version,
+    ).then((res) => {
+      const [content] = res.data.results;
+      setCollection(collections, collection, content);
     });
+  });
+  // .catch(() => {
+  //   navigate(formatPath(Paths.notFound));
+  // });
 }

@@ -91,14 +91,14 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const { collection_version: version } = collection;
+    const { collection_version: version, repository } = collection;
 
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: version.namespace,
-          repo: this.context.selectedRepo,
+          repo: repository.name,
         }),
         name: version.namespace,
       },
@@ -106,7 +106,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
         url: formatPath(Paths.collectionByRepo, {
           namespace: version.namespace,
           collection: version.name,
-          repo: this.context.selectedRepo,
+          repo: repository.name,
         }),
         name: version.name,
       },
@@ -135,7 +135,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           }}
           breadcrumbs={breadcrumbs}
           activeTab='dependencies'
-          repo={this.context.selectedRepo}
+          repo={repository.name}
         />
         <Main>
           <section className='body'>
@@ -221,25 +221,25 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
   }
 
   private loadDependencyRepo(dependency_repo) {
-    return CollectionVersionAPI.list({
-      namespace: dependency_repo.namespace,
-      name: dependency_repo.name,
-      version_range: dependency_repo.version_range,
-      page_size: 1,
-    })
-      .then((result) => {
-        dependency_repo.repo = result.data.data[0].repository_list[0];
-        dependency_repo.path = formatPath(Paths.collectionByRepo, {
-          collection: dependency_repo.name,
-          namespace: dependency_repo.namespace,
-          repo: dependency_repo.repo,
-        });
-      })
-      .catch(() => {
-        // do nothing, dependency_repo.path and repo stays empty
-        // this may mean that collection was not found - thus is not in the system.
-        // user will be notified in the list of dependencies rather than alerts
-      });
+    // return CollectionVersionAPI.list({
+    //   namespace: dependency_repo.namespace,
+    //   name: dependency_repo.name,
+    //   version_range: dependency_repo.version_range,
+    //   page_size: 1,
+    // })
+    //   .then((result) => {
+    //     dependency_repo.repo = result.data.data[0].repository_list[0];
+    //     dependency_repo.path = formatPath(Paths.collectionByRepo, {
+    //       collection: dependency_repo.name,
+    //       namespace: dependency_repo.namespace,
+    //       repo: dependency_repo.repo,
+    //     });
+    //   })
+    //   .catch(() => {
+    //     // do nothing, dependency_repo.path and repo stays empty
+    //     // this may mean that collection was not found - thus is not in the system.
+    //     // user will be notified in the list of dependencies rather than alerts
+    //   });
   }
 
   private loadUsedByDependencies() {
@@ -292,7 +292,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
       setCollection: (collections, collection, content) =>
         this.setState({ collections, collection, content }, callback),
       stateParams: this.state.params.version

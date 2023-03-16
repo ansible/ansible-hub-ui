@@ -90,7 +90,29 @@ export const CollectionListItem = ({
         {showNamespace ? (
           <TextContent>
             <Text component={TextVariants.small}>
-              <Trans>Provided by {company}</Trans>
+              <Trans>
+                Provided by&nbsp;
+                <Link
+                  to={formatPath(
+                    // TODO: repository detail page
+                    Paths.ansibleRepositoryDetail,
+                    {
+                      name: repository.name,
+                    },
+                  )}
+                >
+                  {repository.name}
+                </Link>
+                /
+                <Link
+                  to={formatPath(Paths.namespaceByRepo, {
+                    repo: repository.name,
+                    namespace: namespace.name,
+                  })}
+                >
+                  {company}
+                </Link>
+              </Trans>
             </Text>
           </TextContent>
         ) : null}

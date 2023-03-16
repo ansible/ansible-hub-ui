@@ -274,6 +274,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const ignoredParams = [
       'namespace',
+      'repository_name',
       'page',
       'page_size',
       'sort',
@@ -383,13 +384,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           params={tabParams}
           updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
-          contextSelector={
-            <RepoSelector
-              path={this.props.routePath}
-              pathParams={{ namespace: namespace.name }}
-              selectedRepo={this.context.selectedRepo}
-            />
-          }
           filters={
             tab === 'collections' ? (
               <div className='hub-toolbar-wrapper namespace-detail'>
@@ -411,6 +405,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </div>
               </div>
             ) : null
+          }
+          contextSelector={
+            <RepoSelector selectedRepo={this.context.selectedRepo} isDisabled />
           }
         ></PartnerHeader>
         <Main>
@@ -652,6 +649,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenSignModal: false,
     });
 
+    // TODO: use distro base path
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       distro_base_path: this.context.selectedRepo,
@@ -687,7 +685,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     CollectionVersionAPI.list({
       ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
       repository_label: '!hide_from_search',
-      repository_name: this.context.selectedRepo,
+      namespace: this.props.routeParams.namespace,
     }).then((result) => {
       this.setState({
         collections: result.data.data,
@@ -701,7 +699,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       CollectionVersionAPI.list({
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
         repository_label: '!hide_from_search',
-        repository_name: this.context.selectedRepo,
+        namespace: this.props.routeParams.namespace,
+        is_highest: true,
       }),
       NamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',

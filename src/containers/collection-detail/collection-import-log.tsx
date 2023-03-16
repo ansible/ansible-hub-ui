@@ -156,7 +156,6 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
       setCollection: (collections, collection, content) =>
         this.setState({ collections, collection, content }, callback),
       stateParams: this.state.params,

@@ -82,8 +82,7 @@ class CollectionContent extends React.Component<
           <section className='body'>
             <CollectionContentList
               contents={content.contents}
-              collection={collection_version.name}
-              namespace={collection_version.namespace}
+              collection={collection}
               params={params}
               updateParams={(p) => this.updateParams(p)}
             ></CollectionContentList>
@@ -98,7 +97,6 @@ class CollectionContent extends React.Component<
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
       setCollection: (collections, collection, content) => {
         this.setState({ collections, collection, content });
       },

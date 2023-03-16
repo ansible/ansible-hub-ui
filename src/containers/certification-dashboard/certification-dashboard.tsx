@@ -22,7 +22,6 @@ import {
   CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {

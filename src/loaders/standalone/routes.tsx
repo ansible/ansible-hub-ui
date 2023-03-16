@@ -275,7 +275,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       },
       { component: CollectionDetail, path: Paths.collectionByRepo },
       { component: NamespaceDetail, path: Paths.namespaceByRepo },
-      { component: Search, path: Paths.searchByRepo },
+      { component: Search, path: Paths.collections },
       { component: CollectionDocs, path: Paths.collectionDocsPage },
       { component: CollectionDocs, path: Paths.collectionDocsIndex },
       { component: CollectionDocs, path: Paths.collectionContentDocs },

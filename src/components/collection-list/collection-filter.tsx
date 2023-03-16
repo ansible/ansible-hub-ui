@@ -20,6 +20,7 @@ interface IProps {
     page_size?: number;
     tags?: string[];
     view_type?: string;
+    repository_name?: string;
   };
   updateParams: (p) => void;
 }
@@ -35,11 +36,20 @@ export const CollectionFilter = (props: IProps) => {
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures } = context.featureFlags;
   const display_tags = ignoredParams.includes('tags') === false;
+  const display_repos = ignoredParams.includes('repository_name') === false;
 
   const filterConfig = [
     {
       id: 'keywords',
       title: t`Keywords`,
+    },
+    display_repos && {
+      id: 'repository_name',
+      title: t`Repository`,
+    },
+    {
+      id: 'namespace',
+      title: t`Namespace`,
     },
     display_tags && {
       id: 'tags',
@@ -79,6 +89,8 @@ export const CollectionFilter = (props: IProps) => {
                   is_signed: t`sign state`,
                   tags: t`tags`,
                   keywords: t`keywords`,
+                  repository_name: t`repository`,
+                  namespace: t`namespace`,
                 }}
                 niceValues={{
                   is_signed: {

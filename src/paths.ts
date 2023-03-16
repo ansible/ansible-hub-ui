@@ -119,6 +119,7 @@ export enum Paths {
   repositories = '/repositories',
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
+  collections = '/collections',
 }
 
 export const namespaceBreadcrumb = {

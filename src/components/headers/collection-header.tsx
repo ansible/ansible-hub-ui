@@ -412,8 +412,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           contextSelector={
             <RepoSelector
-              path={Paths.searchByRepo}
-              selectedRepo={this.context.selectedRepo}
+              selectedRepo={collection.repository.name}
               isDisabled
             />
           }
@@ -577,11 +576,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   private renderTabs(active) {
-    const { params, repo, collection } = this.props;
+    const { params, collection } = this.props;
     const pathParams = {
       namespace: collection.collection_version.namespace,
       collection: collection.collection_version.name,
-      repo: repo,
+      repo: collection.repository.name,
     };
     const reduced = ParamHelper.getReduced(params, this.ignoreParams);
 
@@ -722,6 +721,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenSignAllModal: false,
     });
 
+    // FIXME: use distor base path
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       distro_base_path: this.context.selectedRepo,
@@ -776,6 +776,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenSignModal: false,
     });
 
+    // FIXME: distor base path
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       distro_base_path: this.context.selectedRepo,
@@ -811,7 +812,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   private deprecate(collection) {
     CollectionAPI.setDeprecation(collection)
-      .then((res: any) => {
+      .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
         return waitForTask(taskId).then(() => {
           const title = !collection.is_deprecated

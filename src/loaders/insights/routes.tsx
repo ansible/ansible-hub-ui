@@ -108,7 +108,7 @@ const routes = [
   },
   { path: Paths.collectionByRepo, component: CollectionDetail },
   { path: Paths.namespaceByRepo, component: NamespaceDetail },
-  { path: Paths.searchByRepo, component: Search },
+  { path: Paths.collections, component: Search },
   { path: Paths.collectionDocsPage, component: CollectionDocs },
   { path: Paths.collectionDocsIndex, component: CollectionDocs },
   {
@@ -126,7 +126,7 @@ const routes = [
   { path: Paths.myImports, component: MyImports },
   { path: Paths.collection, component: CollectionDetail },
   { path: Paths.namespace, component: NamespaceDetail },
-  { path: Paths.search, component: Search },
+  { path: Paths.collections, component: Search },
 ];
 
 /**

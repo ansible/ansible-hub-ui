@@ -84,7 +84,7 @@ class CollectionDetail extends React.Component<
           }
           breadcrumbs={breadcrumbs}
           activeTab='install'
-          repo={this.context.selectedRepo}
+          repo={this.props.routeParams.published}
         />
         <Main>
           <section className='body'>
@@ -113,15 +113,10 @@ class CollectionDetail extends React.Component<
   }
 
   private loadCollections(forceReload) {
-    const { repo, ...routeParams } = this.props.routeParams;
     loadCollection({
       forceReload,
-      matchParams: {
-        repository_name: repo,
-        ...routeParams,
-      },
+      matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
       setCollection: (collections, collection, content) => {
         this.setState({
           collections,
