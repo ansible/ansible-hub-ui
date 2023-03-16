@@ -62,7 +62,7 @@ const DetailsTab = ({ item }: TabProps) => {
         { label: t`Description`, value: item?.description || t`None` },
         {
           label: t`Retained version count`,
-          value: item?.retain_repo_versions ?? t`None`,
+          value: item?.retain_repo_versions ?? t`All`,
         },
         {
           label: t`Distribution`,
