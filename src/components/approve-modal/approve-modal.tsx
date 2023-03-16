@@ -1,6 +1,10 @@
 import { t } from '@lingui/macro';
 import {
   Button,
+  Flex,
+  FlexItem,
+  Label,
+  LabelGroup,
   Modal,
   Spinner,
   Toolbar,
@@ -39,6 +43,7 @@ export const ApproveModal = (props: IProps) => {
     page_size: 10,
     sort: 'name',
   });
+  const [showAllSelected, setShowAllSelected] = useState(false);
 
   function buttonClick() {
     // TODO - waiting for API
@@ -50,14 +55,6 @@ export const ApproveModal = (props: IProps) => {
 
   function closeAlert() {
     setAlerts([]);
-  }
-
-  function selectAll() {
-    setSelectedRepos(repositoryList.map((item) => item.name));
-  }
-
-  function unselectAll() {
-    setSelectedRepos([]);
   }
 
   function changeSelection(name) {
@@ -95,15 +92,40 @@ export const ApproveModal = (props: IProps) => {
       });
   }
 
+  function renderLabels() {
+    const labels = (
+      <>
+        <LabelGroup>
+          {selectedRepos.map((name) => (
+            <>
+              <Label onClose={() => changeSelection(name)}>{name}</Label>{' '}
+            </>
+          ))}
+        </LabelGroup>
+      </>
+    );
+
+    return (
+      <>
+        <Flex>
+          <FlexItem>
+            <b>{t`Selected`}</b>
+          </FlexItem>
+          <FlexItem>{labels}</FlexItem>
+        </Flex>
+      </>
+    );
+  }
+
   useEffect(() => {
     loadRepos();
   }, [params, inputText]);
 
-  const renderTable = () => {
+  function renderTable() {
     const sortTableOptions = {
       headers: [
         {
-          title: t`Repository name`,
+          title: t`Name`,
           type: 'alpha',
           id: 'name',
         },
@@ -132,14 +154,17 @@ export const ApproveModal = (props: IProps) => {
                 }}
                 data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
               >
-                <td>{repo.name}</td>
+                <td>
+                  <div>{repo.name}</div>
+                  <div>{repo.description}</div>
+                </td>
               </CheckboxRow>
             ))}
           </tbody>
         </table>
       </>
     );
-  };
+  }
 
   return (
     <>
@@ -151,7 +176,7 @@ export const ApproveModal = (props: IProps) => {
             variant='primary'
             isDisabled={selectedRepos.length == 0}
           >
-            {t`Confirm`}
+            {t`Select`}
           </Button>,
           <Button key='cancel' onClick={props.closeAction} variant='link'>
             {t`Cancel`}
@@ -159,12 +184,11 @@ export const ApproveModal = (props: IProps) => {
         ]}
         isOpen={true}
         onClose={props.closeAction}
-        title={t`Choose repositories`}
-        titleIconVariant='warning'
+        title={t`Select repositories`}
         variant='large'
       >
         <section className='modal-body' data-cy='modal-body'>
-          {t`Collection will be moved to all of the selected repositories.`}
+          {renderLabels()}
           <div className='toolbar hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
@@ -204,12 +228,7 @@ export const ApproveModal = (props: IProps) => {
               ignoredParams={['page_size', 'page', 'sort']}
             />
           </div>
-          <Button key='selectAll' onClick={selectAll} variant='link'>
-            {t`Select all`}
-          </Button>
-          <Button key='unselectAll' onClick={unselectAll} variant='link'>
-            {t`Unselect all`}
-          </Button>
+
           {loading ? <Spinner /> : renderTable()}
 
           <div className='footer'>

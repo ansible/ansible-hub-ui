@@ -1,5 +1,6 @@
 export interface Repository {
   name: string;
+  description: string;
   pulp_href: string;
   pulp_created: string;
   versions_href: string;
