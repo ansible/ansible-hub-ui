@@ -26,7 +26,6 @@ import {
   RepoSigningUtils,
   RouteProps,
   canSignEE,
-  parsePulpIDFromURL,
   taskAlert,
   waitForTask,
 } from 'src/utilities';
@@ -361,10 +360,12 @@ export function withContainerRepo(WrappedComponent) {
 
     private sync(name) {
       ExecutionEnvironmentRemoteAPI.sync(name)
-        .then((result) => {
-          const task_id = parsePulpIDFromURL(result.data.task);
+        .then(({ data }) => {
           this.addAlertObj(
-            taskAlert(task_id, t`Sync started for remote registry "${name}".`),
+            taskAlert(
+              data.task,
+              t`Sync started for remote registry "${name}".`,
+            ),
           );
           this.loadRepo();
         })

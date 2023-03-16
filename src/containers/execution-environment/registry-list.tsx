@@ -39,7 +39,6 @@ import {
   lastSyncStatus,
   lastSynced,
   mapErrorMessages,
-  parsePulpIDFromURL,
   taskAlert,
   withRouter,
 } from 'src/utilities';
@@ -488,10 +487,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private syncRegistry({ id, name }) {
     ExecutionEnvironmentRegistryAPI.sync(id)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
+      .then(({ data }) => {
         this.addAlertObj(
-          taskAlert(task_id, t`Sync started for remote registry "${name}".`),
+          taskAlert(data.task, t`Sync started for remote registry "${name}".`),
         );
         this.queryRegistries(true);
       })
@@ -507,11 +505,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private indexRegistry({ id, name }) {
     ExecutionEnvironmentRegistryAPI.index(id)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
+      .then(({ data }) => {
         this.addAlertObj(
           taskAlert(
-            task_id,
+            data.task,
             t`Indexing started for execution environment "${name}".`,
             'success',
           ),

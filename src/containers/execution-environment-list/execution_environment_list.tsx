@@ -43,7 +43,6 @@ import {
   ParamHelper,
   RouteProps,
   filterIsSet,
-  parsePulpIDFromURL,
   taskAlert,
   withRouter,
 } from 'src/utilities';
@@ -526,11 +525,10 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
   private sync(name) {
     ExecutionEnvironmentRemoteAPI.sync(name)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
+      .then(({ data }) => {
         this.addAlertObj(
           taskAlert(
-            task_id,
+            data.task,
             t`Sync started for execution environment "${name}".`,
           ),
         );
