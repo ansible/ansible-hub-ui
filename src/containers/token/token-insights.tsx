@@ -97,8 +97,8 @@ class TokenPage extends React.Component<RouteProps, IState> {
             <p>
               <Trans>
                 Use the{' '}
-                <Link to={formatPath(Paths.repositories)}>
-                  Repository Management
+                <Link to={formatPath(Paths.ansibleRepositories)}>
+                  Repositories
                 </Link>{' '}
                 page to sync collections curated by your organization to the Red
                 Hat Certified repository in your private Automation Hub. Users

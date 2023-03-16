@@ -3,6 +3,25 @@ import { Route, Routes } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
 import { Paths } from 'src/paths';
 
+const AnsibleRemoteDetail = lazy(
+  () => import('src/containers/ansible-remote/detail'),
+);
+const AnsibleRemoteEdit = lazy(
+  () => import('src/containers/ansible-remote/edit'),
+);
+const AnsibleRemoteList = lazy(
+  () => import('src/containers/ansible-remote/list'),
+);
+const AnsibleRepositoryDetail = lazy(
+  () => import('src/containers/ansible-repository/detail'),
+);
+const AnsibleRepositoryEdit = lazy(
+  () => import('src/containers/ansible-repository/edit'),
+);
+const AnsibleRepositoryList = lazy(
+  () => import('src/containers/ansible-repository/list'),
+);
+
 const CertificationDashboard = lazy(
   () =>
     import('src/containers/certification-dashboard/certification-dashboard'),
@@ -72,6 +91,12 @@ const TokenPage = lazy(() => import('src/containers/token/token-insights'));
 
 const routes = [
   { path: Paths.repositories, component: RepositoryList },
+  { path: Paths.ansibleRemoteDetail, component: AnsibleRemoteDetail },
+  { path: Paths.ansibleRemoteEdit, component: AnsibleRemoteEdit },
+  { path: Paths.ansibleRemotes, component: AnsibleRemoteList },
+  { path: Paths.ansibleRepositories, component: AnsibleRepositoryList },
+  { path: Paths.ansibleRepositoryDetail, component: AnsibleRepositoryDetail },
+  { path: Paths.ansibleRepositoryEdit, component: AnsibleRepositoryEdit },
   {
     path: Paths.approvalDashboard,
     component: CertificationDashboard,
