@@ -4,7 +4,7 @@ import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRemote: AnsibleRemoteType = {
   name: '',
@@ -94,12 +94,21 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
           );
 
       promise
-        .then(() => {
+        .then(({ data: task }) => {
           setState({
             errorMessages: {},
             remoteToEdit: undefined,
           });
-          // TODO context addAlert, task variant on update
+
+          queueAlert(
+            item
+              ? taskAlert(task, t`Update started for remote ${data.name}`)
+              : {
+                  variant: 'success',
+                  title: t`Successfully created remote ${data.name}`,
+                },
+          );
+
           navigate(
             formatPath(Paths.ansibleRemoteDetail, {
               name: data.name,

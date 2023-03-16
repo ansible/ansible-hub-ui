@@ -8,7 +8,7 @@ import {
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRepository: AnsibleRepositoryType = {
   name: '',
@@ -107,27 +107,52 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
         delete data.pulp_labels.pipeline;
       }
 
-      const promise = !item
-        ? AnsibleRepositoryAPI.create(data)
-        : AnsibleRepositoryAPI.update(parsePulpIDFromURL(item.pulp_href), data);
+      let promise = !item
+        ? AnsibleRepositoryAPI.create(data).then(({ data: newData }) => {
+            queueAlert({
+              variant: 'success',
+              title: t`Successfully created repository ${data.name}`,
+            });
+
+            return newData.pulp_href;
+          })
+        : AnsibleRepositoryAPI.update(
+            parsePulpIDFromURL(item.pulp_href),
+            data,
+          ).then(({ data: task }) => {
+            queueAlert(
+              taskAlert(task, t`Update started for repository ${data.name}`),
+            );
+
+            return item.pulp_href;
+          });
+
+      if (createDistribution) {
+        promise = promise
+          .then((pulp_href) =>
+            AnsibleDistributionAPI.create({
+              name: data.name,
+              base_path: data.name,
+              repository: pulp_href,
+            }),
+          )
+          .then(({ data: task }) =>
+            queueAlert(
+              taskAlert(
+                task,
+                t`Creation started for distribution ${data.name}`,
+              ),
+            ),
+          );
+      }
 
       promise
-        .then(
-          createDistribution
-            ? ({ data: newData }) =>
-                AnsibleDistributionAPI.create({
-                  name: data.name,
-                  base_path: data.name,
-                  repository: newData.pulp_href,
-                })
-            : () => null,
-        )
         .then(() => {
           setState({
             errorMessages: {},
             repositoryToEdit: undefined,
           });
-          // TODO context addAlert, task variant on update?
+
           navigate(
             formatPath(Paths.ansibleRepositoryDetail, {
               name: data.name,
