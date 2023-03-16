@@ -176,6 +176,9 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         this.query();
       }
 
+      this.setState({ alerts: this.context.alerts || [] });
+      this.context.setAlerts([]);
+
       if (didMount) {
         didMount({
           context: this.context,
@@ -199,11 +202,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
+        hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
+        queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        hasPermission: this.context.hasPermission,
       };
 
       return (

@@ -41,7 +41,7 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
     name: name !== '_' ? name : null,
   }),
 
-  render: (item, { navigate, state, setState }) => {
+  render: (item, { navigate, queueAlert, state, setState }) => {
     if (!state.repositoryToEdit) {
       const repositoryToEdit = {
         ...initialRepository,

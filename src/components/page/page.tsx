@@ -107,6 +107,9 @@ export const Page = function <
         this.query();
       }
 
+      this.setState({ alerts: this.context.alerts || [] });
+      this.context.setAlerts([]);
+
       if (didMount) {
         didMount({
           context: this.context,
@@ -121,11 +124,12 @@ export const Page = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
+        hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
+        queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        hasPermission: this.context.hasPermission,
       };
 
       const name = item?.name || transformParams(routeParams)?.name || null;

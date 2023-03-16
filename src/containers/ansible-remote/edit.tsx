@@ -49,7 +49,7 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
     name: name !== '_' ? name : null,
   }),
 
-  render: (item, { navigate, state, setState }) => {
+  render: (item, { navigate, queueAlert, state, setState }) => {
     if (!state.remoteToEdit) {
       const remoteToEdit = {
         ...initialRemote,
@@ -108,7 +108,10 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
         })
         .catch(({ response: { data } }) =>
           setState({
-            errorMessages: { __nofield: data.non_field_errors, ...data },
+            errorMessages: {
+              __nofield: data.non_field_errors || data.detail,
+              ...data,
+            },
           }),
         );
     };
