@@ -69,10 +69,6 @@ const NotFound = lazy(() => import('src/containers/not-found/not-found'));
 
 const Partners = lazy(() => import('src/containers/namespace-list/partners'));
 
-const RepositoryList = lazy(
-  () => import('src/containers/repositories/repository-list'),
-);
-
 const Search = lazy(() => import('src/containers/search/search'));
 
 const SignatureKeysList = lazy(
@@ -90,7 +86,6 @@ const TaskListView = lazy(
 const TokenPage = lazy(() => import('src/containers/token/token-insights'));
 
 const routes = [
-  { path: Paths.repositories, component: RepositoryList },
   { path: Paths.ansibleRemoteDetail, component: AnsibleRemoteDetail },
   { path: Paths.ansibleRemoteEdit, component: AnsibleRemoteEdit },
   { path: Paths.ansibleRemotes, component: AnsibleRemoteList },

@@ -51,10 +51,6 @@ function standaloneMenu() {
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
       }),
-      menuItem(t`Repository Management`, {
-        condition: isLoggedIn,
-        url: formatPath(Paths.repositories),
-      }),
       menuItem(t`Repositories`, {
         condition: canViewAnsibleRepositories,
         url: formatPath(Paths.ansibleRepositories),
