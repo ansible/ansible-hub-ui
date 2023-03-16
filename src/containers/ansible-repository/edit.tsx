@@ -14,6 +14,8 @@ const initialRepository: AnsibleRepositoryType = {
   name: '',
   description: '',
   retain_repo_versions: 1,
+  pulp_labels: {},
+  remote: null,
 };
 
 export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
@@ -66,17 +68,12 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
 
       const data = { ...repositoryToEdit };
 
-      if (!item) {
-        // prevent "This field may not be blank." when writing in and then deleting username/password/etc
-        // only when creating, edit diffs with item
-        Object.keys(data).forEach((k) => {
-          if (data[k] === '' || data[k] == null) {
-            delete data[k];
-          }
-        });
-      }
-      // TODO update cant remove description, use ^
-      // TODO default retain null, not 1
+      // prevent "This field may not be blank." for nullable fields
+      Object.keys(data).forEach((k) => {
+        if (data[k] === '') {
+          data[k] = null;
+        }
+      });
 
       if (item) {
         delete data.last_sync_task;
