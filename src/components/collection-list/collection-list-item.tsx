@@ -93,13 +93,9 @@ export const CollectionListItem = ({
               <Trans>
                 Provided by&nbsp;
                 <Link
-                  to={formatPath(
-                    // TODO: repository detail page
-                    Paths.ansibleRepositoryDetail,
-                    {
-                      name: repository.name,
-                    },
-                  )}
+                  to={formatPath(Paths.ansibleRepositoryDetail, {
+                    name: repository.name,
+                  })}
                 >
                   {repository.name}
                 </Link>

@@ -38,25 +38,24 @@ export function loadCollection({
       order_by: '-version',
     },
     forceReload,
-  ).then((collections: CollectionVersionSearch[]) => {
-    const collection = version
-      ? collections.find(
-          ({ collection_version }) => collection_version.version == version,
-        )
-      : collections.find((cv) => cv.is_highest);
+  )
+    .then((collections: CollectionVersionSearch[]) => {
+      const collection = version
+        ? collections.find(
+            ({ collection_version }) => collection_version.version == version,
+          )
+        : collections.find((cv) => cv.is_highest);
 
-    console.log(collections);
-    // TODO: cache the content as well
-    CollectionAPI.getContent(
-      namespace,
-      name,
-      collection.collection_version.version,
-    ).then((res) => {
-      const [content] = res.data.results;
-      setCollection(collections, collection, content);
+      CollectionAPI.getContent(
+        namespace,
+        name,
+        collection.collection_version.version,
+      ).then((res) => {
+        const [content] = res.data.results;
+        setCollection(collections, collection, content);
+      });
+    })
+    .catch(() => {
+      navigate(formatPath(Paths.notFound));
     });
-  });
-  // .catch(() => {
-  //   navigate(formatPath(Paths.notFound));
-  // });
 }

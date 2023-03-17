@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { Repositories } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
@@ -20,32 +21,53 @@ interface IProps {
     page_size?: number;
     tags?: string[];
     view_type?: string;
-    repository_name?: string;
+    repository__name?: string;
   };
   updateParams: (p) => void;
 }
 
 export const CollectionFilter = (props: IProps) => {
   const context = useContext();
-  const [inputText, setInputText] = useState(props.params.keywords || '');
+  const [repositories, setRepositories] = useState([]);
+  const [inputText, setInputText] = useState('');
 
   useEffect(() => {
     setInputText(props.params['keywords'] || '');
   }, [props.params.keywords]);
 
+  useEffect(() => {
+    setInputText(props.params['repository__name'] || '');
+  }, [props.params.repository__name]);
+
+  useEffect(() => {
+    if (inputText != '') {
+      Repositories.list({
+        name__icontains: inputText,
+      }).then((res) => {
+        const repos = res.data.results.map(({ name }) => ({
+          id: name,
+          title: name,
+        }));
+        setRepositories(repos);
+      });
+    }
+  }, [inputText]);
+
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures } = context.featureFlags;
   const display_tags = ignoredParams.includes('tags') === false;
-  const display_repos = ignoredParams.includes('repository_name') === false;
+  const display_repos = ignoredParams.includes('repository__name') === false;
 
   const filterConfig = [
+    display_repos && {
+      id: 'repository__name',
+      title: t`Repository`,
+      inputType: 'typeahead' as const,
+      options: repositories,
+    },
     {
       id: 'keywords',
       title: t`Keywords`,
-    },
-    display_repos && {
-      id: 'repository_name',
-      title: t`Repository`,
     },
     {
       id: 'namespace',
@@ -89,7 +111,7 @@ export const CollectionFilter = (props: IProps) => {
                   is_signed: t`sign state`,
                   tags: t`tags`,
                   keywords: t`keywords`,
-                  repository_name: t`repository`,
+                  repository__name: t`repository`,
                   namespace: t`namespace`,
                 }}
                 niceValues={{

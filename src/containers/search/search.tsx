@@ -51,7 +51,7 @@ interface IState {
     keywords?: string;
     tags?: string[];
     view_type?: string;
-    repository_name?: string;
+    repository__name?: string;
     namespace?: string;
   };
   loading: boolean;
@@ -150,7 +150,7 @@ class Search extends React.Component<RouteProps, IState> {
         'keywords',
         'tags',
         'is_signed',
-        'repository_name',
+        'repository__name',
         'namespace',
       ]);
 

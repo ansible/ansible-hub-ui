@@ -274,7 +274,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const ignoredParams = [
       'namespace',
-      'repository_name',
+      'repository__name',
       'page',
       'page_size',
       'sort',
@@ -631,6 +631,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private signAllCertificates(namespace: NamespaceType) {
+    // get the repository from first collection
+    // all collections are in same repo, so this should be fine.
+    const [collection] = this.state.collections;
+
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
       title: t`Failed to sign all collections.`,
@@ -649,11 +653,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenSignModal: false,
     });
 
-    // TODO: use distro base path
+    const { name } = collection.collection_version;
+
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      distro_base_path: this.context.selectedRepo,
+      repository: collection.repository,
       namespace: namespace.name,
+      collection: name,
     })
       .then((result) => {
         waitForTask(result.data.task_id)

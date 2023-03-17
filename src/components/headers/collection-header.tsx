@@ -721,10 +721,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenSignAllModal: false,
     });
 
-    // FIXME: use distor base path
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      distro_base_path: this.context.selectedRepo,
+      repository: this.props.collection.repository,
       namespace: namespace,
       collection: name,
     })
@@ -776,10 +775,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenSignModal: false,
     });
 
-    // FIXME: distor base path
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      distro_base_path: this.context.selectedRepo,
+      repository: this.props.collection.repository,
       namespace: namespace,
       collection: name,
       version: version,
