@@ -32,6 +32,28 @@ class API extends PulpAPI {
   list(params?) {
     return super.list(params, this.apiPath);
   }
+
+  copyCollectionVersion(
+    pulp_id: string,
+    collection_versions: string[],
+    destination_repositories: string[],
+    signing_service?: string,
+  ) {
+    let params = {
+      collection_versions,
+      destination_repositories,
+    };
+    if (signing_service) {
+      params['signing_service'] = signing_service;
+    }
+
+    debugger;
+
+    return this.http.post(
+      this.apiPath + `${pulp_id}/copy_collection_version/`,
+      params,
+    );
+  }
 }
 
 export const Repositories = new API();

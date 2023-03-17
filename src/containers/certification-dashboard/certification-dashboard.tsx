@@ -57,6 +57,7 @@ import {
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
+import repositoryList from '../repositories/repository-list';
 import './certification-dashboard.scss';
 
 interface IState {
@@ -272,6 +273,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   this.state.approveModalInfo.collectionVersion
                 }
                 addAlert={(alert) => this.addAlertObj(alert)}
+                allRepositories={this.state.repositoryList}
               />
             )}
           </Main>
@@ -631,6 +633,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       this.setState({ approveModalInfo: { collectionVersion: version } });
     }
   }
+
+  /* public approveAll( params : { collectionVersion : CollectionVersion, destination_repos: string[], signing_service : string, errorAlert, modalClose, setLoading } )
+  {
+    debugger;
+    
+  }*/
 
   private reject(version) {
     // test

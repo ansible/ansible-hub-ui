@@ -12,7 +12,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { CollectionVersion, Repositories } from 'src/api';
+import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
@@ -23,12 +23,17 @@ import {
   Pagination,
   SortTable,
 } from 'src/components';
-import { errorMessage } from 'src/utilities';
+import {
+  errorMessage,
+  parsePulpIDFromURL,
+  waitForTaskUrl,
+} from 'src/utilities';
 
 interface IProps {
   closeAction: () => void;
   collectionVersion: CollectionVersion;
   addAlert: (alert) => void;
+  allRepositories: Repository[];
 }
 
 export const ApproveModal = (props: IProps) => {
@@ -43,10 +48,83 @@ export const ApproveModal = (props: IProps) => {
     page_size: 10,
     sort: 'name',
   });
-  const [showAllSelected, setShowAllSelected] = useState(false);
 
   function buttonClick() {
-    // TODO - waiting for API
+    function failedToLoadRepo(status?, statusText?) {
+      setLoading(false);
+      addAlert({
+        title: t`Failed to load pulp_id of collection repository.`,
+        variant: 'danger',
+        description: errorMessage(status, statusText),
+      });
+    }
+    /*props.approveAll( 
+        { 
+            collectionVersion : props.collectionVersion, 
+            destination_repos : selectedRepos, 
+            errorAlert : (alert) => this.addAlert(alert), 
+            modalClose : () => props.closeAction(), 
+            setLoading 
+        });*/
+
+    setLoading(true);
+    const repoName = props.collectionVersion.repository_list[0];
+    const repositoriesRef = props.allRepositories
+      .filter((repo) => selectedRepos.includes(repo.name))
+      .map((repo) => repo.pulp_href);
+
+    Repositories.getRepository({ name: repoName })
+      .then((data) => {
+        if (data.data.results.length == 0) {
+          failedToLoadRepo('', t`Repository name ${repoName} not found.`);
+        } else {
+          const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
+
+          // load collection version
+          debugger;
+          CollectionVersionAPI.get(props.collectionVersion.id)
+            .then((data) => {
+              debugger;
+
+              Repositories.copyCollectionVersion(
+                pulp_id,
+                [data.data.pulp_href],
+                repositoriesRef,
+              )
+                .then((task) => {
+                  debugger;
+                  return waitForTaskUrl(task.data.task);
+                })
+                .then((data) => {
+                  props.closeAction();
+                  props.addAlert({
+                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
+                    variant: 'success',
+                    description: '',
+                  });
+                })
+                .catch(({ response: { status, statusText } }) => {
+                  setLoading(false);
+                  addAlert({
+                    title: t`Failed to approve collection.`,
+                    variant: 'danger',
+                    description: errorMessage(status, statusText),
+                  });
+                });
+            })
+            .catch(({ response: { status, statusText } }) => {
+              setLoading(false);
+              addAlert({
+                title: t`Failed to load collection version ${props.collectionVersion.name}.`,
+                variant: 'danger',
+                description: errorMessage(status, statusText),
+              });
+            });
+        }
+      })
+      .catch(({ response: { status, statusText } }) => {
+        failedToLoadRepo(status, statusText);
+      });
   }
 
   function addAlert(alert: AlertType) {
