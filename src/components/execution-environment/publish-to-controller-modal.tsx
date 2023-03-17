@@ -13,12 +13,11 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   APISearchTypeAhead,
   AlertList,
-  AlertType,
   AppliedFilters,
   CompoundFilter,
   EmptyStateFilter,
@@ -26,7 +25,7 @@ import {
   LoadingPageSpinner,
   Pagination,
   ShaLabel,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { errorMessage, filterIsSet, getContainersURL } from 'src/utilities';
 
@@ -36,25 +35,6 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   tag?: string;
-}
-
-interface IState {
-  alerts: AlertType[];
-  controllers: string[];
-  controllerCount: number;
-  controllerParams: {
-    page: number;
-    page_size: number;
-    host__icontains?: string;
-  };
-  digest?: string;
-  digestByTag: { [key: string]: string };
-  loading: boolean;
-  tag?: string;
-  tagResults: { name: string; id: string }[];
-  tagSelection: { name: string; id: string }[];
-  tags: { tag: string; digest: string }[];
-  inputText: string;
 }
 
 const initialState = {
@@ -68,60 +48,80 @@ const initialState = {
   tag: null,
   tagResults: [],
   tagSelection: [],
-  tags: [],
   inputText: '',
 };
 
-export class PublishToControllerModal extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
+export const PublishToControllerModal = (props: IProps) => {
+  const [alerts, setAlerts] = useState(initialState.alerts);
+  const [controllers, setControllers] = useState(initialState.controllers);
+  const [controllerCount, setControllerCount] = useState(
+    initialState.controllerCount,
+  );
+  const [controllerParams, setControllerParams] = useState(
+    initialState.controllerParams,
+  );
+  const [digest, setDigest] = useState(initialState.digest);
+  const [digestByTag, setDigestByTag] = useState(initialState.digestByTag);
+  const [loading, setLoading] = useState(initialState.loading);
+  const [tag, setTag] = useState(initialState.tag);
+  const [tagResults, setTagResults] = useState(initialState.tagResults);
+  const [tagSelection, setTagSelection] = useState(initialState.tagSelection);
 
-    this.state = initialState;
-  }
+  const [inputText, setInputText] = useState(initialState.inputText);
 
-  componentDidUpdate(prevProps) {
-    const { image, isOpen } = this.props;
+  useEffect(() => {
+    const { image, isOpen } = props;
+    if (isOpen) {
+      // load on open
+      fetchData(image);
+    } else {
+      // reset on close
+      setAlerts(initialState.alerts);
+      setControllers(initialState.controllers);
+      setControllerCount(initialState.controllerCount);
+      setControllerParams(initialState.controllerParams);
+      setDigest(initialState.digest);
+      setDigestByTag(initialState.digestByTag);
+      setLoading(initialState.loading);
+      setTag(initialState.tag);
+      setTagResults(initialState.tagResults);
+      setTagSelection(initialState.tagSelection);
 
-    if (isOpen !== prevProps.isOpen) {
-      if (isOpen) {
-        // load on open
-        this.fetchData(image);
-      } else {
-        // reset on close
-        this.setState(initialState);
-      }
+      setInputText(initialState.inputText);
     }
-  }
+  }, [props.isOpen]);
 
-  fetchControllers() {
-    const { controllerParams: params } = this.state;
-    return ControllerAPI.list(params)
+  useEffect(() => {
+    fetchControllers();
+  }, [controllerParams]);
+
+  function fetchControllers() {
+    return ControllerAPI.list(controllerParams)
       .then(({ data }) => {
         const controllers = data.data.map((c) => c.host);
         const controllerCount = data.meta.count;
 
-        this.setState({ controllers, controllerCount });
+        setControllers(controllers);
+        setControllerCount(controllerCount);
 
         return controllers;
       })
       .catch((e) => {
         const { status, statusText } = e.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Controllers list could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
+        setAlerts([
+          ...alerts,
+          {
+            variant: 'danger',
+            title: t`Controllers list could not be displayed.`,
+            description: errorMessage(status, statusText),
+          },
+        ]);
       });
   }
 
-  fetchTags(image, name?) {
+  function fetchTags(image, name?) {
     // filter tags by digest when provided from Images list
-    const { digest } = this.props;
+    const { digest } = props;
 
     return ExecutionEnvironmentAPI.tags(image, {
       sort: '-created_at',
@@ -138,52 +138,48 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
         const tagResults = tags.map(({ tag }) => ({ id: tag, name: tag }));
 
-        this.setState({
-          digestByTag,
-          tagResults,
-          tags,
-        });
+        setDigestByTag(digestByTag);
+        setTagResults(tagResults);
 
-        return tags;
+        return { digestByTag, tags };
       })
       .catch((e) => {
         const { status, statusText } = e.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Tags could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
+        setAlerts([
+          ...alerts,
+          {
+            variant: 'danger',
+            title: t`Tags could not be displayed.`,
+            description: errorMessage(status, statusText),
+          },
+        ]);
       });
   }
 
-  fetchData(image) {
-    const controllers = this.fetchControllers();
-    const tags = this.fetchTags(image).then(() => {
-      // preselect tag if present
-      let { digest, tag } = this.props;
-      tag ||= this.state.tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
-      digest ||= this.state.digestByTag[tag]; // set digest by tag unless in props
+  function fetchData(image) {
+    const controllers = fetchControllers();
+    const tagsPromises = fetchTags(image).then(({ tags, digestByTag }) => {
+      // tags and digestByTag must be passed this way from fetchTags, otherwise, closure
+      // will see old value of both variables set in fetchTags
+      // and additionaly, tags state is not needed at all because of that
 
-      this.setState({
-        digest,
-        tag,
-        tagSelection: tag ? [{ id: tag, name: tag }] : [],
-      });
+      // preselect tag if present
+      let { digest, tag } = props;
+      tag ||= tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
+      digest ||= digestByTag[tag]; // set digest by tag unless in props
+
+      setDigest(digest);
+      setTag(tag);
+      setTagSelection(tag ? [{ id: tag, name: tag }] : []);
     });
 
-    Promise.all([controllers, tags]).then(() =>
-      this.setState({ loading: false }),
-    );
+    Promise.all([controllers, tagsPromises]).then(() => {
+      setLoading(false);
+    });
   }
 
-  renderControllers() {
-    const { image, isOpen } = this.props;
-    const { controllers, digest, tag } = this.state;
+  function renderControllers() {
+    const { image, isOpen } = props;
     const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     if (!isOpen || !controllers) {
@@ -239,206 +235,180 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     );
   }
 
-  render() {
-    const { image, isOpen, onClose } = this.props;
-    const {
-      alerts,
-      controllers,
-      controllerCount,
-      controllerParams,
-      loading,
-      digest,
-      digestByTag,
-      tagResults,
-      tagSelection,
-    } = this.state;
+  const { image, isOpen, onClose } = props;
 
-    const docsLink =
-      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1';
+  const docsLink =
+    'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1';
 
-    const noData =
-      controllers?.length === 0 &&
-      !filterIsSet(controllerParams, ['host__icontains']);
+  const noData =
+    controllers?.length === 0 &&
+    !filterIsSet(controllerParams, ['host__icontains']);
 
-    const notListedMessage = (
-      <>
-        {t`If the Controller is not listed in the table, check settings.py.`}{' '}
-        {docsLink && (
-          <>
-            <a href={docsLink} target='_blank' rel='noreferrer'>
-              {t`Learn more`}
-            </a>{' '}
-            <ExternalLinkAltIcon />
-          </>
-        )}
-      </>
-    );
+  const notListedMessage = (
+    <>
+      {t`If the Controller is not listed in the table, check settings.py.`}{' '}
+      {docsLink && (
+        <>
+          <a href={docsLink} target='_blank' rel='noreferrer'>
+            {t`Learn more`}
+          </a>{' '}
+          <ExternalLinkAltIcon />
+        </>
+      )}
+    </>
+  );
 
-    const Spacer = () => <div style={{ paddingTop: '24px' }}></div>;
-    const unsafeLinksSupported = !Object.keys(window).includes('chrome');
+  const Spacer = () => <div style={{ paddingTop: '24px' }}></div>;
+  const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
-    return (
-      <Modal
-        variant='large'
-        title={t`Use in Controller`}
-        isOpen={isOpen}
-        onClose={onClose}
-        actions={[
-          <Button key='close' variant='primary' onClick={onClose}>
-            {t`Close`}
-          </Button>,
-        ]}
-      >
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
-        {loading && (
-          <div style={{ padding: '16px' }}>
-            <LoadingPageSpinner />
-          </div>
-        )}
-        {noData && !loading ? (
-          <EmptyStateNoData
-            title={t`No Controllers available`}
-            description={notListedMessage}
-          />
-        ) : null}
+  return (
+    <Modal
+      variant='large'
+      title={t`Use in Controller`}
+      isOpen={isOpen}
+      onClose={onClose}
+      actions={[
+        <Button key='close' variant='primary' onClick={onClose}>
+          {t`Close`}
+        </Button>,
+      ]}
+    >
+      <AlertList
+        alerts={alerts}
+        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+      ></AlertList>
+      {loading && (
+        <div style={{ padding: '16px' }}>
+          <LoadingPageSpinner />
+        </div>
+      )}
+      {noData && !loading ? (
+        <EmptyStateNoData
+          title={t`No Controllers available`}
+          description={notListedMessage}
+        />
+      ) : null}
 
-        {isOpen && !loading && !noData && controllers && (
-          <>
-            <DescriptionList isHorizontal>
-              <DescriptionListGroup>
-                <DescriptionListTerm>
-                  {t`Execution Environment`}
-                </DescriptionListTerm>
-                <DescriptionListDescription>{image}</DescriptionListDescription>
-              </DescriptionListGroup>
-              <DescriptionListGroup>
-                <DescriptionListTerm>{t`Tag`}</DescriptionListTerm>
-                <DescriptionListDescription>
-                  <Flex>
-                    <FlexItem>
-                      <APISearchTypeAhead
-                        loadResults={(name) => this.fetchTags(image, name)}
-                        onClear={() =>
-                          this.setState({ tag: null, tagSelection: [] })
-                        }
-                        onSelect={(event, value) => {
-                          const digest = digestByTag[value.toString()];
-                          this.setState({
-                            tag: digest && value.toString(),
-                            tagSelection: [{ id: value, name: value }],
-                            digest,
-                          });
-                        }}
-                        placeholderText={t`Select a tag`}
-                        results={tagResults}
-                        selections={tagSelection}
-                        toggleIcon={<TagIcon />}
-                      />
-                    </FlexItem>
-                    <FlexItem></FlexItem>
-                  </Flex>
-                </DescriptionListDescription>
-              </DescriptionListGroup>
-              {digest && (
-                <>
-                  <DescriptionListGroup>
-                    <DescriptionListTerm>{t`Digest`}</DescriptionListTerm>
-                    <DescriptionListDescription>
-                      <ShaLabel grey long digest={digest} />
-                    </DescriptionListDescription>
-                  </DescriptionListGroup>
-                </>
-              )}
-            </DescriptionList>
-            <Spacer />
-            <Trans>
-              Click on the Controller URL that you want to use the above
-              execution environment in, and it will launch that
-              Controller&apos;s console. Log in (if necessary) and follow the
-              steps to complete the configuration.
-            </Trans>
-            <br />
-            {!unsafeLinksSupported && (
-              <Trans>
-                <b>Note:</b> The following links may be blocked by your browser.
-                Copy and paste the external link manually.
-              </Trans>
+      {isOpen && !loading && !noData && controllers && (
+        <>
+          <DescriptionList isHorizontal>
+            <DescriptionListGroup>
+              <DescriptionListTerm>
+                {t`Execution Environment`}
+              </DescriptionListTerm>
+              <DescriptionListDescription>{image}</DescriptionListDescription>
+            </DescriptionListGroup>
+            <DescriptionListGroup>
+              <DescriptionListTerm>{t`Tag`}</DescriptionListTerm>
+              <DescriptionListDescription>
+                <Flex>
+                  <FlexItem>
+                    <APISearchTypeAhead
+                      loadResults={(name) => fetchTags(image, name)}
+                      onClear={() => {
+                        setTag(null);
+                        setTagSelection([]);
+                      }}
+                      onSelect={(event, value) => {
+                        const digest = digestByTag[value.toString()];
+                        setTag(digest && value.toString());
+                        setTagSelection([{ id: value, name: value }]);
+                        setDigest(digest);
+                      }}
+                      placeholderText={t`Select a tag`}
+                      results={tagResults}
+                      selections={tagSelection}
+                      toggleIcon={<TagIcon />}
+                    />
+                  </FlexItem>
+                  <FlexItem></FlexItem>
+                </Flex>
+              </DescriptionListDescription>
+            </DescriptionListGroup>
+            {digest && (
+              <>
+                <DescriptionListGroup>
+                  <DescriptionListTerm>{t`Digest`}</DescriptionListTerm>
+                  <DescriptionListDescription>
+                    <ShaLabel grey long digest={digest} />
+                  </DescriptionListDescription>
+                </DescriptionListGroup>
+              </>
             )}
-            <Spacer />
+          </DescriptionList>
+          <Spacer />
+          <Trans>
+            Click on the Controller URL that you want to use the above execution
+            environment in, and it will launch that Controller&apos;s console.
+            Log in (if necessary) and follow the steps to complete the
+            configuration.
+          </Trans>
+          <br />
+          {!unsafeLinksSupported && (
+            <Trans>
+              <b>Note:</b> The following links may be blocked by your browser.
+              Copy and paste the external link manually.
+            </Trans>
+          )}
+          <Spacer />
 
-            <Flex>
-              <FlexItem>
-                <CompoundFilter
-                  inputText={this.state.inputText}
-                  onChange={(text) => this.setState({ inputText: text })}
-                  updateParams={(controllerParams) => {
-                    this.setState({ controllerParams }, () =>
-                      this.fetchControllers(),
-                    );
-                  }}
-                  params={controllerParams}
-                  filterConfig={[
-                    {
-                      id: 'host__icontains',
-                      title: t`Controller name`,
-                    },
-                  ]}
-                />
-              </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}></FlexItem>
-              <FlexItem>
-                <Pagination
-                  params={controllerParams}
-                  updateParams={(controllerParams) => {
-                    this.setState({ controllerParams }, () =>
-                      this.fetchControllers(),
-                    );
-                  }}
-                  count={controllerCount}
-                  isTop
-                />
-              </FlexItem>
-            </Flex>
+          <Flex>
+            <FlexItem>
+              <CompoundFilter
+                inputText={inputText}
+                onChange={(text) => setInputText(text)}
+                updateParams={(controllerParams) => {
+                  setControllerParams(controllerParams);
+                }}
+                params={controllerParams}
+                filterConfig={[
+                  {
+                    id: 'host__icontains',
+                    title: t`Controller name`,
+                  },
+                ]}
+              />
+            </FlexItem>
+            <FlexItem grow={{ default: 'grow' }}></FlexItem>
+            <FlexItem>
+              <Pagination
+                params={controllerParams}
+                updateParams={(controllerParams) => {
+                  setControllerParams(controllerParams);
+                }}
+                count={controllerCount}
+                isTop
+              />
+            </FlexItem>
+          </Flex>
 
-            <AppliedFilters
-              updateParams={(controllerParams) =>
-                this.setState({ controllerParams }, () =>
-                  this.fetchControllers(),
-                )
-              }
-              params={controllerParams}
-              ignoredParams={['page_size', 'page']}
-              niceNames={{
-                host__icontains: t`Controller name`,
-              }}
-            />
+          <AppliedFilters
+            updateParams={(controllerParams) => {
+              setControllerParams(controllerParams);
+            }}
+            params={controllerParams}
+            ignoredParams={['page_size', 'page']}
+            niceNames={{
+              host__icontains: t`Controller name`,
+            }}
+          />
 
-            <Spacer />
-            {this.renderControllers()}
-            <Spacer />
+          <Spacer />
+          {renderControllers()}
+          <Spacer />
 
-            <Pagination
-              params={controllerParams}
-              updateParams={(controllerParams) => {
-                this.setState({ controllerParams }, () =>
-                  this.fetchControllers(),
-                );
-              }}
-              count={controllerCount}
-              isTop
-            />
-            <Spacer />
-            <div>{notListedMessage}</div>
-          </>
-        )}
-      </Modal>
-    );
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-}
+          <Pagination
+            params={controllerParams}
+            updateParams={(controllerParams) => {
+              setControllerParams(controllerParams);
+            }}
+            count={controllerCount}
+            isTop
+          />
+          <Spacer />
+          <div>{notListedMessage}</div>
+        </>
+      )}
+    </Modal>
+  );
+};
