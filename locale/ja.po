@@ -52,7 +52,7 @@ msgstr "<0/> が <1/> から削除されました"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注記:</0> ansible-galaxy を使用したコレクションのインストールは、ansible 2.9+ でのみサポートされます"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:365
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロックされる可能性があります。外部リンクを手動でコピーアンドペーストしてください。"
 
@@ -64,9 +64,13 @@ msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロッ
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:443
+#: src/containers/namespace-detail/namespace-detail.tsx:455
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注記:</0> この URL を使用して ansible-galaxy を設定して、この名前空間にコレクションをアップロードします。ansible-galaxy の設定に関する詳細は <1>ここ</1><2></2><3/> を参照してください。"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:213
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+msgstr ""
 
 #: src/containers/role-management/role-list.tsx:190
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -117,7 +121,7 @@ msgstr "タグには、小文字、大文字、小文字、数字、アンダー
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:610
+#: src/containers/namespace-detail/namespace-detail.tsx:622
 msgid "API Error: Failed to set deprecation."
 msgstr "API エラー: 非推奨の設定に失敗しました。"
 
@@ -132,7 +136,7 @@ msgstr "API エラー: {ex}"
 
 #: src/components/headers/collection-header.tsx:707
 #: src/components/headers/collection-header.tsx:758
-#: src/containers/namespace-detail/namespace-detail.tsx:629
+#: src/containers/namespace-detail/namespace-detail.tsx:641
 msgid "API Error: {status}"
 msgstr "API エラー: {status}"
 
@@ -323,6 +327,22 @@ msgstr "リモートからのコレクションを承認、拒否、同期しま
 msgid "Approved"
 msgstr "承認済"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:70
+msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:76
+msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:47
+msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:52
+msgid "Are you sure you want to opt the following namespace out of Wisdom?"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
@@ -370,7 +390,7 @@ msgstr "CA 証明書"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:224
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "CLI configuration"
 msgstr "CLI 設定"
 
@@ -398,6 +418,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
+#: src/components/wisdom-modal/wisdom-modal.tsx:175
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:191
@@ -409,7 +430,7 @@ msgstr "取り消し"
 msgid "Canceled"
 msgstr "取り消し済み"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:806
+#: src/containers/namespace-detail/namespace-detail.tsx:819
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前空間は削除できません"
 
@@ -536,7 +557,7 @@ msgstr "消去"
 msgid "Clear all filters"
 msgstr "すべてのフィルターの解除"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:357
+#: src/components/execution-environment/publish-to-controller-modal.tsx:340
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログインして (必要な場合)、手順に従い、設定を完了します。"
 
@@ -548,7 +569,7 @@ msgstr "クライアント証明書"
 msgid "Client key"
 msgstr "クライアントキー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/execution-environment/publish-to-controller-modal.tsx:272
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "閉じる"
@@ -572,11 +593,11 @@ msgstr "コレクション \"{0}\" を非推奨化できませんでした。"
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化を解除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:595
+#: src/containers/namespace-detail/namespace-detail.tsx:607
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:594
+#: src/containers/namespace-detail/namespace-detail.tsx:606
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
 
@@ -634,7 +655,7 @@ msgstr "コレクションには依存関係がありません。"
 msgid "Collection is not being used by any collection."
 msgstr "コレクションはどのコレクションでも使用されていません。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:764
+#: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Collection repositories could not be displayed."
 msgstr "コレクションリポジトリーを表示できませんでした。"
 
@@ -657,7 +678,7 @@ msgstr "コレクションのバージョン"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "システムでコレクションが見つかりませんでした。アップロードする必要があります。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:223
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 #: src/containers/search/search.tsx:200
 #: src/loaders/standalone/menu.tsx:36
 #: src/loaders/standalone/menu.tsx:37
@@ -665,7 +686,7 @@ msgid "Collections"
 msgstr "コレクション"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
 msgstr "コレクションはアップロードされると表示されます"
@@ -766,17 +787,17 @@ msgstr "コンテンツ"
 msgid "Contents"
 msgstr "コンテンツ"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:386
-#: src/components/execution-environment/publish-to-controller-modal.tsx:415
+#: src/components/execution-environment/publish-to-controller-modal.tsx:367
+#: src/components/execution-environment/publish-to-controller-modal.tsx:392
 msgid "Controller name"
 msgstr "コントローラー名"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:114
+#: src/components/execution-environment/publish-to-controller-modal.tsx:115
 msgid "Controllers list could not be displayed."
 msgstr "コントローラーのリストを表示できませんでした。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:229
-#: src/components/execution-environment/publish-to-controller-modal.tsx:232
+#: src/components/execution-environment/publish-to-controller-modal.tsx:225
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:12
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
@@ -986,12 +1007,12 @@ msgstr "グループを削除しますか?"
 msgid "Delete image?"
 msgstr "イメージを削除しますか?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:800
-#: src/containers/namespace-detail/namespace-detail.tsx:814
+#: src/containers/namespace-detail/namespace-detail.tsx:813
+#: src/containers/namespace-detail/namespace-detail.tsx:827
 msgid "Delete namespace"
 msgstr "名前空間の削除"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:336
+#: src/containers/namespace-detail/namespace-detail.tsx:340
 msgid "Delete namespace?"
 msgstr "名前空間を削除しますか?"
 
@@ -1040,7 +1061,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:65
-#: src/containers/namespace-detail/namespace-detail.tsx:341
+#: src/containers/namespace-detail/namespace-detail.tsx:345
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> を削除すると、そのデータが失われます。"
 
@@ -1087,12 +1108,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "非推奨"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:593
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始されています。"
 
@@ -1121,7 +1142,7 @@ msgstr "詳細"
 msgid "Details"
 msgstr "詳細"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:348
+#: src/components/execution-environment/publish-to-controller-modal.tsx:331
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
@@ -1222,7 +1243,7 @@ msgstr "実行環境の編集"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:790
+#: src/containers/namespace-detail/namespace-detail.tsx:803
 msgid "Edit namespace"
 msgstr "名前空間の編集"
 
@@ -1447,7 +1468,7 @@ msgstr "エラー {statusCode} - {statusText}: このリクエストを行うの
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:313
+#: src/components/execution-environment/publish-to-controller-modal.tsx:297
 msgid "Execution Environment"
 msgstr "実行環境"
 
@@ -1503,11 +1524,23 @@ msgstr "失敗"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:94
+msgid "Failed to load Wisdom information."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:124
+msgid "Failed to opt in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:140
+msgid "Failed to opt out of Wisdom."
+msgstr ""
+
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "ユーザーデータの取得に失敗しました。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:628
+#: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "Failed to sign all collections."
 msgstr "すべてのコレクションの署名に失敗しました。"
 
@@ -1599,7 +1632,7 @@ msgid "Group"
 msgstr "グループ"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:489
+#: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "グループ \"{0}\" を \"{name}\" に追加できませんでした。"
 
@@ -1608,12 +1641,12 @@ msgstr "グループ \"{0}\" を \"{name}\" に追加できませんでした。
 #~ msgstr "Group \"{0}\" could not be displayed."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "グループ \"{0}\" を \"{name}\" から削除できませんでした。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:488
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "グループ \"{0}\" が \"{name}\" に正常に追加されました。"
 
@@ -1622,21 +1655,21 @@ msgid "Group \"{0}\" has been successfully deleted."
 msgstr "グループ \"{0}\" が正常に削除されました。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:498
+#: src/containers/namespace-detail/namespace-detail.tsx:510
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "グループ \"{0}\" は \"{name}\" から正常に削除されました。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:519
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "グループ \"{0}\" のロールを \"{name}\" で更新することができませんでした。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:518
-#: src/containers/namespace-detail/namespace-detail.tsx:537
+#: src/containers/namespace-detail/namespace-detail.tsx:530
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "グループ \"{0}\" のロールが \"{name}\" に正常に更新されました。"
 
@@ -1663,7 +1696,7 @@ msgstr "グループリスト"
 msgid "Group name"
 msgstr "グループ名"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:259
+#: src/containers/namespace-detail/namespace-detail.tsx:263
 msgid "Group {0}"
 msgstr "グループ {0}"
 
@@ -1704,7 +1737,7 @@ msgstr "署名の非表示"
 #: src/components/delete-modal/delete-collection-modal.tsx:73
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
-#: src/containers/namespace-detail/namespace-detail.tsx:348
+#: src/containers/namespace-detail/namespace-detail.tsx:352
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
@@ -1712,7 +1745,7 @@ msgstr "この操作は元に戻せないことを理解しています。"
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:249
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "コントローラーが表に記載されていない場合は、settings.py を確認してください。"
 
@@ -1753,7 +1786,7 @@ msgstr "インポートしてステージングに移動"
 msgid "Import log"
 msgstr "ログのインポート"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:831
+#: src/containers/namespace-detail/namespace-detail.tsx:844
 msgid "Imports"
 msgstr "インポート"
 
@@ -1873,9 +1906,13 @@ msgstr "レジストリー {0} からの最終更新"
 msgid "Layers"
 msgstr "レイヤー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:269
+#: src/components/execution-environment/publish-to-controller-modal.tsx:253
 msgid "Learn more"
 msgstr "詳細情報"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:180
+msgid "Learn more about Ansible Wisdom."
+msgstr ""
 
 #: src/loaders/standalone/menu.tsx:81
 msgid "Legacy"
@@ -1889,6 +1926,14 @@ msgstr ""
 #: src/containers/legacy-roles/legacy-roles.tsx:127
 #: src/loaders/standalone/menu.tsx:86
 msgid "Legacy Roles"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:60
+msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:65
+msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
 msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:59
@@ -1916,7 +1961,7 @@ msgstr "コレクションの一覧"
 msgid "List of Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:140
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:146
 #: src/containers/legacy-roles/legacy-roles.tsx:151
 msgid "List of Legacy Roles"
 msgstr ""
@@ -2065,15 +2110,23 @@ msgstr "名前を空白にすることはできません。"
 msgid "Namespace"
 msgstr "名前空間"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:916
+#: src/containers/namespace-detail/namespace-detail.tsx:937
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "名前空間 \"{name}\" を削除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:895
+#: src/containers/namespace-detail/namespace-detail.tsx:916
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "名前空間 \"{name}\" が正常に削除されました。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:244
+#: src/components/wisdom-modal/wisdom-modal.tsx:37
+msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:42
+msgid "Namespace <0>{name}</0> is opted out of Wisdom."
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
 msgstr ""
 
@@ -2086,8 +2139,8 @@ msgid "Namespace names are limited to alphanumeric characters and underscores, m
 msgstr "名前空間の名前に使用できるのは、英数字とアンダースコアのみで、最低でも 2 文字以上使用する必要があります。また ‘_’ で開始できません。"
 
 #: src/components/namespace-form/namespace-form.tsx:76
-#: src/containers/namespace-detail/namespace-detail.tsx:226
-#: src/containers/namespace-detail/namespace-detail.tsx:245
+#: src/containers/namespace-detail/namespace-detail.tsx:230
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 msgid "Namespace owners"
 msgstr "名前空間の所有者"
 
@@ -2143,7 +2196,7 @@ msgstr ""
 msgid "No"
 msgstr "不可"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:303
+#: src/components/execution-environment/publish-to-controller-modal.tsx:287
 msgid "No Controllers available"
 msgstr "利用可能なコントローラーがありません"
 
@@ -2167,7 +2220,7 @@ msgstr "割り当て可能なロールはありません。"
 msgid "No child task"
 msgstr "子タスクなし"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:407
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 #: src/containers/search/search.tsx:254
 msgid "No collections yet"
 msgstr "まだコレクションはありません"
@@ -2246,7 +2299,7 @@ msgstr "結果が見つかりません"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "絞り込みの基準と一致する結果がありません。フィルター設定を変更してみてください。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:133
 msgid "No roles yet"
 msgstr ""
@@ -2255,7 +2308,7 @@ msgstr ""
 msgid "No signature keys yet"
 msgstr "署名鍵はまだありません"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:199
+#: src/components/execution-environment/publish-to-controller-modal.tsx:195
 msgid "No tag or digest selected."
 msgstr "タグまたはダイジェストが選択されていません。"
 
@@ -2325,6 +2378,16 @@ msgstr "OS / アーキテクチャー"
 #: src/containers/token/token-insights.tsx:130
 msgid "Offline token"
 msgstr "オフライントークン"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:158
+#: src/components/wisdom-modal/wisdom-modal.tsx:190
+msgid "Opt in to Wisdom"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:168
+#: src/components/wisdom-modal/wisdom-modal.tsx:191
+msgid "Opt out of Wisdom"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -2797,7 +2860,7 @@ msgstr "編集にはスーパーユーザー権限が必要です。"
 msgid "Reserve resources"
 msgstr "リソースの予約"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:229
 msgid "Resources"
 msgstr "リソース"
 
@@ -2862,7 +2925,7 @@ msgstr "ロール"
 msgid "Roles list could not be displayed."
 msgstr "ロールリストを表示できませんでした。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:136
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:142
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "Roles will appear once imported"
 msgstr ""
@@ -2943,7 +3006,7 @@ msgstr "グループの選択"
 msgid "Select a registry"
 msgstr "レジストリーの選択"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:335
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 msgid "Select a tag"
 msgstr "タグの選択"
 
@@ -3038,7 +3101,7 @@ msgid "Sign all"
 msgstr "すべて署名する"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:854
 msgid "Sign all collections"
 msgstr "すべてのコレクションへの署名"
 
@@ -3105,7 +3168,7 @@ msgstr "署名済みバージョン"
 msgid "Signing service selector:"
 msgstr "署名サービスセレクター:"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:638
+#: src/containers/namespace-detail/namespace-detail.tsx:650
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" のすべてのコレクションで署名を開始しました。"
 
@@ -3272,13 +3335,13 @@ msgid "TLS validation"
 msgstr "TLS 検証"
 
 #: src/components/collection-list/collection-filter.tsx:46
-#: src/components/execution-environment/publish-to-controller-modal.tsx:318
+#: src/components/execution-environment/publish-to-controller-modal.tsx:302
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "タグ"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:156
+#: src/components/execution-environment/publish-to-controller-modal.tsx:152
 msgid "Tags could not be displayed."
 msgstr "タグを表示できませんでした。"
 
@@ -3423,7 +3486,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "選択したロールは、この特定の実行環境に追加されます。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:474
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "The selected roles will be added to this specific namespace."
 msgstr "選択したロールは、この特定の名前空間に追加されます。"
 
@@ -3590,7 +3653,7 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "非推奨解除"
@@ -3623,13 +3686,13 @@ msgstr "アップロード"
 msgid "Upload and modify collections."
 msgstr "コレクションをアップロードして変更します。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:414
-#: src/containers/namespace-detail/namespace-detail.tsx:853
+#: src/containers/namespace-detail/namespace-detail.tsx:426
+#: src/containers/namespace-detail/namespace-detail.tsx:874
 msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
 #: src/components/headers/collection-header.tsx:263
-#: src/containers/namespace-detail/namespace-detail.tsx:949
+#: src/containers/namespace-detail/namespace-detail.tsx:970
 #: src/containers/search/search.tsx:396
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
@@ -3649,7 +3712,7 @@ msgstr "署名のアップロード"
 msgid "Upstream name"
 msgstr "アップストリーム名"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:283
+#: src/components/execution-environment/publish-to-controller-modal.tsx:267
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
 #: src/containers/execution-environment-list/execution_environment_list.tsx:375
@@ -3910,6 +3973,12 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:178
 msgid "Website"
 msgstr "Web サイト"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:188
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:277
+#: src/containers/namespace-detail/namespace-detail.tsx:862
+msgid "Wisdom settings"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:294
 msgid "YAML requirements"

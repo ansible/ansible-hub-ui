@@ -52,7 +52,7 @@ msgstr "<0/> 已从 <1/> 中删除"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注：</0>只有 ansible 2.9+ 支持使用 ansible-galaxy 安装集合"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:365
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制并粘贴外部链接。"
 
@@ -64,9 +64,13 @@ msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:443
+#: src/containers/namespace-detail/namespace-detail.tsx:455
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1><2></2><3/>。"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:213
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+msgstr ""
 
 #: src/containers/role-management/role-list.tsx:190
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -117,7 +121,7 @@ msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划�
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:610
+#: src/containers/namespace-detail/namespace-detail.tsx:622
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
@@ -132,7 +136,7 @@ msgstr "API 错误：{ex}"
 
 #: src/components/headers/collection-header.tsx:707
 #: src/components/headers/collection-header.tsx:758
-#: src/containers/namespace-detail/namespace-detail.tsx:629
+#: src/containers/namespace-detail/namespace-detail.tsx:641
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
 
@@ -323,6 +327,22 @@ msgstr "从远程批准、拒绝和同步集合。"
 msgid "Approved"
 msgstr "批准"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:70
+msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:76
+msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:47
+msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:52
+msgid "Are you sure you want to opt the following namespace out of Wisdom?"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
 msgstr "身份验证供应商"
@@ -370,7 +390,7 @@ msgstr "CA 证书"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:224
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "CLI configuration"
 msgstr "CLI 配置"
 
@@ -398,6 +418,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
+#: src/components/wisdom-modal/wisdom-modal.tsx:175
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:191
@@ -409,7 +430,7 @@ msgstr "取消"
 msgid "Canceled"
 msgstr "已取消"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:806
+#: src/containers/namespace-detail/namespace-detail.tsx:819
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
@@ -536,7 +557,7 @@ msgstr "清除"
 msgid "Clear all filters"
 msgstr "清除所有过滤器"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:357
+#: src/components/execution-environment/publish-to-controller-modal.tsx:340
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的控制器 URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
@@ -548,7 +569,7 @@ msgstr "客户端证书"
 msgid "Client key"
 msgstr "客户端密钥"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/execution-environment/publish-to-controller-modal.tsx:272
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "关闭"
@@ -572,11 +593,11 @@ msgstr "集合 \"{0}\" 无法被弃用。"
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "集合 \"{0}\" 无法取消弃用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:595
+#: src/containers/namespace-detail/namespace-detail.tsx:607
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "集合 \"{0}\" 已成功弃用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:594
+#: src/containers/namespace-detail/namespace-detail.tsx:606
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "集合 \"{0}\" 已成功取消弃用。"
 
@@ -634,7 +655,7 @@ msgstr "集合没有依赖项。"
 msgid "Collection is not being used by any collection."
 msgstr "集合没有被任何集合使用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:764
+#: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Collection repositories could not be displayed."
 msgstr "无法显示集合仓库。"
 
@@ -657,7 +678,7 @@ msgstr "集合版本"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "系统中没有找到集合。您必须上传它。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:223
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 #: src/containers/search/search.tsx:200
 #: src/loaders/standalone/menu.tsx:36
 #: src/loaders/standalone/menu.tsx:37
@@ -665,7 +686,7 @@ msgid "Collections"
 msgstr "集合"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
 msgstr "上传后会出现集合"
@@ -766,17 +787,17 @@ msgstr "内容"
 msgid "Contents"
 msgstr "内容"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:386
-#: src/components/execution-environment/publish-to-controller-modal.tsx:415
+#: src/components/execution-environment/publish-to-controller-modal.tsx:367
+#: src/components/execution-environment/publish-to-controller-modal.tsx:392
 msgid "Controller name"
 msgstr "控制器名称"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:114
+#: src/components/execution-environment/publish-to-controller-modal.tsx:115
 msgid "Controllers list could not be displayed."
 msgstr "无法显示控制器列表。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:229
-#: src/components/execution-environment/publish-to-controller-modal.tsx:232
+#: src/components/execution-environment/publish-to-controller-modal.tsx:225
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:12
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
@@ -986,12 +1007,12 @@ msgstr "删除组？"
 msgid "Delete image?"
 msgstr "删除镜像？"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:800
-#: src/containers/namespace-detail/namespace-detail.tsx:814
+#: src/containers/namespace-detail/namespace-detail.tsx:813
+#: src/containers/namespace-detail/namespace-detail.tsx:827
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:336
+#: src/containers/namespace-detail/namespace-detail.tsx:340
 msgid "Delete namespace?"
 msgstr "删除命名空间？"
 
@@ -1040,7 +1061,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:65
-#: src/containers/namespace-detail/namespace-detail.tsx:341
+#: src/containers/namespace-detail/namespace-detail.tsx:345
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 
@@ -1087,12 +1108,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "弃用"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:593
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "为集合 \"{0}\" 开始的弃用状态更新。"
 
@@ -1121,7 +1142,7 @@ msgstr "详情"
 msgid "Details"
 msgstr "详情"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:348
+#: src/components/execution-environment/publish-to-controller-modal.tsx:331
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
@@ -1222,7 +1243,7 @@ msgstr "编辑执行环境"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:790
+#: src/containers/namespace-detail/namespace-detail.tsx:803
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
@@ -1447,7 +1468,7 @@ msgstr "错误 {statusCode} - {statusText}: 您没有权利进行这个请求。
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:313
+#: src/components/execution-environment/publish-to-controller-modal.tsx:297
 msgid "Execution Environment"
 msgstr "执行环境"
 
@@ -1503,11 +1524,23 @@ msgstr "失败"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:94
+msgid "Failed to load Wisdom information."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:124
+msgid "Failed to opt in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:140
+msgid "Failed to opt out of Wisdom."
+msgstr ""
+
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "获取用户数据失败。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:628
+#: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
@@ -1599,7 +1632,7 @@ msgid "Group"
 msgstr "组"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:489
+#: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "组 \"{0}\" 无法被添加到 \"{name}\"。"
 
@@ -1608,12 +1641,12 @@ msgstr "组 \"{0}\" 无法被添加到 \"{name}\"。"
 #~ msgstr "Group \"{0}\" could not be displayed."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "组 \"{0}\" 无法从 \"{name}\" 中删除。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:488
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "组 \"{0}\" 已被添加到 \"{name}\"。"
 
@@ -1622,21 +1655,21 @@ msgid "Group \"{0}\" has been successfully deleted."
 msgstr "组 \"{0}\" 已成功删除。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:498
+#: src/containers/namespace-detail/namespace-detail.tsx:510
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "组 \"{0}\" 已从 \"{name}\" 中成功删除。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:519
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "组 \"{0}\" 角色无法在 \"{name}\" 中更新。"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:518
-#: src/containers/namespace-detail/namespace-detail.tsx:537
+#: src/containers/namespace-detail/namespace-detail.tsx:530
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "组 \"{0}\" 角色在 \"{name}\" 中已成功更新。"
 
@@ -1663,7 +1696,7 @@ msgstr "组列表"
 msgid "Group name"
 msgstr "组名称"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:259
+#: src/containers/namespace-detail/namespace-detail.tsx:263
 msgid "Group {0}"
 msgstr "组 {0}"
 
@@ -1704,7 +1737,7 @@ msgstr "隐藏签名"
 #: src/components/delete-modal/delete-collection-modal.tsx:73
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
-#: src/containers/namespace-detail/namespace-detail.tsx:348
+#: src/containers/namespace-detail/namespace-detail.tsx:352
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
@@ -1712,7 +1745,7 @@ msgstr "我理解这个行动是无法撤销的。"
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:249
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "如果控制器没有在表中列出，请检查 settings.py。"
 
@@ -1753,7 +1786,7 @@ msgstr "导入并移至 staging"
 msgid "Import log"
 msgstr "导入日志"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:831
+#: src/containers/namespace-detail/namespace-detail.tsx:844
 msgid "Imports"
 msgstr "导入"
 
@@ -1873,9 +1906,13 @@ msgstr "最后从注册表 {0} 更新"
 msgid "Layers"
 msgstr "层"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:269
+#: src/components/execution-environment/publish-to-controller-modal.tsx:253
 msgid "Learn more"
 msgstr "了解更多"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:180
+msgid "Learn more about Ansible Wisdom."
+msgstr ""
 
 #: src/loaders/standalone/menu.tsx:81
 msgid "Legacy"
@@ -1889,6 +1926,14 @@ msgstr ""
 #: src/containers/legacy-roles/legacy-roles.tsx:127
 #: src/loaders/standalone/menu.tsx:86
 msgid "Legacy Roles"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:60
+msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:65
+msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
 msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:59
@@ -1916,7 +1961,7 @@ msgstr "集合列表"
 msgid "List of Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:140
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:146
 #: src/containers/legacy-roles/legacy-roles.tsx:151
 msgid "List of Legacy Roles"
 msgstr ""
@@ -2065,15 +2110,23 @@ msgstr "名称不能为空。"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:916
+#: src/containers/namespace-detail/namespace-detail.tsx:937
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:895
+#: src/containers/namespace-detail/namespace-detail.tsx:916
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:244
+#: src/components/wisdom-modal/wisdom-modal.tsx:37
+msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:42
+msgid "Namespace <0>{name}</0> is opted out of Wisdom."
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
 msgstr ""
 
@@ -2086,8 +2139,8 @@ msgid "Namespace names are limited to alphanumeric characters and underscores, m
 msgstr "命名空间名称限制为字母数字字符和下划线，长度最少为 2 个字符，且不能以 '_' 开头。"
 
 #: src/components/namespace-form/namespace-form.tsx:76
-#: src/containers/namespace-detail/namespace-detail.tsx:226
-#: src/containers/namespace-detail/namespace-detail.tsx:245
+#: src/containers/namespace-detail/namespace-detail.tsx:230
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 msgid "Namespace owners"
 msgstr "命名空间所有者"
 
@@ -2143,7 +2196,7 @@ msgstr ""
 msgid "No"
 msgstr "否"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:303
+#: src/components/execution-environment/publish-to-controller-modal.tsx:287
 msgid "No Controllers available"
 msgstr "没有控制器可用"
 
@@ -2167,7 +2220,7 @@ msgstr "无可分配角色。"
 msgid "No child task"
 msgstr "没有子任务"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:407
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 #: src/containers/search/search.tsx:254
 msgid "No collections yet"
 msgstr "还没有集合"
@@ -2246,7 +2299,7 @@ msgstr "没有找到结果"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "没有结果与过滤条件匹配。尝试更改过滤器设置。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:133
 msgid "No roles yet"
 msgstr ""
@@ -2255,7 +2308,7 @@ msgstr ""
 msgid "No signature keys yet"
 msgstr "还没有签名密钥"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:199
+#: src/components/execution-environment/publish-to-controller-modal.tsx:195
 msgid "No tag or digest selected."
 msgstr "没有选择标签或摘要。"
 
@@ -2325,6 +2378,16 @@ msgstr "OS/ Arch"
 #: src/containers/token/token-insights.tsx:130
 msgid "Offline token"
 msgstr "离线令牌"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:158
+#: src/components/wisdom-modal/wisdom-modal.tsx:190
+msgid "Opt in to Wisdom"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:168
+#: src/components/wisdom-modal/wisdom-modal.tsx:191
+msgid "Opt out of Wisdom"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -2797,7 +2860,7 @@ msgstr "需要超级用户权限进行编辑。"
 msgid "Reserve resources"
 msgstr "保留资源"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:229
 msgid "Resources"
 msgstr "资源"
 
@@ -2862,7 +2925,7 @@ msgstr "角色"
 msgid "Roles list could not be displayed."
 msgstr "无法显示角色列表。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:136
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:142
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "Roles will appear once imported"
 msgstr ""
@@ -2943,7 +3006,7 @@ msgstr "选择一个组"
 msgid "Select a registry"
 msgstr "选择注册表"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:335
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 msgid "Select a tag"
 msgstr "选择标签"
 
@@ -3038,7 +3101,7 @@ msgid "Sign all"
 msgstr "签发所有"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:854
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
@@ -3105,7 +3168,7 @@ msgstr "签名的版本"
 msgid "Signing service selector:"
 msgstr "签名服务选择器："
 
-#: src/containers/namespace-detail/namespace-detail.tsx:638
+#: src/containers/namespace-detail/namespace-detail.tsx:650
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
@@ -3272,13 +3335,13 @@ msgid "TLS validation"
 msgstr "TLS 验证"
 
 #: src/components/collection-list/collection-filter.tsx:46
-#: src/components/execution-environment/publish-to-controller-modal.tsx:318
+#: src/components/execution-environment/publish-to-controller-modal.tsx:302
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "标签"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:156
+#: src/components/execution-environment/publish-to-controller-modal.tsx:152
 msgid "Tags could not be displayed."
 msgstr "无法显示标签。"
 
@@ -3423,7 +3486,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "所选角色将添加到这个特定执行环境中。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:474
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "The selected roles will be added to this specific namespace."
 msgstr "所选角色将添加到此特定命名空间中。"
 
@@ -3590,7 +3653,7 @@ msgid "URL: {0}"
 msgstr "URL：{0}"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "取消弃用"
@@ -3623,13 +3686,13 @@ msgstr "上传"
 msgid "Upload and modify collections."
 msgstr "上传和修改集合。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:414
-#: src/containers/namespace-detail/namespace-detail.tsx:853
+#: src/containers/namespace-detail/namespace-detail.tsx:426
+#: src/containers/namespace-detail/namespace-detail.tsx:874
 msgid "Upload collection"
 msgstr "上传集合"
 
 #: src/components/headers/collection-header.tsx:263
-#: src/containers/namespace-detail/namespace-detail.tsx:949
+#: src/containers/namespace-detail/namespace-detail.tsx:970
 #: src/containers/search/search.tsx:396
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
@@ -3649,7 +3712,7 @@ msgstr "上传签名"
 msgid "Upstream name"
 msgstr "上游名称"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:283
+#: src/components/execution-environment/publish-to-controller-modal.tsx:267
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
 #: src/containers/execution-environment-list/execution_environment_list.tsx:375
@@ -3910,6 +3973,12 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:178
 msgid "Website"
 msgstr "网站"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:188
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:277
+#: src/containers/namespace-detail/namespace-detail.tsx:862
+msgid "Wisdom settings"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:294
 msgid "YAML requirements"

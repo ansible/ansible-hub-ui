@@ -52,7 +52,7 @@ msgstr "<0/>이/가 <1/>에서 제거되었습니다"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:365
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습니다. 외부 링크를 수동으로 복사하여 붙여넣습니다."
 
@@ -64,9 +64,13 @@ msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:443
+#: src/containers/namespace-detail/namespace-detail.tsx:455
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>참고:</0> 이 URL을 사용하여 이 네임스페이스에 컬렉션을 업로드하도록 ansible-CBC를 구성합니다. ansible-octets 구성에 대한 자세한 내용은 <1>여기</1><2> </2><3/>에서 확인할 수 있습니다."
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:213
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+msgstr ""
 
 #: src/containers/role-management/role-list.tsx:190
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -117,7 +121,7 @@ msgstr "태그에는 소문자 및 대문자 ASCII 알파벳 문자, 숫자, 밑
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:610
+#: src/containers/namespace-detail/namespace-detail.tsx:622
 msgid "API Error: Failed to set deprecation."
 msgstr "API 오류: 사용 중단을 설정하지 못했습니다."
 
@@ -132,7 +136,7 @@ msgstr "API 오류: {ex}"
 
 #: src/components/headers/collection-header.tsx:707
 #: src/components/headers/collection-header.tsx:758
-#: src/containers/namespace-detail/namespace-detail.tsx:629
+#: src/containers/namespace-detail/namespace-detail.tsx:641
 msgid "API Error: {status}"
 msgstr "API 오류: {status}"
 
@@ -323,6 +327,22 @@ msgstr "원격에서 컬렉션을 승인, 거부 및 동기화합니다."
 msgid "Approved"
 msgstr "승인됨"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:70
+msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:76
+msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:47
+msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:52
+msgid "Are you sure you want to opt the following namespace out of Wisdom?"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
 msgstr "인증 제공자"
@@ -370,7 +390,7 @@ msgstr "CA 인증서"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:224
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "CLI configuration"
 msgstr "CLI 구성"
 
@@ -398,6 +418,7 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
+#: src/components/wisdom-modal/wisdom-modal.tsx:175
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:191
@@ -409,7 +430,7 @@ msgstr "취소"
 msgid "Canceled"
 msgstr "취소됨"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:806
+#: src/containers/namespace-detail/namespace-detail.tsx:819
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다."
 
@@ -536,7 +557,7 @@ msgstr "지우기"
 msgid "Clear all filters"
 msgstr "모든 필터 지우기"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:357
+#: src/components/execution-environment/publish-to-controller-modal.tsx:340
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
@@ -548,7 +569,7 @@ msgstr "클라이언트 인증서"
 msgid "Client key"
 msgstr "클라이언트 키"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/execution-environment/publish-to-controller-modal.tsx:272
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "닫기"
@@ -572,11 +593,11 @@ msgstr "컬렉션 \"{0}\"을/를 더 이상 사용하지 않을 수 없습니다
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "컬렉션 \"{0}\"을/를 지원 중단할 수 없습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:595
+#: src/containers/namespace-detail/namespace-detail.tsx:607
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "컬렉션 \"{0}\"이/가 더 이상 사용되지 않습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:594
+#: src/containers/namespace-detail/namespace-detail.tsx:606
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "컬렉션 \"{0}\"이/가 성공적으로 지원 중단되었습니다."
 
@@ -634,7 +655,7 @@ msgstr "컬렉션에는 종속성이 없습니다."
 msgid "Collection is not being used by any collection."
 msgstr "컬렉션은 어떤 컬렉션에서도 사용되고 있지 않습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:764
+#: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Collection repositories could not be displayed."
 msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 
@@ -657,7 +678,7 @@ msgstr "컬렉션 버전"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "컬렉션을 시스템에서 찾을 수 없습니다. 업로드해야 합니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:223
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 #: src/containers/search/search.tsx:200
 #: src/loaders/standalone/menu.tsx:36
 #: src/loaders/standalone/menu.tsx:37
@@ -665,7 +686,7 @@ msgid "Collections"
 msgstr "컬렉션"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
 msgstr "업로드 후 컬렉션이 나타납니다."
@@ -766,17 +787,17 @@ msgstr "콘텐츠"
 msgid "Contents"
 msgstr "콘텐츠"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:386
-#: src/components/execution-environment/publish-to-controller-modal.tsx:415
+#: src/components/execution-environment/publish-to-controller-modal.tsx:367
+#: src/components/execution-environment/publish-to-controller-modal.tsx:392
 msgid "Controller name"
 msgstr "컨트롤러 이름"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:114
+#: src/components/execution-environment/publish-to-controller-modal.tsx:115
 msgid "Controllers list could not be displayed."
 msgstr "컨트롤러 목록을 표시할 수 없습니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:229
-#: src/components/execution-environment/publish-to-controller-modal.tsx:232
+#: src/components/execution-environment/publish-to-controller-modal.tsx:225
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:12
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
@@ -986,12 +1007,12 @@ msgstr "그룹을 삭제하시겠습니까?"
 msgid "Delete image?"
 msgstr "이미지를 삭제하시겠습니까?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:800
-#: src/containers/namespace-detail/namespace-detail.tsx:814
+#: src/containers/namespace-detail/namespace-detail.tsx:813
+#: src/containers/namespace-detail/namespace-detail.tsx:827
 msgid "Delete namespace"
 msgstr "네임스페이스 삭제"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:336
+#: src/containers/namespace-detail/namespace-detail.tsx:340
 msgid "Delete namespace?"
 msgstr "네임스페이스를 삭제하시겠습니까?"
 
@@ -1040,7 +1061,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실됩니다."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:65
-#: src/containers/namespace-detail/namespace-detail.tsx:341
+#: src/containers/namespace-detail/namespace-detail.tsx:345
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
 
@@ -1087,12 +1108,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "더 이상 사용되지 않음"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:593
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "\"{0}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작합니다."
 
@@ -1121,7 +1142,7 @@ msgstr "세부 정보"
 msgid "Details"
 msgstr "세부 정보"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:348
+#: src/components/execution-environment/publish-to-controller-modal.tsx:331
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
@@ -1222,7 +1243,7 @@ msgstr "실행 환경 편집"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:790
+#: src/containers/namespace-detail/namespace-detail.tsx:803
 msgid "Edit namespace"
 msgstr "네임스페이스 편집"
 
@@ -1447,7 +1468,7 @@ msgstr "오류 {statusCode} - {statusText}: 이 요청을 진행하는 데 필�
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:313
+#: src/components/execution-environment/publish-to-controller-modal.tsx:297
 msgid "Execution Environment"
 msgstr "실행 환경"
 
@@ -1503,11 +1524,23 @@ msgstr "실패"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:94
+msgid "Failed to load Wisdom information."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:124
+msgid "Failed to opt in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:140
+msgid "Failed to opt out of Wisdom."
+msgstr ""
+
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "사용자 데이터를 검색하지 못했습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:628
+#: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "Failed to sign all collections."
 msgstr "모든 컬렉션에 서명하지 못했습니다."
 
@@ -1599,7 +1632,7 @@ msgid "Group"
 msgstr "그룹"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:489
+#: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "그룹 \"{0}\"을/를 \"{name}\"에 추가할 수 없습니다."
 
@@ -1608,12 +1641,12 @@ msgstr "그룹 \"{0}\"을/를 \"{name}\"에 추가할 수 없습니다."
 #~ msgstr "Group \"{0}\" could not be displayed."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "그룹 \"{0}\"을/를 \"{name}\"에서 제거할 수 없습니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:488
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "그룹\"{0}\"이/가 \"{name}\"에 성공적으로 추가되었습니다."
 
@@ -1622,21 +1655,21 @@ msgid "Group \"{0}\" has been successfully deleted."
 msgstr "그룹 \"{0}\"이/가 성공적으로 삭제되었습니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:498
+#: src/containers/namespace-detail/namespace-detail.tsx:510
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "그룹 \"{0}\"이/가 \"{name}\"에서 성공적으로 제거되었습니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:519
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "그룹 \"{0}\" 역할은 \"{name}\"에서 업데이트할 수 없습니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:518
-#: src/containers/namespace-detail/namespace-detail.tsx:537
+#: src/containers/namespace-detail/namespace-detail.tsx:530
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "그룹 \"{0}\" 역할이 \"{name}\"에서 성공적으로 업데이트되었습니다."
 
@@ -1663,7 +1696,7 @@ msgstr "그룹 목록"
 msgid "Group name"
 msgstr "그룹 이름"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:259
+#: src/containers/namespace-detail/namespace-detail.tsx:263
 msgid "Group {0}"
 msgstr "그룹 {0}"
 
@@ -1704,7 +1737,7 @@ msgstr "서명 숨기기"
 #: src/components/delete-modal/delete-collection-modal.tsx:73
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
-#: src/containers/namespace-detail/namespace-detail.tsx:348
+#: src/containers/namespace-detail/namespace-detail.tsx:352
 msgid "I understand that this action cannot be undone."
 msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 
@@ -1712,7 +1745,7 @@ msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:249
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "컨트롤러가 표에 나열되지 않은 경우 settings.py를 확인합니다."
 
@@ -1753,7 +1786,7 @@ msgstr "가져오기 및 스테이징으로 이동"
 msgid "Import log"
 msgstr "로그 가져오기"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:831
+#: src/containers/namespace-detail/namespace-detail.tsx:844
 msgid "Imports"
 msgstr "가져오기"
 
@@ -1873,9 +1906,13 @@ msgstr "레지스트리 {0}에서 마지막으로 업데이트됨"
 msgid "Layers"
 msgstr "레이어"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:269
+#: src/components/execution-environment/publish-to-controller-modal.tsx:253
 msgid "Learn more"
 msgstr "더 알아보기"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:180
+msgid "Learn more about Ansible Wisdom."
+msgstr ""
 
 #: src/loaders/standalone/menu.tsx:81
 msgid "Legacy"
@@ -1889,6 +1926,14 @@ msgstr ""
 #: src/containers/legacy-roles/legacy-roles.tsx:127
 #: src/loaders/standalone/menu.tsx:86
 msgid "Legacy Roles"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:60
+msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:65
+msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
 msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:59
@@ -1916,7 +1961,7 @@ msgstr "컬렉션 목록"
 msgid "List of Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:140
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:146
 #: src/containers/legacy-roles/legacy-roles.tsx:151
 msgid "List of Legacy Roles"
 msgstr ""
@@ -2065,15 +2110,23 @@ msgstr "이름은 비워 둘 수 없습니다."
 msgid "Namespace"
 msgstr "네임스페이스"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:916
+#: src/containers/namespace-detail/namespace-detail.tsx:937
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "네임스페이스 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:895
+#: src/containers/namespace-detail/namespace-detail.tsx:916
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "네임스페이스 \"{name}\"을/를 성공적으로 삭제했습니다."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:244
+#: src/components/wisdom-modal/wisdom-modal.tsx:37
+msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:42
+msgid "Namespace <0>{name}</0> is opted out of Wisdom."
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
 msgstr ""
 
@@ -2086,8 +2139,8 @@ msgid "Namespace names are limited to alphanumeric characters and underscores, m
 msgstr "네임스페이스 이름은 영숫자와 밑줄로 제한되며 최소 2자의 길이이며 '_'로 시작할 수 없습니다."
 
 #: src/components/namespace-form/namespace-form.tsx:76
-#: src/containers/namespace-detail/namespace-detail.tsx:226
-#: src/containers/namespace-detail/namespace-detail.tsx:245
+#: src/containers/namespace-detail/namespace-detail.tsx:230
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 msgid "Namespace owners"
 msgstr "네임 스페이스 소유자"
 
@@ -2143,7 +2196,7 @@ msgstr ""
 msgid "No"
 msgstr "제공되지 않음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:303
+#: src/components/execution-environment/publish-to-controller-modal.tsx:287
 msgid "No Controllers available"
 msgstr "사용 가능한 컨트롤러 없음"
 
@@ -2167,7 +2220,7 @@ msgstr "할당할 수 있는 역할이 없습니다."
 msgid "No child task"
 msgstr "하위 작업 없음"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:407
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 #: src/containers/search/search.tsx:254
 msgid "No collections yet"
 msgstr "아직 컬렉션이 없습니다."
@@ -2246,7 +2299,7 @@ msgstr "결과를 찾을 수 없음"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 변경하십시오."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:133
 msgid "No roles yet"
 msgstr ""
@@ -2255,7 +2308,7 @@ msgstr ""
 msgid "No signature keys yet"
 msgstr "서명 키가 없음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:199
+#: src/components/execution-environment/publish-to-controller-modal.tsx:195
 msgid "No tag or digest selected."
 msgstr "태그 또는 요악이 선택되어 있지 않습니다."
 
@@ -2325,6 +2378,16 @@ msgstr "OS/ Arch"
 #: src/containers/token/token-insights.tsx:130
 msgid "Offline token"
 msgstr "오프라인 토큰"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:158
+#: src/components/wisdom-modal/wisdom-modal.tsx:190
+msgid "Opt in to Wisdom"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:168
+#: src/components/wisdom-modal/wisdom-modal.tsx:191
+msgid "Opt out of Wisdom"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -2797,7 +2860,7 @@ msgstr "편집하려면 슈퍼 사용자 권한이 필요합니다."
 msgid "Reserve resources"
 msgstr "리소스 예약"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:229
 msgid "Resources"
 msgstr "리소스"
 
@@ -2862,7 +2925,7 @@ msgstr "역할"
 msgid "Roles list could not be displayed."
 msgstr "역할 목록을 표시할 수 없습니다."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:136
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:142
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "Roles will appear once imported"
 msgstr ""
@@ -2943,7 +3006,7 @@ msgstr "그룹 선택"
 msgid "Select a registry"
 msgstr "레지스트리 선택"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:335
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 msgid "Select a tag"
 msgstr "태그 선택"
 
@@ -3038,7 +3101,7 @@ msgid "Sign all"
 msgstr "모두 서명"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:854
 msgid "Sign all collections"
 msgstr "모든 컬렉션에 서명"
 
@@ -3105,7 +3168,7 @@ msgstr "서명된 버전"
 msgid "Signing service selector:"
 msgstr "서비스 선택기에 서명합니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:638
+#: src/containers/namespace-detail/namespace-detail.tsx:650
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "네임스페이스 \"{0}\"의 모든 컬렉션에 대해 서명이 시작되었습니다."
 
@@ -3272,13 +3335,13 @@ msgid "TLS validation"
 msgstr "TLS 인증"
 
 #: src/components/collection-list/collection-filter.tsx:46
-#: src/components/execution-environment/publish-to-controller-modal.tsx:318
+#: src/components/execution-environment/publish-to-controller-modal.tsx:302
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "태그"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:156
+#: src/components/execution-environment/publish-to-controller-modal.tsx:152
 msgid "Tags could not be displayed."
 msgstr "태그를 표시할 수 없습니다."
 
@@ -3423,7 +3486,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "선택한 역할은 이 특정 실행 환경에 추가됩니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:474
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "The selected roles will be added to this specific namespace."
 msgstr "선택한 역할이 이 특정 네임스페이스에 추가됩니다."
 
@@ -3590,7 +3653,7 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "사용되지 않음"
@@ -3623,13 +3686,13 @@ msgstr "업로드"
 msgid "Upload and modify collections."
 msgstr "컬렉션을 업로드하고 수정합니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:414
-#: src/containers/namespace-detail/namespace-detail.tsx:853
+#: src/containers/namespace-detail/namespace-detail.tsx:426
+#: src/containers/namespace-detail/namespace-detail.tsx:874
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
 #: src/components/headers/collection-header.tsx:263
-#: src/containers/namespace-detail/namespace-detail.tsx:949
+#: src/containers/namespace-detail/namespace-detail.tsx:970
 #: src/containers/search/search.tsx:396
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
@@ -3649,7 +3712,7 @@ msgstr "서명 업로드"
 msgid "Upstream name"
 msgstr "업스트림 이름"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:283
+#: src/components/execution-environment/publish-to-controller-modal.tsx:267
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
 #: src/containers/execution-environment-list/execution_environment_list.tsx:375
@@ -3910,6 +3973,12 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:178
 msgid "Website"
 msgstr "웹 사이트"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:188
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:277
+#: src/containers/namespace-detail/namespace-detail.tsx:862
+msgid "Wisdom settings"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:294
 msgid "YAML requirements"

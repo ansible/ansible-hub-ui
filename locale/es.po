@@ -52,7 +52,7 @@ msgstr "<0/> se eliminó de <1/>"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>Nota:</0> La instalación de colecciones con ansible-galaxy sólo es compatible con ansible 2.9+"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:365
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces. Copie y pegue el enlace externo manualmente."
 
@@ -64,9 +64,13 @@ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:443
+#: src/containers/namespace-detail/namespace-detail.tsx:455
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:213
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+msgstr ""
 
 #: src/containers/role-management/role-list.tsx:190
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -117,7 +121,7 @@ msgstr "Una etiqueta puede contener caracteres alfabéticos ASCII en minúsculas
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:610
+#: src/containers/namespace-detail/namespace-detail.tsx:622
 msgid "API Error: Failed to set deprecation."
 msgstr "Error de API: No se ha podido pasar a desuso."
 
@@ -132,7 +136,7 @@ msgstr "Error de API: {ex}"
 
 #: src/components/headers/collection-header.tsx:707
 #: src/components/headers/collection-header.tsx:758
-#: src/containers/namespace-detail/namespace-detail.tsx:629
+#: src/containers/namespace-detail/namespace-detail.tsx:641
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
 
@@ -323,6 +327,22 @@ msgstr "Aprueba, rechaza y sincroniza los cobros desde las remotas."
 msgid "Approved"
 msgstr "Aprobado"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:70
+msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:76
+msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:47
+msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:52
+msgid "Are you sure you want to opt the following namespace out of Wisdom?"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
 msgstr "Proveedor de autenticación"
@@ -370,7 +390,7 @@ msgstr "Certificado de CA"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:224
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "CLI configuration"
 msgstr "Configuración CLI"
 
@@ -398,6 +418,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
+#: src/components/wisdom-modal/wisdom-modal.tsx:175
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:191
@@ -409,7 +430,7 @@ msgstr "Cancelar"
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:806
+#: src/containers/namespace-detail/namespace-detail.tsx:819
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
@@ -536,7 +557,7 @@ msgstr "Borrar"
 msgid "Clear all filters"
 msgstr "Borrar todos los filtros"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:357
+#: src/components/execution-environment/publish-to-controller-modal.tsx:340
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Haga clic en la URL del Controlador en el que desea utilizar el entorno de ejecución anterior y se lanzará la consola de ese Controlador. Inicie sesión (si es necesario) y siga los pasos para completar la configuración."
 
@@ -548,7 +569,7 @@ msgstr "Certificado de cliente"
 msgid "Client key"
 msgstr "Clave de cliente"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:288
+#: src/components/execution-environment/publish-to-controller-modal.tsx:272
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "Cerrar"
@@ -572,11 +593,11 @@ msgstr "No se pudo eliminar la colección \"{0}\"."
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "No se pudo descargar la colección \"{0}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:595
+#: src/containers/namespace-detail/namespace-detail.tsx:607
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "La colección \"{0}\" se eliminó correctamente."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:594
+#: src/containers/namespace-detail/namespace-detail.tsx:606
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "La colección \"{0}\" se eliminó correctamente."
 
@@ -634,7 +655,7 @@ msgstr "La colección no tiene dependencias."
 msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:764
+#: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Collection repositories could not be displayed."
 msgstr "No se pudieron mostrar los repositorios de colecciones."
 
@@ -657,7 +678,7 @@ msgstr "Versiones de la colección"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "La colección no se ha encontrado en el sistema. Debe cargarla."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:223
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 #: src/containers/search/search.tsx:200
 #: src/loaders/standalone/menu.tsx:36
 #: src/loaders/standalone/menu.tsx:37
@@ -665,7 +686,7 @@ msgid "Collections"
 msgstr "Colecciones"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
 msgstr "Las colecciones aparecerán una vez cargadas"
@@ -766,17 +787,17 @@ msgstr "Contenido"
 msgid "Contents"
 msgstr "Contenido"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:386
-#: src/components/execution-environment/publish-to-controller-modal.tsx:415
+#: src/components/execution-environment/publish-to-controller-modal.tsx:367
+#: src/components/execution-environment/publish-to-controller-modal.tsx:392
 msgid "Controller name"
 msgstr "Nombre del controlador"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:114
+#: src/components/execution-environment/publish-to-controller-modal.tsx:115
 msgid "Controllers list could not be displayed."
 msgstr "No se pudo mostrar la lista de controladores."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:229
-#: src/components/execution-environment/publish-to-controller-modal.tsx:232
+#: src/components/execution-environment/publish-to-controller-modal.tsx:225
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:12
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
@@ -986,12 +1007,12 @@ msgstr "¿Borrar el grupo?"
 msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:800
-#: src/containers/namespace-detail/namespace-detail.tsx:814
+#: src/containers/namespace-detail/namespace-detail.tsx:813
+#: src/containers/namespace-detail/namespace-detail.tsx:827
 msgid "Delete namespace"
 msgstr "Eliminar el espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:336
+#: src/containers/namespace-detail/namespace-detail.tsx:340
 msgid "Delete namespace?"
 msgstr "¿Eliminar el espacio de nombres?"
 
@@ -1040,7 +1061,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0} v{collectionVersion}</0>, se perderán sus datos."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:65
-#: src/containers/namespace-detail/namespace-detail.tsx:341
+#: src/containers/namespace-detail/namespace-detail.tsx:345
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0}</0>, se perderán sus datos."
 
@@ -1087,12 +1108,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "No se pudieron mostrar las colecciones dependientes."
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "Pasar a desuso"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:593
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "Actualización del estado de desaprobación a partir de la colección \"{0}\"."
 
@@ -1121,7 +1142,7 @@ msgstr "Detalle"
 msgid "Details"
 msgstr "Detalles"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:348
+#: src/components/execution-environment/publish-to-controller-modal.tsx:331
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
@@ -1222,7 +1243,7 @@ msgstr "Modificar entorno de ejecución"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:790
+#: src/containers/namespace-detail/namespace-detail.tsx:803
 msgid "Edit namespace"
 msgstr "Editar el espacio de nombres"
 
@@ -1447,7 +1468,7 @@ msgstr "Error {statusCode} - {statusText}: No tiene los permisos necesarios para
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:313
+#: src/components/execution-environment/publish-to-controller-modal.tsx:297
 msgid "Execution Environment"
 msgstr "Entorno de ejecución"
 
@@ -1503,11 +1524,23 @@ msgstr "Fallido"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:94
+msgid "Failed to load Wisdom information."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:124
+msgid "Failed to opt in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:140
+msgid "Failed to opt out of Wisdom."
+msgstr ""
+
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "Fallo en la recuperación de los datos del usuario."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:628
+#: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
@@ -1599,7 +1632,7 @@ msgid "Group"
 msgstr "Grupo"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:489
+#: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "No se pudo agregar el grupo \"{0}\" a la \"{name}\"."
 
@@ -1608,12 +1641,12 @@ msgstr "No se pudo agregar el grupo \"{0}\" a la \"{name}\"."
 #~ msgstr "Group \"{0}\" could not be displayed."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "El grupo \"{0}\" no se pudo eliminar de \"{name}\"."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:488
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "El grupo \"{0}\" se agregó correctamente a \"{name}\"."
 
@@ -1622,21 +1655,21 @@ msgid "Group \"{0}\" has been successfully deleted."
 msgstr "El grupo \"{0}\" se eliminó correctamente."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:498
+#: src/containers/namespace-detail/namespace-detail.tsx:510
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "El usuario \"{0}\" se eliminó correctamente del grupo \"{name}\"."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:519
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "Los roles del grupo \"{0}\" no pudieron ser actualizados en \"{name}\"."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:518
-#: src/containers/namespace-detail/namespace-detail.tsx:537
+#: src/containers/namespace-detail/namespace-detail.tsx:530
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "Roles del grupo \"{0}\" actualizados con éxito en \"{name}\"."
 
@@ -1663,7 +1696,7 @@ msgstr "Lista de grupos"
 msgid "Group name"
 msgstr "Nombre del grupo"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:259
+#: src/containers/namespace-detail/namespace-detail.tsx:263
 msgid "Group {0}"
 msgstr "Grupo {0}"
 
@@ -1704,7 +1737,7 @@ msgstr "Ocultar la firma"
 #: src/components/delete-modal/delete-collection-modal.tsx:73
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
-#: src/containers/namespace-detail/namespace-detail.tsx:348
+#: src/containers/namespace-detail/namespace-detail.tsx:352
 msgid "I understand that this action cannot be undone."
 msgstr "Entiendo que esta acción no se puede deshacer."
 
@@ -1712,7 +1745,7 @@ msgstr "Entiendo que esta acción no se puede deshacer."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Si se selecciona, se debe realizar la validación de pares TLS."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:249
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "Si el controlador no aparece en la tabla, compruebe el archivo settings.py."
 
@@ -1753,7 +1786,7 @@ msgstr "Importar y trasladar a la puesta en escena"
 msgid "Import log"
 msgstr "Registro de importación"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:831
+#: src/containers/namespace-detail/namespace-detail.tsx:844
 msgid "Imports"
 msgstr "Importaciones"
 
@@ -1873,9 +1906,13 @@ msgstr "Última actualización del registro {0}"
 msgid "Layers"
 msgstr "Capas"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:269
+#: src/components/execution-environment/publish-to-controller-modal.tsx:253
 msgid "Learn more"
 msgstr "Más información"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:180
+msgid "Learn more about Ansible Wisdom."
+msgstr ""
 
 #: src/loaders/standalone/menu.tsx:81
 msgid "Legacy"
@@ -1889,6 +1926,14 @@ msgstr ""
 #: src/containers/legacy-roles/legacy-roles.tsx:127
 #: src/loaders/standalone/menu.tsx:86
 msgid "Legacy Roles"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:60
+msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:65
+msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
 msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:59
@@ -1916,7 +1961,7 @@ msgstr "Lista de colecciones"
 msgid "List of Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:140
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:146
 #: src/containers/legacy-roles/legacy-roles.tsx:151
 msgid "List of Legacy Roles"
 msgstr ""
@@ -2065,15 +2110,23 @@ msgstr "El nombre no debe estar vacío."
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:916
+#: src/containers/namespace-detail/namespace-detail.tsx:937
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el espacio de nombres \"{name}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:895
+#: src/containers/namespace-detail/namespace-detail.tsx:916
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:244
+#: src/components/wisdom-modal/wisdom-modal.tsx:37
+msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:42
+msgid "Namespace <0>{name}</0> is opted out of Wisdom."
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
 msgstr ""
 
@@ -2086,8 +2139,8 @@ msgid "Namespace names are limited to alphanumeric characters and underscores, m
 msgstr "Los nombres de los espacios de nombres están limitados a caracteres alfanuméricos y guiones bajos, deben tener una longitud mínima de 2 caracteres y no pueden empezar con \"_\"."
 
 #: src/components/namespace-form/namespace-form.tsx:76
-#: src/containers/namespace-detail/namespace-detail.tsx:226
-#: src/containers/namespace-detail/namespace-detail.tsx:245
+#: src/containers/namespace-detail/namespace-detail.tsx:230
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 msgid "Namespace owners"
 msgstr "Propietarios de espacios de nombres"
 
@@ -2143,7 +2196,7 @@ msgstr ""
 msgid "No"
 msgstr "No"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:303
+#: src/components/execution-environment/publish-to-controller-modal.tsx:287
 msgid "No Controllers available"
 msgstr "No hay controladores disponibles"
 
@@ -2167,7 +2220,7 @@ msgstr "No hay roles asignables."
 msgid "No child task"
 msgstr "Ninguna tarea infantil"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:407
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 #: src/containers/search/search.tsx:254
 msgid "No collections yet"
 msgstr "Todavía no hay colecciones"
@@ -2246,7 +2299,7 @@ msgstr "No se encontraron resultados"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "Ningún resultado coincide con los criterios de filtrado. Pruebe cambiar la configuración del filtro."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:133
 msgid "No roles yet"
 msgstr ""
@@ -2255,7 +2308,7 @@ msgstr ""
 msgid "No signature keys yet"
 msgstr "Todavía no hay claves de firma"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:199
+#: src/components/execution-environment/publish-to-controller-modal.tsx:195
 msgid "No tag or digest selected."
 msgstr "No se ha seleccionado ninguna etiqueta o compendio."
 
@@ -2325,6 +2378,16 @@ msgstr "OS / Arch"
 #: src/containers/token/token-insights.tsx:130
 msgid "Offline token"
 msgstr "Ficha de conexión"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:158
+#: src/components/wisdom-modal/wisdom-modal.tsx:190
+msgid "Opt in to Wisdom"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:168
+#: src/components/wisdom-modal/wisdom-modal.tsx:191
+msgid "Opt out of Wisdom"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -2797,7 +2860,7 @@ msgstr "Requiere permisos de superusuario para su edición."
 msgid "Reserve resources"
 msgstr "Recursos de reserva"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:229
 msgid "Resources"
 msgstr "Recursos"
 
@@ -2862,7 +2925,7 @@ msgstr "Roles"
 msgid "Roles list could not be displayed."
 msgstr "No se pudo mostrar la lista de usuarios."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx:136
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:142
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "Roles will appear once imported"
 msgstr ""
@@ -2943,7 +3006,7 @@ msgstr "Seleccionar un grupo"
 msgid "Select a registry"
 msgstr "Seleccione un registro"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:335
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
@@ -3038,7 +3101,7 @@ msgid "Sign all"
 msgstr "Firmar todo"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:854
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
@@ -3105,7 +3168,7 @@ msgstr "Versión(es) firmada(s)"
 msgid "Signing service selector:"
 msgstr "Selecciona un servicio de firmas "
 
-#: src/containers/namespace-detail/namespace-detail.tsx:638
+#: src/containers/namespace-detail/namespace-detail.tsx:650
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
@@ -3272,13 +3335,13 @@ msgid "TLS validation"
 msgstr "Validación TLS"
 
 #: src/components/collection-list/collection-filter.tsx:46
-#: src/components/execution-environment/publish-to-controller-modal.tsx:318
+#: src/components/execution-environment/publish-to-controller-modal.tsx:302
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:156
+#: src/components/execution-environment/publish-to-controller-modal.tsx:152
 msgid "Tags could not be displayed."
 msgstr "No se pudieron mostrar las etiquetas."
 
@@ -3423,7 +3486,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "Los roles seleccionados se añadirán a este Entorno de Ejecución específico."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:474
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "The selected roles will be added to this specific namespace."
 msgstr "Los roles seleccionados se añadirán a este espacio de nombres específico."
 
@@ -3590,7 +3653,7 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:969
+#: src/containers/namespace-detail/namespace-detail.tsx:990
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "Cancelar paso a desuso"
@@ -3623,13 +3686,13 @@ msgstr "Subir"
 msgid "Upload and modify collections."
 msgstr "Subir y modificar colecciones."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:414
-#: src/containers/namespace-detail/namespace-detail.tsx:853
+#: src/containers/namespace-detail/namespace-detail.tsx:426
+#: src/containers/namespace-detail/namespace-detail.tsx:874
 msgid "Upload collection"
 msgstr "Subir la colección"
 
 #: src/components/headers/collection-header.tsx:263
-#: src/containers/namespace-detail/namespace-detail.tsx:949
+#: src/containers/namespace-detail/namespace-detail.tsx:970
 #: src/containers/search/search.tsx:396
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
@@ -3649,7 +3712,7 @@ msgstr "Cargar firma"
 msgid "Upstream name"
 msgstr "Nombre del upstream"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:283
+#: src/components/execution-environment/publish-to-controller-modal.tsx:267
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
 #: src/containers/execution-environment-list/execution_environment_list.tsx:375
@@ -3910,6 +3973,12 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:178
 msgid "Website"
 msgstr "Página web"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:188
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:277
+#: src/containers/namespace-detail/namespace-detail.tsx:862
+msgid "Wisdom settings"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:294
 msgid "YAML requirements"
