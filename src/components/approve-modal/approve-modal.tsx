@@ -11,6 +11,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { version } from 'os';
 import React, { useEffect, useState } from 'react';
 import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
@@ -23,6 +24,7 @@ import {
   Pagination,
   SortTable,
 } from 'src/components';
+import { Constants } from 'src/constants';
 import {
   errorMessage,
   parsePulpIDFromURL,
@@ -31,9 +33,10 @@ import {
 
 interface IProps {
   closeAction: () => void;
-  collectionVersion: CollectionVersion;
+  collectionVersionProps: CollectionVersion;
   addAlert: (alert) => void;
   allRepositories: Repository[];
+  finishAction: () => void;
 }
 
 export const ApproveModal = (props: IProps) => {
@@ -42,12 +45,63 @@ export const ApproveModal = (props: IProps) => {
   const [itemCount, setItemCount] = useState(0);
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
+  const [fixedRepos, setFixedRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState({
     page: 1,
     page_size: 10,
     sort: 'name',
   });
+  const [collectionVersion, setCollectionVersion] = useState(null);
+
+  function init() {
+    function failedToLoadCollection(status, statusText) {
+      setLoading(false);
+      addAlert({
+        title: t`Failed to load collection.`,
+        variant: 'danger',
+        description: errorMessage(status, statusText),
+      });
+    }
+    setLoading(true);
+
+    // reload the collection version, because it may now contains different repos
+    return CollectionVersionAPI.list({
+      name: props.collectionVersionProps.name,
+      namespace: props.collectionVersionProps.namespace,
+    })
+      .then((data) => {
+        if (data.data.data.length == 0) {
+          failedToLoadCollection('', 'Collection not found.');
+          return;
+        }
+
+        const version = data.data.data[0];
+        setLoading(false);
+        setCollectionVersion(version);
+
+        const fixedReposLocal = [];
+        const selectedReposLocal = [];
+
+        // check for approval repos that are already in collection and select them in UI
+        // this is handling of situation when collection is in inconsistent state
+        version.repository_list.forEach((repo) => {
+          const count = props.allRepositories.filter(
+            (r) => r.name == repo,
+          ).length;
+          if (count > 0) {
+            fixedReposLocal.push(repo);
+            selectedReposLocal.push(repo);
+          }
+        });
+
+        setSelectedRepos(selectedReposLocal);
+        setFixedRepos(fixedReposLocal);
+      })
+      .catch(({ response: { status, statusText } }) => {
+        failedToLoadCollection(status, statusText);
+      });
+  }
 
   function buttonClick() {
     function failedToLoadRepo(status?, statusText?) {
@@ -58,64 +112,97 @@ export const ApproveModal = (props: IProps) => {
         description: errorMessage(status, statusText),
       });
     }
-    /*props.approveAll( 
-        { 
-            collectionVersion : props.collectionVersion, 
-            destination_repos : selectedRepos, 
-            errorAlert : (alert) => this.addAlert(alert), 
-            modalClose : () => props.closeAction(), 
-            setLoading 
-        });*/
 
     setLoading(true);
-    const repoName = props.collectionVersion.repository_list[0];
+
+    const originRepoName = collectionVersion.repository_list.filter(
+      (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
+    )[0];
+    const reposToApprove = [];
+
+    // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
+    // this handles the possible inconsistent state
+    selectedRepos.forEach((repo) => {
+      if (!fixedRepos.includes(repo)) {
+        reposToApprove.push(repo);
+      }
+    });
+
     const repositoriesRef = props.allRepositories
-      .filter((repo) => selectedRepos.includes(repo.name))
+      .filter((repo) => reposToApprove.includes(repo.name))
       .map((repo) => repo.pulp_href);
 
-    Repositories.getRepository({ name: repoName })
+    // do not copy to all repos, one last repository must be used to move content into it from staging or rejected
+    repositoriesRef.pop();
+
+    let copyCompleted = false;
+
+    const needCopy = repositoriesRef.length > 0;
+
+    Repositories.getRepository({ name: originRepoName })
       .then((data) => {
         if (data.data.results.length == 0) {
-          failedToLoadRepo('', t`Repository name ${repoName} not found.`);
+          failedToLoadRepo('', t`Repository name ${originRepoName} not found.`);
         } else {
           const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
-
-          // load collection version
-          debugger;
-          CollectionVersionAPI.get(props.collectionVersion.id)
+          CollectionVersionAPI.get(collectionVersion.id)
             .then((data) => {
-              debugger;
+              let promise = Promise.resolve();
 
-              Repositories.copyCollectionVersion(
-                pulp_id,
-                [data.data.pulp_href],
-                repositoriesRef,
-              )
+              if (needCopy) {
+                promise = Repositories.copyCollectionVersion(
+                  pulp_id,
+                  [data.data.pulp_href],
+                  repositoriesRef,
+                );
+              }
+              promise
                 .then((task) => {
-                  debugger;
-                  return waitForTaskUrl(task.data.task);
+                  if (needCopy) {
+                    return waitForTaskUrl(task['data'].task);
+                  }
+                  return true;
                 })
-                .then((data) => {
-                  props.closeAction();
+                .then(() => {
+                  copyCompleted = true;
+
+                  return CollectionVersionAPI.setRepository(
+                    collectionVersion.namespace,
+                    collectionVersion.name,
+                    collectionVersion.version,
+                    originRepoName,
+                    reposToApprove[reposToApprove.length - 1],
+                  );
+                })
+                .then(() => {
+                  props.finishAction();
                   props.addAlert({
-                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
+                    title: t`Certification status for collection "${collectionVersion.namespace} ${collectionVersion.name} v${collectionVersion.version}" has been successfully updated.`,
                     variant: 'success',
                     description: '',
                   });
                 })
                 .catch(({ response: { status, statusText } }) => {
-                  setLoading(false);
+                  init();
                   addAlert({
                     title: t`Failed to approve collection.`,
                     variant: 'danger',
                     description: errorMessage(status, statusText),
                   });
+
+                  if (copyCompleted && needCopy) {
+                    addAlert({
+                      title: t`Operation status.`,
+                      variant: 'info',
+                      description:
+                        'Collection was copied to some of the selected repositories, but not all.',
+                    });
+                  }
                 });
             })
             .catch(({ response: { status, statusText } }) => {
-              setLoading(false);
               addAlert({
-                title: t`Failed to load collection version ${props.collectionVersion.name}.`,
+                title: t`Failed to load collection.`,
                 variant: 'danger',
                 description: errorMessage(status, statusText),
               });
@@ -174,11 +261,17 @@ export const ApproveModal = (props: IProps) => {
     const labels = (
       <>
         <LabelGroup>
-          {selectedRepos.map((name) => (
-            <>
-              <Label onClose={() => changeSelection(name)}>{name}</Label>{' '}
-            </>
-          ))}
+          {selectedRepos.map((name) => {
+            let label = null;
+            if (fixedRepos.includes(name)) {
+              label = <Label>{name}</Label>;
+            } else {
+              label = (
+                <Label onClose={() => changeSelection(name)}>{name}</Label>
+              );
+            }
+            return <>{label} </>;
+          })}
         </LabelGroup>
       </>
     );
@@ -199,7 +292,15 @@ export const ApproveModal = (props: IProps) => {
     loadRepos();
   }, [params, inputText]);
 
+  useEffect(() => {
+    init();
+  }, []);
+
   function renderTable() {
+    if (!collectionVersion) {
+      return;
+    }
+
     const sortTableOptions = {
       headers: [
         {
@@ -230,6 +331,9 @@ export const ApproveModal = (props: IProps) => {
                 onSelect={() => {
                   changeSelection(repo.name);
                 }}
+                isDisabled={collectionVersion.repository_list.includes(
+                  repo.name,
+                )}
                 data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
               >
                 <td>
@@ -252,11 +356,18 @@ export const ApproveModal = (props: IProps) => {
             key='confirm'
             onClick={buttonClick}
             variant='primary'
-            isDisabled={selectedRepos.length == 0}
+            isDisabled={
+              selectedRepos.length - fixedRepos.length <= 0 || loading
+            }
           >
             {t`Select`}
           </Button>,
-          <Button key='cancel' onClick={props.closeAction} variant='link'>
+          <Button
+            key='cancel'
+            onClick={props.closeAction}
+            variant='link'
+            isDisabled={loading}
+          >
             {t`Cancel`}
           </Button>,
         ]}

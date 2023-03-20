@@ -269,7 +269,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 closeAction={() => {
                   this.setState({ approveModalInfo: null });
                 }}
-                collectionVersion={
+                finishAction={() => {
+                  this.setState({ approveModalInfo: null });
+                  this.queryCollections();
+                }}
+                collectionVersionProps={
                   this.state.approveModalInfo.collectionVersion
                 }
                 addAlert={(alert) => this.addAlertObj(alert)}
@@ -589,11 +593,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private isApproved(version) {
-    let approvedRepoFound = false;
+    let approvedRepoFound = true;
 
-    this.state.repositoryList.forEach((repo: Repository) => {
-      if (version.repository_list.includes(repo.name)) {
-        approvedRepoFound = true;
+    version.repository_list.forEach((repo) => {
+      if (this.state.repositoryList.filter((r) => r.name == repo).length == 0) {
+        approvedRepoFound = false;
       }
     });
 

@@ -47,8 +47,6 @@ class API extends PulpAPI {
       params['signing_service'] = signing_service;
     }
 
-    debugger;
-
     return this.http.post(
       this.apiPath + `${pulp_id}/copy_collection_version/`,
       params,
