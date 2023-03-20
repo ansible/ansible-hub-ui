@@ -386,8 +386,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       namespace: deleteCollection.namespace.name,
                     }),
                     selectedRepo: this.context.selectedRepo,
-                    addAlert: (alert) =>
-                      this.context.setAlerts([...this.state.alerts, alert]),
+                    addAlert: (alert) => this.context.queueAlert(alert),
                   });
             })
           }
@@ -892,18 +891,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             });
           } else {
             // last version in collection => collection will be deleted => redirect
-            this.context.setAlerts([
-              ...this.context.alerts,
-              {
-                variant: 'success',
-                title: (
-                  <Trans>
-                    Collection &quot;{name} v{collectionVersion}&quot; has been
-                    successfully deleted.
-                  </Trans>
-                ),
-              },
-            ]);
+            this.context.queueAlert({
+              variant: 'success',
+              title: (
+                <Trans>
+                  Collection &quot;{name} v{collectionVersion}&quot; has been
+                  successfully deleted.
+                </Trans>
+              ),
+            });
             this.setState({
               redirect: formatPath(Paths.namespaceByRepo, {
                 repo: this.context.selectedRepo,

@@ -64,11 +64,14 @@ const App = (_props) => {
     );
   }
 
+  const queueAlert = (alert) => setAlerts((alerts) => [...alerts, alert]);
+
   return (
     <AppContext.Provider
       value={{
         alerts,
         featureFlags,
+        queueAlert,
         selectedRepo,
         setAlerts,
         setUser,

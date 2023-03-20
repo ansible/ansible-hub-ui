@@ -908,17 +908,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             confirmDelete: false,
             isNamespacePending: false,
           });
-          this.context.setAlerts([
-            ...this.context.alerts,
-            {
-              variant: 'success',
-              title: (
-                <Trans>
-                  Namespace &quot;{name}&quot; has been successfully deleted.
-                </Trans>
-              ),
-            },
-          ]);
+          this.context.queueAlert({
+            variant: 'success',
+            title: (
+              <Trans>
+                Namespace &quot;{name}&quot; has been successfully deleted.
+              </Trans>
+            ),
+          });
         })
         .catch((e) => {
           const { status, statusText } = e.response;

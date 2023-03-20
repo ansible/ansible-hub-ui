@@ -229,18 +229,15 @@ class EditNamespace extends React.Component<RouteProps, IState> {
               }),
             },
             () =>
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
-                  variant: 'success',
-                  title: (
-                    <Trans>
-                      Saved changes to namespace &quot;
-                      {this.state.namespace.name}&quot;.
-                    </Trans>
-                  ),
-                },
-              ]),
+              this.context.queueAlert({
+                variant: 'success',
+                title: (
+                  <Trans>
+                    Saved changes to namespace &quot;
+                    {this.state.namespace.name}&quot;.
+                  </Trans>
+                ),
+              }),
           );
         })
         .catch((error) => {
