@@ -6,7 +6,7 @@ import {
   GroupType,
   RoleType,
 } from 'src/api';
-import { OwnersTab } from 'src/components';
+import { AccessTab } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
@@ -32,7 +32,7 @@ interface IState {
   showRoleSelectWizard?: { roles?: RoleType[] };
 }
 
-class ExecutionEnvironmentDetailOwners extends React.Component<
+class ExecutionEnvironmentDetailAccess extends React.Component<
   IDetailSharedProps,
   IState
 > {
@@ -99,7 +99,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
     const { name, groups, canEditOwners, selectedGroup } = this.state;
 
     return (
-      <OwnersTab
+      <AccessTab
         showGroupRemoveModal={this.state.showGroupRemoveModal}
         showGroupSelectWizard={this.state.showGroupSelectWizard}
         showRoleRemoveModal={this.state.showRoleRemoveModal}
@@ -179,7 +179,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
           });
         }}
         selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
-        urlPrefix={formatEEPath(Paths.executionEnvironmentDetailOwners, {
+        urlPrefix={formatEEPath(Paths.executionEnvironmentDetailAccess, {
           container: name,
         })}
       />
@@ -244,8 +244,8 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 }
 
-ExecutionEnvironmentDetailOwners.contextType = AppContext;
+ExecutionEnvironmentDetailAccess.contextType = AppContext;
 
 export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailOwners)),
+  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailAccess)),
 );

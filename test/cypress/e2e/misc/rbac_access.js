@@ -1,24 +1,24 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
-describe('Namespace owners tab', () => {
+describe('Namespace Access tab', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.deleteTestGroups();
 
-    cy.galaxykit(`-i namespace create rbac_owners_${num}`);
-    cy.galaxykit('-i group create', `owners_group`);
+    cy.galaxykit(`-i namespace create rbac_access_${num}`);
+    cy.galaxykit('-i group create', `access_group`);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published/rbac_owners_${num}`);
-    cy.get('.pf-c-tabs__item-text').contains('Namespace owners').click();
+    cy.visit(`${uiPrefix}repo/published/rbac_access_${num}`);
+    cy.get('.pf-c-tabs__item-text').contains('Access').click();
   });
 
   it('add and remove group and roles', () => {
-    testOwnersTab({
+    testAccessTab({
       num,
       permission: 'change_namespace',
       permissionGroup: 'Galaxy',
@@ -29,7 +29,7 @@ describe('Namespace owners tab', () => {
   });
 });
 
-describe('Execution Environment Owners tab', () => {
+describe('Execution Environment Access tab', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
@@ -40,26 +40,26 @@ describe('Execution Environment Owners tab', () => {
 
     cy.galaxykit(
       'registry create',
-      `rbac_owners_${num}_registry`,
+      `rbac_access_${num}_registry`,
       'https://registry.hub.docker.com/',
     );
     cy.galaxykit(
       'container create',
-      `rbac_owners_${num}`,
+      `rbac_access_${num}`,
       'library/alpine',
-      `rbac_owners_${num}_registry`,
+      `rbac_access_${num}_registry`,
     );
-    cy.galaxykit('-i group create', `owners_group`);
+    cy.galaxykit('-i group create', `access_group`);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}containers/rbac_owners_${num}`);
-    cy.get('.pf-c-tabs__item-text').contains('Owners').click();
+    cy.visit(`${uiPrefix}containers/rbac_access_${num}`);
+    cy.get('.pf-c-tabs__item-text').contains('Access').click();
   });
 
   it('add and remove group and roles', () => {
-    testOwnersTab({
+    testAccessTab({
       num,
       permission: 'change_containernamespace',
       permissionGroup: 'Container',
@@ -70,7 +70,7 @@ describe('Execution Environment Owners tab', () => {
   });
 });
 
-function testOwnersTab({
+function testAccessTab({
   num,
   permission,
   permissionGroup,
@@ -85,14 +85,14 @@ function testOwnersTab({
   // group role modal
   // find partner-engineers, select, check indicator, next
   cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
-    'owners{enter}',
+    'access{enter}',
   );
   cy.get(
-    '[data-cy="GroupListTable-CheckboxRow-row-owners_group"] input[type=radio]',
+    '[data-cy="GroupListTable-CheckboxRow-row-access_group"] input[type=radio]',
   ).click();
 
   cy.get('strong').contains('Selected group');
-  cy.get('.hub-permission').contains('owners_group');
+  cy.get('.hub-permission').contains('access_group');
 
   cy.get('footer button').contains('Next').click();
 
@@ -110,7 +110,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Next').click();
 
   // see preview, add
-  cy.get('strong').contains('owners_group');
+  cy.get('strong').contains('access_group');
   cy.get('strong').contains(role);
 
   cy.get('.hub-permission strong').contains(permissionGroup);
@@ -119,18 +119,18 @@ function testOwnersTab({
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" has been successfully added to "rbac_owners_${num}".`,
+      `Group "access_group" has been successfully added to "rbac_access_${num}".`,
     )
     .parent('.pf-c-alert')
     .find('button')
     .click();
-  cy.get('tr[data-cy="OwnersTab-row-owners_group"]');
+  cy.get('tr[data-cy="AccessTab-row-access_group"]');
 
   // group list view, try modal, open group
   cy.get('button').contains('Select a group').click();
   cy.get('.pf-c-wizard__footer-cancel').click();
 
-  cy.get('tr[data-cy="OwnersTab-row-owners_group"] a').click();
+  cy.get('tr[data-cy="AccessTab-row-access_group"] a').click();
 
   // role list view, use modal
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
@@ -143,7 +143,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+      `Group "access_group" roles successfully updated in "rbac_access_${num}".`,
     )
     .parent('.pf-c-alert')
     .find('button')
@@ -161,13 +161,13 @@ function testOwnersTab({
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle] button`,
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
-  cy.get('.pf-c-modal-box__body b').contains('owners_group');
+  cy.get('.pf-c-modal-box__body b').contains('access_group');
   cy.get('.pf-c-modal-box__body b').contains(role);
-  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_access_${num}`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+      `Group "access_group" roles successfully updated in "rbac_access_${num}".`,
     )
     .parent('.pf-c-alert')
     .find('button')
@@ -178,15 +178,15 @@ function testOwnersTab({
 
   // list view, delete, see empty
   cy.get(
-    'tr[data-cy="OwnersTab-row-owners_group"] [data-cy=kebab-toggle] button',
+    'tr[data-cy="AccessTab-row-access_group"] [data-cy=kebab-toggle] button',
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
-  cy.get('.pf-c-modal-box__body b').contains('owners_group');
-  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
+  cy.get('.pf-c-modal-box__body b').contains('access_group');
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_access_${num}`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
+      `Group "access_group" has been successfully removed from "rbac_access_${num}".`,
     )
     .parent('.pf-c-alert')
     .find('button')

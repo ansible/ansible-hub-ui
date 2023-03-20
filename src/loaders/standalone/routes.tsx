@@ -13,9 +13,9 @@ import {
   EditRole,
   EditUser,
   ExecutionEnvironmentDetail,
+  ExecutionEnvironmentDetailAccess,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
-  ExecutionEnvironmentDetailOwners,
   ExecutionEnvironmentList,
   ExecutionEnvironmentManifest,
   ExecutionEnvironmentRegistryList,
@@ -147,8 +147,8 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
         isDisabled: isContainerDisabled,
       },
       {
-        component: ExecutionEnvironmentDetailOwners,
-        path: Paths.executionEnvironmentDetailOwnersWithNamespace,
+        component: ExecutionEnvironmentDetailAccess,
+        path: Paths.executionEnvironmentDetailAccessWithNamespace,
         isDisabled: isContainerDisabled,
       },
       {
@@ -172,8 +172,8 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
         isDisabled: isContainerDisabled,
       },
       {
-        component: ExecutionEnvironmentDetailOwners,
-        path: Paths.executionEnvironmentDetailOwners,
+        component: ExecutionEnvironmentDetailAccess,
+        path: Paths.executionEnvironmentDetailAccess,
         isDisabled: isContainerDisabled,
       },
       {

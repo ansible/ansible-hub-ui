@@ -4,7 +4,7 @@ describe('API Token Tests', () => {
   });
 
   it('token is generated', () => {
-    cy.menuGo('Collections > API token management');
+    cy.menuGo('Collections > API token');
     cy.contains('Load token').click();
 
     cy.get('[aria-label="Copyable input"]')

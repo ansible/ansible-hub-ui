@@ -38,8 +38,8 @@ export function formatEEPath(path, data, params?) {
       Paths.executionEnvironmentDetailActivitiesWithNamespace,
     [Paths.executionEnvironmentDetailImages]:
       Paths.executionEnvironmentDetailImagesWithNamespace,
-    [Paths.executionEnvironmentDetailOwners]:
-      Paths.executionEnvironmentDetailOwnersWithNamespace,
+    [Paths.executionEnvironmentDetailAccess]:
+      Paths.executionEnvironmentDetailAccessWithNamespace,
     [Paths.executionEnvironmentManifest]:
       Paths.executionEnvironmentManifestWithNamespace,
   };
@@ -64,8 +64,8 @@ export enum Paths {
   executionEnvironmentDetailActivitiesWithNamespace = '/containers/:namespace/:container/_content/activity',
   executionEnvironmentDetailImages = '/containers/:container/_content/images',
   executionEnvironmentDetailImagesWithNamespace = '/containers/:namespace/:container/_content/images',
-  executionEnvironmentDetailOwners = '/containers/:container/_content/owners',
-  executionEnvironmentDetailOwnersWithNamespace = '/containers/:namespace/:container/_content/owners',
+  executionEnvironmentDetailAccess = '/containers/:container/_content/access',
+  executionEnvironmentDetailAccessWithNamespace = '/containers/:namespace/:container/_content/access',
   executionEnvironmentManifest = '/containers/:container/_content/images/:digest',
   executionEnvironmentManifestWithNamespace = '/containers/:namespace/:container/_content/images/:digest',
   executionEnvironments = '/containers',

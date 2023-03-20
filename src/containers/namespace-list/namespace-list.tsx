@@ -171,7 +171,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   repo: 'published',
                   namespace: result.name,
                 },
-                { tab: 'owners' },
+                { tab: 'collections' },
               ),
             })
           }

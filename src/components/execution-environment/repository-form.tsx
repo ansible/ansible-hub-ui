@@ -1,6 +1,5 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import {
-  Alert,
   Button,
   Form,
   FormGroup,
@@ -12,9 +11,8 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
+import { TagIcon } from '@patternfly/react-icons';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import {
   ContainerDistributionAPI,
   ExecutionEnvironmentRegistryAPI,
@@ -27,7 +25,6 @@ import {
   HelperText,
   closeAlertMixin,
 } from 'src/components';
-import { Paths, formatEEPath } from 'src/paths';
 import {
   ErrorMessagesType,
   alertErrorsWithoutFields,
@@ -378,33 +375,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               type='text'
               resizeOrientation={'vertical'}
               autoResize={true}
-            />
-          </FormGroup>
-
-          <FormGroup fieldId='none' label={t`Groups with access`}>
-            <Alert
-              isInline
-              variant='info'
-              title={
-                isNew ? (
-                  <Trans>
-                    Moved to the <b>Owners</b> tab
-                  </Trans>
-                ) : (
-                  <Trans>
-                    Moved to the{' '}
-                    <Link
-                      target='_blank'
-                      to={formatEEPath(Paths.executionEnvironmentDetailOwners, {
-                        container: name,
-                      })}
-                    >
-                      Owners
-                    </Link>{' '}
-                    <ExternalLinkAltIcon /> tab
-                  </Trans>
-                )
-              }
             />
           </FormGroup>
         </Form>
