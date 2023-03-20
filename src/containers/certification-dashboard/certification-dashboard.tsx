@@ -616,13 +616,17 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     if (this.state.repositoryList.length == 1) {
+      const originalRepo = version.repository_list.find(
+        (repo) =>
+          repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
+      );
       if (
-        version.repository_list[0] == Constants.NEEDSREVIEW ||
-        version.repository_list[0] == Constants.NOTCERTIFIED
+        originalRepo == Constants.NEEDSREVIEW ||
+        originalRepo == Constants.NOTCERTIFIED
       ) {
         this.updateCertification(
           version,
-          version.repository_list[0],
+          originalRepo,
           this.state.repositoryList[0].name,
         );
       } else {
@@ -638,15 +642,15 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
-  /* public approveAll( params : { collectionVersion : CollectionVersion, destination_repos: string[], signing_service : string, errorAlert, modalClose, setLoading } )
-  {
-    debugger;
-    
-  }*/
-
   private reject(version) {
     // test
-    //CollectionVersionAPI.setRepository(version.namespace, version.name, version.version, version.repository_list[0], 'test');
+    CollectionVersionAPI.setRepository(
+      version.namespace,
+      version.name,
+      version.version,
+      version.repository_list[0],
+      Constants.NOTCERTIFIED,
+    );
     //return;
 
     if (version.repository_list.length == 0) {

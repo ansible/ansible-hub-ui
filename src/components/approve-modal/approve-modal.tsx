@@ -115,9 +115,9 @@ export const ApproveModal = (props: IProps) => {
 
     setLoading(true);
 
-    const originRepoName = collectionVersion.repository_list.filter(
+    const originRepoName = collectionVersion.repository_list.find(
       (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
-    )[0];
+    );
     const reposToApprove = [];
 
     // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
@@ -134,6 +134,8 @@ export const ApproveModal = (props: IProps) => {
 
     // do not copy to all repos, one last repository must be used to move content into it from staging or rejected
     repositoriesRef.pop();
+
+    const lastRepo = reposToApprove[reposToApprove.length - 1];
 
     let copyCompleted = false;
 
@@ -171,7 +173,7 @@ export const ApproveModal = (props: IProps) => {
                     collectionVersion.name,
                     collectionVersion.version,
                     originRepoName,
-                    reposToApprove[reposToApprove.length - 1],
+                    lastRepo,
                   );
                 })
                 .then(() => {
@@ -194,8 +196,7 @@ export const ApproveModal = (props: IProps) => {
                     addAlert({
                       title: t`Operation status.`,
                       variant: 'info',
-                      description:
-                        'Collection was copied to some of the selected repositories, but not all.',
+                      description: t`Collection was copied to some of the selected repositories, but failed to move to repository ${lastRepo}`,
                     });
                   }
                 });
