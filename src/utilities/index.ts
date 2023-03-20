@@ -22,6 +22,7 @@ export { hasPermission } from './has-permission';
 export { parsePulpIDFromURL } from './parse-pulp-id';
 export { lastSynced, lastSyncStatus } from './last-sync-task';
 export { waitForTask, waitForTaskUrl } from './wait-for-task';
+export { taskAlert } from './task-alert';
 export { errorMessage } from './fail-alerts';
 export { validateURLHelper } from './validateURLHelper';
 export { canSignNamespace, canSignEE } from './can-sign';

@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
@@ -21,12 +21,12 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps } from 'src/utilities';
 import {
   ParamHelper,
   RepoSigningUtils,
+  RouteProps,
   canSignEE,
-  parsePulpIDFromURL,
+  taskAlert,
   waitForTask,
 } from 'src/utilities';
 
@@ -360,20 +360,12 @@ export function withContainerRepo(WrappedComponent) {
 
     private sync(name) {
       ExecutionEnvironmentRemoteAPI.sync(name)
-        .then((result) => {
-          const task_id = parsePulpIDFromURL(result.data.task);
-          this.addAlert(
-            <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
-            'info',
-            <span>
-              <Trans>
-                See the task management{' '}
-                <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                  detail page{' '}
-                </Link>
-                for the status of this task.
-              </Trans>
-            </span>,
+        .then(({ data }) => {
+          this.addAlertObj(
+            taskAlert(
+              data.task,
+              t`Sync started for remote registry "${name}".`,
+            ),
           );
           this.loadRepo();
         })

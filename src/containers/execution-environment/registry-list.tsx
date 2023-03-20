@@ -9,7 +9,6 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
 import {
   AlertList,
@@ -31,17 +30,17 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   ErrorMessagesType,
   ParamHelper,
+  RouteProps,
+  errorMessage,
   filterIsSet,
   lastSyncStatus,
   lastSynced,
   mapErrorMessages,
-  parsePulpIDFromURL,
+  taskAlert,
+  withRouter,
 } from 'src/utilities';
 
 interface IState {
@@ -488,20 +487,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private syncRegistry({ id, name }) {
     ExecutionEnvironmentRegistryAPI.sync(id)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
-        this.addAlert(
-          <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
-          'info',
-          <span>
-            <Trans>
-              See the task management{' '}
-              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                detail page{' '}
-              </Link>
-              for the status of this task.
-            </Trans>
-          </span>,
+      .then(({ data }) => {
+        this.addAlertObj(
+          taskAlert(data.task, t`Sync started for remote registry "${name}".`),
         );
         this.queryRegistries(true);
       })
@@ -517,20 +505,13 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private indexRegistry({ id, name }) {
     ExecutionEnvironmentRegistryAPI.index(id)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
-        this.addAlert(
-          t`Indexing started for execution environment "${name}".`,
-          'success',
-          <span>
-            <Trans>
-              See the task management{' '}
-              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                detail page
-              </Link>
-              for the status of this task.
-            </Trans>
-          </span>,
+      .then(({ data }) => {
+        this.addAlertObj(
+          taskAlert(
+            data.task,
+            t`Indexing started for execution environment "${name}".`,
+            'success',
+          ),
         );
       })
       .catch((err) => {
@@ -543,16 +524,17 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       });
   }
 
-  private addAlert(title, variant, description?) {
+  private addAlertObj(alert: AlertType) {
     this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
+  private addAlert(title, variant, description?) {
+    this.addAlertObj({
+      description,
+      title,
+      variant,
     });
   }
 

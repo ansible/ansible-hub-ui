@@ -38,9 +38,14 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, filterIsSet, parsePulpIDFromURL } from 'src/utilities';
+import { Paths, formatEEPath } from 'src/paths';
+import {
+  ParamHelper,
+  RouteProps,
+  filterIsSet,
+  taskAlert,
+  withRouter,
+} from 'src/utilities';
 import './execution-environment.scss';
 
 interface IState {
@@ -520,22 +525,12 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
   private sync(name) {
     ExecutionEnvironmentRemoteAPI.sync(name)
-      .then((result) => {
-        const task_id = parsePulpIDFromURL(result.data.task);
-        this.addAlert(
-          <Trans>
-            Sync started for execution environment &quot;{name}&quot;.
-          </Trans>,
-          'info',
-          <span>
-            <Trans>
-              See the task management{' '}
-              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                detail page{' '}
-              </Link>
-              for the status of this task.
-            </Trans>
-          </span>,
+      .then(({ data }) => {
+        this.addAlertObj(
+          taskAlert(
+            data.task,
+            t`Sync started for execution environment "${name}".`,
+          ),
         );
       })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
