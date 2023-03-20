@@ -11,7 +11,6 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { version } from 'os';
 import React, { useEffect, useState } from 'react';
 import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
@@ -33,7 +32,7 @@ import {
 
 interface IProps {
   closeAction: () => void;
-  collectionVersionProps: CollectionVersion;
+  collectionVersion: CollectionVersion;
   addAlert: (alert) => void;
   allRepositories: Repository[];
   finishAction: () => void;
@@ -52,56 +51,6 @@ export const ApproveModal = (props: IProps) => {
     page_size: 10,
     sort: 'name',
   });
-  const [collectionVersion, setCollectionVersion] = useState(null);
-
-  function init() {
-    function failedToLoadCollection(status, statusText) {
-      setLoading(false);
-      addAlert({
-        title: t`Failed to load collection.`,
-        variant: 'danger',
-        description: errorMessage(status, statusText),
-      });
-    }
-    setLoading(true);
-
-    // reload the collection version, because it may now contains different repos
-    return CollectionVersionAPI.list({
-      name: props.collectionVersionProps.name,
-      namespace: props.collectionVersionProps.namespace,
-    })
-      .then((data) => {
-        if (data.data.data.length == 0) {
-          failedToLoadCollection('', 'Collection not found.');
-          return;
-        }
-
-        const version = data.data.data[0];
-        setLoading(false);
-        setCollectionVersion(version);
-
-        const fixedReposLocal = [];
-        const selectedReposLocal = [];
-
-        // check for approval repos that are already in collection and select them in UI
-        // this is handling of situation when collection is in inconsistent state
-        version.repository_list.forEach((repo) => {
-          const count = props.allRepositories.filter(
-            (r) => r.name == repo,
-          ).length;
-          if (count > 0) {
-            fixedReposLocal.push(repo);
-            selectedReposLocal.push(repo);
-          }
-        });
-
-        setSelectedRepos(selectedReposLocal);
-        setFixedRepos(fixedReposLocal);
-      })
-      .catch(({ response: { status, statusText } }) => {
-        failedToLoadCollection(status, statusText);
-      });
-  }
 
   function buttonClick() {
     function failedToLoadRepo(status?, statusText?) {
@@ -115,7 +64,7 @@ export const ApproveModal = (props: IProps) => {
 
     setLoading(true);
 
-    const originRepoName = collectionVersion.repository_list.find(
+    const originRepoName = props.collectionVersion.repository_list.find(
       (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
     );
     const reposToApprove = [];
@@ -132,73 +81,37 @@ export const ApproveModal = (props: IProps) => {
       .filter((repo) => reposToApprove.includes(repo.name))
       .map((repo) => repo.pulp_href);
 
-    // do not copy to all repos, one last repository must be used to move content into it from staging or rejected
-    repositoriesRef.pop();
-
-    const lastRepo = reposToApprove[reposToApprove.length - 1];
-
-    let copyCompleted = false;
-
-    const needCopy = repositoriesRef.length > 0;
-
     Repositories.getRepository({ name: originRepoName })
       .then((data) => {
         if (data.data.results.length == 0) {
           failedToLoadRepo('', t`Repository name ${originRepoName} not found.`);
         } else {
           const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
-          CollectionVersionAPI.get(collectionVersion.id)
+          CollectionVersionAPI.get(props.collectionVersion.id)
             .then((data) => {
-              let promise = Promise.resolve();
-
-              if (needCopy) {
-                promise = Repositories.copyCollectionVersion(
-                  pulp_id,
-                  [data.data.pulp_href],
-                  repositoriesRef,
-                );
-              }
-              promise
+              Repositories.moveCollectionVersion(
+                pulp_id,
+                [data.data.pulp_href],
+                repositoriesRef,
+              )
                 .then((task) => {
-                  if (needCopy) {
-                    return waitForTaskUrl(task['data'].task);
-                  }
-                  return true;
-                })
-                .then(() => {
-                  copyCompleted = true;
-
-                  return CollectionVersionAPI.setRepository(
-                    collectionVersion.namespace,
-                    collectionVersion.name,
-                    collectionVersion.version,
-                    originRepoName,
-                    lastRepo,
-                  );
+                  return waitForTaskUrl(task['data'].task);
                 })
                 .then(() => {
                   props.finishAction();
                   props.addAlert({
-                    title: t`Certification status for collection "${collectionVersion.namespace} ${collectionVersion.name} v${collectionVersion.version}" has been successfully updated.`,
+                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
                     variant: 'success',
                     description: '',
                   });
                 })
                 .catch(({ response: { status, statusText } }) => {
-                  init();
+                  setLoading(false);
                   addAlert({
                     title: t`Failed to approve collection.`,
                     variant: 'danger',
                     description: errorMessage(status, statusText),
                   });
-
-                  if (copyCompleted && needCopy) {
-                    addAlert({
-                      title: t`Operation status.`,
-                      variant: 'info',
-                      description: t`Collection was copied to some of the selected repositories, but failed to move to repository ${lastRepo}`,
-                    });
-                  }
                 });
             })
             .catch(({ response: { status, statusText } }) => {
@@ -294,11 +207,25 @@ export const ApproveModal = (props: IProps) => {
   }, [params, inputText]);
 
   useEffect(() => {
-    init();
+    const fixedReposLocal = [];
+    const selectedReposLocal = [];
+
+    // check for approval repos that are already in collection and select them in UI
+    // this is handling of situation when collection is in inconsistent state
+    props.collectionVersion.repository_list.forEach((repo) => {
+      const count = props.allRepositories.filter((r) => r.name == repo).length;
+      if (count > 0) {
+        fixedReposLocal.push(repo);
+        selectedReposLocal.push(repo);
+      }
+    });
+
+    setSelectedRepos(selectedReposLocal);
+    setFixedRepos(fixedReposLocal);
   }, []);
 
   function renderTable() {
-    if (!collectionVersion) {
+    if (!props.collectionVersion) {
       return;
     }
 
@@ -332,7 +259,7 @@ export const ApproveModal = (props: IProps) => {
                 onSelect={() => {
                   changeSelection(repo.name);
                 }}
-                isDisabled={collectionVersion.repository_list.includes(
+                isDisabled={props.collectionVersion.repository_list.includes(
                   repo.name,
                 )}
                 data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}

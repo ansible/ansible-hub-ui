@@ -49,15 +49,15 @@ import {
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   ParamHelper,
+  RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
   waitForTask,
+  withRouter,
 } from 'src/utilities';
-import repositoryList from '../repositories/repository-list';
 import './certification-dashboard.scss';
 
 interface IState {
@@ -273,7 +273,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   this.setState({ approveModalInfo: null });
                   this.queryCollections();
                 }}
-                collectionVersionProps={
+                collectionVersion={
                   this.state.approveModalInfo.collectionVersion
                 }
                 addAlert={(alert) => this.addAlertObj(alert)}
@@ -526,7 +526,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         <ListItemActions
           kebabItems={[
             certifyDropDown(false),
-            rejectDropDown(true),
+            rejectDropDown(false),
             importsLink,
           ]}
         />
@@ -643,16 +643,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private reject(version) {
-    // test
-    CollectionVersionAPI.setRepository(
-      version.namespace,
-      version.name,
-      version.version,
-      version.repository_list[0],
-      Constants.NOTCERTIFIED,
-    );
-    //return;
-
     if (version.repository_list.length == 0) {
       // I hope that this may not occure ever, but to be sure...
       this.addAlert(
@@ -670,7 +660,74 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         Constants.NOTCERTIFIED,
       );
     } else {
-      // TODO use new API
+      const promises = [];
+      const repositoryList = this.state.repositoryList;
+
+      this.setState({ loading: true });
+
+      const removedRepos = [];
+      const failedRepos = [];
+
+      version.repository_list.forEach((repo, i) => {
+        const repoInfo = repositoryList.find((r) => r.name == repo);
+
+        if (repoInfo?.pulp_labels?.pipeline == 'approved') {
+          const promise = CollectionVersionAPI.setRepository(
+            version.namespace,
+            version.name,
+            version.version,
+            repo,
+            Constants.NOTCERTIFIED,
+          )
+            .then(() => {
+              removedRepos.push(repo);
+              return Promise.resolve();
+            })
+            .catch(({ response: { status, statusText } }) => {
+              this.setState({ loading: false });
+              this.addAlertObj({
+                title: t`Failed to reject collection from repository ${repo}.`,
+                variant: 'danger',
+                description: errorMessage(status, statusText),
+              });
+
+              failedRepos.push(repo);
+              return Promise.resolve();
+            });
+          promises.push(promise);
+        }
+      });
+
+      Promise.all(promises).then(() => {
+        this.setState({ loading: false });
+
+        if (failedRepos.length == 0) {
+          this.addAlertObj({
+            title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+            variant: 'success',
+          });
+        } else {
+          if (removedRepos.length > 0) {
+            this.addAlertObj({
+              title: t`Rejection summary.`,
+              variant: 'danger',
+              description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
+                ', ',
+              )}, but failed to be removed from those repositories: ${failedRepos.join(
+                ', ',
+              )}`,
+            });
+          } else {
+            this.addAlertObj({
+              title: t`Rejection summary.`,
+              variant: 'danger',
+              description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
+                ', ',
+              )}`,
+            });
+          }
+        }
+      });
     }
   }
 

@@ -72,6 +72,21 @@ class API extends PulpAPI {
       params,
     );
   }
+
+  modify(
+    pulp_id: string,
+    add_content_units: string[],
+    remove_content_units: string[],
+    base_version: string,
+  ) {
+    let params = {
+      add_content_units,
+      remove_content_units,
+      base_version,
+    };
+
+    return this.http.post(this.apiPath + `${pulp_id}/modify/`, params);
+  }
 }
 
 export const Repositories = new API();
