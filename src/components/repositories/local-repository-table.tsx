@@ -99,9 +99,9 @@ export class LocalRepositoryTable extends React.Component<IProps> {
   private renderRow(distribution) {
     const cliConfig = [
       '[galaxy]',
-      `server_list = ${distribution.repository.name}_repo`,
+      `server_list = ${distribution.repository?.name}_repo`,
       '',
-      `[galaxy_server.${distribution.repository.name}_repo]`,
+      `[galaxy_server.${distribution.repository?.name}_repo]`,
       `url=${getRepoUrl()}`,
       'token=<put your token here>',
     ];
@@ -109,13 +109,13 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     return (
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
-        <td>{distribution.repository.name}</td>
+        <td>{distribution.repository?.name}</td>
         <td>
           <CollectionCount distributionPath={distribution.base_path} />
         </td>
         {DEPLOYMENT_MODE ===
         Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
-            .pulp_last_updated ? (
+            ?.pulp_last_updated ? (
           <td>
             <DateComponent date={distribution.repository.pulp_last_updated} />
           </td>
@@ -127,9 +127,13 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         </td>
         {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
           <td>
-            <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-              {cliConfig.join('\n')}
-            </ClipboardCopy>
+            {distribution.repository ? (
+              <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+                {cliConfig.join('\n')}
+              </ClipboardCopy>
+            ) : (
+              '---'
+            )}
           </td>
         )}
       </tr>
