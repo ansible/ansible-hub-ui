@@ -1,6 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
-describe('Token Management Tests', () => {
+describe('Documentation dropdown', () => {
   beforeEach(() => {
     cy.visit(uiPrefix);
     cy.login();

@@ -21,7 +21,11 @@ export { CollectionListItem } from './collection-list/collection-list-item';
 export { ConfirmModal } from './confirm-modal/confirm-modal';
 export { CollectionDependenciesList } from './collection-dependencies-list/collection-dependencies-list';
 export { CollectionUsedbyDependenciesList } from './collection-dependencies-list/collection-usedby-dependencies-list';
-export { CompoundFilter } from './patternfly-wrappers/compound-filter';
+export {
+  CompoundFilter,
+  FilterOption,
+} from './patternfly-wrappers/compound-filter';
+export { CopyURL } from './patternfly-wrappers/copy-url';
 export { DateComponent } from './date-component/date-component';
 export { DeleteExecutionEnvironmentModal } from './delete-modal/delete-execution-environment-modal';
 export { DeleteGroupModal } from './rbac/delete-group-modal';

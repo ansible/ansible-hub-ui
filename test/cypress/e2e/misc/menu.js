@@ -1,8 +1,8 @@
 describe('Hub Menu Tests', () => {
-  let username = 'nopermission';
-  let password = 'n0permissi0n';
+  const username = 'nopermission';
+  const password = 'n0permissi0n';
 
-  let menuItems = [
+  const menuItems = [
     'Collections > Collections',
     'Collections > Namespaces',
     'Collections > Repository Management',
@@ -11,9 +11,11 @@ describe('Hub Menu Tests', () => {
     'Execution Environments > Execution Environments',
     'Execution Environments > Remote Registries',
     'Task Management',
+    'Signature Keys',
     'Documentation',
     'User Access > Users',
     'User Access > Groups',
+    'User Access > Roles',
   ];
 
   before(() => {
@@ -30,7 +32,7 @@ describe('Hub Menu Tests', () => {
 
   describe('user without permissions', () => {
     // one more similar test in view-only
-    let visibleMenuItems = [
+    const visibleMenuItems = [
       'Collections > Collections',
       'Collections > Namespaces',
       'Collections > Repository Management',
@@ -38,11 +40,13 @@ describe('Hub Menu Tests', () => {
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',
       'Task Management',
+      'Signature Keys',
       'Documentation',
     ];
-    let missingMenuItems = [
+    const missingMenuItems = [
       'User Access > Users',
       'User Access > Groups',
+      'User Access > Roles',
       'Collections > Approval',
     ];
 

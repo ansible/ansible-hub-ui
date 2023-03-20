@@ -12,6 +12,7 @@ import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
+import { isLoggedIn } from 'src/permissions';
 import { hasPermission } from 'src/utilities';
 
 const menuItem = (name, options = {}) => ({
@@ -49,12 +50,12 @@ function standaloneMenu({ repository }) {
           !user.is_anonymous,
       }),
       menuItem(t`Repository Management`, {
-        condition: ({ user }) => !user.is_anonymous,
+        condition: isLoggedIn,
         url: formatPath(Paths.repositories),
       }),
       menuItem(t`API token`, {
         url: formatPath(Paths.token),
-        condition: ({ user }) => !user.is_anonymous,
+        condition: isLoggedIn,
       }),
       menuItem(t`Approval`, {
         condition: (context) =>
@@ -93,7 +94,7 @@ function standaloneMenu({ repository }) {
     ),
     menuItem(t`Task Management`, {
       url: formatPath(Paths.taskList),
-      condition: ({ user }) => !user.is_anonymous,
+      condition: isLoggedIn,
     }),
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),

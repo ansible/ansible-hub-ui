@@ -1,5 +1,6 @@
 export { chipGroupProps } from './chip-group-props';
 export { convertContentSummaryCounts } from './content-summary';
+export { downloadString } from './download-data';
 export { ParamHelper } from './param-helper';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export {
@@ -23,7 +24,7 @@ export { parsePulpIDFromURL } from './parse-pulp-id';
 export { lastSynced, lastSyncStatus } from './last-sync-task';
 export { waitForTask, waitForTaskUrl } from './wait-for-task';
 export { taskAlert } from './task-alert';
-export { errorMessage } from './fail-alerts';
+export { errorMessage, handleHttpError } from './fail-alerts';
 export { validateURLHelper } from './validateURLHelper';
 export { canSignNamespace, canSignEE } from './can-sign';
 export { DeleteCollectionUtils } from './delete-collection';

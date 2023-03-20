@@ -11,3 +11,13 @@ export function errorMessage(statusCode: number, statusText: string) {
   };
   return messages[statusCode] || messages.default;
 }
+
+export const handleHttpError = (title, callback, addAlert) => (e) => {
+  const { status, statusText } = e.response;
+  addAlert({
+    title,
+    variant: 'danger',
+    description: errorMessage(status, statusText),
+  });
+  callback();
+};

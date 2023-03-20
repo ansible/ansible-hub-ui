@@ -21,8 +21,10 @@ describe('view-only mode - with download', () => {
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',
       'Task Management',
+      'Signature Keys',
       'User Access > Users',
       'User Access > Groups',
+      'User Access > Roles',
     ].forEach((item) => cy.menuMissing(item));
 
     // login button in top right nav

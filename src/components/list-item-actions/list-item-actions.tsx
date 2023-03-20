@@ -10,22 +10,24 @@ export class ListItemActions extends React.Component<IProps> {
   render() {
     const buttons = this.props.buttons?.filter(Boolean);
     const kebabItems = this.props.kebabItems?.filter(Boolean);
+    const anyButtons = buttons?.length;
+    const anyKebab = kebabItems?.length;
 
     return (
       <td
         style={{
-          paddingRight: '0px',
+          paddingRight: anyKebab ? '0px' : '16px',
           textAlign: 'right',
           display: 'flex',
           justifyContent: 'flex-end',
         }}
       >
-        {buttons?.length ? (
+        {anyButtons ? (
           <>
             <List>{buttons}</List>{' '}
           </>
         ) : null}
-        {kebabItems?.length ? (
+        {anyKebab ? (
           <div data-cy='kebab-toggle'>
             <StatefulDropdown items={kebabItems} />{' '}
           </div>
