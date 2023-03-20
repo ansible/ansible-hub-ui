@@ -254,7 +254,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     } = this.state;
 
     const docsLink =
-      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1';
+      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.2';
 
     const noData =
       controllers?.length === 0 &&
