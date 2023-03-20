@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
+  ActionGroup,
   Button,
   Checkbox,
   ExpandableSection,
@@ -36,7 +37,8 @@ interface IProps {
   remote: RemoteType;
   remoteType?: 'registry';
   saveRemote: () => void;
-  showModal: boolean;
+  showModal?: boolean;
+  showMain?: boolean;
   title?: string;
   updateRemote: (remote) => void;
 }
@@ -95,7 +97,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { remote } = this.props;
+    const {
+      allowEditName,
+      closeModal,
+      remote,
+      saveRemote,
+      showMain,
+      showModal,
+      title,
+    } = this.props;
     if (!remote) {
       return null;
     }
@@ -103,60 +113,82 @@ export class RemoteForm extends React.Component<IProps, IState> {
     const remoteType = this.props.remoteType || this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
-    let disabledFields = this.props.allowEditName ? [] : ['name'];
+    let disabledFields = allowEditName ? [] : ['name'];
 
-    if (remoteType === 'certified') {
-      requiredFields = requiredFields.concat(['auth_url']);
-      disabledFields = disabledFields.concat(['requirements_file']);
+    switch (remoteType) {
+      case 'none':
+        // require only name, url; nothing disabled
+        break;
+
+      case 'certified':
+        requiredFields = requiredFields.concat(['auth_url']);
+        disabledFields = disabledFields.concat(['requirements_file']);
+        break;
+
+      case 'community':
+        requiredFields = requiredFields.concat(['requirements_file']);
+        disabledFields = disabledFields.concat(['auth_url', 'token']);
+        break;
+
+      case 'registry':
+        disabledFields = disabledFields.concat([
+          'auth_url',
+          'token',
+          'requirements_file',
+          'signed_only',
+        ]);
+        break;
     }
 
-    if (remoteType === 'community') {
-      requiredFields = requiredFields.concat(['requirements_file']);
-      disabledFields = disabledFields.concat(['auth_url', 'token']);
-    }
+    const save = (
+      <Button
+        isDisabled={!this.isValid(requiredFields, remoteType)}
+        key='confirm'
+        variant='primary'
+        onClick={() => saveRemote()}
+      >
+        {t`Save`}
+      </Button>
+    );
+    const cancel = (
+      <Button key='cancel' variant='link' onClick={() => closeModal()}>
+        {t`Cancel`}
+      </Button>
+    );
 
-    if (remoteType === 'registry') {
-      disabledFields = disabledFields.concat([
-        'auth_url',
-        'token',
-        'requirements_file',
-        'signed_only',
-      ]);
+    if (showMain) {
+      return (
+        <>
+          {this.renderForm(
+            requiredFields,
+            disabledFields,
+            <ActionGroup key='actions'>
+              {save}
+              {cancel}
+            </ActionGroup>,
+          )}
+        </>
+      );
     }
 
     return (
       <Modal
-        isOpen={this.props.showModal}
-        title={this.props.title || t`Edit remote`}
+        isOpen={showModal}
+        title={title || t`Edit remote`}
         variant='small'
-        onClose={() => this.props.closeModal()}
-        actions={[
-          <Button
-            isDisabled={!this.isValid(requiredFields, remoteType)}
-            key='confirm'
-            variant='primary'
-            onClick={() => this.props.saveRemote()}
-          >
-            {t`Save`}
-          </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.props.closeModal()}
-          >
-            {t`Cancel`}
-          </Button>,
-        ]}
+        onClose={() => closeModal()}
+        actions={[save, cancel]}
       >
         {this.renderForm(requiredFields, disabledFields)}
       </Modal>
     );
   }
 
-  private renderForm(requiredFields, disabledFields) {
-    const { remote, errorMessages } = this.props;
+  private renderForm(requiredFields, disabledFields, extra?) {
+    const { errorMessages, remote } = this.props;
     const { filenames } = this.state;
     const { collection_signing } = this.context.featureFlags;
+    const writeOnlyFields = remote['write_only_fields'];
 
     const docsAnsibleLink = (
       <a
@@ -237,7 +269,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <Switch
               id='signed_only'
-              isChecked={remote.signed_only}
+              isChecked={!!remote.signed_only}
               onChange={(value) => this.updateRemote(value, 'signed_only')}
             />
           </FormGroup>
@@ -257,7 +289,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             helperTextInvalid={errorMessages['token']}
           >
             <WriteOnlyField
-              isValueSet={isFieldSet('token', remote.write_only_fields)}
+              isValueSet={isFieldSet('token', writeOnlyFields)}
               onClear={() => this.updateIsSet('token', false)}
             >
               <TextInput
@@ -364,8 +396,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
         >
           <WriteOnlyField
             isValueSet={
-              isWriteOnly('username', remote.write_only_fields) &&
-              isFieldSet('username', remote.write_only_fields)
+              isWriteOnly('username', writeOnlyFields) &&
+              isFieldSet('username', writeOnlyFields)
             }
             onClear={() => this.updateIsSet('username', false)}
           >
@@ -399,7 +431,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           helperTextInvalid={errorMessages['password']}
         >
           <WriteOnlyField
-            isValueSet={isFieldSet('password', remote.write_only_fields)}
+            isValueSet={isFieldSet('password', writeOnlyFields)}
             onClear={() => this.updateIsSet('password', false)}
           >
             <TextInput
@@ -447,8 +479,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             >
               <WriteOnlyField
                 isValueSet={
-                  isWriteOnly('proxy_username', remote.write_only_fields) &&
-                  isFieldSet('proxy_username', remote.write_only_fields)
+                  isWriteOnly('proxy_username', writeOnlyFields) &&
+                  isFieldSet('proxy_username', writeOnlyFields)
                 }
                 onClear={() => this.updateIsSet('proxy_username', false)}
               >
@@ -475,10 +507,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               helperTextInvalid={errorMessages['proxy_password']}
             >
               <WriteOnlyField
-                isValueSet={isFieldSet(
-                  'proxy_password',
-                  remote.write_only_fields,
-                )}
+                isValueSet={isFieldSet('proxy_password', writeOnlyFields)}
                 onClear={() => this.updateIsSet('proxy_password', false)}
               >
                 <TextInput
@@ -527,7 +556,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               helperTextInvalid={errorMessages['client_key']}
             >
               <WriteOnlyField
-                isValueSet={isFieldSet('client_key', remote.write_only_fields)}
+                isValueSet={isFieldSet('client_key', writeOnlyFields)}
                 onClear={() => this.updateIsSet('client_key', false)}
               >
                 <FileUpload
@@ -698,6 +727,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             {errorMessages['__nofield']}
           </span>
         ) : null}
+        {extra}
       </Form>
     );
   }
@@ -742,25 +772,24 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private updateIsSet(fieldName: string, value: boolean) {
-    const writeOnlyFields = this.props.remote.write_only_fields;
-    const newFields: WriteOnlyFieldType[] = [];
+    const { remote } = this.props;
+    const hiddenFieldsName = 'write_only_fields';
 
-    for (const field of writeOnlyFields) {
-      if (field.name === fieldName) {
-        field.is_set = value;
-      }
+    const newFields: WriteOnlyFieldType[] = remote[hiddenFieldsName].map(
+      (field) =>
+        field.name === fieldName ? { ...field, is_set: value } : field,
+    );
 
-      newFields.push(field);
-    }
-
-    const update = { ...this.props.remote };
-    update.write_only_fields = newFields;
-    update[fieldName] = null;
-
-    this.props.updateRemote(update);
+    this.props.updateRemote({
+      ...remote,
+      [fieldName]: null,
+      [hiddenFieldsName]: newFields,
+    });
   }
 
   private updateRemote(value, field) {
+    const { remote } = this.props;
+
     const numericFields = ['download_concurrency', 'rate_limit'];
     if (numericFields.includes(field)) {
       value = Number.isInteger(value)
@@ -770,9 +799,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         : parseInt(value, 10);
     }
 
-    const update = { ...this.props.remote };
-    update[field] = value;
-    this.props.updateRemote(update);
+    this.props.updateRemote({ ...remote, [field]: value });
   }
 
   private toError(validated: boolean) {

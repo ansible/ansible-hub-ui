@@ -16,7 +16,7 @@ export function isFieldSet(
   if (field) {
     return field.is_set;
   } else {
-    throw 'Field ${name} is not in writeOnlyFields';
+    throw `Field ${name} is not in writeOnlyFields`;
   }
 }
 
