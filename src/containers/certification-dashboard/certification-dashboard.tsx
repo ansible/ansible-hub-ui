@@ -668,7 +668,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       const removedRepos = [];
       const failedRepos = [];
 
-      version.repository_list.forEach((repo, i) => {
+      version.repository_list.forEach((repo) => {
         const repoInfo = repositoryList.find((r) => r.name == repo);
 
         if (repoInfo?.pulp_labels?.pipeline == 'approved') {

@@ -39,7 +39,7 @@ class API extends PulpAPI {
     destination_repositories: string[],
     signing_service?: string,
   ) {
-    let params = {
+    const params = {
       collection_versions,
       destination_repositories,
     };
@@ -59,7 +59,7 @@ class API extends PulpAPI {
     destination_repositories: string[],
     signing_service?: string,
   ) {
-    let params = {
+    const params = {
       collection_versions,
       destination_repositories,
     };
@@ -79,7 +79,7 @@ class API extends PulpAPI {
     remove_content_units: string[],
     base_version: string,
   ) {
-    let params = {
+    const params = {
       add_content_units,
       remove_content_units,
       base_version,
