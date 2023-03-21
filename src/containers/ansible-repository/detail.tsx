@@ -12,11 +12,15 @@ import {
   AnsibleRemoteType,
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
+  AnsibleRepositoryVersionType,
   CollectionVersionAPI,
 } from 'src/api';
 import {
+  DateComponent,
+  DetailList,
   Details,
   LazyDistributions,
+  ListItemActions,
   PageWithTabs,
   PulpLabels,
 } from 'src/components';
@@ -35,7 +39,7 @@ const tabs = [
   { id: 'details', name: t`Details` },
   { id: 'access', name: wip + t`Access` },
   { id: 'collection-versions', name: wip + t`Collection versions` },
-  { id: 'repository-versions', name: wip + t`Versions` },
+  { id: 'repository-versions', name: t`Versions` },
 ];
 
 interface TabProps {
@@ -116,22 +120,85 @@ const RepositoryVersionsTab = ({
   item,
   actionContext: { addAlert },
 }: TabProps) => {
-  const [versions, setVersions] = useState([]);
+  const pulpId = parsePulpIDFromURL(item.pulp_href);
+  const latest_href = item.latest_version_href;
+  const query = ({ params }) =>
+    AnsibleRepositoryAPI.listVersions(pulpId, params);
 
-  useEffect(() => {
-    const pulpId = parsePulpIDFromURL(item.pulp_href);
-    AnsibleRepositoryAPI.listVersions(pulpId)
-      .then(({ data: { results } }) => setVersions(results))
-      .catch(
-        handleHttpError(
-          t`Failed to load repository versions`,
-          () => setVersions([]),
-          addAlert,
-        ),
-      );
-  }, []);
+  const renderTableRow = (
+    item: AnsibleRepositoryVersionType,
+    index: number,
+    actionContext,
+    listItemActions,
+  ) => {
+    const { number, pulp_created, pulp_href } = item;
 
-  return <Details item={versions} />;
+    const isLatest = latest_href === pulp_href;
+
+    // TODO revert should use item.isLatest in visible/disabled
+    const kebabItems = listItemActions.map((action) =>
+      action.dropdownItem({ ...item, isLatest }, actionContext),
+    );
+
+    return (
+      <tr key={index}>
+        <td>
+          <Link
+            to={formatPath(
+              Paths.ansibleRepositoryDetail,
+              {
+                name,
+              },
+              {
+                repositoryVersion: number,
+                tab: 'repository-versions',
+              },
+            )}
+          >
+            {number}
+          </Link>
+          {isLatest ? ' ' + t`(latest)` : null}
+        </td>
+        <td>
+          <DateComponent date={pulp_created} />
+        </td>
+        <ListItemActions kebabItems={kebabItems} />
+      </tr>
+    );
+  };
+
+  return (
+    <DetailList<AnsibleRepositoryVersionType>
+      actionContext={{ addAlert }}
+      defaultPageSize={10}
+      defaultSort={'-pulp_created'}
+      errorTitle={t`Repository versions could not be displayed.`}
+      filterConfig={null}
+      listItemActions={
+        [
+          /*TODO: revert to this version*/
+        ]
+      }
+      noDataButton={null}
+      noDataDescription={t`Repository versions will appear once the repository is modified.`}
+      noDataTitle={t`No repository versions yet`}
+      query={query}
+      renderTableRow={renderTableRow}
+      sortHeaders={[
+        {
+          title: t`Version number`,
+          type: 'numeric',
+          id: 'number',
+        },
+        {
+          title: t`Created date`,
+          type: 'numeric',
+          id: 'pulp_created',
+        },
+      ]}
+      title={t`Repository versions`}
+    />
+  );
 };
 
 export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
