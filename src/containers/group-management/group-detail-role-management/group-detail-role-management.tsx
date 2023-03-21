@@ -33,6 +33,7 @@ import {
 import { IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
+  ParamType,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -41,7 +42,7 @@ import {
 import './group-detail-role-management.scss';
 
 interface Props {
-  params: object;
+  params: ParamType;
   updateParams: (params) => void;
   context: IAppContextType;
   group: GroupObjectPermissionType;
@@ -64,12 +65,14 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
   const [roles, setRoles] = useState<GroupRoleType[]>([]);
   const [rolesItemCount, setRolesItemCount] = useState<number>(0);
   const [selectedRoles, setSelectedRoles] = useState<RoleType[]>([]);
-  const [inputText, setInputText] = useState(params['role__icontains'] || '');
+  const [inputText, setInputText] = useState<string>(
+    (params['role__icontains'] as string) || '',
+  );
   const [isRoleDeleting, setIsRoleDeleting] = useState(false);
 
   useEffect(() => {
     queryRolesWithPermissions();
-    setInputText(params['role__icontains'] || '');
+    setInputText((params['role__icontains'] as string) || '');
   }, [params]);
 
   const queryRolesWithPermissions = () => {

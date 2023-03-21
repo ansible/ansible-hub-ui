@@ -1,5 +1,8 @@
 import { cloneDeep } from 'lodash';
 
+type ParamValueType = string | number | string[];
+export type ParamType = Record<string, ParamValueType>;
+
 export class ParamHelper {
   // Helper class for managing param object.
   // Param object is just a dictionary where the keys map to
@@ -35,11 +38,7 @@ export class ParamHelper {
   }
 
   // Replaces specified parameter with speficied value
-  static setParam(
-    p: object,
-    key: string,
-    value: number | string | string[] | number[],
-  ) {
+  static setParam(p: object, key: string, value: ParamValueType) {
     const params = cloneDeep(p);
     params[key] = value;
 
@@ -64,7 +63,7 @@ export class ParamHelper {
 
   // Returns a reduced set of parameters. Useful when not all params should
   // be passed to the API
-  static getReduced(p: object, keys: string[]) {
+  static getReduced(p: ParamType, keys: string[]) {
     const params = cloneDeep(p);
     for (const k of keys) {
       delete params[k];

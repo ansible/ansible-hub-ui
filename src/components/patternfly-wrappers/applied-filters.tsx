@@ -1,14 +1,14 @@
 import { t } from '@lingui/macro';
 import { Button, Chip, ChipGroup } from '@patternfly/react-core';
 import React from 'react';
-import { ParamHelper, chipGroupProps } from 'src/utilities';
+import { ParamHelper, ParamType, chipGroupProps } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */
   updateParams: (p) => void;
 
   /** Current page params */
-  params: object;
+  params: ParamType;
 
   /** A list of params that shouldn't get displayed */
   ignoredParams?: string[];
@@ -38,7 +38,9 @@ export const AppliedFilters = ({
   }
 
   const renderGroup = (key) => {
-    const chips = Array.isArray(params[key]) ? params[key] : [params[key]];
+    const chips = Array.isArray(params[key])
+      ? (params[key] as string[] | number[])
+      : [params[key]];
 
     const unsetFilter = (v) =>
       updateParams({
