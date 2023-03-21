@@ -1,8 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
-  CollectionAPI,
-  CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionContentType,
@@ -34,19 +32,19 @@ interface IState {
   params: {
     page?: number;
     page_size?: number;
-    collection?: string;
-    sort?: string;
+    name?: string;
+    order_by?: string;
     version?: string;
   };
-  usedByDependencies: CollectionUsedByDependencies[];
+  usedByDependencies: CollectionVersionSearch[];
   usedByDependenciesCount: number;
   usedByDependenciesLoading: boolean;
   alerts: AlertType[];
 }
 
 class CollectionDependencies extends React.Component<RouteProps, IState> {
-  private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
-  private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
+  private ignoredParams = ['page_size', 'page', 'order_by', 'name'];
+  private cancelToken: ReturnType<typeof CollectionVersionAPI.getCancelToken>;
 
   constructor(props) {
     super(props);
@@ -56,7 +54,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       'page_size',
     ]);
 
-    params['sort'] = !params['sort'] ? '-collection' : 'collection';
+    params['order_by'] = !params['order_by'] ? '-name' : 'name';
 
     this.state = {
       collections: [],
@@ -143,7 +141,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
               <h1>{t`Dependencies`}</h1>
               {noDependencies &&
               !usedByDependenciesCount &&
-              !filterIsSet(params, ['name__icontains']) ? (
+              !filterIsSet(params, ['name']) ? (
                 <EmptyStateNoData
                   title={t`No dependencies`}
                   description={t`Collection does not have any dependencies.`}
@@ -164,7 +162,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
                   )}
                   <p>{t`This collection is being used by`}</p>
                   <CollectionUsedbyDependenciesList
-                    repo={this.context.selectedRepo}
                     usedByDependencies={usedByDependencies}
                     itemCount={usedByDependenciesCount}
                     params={dependenciesParams}
@@ -221,25 +218,27 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
   }
 
   private loadDependencyRepo(dependency_repo) {
-    // return CollectionVersionAPI.list({
-    //   namespace: dependency_repo.namespace,
-    //   name: dependency_repo.name,
-    //   version_range: dependency_repo.version_range,
-    //   page_size: 1,
-    // })
-    //   .then((result) => {
-    //     dependency_repo.repo = result.data.data[0].repository_list[0];
-    //     dependency_repo.path = formatPath(Paths.collectionByRepo, {
-    //       collection: dependency_repo.name,
-    //       namespace: dependency_repo.namespace,
-    //       repo: dependency_repo.repo,
-    //     });
-    //   })
-    //   .catch(() => {
-    //     // do nothing, dependency_repo.path and repo stays empty
-    //     // this may mean that collection was not found - thus is not in the system.
-    //     // user will be notified in the list of dependencies rather than alerts
-    //   });
+    return CollectionVersionAPI.list({
+      namespace: dependency_repo.namespace,
+      name: dependency_repo.name,
+      version_range: dependency_repo.version_range,
+      page_size: 1,
+    })
+      .then((result) => {
+        const [collection] = result.data.data;
+
+        dependency_repo.repo = collection.repository.name;
+        dependency_repo.path = formatPath(Paths.collectionByRepo, {
+          collection: dependency_repo.name,
+          namespace: dependency_repo.namespace,
+          repo: dependency_repo.repo,
+        });
+      })
+      .catch(() => {
+        // do nothing, dependency_repo.path and repo stays empty
+        // this may mean that collection was not found - thus is not in the system.
+        // user will be notified in the list of dependencies rather than alerts
+      });
   }
 
   private loadUsedByDependencies() {
@@ -248,11 +247,11 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
         this.cancelToken.cancel('request-canceled');
       }
 
-      this.cancelToken = CollectionAPI.getCancelToken();
+      this.cancelToken = CollectionVersionAPI.getCancelToken();
 
       const { name, namespace } = this.state.collection.collection_version;
 
-      CollectionAPI.getUsedDependenciesByCollection(
+      CollectionVersionAPI.getUsedDependenciesByCollection(
         namespace,
         name,
         ParamHelper.getReduced(this.state.params, ['version']),
@@ -265,9 +264,9 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
             usedByDependenciesLoading: false,
           });
         })
-        .catch((err) => {
-          const { status, statusText } = err.response;
-          if (err?.message !== 'request-canceled') {
+        .catch(({ response, message }) => {
+          if (message !== 'request-canceled') {
+            const { status, statusText } = response;
             this.setState({
               usedByDependenciesLoading: false,
               alerts: [

@@ -8,7 +8,7 @@ import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   collection: CollectionVersionSearch;
-  dependencies_repos: (CollectionVersion & {
+  dependencies_repos?: (CollectionVersion & {
     path?: string;
   })[];
 }

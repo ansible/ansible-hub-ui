@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { CollectionVersionSearch } from '../api';
 import { HubAPI } from './hub';
 
@@ -63,6 +64,22 @@ export class API extends HubAPI {
         })
         .catch((err) => reject(err));
     });
+  }
+
+  getUsedDependenciesByCollection(
+    namespace,
+    collection,
+    params = {},
+    cancelToken = undefined,
+  ) {
+    return this.http.get(
+      `${this.apiPath}?dependency=${namespace}.${collection}`,
+      { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
+    );
+  }
+
+  getCancelToken() {
+    return axios.CancelToken.source();
   }
 }
 

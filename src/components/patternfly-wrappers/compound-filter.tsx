@@ -46,7 +46,6 @@ interface IState {
   isCreatable: boolean;
   isOpen: boolean;
   hasOnCreateOption: boolean;
-  selections: any[];
 }
 
 export class CompoundFilter extends React.Component<IProps, IState> {
@@ -59,8 +58,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       isCreatable: false,
       isOpen: false,
       hasOnCreateOption: false,
-      // results: [],
-      selections: [],
     };
   }
 
@@ -177,23 +174,15 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             }}
             onClear={() => {
               this.props.onChange('');
-              this.setState({ selections: [] });
             }}
             onSelect={(event, value) => {
               this.submitFilter(value);
-              // this.props.onChange(value);
-              this.setState({
-                selections: typeAheadResults.filter(
-                  ({ name }) => name === value,
-                ),
-              });
             }}
             placeholderText={
               selectedFilter?.placeholder ||
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             results={typeAheadResults}
-            selections={this.state.selections}
           />
         );
       }

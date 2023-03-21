@@ -445,26 +445,26 @@ class Search extends React.Component<RouteProps, IState> {
       });
     };
 
-    // MyNamespaceAPI.get(collection.namespace.name, {
-    //   include_related: 'my_permissions',
-    // })
-    //   .then((value) => {
-    //     if (
-    //       value.data.related_fields.my_permissions.includes(
-    //         'galaxy.upload_to_namespace',
-    //       )
-    //     ) {
-    //       this.setState({
-    //         updateCollection: collection,
-    //         showImportModal: true,
-    //       });
-    //     } else {
-    //       addAlert();
-    //     }
-    //   })
-    //   .catch(() => {
-    //     addAlert();
-    //   });
+    MyNamespaceAPI.get(collection.namespace.name, {
+      include_related: 'my_permissions',
+    })
+      .then((value) => {
+        if (
+          value.data.related_fields.my_permissions.includes(
+            'galaxy.upload_to_namespace',
+          )
+        ) {
+          this.setState({
+            updateCollection: collection,
+            showImportModal: true,
+          });
+        } else {
+          addAlert();
+        }
+      })
+      .catch(() => {
+        addAlert();
+      });
   }
 
   private toggleCollectionSync(name: string, namespace: string) {

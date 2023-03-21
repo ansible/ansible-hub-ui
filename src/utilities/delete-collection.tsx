@@ -1,13 +1,17 @@
 import { Trans, t } from '@lingui/macro';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
 import React from 'react';
-import { CollectionAPI, CollectionVersionSearch } from 'src/api';
+import {
+  CollectionAPI,
+  CollectionVersionAPI,
+  CollectionVersionSearch,
+} from 'src/api';
 import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 export class DeleteCollectionUtils {
   public static getUsedbyDependencies(collection: CollectionVersionSearch) {
     const { name, namespace } = collection.collection_version;
-    return CollectionAPI.getUsedDependenciesByCollection(namespace, name)
+    return CollectionVersionAPI.getUsedDependenciesByCollection(namespace, name)
       .then(({ data }) => data.data.length === 0)
       .catch((err) => {
         const { status, statusText } = err.response;
