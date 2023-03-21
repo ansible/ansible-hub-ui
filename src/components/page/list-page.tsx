@@ -129,10 +129,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   renderModals ||= function (actionContext) {
     return (
       <>
-        {headerActions?.length &&
-          headerActions.map((action) => action?.modal?.(actionContext))}
-        {listItemActions?.length &&
-          listItemActions.map((action) => action?.modal?.(actionContext))}
+        {headerActions?.length
+          ? headerActions.map((action) => action?.modal?.(actionContext))
+          : null}
+        {listItemActions?.length
+          ? listItemActions.map((action) => action?.modal?.(actionContext))
+          : null}
       </>
     );
   };

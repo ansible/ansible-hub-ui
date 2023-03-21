@@ -78,8 +78,9 @@ export const Page = function <
   renderModals ||= function (actionContext) {
     return (
       <>
-        {headerActions?.length &&
-          headerActions.map((action) => action?.modal?.(actionContext))}
+        {headerActions?.length
+          ? headerActions.map((action) => action?.modal?.(actionContext))
+          : null}
       </>
     );
   };
