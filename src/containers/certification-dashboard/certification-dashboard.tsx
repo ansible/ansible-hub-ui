@@ -396,32 +396,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
-  // take only subset of repos in case where collection is in too many repos to display them all
-  private returnTruncatedRepoListCount(version) {
-    const list = version.repository_list;
-
-    if (list.length == 0) {
-      return 1;
-    }
-
-    // take into account average number of string lengths, maximum number of displayed repos will
-    // be based on that
-    let total = 0;
-    list.forEach((repo) => {
-      total += repo.length;
-    });
-    const average = total / list.length;
-
-    if (average == 0) {
-      return 1;
-    }
-
-    const max = 30 / average;
-    return Math.round(max);
-  }
-
   private renderRow(version: CollectionVersion, index) {
-    const listReposCount = this.returnTruncatedRepoListCount(version);
     return (
       <tr key={index} data-cy='CertificationDashboard-row'>
         <td>{version.namespace}</td>
@@ -455,7 +430,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           <DateComponent date={version.created_at} />
         </td>
         <td>
-          <LabelGroup numLabels={listReposCount}>
+          <LabelGroup>
             {version.repository_list.map((repo, i) => {
               let text = repo;
               if (i < version.repository_list.length - 1) {
