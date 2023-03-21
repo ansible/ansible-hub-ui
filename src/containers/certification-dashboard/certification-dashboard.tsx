@@ -4,6 +4,7 @@ import {
   ButtonVariant,
   DropdownItem,
   Label,
+  LabelGroup,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
@@ -320,6 +321,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           id: 'pulp_created',
         },
         {
+          title: t`Repositories`,
+          type: 'none',
+          id: '',
+        },
+        {
           title: t`Status`,
           type: 'none',
           id: 'status',
@@ -391,11 +397,27 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
+  // take only subset of repos in case where collection is in too many repos to display them all
+  private returnTruncatedRepoListCount(version) {
+    const list = version.repository_list;
+
+    // take into account average number of string lengths, maximum number of displayed repos will
+    // be based on that
+    let total = 0;
+    list.forEach((repo) => {
+      total += repo.length;
+    });
+    const average = total / list.length;
+    const max = 30 / average;
+    return Math.round(max);
+  }
+
   private renderRow(version: CollectionVersion, index) {
+    const listReposCount = this.returnTruncatedRepoListCount(version);
     return (
       <tr key={index} data-cy='CertificationDashboard-row'>
         <td>{version.namespace}</td>
-        <td>{version.name + '(' + version.repository_list.join(', ') + ')'}</td>
+        <td>{version.name}</td>
         <td>
           <Link
             to={formatPath(
@@ -423,6 +445,17 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         </td>
         <td>
           <DateComponent date={version.created_at} />
+        </td>
+        <td>
+          <LabelGroup numLabels={listReposCount}>
+            {version.repository_list.map((repo, i) => {
+              let text = repo;
+              if (i < version.repository_list.length - 1) {
+                text += ', ';
+              }
+              return text;
+            })}
+          </LabelGroup>
         </td>
         <td>{this.renderStatus(version)}</td>
         {this.renderButtons(version)}
