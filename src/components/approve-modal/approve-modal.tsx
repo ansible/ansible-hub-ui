@@ -41,7 +41,6 @@ interface IProps {
 export const ApproveModal = (props: IProps) => {
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
-  const [itemCount, setItemCount] = useState(0);
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
   const [fixedRepos, setFixedRepos] = useState([]);
@@ -52,7 +51,7 @@ export const ApproveModal = (props: IProps) => {
     sort: 'name',
   });
 
-  function buttonClick() {
+  function approve() {
     function failedToLoadRepo(status?, statusText?) {
       setLoading(false);
       addAlert({
@@ -98,6 +97,7 @@ export const ApproveModal = (props: IProps) => {
                   return waitForTaskUrl(task['data'].task);
                 })
                 .then(() => {
+                  setLoading(false);
                   props.finishAction();
                   props.addAlert({
                     title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
@@ -115,6 +115,7 @@ export const ApproveModal = (props: IProps) => {
                 });
             })
             .catch(({ response: { status, statusText } }) => {
+              setLoading(false);
               addAlert({
                 title: t`Failed to load collection.`,
                 variant: 'danger',
@@ -137,6 +138,10 @@ export const ApproveModal = (props: IProps) => {
   }
 
   function changeSelection(name) {
+    if (fixedRepos.includes(name)) {
+      return;
+    }
+
     const checked = selectedRepos.includes(name);
 
     if (checked) {
@@ -154,12 +159,12 @@ export const ApproveModal = (props: IProps) => {
     par['pulp_label_select'] = 'pipeline=approved';
     par['ordering'] = par['sort'];
     delete par['sort'];
+    setLoading(true);
 
     Repositories.list(par)
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);
-        setItemCount(data.data.count);
       })
       .catch(({ response: { status, statusText } }) => {
         setLoading(false);
@@ -204,7 +209,7 @@ export const ApproveModal = (props: IProps) => {
 
   useEffect(() => {
     loadRepos();
-  }, [params, inputText]);
+  }, [params]);
 
   useEffect(() => {
     const fixedReposLocal = [];
@@ -259,9 +264,7 @@ export const ApproveModal = (props: IProps) => {
                 onSelect={() => {
                   changeSelection(repo.name);
                 }}
-                isDisabled={props.collectionVersion.repository_list.includes(
-                  repo.name,
-                )}
+                isDisabled={fixedRepos.includes(repo.name)}
                 data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
               >
                 <td>
@@ -282,7 +285,7 @@ export const ApproveModal = (props: IProps) => {
         actions={[
           <Button
             key='confirm'
-            onClick={buttonClick}
+            onClick={approve}
             variant='primary'
             isDisabled={
               selectedRepos.length - fixedRepos.length <= 0 || loading
@@ -331,7 +334,7 @@ export const ApproveModal = (props: IProps) => {
             <Pagination
               params={params}
               updateParams={(p) => setParams(p)}
-              count={itemCount}
+              count={props.allRepositories.length}
               isTop
             />
           </div>
@@ -343,6 +346,9 @@ export const ApproveModal = (props: IProps) => {
               }}
               params={params}
               ignoredParams={['page_size', 'page', 'sort']}
+              niceNames={{
+                name__icontains: t`Name`,
+              }}
             />
           </div>
 
@@ -352,7 +358,7 @@ export const ApproveModal = (props: IProps) => {
             <Pagination
               params={params}
               updateParams={(p) => setParams(p)}
-              count={itemCount}
+              count={props.allRepositories.length}
             />
           </div>
         </section>
