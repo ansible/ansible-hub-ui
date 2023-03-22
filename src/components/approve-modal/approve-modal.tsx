@@ -41,6 +41,7 @@ interface IProps {
 export const ApproveModal = (props: IProps) => {
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
+  const [itemsCount, setItemsCount] = useState(0);
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
   const [fixedRepos, setFixedRepos] = useState([]);
@@ -165,6 +166,7 @@ export const ApproveModal = (props: IProps) => {
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);
+        setItemsCount(data.data.count);
       })
       .catch(({ response: { status, statusText } }) => {
         setLoading(false);
@@ -334,7 +336,7 @@ export const ApproveModal = (props: IProps) => {
             <Pagination
               params={params}
               updateParams={(p) => setParams(p)}
-              count={props.allRepositories.length}
+              count={itemsCount}
               isTop
             />
           </div>
@@ -358,7 +360,7 @@ export const ApproveModal = (props: IProps) => {
             <Pagination
               params={params}
               updateParams={(p) => setParams(p)}
-              count={props.allRepositories.length}
+              count={itemsCount}
             />
           </div>
         </section>

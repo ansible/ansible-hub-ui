@@ -57,6 +57,7 @@ import {
   filterIsSet,
   parsePulpIDFromURL,
   waitForTask,
+  waitForTaskUrl,
   withRouter,
 } from 'src/utilities';
 import './certification-dashboard.scss';
@@ -700,13 +701,14 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             repo,
             Constants.NOTCERTIFIED,
           )
+            .then((task) => {
+              return waitForTaskUrl(task['data'].copy_task_id);
+            })
             .then(() => {
               removedRepos.push(repo);
-              return Promise.resolve();
             })
             .catch(() => {
               failedRepos.push(repo);
-              return Promise.resolve();
             });
           promises.push(promise);
         }
