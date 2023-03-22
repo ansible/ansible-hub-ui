@@ -23,6 +23,8 @@ import {
   CollectionVersionContentType,
   CollectionVersionSearch,
   MyNamespaceAPI,
+  NamespaceAPI,
+  NamespaceType,
   SignCollectionAPI,
 } from 'src/api';
 import {
@@ -93,6 +95,7 @@ interface IState {
   showImportModal: boolean;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate: CollectionVersionSearch;
+  namespace: NamespaceType;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -122,6 +125,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       showImportModal: false,
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: undefined,
+      namespace: null,
     };
   }
 
@@ -130,6 +134,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     DeleteCollectionUtils.getUsedbyDependencies(collection)
       .then((noDependencies) => this.setState({ noDependencies }))
       .catch((alert) => this.addAlert(alert));
+
+    NamespaceAPI.get(collection.collection_version.namespace, {
+      include_related: 'my_permissions',
+    }).then(({ data }) => {
+      this.setState({ namespace: data });
+    });
   }
 
   render() {
@@ -210,7 +220,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const canSign = canSignNamespace(this.context, namespace);
+    const canSign = canSignNamespace(this.context, this.state.namespace);
 
     const { hasPermission } = this.context;
 
