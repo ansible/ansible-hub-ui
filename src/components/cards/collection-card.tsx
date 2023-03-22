@@ -99,8 +99,7 @@ export const CollectionCard = ({
                 </Link>
                 /
                 <Link
-                  to={formatPath(Paths.namespaceByRepo, {
-                    repo: repository.name,
+                  to={formatPath(Paths.namespaceDetail, {
                     namespace: namespace.name,
                   })}
                 >

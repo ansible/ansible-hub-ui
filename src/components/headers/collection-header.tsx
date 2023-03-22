@@ -396,8 +396,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                     collection: deleteCollection,
                     setState: (state) => this.setState(state),
                     load: null,
-                    redirect: formatPath(Paths.namespaceByRepo, {
-                      repo: deleteCollection.repository.name,
+                    redirect: formatPath(Paths.namespaceDetail, {
                       namespace: deleteCollection.collection_version.namespace,
                     }),
                     addAlert: (alert) => this.context.queueAlert(alert),
@@ -910,8 +909,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ),
             });
             this.setState({
-              redirect: formatPath(Paths.namespaceByRepo, {
-                repo: deleteCollection.repository.name,
+              redirect: formatPath(Paths.namespaceDetail, {
                 namespace: deleteCollection.collection_version.namespace,
               }),
             });

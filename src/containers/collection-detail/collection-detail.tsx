@@ -51,14 +51,13 @@ class CollectionDetail extends React.Component<
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const { collection_version: version, repository } = collection;
+    const { collection_version: version } = collection;
 
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
+        url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,
-          repo: repository.name,
         }),
         name: version.namespace,
       },

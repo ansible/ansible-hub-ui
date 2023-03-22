@@ -90,6 +90,7 @@ class LegacyNamespaces extends React.Component<
   render() {
     const ignoredParams = [
       'namespace',
+      'repository__name',
       'page',
       'page_size',
       'sort',

@@ -106,6 +106,7 @@ export enum Paths {
   namespaceByRepo = '/repo/:repo/:namespace',
   collection = '/:namespace/:collection',
   namespace = '/:namespace',
+  namespaceDetail = '/namespaces/:namespace',
   partners = '/partners',
   namespaces = '/namespaces',
   notFound = '/not-found',

@@ -63,9 +63,8 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
+        url: formatPath(Paths.namespaceDetail, {
           namespace: collection_version.namespace,
-          repo: repository.name,
         }),
         name: collection_version.namespace,
       },
@@ -93,7 +92,6 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
           }
           breadcrumbs={breadcrumbs}
           activeTab='import-log'
-          repo={this.context.selectedRepo}
         />
         <Main>
           <section className='body'>

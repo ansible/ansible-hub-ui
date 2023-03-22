@@ -38,13 +38,11 @@ import {
   Main,
   Pagination,
   PartnerHeader,
-  RepoSelector,
   SignAllCertificatesModal,
   StatefulDropdown,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -82,7 +80,6 @@ interface IState {
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
   isOpenWisdomModal: boolean;
-  isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
   alerts: AlertType[];
@@ -95,11 +92,7 @@ interface IState {
   group: GroupType;
 }
 
-interface IProps extends RouteProps {
-  selectedRepo: string;
-}
-
-export class NamespaceDetail extends React.Component<IProps, IState> {
+export class NamespaceDetail extends React.Component<RouteProps, IState> {
   nonAPIParams = ['tab', 'group'];
 
   // namespace is a positional url argument, so don't include it in the
@@ -129,7 +122,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
       isOpenWisdomModal: false,
-      isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
       alerts: [],
@@ -239,8 +231,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         name: namespace.name,
         url:
           tab === 'access'
-            ? formatPath(Paths.namespaceByRepo, {
-                repo: this.context.selectedRepo,
+            ? formatPath(Paths.namespaceDetail, {
                 namespace: namespace.name,
               })
             : null,
@@ -250,9 +241,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             name: t`Access`,
             url: params.group
               ? formatPath(
-                  Paths.namespaceByRepo,
+                  Paths.namespaceDetail,
                   {
-                    repo: this.context.selectedRepo,
                     namespace: namespace.name,
                   },
                   { tab: 'access' },
@@ -406,9 +396,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               </div>
             ) : null
           }
-          contextSelector={
-            <RepoSelector selectedRepo={this.context.selectedRepo} isDisabled />
-          }
         ></PartnerHeader>
         <Main>
           {tab === 'collections' ? (
@@ -548,8 +535,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   stateUpdate: { showRoleRemoveModal: null },
                 });
               }}
-              urlPrefix={formatPath(Paths.namespaceByRepo, {
-                repo: this.context.selectedRepo,
+              urlPrefix={formatPath(Paths.namespaceDetail, {
                 namespace: namespace.name,
               })}
             />
@@ -740,45 +726,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             val[1].data['groups'],
           ),
         });
-        this.loadAllRepos(val[0].data.meta.count);
       })
       .catch(() => {
         this.setState({ redirect: formatPath(Paths.notFound) });
-      });
-  }
-
-  private loadAllRepos(currentRepoCount) {
-    // get collections in namespace from each repo
-    // except the one we already have
-    const repoPromises = Object.keys(Constants.REPOSITORYNAMES)
-      .filter((repo) => repo !== this.context.selectedRepo)
-      .map((repo) =>
-        CollectionAPI.list(
-          { namespace: this.props.routeParams.namespace },
-          repo,
-        ),
-      );
-
-    Promise.all(repoPromises)
-      .then((results) =>
-        this.setState({
-          isNamespaceEmpty:
-            results.every((val) => val.data.meta.count === 0) &&
-            currentRepoCount === 0,
-        }),
-      )
-      .catch((err) => {
-        const { status, statusText } = err.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Collection repositories could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
       });
   }
 
@@ -807,7 +757,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       />,
       hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
-          {this.state.isNamespaceEmpty ? (
+          {this.state.collections.length === 0 ? (
             <DropdownItem
               onClick={() => this.setState({ isOpenNamespaceModal: true })}
             >

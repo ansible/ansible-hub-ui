@@ -107,7 +107,7 @@ const routes = [
     component: CollectionDependencies,
   },
   { path: Paths.collectionByRepo, component: CollectionDetail },
-  { path: Paths.namespaceByRepo, component: NamespaceDetail },
+  { path: Paths.namespaceDetail, component: NamespaceDetail },
   { path: Paths.collections, component: Search },
   { path: Paths.collectionDocsPage, component: CollectionDocs },
   { path: Paths.collectionDocsIndex, component: CollectionDocs },

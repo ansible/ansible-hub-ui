@@ -55,25 +55,26 @@ export const CollectionFilter = (props: IProps) => {
 
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures } = context.featureFlags;
-  const display_tags = ignoredParams.includes('tags') === false;
-  const display_repos = ignoredParams.includes('repository__name') === false;
+  const displayTags = ignoredParams.includes('tags') === false;
+  const displayRepos = ignoredParams.includes('repository__name') === false;
+  const displayNamespaces = ignoredParams.includes('namespace') === false;
 
   const filterConfig = [
-    display_repos && {
+    {
+      id: 'keywords',
+      title: t`Keywords`,
+    },
+    displayRepos && {
       id: 'repository__name',
       title: t`Repository`,
       inputType: 'typeahead' as const,
       options: repositories,
     },
-    {
-      id: 'keywords',
-      title: t`Keywords`,
-    },
-    {
+    displayNamespaces && {
       id: 'namespace',
       title: t`Namespace`,
     },
-    display_tags && {
+    displayTags && {
       id: 'tags',
       title: t`Tag`,
       inputType: 'multiple' as const,

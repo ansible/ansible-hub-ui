@@ -46,9 +46,8 @@ class CollectionContent extends React.Component<
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
+        url: formatPath(Paths.namespaceDetail, {
           namespace: collection_version.namespace,
-          repo: repository.name,
         }),
         name: collection_version.namespace,
       },
@@ -76,7 +75,6 @@ class CollectionContent extends React.Component<
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
-          repo={this.context.selectedRepo}
         />
         <Main>
           <section className='body'>

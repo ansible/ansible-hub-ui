@@ -166,9 +166,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
           onCreateSuccess={(result) =>
             this.setState({
               redirect: formatPath(
-                Paths.namespaceByRepo,
+                Paths.namespaceDetail,
                 {
-                  repo: 'published',
                   namespace: result.name,
                 },
                 { tab: 'collections' },
@@ -328,7 +327,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <NamespaceCard
               namespaceURL={formatPath(namespacePath, {
                 namespace: ns.name,
-                repo: ns['repository'],
               })}
               key={i}
               {...ns}
@@ -349,10 +347,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         .then((results) => {
           this.setState({
             // TODO: remove this when after new namespaces
-            namespaces: results.data.data.map((res) => ({
-              ...res,
-              repository: 'published',
-            })),
+            namespaces: results.data.data,
             itemCount: results.data.meta.count,
             loading: false,
           });

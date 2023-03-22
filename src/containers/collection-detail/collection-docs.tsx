@@ -7,6 +7,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionHeader,
   EmptyStateCustom,
@@ -93,22 +94,23 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       }
     }
 
+    const { collection_version, repository } = collection;
+
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
-          namespace: collection.collection_version.namespace,
-          repo: this.context.selectedRepo,
+        url: formatPath(Paths.namespaceDetail, {
+          namespace: collection_version.namespace,
         }),
         name: collection.collection_version.namespace,
       },
       {
         url: formatPath(Paths.collectionByRepo, {
-          namespace: collection.collection_version.namespace,
-          collection: collection.collection_version.name,
-          repo: this.context.selectedRepo,
+          namespace: collection_version.namespace,
+          collection: collection_version.name,
+          repo: repository.name,
         }),
-        name: collection.collection_version.name,
+        name: collection_version.name,
       },
       { name: t`Documentation` },
     ];
@@ -136,7 +138,6 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
-          repo={this.context.selectedRepo}
         />
         <Main className='main'>
           <section className='docs-container'>
@@ -185,7 +186,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                     )}
                   />
                 )
-              ) : this.context.selectedRepo === 'community' &&
+              ) : collection.repository.name === 'community' &&
                 !content.docs_blob.contents ? (
                 this.renderCommunityWarningMessage()
               ) : (
@@ -198,7 +199,12 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     );
   }
 
-  private renderDocLink(name, href, collection, params) {
+  private renderDocLink(
+    name,
+    href,
+    collection: CollectionVersionSearch,
+    params,
+  ) {
     if (!!href && href.startsWith('http')) {
       return (
         <a href={href} target='_blank' rel='noreferrer'>
@@ -209,15 +215,18 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this
+
+      const { collection_version, repository } = collection;
+
       return (
         <Link
           to={formatPath(
             Paths.collectionDocsPageByRepo,
             {
-              namespace: collection.namespace.name,
-              collection: collection.name,
+              namespace: collection_version.namespace,
+              collection: collection_version.name,
               page: sanitizeDocsUrls(href),
-              repo: this.context.selectedRepo,
+              repo: repository.name,
             },
             params,
           )}
@@ -245,7 +254,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
               collection: collection.name,
               type: 'module',
               name: moduleName,
-              repo: this.context.selectedRepo,
+              repo: this.props.routeParams.repo,
             },
             params,
           )}
