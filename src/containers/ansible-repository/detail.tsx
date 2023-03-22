@@ -6,6 +6,7 @@ import {
   ansibleRepositoryDeleteAction,
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
+  ansibleRepositoryVersionRevertAction,
 } from 'src/actions';
 import {
   AnsibleRemoteAPI,
@@ -122,8 +123,10 @@ const RepositoryVersionsTab = ({
 }: TabProps) => {
   const pulpId = parsePulpIDFromURL(item.pulp_href);
   const latest_href = item.latest_version_href;
+  const repositoryName = item.name;
   const query = ({ params }) =>
     AnsibleRepositoryAPI.listVersions(pulpId, params);
+  const [state, setState] = useState({});
 
   const renderTableRow = (
     item: AnsibleRepositoryVersionType,
@@ -135,9 +138,8 @@ const RepositoryVersionsTab = ({
 
     const isLatest = latest_href === pulp_href;
 
-    // TODO revert should use item.isLatest in visible/disabled
     const kebabItems = listItemActions.map((action) =>
-      action.dropdownItem({ ...item, isLatest }, actionContext),
+      action.dropdownItem({ ...item, isLatest, repositoryName }, actionContext),
     );
 
     return (
@@ -169,16 +171,12 @@ const RepositoryVersionsTab = ({
 
   return (
     <DetailList<AnsibleRepositoryVersionType>
-      actionContext={{ addAlert }}
+      actionContext={{ addAlert, state, setState, query }}
       defaultPageSize={10}
       defaultSort={'-pulp_created'}
       errorTitle={t`Repository versions could not be displayed.`}
       filterConfig={null}
-      listItemActions={
-        [
-          /*TODO: revert to this version*/
-        ]
-      }
+      listItemActions={[ansibleRepositoryVersionRevertAction]}
       noDataButton={null}
       noDataDescription={t`Repository versions will appear once the repository is modified.`}
       noDataTitle={t`No repository versions yet`}

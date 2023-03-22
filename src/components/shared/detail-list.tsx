@@ -22,7 +22,7 @@ import {
 import { filterIsSet, handleHttpError } from 'src/utilities';
 
 interface IProps<T> {
-  actionContext: { addAlert };
+  actionContext: { addAlert; state; setState; query };
   defaultPageSize: number;
   defaultSort?: string;
   errorTitle: string;
