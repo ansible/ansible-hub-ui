@@ -57,19 +57,10 @@ function revert(
   { repositoryName, pulp_href, number },
   { addAlert, setState, query },
 ) {
+  // the uuid in version href is the reposotory uuid
   const pulpId = parsePulpIDFromURL(pulp_href);
-  const versionHref = 'TODO';
 
-  // TODO AnsibleRepositoryAPI.revert(pulpId, versionHref)
-  return (
-    Math.random() < 0.5
-      ? Promise.reject({
-          response: { status: 500, statusText: 'not implemented' },
-        })
-      : Promise.resolve({
-          data: { task: '00000000-0000-0000-0000-000000000000' },
-        })
-  )
+  return AnsibleRepositoryAPI.revert(pulpId, pulp_href)
     .then(({ data }) => {
       addAlert(
         taskAlert(
