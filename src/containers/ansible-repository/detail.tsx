@@ -45,7 +45,7 @@ const tabs = [
 
 interface TabProps {
   item: AnsibleRepositoryType;
-  actionContext: { addAlert: (alert) => void };
+  actionContext: { addAlert: (alert) => void; state: { params } };
 }
 
 const DetailsTab = ({ item }: TabProps) => {
@@ -119,14 +119,14 @@ const CollectionVersionsTab = ({
 
 const RepositoryVersionsTab = ({
   item,
-  actionContext: { addAlert },
+  actionContext: { addAlert, state },
 }: TabProps) => {
   const pulpId = parsePulpIDFromURL(item.pulp_href);
   const latest_href = item.latest_version_href;
   const repositoryName = item.name;
   const query = ({ params }) =>
     AnsibleRepositoryAPI.listVersions(pulpId, params);
-  const [state, setState] = useState({});
+  const [modalState, setModalState] = useState({});
 
   const renderTableRow = (
     item: AnsibleRepositoryVersionType,
@@ -149,7 +149,7 @@ const RepositoryVersionsTab = ({
             to={formatPath(
               Paths.ansibleRepositoryDetail,
               {
-                name,
+                name: repositoryName,
               },
               {
                 repositoryVersion: number,
@@ -169,9 +169,16 @@ const RepositoryVersionsTab = ({
     );
   };
 
-  return (
+  return state.params.repositoryVersion ? (
+    <Details fields={[{ label: t`Foo`, value: t`Bar` }]} />
+  ) : (
     <DetailList<AnsibleRepositoryVersionType>
-      actionContext={{ addAlert, state, setState, query }}
+      actionContext={{
+        addAlert,
+        state: modalState,
+        setState: setModalState,
+        query,
+      }}
       defaultPageSize={10}
       defaultSort={'-pulp_created'}
       errorTitle={t`Repository versions could not be displayed.`}
@@ -200,11 +207,24 @@ const RepositoryVersionsTab = ({
 };
 
 export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
-  breadcrumbs: ({ name, tab }) => [
-    { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
-    { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-    { name: tab.name },
-  ],
+  breadcrumbs: ({ name, tab, params: { repositoryVersion } }) =>
+    [
+      { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
+      { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
+      tab.id === 'repository-versions' && repositoryVersion
+        ? {
+            url: formatPath(
+              Paths.ansibleRepositoryDetail,
+              { name },
+              { tab: tab.id },
+            ),
+            name: tab.name,
+          }
+        : null,
+      tab.id === 'repository-versions' && repositoryVersion
+        ? { name: t`Version ${repositoryVersion}` }
+        : { name: tab.name },
+    ].filter(Boolean),
   condition: isLoggedIn,
   displayName: 'AnsibleRepositoryDetail',
   errorTitle: t`Repository could not be displayed.`,
@@ -240,6 +260,10 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
       ),
     }[tab]),
   tabs,
+  tabUpdateParams: (p) => {
+    delete p.repositoryVersion;
+    return p;
+  },
 });
 
 export default AnsibleRepositoryDetail;
