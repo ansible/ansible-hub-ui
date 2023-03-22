@@ -1,6 +1,8 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
+  CollectionAPI,
+  CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionContentType,
@@ -32,19 +34,19 @@ interface IState {
   params: {
     page?: number;
     page_size?: number;
-    name?: string;
-    order_by?: string;
+    collection?: string;
+    sort?: string;
     version?: string;
   };
-  usedByDependencies: CollectionVersionSearch[];
+  usedByDependencies: CollectionUsedByDependencies[];
   usedByDependenciesCount: number;
   usedByDependenciesLoading: boolean;
   alerts: AlertType[];
 }
 
 class CollectionDependencies extends React.Component<RouteProps, IState> {
-  private ignoredParams = ['page_size', 'page', 'order_by', 'name'];
-  private cancelToken: ReturnType<typeof CollectionVersionAPI.getCancelToken>;
+  private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
+  private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
 
   constructor(props) {
     super(props);
@@ -54,7 +56,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       'page_size',
     ]);
 
-    params['order_by'] = !params['order_by'] ? '-name' : 'name';
+    params['sort'] = !params['sort'] ? '-collection' : 'collection';
 
     this.state = {
       collections: [],
@@ -141,7 +143,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
               <h1>{t`Dependencies`}</h1>
               {noDependencies &&
               !usedByDependenciesCount &&
-              !filterIsSet(params, ['name']) ? (
+              !filterIsSet(params, ['name__icontains']) ? (
                 <EmptyStateNoData
                   title={t`No dependencies`}
                   description={t`Collection does not have any dependencies.`}
@@ -247,11 +249,13 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
         this.cancelToken.cancel('request-canceled');
       }
 
-      this.cancelToken = CollectionVersionAPI.getCancelToken();
+      this.cancelToken = CollectionAPI.getCancelToken();
 
       const { name, namespace } = this.state.collection.collection_version;
 
-      CollectionVersionAPI.getUsedDependenciesByCollection(
+      // We have to use CollectionAPI here for used by dependencies
+      // because cross repo collection search doesn't allow `name__icontains` filter
+      CollectionAPI.getUsedDependenciesByCollection(
         namespace,
         name,
         ParamHelper.getReduced(this.state.params, ['version']),
@@ -265,6 +269,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           });
         })
         .catch(({ response, message }) => {
+          // console.log(response, message);
           if (message !== 'request-canceled') {
             const { status, statusText } = response;
             this.setState({

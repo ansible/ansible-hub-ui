@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersionSearch } from 'src/api';
+import { CollectionUsedByDependencies } from 'src/api';
 import {
   EmptyStateFilter,
   EmptyStateNoData,
@@ -20,15 +20,15 @@ import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, filterIsSet } from 'src/utilities';
 
 interface IProps {
-  usedByDependencies: CollectionVersionSearch[];
+  usedByDependencies: CollectionUsedByDependencies[];
   usedByDependenciesLoading: boolean;
   itemCount: number;
   params: {
     page?: number;
     page_size?: number;
-    order_by?: string;
+    sort?: string;
     version?: string;
-    name?: string; // collection version search is missing name__icontains
+    name__icontains?: string;
   };
   updateParams: (params) => void;
 }
@@ -40,9 +40,9 @@ export const CollectionUsedbyDependenciesList = ({
   updateParams,
   usedByDependenciesLoading,
 }: IProps) => {
-  const ignoredParams = ['page_size', 'page', 'order_by', 'name'];
+  const ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
 
-  if (!itemCount && !filterIsSet(params, ['name'])) {
+  if (!itemCount && !filterIsSet(params, ['name__icontains'])) {
     return (
       <EmptyStateNoData
         title={t`Not required for use by other collections`}
@@ -58,12 +58,16 @@ export const CollectionUsedbyDependenciesList = ({
           <ToolbarGroup>
             <ToolbarItem>
               <SearchInput
-                value={params.name || ''}
+                value={params.name__icontains || ''}
                 onChange={(_e, val) =>
-                  updateParams(ParamHelper.setParam(params, 'name', val))
+                  updateParams(
+                    ParamHelper.setParam(params, 'name__icontains', val),
+                  )
                 }
                 onClear={() =>
-                  updateParams(ParamHelper.setParam(params, 'name', ''))
+                  updateParams(
+                    ParamHelper.setParam(params, 'name__icontains', ''),
+                  )
                 }
                 aria-label='filter-collection-name'
                 placeholder={t`Filter by name`}
@@ -71,14 +75,13 @@ export const CollectionUsedbyDependenciesList = ({
             </ToolbarItem>
             <ToolbarItem>
               <Sort
-                options={[{ title: t`Collection`, id: 'name', type: 'alpha' }]}
-                sortParamName={'order_by'}
+                options={[
+                  { title: t`Collection`, id: 'collection', type: 'alpha' },
+                ]}
                 params={params}
-                updateParams={({ order_by }) => {
-                  updateParams(
-                    ParamHelper.setParam(params, 'order_by', order_by),
-                  );
-                }}
+                updateParams={({ sort }) =>
+                  updateParams(ParamHelper.setParam(params, 'sort', sort))
+                }
               />
             </ToolbarItem>
           </ToolbarGroup>
@@ -104,13 +107,7 @@ export const CollectionUsedbyDependenciesList = ({
               <table className='hub-c-table-content pf-c-table pf-m-compact'>
                 <tbody>
                   {usedByDependencies.map(
-                    (
-                      {
-                        collection_version: { name, namespace, version },
-                        repository,
-                      },
-                      i,
-                    ) => (
+                    ({ name, namespace, version, repository_list }, i) => (
                       <tr key={i}>
                         <td>
                           <Link
@@ -119,7 +116,7 @@ export const CollectionUsedbyDependenciesList = ({
                               {
                                 collection: name,
                                 namespace,
-                                repo: repository.name,
+                                repo: repository_list[0],
                               },
                               ParamHelper.getReduced(
                                 { version },
