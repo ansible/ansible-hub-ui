@@ -149,7 +149,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           }),
       );
 
-      promises.push(this.queryCollections());
+      promises.push(this.queryCollections(false));
 
       Promise.all(promises).then(() => {
         this.setState({ loading: false });
@@ -187,7 +187,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                           this.setState({ inputText: text });
                         }}
                         updateParams={(p) =>
-                          this.updateParams(p, () => this.queryCollections())
+                          this.updateParams(p, () =>
+                            this.queryCollections(true),
+                          )
                         }
                         params={params}
                         filterConfig={[
@@ -227,7 +229,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 <Pagination
                   params={params}
                   updateParams={(p) =>
-                    this.updateParams(p, () => this.queryCollections())
+                    this.updateParams(p, () => this.queryCollections(true))
                   }
                   count={itemCount}
                   isTop
@@ -236,7 +238,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
               <div>
                 <AppliedFilters
                   updateParams={(p) => {
-                    this.updateParams(p, () => this.queryCollections());
+                    this.updateParams(p, () => this.queryCollections(true));
                     this.setState({ inputText: '' });
                   }}
                   params={params}
@@ -263,7 +265,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 <Pagination
                   params={params}
                   updateParams={(p) =>
-                    this.updateParams(p, () => this.queryCollections())
+                    this.updateParams(p, () => this.queryCollections(true))
                   }
                   count={itemCount}
                 />
@@ -281,7 +283,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 }}
                 finishAction={() => {
                   this.setState({ approveModalInfo: null });
-                  this.queryCollections();
+                  this.queryCollections(true);
                 }}
                 collectionVersion={
                   this.state.approveModalInfo.collectionVersion
@@ -356,7 +358,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           options={sortTableOptions}
           params={params}
           updateParams={(p) =>
-            this.updateParams(p, () => this.queryCollections())
+            this.updateParams(p, () => this.queryCollections(true))
           }
         />
         <tbody>
@@ -606,7 +608,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           'success',
         ),
       )
-      .then(() => this.queryCollections())
+      .then(() => this.queryCollections(true))
       .catch((error) => {
         const description = !error.response
           ? error
@@ -725,7 +727,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
       Promise.all(promises).then(() => {
         this.setState({ loading: false });
-        this.queryCollections();
+        this.queryCollections(true);
         if (failedRepos.length == 0) {
           this.addAlertObj({
             title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
@@ -775,7 +777,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           'success',
         ),
       )
-      .then(() => this.queryCollections())
+      .then(() => this.queryCollections(true))
       .catch((error) => {
         const description = !error.response
           ? error
@@ -789,16 +791,32 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       });
   }
 
-  private queryCollections() {
+  private queryCollections(handleLoading) {
+    if (handleLoading) {
+      this.setState({
+        loading: true,
+      });
+    }
+
     return CollectionVersionAPI.list(this.state.params)
       .then((result) => {
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,
         });
+        if (handleLoading) {
+          this.setState({
+            loading: false,
+            updatingVersions: [],
+          });
+        }
       })
       .catch((error) => {
         this.addAlert(t`Error loading collections.`, 'danger', error?.message);
+        this.setState({
+          loading: false,
+          updatingVersions: [],
+        });
       });
   }
 
