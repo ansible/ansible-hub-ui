@@ -1,38 +1,20 @@
 import { Trans, t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import {
   ansibleRepositoryCopyAction,
   ansibleRepositoryDeleteAction,
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
-  ansibleRepositoryVersionRevertAction,
 } from 'src/actions';
-import {
-  AnsibleRemoteAPI,
-  AnsibleRemoteType,
-  AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-  AnsibleRepositoryVersionType,
-  CollectionVersionAPI,
-} from 'src/api';
-import {
-  DateComponent,
-  DetailList,
-  Details,
-  LazyDistributions,
-  ListItemActions,
-  PageWithTabs,
-  PulpLabels,
-} from 'src/components';
+import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import {
-  handleHttpError,
-  lastSyncStatus,
-  lastSynced,
-  parsePulpIDFromURL,
-} from 'src/utilities';
+import { lastSyncStatus, lastSynced } from 'src/utilities';
+import { AccessTab } from './tab-access';
+import { CollectionVersionsTab } from './tab-collection-versions';
+import { DetailsTab } from './tab-details';
+import { RepositoryVersionsTab } from './tab-repository-versions';
 
 const wip = '🚧 ';
 
@@ -42,169 +24,6 @@ const tabs = [
   { id: 'collection-versions', name: wip + t`Collection versions` },
   { id: 'repository-versions', name: t`Versions` },
 ];
-
-interface TabProps {
-  item: AnsibleRepositoryType;
-  actionContext: { addAlert: (alert) => void; state: { params } };
-}
-
-const DetailsTab = ({ item }: TabProps) => {
-  const [remote, setRemote] = useState<AnsibleRemoteType>(null);
-
-  useEffect(() => {
-    const pk = item.remote && parsePulpIDFromURL(item.remote);
-    if (pk) {
-      AnsibleRemoteAPI.get(pk).then(({ data }) => setRemote(data));
-    } else {
-      setRemote(null);
-    }
-  }, [item.remote]);
-
-  return (
-    <Details
-      fields={[
-        { label: t`Repository name`, value: item?.name },
-        { label: t`Description`, value: item?.description || t`None` },
-        {
-          label: t`Retained version count`,
-          value: item?.retain_repo_versions ?? t`All`,
-        },
-        {
-          label: t`Distribution`,
-          value: <LazyDistributions repositoryHref={item.pulp_href} />,
-        },
-        {
-          label: t`Labels`,
-          value: <PulpLabels labels={item?.pulp_labels} />,
-        },
-        {
-          label: t`Remote`,
-          value: remote ? (
-            <Link
-              to={formatPath(Paths.ansibleRemoteDetail, { name: remote.name })}
-            >
-              {remote.name}
-            </Link>
-          ) : (
-            t`None`
-          ),
-        },
-      ]}
-    />
-  );
-};
-
-const AccessTab = ({ item }: TabProps) => <Details item={item} />;
-
-const CollectionVersionsTab = ({
-  item,
-  actionContext: { addAlert },
-}: TabProps) => {
-  const [versions, setVersions] = useState([]);
-
-  useEffect(() => {
-    CollectionVersionAPI.list({ repository: item.name })
-      .then(({ data: { data } }) => setVersions(data))
-      .catch(
-        handleHttpError(
-          t`Failed to load collection versions`,
-          () => setVersions([]),
-          addAlert,
-        ),
-      );
-  }, []);
-
-  return <Details item={versions} />;
-};
-
-const RepositoryVersionsTab = ({
-  item,
-  actionContext: { addAlert, state },
-}: TabProps) => {
-  const pulpId = parsePulpIDFromURL(item.pulp_href);
-  const latest_href = item.latest_version_href;
-  const repositoryName = item.name;
-  const query = ({ params }) =>
-    AnsibleRepositoryAPI.listVersions(pulpId, params);
-  const [modalState, setModalState] = useState({});
-
-  const renderTableRow = (
-    item: AnsibleRepositoryVersionType,
-    index: number,
-    actionContext,
-    listItemActions,
-  ) => {
-    const { number, pulp_created, pulp_href } = item;
-
-    const isLatest = latest_href === pulp_href;
-
-    const kebabItems = listItemActions.map((action) =>
-      action.dropdownItem({ ...item, isLatest, repositoryName }, actionContext),
-    );
-
-    return (
-      <tr key={index}>
-        <td>
-          <Link
-            to={formatPath(
-              Paths.ansibleRepositoryDetail,
-              {
-                name: repositoryName,
-              },
-              {
-                repositoryVersion: number,
-                tab: 'repository-versions',
-              },
-            )}
-          >
-            {number}
-          </Link>
-          {isLatest ? ' ' + t`(latest)` : null}
-        </td>
-        <td>
-          <DateComponent date={pulp_created} />
-        </td>
-        <ListItemActions kebabItems={kebabItems} />
-      </tr>
-    );
-  };
-
-  return state.params.repositoryVersion ? (
-    <Details fields={[{ label: t`Foo`, value: t`Bar` }]} />
-  ) : (
-    <DetailList<AnsibleRepositoryVersionType>
-      actionContext={{
-        addAlert,
-        state: modalState,
-        setState: setModalState,
-        query,
-      }}
-      defaultPageSize={10}
-      defaultSort={'-pulp_created'}
-      errorTitle={t`Repository versions could not be displayed.`}
-      filterConfig={null}
-      listItemActions={[ansibleRepositoryVersionRevertAction]}
-      noDataButton={null}
-      noDataDescription={t`Repository versions will appear once the repository is modified.`}
-      noDataTitle={t`No repository versions yet`}
-      query={query}
-      renderTableRow={renderTableRow}
-      sortHeaders={[
-        {
-          title: t`Version number`,
-          type: 'numeric',
-          id: 'number',
-        },
-        {
-          title: t`Created date`,
-          type: 'numeric',
-          id: 'pulp_created',
-        },
-      ]}
-      title={t`Repository versions`}
-    />
-  );
-};
 
 export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   breadcrumbs: ({ name, tab, params: { repositoryVersion } }) =>
