@@ -133,19 +133,28 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     } else {
       this.setState({ loading: true });
 
-      Repositories.listApproved()
-        .then((data) => {
-          this.setState({ repositoryList: data.data.results });
-          this.queryCollections();
-        })
-        .catch(({ response: { status, statusText } }) => {
-          this.setState({ loading: false });
-          this.addAlertObj({
-            title: t`Failed to load repositories.`,
-            variant: 'danger',
-            description: errorMessage(status, statusText),
-          });
-        });
+      const promises = [];
+
+      promises.push(
+        Repositories.listApproved()
+          .then((data) => {
+            this.setState({ repositoryList: data.data.results });
+          })
+          .catch(({ response: { status, statusText } }) => {
+            this.addAlertObj({
+              title: t`Failed to load repositories.`,
+              variant: 'danger',
+              description: errorMessage(status, statusText),
+            });
+          }),
+      );
+
+      promises.push(this.queryCollections());
+
+      Promise.all(promises).then(() => {
+        this.setState({ loading: false });
+        this.setState({ updatingVersions: [] });
+      });
     }
   }
 
@@ -781,28 +790,16 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private queryCollections() {
-    this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params)
-        .then((result) => {
-          this.setState({
-            versions: result.data.data,
-            itemCount: result.data.meta.count,
-            loading: false,
-            updatingVersions: [],
-          });
-        })
-        .catch((error) => {
-          this.addAlert(
-            t`Error loading collections.`,
-            'danger',
-            error?.message,
-          );
-          this.setState({
-            loading: false,
-            updatingVersions: [],
-          });
-        }),
-    );
+    return CollectionVersionAPI.list(this.state.params)
+      .then((result) => {
+        this.setState({
+          versions: result.data.data,
+          itemCount: result.data.meta.count,
+        });
+      })
+      .catch((error) => {
+        this.addAlert(t`Error loading collections.`, 'danger', error?.message);
+      });
   }
 
   private download(namespace: string, name: string, version: string) {
