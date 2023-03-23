@@ -138,7 +138,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       promises.push(
         Repositories.listApproved()
           .then((data) => {
-            this.setState({ repositoryList: data.data.results });
+            this.setState({ repositoryList: data });
           })
           .catch(({ response: { status, statusText } }) => {
             this.addAlertObj({

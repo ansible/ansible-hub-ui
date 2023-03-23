@@ -21,12 +21,34 @@ class API extends PulpAPI {
     return this.http.get(`${this.apiPath}?name=${data.name}`);
   }
 
-  listApproved(): Promise<ReturnRepository> {
-    return this.http.get(
-      `${this.apiPath}?pulp_label_select=${encodeURIComponent(
-        'pipeline=approved',
-      )}`,
-    );
+  listApproved(): Promise<Repository[]> {
+    async function getAll(self) {
+      let list = [];
+
+      let page = 0;
+      const pageSize = 100;
+
+      // watchdog, in case something terrible happened, loop maximum of 10 times. I hope 1000 repos limit is enough
+      // otherwise, doing more than 10 API calls is not acceptable either
+      for (let i = 0; i < 10; i++) {
+        const result = await self.http.get(
+          `${
+            self.apiPath
+          }?offset=${page}&limit=${pageSize}&pulp_label_select=${encodeURIComponent(
+            'pipeline=approved',
+          )}`,
+        );
+
+        list = list.concat(result.data.results);
+        if (list.length >= result.data.count) {
+          return list;
+        }
+
+        page += pageSize;
+      }
+    }
+
+    return getAll(this);
   }
 
   list(params?) {
