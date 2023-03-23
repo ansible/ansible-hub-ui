@@ -12,7 +12,11 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
+import {
+  CollectionVersionAPI,
+  CollectionVersionSearch,
+  Repositories,
+} from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
@@ -23,7 +27,6 @@ import {
   Pagination,
   SortTable,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import {
   errorMessage,
   parsePulpIDFromURL,
@@ -32,7 +35,8 @@ import {
 
 interface IProps {
   closeAction: () => void;
-  collectionVersion: CollectionVersion;
+  collectionVersion: CollectionVersionSearch;
+  collections: CollectionVersionSearch[];
   addAlert: (alert) => void;
   allRepositories: Repository[];
   finishAction: () => void;
@@ -64,9 +68,8 @@ export const ApproveModal = (props: IProps) => {
 
     setLoading(true);
 
-    const originRepoName = props.collectionVersion.repository_list.find(
-      (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
-    );
+    const originRepoName = props.collectionVersion.repository.name;
+
     const reposToApprove = [];
 
     // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
@@ -87,7 +90,10 @@ export const ApproveModal = (props: IProps) => {
           failedToLoadRepo('', t`Repository name ${originRepoName} not found.`);
         } else {
           const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
-          CollectionVersionAPI.get(props.collectionVersion.id)
+          const collectionVersionPulpId = parsePulpIDFromURL(
+            props.collectionVersion.collection_version.pulp_href,
+          );
+          CollectionVersionAPI.get(collectionVersionPulpId)
             .then((data) => {
               Repositories.moveCollectionVersion(
                 pulp_id,
@@ -100,8 +106,12 @@ export const ApproveModal = (props: IProps) => {
                 .then(() => {
                   setLoading(false);
                   props.finishAction();
+
+                  const { namespace, name, version } =
+                    props.collectionVersion.collection_version;
+
                   props.addAlert({
-                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
+                    title: t`Certification status for collection "${namespace} ${name} v${version}" has been successfully updated.`,
                     variant: 'success',
                     description: '',
                   });
@@ -219,7 +229,21 @@ export const ApproveModal = (props: IProps) => {
 
     // check for approval repos that are already in collection and select them in UI
     // this is handling of situation when collection is in inconsistent state
-    props.collectionVersion.repository_list.forEach((repo) => {
+    const { namespace, name, version } =
+      props.collectionVersion.collection_version;
+
+    const collections = props.collections.filter(
+      ({ collection_version: cv }) =>
+        cv.namespace === namespace &&
+        cv.name === name &&
+        cv.version === version,
+    );
+
+    const collectionRepos = collections.map(
+      ({ repository }) => repository.name,
+    );
+
+    collectionRepos.forEach((repo) => {
       const count = props.allRepositories.filter((r) => r.name == repo).length;
       if (count > 0) {
         fixedReposLocal.push(repo);
