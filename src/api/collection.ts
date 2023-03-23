@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {
+  AnsibleDistributionAPI,
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
   CollectionVersionSearch,
-  RepositoryDistributionsAPI,
 } from 'src/api';
 import { HubAPI } from './hub';
 
@@ -87,7 +87,7 @@ export class API extends HubAPI {
       is_deprecated,
     } = collection;
     return new Promise((resolve, reject) => {
-      RepositoryDistributionsAPI.list({
+      AnsibleDistributionAPI.list({
         repository: repository.pulp_href,
       })
         .then((result) => {
@@ -140,7 +140,7 @@ export class API extends HubAPI {
   getDownloadURL(repository, namespace, name, version) {
     // UI API doesn't have tarball download link, so query it separately here
     return new Promise((resolve, reject) => {
-      RepositoryDistributionsAPI.list({
+      AnsibleDistributionAPI.list({
         repository: repository.pulp_href,
       })
         .then((result) => {
@@ -163,7 +163,7 @@ export class API extends HubAPI {
   }
 
   async deleteCollectionVersion(collection: CollectionVersionSearch) {
-    const distros = await RepositoryDistributionsAPI.list({
+    const distros = await AnsibleDistributionAPI.list({
       repository: collection.repository.pulp_href,
     });
 
@@ -178,7 +178,7 @@ export class API extends HubAPI {
   }
 
   async deleteCollection(collection: CollectionVersionSearch) {
-    const distros = await RepositoryDistributionsAPI.list({
+    const distros = await AnsibleDistributionAPI.list({
       repository: collection.repository.pulp_href,
     });
 

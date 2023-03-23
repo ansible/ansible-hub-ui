@@ -11,9 +11,9 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 import React, { useState } from 'react';
 import {
+  AnsibleDistributionAPI,
   CollectionAPI,
   CollectionVersionSearch,
-  RepositoryDistributionsAPI,
   findDistroBasePathByRepo,
 } from 'src/api';
 import 'src/api/response-types/collection';
@@ -43,7 +43,7 @@ export const DownloadSignatureGridItem = ({
 
   React.useEffect(() => {
     if (show && isLoading) {
-      RepositoryDistributionsAPI.list({
+      AnsibleDistributionAPI.list({
         repository: repository.pulp_href,
       }).then((result) => {
         const distroBasePath = findDistroBasePathByRepo(

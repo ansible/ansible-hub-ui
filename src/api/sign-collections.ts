@@ -1,6 +1,6 @@
 import {
+  AnsibleDistributionAPI,
   CollectionVersionSearch,
-  RepositoryDistributionsAPI,
   findDistroBasePathByRepo,
 } from 'src/api';
 import { HubAPI } from './hub';
@@ -26,7 +26,7 @@ class API extends HubAPI {
 
   async sign(data: SignProps) {
     const { repository, ...args } = data;
-    const distros = await RepositoryDistributionsAPI.list({
+    const distros = await AnsibleDistributionAPI.list({
       repository: repository.pulp_href,
     });
 

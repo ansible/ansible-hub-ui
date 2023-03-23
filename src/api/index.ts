@@ -82,8 +82,6 @@ export {
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
 } from './response-types/ansible-repository';
-export { RepositoryDistributionsAPI } from './repository-distributions';
-export { RepositoryDistributions } from './repository-distributions';
 export { SignContainersAPI } from './sign-containers';
 export {
   LegacyRoleDetailType,
