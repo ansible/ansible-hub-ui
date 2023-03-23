@@ -34,6 +34,7 @@ export { DeleteModal } from './delete-modal/delete-modal';
 export { DeleteUserModal } from './rbac/delete-user-modal';
 export { DeprecatedTag } from './tags/deprecated-tag';
 export { Details } from './shared/details';
+export { DetailList } from './shared/detail-list';
 export { EmptyStateCustom } from './empty-state/empty-state-custom';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
@@ -45,7 +46,12 @@ export { HelperText } from './helper-text/helper-text';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
 export { ImportModal } from './import-modal/import-modal';
-export { ListPage } from './page/list-page';
+export {
+  ListPage,
+  type Query,
+  type RenderTableRow,
+  type SortHeaders,
+} from './page/list-page';
 export { PageWithTabs } from './page/page-with-tabs';
 export { Page } from './page/page';
 export { PulpLabels } from './repositories/pulp-labels';

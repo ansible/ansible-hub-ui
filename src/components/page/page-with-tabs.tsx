@@ -21,6 +21,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
+  ParamType,
   RouteProps,
   errorMessage,
   withRouter,
@@ -44,7 +45,7 @@ interface IState<T> {
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 
 interface PageWithTabsParams<T, ExtraState> {
-  breadcrumbs: ({ name, tab }) => { url?: string; name: string }[];
+  breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
@@ -56,6 +57,7 @@ interface PageWithTabsParams<T, ExtraState> {
   renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => React.ReactNode;
   tabs: { id: string; name: string }[];
+  tabUpdateParams?: (params: ParamType) => ParamType;
 }
 
 export const PageWithTabs = function <
@@ -85,12 +87,15 @@ export const PageWithTabs = function <
   renderTab,
   // [{ id, name }]
   tabs,
+  // params => params
+  tabUpdateParams,
 }: PageWithTabsParams<T, ExtraState>) {
   renderModals ||= function (actionContext) {
     return (
       <>
-        {headerActions?.length &&
-          headerActions.map((action) => action?.modal?.(actionContext))}
+        {headerActions?.length
+          ? headerActions.map((action) => action?.modal?.(actionContext))
+          : null}
       </>
     );
   };
@@ -102,9 +107,7 @@ export const PageWithTabs = function <
     constructor(props) {
       super(props);
 
-      const params = ParamHelper.parseParamString(props.location.search, [
-        'tab',
-      ]);
+      const params = ParamHelper.parseParamString(props.location.search);
 
       if (!params['tab']) {
         params['tab'] = tabs[0].id;
@@ -138,6 +141,13 @@ export const PageWithTabs = function <
       }
     }
 
+    componentDidUpdate(prevProps) {
+      if (prevProps.location !== this.props.location) {
+        const params = ParamHelper.parseParamString(this.props.location.search);
+        this.setState({ params: { tab: tabs[0].id, ...params } });
+      }
+    }
+
     render() {
       const { routeParams } = this.props;
       const { alerts, item, loading, params, unauthorised } = this.state;
@@ -168,6 +178,7 @@ export const PageWithTabs = function <
                 links={breadcrumbs({
                   name,
                   tab,
+                  params,
                 })}
               />
             }
@@ -198,7 +209,9 @@ export const PageWithTabs = function <
                 <Tabs
                   tabs={tabs}
                   params={params}
-                  updateParams={(p) => this.updateParams(p)}
+                  updateParams={(p) =>
+                    this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)
+                  }
                 />
               </div>
             </div>

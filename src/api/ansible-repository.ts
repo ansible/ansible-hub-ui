@@ -15,6 +15,12 @@ class API extends PulpAPI {
   sync(id) {
     return this.http.post(this.apiPath + id + '/sync/', {});
   }
+
+  revert(id, version_href) {
+    return this.http.post(this.apiPath + id + '/modify/', {
+      base_version: version_href,
+    });
+  }
 }
 
 export const AnsibleRepositoryAPI = new API();

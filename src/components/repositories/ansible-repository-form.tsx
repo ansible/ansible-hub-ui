@@ -196,7 +196,15 @@ export const AnsibleRepositoryForm = ({
       </FormGroup>
 
       <FormGroup key={'labels'} fieldId={'labels'} label={t`Labels`}>
-        <PulpLabels labels={repository.pulp_labels} />
+        <div
+          // prevents "N more" clicks from submitting the form
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
+          <PulpLabels labels={repository.pulp_labels} />
+        </div>
         <div style={{ marginTop: '12px' }}>
           <Checkbox
             isChecked={createLabel}

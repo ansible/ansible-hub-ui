@@ -53,16 +53,17 @@ interface IState<T> {
 // (data) - also renders SortTable
 
 type ParamsType = { page?: number; page_size?: number };
-type Query<T> = (o: {
+export type Query<T> = (o: {
   params?: ParamsType;
 }) => Promise<{ data: { count: number; results: T[] } }>;
-type RenderTableRow<T> = (
+export type RenderTableRow<T> = (
   item: T,
   index: number,
-  { addAlert, setState },
+  { addAlert, setState = null },
+  listItemActions?,
 ) => React.ReactNode;
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
-type SortHeaders = {
+export type SortHeaders = {
   title: string;
   type: string;
   id: string;
@@ -129,10 +130,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   renderModals ||= function (actionContext) {
     return (
       <>
-        {headerActions?.length &&
-          headerActions.map((action) => action?.modal?.(actionContext))}
-        {listItemActions?.length &&
-          listItemActions.map((action) => action?.modal?.(actionContext))}
+        {headerActions?.length
+          ? headerActions.map((action) => action?.modal?.(actionContext))
+          : null}
+        {listItemActions?.length
+          ? listItemActions.map((action) => action?.modal?.(actionContext))
+          : null}
       </>
     );
   };

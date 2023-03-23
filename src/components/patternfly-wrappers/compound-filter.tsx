@@ -65,6 +65,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     const { filterConfig } = this.props;
     const { selectedFilter } = this.state;
 
+    if (filterConfig.length === 0) {
+      return null;
+    }
+
     const filterOptions = filterConfig.map((v) => (
       <DropdownItem
         onClick={() => {
@@ -79,7 +83,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
     return (
       <InputGroup data-cy='compound_filter'>
-        {filterConfig.length != 1 && (
+        {filterConfig.length !== 1 && (
           <StatefulDropdown
             toggleType='dropdown'
             defaultText={

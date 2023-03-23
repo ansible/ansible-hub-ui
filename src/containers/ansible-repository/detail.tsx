@@ -1,33 +1,20 @@
 import { Trans, t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import {
   ansibleRepositoryCopyAction,
   ansibleRepositoryDeleteAction,
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import {
-  AnsibleRemoteAPI,
-  AnsibleRemoteType,
-  AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-  CollectionVersionAPI,
-} from 'src/api';
-import {
-  Details,
-  LazyDistributions,
-  PageWithTabs,
-  PulpLabels,
-} from 'src/components';
+import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
-import {
-  handleHttpError,
-  lastSyncStatus,
-  lastSynced,
-  parsePulpIDFromURL,
-} from 'src/utilities';
+import { lastSyncStatus, lastSynced } from 'src/utilities';
+import { AccessTab } from './tab-access';
+import { CollectionVersionsTab } from './tab-collection-versions';
+import { DetailsTab } from './tab-details';
+import { RepositoryVersionsTab } from './tab-repository-versions';
 
 const wip = '🚧 ';
 
@@ -35,111 +22,28 @@ const tabs = [
   { id: 'details', name: t`Details` },
   { id: 'access', name: wip + t`Access` },
   { id: 'collection-versions', name: wip + t`Collection versions` },
-  { id: 'repository-versions', name: wip + t`Versions` },
+  { id: 'repository-versions', name: t`Versions` },
 ];
 
-interface TabProps {
-  item: AnsibleRepositoryType;
-  actionContext: { addAlert: (alert) => void };
-}
-
-const DetailsTab = ({ item }: TabProps) => {
-  const [remote, setRemote] = useState<AnsibleRemoteType>(null);
-
-  useEffect(() => {
-    const pk = item.remote && parsePulpIDFromURL(item.remote);
-    if (pk) {
-      AnsibleRemoteAPI.get(pk).then(({ data }) => setRemote(data));
-    } else {
-      setRemote(null);
-    }
-  }, [item.remote]);
-
-  return (
-    <Details
-      fields={[
-        { label: t`Repository name`, value: item?.name },
-        { label: t`Description`, value: item?.description || t`None` },
-        {
-          label: t`Retained version count`,
-          value: item?.retain_repo_versions ?? t`None`,
-        },
-        {
-          label: t`Distribution`,
-          value: <LazyDistributions repositoryHref={item.pulp_href} />,
-        },
-        {
-          label: t`Labels`,
-          value: <PulpLabels labels={item?.pulp_labels} />,
-        },
-        {
-          label: t`Remote`,
-          value: remote ? (
-            <Link
-              to={formatPath(Paths.ansibleRemoteDetail, { name: remote.name })}
-            >
-              {remote.name}
-            </Link>
-          ) : (
-            t`None`
-          ),
-        },
-      ]}
-    />
-  );
-};
-
-const AccessTab = ({ item }: TabProps) => <Details item={item} />;
-
-const CollectionVersionsTab = ({
-  item,
-  actionContext: { addAlert },
-}: TabProps) => {
-  const [versions, setVersions] = useState([]);
-
-  useEffect(() => {
-    CollectionVersionAPI.list({ repository: item.name })
-      .then(({ data: { data } }) => setVersions(data))
-      .catch(
-        handleHttpError(
-          t`Failed to load collection versions`,
-          () => setVersions([]),
-          addAlert,
-        ),
-      );
-  }, []);
-
-  return <Details item={versions} />;
-};
-
-const RepositoryVersionsTab = ({
-  item,
-  actionContext: { addAlert },
-}: TabProps) => {
-  const [versions, setVersions] = useState([]);
-
-  useEffect(() => {
-    const pulpId = parsePulpIDFromURL(item.pulp_href);
-    AnsibleRepositoryAPI.listVersions(pulpId)
-      .then(({ data: { results } }) => setVersions(results))
-      .catch(
-        handleHttpError(
-          t`Failed to load repository versions`,
-          () => setVersions([]),
-          addAlert,
-        ),
-      );
-  }, []);
-
-  return <Details item={versions} />;
-};
-
 export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
-  breadcrumbs: ({ name, tab }) => [
-    { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
-    { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-    { name: tab.name },
-  ],
+  breadcrumbs: ({ name, tab, params: { repositoryVersion } }) =>
+    [
+      { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
+      { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
+      tab.id === 'repository-versions' && repositoryVersion
+        ? {
+            url: formatPath(
+              Paths.ansibleRepositoryDetail,
+              { name },
+              { tab: tab.id },
+            ),
+            name: tab.name,
+          }
+        : null,
+      tab.id === 'repository-versions' && repositoryVersion
+        ? { name: t`Version ${repositoryVersion}` }
+        : { name: tab.name },
+    ].filter(Boolean),
   condition: isLoggedIn,
   displayName: 'AnsibleRepositoryDetail',
   errorTitle: t`Repository could not be displayed.`,
@@ -175,6 +79,10 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
       ),
     }[tab]),
   tabs,
+  tabUpdateParams: (p) => {
+    delete p.repositoryVersion;
+    return p;
+  },
 });
 
 export default AnsibleRepositoryDetail;
