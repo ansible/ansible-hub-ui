@@ -22,6 +22,7 @@ import {
   CompoundFilter,
   Pagination,
   SortTable,
+  closeAlert,
 } from 'src/components';
 import { Constants } from 'src/constants';
 import {
@@ -132,10 +133,6 @@ export const ApproveModal = (props: IProps) => {
 
   function addAlert(alert: AlertType) {
     setAlerts((prevAlerts) => [...prevAlerts, alert]);
-  }
-
-  function closeAlert() {
-    setAlerts([]);
   }
 
   function changeSelection(name) {
@@ -365,7 +362,10 @@ export const ApproveModal = (props: IProps) => {
           </div>
         </section>
 
-        <AlertList alerts={alerts} closeAlert={() => closeAlert()} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+        />
       </Modal>
     </>
   );
