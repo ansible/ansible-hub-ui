@@ -1,3 +1,9 @@
+export { default as AnsibleRemoteDetail } from './ansible-remote/detail';
+export { default as AnsibleRemoteEdit } from './ansible-remote/edit';
+export { default as AnsibleRemoteList } from './ansible-remote/list';
+export { default as AnsibleRepositoryDetail } from './ansible-repository/detail';
+export { default as AnsibleRepositoryEdit } from './ansible-repository/edit';
+export { default as AnsibleRepositoryList } from './ansible-repository/list';
 export { default as CertificationDashboard } from './certification-dashboard/certification-dashboard';
 export { default as CollectionContent } from './collection-detail/collection-content';
 export { default as CollectionDetail } from './collection-detail/collection-detail';

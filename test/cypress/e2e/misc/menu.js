@@ -5,7 +5,8 @@ describe('Hub Menu Tests', () => {
   const menuItems = [
     'Collections > Collections',
     'Collections > Namespaces',
-    'Collections > Repository Management',
+    'Collections > Repositories',
+    'Collections > Remotes',
     'Collections > API token',
     'Collections > Approval',
     'Execution Environments > Execution Environments',
@@ -35,7 +36,8 @@ describe('Hub Menu Tests', () => {
     const visibleMenuItems = [
       'Collections > Collections',
       'Collections > Namespaces',
-      'Collections > Repository Management',
+      'Collections > Repositories',
+      'Collections > Remotes',
       'Collections > API token',
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',

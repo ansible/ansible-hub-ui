@@ -69,6 +69,11 @@ export { SigningServiceAPI, SigningServiceType } from './signing-service';
 export { RoleType, GroupRoleType } from './response-types/role';
 export { CertificateUploadAPI } from './certificate-upload';
 export { Repositories } from './repositories';
+export { AnsibleDistributionAPI } from './ansible-distribution';
+export { AnsibleRemoteAPI } from './ansible-remote';
+export { AnsibleRemoteType } from './response-types/ansible-remote';
+export { AnsibleRepositoryAPI } from './ansible-repository';
+export { AnsibleRepositoryType } from './response-types/ansible-repository';
 export { SignContainersAPI } from './sign-containers';
 export {
   LegacyRoleDetailType,

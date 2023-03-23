@@ -53,6 +53,14 @@ function standaloneMenu({ repository }) {
         condition: isLoggedIn,
         url: formatPath(Paths.repositories),
       }),
+      menuItem(t`Repositories`, {
+        condition: isLoggedIn,
+        url: formatPath(Paths.ansibleRepositories),
+      }),
+      menuItem(t`Remotes`, {
+        condition: isLoggedIn,
+        url: formatPath(Paths.ansibleRemotes),
+      }),
       menuItem(t`API token`, {
         url: formatPath(Paths.token),
         condition: isLoggedIn,
