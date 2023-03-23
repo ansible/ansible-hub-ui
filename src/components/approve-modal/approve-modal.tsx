@@ -1,6 +1,11 @@
 import { t } from '@lingui/macro';
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownToggle,
+  DropdownToggleCheckbox,
   Flex,
   FlexItem,
   Label,
@@ -40,6 +45,7 @@ interface IProps {
 }
 
 export const ApproveModal = (props: IProps) => {
+  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
   const [itemsCount, setItemsCount] = useState(0);
@@ -228,6 +234,92 @@ export const ApproveModal = (props: IProps) => {
     setFixedRepos(fixedReposLocal);
   }, []);
 
+  function renderMultipleSelector() {
+    function onToggle(isOpen: boolean) {
+      setIsSelectorOpen(isOpen);
+    }
+
+    function onFocus() {
+      const element = document.getElementById('toggle-split-button');
+      element.focus();
+    }
+
+    function onSelect() {
+      setIsSelectorOpen(false);
+      onFocus();
+    }
+
+    function selectAll() {
+      setSelectedRepos(props.allRepositories.map((a) => a.name));
+    }
+
+    function selectPage() {
+      let newRepos = [...selectedRepos];
+
+      repositoryList.forEach((repo) => {
+        if (!selectedRepos.includes(repo.name)) {
+          newRepos.push(repo.name);
+        }
+      });
+
+      setSelectedRepos(newRepos);
+    }
+
+    function deselectAll() {
+      setSelectedRepos(fixedRepos);
+    }
+
+    function deselectPage() {
+      const newSelectedRepos = selectedRepos.filter(
+        (repo) =>
+          fixedRepos.includes(repo) ||
+          !repositoryList.find((repo2) => repo2.name == repo),
+      );
+      setSelectedRepos(newSelectedRepos);
+    }
+
+    const dropdownItems = [
+      <DropdownItem
+        onClick={selectPage}
+        key='select-page'
+      >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={selectAll}
+        key='select-all'
+      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
+      <DropdownSeparator key='separator' />,
+      <DropdownItem
+        onClick={deselectPage}
+        key='deselect-page'
+      >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={deselectAll}
+        key='deselect-all'
+      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
+    ];
+
+    return (
+      <Dropdown
+        onSelect={onSelect}
+        toggle={
+          <DropdownToggle
+            splitButtonItems={[
+              <DropdownToggleCheckbox
+                id='split-button-toggle-checkbox'
+                key='split-checkbox'
+                aria-label='Select all'
+              />,
+            ]}
+            onToggle={onToggle}
+            id='toggle-split-button'
+          />
+        }
+        isOpen={isSelectorOpen}
+        dropdownItems={dropdownItems}
+      />
+    );
+  }
+
   function renderTable() {
     if (!props.collectionVersion) {
       return;
@@ -311,6 +403,7 @@ export const ApproveModal = (props: IProps) => {
           <div className='toolbar hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
+                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
                 <ToolbarItem>
                   <CompoundFilter
                     inputText={inputText}
