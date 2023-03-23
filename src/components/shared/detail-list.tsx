@@ -44,7 +44,7 @@ interface IProps<T> {
   title: string;
 }
 
-export function DetailList<T extends { pulp_href: string }>({
+export function DetailList<T>({
   actionContext,
   defaultPageSize,
   defaultSort,
