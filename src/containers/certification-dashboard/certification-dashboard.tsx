@@ -83,8 +83,8 @@ interface IState {
     collectionVersion: CollectionVersion;
   };
   repositoryList: Repository[];
-  stagingRepo: Repository;
-  rejectedRepo: Repository;
+  stagingRepoName: string;
+  rejectedRepoName: string;
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -121,8 +121,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       versionToUploadCertificate: null,
       approveModalInfo: null,
       repositoryList: [],
-      stagingRepo: null,
-      rejectedRepo: null,
+      stagingRepoName: 'staging',
+      rejectedRepoName: 'rejected',
     };
   }
 
@@ -168,19 +168,13 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   private loadRepo(pipeline) {
     return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
       .then((data) => {
-        if (data.data.results.length == 0) {
-          this.addAlert(
-            t`Error loading repository with label ${pipeline}.`,
-            'danger',
-            'No repository found.',
-          );
-        } else {
+        if (data.data.results.length > 0) {
           if (pipeline == 'staging') {
-            this.setState({ stagingRepo: data.data.results[0] });
+            this.setState({ stagingRepoName: data.data.results[0].name });
           }
 
           if (pipeline == 'rejected') {
-            this.setState({ rejectedRepo: data.data.results[0] });
+            this.setState({ rejectedRepoName: data.data.results[0].name });
           }
         }
       })
@@ -668,11 +662,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     version.repository_list.forEach((repo) => {
-      if (repo == this.state.rejectedRepo.name) {
+      if (repo == this.state.rejectedRepoName) {
         isStagingOrRejected = true;
       }
 
-      if (repo == this.state.stagingRepo.name) {
+      if (repo == this.state.stagingRepoName) {
         isStagingOrRejected = true;
       }
 
@@ -698,13 +692,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     let isStagingOrRejected = false;
-
     version.repository_list.forEach((repo) => {
-      if (pipeline == 'rejected' && repo == this.state.rejectedRepo.name) {
+      if (pipeline == 'rejected' && repo == this.state.rejectedRepoName) {
         isStagingOrRejected = true;
       }
 
-      if (pipeline == 'staging' && repo == this.state.stagingRepo.name) {
+      if (pipeline == 'staging' && repo == this.state.stagingRepoName) {
         isStagingOrRejected = true;
       }
     });
@@ -726,8 +719,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (this.state.repositoryList.length == 1) {
       const originalRepo = version.repository_list.find(
         (repo) =>
-          repo == this.state.stagingRepo.name ||
-          repo == this.state.rejectedRepo.name,
+          repo == this.state.stagingRepoName ||
+          repo == this.state.rejectedRepoName,
       );
       if (originalRepo) {
         this.updateCertification(
@@ -759,68 +752,114 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return;
     }
 
-    const promises = [];
-    const repositoryList = this.state.repositoryList;
-
     this.setState({ updatingVersions: [version] });
 
-    const removedRepos = [];
-    const failedRepos = [];
+    let deletePromise = Promise.resolve();
 
-    version.repository_list.forEach((repo) => {
-      const repoInfo = repositoryList.find((r) => r.name == repo);
+    let isInRejected = false;
+    let rejectedDeleted = false;
 
-      if (repoInfo?.pulp_labels?.pipeline == 'approved') {
-        const promise = CollectionVersionAPI.setRepository(
-          version.namespace,
-          version.name,
-          version.version,
-          repo,
-          this.state.rejectedRepo.name,
-        )
-          .then((task) => {
-            return waitForTaskUrl(task['data'].copy_task_id);
-          })
+    // delete rejected before rejection
+    if (version.repository_list.includes(this.state.rejectedRepoName)) {
+      isInRejected = true;
+      deletePromise = Repositories.deleteCollection(
+        this.state.rejectedRepoName,
+        version,
+      );
+    }
+
+    deletePromise
+      .then(() => {
+        if (isInRejected) {
+          rejectedDeleted = true;
+        }
+        const promises = [];
+        const repositoryList = this.state.repositoryList;
+
+        const removedRepos = [];
+        const failedRepos = [];
+
+        version.repository_list.forEach((repo) => {
+          const repoInfo = repositoryList.find((r) => r.name == repo);
+
+          if (
+            repoInfo?.pulp_labels?.pipeline == 'approved' ||
+            repo == this.state.stagingRepoName
+          ) {
+            const promise = CollectionVersionAPI.setRepository(
+              version.namespace,
+              version.name,
+              version.version,
+              repo,
+              this.state.rejectedRepoName,
+            )
+              .then((task) => {
+                return waitForTaskUrl(task['data'].copy_task_id);
+              })
+              .then(() => {
+                removedRepos.push(repo);
+              })
+              .catch(() => {
+                failedRepos.push(repo);
+              });
+            promises.push(promise);
+          }
+        });
+
+        Promise.all(promises)
           .then(() => {
-            removedRepos.push(repo);
+            // if something fail, add previously deleted rejected repo back again
+            if (failedRepos.length > 0) {
+              return Repositories.addCollection(
+                this.state.rejectedRepoName,
+                version,
+              );
+            }
           })
           .catch(() => {
-            failedRepos.push(repo);
+            this.addAlertObj({
+              title: t`Cannot add collection back to rejected repository.`,
+              variant: 'danger',
+            });
+          })
+          .then(() => {
+            this.setState({ loading: false });
+            this.queryCollections(true);
+            if (failedRepos.length == 0) {
+              this.addAlertObj({
+                title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+                variant: 'success',
+              });
+            } else {
+              if (removedRepos.length > 0) {
+                this.addAlertObj({
+                  title: t`Rejection summary.`,
+                  variant: 'danger',
+                  description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
+                    ', ',
+                  )}, but failed to be removed from those repositories: ${failedRepos.join(
+                    ', ',
+                  )}`,
+                });
+              } else {
+                this.addAlertObj({
+                  title: t`Rejection failed.`,
+                  variant: 'danger',
+                  description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
+                    ', ',
+                  )}`,
+                });
+              }
+            }
           });
-        promises.push(promise);
-      }
-    });
-
-    Promise.all(promises).then(() => {
-      this.setState({ loading: false });
-      this.queryCollections(true);
-      if (failedRepos.length == 0) {
+      })
+      .catch(() => {
         this.addAlertObj({
-          title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
-          variant: 'success',
+          title: t`Rejection failed.`,
+          variant: 'danger',
+          description: t`Cannot delete collection from rejected repository ${this.state.rejectedRepoName}`,
         });
-      } else {
-        if (removedRepos.length > 0) {
-          this.addAlertObj({
-            title: t`Rejection summary.`,
-            variant: 'danger',
-            description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
-              ', ',
-            )}, but failed to be removed from those repositories: ${failedRepos.join(
-              ', ',
-            )}`,
-          });
-        } else {
-          this.addAlertObj({
-            title: t`Rejection failed.`,
-            variant: 'danger',
-            description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
-              ', ',
-            )}`,
-          });
-        }
-      }
-    });
+      });
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {

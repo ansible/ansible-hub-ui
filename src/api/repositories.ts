@@ -1,3 +1,7 @@
+import { t } from '@lingui/macro';
+import { waitForTaskUrl } from 'src/utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import { CollectionVersionAPI } from './collection-version';
 import { PulpAPI } from './pulp';
 import { Repository } from './response-types/repositories';
 
@@ -108,6 +112,47 @@ class API extends PulpAPI {
     };
 
     return this.http.post(this.apiPath + `${pulp_id}/modify/`, params);
+  }
+
+  async deleteOrAddCollection(repoName, collectionVersion, add) {
+    let data = await this.getRepository({ name: repoName });
+
+    if (data.data.results.length == 0) {
+      return Promise.reject({ error: t`Repository ${repoName} not found.` });
+    }
+
+    const repo = data.data.results[0];
+    const pulp_id = parsePulpIDFromURL(repo.pulp_href);
+
+    data = await CollectionVersionAPI.get(collectionVersion.id);
+
+    const version_pulp_href = data.data['pulp_href'];
+
+    const addList = [];
+    const removeList = [];
+
+    if (add) {
+      addList.push(version_pulp_href);
+    } else {
+      removeList.push(version_pulp_href);
+    }
+
+    data = await this.modify(
+      pulp_id,
+      addList,
+      removeList,
+      repo.latest_version_href,
+    );
+
+    data = await waitForTaskUrl(data.data['task']);
+  }
+
+  async deleteCollection(repoName, collectionVersion) {
+    return this.deleteOrAddCollection(repoName, collectionVersion, false);
+  }
+
+  async addCollection(repoName, collectionVersion) {
+    return this.deleteOrAddCollection(repoName, collectionVersion, true);
   }
 }
 

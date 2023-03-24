@@ -5,4 +5,5 @@ export interface Repository {
   pulp_created: string;
   versions_href: string;
   pulp_labels: { pipeline?: string };
+  latest_version_href: string;
 }
