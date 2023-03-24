@@ -44,6 +44,22 @@ class API extends PulpAPI {
   update(_id, _obj) {
     throw 'use smartUpdate()';
   }
+
+  listRoles(id, params?) {
+    return super.list(params, this.apiPath + id + '/list_roles/');
+  }
+
+  addRole(id, role) {
+    return super.create(role, this.apiPath + id + '/add_role/');
+  }
+
+  myPermissions(id, params?) {
+    return super.list(params, this.apiPath + id + '/my_permissions/');
+  }
+
+  removeRole(id, role) {
+    return super.create(role, this.apiPath + id + '/remove_role/');
+  }
 }
 
 export const AnsibleRemoteAPI = new API();
