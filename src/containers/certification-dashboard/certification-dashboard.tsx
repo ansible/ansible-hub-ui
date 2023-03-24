@@ -83,6 +83,8 @@ interface IState {
     collectionVersion: CollectionVersion;
   };
   repositoryList: Repository[];
+  stagingRepo: Repository;
+  rejectedRepo: Repository;
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -119,6 +121,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       versionToUploadCertificate: null,
       approveModalInfo: null,
       repositoryList: [],
+      stagingRepo: null,
+      rejectedRepo: null,
     };
   }
 
@@ -134,6 +138,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       this.setState({ loading: true });
 
       const promises = [];
+
+      promises.push(this.loadRepo('staging'));
+      promises.push(this.loadRepo('rejected'));
 
       promises.push(
         Repositories.listApproved()
@@ -156,6 +163,34 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         this.setState({ updatingVersions: [] });
       });
     }
+  }
+
+  private loadRepo(pipeline) {
+    return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
+      .then((data) => {
+        if (data.data.results.length == 0) {
+          this.addAlert(
+            t`Error loading repository with label ${pipeline}.`,
+            'danger',
+            'No repository found.',
+          );
+        } else {
+          if (pipeline == 'staging') {
+            this.setState({ stagingRepo: data.data.results[0] });
+          }
+
+          if (pipeline == 'rejected') {
+            this.setState({ rejectedRepo: data.data.results[0] });
+          }
+        }
+      })
+      .catch((error) => {
+        this.addAlert(
+          t`Error loading repository with label ${pipeline}.`,
+          'danger',
+          error?.message,
+        );
+      });
   }
 
   render() {
@@ -382,14 +417,14 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         </Label>
       );
     }
-    if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
+    if (this.isRejected(version)) {
       return (
         <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
           {t`Rejected`}
         </Label>
       );
     }
-    if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+    if (this.isStaging(version)) {
       const { can_upload_signatures, require_upload_signatures } =
         this.context.featureFlags;
       return (
@@ -550,7 +585,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       );
     }
 
-    if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
+    if (this.isRejected(version)) {
       // render reject button if version is in multiple repositories including rejected state - handles inconsistency
       // and allows user to reject it again to move it all to rejected state
       return (
@@ -563,7 +598,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         />
       );
     }
-    if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+
+    if (this.isStaging(version)) {
       return (
         <ListItemActions
           kebabItems={[rejectDropDown(false), importsLink]}
@@ -624,19 +660,56 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private isApproved(version) {
-    let approvedRepoFound = true;
+    let isStagingOrRejected = false;
+    let foundApproved = false;
 
     if (version.repository_list.length == 0) {
       return false;
     }
 
     version.repository_list.forEach((repo) => {
-      if (!this.state.repositoryList.find((r) => r.name == repo)) {
-        approvedRepoFound = false;
+      if (repo == this.state.rejectedRepo.name) {
+        isStagingOrRejected = true;
+      }
+
+      if (repo == this.state.stagingRepo.name) {
+        isStagingOrRejected = true;
+      }
+
+      if (this.state.repositoryList.find((repo2) => repo2.name == repo)) {
+        foundApproved = true;
       }
     });
 
-    return approvedRepoFound;
+    return !isStagingOrRejected && foundApproved;
+  }
+
+  private isRejected(version) {
+    return this.isRejectedOrStaging(version, 'rejected');
+  }
+
+  private isStaging(version) {
+    return this.isRejectedOrStaging(version, 'staging');
+  }
+
+  private isRejectedOrStaging(version, pipeline) {
+    if (version.repository_list.length == 0) {
+      return false;
+    }
+
+    let isStagingOrRejected = false;
+
+    version.repository_list.forEach((repo) => {
+      if (pipeline == 'rejected' && repo == this.state.rejectedRepo.name) {
+        isStagingOrRejected = true;
+      }
+
+      if (pipeline == 'staging' && repo == this.state.stagingRepo.name) {
+        isStagingOrRejected = true;
+      }
+    });
+
+    return isStagingOrRejected;
   }
 
   private approve(version) {
@@ -653,7 +726,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (this.state.repositoryList.length == 1) {
       const originalRepo = version.repository_list.find(
         (repo) =>
-          repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
+          repo == this.state.stagingRepo.name ||
+          repo == this.state.rejectedRepo.name,
       );
       if (originalRepo) {
         this.updateCertification(
@@ -685,77 +759,68 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return;
     }
 
-    if (version.repository_list.length == 1) {
-      // maintain vanilla functionality
-      this.updateCertification(
-        version,
-        version.repository_list[0],
-        Constants.NOTCERTIFIED,
-      );
-    } else {
-      const promises = [];
-      const repositoryList = this.state.repositoryList;
+    const promises = [];
+    const repositoryList = this.state.repositoryList;
 
-      this.setState({ updatingVersions: [version] });
+    this.setState({ updatingVersions: [version] });
 
-      const removedRepos = [];
-      const failedRepos = [];
+    const removedRepos = [];
+    const failedRepos = [];
 
-      version.repository_list.forEach((repo) => {
-        const repoInfo = repositoryList.find((r) => r.name == repo);
+    version.repository_list.forEach((repo) => {
+      const repoInfo = repositoryList.find((r) => r.name == repo);
 
-        if (repoInfo?.pulp_labels?.pipeline == 'approved') {
-          const promise = CollectionVersionAPI.setRepository(
-            version.namespace,
-            version.name,
-            version.version,
-            repo,
-            Constants.NOTCERTIFIED,
-          )
-            .then((task) => {
-              return waitForTaskUrl(task['data'].copy_task_id);
-            })
-            .then(() => {
-              removedRepos.push(repo);
-            })
-            .catch(() => {
-              failedRepos.push(repo);
-            });
-          promises.push(promise);
-        }
-      });
+      if (repoInfo?.pulp_labels?.pipeline == 'approved') {
+        const promise = CollectionVersionAPI.setRepository(
+          version.namespace,
+          version.name,
+          version.version,
+          repo,
+          this.state.rejectedRepo.name,
+        )
+          .then((task) => {
+            return waitForTaskUrl(task['data'].copy_task_id);
+          })
+          .then(() => {
+            removedRepos.push(repo);
+          })
+          .catch(() => {
+            failedRepos.push(repo);
+          });
+        promises.push(promise);
+      }
+    });
 
-      Promise.all(promises).then(() => {
-        this.setState({ loading: false });
-        this.queryCollections(true);
-        if (failedRepos.length == 0) {
+    Promise.all(promises).then(() => {
+      this.setState({ loading: false });
+      this.queryCollections(true);
+      if (failedRepos.length == 0) {
+        this.addAlertObj({
+          title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+          variant: 'success',
+        });
+      } else {
+        if (removedRepos.length > 0) {
           this.addAlertObj({
-            title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
-            variant: 'success',
+            title: t`Rejection summary.`,
+            variant: 'danger',
+            description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
+              ', ',
+            )}, but failed to be removed from those repositories: ${failedRepos.join(
+              ', ',
+            )}`,
           });
         } else {
-          if (removedRepos.length > 0) {
-            this.addAlertObj({
-              title: t`Rejection summary.`,
-              variant: 'danger',
-              description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
-                ', ',
-              )}, but failed to be removed from those repositories: ${failedRepos.join(
-                ', ',
-              )}`,
-            });
-          } else {
-            this.addAlertObj({
-              title: t`Rejection failed.`,
-              variant: 'danger',
-              description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
-                ', ',
-              )}`,
-            });
-          }
+          this.addAlertObj({
+            title: t`Rejection failed.`,
+            variant: 'danger',
+            description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
+              ', ',
+            )}`,
+          });
         }
-      });
-    }
+      }
+    });
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
@@ -813,10 +878,13 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       })
       .catch((error) => {
         this.addAlert(t`Error loading collections.`, 'danger', error?.message);
-        this.setState({
-          loading: false,
-          updatingVersions: [],
-        });
+
+        if (handleLoading) {
+          this.setState({
+            loading: false,
+            updatingVersions: [],
+          });
+        }
       });
   }
 
