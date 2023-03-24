@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
@@ -81,7 +82,7 @@ interface IState {
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersionSearch;
   approveModalInfo: {
-    collectionVersion: CollectionVersionSearch;
+    collectionVersion: CollectionVersion;
   };
   repositoryList: Repository[];
 }
@@ -288,7 +289,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 collectionVersion={
                   this.state.approveModalInfo.collectionVersion
                 }
-                collections={this.state.versions}
                 addAlert={(alert) => this.addAlertObj(alert)}
                 allRepositories={this.state.repositoryList}
               />
@@ -673,7 +673,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         );
       }
     } else {
-      this.setState({ approveModalInfo: { collectionVersion: collection } });
+      this.transformToCollectionVersion(collection).then(
+        (collectionVersion) => {
+          this.setState({ approveModalInfo: { collectionVersion } });
+        },
+      );
     }
   }
 
@@ -804,6 +808,50 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private addAlertObj(alert) {
     this.addAlert(alert.title, alert.variant, alert.description);
+  }
+
+  async getCollectionRepoList(collection: CollectionVersionSearch) {
+    const { name, namespace, version } = collection.collection_version;
+
+    // get repository list for selected collection
+    const collectionInRepos = await CollectionVersionAPI.list({
+      namespace,
+      name,
+      version,
+      page_size: 100000,
+      offset: 0,
+    });
+
+    const collectionRepos = collectionInRepos.data.data.map(
+      ({ repository }) => repository.name,
+    );
+
+    return collectionRepos;
+  }
+
+  // compose from collectionVersionSearch to CollectionVersion structure for approval modal
+  async transformToCollectionVersion(collection: CollectionVersionSearch) {
+    const repoList = await this.getCollectionRepoList(collection);
+
+    const { collection_version, is_signed } = collection;
+    const id = parsePulpIDFromURL(collection_version.pulp_href);
+    const collectionVersion: CollectionVersion = {
+      id,
+      version: collection_version.version,
+      metadata: {
+        contents: collection_version.contents,
+        description: collection_version.description,
+        tags: collection_version.tags.map((tag) => tag.name),
+        dependencies: [collection_version.dependencies],
+      },
+      created_at: collection_version.pulp_created,
+      namespace: collection_version.namespace,
+      name: collection_version.name,
+      repository_list: repoList,
+      sign_state: is_signed ? 'signed' : 'unsigned',
+    };
+
+    return collectionVersion;
   }
 }
 
