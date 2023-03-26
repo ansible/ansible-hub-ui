@@ -13,6 +13,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:198
+#: src/containers/ansible-repository/tab-repository-versions.tsx:139
 msgid "(latest)"
 msgstr "(最新)"
 
@@ -24,7 +25,7 @@ msgstr "(署名済み)"
 msgid "(unsigned)"
 msgstr "(未署名)"
 
-#: src/components/repositories/remote-form.tsx:168
+#: src/components/repositories/remote-form.tsx:209
 msgid "(uploaded)"
 msgstr "(アップロード済み)"
 
@@ -52,7 +53,7 @@ msgstr "<0/> が <1/> から削除されました"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注記:</0> ansible-galaxy を使用したコレクションのインストールは、ansible 2.9+ でのみサポートされます"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:348
+#: src/components/execution-environment/publish-to-controller-modal.tsx:349
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロックされる可能性があります。外部リンクを手動でコピーアンドペーストしてください。"
 
@@ -104,12 +105,12 @@ msgstr "<0>{name}</0> は完全に削除されます。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:550
-#: src/components/repositories/remote-form.tsx:596
+#: src/components/repositories/remote-form.tsx:587
+#: src/components/repositories/remote-form.tsx:631
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "認証に使用する PEM でエンコードされたクライアント証明書。"
 
-#: src/components/repositories/remote-form.tsx:520
+#: src/components/repositories/remote-form.tsx:557
 msgid "A PEM encoded private key used for authentication."
 msgstr "認証に使用する PEM でエンコードされた秘密鍵。"
 
@@ -134,8 +135,8 @@ msgstr "API エラー: 非推奨の設定に失敗しました。"
 msgid "API Error: {ex}"
 msgstr "API エラー: {ex}"
 
-#: src/components/headers/collection-header.tsx:707
-#: src/components/headers/collection-header.tsx:758
+#: src/components/headers/collection-header.tsx:706
+#: src/components/headers/collection-header.tsx:757
 #: src/containers/namespace-detail/namespace-detail.tsx:641
 msgid "API Error: {status}"
 msgstr "API エラー: {status}"
@@ -149,20 +150,28 @@ msgstr "API エラー: {status}"
 msgid "API error. Status code: {0}"
 msgstr "API エラー。ステータスコード: {0}"
 
+#: src/containers/token/token-standalone.tsx:50
 #: src/containers/token/token-standalone.tsx:58
+#: src/loaders/standalone/menu.tsx:64
 msgid "API token"
 msgstr "API トークン"
 
 #: src/containers/token/token-standalone.tsx:50
 #: src/loaders/standalone/menu.tsx:55
-msgid "API token management"
-msgstr "API トークンの管理"
+#~ msgid "API token management"
+#~ msgstr "API トークンの管理"
 
 #: src/loaders/standalone/layout.tsx:108
 msgid "About"
 msgstr "情報"
 
+#: src/components/execution-environment-header/execution-environment-header.tsx:27
+#: src/components/execution-environment-header/execution-environment-header.tsx:53
+#: src/containers/ansible-remote/detail.tsx:21
+#: src/containers/ansible-repository/detail.tsx:23
 #: src/containers/group-management/group-detail.tsx:143
+#: src/containers/namespace-detail/namespace-detail.tsx:230
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 msgid "Access"
 msgstr "アクセス"
 
@@ -182,13 +191,15 @@ msgstr "項目をプッシュするとアクティビティーが表示されま
 msgid "Activity"
 msgstr "アクティビティー"
 
-#: src/components/execution-environment/repository-form.tsx:289
-#: src/components/execution-environment/repository-form.tsx:336
+#: src/components/execution-environment/repository-form.tsx:286
+#: src/components/execution-environment/repository-form.tsx:333
 #: src/components/execution-environment/tag-manifest-modal.tsx:164
-#: src/components/rbac/owners-tab.tsx:365
-#: src/components/rbac/owners-tab.tsx:417
+#: src/components/rbac/access-tab.tsx:365
+#: src/components/rbac/access-tab.tsx:417
+#: src/containers/ansible-remote/edit.tsx:37
+#: src/containers/ansible-repository/edit.tsx:29
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:120
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:198
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:201
 #: src/containers/group-management/group-detail.tsx:273
 #: src/containers/group-management/group-detail.tsx:500
 #: src/containers/group-management/group-detail.tsx:551
@@ -219,8 +230,8 @@ msgstr ""
 #~ msgid "Add container repository"
 #~ msgstr "コンテナーリポジトリーの追加"
 
-#: src/components/execution-environment/repository-form.tsx:143
-#: src/containers/execution-environment-list/execution_environment_list.tsx:155
+#: src/components/execution-environment/repository-form.tsx:140
+#: src/containers/execution-environment-list/execution_environment_list.tsx:160
 msgid "Add execution environment"
 msgstr "実行環境の追加"
 
@@ -232,6 +243,14 @@ msgstr "実行環境の追加"
 #~ msgid "Add namespace"
 #~ msgstr "名前空間の追加"
 
+#: src/containers/ansible-remote/edit.tsx:46
+msgid "Add new remote"
+msgstr ""
+
+#: src/containers/ansible-repository/edit.tsx:40
+msgid "Add new repository"
+msgstr ""
+
 #: src/components/execution-environment/tag-manifest-modal.tsx:141
 msgid "Add new tag"
 msgstr "新規タグの追加"
@@ -240,14 +259,22 @@ msgstr "新規タグの追加"
 msgid "Add new tag to image"
 msgstr "新規タグのイメージへの追加"
 
+#: src/actions/ansible-remote-create.tsx:6
+msgid "Add remote"
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx:150
 #: src/containers/execution-environment/registry-list.tsx:213
 msgid "Add remote registry"
 msgstr "リモートレジストリーの追加"
 
-#: src/components/rbac/owners-tab.tsx:196
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:158
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:176
+#: src/actions/ansible-repository-create.tsx:6
+msgid "Add repository"
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx:196
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:161
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:179
 #: src/containers/role-management/role-list.tsx:133
 msgid "Add roles"
 msgstr "ロールの追加"
@@ -260,11 +287,11 @@ msgstr "選択したユーザーのグループへの追加"
 #~ msgid "Add synclist"
 #~ msgstr "同期リストの追加"
 
-#: src/components/execution-environment/repository-form.tsx:317
+#: src/components/execution-environment/repository-form.tsx:314
 msgid "Add tag(s) to exclude"
 msgstr "除外するタグの追加"
 
-#: src/components/execution-environment/repository-form.tsx:270
+#: src/components/execution-environment/repository-form.tsx:267
 msgid "Add tag(s) to include"
 msgstr "含めるタグの追加"
 
@@ -280,11 +307,12 @@ msgstr "含めるタグの追加"
 #~ "Adding groups provides access to all repositories in the\n"
 #~ "\"{namespace}\" container namespace."
 
+#: src/containers/ansible-repository/tab-details.tsx:37
 #: src/containers/namespace-list/namespace-list.tsx:187
 msgid "All"
 msgstr "すべて"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:111
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:114
 msgid "All associated permissions under this role were removed."
 msgstr "このロールに関連付けられているすべてのパーミッションが削除されました。"
 
@@ -296,24 +324,33 @@ msgstr "タスクのすべてのアクションを許可します。"
 msgid "Allow all actions on a taskschedule."
 msgstr "taskschedule のすべてのアクションを許可します。"
 
+#: src/actions/ansible-repository-version-revert.tsx:99
+msgid "Already the current version"
+msgstr ""
+
 #: src/components/about-modal/about-modal.tsx:85
 msgid "Ansible Automation Platform"
 msgstr ""
 
-#: src/loaders/standalone/menu.tsx:59
+#: src/loaders/standalone/menu.tsx:68
 msgid "Approval"
 msgstr "承認"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:136
+#: src/containers/certification-dashboard/certification-dashboard.tsx:170
 msgid "Approval dashboard"
 msgstr "承認ダッシュボード"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:646
+#: src/containers/certification-dashboard/certification-dashboard.tsx:667
+msgid "Approval failed."
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:185
 msgid "Approval status:"
 msgstr "承認状態:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:429
-#: src/containers/certification-dashboard/certification-dashboard.tsx:462
+#: src/containers/certification-dashboard/certification-dashboard.tsx:493
+#: src/containers/certification-dashboard/certification-dashboard.tsx:524
 msgid "Approve"
 msgstr "承認"
 
@@ -321,11 +358,20 @@ msgstr "承認"
 msgid "Approve, reject and sync collections from remotes."
 msgstr "リモートからのコレクションを承認、拒否、同期します。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:183
-#: src/containers/certification-dashboard/certification-dashboard.tsx:212
-#: src/containers/certification-dashboard/certification-dashboard.tsx:324
+#: src/components/repositories/ansible-repository-form.tsx:154
+#: src/containers/certification-dashboard/certification-dashboard.tsx:219
+#: src/containers/certification-dashboard/certification-dashboard.tsx:248
+#: src/containers/certification-dashboard/certification-dashboard.tsx:381
 msgid "Approved"
 msgstr "承認済"
+
+#: src/components/delete-modal/delete-ansible-remote-modal.tsx:38
+msgid "Are you sure you want to delete the remote <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this remote."
+msgstr ""
+
+#: src/components/delete-modal/delete-ansible-repository-modal.tsx:38
+msgid "Are you sure you want to delete the repository <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this repository."
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:70
 msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
@@ -343,12 +389,20 @@ msgstr ""
 msgid "Are you sure you want to opt the following namespace out of Wisdom?"
 msgstr ""
 
+#: src/actions/ansible-repository-version-revert.tsx:47
+msgid "Are you sure you want to revert this repository to the version below?"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:36
 msgid "Back"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:171
+msgid "Base version"
 msgstr ""
 
 #: src/components/patternfly-wrappers/fileupload.tsx:10
@@ -381,7 +435,8 @@ msgstr "組み込みのロールは、編集または削除できません。"
 msgid "Built-in roles cannot be edited."
 msgstr "組み込みのロールは編集できません。"
 
-#: src/components/repositories/remote-form.tsx:593
+#: src/components/repositories/remote-form.tsx:628
+#: src/containers/ansible-remote/tab-details.tsx:75
 msgid "CA certificate"
 msgstr "CA 証明書"
 
@@ -402,26 +457,29 @@ msgstr ""
 msgid "Can't update remote without a distribution attached to it."
 msgstr "ディストリビューションをアタッチせずにリモートは更新できません。"
 
+#: src/actions/ansible-repository-version-revert.tsx:37
+#: src/components/approve-modal/approve-modal.tsx:304
 #: src/components/confirm-modal/confirm-modal.tsx:39
 #: src/components/delete-modal/delete-modal.tsx:40
-#: src/components/execution-environment/repository-form.tsx:155
+#: src/components/execution-environment/repository-form.tsx:152
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
 #: src/components/namespace-modal/namespace-modal.tsx:110
 #: src/components/patternfly-wrappers/wizard-modal.tsx:37
+#: src/components/rbac/access-tab.tsx:339
+#: src/components/rbac/access-tab.tsx:410
 #: src/components/rbac/group-modal.tsx:61
-#: src/components/rbac/owners-tab.tsx:339
-#: src/components/rbac/owners-tab.tsx:410
 #: src/components/rbac/role-form.tsx:148
 #: src/components/rbac/user-form.tsx:224
-#: src/components/repositories/remote-form.tsx:143
+#: src/components/repositories/ansible-repository-form.tsx:291
+#: src/components/repositories/remote-form.tsx:157
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/wisdom-modal/wisdom-modal.tsx:175
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:191
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:194
 #: src/containers/group-management/group-detail.tsx:276
 msgid "Cancel"
 msgstr "取り消し"
@@ -439,12 +497,14 @@ msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前�
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存する<0/>コレクションが削除されるまで<1/>削除できません。"
 
-#: src/components/headers/collection-header.tsx:661
-#: src/containers/certification-dashboard/certification-dashboard.tsx:549
+#: src/components/headers/collection-header.tsx:660
+#: src/containers/certification-dashboard/certification-dashboard.tsx:607
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "コレクション \"{0} {1} v{2}\" の証明書が正常にアップロードされました。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:583
+#: src/components/approve-modal/approve-modal.tsx:104
+#: src/containers/certification-dashboard/certification-dashboard.tsx:733
+#: src/containers/certification-dashboard/certification-dashboard.tsx:776
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスが正常に更新されました。"
 
@@ -523,7 +583,7 @@ msgstr "既存の実行環境を変更します。"
 #~ msgid "Change user"
 #~ msgstr "ユーザーの変更"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:594
+#: src/containers/certification-dashboard/certification-dashboard.tsx:787
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスへの変更を保存できませんでした。"
 
@@ -531,7 +591,7 @@ msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスへの変更
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "グループ \"{0}\" への変更を保存できませんでした。"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:257
+#: src/containers/edit-namespace/edit-namespace.tsx:254
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "名前空間 \"{0}\" への変更を保存できませんでした。"
 
@@ -553,23 +613,24 @@ msgid "Clear"
 msgstr "消去"
 
 #: src/components/empty-state/empty-state-filter.tsx:20
-#: src/components/patternfly-wrappers/applied-filters.tsx:71
+#: src/components/patternfly-wrappers/applied-filters.tsx:73
 msgid "Clear all filters"
 msgstr "すべてのフィルターの解除"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:340
+#: src/components/execution-environment/publish-to-controller-modal.tsx:341
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログインして (必要な場合)、手順に従い、設定を完了します。"
 
-#: src/components/repositories/remote-form.tsx:547
+#: src/components/repositories/remote-form.tsx:584
+#: src/containers/ansible-remote/tab-details.tsx:74
 msgid "Client certificate"
 msgstr "クライアント証明書"
 
-#: src/components/repositories/remote-form.tsx:517
+#: src/components/repositories/remote-form.tsx:554
 msgid "Client key"
 msgstr "クライアントキー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:272
+#: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
 msgstr "閉じる"
@@ -579,16 +640,16 @@ msgid "Code"
 msgstr "コード"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:81
-#: src/containers/certification-dashboard/certification-dashboard.tsx:268
+#: src/containers/certification-dashboard/certification-dashboard.tsx:320
 msgid "Collection"
 msgstr "コレクション"
 
-#: src/components/headers/collection-header.tsx:841
+#: src/components/headers/collection-header.tsx:840
 #: src/containers/search/search.tsx:360
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "コレクション \"{0}\" を非推奨化できませんでした。"
 
-#: src/components/headers/collection-header.tsx:842
+#: src/components/headers/collection-header.tsx:841
 #: src/containers/search/search.tsx:361
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化を解除できませんでした。"
@@ -601,12 +662,12 @@ msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
 
-#: src/components/headers/collection-header.tsx:956
+#: src/components/headers/collection-header.tsx:952
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" を削除できませんでした。"
 
-#: src/components/headers/collection-header.tsx:885
-#: src/components/headers/collection-header.tsx:900
+#: src/components/headers/collection-header.tsx:884
+#: src/components/headers/collection-header.tsx:897
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" が正常に削除されました。"
 
@@ -622,7 +683,7 @@ msgstr "コレクション \"{name}\" をダウンロードできませんでし
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "コレクション \"{name}\" が正常に削除されました。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:166
+#: src/containers/certification-dashboard/certification-dashboard.tsx:202
 msgid "Collection Name"
 msgstr "コレクション名"
 
@@ -651,9 +712,22 @@ msgstr "コレクションには依存関係が何もありません。"
 msgid "Collection does not have dependencies."
 msgstr "コレクションには依存関係がありません。"
 
+#: src/containers/certification-dashboard/certification-dashboard.tsx:751
+msgid "Collection failed to be removed from those repositories: {0}"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:669
+msgid "Collection has to be in rejected or staging repository."
+msgstr ""
+
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:51
 msgid "Collection is not being used by any collection."
 msgstr "コレクションはどのコレクションでも使用されていません。"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:648
+#: src/containers/certification-dashboard/certification-dashboard.tsx:683
+msgid "Collection not found in any repository."
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Collection repositories could not be displayed."
@@ -667,10 +741,12 @@ msgstr "コレクションのアップロードが取り消されました"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr ""
 
+#: src/components/approve-modal/approve-modal.tsx:252
 #: src/components/headers/collection-header.tsx:321
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:99
-#: src/containers/certification-dashboard/certification-dashboard.tsx:297
+#: src/containers/ansible-repository/detail.tsx:24
+#: src/containers/certification-dashboard/certification-dashboard.tsx:354
 msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
@@ -678,14 +754,18 @@ msgstr "コレクションのバージョン"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "システムでコレクションが見つかりませんでした。アップロードする必要があります。"
 
+#: src/containers/certification-dashboard/certification-dashboard.tsx:741
+msgid "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
+msgstr ""
+
 #: src/containers/namespace-detail/namespace-detail.tsx:227
 #: src/containers/search/search.tsx:200
-#: src/loaders/standalone/menu.tsx:36
 #: src/loaders/standalone/menu.tsx:37
+#: src/loaders/standalone/menu.tsx:38
 msgid "Collections"
 msgstr "コレクション"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:256
+#: src/containers/certification-dashboard/certification-dashboard.tsx:308
 #: src/containers/namespace-detail/namespace-detail.tsx:420
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
@@ -704,7 +784,7 @@ msgstr "コミュニティー"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "コミュニティーコレクションにはドキュメントやコンテンツ数はありませんが、すべてのコンテンツが同期されます"
 
-#: src/components/namespace-form/namespace-form.tsx:58
+#: src/components/namespace-form/namespace-form.tsx:46
 msgid "Company name"
 msgstr "会社名"
 
@@ -754,20 +834,20 @@ msgstr "詳細は、組織の管理者にお問い合わせください。"
 msgid "Container must be synchronized with remote repository first."
 msgstr "最初にコンテナーをリモートリポジトリーと同期する必要があります。"
 
-#: src/components/execution-environment/repository-form.tsx:421
+#: src/components/execution-environment/repository-form.tsx:391
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 msgstr "コンテナー名には、英数字、「.」、「_」、「-」、および 1 つまでの「/」しか使用することができません。"
 
-#: src/components/execution-environment/repository-form.tsx:178
+#: src/components/execution-environment/repository-form.tsx:175
 msgid "Container namespace"
 msgstr "コンテナーの名前空間"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:309
+#: src/containers/execution-environment-list/execution_environment_list.tsx:314
 msgid "Container registry type"
 msgstr "コンテナーレジストリータイプ"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:230
-#: src/containers/execution-environment-list/execution_environment_list.tsx:289
+#: src/containers/execution-environment-list/execution_environment_list.tsx:235
+#: src/containers/execution-environment-list/execution_environment_list.tsx:294
 msgid "Container repository name"
 msgstr "コンテナーリポジトリー名"
 
@@ -779,16 +859,24 @@ msgstr "コンテナーリポジトリー名"
 msgid "Content"
 msgstr "コンテンツ"
 
+#: src/containers/ansible-repository/tab-repository-versions.tsx:159
+msgid "Content added"
+msgstr ""
+
 #: src/components/repositories/local-repository-table.tsx:54
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
-#: src/components/headers/collection-header.tsx:599
+#: src/containers/ansible-repository/tab-repository-versions.tsx:163
+msgid "Content removed"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:598
 msgid "Contents"
 msgstr "コンテンツ"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:367
-#: src/components/execution-environment/publish-to-controller-modal.tsx:392
+#: src/components/execution-environment/publish-to-controller-modal.tsx:368
+#: src/components/execution-environment/publish-to-controller-modal.tsx:393
 msgid "Controller name"
 msgstr "コントローラー名"
 
@@ -796,9 +884,22 @@ msgstr "コントローラー名"
 msgid "Controllers list could not be displayed."
 msgstr "コントローラーのリストを表示できませんでした。"
 
+#: src/components/patternfly-wrappers/copy-url.tsx:19
+msgid "Copied"
+msgstr ""
+
+#: src/components/patternfly-wrappers/copy-url.tsx:18
+msgid "Copy"
+msgstr ""
+
+#: src/actions/ansible-repository-copy.tsx:7
+msgid "Copy CLI configuration"
+msgstr ""
+
 #: src/components/execution-environment/publish-to-controller-modal.tsx:225
 #: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:12
+#: src/containers/ansible-remote/tab-details.tsx:42
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:133
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピーする"
@@ -812,6 +913,10 @@ msgstr "インポートログを読み込むことができませんでした"
 #~ msgid "Could not update the certification status for {0}.{1}.{2}."
 #~ msgstr "Could not update the certification status for {0}.{1}.{2}."
 
+#: src/containers/ansible-repository/tab-repository-versions.tsx:33
+msgid "Count"
+msgstr ""
+
 #: src/components/namespace-modal/namespace-modal.tsx:107
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:157
@@ -822,6 +927,14 @@ msgstr "インポートログを読み込むことができませんでした"
 #: src/containers/user-management/user-list.tsx:247
 msgid "Create"
 msgstr "作成"
+
+#: src/components/repositories/ansible-repository-form.tsx:212
+msgid "Create a \"content: approved_for_use\" label"
+msgstr ""
+
+#: src/components/repositories/ansible-repository-form.tsx:179
+msgid "Create a \"{0}\" distribution"
+msgstr ""
 
 #: src/components/rbac/group-modal.tsx:45
 msgid "Create a group"
@@ -847,7 +960,7 @@ msgstr "特殊文字 (例: <!@$%>) を含めた {minLength} 文字以上のパ�
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "既存のコンテナー名前空間の下に実行環境を作成し、更新します。"
 
-#: src/components/headers/collection-header.tsx:490
+#: src/components/headers/collection-header.tsx:489
 msgid "Create issue"
 msgstr ""
 
@@ -870,18 +983,28 @@ msgid "Create, delete and change collection namespaces. Upload and delete collec
 msgstr "コレクションの名前空間を作成、削除、および変更します。コレクションをアップロードおよび削除します。リモートからのコレクションを同期します。コレクションを承認および拒否します。"
 
 #: src/containers/execution-environment/registry-list.tsx:322
-#: src/containers/execution-environment-list/execution_environment_list.tsx:299
+#: src/containers/execution-environment-list/execution_environment_list.tsx:304
 #: src/containers/group-management/group-detail.tsx:624
 #: src/containers/role-management/role-list.tsx:154
 #: src/containers/user-management/user-list.tsx:284
 msgid "Created"
 msgstr "作成済み"
 
+#: src/containers/ansible-repository/list.tsx:88
+#: src/containers/ansible-repository/tab-repository-versions.tsx:155
+#: src/containers/ansible-repository/tab-repository-versions.tsx:209
+msgid "Created date"
+msgstr ""
+
 #: src/containers/signature-keys/list.tsx:186
 #: src/containers/task-management/task-list-view.tsx:241
 #: src/containers/task-management/task_detail.tsx:180
 msgid "Created on"
 msgstr "作成日時"
+
+#: src/containers/ansible-repository/edit.tsx:140
+msgid "Creation started for distribution {0}"
+msgstr ""
 
 #: src/constants.tsx:83
 msgid "Curate all synclist repository"
@@ -895,15 +1018,19 @@ msgstr "同期リストリポジトリーのキュレート"
 msgid "Curate synclist repository batch"
 msgstr "同期リストリポジトリーのバッチのキュレート"
 
+#: src/containers/ansible-repository/tab-repository-versions.tsx:167
+msgid "Current content"
+msgstr ""
+
 #: src/components/execution-environment/tag-manifest-modal.tsx:194
 msgid "Current tags"
 msgstr "現在のタグ"
 
-#: src/components/execution-environment/repository-form.tsx:343
+#: src/components/execution-environment/repository-form.tsx:340
 msgid "Currently excluded tags"
 msgstr "現在除外されているタグ"
 
-#: src/components/execution-environment/repository-form.tsx:296
+#: src/components/execution-environment/repository-form.tsx:293
 msgid "Currently included tags"
 msgstr "現在含まれているタグ"
 
@@ -923,15 +1050,17 @@ msgstr "非推奨"
 msgid "Date"
 msgstr "日付"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:278
+#: src/containers/certification-dashboard/certification-dashboard.tsx:330
 msgid "Date created"
 msgstr "作成日"
 
+#: src/actions/ansible-remote-delete.tsx:9
+#: src/actions/ansible-repository-delete.tsx:9
 #: src/components/delete-modal/delete-modal.tsx:35
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
-#: src/containers/execution-environment-list/execution_environment_list.tsx:384
+#: src/containers/execution-environment-list/execution_environment_list.tsx:389
 #: src/containers/group-management/group-detail.tsx:220
 #: src/containers/group-management/group-list.tsx:417
 #: src/containers/role-management/role-list.tsx:413
@@ -1024,7 +1153,15 @@ msgstr "名前空間を削除しますか?"
 msgid "Delete remote registry?"
 msgstr "リモートレジストリーを削除しますか?"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:131
+#: src/components/delete-modal/delete-ansible-remote-modal.tsx:35
+msgid "Delete remote?"
+msgstr ""
+
+#: src/components/delete-modal/delete-ansible-repository-modal.tsx:35
+msgid "Delete repository?"
+msgstr ""
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:134
 msgid "Delete role: {0}"
 msgstr "ロールの削除: {0}"
 
@@ -1089,7 +1226,7 @@ msgstr "このグループを削除すると {count} 人のユーザーが影響
 msgid "Deleting yourself is not allowed."
 msgstr "自分自身は削除できません。"
 
-#: src/components/headers/collection-header.tsx:613
+#: src/components/headers/collection-header.tsx:612
 #: src/containers/collection-detail/collection-dependencies.tsx:104
 #: src/containers/collection-detail/collection-dependencies.tsx:134
 msgid "Dependencies"
@@ -1099,7 +1236,7 @@ msgstr "依存関係"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "コレクション \"{name}\" の依存関係を表示できませんでした。"
 
-#: src/components/headers/collection-header.tsx:926
+#: src/components/headers/collection-header.tsx:922
 msgid "Dependent collections"
 msgstr "依存するコレクション"
 
@@ -1108,7 +1245,7 @@ msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:990
+#: src/containers/namespace-detail/namespace-detail.tsx:987
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "非推奨"
@@ -1118,13 +1255,15 @@ msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始されています。"
 
 #: src/components/collection-detail/collection-content-list.tsx:107
-#: src/components/execution-environment/repository-form.tsx:367
-#: src/components/namespace-form/namespace-form.tsx:119
+#: src/components/execution-environment/repository-form.tsx:364
+#: src/components/namespace-form/namespace-form.tsx:81
 #: src/components/rbac/role-form.tsx:105
 #: src/components/rbac/role-list-table.tsx:47
 #: src/components/rbac/select-roles.tsx:98
-#: src/containers/execution-environment-list/execution_environment_list.tsx:294
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
+#: src/components/repositories/ansible-repository-form.tsx:161
+#: src/containers/ansible-repository/tab-details.tsx:34
+#: src/containers/execution-environment-list/execution_environment_list.tsx:299
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:220
 #: src/containers/role-management/role-list.tsx:149
 #: src/containers/task-management/task_detail.tsx:346
 msgid "Description"
@@ -1139,15 +1278,25 @@ msgid "Detail"
 msgstr "詳細"
 
 #: src/components/rbac/role-form.tsx:74
+#: src/containers/ansible-remote/detail.tsx:20
+#: src/containers/ansible-repository/detail.tsx:22
 msgid "Details"
 msgstr "詳細"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:331
+#: src/components/execution-environment/publish-to-controller-modal.tsx:332
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:174
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:270
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
 msgid "Digest"
 msgstr "ダイジェスト"
+
+#: src/containers/ansible-remote/tab-details.tsx:72
+msgid "Disabled"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-details.tsx:40
+msgid "Distribution"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:64
 msgid "Distribution URL"
@@ -1157,13 +1306,17 @@ msgstr "ディストリビューション URL"
 msgid "Distribution name"
 msgstr "ディストリビューション名"
 
+#: src/components/repositories/ansible-repository-form.tsx:167
+msgid "Distributions"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:177
 msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
-#: src/components/headers/collection-header.tsx:594
+#: src/components/headers/collection-header.tsx:593
 #: src/containers/collection-detail/collection-docs.tsx:113
-#: src/loaders/standalone/menu.tsx:104
+#: src/loaders/standalone/menu.tsx:113
 msgid "Documentation"
 msgstr "ドキュメント"
 
@@ -1176,15 +1329,24 @@ msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するド�
 msgid "Done"
 msgstr "完了"
 
-#: src/components/repositories/remote-form.tsx:629
+#: src/actions/ansible-remote-download-ca.tsx:6
+msgid "Download CA certificate"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:662
 msgid "Download CA certification file"
 msgstr "CA 証明書ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:583
+#: src/actions/ansible-remote-download-client.tsx:6
+msgid "Download client certificate"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:618
 msgid "Download client certification file"
 msgstr "クライアント認定ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:639
+#: src/components/repositories/remote-form.tsx:672
+#: src/containers/ansible-remote/tab-details.tsx:77
 msgid "Download concurrency"
 msgstr "同時実行のダウンロード"
 
@@ -1192,11 +1354,15 @@ msgstr "同時実行のダウンロード"
 msgid "Download key"
 msgstr "キーのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:232
+#: src/components/repositories/remote-form.tsx:273
 msgid "Download only signed collections"
 msgstr "署名済みコレクションのみのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:337
+#: src/actions/ansible-remote-download-requirements.tsx:6
+msgid "Download requirements YAML"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:377
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
@@ -1217,12 +1383,16 @@ msgstr "ファイルをドラッグアンドドロップするか、アップロ
 msgid "Dropdown"
 msgstr "ドロップダウン"
 
+#: src/actions/ansible-remote-edit.tsx:6
+#: src/actions/ansible-repository-edit.tsx:6
 #: src/components/repositories/remote-repository-table.tsx:133
+#: src/containers/ansible-remote/edit.tsx:37
+#: src/containers/ansible-repository/edit.tsx:29
 #: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:391
 #: src/containers/execution-environment-detail/base.tsx:232
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:103
-#: src/containers/execution-environment-list/execution_environment_list.tsx:357
+#: src/containers/execution-environment-list/execution_environment_list.tsx:362
 #: src/containers/role-management/role-list.tsx:399
 #: src/containers/settings/user-profile.tsx:92
 #: src/containers/user-management/user-detail.tsx:109
@@ -1235,7 +1405,7 @@ msgstr "編集"
 msgid "Edit details"
 msgstr "詳細の編集"
 
-#: src/components/execution-environment/repository-form.tsx:143
+#: src/components/execution-environment/repository-form.tsx:140
 msgid "Edit execution environment"
 msgstr "実行環境の編集"
 
@@ -1247,7 +1417,7 @@ msgstr "実行環境の編集"
 msgid "Edit namespace"
 msgstr "名前空間の編集"
 
-#: src/components/repositories/remote-form.tsx:126
+#: src/components/repositories/remote-form.tsx:179
 msgid "Edit remote"
 msgstr "リモートの編集"
 
@@ -1293,6 +1463,10 @@ msgstr "編集可能"
 #: src/containers/user-management/user-list.tsx:274
 msgid "Email"
 msgstr "メール"
+
+#: src/containers/ansible-remote/tab-details.tsx:72
+msgid "Enabled"
+msgstr ""
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:227
 msgid "Environment"
@@ -1347,7 +1521,7 @@ msgstr "API からのインポート取得エラー"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:614
+#: src/containers/certification-dashboard/certification-dashboard.tsx:815
 msgid "Error loading collections."
 msgstr "コレクションの読み込み中にエラーが発生しました。"
 
@@ -1355,7 +1529,7 @@ msgstr "コレクションの読み込み中にエラーが発生しました。
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:494
+#: src/containers/execution-environment-list/execution_environment_list.tsx:499
 msgid "Error loading environments."
 msgstr "環境の読み込みエラー。"
 
@@ -1430,7 +1604,7 @@ msgstr "エラーメッセージ:"
 #~ msgid "Error updating users."
 #~ msgstr "Error updating users."
 
-#: src/components/execution-environment/repository-form.tsx:523
+#: src/components/execution-environment/repository-form.tsx:493
 msgid "Error when saving registry."
 msgstr ""
 
@@ -1468,23 +1642,23 @@ msgstr "エラー {statusCode} - {statusText}: このリクエストを行うの
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:297
+#: src/components/execution-environment/publish-to-controller-modal.tsx:298
 msgid "Execution Environment"
 msgstr "実行環境"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:40
-#: src/containers/execution-environment-list/execution_environment_list.tsx:173
+#: src/containers/execution-environment-list/execution_environment_list.tsx:178
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:110
-#: src/loaders/standalone/menu.tsx:66
-#: src/loaders/standalone/menu.tsx:72
+#: src/loaders/standalone/menu.tsx:75
+#: src/loaders/standalone/menu.tsx:81
 msgid "Execution Environments"
 msgstr "実行環境"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:457
+#: src/containers/execution-environment-list/execution_environment_list.tsx:462
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr "実行環境 \"{0}\" が正常に追加されました。"
 
-#: src/containers/execution-environment/registry-list.tsx:539
+#: src/containers/execution-environment/registry-list.tsx:523
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "実行環境 \"{name}\" をインデックス化できませんでした。"
 
@@ -1520,12 +1694,49 @@ msgstr "有効期限"
 msgid "Failed"
 msgstr "失敗"
 
+#: src/components/approve-modal/approve-modal.tsx:112
+msgid "Failed to approve collection."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx:470
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
+#: src/containers/ansible-repository/tab-repository-versions.tsx:97
+msgid "Failed to find repository version"
+msgstr ""
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:94
 msgid "Failed to load Wisdom information."
+msgstr ""
+
+#: src/containers/ansible-repository/tab-collection-versions.tsx:23
+msgid "Failed to load collection versions"
+msgstr ""
+
+#: src/components/approve-modal/approve-modal.tsx:121
+msgid "Failed to load collection."
+msgstr ""
+
+#: src/components/repositories/lazy-distributions.tsx:51
+msgid "Failed to load distributions: {error}"
+msgstr ""
+
+#: src/components/approve-modal/approve-modal.tsx:59
+msgid "Failed to load pulp_id of collection repository."
+msgstr ""
+
+#: src/components/repositories/ansible-repository-form.tsx:257
+msgid "Failed to load remotes: {remotesError}"
+msgstr ""
+
+#: src/components/approve-modal/approve-modal.tsx:174
+#: src/containers/certification-dashboard/certification-dashboard.tsx:145
+msgid "Failed to load repositories."
+msgstr ""
+
+#: src/components/repositories/lazy-repositories.tsx:53
+msgid "Failed to load repositories: {error}"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:124
@@ -1536,15 +1747,27 @@ msgstr ""
 msgid "Failed to opt out of Wisdom."
 msgstr ""
 
+#: src/actions/ansible-remote-delete.tsx:38
+msgid "Failed to remove remote {name}"
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx:39
+msgid "Failed to remove repository {name}"
+msgstr ""
+
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "ユーザーデータの取得に失敗しました。"
+
+#: src/actions/ansible-repository-version-revert.tsx:76
+msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "Failed to sign all collections."
 msgstr "すべてのコレクションの署名に失敗しました。"
 
-#: src/components/headers/collection-header.tsx:706
+#: src/components/headers/collection-header.tsx:705
 msgid "Failed to sign all versions in the collection."
 msgstr "コレクションのすべてのバージョンの署名に失敗しました。"
 
@@ -1553,9 +1776,13 @@ msgstr "コレクションのすべてのバージョンの署名に失敗しま
 msgid "Failed to sign the container version."
 msgstr "コンテナーバージョンに署名できませんでした。"
 
-#: src/components/headers/collection-header.tsx:757
+#: src/components/headers/collection-header.tsx:756
 msgid "Failed to sign the version."
 msgstr "バージョンへの署名に失敗しました。"
+
+#: src/actions/ansible-repository-sync.tsx:20
+msgid "Failed to sync repository \"{name}\""
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:248
 msgid "Failed to {operation} tag \"{tag}\"."
@@ -1569,9 +1796,9 @@ msgstr "名前別にフィルター"
 msgid "Filter by repository"
 msgstr "リポジトリー別にフィルター"
 
-#: src/components/patternfly-wrappers/compound-filter.tsx:118
-#: src/components/patternfly-wrappers/compound-filter.tsx:124
-#: src/components/patternfly-wrappers/compound-filter.tsx:167
+#: src/components/patternfly-wrappers/compound-filter.tsx:122
+#: src/components/patternfly-wrappers/compound-filter.tsx:128
+#: src/components/patternfly-wrappers/compound-filter.tsx:171
 msgid "Filter by {0}"
 msgstr "{0} 別にフィルター"
 
@@ -1626,12 +1853,12 @@ msgstr "10 回試行した後に、タスクの待機を中止します。"
 msgid "Go to documentation"
 msgstr "ドキュメントに移動"
 
-#: src/components/rbac/owners-tab.tsx:117
+#: src/components/rbac/access-tab.tsx:117
 #: src/components/rbac/select-group.tsx:85
 msgid "Group"
 msgstr "グループ"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:128
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:128
 #: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "グループ \"{0}\" を \"{name}\" に追加できませんでした。"
@@ -1640,12 +1867,12 @@ msgstr "グループ \"{0}\" を \"{name}\" に追加できませんでした。
 #~ msgid "Group \"{0}\" could not be displayed."
 #~ msgstr "Group \"{0}\" could not be displayed."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:145
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:145
 #: src/containers/namespace-detail/namespace-detail.tsx:511
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "グループ \"{0}\" を \"{name}\" から削除できませんでした。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:127
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:127
 #: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "グループ \"{0}\" が \"{name}\" に正常に追加されました。"
@@ -1654,20 +1881,20 @@ msgstr "グループ \"{0}\" が \"{name}\" に正常に追加されました。
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "グループ \"{0}\" が正常に削除されました。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:144
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:144
 #: src/containers/namespace-detail/namespace-detail.tsx:510
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "グループ \"{0}\" は \"{name}\" から正常に削除されました。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:162
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:177
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:162
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:177
 #: src/containers/namespace-detail/namespace-detail.tsx:531
 #: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "グループ \"{0}\" のロールを \"{name}\" で更新することができませんでした。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:161
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:176
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:161
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:176
 #: src/containers/namespace-detail/namespace-detail.tsx:530
 #: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
@@ -1685,7 +1912,7 @@ msgstr "グループ \"{group}\" が正常に削除されました。"
 msgid "Group could not be displayed."
 msgstr "グループを表示できませんでした。"
 
-#: src/components/rbac/owners-tab.tsx:110
+#: src/components/rbac/access-tab.tsx:110
 #: src/containers/group-management/group-list.tsx:390
 msgid "Group list"
 msgstr "グループリスト"
@@ -1709,7 +1936,7 @@ msgstr "グループ {groupId}"
 #: src/containers/group-management/group-detail.tsx:182
 #: src/containers/group-management/group-list.tsx:141
 #: src/containers/user-management/user-list.tsx:280
-#: src/loaders/standalone/menu.tsx:121
+#: src/loaders/standalone/menu.tsx:130
 msgid "Groups"
 msgstr "グループ"
 
@@ -1723,12 +1950,16 @@ msgid "Groups will appear once created"
 msgstr "グループは作成後に表示されます"
 
 #: src/components/execution-environment/repository-form.tsx:384
-msgid "Groups with access"
-msgstr "アクセス権のあるグループ"
+#~ msgid "Groups with access"
+#~ msgstr "アクセス権のあるグループ"
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:456
 msgid "Hide advanced options"
 msgstr "詳細オプションの非表示"
+
+#: src/components/repositories/ansible-repository-form.tsx:218
+msgid "Hide from search"
+msgstr ""
 
 #: src/components/collection-detail/download-signature-grid-item.tsx:44
 msgid "Hide the signature"
@@ -1741,11 +1972,11 @@ msgstr "署名の非表示"
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
-#: src/components/repositories/remote-form.tsx:501
+#: src/components/repositories/remote-form.tsx:538
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:249
+#: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "コントローラーが表に記載されていない場合は、settings.py を確認してください。"
 
@@ -1781,7 +2012,7 @@ msgstr "インポートと自動承認"
 msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
-#: src/components/headers/collection-header.tsx:608
+#: src/components/headers/collection-header.tsx:607
 #: src/containers/collection-detail/collection-import-log.tsx:74
 msgid "Import log"
 msgstr "ログのインポート"
@@ -1806,12 +2037,12 @@ msgstr "実行環境のインデックス作成は、registry.redhat.io のみ�
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:523
+#: src/containers/execution-environment/registry-list.tsx:515
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" のインデックス化が開始されました。"
 
 #: src/components/collection-detail/collection-info.tsx:47
-#: src/components/headers/collection-header.tsx:589
+#: src/components/headers/collection-header.tsx:588
 msgid "Install"
 msgstr "インストール"
 
@@ -1871,7 +2102,12 @@ msgstr "キーフィンガープリント"
 msgid "Keywords"
 msgstr "キーワード"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:304
+#: src/components/repositories/ansible-repository-form.tsx:198
+#: src/containers/ansible-repository/tab-details.tsx:44
+msgid "Labels"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:309
 msgid "Last modified"
 msgstr "最終変更日時"
 
@@ -1885,6 +2121,7 @@ msgid "Last name"
 msgstr "姓"
 
 #: src/components/repositories/remote-repository-table.tsx:80
+#: src/containers/ansible-repository/list.tsx:83
 msgid "Last synced"
 msgstr "最終同期"
 
@@ -1894,11 +2131,12 @@ msgstr "最終同期"
 msgid "Last updated"
 msgstr "最終更新日時"
 
-#: src/components/headers/collection-header.tsx:472
+#: src/components/headers/collection-header.tsx:471
 msgid "Last updated <0/>"
 msgstr "最終更新日時 <0/>"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:82
+#: src/containers/ansible-repository/detail.tsx:60
 msgid "Last updated from registry {0}"
 msgstr "レジストリー {0} からの最終更新"
 
@@ -1906,7 +2144,7 @@ msgstr "レジストリー {0} からの最終更新"
 msgid "Layers"
 msgstr "レイヤー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:253
+#: src/components/execution-environment/publish-to-controller-modal.tsx:254
 msgid "Learn more"
 msgstr "詳細情報"
 
@@ -1914,17 +2152,17 @@ msgstr "詳細情報"
 msgid "Learn more about Ansible Wisdom."
 msgstr ""
 
-#: src/loaders/standalone/menu.tsx:81
+#: src/loaders/standalone/menu.tsx:90
 msgid "Legacy"
 msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx:118
-#: src/loaders/standalone/menu.tsx:89
+#: src/loaders/standalone/menu.tsx:98
 msgid "Legacy Namespaces"
 msgstr ""
 
 #: src/containers/legacy-roles/legacy-roles.tsx:127
-#: src/loaders/standalone/menu.tsx:86
+#: src/loaders/standalone/menu.tsx:95
 msgid "Legacy Roles"
 msgstr ""
 
@@ -1940,15 +2178,15 @@ msgstr ""
 msgid "License"
 msgstr "ライセンス"
 
-#: src/components/repositories/remote-form.tsx:674
+#: src/components/repositories/remote-form.tsx:707
 msgid "Limits total download rate in requests per second."
 msgstr "1 秒あたりの要求の合計ダウンロード速度を制限します。"
 
-#: src/components/namespace-form/namespace-form.tsx:260
+#: src/components/namespace-form/namespace-form.tsx:222
 msgid "Link URL"
 msgstr "リンク URL"
 
-#: src/components/namespace-form/namespace-form.tsx:248
+#: src/components/namespace-form/namespace-form.tsx:210
 msgid "Link text"
 msgstr "リンクテキスト"
 
@@ -1975,7 +2213,7 @@ msgstr ""
 msgid "Load token"
 msgstr "トークンの読み込み"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:414
+#: src/containers/execution-environment-list/execution_environment_list.tsx:419
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "ローカル"
@@ -1993,13 +2231,17 @@ msgstr "アカウントにログイン"
 msgid "Login"
 msgstr "ログイン"
 
-#: src/components/namespace-form/namespace-form.tsx:104
+#: src/components/namespace-form/namespace-form.tsx:66
 msgid "Logo URL"
 msgstr "ロゴ URL"
 
 #: src/loaders/standalone/layout.tsx:84
 msgid "Logout"
 msgstr "ログアウト"
+
+#: src/components/repositories/ansible-repository-form.tsx:224
+msgid "Make private"
+msgstr ""
 
 #: src/constants.tsx:176
 msgid "Manage all content types."
@@ -2027,18 +2269,18 @@ msgstr "メッセージ"
 #~ msgstr "Ansible リポジトリーコンテンツの変更"
 
 #: src/components/namespace-form/namespace-form.tsx:81
-msgid "Moved to the <0>Namespace owners</0> <1/> tab"
-msgstr "<0>Namespace owners</0> <1/> タブに移動しました"
+#~ msgid "Moved to the <0>Namespace owners</0> <1/> tab"
+#~ msgstr "<0>Namespace owners</0> <1/> タブに移動しました"
 
 #: src/components/execution-environment/repository-form.tsx:394
-msgid "Moved to the <0>Owners</0> <1/> tab"
-msgstr "<0>Owners</0> <1/> タブに移動しました"
+#~ msgid "Moved to the <0>Owners</0> <1/> tab"
+#~ msgstr "<0>Owners</0> <1/> タブに移動しました"
 
 #: src/components/execution-environment/repository-form.tsx:390
-msgid "Moved to the <0>Owners</0> tab"
-msgstr "<0>Owners</0> タブに移動しました"
+#~ msgid "Moved to the <0>Owners</0> tab"
+#~ msgstr "<0>Owners</0> タブに移動しました"
 
-#: src/components/repositories/remote-form.tsx:683
+#: src/components/repositories/remote-form.tsx:716
 msgid "Must be an integer."
 msgstr "整数でなければなりません。"
 
@@ -2056,12 +2298,14 @@ msgstr "自分の名前空間"
 msgid "My profile"
 msgstr "自分のプロファイル"
 
+#: src/components/approve-modal/approve-modal.tsx:242
+#: src/components/approve-modal/approve-modal.tsx:352
 #: src/components/collection-detail/collection-content-list.tsx:105
-#: src/components/execution-environment/repository-form.tsx:166
-#: src/components/execution-environment/repository-form.tsx:194
+#: src/components/execution-environment/repository-form.tsx:163
+#: src/components/execution-environment/repository-form.tsx:191
 #: src/components/my-imports/import-list.tsx:84
 #: src/components/my-imports/import-list.tsx:121
-#: src/components/namespace-form/namespace-form.tsx:44
+#: src/components/namespace-form/namespace-form.tsx:32
 #: src/components/namespace-modal/namespace-modal.tsx:121
 #: src/components/rbac/group-modal.tsx:75
 #: src/components/rbac/role-form.tsx:82
@@ -2069,13 +2313,14 @@ msgstr "自分のプロファイル"
 #: src/components/rbac/select-group.tsx:156
 #: src/components/rbac/select-roles.tsx:178
 #: src/components/rbac/select-roles.tsx:190
-#: src/components/repositories/remote-form.tsx:188
+#: src/components/repositories/ansible-repository-form.tsx:160
+#: src/components/repositories/remote-form.tsx:229
 #: src/containers/execution-environment/registry-list.tsx:260
 #: src/containers/execution-environment/registry-list.tsx:288
 #: src/containers/execution-environment/registry-list.tsx:317
-#: src/containers/execution-environment-list/execution_environment_list.tsx:259
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:329
+#: src/containers/execution-environment-list/execution_environment_list.tsx:264
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:300
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:332
 #: src/containers/namespace-list/namespace-list.tsx:232
 #: src/containers/signature-keys/list.tsx:122
 #: src/containers/signature-keys/list.tsx:148
@@ -2100,21 +2345,21 @@ msgstr "名前は '_' で開始できません"
 msgid "Name must be longer than 2 characters"
 msgstr "名前は 2 文字以上にする必要があります"
 
-#: src/components/namespace-form/namespace-form.tsx:214
+#: src/components/namespace-form/namespace-form.tsx:176
 msgid "Name must not be empty."
 msgstr "名前を空白にすることはできません。"
 
 #: src/components/my-imports/import-list.tsx:253
-#: src/containers/certification-dashboard/certification-dashboard.tsx:162
-#: src/containers/certification-dashboard/certification-dashboard.tsx:263
+#: src/containers/certification-dashboard/certification-dashboard.tsx:198
+#: src/containers/certification-dashboard/certification-dashboard.tsx:315
 msgid "Namespace"
 msgstr "名前空間"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:937
+#: src/containers/namespace-detail/namespace-detail.tsx:934
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "名前空間 \"{name}\" を削除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:916
+#: src/containers/namespace-detail/namespace-detail.tsx:914
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "名前空間 \"{name}\" が正常に削除されました。"
 
@@ -2141,15 +2386,15 @@ msgstr "名前空間の名前に使用できるのは、英数字とアンダー
 #: src/components/namespace-form/namespace-form.tsx:76
 #: src/containers/namespace-detail/namespace-detail.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:249
-msgid "Namespace owners"
-msgstr "名前空間の所有者"
+#~ msgid "Namespace owners"
+#~ msgstr "名前空間の所有者"
 
 #: src/containers/edit-namespace/edit-namespace.tsx:262
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
-#: src/loaders/standalone/menu.tsx:45
-#: src/paths.ts:124
+#: src/loaders/standalone/menu.tsx:46
+#: src/paths.ts:126
 msgid "Namespaces"
 msgstr "名前空間"
 
@@ -2167,16 +2412,16 @@ msgstr "名前空間は作成後に表示されます"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:179
-#: src/containers/certification-dashboard/certification-dashboard.tsx:213
+#: src/containers/certification-dashboard/certification-dashboard.tsx:215
+#: src/containers/certification-dashboard/certification-dashboard.tsx:249
 msgid "Needs Review"
 msgstr "レビューが必要"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:348
+#: src/containers/certification-dashboard/certification-dashboard.tsx:405
 msgid "Needs review"
 msgstr "レビューが必要"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:347
+#: src/containers/certification-dashboard/certification-dashboard.tsx:404
 msgid "Needs signature and review"
 msgstr "署名とレビューが必要"
 
@@ -2196,7 +2441,7 @@ msgstr ""
 msgid "No"
 msgstr "不可"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:287
+#: src/components/execution-environment/publish-to-controller-modal.tsx:288
 msgid "No Controllers available"
 msgstr "利用可能なコントローラーがありません"
 
@@ -2225,7 +2470,7 @@ msgstr "子タスクなし"
 msgid "No collections yet"
 msgstr "まだコレクションはありません"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:195
+#: src/containers/execution-environment-list/execution_environment_list.tsx:200
 msgid "No container repositories yet"
 msgstr "まだコンテナーリポジトリーはありません"
 
@@ -2257,7 +2502,7 @@ msgstr "インポートなし"
 msgid "No local repositories yet"
 msgstr "まだローカルリポジトリーはありません"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:255
+#: src/containers/certification-dashboard/certification-dashboard.tsx:307
 msgid "No managed collections yet"
 msgstr "まだ管理コレクションはありません"
 
@@ -2290,6 +2535,18 @@ msgstr "リモートレジストリーなし"
 #: src/containers/repositories/repository-list.tsx:225
 msgid "No remote repositories yet"
 msgstr "まだリモートリポジトリーはありません"
+
+#: src/containers/ansible-remote/list.tsx:48
+msgid "No remotes yet"
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx:45
+msgid "No repositories yet"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:199
+msgid "No repository versions yet"
+msgstr ""
 
 #: src/components/empty-state/empty-state-filter.tsx:14
 msgid "No results found"
@@ -2341,6 +2598,22 @@ msgstr ""
 msgid "No versions"
 msgstr ""
 
+#: src/components/patternfly-wrappers/copy-url.tsx:13
+#: src/components/repositories/ansible-repository-form.tsx:155
+#: src/components/repositories/ansible-repository-form.tsx:170
+#: src/components/repositories/pulp-labels.tsx:11
+#: src/containers/ansible-remote/tab-details.tsx:56
+#: src/containers/ansible-remote/tab-details.tsx:74
+#: src/containers/ansible-remote/tab-details.tsx:75
+#: src/containers/ansible-remote/tab-details.tsx:78
+#: src/containers/ansible-remote/tab-details.tsx:80
+#: src/containers/ansible-repository/tab-details.tsx:34
+#: src/containers/ansible-repository/tab-details.tsx:56
+#: src/containers/ansible-repository/tab-repository-versions.tsx:27
+#: src/containers/ansible-repository/tab-repository-versions.tsx:54
+msgid "None"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:202
 msgid "Not a super user"
 msgstr "スーパーユーザーではありません"
@@ -2367,7 +2640,7 @@ msgstr "他のコレクションでの使用には必要ありません"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:651
+#: src/components/repositories/remote-form.tsx:684
 msgid "Number must be greater than 0"
 msgstr "数字は 0 より大きくなければなりません"
 
@@ -2391,8 +2664,8 @@ msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
-msgid "Owners"
-msgstr "所有者"
+#~ msgid "Owners"
+#~ msgstr "所有者"
 
 #: src/components/headers/base-header.tsx:47
 #~ msgid "Page logo"
@@ -2410,12 +2683,12 @@ msgstr "親タスク"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
-#: src/paths.ts:125
+#: src/paths.ts:127
 msgid "Partners"
 msgstr "パートナー"
 
 #: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:385
+#: src/components/repositories/remote-form.tsx:425
 #: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "パスワード"
@@ -2484,16 +2757,20 @@ msgstr "保留中"
 msgid "Permissions"
 msgstr "Permissions"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:94
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:97
 msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "グループ \"{0}\" のパーミッションを表示できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:278
+#: src/components/repositories/ansible-repository-form.tsx:184
+msgid "Pipeline"
+msgstr ""
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:281
 #: src/containers/role-management/role-list.tsx:207
 msgid "Please add a role by using the button below."
 msgstr "下のボタンを使用してロールを追加してください。"
 
-#: src/components/rbac/owners-tab.tsx:79
+#: src/components/rbac/access-tab.tsx:79
 msgid "Please add an owner by using the button below."
 msgstr "下のボタンを使用して所有者を追加してください。"
 
@@ -2522,9 +2799,9 @@ msgid "Plugin"
 msgstr ""
 
 #: src/components/markdown-editor/markdown-editor.tsx:37
-#: src/components/rbac/owners-tab.tsx:363
-#: src/components/rbac/owners-tab.tsx:415
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
+#: src/components/rbac/access-tab.tsx:363
+#: src/components/rbac/access-tab.tsx:415
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:199
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -2545,15 +2822,16 @@ msgstr ""
 msgid "Provided by {company}"
 msgstr "{company} により提供"
 
-#: src/components/repositories/remote-form.tsx:422
+#: src/components/repositories/remote-form.tsx:462
+#: src/containers/ansible-remote/tab-details.tsx:67
 msgid "Proxy URL"
 msgstr "プロキシー URL"
 
-#: src/components/repositories/remote-form.tsx:470
+#: src/components/repositories/remote-form.tsx:510
 msgid "Proxy password"
 msgstr "プロキシーパスワード"
 
-#: src/components/repositories/remote-form.tsx:441
+#: src/components/repositories/remote-form.tsx:481
 msgid "Proxy username"
 msgstr "プロキシーユーザー名"
 
@@ -2635,6 +2913,10 @@ msgstr "Pulp コンテナー: タスクの同期"
 msgid "Pulp container: Untage image"
 msgstr "Pulp コンテナー: イメージのタグ付け解除"
 
+#: src/containers/ansible-repository/tab-repository-versions.tsx:34
+msgid "Pulp type"
+msgstr ""
+
 #: src/constants.tsx:159
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore: 追加および削除"
@@ -2687,7 +2969,7 @@ msgstr "Pulpcore: バージョンの修復"
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: コミットのアップロード"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:140
+#: src/containers/execution-environment-list/execution_environment_list.tsx:145
 msgid "Push container images"
 msgstr "コンテナーイメージのプッシュ"
 
@@ -2715,9 +2997,13 @@ msgstr "プッシュし、実行環境を変更します。"
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "実行環境をプッシュ、削除、および変更します。リモートレジストリーを作成、削除、および変更します。"
 
-#: src/components/repositories/remote-form.tsx:671
+#: src/components/repositories/remote-form.tsx:704
 msgid "Rate Limit"
 msgstr "速度制限"
+
+#: src/containers/ansible-remote/tab-details.tsx:80
+msgid "Rate limit"
+msgstr ""
 
 #: src/components/markdown-editor/markdown-editor.tsx:25
 msgid "Raw Markdown"
@@ -2735,11 +3021,11 @@ msgstr "理由: タスク {0}"
 msgid "Red Hat Certified"
 msgstr "Red Hat 認定"
 
-#: src/components/execution-environment/repository-form.tsx:109
+#: src/components/execution-environment/repository-form.tsx:106
 msgid "Registries list could not be displayed."
 msgstr "レジストリーリストを表示できませんでした。"
 
-#: src/components/execution-environment/repository-form.tsx:231
+#: src/components/execution-environment/repository-form.tsx:228
 msgid "Registry"
 msgstr "レジストリー"
 
@@ -2751,49 +3037,91 @@ msgstr "レジストリー URL"
 msgid "Registry sync status"
 msgstr "レジストリーの同期ステータス"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:479
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
 msgid "Reject"
 msgstr "拒否"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:175
-#: src/containers/certification-dashboard/certification-dashboard.tsx:214
-#: src/containers/certification-dashboard/certification-dashboard.tsx:331
+#: src/containers/certification-dashboard/certification-dashboard.tsx:211
+#: src/containers/certification-dashboard/certification-dashboard.tsx:250
+#: src/containers/certification-dashboard/certification-dashboard.tsx:388
 msgid "Rejected"
 msgstr "拒否"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:681
+#: src/containers/certification-dashboard/certification-dashboard.tsx:749
+msgid "Rejection failed."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:739
+msgid "Rejection summary."
+msgstr ""
 
 #: src/containers/legacy-roles/legacy-role.tsx:114
 msgid "Released <0/>"
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:414
+#: src/components/repositories/ansible-repository-form.tsx:231
+#: src/containers/ansible-repository/tab-details.tsx:48
+#: src/containers/execution-environment-list/execution_environment_list.tsx:419
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "リモート"
 
 #: src/containers/execution-environment/registry-list.tsx:230
-#: src/loaders/standalone/menu.tsx:75
+#: src/loaders/standalone/menu.tsx:84
 msgid "Remote Registries"
 msgstr "リモートレジストリー"
 
+#: src/containers/ansible-remote/detail.tsx:32
+#: src/containers/ansible-remote/edit.tsx:42
+msgid "Remote could not be displayed."
+msgstr ""
+
 #: src/components/repositories/remote-repository-table.tsx:65
+#: src/containers/ansible-remote/list.tsx:41
+#: src/containers/ansible-remote/list.tsx:74
+#: src/containers/ansible-remote/tab-details.tsx:61
 msgid "Remote name"
 msgstr "リモート名"
 
-#: src/containers/execution-environment/registry-list.tsx:478
+#: src/containers/execution-environment/registry-list.tsx:480
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "リモートレジストリー \"{name}\" を削除できませんでした。"
 
-#: src/containers/execution-environment/registry-list.tsx:511
+#: src/containers/execution-environment/registry-list.tsx:502
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "リモートレジストリー \"{name}\" を同期できませんでした。"
 
-#: src/containers/execution-environment/registry-list.tsx:469
+#: src/containers/execution-environment/registry-list.tsx:471
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "リモートレジストリー \"{name}\" が正常に削除されました。"
 
 #: src/containers/repositories/repository-list.tsx:226
 msgid "Remote repositories will appear once added"
 msgstr "リモートリポジトリーは追加後に表示されます"
+
+#: src/containers/ansible-remote/detail.tsx:26
+#: src/containers/ansible-remote/edit.tsx:35
+#: src/containers/ansible-remote/list.tsx:84
+#: src/loaders/standalone/menu.tsx:60
+msgid "Remotes"
+msgstr ""
+
+#: src/containers/ansible-remote/list.tsx:36
+msgid "Remotes could not be displayed."
+msgstr ""
+
+#: src/containers/ansible-remote/list.tsx:47
+msgid "Remotes will appear once created."
+msgstr ""
+
+#: src/actions/ansible-remote-delete.tsx:32
+msgid "Removal started for remote {name}"
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx:32
+msgid "Removal started for repository {name}"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:663
 msgid "Remove"
@@ -2803,20 +3131,20 @@ msgstr "削除"
 msgid "Remove content from repository"
 msgstr "リポジトリーからのコンテンツ削除"
 
-#: src/components/rbac/owners-tab.tsx:152
+#: src/components/rbac/access-tab.tsx:152
 msgid "Remove group"
 msgstr "グループの削除"
 
-#: src/components/rbac/owners-tab.tsx:278
+#: src/components/rbac/access-tab.tsx:278
 msgid "Remove group {groupname}?"
 msgstr "グループ {groupname} を削除しますか?"
 
-#: src/components/rbac/owners-tab.tsx:255
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:366
+#: src/components/rbac/access-tab.tsx:255
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:369
 msgid "Remove role"
 msgstr "ロールの削除"
 
-#: src/components/rbac/owners-tab.tsx:300
+#: src/components/rbac/access-tab.tsx:300
 msgid "Remove role {role}?"
 msgstr "ロール {role} を削除しますか?"
 
@@ -2837,16 +3165,58 @@ msgstr "リポジトリー管理"
 #~ msgstr "Repo URL"
 
 #: src/components/repositories/remote-repository-table.tsx:70
+#: src/containers/ansible-remote/tab-details.tsx:82
+#: src/containers/ansible-repository/detail.tsx:31
+#: src/containers/ansible-repository/edit.tsx:24
+#: src/containers/ansible-repository/list.tsx:93
+#: src/containers/certification-dashboard/certification-dashboard.tsx:335
+#: src/loaders/standalone/menu.tsx:56
 msgid "Repositories"
 msgstr "リポジトリー"
 
-#: src/loaders/standalone/menu.tsx:51
+#: src/containers/ansible-repository/list.tsx:33
+msgid "Repositories could not be displayed."
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx:44
+msgid "Repositories will appear once created."
+msgstr ""
+
+#: src/components/approve-modal/approve-modal.tsx:328
+msgid "Repository"
+msgstr ""
+
+#: src/loaders/standalone/menu.tsx:52
 msgid "Repository Management"
 msgstr "リポジトリー管理"
 
+#: src/containers/ansible-repository/detail.tsx:49
+#: src/containers/ansible-repository/edit.tsx:34
+msgid "Repository could not be displayed."
+msgstr ""
+
 #: src/components/repositories/local-repository-table.tsx:49
+#: src/containers/ansible-repository/list.tsx:38
+#: src/containers/ansible-repository/list.tsx:73
+#: src/containers/ansible-repository/tab-details.tsx:33
 msgid "Repository name"
 msgstr "リポジトリー名"
+
+#: src/components/approve-modal/approve-modal.tsx:87
+msgid "Repository name {originRepoName} not found."
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:214
+msgid "Repository versions"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:194
+msgid "Repository versions could not be displayed."
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:198
+msgid "Repository versions will appear once the repository is modified."
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:124
 msgid "Requires Ansible"
@@ -2864,10 +3234,34 @@ msgstr "リソースの予約"
 msgid "Resources"
 msgstr "リソース"
 
-#: src/components/rbac/owners-tab.tsx:226
+#: src/components/repositories/ansible-repository-form.tsx:162
+msgid "Retained number of versions"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-details.tsx:36
+msgid "Retained version count"
+msgstr ""
+
+#: src/actions/ansible-repository-version-revert.tsx:32
+msgid "Revert"
+msgstr ""
+
+#: src/actions/ansible-repository-version-revert.tsx:42
+msgid "Revert repository"
+msgstr ""
+
+#: src/actions/ansible-repository-version-revert.tsx:68
+msgid "Revert started for repository \"{repositoryName}\"."
+msgstr ""
+
+#: src/actions/ansible-repository-version-revert.tsx:84
+msgid "Revert to this version"
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx:226
 #: src/components/rbac/role-list-table.tsx:42
 #: src/components/rbac/select-roles.tsx:93
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:212
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:215
 msgid "Role"
 msgstr "ロール"
 
@@ -2875,7 +3269,7 @@ msgstr "ロール"
 msgid "Role \"{0}\" could not be created."
 msgstr "ロール \"{0}\" を作成できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:117
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:120
 msgid "Role \"{0}\" could not be deleted."
 msgstr "ロール \"{0}\" を削除できませんでした。"
 
@@ -2883,7 +3277,7 @@ msgstr "ロール \"{0}\" を削除できませんでした。"
 msgid "Role \"{0}\" could not be displayed."
 msgstr "ロール \"{0}\" を表示できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:109
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:112
 msgid "Role \"{0}\" has been successfully removed."
 msgstr "ロール \"{0}\" は正常に削除されました。"
 
@@ -2906,18 +3300,18 @@ msgstr ""
 msgid "Role name"
 msgstr "ロール名"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:258
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:261
 msgid "Role {0} could not be assigned to group {1}."
 msgstr "ロール {0} をグループ {1} に割り当てられませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:245
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:248
 msgid "Role {0} has been successfully added to {1}."
 msgstr "ロール {0} は {1} に正常に追加されました。"
 
 #: src/containers/role-management/role-create.tsx:59
 #: src/containers/role-management/role-edit.tsx:143
 #: src/containers/role-management/role-list.tsx:201
-#: src/loaders/standalone/menu.tsx:125
+#: src/loaders/standalone/menu.tsx:134
 msgid "Roles"
 msgstr "ロール"
 
@@ -2937,24 +3331,25 @@ msgstr ""
 msgid "Running"
 msgstr "実行中"
 
-#: src/components/repositories/remote-form.tsx:274
+#: src/components/repositories/remote-form.tsx:315
 #: src/containers/token/token-insights.tsx:192
 msgid "SSO URL"
 msgstr "SSO URL"
 
-#: src/components/execution-environment/repository-form.tsx:152
+#: src/components/execution-environment/repository-form.tsx:149
 #: src/components/execution-environment/tag-manifest-modal.tsx:115
 #: src/components/rbac/group-modal.tsx:57
 #: src/components/rbac/role-form.tsx:142
 #: src/components/rbac/user-form.tsx:221
-#: src/components/repositories/remote-form.tsx:136
+#: src/components/repositories/ansible-repository-form.tsx:288
+#: src/components/repositories/remote-form.tsx:152
 #: src/containers/edit-namespace/edit-namespace.tsx:156
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:152
 msgid "Save"
 msgstr "保存"
 
 #: src/containers/execution-environment-detail/base.tsx:255
-#: src/containers/execution-environment-list/execution_environment_list.tsx:462
+#: src/containers/execution-environment-list/execution_environment_list.tsx:467
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "実行環境 \"{0}\" への変更を保存しました。"
 
@@ -2962,7 +3357,7 @@ msgstr "実行環境 \"{0}\" への変更を保存しました。"
 #~ msgid "Saved changes to execution environment \"{name}\"."
 #~ msgstr "Saved changes to execution environment \"{name}\"."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:237
+#: src/containers/edit-namespace/edit-namespace.tsx:235
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" への変更を保存しました。"
 
@@ -2986,31 +3381,37 @@ msgstr "最後までスクロール"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:497
-#: src/containers/execution-environment-detail/base.tsx:369
-#: src/containers/execution-environment-list/execution_environment_list.tsx:531
+#: src/utilities/task-alert.tsx:15
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
 
 #: src/containers/execution-environment/registry-list.tsx:526
-msgid "See the task management <0>detail page</0>for the status of this task."
-msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
+#~ msgid "See the task management <0>detail page</0>for the status of this task."
+#~ msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
 
-#: src/components/rbac/owners-tab.tsx:63
-#: src/components/rbac/owners-tab.tsx:327
-#: src/components/rbac/owners-tab.tsx:374
+#: src/components/approve-modal/approve-modal.tsx:296
+msgid "Select"
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx:63
+#: src/components/rbac/access-tab.tsx:327
+#: src/components/rbac/access-tab.tsx:374
 msgid "Select a group"
 msgstr "グループの選択"
 
-#: src/components/execution-environment/repository-form.tsx:257
+#: src/components/execution-environment/repository-form.tsx:254
 msgid "Select a registry"
 msgstr "レジストリーの選択"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:318
+#: src/components/repositories/ansible-repository-form.tsx:242
+msgid "Select a remote"
+msgstr ""
+
+#: src/components/execution-environment/publish-to-controller-modal.tsx:319
 msgid "Select a tag"
 msgstr "タグの選択"
 
-#: src/components/headers/collection-header.tsx:432
+#: src/components/headers/collection-header.tsx:431
 msgid "Select collection version"
 msgstr "コレクションバージョンの選択"
 
@@ -3036,16 +3437,24 @@ msgstr "名前空間の選択"
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
-#: src/components/rbac/owners-tab.tsx:344
-#: src/components/rbac/owners-tab.tsx:399
-#: src/components/rbac/owners-tab.tsx:426
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:183
+#: src/components/approve-modal/approve-modal.tsx:309
+msgid "Select repositories"
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx:344
+#: src/components/rbac/access-tab.tsx:399
+#: src/components/rbac/access-tab.tsx:426
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:186
 msgid "Select role(s)"
 msgstr "ロールの選択"
 
 #: src/containers/group-management/group-detail.tsx:335
 msgid "Select users"
 msgstr "ユーザーの選択"
+
+#: src/components/approve-modal/approve-modal.tsx:204
+msgid "Selected"
+msgstr ""
 
 #: src/components/rbac/select-group.tsx:116
 msgid "Selected group"
@@ -3079,7 +3488,7 @@ msgstr "設定"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:417
+#: src/components/repositories/remote-form.tsx:457
 msgid "Show advanced options"
 msgstr "詳細オプションの表示"
 
@@ -3105,8 +3514,8 @@ msgstr "すべて署名する"
 msgid "Sign all collections"
 msgstr "すべてのコレクションへの署名"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:429
-#: src/containers/certification-dashboard/certification-dashboard.tsx:462
+#: src/containers/certification-dashboard/certification-dashboard.tsx:493
+#: src/containers/certification-dashboard/certification-dashboard.tsx:524
 msgid "Sign and approve"
 msgstr "署名および承認"
 
@@ -3131,7 +3540,7 @@ msgid "Signature"
 msgstr "署名"
 
 #: src/containers/signature-keys/list.tsx:90
-#: src/loaders/standalone/menu.tsx:98
+#: src/loaders/standalone/menu.tsx:107
 msgid "Signature Keys"
 msgstr "署名鍵"
 
@@ -3152,11 +3561,11 @@ msgstr "署名キーが作成されると表示されます。"
 msgid "Signed"
 msgstr "署名済み"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:323
+#: src/containers/certification-dashboard/certification-dashboard.tsx:380
 msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
-#: src/components/repositories/remote-form.tsx:231
+#: src/components/repositories/remote-form.tsx:272
 msgid "Signed only"
 msgstr "署名済みのみ"
 
@@ -3172,11 +3581,11 @@ msgstr "署名サービスセレクター:"
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" のすべてのコレクションで署名を開始しました。"
 
-#: src/components/headers/collection-header.tsx:716
+#: src/components/headers/collection-header.tsx:715
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "コレクション \"{0}\" のすべてのバージョンで署名を開始しました"
 
-#: src/components/headers/collection-header.tsx:767
+#: src/components/headers/collection-header.tsx:766
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "コレクション \"{0} v{1}\" の署名を開始しました。"
 
@@ -3184,7 +3593,7 @@ msgstr "コレクション \"{0} v{1}\" の署名を開始しました。"
 msgid "Signing started for container \"{0}\"."
 msgstr "コンテナー \"{0}\" の署名が開始されました。"
 
-#: src/components/repositories/remote-form.tsx:275
+#: src/components/repositories/remote-form.tsx:316
 msgid "Single sign on URL."
 msgstr "シングルサインオン URL。"
 
@@ -3200,6 +3609,10 @@ msgstr ""
 msgid "Sort results"
 msgstr "結果のソート"
 
+#: src/components/repositories/ansible-repository-form.tsx:153
+msgid "Staging"
+msgstr ""
+
 #: src/containers/task-management/task-list-view.tsx:246
 msgid "Started at"
 msgstr "開始日時"
@@ -3210,9 +3623,9 @@ msgstr "状態"
 
 #: src/components/my-imports/import-list.tsx:88
 #: src/components/my-imports/import-list.tsx:122
-#: src/containers/certification-dashboard/certification-dashboard.tsx:170
-#: src/containers/certification-dashboard/certification-dashboard.tsx:218
-#: src/containers/certification-dashboard/certification-dashboard.tsx:283
+#: src/containers/certification-dashboard/certification-dashboard.tsx:206
+#: src/containers/certification-dashboard/certification-dashboard.tsx:254
+#: src/containers/certification-dashboard/certification-dashboard.tsx:340
 #: src/containers/task-management/task-list-view.tsx:161
 #: src/containers/task-management/task-list-view.tsx:207
 #: src/containers/task-management/task-list-view.tsx:256
@@ -3242,9 +3655,22 @@ msgstr "タスクを停止しますか?"
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
 
+#: src/actions/ansible-repository-copy.tsx:20
+#: src/containers/ansible-remote/tab-details.tsx:42
+msgid "Successfully copied to clipboard"
+msgstr ""
+
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:13
 msgid "Successfully copied to clipboard!"
 msgstr "クリップボードへのコピーに成功しました!"
+
+#: src/containers/ansible-remote/edit.tsx:108
+msgid "Successfully created remote {0}"
+msgstr ""
+
+#: src/containers/ansible-repository/edit.tsx:111
+msgid "Successfully created repository {0}"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:545
 #~ msgid "Successfully deleted collection version."
@@ -3295,19 +3721,20 @@ msgstr "スーパーユーザーは、自分自身を無効にできません。
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "スーパーユーザーには、所属するグループに関係なく、すべてのシステムパーミッションが割り当てられています。"
 
+#: src/actions/ansible-repository-sync.tsx:7
 #: src/components/repositories/remote-repository-table.tsx:185
 #: src/containers/search/search.tsx:430
 msgid "Sync"
 msgstr "同期"
 
-#: src/containers/execution-environment-detail/base.tsx:380
-#: src/containers/execution-environment-list/execution_environment_list.tsx:541
+#: src/containers/execution-environment-detail/base.tsx:372
+#: src/containers/execution-environment-list/execution_environment_list.tsx:536
 msgid "Sync failed for {name}"
 msgstr "{name} の同期に失敗しました"
 
 #: src/containers/execution-environment/registry-list.tsx:372
 #: src/containers/execution-environment-detail/base.tsx:147
-#: src/containers/execution-environment-list/execution_environment_list.tsx:362
+#: src/containers/execution-environment-list/execution_environment_list.tsx:367
 msgid "Sync from registry"
 msgstr "レジストリーからの同期"
 
@@ -3317,25 +3744,35 @@ msgstr "レジストリーからの同期"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:526
+#: src/containers/execution-environment-list/execution_environment_list.tsx:532
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" の同期が開始されました。"
 
-#: src/containers/execution-environment/registry-list.tsx:494
-#: src/containers/execution-environment-detail/base.tsx:366
+#: src/containers/execution-environment/registry-list.tsx:495
+#: src/containers/execution-environment-detail/base.tsx:367
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "リモートレジストリー \"{name}\" の同期が開始されました。"
 
+#: src/actions/ansible-repository-sync.tsx:13
+msgid "Sync started for repository \"{name}\"."
+msgstr ""
+
 #: src/components/repositories/remote-repository-table.tsx:85
+#: src/containers/ansible-repository/list.tsx:78
 msgid "Sync status"
 msgstr "同期のステータス"
 
-#: src/components/repositories/remote-form.tsx:498
+#: src/actions/ansible-repository-sync.tsx:37
+msgid "Sync task is already queued."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:535
+#: src/containers/ansible-remote/tab-details.tsx:71
 msgid "TLS validation"
 msgstr "TLS 検証"
 
 #: src/components/collection-list/collection-filter.tsx:46
-#: src/components/execution-environment/publish-to-controller-modal.tsx:302
+#: src/components/execution-environment/publish-to-controller-modal.tsx:303
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
@@ -3362,7 +3799,7 @@ msgid "Task \"{taskName}\" stopped successfully."
 msgstr "タスク \"{taskName}\" が正常に停止しました。"
 
 #: src/containers/task-management/task-list-view.tsx:126
-#: src/loaders/standalone/menu.tsx:94
+#: src/loaders/standalone/menu.tsx:103
 msgid "Task Management"
 msgstr "タスク管理"
 
@@ -3415,15 +3852,15 @@ msgstr "タスクは作成後に表示されます。"
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
-#: src/loaders/standalone/menu.tsx:111
+#: src/loaders/standalone/menu.tsx:120
 msgid "Terms of Use"
 msgstr ""
 
-#: src/components/namespace-form/namespace-form.tsx:159
+#: src/components/namespace-form/namespace-form.tsx:121
 msgid "Text: {0}"
 msgstr "テキスト: {0}"
 
-#: src/loaders/insights/loader.tsx:99
+#: src/loaders/insights/loader.tsx:102
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr "Automation Hub 同期トグルは、AAP 2.0 でのみサポートされるようになりました。以前のバージョンの AAP は、引き続きすべてのコレクションを自動的に同期します。"
 
@@ -3431,25 +3868,25 @@ msgstr "Automation Hub 同期トグルは、AAP 2.0 でのみサポートされ�
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "URL の形式は 'http(s)://' でなければなりません。"
 
-#: src/components/repositories/remote-form.tsx:208
+#: src/components/repositories/remote-form.tsx:249
 msgid "The URL of an external content source."
 msgstr "外部コンテンツソースの URL。"
 
-#: src/components/headers/collection-header.tsx:672
-#: src/containers/certification-dashboard/certification-dashboard.tsx:560
+#: src/components/headers/collection-header.tsx:671
+#: src/containers/certification-dashboard/certification-dashboard.tsx:618
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "\"{0} {1} v{2}\" の証明書を保存できませんでした。"
 
-#: src/components/headers/collection-header.tsx:640
+#: src/components/headers/collection-header.tsx:639
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "\"{0} {1} v{2}\" の証明書をアップロードしています。"
 
-#: src/components/headers/collection-header.tsx:816
+#: src/components/headers/collection-header.tsx:815
 #: src/containers/search/search.tsx:338
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 
-#: src/components/headers/collection-header.tsx:817
+#: src/components/headers/collection-header.tsx:816
 #: src/containers/search/search.tsx:339
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
@@ -3470,11 +3907,11 @@ msgstr "このファイルは、このバージョンの {collectionName} では
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "グループには、以下のロールが適用されます: <0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:430
 msgid "The password to be used for authentication when syncing."
 msgstr "同期時に認証に使用するパスワード。"
 
-#: src/components/repositories/remote-form.tsx:391
+#: src/components/repositories/remote-form.tsx:431
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
@@ -3482,7 +3919,7 @@ msgstr "同期時に認証に使用するパスワード。トークンを使用
 msgid "The role is versionless and will always install from the head/main/master branch."
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:181
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:181
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "選択したロールは、この特定の実行環境に追加されます。"
 
@@ -3494,11 +3931,11 @@ msgstr "選択したロールは、この特定の名前空間に追加されま
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "トークンは、30 日のアクティブではない状態が続くと期限切れになります。トークンの有効期限が切れないように、定期的に以下のコマンドを実行します。"
 
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:394
 msgid "The username to be used for authentication when syncing."
 msgstr "同期時に認証に使用するユーザー名。"
 
-#: src/components/repositories/remote-form.tsx:355
+#: src/components/repositories/remote-form.tsx:395
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するユーザー名。トークンを使用する場合は不要です。"
 
@@ -3506,7 +3943,7 @@ msgstr "同期時に認証に使用するユーザー名。トークンを使用
 msgid "There are currently no groups that can be assigned to this namespace."
 msgstr "現在、この名前空間に割り当てることができるグループはありません。"
 
-#: src/components/rbac/owners-tab.tsx:76
+#: src/components/rbac/access-tab.tsx:76
 msgid "There are currently no owners assigned."
 msgstr "現在、所有者は割り当てられていません。"
 
@@ -3514,13 +3951,17 @@ msgstr "現在、所有者は割り当てられていません。"
 msgid "There are currently no roles"
 msgstr "現在ロールはありません"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:277
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:280
 msgid "There are currently no roles assigned to this group."
 msgstr "現在、このグループに割り当てられているロールはありません。"
 
 #: src/components/rbac/select-roles.tsx:77
 msgid "There are currently no roles that can be assigned to this group."
 msgstr "現在、このグループに割り当てることができるロールはありません。"
+
+#: src/actions/ansible-repository-sync.tsx:30
+msgid "There are no remotes associated with this repository."
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:118
 msgid "There are no repos associated with this remote."
@@ -3551,7 +3992,7 @@ msgstr "このアカウントは、名前空間の管理設定がされていま
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:507
+#: src/components/headers/collection-header.tsx:506
 msgid "This collection has been deprecated."
 msgstr "このコレクションは非推奨になりました。"
 
@@ -3591,11 +4032,11 @@ msgstr "このタグは別のイメージにすでに存在します。このイ
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "このタグはすでにこのイメージに対して選択されています。タグは 2 回追加できません。"
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:339
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:143
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:146
 msgid "This will revoke all permissions associated with this role from the group."
 msgstr "これにより、このロールに関連付けられたすべてのパーミッションがグループから取り消されます。"
 
@@ -3603,7 +4044,7 @@ msgstr "これにより、このロールに関連付けられたすべてのパ
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "トークンを取り消すか、すべてのトークンを表示するには、<0>オフライン API トークン管理</0> ページに移動します。"
 
-#: src/components/repositories/remote-form.tsx:245
+#: src/components/repositories/remote-form.tsx:286
 msgid "Token"
 msgstr "トークン"
 
@@ -3611,7 +4052,7 @@ msgstr "トークン"
 msgid "Token could not be displayed."
 msgstr "トークンを表示できませんでした。"
 
-#: src/components/repositories/remote-form.tsx:248
+#: src/components/repositories/remote-form.tsx:289
 msgid "Token for authenticating to the server URL."
 msgstr "サーバー URL に対する認証に使用するトークンです。"
 
@@ -3619,7 +4060,7 @@ msgstr "サーバー URL に対する認証に使用するトークンです。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:642
+#: src/components/repositories/remote-form.tsx:675
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
@@ -3640,20 +4081,22 @@ msgstr "タイプ"
 msgid "UI Version"
 msgstr "UI バージョン"
 
-#: src/components/repositories/remote-form.tsx:206
+#: src/components/repositories/remote-form.tsx:247
+#: src/containers/ansible-remote/list.tsx:79
+#: src/containers/ansible-remote/tab-details.tsx:63
 msgid "URL"
 msgstr "URL"
 
-#: src/components/namespace-form/namespace-form.tsx:232
+#: src/components/namespace-form/namespace-form.tsx:194
 msgid "URL must not be empty."
 msgstr "URL を空白にすることはできません。"
 
-#: src/components/namespace-form/namespace-form.tsx:162
+#: src/components/namespace-form/namespace-form.tsx:124
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:256
-#: src/containers/namespace-detail/namespace-detail.tsx:990
+#: src/containers/namespace-detail/namespace-detail.tsx:987
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "非推奨解除"
@@ -3670,6 +4113,14 @@ msgstr "未署名バージョン"
 #: src/constants.tsx:167
 #~ msgid "Update container information"
 #~ msgstr "コンテナー情報の更新"
+
+#: src/containers/ansible-remote/edit.tsx:105
+msgid "Update started for remote {0}"
+msgstr ""
+
+#: src/containers/ansible-repository/edit.tsx:121
+msgid "Update started for repository {0}"
+msgstr ""
 
 #: src/components/collection-list/collection-list-item.tsx:115
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
@@ -3692,14 +4143,14 @@ msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
 #: src/components/headers/collection-header.tsx:263
-#: src/containers/namespace-detail/namespace-detail.tsx:970
+#: src/containers/namespace-detail/namespace-detail.tsx:967
 #: src/containers/search/search.tsx:396
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
 msgstr "新規バージョンのアップロード"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:413
+#: src/containers/certification-dashboard/certification-dashboard.tsx:481
 msgid "Upload signature"
 msgstr "署名のアップロード"
 
@@ -3708,14 +4159,14 @@ msgstr "署名のアップロード"
 #~ msgid "Upload to namespace"
 #~ msgstr "名前空間へのアップロード"
 
-#: src/components/execution-environment/repository-form.tsx:213
+#: src/components/execution-environment/repository-form.tsx:210
 msgid "Upstream name"
 msgstr "アップストリーム名"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:267
+#: src/components/execution-environment/publish-to-controller-modal.tsx:268
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
-#: src/containers/execution-environment-list/execution_environment_list.tsx:375
+#: src/containers/execution-environment-list/execution_environment_list.tsx:380
 msgid "Use in Controller"
 msgstr "コントローラーでの使用"
 
@@ -3723,7 +4174,7 @@ msgstr "コントローラーでの使用"
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "<0>リポジトリー管理</0> ページを使用して、組織がキュレートしたコレクションを Private Automation Hub の Red Hat 認定リポジトリーに同期します。適切なパーミッションが割り当てられたユーザーは、<1>コレクション</1> ページの同期トグルを使用して、組織の同期リポジトリーに追加されるコレクションを制御できます。"
 
-#: src/components/execution-environment/repository-form.tsx:217
+#: src/components/execution-environment/repository-form.tsx:214
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 msgstr "名前空間を指定したコンテナーには名前空間/名前のフォーマットを使用します。それ以外の場合は、ライブラリー/名前のフォーマットを使用します。"
 
@@ -3755,7 +4206,7 @@ msgstr "このトークンを使用して、Automation Hub からコンテンツ
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "このトークンを使用して、<0>ansible-galaxy</0> クライアントを認証します。"
 
-#: src/components/namespace-form/namespace-form.tsx:134
+#: src/components/namespace-form/namespace-form.tsx:96
 msgid "Useful links"
 msgstr "便利なリンク"
 
@@ -3796,7 +4247,7 @@ msgstr "ユーザー <0>{username}</0> がグループ <1>{groupname}</1> から
 #~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 #~ msgstr "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 
-#: src/loaders/standalone/menu.tsx:116
+#: src/loaders/standalone/menu.tsx:125
 msgid "User Access"
 msgstr "ユーザーアクセス"
 
@@ -3819,7 +4270,7 @@ msgstr "ユーザータイプ"
 
 #: src/components/about-modal/about-modal.tsx:93
 #: src/components/rbac/user-form.tsx:86
-#: src/components/repositories/remote-form.tsx:349
+#: src/components/repositories/remote-form.tsx:389
 #: src/containers/group-management/group-detail.tsx:525
 #: src/containers/group-management/group-detail.tsx:604
 #: src/containers/login/login.tsx:51
@@ -3838,7 +4289,7 @@ msgstr "ユーザー名: {0}"
 #: src/containers/user-management/user-detail.tsx:70
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:137
-#: src/loaders/standalone/menu.tsx:117
+#: src/loaders/standalone/menu.tsx:126
 msgid "Users"
 msgstr "ユーザー"
 
@@ -3862,20 +4313,33 @@ msgstr "ユーザーは作成後に表示されます"
 msgid "Validated"
 msgstr "検証済み"
 
-#: src/components/headers/collection-header.tsx:420
-#: src/containers/certification-dashboard/certification-dashboard.tsx:273
+#: src/components/headers/collection-header.tsx:419
+#: src/containers/certification-dashboard/certification-dashboard.tsx:325
 msgid "Version"
 msgstr "バージョン"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx:153
+#: src/containers/ansible-repository/tab-repository-versions.tsx:204
+msgid "Version number"
+msgstr ""
+
+#: src/containers/ansible-repository/detail.tsx:44
+msgid "Version {repositoryVersion}"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:189
 msgid "Version:"
 msgstr "バージョン:"
 
+#: src/containers/ansible-repository/detail.tsx:25
+msgid "Versions"
+msgstr ""
+
 #: src/constants.tsx:122
 #~ msgid "View Ansible distribution"
 #~ msgstr "Ansible ディストリビューションの表示"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:448
+#: src/containers/certification-dashboard/certification-dashboard.tsx:512
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 
@@ -3907,7 +4371,7 @@ msgstr "コレクションの表示"
 #~ msgid "View group"
 #~ msgstr "グループの表示"
 
-#: src/components/headers/collection-header.tsx:436
+#: src/components/headers/collection-header.tsx:435
 msgid "View more"
 msgstr "詳細表示"
 
@@ -3980,7 +4444,8 @@ msgstr "Web サイト"
 msgid "Wisdom settings"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:335
+#: src/containers/ansible-remote/tab-details.tsx:86
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
@@ -3994,15 +4459,15 @@ msgstr "はい"
 msgid "Yes, stop"
 msgstr "はい、停止します"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:138
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:141
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr "<0>{0}</0> を<1>{1}</1> から削除しようとしています。"
 
-#: src/components/rbac/owners-tab.tsx:280
+#: src/components/rbac/access-tab.tsx:280
 msgid "You are about to remove <0>{groupname}</0> from <1>{name}</1>.<2/>This will also remove all associated permissions."
 msgstr "<0>{groupname}</0> を<1>{name}</1> から削除しようとしています。<2/>これにより、関連するすべてのパーミッションも削除されます。"
 
-#: src/components/rbac/owners-tab.tsx:302
+#: src/components/rbac/access-tab.tsx:302
 msgid "You are about to remove <0>{role}</0> from <1>{groupname}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
 msgstr "<2>{name}</2> の <1>{groupname}</1> から <0>{role}</0> を削除しようとしています。<3/>これにより、関連するすべてのパーミッションも削除されます。"
 
@@ -4030,7 +4495,7 @@ msgstr "SSO ユーザーです。トークンは <0/> に期限が切れます�
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "ここでカスタムマークダウンを入力して、プロファイルのリソースタブをカスタマイズできます。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:196
+#: src/containers/execution-environment-list/execution_environment_list.tsx:201
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "現在、コンテナーリポジトリーはありません。開始するには、CLI でコンテナーリポジトリーを追加します。"
 
@@ -4058,7 +4523,7 @@ msgstr "ユーザーを表示するパーミッションがありません。"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:547
+#: src/components/headers/collection-header.tsx:546
 #: src/containers/search/search.tsx:443
 msgid "You don't have rights to do this operation."
 msgstr "この操作を行う権限がありません。"
@@ -4159,7 +4624,7 @@ msgstr "インポートの完了を待機中"
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} released {1}"
 
-#: src/components/headers/collection-header.tsx:463
+#: src/components/headers/collection-header.tsx:462
 msgid "{0} updated {1}"
 msgstr "{0} 更新済み {1}"
 
@@ -4178,7 +4643,7 @@ msgstr "{collectionName} のバージョン。"
 #: src/components/cards/collection-card.tsx:50
 #: src/components/cards/namespace-card.tsx:37
 #: src/components/collection-list/collection-list-item.tsx:55
-#: src/components/headers/collection-header.tsx:401
+#: src/components/headers/collection-header.tsx:400
 #: src/components/headers/partner-header.tsx:48
 msgid "{company} logo"
 msgstr "{company} ロゴ"
