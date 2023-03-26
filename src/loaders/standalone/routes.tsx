@@ -13,6 +13,7 @@ import {
   CollectionContent,
   CollectionDependencies,
   CollectionDetail,
+  CollectionDistributions,
   CollectionDocs,
   CollectionImportLog,
   EditNamespace,
@@ -269,6 +270,10 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: CollectionDocs, path: Paths.collectionContentDocsByRepo },
       { component: CollectionContent, path: Paths.collectionContentListByRepo },
       { component: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      {
+        component: CollectionDistributions,
+        path: Paths.collectionDistributionsByRepo,
+      },
       {
         component: CollectionDependencies,
         path: Paths.collectionDependenciesByRepo,

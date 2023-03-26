@@ -627,6 +627,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           reduced,
         ),
       },
+      {
+        active: active === 'distributions',
+        title: t`Distributions`,
+        link: formatPath(
+          Paths.collectionDistributionsByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
     ];
 
     return <LinkTabs tabs={tabs} />;

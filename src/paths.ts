@@ -103,6 +103,7 @@ export enum Paths {
   collectionContentListByRepo = '/repo/:repo/:namespace/:collection/content',
   collectionImportLogByRepo = '/repo/:repo/:namespace/:collection/import-log',
   collectionDependenciesByRepo = '/repo/:repo/:namespace/:collection/dependencies',
+  collectionDistributionsByRepo = '/repo/:repo/:namespace/:collection/distributions',
   namespaceByRepo = '/repo/:repo/:namespace',
   collection = '/:namespace/:collection',
   namespace = '/:namespace',
