@@ -59,7 +59,6 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
 
     const saveRepository = ({
       createDistribution,
-      createLabel,
       hideFromSearch,
       isPrivate,
       pipeline,
@@ -85,9 +84,6 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       }
 
       data.pulp_labels ||= {};
-      if (createLabel) {
-        data.pulp_labels.content = 'approved_for_use';
-      }
       if (hideFromSearch) {
         data.pulp_labels.hide_from_search = '';
       } else {

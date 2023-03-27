@@ -23,13 +23,7 @@ interface IProps {
   allowEditName: boolean;
   errorMessages: ErrorMessagesType;
   onCancel: () => void;
-  onSave: ({
-    createDistribution,
-    createLabel,
-    hideFromSearch,
-    isPrivate,
-    pipeline,
-  }) => void;
+  onSave: ({ createDistribution, hideFromSearch, isPrivate, pipeline }) => void;
   repository: AnsibleRepositoryType;
   updateRepository: (r) => void;
 }
@@ -87,7 +81,6 @@ export const AnsibleRepositoryForm = ({
     }
   };
 
-  const createLabel = repository?.pulp_labels?.content !== 'approved_for_use';
   const [hideFromSearch, setHideFromSearch] = useState(
     repository?.pulp_labels?.hide_from_search === '',
   );
@@ -207,12 +200,6 @@ export const AnsibleRepositoryForm = ({
         </div>
         <div style={{ marginTop: '12px' }}>
           <Checkbox
-            isChecked={createLabel}
-            isDisabled={true}
-            label={t`Create a "content: approved_for_use" label`}
-            id='create_label'
-          />
-          <Checkbox
             isChecked={hideFromSearch}
             isDisabled={disableHideFromSearch}
             label={t`Hide from search`}
@@ -278,7 +265,6 @@ export const AnsibleRepositoryForm = ({
           onClick={() =>
             onSave({
               createDistribution,
-              createLabel,
               hideFromSearch,
               isPrivate,
               pipeline,
