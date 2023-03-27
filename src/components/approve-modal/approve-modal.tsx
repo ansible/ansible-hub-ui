@@ -42,6 +42,8 @@ interface IProps {
   addAlert: (alert) => void;
   allRepositories: Repository[];
   finishAction: () => void;
+  stagingRepoNames: string[];
+  rejectedRepoName: string;
 }
 
 export const ApproveModal = (props: IProps) => {
@@ -72,7 +74,8 @@ export const ApproveModal = (props: IProps) => {
     setLoading(true);
 
     const originRepoName = props.collectionVersion.repository_list.find(
-      (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
+      (repo) =>
+        props.stagingRepoNames.includes(repo) || repo == props.rejectedRepoName,
     );
     const reposToApprove = [];
 

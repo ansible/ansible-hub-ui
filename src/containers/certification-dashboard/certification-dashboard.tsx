@@ -83,7 +83,7 @@ interface IState {
     collectionVersion: CollectionVersion;
   };
   repositoryList: Repository[];
-  stagingRepoName: string;
+  stagingRepoNames: string[];
   rejectedRepoName: string;
 }
 
@@ -121,7 +121,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       versionToUploadCertificate: null,
       approveModalInfo: null,
       repositoryList: [],
-      stagingRepoName: 'staging',
+      stagingRepoNames: [],
       rejectedRepoName: 'rejected',
     };
   }
@@ -170,7 +170,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       .then((data) => {
         if (data.data.results.length > 0) {
           if (pipeline == 'staging') {
-            this.setState({ stagingRepoName: data.data.results[0].name });
+            this.setState({
+              stagingRepoNames: data.data.results.map((res) => res.name),
+            });
           }
 
           if (pipeline == 'rejected') {
@@ -319,6 +321,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 }
                 addAlert={(alert) => this.addAlertObj(alert)}
                 allRepositories={this.state.repositoryList}
+                stagingRepoNames={this.state.stagingRepoNames}
+                rejectedRepoName={this.state.rejectedRepoName}
               />
             )}
           </Main>
@@ -666,7 +670,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         isStagingOrRejected = true;
       }
 
-      if (repo == this.state.stagingRepoName) {
+      if (this.state.stagingRepoNames.includes(repo)) {
         isStagingOrRejected = true;
       }
 
@@ -697,7 +701,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         isStagingOrRejected = true;
       }
 
-      if (pipeline == 'staging' && repo == this.state.stagingRepoName) {
+      if (pipeline == 'staging' && this.state.stagingRepoNames.includes(repo)) {
         isStagingOrRejected = true;
       }
     });
@@ -719,7 +723,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (this.state.repositoryList.length == 1) {
       const originalRepo = version.repository_list.find(
         (repo) =>
-          repo == this.state.stagingRepoName ||
+          this.state.stagingRepoNames.includes(repo) ||
           repo == this.state.rejectedRepoName,
       );
       if (originalRepo) {
@@ -784,7 +788,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
           if (
             repoInfo?.pulp_labels?.pipeline == 'approved' ||
-            repo == this.state.stagingRepoName
+            this.state.stagingRepoNames.includes(repo)
           ) {
             const promise = CollectionVersionAPI.setRepository(
               version.namespace,
