@@ -68,16 +68,6 @@ export const RemoteAccessTab = ({
               permissions.includes('ansible.change_collectionremote') ||
                 hasPermission('ansible.change_collectionremote'),
             );
-
-            if (params?.group) {
-              GroupAPI.list({ name: params.group }).then(
-                ({ data: { data } }) => {
-                  setSelectedGroup(
-                    groupRoles.find((g) => g.name === data[0].name),
-                  );
-                },
-              );
-            }
           })
           .catch(() => {
             setGroups([]);
@@ -195,6 +185,20 @@ export const RemoteAccessTab = ({
   };
 
   useEffect(query, [item.pulp_href]);
+  useEffect(() => {
+    if (!groups) {
+      return;
+    }
+
+    if (!params?.group) {
+      setSelectedGroup(null);
+      return;
+    }
+
+    GroupAPI.list({ name: params.group }).then(({ data: { data } }) => {
+      setSelectedGroup(groups.find((g) => g.name === data[0].name));
+    });
+  }, [params?.group, groups]);
 
   return (
     <AccessTab

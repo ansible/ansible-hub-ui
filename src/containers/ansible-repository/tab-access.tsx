@@ -68,16 +68,6 @@ export const RepositoryAccessTab = ({
               permissions.includes('ansible.change_ansiblerepository') ||
                 hasPermission('ansible.change_ansiblerepository'),
             );
-
-            if (params?.group) {
-              GroupAPI.list({ name: params.group }).then(
-                ({ data: { data } }) => {
-                  setSelectedGroup(
-                    groupRoles.find((g) => g.name === data[0].name),
-                  );
-                },
-              );
-            }
           })
           .catch(() => {
             setGroups([]);
@@ -195,6 +185,20 @@ export const RepositoryAccessTab = ({
   };
 
   useEffect(query, [item.pulp_href]);
+  useEffect(() => {
+    if (!groups) {
+      return;
+    }
+
+    if (!params?.group) {
+      setSelectedGroup(null);
+      return;
+    }
+
+    GroupAPI.list({ name: params.group }).then(({ data: { data } }) => {
+      setSelectedGroup(groups.find((g) => g.name === data[0].name));
+    });
+  }, [params?.group, groups]);
 
   return (
     <AccessTab
