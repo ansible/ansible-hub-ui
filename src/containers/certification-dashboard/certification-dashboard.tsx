@@ -813,7 +813,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         Promise.all(promises)
           .then(() => {
             // if something fail, add previously deleted rejected repo back again
-            if (failedRepos.length > 0) {
+            if (failedRepos.length > 0 && rejectedDeleted == true) {
               return Repositories.addCollection(
                 this.state.rejectedRepoName,
                 version,
