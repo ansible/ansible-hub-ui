@@ -676,7 +676,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   private loadCollections() {
     CollectionVersionAPI.list({
       ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      repository_label: '!hide_from_search',
+      // repository_label: '!hide_from_search',
       namespace: this.props.routeParams.namespace,
     }).then((result) => {
       this.setState({
@@ -690,7 +690,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     Promise.all([
       CollectionVersionAPI.list({
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-        repository_label: '!hide_from_search',
+        // repository_label: '!hide_from_search',
         namespace: this.props.routeParams.namespace,
         is_highest: true,
       }),
