@@ -380,22 +380,27 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </Button>
               </FlexItem>
             </Flex>
-            <Flex>
-              <FlexItem grow={{ default: 'grow' }}>
-                {/* TODO better placement, sizing */}
-                {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
-                <CodeEditor
-                  code={this.props.remote.requirements_file}
-                  isDarkTheme
-                  height='sizeToFit'
-                  language={Language.yaml}
-                  onChange={(value) =>
-                    this.updateRemote(value, 'requirements_file')
-                  }
-                  onEditorDidMount={(editor) => editor.focus()}
-                />
-              </FlexItem>
-            </Flex>
+            <ExpandableSection
+              toggleTextExpanded={t`Close YAML editor`}
+              toggleTextCollapsed={t`Edit in YAML editor`}
+            >
+              <Flex>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <ExclamationTriangleIcon />{' '}
+                  {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
+                  <CodeEditor
+                    code={this.props.remote.requirements_file}
+                    isDarkTheme
+                    height='20rem'
+                    language={Language.yaml}
+                    onChange={(value) =>
+                      this.updateRemote(value, 'requirements_file')
+                    }
+                    onEditorDidMount={(editor) => editor.focus()}
+                  />
+                </FlexItem>
+              </Flex>
+            </ExpandableSection>
           </FormGroup>
         )}
 
