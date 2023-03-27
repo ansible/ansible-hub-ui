@@ -84,6 +84,7 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   tabs,
   tabUpdateParams: (p) => {
     delete p.repositoryVersion;
+    delete p.group;
     return p;
   },
 });

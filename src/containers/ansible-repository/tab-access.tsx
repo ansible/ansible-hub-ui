@@ -70,7 +70,7 @@ export const RepositoryAccessTab = ({
             );
 
             if (params?.group) {
-              GroupAPI.list({ name: params.group.name }).then(
+              GroupAPI.list({ name: params.group }).then(
                 ({ data: { data } }) => {
                   setSelectedGroup(
                     groupRoles.find((g) => g.name === data[0].name),

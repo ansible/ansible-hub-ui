@@ -56,6 +56,10 @@ export const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
       access: <RemoteAccessTab item={item} actionContext={actionContext} />,
     }[tab]),
   tabs,
+  tabUpdateParams: (p) => {
+    delete p.group;
+    return p;
+  },
 });
 
 export default AnsibleRemoteDetail;
