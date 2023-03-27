@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { CodeEditor, Language } from '@patternfly/react-code-editor';
 import {
   ActionGroup,
   Button,
@@ -18,7 +19,6 @@ import {
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
 import React from 'react';
-import MonacoEditor from 'react-monaco-editor';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { Constants } from 'src/constants';
@@ -384,17 +384,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <FlexItem grow={{ default: 'grow' }}>
                 {/* TODO better placement, sizing */}
                 {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
-                <MonacoEditor
-                  width='800'
-                  height='600'
-                  language='yaml'
-                  theme='vs-dark'
-                  value={this.props.remote.requirements_file}
-                  options={{ selectOnLineNumbers: true }}
+                <CodeEditor
+                  code={this.props.remote.requirements_file}
+                  isDarkTheme
+                  height='sizeToFit'
+                  language={Language.yaml}
                   onChange={(value) =>
                     this.updateRemote(value, 'requirements_file')
                   }
-                  editorDidMount={(editor) => editor.focus()}
+                  onEditorDidMount={(editor) => editor.focus()}
                 />
               </FlexItem>
             </Flex>
