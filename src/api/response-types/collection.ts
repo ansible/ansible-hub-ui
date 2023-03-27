@@ -79,7 +79,6 @@ export class CollectionVersionSearch {
     name: string;
     company: string;
     description: string;
-    avatar: string;
     avatar_url: string;
   };
   repository: {

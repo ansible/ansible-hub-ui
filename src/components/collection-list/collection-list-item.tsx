@@ -43,18 +43,6 @@ export const CollectionListItem = ({
 }: IProps) => {
   const cells = [];
 
-  // FIXME: remove when API switch to AnsibleNamespaceMetadata
-  const mockNamespace = {
-    pulp_href: '',
-    name: collection_version.namespace,
-    company: 'xaz',
-    description: 'foo bar',
-    avatar: '',
-    avatar_url: '',
-    email: 'foo',
-  };
-  namespace = mockNamespace;
-
   const company = namespace.company || namespace.name;
 
   if (showNamespace) {

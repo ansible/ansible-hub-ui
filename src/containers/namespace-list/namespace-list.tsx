@@ -346,7 +346,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
         .list(this.state.params)
         .then((results) => {
           this.setState({
-            // TODO: remove this when after new namespaces
             namespaces: results.data.data,
             itemCount: results.data.meta.count,
             loading: false,

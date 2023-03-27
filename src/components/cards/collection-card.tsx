@@ -38,18 +38,6 @@ export const CollectionCard = ({
 }: IProps) => {
   const MAX_DESCRIPTION_LENGTH = 60;
 
-  // FIXME: remove when API switch to AnsibleNamespaceMetadata
-  const mockNamespace = {
-    pulp_href: '',
-    name: collection_version.namespace,
-    company: 'xaz',
-    description: 'foo bar',
-    avatar: '',
-    avatar_url: '',
-    email: 'foo',
-  };
-  namespace = mockNamespace;
-
   const company = namespace.company || namespace.name;
   const contentSummary = convertContentSummaryCounts(collection_version);
 

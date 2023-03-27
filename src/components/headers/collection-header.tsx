@@ -199,20 +199,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       }`;
     };
 
-    const { collection_version } = collection;
+    const { collection_version, namespace_metadata: namespace } = collection;
     const { name: collectionName, version } = collection_version;
-
-    // FIXME: remove when API switch to AnsibleNamespaceMetadata
-    const mockNamespace = {
-      pulp_href: '',
-      name: collection_version.namespace,
-      company: 'xaz',
-      description: 'foo bar',
-      avatar: '',
-      avatar_url: '',
-      email: 'foo',
-    };
-    const namespace = mockNamespace;
 
     const company = namespace.company || namespace.name;
 

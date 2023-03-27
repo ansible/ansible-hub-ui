@@ -23,7 +23,6 @@ const CollectionDistributions = (props: RouteProps) => {
   const [collection, setCollection] = useState(null);
   const [content, setContent] = useState(null);
 
-  console.log(routeParams);
   const [params, setParams] = useState(
     Object.keys(routeParams).length
       ? routeParams
