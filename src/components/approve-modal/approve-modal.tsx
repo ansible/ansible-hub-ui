@@ -73,10 +73,19 @@ export const ApproveModal = (props: IProps) => {
 
     setLoading(true);
 
-    const originRepoName = props.collectionVersion.repository_list.find(
+    let reapprove = false;
+
+    let originRepoName = props.collectionVersion.repository_list.find(
       (repo) =>
         props.stagingRepoNames.includes(repo) || repo == props.rejectedRepoName,
     );
+
+    // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
+    if (!originRepoName) {
+      reapprove = true;
+      originRepoName = fixedRepos[0];
+    }
+
     const reposToApprove = [];
 
     // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
@@ -99,11 +108,24 @@ export const ApproveModal = (props: IProps) => {
           const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
           CollectionVersionAPI.get(props.collectionVersion.id)
             .then((data) => {
-              Repositories.moveCollectionVersion(
-                pulp_id,
-                [data.data.pulp_href],
-                repositoriesRef,
-              )
+              let promiseCopyOrMove = null;
+
+              if (reapprove) {
+                // reapprove takes first
+                promiseCopyOrMove = Repositories.copyCollectionVersion(
+                  pulp_id,
+                  [data.data.pulp_href],
+                  repositoriesRef,
+                );
+              } else {
+                promiseCopyOrMove = Repositories.moveCollectionVersion(
+                  pulp_id,
+                  [data.data.pulp_href],
+                  repositoriesRef,
+                );
+              }
+
+              promiseCopyOrMove
                 .then((task) => {
                   return waitForTaskUrl(task['data'].task);
                 })

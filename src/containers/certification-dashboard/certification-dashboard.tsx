@@ -23,6 +23,7 @@ import {
   CollectionVersion,
   CollectionVersionAPI,
   Repositories,
+  ReturnedValue,
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
@@ -561,7 +562,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     const rejectDropDown = (isDisabled: boolean) => (
       <DropdownItem
         onClick={() => {
-          this.reject(version);
+          // TODO - Jirka will pass here list of all repos that collection is in
+          this.reject(version, []);
         }}
         isDisabled={isDisabled}
         className='rejected-icon'
@@ -575,7 +577,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return (
         <ListItemActions
           kebabItems={[
-            certifyDropDown(true),
+            certifyDropDown(false),
             rejectDropDown(false),
             importsLink,
           ]}
@@ -584,13 +586,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     if (this.isRejected(version)) {
-      // render reject button if version is in multiple repositories including rejected state - handles inconsistency
-      // and allows user to reject it again to move it all to rejected state
       return (
         <ListItemActions
           kebabItems={[
             certifyDropDown(false),
-            rejectDropDown(version.repository_list.length == 1),
+            rejectDropDown(false),
             importsLink,
           ]}
         />
@@ -745,125 +745,52 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
-  private reject(version) {
-    if (version.repository_list.length == 0) {
-      // I hope that this may not occure ever, but to be sure...
-      this.addAlert(
-        t`Rejection failed.`,
-        'danger',
-        t`Collection not found in any repository.`,
-      );
+  private reject(version, repository_list) {
+    // this is only for now, Jirkas PR will have it differently and repository_list will contains all repos,
+    // while version.repository list will contains 1 repo
+    repository_list = version.repository_list;
+
+    // just to be sure collection is not in 1 repo and this repo is rejected
+    if (
+      repository_list.includes(this.state.rejectedRepoName) &&
+      repository_list.length == 1
+    ) {
       return;
     }
 
-    this.setState({ updatingVersions: [version] });
-
-    let deletePromise = Promise.resolve();
-
-    let isInRejected = false;
-    let rejectedDeleted = false;
-
-    // delete rejected before rejection
-    if (version.repository_list.includes(this.state.rejectedRepoName)) {
-      isInRejected = true;
-      deletePromise = Repositories.deleteCollection(
-        this.state.rejectedRepoName,
-        version,
-      );
-    }
-
-    deletePromise
-      .then(() => {
-        if (isInRejected) {
-          rejectedDeleted = true;
-        }
-        const promises = [];
-        const repositoryList = this.state.repositoryList;
-
-        const removedRepos = [];
-        const failedRepos = [];
-
-        version.repository_list.forEach((repo) => {
-          const repoInfo = repositoryList.find((r) => r.name == repo);
-
-          if (
-            repoInfo?.pulp_labels?.pipeline == 'approved' ||
-            this.state.stagingRepoNames.includes(repo)
-          ) {
-            const promise = CollectionVersionAPI.setRepository(
-              version.namespace,
-              version.name,
-              version.version,
-              repo,
-              this.state.rejectedRepoName,
-            )
-              .then((task) => {
-                return waitForTaskUrl(task['data'].copy_task_id);
-              })
-              .then(() => {
-                removedRepos.push(repo);
-              })
-              .catch(() => {
-                failedRepos.push(repo);
-              });
-            promises.push(promise);
-          }
-        });
-
-        Promise.all(promises)
+    // just to be sure, but this will be always true unless something bad broke
+    if (version.repository_list.length > 0) {
+      if (repository_list.includes(this.state.rejectedRepoName)) {
+        // collection already in rejected repository, so remove it from aproved repo
+        this.setState({ updatingVersions: [version] });
+        Repositories.deleteCollection(version.repository_list[0], version)
           .then(() => {
-            // if something fail, add previously deleted rejected repo back again
-            if (failedRepos.length > 0 && rejectedDeleted == true) {
-              return Repositories.addCollection(
-                this.state.rejectedRepoName,
-                version,
-              );
-            }
-          })
-          .catch(() => {
-            this.addAlertObj({
-              title: t`Cannot add collection back to rejected repository.`,
-              variant: 'danger',
-            });
-          })
-          .then(() => {
-            this.setState({ loading: false });
+            this.addAlert(
+              t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+              'success',
+            );
             this.queryCollections(true);
-            if (failedRepos.length == 0) {
-              this.addAlertObj({
-                title: t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
-                variant: 'success',
-              });
-            } else {
-              if (removedRepos.length > 0) {
-                this.addAlertObj({
-                  title: t`Rejection summary.`,
-                  variant: 'danger',
-                  description: t`Collection was sucessfuly rejected from those repositories: ${removedRepos.join(
-                    ', ',
-                  )}, but failed to be removed from those repositories: ${failedRepos.join(
-                    ', ',
-                  )}`,
-                });
-              } else {
-                this.addAlertObj({
-                  title: t`Rejection failed.`,
-                  variant: 'danger',
-                  description: t`Collection failed to be removed from those repositories: ${failedRepos.join(
-                    ', ',
-                  )}`,
-                });
-              }
-            }
+          })
+          .catch((error) => {
+            const description = !error.response
+              ? error
+              : errorMessage(error.response.status, error.response.statusText);
+
+            this.addAlert(
+              t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+              'danger',
+              description,
+            );
           });
-      })
-      .catch(() => {
-        this.addAlertObj({
-          title: t`Rejection failed.`,
-          variant: 'danger',
-          description: t`Cannot delete collection from rejected repository ${this.state.rejectedRepoName}`,
-        });
-      });
+      } else {
+        // collection is not in rejected state, move it there
+        this.updateCertification(
+          version,
+          version.repository_list[0],
+          this.state.rejectedRepoName,
+        );
+      }
+    }
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
