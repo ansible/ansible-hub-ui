@@ -53,12 +53,12 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
+  RepositoriesUtils,
   RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
   waitForTask,
-  waitForTaskUrl,
   withRouter,
 } from 'src/utilities';
 import './certification-dashboard.scss';
@@ -144,7 +144,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       promises.push(this.loadRepo('rejected'));
 
       promises.push(
-        Repositories.listApproved()
+        RepositoriesUtils.listApproved()
           .then((data) => {
             this.setState({ repositoryList: data });
           })
@@ -763,7 +763,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       if (repository_list.includes(this.state.rejectedRepoName)) {
         // collection already in rejected repository, so remove it from aproved repo
         this.setState({ updatingVersions: [version] });
-        Repositories.deleteCollection(version.repository_list[0], version)
+        RepositoriesUtils.deleteCollection(version.repository_list[0], version)
           .then(() => {
             this.addAlert(
               t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
