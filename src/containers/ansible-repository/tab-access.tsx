@@ -9,6 +9,7 @@ import {
 } from 'src/api';
 import { AccessTab } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import { canEditAnsibleRepositoryAccess } from 'src/permissions';
 import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
@@ -17,6 +18,7 @@ interface TabProps {
     addAlert: (alert) => void;
     state: { params };
     hasPermission;
+    user;
   };
 }
 
@@ -26,6 +28,7 @@ export const RepositoryAccessTab = ({
     addAlert,
     state: { params },
     hasPermission,
+    user,
   },
 }: TabProps) => {
   const id = item?.pulp_href && parsePulpIDFromURL(item.pulp_href);
@@ -65,8 +68,12 @@ export const RepositoryAccessTab = ({
             setName(name);
             setGroups(groupRoles);
             setCanEditOwners(
-              permissions.includes('ansible.change_ansiblerepository') ||
-                hasPermission('ansible.change_ansiblerepository'),
+              canEditAnsibleRepositoryAccess({
+                hasPermission,
+                hasObjectPermission: (p: string): boolean =>
+                  permissions.includes(p),
+                user,
+              }),
             );
           })
           .catch(() => {

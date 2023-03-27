@@ -12,7 +12,11 @@ import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import {
+  canViewAnsibleRemotes,
+  canViewAnsibleRepositories,
+  isLoggedIn,
+} from 'src/permissions';
 import { hasPermission } from 'src/utilities';
 
 const menuItem = (name, options = {}) => ({
@@ -52,11 +56,11 @@ function standaloneMenu() {
         url: formatPath(Paths.repositories),
       }),
       menuItem(t`Repositories`, {
-        condition: isLoggedIn,
+        condition: canViewAnsibleRepositories,
         url: formatPath(Paths.ansibleRepositories),
       }),
       menuItem(t`Remotes`, {
-        condition: isLoggedIn,
+        condition: canViewAnsibleRemotes,
         url: formatPath(Paths.ansibleRemotes),
       }),
       menuItem(t`API token`, {

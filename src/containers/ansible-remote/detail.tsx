@@ -10,7 +10,7 @@ import {
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import { canViewAnsibleRemotes } from 'src/permissions';
 import { RemoteAccessTab } from './tab-access';
 import { DetailsTab } from './tab-details';
 
@@ -38,7 +38,7 @@ export const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
         ? { name: t`Group ${group}` }
         : { name: tab.name },
     ].filter(Boolean),
-  condition: isLoggedIn,
+  condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
   errorTitle: t`Remote could not be displayed.`,
   headerActions: [

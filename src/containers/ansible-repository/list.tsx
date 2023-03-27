@@ -11,7 +11,7 @@ import {
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
 
 const listItemActions = [
@@ -26,7 +26,7 @@ const listItemActions = [
 ];
 
 export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
-  condition: isLoggedIn,
+  condition: canViewAnsibleRepositories,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRepositoryList',

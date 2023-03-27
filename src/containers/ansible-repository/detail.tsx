@@ -9,7 +9,7 @@ import {
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
@@ -47,7 +47,7 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
         ? { name: t`Group ${group}` }
         : { name: tab.name },
     ].filter(Boolean),
-  condition: isLoggedIn,
+  condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',
   errorTitle: t`Repository could not be displayed.`,
   headerActions: [

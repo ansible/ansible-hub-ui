@@ -7,7 +7,10 @@ import {
 } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import {
+  canAddAnsibleRepository,
+  canEditAnsibleRepository,
+} from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRepository: AnsibleRepositoryType = {
@@ -29,7 +32,8 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       name ? { name: t`Edit` } : { name: t`Add` },
     ].filter(Boolean),
 
-  condition: isLoggedIn,
+  condition: (context, item?) =>
+    canAddAnsibleRepository(context) || canEditAnsibleRepository(context, item),
   displayName: 'AnsibleRepositoryEdit',
   errorTitle: t`Repository could not be displayed.`,
   query: ({ name }) =>

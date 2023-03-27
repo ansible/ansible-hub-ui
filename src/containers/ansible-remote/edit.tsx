@@ -3,7 +3,7 @@ import React from 'react';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import { canAddAnsibleRemote, canEditAnsibleRemote } from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRemote: AnsibleRemoteType = {
@@ -37,7 +37,8 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
       name ? { name: t`Edit` } : { name: t`Add` },
     ].filter(Boolean),
 
-  condition: isLoggedIn,
+  condition: (context, item?) =>
+    canAddAnsibleRemote(context) || canEditAnsibleRemote(context, item),
   displayName: 'AnsibleRemoteEdit',
   errorTitle: t`Remote could not be displayed.`,
   query: ({ name }) =>

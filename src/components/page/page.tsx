@@ -131,6 +131,8 @@ export const Page = function <
         queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
+        hasObjectPermission: (permission) =>
+          item?.my_permissions?.includes?.(permission),
       };
 
       const name = item?.name || transformParams(routeParams)?.name || null;

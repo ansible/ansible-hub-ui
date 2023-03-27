@@ -9,6 +9,7 @@ import {
 } from 'src/api';
 import { AccessTab } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import { canEditAnsibleRemoteAccess } from 'src/permissions';
 import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
@@ -17,6 +18,7 @@ interface TabProps {
     addAlert: (alert) => void;
     state: { params };
     hasPermission;
+    user;
   };
 }
 
@@ -26,6 +28,7 @@ export const RemoteAccessTab = ({
     addAlert,
     state: { params },
     hasPermission,
+    user,
   },
 }: TabProps) => {
   const id = item?.pulp_href && parsePulpIDFromURL(item.pulp_href);
@@ -65,8 +68,12 @@ export const RemoteAccessTab = ({
             setName(name);
             setGroups(groupRoles);
             setCanEditOwners(
-              permissions.includes('ansible.change_collectionremote') ||
-                hasPermission('ansible.change_collectionremote'),
+              canEditAnsibleRemoteAccess({
+                hasPermission,
+                hasObjectPermission: (p: string): boolean =>
+                  permissions.includes(p),
+                user,
+              }),
             );
           })
           .catch(() => {
