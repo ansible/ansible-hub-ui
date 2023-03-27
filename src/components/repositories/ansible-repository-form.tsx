@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
@@ -14,6 +14,7 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,
+  HelperText,
   LazyDistributions,
   PulpLabels,
 } from 'src/components';
@@ -40,15 +41,31 @@ export const AnsibleRepositoryForm = ({
   const disabledFields = allowEditName ? [] : ['name'];
 
   const toError = (bool) => (bool ? 'default' : 'error');
-  const inputField = (fieldName, label, props) => (
+  const formGroup = (fieldName, label, helperText, children) => (
     <FormGroup
       key={fieldName}
       fieldId={fieldName}
-      label={label}
+      label={
+        helperText ? (
+          <>
+            {label} <HelperText content={helperText} />
+          </>
+        ) : (
+          label
+        )
+      }
       isRequired={requiredFields.includes(fieldName)}
       validated={toError(!(fieldName in errorMessages))}
       helperTextInvalid={errorMessages[fieldName]}
     >
+      {children}
+    </FormGroup>
+  );
+  const inputField = (fieldName, label, helperText, props) =>
+    formGroup(
+      fieldName,
+      label,
+      helperText,
       <TextInput
         validated={toError(!(fieldName in errorMessages))}
         isRequired={requiredFields.includes(fieldName)}
@@ -59,13 +76,12 @@ export const AnsibleRepositoryForm = ({
           updateRepository({ ...repository, [fieldName]: value })
         }
         {...props}
-      />
-    </FormGroup>
-  );
-  const stringField = (fieldName, label) =>
-    inputField(fieldName, label, { type: 'text' });
-  const numericField = (fieldName, label) =>
-    inputField(fieldName, label, { type: 'number' });
+      />,
+    );
+  const stringField = (fieldName, label, helperText?) =>
+    inputField(fieldName, label, helperText, { type: 'text' });
+  const numericField = (fieldName, label, helperText?) =>
+    inputField(fieldName, label, helperText, { type: 'number' });
 
   const isValid = !requiredFields.find((field) => !repository[field]);
 
@@ -148,33 +164,81 @@ export const AnsibleRepositoryForm = ({
     none: { id: 'none', toString: () => t`None` },
   };
 
+  const pipelineHelp = (
+    <Trans>
+      Pipeline adds repository labels with pre-defined meanings:
+      <ul>
+        <li>
+          <b>None</b> - no special handling
+        </li>
+        <li>
+          <b>Approved</b> - collections can be moved here on approval
+        </li>
+        <li>
+          <b>Staging</b> - collections uploaded here can be approved or rejected
+          in the UI
+        </li>
+      </ul>
+    </Trans>
+  );
+  const labelsHelp = (
+    <Trans>
+      Repository labels can change the context in which a repository is seen.
+      <ul>
+        <li>
+          <b>Hide from search</b> (
+          <pre style={{ display: 'inline-block' }}>hide_from_search</pre>) -
+          prevent collections in this repository from showing up on the home
+          page
+        </li>
+        <li>
+          <b>Make private</b> (
+          <pre style={{ display: 'inline-block' }}>is_private=true</pre>) - make
+          repository private
+        </li>
+        <li>
+          (<pre style={{ display: 'inline-block' }}>pipeline: *</pre>) - see
+          Pipeline above
+        </li>
+      </ul>
+    </Trans>
+  );
+
   return (
     <Form>
       {stringField('name', t`Name`)}
       {stringField('description', t`Description`)}
-      {numericField('retain_repo_versions', t`Retained number of versions`)}
+      {numericField(
+        'retain_repo_versions',
+        t`Retained number of versions`,
+        t`In order to retain all versions, leave this field blank.`,
+      )}
 
-      <FormGroup
-        key={'distributions'}
-        fieldId={'distributions'}
-        label={t`Distributions`}
-      >
-        <LazyDistributions
-          emptyText={t`None`}
-          repositoryHref={repository.pulp_href}
-          onLoad={onDistributionsLoad}
-        />
-        <br />
-        <Checkbox
-          isChecked={createDistribution}
-          isDisabled={disabledDistribution}
-          onChange={(value) => setCreateDistribution(value)}
-          label={t`Create a "${repository.name}" distribution`}
-          id='create_distribution'
-        />
-      </FormGroup>
+      {formGroup(
+        'distributions',
+        t`Distributions`,
+        t`Some actions will not work without a distribution.`,
+        <>
+          <LazyDistributions
+            emptyText={t`None`}
+            repositoryHref={repository.pulp_href}
+            onLoad={onDistributionsLoad}
+          />
+          <br />
+          <Checkbox
+            isChecked={createDistribution}
+            isDisabled={disabledDistribution}
+            onChange={(value) => setCreateDistribution(value)}
+            label={t`Create a "${repository.name}" distribution`}
+            id='create_distribution'
+          />
+        </>,
+      )}
 
-      <FormGroup key='pipeline' fieldId='pipeline' label={t`Pipeline`}>
+      {formGroup(
+        'pipeline',
+        t`Pipeline`,
+        pipelineHelp,
         <Select
           variant='single'
           isOpen={selectOpen}
@@ -185,67 +249,82 @@ export const AnsibleRepositoryForm = ({
           {Object.entries(selectOptions).map(([k, v]) => (
             <SelectOption key={k} value={v} />
           ))}
-        </Select>
-      </FormGroup>
+        </Select>,
+      )}
 
-      <FormGroup key={'labels'} fieldId={'labels'} label={t`Labels`}>
-        <div
-          // prevents "N more" clicks from submitting the form
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-        >
-          <PulpLabels labels={repository.pulp_labels} />
-        </div>
-        <div style={{ marginTop: '12px' }}>
-          <Checkbox
-            isChecked={hideFromSearch}
-            isDisabled={disableHideFromSearch}
-            label={t`Hide from search`}
-            id='hide_from_search'
-            onChange={(value) => setHideFromSearch(value)}
-          />
-          <Checkbox
-            isChecked={isPrivate}
-            label={t`Make private`}
-            id='is_private'
-            onChange={(value) => setIsPrivate(value)}
-          />
-        </div>
-      </FormGroup>
-
-      <FormGroup key='remote' fieldId='remote' label={t`Remote`}>
-        {remotes ? (
-          <APISearchTypeAhead
-            loadResults={loadRemotes}
-            onClear={() => updateRepository({ ...repository, remote: null })}
-            onSelect={(_event, value) =>
-              updateRepository({
-                ...repository,
-                remote: remotes.find(({ name }) => name === value)?.pulp_href,
-              })
-            }
-            placeholderText={t`Select a remote`}
-            results={remotes}
-            selections={
-              selectedRemote
-                ? [{ name: selectedRemote.name, id: selectedRemote.pulp_href }]
-                : []
-            }
-          />
-        ) : null}
-        {remotesError ? (
-          <span
-            style={{
-              color: 'var(--pf-global--danger-color--200)',
+      {formGroup(
+        'labels',
+        t`Labels`,
+        labelsHelp,
+        <>
+          <div
+            // prevents "N more" clicks from submitting the form
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
             }}
           >
-            {t`Failed to load remotes: ${remotesError}`}
-          </span>
-        ) : null}
-        {!remotes && !remotesError ? <Spinner size='sm' /> : null}
-      </FormGroup>
+            <PulpLabels labels={repository.pulp_labels} />
+          </div>
+          <div style={{ marginTop: '12px' }}>
+            <Checkbox
+              isChecked={hideFromSearch}
+              isDisabled={disableHideFromSearch}
+              label={t`Hide from search`}
+              id='hide_from_search'
+              onChange={(value) => setHideFromSearch(value)}
+            />
+            <Checkbox
+              isChecked={isPrivate}
+              label={t`Make private`}
+              id='is_private'
+              onChange={(value) => setIsPrivate(value)}
+            />
+          </div>
+        </>,
+      )}
+
+      {formGroup(
+        'remote',
+        t`Remote`,
+        t`Setting a remote allows a repository to sync from elsewhere.`,
+        <>
+          {remotes ? (
+            <APISearchTypeAhead
+              loadResults={loadRemotes}
+              onClear={() => updateRepository({ ...repository, remote: null })}
+              onSelect={(_event, value) =>
+                updateRepository({
+                  ...repository,
+                  remote: remotes.find(({ name }) => name === value)?.pulp_href,
+                })
+              }
+              placeholderText={t`Select a remote`}
+              results={remotes}
+              selections={
+                selectedRemote
+                  ? [
+                      {
+                        name: selectedRemote.name,
+                        id: selectedRemote.pulp_href,
+                      },
+                    ]
+                  : []
+              }
+            />
+          ) : null}
+          {remotesError ? (
+            <span
+              style={{
+                color: 'var(--pf-global--danger-color--200)',
+              }}
+            >
+              {t`Failed to load remotes: ${remotesError}`}
+            </span>
+          ) : null}
+          {!remotes && !remotesError ? <Spinner size='sm' /> : null}
+        </>,
+      )}
 
       {errorMessages['__nofield'] ? (
         <span
