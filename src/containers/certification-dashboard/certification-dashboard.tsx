@@ -84,7 +84,7 @@ interface IState {
   approveModalInfo: {
     collectionVersion: CollectionVersion;
   };
-  repositoryList: Repository[];
+  approvedRepositoryList: Repository[];
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -120,7 +120,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
       approveModalInfo: null,
-      repositoryList: [],
+      approvedRepositoryList: [],
     };
   }
 
@@ -140,7 +140,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       promises.push(
         Repositories.listApproved()
           .then((data) => {
-            this.setState({ repositoryList: data.data.results });
+            this.setState({ approvedRepositoryList: data.data.results });
           })
           .catch(({ response: { status, statusText } }) => {
             this.addAlertObj({
@@ -290,7 +290,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   this.state.approveModalInfo.collectionVersion
                 }
                 addAlert={(alert) => this.addAlertObj(alert)}
-                allRepositories={this.state.repositoryList}
+                allRepositories={this.state.approvedRepositoryList}
               />
             )}
           </Main>
@@ -632,7 +632,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return false;
     }
 
-    return this.state.repositoryList.find(
+    return this.state.approvedRepositoryList.find(
       (r) => r.name == collection.repository.name,
     );
   }
@@ -648,21 +648,14 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return;
     }
 
-    const { name, namespace, version } = collection.collection_version;
+    const { approvedRepositoryList } = this.state;
 
-    const collections = this.state.versions.filter(
-      ({ collection_version: cv }) =>
-        cv.namespace === namespace &&
-        cv.name === name &&
-        cv.version === version,
-    );
-
-    if (collections.length == 1) {
+    if (approvedRepositoryList.length == 1) {
       if (collection.repository) {
         this.updateCertification(
           collection.collection_version,
           collection.repository.name,
-          this.state.repositoryList[0].name,
+          this.state.approvedRepositoryList[0].name,
         );
       } else {
         // I hope that this may not occure ever, but to be sure...
