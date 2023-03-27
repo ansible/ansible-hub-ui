@@ -31,6 +31,22 @@ export const CollectionFilter = (props: IProps) => {
   const [repositories, setRepositories] = useState([]);
   const [inputText, setInputText] = useState('');
 
+  const loadRepos = () => {
+    Repositories.list({
+      name__icontains: inputText,
+    }).then((res) => {
+      const repos = res.data.results.map(({ name }) => ({
+        id: name,
+        title: name,
+      }));
+      setRepositories(repos);
+    });
+  };
+
+  useEffect(() => {
+    loadRepos();
+  }, []);
+
   useEffect(() => {
     setInputText(props.params['keywords'] || '');
   }, [props.params.keywords]);
@@ -41,15 +57,7 @@ export const CollectionFilter = (props: IProps) => {
 
   useEffect(() => {
     if (inputText != '') {
-      Repositories.list({
-        name__icontains: inputText,
-      }).then((res) => {
-        const repos = res.data.results.map(({ name }) => ({
-          id: name,
-          title: name,
-        }));
-        setRepositories(repos);
-      });
+      loadRepos();
     }
   }, [inputText]);
 

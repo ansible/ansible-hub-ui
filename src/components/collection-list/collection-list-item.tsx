@@ -4,6 +4,7 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
+  Label,
   LabelGroup,
   Text,
   TextContent,
@@ -93,14 +94,6 @@ export const CollectionListItem = ({
               <Trans>
                 Provided by&nbsp;
                 <Link
-                  to={formatPath(Paths.ansibleRepositoryDetail, {
-                    name: repository.name,
-                  })}
-                >
-                  {repository.name}
-                </Link>
-                /
-                <Link
                   to={formatPath(Paths.namespaceDetail, {
                     namespace: namespace.name,
                   })}
@@ -112,7 +105,6 @@ export const CollectionListItem = ({
           </TextContent>
         ) : null}
       </div>
-      <div className='hub-entry'>{collection_version.description}</div>
       <div className='hub-entry pf-l-flex pf-m-wrap'>
         {Object.keys(contentSummary.contents).map((type) => (
           <div key={type}>
@@ -142,9 +134,19 @@ export const CollectionListItem = ({
         </Trans>
       </div>
       <div className='hub-entry'>v{collection_version.version}</div>
+      <Label variant='outline' className='hub-repository-badge'>
+        <Link
+          to={formatPath(Paths.ansibleRepositoryDetail, {
+            name: repository.name,
+          })}
+        >
+          {repository.name}
+        </Link>
+      </Label>
       {displaySignatures ? (
         <SignatureBadge
           className='hub-entry'
+          variant='outline'
           signState={is_signed ? 'signed' : 'unsigned'}
         />
       ) : null}

@@ -88,44 +88,55 @@ export const CollectionInfo = ({
                   only supported in ansible 2.9+
                 </Trans>
               </div>
-              {context.user.is_anonymous &&
-              !context.settings
-                .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
-                <Alert
-                  className={'hub-collection-download-alert'}
-                  isInline
-                  variant='warning'
-                  title={
-                    <React.Fragment>
-                      {t`You have to be logged in to be able to download the tarball.`}{' '}
-                      <LoginLink />
-                    </React.Fragment>
-                  }
-                />
-              ) : (
-                <div>
-                  <a ref={downloadLinkRef} style={{ display: 'none' }}></a>
-                  <Button
-                    className='download-button'
-                    variant='link'
-                    data-cy='download-collection-tarball-button'
-                    icon={<DownloadIcon />}
-                    onClick={() =>
-                      download(
-                        repository,
-                        collection_version.namespace,
-                        collection_version.name,
-                        collection_version.version,
-                        downloadLinkRef,
-                        addAlert,
-                      )
-                    }
-                  >
-                    {t`Download tarball`}
-                  </Button>
-                </div>
-              )}
             </SplitItem>
+          </Split>
+        </GridItem>
+        <GridItem>
+          <Split hasGutter={true}>
+            <SplitItem className='install-title'>{t`Download`}</SplitItem>
+            {context.user.is_anonymous &&
+            !context.settings
+              .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
+              <Alert
+                className={'hub-collection-download-alert'}
+                isInline
+                variant='warning'
+                title={
+                  <React.Fragment>
+                    {t`You have to be logged in to be able to download the tarball.`}{' '}
+                    <LoginLink />
+                  </React.Fragment>
+                }
+              />
+            ) : (
+              <SplitItem isFilled>
+                <div>
+                  <Trans>
+                    To download this collection, configure your client to
+                    connect to one of this repositories distributions.
+                  </Trans>
+                </div>
+                <a ref={downloadLinkRef} style={{ display: 'none' }}></a>
+                <Button
+                  className='download-button'
+                  variant='link'
+                  data-cy='download-collection-tarball-button'
+                  icon={<DownloadIcon />}
+                  onClick={() =>
+                    download(
+                      repository,
+                      collection_version.namespace,
+                      collection_version.name,
+                      collection_version.version,
+                      downloadLinkRef,
+                      addAlert,
+                    )
+                  }
+                >
+                  {t`Download tarball`}
+                </Button>
+              </SplitItem>
+            )}
           </Split>
         </GridItem>
         <DownloadSignatureGridItem

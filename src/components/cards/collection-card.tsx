@@ -64,13 +64,29 @@ export const CollectionCard = ({
           unlockWidth
           flexGrow
         />
-        <TextContent>{getCertification(repository.name)}</TextContent>
-        {displaySignatures ? (
-          <SignatureBadge
-            isCompact
-            signState={is_signed ? 'signed' : 'unsigned'}
-          />
-        ) : null}
+        <div className='card-badge-area'>
+          <TextContent>
+            <Text component={TextVariants.small}>
+              <Badge isRead>
+                <Link
+                  to={formatPath(Paths.ansibleRepositoryDetail, {
+                    name: repository.name,
+                  })}
+                >
+                  {repository.name === Constants.CERTIFIED_REPO
+                    ? t`Certified`
+                    : repository.name}
+                </Link>
+              </Badge>
+            </Text>
+          </TextContent>
+          {displaySignatures ? (
+            <SignatureBadge
+              isCompact
+              signState={is_signed ? 'signed' : 'unsigned'}
+            />
+          ) : null}
+        </div>
         {menu}
       </CardHeader>
       <CardHeader>
@@ -90,14 +106,6 @@ export const CollectionCard = ({
             <Text component={TextVariants.small}>
               <Trans>
                 Provided by&nbsp;
-                <Link
-                  to={formatPath(Paths.ansibleRepositoryDetail, {
-                    name: repository.name,
-                  })}
-                >
-                  {repository.name}
-                </Link>
-                /
                 <Link
                   to={formatPath(Paths.namespaceDetail, {
                     namespace: namespace.name,
@@ -129,18 +137,6 @@ export const CollectionCard = ({
     </Card>
   );
 };
-
-function getCertification(repo) {
-  if (repo === Constants.CERTIFIED_REPO) {
-    return (
-      <Text component={TextVariants.small}>
-        <Badge isRead>{t`Certified`}</Badge>
-      </Text>
-    );
-  }
-
-  return null;
-}
 
 function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
   if (!d) {
