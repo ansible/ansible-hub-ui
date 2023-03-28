@@ -5,7 +5,6 @@ import axios from 'axios';
 import * as React from 'react';
 import {
   CollectionAPI,
-  CollectionListType,
   CollectionUploadType,
   CollectionVersionSearch,
 } from 'src/api';

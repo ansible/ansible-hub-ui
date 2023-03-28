@@ -258,7 +258,7 @@ const CollectionDistributions = (props: RouteProps) => {
               setInputText('');
             }}
             params={params}
-            ignoredParams={['page_size', 'page', 'sort']}
+            ignoredParams={['page_size', 'page', 'sort', 'version']}
             niceNames={{
               base_path__icontains: t`Base path`,
               name__icontains: t`Name`,
