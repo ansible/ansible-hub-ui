@@ -1,7 +1,3 @@
-import { t } from '@lingui/macro';
-import { waitForTaskUrl } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
-import { CollectionVersionAPI } from './collection-version';
 import { PulpAPI } from './pulp';
 import { Repository } from './response-types/repositories';
 

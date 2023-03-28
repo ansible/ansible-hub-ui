@@ -366,7 +366,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           id: 'pulp_created',
         },
         {
-          title: t`Repositories`,
+          title: t`Repository`,
           type: 'none',
           id: '',
         },
