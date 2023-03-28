@@ -11,7 +11,7 @@ import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { isLoggedIn } from 'src/permissions';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
-import { AccessTab } from './tab-access';
+import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';
 import { RepositoryVersionsTab } from './tab-repository-versions';
@@ -20,17 +20,18 @@ const wip = '🚧 ';
 
 const tabs = [
   { id: 'details', name: t`Details` },
-  { id: 'access', name: wip + t`Access` },
+  { id: 'access', name: t`Access` },
   { id: 'collection-versions', name: wip + t`Collection versions` },
   { id: 'repository-versions', name: t`Versions` },
 ];
 
 export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
-  breadcrumbs: ({ name, tab, params: { repositoryVersion } }) =>
+  breadcrumbs: ({ name, tab, params: { repositoryVersion, group } }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
       { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-      tab.id === 'repository-versions' && repositoryVersion
+      (tab.id === 'repository-versions' && repositoryVersion) ||
+      (tab.id === 'access' && group)
         ? {
             url: formatPath(
               Paths.ansibleRepositoryDetail,
@@ -42,6 +43,8 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
         : null,
       tab.id === 'repository-versions' && repositoryVersion
         ? { name: t`Version ${repositoryVersion}` }
+        : tab.id === 'access' && group
+        ? { name: t`Group ${group}` }
         : { name: tab.name },
     ].filter(Boolean),
   condition: isLoggedIn,
@@ -70,7 +73,7 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   renderTab: (tab, item, actionContext) =>
     ({
       details: <DetailsTab item={item} actionContext={actionContext} />,
-      access: <AccessTab item={item} actionContext={actionContext} />,
+      access: <RepositoryAccessTab item={item} actionContext={actionContext} />,
       'collection-versions': (
         <CollectionVersionsTab item={item} actionContext={actionContext} />
       ),
@@ -81,6 +84,7 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   tabs,
   tabUpdateParams: (p) => {
     delete p.repositoryVersion;
+    delete p.group;
     return p;
   },
 });
