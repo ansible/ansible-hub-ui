@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { Repositories } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
@@ -20,28 +21,68 @@ interface IProps {
     page_size?: number;
     tags?: string[];
     view_type?: string;
+    repository__name?: string;
   };
   updateParams: (p) => void;
 }
 
 export const CollectionFilter = (props: IProps) => {
   const context = useContext();
-  const [inputText, setInputText] = useState(props.params.keywords || '');
+  const [repositories, setRepositories] = useState([]);
+  const [inputText, setInputText] = useState('');
+
+  const loadRepos = () => {
+    Repositories.list({
+      name__icontains: inputText,
+    }).then((res) => {
+      const repos = res.data.results.map(({ name }) => ({
+        id: name,
+        title: name,
+      }));
+      setRepositories(repos);
+    });
+  };
+
+  useEffect(() => {
+    loadRepos();
+  }, []);
 
   useEffect(() => {
     setInputText(props.params['keywords'] || '');
   }, [props.params.keywords]);
 
+  useEffect(() => {
+    setInputText(props.params['repository__name'] || '');
+  }, [props.params.repository__name]);
+
+  useEffect(() => {
+    if (inputText != '') {
+      loadRepos();
+    }
+  }, [inputText]);
+
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures } = context.featureFlags;
-  const display_tags = ignoredParams.includes('tags') === false;
+  const displayTags = ignoredParams.includes('tags') === false;
+  const displayRepos = ignoredParams.includes('repository__name') === false;
+  const displayNamespaces = ignoredParams.includes('namespace') === false;
 
   const filterConfig = [
     {
       id: 'keywords',
       title: t`Keywords`,
     },
-    display_tags && {
+    displayRepos && {
+      id: 'repository__name',
+      title: t`Repository`,
+      inputType: 'typeahead' as const,
+      options: repositories,
+    },
+    displayNamespaces && {
+      id: 'namespace',
+      title: t`Namespace`,
+    },
+    displayTags && {
       id: 'tags',
       title: t`Tag`,
       inputType: 'multiple' as const,
@@ -51,12 +92,12 @@ export const CollectionFilter = (props: IProps) => {
       })),
     },
     display_signatures && {
-      id: 'sign_state',
+      id: 'is_signed',
       title: t`Sign state`,
       inputType: 'select' as const,
       options: [
-        { id: 'signed', title: t`Signed` },
-        { id: 'unsigned', title: t`Unsigned` },
+        { id: 'true', title: t`Signed` },
+        { id: 'false', title: t`Unsigned` },
       ],
     },
   ].filter(Boolean);
@@ -76,9 +117,17 @@ export const CollectionFilter = (props: IProps) => {
             <ToolbarItem>
               <AppliedFilters
                 niceNames={{
-                  sign_state: t`sign state`,
+                  is_signed: t`sign state`,
                   tags: t`tags`,
                   keywords: t`keywords`,
+                  repository__name: t`repository`,
+                  namespace: t`namespace`,
+                }}
+                niceValues={{
+                  is_signed: {
+                    false: t`unsigned`,
+                    true: t`signed`,
+                  },
                 }}
                 style={{ marginTop: '16px' }}
                 updateParams={updateParams}

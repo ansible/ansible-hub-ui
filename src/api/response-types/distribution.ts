@@ -10,3 +10,15 @@ export class DistributionType {
     content_count: number;
   };
 }
+
+export class PulpAnsibleDistributionType {
+  base_path: string;
+  client_url: string;
+  content_guard: string;
+  name: string;
+  pulp_created: string;
+  pulp_href: string;
+  pulp_labels: object;
+  repository: string;
+  repository_version: string;
+}

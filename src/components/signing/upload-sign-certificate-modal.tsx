@@ -55,7 +55,7 @@ export const UploadSingCertificateModal: React.FC<Props> = ({
       <FileUpload
         id='certificate-file'
         filename={filename}
-        filenamePlaceholder={t`Drag and drop a file or upload one'`}
+        filenamePlaceholder={t`Drag and drop a file or upload one.`}
         browseButtonText={t`Select file`}
         onFileInputChange={handleFileInputChange}
         onClearClick={() => setFilename('')}

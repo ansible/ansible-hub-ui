@@ -21,9 +21,7 @@ interface IProps {
   setOpen: (isOpen, warnings?) => void;
   onUploadSuccess: (result) => void;
 
-  collection?:
-    | CollectionVersionSearch['collection_version']
-    | CollectionListType;
+  collection?: CollectionVersionSearch['collection_version'];
   namespace: string;
 }
 

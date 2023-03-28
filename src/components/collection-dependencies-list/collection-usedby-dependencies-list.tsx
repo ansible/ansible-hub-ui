@@ -22,12 +22,10 @@ import { ParamHelper, filterIsSet } from 'src/utilities';
 interface IProps {
   usedByDependencies: CollectionUsedByDependencies[];
   usedByDependenciesLoading: boolean;
-  repo: string;
   itemCount: number;
   params: {
     page?: number;
     page_size?: number;
-    collection?: string;
     sort?: string;
     version?: string;
     name__icontains?: string;

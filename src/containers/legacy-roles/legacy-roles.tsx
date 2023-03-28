@@ -98,6 +98,7 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
     const ignoredParams = [
       'order_by',
       'namespace',
+      'repository__name',
       'page',
       'page_size',
       'sort',

@@ -1,13 +1,17 @@
 import { Trans, t } from '@lingui/macro';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
 import React from 'react';
-import { CollectionAPI } from 'src/api';
+import {
+  CollectionAPI,
+  CollectionVersionAPI,
+  CollectionVersionSearch,
+} from 'src/api';
 import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 export class DeleteCollectionUtils {
-  public static getUsedbyDependencies(collection) {
-    const { name, namespace } = collection;
-    return CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
+  public static getUsedbyDependencies(collection: CollectionVersionSearch) {
+    const { name, namespace } = collection.collection_version;
+    return CollectionVersionAPI.getUsedDependenciesByCollection(namespace, name)
       .then(({ data }) => data.data.length === 0)
       .catch((err) => {
         const { status, statusText } = err.response;
@@ -109,13 +113,12 @@ export class DeleteCollectionUtils {
     setState,
     load,
     redirect,
-    selectedRepo,
     addAlert,
   }) {
-    CollectionAPI.deleteCollection(selectedRepo, collection)
+    CollectionAPI.deleteCollection(collection)
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
-        const name = collection.name;
+        const name = collection.collection_version.name;
 
         waitForTask(taskId).then(() => {
           addAlert({
@@ -142,7 +145,7 @@ export class DeleteCollectionUtils {
 
         addAlert({
           variant: 'danger',
-          title: t`Collection "${name}" could not be deleted.`,
+          title: t`Collection "${collection.collection_version.name}" could not be deleted.`,
           description: errorMessage(status, statusText),
         });
       })

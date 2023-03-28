@@ -2,13 +2,13 @@ import { t } from '@lingui/macro';
 import { List, ListItem, ListVariant } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionDetailType, CollectionVersion } from 'src/api';
+import { CollectionVersion, CollectionVersionSearch } from 'src/api';
 import { EmptyStateNoData, HelperText } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
-  collection: CollectionDetailType;
-  dependencies_repos: (CollectionVersion & {
+  collection: CollectionVersionSearch;
+  dependencies_repos?: (CollectionVersion & {
     path?: string;
   })[];
 }
@@ -17,7 +17,7 @@ export const CollectionDependenciesList = ({
   collection,
   dependencies_repos,
 }: IProps) => {
-  const { dependencies } = collection.latest_version.metadata;
+  const { dependencies } = collection.collection_version;
 
   if (!Object.keys(dependencies).length) {
     return (
