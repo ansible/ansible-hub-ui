@@ -12,14 +12,14 @@ import {
 } from '@patternfly/react-core';
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 import * as React from 'react';
-import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
+import { StatefulDropdown } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
 export class FilterOption {
   id: string;
   title: string;
   placeholder?: string;
-  inputType?: 'text-field' | 'select' | 'multiple' | 'typeahead';
+  inputType?: 'text-field' | 'select' | 'multiple';
   options?: { id: string; title: string }[];
 }
 
@@ -162,30 +162,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             ))}
           />
         );
-      case 'typeahead': {
-        const typeAheadResults = this.props.filterConfig
-          .find(({ id }) => id === selectedFilter.id)
-          .options.map(({ id, title }) => ({ id, name: title }));
-        return (
-          <APISearchTypeAhead
-            multiple={false}
-            loadResults={(name) => {
-              this.props.onChange(name);
-            }}
-            onClear={() => {
-              this.props.onChange('');
-            }}
-            onSelect={(event, value) => {
-              this.submitFilter(value);
-            }}
-            placeholderText={
-              selectedFilter?.placeholder ||
-              t`Filter by ${selectedFilter.title.toLowerCase()}`
-            }
-            results={typeAheadResults}
-          />
-        );
-      }
       default:
         return (
           <TextInput

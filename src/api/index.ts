@@ -13,7 +13,6 @@ export {
   CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionSearch,
-  CollectionVersionContentType,
   ContentSummaryType,
   DocsBlobType,
   PluginContentType,
