@@ -20,7 +20,6 @@ import { Link } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
-  CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
@@ -410,7 +409,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private renderStatus(collectionData: CollectionVersionSearch) {
-    const { collection_version: version, repository } = collectionData;
+    const { repository } = collectionData;
     const repoStatus = repository.pulp_labels?.pipeline;
 
     if (this.isVersionUpdating(collectionData)) {
@@ -904,7 +903,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   async transformToCollectionVersion(collection: CollectionVersionSearch) {
     const repoList = await this.getCollectionRepoList(collection);
 
-    const { collection_version, is_signed } = collection;
+    const { collection_version } = collection;
     const id = parsePulpIDFromURL(collection_version.pulp_href);
     const collectionVersion = {
       id,

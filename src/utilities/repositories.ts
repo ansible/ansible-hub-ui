@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import { CollectionVersionAPI } from 'src/api/collection-version';
 import { Repositories } from 'src/api/repositories';
 import { Repository } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';

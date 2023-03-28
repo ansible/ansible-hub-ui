@@ -278,7 +278,7 @@ export const ApproveModal = (props: IProps) => {
     }
 
     function selectPage() {
-      let newRepos = [...selectedRepos];
+      const newRepos = [...selectedRepos];
 
       repositoryList.forEach((repo) => {
         if (!selectedRepos.includes(repo.name)) {
