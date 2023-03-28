@@ -7,6 +7,7 @@ import {
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
+  PulpAPI,
 } from 'src/api';
 import {
   DateComponent,
@@ -21,6 +22,81 @@ interface TabProps {
   item: AnsibleRepositoryType;
   actionContext: { addAlert: (alert) => void; state: { params } };
 }
+
+const AnyAPI = (href) =>
+  new (class extends PulpAPI {
+    useOrdering = true;
+    apiPath = href.replace(PULP_API_BASE_PATH, '');
+  })();
+
+const VersionContent = ({
+  href,
+  addAlert,
+}: {
+  href: string;
+  addAlert: (alert) => void;
+}) => {
+  const [state, setState] = useState({});
+  const API = AnyAPI(href);
+  const query = ({ params }) => API.list(params);
+  const renderTableRow = ({
+    manifest: {
+      collection_info: { namespace, name, version },
+    },
+    description,
+  }) => (
+    <tr>
+      <td>
+        <Link
+          to={formatPath(
+            Paths.collection,
+            {
+              namespace,
+              collection: name,
+            },
+            {
+              version,
+            },
+          )}
+        >
+          {namespace}.{name} v{version}
+        </Link>
+      </td>
+      <td>{description}</td>
+    </tr>
+  );
+
+  return (
+    <DetailList<{ manifest; description; pulp_href }>
+      actionContext={{
+        addAlert,
+        state,
+        setState,
+        query,
+      }}
+      defaultPageSize={10}
+      defaultSort={'name'}
+      errorTitle={t`Collection versions could not be displayed.`}
+      noDataDescription={t`No collection versions in this repository version.`}
+      noDataTitle={t`No collection versions yet`}
+      query={query}
+      renderTableRow={renderTableRow}
+      sortHeaders={[
+        {
+          title: t`Collection`,
+          type: 'none',
+          id: 'col1',
+        },
+        {
+          title: t`Description`,
+          type: 'none',
+          id: 'col2',
+        },
+      ]}
+      title={t`Collection versions`}
+    />
+  );
+};
 
 const ContentSummary = ({ data }: { data: object }) => {
   if (!Object.keys(data).length) {
@@ -148,36 +224,45 @@ export const RepositoryVersionsTab = ({
 
   return state.params.repositoryVersion ? (
     version ? (
-      <Details
-        fields={[
-          { label: t`Version number`, value: version.number },
-          {
-            label: t`Created date`,
-            value: <DateComponent date={version.pulp_created} />,
-          },
-          {
-            label: t`Content added`,
-            value: <ContentSummary data={version.content_summary?.added} />,
-          },
-          {
-            label: t`Content removed`,
-            value: <ContentSummary data={version.content_summary?.removed} />,
-          },
-          {
-            label: t`Current content`,
-            value: <ContentSummary data={version.content_summary?.present} />,
-          },
-          {
-            label: t`Base version`,
-            value: (
-              <BaseVersion
-                repositoryName={repositoryName}
-                data={version.base_version}
-              />
-            ),
-          },
-        ]}
-      />
+      <>
+        <Details
+          fields={[
+            { label: t`Version number`, value: version.number },
+            {
+              label: t`Created date`,
+              value: <DateComponent date={version.pulp_created} />,
+            },
+            {
+              label: t`Content added`,
+              value: <ContentSummary data={version.content_summary?.added} />,
+            },
+            {
+              label: t`Content removed`,
+              value: <ContentSummary data={version.content_summary?.removed} />,
+            },
+            {
+              label: t`Current content`,
+              value: <ContentSummary data={version.content_summary?.present} />,
+            },
+            {
+              label: t`Base version`,
+              value: (
+                <BaseVersion
+                  repositoryName={repositoryName}
+                  data={version.base_version}
+                />
+              ),
+            },
+          ]}
+        />
+        <div
+          className='pf-c-page__main-section'
+          style={{ padding: '8px 0', margin: '24px -16px 0' }}
+        />
+        <VersionContent
+          {...version.content_summary.present['ansible.collection_version']}
+        />
+      </>
     ) : (
       <Spinner size='md' />
     )
