@@ -64,7 +64,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { filterConfig } = this.props;
+    const { filterConfig, selectFilter } = this.props;
     const { selectedFilter } = this.state;
 
     if (filterConfig.length === 0) {
@@ -76,7 +76,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         onClick={() => {
           this.props.onChange('');
           this.setState({ selectedFilter: v });
-          this.props.selectFilter(v.id);
+          selectFilter && selectFilter(v.id);
         }}
         key={v.id}
       >
