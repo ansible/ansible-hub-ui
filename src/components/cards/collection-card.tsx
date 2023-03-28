@@ -38,7 +38,7 @@ export const CollectionCard = ({
 }: IProps) => {
   const MAX_DESCRIPTION_LENGTH = 60;
 
-  const company = namespace.company || namespace.name;
+  const company = namespace?.company || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
@@ -47,7 +47,7 @@ export const CollectionCard = ({
         <Logo
           alt={t`${company} logo`}
           fallbackToDefault
-          image={namespace.avatar_url}
+          image={namespace?.avatar_url}
           size='40px'
           unlockWidth
           flexGrow
@@ -82,7 +82,7 @@ export const CollectionCard = ({
           <Link
             to={formatPath(Paths.collectionByRepo, {
               collection: collection_version.name,
-              namespace: namespace.name,
+              namespace: collection_version.namespace,
               repo: repository.name,
             })}
           >
@@ -96,7 +96,7 @@ export const CollectionCard = ({
                 Provided by&nbsp;
                 <Link
                   to={formatPath(Paths.namespaceDetail, {
-                    namespace: namespace.name,
+                    namespace: collection_version.namespace,
                   })}
                 >
                   {company}

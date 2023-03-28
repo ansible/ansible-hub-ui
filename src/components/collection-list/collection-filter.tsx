@@ -21,7 +21,7 @@ interface IProps {
     page_size?: number;
     tags?: string[];
     view_type?: string;
-    repository__name?: string;
+    repository_name?: string;
   };
   updateParams: (p) => void;
 }
@@ -30,6 +30,7 @@ export const CollectionFilter = (props: IProps) => {
   const context = useContext();
   const [repositories, setRepositories] = useState([]);
   const [inputText, setInputText] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   const loadRepos = () => {
     Repositories.list({
@@ -52,11 +53,11 @@ export const CollectionFilter = (props: IProps) => {
   }, [props.params.keywords]);
 
   useEffect(() => {
-    setInputText(props.params['repository__name'] || '');
-  }, [props.params.repository__name]);
+    setInputText(props.params['repository_name'] || '');
+  }, [props.params.repository_name]);
 
   useEffect(() => {
-    if (inputText != '') {
+    if (inputText != '' && selectedFilter === 'repository_name') {
       loadRepos();
     }
   }, [inputText]);
@@ -64,7 +65,7 @@ export const CollectionFilter = (props: IProps) => {
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures } = context.featureFlags;
   const displayTags = ignoredParams.includes('tags') === false;
-  const displayRepos = ignoredParams.includes('repository__name') === false;
+  const displayRepos = ignoredParams.includes('repository_name') === false;
   const displayNamespaces = ignoredParams.includes('namespace') === false;
 
   const filterConfig = [
@@ -73,7 +74,7 @@ export const CollectionFilter = (props: IProps) => {
       title: t`Keywords`,
     },
     displayRepos && {
-      id: 'repository__name',
+      id: 'repository_name',
       title: t`Repository`,
       inputType: 'typeahead' as const,
       options: repositories,
@@ -113,6 +114,9 @@ export const CollectionFilter = (props: IProps) => {
               updateParams={updateParams}
               params={params}
               filterConfig={filterConfig}
+              selectFilter={(selected) => {
+                setSelectedFilter(selected);
+              }}
             />
             <ToolbarItem>
               <AppliedFilters
@@ -120,7 +124,7 @@ export const CollectionFilter = (props: IProps) => {
                   is_signed: t`sign state`,
                   tags: t`tags`,
                   keywords: t`keywords`,
-                  repository__name: t`repository`,
+                  repository_name: t`repository`,
                   namespace: t`namespace`,
                 }}
                 niceValues={{

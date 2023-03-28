@@ -43,7 +43,7 @@ export const CollectionListItem = ({
 }: IProps) => {
   const cells = [];
 
-  const company = namespace.company || namespace.name;
+  const company = namespace?.company || collection_version.namespace;
 
   if (showNamespace) {
     cells.push(
@@ -51,7 +51,7 @@ export const CollectionListItem = ({
         <Logo
           alt={t`${company} logo`}
           fallbackToDefault
-          image={namespace.avatar_url}
+          image={namespace?.avatar_url}
           size='40px'
           unlockWidth
           width='97px'
@@ -68,7 +68,7 @@ export const CollectionListItem = ({
         <Link
           to={formatPath(Paths.collectionByRepo, {
             collection: collection_version.name,
-            namespace: namespace.name,
+            namespace: collection_version.namespace,
             repo: repository.name,
           })}
           data-cy='CollectionList-name'
@@ -83,7 +83,7 @@ export const CollectionListItem = ({
                 Provided by&nbsp;
                 <Link
                   to={formatPath(Paths.namespaceDetail, {
-                    namespace: namespace.name,
+                    namespace: collection_version.namespace,
                   })}
                 >
                   {company}

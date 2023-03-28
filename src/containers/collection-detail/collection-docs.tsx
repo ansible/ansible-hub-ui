@@ -102,7 +102,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         url: formatPath(Paths.namespaceDetail, {
           namespace: collection_version.namespace,
         }),
-        name: collection.collection_version.namespace,
+        name: collection_version.namespace,
       },
       {
         url: formatPath(Paths.collectionByRepo, {
@@ -145,6 +145,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
               className='sidebar'
               namespace={collection.collection_version.namespace}
               collection={collection.collection_version.name}
+              repository={collection.repository.name}
               docs_blob={content.docs_blob}
               selectedName={contentName}
               selectedType={contentType}
@@ -250,8 +251,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           to={formatPath(
             Paths.collectionContentDocsByRepo,
             {
-              namespace: collection.namespace.name,
-              collection: collection.name,
+              namespace: collection.collection_version.namespace,
+              collection: collection.collection_version.name,
               type: 'module',
               name: moduleName,
               repo: this.props.routeParams.repo,

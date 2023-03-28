@@ -11,7 +11,6 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
 import { EmptyStateCustom } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './collection-content-list.scss';
@@ -33,7 +32,6 @@ export const CollectionContentList = ({
   updateParams,
 }: IProps) => {
   const ignoredParams = ['keywords', 'showing'];
-  const context = useContext();
 
   const toShow: ContentSummaryType[] = [];
   const summary = { all: 0 };
@@ -134,7 +132,7 @@ export const CollectionContentList = ({
         </tbody>
       </table>
       {summary.all <= 0 &&
-        context.selectedRepo === 'community' &&
+        repository.name === 'community' &&
         renderCommunityWarningMessage()}
     </div>
   );

@@ -13,7 +13,6 @@ import { capitalize } from 'lodash';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DocsBlobType } from 'src/api';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 
@@ -36,6 +35,7 @@ interface IProps {
   docs_blob: DocsBlobType;
   namespace: string;
   collection: string;
+  repository: string;
   params: { keywords?: string };
   selectedName?: string;
   selectedType?: string;
@@ -47,13 +47,12 @@ interface IProps {
 export const TableOfContents = (props: IProps) => {
   const [docsBlob, setDocsBlob] = useState<DocsBlobType>(null);
   const [table, setTable] = useState<Table>(null);
-  const context = useContext();
 
   const collapsedCategories = [];
   const { className, docs_blob, updateParams, params } = props;
 
   if (!table || docsBlob !== docs_blob) {
-    setTable(parseLinks(docs_blob, props, context));
+    setTable(parseLinks(docs_blob, props));
     setDocsBlob(docs_blob);
   }
 
@@ -97,13 +96,13 @@ export const TableOfContents = (props: IProps) => {
   );
 };
 
-function parseLinks(docs_blob: DocsBlobType, props, context): Table {
+function parseLinks(docs_blob: DocsBlobType, props): Table {
   const { namespace, collection } = props;
 
   const baseUrlParams = {
     namespace: namespace,
     collection: collection,
-    repo: context.selectedRepo,
+    repo: props.repository,
   };
 
   const table = {

@@ -7,7 +7,7 @@ import {
   Split,
   SplitItem,
 } from '@patternfly/react-core';
-import { DownloadIcon, ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { DownloadIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -113,7 +113,7 @@ export const CollectionInfo = ({
                 <div>
                   <Trans>
                     To download this collection, configure your client to
-                    connect to one of this repositories distributions.{' '}
+                    connect to one of this repositories{' '}
                     <Link
                       to={formatPath(Paths.collectionDistributionsByRepo, {
                         repo: repository.name,
@@ -121,8 +121,9 @@ export const CollectionInfo = ({
                         collection: collection_version.name,
                       })}
                     >
-                      <ExternalLinkAltIcon />
+                      distributions
                     </Link>
+                    .
                   </Trans>
                 </div>
                 <a ref={downloadLinkRef} style={{ display: 'none' }}></a>

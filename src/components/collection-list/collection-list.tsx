@@ -47,6 +47,7 @@ export const CollectionList = (props: IProps) => {
               key={i}
               {...c}
               displaySignatures={displaySignatures}
+              showNamespace={true}
             />
           ))
         ) : (

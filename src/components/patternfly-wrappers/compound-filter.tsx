@@ -38,6 +38,8 @@ interface IProps {
   inputText: string;
 
   onChange: (inputText: string) => void;
+
+  selectFilter?: (filterId: string) => void;
 }
 
 interface IState {
@@ -74,6 +76,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         onClick={() => {
           this.props.onChange('');
           this.setState({ selectedFilter: v });
+          this.props.selectFilter(v.id);
         }}
         key={v.id}
       >

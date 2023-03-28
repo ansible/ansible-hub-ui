@@ -51,7 +51,7 @@ interface IState {
     keywords?: string;
     tags?: string[];
     view_type?: string;
-    repository__name?: string;
+    repository_name?: string;
     namespace?: string;
   };
   loading: boolean;
@@ -150,7 +150,7 @@ class Search extends React.Component<RouteProps, IState> {
         'keywords',
         'tags',
         'is_signed',
-        'repository__name',
+        'repository_name',
         'namespace',
       ]);
 
@@ -315,7 +315,7 @@ class Search extends React.Component<RouteProps, IState> {
               {...c}
               footer={this.renderSyncToogle(
                 c.collection_version.name,
-                c.collection_version.namespace.name,
+                c.collection_version.namespace,
               )}
               menu={this.renderMenu(false, c)}
               displaySignatures={this.context.featureFlags.display_signatures}
@@ -445,7 +445,7 @@ class Search extends React.Component<RouteProps, IState> {
       });
     };
 
-    MyNamespaceAPI.get(collection.namespace.name, {
+    MyNamespaceAPI.get(collection.collection_version.namespace, {
       include_related: 'my_permissions',
     })
       .then((value) => {
