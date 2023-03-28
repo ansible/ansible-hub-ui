@@ -21,14 +21,6 @@ class API extends PulpAPI {
     return this.http.get(`${this.apiPath}?name=${data.name}`);
   }
 
-  listApproved(): Promise<ReturnRepository> {
-    return this.http.get(
-      `${this.apiPath}?pulp_label_select=${encodeURIComponent(
-        'pipeline=approved',
-      )}`,
-    );
-  }
-
   list(params?) {
     return super.list(params, this.apiPath);
   }

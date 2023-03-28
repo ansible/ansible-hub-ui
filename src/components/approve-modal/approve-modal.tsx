@@ -1,6 +1,11 @@
 import { t } from '@lingui/macro';
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownToggle,
+  DropdownToggleCheckbox,
   Flex,
   FlexItem,
   Label,
@@ -22,8 +27,8 @@ import {
   CompoundFilter,
   Pagination,
   SortTable,
+  closeAlert,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import {
   errorMessage,
   parsePulpIDFromURL,
@@ -36,9 +41,12 @@ interface IProps {
   addAlert: (alert) => void;
   allRepositories: Repository[];
   finishAction: () => void;
+  stagingRepoNames: string[];
+  rejectedRepoName: string;
 }
 
 export const ApproveModal = (props: IProps) => {
+  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
   const [itemsCount, setItemsCount] = useState(0);
@@ -64,9 +72,19 @@ export const ApproveModal = (props: IProps) => {
 
     setLoading(true);
 
-    const originRepoName = props.collectionVersion.repository_list.find(
-      (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
+    let reapprove = false;
+
+    let originRepoName = props.collectionVersion.repository_list.find(
+      (repo) =>
+        props.stagingRepoNames.includes(repo) || repo == props.rejectedRepoName,
     );
+
+    // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
+    if (!originRepoName) {
+      reapprove = true;
+      originRepoName = fixedRepos[0];
+    }
+
     const reposToApprove = [];
 
     // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
@@ -89,11 +107,24 @@ export const ApproveModal = (props: IProps) => {
           const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
           CollectionVersionAPI.get(props.collectionVersion.id)
             .then((data) => {
-              Repositories.moveCollectionVersion(
-                pulp_id,
-                [data.data.pulp_href],
-                repositoriesRef,
-              )
+              let promiseCopyOrMove = null;
+
+              if (reapprove) {
+                // reapprove takes first
+                promiseCopyOrMove = Repositories.copyCollectionVersion(
+                  pulp_id,
+                  [data.data.pulp_href],
+                  repositoriesRef,
+                );
+              } else {
+                promiseCopyOrMove = Repositories.moveCollectionVersion(
+                  pulp_id,
+                  [data.data.pulp_href],
+                  repositoriesRef,
+                );
+              }
+
+              promiseCopyOrMove
                 .then((task) => {
                   return waitForTaskUrl(task['data'].task);
                 })
@@ -132,10 +163,6 @@ export const ApproveModal = (props: IProps) => {
 
   function addAlert(alert: AlertType) {
     setAlerts((prevAlerts) => [...prevAlerts, alert]);
-  }
-
-  function closeAlert() {
-    setAlerts([]);
   }
 
   function changeSelection(name) {
@@ -231,6 +258,92 @@ export const ApproveModal = (props: IProps) => {
     setFixedRepos(fixedReposLocal);
   }, []);
 
+  function renderMultipleSelector() {
+    function onToggle(isOpen: boolean) {
+      setIsSelectorOpen(isOpen);
+    }
+
+    function onFocus() {
+      const element = document.getElementById('toggle-split-button');
+      element.focus();
+    }
+
+    function onSelect() {
+      setIsSelectorOpen(false);
+      onFocus();
+    }
+
+    function selectAll() {
+      setSelectedRepos(props.allRepositories.map((a) => a.name));
+    }
+
+    function selectPage() {
+      let newRepos = [...selectedRepos];
+
+      repositoryList.forEach((repo) => {
+        if (!selectedRepos.includes(repo.name)) {
+          newRepos.push(repo.name);
+        }
+      });
+
+      setSelectedRepos(newRepos);
+    }
+
+    function deselectAll() {
+      setSelectedRepos(fixedRepos);
+    }
+
+    function deselectPage() {
+      const newSelectedRepos = selectedRepos.filter(
+        (repo) =>
+          fixedRepos.includes(repo) ||
+          !repositoryList.find((repo2) => repo2.name == repo),
+      );
+      setSelectedRepos(newSelectedRepos);
+    }
+
+    const dropdownItems = [
+      <DropdownItem
+        onClick={selectPage}
+        key='select-page'
+      >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={selectAll}
+        key='select-all'
+      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
+      <DropdownSeparator key='separator' />,
+      <DropdownItem
+        onClick={deselectPage}
+        key='deselect-page'
+      >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={deselectAll}
+        key='deselect-all'
+      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
+    ];
+
+    return (
+      <Dropdown
+        onSelect={onSelect}
+        toggle={
+          <DropdownToggle
+            splitButtonItems={[
+              <DropdownToggleCheckbox
+                id='split-button-toggle-checkbox'
+                key='split-checkbox'
+                aria-label='Select all'
+              />,
+            ]}
+            onToggle={onToggle}
+            id='toggle-split-button'
+          />
+        }
+        isOpen={isSelectorOpen}
+        dropdownItems={dropdownItems}
+      />
+    );
+  }
+
   function renderTable() {
     if (!props.collectionVersion) {
       return;
@@ -314,6 +427,7 @@ export const ApproveModal = (props: IProps) => {
           <div className='toolbar hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
+                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
                 <ToolbarItem>
                   <CompoundFilter
                     inputText={inputText}
@@ -365,7 +479,10 @@ export const ApproveModal = (props: IProps) => {
           </div>
         </section>
 
-        <AlertList alerts={alerts} closeAlert={() => closeAlert()} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+        />
       </Modal>
     </>
   );
