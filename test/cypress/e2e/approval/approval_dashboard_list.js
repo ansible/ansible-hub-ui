@@ -31,7 +31,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   function loadData() {
     // we cant delete all data using galaxykit right now, because when collection is rejected
     // it cant be deleted. So we must load the data, that are right now in the table
-    let intercept_url = `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100`;
+    let intercept_url = `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=100`;
 
     cy.visit(`${uiPrefix}approval-dashboard?page_size=100`);
     cy.intercept('GET', intercept_url).as('data');
@@ -40,7 +40,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.wait('@data').then((res) => {
       let data = res.response.body.data;
       data.forEach((record) => {
-        items.push({ name: record.name });
+        items.push({ name: record.collection_version.name });
       });
       items = sortBy(items, 'name');
     });
@@ -72,8 +72,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should sort alphabetically and paging is working.', () => {
-    cy.get('[data-cy="sort_collection"]').click();
-    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_name"]').click();
+    cy.get('[data-cy="sort_name"]').click();
 
     cy.get('[data-cy="body"]').contains(items[0].name);
 
@@ -84,7 +84,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should sort collection.', () => {
-    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
     cy.get('[data-cy="CertificationDashboard-row"]:first').contains(
@@ -108,8 +108,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       '[data-cy="body"] [data-cy="compound_filter"] a',
       'Collection Name',
     ).click();
-    cy.get('[data-cy="sort_collection"]').click();
-    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_name"]').click();
+    cy.get('[data-cy="sort_name"]').click();
 
     cy.get('[data-cy="body"] [data-cy="compound_filter"] input').type(
       'approval_dashboard_collection_test0{enter}',
@@ -139,8 +139,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       'approval_dashboard_namespace_test{enter}',
     );
 
-    cy.get('[data-cy="sort_collection"]').click();
-    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_name"]').click();
+    cy.get('[data-cy="sort_name"]').click();
 
     cy.get('[data-cy="body"]').contains('approval_dashboard_collection_test0');
     cy.get('[data-cy="body"]')
@@ -170,8 +170,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       .click();
     cy.get('[data-cy="body"]').contains('20 per page').click();
 
-    cy.get('[data-cy="sort_collection"]').click();
-    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_name"]').click();
+    cy.get('[data-cy="sort_name"]').click();
 
     range(11).forEach((i) => {
       cy.get('[data-cy="body"]').contains(items[i].name);

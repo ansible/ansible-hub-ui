@@ -7,6 +7,7 @@ import {
   CollectionAPI,
   CollectionListType,
   CollectionUploadType,
+  CollectionVersionSearch,
 } from 'src/api';
 import './import-modal.scss';
 
@@ -20,7 +21,9 @@ interface IProps {
   setOpen: (isOpen, warnings?) => void;
   onUploadSuccess: (result) => void;
 
-  collection?: CollectionListType;
+  collection?:
+    | CollectionVersionSearch['collection_version']
+    | CollectionListType;
   namespace: string;
 }
 

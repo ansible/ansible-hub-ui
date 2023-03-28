@@ -12,6 +12,7 @@ export {
   CollectionUploadType,
   CollectionUsedByDependencies,
   CollectionVersion,
+  CollectionVersionSearch,
   ContentSummaryType,
   DocsBlobType,
   PluginContentType,

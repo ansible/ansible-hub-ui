@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('collection-versions/');
+  apiPath = 'v3/plugin/ansible/search/collection-versions/';
 
   setRepository(
     namespace: string,

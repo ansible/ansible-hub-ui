@@ -17,7 +17,7 @@ describe('tests the approval list screen ', () => {
   it('rejects certification status and approves it again', () => {
     cy.intercept(
       'GET',
-      `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10`,
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
     cy.get('.pf-c-chip > button[aria-label="close"]').click();
     cy.wait('@reload');
@@ -42,7 +42,7 @@ describe('tests the approval list screen ', () => {
   it('view the imports logs', () => {
     cy.intercept(
       'GET',
-      `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10`,
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
     cy.get('.pf-c-chip > button[aria-label="close"]').click();
     cy.wait('@reload');
