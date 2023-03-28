@@ -301,7 +301,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
+      return filterIsSet(params, ['namespace', 'name', 'status']) ? (
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
