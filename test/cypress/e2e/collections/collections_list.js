@@ -2,7 +2,6 @@ import { range } from 'lodash';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const disableRepoSwitch = Cypress.env('disableRepoSwitch');
 const insightsLogin = Cypress.env('insightsLogin');
 
 describe('Collections list Tests', () => {
@@ -120,23 +119,6 @@ describe('Collections list Tests', () => {
 
     cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);
   });
-
-  if (!disableRepoSwitch) {
-    it('should switch repos when clicking on the dropdown', () => {
-      cy.get('button[aria-label="Options menu"]:first').click();
-      cy.get('button[name="rh-certified"]:first').click();
-      cy.get('.hub-cards .card').should('have.length', 0);
-
-      // Switch back (to have data again)
-      cy.get('button[aria-label="Options menu"]:first').click();
-      cy.get('button[name="published"]:first').click();
-      cy.get('.hub-cards .card').should('have.length', 10);
-
-      cy.get('button[aria-label="Options menu"]:first').click();
-      cy.get('button[name="community"]:first').click();
-      cy.get('.hub-cards .card').should('have.length', 0);
-    });
-  }
 
   it('Can delete collection in collection list', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
