@@ -86,12 +86,8 @@ describe('Collection Upload Tests', () => {
       ).as('upload');
       cy.galaxykit('-i namespace create', 'ansible');
       cy.menuGo('Collections > Namespaces');
-      cy.intercept('GET', `${apiPrefix}_ui/v1/repo/published/*`).as(
-        'namespaces',
-      );
 
       cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
-      cy.wait('@namespaces');
       cy.contains('Upload collection').should('not.exist');
     });
   }
@@ -104,10 +100,8 @@ describe('Collection Upload Tests', () => {
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.goToNamespaces();
-    cy.intercept('GET', `${apiPrefix}_ui/v1/repo/published/*`).as('namespaces');
 
     cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
-    cy.wait('@namespaces');
     cy.contains('Upload collection').click();
     cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)
@@ -123,6 +117,7 @@ describe('Collection Upload Tests', () => {
     cy.contains('My imports');
     cy.get('.pf-c-label__content').contains('Running').should('exist');
     cy.wait('@upload', { timeout: 10000 });
+    cy.wait(5000);
     cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
     cy.get('.pf-c-label__content').contains('Completed').should('exist');
   });

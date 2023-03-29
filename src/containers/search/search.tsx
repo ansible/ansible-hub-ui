@@ -377,12 +377,14 @@ class Search extends React.Component<RouteProps, IState> {
             collection,
           }),
       }),
-      <DropdownItem
-        onClick={() => this.handleControlClick(collection)}
-        key='deprecate'
-      >
-        {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-      </DropdownItem>,
+      hasPermission('galaxy.upload_to_namespace') && (
+        <DropdownItem
+          onClick={() => this.handleControlClick(collection)}
+          key='deprecate'
+        >
+          {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
+        </DropdownItem>
+      ),
     ];
 
     if (!list) {

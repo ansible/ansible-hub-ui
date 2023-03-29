@@ -254,9 +254,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign version ${version}`}
         </DropdownItem>
       ),
-      <DropdownItem onClick={() => this.deprecate(collection)} key='deprecate'>
-        {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-      </DropdownItem>,
+      hasPermission('galaxy.upload_to_namespace') && (
+        <DropdownItem
+          onClick={() => this.deprecate(collection)}
+          key='deprecate'
+        >
+          {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
+        </DropdownItem>
+      ),
       <DropdownItem
         key='upload-collection-version'
         onClick={() => this.checkUploadPrivilleges(collection)}

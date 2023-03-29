@@ -45,8 +45,10 @@ export const CollectionFilter = (props: IProps) => {
   };
 
   useEffect(() => {
-    loadRepos();
-  }, []);
+    if (selectedFilter === 'repository_name') {
+      loadRepos();
+    }
+  }, [selectedFilter]);
 
   useEffect(() => {
     setInputText(props.params['keywords'] || '');
