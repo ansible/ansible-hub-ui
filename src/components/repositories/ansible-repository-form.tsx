@@ -169,14 +169,17 @@ export const AnsibleRepositoryForm = ({
       Pipeline adds repository labels with pre-defined meanings:
       <ul>
         <li>
-          <b>None</b> - no special handling
+          <b>None</b> - users require permissions to modify content in this
+          repository to upload collection.
         </li>
         <li>
-          <b>Approved</b> - collections can be moved here on approval
+          <b>Approved</b> - collections can be moved here on approval.
+          Publishing directly to this repository is disabled.
         </li>
         <li>
-          <b>Staging</b> - collections uploaded here can be approved or rejected
-          in the UI
+          <b>Staging</b> - collections uploaded here require approval before
+          showing up on the search page. Anyone with upload permissions for a
+          namespace can upload collections to this repository.
         </li>
       </ul>
     </Trans>
@@ -217,7 +220,7 @@ export const AnsibleRepositoryForm = ({
       {formGroup(
         'distributions',
         t`Distributions`,
-        t`Some actions will not work without a distribution.`,
+        t`Content in repositories without a distribution will not be visible to clients for sync, download or search.`,
         <>
           <LazyDistributions
             emptyText={t`None`}
