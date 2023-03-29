@@ -17,7 +17,12 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
+import {
+  CollectionVersion,
+  CollectionVersionAPI,
+  Repositories,
+  SigningServiceAPI,
+} from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
@@ -29,6 +34,7 @@ import {
   SortTable,
   closeAlert,
 } from 'src/components';
+import { useContext } from 'src/loaders/app-context';
 import {
   errorMessage,
   parsePulpIDFromURL,
@@ -60,105 +66,117 @@ export const ApproveModal = (props: IProps) => {
     sort: 'name',
   });
 
+  const context = useContext();
+
   function approve() {
-    function failedToLoadRepo(status?, statusText?) {
-      setLoading(false);
-      addAlert({
-        title: t`Failed to load pulp_id of collection repository.`,
-        variant: 'danger',
-        description: errorMessage(status, statusText),
-      });
-    }
+    let error = '';
 
-    setLoading(true);
+    async function approveAsync() {
+      setLoading(true);
 
-    let reapprove = false;
+      let reapprove = false;
 
-    let originRepoName = props.collectionVersion.repository_list.find(
-      (repo) =>
-        props.stagingRepoNames.includes(repo) || repo == props.rejectedRepoName,
-    );
+      let originRepoName = props.collectionVersion.repository_list.find(
+        (repo) =>
+          props.stagingRepoNames.includes(repo) ||
+          repo == props.rejectedRepoName,
+      );
 
-    // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
-    if (!originRepoName) {
-      reapprove = true;
-      originRepoName = fixedRepos[0];
-    }
-
-    const reposToApprove = [];
-
-    // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
-    // this handles the possible inconsistent state
-    selectedRepos.forEach((repo) => {
-      if (!fixedRepos.includes(repo)) {
-        reposToApprove.push(repo);
+      // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
+      if (!originRepoName) {
+        reapprove = true;
+        originRepoName = fixedRepos[0];
       }
-    });
 
-    const repositoriesRef = props.allRepositories
-      .filter((repo) => reposToApprove.includes(repo.name))
-      .map((repo) => repo.pulp_href);
+      const reposToApprove = [];
 
-    Repositories.getRepository({ name: originRepoName })
-      .then((data) => {
-        if (data.data.results.length == 0) {
-          failedToLoadRepo('', t`Repository name ${originRepoName} not found.`);
-        } else {
-          const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
-          CollectionVersionAPI.get(props.collectionVersion.id)
-            .then((data) => {
-              let promiseCopyOrMove = null;
-
-              if (reapprove) {
-                // reapprove takes first
-                promiseCopyOrMove = Repositories.copyCollectionVersion(
-                  pulp_id,
-                  [data.data.pulp_href],
-                  repositoriesRef,
-                );
-              } else {
-                promiseCopyOrMove = Repositories.moveCollectionVersion(
-                  pulp_id,
-                  [data.data.pulp_href],
-                  repositoriesRef,
-                );
-              }
-
-              promiseCopyOrMove
-                .then((task) => {
-                  return waitForTaskUrl(task['data'].task);
-                })
-                .then(() => {
-                  setLoading(false);
-                  props.finishAction();
-                  props.addAlert({
-                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
-                    variant: 'success',
-                    description: '',
-                  });
-                })
-                .catch(({ response: { status, statusText } }) => {
-                  setLoading(false);
-                  addAlert({
-                    title: t`Failed to approve collection.`,
-                    variant: 'danger',
-                    description: errorMessage(status, statusText),
-                  });
-                });
-            })
-            .catch(({ response: { status, statusText } }) => {
-              setLoading(false);
-              addAlert({
-                title: t`Failed to load collection.`,
-                variant: 'danger',
-                description: errorMessage(status, statusText),
-              });
-            });
+      // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
+      // this handles the possible inconsistent state
+      selectedRepos.forEach((repo) => {
+        if (!fixedRepos.includes(repo)) {
+          reposToApprove.push(repo);
         }
-      })
-      .catch(({ response: { status, statusText } }) => {
-        failedToLoadRepo(status, statusText);
       });
+
+      const repositoriesRef = props.allRepositories
+        .filter((repo) => reposToApprove.includes(repo.name))
+        .map((repo) => repo.pulp_href);
+
+      error = t`Repository name ${originRepoName} not found.`;
+      const repoData = await Repositories.getRepository({
+        name: originRepoName,
+      });
+      if (repoData.data.results.length == 0) {
+        throw new Error();
+      }
+      error = '';
+
+      const pulp_id = parsePulpIDFromURL(repoData.data.results[0].pulp_href);
+
+      error = t`Collection with id ${props.collectionVersion.id} not found.`;
+      const collectionData = await CollectionVersionAPI.get(
+        props.collectionVersion.id,
+      );
+      error = '';
+
+      const autosign = context.settings.GALAXY_AUTO_SIGN_COLLECTIONS;
+      let signingService_href = null;
+
+      if (autosign) {
+        const signingServiceName =
+          context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+
+        error = t`Signing service ${signingServiceName} not found`;
+        const signingList = await SigningServiceAPI.list({
+          name: signingServiceName,
+        });
+        if (signingList.data.results.length > 0) {
+          signingService_href = signingList.data.results[0].pulp_href;
+        } else {
+          throw new Error();
+        }
+        error = '';
+      }
+
+      let promiseCopyOrMove = null;
+      if (reapprove) {
+        // reapprove takes first
+        promiseCopyOrMove = Repositories.copyCollectionVersion(
+          pulp_id,
+          [collectionData.data.pulp_href],
+          repositoriesRef,
+          signingService_href,
+        );
+      } else {
+        promiseCopyOrMove = Repositories.moveCollectionVersion(
+          pulp_id,
+          [collectionData.data.pulp_href],
+          repositoriesRef,
+          signingService_href,
+        );
+      }
+
+      const task = await promiseCopyOrMove;
+      await waitForTaskUrl(task['data'].task);
+
+      setLoading(false);
+      props.finishAction();
+      props.addAlert({
+        title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
+        variant: 'success',
+        description: '',
+      });
+    }
+
+    approveAsync().catch(() => {
+      setLoading(false);
+
+      addAlert({
+        title: t`Failed to approve collection.`,
+        variant: 'danger',
+        description: error,
+      });
+    });
   }
 
   function addAlert(alert: AlertType) {
