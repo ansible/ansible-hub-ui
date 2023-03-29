@@ -206,6 +206,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
       </a>
     );
 
+    const yamlTemplate = [
+      '# Sample requirements.yaml',
+      '',
+      'collections:',
+      '  - name: my_namespace.my_collection_name',
+      '  - name: my_namespace.my_collection_name2',
+    ].join('\n');
+
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
     const fileOnChange = (field) => (value, name) => {
@@ -390,7 +398,28 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
                   <CodeEditor
                     code={this.props.remote.requirements_file}
+                    isCopyEnabled
                     isDarkTheme
+                    isDownloadEnabled
+                    isLanguageLabelVisible
+                    isUploadEnabled
+                    emptyState={
+                      <>
+                        <pre>{yamlTemplate}</pre>
+                        <Button
+                          variant='plain'
+                          onClick={() =>
+                            this.updateRemote(yamlTemplate, 'requirements_file')
+                          }
+                        >{t`Use template`}</Button>
+                        <Button
+                          variant='plain'
+                          onClick={() =>
+                            this.updateRemote('\n', 'requirements_file')
+                          }
+                        >{t`Start from scratch`}</Button>
+                      </>
+                    }
                     height='20rem'
                     language={Language.yaml}
                     onChange={(value) =>
