@@ -5,3 +5,7 @@
 backport-4.6:
 - src/**/*
 - test/**/*
+
+backport-4.7:
+- src/**/*
+- test/**/*

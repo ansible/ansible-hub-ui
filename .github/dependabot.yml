@@ -12,6 +12,23 @@ updates:
 
   - package-ecosystem: 'npm'
     directory: '/'
+    target-branch: 'stable-4.7'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[stable-4.7] '
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: 'npm'
+    directory: '/'
     target-branch: 'stable-4.6'
     schedule:
       interval: 'weekly'
@@ -81,6 +98,14 @@ updates:
   - package-ecosystem: "github-actions"
     # Workflow files stored in the default location of `.github/workflows`
     directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: 'stable-4.7'
+    commit-message:
+      prefix: '[stable-4.7] '
     schedule:
       interval: "weekly"
 
