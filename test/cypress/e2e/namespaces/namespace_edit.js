@@ -46,7 +46,7 @@ describe('Edit a namespace', () => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
     cy.goToNamespaces();
-    cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
+    cy.get(`a[href*="${uiPrefix}namespaces/testns1"]`).click();
     cy.contains('No collections yet');
     kebabToggle();
     cy.contains('Edit namespace').click();
@@ -73,7 +73,7 @@ describe('Edit a namespace', () => {
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
-    cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns1`));
+    cy.url().should('match', new RegExp(`${uiPrefix}namespaces/testns1`));
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
 

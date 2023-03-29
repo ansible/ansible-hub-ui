@@ -13,7 +13,7 @@ describe('Namespace Access tab', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published/rbac_access_${num}`);
+    cy.visit(`${uiPrefix}namespaces/rbac_access_${num}`);
     cy.get('.pf-c-tabs__item-text').contains('Access').click();
   });
 

@@ -61,6 +61,7 @@ import './namespace-detail.scss';
 interface IState {
   canSign: boolean;
   collections: CollectionVersionSearch[];
+  allCollections: CollectionVersionSearch[];
   namespace: NamespaceType;
   params: {
     sort?: string;
@@ -111,6 +112,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     this.state = {
       canSign: false,
       collections: [],
+      allCollections: [],
       namespace: null,
       params: params,
       redirect: null,
@@ -137,6 +139,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   componentDidMount() {
     this.load();
+
+    this.loadAllCollections();
 
     this.setState({ alerts: this.context.alerts || [] });
     this.context.setAlerts([]);
@@ -732,6 +736,17 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       });
   }
 
+  private loadAllCollections() {
+    CollectionVersionAPI.list({
+      ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+      namespace: this.props.routeParams.namespace,
+    }).then((result) => {
+      this.setState({
+        allCollections: result.data.data,
+      });
+    });
+  }
+
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
   }
@@ -757,7 +772,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       />,
       hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
-          {this.state.collections.length === 0 ? (
+          {this.state.allCollections.length === 0 ? (
             <DropdownItem
               onClick={() => this.setState({ isOpenNamespaceModal: true })}
             >

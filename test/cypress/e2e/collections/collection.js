@@ -25,7 +25,7 @@ describe('collection tests', () => {
   it('deletes a collection version', () => {
     cy.createApprovedCollection('my_namespace', 'my_collection');
 
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
       'reload',

@@ -29,7 +29,7 @@ describe('Wisdom Modal Test', () => {
 
   it('can opt in or opt out of namespace.', () => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published/testns1`);
+    cy.visit(`${uiPrefix}namespaces/testns1`);
     optOut();
     optIn();
     clickWisdomSettings();
@@ -46,7 +46,7 @@ describe('Wisdom Modal Test', () => {
     // namespace was removed from wisdom, now delete it and it should be in wisdom again after recreation
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.visit(`${uiPrefix}repo/published/testns1`);
+    cy.visit(`${uiPrefix}namespaces/testns1`);
 
     // it should be again in wisdom
     clickWisdomSettings();

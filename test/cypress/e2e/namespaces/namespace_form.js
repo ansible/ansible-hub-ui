@@ -85,6 +85,6 @@ describe('A namespace form', () => {
     let id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns_`));
+    cy.url().should('match', new RegExp(`${uiPrefix}namespaces/testns_`));
   });
 });

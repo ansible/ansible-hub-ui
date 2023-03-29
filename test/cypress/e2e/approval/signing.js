@@ -37,7 +37,7 @@ describe('signing versions - auto sign on approval', () => {
     cy.wait(10000);
 
     // Go and check if it is signed in the collections
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
     cy.get('[data-cy="signature-badge"]', { timeout: 20000 }).should(
       'have.length',
       1,

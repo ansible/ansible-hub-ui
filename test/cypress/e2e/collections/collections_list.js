@@ -60,7 +60,7 @@ describe('Collections list Tests', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
     cy.contains('Collections');
   });
 
@@ -158,7 +158,7 @@ describe('Collections list Tests', () => {
   });
 
   it('Can delete collection in namespace collection list', () => {
-    cy.visit(`${uiPrefix}repo/published/my_namespace`);
+    cy.visit(`${uiPrefix}namespaces/my_namespace`);
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');
