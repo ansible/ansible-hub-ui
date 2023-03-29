@@ -51,7 +51,7 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Create').should('not.exist');
 
     cy.galaxykit('-i namespace create', 'testspace');
-    cy.visit(`${uiPrefix}repo/published/testspace`);
+    cy.visit(`${uiPrefix}namespaces/testspace`);
 
     // cannot Change namespace and Delete namespace
     cy.get('[data-cy=kebab-toggle]').should('not.exist');
@@ -268,7 +268,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Create').should('exist');
     cy.galaxykit('-i namespace create', 'testspace');
 
-    cy.visit(`${uiPrefix}repo/published/testspace`);
+    cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.get('[data-cy="ns-kebab-toggle"]').should('exist').click();
     cy.contains('Edit namespace');
     cy.contains('Delete namespace');

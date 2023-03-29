@@ -97,6 +97,21 @@ export class CollectionVersionSearch {
   repository_version: string;
 }
 
+export class CollectionVersionContentType {
+  contents: ContentSummaryType[];
+  description: string;
+  tags: string[];
+  authors: string[];
+  license: string[];
+  homepage: string;
+  documentation: string;
+  issues: string;
+  repository: string;
+  dependencies: DependencyType[];
+  docs_blob: DocsBlobType;
+  requires_ansible: string;
+}
+
 export class CollectionListType {
   id: string;
   name: string;

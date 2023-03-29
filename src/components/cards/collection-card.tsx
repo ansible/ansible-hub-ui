@@ -13,35 +13,33 @@ import {
 import cx from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionListType } from 'src/api';
+import { CollectionVersionSearch } from 'src/api';
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
 
-interface IProps extends CollectionListType {
+interface IProps extends CollectionVersionSearch {
   className?: string;
   displaySignatures: boolean;
   footer?: React.ReactNode;
-  repo?: string;
   menu?: React.ReactNode;
 }
 
 export const CollectionCard = ({
-  name,
-  latest_version,
-  namespace,
+  collection_version,
+  namespace_metadata: namespace,
+  repository,
+  is_signed,
   className,
   displaySignatures,
-  footer,
-  repo,
-  sign_state,
   menu,
+  footer,
 }: IProps) => {
   const MAX_DESCRIPTION_LENGTH = 60;
 
-  const company = namespace.company || namespace.name;
-  const contentSummary = convertContentSummaryCounts(latest_version.metadata);
+  const company = namespace?.company || collection_version.namespace;
+  const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
@@ -49,42 +47,70 @@ export const CollectionCard = ({
         <Logo
           alt={t`${company} logo`}
           fallbackToDefault
-          image={namespace.avatar_url}
+          image={namespace?.avatar_url}
           size='40px'
           unlockWidth
           flexGrow
         />
-        <TextContent>{getCertification(repo)}</TextContent>
-        {displaySignatures ? (
-          <SignatureBadge isCompact signState={sign_state} />
-        ) : null}
+        <div className='card-badge-area'>
+          <TextContent>
+            <Text component={TextVariants.small}>
+              <Badge isRead>
+                <Link
+                  to={formatPath(Paths.ansibleRepositoryDetail, {
+                    name: repository.name,
+                  })}
+                >
+                  {repository.name === Constants.CERTIFIED_REPO
+                    ? t`Certified`
+                    : repository.name}
+                </Link>
+              </Badge>
+            </Text>
+          </TextContent>
+          {displaySignatures ? (
+            <SignatureBadge
+              isCompact
+              signState={is_signed ? 'signed' : 'unsigned'}
+            />
+          ) : null}
+        </div>
         {menu}
       </CardHeader>
       <CardHeader>
         <div className='name'>
           <Link
             to={formatPath(Paths.collectionByRepo, {
-              collection: name,
-              namespace: namespace.name,
-              repo: repo,
+              collection: collection_version.name,
+              namespace: collection_version.namespace,
+              repo: repository.name,
             })}
           >
-            {name}
+            {collection_version.name}
           </Link>
         </div>
         <div className='author'>
           <TextContent>
             <Text component={TextVariants.small}>
-              <Trans>Provided by {company}</Trans>
+              <Trans>
+                Provided by&nbsp;
+                <Link
+                  to={formatPath(Paths.namespaceDetail, {
+                    namespace: collection_version.namespace,
+                  })}
+                >
+                  {company}
+                </Link>
+              </Trans>
             </Text>
           </TextContent>
         </div>
       </CardHeader>
       <CardBody>
-        <Tooltip content={<div>{latest_version.metadata.description}</div>}>
+        <Tooltip content={<div>{collection_version.description}</div>}>
           <div className='description'>
             {getDescription(
-              latest_version.metadata.description,
+              collection_version.description,
               MAX_DESCRIPTION_LENGTH,
             )}
           </div>
@@ -99,18 +125,6 @@ export const CollectionCard = ({
     </Card>
   );
 };
-
-function getCertification(repo) {
-  if (repo === Constants.CERTIFIED_REPO) {
-    return (
-      <Text component={TextVariants.small}>
-        <Badge isRead>{t`Certified`}</Badge>
-      </Text>
-    );
-  }
-
-  return null;
-}
 
 function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
   if (!d) {

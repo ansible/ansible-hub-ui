@@ -4,6 +4,7 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
+  Label,
   LabelGroup,
   Text,
   TextContent,
@@ -11,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionListType } from 'src/api';
+import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
   DateComponent,
@@ -24,29 +25,25 @@ import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
-interface IProps extends CollectionListType {
+interface IProps extends CollectionVersionSearch {
   showNamespace?: boolean;
   controls?: React.ReactNode;
   displaySignatures: boolean;
-  repo?: string;
 }
 
-export const CollectionListItem = (props: IProps) => {
-  const {
-    name,
-    latest_version,
-    namespace,
-    showNamespace,
-    controls,
-    deprecated,
-    displaySignatures,
-    repo,
-    sign_state,
-  } = props;
-
+export const CollectionListItem = ({
+  collection_version,
+  namespace_metadata: namespace,
+  repository,
+  is_signed,
+  is_deprecated,
+  displaySignatures,
+  showNamespace,
+  controls,
+}: IProps) => {
   const cells = [];
 
-  const company = namespace.company || namespace.name;
+  const company = namespace?.company || collection_version.namespace;
 
   if (showNamespace) {
     cells.push(
@@ -54,7 +51,7 @@ export const CollectionListItem = (props: IProps) => {
         <Logo
           alt={t`${company} logo`}
           fallbackToDefault
-          image={namespace.avatar_url}
+          image={namespace?.avatar_url}
           size='40px'
           unlockWidth
           width='97px'
@@ -63,31 +60,39 @@ export const CollectionListItem = (props: IProps) => {
     );
   }
 
-  const contentSummary = convertContentSummaryCounts(latest_version.metadata);
+  const contentSummary = convertContentSummaryCounts(collection_version);
 
   cells.push(
     <DataListCell key='content'>
       <div>
         <Link
           to={formatPath(Paths.collectionByRepo, {
-            collection: name,
-            namespace: namespace.name,
-            repo: repo,
+            collection: collection_version.name,
+            namespace: collection_version.namespace,
+            repo: repository.name,
           })}
           data-cy='CollectionList-name'
         >
-          {name}
+          {collection_version.name}
         </Link>
-        {deprecated && <DeprecatedTag />}
+        {is_deprecated && <DeprecatedTag />}
         {showNamespace ? (
           <TextContent>
             <Text component={TextVariants.small}>
-              <Trans>Provided by {company}</Trans>
+              <Trans>
+                Provided by&nbsp;
+                <Link
+                  to={formatPath(Paths.namespaceDetail, {
+                    namespace: collection_version.namespace,
+                  })}
+                >
+                  {company}
+                </Link>
+              </Trans>
             </Text>
           </TextContent>
         ) : null}
       </div>
-      <div className='hub-entry'>{latest_version.metadata.description}</div>
       <div className='hub-entry pf-l-flex pf-m-wrap'>
         {Object.keys(contentSummary.contents).map((type) => (
           <div key={type}>
@@ -100,8 +105,8 @@ export const CollectionListItem = (props: IProps) => {
       </div>
       <div className='hub-entry pf-l-flex pf-m-wrap'>
         <LabelGroup {...chipGroupProps()}>
-          {latest_version.metadata.tags.map((tag, index) => (
-            <Tag key={index}>{tag}</Tag>
+          {collection_version.tags.map((tag, index) => (
+            <Tag key={index}>{tag.name}</Tag>
           ))}
         </LabelGroup>
       </div>
@@ -113,12 +118,25 @@ export const CollectionListItem = (props: IProps) => {
       {controls ? <div className='hub-entry'>{controls}</div> : null}
       <div className='hub-right-col hub-entry'>
         <Trans>
-          Updated <DateComponent date={latest_version.created_at} />
+          Updated <DateComponent date={collection_version.pulp_created} />
         </Trans>
       </div>
-      <div className='hub-entry'>v{latest_version.version}</div>
+      <div className='hub-entry'>v{collection_version.version}</div>
+      <Label variant='outline' className='hub-repository-badge'>
+        <Link
+          to={formatPath(Paths.ansibleRepositoryDetail, {
+            name: repository.name,
+          })}
+        >
+          {repository.name}
+        </Link>
+      </Label>
       {displaySignatures ? (
-        <SignatureBadge className='hub-entry' signState={sign_state} />
+        <SignatureBadge
+          className='hub-entry'
+          variant='outline'
+          signState={is_signed ? 'signed' : 'unsigned'}
+        />
       ) : null}
     </DataListCell>,
   );

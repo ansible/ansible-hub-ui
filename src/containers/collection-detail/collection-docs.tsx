@@ -7,6 +7,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionHeader,
   EmptyStateCustom,
@@ -32,7 +33,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      collection: undefined,
+      collections: [],
+      collection: null,
+      content: null,
       params: params,
     };
     this.docsRef = React.createRef();
@@ -44,10 +47,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection } = this.state;
+    const { params, collection, collections, content } = this.state;
     const urlFields = this.props.routeParams;
 
-    if (!collection) {
+    if (!collection || !content) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
@@ -60,11 +63,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const contentName = urlFields['name'] || urlFields['page'] || null;
 
     if (contentType === 'docs' && contentName) {
-      if (collection.latest_version.docs_blob.documentation_files) {
-        const file =
-          collection.latest_version.docs_blob.documentation_files.find(
-            (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
-          );
+      if (content.docs_blob.documentation_files) {
+        const file = content.docs_blob.documentation_files.find(
+          (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
+        );
 
         if (file) {
           displayHTML = file.html;
@@ -72,43 +74,43 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       }
     } else if (contentName) {
       // check if contents exists
-      if (collection.latest_version.docs_blob.contents) {
-        const content = collection.latest_version.docs_blob.contents.find(
+      if (content.docs_blob.contents) {
+        const selectedContent = content.docs_blob.contents.find(
           (x) =>
             x.content_type === contentType && x.content_name === contentName,
         );
 
-        if (content) {
+        if (selectedContent) {
           if (contentType === 'role') {
-            displayHTML = content['readme_html'];
+            displayHTML = selectedContent['readme_html'];
           } else {
-            pluginData = content;
+            pluginData = selectedContent;
           }
         }
       }
     } else {
-      if (collection.latest_version.docs_blob.collection_readme) {
-        displayHTML =
-          collection.latest_version.docs_blob.collection_readme.html;
+      if (content.docs_blob.collection_readme) {
+        displayHTML = content.docs_blob.collection_readme.html;
       }
     }
+
+    const { collection_version, repository } = collection;
 
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
-          namespace: collection.namespace.name,
-          repo: this.context.selectedRepo,
+        url: formatPath(Paths.namespaceDetail, {
+          namespace: collection_version.namespace,
         }),
-        name: collection.namespace.name,
+        name: collection_version.namespace,
       },
       {
         url: formatPath(Paths.collectionByRepo, {
-          namespace: collection.namespace.name,
-          collection: collection.name,
-          repo: this.context.selectedRepo,
+          namespace: collection_version.namespace,
+          collection: collection_version.name,
+          repo: repository.name,
         }),
-        name: collection.name,
+        name: collection_version.name,
       },
       { name: t`Documentation` },
     ];
@@ -127,6 +129,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         <CollectionHeader
           reload={() => this.loadCollection(true)}
           collection={collection}
+          collections={collections}
+          content={content}
           params={params}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollection(true))
@@ -134,15 +138,15 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
-          repo={this.context.selectedRepo}
         />
         <Main className='main'>
           <section className='docs-container'>
             <TableOfContents
               className='sidebar'
-              namespace={collection.namespace.name}
-              collection={collection.name}
-              docs_blob={collection.latest_version.docs_blob}
+              namespace={collection.collection_version.namespace}
+              collection={collection.collection_version.name}
+              repository={collection.repository.name}
+              docs_blob={content.docs_blob}
               selectedName={contentName}
               selectedType={contentType}
               params={params}
@@ -169,7 +173,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                         moduleName,
                         collection,
                         params,
-                        collection.latest_version.metadata.contents,
+                        content.contents,
                       )
                     }
                     renderDocLink={(name, href) =>
@@ -183,11 +187,11 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                     )}
                   />
                 )
-              ) : this.context.selectedRepo === 'community' &&
-                !collection.latest_version.docs_blob.contents ? (
+              ) : collection.repository.name === 'community' &&
+                !content.docs_blob.contents ? (
                 this.renderCommunityWarningMessage()
               ) : (
-                this.renderNotFound(collection.name)
+                this.renderNotFound(collection.collection_version.name)
               )}
             </div>
           </section>
@@ -196,7 +200,12 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     );
   }
 
-  private renderDocLink(name, href, collection, params) {
+  private renderDocLink(
+    name,
+    href,
+    collection: CollectionVersionSearch,
+    params,
+  ) {
     if (!!href && href.startsWith('http')) {
       return (
         <a href={href} target='_blank' rel='noreferrer'>
@@ -207,15 +216,18 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this
+
+      const { collection_version, repository } = collection;
+
       return (
         <Link
           to={formatPath(
             Paths.collectionDocsPageByRepo,
             {
-              namespace: collection.namespace.name,
-              collection: collection.name,
+              namespace: collection_version.namespace,
+              collection: collection_version.name,
               page: sanitizeDocsUrls(href),
-              repo: this.context.selectedRepo,
+              repo: repository.name,
             },
             params,
           )}
@@ -239,11 +251,11 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           to={formatPath(
             Paths.collectionContentDocsByRepo,
             {
-              namespace: collection.namespace.name,
-              collection: collection.name,
+              namespace: collection.collection_version.namespace,
+              collection: collection.collection_version.name,
               type: 'module',
               name: moduleName,
-              repo: this.context.selectedRepo,
+              repo: this.props.routeParams.repo,
             },
             params,
           )}
@@ -281,8 +293,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
-      setCollection: (collection) => this.setState({ collection }),
+      setCollection: (collections, collection, content) => {
+        this.setState({ collections, collection, content });
+      },
       stateParams: this.state.params,
     });
   }

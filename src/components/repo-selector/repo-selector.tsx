@@ -18,7 +18,7 @@ interface IProps {
   selectedRepo: string;
   // Path of the component that's using the component. This is required so that
   // the url for the repo can be updated correctly.
-  path: Paths;
+  path?: Paths;
   pathParams?: Record<string, string>;
   isDisabled?: boolean;
 }
@@ -48,11 +48,11 @@ export const RepoSelector = ({
             variant='plain'
             className='hub-input-group-text-no-wrap'
           >
-            {t`Filter by repository`}
+            {t`Repository`}
           </InputGroupText>
           <Select
             className='nav-select'
-            isDisabled={isDisabled}
+            isDisabled={!path || isDisabled}
             isOpen={selectExpanded}
             isPlain={false}
             onSelect={(event: React.ChangeEvent<HTMLInputElement>) => {

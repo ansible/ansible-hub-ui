@@ -1,6 +1,5 @@
 const uiPrefix = Cypress.env('uiPrefix');
 const apiPrefix = Cypress.env('apiPrefix');
-const disableRepoSwitch = Cypress.env('disableRepoSwitch');
 
 describe('Namespace detail screen', () => {
   before(() => {
@@ -16,7 +15,7 @@ describe('Namespace detail screen', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
+    cy.visit(`${uiPrefix}namespaces/namespace_detail_test`);
   });
 
   it('should display the collections belonging to the namespace', () => {
@@ -32,7 +31,7 @@ describe('Namespace detail screen', () => {
     cy.contains('.body ul a', 'Deprecate').click();
 
     // Reload the page
-    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
+    cy.visit(`${uiPrefix}namespaces/namespace_detail_test`);
 
     cy.get('[data-cy="CollectionListItem"]:first').contains('DEPRECATED');
   });
@@ -77,31 +76,4 @@ describe('Namespace detail screen', () => {
 
     // The test for success are impmeneted in the collection_upload file
   });
-
-  if (!disableRepoSwitch) {
-    it('should filter by repositories', () => {
-      const namespace = 'coolestnamespace';
-      cy.galaxykit('-i namespace create', namespace);
-      cy.visit(`${uiPrefix}repo/published/${namespace}`);
-
-      cy.get('.nav-select').contains('Published').click();
-      cy.contains('Red Hat Certified').click();
-
-      cy.get('.nav-select').contains('Red Hat Certified');
-      cy.url().should('include', `/repo/rh-certified/${namespace}`);
-
-      cy.visit(`${uiPrefix}repo/community/${namespace}`);
-      cy.get('.nav-select').contains('Community');
-    });
-
-    it('repo selector should be disabled in collection detail ', () => {
-      const namespace = 'coolestnamespace';
-      const collection = 'coolestcollection';
-      cy.galaxykit('-i namespace create', namespace);
-      cy.createApprovedCollection(namespace, collection);
-
-      cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
-      cy.get('.nav-select').contains('Published').should('be.disabled');
-    });
-  }
 });

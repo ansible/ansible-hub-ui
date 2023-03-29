@@ -1,8 +1,13 @@
+import {
+  AnsibleDistributionAPI,
+  CollectionVersionSearch,
+  findDistroBasePathByRepo,
+} from 'src/api';
 import { HubAPI } from './hub';
 
 interface SignNamespace {
   signing_service?: string;
-  distro_base_path?: string;
+  repository: CollectionVersionSearch['repository'];
   namespace: string;
 }
 
@@ -19,8 +24,23 @@ type SignProps = SignNamespace | SignCollection | SignVersion;
 class API extends HubAPI {
   apiPath = this.getUIPath('collection_signing/');
 
-  sign(data: SignProps) {
-    return this.http.post(this.apiPath, data);
+  async sign(data: SignProps) {
+    const { repository, ...args } = data;
+    const distros = await AnsibleDistributionAPI.list({
+      repository: repository.pulp_href,
+    });
+
+    const distroBasePath = findDistroBasePathByRepo(
+      distros.data.results,
+      repository,
+    );
+
+    const updatedData = {
+      distro_base_path: distroBasePath,
+      ...args,
+    };
+
+    return this.http.post(this.apiPath, updatedData);
   }
 }
 

@@ -10,6 +10,7 @@ export { default as CollectionDetail } from './collection-detail/collection-deta
 export { default as CollectionDocs } from './collection-detail/collection-docs';
 export { default as CollectionImportLog } from './collection-detail/collection-import-log';
 export { default as CollectionDependencies } from './collection-detail/collection-dependencies';
+export { default as CollectionDistributions } from './collection-detail/collection-distributions';
 export { default as EditNamespace } from './edit-namespace/edit-namespace';
 export { default as LoginPage } from './login/login';
 export { default as MyImports } from './my-imports/my-imports';

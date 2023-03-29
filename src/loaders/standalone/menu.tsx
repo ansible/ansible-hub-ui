@@ -32,13 +32,11 @@ const menuSection = (name, options = {}, items = []) => ({
   items,
 });
 
-function standaloneMenu({ repository }) {
+function standaloneMenu() {
   return [
     menuSection(t`Collections`, {}, [
       menuItem(t`Collections`, {
-        url: formatPath(Paths.searchByRepo, {
-          repo: repository || 'published',
-        }),
+        url: formatPath(Paths.collections),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
@@ -224,16 +222,15 @@ function Menu({ items, context, expandedSections }) {
   );
 }
 
-export const StandaloneMenu = ({ repository, context }) => {
+export const StandaloneMenu = ({ context }) => {
   const [expandedSections, setExpandedSections] = useState([]);
 
   const location = useLocation();
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    setMenu(standaloneMenu({ repository }));
-  }, [repository]);
-
+    setMenu(standaloneMenu());
+  }, []);
   useEffect(() => {
     activateMenu(menu, location.pathname);
     setExpandedSections(

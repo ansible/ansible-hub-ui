@@ -28,6 +28,10 @@ const CollectionImportLog = lazy(
   () => import('src/containers/collection-detail/collection-import-log'),
 );
 
+const CollectionDistributions = lazy(
+  () => import('src/containers/collection-detail/collection-distributions'),
+);
+
 const EditNamespace = lazy(
   () => import('src/containers/edit-namespace/edit-namespace'),
 );
@@ -106,9 +110,13 @@ const routes = [
     path: Paths.collectionDependenciesByRepo,
     component: CollectionDependencies,
   },
+  {
+    component: CollectionDistributions,
+    path: Paths.collectionDistributionsByRepo,
+  },
   { path: Paths.collectionByRepo, component: CollectionDetail },
-  { path: Paths.namespaceByRepo, component: NamespaceDetail },
-  { path: Paths.searchByRepo, component: Search },
+  { path: Paths.namespaceDetail, component: NamespaceDetail },
+  { path: Paths.collections, component: Search },
   { path: Paths.collectionDocsPage, component: CollectionDocs },
   { path: Paths.collectionDocsIndex, component: CollectionDocs },
   {
@@ -126,6 +134,7 @@ const routes = [
   { path: Paths.myImports, component: MyImports },
   { path: Paths.collection, component: CollectionDetail },
   { path: Paths.namespace, component: NamespaceDetail },
+  { path: Paths.collections, component: Search },
   { path: Paths.search, component: Search },
 ];
 

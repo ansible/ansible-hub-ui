@@ -9,17 +9,15 @@ import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import cx from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { ContentSummaryType } from 'src/api';
+import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
 import { EmptyStateCustom } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './collection-content-list.scss';
 
 interface IProps {
   contents: ContentSummaryType[];
-  collection: string;
-  namespace: string;
+  collection: CollectionVersionSearch;
   params: {
     keywords?: string;
     showing?: string;
@@ -30,12 +28,10 @@ interface IProps {
 export const CollectionContentList = ({
   contents,
   collection,
-  namespace,
   params,
   updateParams,
 }: IProps) => {
   const ignoredParams = ['keywords', 'showing'];
-  const context = useContext();
 
   const toShow: ContentSummaryType[] = [];
   const summary = { all: 0 };
@@ -59,6 +55,8 @@ export const CollectionContentList = ({
       toShow.push(c);
     }
   }
+
+  const { collection_version, repository } = collection;
 
   return (
     <div>
@@ -115,11 +113,11 @@ export const CollectionContentList = ({
                   to={formatPath(
                     Paths.collectionContentDocsByRepo,
                     {
-                      collection: collection,
-                      namespace: namespace,
+                      collection: collection_version.name,
+                      namespace: collection_version.namespace,
                       type: content.content_type,
                       name: content.name,
-                      repo: context.selectedRepo,
+                      repo: repository.name,
                     },
                     ParamHelper.getReduced(params, ignoredParams),
                   )}
@@ -134,7 +132,7 @@ export const CollectionContentList = ({
         </tbody>
       </table>
       {summary.all <= 0 &&
-        context.selectedRepo === 'community' &&
+        repository.name === 'community' &&
         renderCommunityWarningMessage()}
     </div>
   );

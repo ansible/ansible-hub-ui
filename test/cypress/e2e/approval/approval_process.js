@@ -16,7 +16,7 @@ describe('Approval Dashboard process', () => {
   });
 
   it('should test the whole approval process.', () => {
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');
 
     // should approve
@@ -35,7 +35,7 @@ describe('Approval Dashboard process', () => {
     );
 
     // should see item in collections
-    cy.visit(`${uiPrefix}repo/published?page_size=100`);
+    cy.visit(`${uiPrefix}collections?page_size=100`);
     cy.contains('.collection-container', 'appp_c_test1');
 
     // should reject
@@ -48,7 +48,7 @@ describe('Approval Dashboard process', () => {
     cy.contains('[data-cy="CertificationDashboard-row"]', 'Rejected');
 
     // should not see items in collections
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');
   });
 });

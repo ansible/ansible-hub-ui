@@ -1,4 +1,4 @@
-export { CollectionAPI } from './collection';
+export { CollectionAPI, findDistroBasePathByRepo } from './collection';
 export { NamespaceAPI } from './namespace';
 export {
   NamespaceType,
@@ -13,6 +13,7 @@ export {
   CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionSearch,
+  CollectionVersionContentType,
   ContentSummaryType,
   DocsBlobType,
   PluginContentType,
@@ -43,7 +44,10 @@ export { ApplicationInfoAPI } from './application-info';
 export { RemoteType } from './response-types/remote';
 export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
-export { DistributionType } from './response-types/distribution';
+export {
+  DistributionType,
+  PulpAnsibleDistributionType,
+} from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {

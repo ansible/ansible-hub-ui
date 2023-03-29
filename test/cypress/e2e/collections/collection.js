@@ -25,7 +25,7 @@ describe('collection tests', () => {
   it('deletes a collection version', () => {
     cy.createApprovedCollection('my_namespace', 'my_collection');
 
-    cy.visit(`${uiPrefix}repo/published`);
+    cy.visit(`${uiPrefix}collections`);
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
       'reload',
@@ -38,6 +38,7 @@ describe('collection tests', () => {
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
+    cy.wait(5000);
     cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
       'have.text',
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',

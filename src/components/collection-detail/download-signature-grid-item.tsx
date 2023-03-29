@@ -10,21 +10,62 @@ import {
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
 import React, { useState } from 'react';
-import { CollectionVersionDetail } from 'src/api/response-types/collection';
+import {
+  AnsibleDistributionAPI,
+  CollectionAPI,
+  CollectionVersionSearch,
+  findDistroBasePathByRepo,
+} from 'src/api';
+import 'src/api/response-types/collection';
 import { useContext } from 'src/loaders/app-context';
+import { LoadingPageSpinner } from '../loading/loading-page-spinner';
 
 interface IProps {
-  version: CollectionVersionDetail;
+  collectionVersion: CollectionVersionSearch['collection_version'];
+  repository: CollectionVersionSearch['repository'];
+  addAlert: (status, statusText) => void;
 }
 
-export const DownloadSignatureGridItem = ({ version }: IProps) => {
+export const DownloadSignatureGridItem = ({
+  collectionVersion,
+  repository,
+  addAlert,
+}: IProps) => {
   const { display_signatures } = useContext().featureFlags;
   const [show, setShow] = useState(false);
+  const [signatures, setSignatures] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // No signature object or the signatures is empty
-  if (!display_signatures || version.metadata.signatures?.length < 1) {
+  // No signature object
+  if (!display_signatures) {
     return null;
   }
+
+  React.useEffect(() => {
+    if (show && isLoading) {
+      AnsibleDistributionAPI.list({
+        repository: repository.pulp_href,
+      }).then((result) => {
+        const distroBasePath = findDistroBasePathByRepo(
+          result.data.results,
+          repository,
+        );
+
+        const { namespace, name, version } = collectionVersion;
+
+        CollectionAPI.getSignatures(distroBasePath, namespace, name, version)
+          .then((res) => {
+            setSignatures(res.data.signatures);
+            setIsLoading(false);
+          })
+          .catch(({ code, message }) => {
+            addAlert(code, message);
+            setIsLoading(false);
+            setShow(false);
+          });
+      });
+    }
+  }, [show]);
 
   return (
     <>
@@ -47,12 +88,19 @@ export const DownloadSignatureGridItem = ({ version }: IProps) => {
         </Split>
       </GridItem>
       <GridItem>
-        {show &&
-          version.metadata.signatures.map(({ signature }, idx) => (
-            <CodeBlock key={idx}>
-              <CodeBlockCode>{signature}</CodeBlockCode>
-            </CodeBlock>
-          ))}
+        {show && (
+          <>
+            {isLoading ? (
+              <LoadingPageSpinner />
+            ) : (
+              signatures.map(({ signature }, idx) => (
+                <CodeBlock key={idx}>
+                  <CodeBlockCode>{signature}</CodeBlockCode>
+                </CodeBlock>
+              ))
+            )}
+          </>
+        )}
       </GridItem>
     </>
   );

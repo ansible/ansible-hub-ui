@@ -8,7 +8,7 @@ class Partners extends React.Component<RouteProps> {
     return (
       <NamespaceList
         {...this.props}
-        namespacePath={Paths.namespaceByRepo}
+        namespacePath={Paths.namespaceDetail}
         filterOwner={false}
       />
     );

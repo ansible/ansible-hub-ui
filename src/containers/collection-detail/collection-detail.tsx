@@ -25,40 +25,44 @@ class CollectionDetail extends React.Component<
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      collection: undefined,
+      collections: [],
+      collection: null,
+      content: null,
+      distroBasePath: null,
       params: params,
       alerts: [],
     };
   }
 
   componentDidMount() {
-    this.loadCollection(true);
+    this.loadCollections(true);
   }
 
   componentDidUpdate(prevProps) {
     if (!isEqual(prevProps.location, this.props.location)) {
-      this.loadCollection(false);
+      this.loadCollections(false);
     }
   }
 
   render() {
-    const { collection, params, alerts } = this.state;
+    const { collections, collection, content, params, alerts } = this.state;
 
-    if (!collection) {
+    if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
+    const { collection_version: version } = collection;
 
     const breadcrumbs = [
       namespaceBreadcrumb,
       {
-        url: formatPath(Paths.namespaceByRepo, {
-          namespace: collection.namespace.name,
-          repo: this.context.selectedRepo,
+        url: formatPath(Paths.namespaceDetail, {
+          namespace: version.namespace,
         }),
-        name: collection.namespace.name,
+        name: version.namespace,
       },
       {
-        name: collection.name,
+        name: version.name,
       },
     ];
 
@@ -69,20 +73,23 @@ class CollectionDetail extends React.Component<
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <CollectionHeader
-          reload={() => this.loadCollection(true)}
+          reload={() => this.loadCollections(true)}
+          collections={collections}
           collection={collection}
+          content={content}
           params={params}
           updateParams={(p) =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () => this.loadCollections(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='install'
-          repo={this.context.selectedRepo}
+          repo={this.props.routeParams.published}
         />
         <Main>
           <section className='body'>
             <CollectionInfo
               {...collection}
+              content={content}
               updateParams={(p) => this.updateParams(p)}
               params={this.state.params}
               addAlert={(variant, title, description) =>
@@ -104,13 +111,18 @@ class CollectionDetail extends React.Component<
     );
   }
 
-  private loadCollection(forceReload) {
+  private loadCollections(forceReload) {
     loadCollection({
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      selectedRepo: this.context.selectedRepo,
-      setCollection: (collection) => this.setState({ collection }),
+      setCollection: (collections, collection, content) => {
+        this.setState({
+          collections,
+          collection,
+          content,
+        });
+      },
       stateParams: this.state.params,
     });
   }

@@ -30,7 +30,7 @@ describe('screenshots', () => {
     };
 
     screenshot('/');
-    screenshot('/repo/published');
+    screenshot('/collections');
     screenshot('/namespaces');
     // TODO - problems - repositories are showing minutes, so text may quickly change and generate diff
     //screenshot('/repositories');

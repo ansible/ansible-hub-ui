@@ -103,9 +103,11 @@ export enum Paths {
   collectionContentListByRepo = '/repo/:repo/:namespace/:collection/content',
   collectionImportLogByRepo = '/repo/:repo/:namespace/:collection/import-log',
   collectionDependenciesByRepo = '/repo/:repo/:namespace/:collection/dependencies',
+  collectionDistributionsByRepo = '/repo/:repo/:namespace/:collection/distributions',
   namespaceByRepo = '/repo/:repo/:namespace',
   collection = '/:namespace/:collection',
   namespace = '/:namespace',
+  namespaceDetail = '/namespaces/:namespace',
   partners = '/partners',
   namespaces = '/namespaces',
   notFound = '/not-found',
@@ -119,6 +121,7 @@ export enum Paths {
   repositories = '/repositories',
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
+  collections = '/collections',
 }
 
 export const namespaceBreadcrumb = {
