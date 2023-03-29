@@ -719,7 +719,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     const version = collection.collection_version;
 
     this.transformToCollectionVersion(collection)
-      .then((versionWithRepos: any) => {
+      .then((versionWithRepos) => {
         this.setState({ updatingVersions: [collection] });
         if (
           versionWithRepos.repository_list.includes(this.state.rejectedRepoName)
