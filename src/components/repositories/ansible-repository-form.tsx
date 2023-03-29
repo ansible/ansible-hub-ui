@@ -24,7 +24,7 @@ interface IProps {
   allowEditName: boolean;
   errorMessages: ErrorMessagesType;
   onCancel: () => void;
-  onSave: ({ createDistribution, hideFromSearch, isPrivate, pipeline }) => void;
+  onSave: ({ createDistribution, hideFromSearch, pipeline }) => void;
   repository: AnsibleRepositoryType;
   updateRepository: (r) => void;
 }
@@ -99,9 +99,6 @@ export const AnsibleRepositoryForm = ({
 
   const [hideFromSearch, setHideFromSearch] = useState(
     repository?.pulp_labels?.hide_from_search === '',
-  );
-  const [isPrivate, setIsPrivate] = useState(
-    repository?.pulp_labels?.is_private === 'true',
   );
   const [pipeline, setPipeline] = useState(repository?.pulp_labels?.pipeline);
   const [disableHideFromSearch, setDisableHideFromSearch] = useState(
@@ -195,11 +192,6 @@ export const AnsibleRepositoryForm = ({
           page
         </li>
         <li>
-          <b>Make private</b> (
-          <pre style={{ display: 'inline-block' }}>is_private=true</pre>) - make
-          repository private
-        </li>
-        <li>
           (<pre style={{ display: 'inline-block' }}>pipeline: *</pre>) - see
           Pipeline above
         </li>
@@ -277,14 +269,22 @@ export const AnsibleRepositoryForm = ({
               id='hide_from_search'
               onChange={(value) => setHideFromSearch(value)}
             />
-            <Checkbox
-              isChecked={isPrivate}
-              label={t`Make private`}
-              id='is_private'
-              onChange={(value) => setIsPrivate(value)}
-            />
           </div>
         </>,
+      )}
+
+      {formGroup(
+        'private',
+        t`Make private`,
+        t`Make the repository private.`,
+        <Checkbox
+          id='private'
+          isChecked={repository.private}
+          label={t`Make private`}
+          onChange={(value) =>
+            updateRepository({ ...repository, private: value })
+          }
+        />,
       )}
 
       {formGroup(
@@ -348,7 +348,6 @@ export const AnsibleRepositoryForm = ({
             onSave({
               createDistribution,
               hideFromSearch,
-              isPrivate,
               pipeline,
             })
           }

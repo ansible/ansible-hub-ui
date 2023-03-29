@@ -45,6 +45,10 @@ export const DetailsTab = ({ item }: TabProps) => {
           value: <PulpLabels labels={item?.pulp_labels} />,
         },
         {
+          label: t`Private`,
+          value: item?.private ? t`Yes` : t`No`,
+        },
+        {
           label: t`Remote`,
           value: remote ? (
             <Link
