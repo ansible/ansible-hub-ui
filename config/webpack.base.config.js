@@ -6,6 +6,7 @@ const {
 } = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
@@ -246,6 +247,13 @@ module.exports = (inputConfigs) => {
       ),
     );
   }
+
+  // @patternfly/react-code-editor
+  plugins.push(
+    new MonacoWebpackPlugin({
+      languages: ['yaml'],
+    }),
+  );
 
   return {
     ...newWebpackConfig,

@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { CodeEditor, Language } from '@patternfly/react-code-editor';
 import {
   ActionGroup,
   Button,
@@ -205,6 +206,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
       </a>
     );
 
+    const yamlTemplate = [
+      '# Sample requirements.yaml',
+      '',
+      'collections:',
+      '  - name: my_namespace.my_collection_name',
+      '  - name: my_namespace.my_collection_name2',
+    ].join('\n');
+
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
     const fileOnChange = (field) => (value, name) => {
@@ -350,7 +359,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
-                {/* TODO yaml requirements direct input - AAH-2044 */}
                 <FileUpload
                   validated={this.toError(
                     !('requirements_file' in errorMessages),
@@ -380,6 +388,48 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </Button>
               </FlexItem>
             </Flex>
+            <ExpandableSection
+              toggleTextExpanded={t`Close YAML editor`}
+              toggleTextCollapsed={t`Edit in YAML editor`}
+            >
+              <Flex>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <ExclamationTriangleIcon />{' '}
+                  {t`If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized.`}
+                  <CodeEditor
+                    code={this.props.remote.requirements_file}
+                    isCopyEnabled
+                    isDarkTheme
+                    isDownloadEnabled
+                    isLanguageLabelVisible
+                    isUploadEnabled
+                    emptyState={
+                      <>
+                        <pre>{yamlTemplate}</pre>
+                        <Button
+                          variant='plain'
+                          onClick={() =>
+                            this.updateRemote(yamlTemplate, 'requirements_file')
+                          }
+                        >{t`Use template`}</Button>
+                        <Button
+                          variant='plain'
+                          onClick={() =>
+                            this.updateRemote('\n', 'requirements_file')
+                          }
+                        >{t`Start from scratch`}</Button>
+                      </>
+                    }
+                    height='20rem'
+                    language={Language.yaml}
+                    onChange={(value) =>
+                      this.updateRemote(value, 'requirements_file')
+                    }
+                    onEditorDidMount={(editor) => editor.focus()}
+                  />
+                </FlexItem>
+              </Flex>
+            </ExpandableSection>
           </FormGroup>
         )}
 
