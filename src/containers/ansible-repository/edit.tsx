@@ -36,10 +36,21 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
     canAddAnsibleRepository(context) || canEditAnsibleRepository(context, item),
   displayName: 'AnsibleRepositoryEdit',
   errorTitle: t`Repository could not be displayed.`,
-  query: ({ name }) =>
-    AnsibleRepositoryAPI.list({ name }).then(
-      ({ data: { results } }) => results[0],
-    ),
+  query: ({ name }) => {
+    return AnsibleRepositoryAPI.list({ name })
+      .then(({ data: { results } }) => results[0])
+      .then((repository) => {
+        return AnsibleRepositoryAPI.myPermissions(
+          parsePulpIDFromURL(repository.pulp_href),
+        )
+          .then(({ data: { permissions } }) => permissions)
+          .catch((e) => {
+            console.error(e);
+            return [];
+          })
+          .then((my_permissions) => ({ ...repository, my_permissions }));
+      });
+  },
 
   title: ({ name }) => name || t`Add new repository`,
   transformParams: ({ name, ...rest }) => ({

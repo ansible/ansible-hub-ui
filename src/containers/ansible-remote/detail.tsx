@@ -11,6 +11,7 @@ import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';
+import { parsePulpIDFromURL } from 'src/utilities';
 import { RemoteAccessTab } from './tab-access';
 import { DetailsTab } from './tab-details';
 
@@ -48,8 +49,21 @@ export const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
     ansibleRemoteDownloadCAAction,
     ansibleRemoteDeleteAction,
   ],
-  query: ({ name }) =>
-    AnsibleRemoteAPI.list({ name }).then(({ data: { results } }) => results[0]),
+  query: ({ name }) => {
+    return AnsibleRemoteAPI.list({ name })
+      .then(({ data: { results } }) => results[0])
+      .then((remote) => {
+        return AnsibleRemoteAPI.myPermissions(
+          parsePulpIDFromURL(remote.pulp_href),
+        )
+          .then(({ data: { permissions } }) => permissions)
+          .catch((e) => {
+            console.error(e);
+            return [];
+          })
+          .then((my_permissions) => ({ ...remote, my_permissions }));
+      });
+  },
   renderTab: (tab, item, actionContext) =>
     ({
       details: <DetailsTab item={item} actionContext={actionContext} />,

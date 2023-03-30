@@ -41,8 +41,21 @@ export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
     canAddAnsibleRemote(context) || canEditAnsibleRemote(context, item),
   displayName: 'AnsibleRemoteEdit',
   errorTitle: t`Remote could not be displayed.`,
-  query: ({ name }) =>
-    AnsibleRemoteAPI.list({ name }).then(({ data: { results } }) => results[0]),
+  query: ({ name }) => {
+    return AnsibleRemoteAPI.list({ name })
+      .then(({ data: { results } }) => results[0])
+      .then((remote) => {
+        return AnsibleRemoteAPI.myPermissions(
+          parsePulpIDFromURL(remote.pulp_href),
+        )
+          .then(({ data: { permissions } }) => permissions)
+          .catch((e) => {
+            console.error(e);
+            return [];
+          })
+          .then((my_permissions) => ({ ...remote, my_permissions }));
+      });
+  },
 
   title: ({ name }) => name || t`Add new remote`,
   transformParams: ({ name, ...rest }) => ({

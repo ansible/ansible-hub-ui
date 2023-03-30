@@ -61,7 +61,7 @@ interface PageWithTabsParams<T, ExtraState> {
 }
 
 export const PageWithTabs = function <
-  T extends { name: string },
+  T extends { name: string; my_permissions?: string[] },
   ExtraState = Record<string, never>,
 >({
   // ({ name }) => [{ url?, name }]

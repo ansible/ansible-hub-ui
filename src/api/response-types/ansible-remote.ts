@@ -28,4 +28,6 @@ export class AnsibleRemoteType {
     is_set: boolean;
     name: string;
   }[];
+
+  my_permissions?: string[];
 }
