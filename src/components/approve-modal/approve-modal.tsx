@@ -1,6 +1,11 @@
 import { t } from '@lingui/macro';
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownToggle,
+  DropdownToggleCheckbox,
   Flex,
   FlexItem,
   Label,
@@ -12,7 +17,12 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { CollectionVersion, CollectionVersionAPI, Repositories } from 'src/api';
+import {
+  CollectionVersion,
+  CollectionVersionAPI,
+  Repositories,
+  SigningServiceAPI,
+} from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
@@ -22,8 +32,9 @@ import {
   CompoundFilter,
   Pagination,
   SortTable,
+  closeAlert,
 } from 'src/components';
-import { Constants } from 'src/constants';
+import { useContext } from 'src/loaders/app-context';
 import {
   errorMessage,
   parsePulpIDFromURL,
@@ -36,9 +47,12 @@ interface IProps {
   addAlert: (alert) => void;
   allRepositories: Repository[];
   finishAction: () => void;
+  stagingRepoNames: string[];
+  rejectedRepoName: string;
 }
 
 export const ApproveModal = (props: IProps) => {
+  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
   const [itemsCount, setItemsCount] = useState(0);
@@ -52,90 +66,121 @@ export const ApproveModal = (props: IProps) => {
     sort: 'name',
   });
 
+  const context = useContext();
+
   function approve() {
-    function failedToLoadRepo(status?, statusText?) {
+    let error = '';
+
+    async function approveAsync() {
+      setLoading(true);
+
+      let reapprove = false;
+
+      let originRepoName = props.collectionVersion.repository_list.find(
+        (repo) =>
+          props.stagingRepoNames.includes(repo) ||
+          repo == props.rejectedRepoName,
+      );
+
+      // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
+      if (!originRepoName) {
+        reapprove = true;
+        originRepoName = fixedRepos[0];
+      }
+
+      const reposToApprove = [];
+
+      // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
+      // this handles the possible inconsistent state
+      selectedRepos.forEach((repo) => {
+        if (!fixedRepos.includes(repo)) {
+          reposToApprove.push(repo);
+        }
+      });
+
+      const repositoriesRef = props.allRepositories
+        .filter((repo) => reposToApprove.includes(repo.name))
+        .map((repo) => repo.pulp_href);
+
+      error = t`Repository name ${originRepoName} not found.`;
+      const repoData = await Repositories.getRepository({
+        name: originRepoName,
+      });
+      if (repoData.data.results.length == 0) {
+        throw new Error();
+      }
+      error = '';
+
+      const pulp_id = parsePulpIDFromURL(repoData.data.results[0].pulp_href);
+
+      error = t`Collection with id ${props.collectionVersion.id} not found.`;
+      const collectionData = await CollectionVersionAPI.get(
+        props.collectionVersion.id,
+      );
+      error = '';
+
+      const autosign = context.settings.GALAXY_AUTO_SIGN_COLLECTIONS;
+      let signingService_href = null;
+
+      if (autosign) {
+        const signingServiceName =
+          context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+
+        error = t`Signing service ${signingServiceName} not found`;
+        const signingList = await SigningServiceAPI.list({
+          name: signingServiceName,
+        });
+        if (signingList.data.results.length > 0) {
+          signingService_href = signingList.data.results[0].pulp_href;
+        } else {
+          throw new Error();
+        }
+        error = '';
+      }
+
+      let promiseCopyOrMove = null;
+      if (reapprove) {
+        // reapprove takes first
+        promiseCopyOrMove = Repositories.copyCollectionVersion(
+          pulp_id,
+          [collectionData.data.pulp_href],
+          repositoriesRef,
+          signingService_href,
+        );
+      } else {
+        promiseCopyOrMove = Repositories.moveCollectionVersion(
+          pulp_id,
+          [collectionData.data.pulp_href],
+          repositoriesRef,
+          signingService_href,
+        );
+      }
+
+      const task = await promiseCopyOrMove;
+      await waitForTaskUrl(task['data'].task);
+
       setLoading(false);
-      addAlert({
-        title: t`Failed to load pulp_id of collection repository.`,
-        variant: 'danger',
-        description: errorMessage(status, statusText),
+      props.finishAction();
+      props.addAlert({
+        title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
+        variant: 'success',
+        description: '',
       });
     }
 
-    setLoading(true);
+    approveAsync().catch(() => {
+      setLoading(false);
 
-    const originRepoName = props.collectionVersion.repository_list.find(
-      (repo) => repo == Constants.NEEDSREVIEW || repo == Constants.NOTCERTIFIED,
-    );
-    const reposToApprove = [];
-
-    // fill repos that are actualy needed to approve, some of them may already contain the collection, those dont need to be approved again
-    // this handles the possible inconsistent state
-    selectedRepos.forEach((repo) => {
-      if (!fixedRepos.includes(repo)) {
-        reposToApprove.push(repo);
-      }
-    });
-
-    const repositoriesRef = props.allRepositories
-      .filter((repo) => reposToApprove.includes(repo.name))
-      .map((repo) => repo.pulp_href);
-
-    Repositories.getRepository({ name: originRepoName })
-      .then((data) => {
-        if (data.data.results.length == 0) {
-          failedToLoadRepo('', t`Repository name ${originRepoName} not found.`);
-        } else {
-          const pulp_id = parsePulpIDFromURL(data.data.results[0].pulp_href);
-          CollectionVersionAPI.get(props.collectionVersion.id)
-            .then((data) => {
-              Repositories.moveCollectionVersion(
-                pulp_id,
-                [data.data.pulp_href],
-                repositoriesRef,
-              )
-                .then((task) => {
-                  return waitForTaskUrl(task['data'].task);
-                })
-                .then(() => {
-                  setLoading(false);
-                  props.finishAction();
-                  props.addAlert({
-                    title: t`Certification status for collection "${props.collectionVersion.namespace} ${props.collectionVersion.name} v${props.collectionVersion.version}" has been successfully updated.`,
-                    variant: 'success',
-                    description: '',
-                  });
-                })
-                .catch(({ response: { status, statusText } }) => {
-                  setLoading(false);
-                  addAlert({
-                    title: t`Failed to approve collection.`,
-                    variant: 'danger',
-                    description: errorMessage(status, statusText),
-                  });
-                });
-            })
-            .catch(({ response: { status, statusText } }) => {
-              setLoading(false);
-              addAlert({
-                title: t`Failed to load collection.`,
-                variant: 'danger',
-                description: errorMessage(status, statusText),
-              });
-            });
-        }
-      })
-      .catch(({ response: { status, statusText } }) => {
-        failedToLoadRepo(status, statusText);
+      addAlert({
+        title: t`Failed to approve collection.`,
+        variant: 'danger',
+        description: error,
       });
+    });
   }
 
   function addAlert(alert: AlertType) {
     setAlerts((prevAlerts) => [...prevAlerts, alert]);
-  }
-
-  function closeAlert() {
-    setAlerts([]);
   }
 
   function changeSelection(name) {
@@ -231,6 +276,92 @@ export const ApproveModal = (props: IProps) => {
     setFixedRepos(fixedReposLocal);
   }, []);
 
+  function renderMultipleSelector() {
+    function onToggle(isOpen: boolean) {
+      setIsSelectorOpen(isOpen);
+    }
+
+    function onFocus() {
+      const element = document.getElementById('toggle-split-button');
+      element.focus();
+    }
+
+    function onSelect() {
+      setIsSelectorOpen(false);
+      onFocus();
+    }
+
+    function selectAll() {
+      setSelectedRepos(props.allRepositories.map((a) => a.name));
+    }
+
+    function selectPage() {
+      const newRepos = [...selectedRepos];
+
+      repositoryList.forEach((repo) => {
+        if (!selectedRepos.includes(repo.name)) {
+          newRepos.push(repo.name);
+        }
+      });
+
+      setSelectedRepos(newRepos);
+    }
+
+    function deselectAll() {
+      setSelectedRepos(fixedRepos);
+    }
+
+    function deselectPage() {
+      const newSelectedRepos = selectedRepos.filter(
+        (repo) =>
+          fixedRepos.includes(repo) ||
+          !repositoryList.find((repo2) => repo2.name == repo),
+      );
+      setSelectedRepos(newSelectedRepos);
+    }
+
+    const dropdownItems = [
+      <DropdownItem
+        onClick={selectPage}
+        key='select-page'
+      >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={selectAll}
+        key='select-all'
+      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
+      <DropdownSeparator key='separator' />,
+      <DropdownItem
+        onClick={deselectPage}
+        key='deselect-page'
+      >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
+      <DropdownItem
+        onClick={deselectAll}
+        key='deselect-all'
+      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
+    ];
+
+    return (
+      <Dropdown
+        onSelect={onSelect}
+        toggle={
+          <DropdownToggle
+            splitButtonItems={[
+              <DropdownToggleCheckbox
+                id='split-button-toggle-checkbox'
+                key='split-checkbox'
+                aria-label='Select all'
+              />,
+            ]}
+            onToggle={onToggle}
+            id='toggle-split-button'
+          />
+        }
+        isOpen={isSelectorOpen}
+        dropdownItems={dropdownItems}
+      />
+    );
+  }
+
   function renderTable() {
     if (!props.collectionVersion) {
       return;
@@ -314,6 +445,7 @@ export const ApproveModal = (props: IProps) => {
           <div className='toolbar hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
+                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
                 <ToolbarItem>
                   <CompoundFilter
                     inputText={inputText}
@@ -365,7 +497,10 @@ export const ApproveModal = (props: IProps) => {
           </div>
         </section>
 
-        <AlertList alerts={alerts} closeAlert={() => closeAlert()} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+        />
       </Modal>
     </>
   );
