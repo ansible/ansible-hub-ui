@@ -21,7 +21,6 @@ import {
 import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
@@ -36,7 +35,7 @@ interface IProps {
   closeModal: () => void;
   errorMessages: ErrorMessagesType;
   remote: RemoteType;
-  remoteType?: 'registry' | 'ansible-remote';
+  remoteType: 'registry' | 'ansible-remote';
   saveRemote: () => void;
   showModal?: boolean;
   showMain?: boolean;
@@ -105,6 +104,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       saveRemote,
       showMain,
       showModal,
+      remoteType,
       title,
     } = this.props;
 
@@ -112,25 +112,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
       return null;
     }
 
-    const remoteType = this.props.remoteType || this.getRemoteType(remote.url);
-
-    let requiredFields = ['name', 'url'];
+    const requiredFields = ['name', 'url'];
     let disabledFields = allowEditName ? [] : ['name'];
 
     switch (remoteType) {
       case 'ansible-remote':
-      case 'none':
         // require only name, url; nothing disabled
-        break;
-
-      case 'certified':
-        requiredFields = requiredFields.concat(['auth_url']);
-        disabledFields = disabledFields.concat(['requirements_file']);
-        break;
-
-      case 'community':
-        requiredFields = requiredFields.concat(['requirements_file']);
-        disabledFields = disabledFields.concat(['auth_url', 'token']);
         break;
 
       case 'registry':
@@ -145,7 +132,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
     const save = (
       <Button
-        isDisabled={!this.isValid(requiredFields, remoteType)}
+        isDisabled={!this.isValid(requiredFields)}
         key='confirm'
         variant='primary'
         onClick={() => saveRemote()}
@@ -788,8 +775,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
     );
   }
 
-  private isValid(requiredFields, remoteType) {
-    const { remote } = this.props;
+  private isValid(requiredFields) {
+    const { remote, remoteType } = this.props;
 
     for (const field of requiredFields) {
       if (!remote[field] || remote[field] === '') {
@@ -797,9 +784,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       }
     }
 
-    if (
-      ['community', 'certified', 'none', 'ansible-remote'].includes(remoteType)
-    ) {
+    if (remoteType === 'ansible-remote') {
       // only required in remotes, not registries
       if (remote.download_concurrency < 1) {
         return false;
@@ -811,24 +796,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
     }
 
     return true;
-  }
-
-  private getRemoteType(
-    url: string,
-  ): 'community' | 'certified' | 'none' | 'ansible-remote' {
-    for (const host of Constants.UPSTREAM_HOSTS) {
-      if (url.includes(host)) {
-        return 'community';
-      }
-    }
-
-    for (const host of Constants.DOWNSTREAM_HOSTS) {
-      if (url.includes(host)) {
-        return 'certified';
-      }
-    }
-
-    return 'none';
   }
 
   private updateIsSet(fieldName: string, value: boolean) {

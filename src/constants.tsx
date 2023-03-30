@@ -10,9 +10,6 @@ export class Constants {
   static readonly INSIGHTS_DEPLOYMENT_MODE = 'insights';
   static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
-  static readonly ADMIN_GROUP = 'system:partner-engineers';
-  static PUBLISHED = 'published';
-
   static CERTIFIED_REPO =
     DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
       ? 'published'
@@ -31,27 +28,12 @@ export class Constants {
     'galaxy.add_group',
   ];
 
-  static UPSTREAM_HOSTS = [
-    'galaxy.ansible.com',
-    'galaxy-dev.ansible.com',
-    'galaxy-qa.ansible.com',
-  ];
-
-  static DOWNSTREAM_HOSTS = [
-    'console.redhat.com',
-    'console.stage.redhat.com',
-    'ci.console.redhat.com',
-    'qa.console.redhat.com',
-  ];
-
   static REPOSITORYNAMES = {
     published: defineMessage({ message: `Published` }),
     'rh-certified': defineMessage({ message: `Red Hat Certified` }),
     community: defineMessage({ message: `Community` }),
     validated: defineMessage({ message: `Validated` }),
   };
-
-  static ALLOWEDREPOS = ['community', 'published', 'rh-certified', 'validated'];
 
   static COLLECTION_FILTER_TAGS = [
     'application',
@@ -164,13 +146,6 @@ export class Constants {
     'pulpcore.plugin.tasking.add_and_remove': defineMessage({
       message: `Pulpcore: Add or remove`,
     }),
-  };
-
-  static HUMAN_STATUS = {
-    completed: t`Completed`,
-    failed: t`Failed`,
-    running: t`Running`,
-    waiting: t`Waiting`,
   };
 
   static LOCKED_ROLES_WITH_DESCRIPTION = {
