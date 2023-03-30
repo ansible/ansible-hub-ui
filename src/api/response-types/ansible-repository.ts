@@ -7,6 +7,7 @@ export class AnsibleRepositoryType {
   pulp_labels?: { [key: string]: string };
   remote?: string;
   retain_repo_versions: number;
+  private?: boolean;
 
   // gpgkey
   // last_synced_metadata_time
