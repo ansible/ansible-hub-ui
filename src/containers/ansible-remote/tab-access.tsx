@@ -51,6 +51,14 @@ export const RemoteAccessTab = ({
     setGroups(null);
     AnsibleRemoteAPI.myPermissions(id)
       .then(({ data: { permissions } }) => {
+        setCanEditOwners(
+          canEditAnsibleRemoteAccess({
+            hasPermission,
+            hasObjectPermission: (p: string): boolean =>
+              permissions.includes(p),
+            user,
+          }),
+        );
         AnsibleRemoteAPI.listRoles(id)
           .then(({ data: { roles } }) => {
             const groupRoles = [];
@@ -67,14 +75,6 @@ export const RemoteAccessTab = ({
 
             setName(name);
             setGroups(groupRoles);
-            setCanEditOwners(
-              canEditAnsibleRemoteAccess({
-                hasPermission,
-                hasObjectPermission: (p: string): boolean =>
-                  permissions.includes(p),
-                user,
-              }),
-            );
           })
           .catch(() => {
             setGroups([]);

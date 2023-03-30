@@ -154,14 +154,15 @@ export const PageWithTabs = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
+        hasObjectPermission: (permission) =>
+          item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        hasObjectPermission: (permission) =>
-          item?.my_permissions?.includes?.(permission),
+        user: this.context.user,
       };
 
       const name = item?.name || routeParams.name;

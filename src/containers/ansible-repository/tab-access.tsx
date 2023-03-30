@@ -51,6 +51,14 @@ export const RepositoryAccessTab = ({
     setGroups(null);
     AnsibleRepositoryAPI.myPermissions(id)
       .then(({ data: { permissions } }) => {
+        setCanEditOwners(
+          canEditAnsibleRepositoryAccess({
+            hasPermission,
+            hasObjectPermission: (p: string): boolean =>
+              permissions.includes(p),
+            user,
+          }),
+        );
         AnsibleRepositoryAPI.listRoles(id)
           .then(({ data: { roles } }) => {
             const groupRoles = [];
@@ -67,14 +75,6 @@ export const RepositoryAccessTab = ({
 
             setName(name);
             setGroups(groupRoles);
-            setCanEditOwners(
-              canEditAnsibleRepositoryAccess({
-                hasPermission,
-                hasObjectPermission: (p: string): boolean =>
-                  permissions.includes(p),
-                user,
-              }),
-            );
           })
           .catch(() => {
             setGroups([]);
