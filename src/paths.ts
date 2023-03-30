@@ -122,6 +122,7 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
+  landingPage = '/landing-page',
 }
 
 export const namespaceBreadcrumb = {
