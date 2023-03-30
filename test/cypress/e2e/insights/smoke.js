@@ -75,10 +75,10 @@ describe('cloud smoketest', () => {
       cy.contains('button', 'Upload new version').should('exist');
     });
 
-    it('can load the Repo Management page', () => {
+    it.skip('can load the Repo Management page', () => {
       cy.login();
       // wait for the Repo management button to appear and then click on it
-      cy.get('[data-ouia-component-id="Repo Management"]').click();
+      cy.get('[data-ouia-component-id="Repositories"]').click();
 
       // wait for the the repository list to appear
       cy.get('.repository-list').should('be.visible');

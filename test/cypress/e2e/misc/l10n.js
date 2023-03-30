@@ -16,17 +16,17 @@ const languageCheckHelper = (url, selector) => (language, message) => {
 };
 
 describe('Localization tests with the t`String` format', () => {
-  const helper = languageCheckHelper(`${uiPrefix}repositories`, 'h1');
+  const helper = languageCheckHelper(`${uiPrefix}tasks`, 'h1');
 
   beforeEach(() => {
     cy.login();
   });
 
   const translations = {
-    en: 'Repo Management',
-    fr: 'Gestion de référentiel',
-    ja: 'リポジトリー管理',
-    zh: '仓库管理',
+    en: 'Task Management',
+    fr: 'Jobs de gestion',
+    ja: 'タスク管理',
+    zh: '任务管理',
   };
 
   Object.entries(translations).forEach(([language, message]) => {

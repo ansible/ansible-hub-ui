@@ -16,10 +16,11 @@ describe('Insights Menu Tests', () => {
     ).click();
   }
 
-  let menuItems = [
+  const menuItems = [
     'Collections',
     'Partners',
-    'Repo Management',
+    'Repositories',
+    'Remotes',
     'Task Management',
     'Connect to Hub',
   ];

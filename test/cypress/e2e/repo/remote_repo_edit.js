@@ -6,7 +6,7 @@ function clearField(name) {
 }
 
 describe('edit a remote repository', () => {
-  let remoteRepoUrl = `${uiPrefix}repositories?tab=remote`;
+  let remoteRepoUrl = `${uiPrefix}ansible/remotes`;
 
   beforeEach(() => {
     cy.login();
@@ -16,7 +16,7 @@ describe('edit a remote repository', () => {
     cy.visit(remoteRepoUrl);
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
-    cy.get('input[id="name"]').should('be.disabled'); //has a readonly name field
+    cy.get('input[id="name"]').should('be.disabled'); // has a readonly name field
     cy.get('input[id="url"]').clear();
     cy.get('button').contains('Save').should('be.disabled'); // Save button disabled when required fields are missing
     cy.get('[id="url-helper"]').should(

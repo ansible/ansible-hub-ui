@@ -2,10 +2,10 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repo Management tests', () => {
-  let remoteRepoUrl = `${uiPrefix}repositories?tab=remote`;
-  let localRepoUrl = `${uiPrefix}repositories`;
+  const remoteRepoUrl = `${uiPrefix}ansible/remotes`;
+  const localRepoUrl = `${uiPrefix}ansible/repositories`;
 
-  let noPrivilegesUser0 = 'noPrivilegesUser0';
+  const noPrivilegesUser0 = 'noPrivilegesUser0';
 
   before(() => {
     cy.deleteTestGroups();
