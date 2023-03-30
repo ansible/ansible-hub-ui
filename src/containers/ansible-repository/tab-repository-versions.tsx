@@ -44,6 +44,10 @@ const VersionContent = ({
   hasPermission: (string) => boolean;
 }) => {
   const [state, setState] = useState({});
+  if (!href) {
+    return null;
+  }
+
   const API = AnyAPI(href);
   const query = ({ params }) => API.list(params);
   const renderTableRow = ({
