@@ -54,13 +54,12 @@ export const canEditAnsibleRepository = has_model_or_obj_perms(
   'ansible.change_ansiblerepository',
 );
 export const canSyncAnsibleRepository = canEditAnsibleRepository;
-export const canViewAnsibleRepositories = has_model_or_obj_perms(
-  'ansible.view_ansiblerepository',
-);
+// everybody can list/view, not has_model_or_obj_perms('ansible.view_ansiblerepository')
+export const canViewAnsibleRepositories = isLoggedIn;
 export const canEditAnsibleRepositoryAccess = has_model_or_obj_perms(
   'ansible.manage_roles_ansiblerepository',
 );
 
 // Ansible Repository Versions
-// has_repository_model_or_obj_perms
+// simulating has_repository_model_or_obj_perms by passing in repository as item
 export const canRevertAnsibleRepositoryVersion = canEditAnsibleRepository;
