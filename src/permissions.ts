@@ -16,8 +16,8 @@ export const isLoggedIn: PermissionContextType = ({ user }) =>
 
 const has_model_perms =
   (permission: string): PermissionContextType =>
-  ({ hasPermission }) =>
-    hasPermission(permission);
+  ({ hasPermission, user }) =>
+    hasPermission(permission) || user?.is_superuser;
 
 const has_model_or_obj_perms =
   (permission: string): PermissionContextType =>
