@@ -17,7 +17,7 @@ describe('Task table contains correct headers and filter', () => {
     cy.get('[aria-label="Actions"]').eq(1).click();
     cy.get('tr').eq(2).contains('Sync').click();
 
-    cy.get('.alert-info');
+    cy.get('.pf-c-alert.pf-m-info');
   });
 
   it('table contains all columns and filter', () => {

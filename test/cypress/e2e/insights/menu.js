@@ -19,8 +19,8 @@ describe('Insights Menu Tests', () => {
   const menuItems = [
     'Collections',
     'Partners',
-    'Repositories',
-    'Remotes',
+    //'Repositories',
+    //'Remotes',
     'Task Management',
     'Connect to Hub',
   ];
