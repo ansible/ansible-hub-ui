@@ -12,6 +12,8 @@ export class AnsibleRepositoryType {
   // gpgkey
   // last_synced_metadata_time
   // versions_href
+
+  my_permissions?: string[];
 }
 
 type ContentSummary = { [key: string]: { count: number; href: string } };

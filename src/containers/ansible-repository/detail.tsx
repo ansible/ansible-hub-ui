@@ -9,7 +9,8 @@ import {
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import { canViewAnsibleRepositories } from 'src/permissions';
+import { parsePulpIDFromURL } from 'src/utilities';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
@@ -47,7 +48,7 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
         ? { name: t`Group ${group}` }
         : { name: tab.name },
     ].filter(Boolean),
-  condition: isLoggedIn,
+  condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',
   errorTitle: t`Repository could not be displayed.`,
   headerActions: [
@@ -66,10 +67,21 @@ export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
       )}
     </>
   ),
-  query: ({ name }) =>
-    AnsibleRepositoryAPI.list({ name }).then(
-      ({ data: { results } }) => results[0],
-    ),
+  query: ({ name }) => {
+    return AnsibleRepositoryAPI.list({ name })
+      .then(({ data: { results } }) => results[0])
+      .then((repository) => {
+        return AnsibleRepositoryAPI.myPermissions(
+          parsePulpIDFromURL(repository.pulp_href),
+        )
+          .then(({ data: { permissions } }) => permissions)
+          .catch((e) => {
+            console.error(e);
+            return [];
+          })
+          .then((my_permissions) => ({ ...repository, my_permissions }));
+      });
+  },
   renderTab: (tab, item, actionContext) =>
     ({
       details: <DetailsTab item={item} actionContext={actionContext} />,

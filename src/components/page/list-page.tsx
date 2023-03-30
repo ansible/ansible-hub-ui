@@ -205,12 +205,14 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
+        hasObjectPermission: () => false, // list items don't load my_permissions .. but superadmin should still work
         hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
+        user: this.context.user,
       };
 
       return (

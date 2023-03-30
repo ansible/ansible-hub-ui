@@ -1,9 +1,11 @@
 import { t } from '@lingui/macro';
 import { AnsibleRepositoryAPI } from 'src/api';
+import { canSyncAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositorySyncAction = Action({
+  condition: canSyncAnsibleRepository,
   title: t`Sync`,
   onClick: ({ name, pulp_href }, { addAlert, query }) => {
     const pulpId = parsePulpIDFromURL(pulp_href);

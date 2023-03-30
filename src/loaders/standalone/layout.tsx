@@ -32,6 +32,7 @@ import { StandaloneMenu } from './menu';
 interface IProps {
   children: React.ReactNode;
   featureFlags: FeatureFlagsType;
+  hasPermission: (string) => boolean;
   setUser: (user) => void;
   settings: SettingsType;
   user: UserType;
@@ -40,6 +41,7 @@ interface IProps {
 export const StandaloneLayout = ({
   children,
   featureFlags,
+  hasPermission,
   setUser,
   settings,
   user,
@@ -156,7 +158,11 @@ export const StandaloneLayout = ({
   const Sidebar = (
     <PageSidebar
       theme='dark'
-      nav={<StandaloneMenu context={{ user, settings, featureFlags }} />}
+      nav={
+        <StandaloneMenu
+          context={{ user, settings, featureFlags, hasPermission }}
+        />
+      }
     />
   );
 

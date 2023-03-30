@@ -32,7 +32,7 @@ export function loadCollection({
 
   CollectionVersionAPI.getCached(
     {
-      repository_name: repo,
+      ...(repo ? { repository_name: repo } : {}),
       namespace,
       name,
       order_by: '-version',

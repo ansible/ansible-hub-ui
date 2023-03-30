@@ -61,7 +61,7 @@ interface PageWithTabsParams<T, ExtraState> {
 }
 
 export const PageWithTabs = function <
-  T extends { name: string },
+  T extends { name: string; my_permissions?: string[] },
   ExtraState = Record<string, never>,
 >({
   // ({ name }) => [{ url?, name }]
@@ -154,12 +154,15 @@ export const PageWithTabs = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
+        hasObjectPermission: (permission) =>
+          item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
+        user: this.context.user,
       };
 
       const name = item?.name || routeParams.name;

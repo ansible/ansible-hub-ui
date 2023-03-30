@@ -7,7 +7,10 @@ import {
 } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { isLoggedIn } from 'src/permissions';
+import {
+  canAddAnsibleRepository,
+  canEditAnsibleRepository,
+} from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRepository: AnsibleRepositoryType = {
@@ -29,13 +32,25 @@ export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       name ? { name: t`Edit` } : { name: t`Add` },
     ].filter(Boolean),
 
-  condition: isLoggedIn,
+  condition: (context, item?) =>
+    canAddAnsibleRepository(context) || canEditAnsibleRepository(context, item),
   displayName: 'AnsibleRepositoryEdit',
   errorTitle: t`Repository could not be displayed.`,
-  query: ({ name }) =>
-    AnsibleRepositoryAPI.list({ name }).then(
-      ({ data: { results } }) => results[0],
-    ),
+  query: ({ name }) => {
+    return AnsibleRepositoryAPI.list({ name })
+      .then(({ data: { results } }) => results[0])
+      .then((repository) => {
+        return AnsibleRepositoryAPI.myPermissions(
+          parsePulpIDFromURL(repository.pulp_href),
+        )
+          .then(({ data: { permissions } }) => permissions)
+          .catch((e) => {
+            console.error(e);
+            return [];
+          })
+          .then((my_permissions) => ({ ...repository, my_permissions }));
+      });
+  },
 
   title: ({ name }) => name || t`Add new repository`,
   transformParams: ({ name, ...rest }) => ({

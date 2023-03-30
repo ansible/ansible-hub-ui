@@ -20,7 +20,12 @@ import { parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
   item: AnsibleRepositoryType;
-  actionContext: { addAlert: (alert) => void; state: { params } };
+  actionContext: {
+    addAlert: (alert) => void;
+    state: { params };
+    hasPermission: (string) => boolean;
+    hasObjectPermission: (string) => boolean;
+  };
 }
 
 const AnyAPI = (href) =>
@@ -32,11 +37,17 @@ const AnyAPI = (href) =>
 const VersionContent = ({
   href,
   addAlert,
+  hasPermission,
 }: {
   href: string;
   addAlert: (alert) => void;
+  hasPermission: (string) => boolean;
 }) => {
   const [state, setState] = useState({});
+  if (!href) {
+    return null;
+  }
+
   const API = AnyAPI(href);
   const query = ({ params }) => API.list(params);
   const renderTableRow = ({
@@ -73,6 +84,7 @@ const VersionContent = ({
         state,
         setState,
         query,
+        hasPermission,
       }}
       defaultPageSize={10}
       defaultSort={'name'}
@@ -151,7 +163,7 @@ const BaseVersion = ({
 
 export const RepositoryVersionsTab = ({
   item,
-  actionContext: { addAlert, state },
+  actionContext: { addAlert, state, hasPermission, hasObjectPermission },
 }: TabProps) => {
   const pulpId = parsePulpIDFromURL(item.pulp_href);
   const latest_href = item.latest_version_href;
@@ -273,6 +285,8 @@ export const RepositoryVersionsTab = ({
         state: modalState,
         setState: setModalState,
         query: queryList,
+        hasPermission,
+        hasObjectPermission, // needs item=repository, not repository version
       }}
       defaultPageSize={10}
       defaultSort={'-pulp_created'}

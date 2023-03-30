@@ -1,38 +1,41 @@
 import { Button, DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { Tooltip } from 'src/components';
+import { type PermissionContextType } from 'src/permissions';
 
 type ModalType = ({ addAlert, state, setState, query }) => React.ReactNode;
 
 interface ActionParams {
   buttonVariant?: 'primary' | 'secondary';
+  condition?: PermissionContextType;
+  disabled?: (item, actionContext) => string | null;
   modal?: ModalType;
   onClick: (item, actionContext) => void;
   title: string;
   visible?: (item, actionContext) => boolean;
-  disabled?: (item, actionContext) => string | null;
 }
 
 export class ActionType {
-  title: string;
   button: (item, actionContext) => React.ReactNode | null;
+  disabled: (item, actionContext) => string | null;
   dropdownItem: (item, actionContext) => React.ReactNode | null;
   modal?: ModalType;
+  title: string;
   visible: (item, actionContext) => boolean;
-  disabled: (item, actionContext) => string | null;
 }
 
 export const Action = ({
   buttonVariant,
-  title,
-  onClick,
-  modal = null,
-  visible = () => true,
+  condition = () => true,
   disabled = () => null,
+  modal = null,
+  onClick,
+  title,
+  visible = () => true,
 }: ActionParams): ActionType => ({
   title,
   button: (item, actionContext) =>
-    visible(item, actionContext) ? (
+    condition(actionContext, item) && visible(item, actionContext) ? (
       disabled(item, actionContext) ? (
         <Tooltip content={disabled(item, actionContext)} key={title}>
           <Button variant={buttonVariant} isDisabled>
@@ -50,7 +53,7 @@ export const Action = ({
       )
     ) : null,
   dropdownItem: (item, actionContext) =>
-    visible(item, actionContext) ? (
+    condition(actionContext, item) && visible(item, actionContext) ? (
       disabled(item, actionContext) ? (
         <DropdownItem
           key={title}

@@ -34,22 +34,22 @@ describe('Hub Menu Tests', () => {
   describe('user without permissions', () => {
     // one more similar test in view-only
     const visibleMenuItems = [
+      'Collections > API token',
       'Collections > Collections',
       'Collections > Namespaces',
       'Collections > Repositories',
-      'Collections > Remotes',
-      'Collections > API token',
+      'Documentation',
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',
-      'Task Management',
       'Signature Keys',
-      'Documentation',
+      'Task Management',
     ];
     const missingMenuItems = [
-      'User Access > Users',
+      'Collections > Approval',
+      'Collections > Remotes',
       'User Access > Groups',
       'User Access > Roles',
-      'Collections > Approval',
+      'User Access > Users',
     ];
 
     it('sees limited menu', () => {
