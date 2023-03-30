@@ -36,8 +36,6 @@ describe('Hub Menu Tests', () => {
     const visibleMenuItems = [
       'Collections > Collections',
       'Collections > Namespaces',
-      'Collections > Repositories',
-      'Collections > Remotes',
       'Collections > API token',
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',
@@ -46,10 +44,12 @@ describe('Hub Menu Tests', () => {
       'Documentation',
     ];
     const missingMenuItems = [
-      'User Access > Users',
+      'Collections > Approval',
+      'Collections > Remotes',
+      'Collections > Repositories',
       'User Access > Groups',
       'User Access > Roles',
-      'Collections > Approval',
+      'User Access > Users',
     ];
 
     it('sees limited menu', () => {
