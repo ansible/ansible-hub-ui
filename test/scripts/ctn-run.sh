@@ -17,5 +17,6 @@ docker run \
 	-e HUB_ADMIN_GROUP \
 	-e HUB_REQUIRE_CERTIFY \
 	-e HUB_UPLOAD_TO_INBOUND \
+	-e RUNNER_DEBUG=1 \
 	--rm \
 	hubuitest

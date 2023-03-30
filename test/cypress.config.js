@@ -20,4 +20,6 @@ module.exports = defineConfig({
     // Default is 0
     openMode: 0,
   },
+  // only record videos when running action in debug mode
+  video: !!process.env.RUNNER_DEBUG,
 });
