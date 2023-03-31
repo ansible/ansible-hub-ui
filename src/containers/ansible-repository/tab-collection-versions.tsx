@@ -1,31 +1,125 @@
 import { t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
-import { AnsibleRepositoryType, CollectionVersionAPI } from 'src/api';
-import { Details } from 'src/components';
-import { handleHttpError } from 'src/utilities';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  AnsibleRepositoryType,
+  CollectionVersionAPI,
+  CollectionVersionSearch,
+} from 'src/api';
+import { DetailList, ListItemActions } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
   item: AnsibleRepositoryType;
-  actionContext: { addAlert: (alert) => void; state: { params } };
+  actionContext: {
+    addAlert: (alert) => void;
+    state: { params };
+    hasPermission;
+  };
 }
 
 export const CollectionVersionsTab = ({
   item,
-  actionContext: { addAlert },
+  actionContext: { addAlert, hasPermission },
 }: TabProps) => {
-  const [versions, setVersions] = useState([]);
+  const query = ({ params }) => {
+    const newParams = { ...params };
+    newParams.ordering = newParams.sort;
+    delete newParams.sort;
 
-  useEffect(() => {
-    CollectionVersionAPI.list({ repository: item.name })
-      .then(({ data: { data } }) => setVersions(data))
-      .catch(
-        handleHttpError(
-          t`Failed to load collection versions`,
-          () => setVersions([]),
-          addAlert,
-        ),
-      );
-  }, []);
+    const repository = parsePulpIDFromURL(item.pulp_href);
+    return CollectionVersionAPI.list({
+      repository,
+      ...newParams,
+    }).then(
+      ({
+        data: {
+          meta: { count },
+          data: results,
+        },
+      }) => ({
+        data: { count, results },
+      }),
+    );
+  };
 
-  return <Details item={versions} />;
+  const [modalState, setModalState] = useState({});
+
+  const renderTableRow = (
+    item: CollectionVersionSearch,
+    index: number,
+    actionContext,
+    listItemActions,
+  ) => {
+    const {
+      collection_version: { name, namespace, version, description },
+    } = item;
+
+    const kebabItems = listItemActions.map((action) =>
+      action.dropdownItem(item, actionContext),
+    );
+
+    return (
+      <tr key={index}>
+        <td>
+          <Link
+            to={formatPath(
+              Paths.collection,
+              {
+                namespace,
+                collection: name,
+              },
+              {
+                version,
+              },
+            )}
+          >
+            {namespace}.{name} v{version}
+          </Link>
+        </td>
+        <td>{description}</td>
+        <ListItemActions kebabItems={kebabItems} />
+      </tr>
+    );
+  };
+
+  return (
+    <DetailList<CollectionVersionSearch>
+      actionContext={{
+        addAlert,
+        state: modalState,
+        setState: setModalState,
+        query,
+        hasPermission,
+      }}
+      defaultPageSize={10}
+      defaultSort={'name'}
+      errorTitle={t`Collection versions could not be displayed.`}
+      filterConfig={null}
+      listItemActions={
+        [
+          /*TODO*/
+        ]
+      }
+      noDataButton={null}
+      noDataDescription={t`Collection versions will appear once the collection is modified.`}
+      noDataTitle={t`No collection versions yet`}
+      query={query}
+      renderTableRow={renderTableRow}
+      sortHeaders={[
+        {
+          title: t`Collection`,
+          type: 'none',
+          id: 'col1',
+        },
+        {
+          title: t`Description`,
+          type: 'none',
+          id: 'col2',
+        },
+      ]}
+      title={t`Collection versions`}
+    />
+  );
 };

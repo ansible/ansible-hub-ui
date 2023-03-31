@@ -17,12 +17,10 @@ import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';
 import { RepositoryVersionsTab } from './tab-repository-versions';
 
-const wip = '🚧 ';
-
 const tabs = [
   { id: 'details', name: t`Details` },
   { id: 'access', name: t`Access` },
-  { id: 'collection-versions', name: wip + t`Collection versions` },
+  { id: 'collection-versions', name: t`Collection versions` },
   { id: 'repository-versions', name: t`Versions` },
 ];
 
