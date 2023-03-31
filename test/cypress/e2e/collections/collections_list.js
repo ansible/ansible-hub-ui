@@ -54,6 +54,7 @@ describe('Collections list Tests', () => {
   });
 
   after(() => {
+    cy.galaxykit('task wait all');
     cy.deleteNamespacesAndCollections();
   });
 

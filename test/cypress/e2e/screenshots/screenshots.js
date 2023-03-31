@@ -33,7 +33,8 @@ describe('screenshots', () => {
     screenshot('/collections');
     screenshot('/namespaces');
     // TODO - problems - repositories are showing minutes, so text may quickly change and generate diff
-    //screenshot('/repositories');
+    //screenshot('/ansible/repositories');
+    screenshot('/ansible/remotes');
     screenshot('/token');
     screenshot('/approval-dashboard');
     screenshot('/containers');

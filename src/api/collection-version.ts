@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CollectionVersionSearch } from '../api';
+import { CollectionVersionSearch } from 'src/api';
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {

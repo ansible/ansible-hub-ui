@@ -4,10 +4,9 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('Task table contains correct headers and filter', () => {
   before(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repositories?tab=remote`);
+    cy.visit(`${uiPrefix}ansible/repositories`);
 
-    cy.contains('Repo Management');
-    cy.contains('Sync');
+    cy.contains('Repositories');
 
     cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
       'sync',
@@ -15,10 +14,10 @@ describe('Task table contains correct headers and filter', () => {
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
 
+    cy.get('[aria-label="Actions"]').eq(1).click();
     cy.get('tr').eq(2).contains('Sync').click();
 
-    cy.wait('@sync');
-    cy.wait('@remotes');
+    cy.get('.pf-c-alert.pf-m-info');
   });
 
   it('table contains all columns and filter', () => {

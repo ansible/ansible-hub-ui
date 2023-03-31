@@ -3,6 +3,25 @@ import { Route, Routes } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
 import { Paths } from 'src/paths';
 
+const AnsibleRemoteDetail = lazy(
+  () => import('src/containers/ansible-remote/detail'),
+);
+const AnsibleRemoteEdit = lazy(
+  () => import('src/containers/ansible-remote/edit'),
+);
+const AnsibleRemoteList = lazy(
+  () => import('src/containers/ansible-remote/list'),
+);
+const AnsibleRepositoryDetail = lazy(
+  () => import('src/containers/ansible-repository/detail'),
+);
+const AnsibleRepositoryEdit = lazy(
+  () => import('src/containers/ansible-repository/edit'),
+);
+const AnsibleRepositoryList = lazy(
+  () => import('src/containers/ansible-repository/list'),
+);
+
 const CertificationDashboard = lazy(
   () =>
     import('src/containers/certification-dashboard/certification-dashboard'),
@@ -50,10 +69,6 @@ const NotFound = lazy(() => import('src/containers/not-found/not-found'));
 
 const Partners = lazy(() => import('src/containers/namespace-list/partners'));
 
-const RepositoryList = lazy(
-  () => import('src/containers/repositories/repository-list'),
-);
-
 const Search = lazy(() => import('src/containers/search/search'));
 
 const SignatureKeysList = lazy(
@@ -68,16 +83,21 @@ const TaskListView = lazy(
   () => import('src/containers/task-management/task-list-view'),
 );
 
-const TokenPage = lazy(() => import('src/containers/token/token-insights'));
+const TokenInsights = lazy(() => import('src/containers/token/token-insights'));
 
 const routes = [
-  { path: Paths.repositories, component: RepositoryList },
+  { path: Paths.ansibleRemoteDetail, component: AnsibleRemoteDetail },
+  { path: Paths.ansibleRemoteEdit, component: AnsibleRemoteEdit },
+  { path: Paths.ansibleRemotes, component: AnsibleRemoteList },
+  { path: Paths.ansibleRepositories, component: AnsibleRepositoryList },
+  { path: Paths.ansibleRepositoryDetail, component: AnsibleRepositoryDetail },
+  { path: Paths.ansibleRepositoryEdit, component: AnsibleRepositoryEdit },
   {
     path: Paths.approvalDashboard,
     component: CertificationDashboard,
   },
   { path: Paths.notFound, component: NotFound },
-  { path: Paths.token, component: TokenPage },
+  { path: Paths.token, component: TokenInsights },
   { path: Paths.partners, component: Partners },
   { path: Paths.editNamespace, component: EditNamespace },
   { path: Paths.myCollections, component: NamespaceDetail },

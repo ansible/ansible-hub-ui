@@ -25,7 +25,7 @@ const listItemActions = [
   ansibleRepositoryDeleteAction,
 ];
 
-export const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
+const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   condition: canViewAnsibleRepositories,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',

@@ -26,7 +26,7 @@ const tabs = [
   { id: 'repository-versions', name: t`Versions` },
 ];
 
-export const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
+const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   breadcrumbs: ({ name, tab, params: { repositoryVersion, group } }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },

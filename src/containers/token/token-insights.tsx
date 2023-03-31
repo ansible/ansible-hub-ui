@@ -31,7 +31,7 @@ interface IState {
   repoUrl: string;
 }
 
-class TokenPage extends React.Component<RouteProps, IState> {
+class TokenInsights extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -97,8 +97,8 @@ class TokenPage extends React.Component<RouteProps, IState> {
             <p>
               <Trans>
                 Use the{' '}
-                <Link to={formatPath(Paths.repositories)}>
-                  Repository Management
+                <Link to={formatPath(Paths.ansibleRepositories)}>
+                  Repositories
                 </Link>{' '}
                 page to sync collections curated by your organization to the Red
                 Hat Certified repository in your private Automation Hub. Users
@@ -236,5 +236,5 @@ class TokenPage extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(TokenPage);
-TokenPage.contextType = AppContext;
+export default withRouter(TokenInsights);
+TokenInsights.contextType = AppContext;

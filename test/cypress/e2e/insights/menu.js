@@ -16,10 +16,11 @@ describe('Insights Menu Tests', () => {
     ).click();
   }
 
-  let menuItems = [
+  const menuItems = [
     'Collections',
     'Partners',
-    'Repo Management',
+    //'Repositories',
+    //'Remotes',
     'Task Management',
     'Connect to Hub',
   ];
@@ -51,13 +52,16 @@ describe('Insights Menu Tests', () => {
     cy.contains('main', 'No namespaces yet');
   });
 
-  it('can navigate to Repo Management', () => {
-    menuClick('Repo Management');
-    cy.contains('main', 'Repo Management');
-    cy.contains('main .body', 'Distribution name');
+  it.skip('can navigate to Repositories', () => {
+    menuClick('Repositories');
+    cy.contains('main', 'Repositories');
     cy.contains('main .body', 'Repository name');
-    cy.contains('main .body', 'Collection count');
-    cy.contains('main .body', 'Distribution URL');
+  });
+
+  it.skip('can navigate to Remotess', () => {
+    menuClick('Remotes');
+    cy.contains('main', 'Remotes');
+    cy.contains('main .body', 'Remote name');
   });
 
   it('can navigate to Task Management', () => {

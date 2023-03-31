@@ -200,10 +200,6 @@ export class ContentSummaryType {
   description: string;
 }
 
-export class CollectionExcludesType {
-  collections: string[];
-}
-
 export class CollectionDetailType {
   deprecated: boolean;
   all_versions: {

@@ -17,7 +17,7 @@ describe('signing versions - auto sign on approval', () => {
   });
 
   it('has the switch to sync only certified repos', () => {
-    cy.visit(`${uiPrefix}repositories?tab=remote`);
+    cy.visit(`${uiPrefix}ansible/remotes`);
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();

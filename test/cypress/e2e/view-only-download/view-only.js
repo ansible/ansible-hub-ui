@@ -58,7 +58,7 @@ describe('view-only mode - with download', () => {
   });
 
   it('gets Unauthorized elsewhere', () => {
-    cy.visit(`${uiPrefix}repositories`);
+    cy.visit(`${uiPrefix}ansible/repositories`);
     cy.contains('You do not have access to Automation Hub');
     cy.contains('.pf-c-button', 'Login');
   });

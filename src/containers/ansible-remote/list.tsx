@@ -28,7 +28,7 @@ const listItemActions = [
   ansibleRemoteDeleteAction,
 ];
 
-export const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
+const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   condition: canViewAnsibleRemotes,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',

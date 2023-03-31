@@ -2,7 +2,7 @@ import { PulpAPI } from './pulp';
 import { AnsibleRemoteType } from './response-types/ansible-remote';
 
 // simplified version of smartUpdate from remote.ts
-export function smartUpdate(
+function smartUpdate(
   remote: AnsibleRemoteType,
   unmodifiedRemote: AnsibleRemoteType,
 ) {

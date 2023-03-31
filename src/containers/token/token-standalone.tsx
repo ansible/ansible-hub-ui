@@ -24,7 +24,7 @@ interface IState {
   loadingToken: boolean;
 }
 
-class TokenPage extends React.Component<RouteProps, IState> {
+class TokenStandalone extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -139,6 +139,6 @@ class TokenPage extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(TokenPage);
+export default withRouter(TokenStandalone);
 
-TokenPage.contextType = AppContext;
+TokenStandalone.contextType = AppContext;
