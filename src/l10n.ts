@@ -1,5 +1,4 @@
 import { i18n } from '@lingui/core';
-import * as plurals from 'make-plural/plurals';
 import * as moment from 'moment';
 
 // remember to update .linguirc as well
@@ -25,7 +24,6 @@ async function activate(locale: string, pseudolocalization = false) {
     });
   }
 
-  i18n.loadLocaleData(locale, { plurals: plurals[locale] });
   i18n.load(locale, messages);
   i18n.activate(locale);
 
