@@ -1,6 +1,10 @@
 import { t } from '@lingui/macro';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  ansibleRepositoryCollectionVersionAddAction,
+  ansibleRepositoryCollectionVersionRemoveAction,
+} from 'src/actions';
 import {
   AnsibleRepositoryType,
   CollectionVersionAPI,
@@ -44,7 +48,8 @@ export const CollectionVersionsTab = ({
     );
   };
 
-  const [modalState, setModalState] = useState({});
+  const [modalState, setModalState] = useState({ repository: item });
+  useEffect(() => setModalState((ms) => ({ ...ms, repository: item })), [item]);
 
   const renderTableRow = (
     item: CollectionVersionSearch,
@@ -96,13 +101,19 @@ export const CollectionVersionsTab = ({
       defaultPageSize={10}
       defaultSort={'name'}
       errorTitle={t`Collection versions could not be displayed.`}
-      filterConfig={null}
-      listItemActions={
-        [
-          /*TODO*/
-        ]
-      }
-      noDataButton={null}
+      filterConfig={[
+        {
+          id: 'keywords',
+          title: t`Keywords`,
+        },
+        {
+          id: 'namespace',
+          title: t`Namespace`,
+        },
+      ]}
+      headerActions={[ansibleRepositoryCollectionVersionAddAction]}
+      listItemActions={[ansibleRepositoryCollectionVersionRemoveAction]}
+      noDataButton={ansibleRepositoryCollectionVersionAddAction.button}
       noDataDescription={t`Collection versions will appear once the collection is modified.`}
       noDataTitle={t`No collection versions yet`}
       query={query}

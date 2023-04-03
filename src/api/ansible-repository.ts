@@ -22,6 +22,18 @@ class API extends PulpAPI {
     });
   }
 
+  addContent(id, collection_version_href) {
+    return this.http.post(this.apiPath + id + '/modify/', {
+      add_content_units: [collection_version_href],
+    });
+  }
+
+  removeContent(id, collection_version_href) {
+    return this.http.post(this.apiPath + id + '/modify/', {
+      remove_content_units: [collection_version_href],
+    });
+  }
+
   listRoles(id, params?) {
     return super.list(params, this.apiPath + id + '/list_roles/');
   }

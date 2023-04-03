@@ -34,6 +34,7 @@ interface IProps<T> {
   defaultSort?: string;
   errorTitle: string;
   filterConfig?: FilterOption[];
+  headerActions?: ActionType[];
   listItemActions?: ActionType[];
   noDataButton?: (item, actionContext) => React.ReactNode;
   noDataDescription: string;
@@ -50,6 +51,7 @@ export function DetailList<T>({
   defaultSort,
   errorTitle,
   filterConfig,
+  headerActions,
   listItemActions,
   noDataButton,
   noDataDescription,
@@ -82,6 +84,9 @@ export function DetailList<T>({
 
   const renderModals = (actionContext) => (
     <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
       {listItemActions?.length
         ? listItemActions.map((action) => action?.modal?.(actionContext))
         : null}
@@ -121,6 +126,12 @@ export function DetailList<T>({
                       filterConfig={filterConfig || []}
                     />
                   </ToolbarItem>
+                  {headerActions?.length &&
+                    headerActions.map((action) => (
+                      <ToolbarItem key={action.title}>
+                        {action.button(null, actionContext)}
+                      </ToolbarItem>
+                    ))}
                 </ToolbarGroup>
               </ToolbarContent>
             </Toolbar>
