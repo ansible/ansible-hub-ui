@@ -103,7 +103,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 page to sync collections curated by your organization to the Red
                 Hat Certified repository in your private Automation Hub. Users
                 with the correct permissions can use the sync toggles on the{' '}
-                <Link to={formatPath(Paths.search)}>Collections</Link> page to
+                <Link to={formatPath(Paths.collections)}>Collections</Link> page to
                 control which collections are added to their organization&apos;s
                 sync repository.
               </Trans>

@@ -1,21 +1,13 @@
 import { t } from '@lingui/macro';
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+
 import * as React from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   AlertList,
   AlertType,
-  AppliedFilters,
   BaseHeader,
-  CompoundFilter,
   LoadingPageSpinner,
   Main,
-  Pagination,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -68,7 +60,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const { params, itemCount, loading, alerts } = this.state;
+    const { loading, alerts } = this.state;
 
     return (
       <React.Fragment>
@@ -83,57 +75,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
           ) : (
             <section className='body'>
               <div className='hub-list-toolbar'>
-                <Toolbar>
-                  <ToolbarContent>
-                    <ToolbarGroup>
-                      <ToolbarItem>
-                        <CompoundFilter
-                          inputText={this.state.inputText}
-                          onChange={(text) =>
-                            this.setState({ inputText: text })
-                          }
-                          updateParams={(p) => {
-                            p['page'] = 1;
-                            this.updateParams(p, () => this.query());
-                          }}
-                          params={params}
-                          filterConfig={[
-                            {
-                              id: 'name',
-                              title: t`Name`,
-                            },
-                          ]}
-                        />
-                      </ToolbarItem>
-                    </ToolbarGroup>
-                  </ToolbarContent>
-                </Toolbar>
-                <Pagination
-                  params={params}
-                  updateParams={(p) => this.updateParams(p, () => this.query())}
-                  count={itemCount}
-                  isTop
-                />
               </div>
-              <div>
-                <AppliedFilters
-                  updateParams={(p) => {
-                    this.updateParams(p, () => this.query());
-                    this.setState({ inputText: '' });
-                  }}
-                  params={params}
-                  ignoredParams={['page_size', 'page', 'sort', 'ordering']}
-                  niceNames={{
-                    name: t`Name`,
-                  }}
-                />
-              </div>
-
-              <Pagination
-                params={params}
-                updateParams={(p) => this.updateParams(p, () => this.query())}
-                count={itemCount}
-              />
             </section>
           )}
         </Main>
