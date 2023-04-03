@@ -11,3 +11,4 @@ export { ansibleRepositoryDeleteAction } from './ansible-repository-delete';
 export { ansibleRepositoryEditAction } from './ansible-repository-edit';
 export { ansibleRepositorySyncAction } from './ansible-repository-sync';
 export { ansibleRepositoryVersionRevertAction } from './ansible-repository-version-revert';
+export { ansibleRepositoryCollectionVersionRemoveAction } from './ansible-repository-collection-version-remove';

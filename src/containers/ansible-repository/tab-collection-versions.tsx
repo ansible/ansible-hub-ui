@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ansibleRepositoryCollectionVersionRemoveAction } from 'src/actions';
 import {
   AnsibleRepositoryType,
   CollectionVersionAPI,
@@ -97,11 +98,7 @@ export const CollectionVersionsTab = ({
       defaultSort={'name'}
       errorTitle={t`Collection versions could not be displayed.`}
       filterConfig={null}
-      listItemActions={
-        [
-          /*TODO*/
-        ]
-      }
+      listItemActions={[ansibleRepositoryCollectionVersionRemoveAction]}
       noDataButton={null}
       noDataDescription={t`Collection versions will appear once the collection is modified.`}
       noDataTitle={t`No collection versions yet`}
