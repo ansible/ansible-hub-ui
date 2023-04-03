@@ -154,6 +154,7 @@ const routes = [
   { path: Paths.myImports, component: MyImports },
   { path: Paths.namespace, component: NamespaceDetail },
   { path: Paths.collections, component: Search },
+  { path: '/', component: Search },
 ];
 
 /**

@@ -86,7 +86,7 @@ export enum Paths {
   myImports = '/my-imports',
   login = '/login',
   logout = '/logout',
-  landingPage = '',
+  landingPage = '/',
   legacyRole = '/legacy/roles/:username/:name',
   legacyRoles = '/legacy/roles/',
   legacyNamespace = '/legacy/namespaces/:namespaceid',
