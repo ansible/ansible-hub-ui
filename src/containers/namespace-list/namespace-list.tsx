@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { t } from '@lingui/macro';
 import {
   Button,
@@ -29,7 +28,7 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { RouteProps } from 'src/utilities';
 import { errorMessage, filterIsSet } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -155,9 +154,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    // Namespaces or Partners
-    const title = i18n._(namespaceBreadcrumb.name);
-
     return (
       <div className='hub-namespace-page'>
         <NamespaceModal
@@ -176,7 +172,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        <BaseHeader title={title}>
+        <BaseHeader title={t`Namespaces`}>
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
@@ -184,7 +180,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: formatPath(Paths[NAMESPACE_TERM]),
+                      link: formatPath(Paths.namespaces),
                       active: !filterOwner,
                     },
                     {

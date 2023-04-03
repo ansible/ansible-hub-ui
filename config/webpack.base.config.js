@@ -9,7 +9,7 @@ const isBuild = process.env.NODE_ENV === 'production';
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
-// a normal webpack config. See config/standalone.prod.webpack.config.js for an
+// a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
 
 // only run git when HUB_UI_VERSION is NOT provided
@@ -24,7 +24,6 @@ const defaultConfigs = [
   { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
@@ -36,7 +35,6 @@ const defaultConfigs = [
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
-  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
 module.exports = (inputConfigs) => {

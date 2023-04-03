@@ -103,7 +103,6 @@ export enum Paths {
   collection = '/:namespace/:collection',
   namespace = '/:namespace',
   namespaceDetail = '/namespaces/:namespace',
-  partners = '/partners',
   namespaces = '/namespaces',
   notFound = '/not-found',
   token = '/token',
@@ -119,9 +118,6 @@ export enum Paths {
 }
 
 export const namespaceBreadcrumb = {
-  name: {
-    namespaces: t`Namespaces`,
-    partners: t`Partners`,
-  }[NAMESPACE_TERM],
-  url: formatPath(Paths[NAMESPACE_TERM]),
+  name: t`Namespaces`,
+  url: formatPath(Paths.namespaces),
 };
