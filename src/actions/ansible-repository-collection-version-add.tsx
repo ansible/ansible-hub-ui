@@ -25,13 +25,13 @@ const add = (
           t`Started adding ${namespace}.${name} v${version} to repository "${repositoryName}".`,
         ),
       );
-      setState({ addCollectionVersionModal: null });
+      setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
       query({});
     })
     .catch(
       handleHttpError(
         t`Failed to add ${namespace}.${name} v${version} to repository "${repositoryName}".`,
-        () => setState({ addCollectionVersionModal: null }),
+        () => setState((ms) => ({ ...ms, addCollectionVersionModal: null })),
         addAlert,
       ),
     );
@@ -185,7 +185,9 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
             query,
           })
         }
-        closeAction={() => setState({ addCollectionVersionModal: null })}
+        closeAction={() =>
+          setState((ms) => ({ ...ms, addCollectionVersionModal: null }))
+        }
       />
     ) : null,
   onClick: (
@@ -197,10 +199,11 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
       setState,
     },
   ) =>
-    setState({
+    setState((ms) => ({
+      ...ms,
       addCollectionVersionModal: {
         repositoryHref,
         repositoryName,
       },
-    }),
+    })),
 });
