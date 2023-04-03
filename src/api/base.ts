@@ -72,15 +72,7 @@ export class BaseAPI {
   }
 
   private async authHandler(request) {
-    // This runs before every API request and ensures that the user is
-    // authenticated before the request is executed. On most calls it appears
-    // to only add ~10ms of latency.
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      await window.insights.chrome.auth.getUser();
-    }
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
-    }
+    request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     return request;
   }
 }

@@ -30,8 +30,7 @@ export class BaseHeader extends React.Component<IProps> {
       status,
     } = this.props;
 
-    const showRepoSelector =
-      contextSelector && DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE;
+    const showRepoSelector = !!contextSelector;
 
     return (
       <div className={cx('background', className)}>

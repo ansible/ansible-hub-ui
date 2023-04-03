@@ -3,12 +3,8 @@ import { Constants } from 'src/constants';
 import { ParamHelper, ParamType } from 'src/utilities';
 
 export function formatPath(path: Paths, data = {}, params?: ParamType) {
-  // insights router has basename="/" or "/beta/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
-  let url =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? UI_BASE_PATH.replace('/beta/', '/').replace(/\/$/, '')
-      : '';
-  url += (path as string) + '/';
+  let url = (path as string) + '/';
+  url = url.replaceAll('//', '/');
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k, encodeURIComponent(data[k]));

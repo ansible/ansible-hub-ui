@@ -112,10 +112,6 @@ class Search extends React.Component<RouteProps, IState> {
 
   private load() {
     this.queryCollections();
-
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      this.getSynclist();
-    }
   }
 
   private addAlert(alert: AlertType) {
