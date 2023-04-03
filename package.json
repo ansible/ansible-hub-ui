@@ -11,7 +11,6 @@
         "@patternfly/react-code-editor": "^4.82.115",
         "@patternfly/react-core": "^4.276.6",
         "@patternfly/react-table": "^4.112.39",
-        "@redhat-cloud-services/frontend-components": "^3.9.33",
         "@types/node": "^16.18.16",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
@@ -91,16 +90,10 @@
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
         "test-run": "test/scripts/ctn-run.sh"
     },
     "insights": {
         "appname": "automation-hub"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run prettier"
-        }
     },
     "engines": {
         "node": ">=16",
