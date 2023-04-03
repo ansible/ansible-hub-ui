@@ -4,7 +4,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 const sessionOptions = {
   validate: () =>
-        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+    cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
 };
 
 function apiLogin(username, password) {
@@ -55,5 +55,5 @@ Cypress.Commands.add('login', {}, (username, password) => {
     password = Cypress.env('password');
   }
 
-    apiLogin(username, password);
+  apiLogin(username, password);
 });

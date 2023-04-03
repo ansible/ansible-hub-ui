@@ -449,9 +449,7 @@ class Search extends React.Component<RouteProps, IState> {
                 showNamespace={true}
                 key={i}
                 {...c}
-                controls={
-                  this.renderMenu(true, c)
-                }
+                controls={this.renderMenu(true, c)}
                 displaySignatures={this.context.featureFlags.display_signatures}
               />
             ))}
