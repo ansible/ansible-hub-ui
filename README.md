@@ -10,49 +10,22 @@ This project can now be run as a container alongside the API. Just follow the in
 
 ## Develop without containers
 
-This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and Roles.
+Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
-For every mode, you first need to:
+### Develop in Standalone Mode
 
 1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the setup instructions
-2. Install node. Node v16+ is known to work. Older versions may work as well.
-3. `npm install` in the UI
-
-### Develop in Standalone Mode (default)
-
-1. Start the API with `COMPOSE_PROFILE=standalone` (compose) or `COMPOSE_PROFILE=galaxy_ng/base` (oci-env)
-2. `npm run start-standalone`
+2. Start the API with `COMPOSE_PROFILE=standalone` (compose) or `COMPOSE_PROFILE=galaxy_ng/base` (oci-env)
+3. Install node. Node v16+ is known to work. Older versions may work as well.
+4. `npm install` in the UI
+5. `npm run start-standalone`
 
 The app will run on http://localhost:8002/ui and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
-
-### Develop in Community Mode
-
-1. Start the API with `COMPOSE_PROFILE=standalone-community` (compose)
-2. `npm run start-community`
-
-The app will run on http://localhost:8002/ui and proxy requests for `/api` to the api on `http://localhost:5001`.
-
-### Version mapping
-
-Our branches, backport labels, releases and tags use AAH versions, but Jira uses AAP versions.
-To map between the two:
-
-|AAP version|AAH version|
-|-|-|
-|1.2|4.2|
-|2.0|4.3 (obsolete)|
-|2.1|4.4|
-|2.2|4.5|
-|2.3|4.6|
 
 ## Patternfly
 
 - This project imports Patternfly components:
   - [Patternfly React](https://github.com/patternfly/patternfly-react)
-
-## Insights Components
-
-Insights Platform will deliver components and static assets through [npm](https://www.npmjs.com/package/@red-hat-insights/insights-frontend-components). [insights-chrome](https://github.com/RedHatInsights/insights-chrome) takes care of the header, sidebar, and footer.
 
 ## UI Testing
 
