@@ -46,7 +46,7 @@ jobs:
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install galaxykit
 
-    - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
+    - name: "Set env.SHORT_BRANCH"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
 
@@ -88,7 +88,7 @@ jobs:
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
         cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
+          ../ansible-hub-ui/.github/workflows/cypress/compose.env.standalone \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -157,7 +157,7 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json."$COMPOSE_PROFILE" cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json.standalone cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
