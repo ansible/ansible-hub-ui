@@ -12,7 +12,7 @@ describe('Delete a namespace', () => {
 
   it('deletes a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
@@ -32,7 +32,7 @@ describe('Delete a namespace', () => {
       'reload',
     );
     cy.galaxykit('-i namespace create', 'ansible');
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
 
     cy.get(`a[href*="${uiPrefix}namespaces/ansible"]`).click();
@@ -49,7 +49,7 @@ describe('Delete a namespace', () => {
       'GET',
       `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
     ).as('namespaces');
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
     cy.wait('@namespaces');
     cy.contains('ansible').parent().contains('View collections').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();

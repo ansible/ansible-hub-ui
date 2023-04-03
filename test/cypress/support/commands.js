@@ -4,7 +4,6 @@ import shell from 'shell-escape-tag';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -437,22 +436,11 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
   });
 });
 
-Cypress.Commands.add('goToNamespaces', {}, () => {
-  if (insightsLogin) {
-    cy.visit(`${uiPrefix}partners`);
-  } else {
-    cy.menuGo('Collections > Namespaces');
-  }
-});
-
 Cypress.Commands.add(
   'createApprovedCollection',
   {},
   (namespace, collection) => {
     cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
-    if (insightsLogin) {
-      cy.galaxykit(`-i collection move ${namespace} ${collection}`);
-    }
   },
 );
 

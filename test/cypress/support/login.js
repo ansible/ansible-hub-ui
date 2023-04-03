@@ -1,15 +1,9 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 const sessionOptions = {
-  validate: insightsLogin
-    ? () => {
-        cy.visit(uiPrefix);
-        cy.get('#UserMenu');
-      }
-    : () =>
+  validate: () =>
         cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
 };
 
@@ -61,9 +55,5 @@ Cypress.Commands.add('login', {}, (username, password) => {
     password = Cypress.env('password');
   }
 
-  if (insightsLogin) {
-    manualCloudLogin(username, password);
-  } else {
     apiLogin(username, password);
-  }
 });
