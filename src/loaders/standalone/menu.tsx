@@ -38,10 +38,6 @@ const menuSection = (name, options = {}, items = []) => ({
 
 function standaloneMenu() {
   return [
-    menuItem(t`Landing Page`, {
-      url: formatPath(Paths.landingPage),
-      condition: isLoggedIn,
-    }),
     menuSection(t`Collections`, {}, [
       menuItem(t`Collections`, {
         url: formatPath(Paths.collections),

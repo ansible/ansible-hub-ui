@@ -127,7 +127,7 @@ export const StandaloneLayout = ({
     <PageHeader
       logo={<SmallLogo alt={APPLICATION_NAME}></SmallLogo>}
       logoComponent={({ children }) => (
-        <Link to={formatPath(Paths.collections)}>{children}</Link>
+        <Link to={formatPath(Paths.landingPage)}>{children}</Link>
       )}
       headerTools={
         <PageHeaderTools>

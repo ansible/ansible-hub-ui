@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-
 import * as React from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
@@ -74,8 +73,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
             <LoadingPageSpinner />
           ) : (
             <section className='body'>
-              <div className='hub-list-toolbar'>
-              </div>
+              <div className='hub-list-toolbar'></div>
             </section>
           )}
         </Main>

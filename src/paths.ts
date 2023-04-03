@@ -86,7 +86,7 @@ export enum Paths {
   myImports = '/my-imports',
   login = '/login',
   logout = '/logout',
-  search = '/',
+  landingPage = '',
   legacyRole = '/legacy/roles/:username/:name',
   legacyRoles = '/legacy/roles/',
   legacyNamespace = '/legacy/namespaces/:namespaceid',
@@ -122,7 +122,6 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
-  landingPage = '/landing-page',
 }
 
 export const namespaceBreadcrumb = {
