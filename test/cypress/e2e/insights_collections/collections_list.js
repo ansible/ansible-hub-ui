@@ -1,1 +1,0 @@
-./../collections/collections_list.js
