@@ -183,11 +183,7 @@ jobs:
 
     - name: "Enable signing service"
       run: |
-        podman exec pulp getent passwd
-        podman exec pulp getent group
-        podman exec pulp grep pulp /etc/passwd /etc/group || true
-        podman exec pulp chown pulp:pulp /etc/pulp/certs || true
-        podman exec pulp su - pulp -c /tmp/signing-setup.sh
+        podman exec pulp /tmp/signing-setup.sh
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
