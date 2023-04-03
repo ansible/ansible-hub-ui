@@ -64,7 +64,6 @@
     },
     "scripts": {
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
-        "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
         "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
         "gettext:compile": "lingui compile",
