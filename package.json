@@ -41,7 +41,7 @@
         "@lingui/cli": "^3.17.2",
         "@lingui/macro": "^3.17.2",
         "@ls-lint/ls-lint": "^1.11.2",
-        "@redhat-cloud-services/frontend-components-config": "^4.7.0",
+        "@redhat-cloud-services/frontend-components-config": "^4.7.2",
         "@redhat-cloud-services/frontend-components-config-utilities": "^1.5.29",
         "@trivago/prettier-plugin-sort-imports": "^4.1.1",
         "@typescript-eslint/eslint-plugin": "^5.54.0",
