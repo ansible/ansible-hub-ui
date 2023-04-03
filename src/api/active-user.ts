@@ -1,4 +1,3 @@
-import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 import { UserType } from './response-types/user';
 

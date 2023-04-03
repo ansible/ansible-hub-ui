@@ -1,16 +1,11 @@
 const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
-const {
-  rbac,
-  defaultServices,
-} = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
-const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like

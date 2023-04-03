@@ -1,6 +1,5 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
-const uiPrefix = Cypress.env('uiPrefix');
 
 const sessionOptions = {
   validate: () =>
@@ -27,25 +26,6 @@ function apiLogin(username, password) {
   );
 
   cy.visit('/');
-}
-
-function manualCloudLogin(username, password) {
-  cy.session(
-    ['manualCloudLogin', username],
-    () => {
-      cy.visit(uiPrefix);
-
-      cy.get('input[id^="username"]').type(username);
-      cy.get('input[id^="password"').type(`${password}{enter}`);
-
-      // wait for the user menu
-      cy.get('#UserMenu');
-    },
-    sessionOptions,
-  );
-
-  cy.visit(uiPrefix);
-  cy.get('#UserMenu');
 }
 
 Cypress.Commands.add('login', {}, (username, password) => {

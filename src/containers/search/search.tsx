@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
+import { Button, DataList, DropdownItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
