@@ -1,6 +1,7 @@
 const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
@@ -58,31 +59,17 @@ module.exports = (inputConfigs) => {
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
-  // config for HtmlWebpackPlugin
-  const htmlPluginConfig = {
-    // used by src/index.html
-    applicationName: customConfigs.APPLICATION_NAME,
-
-    favicon: 'static/images/favicon.ico',
-
-    // standalone needs injecting js and css into dist/index.html
-    inject: true,
-  };
-
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     definePlugin: globals,
-    htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
+
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
     // frontend-components-config 4.5.0+: don't remove patternfly from builds
     bundlePfModules: true,
-
-    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: false,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
     useFileHash: true,
@@ -156,6 +143,15 @@ module.exports = (inputConfigs) => {
   newWebpackConfig.entry.App = newEntry;
 
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
+
+  // keep HtmlWebpackPlugin for standalone, inject src/index.html
+  plugins.push(
+    new HtmlWebpackPlugin({
+      applicationName: customConfigs.APPLICATION_NAME,
+      favicon: 'static/images/favicon.ico',
+      template: resolve(__dirname, '../src/index.html'),
+    }),
+  );
 
   return {
     ...newWebpackConfig,
