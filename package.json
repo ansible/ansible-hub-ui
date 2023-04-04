@@ -11,7 +11,7 @@
         "@patternfly/react-code-editor": "^4.82.115",
         "@patternfly/react-core": "^4.276.6",
         "@patternfly/react-table": "^4.112.39",
-        "@redhat-cloud-services/frontend-components": "^3.9.33",
+        "@redhat-cloud-services/frontend-components": "^3.9.34",
         "@types/node": "^16.18.16",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
