@@ -1,7 +1,7 @@
-/* global require, module, __dirname */
-const { resolve } = require('path');
+const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isBuild = process.env.NODE_ENV === 'production';
 
@@ -33,7 +33,7 @@ module.exports = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
 
-  defaultConfigs.forEach((item, i) => {
+  defaultConfigs.forEach((item) => {
     // == will match null and undefined, but not false
     if (inputConfigs[item.name] == null) {
       customConfigs[item.name] = item.default;
@@ -47,21 +47,9 @@ module.exports = (inputConfigs) => {
     }
   });
 
-  // config for HtmlWebpackPlugin
-  const htmlPluginConfig = {
-    // used by src/index.html
-    applicationName: customConfigs.APPLICATION_NAME,
-
-    favicon: 'static/images/favicon.ico',
-
-    // standalone needs injecting js and css into dist/index.html
-    inject: true,
-  };
-
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     definePlugin: globals,
-    htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
 
@@ -70,9 +58,6 @@ module.exports = (inputConfigs) => {
 
     // frontend-components-config 4.5.0+: don't remove patternfly from builds
     bundlePfModules: true,
-
-    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: false,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
     useFileHash: true,
@@ -146,6 +131,15 @@ module.exports = (inputConfigs) => {
   newWebpackConfig.entry.App = newEntry;
 
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
+
+  // keep HtmlWebpackPlugin for standalone, inject src/index.html
+  plugins.push(
+    new HtmlWebpackPlugin({
+      applicationName: customConfigs.APPLICATION_NAME,
+      favicon: 'static/images/favicon.ico',
+      template: resolve(__dirname, '../src/index.html'),
+    }),
+  );
 
   return {
     ...newWebpackConfig,
