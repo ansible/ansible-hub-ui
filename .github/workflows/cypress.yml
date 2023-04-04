@@ -33,8 +33,6 @@ jobs:
         - 'execution_environments'
         - 'groups_and_users'
         - 'imports'
-        - 'insights'
-        - 'insights_collections'
         - 'misc'
         - 'namespaces'
         - 'repo'
@@ -48,23 +46,11 @@ jobs:
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install galaxykit
 
-    - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
+    - name: "Set env.SHORT_BRANCH"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
 
-        case "${{ matrix.test }}" in
-          insights*)
-            COMPOSE_PROFILE=insights
-            echo "insights"
-            ;;
-          *)
-            COMPOSE_PROFILE=standalone
-            echo "standalone"
-            ;;
-        esac
-
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
-        echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
 
     - name: "Set variables for screenshots"
@@ -102,7 +88,7 @@ jobs:
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
         cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
+          ../ansible-hub-ui/.github/workflows/cypress/compose.env.standalone \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -131,7 +117,6 @@ jobs:
           npm-
 
     - name: "Build standalone UI"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       working-directory: 'ansible-hub-ui'
       run: |
         npm install
@@ -147,7 +132,6 @@ jobs:
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
     - name: "Serve standalone UI"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         mkdir -p www/static/
         mv ansible-hub-ui/dist www/static/galaxy_ng
@@ -159,29 +143,6 @@ jobs:
           --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
           --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
-
-    - name: "Run insights UI"
-      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
-      working-directory: 'ansible-hub-ui'
-      run: |
-        npm install
-
-        # production displays unknown translations literally, make sure it's up to date
-        npm run gettext:extract
-        npm run gettext:compile
-
-        # pre-pull containers (and check for version changes)
-        FROM=node_modules/@redhat-cloud-services/frontend-components-config-utilities/standalone/services/
-        grep postgres:9.6 "$FROM"/rbac.js
-        docker pull postgres:9.6
-        grep redis:5.0.4 "$FROM"/rbac.js
-        docker pull redis:5.0.4
-        grep quay.io/cloudservices/rbac "$FROM"/rbac.js
-        docker pull quay.io/cloudservices/rbac
-        grep jboss/keycloak "$FROM"/default/chrome.js
-        docker pull jboss/keycloak
-
-        npm run start-insights &
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
@@ -196,60 +157,26 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json."$COMPOSE_PROFILE" cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json.standalone cypress.env.json
 
     - name: "Ensure index.html uses the new js"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure insights is served"
-      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
-      run: |
-        echo waiting for containers to start
-        sleep 30
-        curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
-        sleep 30
-
     - name: "Ensure galaxykit can connect to API (standalone)"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Ensure galaxykit can connect to API (insights)"
-      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
-      run: |
-        galaxykit -s http://localhost:8002/api/automation-hub/ \
-          -u admin -p admin \
-          --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
-          collection list
-
     - name: "Check initial feature flags (standalone)"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
 
-    - name: "Check initial feature flags (insights)"
-      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
-      run: |
-        curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
-
     - name: "Check component versions & settings (standalone)"
-      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
-
-    - name: "Check component versions & settings (insights)"
-      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
-      run: |
-        BEARER=`curl -s -H "Content-Type: application/x-www-form-urlencoded" \
-          -d "client_id=cloud-services&username=admin&password=admin&grant_type=password" \
-          http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token | jq -r .access_token`
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/ | jq
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/_ui/v1/settings/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'

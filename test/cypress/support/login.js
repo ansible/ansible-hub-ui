@@ -1,16 +1,9 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
-const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 const sessionOptions = {
-  validate: insightsLogin
-    ? () => {
-        cy.visit(uiPrefix);
-        cy.get('#UserMenu');
-      }
-    : () =>
-        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+  validate: () =>
+    cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
 };
 
 function apiLogin(username, password) {
@@ -35,25 +28,6 @@ function apiLogin(username, password) {
   cy.visit('/');
 }
 
-function manualCloudLogin(username, password) {
-  cy.session(
-    ['manualCloudLogin', username],
-    () => {
-      cy.visit(uiPrefix);
-
-      cy.get('input[id^="username"]').type(username);
-      cy.get('input[id^="password"').type(`${password}{enter}`);
-
-      // wait for the user menu
-      cy.get('#UserMenu');
-    },
-    sessionOptions,
-  );
-
-  cy.visit(uiPrefix);
-  cy.get('#UserMenu');
-}
-
 Cypress.Commands.add('login', {}, (username, password) => {
   if (!username && !password) {
     // default to admin
@@ -61,9 +35,5 @@ Cypress.Commands.add('login', {}, (username, password) => {
     password = Cypress.env('password');
   }
 
-  if (insightsLogin) {
-    manualCloudLogin(username, password);
-  } else {
-    apiLogin(username, password);
-  }
+  apiLogin(username, password);
 });

@@ -1,1 +1,0 @@
-./../namespaces/namespace_detail.js

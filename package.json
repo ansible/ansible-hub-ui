@@ -11,7 +11,6 @@
         "@patternfly/react-code-editor": "^4.82.115",
         "@patternfly/react-core": "^4.276.6",
         "@patternfly/react-table": "^4.112.39",
-        "@redhat-cloud-services/frontend-components": "^3.9.33",
         "@types/node": "^16.18.16",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
@@ -42,7 +41,6 @@
         "@lingui/macro": "^3.17.2",
         "@ls-lint/ls-lint": "^1.11.2",
         "@redhat-cloud-services/frontend-components-config": "^4.7.2",
-        "@redhat-cloud-services/frontend-components-config-utilities": "^1.5.29",
         "@trivago/prettier-plugin-sort-imports": "^4.1.1",
         "@typescript-eslint/eslint-plugin": "^5.57.1",
         "@typescript-eslint/parser": "^5.57.1",
@@ -53,7 +51,6 @@
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-react": "^7.32.2",
         "html-webpack-plugin": "^5.5.0",
-        "husky": "^4.3.0",
         "monaco-editor-webpack-plugin": "^7.0.1",
         "npm-run-all": "^4.1.5",
         "postcss": "^8.4.21",
@@ -70,10 +67,7 @@
         "webpack-cli": "^5.0.1"
     },
     "scripts": {
-        "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
-        "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
-        "deploy": "npm-run-all build-insights test-prettier lint:ts",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
         "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
         "gettext:compile": "lingui compile",
@@ -92,22 +86,14 @@
         "lint:yaml:setup": "pip install --upgrade yamllint",
         "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
-        "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
-        "start-insights": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
         "test-run": "test/scripts/ctn-run.sh"
     },
     "insights": {
         "appname": "automation-hub"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run prettier"
-        }
     },
     "engines": {
         "node": ">=16",

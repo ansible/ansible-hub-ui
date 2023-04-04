@@ -1,4 +1,3 @@
-import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 import { UserType } from './response-types/user';
 
@@ -13,16 +12,7 @@ class API extends HubAPI {
     return this.http.put(this.apiPath, data);
   }
 
-  // insights has some asinine way of loading tokens that involves forcing the
-  // page to refresh before loading the token that can't be done witha single
-  // API request.
   getToken(): Promise<{ data: { token: string } }> {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return Promise.reject(
-        'Use window.insights.chrome.auth to get tokens for insights deployments',
-      );
-    }
-
     return this.http.post('v3/auth/token/', {});
   }
 

@@ -271,12 +271,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       </DropdownItem>,
     ].filter(Boolean);
 
-    const issueUrl =
-      'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
-      encodeURIComponent(
-        `${collection_version.namespace}-${collectionName}-${version}`,
-      );
-
     return (
       <React.Fragment>
         {showImportModal && (
@@ -490,14 +484,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           pageControls={
             <Flex>
-              {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
-                <FlexItem>
-                  <a href={issueUrl} target='_blank' rel='noreferrer'>
-                    {t`Create issue`}
-                  </a>{' '}
-                  <ExternalLinkAltIcon />
-                </FlexItem>
-              ) : null}
               {dropdownItems.length > 0 ? (
                 <FlexItem data-cy='kebab-toggle'>
                   <StatefulDropdown items={dropdownItems} />

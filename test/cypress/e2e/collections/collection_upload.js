@@ -1,6 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 describe('Collection Upload Tests', () => {
   const userName = 'testUser';
@@ -9,64 +8,60 @@ describe('Collection Upload Tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
 
-    if (!insightsLogin) {
-      cy.login();
-      cy.deleteTestGroups();
-      cy.deleteTestUsers();
-      cy.createUser(userName, userPassword);
-    }
+    cy.login();
+    cy.deleteTestGroups();
+    cy.deleteTestUsers();
+    cy.createUser(userName, userPassword);
     cy.createApprovedCollection('testspace', 'testcollection');
   });
 
-  if (!insightsLogin) {
-    it('should not upload new collection version in collection list when user does not have permissions', () => {
-      cy.login(userName, userPassword);
-      cy.visit(
-        `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
-      );
-      cy.contains('testcollection');
-      cy.contains('Upload new version').click();
-      cy.contains("You don't have rights to do this operation.");
-    });
+  it('should not upload new collection version in collection list when user does not have permissions', () => {
+    cy.login(userName, userPassword);
+    cy.visit(
+      `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
+    );
+    cy.contains('testcollection');
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+  });
 
-    it('should not upload new collection version in collection list/cards when user does not have permissions', () => {
-      cy.login(userName, userPassword);
-      cy.visit(
-        `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
-      );
-      cy.contains('testcollection');
-      cy.get('[aria-label="Actions"]').click();
-      cy.contains('Upload new version').click();
-      cy.contains("You don't have rights to do this operation.");
-    });
+  it('should not upload new collection version in collection list/cards when user does not have permissions', () => {
+    cy.login(userName, userPassword);
+    cy.visit(
+      `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
+    );
+    cy.contains('testcollection');
+    cy.get('[aria-label="Actions"]').click();
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+  });
 
-    it('should not upload new collection version in collection detail when user does not have permissions', () => {
-      cy.login(userName, userPassword);
-      cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
-      cy.contains('testcollection');
-      cy.get('button[aria-label="Actions"]').click();
-      cy.contains('Upload new version').click();
-      cy.contains("You don't have rights to do this operation.");
-    });
+  it('should not upload new collection version in collection detail when user does not have permissions', () => {
+    cy.login(userName, userPassword);
+    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
+    cy.contains('testcollection');
+    cy.get('button[aria-label="Actions"]').click();
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+  });
 
-    it('should see upload new collection version in collection list when user does have permissions', () => {
-      cy.login();
-      cy.visit(
-        `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
-      );
-      cy.contains('testcollection');
-      cy.contains('Upload new version').click();
-      cy.contains('New version of testcollection');
+  it('should see upload new collection version in collection list when user does have permissions', () => {
+    cy.login();
+    cy.visit(
+      `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
+    );
+    cy.contains('testcollection');
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
 
-      cy.visit(
-        `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
-      );
-      cy.contains('testcollection');
-      cy.get('button[aria-label="Actions"]').click();
-      cy.contains('Upload new version').click();
-      cy.contains('New version of testcollection');
-    });
-  }
+    cy.visit(
+      `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
+    );
+    cy.contains('testcollection');
+    cy.get('button[aria-label="Actions"]').click();
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
+  });
 
   it('should see upload new collection version in collection detail when user does have permissions', () => {
     cy.login();
@@ -77,20 +72,18 @@ describe('Collection Upload Tests', () => {
     cy.contains('New version of testcollection');
   });
 
-  if (!insightsLogin) {
-    it('user should not be able to upload new collection without permissions', () => {
-      cy.login(userName, userPassword);
-      cy.intercept(
-        'GET',
-        `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-      ).as('upload');
-      cy.galaxykit('-i namespace create', 'ansible');
-      cy.menuGo('Collections > Namespaces');
+  it('user should not be able to upload new collection without permissions', () => {
+    cy.login(userName, userPassword);
+    cy.intercept(
+      'GET',
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
+    ).as('upload');
+    cy.galaxykit('-i namespace create', 'ansible');
+    cy.menuGo('Collections > Namespaces');
 
-      cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
-      cy.contains('Upload collection').should('not.exist');
-    });
-  }
+    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('Upload collection').should('not.exist');
+  });
 
   it('collection should be uploaded', () => {
     cy.login();
@@ -99,7 +92,7 @@ describe('Collection Upload Tests', () => {
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
 
     cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
     cy.contains('Upload collection').click();
@@ -123,15 +116,13 @@ describe('Collection Upload Tests', () => {
     cy.get('.pf-c-label__content').contains('Completed').should('exist');
   });
 
-  if (!insightsLogin) {
-    it('should not upload new collection version when user does not have permissions', () => {
-      cy.login(userName, userPassword);
-      cy.visit(`${uiPrefix}namespaces/testspace`);
+  it('should not upload new collection version when user does not have permissions', () => {
+    cy.login(userName, userPassword);
+    cy.visit(`${uiPrefix}namespaces/testspace`);
 
-      cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
-      cy.contains('Upload new version').should('not.exist');
-    });
-  }
+    cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
+    cy.contains('Upload new version').should('not.exist');
+  });
 
   it('should deprecate let user deprecate and undeprecate collections', () => {
     cy.login();

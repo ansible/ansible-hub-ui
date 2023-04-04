@@ -46,7 +46,7 @@ function standaloneMenu() {
           !user.is_anonymous,
       }),
       menuItem(t`Namespaces`, {
-        url: formatPath(Paths[NAMESPACE_TERM]),
+        url: formatPath(Paths.namespaces),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
