@@ -25,16 +25,13 @@ describe('tests the approval list screen ', () => {
     // reject
     cy.get('button[aria-label="Actions"]:first').click();
     cy.contains('Reject').click();
-    cy.contains(
-      '[data-cy="CertificationDashboard-row"]:first-child',
-      'Rejected',
-    );
+    cy.contains('.CertificationDashboard-row:first-child', 'Rejected');
 
     // approve
     cy.get('button[aria-label="Actions"]:first').click();
     cy.contains('Sign and approve').click();
     cy.contains(
-      '[data-cy="CertificationDashboard-row"]:first-child',
+      '.CertificationDashboard-row:first-child',
       'Signed and approved',
     );
   });
