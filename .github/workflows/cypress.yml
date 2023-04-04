@@ -40,7 +40,7 @@ jobs:
     - name: "Install galaxykit dependency"
       run: |
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
-        pip install galaxykit
+        pip install galaxykit==0.13.0
 
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
