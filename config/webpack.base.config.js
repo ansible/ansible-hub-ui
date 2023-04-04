@@ -1,8 +1,7 @@
 const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { execSync } = require('child_process'); // node:child_process
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isBuild = process.env.NODE_ENV === 'production';
 
@@ -10,9 +9,6 @@ const isBuild = process.env.NODE_ENV === 'production';
 // should be imported, initialized with the following settings and exported like
 // a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
-
-// hardcoded to 4.2 instead of running git when HUB_UI_VERSION is not provided
-const gitCommit = process.env.HUB_UI_VERSION || '4.2';
 
 // Default user defined settings
 const defaultConfigs = [
@@ -50,31 +46,20 @@ module.exports = (inputConfigs) => {
     }
   });
 
-  // config for HtmlWebpackPlugin
-  const htmlPluginConfig = {
-    // used by src/index.html
-    applicationName: customConfigs.APPLICATION_NAME,
-
-    favicon: 'static/images/favicon.ico',
-
-    // standalone needs injecting js and css into dist/index.html
-    inject: true,
-  };
-
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     definePlugin: globals,
-    htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
+
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
     // frontend-components-config 4.5.0+: don't remove patternfly from builds
     bundlePfModules: true,
 
-    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: false,
+    // frontend-components-config 4.6.25-29+: ensure hashed filenames
+    useFileHash: true,
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -144,7 +129,16 @@ module.exports = (inputConfigs) => {
   console.log(`New entry.App: ${newEntry}`);
   newWebpackConfig.entry.App = newEntry;
 
-  plugins.push(new ForkTsCheckerWebpackPlugin());
+  // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
+
+  // keep HtmlWebpackPlugin for standalone, inject src/index.html
+  plugins.push(
+    new HtmlWebpackPlugin({
+      applicationName: customConfigs.APPLICATION_NAME,
+      favicon: 'static/images/favicon.ico',
+      template: resolve(__dirname, '../src/index.html'),
+    }),
+  );
 
   return {
     ...newWebpackConfig,
