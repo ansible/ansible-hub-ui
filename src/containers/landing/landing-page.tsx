@@ -1,17 +1,17 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { SigningServiceAPI, SigningServiceType } from 'src/api';
+import { SigningServiceType } from 'src/api';
 import {
   AlertList,
   AlertType,
   BaseHeader,
-  LoadingPageSpinner,
+  LandingPageCard,
   Main,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage } from 'src/utilities';
+import { ParamHelper } from 'src/utilities';
 
 interface IState {
   params: {
@@ -50,16 +50,8 @@ export class LandingPage extends React.Component<RouteProps, IState> {
     };
   }
 
-  componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
-      this.setState({ loading: false, unauthorised: true });
-    } else {
-      this.query();
-    }
-  }
-
   render() {
-    const { loading, alerts } = this.state;
+    const { alerts } = this.state;
 
     return (
       <React.Fragment>
@@ -67,15 +59,24 @@ export class LandingPage extends React.Component<RouteProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={t`Landing Page`} />
+        <BaseHeader title={t`Home`} />
         <Main>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            <section className='body'>
-              <div className='hub-list-toolbar'></div>
-            </section>
-          )}
+          <LandingPageCard
+            title={t`Lorem Ipsum`}
+            body={t`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nibh odio, semper non ex vitae, semper convallis tellus. Praesent et ipsum erat. Praesent hendrerit urna eget mattis vestibulum. Maecenas dictum orci vitae nisl sagittis laoreet id et mauris. Sed pharetra accumsan nibh a viverra. Duis tincidunt eros at maximus sodales. Fusce gravida tellus ligula eu posuere lorem placerat ut.`}
+          />
+          <LandingPageCard
+            title={t`Lorem Ipsum`}
+            body={t`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nibh odio, semper non ex vitae, semper convallis tellus. Praesent et ipsum erat. Praesent hendrerit urna eget mattis vestibulum. Maecenas dictum orci vitae nisl sagittis laoreet id et mauris. Sed pharetra accumsan nibh a viverra. Duis tincidunt eros at maximus sodales. Fusce gravida tellus ligula eu posuere lorem placerat ut.`}
+          />
+          <LandingPageCard
+            title={t`Lorem Ipsum`}
+            body={t`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nibh odio, semper non ex vitae, semper convallis tellus. Praesent et ipsum erat. Praesent hendrerit urna eget mattis vestibulum. Maecenas dictum orci vitae nisl sagittis laoreet id et mauris. Sed pharetra accumsan nibh a viverra. Duis tincidunt eros at maximus sodales. Fusce gravida tellus ligula eu posuere lorem placerat ut.`}
+          />
+          <LandingPageCard
+            title={t`Lorem Ipsum`}
+            body={t`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nibh odio, semper non ex vitae, semper convallis tellus. Praesent et ipsum erat. Praesent hendrerit urna eget mattis vestibulum. Maecenas dictum orci vitae nisl sagittis laoreet id et mauris. Sed pharetra accumsan nibh a viverra. Duis tincidunt eros at maximus sodales. Fusce gravida tellus ligula eu posuere lorem placerat ut.`}
+          />
         </Main>
       </React.Fragment>
     );
@@ -83,32 +84,6 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 
   private get closeAlert() {
     return closeAlertMixin('alerts');
-  }
-
-  private query() {
-    this.setState({ loading: true }, () => {
-      SigningServiceAPI.list(this.state.params)
-        .then((result) => {
-          this.setState({
-            items: result.data.results,
-            itemCount: result.data.count,
-            loading: false,
-          });
-        })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.setState({
-            loading: false,
-            items: [],
-            itemCount: 0,
-          });
-          this.addAlert({
-            title: t`Signature keys could not be displayed.`,
-            variant: 'danger',
-            description: errorMessage(status, statusText),
-          });
-        });
-    });
   }
 
   private addAlert(alert: AlertType) {

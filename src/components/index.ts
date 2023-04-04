@@ -61,6 +61,7 @@ export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
 export { LoginLink } from './shared/login-link';
 export { Logo } from './logo/logo';
+export { LandingPageCard } from './cards/landing-page-card';
 export { Main } from './patternfly-wrappers/main';
 export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { NamespaceCard } from './cards/namespace-card';
