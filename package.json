@@ -45,7 +45,7 @@
         "@redhat-cloud-services/frontend-components-config-utilities": "^1.5.29",
         "@trivago/prettier-plugin-sort-imports": "^4.1.1",
         "@typescript-eslint/eslint-plugin": "^5.54.0",
-        "@typescript-eslint/parser": "^5.54.0",
+        "@typescript-eslint/parser": "^5.57.1",
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-macros": "^3.1.0",
         "css-loader": "^6.7.3",
