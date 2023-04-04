@@ -1,0 +1,1 @@
+Don't send my_permissions field when repository/remote is edited (fixes a 400 Bad request)

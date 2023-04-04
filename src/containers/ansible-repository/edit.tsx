@@ -97,6 +97,8 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
         delete data.versions_href;
       }
 
+      delete data.my_permissions;
+
       data.pulp_labels ||= {};
       if (hideFromSearch) {
         data.pulp_labels.hide_from_search = '';
