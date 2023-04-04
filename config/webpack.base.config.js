@@ -14,7 +14,7 @@ const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
-// a normal webpack config. See config/insights.prod.webpack.config.js for an
+// a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
 
 // only run git when HUB_UI_VERSION is NOT provided
@@ -109,6 +109,7 @@ module.exports = (inputConfigs) => {
     definePlugin: globals,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
+
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
