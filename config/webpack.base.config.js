@@ -65,10 +65,11 @@ module.exports = (inputConfigs) => {
     definePlugin: globals,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
+
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
-    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
+    // frontend-components-config 4.5.0+: don't remove patternfly from builds
     bundlePfModules: true,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
