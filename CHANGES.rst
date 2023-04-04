@@ -1,3 +1,25 @@
+4.6.4 (2023-04-04)
+==================
+
+Features
+--------
+
+- Display boolean values in docs as true/false (was yes/no)
+  `AAH-1859 <https://issues.redhat.com/browse/AAH-1859>`_
+
+
+Bugfixes
+--------
+
+- Fix a bug where the UI was falsely reporting that collection dependencies don't exist.
+  `AAH-2018 <https://issues.redhat.com/browse/AAH-2018>`_
+- Fix bug where the resource type on "reserved resources" on the task management page always returns "api".
+  `AAH-2055 <https://issues.redhat.com/browse/AAH-2055>`_
+
+
+----
+
+
 4.6.3 (2022-12-05)
 ==================
 
