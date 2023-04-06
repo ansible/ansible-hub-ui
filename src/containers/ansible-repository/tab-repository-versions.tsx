@@ -38,10 +38,12 @@ const VersionContent = ({
   href,
   addAlert,
   hasPermission,
+  repositoryName,
 }: {
   href: string;
   addAlert: (alert) => void;
   hasPermission: (string) => boolean;
+  repositoryName: string;
 }) => {
   const [state, setState] = useState({});
   if (!href) {
@@ -60,8 +62,9 @@ const VersionContent = ({
       <td>
         <Link
           to={formatPath(
-            Paths.collection,
+            Paths.collectionByRepo,
             {
+              repo: repositoryName,
               namespace,
               collection: name,
             },
@@ -273,6 +276,7 @@ export const RepositoryVersionsTab = ({
         />
         <VersionContent
           {...version.content_summary.present['ansible.collection_version']}
+          repositoryName={repositoryName}
         />
       </>
     ) : (

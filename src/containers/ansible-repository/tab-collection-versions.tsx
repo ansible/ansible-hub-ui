@@ -59,6 +59,7 @@ export const CollectionVersionsTab = ({
   ) => {
     const {
       collection_version: { name, namespace, version, description },
+      repository,
     } = item;
 
     const kebabItems = listItemActions.map((action) =>
@@ -70,8 +71,9 @@ export const CollectionVersionsTab = ({
         <td>
           <Link
             to={formatPath(
-              Paths.collection,
+              Paths.collectionByRepo,
               {
+                repo: repository.name,
                 namespace,
                 collection: name,
               },
