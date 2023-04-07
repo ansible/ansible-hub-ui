@@ -9,7 +9,7 @@ interface IProps {
 export const LandingPageCard = ({ title, body }: IProps) => {
   return (
     <React.Fragment>
-      <Card className='landing-page-card'>
+      <Card className='landing-page-card' style={{ marginBottom: '20px' }}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
