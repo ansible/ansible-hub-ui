@@ -219,6 +219,10 @@ msgstr "Add a README with instructions for using this container."
 msgid "Add a role description here"
 msgstr "Add a role description here"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:177
+msgid "Add collection"
+msgstr "Add collection"
+
 #: src/constants.tsx:115
 #~ msgid "Add collection remote"
 #~ msgstr "Add collection remote"
@@ -390,6 +394,10 @@ msgstr "Are you sure you want to opt the following namespace in to Wisdom?"
 msgid "Are you sure you want to opt the following namespace out of Wisdom?"
 msgstr "Are you sure you want to opt the following namespace out of Wisdom?"
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:76
+msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
+msgstr "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
+
 #: src/actions/ansible-repository-version-revert.tsx:48
 msgid "Are you sure you want to revert this repository to the version below?"
 msgstr "Are you sure you want to revert this repository to the version below?"
@@ -464,6 +472,7 @@ msgstr "CRC public key"
 #~ msgid "Can't update remote without a distribution attached to it."
 #~ msgstr "Can't update remote without a distribution attached to it."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:110
 #: src/actions/ansible-repository-version-revert.tsx:38
 #: src/components/approve-modal/approve-modal.tsx:435
 #: src/components/confirm-modal/confirm-modal.tsx:39
@@ -655,8 +664,9 @@ msgstr "Close YAML editor"
 msgid "Code"
 msgstr "Code"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:153
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:79
-#: src/containers/ansible-repository/tab-collection-versions.tsx:112
+#: src/containers/ansible-repository/tab-collection-versions.tsx:123
 #: src/containers/ansible-repository/tab-repository-versions.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:354
 msgid "Collection"
@@ -788,21 +798,27 @@ msgstr "Collection upload canceled"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:163
 #: src/components/approve-modal/approve-modal.tsx:383
 #: src/components/headers/collection-header.tsx:328
 #: src/containers/ansible-repository/detail.tsx:23
-#: src/containers/ansible-repository/tab-collection-versions.tsx:122
+#: src/containers/ansible-repository/tab-collection-versions.tsx:133
 #: src/containers/ansible-repository/tab-repository-versions.tsx:108
 #: src/containers/certification-dashboard/certification-dashboard.tsx:388
 msgid "Collection versions"
 msgstr "Collection versions"
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:98
+#: src/actions/ansible-repository-collection-version-add.tsx:131
+#: src/containers/ansible-repository/tab-collection-versions.tsx:103
 #: src/containers/ansible-repository/tab-repository-versions.tsx:91
 msgid "Collection versions could not be displayed."
 msgstr "Collection versions could not be displayed."
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:106
+#: src/actions/ansible-repository-collection-version-add.tsx:142
+msgid "Collection versions will appear once a collection is uploaded."
+msgstr "Collection versions will appear once a collection is uploaded."
+
+#: src/containers/ansible-repository/tab-collection-versions.tsx:117
 msgid "Collection versions will appear once the collection is modified."
 msgstr "Collection versions will appear once the collection is modified."
 
@@ -1066,7 +1082,7 @@ msgstr "Created date"
 msgid "Created on"
 msgstr "Created on"
 
-#: src/containers/ansible-repository/edit.tsx:145
+#: src/containers/ansible-repository/edit.tsx:147
 msgid "Creation started for distribution {0}"
 msgstr "Creation started for distribution {0}"
 
@@ -1326,6 +1342,7 @@ msgstr "Deprecate"
 msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr "Deprecation status update starting for collection \"{name}\"."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:158
 #: src/components/collection-detail/collection-content-list.tsx:105
 #: src/components/execution-environment/repository-form.tsx:364
 #: src/components/namespace-form/namespace-form.tsx:81
@@ -1333,7 +1350,7 @@ msgstr "Deprecation status update starting for collection \"{name}\"."
 #: src/components/rbac/role-list-table.tsx:47
 #: src/components/rbac/select-roles.tsx:98
 #: src/components/repositories/ansible-repository-form.tsx:205
-#: src/containers/ansible-repository/tab-collection-versions.tsx:117
+#: src/containers/ansible-repository/tab-collection-versions.tsx:128
 #: src/containers/ansible-repository/tab-details.tsx:34
 #: src/containers/ansible-repository/tab-repository-versions.tsx:103
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
@@ -1792,6 +1809,10 @@ msgstr "Expiration"
 msgid "Failed"
 msgstr "Failed"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:33
+msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+
 #: src/components/approve-modal/approve-modal.tsx:175
 msgid "Failed to approve collection."
 msgstr "Failed to approve collection."
@@ -1852,6 +1873,10 @@ msgstr "Failed to remove remote {name}"
 #: src/actions/ansible-repository-delete.tsx:41
 msgid "Failed to remove repository {name}"
 msgstr "Failed to remove repository {name}"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx:33
+msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
+msgstr "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
 
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
@@ -2226,7 +2251,9 @@ msgstr "It's safe to close this window. These tasks will finish in the backgroun
 msgid "Key fingerprint"
 msgstr "Key fingerprint"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:135
 #: src/components/collection-list/collection-filter.tsx:76
+#: src/containers/ansible-repository/tab-collection-versions.tsx:107
 msgid "Keywords"
 msgstr "Keywords"
 
@@ -2489,8 +2516,10 @@ msgstr "Name must be longer than 2 characters"
 msgid "Name must not be empty."
 msgstr "Name must not be empty."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:139
 #: src/components/collection-list/collection-filter.tsx:86
 #: src/components/my-imports/import-list.tsx:253
+#: src/containers/ansible-repository/tab-collection-versions.tsx:111
 #: src/containers/certification-dashboard/certification-dashboard.tsx:230
 #: src/containers/certification-dashboard/certification-dashboard.tsx:349
 msgid "Namespace"
@@ -2611,7 +2640,8 @@ msgstr "No child task"
 msgid "No collection versions in this repository version."
 msgstr "No collection versions in this repository version."
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:107
+#: src/actions/ansible-repository-collection-version-add.tsx:143
+#: src/containers/ansible-repository/tab-collection-versions.tsx:118
 #: src/containers/ansible-repository/tab-repository-versions.tsx:93
 msgid "No collection versions yet"
 msgstr "No collection versions yet"
@@ -3281,6 +3311,10 @@ msgstr "Remotes could not be displayed."
 msgid "Remotes will appear once created."
 msgstr "Remotes will appear once created."
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:25
+msgid "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
+msgstr "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
+
 #: src/actions/ansible-remote-delete.tsx:34
 msgid "Removal started for remote {name}"
 msgstr "Removal started for remote {name}"
@@ -3289,9 +3323,14 @@ msgstr "Removal started for remote {name}"
 msgid "Removal started for repository {name}"
 msgstr "Removal started for repository {name}"
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:90
 #: src/containers/group-management/group-detail.tsx:663
 msgid "Remove"
 msgstr "Remove"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx:73
+msgid "Remove collection version?"
+msgstr "Remove collection version?"
 
 #: src/constants.tsx:54
 msgid "Remove content from repository"
@@ -3563,9 +3602,14 @@ msgstr "See the task management <0>detail page </0>for the status of this task."
 #~ msgid "See the task management <0>detail page</0>for the status of this task."
 #~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:107
 #: src/components/approve-modal/approve-modal.tsx:427
 msgid "Select"
 msgstr "Select"
+
+#: src/actions/ansible-repository-collection-version-add.tsx:115
+msgid "Select a collection"
+msgstr "Select a collection"
 
 #: src/components/rbac/access-tab.tsx:63
 #: src/components/rbac/access-tab.tsx:327
@@ -3820,6 +3864,10 @@ msgstr "Staging"
 msgid "Start from scratch"
 msgstr "Start from scratch"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:25
+msgid "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+msgstr "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+
 #: src/containers/task-management/task-list-view.tsx:246
 msgid "Started at"
 msgstr "Started at"
@@ -3871,11 +3919,11 @@ msgstr "Successfully copied to clipboard"
 msgid "Successfully copied to clipboard!"
 msgstr "Successfully copied to clipboard!"
 
-#: src/containers/ansible-remote/edit.tsx:122
+#: src/containers/ansible-remote/edit.tsx:124
 msgid "Successfully created remote {0}"
 msgstr "Successfully created remote {0}"
 
-#: src/containers/ansible-repository/edit.tsx:116
+#: src/containers/ansible-repository/edit.tsx:118
 msgid "Successfully created repository {0}"
 msgstr "Successfully created repository {0}"
 
@@ -4340,11 +4388,11 @@ msgstr "Unsigned version(s)"
 #~ msgid "Update container information"
 #~ msgstr "Update container information"
 
-#: src/containers/ansible-remote/edit.tsx:119
+#: src/containers/ansible-remote/edit.tsx:121
 msgid "Update started for remote {0}"
 msgstr "Update started for remote {0}"
 
-#: src/containers/ansible-repository/edit.tsx:126
+#: src/containers/ansible-repository/edit.tsx:128
 msgid "Update started for repository {0}"
 msgstr "Update started for repository {0}"
 

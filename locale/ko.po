@@ -218,6 +218,10 @@ msgstr "이 컨테이너 사용에 대한 정보가 포함된 README를 추가�
 msgid "Add a role description here"
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-add.tsx:177
+msgid "Add collection"
+msgstr ""
+
 #: src/constants.tsx:115
 #~ msgid "Add collection remote"
 #~ msgstr "원격 컬렉션 추가"
@@ -389,6 +393,10 @@ msgstr ""
 msgid "Are you sure you want to opt the following namespace out of Wisdom?"
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:76
+msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
+msgstr ""
+
 #: src/actions/ansible-repository-version-revert.tsx:48
 msgid "Are you sure you want to revert this repository to the version below?"
 msgstr ""
@@ -463,6 +471,7 @@ msgstr ""
 #~ msgid "Can't update remote without a distribution attached to it."
 #~ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수 없습니다."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:110
 #: src/actions/ansible-repository-version-revert.tsx:38
 #: src/components/approve-modal/approve-modal.tsx:435
 #: src/components/confirm-modal/confirm-modal.tsx:39
@@ -654,8 +663,9 @@ msgstr ""
 msgid "Code"
 msgstr "코드"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:153
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:79
-#: src/containers/ansible-repository/tab-collection-versions.tsx:112
+#: src/containers/ansible-repository/tab-collection-versions.tsx:123
 #: src/containers/ansible-repository/tab-repository-versions.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:354
 msgid "Collection"
@@ -787,21 +797,27 @@ msgstr "컬렉션 업로드 취소됨"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr ""
 
+#: src/actions/ansible-repository-collection-version-add.tsx:163
 #: src/components/approve-modal/approve-modal.tsx:383
 #: src/components/headers/collection-header.tsx:328
 #: src/containers/ansible-repository/detail.tsx:23
-#: src/containers/ansible-repository/tab-collection-versions.tsx:122
+#: src/containers/ansible-repository/tab-collection-versions.tsx:133
 #: src/containers/ansible-repository/tab-repository-versions.tsx:108
 #: src/containers/certification-dashboard/certification-dashboard.tsx:388
 msgid "Collection versions"
 msgstr "컬렉션 버전"
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:98
+#: src/actions/ansible-repository-collection-version-add.tsx:131
+#: src/containers/ansible-repository/tab-collection-versions.tsx:103
 #: src/containers/ansible-repository/tab-repository-versions.tsx:91
 msgid "Collection versions could not be displayed."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:106
+#: src/actions/ansible-repository-collection-version-add.tsx:142
+msgid "Collection versions will appear once a collection is uploaded."
+msgstr ""
+
+#: src/containers/ansible-repository/tab-collection-versions.tsx:117
 msgid "Collection versions will appear once the collection is modified."
 msgstr ""
 
@@ -1065,7 +1081,7 @@ msgstr ""
 msgid "Created on"
 msgstr "생성된 시간"
 
-#: src/containers/ansible-repository/edit.tsx:145
+#: src/containers/ansible-repository/edit.tsx:147
 msgid "Creation started for distribution {0}"
 msgstr ""
 
@@ -1325,6 +1341,7 @@ msgstr "더 이상 사용되지 않음"
 msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-add.tsx:158
 #: src/components/collection-detail/collection-content-list.tsx:105
 #: src/components/execution-environment/repository-form.tsx:364
 #: src/components/namespace-form/namespace-form.tsx:81
@@ -1332,7 +1349,7 @@ msgstr ""
 #: src/components/rbac/role-list-table.tsx:47
 #: src/components/rbac/select-roles.tsx:98
 #: src/components/repositories/ansible-repository-form.tsx:205
-#: src/containers/ansible-repository/tab-collection-versions.tsx:117
+#: src/containers/ansible-repository/tab-collection-versions.tsx:128
 #: src/containers/ansible-repository/tab-details.tsx:34
 #: src/containers/ansible-repository/tab-repository-versions.tsx:103
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
@@ -1791,6 +1808,10 @@ msgstr "만료"
 msgid "Failed"
 msgstr "실패"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:33
+msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+msgstr ""
+
 #: src/components/approve-modal/approve-modal.tsx:175
 msgid "Failed to approve collection."
 msgstr ""
@@ -1850,6 +1871,10 @@ msgstr ""
 
 #: src/actions/ansible-repository-delete.tsx:41
 msgid "Failed to remove repository {name}"
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-remove.tsx:33
+msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
 msgstr ""
 
 #: src/containers/login/login.tsx:93
@@ -2225,7 +2250,9 @@ msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라�
 msgid "Key fingerprint"
 msgstr "키 지문"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:135
 #: src/components/collection-list/collection-filter.tsx:76
+#: src/containers/ansible-repository/tab-collection-versions.tsx:107
 msgid "Keywords"
 msgstr "키워드"
 
@@ -2488,8 +2515,10 @@ msgstr "이름은 2자 이상이어야 합니다."
 msgid "Name must not be empty."
 msgstr "이름은 비워 둘 수 없습니다."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:139
 #: src/components/collection-list/collection-filter.tsx:86
 #: src/components/my-imports/import-list.tsx:253
+#: src/containers/ansible-repository/tab-collection-versions.tsx:111
 #: src/containers/certification-dashboard/certification-dashboard.tsx:230
 #: src/containers/certification-dashboard/certification-dashboard.tsx:349
 msgid "Namespace"
@@ -2610,7 +2639,8 @@ msgstr "하위 작업 없음"
 msgid "No collection versions in this repository version."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:107
+#: src/actions/ansible-repository-collection-version-add.tsx:143
+#: src/containers/ansible-repository/tab-collection-versions.tsx:118
 #: src/containers/ansible-repository/tab-repository-versions.tsx:93
 msgid "No collection versions yet"
 msgstr ""
@@ -3280,6 +3310,10 @@ msgstr ""
 msgid "Remotes will appear once created."
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:25
+msgid "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
+msgstr ""
+
 #: src/actions/ansible-remote-delete.tsx:34
 msgid "Removal started for remote {name}"
 msgstr ""
@@ -3288,9 +3322,14 @@ msgstr ""
 msgid "Removal started for repository {name}"
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-remove.tsx:90
 #: src/containers/group-management/group-detail.tsx:663
 msgid "Remove"
 msgstr "제거"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx:73
+msgid "Remove collection version?"
+msgstr ""
 
 #: src/constants.tsx:54
 msgid "Remove content from repository"
@@ -3562,8 +3601,13 @@ msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페�
 #~ msgid "See the task management <0>detail page</0>for the status of this task."
 #~ msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페이지</0>를 참조하십시오."
 
+#: src/actions/ansible-repository-collection-version-add.tsx:107
 #: src/components/approve-modal/approve-modal.tsx:427
 msgid "Select"
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx:115
+msgid "Select a collection"
 msgstr ""
 
 #: src/components/rbac/access-tab.tsx:63
@@ -3819,6 +3863,10 @@ msgstr ""
 msgid "Start from scratch"
 msgstr ""
 
+#: src/actions/ansible-repository-collection-version-add.tsx:25
+msgid "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+msgstr ""
+
 #: src/containers/task-management/task-list-view.tsx:246
 msgid "Started at"
 msgstr "시작 시간"
@@ -3870,11 +3918,11 @@ msgstr ""
 msgid "Successfully copied to clipboard!"
 msgstr "클립보드에 성공적으로 복사되었습니다."
 
-#: src/containers/ansible-remote/edit.tsx:122
+#: src/containers/ansible-remote/edit.tsx:124
 msgid "Successfully created remote {0}"
 msgstr ""
 
-#: src/containers/ansible-repository/edit.tsx:116
+#: src/containers/ansible-repository/edit.tsx:118
 msgid "Successfully created repository {0}"
 msgstr ""
 
@@ -4339,11 +4387,11 @@ msgstr "서명되지 않은 버전"
 #~ msgid "Update container information"
 #~ msgstr "컨테이너 정보 업데이트"
 
-#: src/containers/ansible-remote/edit.tsx:119
+#: src/containers/ansible-remote/edit.tsx:121
 msgid "Update started for remote {0}"
 msgstr ""
 
-#: src/containers/ansible-repository/edit.tsx:126
+#: src/containers/ansible-repository/edit.tsx:128
 msgid "Update started for repository {0}"
 msgstr ""
 
