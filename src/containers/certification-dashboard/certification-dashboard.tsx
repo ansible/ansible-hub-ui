@@ -454,9 +454,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private renderRow(collectionData: CollectionVersionSearch, index) {
     const { collection_version: version, repository } = collectionData;
-    const data_cy = `${collectionData.repository.name}-${collectionData.collection_version.namespace}-${collectionData.collection_version.name}`;
+    const data_cy = `CertificationDashboard-row-${collectionData.repository.name}-${collectionData.collection_version.namespace}-${collectionData.collection_version.name}`;
     return (
-      <tr key={index} className='CertificationDashboard-row' data-cy={data_cy}>
+      <tr key={index} data-cy={data_cy}>
         <td>{version.namespace}</td>
         <td>{version.name}</td>
         <td>

@@ -8,11 +8,13 @@ function openModal(menu) {
   cy.contains('Clear all filters').click();
 
   if (menu) {
-    cy.get('.CertificationDashboard-row [aria-label="Actions"]').click();
+    cy.get(
+      '[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]',
+    ).click();
     cy.contains('a', 'Sign and approve').click();
   } else {
     cy.contains(
-      '.CertificationDashboard-row button',
+      '[data-cy^="CertificationDashboard-row"] button',
       'Sign and approve',
     ).click();
   }
