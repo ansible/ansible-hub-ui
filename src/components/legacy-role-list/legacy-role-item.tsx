@@ -62,7 +62,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
       cells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <Logo
-            alt={t`role.github_user logo`}
+            alt={t`${role.github_user} logo`}
             image={role.summary_fields.namespace.avatar_url}
             size='70px'
             unlockWidth
