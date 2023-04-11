@@ -83,7 +83,7 @@ class CollectionDetail extends React.Component<
           }
           breadcrumbs={breadcrumbs}
           activeTab='install'
-          repo={this.props.routeParams.published}
+          repo={this.props.routeParams.repo}
         />
         <Main>
           <section className='body'>
