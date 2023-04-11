@@ -268,7 +268,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
     const { hasPermission } = this.context;
-    const { view_user } = hasPermission('galaxy.view_user');
+    const view_user = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
