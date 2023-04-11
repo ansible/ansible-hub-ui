@@ -44,9 +44,7 @@ export const WisdomModal = (props: IProps) => {
       </Trans>
     );
     areYouSureToOptIn = (
-      <Trans>
-        Are you sure you want to opt the following namespace in to Wisdom?
-      </Trans>
+      <Trans>The following namespace will be opted in to Project Wisdom:</Trans>
     );
     areYouSureToOptOut = (
       <Trans>
@@ -68,8 +66,7 @@ export const WisdomModal = (props: IProps) => {
     );
     areYouSureToOptIn = (
       <Trans>
-        Are you sure you want to opt the following legacy namespace in to
-        Wisdom?
+        The following legacy namespace will be opted in to Project Wisdom:
       </Trans>
     );
     areYouSureToOptOut = (
@@ -177,7 +174,7 @@ export const WisdomModal = (props: IProps) => {
     );
   }
 
-  const expandableTitle = t`Learn more about Ansible Wisdom.`;
+  const expandableTitle = t`Additional details`;
   return (
     <Modal
       actions={actions}
@@ -185,12 +182,13 @@ export const WisdomModal = (props: IProps) => {
       onClose={props.closeAction}
       title={
         loading
-          ? t`Wisdom settings`
+          ? t`Project Wisdom settings`
           : isInDenyIndex
-          ? t`Opt in to Wisdom`
-          : t`Opt out of Wisdom`
+          ? t`Opt in to Project Wisdom`
+          : t`Opt out of Project Wisdom`
       }
       variant='small'
+      titleIconVariant={isInDenyIndex ? null : 'warning'}
     >
       <AlertList
         alerts={alerts}
@@ -201,29 +199,28 @@ export const WisdomModal = (props: IProps) => {
       ) : (
         <div>
           <div>
-            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
-          </div>
-          <br />
-          <div>
+            <Trans>
+              <p>
+                Red Hat is working on exciting new Ansible content development
+                capabilities within the context of{' '}
+                <a
+                  href='https://www.redhat.com/en/engage/project-wisdom'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Project Wisdom
+                </a>{' '}
+                <ExternalLinkAltIcon /> to help other automators build Ansible
+                content.
+              </p>
+            </Trans>
+            <br />
             <ExpandableSection
               toggleTextExpanded={expandableTitle}
               toggleTextCollapsed={expandableTitle}
             >
               <div>
                 <Trans>
-                  <p>
-                    Red Hat is working on exciting new Ansible content
-                    development capabilities within the context of{' '}
-                    <a
-                      href='https://www.redhat.com/en/engage/project-wisdom'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      Project Wisdom
-                    </a>{' '}
-                    <ExternalLinkAltIcon /> to help other automators build
-                    Ansible content.
-                  </p>
                   <p>
                     Your roles and collections may be used as training data for
                     a machine learning model that provides Ansible automation
@@ -240,6 +237,12 @@ export const WisdomModal = (props: IProps) => {
               </div>
             </ExpandableSection>
           </div>
+          <br />
+          <div>
+            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
+          </div>
+          <br />
+          {props.reference}
         </div>
       )}
     </Modal>

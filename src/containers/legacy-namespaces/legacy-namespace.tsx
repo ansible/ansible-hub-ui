@@ -274,7 +274,7 @@ class LegacyNamespace extends React.Component<
           <DropdownItem
             onClick={() => this.setState({ isOpenWisdomModal: true })}
           >
-            {t`Wisdom settings`}
+            {t`Project Wisdom settings`}
           </DropdownItem>,
         );
       }
