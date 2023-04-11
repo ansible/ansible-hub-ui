@@ -98,7 +98,6 @@ class LegacyNamespaces extends React.Component<
   };
 
   openModal(namespace) {
-    debugger;
     this.setState({ isOpenWisdomModal: true, wisdomReference: namespace.name });
   }
 
