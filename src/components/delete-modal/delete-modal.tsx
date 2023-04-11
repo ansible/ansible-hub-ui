@@ -7,6 +7,7 @@ export interface IProps {
   children?: React.ReactNode;
   deleteAction: () => void;
   isDisabled?: boolean;
+  isRemove?: boolean;
   title: string;
   spinner?: boolean;
   'data-cy'?: string;
@@ -18,6 +19,7 @@ export const DeleteModal = ({
   children,
   deleteAction,
   isDisabled,
+  isRemove,
   title,
   spinner,
   variant = 'small',
@@ -32,7 +34,7 @@ export const DeleteModal = ({
             variant='danger'
             isDisabled={isDisabled}
           >
-            {t`Delete`}
+            {isRemove ? t`Remove` : t`Delete`}
             {spinner && <Spinner size='sm'></Spinner>}
           </Button>
         </div>,
