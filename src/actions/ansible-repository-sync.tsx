@@ -9,7 +9,7 @@ export const ansibleRepositorySyncAction = Action({
   title: t`Sync`,
   onClick: ({ name, pulp_href }, { addAlert, query }) => {
     const pulpId = parsePulpIDFromURL(pulp_href);
-    AnsibleRepositoryAPI.sync(pulpId)
+    AnsibleRepositoryAPI.sync(pulpId, { mirror: true })
       .then(({ data }) => {
         addAlert(
           taskAlert(data.task, t`Sync started for repository "${name}".`),
