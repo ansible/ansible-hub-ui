@@ -1,0 +1,1 @@
+Fix and unify collection detail routing to `/ui/repo/<repository>/<namespace>/<collection>`

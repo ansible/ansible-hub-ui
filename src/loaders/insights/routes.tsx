@@ -152,7 +152,6 @@ const routes = [
     component: CollectionImportLog,
   },
   { path: Paths.myImports, component: MyImports },
-  { path: Paths.collection, component: CollectionDetail },
   { path: Paths.namespace, component: NamespaceDetail },
   { path: Paths.collections, component: Search },
   { path: Paths.search, component: Search },

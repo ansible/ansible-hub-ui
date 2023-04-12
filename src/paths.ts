@@ -105,7 +105,6 @@ export enum Paths {
   collectionDependenciesByRepo = '/repo/:repo/:namespace/:collection/dependencies',
   collectionDistributionsByRepo = '/repo/:repo/:namespace/:collection/distributions',
   namespaceByRepo = '/repo/:repo/:namespace',
-  collection = '/:namespace/:collection',
   namespace = '/:namespace',
   namespaceDetail = '/namespaces/:namespace',
   partners = '/partners',
