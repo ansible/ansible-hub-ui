@@ -3,7 +3,7 @@ import * as React from 'react';
 
 interface IProps {
   title: string;
-  body: string;
+  body: React.ReactNode;
 }
 
 export const LandingPageCard = ({ title, body }: IProps) => {
