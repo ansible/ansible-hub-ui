@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
+import cx from 'classnames';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -385,22 +386,21 @@ class Search extends React.Component<RouteProps, IState> {
           {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
         </DropdownItem>
       ),
-    ];
-
-    if (!list) {
-      menuItems.push(
+      !list && hasPermission('galaxy.upload_to_namespace') && (
         <DropdownItem
           onClick={() => this.checkUploadPrivilleges(collection)}
           key='upload new version'
         >
           {t`Upload new version`}
-        </DropdownItem>,
-      );
-    }
+        </DropdownItem>
+      ),
+    ].filter(Boolean);
+
+    const displayMenu = menuItems.length > 0;
 
     return (
       <React.Fragment>
-        {list && (
+        {list && hasPermission('galaxy.upload_to_namespace') && (
           <Button
             onClick={() => this.checkUploadPrivilleges(collection)}
             variant='secondary'
@@ -408,10 +408,11 @@ class Search extends React.Component<RouteProps, IState> {
             {t`Upload new version`}
           </Button>
         )}
-        <StatefulDropdown
-          items={menuItems.filter(Boolean)}
-          ariaLabel='collection-kebab'
-        />
+        <span className={cx(!displayMenu && 'hidden-menu-space')}>
+          {displayMenu && (
+            <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+          )}
+        </span>
       </React.Fragment>
     );
   }
