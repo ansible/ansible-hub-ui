@@ -35,6 +35,7 @@ export const CollectionFilter = (props: IProps) => {
   const loadRepos = () => {
     Repositories.list({
       name__icontains: inputText,
+      pulp_label_select: '!hide_from_search',
     }).then((res) => {
       const repos = res.data.results.map(({ name }) => ({
         id: name,
