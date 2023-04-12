@@ -67,11 +67,15 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
       </DropdownItem>,
     );
 
-    cells.push(
-      <DataListCell key='menu' alignRight={true}>
-        <div>{showWisdom && <StatefulDropdown items={dropdownItems} />}</div>
-      </DataListCell>,
-    );
+    if (showWisdom) {
+      cells.push(
+        <DataListCell key='menu' alignRight={true}>
+          <div style={{ float: 'right' }}>
+            <StatefulDropdown items={dropdownItems} />
+          </div>
+        </DataListCell>,
+      );
+    }
 
     return (
       <DataListItem data-cy='LegacyNamespaceListItem'>
