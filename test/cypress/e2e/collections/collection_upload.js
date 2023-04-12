@@ -25,8 +25,7 @@ describe('Collection Upload Tests', () => {
         `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
       );
       cy.contains('testcollection');
-      cy.contains('Upload new version').click();
-      cy.contains("You don't have rights to do this operation.");
+      cy.contains('Upload new version').should('not.exist');
     });
 
     it('should not upload new collection version in collection list/cards when user does not have permissions', () => {
@@ -35,9 +34,7 @@ describe('Collection Upload Tests', () => {
         `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
       );
       cy.contains('testcollection');
-      cy.get('[aria-label="Actions"]').click();
-      cy.contains('Upload new version').click();
-      cy.contains("You don't have rights to do this operation.");
+      cy.get('[aria-label="Actions"]').should('not.exist');
     });
 
     it('should not upload new collection version in collection detail when user does not have permissions', () => {
