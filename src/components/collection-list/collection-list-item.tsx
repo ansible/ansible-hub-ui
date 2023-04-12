@@ -52,7 +52,7 @@ export const CollectionListItem = ({
           alt={t`${company} logo`}
           fallbackToDefault
           image={namespace?.avatar_url}
-          size='40px'
+          size='130px'
           unlockWidth
           width='97px'
         />
