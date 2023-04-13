@@ -21,16 +21,16 @@ describe('Approval Dashboard process', () => {
 
     // should approve
     cy.visit(`${uiPrefix}approval-dashboard`);
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Needs review');
+    cy.contains('[data-cy^="CertificationDashboard-row"]', 'Needs review');
     cy.contains(
-      '[data-cy="CertificationDashboard-row"] button',
+      '[data-cy^="CertificationDashboard-row"] button',
       'Sign and approve',
     ).click();
     cy.contains('.body', 'No results found', { timeout: 8000 });
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('button', 'Clear all filters').click();
     cy.contains(
-      '[data-cy="CertificationDashboard-row"]',
+      '[data-cy^="CertificationDashboard-row"]',
       'Signed and approved',
     );
 
@@ -45,7 +45,7 @@ describe('Approval Dashboard process', () => {
       { force: true },
     );
     cy.contains('Reject').click({ force: true });
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Rejected');
+    cy.contains('[data-cy^="CertificationDashboard-row"]', 'Rejected');
 
     // should not see items in collections
     cy.visit(`${uiPrefix}collections`);

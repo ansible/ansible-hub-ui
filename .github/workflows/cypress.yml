@@ -28,6 +28,7 @@ jobs:
         test:
         - 'screenshots'
         - 'approval'
+        - 'approval_modal'
         - 'collections'
         - 'ee_controller'
         - 'execution_environments'
