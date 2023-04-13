@@ -53,6 +53,11 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
     return AnsibleRemoteAPI.list({ name })
       .then(({ data: { results } }) => results[0])
       .then((remote) => {
+        // using the list api, so an empty array is really a 404
+        if (!remote) {
+          return Promise.reject({ response: { status: 404 } });
+        }
+
         return AnsibleRemoteAPI.myPermissions(
           parsePulpIDFromURL(remote.pulp_href),
         )
