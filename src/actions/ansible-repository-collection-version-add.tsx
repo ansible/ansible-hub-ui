@@ -75,6 +75,7 @@ const AddCollectionVersionModal = ({
   const renderTableRow = (item: CollectionVersionSearch, index: number) => {
     const {
       collection_version: { name, namespace, version, description },
+      repository,
     } = item;
 
     return (
@@ -91,6 +92,7 @@ const AddCollectionVersionModal = ({
           {namespace}.{name} v{version}
         </td>
         <td>{description}</td>
+        <td>{repository.name}</td>
       </tr>
     );
   };
@@ -138,6 +140,10 @@ const AddCollectionVersionModal = ({
               id: 'namespace',
               title: t`Namespace`,
             },
+            {
+              id: 'repository_name',
+              title: t`Repository`,
+            },
           ]}
           noDataDescription={t`Collection versions will appear once a collection is uploaded.`}
           noDataTitle={t`No collection versions yet`}
@@ -158,6 +164,11 @@ const AddCollectionVersionModal = ({
               title: t`Description`,
               type: 'none',
               id: 'col2',
+            },
+            {
+              title: t`Repository`,
+              type: 'none',
+              id: 'col3',
             },
           ]}
           title={t`Collection versions`}
