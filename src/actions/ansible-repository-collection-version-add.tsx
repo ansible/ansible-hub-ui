@@ -28,11 +28,11 @@ const add = (
   return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHrefs)
     .then(({ data }) => {
       collections.map(
-        ({ collection_version: { name, namespace, version } }) => {
+        ({ collection_version: { name, namespace, version }, repository }) => {
           addAlert(
             taskAlert(
               data.task,
-              t`Started adding ${namespace}.${name} v${version} to repository "${repositoryName}".`,
+              t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repositoryName}".`,
             ),
           );
           setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
