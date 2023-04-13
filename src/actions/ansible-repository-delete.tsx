@@ -2,6 +2,7 @@ import { t } from '@lingui/macro';
 import React from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
+import { Constants } from 'src/constants';
 import { canDeleteAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
@@ -26,6 +27,13 @@ export const ansibleRepositoryDeleteAction = Action({
     setState({
       deleteModalOpen: { pulpId: id || parsePulpIDFromURL(pulp_href), name },
     }),
+  disabled: ({ name }) => {
+    if (Constants.PROTECTED_REPOSITORIES.includes(name)) {
+      return t`Protected repositories cannot be deleted.`;
+    }
+
+    return null;
+  },
 });
 
 function deleteRepository({ name, pulpId }, { addAlert, setState, query }) {
@@ -39,7 +47,7 @@ function deleteRepository({ name, pulpId }, { addAlert, setState, query }) {
     .catch(
       handleHttpError(
         t`Failed to remove repository ${name}`,
-        () => null,
+        () => setState({ deleteModalOpen: null }),
         addAlert,
       ),
     );

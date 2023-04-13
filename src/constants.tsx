@@ -35,6 +35,15 @@ export class Constants {
     validated: defineMessage({ message: `Validated` }),
   };
 
+  static PROTECTED_REPOSITORIES = [
+    'rh-certified',
+    'validated',
+    'community',
+    'published',
+    'staging',
+    'rejected',
+  ];
+
   static COLLECTION_FILTER_TAGS = [
     'application',
     'cloud',
