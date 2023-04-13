@@ -70,6 +70,7 @@ const RemoveCollectionVersionModal = ({
         deleteAction();
       }}
       isDisabled={pending}
+      isRemove
       title={t`Remove collection version?`}
     >
       <Text>
