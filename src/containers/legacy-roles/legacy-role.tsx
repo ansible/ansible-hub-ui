@@ -275,7 +275,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
       header_cells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <Logo
-            alt={t`role.github_user logo`}
+            alt={t`${role.github_user} logo`}
             fallbackToDefault
             image={role.summary_fields.namespace.avatar_url}
             size='70px'
