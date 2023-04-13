@@ -52,7 +52,8 @@ interface IProps {
 }
 
 export const ApproveModal = (props: IProps) => {
-  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
+  const [isSelectorChecked, setIsSelectorChecked] = useState(false);
+  const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
   const [itemsCount, setItemsCount] = useState(0);
@@ -293,6 +294,7 @@ export const ApproveModal = (props: IProps) => {
 
     function selectAll() {
       setSelectedRepos(props.allRepositories.map((a) => a.name));
+      setIsSelectorChecked(true);
     }
 
     function selectPage() {
@@ -305,10 +307,12 @@ export const ApproveModal = (props: IProps) => {
       });
 
       setSelectedRepos(newRepos);
+      setIsSelectorChecked(true);
     }
 
     function deselectAll() {
       setSelectedRepos(fixedRepos);
+      setIsSelectorChecked(false);
     }
 
     function deselectPage() {
@@ -318,6 +322,16 @@ export const ApproveModal = (props: IProps) => {
           !repositoryList.find((repo2) => repo2.name == repo),
       );
       setSelectedRepos(newSelectedRepos);
+      setIsSelectorChecked(false);
+    }
+
+    function onToggleCheckbox() {
+      setIsSelectorChecked(!isSelectorChecked);
+      if (isSelectorChecked) {
+        deselectPage();
+      } else {
+        selectPage();
+      }
     }
 
     const dropdownItems = [
@@ -350,6 +364,8 @@ export const ApproveModal = (props: IProps) => {
                 id='split-button-toggle-checkbox'
                 key='split-checkbox'
                 aria-label='Select all'
+                checked={isSelectorChecked}
+                onChange={onToggleCheckbox}
               />,
             ]}
             onToggle={onToggle}
