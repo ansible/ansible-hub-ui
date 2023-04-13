@@ -35,20 +35,23 @@ export const WisdomModal = (props: IProps) => {
   if (props.scope == 'namespace') {
     titleWillBeUsed = (
       <Trans>
-        Namespace <b>{name}</b> is opted in to Wisdom.
+        Namespace <b>{name}</b> is opted in to Ansible Lightspeed.
       </Trans>
     );
     titleWillNotBeUsed = (
       <Trans>
-        Namespace <b>{name}</b> is opted out of Wisdom.
+        Namespace <b>{name}</b> is opted out of Ansible Lightspeed.
       </Trans>
     );
     areYouSureToOptIn = (
-      <Trans>The following namespace will be opted in to Project Wisdom:</Trans>
+      <Trans>
+        The following namespace will be opted in to Ansible Lightspeed:
+      </Trans>
     );
     areYouSureToOptOut = (
       <Trans>
-        Are you sure you want to opt the following namespace out of Wisdom?
+        Are you sure you want to opt the following namespace out of Ansible
+        Lightspeed?
       </Trans>
     );
   }
@@ -56,23 +59,23 @@ export const WisdomModal = (props: IProps) => {
   if (props.scope == 'legacy_namespace') {
     titleWillBeUsed = (
       <Trans>
-        Legacy namespace <b>{name}</b> is opted in to Wisdom.
+        Legacy namespace <b>{name}</b> is opted in to Ansible Lightspeed.
       </Trans>
     );
     titleWillNotBeUsed = (
       <Trans>
-        Legacy namespace <b>{name}</b> is opted out of Wisdom.
+        Legacy namespace <b>{name}</b> is opted out of Ansible Lightspeed.
       </Trans>
     );
     areYouSureToOptIn = (
       <Trans>
-        The following legacy namespace will be opted in to Project Wisdom:
+        The following legacy namespace will be opted in to Ansible Lightspeed:
       </Trans>
     );
     areYouSureToOptOut = (
       <Trans>
         Are you sure you want to opt the following legacy namespace out of
-        Wisdom?
+        Ansible Lightspeed?
       </Trans>
     );
   }
@@ -88,7 +91,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to load Wisdom information.`,
+          title: t`Failed to load Ansible Lightspeed information.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -118,7 +121,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to opt in to Wisdom.`,
+          title: t`Failed to opt in to Ansible Lightspeed.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -134,7 +137,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to opt out of Wisdom.`,
+          title: t`Failed to opt out of Ansible Lightspeed.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -152,7 +155,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt in to Wisdom`}
+          {t`Opt in to Ansible Lightspeed`}
         </Button>,
       );
     } else {
@@ -162,7 +165,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={addToDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt out of Wisdom`}
+          {t`Opt out of Ansible Lightspeed`}
         </Button>,
       );
     }
@@ -182,10 +185,10 @@ export const WisdomModal = (props: IProps) => {
       onClose={props.closeAction}
       title={
         loading
-          ? t`Project Wisdom settings`
+          ? t`Ansible Lightspeed settings`
           : isInDenyIndex
-          ? t`Opt in to Project Wisdom`
-          : t`Opt out of Project Wisdom`
+          ? t`Opt in to Ansible Lightspeed`
+          : t`Opt out of Ansible Lightspeed`
       }
       variant='small'
       titleIconVariant={isInDenyIndex ? null : 'warning'}
@@ -208,7 +211,7 @@ export const WisdomModal = (props: IProps) => {
                   target='_blank'
                   rel='noreferrer'
                 >
-                  Project Wisdom
+                  Ansible Lightspeed
                 </a>{' '}
                 <ExternalLinkAltIcon /> to help other automators build Ansible
                 content.

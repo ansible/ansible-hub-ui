@@ -63,7 +63,7 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
 
     dropdownItems.push(
       <DropdownItem onClick={() => this.props.openModal(namespace)}>
-        {t`Project Wisdom settings`}
+        {t`Ansible Lightspeed settings`}
       </DropdownItem>,
     );
 
