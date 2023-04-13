@@ -5,6 +5,7 @@ class API extends PulpAPI {
   useOrdering = true;
 
   // list(params?)
+  // delete(pk)
 }
 
 export const AnsibleDistributionAPI = new API();
