@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleRepositoryAPI } from 'src/api';
+import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
 import { canDeleteAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
@@ -24,17 +24,34 @@ export const ansibleRepositoryDeleteAction = Action({
     { setState },
   ) =>
     setState({
-      deleteModalOpen: { pulpId: id || parsePulpIDFromURL(pulp_href), name },
+      deleteModalOpen: {
+        pulpId: id || parsePulpIDFromURL(pulp_href),
+        name,
+        pulp_href,
+      },
     }),
 });
 
-function deleteRepository({ name, pulpId }, { addAlert, setState, query }) {
-  return AnsibleRepositoryAPI.delete(pulpId)
+async function deleteRepository(
+  { name, pulp_href, pulpId },
+  { addAlert, setState, query },
+) {
+  const distributionsToDelete = await AnsibleDistributionAPI.list({
+    repository: pulp_href,
+  })
+    .then(({ data: { results } }) => results || [])
+    .catch((e) => {
+      handleHttpError(
+        t`Failed to list distributions, removing only the repository.`,
+        () => null,
+        addAlert,
+      )(e);
+      return [];
+    });
+
+  const deleteRepo = AnsibleRepositoryAPI.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for repository ${name}`));
-
-      setState({ deleteModalOpen: null });
-      query();
     })
     .catch(
       handleHttpError(
@@ -43,4 +60,29 @@ function deleteRepository({ name, pulpId }, { addAlert, setState, query }) {
         addAlert,
       ),
     );
+
+  const deleteDistribution = ({ name, pulp_href }) => {
+    const distribution_id = parsePulpIDFromURL(pulp_href);
+    return AnsibleDistributionAPI.delete(distribution_id)
+      .then(({ data }) =>
+        addAlert(
+          taskAlert(data.task, t`Removal started for distribution ${name}`),
+        ),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to remove distribution ${name}`,
+          () => null,
+          addAlert,
+        ),
+      );
+  };
+
+  return Promise.all([
+    deleteRepo,
+    ...distributionsToDelete.map(deleteDistribution),
+  ]).then(() => {
+    setState({ deleteModalOpen: null });
+    query();
+  });
 }
