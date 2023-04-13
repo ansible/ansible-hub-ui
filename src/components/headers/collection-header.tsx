@@ -870,12 +870,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         const name = deleteCollection.collection_version.name;
 
         waitForTask(taskId).then(() => {
-          if (collections.length > 1) {
-            const topVersion = collections.filter(
-              ({ collection_version }) =>
-                collection_version.version !== collectionVersion,
-            );
+          const topVersion = (collections || []).filter(
+            ({ collection_version }) =>
+              collection_version.version !== collectionVersion,
+          );
 
+          if (topVersion.length) {
             this.props.updateParams(
               ParamHelper.setParam(
                 this.props.params,
