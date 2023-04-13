@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro';
+import { Title } from '@patternfly/react-core';
 import * as React from 'react';
 import {
   AlertList,
@@ -35,6 +36,11 @@ export class LandingPage extends React.Component<RouteProps, IState> {
         ></AlertList>
         <BaseHeader title={t`Home`} />
         <Main>
+          <Title
+            style={{ margin: '8px 0 24px 0' }}
+            headingLevel='h1'
+            size='2xl'
+          >{t`Welcome to Beta Galaxy`}</Title>
           <div
             style={{
               display: 'flex',
@@ -45,30 +51,106 @@ export class LandingPage extends React.Component<RouteProps, IState> {
           >
             <LandingPageCard
               title={t`Download`}
-              body={<React.Fragment><p>{t`Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.`}</p><br/>
+              body={
+                <React.Fragment>
+                  <p>{t`Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.`}</p>
+                  <br />
 
-<p>{t`Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`} </p><br/>
+                  <p>
+                    {t`Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`}{' '}
+                  </p>
+                  <br />
 
-<p>{t`Use the <Search page> to find content for your project, then download them onto your Ansible host using <ansible-galaxy>, the command line tool that comes bundled with Ansible.`}</p></React.Fragment>}
-
-
+                  <p>
+                    {t`Use the`}{' '}
+                    <a href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'>{t`Search page`}</a>{' '}
+                    {t`to find content for your project, then download them onto your Ansible host using`}{' '}
+                    <a
+                      href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
+                      target='_blanck'
+                    >{t`ansible-galaxy`}</a>
+                    {t`, the command line tool that comes bundled with Ansible.`}
+                  </p>
+                </React.Fragment>
+              }
             />
-             <LandingPageCard
+            <LandingPageCard
               title={t`Share`}
-              body={<React.Fragment><p>{t`Help other Ansible users by sharing the awesome roles and collections you create.`}</p><br/>
-              <p>{t`Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community.`}</p><br/>
+              body={
+                <React.Fragment>
+                  <p>{t`Help other Ansible users by sharing the awesome roles and collections you create.`}</p>
+                  <br />
+                  <p>{t`Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community.`}</p>
+                  <br />
 
-
-<p>{t`Red Hat is working on exciting new Ansible content development capabilities within the context of <Project Wisdom> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <ansible-content-ai@redhat.com>.`}</p></React.Fragment>}
-
-
+                  <p>
+                    {t`Red Hat is working on exciting new Ansible content development capabilities within the context of`}{' '}
+                    <a
+                      href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >{t`Project Wisdom`}</a>{' '}
+                    {t`to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at`}{' '}
+                    <a href='mailto:ansible-content-ai@redhat.com'>{t`ansible-content-ai@redhat.com`}</a>
+                  </p>
+                </React.Fragment>
+              }
             />
-             <LandingPageCard
+            <LandingPageCard
               title={t`Featured`}
-              body={<React.Fragment><p>{t`Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.`}</p><br/>
-
-<p>{t`Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`} </p><br/>
-<p>{t`Use the Search page to find content for your project, then download them onto your Ansible host using ansible-galaxy, the command line tool that comes bundled with Ansible.`}</p></React.Fragment>}
+              body={
+                <React.Fragment>
+                  <b>
+                    <p>{t`AnsibleFest`}</p>
+                  </b>
+                  <br />
+                  <p>
+                    <a href='https://www.redhat.com/en/summit/ansiblefest?intcmp=7013a0000034lvmAAA'>
+                      <img
+                        width='100%'
+                        alt='Ansible Fest at Red Hat Summit May 23rd to 25th 2023'
+                        src='https://www.ansible.com/hubfs/rh-2023-summit-ansiblefest-ansible-galaxy-site-200x200.png'
+                      />
+                    </a>
+                  </p>
+                  <hr
+                    style={{
+                      boxSizing: 'content-box',
+                      height: 0,
+                      marginTop: 20,
+                      marginBottom: 20,
+                      border: 0,
+                      borderTop: '1px solid #f1f1f1',
+                    }}
+                  />
+                  <p>
+                    <b>
+                      {t`Extend the power of Ansible to your entire team.`}{' '}
+                    </b>
+                  </p>
+                  <br />
+                  <p>{t`Try Red Hat Ansible Automation Platform`}</p>
+                  <br />
+                  <p>
+                    <a
+                      href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'
+                      target='_blank'
+                      rel='noreferrer'
+                    >{t`Get the trial`}</a>
+                  </p>
+                </React.Fragment>
+              }
+            />
+            <LandingPageCard
+              title={t`Terms of Use`}
+              body={
+                <React.Fragment>
+                  <p>
+                    {t`Please see our`}{' '}
+                    <a href='https://www.redhat.com/en/about/terms-use'>{t`Terms of Use`}</a>
+                  </p>
+                </React.Fragment>
+              }
             />
           </div>
         </Main>
