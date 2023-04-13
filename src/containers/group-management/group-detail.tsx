@@ -374,7 +374,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
         });
     };
     const { hasPermission } = this.context;
-    const { view_user } = hasPermission('galaxy.view_user');
+    const view_user = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
