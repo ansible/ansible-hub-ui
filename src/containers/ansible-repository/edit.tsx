@@ -132,19 +132,33 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
           });
 
       if (createDistribution) {
+        // only alphanumerics, slashes, underscores and dashes are allowed in base_path, transform anything else to _
+        const basePathTransform = (name) =>
+          name.replaceAll(/[^-a-zA-Z0-9_/]/g, '_');
+        let distributionName = data.name;
+
         promise = promise
           .then((pulp_href) =>
             AnsibleDistributionAPI.create({
-              name: data.name,
-              base_path: data.name,
+              name: distributionName,
+              base_path: basePathTransform(distributionName),
               repository: pulp_href,
+            }).catch(() => {
+              // if distribution already exists, try a numeric suffix to name & base_path
+              distributionName =
+                data.name + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+              return AnsibleDistributionAPI.create({
+                name: distributionName,
+                base_path: basePathTransform(distributionName),
+                repository: pulp_href,
+              });
             }),
           )
           .then(({ data: task }) =>
             queueAlert(
               taskAlert(
                 task,
-                t`Creation started for distribution ${data.name}`,
+                t`Creation started for distribution ${distributionName}`,
               ),
             ),
           );
