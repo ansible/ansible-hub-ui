@@ -40,7 +40,7 @@ export class Logo extends React.Component<IProps, IState> {
     const style = {
       height: size,
       display: 'flex',
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
       alignItems: 'center',
       width: width,
     };
