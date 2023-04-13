@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { Repositories } from 'src/api/repositories';
+import { CollectionVersionSearch } from 'src/api/response-types/collection';
 import { Repository } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
@@ -80,6 +81,37 @@ export class RepositoriesUtils {
       repoName,
       collectionVersion_pulp_href,
       true,
+    );
+  }
+
+  public static pushToOrFilterOutCollections(
+    selectedCollection: CollectionVersionSearch,
+    collections: CollectionVersionSearch[],
+  ): CollectionVersionSearch[] {
+    // check if collection is already selected
+    const selectedItem = collections.find(
+      ({ collection_version: { name, namespace, version }, repository }) =>
+        name === selectedCollection.collection_version.name &&
+        namespace === selectedCollection.collection_version.namespace &&
+        version === selectedCollection.collection_version.version &&
+        repository.name === selectedCollection.repository.name,
+    );
+
+    // if collection is not selected, add it to selected items
+    if (!selectedItem) {
+      return [...collections, selectedCollection];
+    }
+
+    // unselect collection
+    return collections.filter(
+      ({ collection_version, repository }) =>
+        collection_version.name !==
+          selectedCollection.collection_version.name ||
+        collection_version.namespace !==
+          selectedCollection.collection_version.namespace ||
+        collection_version.version !==
+          selectedCollection.collection_version.version ||
+        repository.name !== selectedCollection.repository.name,
     );
   }
 }

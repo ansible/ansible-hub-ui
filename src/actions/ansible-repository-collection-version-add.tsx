@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, Modal, Radio } from '@patternfly/react-core';
+import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
@@ -8,29 +8,43 @@ import {
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  RepositoriesUtils,
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+} from 'src/utilities';
 import { Action } from './action';
 
 const add = (
   { repositoryHref, repositoryName },
-  { namespace, name, version, pulp_href: collectionVersionHref },
+  collections,
   { addAlert, setState, query },
 ) => {
   const pulpId = parsePulpIDFromURL(repositoryHref);
-  return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHref)
+  const collectionVersionHrefs = collections.map(
+    (c) => c.collection_version.pulp_href,
+  );
+  return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHrefs)
     .then(({ data }) => {
-      addAlert(
-        taskAlert(
-          data.task,
-          t`Started adding ${namespace}.${name} v${version} to repository "${repositoryName}".`,
-        ),
+      collections.map(
+        ({ collection_version: { name, namespace, version } }) => {
+          addAlert(
+            taskAlert(
+              data.task,
+              t`Started adding ${namespace}.${name} v${version} to repository "${repositoryName}".`,
+            ),
+          );
+          setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
+          query({});
+        },
       );
-      setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
-      query({});
     })
     .catch(
       handleHttpError(
-        t`Failed to add ${namespace}.${name} v${version} to repository "${repositoryName}".`,
+        t`Failed to add collection${
+          collections.length === 1 ? '' : 's'
+        } to repository "${repositoryName}".`,
         () => setState((ms) => ({ ...ms, addCollectionVersionModal: null })),
         addAlert,
       ),
@@ -45,7 +59,7 @@ const AddCollectionVersionModal = ({
   closeAction: () => void;
 }) => {
   const [alerts, setAlerts] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<CollectionVersionSearch[]>([]);
 
   const addAlert = (alert: AlertType) => {
     setAlerts([...alerts, alert]);
@@ -79,12 +93,19 @@ const AddCollectionVersionModal = ({
     } = item;
 
     return (
-      <tr onClick={() => setSelected(item)} key={index}>
+      <tr
+        onClick={() =>
+          setSelected(
+            RepositoriesUtils.pushToOrFilterOutCollections(item, selected),
+          )
+        }
+        key={index}
+      >
         <td>
-          <Radio
+          <Checkbox
             aria-label={`${namespace}.${name} v${version}`}
             id={`collection-${index}`}
-            isChecked={selected === item}
+            isChecked={selected.includes(item)}
             name={`collection-${index}`}
           />
         </td>
@@ -189,13 +210,13 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
   modal: ({ addAlert, state, setState, query }) =>
     state.addCollectionVersionModal ? (
       <AddCollectionVersionModal
-        addAction={(collection) =>
-          add(state.addCollectionVersionModal, collection.collection_version, {
+        addAction={(collections: CollectionVersionSearch[]) => {
+          add(state.addCollectionVersionModal, collections, {
             addAlert,
             setState,
             query,
-          })
-        }
+          });
+        }}
         closeAction={() =>
           setState((ms) => ({ ...ms, addCollectionVersionModal: null }))
         }
