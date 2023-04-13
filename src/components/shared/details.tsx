@@ -11,7 +11,7 @@ interface IProps {
 export const Details = ({ item, fields = [] }: IProps) => (
   <>
     {fields.map(({ label, value }) => (
-      <div key={label}>
+      <div key={label} style={{ overflowWrap: 'break-word' }}>
         <div>
           <b>{label}</b>
         </div>
