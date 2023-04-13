@@ -6,17 +6,18 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { ActionType } from 'src/actions';
-import { LoadingPageSpinner } from 'src/components';
 import {
   AlertList,
   AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
+  LoadingPageSpinner,
   Main,
   Tabs,
   closeAlertMixin,
 } from 'src/components';
+import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
@@ -168,12 +169,18 @@ export const PageWithTabs = function <
       const name = item?.name || routeParams.name;
       const tab = tabs.find((t) => t.id == params.tab) || tabs[0];
 
+      if (!loading && !unauthorised && !item) {
+        return (
+          <>
+            <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+            <NotFound />
+          </>
+        );
+      }
+
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader
             title={name}
             breadcrumbs={
