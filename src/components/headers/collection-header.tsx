@@ -61,6 +61,7 @@ import './header.scss';
 
 interface IProps {
   collections: CollectionVersionSearch[];
+  collectionsCount: number;
   collection: CollectionVersionSearch;
   content: CollectionVersionContentType;
   params: {
@@ -145,6 +146,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   render() {
     const {
       collections,
+      collectionsCount,
       collection,
       content,
       params,
@@ -167,8 +169,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       showImportModal,
       updateCollection,
     } = this.state;
-
-    const numOfshownVersions = 10;
 
     const urlKeys = [
       { key: 'documentation', name: t`Docs site` },
@@ -333,7 +333,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   page_size: modalPagination.pageSize,
                 }}
                 updateParams={this.updatePaginationParams}
-                count={collections.length}
+                count={collectionsCount}
               />
             </div>
             {this.paginateVersions(collections).map(
@@ -366,7 +366,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               page_size: modalPagination.pageSize,
             }}
             updateParams={this.updatePaginationParams}
-            count={collections.length}
+            count={collectionsCount}
           />
         </Modal>
         <DeleteCollectionModal
@@ -428,7 +428,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   selections={`v${version}`}
                   aria-label={t`Select collection version`}
                   loadingVariant={
-                    numOfshownVersions < collections.length
+                    collections.length < collectionsCount
                       ? {
                           text: t`View more`,
                           onClick: () =>
@@ -440,28 +440,27 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       : null
                   }
                 >
-                  {this.renderSelectVersions(
-                    collections,
-                    numOfshownVersions,
-                  ).map((v) => (
-                    <SelectOption
-                      key={v.version}
-                      value={`v${v.version}`}
-                      onClick={() =>
-                        updateParams(
-                          ParamHelper.setParam(
-                            params,
-                            'version',
-                            v.version.toString(),
-                          ),
-                        )
-                      }
-                    >
-                      <Trans>
-                        {v.version} updated {isLatestVersion(v)}
-                      </Trans>
-                    </SelectOption>
-                  ))}
+                  {collections
+                    .map((c) => c.collection_version)
+                    .map((v) => (
+                      <SelectOption
+                        key={v.version}
+                        value={`v${v.version}`}
+                        onClick={() =>
+                          updateParams(
+                            ParamHelper.setParam(
+                              params,
+                              'version',
+                              v.version.toString(),
+                            ),
+                          )
+                        }
+                      >
+                        <Trans>
+                          {v.version} updated {isLatestVersion(v)}
+                        </Trans>
+                      </SelectOption>
+                    ))}
                 </Select>
               </div>
               {latestVersion ? (
@@ -617,10 +616,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     ];
 
     return <LinkTabs tabs={tabs} />;
-  }
-
-  private renderSelectVersions(versions, count) {
-    return versions.slice(0, count).map((c) => c.collection_version);
   }
 
   private async submitCertificate(file: File) {

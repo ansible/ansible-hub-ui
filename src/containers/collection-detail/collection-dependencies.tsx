@@ -5,12 +5,9 @@ import {
   CollectionUsedByDependencies,
   CollectionVersion,
   CollectionVersionAPI,
-  CollectionVersionContentType,
-  CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
   CollectionDependenciesList,
   CollectionHeader,
   CollectionUsedbyDependenciesList,
@@ -23,13 +20,10 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
-import { loadCollection } from './base';
+import { IBaseCollectionState, loadCollection } from './base';
 import './collection-dependencies.scss';
 
-interface IState {
-  collections: CollectionVersionSearch[];
-  collection: CollectionVersionSearch;
-  content: CollectionVersionContentType;
+interface IState extends IBaseCollectionState {
   dependencies_repos: CollectionVersion[];
   params: {
     page?: number;
@@ -41,7 +35,6 @@ interface IState {
   usedByDependencies: CollectionUsedByDependencies[];
   usedByDependenciesCount: number;
   usedByDependenciesLoading: boolean;
-  alerts: AlertType[];
 }
 
 class CollectionDependencies extends React.Component<RouteProps, IState> {
@@ -60,6 +53,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
     this.state = {
       collections: [],
+      collectionsCount: 0,
       collection: null,
       content: null,
       dependencies_repos: [],
@@ -78,6 +72,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
   render() {
     const {
       collections,
+      collectionsCount,
       collection,
       content,
       params,
@@ -124,6 +119,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
         <CollectionHeader
           reload={() => this.loadData(true)}
           collections={collections}
+          collectionsCount={collectionsCount}
           collection={collection}
           content={content}
           params={headerParams}
@@ -295,8 +291,11 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content) =>
-        this.setState({ collections, collection, content }, callback),
+      setCollection: (collections, collection, content, collectionsCount) =>
+        this.setState(
+          { collections, collection, content, collectionsCount },
+          callback,
+        ),
       stateParams: this.state.params.version
         ? { version: this.state.params.version }
         : {},

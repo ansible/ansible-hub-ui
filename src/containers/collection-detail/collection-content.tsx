@@ -24,6 +24,7 @@ class CollectionContent extends React.Component<
 
     this.state = {
       collections: [],
+      collectionsCount: 0,
       collection: null,
       content: null,
       params: params,
@@ -35,7 +36,8 @@ class CollectionContent extends React.Component<
   }
 
   render() {
-    const { collections, collection, params, content } = this.state;
+    const { collections, collectionsCount, collection, params, content } =
+      this.state;
 
     if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -67,6 +69,7 @@ class CollectionContent extends React.Component<
         <CollectionHeader
           reload={() => this.loadCollections(true)}
           collections={collections}
+          collectionsCount={collectionsCount}
           collection={collection}
           content={content}
           params={params}
@@ -95,9 +98,8 @@ class CollectionContent extends React.Component<
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content) => {
-        this.setState({ collections, collection, content });
-      },
+      setCollection: (collections, collection, content, collectionsCount) =>
+        this.setState({ collections, collection, content, collectionsCount }),
       stateParams: this.state.params,
     });
   }
