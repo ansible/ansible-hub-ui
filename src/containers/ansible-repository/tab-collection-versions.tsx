@@ -99,6 +99,8 @@ export const CollectionVersionsTab = ({
         setState: setModalState,
         query,
         hasPermission,
+        hasObjectPermission: (p: string): boolean =>
+          item?.my_permissions?.includes?.(p),
       }}
       defaultPageSize={10}
       defaultSort={'name'}
