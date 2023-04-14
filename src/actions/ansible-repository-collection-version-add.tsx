@@ -1,5 +1,5 @@
-import { t } from '@lingui/macro';
-import { Button, Modal, Radio } from '@patternfly/react-core';
+import { plural, t } from '@lingui/macro';
+import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
@@ -8,29 +8,44 @@ import {
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  RepositoriesUtils,
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+} from 'src/utilities';
 import { Action } from './action';
 
 const add = (
   { repositoryHref, repositoryName },
-  { namespace, name, version, pulp_href: collectionVersionHref },
+  collections,
   { addAlert, setState, query },
 ) => {
   const pulpId = parsePulpIDFromURL(repositoryHref);
-  return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHref)
+  const collectionVersionHrefs = collections.map(
+    (c) => c.collection_version.pulp_href,
+  );
+  return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHrefs)
     .then(({ data }) => {
-      addAlert(
-        taskAlert(
-          data.task,
-          t`Started adding ${namespace}.${name} v${version} to repository "${repositoryName}".`,
-        ),
+      collections.map(
+        ({ collection_version: { name, namespace, version }, repository }) => {
+          addAlert(
+            taskAlert(
+              data.task,
+              t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repositoryName}".`,
+            ),
+          );
+          setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
+          query({});
+        },
       );
-      setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
-      query({});
     })
     .catch(
       handleHttpError(
-        t`Failed to add ${namespace}.${name} v${version} to repository "${repositoryName}".`,
+        plural(collections.length, {
+          one: `Failed to add collection to repository "${repositoryName}".`,
+          other: `Failed to add collections to repository "${repositoryName}".`,
+        }),
         () => setState((ms) => ({ ...ms, addCollectionVersionModal: null })),
         addAlert,
       ),
@@ -45,7 +60,7 @@ const AddCollectionVersionModal = ({
   closeAction: () => void;
 }) => {
   const [alerts, setAlerts] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<CollectionVersionSearch[]>([]);
 
   const addAlert = (alert: AlertType) => {
     setAlerts([...alerts, alert]);
@@ -75,15 +90,23 @@ const AddCollectionVersionModal = ({
   const renderTableRow = (item: CollectionVersionSearch, index: number) => {
     const {
       collection_version: { name, namespace, version, description },
+      repository,
     } = item;
 
     return (
-      <tr onClick={() => setSelected(item)} key={index}>
+      <tr
+        onClick={() =>
+          setSelected(
+            RepositoriesUtils.pushToOrFilterOutCollections(item, selected),
+          )
+        }
+        key={index}
+      >
         <td>
-          <Radio
+          <Checkbox
             aria-label={`${namespace}.${name} v${version}`}
             id={`collection-${index}`}
-            isChecked={selected === item}
+            isChecked={selected.includes(item)}
             name={`collection-${index}`}
           />
         </td>
@@ -91,6 +114,7 @@ const AddCollectionVersionModal = ({
           {namespace}.{name} v{version}
         </td>
         <td>{description}</td>
+        <td>{repository.name}</td>
       </tr>
     );
   };
@@ -138,6 +162,10 @@ const AddCollectionVersionModal = ({
               id: 'namespace',
               title: t`Namespace`,
             },
+            {
+              id: 'repository_name',
+              title: t`Repository`,
+            },
           ]}
           noDataDescription={t`Collection versions will appear once a collection is uploaded.`}
           noDataTitle={t`No collection versions yet`}
@@ -159,6 +187,11 @@ const AddCollectionVersionModal = ({
               type: 'none',
               id: 'col2',
             },
+            {
+              title: t`Repository`,
+              type: 'none',
+              id: 'col3',
+            },
           ]}
           title={t`Collection versions`}
         />
@@ -178,13 +211,13 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
   modal: ({ addAlert, state, setState, query }) =>
     state.addCollectionVersionModal ? (
       <AddCollectionVersionModal
-        addAction={(collection) =>
-          add(state.addCollectionVersionModal, collection.collection_version, {
+        addAction={(collections: CollectionVersionSearch[]) => {
+          add(state.addCollectionVersionModal, collections, {
             addAlert,
             setState,
             query,
-          })
-        }
+          });
+        }}
         closeAction={() =>
           setState((ms) => ({ ...ms, addCollectionVersionModal: null }))
         }
