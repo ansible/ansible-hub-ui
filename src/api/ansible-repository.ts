@@ -12,8 +12,8 @@ class API extends PulpAPI {
 
   // delete(uuid)
 
-  sync(id) {
-    return this.http.post(this.apiPath + id + '/sync/', {});
+  sync(id, body = {}) {
+    return this.http.post(this.apiPath + id + '/sync/', body);
   }
 
   revert(id, version_href) {
