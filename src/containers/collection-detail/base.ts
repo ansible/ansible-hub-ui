@@ -20,6 +20,19 @@ export interface IBaseCollectionState {
   distroBasePath?: string;
 }
 
+// Caches the collection data when matching, prevents redundant fetches between collection detail tabs
+const cache = {
+  repository: null,
+  namespace: null,
+  name: null,
+  version: null,
+
+  collections: [],
+  collectionsCount: 0,
+  collection: null,
+  content: null,
+};
+
 export function loadCollection({
   forceReload,
   matchParams,
@@ -30,32 +43,73 @@ export function loadCollection({
   const { version } = stateParams;
   const { collection: name, namespace, repo } = matchParams;
 
-  CollectionVersionAPI.getCached(
-    {
-      ...(repo ? { repository_name: repo } : {}),
-      namespace,
-      name,
-      order_by: '-version',
-    },
-    forceReload,
-  )
-    .then((collections: CollectionVersionSearch[]) => {
-      const collection = version
-        ? collections.find(
-            ({ collection_version }) => collection_version.version == version,
-          )
-        : collections.find((cv) => cv.is_highest);
+  // try loading from cache
+  if (
+    !forceReload &&
+    cache.repository === repo &&
+    cache.namespace === namespace &&
+    cache.name === name &&
+    cache.version === version
+  ) {
+    setCollection(
+      cache.collections,
+      cache.collection,
+      cache.content,
+    );
+    return;
+  }
 
+  const requestParams = {
+    ...(repo ? { repository_name: repo } : {}),
+    namespace,
+    name,
+  };
+
+  const currentVersion = (
+    version
+      ? CollectionVersionAPI.list({ ...requestParams, version })
+      : CollectionVersionAPI.list({ ...requestParams, is_highest: true })
+  ).then(({ data }) => data.data[0]);
+
+  const content = currentVersion
+    .then((collection) =>
       CollectionAPI.getContent(
         namespace,
         name,
         collection.collection_version.version,
-      ).then((res) => {
-        const [content] = res.data.results;
-        setCollection(collections, collection, content);
-      });
-    })
-    .catch(() => {
-      navigate(formatPath(Paths.notFound));
-    });
+      ),
+    )
+    .then(({ data: { results } }) => results[0])
+    .catch(() => navigate(formatPath(Paths.notFound)));
+
+  const versions = CollectionVersionAPI.list({
+    ...requestParams,
+    order_by: '-version',
+    page_size: 10,
+  })
+    .then(({ data }) => data)
+    .catch(() => ({ data: [], meta: { count: 0 } }));
+
+  return Promise.all([versions, currentVersion, content]).then(
+    ([
+      {
+        data: collections,
+        meta: { count: collectionsCount },
+      },
+      collection,
+      content,
+    ]) => {
+      setCollection(collections, collection, content);
+
+      cache.repository = repo;
+      cache.namespace = namespace;
+      cache.name = name;
+      cache.version = version;
+
+      cache.collections = collections;
+      cache.collectionsCount = collectionsCount;
+      cache.collection = collection;
+      cache.content = content;
+    },
+  );
 }
