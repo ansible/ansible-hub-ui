@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { plural, t } from '@lingui/macro';
 import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
@@ -42,9 +42,10 @@ const add = (
     })
     .catch(
       handleHttpError(
-        t`Failed to add collection${
-          collections.length === 1 ? '' : 's'
-        } to repository "${repositoryName}".`,
+        plural(collections.length, {
+          one: `Failed to add collection to repository "${repositoryName}".`,
+          other: `Failed to add collections to repository "${repositoryName}".`,
+        }),
         () => setState((ms) => ({ ...ms, addCollectionVersionModal: null })),
         addAlert,
       ),
