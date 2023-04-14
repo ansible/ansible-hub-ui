@@ -23,13 +23,6 @@ export class Constants {
     'galaxy.add_group',
   ];
 
-  static REPOSITORYNAMES = {
-    published: defineMessage({ message: `Published` }),
-    'rh-certified': defineMessage({ message: `Red Hat Certified` }),
-    community: defineMessage({ message: `Community` }),
-    validated: defineMessage({ message: `Validated` }),
-  };
-
   static PROTECTED_REPOSITORIES = [
     'rh-certified',
     'validated',
