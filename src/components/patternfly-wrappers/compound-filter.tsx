@@ -242,8 +242,16 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
   private onSelectMultiple = (event) => {
     let newParams = this.props.params[this.state.selectedFilter.id];
+
+    // no tags => falsy
+    // 1 tag => "foo"
+    // 2+ tags => ["foo", "bar"]
+    // convert all to an array
     if (!newParams) {
       newParams = [];
+    }
+    if (!Array.isArray(newParams)) {
+      newParams = [newParams];
     }
 
     // TODO: Remove this replace after patternfly fixes the pf-random-id issue
@@ -256,6 +264,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     } else {
       newParams.push(selectedID);
     }
+
     this.submitMultiple(newParams);
   };
 

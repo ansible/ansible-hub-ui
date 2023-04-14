@@ -261,7 +261,14 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
     const repositoryUrl = getRepoUrl();
 
-    const noData = itemCount === 0 && !filterIsSet(params, ['keywords']);
+    const noData =
+      itemCount === 0 &&
+      !filterIsSet(params, [
+        'is_signed',
+        'keywords',
+        'repository_name',
+        'tags',
+      ]);
 
     const updateParams = (params) =>
       this.updateParams(params, () => this.loadCollections());
