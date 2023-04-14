@@ -14,6 +14,7 @@ export interface IBaseCollectionState {
     keywords?: string;
   };
   collections?: CollectionVersionSearch[];
+  collectionsCount?: number;
   collection?: CollectionVersionSearch;
   content?: CollectionVersionContentType;
   alerts?: AlertType[];
@@ -55,6 +56,7 @@ export function loadCollection({
       cache.collections,
       cache.collection,
       cache.content,
+      cache.collectionsCount,
     );
     return;
   }
@@ -99,7 +101,7 @@ export function loadCollection({
       collection,
       content,
     ]) => {
-      setCollection(collections, collection, content);
+      setCollection(collections, collection, content, collectionsCount);
 
       cache.repository = repo;
       cache.namespace = namespace;
