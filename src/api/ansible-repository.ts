@@ -22,9 +22,9 @@ class API extends PulpAPI {
     });
   }
 
-  addContent(id, collection_version_href) {
+  addContent(id, collection_version_hrefs) {
     return this.http.post(this.apiPath + id + '/modify/', {
-      add_content_units: [collection_version_href],
+      add_content_units: collection_version_hrefs,
     });
   }
 
