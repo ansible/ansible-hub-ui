@@ -34,6 +34,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
 
     this.state = {
       collections: [],
+      collectionsCount: 0,
       collection: null,
       content: null,
       params: params,
@@ -47,7 +48,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection, collections, content } = this.state;
+    const { params, collection, collections, collectionsCount, content } =
+      this.state;
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
@@ -128,8 +130,9 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       <React.Fragment>
         <CollectionHeader
           reload={() => this.loadCollection(true)}
-          collection={collection}
           collections={collections}
+          collectionsCount={collectionsCount}
+          collection={collection}
           content={content}
           params={params}
           updateParams={(p) =>
@@ -293,9 +296,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content) => {
-        this.setState({ collections, collection, content });
-      },
+      setCollection: (collections, collection, content, collectionsCount) =>
+        this.setState({ collections, collection, content, collectionsCount }),
       stateParams: this.state.params,
     });
   }

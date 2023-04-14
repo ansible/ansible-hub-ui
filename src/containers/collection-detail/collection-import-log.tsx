@@ -29,6 +29,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     this.state = {
       collection: null,
       collections: [],
+      collectionsCount: 0,
       content: null,
       params: params,
       loadingImports: true,
@@ -46,6 +47,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     const {
       collection,
       collections,
+      collectionsCount,
       params,
       loadingImports,
       selectedImportDetail,
@@ -84,6 +86,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
         <CollectionHeader
           reload={() => this.loadData(true)}
           collections={collections}
+          collectionsCount={collectionsCount}
           collection={collection}
           content={content}
           params={params}
@@ -154,8 +157,11 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content) =>
-        this.setState({ collections, collection, content }, callback),
+      setCollection: (collections, collection, content, collectionsCount) =>
+        this.setState(
+          { collections, collection, content, collectionsCount },
+          callback,
+        ),
       stateParams: this.state.params,
     });
   }

@@ -30,6 +30,7 @@ const CollectionDistributions = (props: RouteProps) => {
   const routeParams = ParamHelper.parseParamString(props.location.search);
 
   const [collections, setCollections] = useState([]);
+  const [collectionsCount, setCollectionsCount] = useState(0);
   const [collection, setCollection] = useState(null);
   const [content, setContent] = useState(null);
   const [inputText, setInputText] = useState('');
@@ -50,8 +51,9 @@ const CollectionDistributions = (props: RouteProps) => {
       forceReload,
       matchParams: props.routeParams,
       navigate: props.navigate,
-      setCollection: (collections, collection, content) => {
+      setCollection: (collections, collection, content, collectionsCount) => {
         setCollections(collections);
+        setCollectionsCount(collectionsCount);
         setCollection(collection);
         setContent(content);
 
@@ -201,6 +203,7 @@ const CollectionDistributions = (props: RouteProps) => {
       <CollectionHeader
         reload={() => loadCollections(true)}
         collections={collections}
+        collectionsCount={collectionsCount}
         collection={collection}
         content={content}
         params={params}
