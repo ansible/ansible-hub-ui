@@ -4,6 +4,8 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
+  Flex,
+  FlexItem,
   Label,
   LabelGroup,
   Text,
@@ -25,21 +27,28 @@ import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
-interface IProps extends CollectionVersionSearch {
-  showNamespace?: boolean;
-  controls?: React.ReactNode;
+interface IProps {
+  collection: CollectionVersionSearch;
   displaySignatures: boolean;
+  dropdownMenu?: React.ReactNode | null;
+  showNamespace?: boolean;
+  synclistSwitch?: React.ReactNode | null;
+  uploadButton?: React.ReactNode | null;
 }
 
 export const CollectionListItem = ({
-  collection_version,
-  namespace_metadata: namespace,
-  repository,
-  is_signed,
-  is_deprecated,
+  collection: {
+    collection_version,
+    namespace_metadata: namespace,
+    repository,
+    is_signed,
+    is_deprecated,
+  },
   displaySignatures,
+  dropdownMenu,
   showNamespace,
-  controls,
+  synclistSwitch,
+  uploadButton,
 }: IProps) => {
   const cells = [];
 
@@ -115,29 +124,55 @@ export const CollectionListItem = ({
 
   cells.push(
     <DataListCell isFilled={false} alignRight key='stats'>
-      {controls ? <div className='hub-entry'>{controls}</div> : null}
-      <div className='hub-right-col hub-entry'>
-        <Trans>
-          Updated <DateComponent date={collection_version.pulp_created} />
-        </Trans>
-      </div>
-      <div className='hub-entry'>v{collection_version.version}</div>
-      <Label variant='outline' className='hub-repository-badge'>
-        <Link
-          to={formatPath(Paths.ansibleRepositoryDetail, {
-            name: repository.name,
-          })}
+      <Flex
+        direction={{ default: 'column' }}
+        alignItems={{ default: 'alignItemsFlexEnd' }}
+      >
+        <Flex
+          direction={{ default: 'column' }}
+          alignItems={{ default: 'alignItemsFlexStart' }}
         >
-          {repository.name}
-        </Link>
-      </Label>
-      {displaySignatures ? (
-        <SignatureBadge
-          className='hub-entry'
-          variant='outline'
-          signState={is_signed ? 'signed' : 'unsigned'}
-        />
-      ) : null}
+          {synclistSwitch && <FlexItem>{synclistSwitch}</FlexItem>}
+          {uploadButton || dropdownMenu ? (
+            <FlexItem>
+              {uploadButton}
+              {dropdownMenu || <span className='hidden-menu-space'></span>}
+            </FlexItem>
+          ) : null}
+          <FlexItem>
+            <div>
+              <Trans>
+                Updated <DateComponent date={collection_version.pulp_created} />
+              </Trans>
+            </div>
+            <div>v{collection_version.version}</div>
+          </FlexItem>
+        </Flex>
+        <Flex
+          direction={{ default: 'row' }}
+          alignSelf={{ default: 'alignSelfFlexStart' }}
+        >
+          <FlexItem>
+            <Label variant='outline'>
+              <Link
+                to={formatPath(Paths.ansibleRepositoryDetail, {
+                  name: repository.name,
+                })}
+              >
+                {repository.name}
+              </Link>
+            </Label>
+          </FlexItem>
+          {displaySignatures ? (
+            <FlexItem>
+              <SignatureBadge
+                variant='outline'
+                signState={is_signed ? 'signed' : 'unsigned'}
+              />
+            </FlexItem>
+          ) : null}
+        </Flex>
+      </Flex>
     </DataListCell>,
   );
 

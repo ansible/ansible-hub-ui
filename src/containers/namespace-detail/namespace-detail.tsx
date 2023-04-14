@@ -425,12 +425,11 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   ignoredParams={ignoredParams}
                   collections={collections}
                   itemCount={itemCount}
-                  showControls={this.state.showControls}
-                  renderCollectionControls={(collection) =>
-                    this.renderCollectionControls(collection)
-                  }
                   displaySignatures={
                     this.context.featureFlags.display_signatures
+                  }
+                  collectionControls={(collection) =>
+                    this.renderCollectionControls(collection)
                   }
                 />
               </section>
@@ -926,8 +925,14 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { hasPermission } = this.context;
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+    const { showControls } = this.state;
+
+    if (!showControls) {
+      return;
+    }
+
+    return {
+      uploadButton: (
         <Button
           onClick={() =>
             this.handleCollectionAction(
@@ -939,6 +944,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         >
           {t`Upload new version`}
         </Button>
+      ),
+      dropdownMenu: (
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
@@ -965,8 +972,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           ].filter(Boolean)}
           ariaLabel='collection-kebab'
         />
-      </div>
-    );
+      ),
+    };
   }
 }
 
