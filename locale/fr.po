@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:197
-#: src/containers/ansible-repository/tab-repository-versions.tsx:227
+#: src/containers/ansible-repository/tab-repository-versions.tsx:230
 msgid "(latest)"
 msgstr "(dernier)"
 
@@ -28,6 +28,10 @@ msgstr "(réversion de signature)"
 #: src/components/repositories/remote-form.tsx:205
 msgid "(uploaded)"
 msgstr "(téléchargé)"
+
+#: src/containers/not-found/not-found.tsx:11
+msgid "404 - Page not found"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:155
 msgid "<0/> was added"
@@ -65,7 +69,7 @@ msgstr "<0>Note:</0> les liens suivants sont sans doute bloqués par votre navig
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:443
+#: src/containers/namespace-detail/namespace-detail.tsx:450
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Remarque</0> : Utilisez cette URL pour configurer ansible-galaxy afin de télécharger des collections dans cet espace de noms. Vous trouverez plus d'informations sur les configurations d'ansible-galaxy <1>ici</1><2> </2><3/>."
 
@@ -122,7 +126,7 @@ msgstr "Un tag peut contenir des caractères alphabétiques ASCII minuscules et 
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:608
+#: src/containers/namespace-detail/namespace-detail.tsx:615
 msgid "API Error: Failed to set deprecation."
 msgstr "Erreur d'API : Impossible de définir la dépréciation."
 
@@ -135,9 +139,9 @@ msgstr "Erreur d'API : Impossible de définir la dépréciation."
 msgid "API Error: {ex}"
 msgstr "Erreur d’API : {ex}"
 
-#: src/components/headers/collection-header.tsx:722
-#: src/components/headers/collection-header.tsx:776
-#: src/containers/namespace-detail/namespace-detail.tsx:631
+#: src/components/headers/collection-header.tsx:714
+#: src/components/headers/collection-header.tsx:768
+#: src/containers/namespace-detail/namespace-detail.tsx:638
 msgid "API Error: {status}"
 msgstr "Erreur d’API : {status}"
 
@@ -218,7 +222,7 @@ msgstr "Ajoutez un fichier README avec des instructions pour utiliser ce contene
 msgid "Add a role description here"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:177
+#: src/actions/ansible-repository-collection-version-add.tsx:210
 msgid "Add collection"
 msgstr ""
 
@@ -320,11 +324,11 @@ msgstr "Tout"
 msgid "All associated permissions under this role were removed."
 msgstr "Toutes les permissions associées à ce rôle ont été supprimées."
 
-#: src/constants.tsx:170
+#: src/constants.tsx:172
 msgid "Allow all actions on a task."
 msgstr "Autoriser toutes les actions sur une tâche."
 
-#: src/constants.tsx:171
+#: src/constants.tsx:173
 msgid "Allow all actions on a taskschedule."
 msgstr "Autoriser toutes les actions sur un plan de travail."
 
@@ -344,8 +348,8 @@ msgstr "Approbation"
 msgid "Approval dashboard"
 msgstr "Tableau de bord des approbations"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:684
-#: src/containers/certification-dashboard/certification-dashboard.tsx:703
+#: src/containers/certification-dashboard/certification-dashboard.tsx:685
+#: src/containers/certification-dashboard/certification-dashboard.tsx:704
 msgid "Approval failed."
 msgstr ""
 
@@ -353,12 +357,12 @@ msgstr ""
 msgid "Approval status:"
 msgstr "Statut d'approbation:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:538
-#: src/containers/certification-dashboard/certification-dashboard.tsx:569
+#: src/containers/certification-dashboard/certification-dashboard.tsx:539
+#: src/containers/certification-dashboard/certification-dashboard.tsx:570
 msgid "Approve"
 msgstr "Approuver"
 
-#: src/constants.tsx:155
+#: src/constants.tsx:157
 msgid "Approve, reject and sync collections from remotes."
 msgstr "Approuver, rejeter et synchroniser les collections à distance."
 
@@ -393,7 +397,7 @@ msgstr ""
 msgid "Are you sure you want to opt the following namespace out of Wisdom?"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-remove.tsx:76
+#: src/actions/ansible-repository-collection-version-remove.tsx:77
 msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
 msgstr ""
 
@@ -409,13 +413,13 @@ msgstr "Fournisseur d’authentification"
 msgid "Back"
 msgstr ""
 
-#: src/containers/collection-detail/collection-distributions.tsx:150
-#: src/containers/collection-detail/collection-distributions.tsx:237
-#: src/containers/collection-detail/collection-distributions.tsx:263
+#: src/containers/collection-detail/collection-distributions.tsx:152
+#: src/containers/collection-detail/collection-distributions.tsx:240
+#: src/containers/collection-detail/collection-distributions.tsx:266
 msgid "Base path"
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:260
+#: src/containers/ansible-repository/tab-repository-versions.tsx:263
 msgid "Base version"
 msgstr ""
 
@@ -458,7 +462,7 @@ msgstr "Certificat CA"
 #~ msgid "CLI Configuration"
 #~ msgstr "CLI Configuration"
 
-#: src/containers/collection-detail/collection-distributions.tsx:160
+#: src/containers/collection-detail/collection-distributions.tsx:162
 #: src/containers/namespace-detail/namespace-detail.tsx:225
 msgid "CLI configuration"
 msgstr "Configuration CLI"
@@ -471,11 +475,11 @@ msgstr ""
 #~ msgid "Can't update remote without a distribution attached to it."
 #~ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distribution y soit attachée."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:110
+#: src/actions/ansible-repository-collection-version-add.tsx:134
 #: src/actions/ansible-repository-version-revert.tsx:38
-#: src/components/approve-modal/approve-modal.tsx:435
+#: src/components/approve-modal/approve-modal.tsx:451
 #: src/components/confirm-modal/confirm-modal.tsx:39
-#: src/components/delete-modal/delete-modal.tsx:40
+#: src/components/delete-modal/delete-modal.tsx:42
 #: src/components/execution-environment/repository-form.tsx:152
 #: src/components/execution-environment/tag-manifest-modal.tsx:124
 #: src/components/import-modal/import-modal.tsx:76
@@ -503,7 +507,7 @@ msgstr "Annuler"
 msgid "Canceled"
 msgstr "Annulé"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:785
+#: src/containers/namespace-detail/namespace-detail.tsx:792
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr ""
 
@@ -516,17 +520,17 @@ msgstr ""
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "Impossible à supprimer tant que les collections <0/> qui dépendent de cette collection <1/> n'ont pas été supprimées<1/>."
 
-#: src/components/headers/collection-header.tsx:675
+#: src/components/headers/collection-header.tsx:667
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "Le certificat de la collection \"{0} {1} v{2}\" a été mis à jour."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:651
+#: src/containers/certification-dashboard/certification-dashboard.tsx:652
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:165
-#: src/containers/certification-dashboard/certification-dashboard.tsx:732
-#: src/containers/certification-dashboard/certification-dashboard.tsx:787
+#: src/components/approve-modal/approve-modal.tsx:166
+#: src/containers/certification-dashboard/certification-dashboard.tsx:733
+#: src/containers/certification-dashboard/certification-dashboard.tsx:788
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Le statut de certification de la collection \"{0} {1} v{2}\" a été mis à jour."
 
@@ -542,7 +546,7 @@ msgstr "Changement"
 #~ msgid "Change Ansible distribution"
 #~ msgstr "Changer la distribution Ansible"
 
-#: src/constants.tsx:156
+#: src/constants.tsx:158
 msgid "Change and upload collections to namespaces."
 msgstr "Changer et télécharger les collections vers les espaces de noms."
 
@@ -571,7 +575,7 @@ msgstr "Changer et télécharger les collections vers les espaces de noms."
 #~ msgid "Change distribution"
 #~ msgstr "Changer la distribution"
 
-#: src/constants.tsx:161
+#: src/constants.tsx:163
 msgid "Change existing execution environments."
 msgstr "Changer les environnements d'exécution existants."
 
@@ -605,9 +609,9 @@ msgstr "Changer les environnements d'exécution existants."
 #~ msgid "Change user"
 #~ msgstr "Changer d'utilisateur"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:747
-#: src/containers/certification-dashboard/certification-dashboard.tsx:767
-#: src/containers/certification-dashboard/certification-dashboard.tsx:798
+#: src/containers/certification-dashboard/certification-dashboard.tsx:748
+#: src/containers/certification-dashboard/certification-dashboard.tsx:768
+#: src/containers/certification-dashboard/certification-dashboard.tsx:799
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "Les changements de statut de certification pour la collection \"{0} {1} v{2}\" n’ont pas pu être sauvegardés."
 
@@ -667,15 +671,15 @@ msgstr ""
 msgid "Code"
 msgstr "Code"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:153
+#: src/actions/ansible-repository-collection-version-add.tsx:181
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:79
-#: src/containers/ansible-repository/tab-collection-versions.tsx:123
-#: src/containers/ansible-repository/tab-repository-versions.tsx:98
+#: src/containers/ansible-repository/tab-collection-versions.tsx:127
+#: src/containers/ansible-repository/tab-repository-versions.tsx:101
 #: src/containers/certification-dashboard/certification-dashboard.tsx:354
 msgid "Collection"
 msgstr "Collection"
 
-#: src/components/headers/collection-header.tsx:963
+#: src/components/headers/collection-header.tsx:955
 msgid "Collection \"{0} v{collectionVersion}\" could not be deleted."
 msgstr ""
 
@@ -683,11 +687,11 @@ msgstr ""
 msgid "Collection \"{0}\" could not be deleted."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:855
+#: src/components/headers/collection-header.tsx:847
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "La collection \"{0}\" n’a pas pu être dépréciée."
 
-#: src/components/headers/collection-header.tsx:856
+#: src/components/headers/collection-header.tsx:848
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "Il n’a pas été possible d’annuler la dépréciation de la collection \"{0}\""
 
@@ -703,8 +707,8 @@ msgstr "Il n’a pas été possible d’annuler la dépréciation de la collecti
 #~ msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 #~ msgstr "La collection \"{name} v{collectionVersion}\" n’a pas pu être supprimée."
 
-#: src/components/headers/collection-header.tsx:896
-#: src/components/headers/collection-header.tsx:909
+#: src/components/headers/collection-header.tsx:888
+#: src/components/headers/collection-header.tsx:901
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "La collection  \"{name} v{collectionVersion}\" a été supprimée."
 
@@ -712,7 +716,7 @@ msgstr "La collection  \"{name} v{collectionVersion}\" a été supprimée."
 #~ msgid "Collection \"{name}\" could not be deleted."
 #~ msgstr "La collection \"{name}\" n’a pas pu être supprimée."
 
-#: src/containers/search/search.tsx:358
+#: src/containers/search/search.tsx:359
 msgid "Collection \"{name}\" could not be deprecated."
 msgstr ""
 
@@ -720,7 +724,7 @@ msgstr ""
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "La collection \"{name}\" n’a pas pu être téléchargée."
 
-#: src/containers/search/search.tsx:359
+#: src/containers/search/search.tsx:360
 msgid "Collection \"{name}\" could not be undeprecated."
 msgstr ""
 
@@ -728,11 +732,11 @@ msgstr ""
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La collection  \"{name}\"  a été supprimée."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:593
+#: src/containers/namespace-detail/namespace-detail.tsx:600
 msgid "Collection \"{name}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:592
+#: src/containers/namespace-detail/namespace-detail.tsx:599
 msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr ""
 
@@ -756,12 +760,12 @@ msgstr "Nom de la collection"
 #~ msgid "Collection count for \"{distributionPath}\" could not be displayed."
 #~ msgstr "Le nombre de collections \"{distributionPath}\" n’a pas pu être affiché."
 
-#: src/containers/collection-detail/collection-distributions.tsx:169
+#: src/containers/collection-detail/collection-distributions.tsx:171
 msgid "Collection distributions"
 msgstr ""
 
-#: src/containers/collection-detail/collection-dependencies.tsx:148
-#: src/containers/collection-detail/collection-dependencies.tsx:156
+#: src/containers/collection-detail/collection-dependencies.tsx:144
+#: src/containers/collection-detail/collection-dependencies.tsx:152
 msgid "Collection does not have any dependencies."
 msgstr "La collection n'a aucune dépendance."
 
@@ -769,7 +773,7 @@ msgstr "La collection n'a aucune dépendance."
 msgid "Collection does not have dependencies."
 msgstr "La collection n'a pas de dépendances."
 
-#: src/containers/collection-detail/collection-distributions.tsx:137
+#: src/containers/collection-detail/collection-distributions.tsx:139
 msgid "Collection doesn't have any distribution assigned."
 msgstr ""
 
@@ -777,7 +781,7 @@ msgstr ""
 #~ msgid "Collection failed to be removed from those repositories: {0}"
 #~ msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:705
+#: src/containers/certification-dashboard/certification-dashboard.tsx:706
 msgid "Collection has to be in rejected or staging repository."
 msgstr ""
 
@@ -785,7 +789,7 @@ msgstr ""
 msgid "Collection is not being used by any collection."
 msgstr "La collection n'est pas utilisée par une autre collection."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:686
+#: src/containers/certification-dashboard/certification-dashboard.tsx:687
 msgid "Collection not found in any repository."
 msgstr ""
 
@@ -801,27 +805,27 @@ msgstr "Le téléchargement de la collection a été annulé"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:163
-#: src/components/approve-modal/approve-modal.tsx:383
+#: src/actions/ansible-repository-collection-version-add.tsx:196
+#: src/components/approve-modal/approve-modal.tsx:399
 #: src/components/headers/collection-header.tsx:328
 #: src/containers/ansible-repository/detail.tsx:23
-#: src/containers/ansible-repository/tab-collection-versions.tsx:133
-#: src/containers/ansible-repository/tab-repository-versions.tsx:108
+#: src/containers/ansible-repository/tab-collection-versions.tsx:137
+#: src/containers/ansible-repository/tab-repository-versions.tsx:111
 #: src/containers/certification-dashboard/certification-dashboard.tsx:388
 msgid "Collection versions"
 msgstr "Versions de la collection"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:131
-#: src/containers/ansible-repository/tab-collection-versions.tsx:103
-#: src/containers/ansible-repository/tab-repository-versions.tsx:91
+#: src/actions/ansible-repository-collection-version-add.tsx:155
+#: src/containers/ansible-repository/tab-collection-versions.tsx:107
+#: src/containers/ansible-repository/tab-repository-versions.tsx:94
 msgid "Collection versions could not be displayed."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:142
+#: src/actions/ansible-repository-collection-version-add.tsx:170
 msgid "Collection versions will appear once a collection is uploaded."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-collection-versions.tsx:117
+#: src/containers/ansible-repository/tab-collection-versions.tsx:121
 msgid "Collection versions will appear once the collection is modified."
 msgstr ""
 
@@ -833,20 +837,20 @@ msgstr ""
 #~ msgid "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 #~ msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:116
+#: src/components/approve-modal/approve-modal.tsx:117
 msgid "Collection with id {0} not found."
 msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:224
-#: src/containers/search/search.tsx:206
+#: src/containers/search/search.tsx:207
 #: src/loaders/standalone/menu.tsx:41
 #: src/loaders/standalone/menu.tsx:42
 msgid "Collections"
 msgstr "Collections"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:342
-#: src/containers/namespace-detail/namespace-detail.tsx:409
-#: src/containers/search/search.tsx:254
+#: src/containers/namespace-detail/namespace-detail.tsx:416
+#: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
 msgstr "Les collections apparaîtront une fois téléchargées"
 
@@ -854,12 +858,12 @@ msgstr "Les collections apparaîtront une fois téléchargées"
 msgid "Command"
 msgstr "Commande"
 
-#: src/constants.tsx:34
+#: src/components/repo-selector/repo-selector.tsx:17
 msgid "Community"
 msgstr "Communauté"
 
 #: src/components/collection-detail/collection-content-list.tsx:145
-#: src/containers/collection-detail/collection-docs.tsx:285
+#: src/containers/collection-detail/collection-docs.tsx:288
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Les collections de la communauté n’ont pas de nombres de contenus ou de document, mais tout le contenu est synchronisé"
 
@@ -933,11 +937,11 @@ msgstr "Nom du référentiel du conteneur"
 #~ msgid "Containers"
 #~ msgstr "Conteneurs"
 
-#: src/containers/collection-detail/collection-content.tsx:62
+#: src/containers/collection-detail/collection-content.tsx:64
 msgid "Content"
 msgstr "Contenu"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:248
+#: src/containers/ansible-repository/tab-repository-versions.tsx:251
 msgid "Content added"
 msgstr ""
 
@@ -949,11 +953,11 @@ msgstr ""
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:252
+#: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:604
+#: src/components/headers/collection-header.tsx:600
 msgid "Contents"
 msgstr "Contenus"
 
@@ -986,7 +990,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papiers"
 
-#: src/containers/collection-detail/collection-import-log.tsx:115
+#: src/containers/collection-detail/collection-import-log.tsx:118
 msgid "Could not load import log"
 msgstr "Impossible de charger le journal d'importation"
 
@@ -995,7 +999,7 @@ msgstr "Impossible de charger le journal d'importation"
 #~ msgid "Could not update the certification status for {0}.{1}.{2}."
 #~ msgstr "Could not update the certification status for {0}.{1}.{2}."
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:121
+#: src/containers/ansible-repository/tab-repository-versions.tsx:124
 msgid "Count"
 msgstr ""
 
@@ -1038,11 +1042,11 @@ msgstr "Créer un nouveau rôle"
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "Créez un mot de passe comportant au moins {minLength} caractères, y compris les caractères spéciaux, par exemple <!@$%>. Évitez d'utiliser des noms communs ou des expressions."
 
-#: src/constants.tsx:162
+#: src/constants.tsx:164
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "Créer et mettre à jour les environnements d'exécution sous les espaces de noms de conteneurs existants."
 
-#: src/components/headers/collection-header.tsx:496
+#: src/components/headers/collection-header.tsx:492
 msgid "Create issue"
 msgstr ""
 
@@ -1060,11 +1064,11 @@ msgstr "Créer un nouveau rôle"
 msgid "Create new user"
 msgstr "Créer un nouvel utilisateur"
 
-#: src/constants.tsx:154
+#: src/constants.tsx:156
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "Créer, supprimer et modifier les espaces de noms des collections. Télécharger et supprimer des collections. Synchroniser des collections à partir de sites distants. Approuver et rejeter des collections."
 
-#: src/containers/collection-detail/collection-distributions.tsx:155
+#: src/containers/collection-detail/collection-distributions.tsx:157
 #: src/containers/execution-environment/registry-list.tsx:322
 #: src/containers/execution-environment-list/execution_environment_list.tsx:304
 #: src/containers/group-management/group-detail.tsx:624
@@ -1074,8 +1078,8 @@ msgid "Created"
 msgstr "Créé"
 
 #: src/containers/ansible-repository/list.tsx:88
-#: src/containers/ansible-repository/tab-repository-versions.tsx:244
-#: src/containers/ansible-repository/tab-repository-versions.tsx:308
+#: src/containers/ansible-repository/tab-repository-versions.tsx:247
+#: src/containers/ansible-repository/tab-repository-versions.tsx:312
 msgid "Created date"
 msgstr ""
 
@@ -1086,22 +1090,26 @@ msgid "Created on"
 msgstr "Créé le"
 
 #: src/containers/ansible-repository/edit.tsx:147
-msgid "Creation started for distribution {0}"
+#~ msgid "Creation started for distribution {0}"
+#~ msgstr ""
+
+#: src/containers/ansible-repository/edit.tsx:161
+msgid "Creation started for distribution {distributionName}"
 msgstr ""
 
-#: src/constants.tsx:67
+#: src/constants.tsx:69
 msgid "Curate all synclist repository"
 msgstr "Conserver le référentiel de tous les synclistes"
 
-#: src/constants.tsx:58
+#: src/constants.tsx:60
 msgid "Curate synclist repository"
 msgstr "Conserver le référentiel syncliste"
 
-#: src/constants.tsx:71
+#: src/constants.tsx:73
 msgid "Curate synclist repository batch"
 msgstr "Lot de référentiel de synclistes"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:256
+#: src/containers/ansible-repository/tab-repository-versions.tsx:259
 msgid "Current content"
 msgstr ""
 
@@ -1138,8 +1146,8 @@ msgid "Date created"
 msgstr "Date de création"
 
 #: src/actions/ansible-remote-delete.tsx:11
-#: src/actions/ansible-repository-delete.tsx:11
-#: src/components/delete-modal/delete-modal.tsx:35
+#: src/actions/ansible-repository-delete.tsx:12
+#: src/components/delete-modal/delete-modal.tsx:37
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
@@ -1219,12 +1227,12 @@ msgstr "Supprimer le groupe ?"
 msgid "Delete image?"
 msgstr "Supprimer l’image ?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:779
-#: src/containers/namespace-detail/namespace-detail.tsx:793
+#: src/containers/namespace-detail/namespace-detail.tsx:786
+#: src/containers/namespace-detail/namespace-detail.tsx:800
 msgid "Delete namespace"
 msgstr "Supprimer l'espace nom"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:336
+#: src/containers/namespace-detail/namespace-detail.tsx:343
 msgid "Delete namespace?"
 msgstr "Supprimer l'espace nom ?"
 
@@ -1285,7 +1293,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Suppression de <0>{0} v{collectionVersion}</0>, et ses données seront perdues."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:68
-#: src/containers/namespace-detail/namespace-detail.tsx:341
+#: src/containers/namespace-detail/namespace-detail.tsx:348
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Suppression de <0>{0}</0> et ses données seront perdues."
 
@@ -1313,9 +1321,9 @@ msgstr "La suppression de ce groupe affectera {count} utilisateurs."
 msgid "Deleting yourself is not allowed."
 msgstr "Il n'est pas permis de s'effacer."
 
-#: src/components/headers/collection-header.tsx:618
-#: src/containers/collection-detail/collection-dependencies.tsx:112
-#: src/containers/collection-detail/collection-dependencies.tsx:142
+#: src/components/headers/collection-header.tsx:614
+#: src/containers/collection-detail/collection-dependencies.tsx:107
+#: src/containers/collection-detail/collection-dependencies.tsx:138
 msgid "Dependencies"
 msgstr "Dépendances"
 
@@ -1323,17 +1331,17 @@ msgstr "Dépendances"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "Les dépendances de la collection \"{name}\" n’ont pas pu être affichées."
 
-#: src/components/headers/collection-header.tsx:933
+#: src/components/headers/collection-header.tsx:925
 msgid "Dependent collections"
 msgstr "Collections dépendantes"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:280
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "Les collections dépendantes n’ont pas pu être affichées."
 
 #: src/components/headers/collection-header.tsx:262
-#: src/containers/namespace-detail/namespace-detail.tsx:963
-#: src/containers/search/search.tsx:385
+#: src/containers/namespace-detail/namespace-detail.tsx:970
+#: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "Dépréciation de"
 
@@ -1341,11 +1349,11 @@ msgstr "Dépréciation de"
 #~ msgid "Deprecation status update starting for collection \"{0}\"."
 #~ msgstr "La mise à jour de l'état de dépréciation commence pour la collection \"{0}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:583
+#: src/containers/namespace-detail/namespace-detail.tsx:590
 msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:158
+#: src/actions/ansible-repository-collection-version-add.tsx:186
 #: src/components/collection-detail/collection-content-list.tsx:105
 #: src/components/execution-environment/repository-form.tsx:364
 #: src/components/namespace-form/namespace-form.tsx:81
@@ -1353,9 +1361,9 @@ msgstr ""
 #: src/components/rbac/role-list-table.tsx:47
 #: src/components/rbac/select-roles.tsx:98
 #: src/components/repositories/ansible-repository-form.tsx:205
-#: src/containers/ansible-repository/tab-collection-versions.tsx:128
+#: src/containers/ansible-repository/tab-collection-versions.tsx:132
 #: src/containers/ansible-repository/tab-details.tsx:34
-#: src/containers/ansible-repository/tab-repository-versions.tsx:103
+#: src/containers/ansible-repository/tab-repository-versions.tsx:106
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:220
 #: src/containers/role-management/role-list.tsx:149
@@ -1367,11 +1375,11 @@ msgstr "Description"
 msgid "Descriptive name"
 msgstr "Nom descriptif"
 
-#: src/components/approve-modal/approve-modal.tsx:340
+#: src/components/approve-modal/approve-modal.tsx:354
 msgid "Deselect all ({0} items)"
 msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:336
+#: src/components/approve-modal/approve-modal.tsx:350
 msgid "Deselect page ({0} items)"
 msgstr ""
 
@@ -1408,9 +1416,9 @@ msgstr ""
 #~ msgid "Distribution name"
 #~ msgstr "Nom de la distribution"
 
-#: src/components/headers/collection-header.tsx:627
+#: src/components/headers/collection-header.tsx:623
 #: src/components/repositories/ansible-repository-form.tsx:214
-#: src/containers/collection-detail/collection-distributions.tsx:106
+#: src/containers/collection-detail/collection-distributions.tsx:108
 msgid "Distributions"
 msgstr ""
 
@@ -1418,8 +1426,8 @@ msgstr ""
 msgid "Docs site"
 msgstr "Site des docs"
 
-#: src/components/headers/collection-header.tsx:599
-#: src/containers/collection-detail/collection-docs.tsx:115
+#: src/components/headers/collection-header.tsx:595
+#: src/containers/collection-detail/collection-docs.tsx:117
 #: src/loaders/standalone/menu.tsx:111
 msgid "Documentation"
 msgstr "Documentation"
@@ -1528,7 +1536,7 @@ msgstr "Modifier l'environnement d'exécution"
 msgid "Edit in YAML editor"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:769
+#: src/containers/namespace-detail/namespace-detail.tsx:776
 msgid "Edit namespace"
 msgstr "Modifier l'espace de nom"
 
@@ -1636,7 +1644,7 @@ msgstr "Erreur lors de la récupération de l'importation à partir de l'API"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:837
+#: src/containers/certification-dashboard/certification-dashboard.tsx:838
 msgid "Error loading collections."
 msgstr "Erreur de chargement des collections"
 
@@ -1727,29 +1735,33 @@ msgstr "Message d'erreur"
 msgid "Error when saving registry."
 msgstr ""
 
-#: src/utilities/fail-alerts.ts:10
+#: src/utilities/fail-alerts.ts:15
 msgid "Error {statusCode} - {statusText}"
 msgstr "Erreur {statusCode} - {statusText}"
 
-#: src/utilities/fail-alerts.ts:7
+#: src/utilities/fail-alerts.ts:12
 msgid "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "Erreur {statusCode} - {statusText}: Interdit : vous ne possédez pas les permissions requises pour procéder à cette requête. Veuillez contacter l’administrateur du serveur pour élever votre niveau de permissions."
 
-#: src/utilities/fail-alerts.ts:8
+#: src/utilities/fail-alerts.ts:13
 msgid "Error {statusCode} - {statusText}: The server could not find the requested URL."
 msgstr "Erreur {statusCode} - {statusText}: le serveur n’a pas trouvé l’URL demandé."
 
-#: src/utilities/fail-alerts.ts:5
+#: src/utilities/fail-alerts.ts:10
 msgid "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
 msgstr "Erreur {statusCode} - {statusText}: le serveur a rencontré une erreur et n’a pas pu compléter votre demande."
 
-#: src/utilities/fail-alerts.ts:9
+#: src/utilities/fail-alerts.ts:14
 msgid "Error {statusCode} - {statusText}: The server was unable to complete your request."
 msgstr "Erreur {statusCode} - {statusText}: le serveur n’a pas pu compléter votre demande."
 
-#: src/utilities/fail-alerts.ts:6
+#: src/utilities/fail-alerts.ts:11
 msgid "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "Erreur {statusCode} - {statusText}: vous ne possédez pas les permissions requises pour procéder à cette demande. Veuillez contacter l’administrateur du serveur pour obtenir des permissions plus élevées."
+
+#: src/utilities/fail-alerts.ts:16
+msgid "Error {statusCode} - {statusText}: {customMessage}"
+msgstr ""
 
 #: src/containers/execution-environment-detail/base.tsx:182
 #: src/containers/execution-environment-list/execution_environment_list.tsx:461
@@ -1813,10 +1825,10 @@ msgid "Failed"
 msgstr "Échec"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:33
-msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
-msgstr ""
+#~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+#~ msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:175
+#: src/components/approve-modal/approve-modal.tsx:176
 msgid "Failed to approve collection."
 msgstr ""
 
@@ -1824,8 +1836,13 @@ msgstr ""
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:185
+#: src/containers/ansible-repository/tab-repository-versions.tsx:188
 msgid "Failed to find repository version"
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx:53
+#: src/actions/ansible-repository-delete.tsx:53
+msgid "Failed to list distributions, removing only the repository."
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:94
@@ -1852,7 +1869,7 @@ msgstr ""
 msgid "Failed to load remotes: {remotesError}"
 msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:219
+#: src/components/approve-modal/approve-modal.tsx:220
 #: src/containers/certification-dashboard/certification-dashboard.tsx:154
 msgid "Failed to load repositories."
 msgstr ""
@@ -1869,11 +1886,15 @@ msgstr ""
 msgid "Failed to opt out of Wisdom."
 msgstr ""
 
+#: src/actions/ansible-repository-delete.tsx:82
+msgid "Failed to remove distribution {name}"
+msgstr ""
+
 #: src/actions/ansible-remote-delete.tsx:40
 msgid "Failed to remove remote {name}"
 msgstr ""
 
-#: src/actions/ansible-repository-delete.tsx:41
+#: src/actions/ansible-repository-delete.tsx:66
 msgid "Failed to remove repository {name}"
 msgstr ""
 
@@ -1889,11 +1910,11 @@ msgstr "Échec de la récupération des données utilisateur."
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:630
+#: src/containers/namespace-detail/namespace-detail.tsx:637
 msgid "Failed to sign all collections."
 msgstr "Signer toutes les collections"
 
-#: src/components/headers/collection-header.tsx:721
+#: src/components/headers/collection-header.tsx:713
 msgid "Failed to sign all versions in the collection."
 msgstr "N’a pas pu signer toutes les versions de la collection."
 
@@ -1902,7 +1923,7 @@ msgstr "N’a pas pu signer toutes les versions de la collection."
 msgid "Failed to sign the container version."
 msgstr "N’a pas pu signer la version."
 
-#: src/components/headers/collection-header.tsx:775
+#: src/components/headers/collection-header.tsx:767
 msgid "Failed to sign the version."
 msgstr "N’a pas pu signer la version."
 
@@ -1988,7 +2009,7 @@ msgstr "Groupe"
 #: src/containers/ansible-remote/tab-access.tsx:125
 #: src/containers/ansible-repository/tab-access.tsx:125
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:489
+#: src/containers/namespace-detail/namespace-detail.tsx:496
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "Groupe \"{0}\" n’a pas pu être ajouté à  \"{name}\"."
 
@@ -1999,14 +2020,14 @@ msgstr "Groupe \"{0}\" n’a pas pu être ajouté à  \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx:140
 #: src/containers/ansible-repository/tab-access.tsx:140
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:506
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "Le groupe \"{0}\" n’a pas pu être supprimé de \"{name}\"."
 
 #: src/containers/ansible-remote/tab-access.tsx:124
 #: src/containers/ansible-repository/tab-access.tsx:124
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:488
+#: src/containers/namespace-detail/namespace-detail.tsx:495
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "Le groupe \"{0}\" a été ajouté à \"{name}\"."
 
@@ -2017,7 +2038,7 @@ msgstr "Le groupe \"{0}\" a été supprimé."
 #: src/containers/ansible-remote/tab-access.tsx:139
 #: src/containers/ansible-repository/tab-access.tsx:139
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:498
+#: src/containers/namespace-detail/namespace-detail.tsx:505
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "Le groupe \"{0}\" a été supprimé de \"{name}\"."
 
@@ -2027,8 +2048,8 @@ msgstr "Le groupe \"{0}\" a été supprimé de \"{name}\"."
 #: src/containers/ansible-repository/tab-access.tsx:166
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:519
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:526
+#: src/containers/namespace-detail/namespace-detail.tsx:545
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "Les rôles du groupe \"{0}\" n'ont pas pu être mis à jour dans \"{name}\"."
 
@@ -2038,8 +2059,8 @@ msgstr "Les rôles du groupe \"{0}\" n'ont pas pu être mis à jour dans \"{name
 #: src/containers/ansible-repository/tab-access.tsx:165
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:518
-#: src/containers/namespace-detail/namespace-detail.tsx:537
+#: src/containers/namespace-detail/namespace-detail.tsx:525
+#: src/containers/namespace-detail/namespace-detail.tsx:544
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "Les rôles du groupe \"{0}\" ont été mis à jour avec succès dans \"{name}\"."
 
@@ -2116,7 +2137,7 @@ msgstr "Masquer la signature"
 #: src/components/delete-modal/delete-collection-modal.tsx:77
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:45
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:223
-#: src/containers/namespace-detail/namespace-detail.tsx:348
+#: src/containers/namespace-detail/namespace-detail.tsx:355
 msgid "I understand that this action cannot be undone."
 msgstr "Je comprends que cette action ne puisse être annulée."
 
@@ -2155,21 +2176,21 @@ msgstr "Images"
 msgid "Images will appear once uploaded"
 msgstr "Les images apparaîtront une fois téléchargées"
 
-#: src/constants.tsx:55
-#: src/constants.tsx:64
+#: src/constants.tsx:57
+#: src/constants.tsx:66
 msgid "Import and auto approve"
 msgstr "Importation et approbation automatique"
 
-#: src/constants.tsx:61
+#: src/constants.tsx:63
 msgid "Import and move to staging"
 msgstr "Importez et déplacez vers la zone de transit"
 
-#: src/components/headers/collection-header.tsx:613
-#: src/containers/collection-detail/collection-import-log.tsx:79
+#: src/components/headers/collection-header.tsx:609
+#: src/containers/collection-detail/collection-import-log.tsx:81
 msgid "Import log"
 msgstr "Journal des importations"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:810
+#: src/containers/namespace-detail/namespace-detail.tsx:817
 msgid "Imports"
 msgstr "Importations"
 
@@ -2198,7 +2219,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "L’indexation commence pour l’environnement d’exécution \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:61
-#: src/components/headers/collection-header.tsx:594
+#: src/components/headers/collection-header.tsx:590
 msgid "Install"
 msgstr "Installer"
 
@@ -2254,9 +2275,9 @@ msgstr "Vous pouvez fermer cette fenêtre en toute sécurité. Ces tâches se te
 msgid "Key fingerprint"
 msgstr "Empreinte digitale de la clé"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:135
-#: src/components/collection-list/collection-filter.tsx:76
-#: src/containers/ansible-repository/tab-collection-versions.tsx:107
+#: src/actions/ansible-repository-collection-version-add.tsx:159
+#: src/components/collection-list/collection-filter.tsx:77
+#: src/containers/ansible-repository/tab-collection-versions.tsx:111
 msgid "Keywords"
 msgstr "Mots clés"
 
@@ -2286,7 +2307,7 @@ msgstr "Dernière synchronisation"
 msgid "Last updated"
 msgstr "Dernière mise à jour"
 
-#: src/components/headers/collection-header.tsx:478
+#: src/components/headers/collection-header.tsx:474
 msgid "Last updated <0/>"
 msgstr "Dernière mise à jour <0/>"
 
@@ -2346,7 +2367,7 @@ msgid "Link text"
 msgstr "Texte du lien"
 
 #: src/components/collection-list/collection-list.tsx:42
-#: src/containers/search/search.tsx:508
+#: src/containers/search/search.tsx:509
 msgid "List of Collections"
 msgstr "Liste des collections"
 
@@ -2402,15 +2423,15 @@ msgstr ""
 msgid "Make the repository private."
 msgstr ""
 
-#: src/constants.tsx:159
+#: src/constants.tsx:161
 msgid "Manage all content types."
 msgstr "Gérez tous les types de contenu."
 
-#: src/constants.tsx:153
+#: src/constants.tsx:155
 msgid "Manage ansible repositories."
 msgstr ""
 
-#: src/constants.tsx:158
+#: src/constants.tsx:160
 msgid "Manage collection remotes."
 msgstr ""
 
@@ -2465,8 +2486,8 @@ msgstr "Mes espaces de noms"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: src/components/approve-modal/approve-modal.tsx:373
-#: src/components/approve-modal/approve-modal.tsx:484
+#: src/components/approve-modal/approve-modal.tsx:389
+#: src/components/approve-modal/approve-modal.tsx:500
 #: src/components/collection-detail/collection-content-list.tsx:103
 #: src/components/execution-environment/repository-form.tsx:163
 #: src/components/execution-environment/repository-form.tsx:191
@@ -2482,9 +2503,9 @@ msgstr "Mon profil"
 #: src/components/rbac/select-roles.tsx:190
 #: src/components/repositories/ansible-repository-form.tsx:204
 #: src/components/repositories/remote-form.tsx:225
-#: src/containers/collection-detail/collection-distributions.tsx:145
-#: src/containers/collection-detail/collection-distributions.tsx:233
-#: src/containers/collection-detail/collection-distributions.tsx:264
+#: src/containers/collection-detail/collection-distributions.tsx:147
+#: src/containers/collection-detail/collection-distributions.tsx:236
+#: src/containers/collection-detail/collection-distributions.tsx:267
 #: src/containers/execution-environment/registry-list.tsx:260
 #: src/containers/execution-environment/registry-list.tsx:288
 #: src/containers/execution-environment/registry-list.tsx:317
@@ -2519,20 +2540,20 @@ msgstr "Le nom doit comporter plus de 2 caractères"
 msgid "Name must not be empty."
 msgstr "Le nom ne peut pas rester vide."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:139
-#: src/components/collection-list/collection-filter.tsx:86
+#: src/actions/ansible-repository-collection-version-add.tsx:163
+#: src/components/collection-list/collection-filter.tsx:87
 #: src/components/my-imports/import-list.tsx:253
-#: src/containers/ansible-repository/tab-collection-versions.tsx:111
+#: src/containers/ansible-repository/tab-collection-versions.tsx:115
 #: src/containers/certification-dashboard/certification-dashboard.tsx:230
 #: src/containers/certification-dashboard/certification-dashboard.tsx:349
 msgid "Namespace"
 msgstr "Espace de nommage"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:902
+#: src/containers/namespace-detail/namespace-detail.tsx:909
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "L’espace-nom \"{name}\" n’a pas pu être supprimé."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:882
+#: src/containers/namespace-detail/namespace-detail.tsx:889
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Suppression réussie de l'espace de nom  \"{name}\" ."
 
@@ -2567,7 +2588,7 @@ msgstr "Les noms d'espace de nommage sont limités aux caractères alphanumériq
 #~ msgstr "Namespace successfully edited."
 
 #: src/loaders/standalone/menu.tsx:48
-#: src/paths.ts:128
+#: src/paths.ts:127
 msgid "Namespaces"
 msgstr "Espaces de noms"
 
@@ -2639,18 +2660,18 @@ msgstr "Aucun rôle assignable."
 msgid "No child task"
 msgstr "Aucune tâche dépendante"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:92
+#: src/containers/ansible-repository/tab-repository-versions.tsx:95
 msgid "No collection versions in this repository version."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:143
-#: src/containers/ansible-repository/tab-collection-versions.tsx:118
-#: src/containers/ansible-repository/tab-repository-versions.tsx:93
+#: src/actions/ansible-repository-collection-version-add.tsx:171
+#: src/containers/ansible-repository/tab-collection-versions.tsx:122
+#: src/containers/ansible-repository/tab-repository-versions.tsx:96
 msgid "No collection versions yet"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:408
-#: src/containers/search/search.tsx:253
+#: src/containers/namespace-detail/namespace-detail.tsx:415
+#: src/containers/search/search.tsx:254
 msgid "No collections yet"
 msgstr "Pas encore de collections"
 
@@ -2665,12 +2686,12 @@ msgid "No data"
 msgstr "Pas de données"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:25
-#: src/containers/collection-detail/collection-dependencies.tsx:147
-#: src/containers/collection-detail/collection-dependencies.tsx:155
+#: src/containers/collection-detail/collection-dependencies.tsx:143
+#: src/containers/collection-detail/collection-dependencies.tsx:151
 msgid "No dependencies"
 msgstr "Aucune dépendance"
 
-#: src/containers/collection-detail/collection-distributions.tsx:136
+#: src/containers/collection-detail/collection-distributions.tsx:138
 msgid "No distributions yet"
 msgstr ""
 
@@ -2732,7 +2753,7 @@ msgstr ""
 msgid "No repositories yet"
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:298
+#: src/containers/ansible-repository/tab-repository-versions.tsx:302
 msgid "No repository versions yet"
 msgstr ""
 
@@ -2797,8 +2818,8 @@ msgstr ""
 #: src/containers/ansible-remote/tab-details.tsx:80
 #: src/containers/ansible-repository/tab-details.tsx:34
 #: src/containers/ansible-repository/tab-details.tsx:60
-#: src/containers/ansible-repository/tab-repository-versions.tsx:115
-#: src/containers/ansible-repository/tab-repository-versions.tsx:142
+#: src/containers/ansible-repository/tab-repository-versions.tsx:118
+#: src/containers/ansible-repository/tab-repository-versions.tsx:145
 msgid "None"
 msgstr ""
 
@@ -2808,11 +2829,11 @@ msgstr "Ne correspond pas à un super utilisateur"
 
 #: src/components/rbac/permission-chip-selector.tsx:99
 #: src/components/typeahead/typeahead.tsx:90
-#: src/containers/collection-detail/collection-docs.tsx:274
+#: src/containers/collection-detail/collection-docs.tsx:277
 msgid "Not found"
 msgstr "Introuvable"
 
-#: src/containers/not-found/not-found.tsx:18
+#: src/containers/not-found/not-found.tsx:16
 msgid "Not found image"
 msgstr "Image non trouvée"
 
@@ -2871,7 +2892,7 @@ msgstr "Tâche parentale"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
-#: src/paths.ts:129
+#: src/paths.ts:128
 msgid "Partners"
 msgstr "Partenaires"
 
@@ -3009,6 +3030,10 @@ msgstr ""
 msgid "Progress messages"
 msgstr "Messages de progression"
 
+#: src/actions/ansible-repository-delete.tsx:36
+msgid "Protected repositories cannot be deleted."
+msgstr ""
+
 #: src/components/legacy-role-list/legacy-role-item.tsx:83
 msgid "Provided by <0>{0}</0>"
 msgstr ""
@@ -3040,7 +3065,7 @@ msgstr "Nom d'utilisateur du proxy"
 msgid "Public key"
 msgstr "Clé publique"
 
-#: src/constants.tsx:32
+#: src/components/repo-selector/repo-selector.tsx:18
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:159
 msgid "Published"
 msgstr "Publié"
@@ -3062,111 +3087,111 @@ msgstr "Extraire cette image"
 msgid "Pulp Ansible Version"
 msgstr "Version Ansible Pulp"
 
-#: src/constants.tsx:72
+#: src/constants.tsx:74
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible : Synchronisation des collections"
 
-#: src/constants.tsx:81
+#: src/constants.tsx:83
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible : Les rôles se synchronisent"
 
-#: src/constants.tsx:75
+#: src/constants.tsx:77
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible : Copier le contenu"
 
-#: src/constants.tsx:86
+#: src/constants.tsx:88
 msgid "Pulp ansible: Import collection"
 msgstr "Pulp ansible : Importer la collection"
 
-#: src/constants.tsx:85
+#: src/constants.tsx:87
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible : Mise à jour de la collection à distance"
 
-#: src/constants.tsx:78
+#: src/constants.tsx:80
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible : collection sync"
 
-#: src/constants.tsx:104
+#: src/constants.tsx:106
 msgid "Pulp container: Build image from containerfile"
 msgstr "Conteneur Pulp : Construire une image à partir du fichier conteneur"
 
-#: src/constants.tsx:107
+#: src/constants.tsx:109
 msgid "Pulp container: General multi delete"
 msgstr "Conteneur Pulp : Suppression générale multiple"
 
-#: src/constants.tsx:98
+#: src/constants.tsx:100
 msgid "Pulp container: Recursive add content"
 msgstr "Conteneur Pulp : Ajout récursif de contenu"
 
-#: src/constants.tsx:101
+#: src/constants.tsx:103
 msgid "Pulp container: Recursive remove content"
 msgstr "Conteneur Pulp : Suppression récursive du contenu"
 
-#: src/constants.tsx:89
+#: src/constants.tsx:91
 msgid "Pulp container: Tag image"
 msgstr "Conteneur Pulp : Tag image"
 
-#: src/constants.tsx:95
+#: src/constants.tsx:97
 msgid "Pulp container: Tasks synchronize"
 msgstr "Conteneur Pulp : Les tâches se synchronisent"
 
-#: src/constants.tsx:92
+#: src/constants.tsx:94
 msgid "Pulp container: Untage image"
 msgstr "Conteneur Pulp : Untag image"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:122
+#: src/containers/ansible-repository/tab-repository-versions.tsx:125
 msgid "Pulp type"
 msgstr ""
 
-#: src/constants.tsx:143
+#: src/constants.tsx:145
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore : Ajouter et supprimer"
 
-#: src/constants.tsx:146
+#: src/constants.tsx:148
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore : Ajouter ou supprimer"
 
-#: src/constants.tsx:134
+#: src/constants.tsx:136
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore : Supprimer la version"
 
-#: src/constants.tsx:119
+#: src/constants.tsx:121
 msgid "Pulpcore: General create"
 msgstr "Pulpcore : Création générale"
 
-#: src/constants.tsx:125
+#: src/constants.tsx:127
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore : Suppression générale"
 
-#: src/constants.tsx:122
+#: src/constants.tsx:124
 msgid "Pulpcore: General update"
 msgstr "Pulpcore : Mise à jour générale"
 
-#: src/constants.tsx:110
+#: src/constants.tsx:112
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore : Importation de la version du référentiel"
 
-#: src/constants.tsx:113
+#: src/constants.tsx:115
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore : Nettoyage des orphelins"
 
-#: src/constants.tsx:128
+#: src/constants.tsx:130
 msgid "Pulpcore: Pulp export"
 msgstr "Pâte à papier : Exportation Pulp"
 
-#: src/constants.tsx:131
+#: src/constants.tsx:133
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore : Importation Pulp"
 
-#: src/constants.tsx:116
+#: src/constants.tsx:118
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore : Réparer tous les artefacts"
 
-#: src/constants.tsx:137
+#: src/constants.tsx:139
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore : Version de réparation"
 
-#: src/constants.tsx:140
+#: src/constants.tsx:142
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore : Télécharger le commit"
 
@@ -3190,11 +3215,11 @@ msgstr "Pousser images de conteneurs"
 #~ msgid "Push to existing containers"
 #~ msgstr "Pousser vers les conteneurs existants"
 
-#: src/constants.tsx:163
+#: src/constants.tsx:165
 msgid "Push, and change execution environments."
 msgstr "Pousser, et modifier les environnements d'exécution."
 
-#: src/constants.tsx:160
+#: src/constants.tsx:162
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "Créer, supprimer et modifier les environnements d'exécution. Créer, supprimer et modifier les registres distants."
 
@@ -3218,7 +3243,7 @@ msgstr "Readme"
 msgid "Reason: task {0}"
 msgstr "Raison : tâche {0}"
 
-#: src/constants.tsx:33
+#: src/components/repo-selector/repo-selector.tsx:20
 msgid "Red Hat Certified"
 msgstr "Certifié Red Hat"
 
@@ -3238,10 +3263,11 @@ msgstr "URL du registre"
 msgid "Registry sync status"
 msgstr "Statut sync registre"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:582
+#: src/containers/certification-dashboard/certification-dashboard.tsx:583
 msgid "Reject"
 msgstr "Rejeter"
 
+#: src/components/repo-selector/repo-selector.tsx:19
 #: src/containers/certification-dashboard/certification-dashboard.tsx:243
 #: src/containers/certification-dashboard/certification-dashboard.tsx:282
 #: src/containers/certification-dashboard/certification-dashboard.tsx:432
@@ -3318,24 +3344,29 @@ msgstr ""
 msgid "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
 msgstr ""
 
+#: src/actions/ansible-repository-delete.tsx:77
+msgid "Removal started for distribution {name}"
+msgstr ""
+
 #: src/actions/ansible-remote-delete.tsx:34
 msgid "Removal started for remote {name}"
 msgstr ""
 
-#: src/actions/ansible-repository-delete.tsx:34
+#: src/actions/ansible-repository-delete.tsx:62
 msgid "Removal started for repository {name}"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-remove.tsx:90
+#: src/actions/ansible-repository-collection-version-remove.tsx:91
+#: src/components/delete-modal/delete-modal.tsx:37
 #: src/containers/group-management/group-detail.tsx:663
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/actions/ansible-repository-collection-version-remove.tsx:73
+#: src/actions/ansible-repository-collection-version-remove.tsx:74
 msgid "Remove collection version?"
 msgstr ""
 
-#: src/constants.tsx:54
+#: src/constants.tsx:56
 msgid "Remove content from repository"
 msgstr "Supprimer le contenu du référentiel"
 
@@ -3388,9 +3419,11 @@ msgstr ""
 msgid "Repositories will appear once created."
 msgstr ""
 
-#: src/components/approve-modal/approve-modal.tsx:460
-#: src/components/collection-list/collection-filter.tsx:80
-#: src/components/repo-selector/repo-selector.tsx:51
+#: src/actions/ansible-repository-collection-version-add.tsx:167
+#: src/actions/ansible-repository-collection-version-add.tsx:191
+#: src/components/approve-modal/approve-modal.tsx:476
+#: src/components/collection-list/collection-filter.tsx:81
+#: src/components/repo-selector/repo-selector.tsx:30
 #: src/containers/certification-dashboard/certification-dashboard.tsx:369
 msgid "Repository"
 msgstr ""
@@ -3414,24 +3447,24 @@ msgstr ""
 msgid "Repository name"
 msgstr "Nom du référentiel"
 
-#: src/components/approve-modal/approve-modal.tsx:105
+#: src/components/approve-modal/approve-modal.tsx:106
 msgid "Repository name {originRepoName} not found."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:313
+#: src/containers/ansible-repository/tab-repository-versions.tsx:317
 msgid "Repository versions"
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:293
+#: src/containers/ansible-repository/tab-repository-versions.tsx:297
 msgid "Repository versions could not be displayed."
 msgstr ""
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:297
+#: src/containers/ansible-repository/tab-repository-versions.tsx:301
 msgid "Repository versions will appear once the repository is modified."
 msgstr ""
 
-#: src/utilities/repositories.ts:45
-#: src/utilities/repositories.ts:45
+#: src/utilities/repositories.ts:46
+#: src/utilities/repositories.ts:46
 msgid "Repository {repoName} not found."
 msgstr ""
 
@@ -3605,12 +3638,12 @@ msgstr "Voir la <0>page de détails </0> de gestion des tâches pour voir le sta
 #~ msgid "See the task management <0>detail page</0>for the status of this task."
 #~ msgstr "Voir la <0>page de détails </0> de gestion des tâches pour voir le statut de cette tâche.."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:107
-#: src/components/approve-modal/approve-modal.tsx:427
+#: src/actions/ansible-repository-collection-version-add.tsx:131
+#: src/components/approve-modal/approve-modal.tsx:443
 msgid "Select"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:115
+#: src/actions/ansible-repository-collection-version-add.tsx:139
 msgid "Select a collection"
 msgstr ""
 
@@ -3632,11 +3665,11 @@ msgstr ""
 msgid "Select a tag"
 msgstr "Sélectionner un tag"
 
-#: src/components/approve-modal/approve-modal.tsx:331
+#: src/components/approve-modal/approve-modal.tsx:345
 msgid "Select all ({0} items)"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:438
+#: src/components/headers/collection-header.tsx:435
 msgid "Select collection version"
 msgstr "Sélectionnez la version de la collection"
 
@@ -3657,7 +3690,7 @@ msgstr "Sélectionner les groupes"
 msgid "Select namespace"
 msgstr "Sélectionnez l'espace de noms"
 
-#: src/components/approve-modal/approve-modal.tsx:327
+#: src/components/approve-modal/approve-modal.tsx:341
 msgid "Select page ({0} items)"
 msgstr ""
 
@@ -3666,7 +3699,7 @@ msgstr ""
 msgid "Select permissions"
 msgstr "Ajouter les permissions"
 
-#: src/components/approve-modal/approve-modal.tsx:440
+#: src/components/approve-modal/approve-modal.tsx:456
 msgid "Select repositories"
 msgstr ""
 
@@ -3681,7 +3714,7 @@ msgstr "Sélectionner des rôles"
 msgid "Select users"
 msgstr "Sélectionner les utilisateurs"
 
-#: src/components/approve-modal/approve-modal.tsx:249
+#: src/components/approve-modal/approve-modal.tsx:250
 msgid "Selected"
 msgstr ""
 
@@ -3743,12 +3776,12 @@ msgid "Sign all"
 msgstr "Tout signer"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:822
+#: src/containers/namespace-detail/namespace-detail.tsx:829
 msgid "Sign all collections"
 msgstr "Signer toutes les collections"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:538
-#: src/containers/certification-dashboard/certification-dashboard.tsx:569
+#: src/containers/certification-dashboard/certification-dashboard.tsx:539
+#: src/containers/certification-dashboard/certification-dashboard.tsx:570
 msgid "Sign and approve"
 msgstr "Signer et approuver"
 
@@ -3756,7 +3789,7 @@ msgstr "Signer et approuver"
 msgid "Sign entire collection"
 msgstr "Signer toute la collection"
 
-#: src/components/collection-list/collection-filter.tsx:99
+#: src/components/collection-list/collection-filter.tsx:100
 msgid "Sign state"
 msgstr "Signer l’état"
 
@@ -3794,7 +3827,7 @@ msgstr "Les clés de signature apparaîtront une fois créées."
 msgid "Signatures could not be loaded."
 msgstr ""
 
-#: src/components/collection-list/collection-filter.tsx:102
+#: src/components/collection-list/collection-filter.tsx:103
 #: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "Signé"
@@ -3815,11 +3848,11 @@ msgstr "Version(s) signée(s)"
 msgid "Signing service selector:"
 msgstr "Sélecteur de service de signature :"
 
-#: src/components/approve-modal/approve-modal.tsx:129
+#: src/components/approve-modal/approve-modal.tsx:130
 msgid "Signing service {signingServiceName} not found"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:640
+#: src/containers/namespace-detail/namespace-detail.tsx:647
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "La signature a commencé pour toutes les collections dans l’espace de nommage \"{0}\"."
 
@@ -3827,7 +3860,7 @@ msgstr "La signature a commencé pour toutes les collections dans l’espace de 
 #~ msgid "Signing started for all versions in collection \"{0}\""
 #~ msgstr "La signature a commencé pour toutes les versions pour la collection \"{0}\""
 
-#: src/components/headers/collection-header.tsx:731
+#: src/components/headers/collection-header.tsx:723
 msgid "Signing started for all versions in collection \"{name}\""
 msgstr ""
 
@@ -3835,7 +3868,7 @@ msgstr ""
 #~ msgid "Signing started for collection \"{0} v{1}\"."
 #~ msgstr "La signature a commencé pour la collection \"{0} v{1}\"."
 
-#: src/components/headers/collection-header.tsx:785
+#: src/components/headers/collection-header.tsx:777
 msgid "Signing started for collection \"{name} v{version}\"."
 msgstr ""
 
@@ -3859,6 +3892,7 @@ msgstr ""
 msgid "Sort results"
 msgstr "Trier les résultats"
 
+#: src/components/repo-selector/repo-selector.tsx:21
 #: src/components/repositories/ansible-repository-form.tsx:159
 msgid "Staging"
 msgstr ""
@@ -3867,9 +3901,13 @@ msgstr ""
 msgid "Start from scratch"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:25
-msgid "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+#: src/actions/ansible-repository-collection-version-add.tsx:35
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."
 msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx:25
+#~ msgid "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
+#~ msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:246
 msgid "Started at"
@@ -3980,7 +4018,7 @@ msgid "Super users have all system permissions regardless of what groups they ar
 msgstr "Les super utilisateurs disposent de toutes les autorisations du système, quels que soient les groupes auxquels ils appartiennent."
 
 #: src/actions/ansible-repository-sync.tsx:9
-#: src/containers/search/search.tsx:430
+#: src/containers/search/search.tsx:431
 msgid "Sync"
 msgstr "Sync"
 
@@ -4027,7 +4065,7 @@ msgstr ""
 msgid "TLS validation"
 msgstr "Validation TLS"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:91
 #: src/components/execution-environment/publish-to-controller-modal.tsx:303
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
@@ -4128,31 +4166,31 @@ msgstr "L’URL doit être au format 'http(s)://'."
 msgid "The URL of an external content source."
 msgstr "L'URL d'une source de contenu externe."
 
-#: src/components/headers/collection-header.tsx:686
+#: src/components/headers/collection-header.tsx:678
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "Le certificat pour \"{0} {1} v{2}\" n'a pas pu être enregistré."
 
-#: src/components/headers/collection-header.tsx:654
+#: src/components/headers/collection-header.tsx:646
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "Le certificat pour \"{0} {1} v{2}\" est en cours de téléchargement."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:662
+#: src/containers/certification-dashboard/certification-dashboard.tsx:663
 msgid "The certificate for \"{namespace} {name} v{version}\" could not be saved."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:830
+#: src/components/headers/collection-header.tsx:822
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "La collection \"{0}\" a été dépréciée."
 
-#: src/components/headers/collection-header.tsx:831
+#: src/components/headers/collection-header.tsx:823
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "La dépréciation de la collection  \"{0}\"  a été annulée."
 
-#: src/containers/search/search.tsx:336
+#: src/containers/search/search.tsx:337
 msgid "The collection \"{name}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/search/search.tsx:337
+#: src/containers/search/search.tsx:338
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr ""
 
@@ -4164,7 +4202,7 @@ msgstr "La collection que vous avez sélectionnée ne correspond pas à cet espa
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "La collection que vous avez sélectionnée ne semble pas correspondre à {0}"
 
-#: src/containers/collection-detail/collection-docs.tsx:275
+#: src/containers/collection-detail/collection-docs.tsx:278
 msgid "The file is not available for this version of {collectionName}"
 msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
@@ -4196,7 +4234,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "Les rôles sélectionnés seront ajoutés à cet environnement d'exécution spécifique."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:474
+#: src/containers/namespace-detail/namespace-detail.tsx:481
 msgid "The selected roles will be added to this specific namespace."
 msgstr "Les rôles sélectionnés seront ajoutés à cet espace de nom spécifique."
 
@@ -4265,15 +4303,15 @@ msgstr "Ce compte n'est pas configuré pour gérer des espaces de noms"
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:513
+#: src/components/headers/collection-header.tsx:509
 msgid "This collection has been deprecated."
 msgstr "Cette collection a été dépréciée."
 
-#: src/containers/collection-detail/collection-dependencies.tsx:164
+#: src/containers/collection-detail/collection-dependencies.tsx:160
 msgid "This collection is being used by"
 msgstr "Cette collection est utilisée par"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:152
+#: src/containers/collection-detail/collection-dependencies.tsx:148
 msgid "This collections requires the following collections for use"
 msgstr "Cette collection nécessite les collections suivantes pour être utilisée"
 
@@ -4373,12 +4411,12 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:262
-#: src/containers/namespace-detail/namespace-detail.tsx:963
-#: src/containers/search/search.tsx:385
+#: src/containers/namespace-detail/namespace-detail.tsx:970
+#: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "Réversion de dépréciation"
 
-#: src/components/collection-list/collection-filter.tsx:103
+#: src/components/collection-list/collection-filter.tsx:104
 #: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "Réversion de signature"
@@ -4410,24 +4448,24 @@ msgstr "Mise à jour de <0/>"
 msgid "Upload"
 msgstr "Télécharger"
 
-#: src/constants.tsx:157
+#: src/constants.tsx:159
 msgid "Upload and modify collections."
 msgstr "Chargez et modifiez les collections."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:415
-#: src/containers/namespace-detail/namespace-detail.tsx:842
+#: src/containers/namespace-detail/namespace-detail.tsx:422
+#: src/containers/namespace-detail/namespace-detail.tsx:849
 msgid "Upload collection"
 msgstr "Télécharger la collection"
 
 #: src/components/headers/collection-header.tsx:270
-#: src/containers/namespace-detail/namespace-detail.tsx:940
-#: src/containers/search/search.tsx:396
+#: src/containers/namespace-detail/namespace-detail.tsx:947
+#: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
 msgstr "Télécharger la nouvelle version"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:526
+#: src/containers/certification-dashboard/certification-dashboard.tsx:527
 msgid "Upload signature"
 msgstr "Télécharger la signature"
 
@@ -4594,17 +4632,17 @@ msgstr "Les utilisateurs apparaîtront une fois ajoutés à ce groupe"
 msgid "Users will appear once created"
 msgstr "Les utilisateurs apparaîtront une fois créés"
 
-#: src/constants.tsx:35
+#: src/components/repo-selector/repo-selector.tsx:22
 msgid "Validated"
 msgstr "Validé"
 
-#: src/components/headers/collection-header.tsx:426
+#: src/components/headers/collection-header.tsx:423
 #: src/containers/certification-dashboard/certification-dashboard.tsx:359
 msgid "Version"
 msgstr "Version"
 
-#: src/containers/ansible-repository/tab-repository-versions.tsx:242
-#: src/containers/ansible-repository/tab-repository-versions.tsx:303
+#: src/containers/ansible-repository/tab-repository-versions.tsx:245
+#: src/containers/ansible-repository/tab-repository-versions.tsx:307
 msgid "Version number"
 msgstr ""
 
@@ -4624,7 +4662,7 @@ msgstr ""
 #~ msgid "View Ansible distribution"
 #~ msgstr "Voir la distribution Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:557
+#: src/containers/certification-dashboard/certification-dashboard.tsx:558
 msgid "View Import Logs"
 msgstr "Afficher les journaux d'importation"
 
@@ -4656,7 +4694,7 @@ msgstr "Voir les collections"
 #~ msgid "View group"
 #~ msgstr "Afficher le groupe"
 
-#: src/components/headers/collection-header.tsx:442
+#: src/components/headers/collection-header.tsx:439
 msgid "View more"
 msgstr "Afficher plus de détails"
 
@@ -4680,19 +4718,19 @@ msgstr "Afficher plus de détails"
 #~ msgid "View user"
 #~ msgstr "Afficher l’utilisateur"
 
-#: src/constants.tsx:164
+#: src/constants.tsx:166
 msgid "View, add, remove and change groups."
 msgstr "Afficher, ajouter, supprimer et modifier des groupes."
 
-#: src/constants.tsx:165
+#: src/constants.tsx:167
 msgid "View, add, remove and change synclists."
 msgstr "Visualiser, ajouter, supprimer et modifier des synclistes."
 
-#: src/constants.tsx:167
+#: src/constants.tsx:169
 msgid "View, add, remove and change users."
 msgstr "Visualiser, ajouter, supprimer et modifier les utilisateurs."
 
-#: src/constants.tsx:166
+#: src/constants.tsx:168
 msgid "View, and cancel any task."
 msgstr "Visualisez et annulez n'importe quelle tâche."
 
@@ -4706,11 +4744,11 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "patientez jusqu’à ce que les tâche(s) {pendingTasks} se terminent."
 
 #: src/components/collection-detail/collection-content-list.tsx:144
-#: src/containers/collection-detail/collection-docs.tsx:284
+#: src/containers/collection-detail/collection-docs.tsx:287
 msgid "Warning"
 msgstr "Avertissement"
 
-#: src/containers/not-found/not-found.tsx:19
+#: src/containers/not-found/not-found.tsx:17
 msgid "We couldn't find the page you're looking for!"
 msgstr "Nous n'avons pas trouvé la page que vous recherchez !"
 
@@ -4724,7 +4762,7 @@ msgstr "Site web"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:188
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
-#: src/containers/namespace-detail/namespace-detail.tsx:830
+#: src/containers/namespace-detail/namespace-detail.tsx:837
 msgid "Wisdom settings"
 msgstr ""
 
@@ -4808,8 +4846,8 @@ msgstr "Vous n'avez pas la permission d'afficher les utilisateurs."
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:553
-#: src/containers/search/search.tsx:443
+#: src/components/headers/collection-header.tsx:549
+#: src/containers/search/search.tsx:444
 msgid "You don't have rights to do this operation."
 msgstr "Vous n'avez pas le droit de faire cette opération."
 
@@ -4842,13 +4880,13 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "valeur cachée"
 
-#: src/components/collection-list/collection-filter.tsx:128
+#: src/components/collection-list/collection-filter.tsx:129
 #: src/containers/namespace-list/namespace-list.tsx:213
 #: src/containers/namespace-list/namespace-list.tsx:223
 msgid "keywords"
 msgstr "mots clés"
 
-#: src/components/collection-list/collection-filter.tsx:130
+#: src/components/collection-list/collection-filter.tsx:131
 msgid "namespace"
 msgstr ""
 
@@ -4872,14 +4910,14 @@ msgstr "rejeté"
 #~ msgid "released {0}"
 #~ msgstr "released {0}"
 
-#: src/components/collection-list/collection-filter.tsx:129
+#: src/components/collection-list/collection-filter.tsx:130
 msgid "repository"
 msgstr ""
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
-msgid "role.github_user logo"
-msgstr ""
+#~ msgid "role.github_user logo"
+#~ msgstr ""
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
@@ -4889,15 +4927,15 @@ msgstr ""
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:126
+#: src/components/collection-list/collection-filter.tsx:127
 msgid "sign state"
 msgstr "état sign"
 
-#: src/components/collection-list/collection-filter.tsx:135
+#: src/components/collection-list/collection-filter.tsx:136
 msgid "signed"
 msgstr ""
 
-#: src/components/collection-list/collection-filter.tsx:127
+#: src/components/collection-list/collection-filter.tsx:128
 msgid "tags"
 msgstr "libellés"
 
@@ -4905,7 +4943,7 @@ msgstr "libellés"
 msgid "true"
 msgstr "vrai"
 
-#: src/components/collection-list/collection-filter.tsx:134
+#: src/components/collection-list/collection-filter.tsx:135
 msgid "unsigned"
 msgstr ""
 
@@ -4921,11 +4959,20 @@ msgstr "attendre l'approbation"
 msgid "waiting for import to finish"
 msgstr "patientez jusqu’à ce que l’importation se termine"
 
+#: src/actions/ansible-repository-collection-version-add.tsx:45
+msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
+msgstr ""
+
+#: src/components/legacy-role-list/legacy-role-item.tsx:65
+#: src/containers/legacy-roles/legacy-role.tsx:278
+msgid "{0} logo"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:511
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} released {1}"
 
-#: src/components/headers/collection-header.tsx:469
+#: src/components/headers/collection-header.tsx:465
 msgid "{0} updated {1}"
 msgstr "{0} mis à jour {1}"
 
