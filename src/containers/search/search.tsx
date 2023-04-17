@@ -397,9 +397,7 @@ class Search extends React.Component<RouteProps, IState> {
           </Button>
         ) : null,
         dropdownMenu: displayMenu ? (
-          <span className={cx(!displayMenu && 'hidden-menu-space')}>
-            <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-            </span>
+          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
         ) : null,
       };
     }
