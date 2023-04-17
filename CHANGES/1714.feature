@@ -1,1 +1,0 @@
-Utilize hasPermission function to accomodate new permission names from the API.
