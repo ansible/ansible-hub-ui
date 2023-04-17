@@ -21,20 +21,23 @@ interface IProps {
   updateParams: (params) => void;
   itemCount: number;
   ignoredParams: string[];
-  showControls?: boolean;
-  renderCollectionControls: (collection) => React.ReactNode;
+  collectionControls: (collection) => {
+    dropdownMenu?: React.ReactNode | null;
+    synclistSwitch?: React.ReactNode | null;
+    uploadButton?: React.ReactNode | null;
+  };
 }
 
 // only used in namespace detail, collections uses individual items
 export const CollectionList = (props: IProps) => {
   const {
     collections,
+    collectionControls,
     displaySignatures,
     params,
     updateParams,
     ignoredParams,
     itemCount,
-    showControls,
   } = props;
 
   return (
@@ -43,11 +46,11 @@ export const CollectionList = (props: IProps) => {
         {collections.length > 0 ? (
           collections.map((c, i) => (
             <CollectionListItem
-              controls={showControls ? props.renderCollectionControls(c) : null}
               key={i}
-              {...c}
+              collection={c}
               displaySignatures={displaySignatures}
-              showNamespace={true}
+              showNamespace
+              {...collectionControls(c)}
             />
           ))
         ) : (

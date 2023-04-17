@@ -386,22 +386,28 @@ class Search extends React.Component<RouteProps, IState> {
 
     const displayMenu = menuItems.length > 0;
 
-    return (
-      <React.Fragment>
-        {list && hasPermission('galaxy.upload_to_namespace') && (
+    if (list) {
+      return {
+        uploadButton: hasPermission('galaxy.upload_to_namespace') ? (
           <Button
             onClick={() => this.checkUploadPrivilleges(collection)}
             variant='secondary'
           >
             {t`Upload new version`}
           </Button>
+        ) : null,
+        dropdownMenu: displayMenu ? (
+          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+        ) : null,
+      };
+    }
+
+    return (
+      <span className={cx(!displayMenu && 'hidden-menu-space')}>
+        {displayMenu && (
+          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
         )}
-        <span className={cx(!displayMenu && 'hidden-menu-space')}>
-          {displayMenu && (
-            <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-          )}
-        </span>
-      </React.Fragment>
+      </span>
     );
   }
 
@@ -447,11 +453,11 @@ class Search extends React.Component<RouteProps, IState> {
           <DataList className='data-list' aria-label={t`List of Collections`}>
             {collections.map((c, i) => (
               <CollectionListItem
-                showNamespace={true}
                 key={i}
-                {...c}
-                controls={this.renderMenu(true, c)}
+                showNamespace
+                collection={c}
                 displaySignatures={this.context.featureFlags.display_signatures}
+                {...this.renderMenu(true, c)}
               />
             ))}
           </DataList>
