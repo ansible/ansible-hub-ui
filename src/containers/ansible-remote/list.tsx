@@ -34,7 +34,6 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRemoteList',
   errorTitle: t`Remotes could not be displayed.`,
-  extraState: {},
   filterConfig: [
     {
       id: 'name__icontains',

@@ -30,6 +30,6 @@ export { canSignNamespace, canSignEE } from './can-sign';
 export { DeleteCollectionUtils } from './delete-collection';
 export { RepoSigningUtils } from './repo-signing';
 export { translateLockedRolesDescription } from './translate-locked-roles-desc';
-export { RouteProps, withRouter } from './with-router';
+export { FunctionRouteProps, RouteProps, withRouter } from './with-router';
 export { mapNetworkErrors, validateInput } from './map-role-errors';
 export { RepositoriesUtils } from './repositories';

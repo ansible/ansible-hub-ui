@@ -16,9 +16,12 @@ export class RouteProps {
   routeParams: Record<string, string>;
   routePath: Paths;
 }
+export class FunctionRouteProps {
+  path: string;
+}
 
 export const withRouter = (ClassComponent) => {
-  const WithRouter = ({ path }: { path: string }) => {
+  const WithRouter = ({ path }: FunctionRouteProps) => {
     const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();

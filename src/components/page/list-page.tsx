@@ -62,7 +62,6 @@ export type RenderTableRow<T> = (
   { addAlert, setState = null },
   listItemActions?,
 ) => React.ReactNode;
-type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 export type SortHeaders = {
   title: string;
   type: string;
@@ -70,14 +69,13 @@ export type SortHeaders = {
   className?: string;
 }[];
 
-interface ListPageParams<T, ExtraState> {
+interface ListPageParams<T> {
   condition: PermissionContextType;
   defaultPageSize: number;
   defaultSort?: string;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: string;
-  extraState?: ExtraState;
   filterConfig: FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
@@ -85,13 +83,12 @@ interface ListPageParams<T, ExtraState> {
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;
-  renderModals?: RenderModals;
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
   title: string;
 }
 
-export const ListPage = function <T, ExtraState = Record<string, never>>({
+export const ListPage = function <T>({
   // { featureFlags, settings, user } => bool
   condition,
   // extra code to run on mount
@@ -104,8 +101,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   defaultSort,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // filters
   filterConfig,
   // displayed after filters
@@ -118,27 +113,23 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   noDataTitle,
   // ({ params }) => Promise<{ data: { count, results[] } }>
   query,
-  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
-  renderModals,
   // (item, index) => <tr>...</tr>
   renderTableRow,
   // table headers
   sortHeaders,
   // container title
   title,
-}: ListPageParams<T, ExtraState>) {
-  renderModals ||= function (actionContext) {
-    return (
-      <>
-        {headerActions?.length
-          ? headerActions.map((action) => action?.modal?.(actionContext))
-          : null}
-        {listItemActions?.length
-          ? listItemActions.map((action) => action?.modal?.(actionContext))
-          : null}
-      </>
-    );
-  };
+}: ListPageParams<T>) {
+  const renderModals = (actionContext) => (
+    <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
+      {listItemActions?.length
+        ? listItemActions.map((action) => action?.modal?.(actionContext))
+        : null}
+    </>
+  );
 
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
@@ -168,7 +159,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         loading: true,
         params,
         unauthorised: false,
-        ...extraState,
       };
     }
 

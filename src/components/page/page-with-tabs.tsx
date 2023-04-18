@@ -43,19 +43,15 @@ interface IState<T> {
 // unauthorised - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
-type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
-
-interface PageWithTabsParams<T, ExtraState> {
+interface PageWithTabsParams<T> {
   breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: string;
-  extraState?: ExtraState;
   headerActions?: ActionType[];
   headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
-  renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => React.ReactNode;
   tabs: { id: string; name: string }[];
   tabUpdateParams?: (params: ParamType) => ParamType;
@@ -63,7 +59,6 @@ interface PageWithTabsParams<T, ExtraState> {
 
 export const PageWithTabs = function <
   T extends { name: string; my_permissions?: string[] },
-  ExtraState = Record<string, never>,
 >({
   // ({ name }) => [{ url?, name }]
   breadcrumbs,
@@ -75,31 +70,26 @@ export const PageWithTabs = function <
   displayName,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // displayed after filters
   headerActions,
   // under title
   headerDetails,
   // () => Promise<T>
   query,
-  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
-  renderModals,
+  // ({ addAlert, state, setState, query }) => <Tab... />
   renderTab,
   // [{ id, name }]
   tabs,
   // params => params
   tabUpdateParams,
-}: PageWithTabsParams<T, ExtraState>) {
-  renderModals ||= function (actionContext) {
-    return (
-      <>
-        {headerActions?.length
-          ? headerActions.map((action) => action?.modal?.(actionContext))
-          : null}
-      </>
-    );
-  };
+}: PageWithTabsParams<T>) {
+  const renderModals = (actionContext) => (
+    <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
+    </>
+  );
 
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
@@ -120,7 +110,6 @@ export const PageWithTabs = function <
         loading: true,
         unauthorised: false,
         params,
-        ...extraState,
       };
     }
 
