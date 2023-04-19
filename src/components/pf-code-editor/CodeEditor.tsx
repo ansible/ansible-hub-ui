@@ -1,5 +1,6 @@
-// https://github.com/patternfly/patternfly-react/tree/v5/packages/react-code-editor/src/components/CodeEditor
-// except that version has an ancient monaco-editor dependency, not compatible with ansible ui framework
+// https://github.com/patternfly/patternfly-react/tree/main/packages/react-code-editor/src/components/CodeEditor
+// except that version has an older monaco-editor dependency, not compatible with ansible ui framework
+// this replaces that until we update it, or until we switch to framework version
 import { t } from '@lingui/macro';
 import {
   Button,
