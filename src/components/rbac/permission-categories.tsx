@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 
 interface IProps {
   permissions: string[];
@@ -39,7 +39,7 @@ export class PermissionCategories extends React.Component<IProps> {
 
   render() {
     const { permissions, setSelected, showCustom, showEmpty } = this.props;
-    const { featureFlags, user } = this.context;
+    const { featureFlags, user } = this.context as IAppContextType;
     const { model_permissions } = user;
     const showUserManagement = !featureFlags.external_authentication;
 

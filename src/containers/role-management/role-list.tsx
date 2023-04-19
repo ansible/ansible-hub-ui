@@ -32,7 +32,7 @@ import {
   RoleListTable,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import {
@@ -414,7 +414,7 @@ export class RoleList extends Component<RouteProps, IState> {
       </DropdownItem>
     );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const dropdownItems = this.context.user.is_superuser
       ? [
           // hasPermission('galaxy.change_containerregistryremote') &&

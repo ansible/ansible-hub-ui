@@ -38,7 +38,7 @@ import {
   Tabs,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -115,7 +115,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorised: true });
     } else {
@@ -138,7 +138,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       users,
       unauthorised,
     } = this.state;
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
 
     const tabs = [{ id: 'access', name: t`Access` }];
     if (!!user && hasPermission('galaxy.view_user')) {
@@ -205,7 +205,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderControls() {
-    const { hasPermission, user } = this.context;
+    const { hasPermission, user } = this.context as IAppContextType;
 
     if (!user || !hasPermission('galaxy.delete_group')) {
       return null;
@@ -229,7 +229,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       <GroupDetailRoleManagement
         params={params}
         updateParams={(p) => this.updateParams(p)}
-        context={this.context}
+        context={this.context as IAppContextType}
         group={group}
         addAlert={(title, variant, description) =>
           this.addAlert(title, variant, description)
@@ -373,7 +373,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           );
         });
     };
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const view_user = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
@@ -472,7 +472,8 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
   private renderUsers(users) {
     const { itemCount, params } = this.state;
-    const { user, featureFlags, hasPermission } = this.context;
+    const { user, featureFlags, hasPermission } = this
+      .context as IAppContextType;
     const noData =
       itemCount === 0 &&
       !filterIsSet(this.state.params, [
@@ -650,7 +651,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
-    const { featureFlags, hasPermission } = this.context;
+    const { featureFlags, hasPermission } = this.context as IAppContextType;
     const isUserMgmtDisabled = featureFlags.external_authentication;
     const dropdownItems = [
       !!currentUser &&

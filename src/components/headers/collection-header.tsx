@@ -46,7 +46,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
 import {
@@ -208,9 +208,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const canSign = canSignNamespace(this.context, this.state.namespace);
+    const canSign = canSignNamespace(
+      this.context as IAppContextType,
+      this.state.namespace,
+    );
 
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({

@@ -10,7 +10,7 @@ import {
   UserFormPage,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ErrorMessagesType, mapErrorMessages } from 'src/utilities';
@@ -55,7 +55,7 @@ class UserProfile extends Component<RouteProps, IState> {
     }
 
     const { user, errorMessages, inEditMode, alerts } = this.state;
-    const { featureFlags } = this.context;
+    const { featureFlags } = this.context as IAppContextType;
     const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (!user) {

@@ -7,7 +7,7 @@ import {
   RoleType,
 } from 'src/api';
 import { AccessTab } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage } from 'src/utilities';
@@ -210,7 +210,7 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
   }
 
   queryNamespace({ id, name: repoName }) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     ExecutionEnvironmentNamespaceAPI.myPermissions(id)
       .then(({ data: { permissions } }) => {
         ExecutionEnvironmentNamespaceAPI.listRoles(id)

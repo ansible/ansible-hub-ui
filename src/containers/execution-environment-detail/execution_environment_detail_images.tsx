@@ -32,7 +32,7 @@ import {
   TagLabel,
   TagManifestModal,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
@@ -346,7 +346,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     canEditTags: boolean,
     cols: number,
   ) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const container = this.props.routeParams.container;
     const manifestLink = (digestOrTag) =>
       formatEEPath(Paths.executionEnvironmentManifest, {

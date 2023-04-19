@@ -29,7 +29,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
@@ -366,7 +366,7 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),

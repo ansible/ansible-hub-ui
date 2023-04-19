@@ -43,7 +43,7 @@ import {
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import {
@@ -284,7 +284,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       'view_type',
     ];
 
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const canEditOwners =
       this.state.namespace.related_fields.my_permissions?.includes(
@@ -761,7 +761,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { canSign, collections } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const dropdownItems = [
       <DropdownItem
@@ -931,7 +931,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const { showControls } = this.state;
 
     if (!showControls) {

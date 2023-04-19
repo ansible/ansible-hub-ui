@@ -37,7 +37,7 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
@@ -126,7 +126,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       showDeleteModal,
       selectedItem,
     } = this.state;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
@@ -346,7 +346,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       permissions.includes('container.change_containernamespace') ||
       permissions.includes('container.namespace_change_containerdistribution');
 
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const dropdownItems = [
       canEdit && (

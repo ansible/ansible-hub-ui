@@ -31,7 +31,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
@@ -87,7 +87,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || user.is_anonymous) {
       this.setState({ loading: false, unauthorised: true });
     } else {

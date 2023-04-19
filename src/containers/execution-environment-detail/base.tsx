@@ -19,7 +19,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -134,7 +134,7 @@ export function withContainerRepo(WrappedComponent) {
       const canSync = permissions.includes(
         'container.change_containernamespace',
       );
-      const { hasPermission } = this.context;
+      const { hasPermission } = this.context as IAppContextType;
       const dropdownItems = [
         this.state.repo.pulp.repository.remote && canSync && (
           <DropdownItem

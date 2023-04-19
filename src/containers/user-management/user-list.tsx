@@ -32,7 +32,7 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -90,7 +90,7 @@ class UserList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorized: true });
     } else {
@@ -110,7 +110,7 @@ class UserList extends Component<RouteProps, IState> {
       unauthorized,
     } = this.state;
 
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -310,7 +310,7 @@ class UserList extends Component<RouteProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const dropdownItems = [];
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     if (!!this.context.user && hasPermission('galaxy.change_user')) {
       dropdownItems.push(
         <DropdownItem

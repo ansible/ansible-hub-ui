@@ -28,7 +28,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps } from 'src/utilities';
 import { errorMessage, filterIsSet } from 'src/utilities';
@@ -144,7 +144,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { alerts, namespaces, params, itemCount, loading, inputText } =
       this.state;
     const { filterOwner } = this.props;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
@@ -283,7 +283,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private renderBody() {
     const { namespaces, loading } = this.state;
     const { namespacePath, filterOwner } = this.props;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noDataTitle = t`No namespaces yet`;
     const noDataDescription = !filterOwner

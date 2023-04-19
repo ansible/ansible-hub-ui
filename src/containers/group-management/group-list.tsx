@@ -33,7 +33,7 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -99,7 +99,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorized: true });
     } else {
@@ -121,7 +121,7 @@ class GroupList extends React.Component<RouteProps, IState> {
       unauthorized,
     } = this.state;
 
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     const noData =
       groups.length === 0 && !filterIsSet(params, ['name__icontains']);
 
@@ -267,7 +267,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   private renderDeleteModal() {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const view_user = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
@@ -401,7 +401,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   }
 
   private renderTableRow(group, index: number) {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     const dropdownItems = [
       !!user && hasPermission('galaxy.delete_group') && (
         <DropdownItem
