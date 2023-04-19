@@ -1,5 +1,4 @@
 import { Trans, t } from '@lingui/macro';
-import { CodeEditor, Language } from '@patternfly/react-code-editor';
 import {
   ActionGroup,
   Button,
@@ -20,7 +19,13 @@ import {
 } from '@patternfly/react-icons';
 import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
-import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
+import {
+  CodeEditor,
+  CodeEditorLanguage,
+  FileUpload,
+  HelperText,
+  WriteOnlyField,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
@@ -408,7 +413,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       </>
                     }
                     height='20rem'
-                    language={Language.yaml}
+                    language={CodeEditorLanguage.yaml}
                     onChange={(value) =>
                       this.updateRemote(value, 'requirements_file')
                     }
