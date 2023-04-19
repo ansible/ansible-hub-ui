@@ -833,7 +833,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           key='wisdom-settings'
           onClick={() => this.setState({ isOpenWisdomModal: true })}
         >
-          {t`Wisdom settings`}
+          {t`Ansible Lightspeed settings`}
         </DropdownItem>
       ),
     ].filter(Boolean);
