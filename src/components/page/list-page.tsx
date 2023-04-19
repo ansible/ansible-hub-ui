@@ -1,3 +1,4 @@
+import { PageHeader } from '@ansible/ansible-ui-framework';
 import {
   Toolbar,
   ToolbarContent,
@@ -10,7 +11,6 @@ import {
   AlertList,
   AlertType,
   AppliedFilters,
-  BaseHeader,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -221,7 +221,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
             alerts={alerts}
             closeAlert={(i) => this.closeAlert(i)}
           ></AlertList>
-          <BaseHeader title={title} />
+          <PageHeader title={title} />
           {renderModals?.(actionContext)}
           {unauthorised ? (
             <EmptyStateUnauthorized />

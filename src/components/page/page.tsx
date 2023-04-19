@@ -1,3 +1,4 @@
+import { PageHeader } from '@ansible/ansible-ui-framework';
 import {
   Toolbar,
   ToolbarContent,
@@ -144,6 +145,15 @@ export const Page = function <
             alerts={alerts}
             closeAlert={(i) => this.closeAlert(i)}
           ></AlertList>
+
+          <PageHeader
+            breadcrumbs={breadcrumbs({ name }).map(({ url, name }) => ({
+              label: name,
+              to: url ? UI_BASE_PATH.replace(/\/$/, '') + url : null,
+            }))}
+            title={title({ name })}
+          />
+
           <BaseHeader
             title={title({ name })}
             breadcrumbs={

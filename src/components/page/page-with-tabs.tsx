@@ -1,3 +1,4 @@
+import { PageHeader } from '@ansible/ansible-ui-framework';
 import {
   Toolbar,
   ToolbarContent,
@@ -9,7 +10,6 @@ import { ActionType } from 'src/actions';
 import {
   AlertList,
   AlertType,
-  BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
@@ -181,18 +181,15 @@ export const PageWithTabs = function <
       return (
         <React.Fragment>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-          <BaseHeader
+          <PageHeader
+            breadcrumbs={breadcrumbs({ name, tab, params }).map(
+              ({ url, name }) => ({
+                label: name,
+                to: url ? UI_BASE_PATH.replace(/\/$/, '') + url : null,
+              }),
+            )}
             title={name}
-            breadcrumbs={
-              <Breadcrumbs
-                links={breadcrumbs({
-                  name,
-                  tab,
-                  params,
-                })}
-              />
-            }
-            pageControls={
+            controls={
               loading ? null : (
                 <div className='hub-list-toolbar'>
                   <Toolbar>
@@ -212,20 +209,25 @@ export const PageWithTabs = function <
                 </div>
               )
             }
-          >
-            {headerDetails?.(item)}
-            <div className='hub-tab-link-container'>
-              <div className='tabs'>
-                <Tabs
-                  tabs={tabs}
-                  params={params}
-                  updateParams={(p) =>
-                    this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)
-                  }
-                />
-              </div>
-            </div>
-          </BaseHeader>
+            headerActions={
+              <>
+                {headerDetails?.(item)}
+                <div className='hub-tab-link-container'>
+                  <div className='tabs'>
+                    <Tabs
+                      tabs={tabs}
+                      params={params}
+                      updateParams={(p) =>
+                        this.updateParams(
+                          tabUpdateParams ? tabUpdateParams(p) : p,
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              </>
+            }
+          />
           {renderModals?.(actionContext)}
           {unauthorised ? (
             <EmptyStateUnauthorized />
