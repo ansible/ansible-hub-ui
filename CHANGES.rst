@@ -1,3 +1,26 @@
+4.6.5 (2023-04-20)
+==================
+
+Bugfixes
+--------
+
+- Repair list of collection dependencies - add namespace to the link caption.
+  `AAH-1807 <https://issues.redhat.com/browse/AAH-1807>`_
+- Repair error mesages in EE form.
+  `AAH-1845 <https://issues.redhat.com/browse/AAH-1845>`_
+- Fix podman pull URLs when latest tag not present, fix digest urls
+  `AAH-1988 <https://issues.redhat.com/browse/AAH-1988>`_
+- Show container signing button based only on container_signing, not collection_signing
+  `AAH-2013 <https://issues.redhat.com/browse/AAH-2013>`_
+- Show container signature badge based only on container_signing, not collection_signing
+  `AAH-2015 <https://issues.redhat.com/browse/AAH-2015>`_
+- License fields on AH - blank or formatted incorrectly - Add comma separator between licences. And also hide license field when empty.
+  `AAH-2048 <https://issues.redhat.com/browse/AAH-2048>`_
+
+
+----
+
+
 4.6.4 (2023-04-04)
 ==================
 
