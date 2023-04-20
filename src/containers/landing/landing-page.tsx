@@ -12,6 +12,8 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 
+
+
 interface IState {
   alerts: AlertType[];
 }
@@ -34,13 +36,8 @@ export class LandingPage extends React.Component<RouteProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={t`Home`} />
+        <BaseHeader title={t`Welcome to Beta Galaxy`} />
         <Main>
-          <Title
-            style={{ margin: '8px 0 24px 0' }}
-            headingLevel='h1'
-            size='2xl'
-          >{t`Welcome to Beta Galaxy`}</Title>
           <div
             style={{
               display: 'flex',
@@ -145,10 +142,15 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               title={t`Terms of Use`}
               body={
                 <React.Fragment>
-                  <p>
-                    {t`Please see our`}{' '}
-                    <a href='https://www.redhat.com/en/about/terms-use'>{t`Terms of Use`}</a>
+                  <div style={{ display: 'flex',}}>
+                  <p style={{paddingRight: '16px'}}>
+                    <a href='https://www.redhat.com/en/about/privacy-policy'>{t`Privacy statement`}</a>
                   </p>
+                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/terms-use'>{t`Terms of use`}</a></p>
+                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/all-policies-guidelines'>{t`All policies and guidelines`}</a></p>
+                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/digital-accessibility'>{t`Digital accessibility`}</a></p>
+                  <p style={{paddingRight: '16px'}}><a href="#">{t`Cookie preferences`}</a></p>
+                  </div>
                 </React.Fragment>
               }
             />
