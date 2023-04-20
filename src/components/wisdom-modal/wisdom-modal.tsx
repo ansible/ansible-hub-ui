@@ -35,22 +35,23 @@ export const WisdomModal = (props: IProps) => {
   if (props.scope == 'namespace') {
     titleWillBeUsed = (
       <Trans>
-        Namespace <b>{name}</b> is opted in to Wisdom.
+        Namespace <b>{name}</b> is opted in to Ansible Lightspeed.
       </Trans>
     );
     titleWillNotBeUsed = (
       <Trans>
-        Namespace <b>{name}</b> is opted out of Wisdom.
+        Namespace <b>{name}</b> is opted out of Ansible Lightspeed.
       </Trans>
     );
     areYouSureToOptIn = (
       <Trans>
-        Are you sure you want to opt the following namespace in to Wisdom?
+        The following namespace will be opted in to Ansible Lightspeed:
       </Trans>
     );
     areYouSureToOptOut = (
       <Trans>
-        Are you sure you want to opt the following namespace out of Wisdom?
+        Are you sure you want to opt the following namespace out of Ansible
+        Lightspeed?
       </Trans>
     );
   }
@@ -58,24 +59,23 @@ export const WisdomModal = (props: IProps) => {
   if (props.scope == 'legacy_namespace') {
     titleWillBeUsed = (
       <Trans>
-        Legacy namespace <b>{name}</b> is opted in to Wisdom.
+        Legacy namespace <b>{name}</b> is opted in to Ansible Lightspeed.
       </Trans>
     );
     titleWillNotBeUsed = (
       <Trans>
-        Legacy namespace <b>{name}</b> is opted out of Wisdom.
+        Legacy namespace <b>{name}</b> is opted out of Ansible Lightspeed.
       </Trans>
     );
     areYouSureToOptIn = (
       <Trans>
-        Are you sure you want to opt the following legacy namespace in to
-        Wisdom?
+        The following legacy namespace will be opted in to Ansible Lightspeed:
       </Trans>
     );
     areYouSureToOptOut = (
       <Trans>
         Are you sure you want to opt the following legacy namespace out of
-        Wisdom?
+        Ansible Lightspeed?
       </Trans>
     );
   }
@@ -91,7 +91,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to load Wisdom information.`,
+          title: t`Failed to load Ansible Lightspeed information.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -121,7 +121,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to opt in to Wisdom.`,
+          title: t`Failed to opt in to Ansible Lightspeed.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -137,7 +137,7 @@ export const WisdomModal = (props: IProps) => {
       })
       .catch(({ response: { status, statusText } }) => {
         addAlert({
-          title: t`Failed to opt out of Wisdom.`,
+          title: t`Failed to opt out of Ansible Lightspeed.`,
           variant: 'danger',
           description: errorMessage(status, statusText),
         });
@@ -155,7 +155,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={removeFromDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt in to Wisdom`}
+          {t`Opt in to Ansible Lightspeed`}
         </Button>,
       );
     } else {
@@ -165,7 +165,7 @@ export const WisdomModal = (props: IProps) => {
           onClick={addToDenyIndex}
           variant={ButtonVariant.primary}
         >
-          {t`Opt out of Wisdom`}
+          {t`Opt out of Ansible Lightspeed`}
         </Button>,
       );
     }
@@ -177,7 +177,7 @@ export const WisdomModal = (props: IProps) => {
     );
   }
 
-  const expandableTitle = t`Learn more about Ansible Wisdom.`;
+  const expandableTitle = t`Additional details`;
   return (
     <Modal
       actions={actions}
@@ -185,12 +185,13 @@ export const WisdomModal = (props: IProps) => {
       onClose={props.closeAction}
       title={
         loading
-          ? t`Wisdom settings`
+          ? t`Ansible Lightspeed settings`
           : isInDenyIndex
-          ? t`Opt in to Wisdom`
-          : t`Opt out of Wisdom`
+          ? t`Opt in to Ansible Lightspeed`
+          : t`Opt out of Ansible Lightspeed`
       }
       variant='small'
+      titleIconVariant={isInDenyIndex ? null : 'warning'}
     >
       <AlertList
         alerts={alerts}
@@ -201,29 +202,28 @@ export const WisdomModal = (props: IProps) => {
       ) : (
         <div>
           <div>
-            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
-          </div>
-          <br />
-          <div>
+            <Trans>
+              <p>
+                Red Hat is working on exciting new Ansible content development
+                capabilities within the context of{' '}
+                <a
+                  href='https://www.redhat.com/en/engage/project-wisdom'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Ansible Lightspeed
+                </a>{' '}
+                <ExternalLinkAltIcon /> to help other automators build Ansible
+                content.
+              </p>
+            </Trans>
+            <br />
             <ExpandableSection
               toggleTextExpanded={expandableTitle}
               toggleTextCollapsed={expandableTitle}
             >
               <div>
                 <Trans>
-                  <p>
-                    Red Hat is working on exciting new Ansible content
-                    development capabilities within the context of{' '}
-                    <a
-                      href='https://www.redhat.com/en/engage/project-wisdom'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      Project Wisdom
-                    </a>{' '}
-                    <ExternalLinkAltIcon /> to help other automators build
-                    Ansible content.
-                  </p>
                   <p>
                     Your roles and collections may be used as training data for
                     a machine learning model that provides Ansible automation
@@ -240,6 +240,12 @@ export const WisdomModal = (props: IProps) => {
               </div>
             </ExpandableSection>
           </div>
+          <br />
+          <div>
+            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
+          </div>
+          <br />
+          {props.reference}
         </div>
       )}
     </Modal>
