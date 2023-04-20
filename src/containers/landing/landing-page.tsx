@@ -1,5 +1,4 @@
-import { t } from '@lingui/macro';
-import { Title } from '@patternfly/react-core';
+import { Trans, t } from '@lingui/macro';
 import * as React from 'react';
 import {
   AlertList,
@@ -11,8 +10,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
-
-
+import './landing-page.scss';
 
 interface IState {
   alerts: AlertType[];
@@ -59,14 +57,21 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <br />
 
                   <p>
-                    {t`Use the`}{' '}
-                    <a href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'>{t`Search page`}</a>{' '}
-                    {t`to find content for your project, then download them onto your Ansible host using`}{' '}
-                    <a
-                      href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
-                      target='_blanck'
-                    >{t`ansible-galaxy`}</a>
-                    {t`, the command line tool that comes bundled with Ansible.`}
+                    <Trans>
+                      Use the{' '}
+                      <a href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'>
+                        Search page
+                      </a>{' '}
+                      to find content for your project, then download them onto
+                      your Ansible host using{' '}
+                      <a
+                        href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
+                        target='_blanck'
+                      >
+                        ansible-galaxy
+                      </a>
+                      , the command line tool that comes bundled with Ansible.
+                    </Trans>
                   </p>
                 </React.Fragment>
               }
@@ -81,14 +86,25 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <br />
 
                   <p>
-                    {t`Red Hat is working on exciting new Ansible content development capabilities within the context of`}{' '}
-                    <a
-                      href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >{t`Project Wisdom`}</a>{' '}
-                    {t`to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at`}{' '}
-                    <a href='mailto:ansible-content-ai@redhat.com'>{t`ansible-content-ai@redhat.com`}</a>
+                    <Trans>
+                      Red Hat is working on exciting new Ansible content
+                      development capabilities within the context of{' '}
+                      <a
+                        href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        Project Wisdom
+                      </a>{' '}
+                      to help other automators build Ansible content. Your roles
+                      and collections may be used as training data for a machine
+                      learning model that provides Ansible automation content
+                      recommendations. If you have concerns, please contact the
+                      Ansible team at{' '}
+                      <a href='mailto:ansible-content-ai@redhat.com'>
+                        ansible-content-ai@redhat.com
+                      </a>
+                    </Trans>
                   </p>
                 </React.Fragment>
               }
@@ -142,14 +158,37 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               title={t`Terms of Use`}
               body={
                 <React.Fragment>
-                  <div style={{ display: 'flex',}}>
-                  <p style={{paddingRight: '16px'}}>
-                    <a href='https://www.redhat.com/en/about/privacy-policy'>{t`Privacy statement`}</a>
-                  </p>
-                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/terms-use'>{t`Terms of use`}</a></p>
-                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/all-policies-guidelines'>{t`All policies and guidelines`}</a></p>
-                  <p style={{paddingRight: '16px'}}><a href='https://www.redhat.com/en/about/digital-accessibility'>{t`Digital accessibility`}</a></p>
-                  <p style={{paddingRight: '16px'}}><a href="#">{t`Cookie preferences`}</a></p>
+                  <div className='footer-parent-links'>
+                    <span>
+                      <a
+                        className='footer-link'
+                        href='https://www.redhat.com/en/about/privacy-policy'
+                      >{t`Privacy statement`}</a>
+                    </span>
+                    <span>
+                      <a
+                        className='footer-link'
+                        href='https://www.redhat.com/en/about/terms-use'
+                      >{t`Terms of use`}</a>
+                    </span>
+                    <span>
+                      <a
+                        className='footer-link'
+                        href='https://www.redhat.com/en/about/all-policies-guidelines'
+                      >{t`All policies and guidelines`}</a>
+                    </span>
+                    <span>
+                      <a
+                        className='footer-link'
+                        href='https://www.redhat.com/en/about/digital-accessibility'
+                      >{t`Digital accessibility`}</a>
+                    </span>
+                    <span>
+                      <a
+                        className='footer-link'
+                        href='#'
+                      >{t`Cookie preferences`}</a>
+                    </span>
                   </div>
                 </React.Fragment>
               }
