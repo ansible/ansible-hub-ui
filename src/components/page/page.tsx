@@ -102,21 +102,27 @@ export const Page = function <
     }
 
     componentDidMount() {
-      if (!condition(this.context)) {
-        this.setState({ loading: false, unauthorised: true });
-      } else {
-        this.query();
-      }
+      // condition check after query, for object permissions
+      this.query().then((item) => {
+        const actionContext = {
+          ...this.context,
+          hasObjectPermission: (permission) =>
+            item?.my_permissions?.includes?.(permission),
+        };
+        if (!condition(actionContext)) {
+          this.setState({ loading: false, unauthorised: true });
+        }
 
-      this.setState({ alerts: this.context.alerts || [] });
-      this.context.setAlerts([]);
+        this.setState({ alerts: this.context.alerts || [] });
+        this.context.setAlerts([]);
 
-      if (didMount) {
-        didMount({
-          context: this.context,
-          addAlert: (alert) => this.addAlert(alert),
-        });
-      }
+        if (didMount) {
+          didMount({
+            context: this.context,
+            addAlert: (alert) => this.addAlert(alert),
+          });
+        }
+      });
     }
 
     render() {
@@ -193,29 +199,33 @@ export const Page = function <
 
       if (!name) {
         this.setState({ loading: false });
-        return;
+        return Promise.resolve(null);
       }
 
-      this.setState({ loading: true }, () => {
-        query({ name })
-          .then((item) => {
-            this.setState({
-              item,
-              loading: false,
+      return new Promise((resolve, reject) => {
+        this.setState({ loading: true }, () => {
+          query({ name })
+            .then((item) => {
+              this.setState({
+                item,
+                loading: false,
+              });
+              resolve(item);
+            })
+            .catch((e) => {
+              const { status, statusText } = e.response;
+              this.setState({
+                loading: false,
+                item: null,
+              });
+              this.addAlert({
+                title: errorTitle,
+                variant: 'danger',
+                description: errorMessage(status, statusText),
+              });
+              reject();
             });
-          })
-          .catch((e) => {
-            const { status, statusText } = e.response;
-            this.setState({
-              loading: false,
-              item: null,
-            });
-            this.addAlert({
-              title: errorTitle,
-              variant: 'danger',
-              description: errorMessage(status, statusText),
-            });
-          });
+        });
       });
     }
 
