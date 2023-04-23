@@ -2,7 +2,7 @@ import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 
 export type PermissionContextType = (
   o: {
-    featureFlags?: FeatureFlagsType;
+    featureFlags: FeatureFlagsType;
     settings?: SettingsType;
     user: UserType;
     hasPermission: (string) => boolean;
@@ -54,8 +54,9 @@ export const canEditAnsibleRepository = has_model_or_obj_perms(
   'ansible.change_ansiblerepository',
 );
 export const canSyncAnsibleRepository = canEditAnsibleRepository;
-// everybody can list/view, not has_model_or_obj_perms('ansible.view_ansiblerepository')
-export const canViewAnsibleRepositories = isLoggedIn;
+// everybody can list/view, not has_model_or_obj_perms('ansible.view_ansiblerepository'); under feature flag
+export const canViewAnsibleRepositories = ({ user, featureFlags }) =>
+  user && featureFlags?.display_repositories;
 export const canEditAnsibleRepositoryAccess = has_model_or_obj_perms(
   'ansible.manage_roles_ansiblerepository',
 );

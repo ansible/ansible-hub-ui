@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
+import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
 
@@ -36,6 +37,7 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
+  const { featureFlags } = useContext();
   const MAX_DESCRIPTION_LENGTH = 60;
 
   const company = namespace?.company || collection_version.namespace;
@@ -53,21 +55,23 @@ export const CollectionCard = ({
           flexGrow
         />
         <div className='card-badge-area'>
-          <TextContent>
-            <Text component={TextVariants.small}>
-              <Badge isRead>
-                <Link
-                  to={formatPath(Paths.ansibleRepositoryDetail, {
-                    name: repository.name,
-                  })}
-                >
-                  {repository.name === Constants.CERTIFIED_REPO
-                    ? t`Certified`
-                    : repository.name}
-                </Link>
-              </Badge>
-            </Text>
-          </TextContent>
+          {featureFlags.display_repositories ? (
+            <TextContent>
+              <Text component={TextVariants.small}>
+                <Badge isRead>
+                  <Link
+                    to={formatPath(Paths.ansibleRepositoryDetail, {
+                      name: repository.name,
+                    })}
+                  >
+                    {repository.name === Constants.CERTIFIED_REPO
+                      ? t`Certified`
+                      : repository.name}
+                  </Link>
+                </Badge>
+              </Text>
+            </TextContent>
+          ) : null}
           {displaySignatures ? (
             <SignatureBadge
               isCompact
