@@ -69,13 +69,17 @@ msgstr "<0>Note:</0> les liens suivants sont sans doute bloqués par votre navig
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:450
+#: src/containers/namespace-detail/namespace-detail.tsx:449
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Remarque</0> : Utilisez cette URL pour configurer ansible-galaxy afin de télécharger des collections dans cet espace de noms. Vous trouverez plus d'informations sur les configurations d'ansible-galaxy <1>ici</1><2> </2><3/>."
 
-#: src/components/wisdom-modal/wisdom-modal.tsx:213
-msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+#: src/components/wisdom-modal/wisdom-modal.tsx:205
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
 msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:213
+#~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
+#~ msgstr ""
 
 #: src/containers/role-management/role-list.tsx:190
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -88,6 +92,10 @@ msgstr "<0>ATTENTION</0> copiez ce jeton maintenant. C'est la seule fois que vou
 #: src/containers/token/token-standalone.tsx:79
 msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>ATTENTION</0> le chargement d'un nouveau jeton supprimera votre ancien jeton."
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:226
+msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:225
 msgid "<0>{0}</0> will be deleted."
@@ -126,7 +134,7 @@ msgstr "Un tag peut contenir des caractères alphabétiques ASCII minuscules et 
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:615
+#: src/containers/namespace-detail/namespace-detail.tsx:614
 msgid "API Error: Failed to set deprecation."
 msgstr "Erreur d'API : Impossible de définir la dépréciation."
 
@@ -141,7 +149,7 @@ msgstr "Erreur d’API : {ex}"
 
 #: src/components/headers/collection-header.tsx:714
 #: src/components/headers/collection-header.tsx:768
-#: src/containers/namespace-detail/namespace-detail.tsx:638
+#: src/containers/namespace-detail/namespace-detail.tsx:637
 msgid "API Error: {status}"
 msgstr "Erreur d’API : {status}"
 
@@ -315,6 +323,10 @@ msgstr "Ajouter une ou plusieurs tags à inclure"
 #~ "Adding groups provides access to all repositories in the\n"
 #~ "\"{namespace}\" container namespace."
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:180
+msgid "Additional details"
+msgstr ""
+
 #: src/containers/ansible-repository/tab-details.tsx:37
 #: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
@@ -338,6 +350,13 @@ msgstr ""
 
 #: src/components/about-modal/about-modal.tsx:85
 msgid "Ansible Automation Platform"
+msgstr ""
+
+#: src/components/legacy-namespace-list/legacy-namespace-item.tsx:66
+#: src/components/wisdom-modal/wisdom-modal.tsx:188
+#: src/containers/legacy-namespaces/legacy-namespace.tsx:277
+#: src/containers/namespace-detail/namespace-detail.tsx:836
+msgid "Ansible Lightspeed settings"
 msgstr ""
 
 #: src/loaders/standalone/menu.tsx:66
@@ -382,20 +401,28 @@ msgid "Are you sure you want to delete the repository <0>{name}</0>?<1/><2>Note:
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:70
-msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+#~ msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:76
+msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:76
-msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
-msgstr ""
+#~ msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
+#~ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:47
-msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+#~ msgid "Are you sure you want to opt the following namespace in to Wisdom?"
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:52
+msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:52
-msgid "Are you sure you want to opt the following namespace out of Wisdom?"
-msgstr ""
+#~ msgid "Are you sure you want to opt the following namespace out of Wisdom?"
+#~ msgstr ""
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:77
 msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
@@ -507,7 +534,7 @@ msgstr "Annuler"
 msgid "Canceled"
 msgstr "Annulé"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:792
+#: src/containers/namespace-detail/namespace-detail.tsx:791
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr ""
 
@@ -732,11 +759,11 @@ msgstr ""
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La collection  \"{name}\"  a été supprimée."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:600
+#: src/containers/namespace-detail/namespace-detail.tsx:599
 msgid "Collection \"{name}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:599
+#: src/containers/namespace-detail/namespace-detail.tsx:598
 msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr ""
 
@@ -1227,8 +1254,8 @@ msgstr "Supprimer le groupe ?"
 msgid "Delete image?"
 msgstr "Supprimer l’image ?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:786
-#: src/containers/namespace-detail/namespace-detail.tsx:800
+#: src/containers/namespace-detail/namespace-detail.tsx:785
+#: src/containers/namespace-detail/namespace-detail.tsx:799
 msgid "Delete namespace"
 msgstr "Supprimer l'espace nom"
 
@@ -1340,7 +1367,7 @@ msgid "Dependent collections could not be displayed."
 msgstr "Les collections dépendantes n’ont pas pu être affichées."
 
 #: src/components/headers/collection-header.tsx:262
-#: src/containers/namespace-detail/namespace-detail.tsx:970
+#: src/containers/namespace-detail/namespace-detail.tsx:977
 #: src/containers/search/search.tsx:386
 msgid "Deprecate"
 msgstr "Dépréciation de"
@@ -1349,7 +1376,7 @@ msgstr "Dépréciation de"
 #~ msgid "Deprecation status update starting for collection \"{0}\"."
 #~ msgstr "La mise à jour de l'état de dépréciation commence pour la collection \"{0}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:590
+#: src/containers/namespace-detail/namespace-detail.tsx:589
 msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr ""
 
@@ -1536,7 +1563,7 @@ msgstr "Modifier l'environnement d'exécution"
 msgid "Edit in YAML editor"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:776
+#: src/containers/namespace-detail/namespace-detail.tsx:775
 msgid "Edit namespace"
 msgstr "Modifier l'espace de nom"
 
@@ -1846,8 +1873,12 @@ msgid "Failed to list distributions, removing only the repository."
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:94
-msgid "Failed to load Wisdom information."
+msgid "Failed to load Ansible Lightspeed information."
 msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:94
+#~ msgid "Failed to load Wisdom information."
+#~ msgstr ""
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx:23
 #~ msgid "Failed to load collection versions"
@@ -1879,12 +1910,20 @@ msgid "Failed to load repositories: {error}"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:124
-msgid "Failed to opt in to Wisdom."
+msgid "Failed to opt in to Ansible Lightspeed."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:124
+#~ msgid "Failed to opt in to Wisdom."
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:140
+msgid "Failed to opt out of Ansible Lightspeed."
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:140
-msgid "Failed to opt out of Wisdom."
-msgstr ""
+#~ msgid "Failed to opt out of Wisdom."
+#~ msgstr ""
 
 #: src/actions/ansible-repository-delete.tsx:82
 msgid "Failed to remove distribution {name}"
@@ -1910,7 +1949,7 @@ msgstr "Échec de la récupération des données utilisateur."
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:637
+#: src/containers/namespace-detail/namespace-detail.tsx:636
 msgid "Failed to sign all collections."
 msgstr "Signer toutes les collections"
 
@@ -2009,7 +2048,7 @@ msgstr "Groupe"
 #: src/containers/ansible-remote/tab-access.tsx:125
 #: src/containers/ansible-repository/tab-access.tsx:125
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:128
-#: src/containers/namespace-detail/namespace-detail.tsx:496
+#: src/containers/namespace-detail/namespace-detail.tsx:495
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "Groupe \"{0}\" n’a pas pu être ajouté à  \"{name}\"."
 
@@ -2020,14 +2059,14 @@ msgstr "Groupe \"{0}\" n’a pas pu être ajouté à  \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx:140
 #: src/containers/ansible-repository/tab-access.tsx:140
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:145
-#: src/containers/namespace-detail/namespace-detail.tsx:506
+#: src/containers/namespace-detail/namespace-detail.tsx:505
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "Le groupe \"{0}\" n’a pas pu être supprimé de \"{name}\"."
 
 #: src/containers/ansible-remote/tab-access.tsx:124
 #: src/containers/ansible-repository/tab-access.tsx:124
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:127
-#: src/containers/namespace-detail/namespace-detail.tsx:495
+#: src/containers/namespace-detail/namespace-detail.tsx:494
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "Le groupe \"{0}\" a été ajouté à \"{name}\"."
 
@@ -2038,7 +2077,7 @@ msgstr "Le groupe \"{0}\" a été supprimé."
 #: src/containers/ansible-remote/tab-access.tsx:139
 #: src/containers/ansible-repository/tab-access.tsx:139
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:144
-#: src/containers/namespace-detail/namespace-detail.tsx:505
+#: src/containers/namespace-detail/namespace-detail.tsx:504
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "Le groupe \"{0}\" a été supprimé de \"{name}\"."
 
@@ -2048,8 +2087,8 @@ msgstr "Le groupe \"{0}\" a été supprimé de \"{name}\"."
 #: src/containers/ansible-repository/tab-access.tsx:166
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:177
-#: src/containers/namespace-detail/namespace-detail.tsx:526
-#: src/containers/namespace-detail/namespace-detail.tsx:545
+#: src/containers/namespace-detail/namespace-detail.tsx:525
+#: src/containers/namespace-detail/namespace-detail.tsx:544
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "Les rôles du groupe \"{0}\" n'ont pas pu être mis à jour dans \"{name}\"."
 
@@ -2059,8 +2098,8 @@ msgstr "Les rôles du groupe \"{0}\" n'ont pas pu être mis à jour dans \"{name
 #: src/containers/ansible-repository/tab-access.tsx:165
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:176
-#: src/containers/namespace-detail/namespace-detail.tsx:525
-#: src/containers/namespace-detail/namespace-detail.tsx:544
+#: src/containers/namespace-detail/namespace-detail.tsx:524
+#: src/containers/namespace-detail/namespace-detail.tsx:543
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "Les rôles du groupe \"{0}\" ont été mis à jour avec succès dans \"{name}\"."
 
@@ -2190,7 +2229,7 @@ msgstr "Importez et déplacez vers la zone de transit"
 msgid "Import log"
 msgstr "Journal des importations"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:817
+#: src/containers/namespace-detail/namespace-detail.tsx:816
 msgid "Imports"
 msgstr "Importations"
 
@@ -2325,14 +2364,14 @@ msgid "Learn more"
 msgstr "En savoir plus"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:180
-msgid "Learn more about Ansible Wisdom."
-msgstr ""
+#~ msgid "Learn more about Ansible Wisdom."
+#~ msgstr ""
 
 #: src/loaders/standalone/menu.tsx:88
 msgid "Legacy"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:119
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:155
 #: src/loaders/standalone/menu.tsx:96
 msgid "Legacy Namespaces"
 msgstr ""
@@ -2342,13 +2381,21 @@ msgstr ""
 msgid "Legacy Roles"
 msgstr ""
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:61
+msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+msgstr ""
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:60
-msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+#~ msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:66
+msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:65
-msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
-msgstr ""
+#~ msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
+#~ msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:73
 msgid "License"
@@ -2366,12 +2413,12 @@ msgstr "Lien URL"
 msgid "Link text"
 msgstr "Texte du lien"
 
-#: src/components/collection-list/collection-list.tsx:42
-#: src/containers/search/search.tsx:509
+#: src/components/collection-list/collection-list.tsx:45
+#: src/containers/search/search.tsx:511
 msgid "List of Collections"
 msgstr "Liste des collections"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:142
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:178
 msgid "List of Legacy Namespaces"
 msgstr ""
 
@@ -2549,21 +2596,29 @@ msgstr "Le nom ne peut pas rester vide."
 msgid "Namespace"
 msgstr "Espace de nommage"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:909
+#: src/containers/namespace-detail/namespace-detail.tsx:908
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "L’espace-nom \"{name}\" n’a pas pu être supprimé."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:889
+#: src/containers/namespace-detail/namespace-detail.tsx:888
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Suppression réussie de l'espace de nom  \"{name}\" ."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:37
-msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:37
+#~ msgid "Namespace <0>{name}</0> is opted in to Wisdom."
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:42
+msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:42
-msgid "Namespace <0>{name}</0> is opted out of Wisdom."
-msgstr ""
+#~ msgid "Namespace <0>{name}</0> is opted out of Wisdom."
+#~ msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
@@ -2602,7 +2657,7 @@ msgstr "La liste d’espace-noms n’a pas pu être affichée"
 msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:126
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:162
 msgid "Namespaces will appear once created or roles are imported"
 msgstr ""
 
@@ -2719,7 +2774,7 @@ msgstr "Pas encore de collections gérées"
 msgid "No namespace selected."
 msgstr "Aucun espace de nom n'a été sélectionné."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:125
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:161
 #: src/containers/namespace-list/namespace-list.tsx:288
 msgid "No namespaces yet"
 msgstr "Pas encore d'espace de noms"
@@ -2863,13 +2918,23 @@ msgstr "Jeton hors ligne"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
-msgid "Opt in to Wisdom"
+msgid "Opt in to Ansible Lightspeed"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:158
+#: src/components/wisdom-modal/wisdom-modal.tsx:190
+#~ msgid "Opt in to Wisdom"
+#~ msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:168
+#: src/components/wisdom-modal/wisdom-modal.tsx:191
+msgid "Opt out of Ansible Lightspeed"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:168
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
-msgid "Opt out of Wisdom"
-msgstr ""
+#~ msgid "Opt out of Wisdom"
+#~ msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -3044,7 +3109,7 @@ msgstr ""
 #~ msgstr "Fourni par {company}"
 
 #: src/components/cards/collection-card.tsx:95
-#: src/components/collection-list/collection-list-item.tsx:82
+#: src/components/collection-list/collection-list-item.tsx:91
 msgid "Provided by <0>{company}</0>"
 msgstr ""
 
@@ -3776,7 +3841,7 @@ msgid "Sign all"
 msgstr "Tout signer"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:829
+#: src/containers/namespace-detail/namespace-detail.tsx:828
 msgid "Sign all collections"
 msgstr "Signer toutes les collections"
 
@@ -3852,7 +3917,7 @@ msgstr "Sélecteur de service de signature :"
 msgid "Signing service {signingServiceName} not found"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:647
+#: src/containers/namespace-detail/namespace-detail.tsx:646
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "La signature a commencé pour toutes les collections dans l’espace de nommage \"{0}\"."
 
@@ -4018,7 +4083,7 @@ msgid "Super users have all system permissions regardless of what groups they ar
 msgstr "Les super utilisateurs disposent de toutes les autorisations du système, quels que soient les groupes auxquels ils appartiennent."
 
 #: src/actions/ansible-repository-sync.tsx:9
-#: src/containers/search/search.tsx:431
+#: src/containers/search/search.tsx:437
 msgid "Sync"
 msgstr "Sync"
 
@@ -4206,6 +4271,14 @@ msgstr "La collection que vous avez sélectionnée ne semble pas correspondre à
 msgid "The file is not available for this version of {collectionName}"
 msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
+#: src/components/wisdom-modal/wisdom-modal.tsx:71
+msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
+msgstr ""
+
+#: src/components/wisdom-modal/wisdom-modal.tsx:47
+msgid "The following namespace will be opted in to Ansible Lightspeed:"
+msgstr ""
+
 #: src/components/rbac/preview-roles.tsx:30
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "Les rôles suivants seront appliqués au groupe : <0>{0}</0>"
@@ -4234,7 +4307,7 @@ msgstr ""
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "Les rôles sélectionnés seront ajoutés à cet environnement d'exécution spécifique."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:481
+#: src/containers/namespace-detail/namespace-detail.tsx:480
 msgid "The selected roles will be added to this specific namespace."
 msgstr "Les rôles sélectionnés seront ajoutés à cet espace de nom spécifique."
 
@@ -4411,7 +4484,7 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:262
-#: src/containers/namespace-detail/namespace-detail.tsx:970
+#: src/containers/namespace-detail/namespace-detail.tsx:977
 #: src/containers/search/search.tsx:386
 msgid "Undeprecate"
 msgstr "Réversion de dépréciation"
@@ -4437,7 +4510,7 @@ msgstr ""
 msgid "Update started for repository {0}"
 msgstr ""
 
-#: src/components/collection-list/collection-list-item.tsx:120
+#: src/components/collection-list/collection-list-item.tsx:144
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
@@ -4453,12 +4526,12 @@ msgid "Upload and modify collections."
 msgstr "Chargez et modifiez les collections."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:422
-#: src/containers/namespace-detail/namespace-detail.tsx:849
+#: src/containers/namespace-detail/namespace-detail.tsx:848
 msgid "Upload collection"
 msgstr "Télécharger la collection"
 
 #: src/components/headers/collection-header.tsx:270
-#: src/containers/namespace-detail/namespace-detail.tsx:947
+#: src/containers/namespace-detail/namespace-detail.tsx:952
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:408
 msgid "Upload new version"
@@ -4763,8 +4836,8 @@ msgstr "Site web"
 #: src/components/wisdom-modal/wisdom-modal.tsx:188
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
 #: src/containers/namespace-detail/namespace-detail.tsx:837
-msgid "Wisdom settings"
-msgstr ""
+#~ msgid "Wisdom settings"
+#~ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:331
 #: src/containers/ansible-remote/tab-details.tsx:86
@@ -4847,7 +4920,7 @@ msgstr "Vous n'avez pas la permission d'afficher les utilisateurs."
 #~ msgstr "You don't have permissions to update this namespace."
 
 #: src/components/headers/collection-header.tsx:549
-#: src/containers/search/search.tsx:444
+#: src/containers/search/search.tsx:450
 msgid "You don't have rights to do this operation."
 msgstr "Vous n'avez pas le droit de faire cette opération."
 
@@ -4990,7 +5063,7 @@ msgstr "{collectionName} versions."
 
 #: src/components/cards/collection-card.tsx:48
 #: src/components/cards/namespace-card.tsx:37
-#: src/components/collection-list/collection-list-item.tsx:52
+#: src/components/collection-list/collection-list-item.tsx:61
 #: src/components/headers/collection-header.tsx:408
 #: src/components/headers/partner-header.tsx:48
 msgid "{company} logo"
