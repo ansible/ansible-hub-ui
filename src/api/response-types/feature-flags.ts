@@ -1,11 +1,14 @@
 export class FeatureFlagsType {
-  // execution environments menu section
+  // execution environments
+  container_signing: boolean;
   execution_environments: boolean;
 
   // keycloak login screen
   external_authentication: boolean;
 
-  // community version
+  // community mode
+  ai_deny_index: boolean;
+  display_repositories: boolean;
   legacy_roles: boolean;
 
   // collection signing
@@ -16,9 +19,6 @@ export class FeatureFlagsType {
   display_signatures: boolean;
   require_upload_signatures: boolean;
   signatures_enabled: boolean;
-
-  // container signing (EE)
-  container_signing: boolean;
 
   // errors
   _messages: string[];

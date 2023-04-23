@@ -16,8 +16,9 @@ interface TabProps {
   item: AnsibleRemoteType;
   actionContext: {
     addAlert: (alert) => void;
-    state: { params };
+    featureFlags;
     hasPermission;
+    state: { params };
     user;
   };
 }
@@ -26,8 +27,9 @@ export const RemoteAccessTab = ({
   item,
   actionContext: {
     addAlert,
-    state: { params },
+    featureFlags,
     hasPermission,
+    state: { params },
     user,
   },
 }: TabProps) => {
@@ -57,6 +59,7 @@ export const RemoteAccessTab = ({
             hasObjectPermission: (p: string): boolean =>
               permissions.includes(p),
             user,
+            featureFlags,
           }),
         );
         AnsibleRemoteAPI.listRoles(id)

@@ -1,7 +1,6 @@
 import { Title } from '@patternfly/react-core';
 import cx from 'classnames';
 import * as React from 'react';
-import { Constants } from 'src/constants';
 import './header.scss';
 
 interface IProps {
@@ -30,18 +29,13 @@ export class BaseHeader extends React.Component<IProps> {
       status,
     } = this.props;
 
-    const showRepoSelector =
-      contextSelector && DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE;
-
     return (
       <div className={cx('background', className)}>
-        {showRepoSelector && (
-          <div className='breadcrumb-container'>{contextSelector}</div>
-        )}
+        {contextSelector || null}
         {breadcrumbs && (
           <div className='breadcrumb-container'>{breadcrumbs}</div>
         )}
-        {!breadcrumbs && !showRepoSelector && <div className='placeholder' />}
+        {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
         <div className='column-section'>
           <div className='title-box'>

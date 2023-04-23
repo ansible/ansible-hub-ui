@@ -22,6 +22,7 @@ import {
   Logo,
   Tag,
 } from 'src/components';
+import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
@@ -50,6 +51,7 @@ export const CollectionListItem = ({
   synclistSwitch,
   uploadButton,
 }: IProps) => {
+  const { featureFlags } = useContext();
   const cells = [];
 
   const company = namespace?.company || collection_version.namespace;
@@ -152,17 +154,19 @@ export const CollectionListItem = ({
           direction={{ default: 'row' }}
           alignSelf={{ default: 'alignSelfFlexStart' }}
         >
-          <FlexItem>
-            <Label variant='outline'>
-              <Link
-                to={formatPath(Paths.ansibleRepositoryDetail, {
-                  name: repository.name,
-                })}
-              >
-                {repository.name}
-              </Link>
-            </Label>
-          </FlexItem>
+          {featureFlags.display_repositories ? (
+            <FlexItem>
+              <Label variant='outline'>
+                <Link
+                  to={formatPath(Paths.ansibleRepositoryDetail, {
+                    name: repository.name,
+                  })}
+                >
+                  {repository.name}
+                </Link>
+              </Label>
+            </FlexItem>
+          ) : null}
           {displaySignatures ? (
             <FlexItem>
               <SignatureBadge
