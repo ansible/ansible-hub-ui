@@ -9,11 +9,13 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import './landing-page.scss';
 
 interface IState {
   alerts: AlertType[];
+  redirect: boolean;
 }
 
 export class LandingPage extends React.Component<RouteProps, IState> {
@@ -22,11 +24,24 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 
     this.state = {
       alerts: [],
+      redirect: false,
     };
   }
 
+  componentDidMount() {
+    const { ai_deny_index } = this.context.featureFlags;
+    if (!ai_deny_index) {
+      this.setState({ redirect: true });
+    }
+  }
+
   render() {
-    const { alerts } = this.state;
+    const { alerts, redirect } = this.state;
+
+    if (redirect) {
+      setTimeout(() => this.props.navigate(formatPath(Paths.collections)));
+      return null;
+    }
 
     return (
       <React.Fragment>
@@ -66,7 +81,8 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       your Ansible host using{' '}
                       <a
                         href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
-                        target='_blanck'
+                        target='_blank'
+                        rel='noreferrer'
                       >
                         ansible-galaxy
                       </a>
@@ -94,7 +110,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        Project Wisdom
+                        Ansible Lightspeed
                       </a>{' '}
                       to help other automators build Ansible content. Your roles
                       and collections may be used as training data for a machine
