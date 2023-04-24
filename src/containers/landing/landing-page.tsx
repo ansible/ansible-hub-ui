@@ -199,12 +199,6 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                         href='https://www.redhat.com/en/about/digital-accessibility'
                       >{t`Digital accessibility`}</a>
                     </span>
-                    <span>
-                      <a
-                        className='footer-link'
-                        href='#'
-                      >{t`Cookie preferences`}</a>
-                    </span>
                   </div>
                 </React.Fragment>
               }
