@@ -22,7 +22,6 @@ import {
   Logo,
   Tag,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
@@ -51,7 +50,6 @@ export const CollectionListItem = ({
   synclistSwitch,
   uploadButton,
 }: IProps) => {
-  const { featureFlags } = useContext();
   const cells = [];
 
   const company = namespace?.company || collection_version.namespace;
@@ -124,6 +122,7 @@ export const CollectionListItem = ({
     </DataListCell>,
   );
 
+  const display_repositories = true; // no feature flag in 4.7
   cells.push(
     <DataListCell isFilled={false} alignRight key='stats'>
       <Flex
@@ -154,7 +153,7 @@ export const CollectionListItem = ({
           direction={{ default: 'row' }}
           alignSelf={{ default: 'alignSelfFlexStart' }}
         >
-          {featureFlags.display_repositories ? (
+          {display_repositories ? (
             <FlexItem>
               <Label variant='outline'>
                 <Link

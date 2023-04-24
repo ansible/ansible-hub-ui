@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
 
@@ -37,11 +36,11 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
-  const { featureFlags } = useContext();
   const MAX_DESCRIPTION_LENGTH = 60;
 
   const company = namespace?.company || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
+  const display_repositories = true; // no feature flag in 4.7
 
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
@@ -55,7 +54,7 @@ export const CollectionCard = ({
           flexGrow
         />
         <div className='card-badge-area'>
-          {featureFlags.display_repositories ? (
+          {display_repositories ? (
             <TextContent>
               <Text component={TextVariants.small}>
                 <Badge isRead>

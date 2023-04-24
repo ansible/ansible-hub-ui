@@ -54,9 +54,8 @@ export const canEditAnsibleRepository = has_model_or_obj_perms(
   'ansible.change_ansiblerepository',
 );
 export const canSyncAnsibleRepository = canEditAnsibleRepository;
-// everybody can list/view, not has_model_or_obj_perms('ansible.view_ansiblerepository'); under feature flag
-export const canViewAnsibleRepositories = ({ user, featureFlags }) =>
-  user && featureFlags?.display_repositories;
+// everybody can list/view, not has_model_or_obj_perms('ansible.view_ansiblerepository'); allow anonymous
+export const canViewAnsibleRepositories = ({ user }) => user;
 export const canEditAnsibleRepositoryAccess = has_model_or_obj_perms(
   'ansible.manage_roles_ansiblerepository',
 );

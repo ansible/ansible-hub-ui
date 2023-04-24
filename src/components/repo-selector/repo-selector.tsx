@@ -6,19 +6,12 @@ import {
   InputGroupText,
 } from '@patternfly/react-core';
 import React from 'react';
-import { useContext } from 'src/loaders/app-context';
 
 interface IProps {
   selectedRepo: string;
 }
 
 export const RepoSelector = ({ selectedRepo }: IProps) => {
-  const { featureFlags } = useContext();
-
-  if (!featureFlags.display_repositories) {
-    return null;
-  }
-
   const repoName =
     {
       community: t`Community`,
