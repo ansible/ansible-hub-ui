@@ -210,7 +210,7 @@ jobs:
       run: |
         echo waiting for containers to start
         sleep 30
-        curl http://localhost:8002/preview/ansible/automation-hub/ | tee /dev/stderr | grep '/preview/apps/chrome/js/'
+        curl http://localhost:8002/preview/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
         sleep 30
 
     - name: "Ensure galaxykit can connect to API (standalone)"

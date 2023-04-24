@@ -122,8 +122,13 @@ module.exports = (inputConfigs) => {
     // insights dev
     ...(!isStandalone &&
       !isBuild && {
-        appUrl: customConfigs.UI_BASE_PATH,
-        deployment: cloudBeta !== 'false' ? 'preview/apps' : 'apps',
+        appUrl: customConfigs.UI_BASE_PATH.includes('/preview/')
+          ? [
+              customConfigs.UI_BASE_PATH,
+              customConfigs.UI_BASE_PATH.replace('/preview/', '/beta/'),
+            ]
+          : customConfigs.UI_BASE_PATH,
+        deployment: cloudBeta !== 'false' ? 'beta/apps' : 'apps',
         standalone: {
           api: {
             context: [customConfigs.API_BASE_PATH],
@@ -138,7 +143,7 @@ module.exports = (inputConfigs) => {
     // insights deployments from master
     ...(!isStandalone &&
       cloudBeta && {
-        deployment: cloudBeta === 'true' ? 'preview/apps' : 'apps',
+        deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',
       }),
   });
 
