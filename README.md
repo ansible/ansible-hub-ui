@@ -39,7 +39,7 @@ The app will run on http://localhost:8002/ui and proxy requests for `/api` to th
 1. Start the API with `COMPOSE_PROFILE=insights` (compose) or `COMPOSE_PROFILE=galaxy_ng/base:galaxy_ng/insights` (oci-env)
 2. `npm run start-insights`
 
-The app will run on http://localhost:8002/beta/ansible/automation-hub and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
+The app will run on http://localhost:8002/preview/ansible/automation-hub (and http://localhost:8002/beta/ansible/automation-hub) and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
 
 ## Deploying
 
@@ -55,9 +55,9 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 - any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
 - the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `qa-beta`
 
-- `qa-beta` builds end up on `console.stage.redhat.com/beta`
+- `qa-beta` builds end up on `console.stage.redhat.com/preview` (and `/beta`)
 - `qa-stable` builds end up on `console.stage.redhat.com`
-- `prod-beta` builds end up on `console.redhat.com/beta`
+- `prod-beta` builds end up on `console.redhat.com/preview` (and `/beta`)
 - `prod-stable` builds end up on `console.redhat.com`
 
 ### Workflows

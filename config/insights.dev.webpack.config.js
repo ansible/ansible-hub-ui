@@ -18,7 +18,7 @@ module.exports = webpackBase({
   // Path on the host where the UI is found. EX: /apps/automation-hub
   UI_BASE_PATH:
     cloudBeta !== 'false'
-      ? '/beta/ansible/automation-hub/'
+      ? '/preview/ansible/automation-hub/'
       : '/ansible/automation-hub/',
 
   // Port that the UI is served over

@@ -122,7 +122,12 @@ module.exports = (inputConfigs) => {
     // insights dev
     ...(!isStandalone &&
       !isBuild && {
-        appUrl: customConfigs.UI_BASE_PATH,
+        appUrl: customConfigs.UI_BASE_PATH.includes('/preview/')
+          ? [
+              customConfigs.UI_BASE_PATH,
+              customConfigs.UI_BASE_PATH.replace('/preview/', '/beta/'),
+            ]
+          : customConfigs.UI_BASE_PATH,
         deployment: cloudBeta !== 'false' ? 'beta/apps' : 'apps',
         standalone: {
           api: {
