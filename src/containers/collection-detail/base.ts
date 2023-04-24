@@ -84,6 +84,8 @@ export function loadCollection({
     .then(({ data: { results } }) => results[0])
     .catch(() => navigate(formatPath(Paths.notFound)));
 
+  // Note: this only provides the first page - containing the latest version, and all items for the version *selector*,
+  // but the version *modal* is using a separate call, in CollectionHeader updatePaginationParams
   const versions = CollectionVersionAPI.list({
     ...requestParams,
     order_by: '-version',

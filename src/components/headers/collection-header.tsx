@@ -11,6 +11,7 @@ import {
   Select,
   SelectOption,
   SelectVariant,
+  Spinner,
   Text,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
@@ -20,6 +21,7 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
   MyNamespaceAPI,
@@ -81,9 +83,10 @@ interface IState {
   isOpenVersionsModal: boolean;
   isOpenSignModal: boolean;
   isOpenSignAllModal: boolean;
+  modalCollections: CollectionVersionSearch[];
   modalPagination: {
     page: number;
-    pageSize: number;
+    page_size: number;
   };
   deleteCollection: CollectionVersionSearch;
   collectionVersion: string | null;
@@ -111,9 +114,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenVersionsModal: false,
       isOpenSignModal: false,
       isOpenSignAllModal: false,
+      modalCollections: null,
       modalPagination: {
         page: 1,
-        pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
+        page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
       },
       deleteCollection: null,
       collectionVersion: null,
@@ -141,6 +145,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }).then(({ data }) => {
       this.setState({ namespace: data });
     });
+
+    this.setState({ modalCollections: this.props.collections });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.collections !== prevProps.collections) {
+      this.setState({ modalCollections: this.props.collections });
+    }
   }
 
   render() {
@@ -157,6 +169,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     } = this.props;
 
     const {
+      modalCollections,
       modalPagination,
       isOpenVersionsModal,
       isOpenVersionsSelect,
@@ -334,16 +347,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               <Text>{t`${collectionName}'s versions.`}</Text>
               <Pagination
                 isTop
-                params={{
-                  page: modalPagination.page,
-                  page_size: modalPagination.pageSize,
-                }}
+                params={modalPagination}
                 updateParams={this.updatePaginationParams}
                 count={collectionsCount}
               />
             </div>
-            {this.paginateVersions(collections).map(
-              ({ collection_version }, i) => (
+            {modalCollections ? (
+              modalCollections.map(({ collection_version }, i) => (
                 <ListItem key={i}>
                   <Button
                     variant='link'
@@ -363,14 +373,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Button>{' '}
                   {t`updated ${isLatestVersion(collection_version)}`}
                 </ListItem>
-              ),
+              ))
+            ) : (
+              <Spinner />
             )}
           </List>
           <Pagination
-            params={{
-              page: modalPagination.page,
-              page_size: modalPagination.pageSize,
-            }}
+            params={modalPagination}
             updateParams={this.updatePaginationParams}
             count={collectionsCount}
           />
@@ -689,21 +698,33 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     });
   }
 
-  private paginateVersions(versions) {
-    const { modalPagination } = this.state;
-    return versions.slice(
-      modalPagination.pageSize * (modalPagination.page - 1),
-      modalPagination.pageSize * modalPagination.page,
-    );
-  }
-
   private updatePaginationParams = ({ page, page_size }) => {
-    this.setState({
-      modalPagination: {
-        page: page,
-        pageSize: page_size,
-      },
-    });
+    const modalPagination = {
+      page,
+      page_size,
+    };
+
+    this.setState({ modalPagination, modalCollections: null });
+
+    const { namespace, name } = this.props.collection.collection_version;
+    const repository = this.props.collection.repository;
+    const requestParams = {
+      ...(repository ? { repository_name: repository.name } : {}),
+      namespace,
+      name,
+    };
+
+    // loadCollections provides initial data, pagination needs extra requests
+    CollectionVersionAPI.list({
+      ...requestParams,
+      order_by: '-version',
+      ...modalPagination,
+    })
+      .then(({ data }) => data)
+      .catch(() => ({ data: [] }))
+      .then(({ data: modalCollections }) =>
+        this.setState({ modalCollections }),
+      );
   };
 
   private signCollection = () => {
