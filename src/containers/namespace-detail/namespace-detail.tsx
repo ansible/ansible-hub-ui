@@ -108,6 +108,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     ]);
 
     params['namespace'] = props.routeParams.namespace;
+    if (props.routeParams.repo && !params['repository_name']) {
+      params['repository_name'] = props.routeParams.repo;
+    }
 
     this.state = {
       canSign: false,
@@ -147,18 +150,28 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.search !== this.props.location.search) {
-      const params = ParamHelper.parseParamString(this.props.location.search, [
-        'page',
-        'page_size',
-      ]);
+    const params = ParamHelper.parseParamString(this.props.location.search, [
+      'page',
+      'page_size',
+    ]);
 
+    if (prevProps.location.search !== this.props.location.search) {
       params['namespace'] = this.props.routeParams.namespace;
 
       this.setState({
         params,
         group: this.filterGroup(params['group'], this.state.namespace.groups),
       });
+    }
+
+    if (
+      prevProps.routeParams.repo !== this.props.routeParams.repo &&
+      this.props.routeParams.repo &&
+      (!params['repository_name'] ||
+        params['repository_name'] === prevProps.routeParams.repo)
+    ) {
+      params['repository_name'] = this.props.routeParams.repo;
+      this.setState({ params });
     }
   }
 
@@ -275,7 +288,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
     const ignoredParams = [
       'namespace',
-      'repository__name',
       'page',
       'page_size',
       'sort',
