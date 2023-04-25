@@ -124,11 +124,11 @@ export const CollectionFilter = (props: IProps) => {
             <ToolbarItem>
               <AppliedFilters
                 niceNames={{
-                  is_signed: t`sign state`,
-                  tags: t`tags`,
-                  keywords: t`keywords`,
-                  repository_name: t`repository`,
-                  namespace: t`namespace`,
+                  is_signed: t`Sign state`,
+                  tags: t`Tags`,
+                  keywords: t`Keywords`,
+                  repository_name: t`Repository`,
+                  namespace: t`Namespace`,
                 }}
                 niceValues={{
                   is_signed: {
