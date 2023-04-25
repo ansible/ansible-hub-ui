@@ -307,6 +307,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const tabParams = { ...params };
     delete tabParams.group;
 
+    const repository = params['repository_name'] || null;
+
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -567,12 +569,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           <SignAllCertificatesModal
             name={this.state.namespace.name}
             isOpen={this.state.isOpenSignModal}
-            onSubmit={() => {
-              this.signAllCertificates(namespace);
-            }}
-            onCancel={() => {
-              this.setState({ isOpenSignModal: false });
-            }}
+            onSubmit={() => this.signAllCertificates(namespace, repository)}
+            onCancel={() => this.setState({ isOpenSignModal: false })}
           />
         )}
       </React.Fragment>
@@ -638,38 +636,32 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     );
   }
 
-  private signAllCertificates(namespace: NamespaceType) {
-    // get the repository from first collection
-    // all collections are in same repo, so this should be fine.
-    const [collection] = this.state.collections;
-
+  private signAllCertificates(namespace: NamespaceType, repository: string) {
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
       title: t`Failed to sign all collections.`,
       description: t`API Error: ${status}`,
     });
 
-    this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          id: 'loading-signing',
-          variant: 'success',
-          title: t`Signing started for all collections in namespace "${namespace.name}".`,
-        },
-      ],
-      isOpenSignModal: false,
-    });
-
-    const { name } = collection.collection_version;
-
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: collection.repository,
+      repository_name: repository,
       namespace: namespace.name,
-      collection: name,
     })
       .then((result) => {
+        // FIXME: use taskAlert
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              id: 'loading-signing',
+              variant: 'success',
+              title: t`Signing started for all collections in namespace "${namespace.name}".`,
+            },
+          ],
+          isOpenSignModal: false,
+        });
+
         waitForTask(result.data.task_id)
           .then(() => {
             this.load();
@@ -691,6 +683,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         // The request failed in the first place
         this.setState({
           alerts: [...this.state.alerts, errorAlert(error.response.status)],
+          isOpenSignModal: false,
         });
       });
   }
@@ -774,6 +767,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
+    const repository = this.state.params['repository_name'] || null;
 
     const dropdownItems = [
       <DropdownItem
@@ -831,15 +825,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       />,
       canSign &&
         !can_upload_signatures &&
-        this.state.collections.length >= 1 && (
+        (repository ? (
           <DropdownItem
             key='sign-collections'
             data-cy='sign-all-collections-button'
             onClick={() => this.setState({ isOpenSignModal: true })}
           >
+            {t`Sign all collections in ${repository}`}
+          </DropdownItem>
+        ) : (
+          <DropdownItem
+            key='sign-collections'
+            isDisabled
+            description={t`Please select a repository filter`}
+          >
             {t`Sign all collections`}
           </DropdownItem>
-        ),
+        )),
       ai_deny_index && (
         <DropdownItem
           key='wisdom-settings'

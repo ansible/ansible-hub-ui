@@ -30,6 +30,12 @@ class API extends HubAPI {
     if (!repository && repository_name) {
       repository = (await AnsibleRepositoryAPI.list({ name: repository_name }))
         ?.data?.results?.[0];
+
+      if (!repository) {
+        return Promise.reject({
+          response: { status: t`Failed to find repository` },
+        });
+      }
     }
 
     const distribution = (
