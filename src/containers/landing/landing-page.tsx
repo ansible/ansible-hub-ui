@@ -74,7 +74,11 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <p>
                     <Trans>
                       Use the{' '}
-                      <a href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'>
+                      <a
+                        href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
                         Search page
                       </a>{' '}
                       to find content for your project, then download them onto
@@ -134,7 +138,11 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   </b>
                   <br />
                   <p>
-                    <a href='https://www.redhat.com/en/summit/ansiblefest?intcmp=7013a0000034lvmAAA'>
+                    <a
+                      href='https://www.redhat.com/en/summit/ansiblefest?intcmp=7013a0000034lvmAAA'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
                       <img
                         width='100%'
                         alt='Ansible Fest at Red Hat Summit May 23rd to 25th 2023'
@@ -179,24 +187,32 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       <a
                         className='footer-link'
                         href='https://www.redhat.com/en/about/privacy-policy'
+                        target='_blank'
+                        rel='noreferrer'
                       >{t`Privacy statement`}</a>
                     </span>
                     <span>
                       <a
                         className='footer-link'
                         href='https://www.redhat.com/en/about/terms-use'
+                        target='_blank'
+                        rel='noreferrer'
                       >{t`Terms of use`}</a>
                     </span>
                     <span>
                       <a
                         className='footer-link'
                         href='https://www.redhat.com/en/about/all-policies-guidelines'
+                        target='_blank'
+                        rel='noreferrer'
                       >{t`All policies and guidelines`}</a>
                     </span>
                     <span>
                       <a
                         className='footer-link'
                         href='https://www.redhat.com/en/about/digital-accessibility'
+                        target='_blank'
+                        rel='noreferrer'
                       >{t`Digital accessibility`}</a>
                     </span>
                   </div>

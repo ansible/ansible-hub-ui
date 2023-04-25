@@ -3,7 +3,6 @@ describe('execution environments', () => {
 
   before(() => {
     cy.login();
-
     cy.deleteRegistriesManual();
     cy.deleteContainersManual();
 
@@ -23,6 +22,7 @@ describe('execution environments', () => {
 
   beforeEach(() => {
     cy.login();
+    cy.wait(10000);
     cy.menuGo('Execution Environments > Execution Environments');
   });
 

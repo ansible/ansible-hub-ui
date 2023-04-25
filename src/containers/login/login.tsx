@@ -29,7 +29,7 @@ class LoginPage extends React.Component<RouteProps, IState> {
     };
 
     const params = ParamHelper.parseParamString(this.props.location.search);
-    this.redirectPage = params['next'] || formatPath(Paths.collections);
+    this.redirectPage = params['next'] || formatPath(Paths.landingPage);
   }
 
   render() {
