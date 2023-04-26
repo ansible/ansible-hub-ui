@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import {
   AlertList,
   AlertType,
@@ -74,13 +75,9 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <p>
                     <Trans>
                       Use the{' '}
-                      <a
-                        href='https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance'
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        Search page
-                      </a>{' '}
+                      <Link to={formatPath(Paths.collections)}>
+                        Search page{' '}
+                      </Link>
                       to find content for your project, then download them onto
                       your Ansible host using{' '}
                       <a
