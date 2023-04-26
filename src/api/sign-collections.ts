@@ -26,14 +26,14 @@ type SignProps = SignNamespace | SignCollection | SignVersion;
 class API extends HubAPI {
   apiPath = this.getUIPath('collection_signing/');
 
-  async sign({ repository, repository_name, ...args }: SignProps) {
-    if (!repository && repository_name) {
-      repository = (await AnsibleRepositoryAPI.list({ name: repository_name }))
-        ?.data?.results?.[0];
+  async sign({ repository, repository_name: name, ...args }: SignProps) {
+    if (!repository && name) {
+      repository = (await AnsibleRepositoryAPI.list({ name }))?.data
+        ?.results?.[0];
 
       if (!repository) {
         return Promise.reject({
-          response: { status: t`Failed to find repository` },
+          response: { status: t`Failed to find repository ${name}` },
         });
       }
     }
@@ -45,8 +45,11 @@ class API extends HubAPI {
     )?.data?.results?.[0];
 
     if (!distribution) {
+      const name = repository.name;
       return Promise.reject({
-        response: { status: t`Failed to find a distribution` },
+        response: {
+          status: t`Failed to find a distribution for repository ${name}`,
+        },
       });
     }
 
