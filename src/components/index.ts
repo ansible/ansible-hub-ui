@@ -127,3 +127,4 @@ export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
 export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespace-item';
 export { WisdomModal } from './wisdom-modal/wisdom-modal';
 export { ApproveModal } from './approve-modal/approve-modal';
+export { MultipleRepoSelector } from './repo-selector/multiple-repo-selector';

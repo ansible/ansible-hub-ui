@@ -1,21 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownSeparator,
-  DropdownToggle,
-  DropdownToggleCheckbox,
-  Flex,
-  FlexItem,
-  Label,
-  LabelGroup,
-  Modal,
-  Spinner,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
   CollectionVersion,
@@ -27,11 +11,7 @@ import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
-  AppliedFilters,
-  CheckboxRow,
-  CompoundFilter,
-  Pagination,
-  SortTable,
+  MultipleRepoSelector,
   closeAlert,
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
@@ -52,20 +32,10 @@ interface IProps {
 }
 
 export const ApproveModal = (props: IProps) => {
-  const [isSelectorChecked, setIsSelectorChecked] = useState(false);
-  const [isSelectorOpen, setIsSelectorOpen] = useState(false);
-  const [inputText, setInputText] = useState('');
-  const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
-  const [itemsCount, setItemsCount] = useState(0);
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);
   const [fixedRepos, setFixedRepos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [params, setParams] = useState({
-    page: 1,
-    page_size: 10,
-    sort: 'name',
-  });
 
   const context = useContext();
 
@@ -184,23 +154,7 @@ export const ApproveModal = (props: IProps) => {
     setAlerts((prevAlerts) => [...prevAlerts, alert]);
   }
 
-  function changeSelection(name) {
-    if (fixedRepos.includes(name)) {
-      return;
-    }
-
-    const checked = selectedRepos.includes(name);
-
-    if (checked) {
-      // remove
-      setSelectedRepos(selectedRepos.filter((element) => element != name));
-    } else {
-      // add
-      setSelectedRepos([...selectedRepos, name]);
-    }
-  }
-
-  function loadRepos() {
+  function loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
     // modify params
     const par = { ...params };
     par['pulp_label_select'] = 'pipeline=approved';
@@ -224,41 +178,6 @@ export const ApproveModal = (props: IProps) => {
       });
   }
 
-  function renderLabels() {
-    const labels = (
-      <>
-        <LabelGroup>
-          {selectedRepos.map((name) => {
-            let label = null;
-            if (fixedRepos.includes(name)) {
-              label = <Label>{name}</Label>;
-            } else {
-              label = (
-                <Label onClose={() => changeSelection(name)}>{name}</Label>
-              );
-            }
-            return <>{label} </>;
-          })}
-        </LabelGroup>
-      </>
-    );
-
-    return (
-      <>
-        <Flex>
-          <FlexItem>
-            <b>{t`Selected`}</b>
-          </FlexItem>
-          <FlexItem>{labels}</FlexItem>
-        </Flex>
-      </>
-    );
-  }
-
-  useEffect(() => {
-    loadRepos();
-  }, [params]);
-
   useEffect(() => {
     const fixedReposLocal = [];
     const selectedReposLocal = [];
@@ -276,157 +195,6 @@ export const ApproveModal = (props: IProps) => {
     setSelectedRepos(selectedReposLocal);
     setFixedRepos(fixedReposLocal);
   }, []);
-
-  function renderMultipleSelector() {
-    function onToggle(isOpen: boolean) {
-      setIsSelectorOpen(isOpen);
-    }
-
-    function onFocus() {
-      const element = document.getElementById('toggle-split-button');
-      element.focus();
-    }
-
-    function onSelect() {
-      setIsSelectorOpen(false);
-      onFocus();
-    }
-
-    function selectAll() {
-      setSelectedRepos(props.allRepositories.map((a) => a.name));
-      setIsSelectorChecked(true);
-    }
-
-    function selectPage() {
-      const newRepos = [...selectedRepos];
-
-      repositoryList.forEach((repo) => {
-        if (!selectedRepos.includes(repo.name)) {
-          newRepos.push(repo.name);
-        }
-      });
-
-      setSelectedRepos(newRepos);
-      setIsSelectorChecked(true);
-    }
-
-    function deselectAll() {
-      setSelectedRepos(fixedRepos);
-      setIsSelectorChecked(false);
-    }
-
-    function deselectPage() {
-      const newSelectedRepos = selectedRepos.filter(
-        (repo) =>
-          fixedRepos.includes(repo) ||
-          !repositoryList.find((repo2) => repo2.name == repo),
-      );
-      setSelectedRepos(newSelectedRepos);
-      setIsSelectorChecked(false);
-    }
-
-    function onToggleCheckbox() {
-      setIsSelectorChecked(!isSelectorChecked);
-      if (isSelectorChecked) {
-        deselectPage();
-      } else {
-        selectPage();
-      }
-    }
-
-    const dropdownItems = [
-      <DropdownItem
-        onClick={selectPage}
-        key='select-page'
-      >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
-      <DropdownItem
-        onClick={selectAll}
-        key='select-all'
-      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
-      <DropdownSeparator key='separator' />,
-      <DropdownItem
-        onClick={deselectPage}
-        key='deselect-page'
-      >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
-      <DropdownItem
-        onClick={deselectAll}
-        key='deselect-all'
-      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
-    ];
-
-    return (
-      <Dropdown
-        onSelect={onSelect}
-        toggle={
-          <DropdownToggle
-            splitButtonItems={[
-              <DropdownToggleCheckbox
-                id='split-button-toggle-checkbox'
-                key='split-checkbox'
-                aria-label='Select all'
-                checked={isSelectorChecked}
-                onChange={onToggleCheckbox}
-              />,
-            ]}
-            onToggle={onToggle}
-            id='toggle-split-button'
-          />
-        }
-        isOpen={isSelectorOpen}
-        dropdownItems={dropdownItems}
-      />
-    );
-  }
-
-  function renderTable() {
-    if (!props.collectionVersion) {
-      return;
-    }
-
-    const sortTableOptions = {
-      headers: [
-        {
-          title: t`Name`,
-          type: 'alpha',
-          id: 'name',
-        },
-      ],
-    };
-
-    return (
-      <>
-        <table
-          aria-label={t`Collection versions`}
-          className='hub-c-table-content pf-c-table'
-        >
-          <SortTable
-            options={sortTableOptions}
-            params={params}
-            updateParams={(p) => setParams(p)}
-          />
-          <tbody>
-            {repositoryList.map((repo, i) => (
-              <CheckboxRow
-                rowIndex={i}
-                key={repo.name}
-                isSelected={selectedRepos.includes(repo.name)}
-                onSelect={() => {
-                  changeSelection(repo.name);
-                }}
-                isDisabled={fixedRepos.includes(repo.name)}
-                data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
-              >
-                <td>
-                  <div>{repo.name}</div>
-                  <div>{repo.description}</div>
-                </td>
-              </CheckboxRow>
-            ))}
-          </tbody>
-        </table>
-      </>
-    );
-  }
 
   return (
     <>
@@ -457,60 +225,14 @@ export const ApproveModal = (props: IProps) => {
         variant='large'
       >
         <section className='modal-body' data-cy='modal-body'>
-          {renderLabels()}
-          <div className='toolbar hub-toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
-                <ToolbarItem>
-                  <CompoundFilter
-                    inputText={inputText}
-                    onChange={(text) => {
-                      setInputText(text);
-                    }}
-                    updateParams={(p) => setParams(p)}
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'name__icontains',
-                        title: t`Repository`,
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-              isTop
-            />
-          </div>
-          <div>
-            <AppliedFilters
-              updateParams={(p) => {
-                setParams(p);
-                setInputText('');
-              }}
-              params={params}
-              ignoredParams={['page_size', 'page', 'sort']}
-              niceNames={{
-                name__icontains: t`Name`,
-              }}
-            />
-          </div>
-
-          {loading ? <Spinner /> : renderTable()}
-
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-            />
-          </div>
+          <MultipleRepoSelector
+            allRepositories={props.allRepositories}
+            fixedRepos={fixedRepos}
+            selectedRepos={selectedRepos}
+            setSelectedRepos={setSelectedRepos}
+            loadRepos={loadRepos}
+          />
+          {loading && <Spinner />}
         </section>
 
         <AlertList

@@ -15,8 +15,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import {
-} from 'src/api';
+import 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AppliedFilters,
@@ -27,11 +26,11 @@ import {
 } from 'src/components';
 
 interface IProps {
-    allRepositories: Repository[];
-    fixedRepos : string[];
-    loadRepos : (setRepositoryList, setLoading, setItemsCount) => void;
-    selectedRepos : string[];
-    setSelectedRepos : (selectedRepos : string[]) => void;
+  allRepositories: Repository[];
+  fixedRepos: string[];
+  loadRepos: (params, setRepositoryList, setLoading, setItemsCount) => void;
+  selectedRepos: string[];
+  setSelectedRepos: (selectedRepos: string[]) => void;
 }
 
 export const MultipleRepoSelector = (props: IProps) => {
@@ -61,7 +60,9 @@ export const MultipleRepoSelector = (props: IProps) => {
 
     if (checked) {
       // remove
-      props.setSelectedRepos(props.selectedRepos.filter((element) => element != name));
+      props.setSelectedRepos(
+        props.selectedRepos.filter((element) => element != name),
+      );
     } else {
       // add
       props.setSelectedRepos([...props.selectedRepos, name]);
@@ -125,7 +126,7 @@ export const MultipleRepoSelector = (props: IProps) => {
   }
 
   useEffect(() => {
-    props.loadRepos(setRepositoryList, setLoading, setItemsCount);
+    props.loadRepos(params, setRepositoryList, setLoading, setItemsCount);
   }, [params]);
 
   /*useEffect(() => {
@@ -180,14 +181,14 @@ export const MultipleRepoSelector = (props: IProps) => {
     }
 
     function deselectAll() {
-        props.setSelectedRepos(props.fixedRepos);
+      props.setSelectedRepos(props.fixedRepos);
       setIsSelectorChecked(false);
     }
 
     function deselectPage() {
       const newSelectedRepos = props.selectedRepos.filter(
         (repo) =>
-        props.fixedRepos.includes(repo) ||
+          props.fixedRepos.includes(repo) ||
           !repositoryList.find((repo2) => repo2.name == repo),
       );
       props.setSelectedRepos(newSelectedRepos);
@@ -295,60 +296,60 @@ export const MultipleRepoSelector = (props: IProps) => {
 
   return (
     <>
-          {renderLabels()}
-          <div className='toolbar hub-toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
-                <ToolbarItem>
-                  <CompoundFilter
-                    inputText={inputText}
-                    onChange={(text) => {
-                      setInputText(text);
-                    }}
-                    updateParams={(p) => setParams(p)}
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'name__icontains',
-                        title: t`Repository`,
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
+      {renderLabels()}
+      <div className='toolbar hub-toolbar'>
+        <Toolbar>
+          <ToolbarGroup>
+            <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
+            <ToolbarItem>
+              <CompoundFilter
+                inputText={inputText}
+                onChange={(text) => {
+                  setInputText(text);
+                }}
+                updateParams={(p) => setParams(p)}
+                params={params}
+                filterConfig={[
+                  {
+                    id: 'name__icontains',
+                    title: t`Repository`,
+                  },
+                ]}
+              />
+            </ToolbarItem>
+          </ToolbarGroup>
+        </Toolbar>
 
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-              isTop
-            />
-          </div>
-          <div>
-            <AppliedFilters
-              updateParams={(p) => {
-                setParams(p);
-                setInputText('');
-              }}
-              params={params}
-              ignoredParams={['page_size', 'page', 'sort']}
-              niceNames={{
-                name__icontains: t`Name`,
-              }}
-            />
-          </div>
+        <Pagination
+          params={params}
+          updateParams={(p) => setParams(p)}
+          count={itemsCount}
+          isTop
+        />
+      </div>
+      <div>
+        <AppliedFilters
+          updateParams={(p) => {
+            setParams(p);
+            setInputText('');
+          }}
+          params={params}
+          ignoredParams={['page_size', 'page', 'sort']}
+          niceNames={{
+            name__icontains: t`Name`,
+          }}
+        />
+      </div>
 
-          {loading ? <Spinner /> : renderTable()}
+      {loading ? <Spinner /> : renderTable()}
 
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-            />
-          </div>
+      <div className='footer'>
+        <Pagination
+          params={params}
+          updateParams={(p) => setParams(p)}
+          count={itemsCount}
+        />
+      </div>
     </>
   );
 };
