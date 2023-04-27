@@ -143,8 +143,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
       const promises = [];
 
-      promises.push(this.loadRepo('staging'));
-      promises.push(this.loadRepo('rejected'));
+      promises.push(this.loadRepos('staging'));
+      promises.push(this.loadRepos('rejected'));
 
       promises.push(
         RepositoriesUtils.listApproved()
@@ -169,7 +169,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
   }
 
-  private loadRepo(pipeline) {
+  private loadRepos(pipeline) {
     return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
       .then((data) => {
         if (data.data.results.length > 0) {

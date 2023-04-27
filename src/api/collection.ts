@@ -131,7 +131,16 @@ export class API extends HubAPI {
     if (cancelToken) {
       config['cancelToken'] = cancelToken.token;
     }
-    return this.http.post('v3/artifacts/collections/', formData, config);
+
+    if (data.distro_base_path) {
+      return this.http.post(
+        `v3/plugin/ansible/content/${data.distro_base_path}/collections/artifacts/`,
+        formData,
+        config,
+      );
+    } else {
+      return this.http.post('v3/artifacts/collections/', formData, config);
+    }
   }
 
   getCancelToken() {

@@ -4,10 +4,21 @@ import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
 import {
+  AnsibleDistributionAPI,
+  AnsibleRepositoryAPI,
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
+  Repositories,
 } from 'src/api';
+import { Repository } from 'src/api/response-types/repositories';
+import {
+  AlertList,
+  AlertType,
+  MultipleRepoSelector,
+  closeAlertMixin,
+} from 'src/components';
+import { errorMessage } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -29,6 +40,10 @@ interface IState {
   errors?: string;
   uploadProgress: number;
   uploadStatus: Status;
+  allRepos: Repository[];
+  loading: boolean;
+  alerts: AlertType[];
+  selectedRepos: string[];
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
@@ -44,15 +59,91 @@ export class ImportModal extends React.Component<IProps, IState> {
       errors: '',
       uploadProgress: 0,
       uploadStatus: Status.waiting,
+      allRepos: [],
+      loading: true,
+      alerts: [],
+      selectedRepos: [],
     };
   }
+
+  componentDidMount() {
+    this.loadAllRepos('staging');
+  }
+
+  private loadAllRepos(pipeline) {
+    return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
+      .then((data) => {
+        this.setState({
+          allRepos: data.data.results,
+        });
+        this.setState({ loading: false });
+        if (data.data.results.length == 1) {
+          this.setState({ selectedRepos: [data.data.results[0].name] });
+        }
+      })
+      .catch((error) => {
+        this.addAlert(
+          t`Error loading repositories with label ${pipeline}.`,
+          'danger',
+          error?.message,
+        );
+        this.setState({ loading: false });
+      });
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
+    });
+  }
+
+  private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
+    // modify params
+    const par = { ...params };
+    par['pulp_label_select'] = 'pipeline=staging';
+    par['ordering'] = par['sort'];
+    delete par['sort'];
+    setLoading(true);
+
+    Repositories.list(par)
+      .then((data) => {
+        setLoading(false);
+        setRepositoryList(data.data.results);
+        setItemsCount(data.data.count);
+      })
+      .catch(({ response: { status, statusText } }) => {
+        setLoading(false);
+        this.addAlertObj({
+          title: t`Failed to load repositories.`,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
+      });
+  }
+
+  private addAlertObj(alert) {
+    this.addAlert(alert.title, alert.variant, alert.description);
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
   render() {
     const { isOpen, collection } = this.props;
 
     const { file, errors, uploadProgress, uploadStatus } = this.state;
+
     return (
       <Modal
-        variant='small'
+        variant={this.state.allRepos.length > 1 ? 'large' : 'small'}
         title={
           collection ? t`New version of ${collection.name}` : t`New collection`
         }
@@ -63,7 +154,9 @@ export class ImportModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={() => this.saveFile()}
-            isDisabled={!this.canUpload()}
+            isDisabled={
+              !this.canUpload() || this.state.selectedRepos.length == 0
+            }
             data-cy={'confirm-upload'}
           >
             {t`Upload`}
@@ -78,6 +171,10 @@ export class ImportModal extends React.Component<IProps, IState> {
         ]}
       >
         <div className='upload-collection'>
+          <AlertList
+            alerts={this.state.alerts}
+            closeAlert={(i) => this.closeAlert(i)}
+          />
           <form>
             <input
               disabled={uploadStatus !== Status.waiting}
@@ -107,6 +204,32 @@ export class ImportModal extends React.Component<IProps, IState> {
             </span>
           ) : null}
         </div>
+        {this.state.allRepos.length > 1 && (
+          <>
+            <br />
+            <MultipleRepoSelector
+              allRepositories={this.state.allRepos}
+              fixedRepos={[]}
+              selectedRepos={this.state.selectedRepos}
+              setSelectedRepos={(repos) =>
+                this.setState({ selectedRepos: repos })
+              }
+              loadRepos={(
+                params,
+                setRepositoryList,
+                setLoading,
+                setItemsCount,
+              ) =>
+                this.loadRepos(
+                  params,
+                  setRepositoryList,
+                  setLoading,
+                  setItemsCount,
+                )
+              }
+            />
+          </>
+        )}
       </Modal>
     );
   }
@@ -182,7 +305,26 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  saveFile() {
+  private async distributionByRepoName(name) {
+    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
+      ?.results?.[0];
+    if (!repository) {
+      return Promise.reject(t`Failed to find repository ${name}`);
+    }
+
+    const distribution = (
+      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
+    )?.data?.results?.[0];
+    if (!distribution) {
+      return Promise.reject(
+        t`Failed to find a distribution for repository ${name}`,
+      );
+    }
+
+    return distribution;
+  }
+
+  async saveFile() {
     this.setState({ uploadStatus: Status.uploading });
     const artifact = {
       file: this.state.file,
