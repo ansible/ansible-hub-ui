@@ -265,22 +265,21 @@ export const MultipleRepoSelector = (props: IProps) => {
 
                 {props.singleSelectionOnly && (
                   <>
-                    <tr>
-                      <RadioRow
-                        rowIndex={i}
-                        key={repo.name}
-                        isSelected={props.selectedRepos.includes(repo.name)}
-                        onSelect={() => {
-                          props.setSelectedRepos([repo.name]);
-                        }}
-                        isDisabled={props.fixedRepos.includes(repo.name)}
-                        data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
-                      />
+                    <RadioRow
+                      rowIndex={i}
+                      key={repo.name}
+                      isSelected={props.selectedRepos.includes(repo.name)}
+                      onSelect={() => {
+                        props.setSelectedRepos([repo.name]);
+                      }}
+                      isDisabled={props.fixedRepos.includes(repo.name)}
+                      data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
+                    >
                       <td>
                         <div>{repo.name}</div>
                         <div>{repo.description}</div>
                       </td>
-                    </tr>
+                    </RadioRow>
                   </>
                 )}
               </>
