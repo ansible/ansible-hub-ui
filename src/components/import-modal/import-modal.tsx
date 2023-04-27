@@ -18,7 +18,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { RepositoriesUtils, errorMessage } from 'src/utilities';
+import { RepositoriesUtils, errorMessage, waitForTaskUrl } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -305,17 +305,36 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  saveFile()
+  /*async copyToAll(response, artifact, selectedRepos)
   {
-    this.saveFileToRepo(this.state.selectedRepos[0], true);
-  }
+    const taskData = await waitForTaskUrl(response.data.task);
 
-  async saveFileToRepo(repo, redirect) {
+    debugger;
+    let names = artifact.file.name.split('-');
+    const namespace = names[0];
+    const name = names[1];
+
+    const result = await CollectionAPI.list( { namespace, name}, selectedRepos[0]);
+
+    debugger;
+
+    if (result.data.data.length == 0)
+    {
+      this.addAlert(`Can not find collection ${namespace}, ${name}`, 'danger');
+      return;
+    }
+
+    const collection = result.data.data[0];
+  }*/
+
+  async saveFile() {
+    const selectedRepos = this.state.selectedRepos;
+
     this.setState({ uploadStatus: Status.uploading });
 
     let distro = null;
     distro = await RepositoriesUtils.distributionByRepoName(
-      repo,
+      selectedRepos[0],
     ).catch((error) => {
       this.addAlert(error, 'danger');
     });
@@ -343,7 +362,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       this.cancelToken,
     )
       .then((response) => {
-        if (redirect) { this.props.onUploadSuccess(response); }
+        this.props.onUploadSuccess(response);
       })
       .catch((errors) => {
         let errorMessage = '';
