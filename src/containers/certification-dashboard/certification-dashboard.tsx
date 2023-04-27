@@ -18,6 +18,8 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  AnsibleDistributionAPI,
+  AnsibleRepositoryAPI,
   CertificateUploadAPI,
   CollectionAPI,
   CollectionVersionAPI,
@@ -771,14 +773,41 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       });
   }
 
+  private async distributionByRepoName(name) {
+    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
+      ?.results?.[0];
+    if (!repository) {
+      return Promise.reject(t`Failed to find repository ${name}`);
+    }
+
+    const distribution = (
+      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
+    )?.data?.results?.[0];
+    if (!distribution) {
+      return Promise.reject(
+        t`Failed to find a distribution for repository ${name}`,
+      );
+    }
+
+    return distribution;
+  }
+
   private updateCertification(version, originalRepo, destinationRepo) {
-    return CollectionVersionAPI.setRepository(
-      version.namespace,
-      version.name,
-      version.version,
-      originalRepo,
-      destinationRepo,
-    )
+    // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
+    // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
+    return Promise.all([
+      this.distributionByRepoName(originalRepo),
+      this.distributionByRepoName(destinationRepo),
+    ])
+      .then(([source, destination]) =>
+        CollectionVersionAPI.move(
+          version.namespace,
+          version.name,
+          version.version,
+          source.base_path,
+          destination.base_path,
+        ),
+      )
       .then((result) =>
         waitForTask(result.data.remove_task_id, { waitMs: 500 }),
       )
