@@ -1,6 +1,10 @@
 import { t } from '@lingui/macro';
-import { Repositories } from 'src/api/repositories';
-import { CollectionVersionSearch } from 'src/api/response-types/collection';
+import {
+  AnsibleDistributionAPI,
+  AnsibleRepositoryAPI,
+  CollectionVersionSearch,
+  Repositories,
+} from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
@@ -106,5 +110,24 @@ export class RepositoriesUtils {
         cv.pulp_href !== selectedCollection.collection_version.pulp_href ||
         repository.pulp_href !== selectedCollection.repository.pulp_href,
     );
+  }
+
+  public static async distributionByRepoName(name) {
+    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
+      ?.results?.[0];
+    if (!repository) {
+      return Promise.reject(t`Failed to find repository ${name}`);
+    }
+
+    const distribution = (
+      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
+    )?.data?.results?.[0];
+    if (!distribution) {
+      return Promise.reject(
+        t`Failed to find a distribution for repository ${name}`,
+      );
+    }
+
+    return distribution;
   }
 }

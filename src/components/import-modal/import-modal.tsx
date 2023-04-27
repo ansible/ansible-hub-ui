@@ -305,25 +305,6 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  private async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
-    if (!repository) {
-      return Promise.reject(t`Failed to find repository ${name}`);
-    }
-
-    const distribution = (
-      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
-    )?.data?.results?.[0];
-    if (!distribution) {
-      return Promise.reject(
-        t`Failed to find a distribution for repository ${name}`,
-      );
-    }
-
-    return distribution;
-  }
-
   async saveFile() {
     this.setState({ uploadStatus: Status.uploading });
     const artifact = {

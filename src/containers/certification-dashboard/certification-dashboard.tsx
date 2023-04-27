@@ -774,31 +774,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       });
   }
 
-  private async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
-    if (!repository) {
-      return Promise.reject(t`Failed to find repository ${name}`);
-    }
-
-    const distribution = (
-      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
-    )?.data?.results?.[0];
-    if (!distribution) {
-      return Promise.reject(
-        t`Failed to find a distribution for repository ${name}`,
-      );
-    }
-
-    return distribution;
-  }
-
   private updateCertification(version, originalRepo, destinationRepo) {
     // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
     // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
     return Promise.all([
-      this.distributionByRepoName(originalRepo),
-      this.distributionByRepoName(destinationRepo),
+      RepositoriesUtils.distributionByRepoName(originalRepo),
+      RepositoriesUtils.distributionByRepoName(destinationRepo),
     ])
       .then(([source, destination]) =>
         CollectionVersionAPI.move(
