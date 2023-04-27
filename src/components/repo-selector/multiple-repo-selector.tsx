@@ -46,11 +46,6 @@ export const MultipleRepoSelector = (props: IProps) => {
     sort: 'name',
   });
 
-  /*
-  function addAlert(alert: AlertType) {
-    setAlerts((prevAlerts) => [...prevAlerts, alert]);
-  }*/
-
   function changeSelection(name) {
     if (props.fixedRepos.includes(name)) {
       return;
@@ -68,31 +63,6 @@ export const MultipleRepoSelector = (props: IProps) => {
       props.setSelectedRepos([...props.selectedRepos, name]);
     }
   }
-
-  /*
-  function loadRepos() {
-    // modify params
-    const par = { ...params };
-    par['pulp_label_select'] = 'pipeline=approved';
-    par['ordering'] = par['sort'];
-    delete par['sort'];
-    setLoading(true);
-
-    Repositories.list(par)
-      .then((data) => {
-        setLoading(false);
-        setRepositoryList(data.data.results);
-        setItemsCount(data.data.count);
-      })
-      .catch(({ response: { status, statusText } }) => {
-        setLoading(false);
-        addAlert({
-          title: t`Failed to load repositories.`,
-          variant: 'danger',
-          description: errorMessage(status, statusText),
-        });
-      });
-  }*/
 
   function renderLabels() {
     const labels = (
