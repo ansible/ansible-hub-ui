@@ -208,6 +208,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           <>
             <br />
             <MultipleRepoSelector
+              singleSelectionOnly={true}
               allRepositories={this.state.allRepos}
               fixedRepos={[]}
               selectedRepos={this.state.selectedRepos}

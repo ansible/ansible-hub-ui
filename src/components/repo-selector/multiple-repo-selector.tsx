@@ -22,6 +22,7 @@ import {
   CheckboxRow,
   CompoundFilter,
   Pagination,
+  RadioRow,
   SortTable,
 } from 'src/components';
 
@@ -31,6 +32,7 @@ interface IProps {
   loadRepos: (params, setRepositoryList, setLoading, setItemsCount) => void;
   selectedRepos: string[];
   setSelectedRepos: (selectedRepos: string[]) => void;
+  singleSelectionOnly?: boolean;
 }
 
 export const MultipleRepoSelector = (props: IProps) => {
@@ -242,21 +244,46 @@ export const MultipleRepoSelector = (props: IProps) => {
           />
           <tbody>
             {repositoryList.map((repo, i) => (
-              <CheckboxRow
-                rowIndex={i}
-                key={repo.name}
-                isSelected={props.selectedRepos.includes(repo.name)}
-                onSelect={() => {
-                  changeSelection(repo.name);
-                }}
-                isDisabled={props.fixedRepos.includes(repo.name)}
-                data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
-              >
-                <td>
-                  <div>{repo.name}</div>
-                  <div>{repo.description}</div>
-                </td>
-              </CheckboxRow>
+              <>
+                {!props.singleSelectionOnly && (
+                  <CheckboxRow
+                    rowIndex={i}
+                    key={repo.name}
+                    isSelected={props.selectedRepos.includes(repo.name)}
+                    onSelect={() => {
+                      changeSelection(repo.name);
+                    }}
+                    isDisabled={props.fixedRepos.includes(repo.name)}
+                    data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
+                  >
+                    <td>
+                      <div>{repo.name}</div>
+                      <div>{repo.description}</div>
+                    </td>
+                  </CheckboxRow>
+                )}
+
+                {props.singleSelectionOnly && (
+                  <>
+                    <tr>
+                      <RadioRow
+                        rowIndex={i}
+                        key={repo.name}
+                        isSelected={props.selectedRepos.includes(repo.name)}
+                        onSelect={() => {
+                          props.setSelectedRepos([repo.name]);
+                        }}
+                        isDisabled={props.fixedRepos.includes(repo.name)}
+                        data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
+                      />
+                      <td>
+                        <div>{repo.name}</div>
+                        <div>{repo.description}</div>
+                      </td>
+                    </tr>
+                  </>
+                )}
+              </>
             ))}
           </tbody>
         </table>
@@ -266,11 +293,13 @@ export const MultipleRepoSelector = (props: IProps) => {
 
   return (
     <>
-      {renderLabels()}
+      {!props.singleSelectionOnly && renderLabels()}
       <div className='toolbar hub-toolbar'>
         <Toolbar>
           <ToolbarGroup>
-            <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
+            {!props.singleSelectionOnly && (
+              <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
+            )}
             <ToolbarItem>
               <CompoundFilter
                 inputText={inputText}
