@@ -305,12 +305,17 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  async saveFile() {
+  saveFile()
+  {
+    this.saveFileToRepo(this.state.selectedRepos[0], true);
+  }
+
+  async saveFileToRepo(repo, redirect) {
     this.setState({ uploadStatus: Status.uploading });
 
     let distro = null;
     distro = await RepositoriesUtils.distributionByRepoName(
-      this.state.selectedRepos[0],
+      repo,
     ).catch((error) => {
       this.addAlert(error, 'danger');
     });
@@ -338,7 +343,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       this.cancelToken,
     )
       .then((response) => {
-        this.props.onUploadSuccess(response);
+        if (redirect) { this.props.onUploadSuccess(response); }
       })
       .catch((errors) => {
         let errorMessage = '';
