@@ -19,7 +19,8 @@ export function findDistroBasePathByRepo(distributions, repository) {
   const distro = distributions.find(
     (distro) => distro.name === repository.name,
   );
-  return distro ? distro.base_path : distro[0].base_path;
+
+  return distro ? distro.base_path : distributions[0].base_path;
 }
 
 function filterContents(contents) {
