@@ -4,8 +4,6 @@ import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
 import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
@@ -18,7 +16,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { RepositoriesUtils, errorMessage, waitForTaskUrl } from 'src/utilities';
+import { RepositoriesUtils, errorMessage } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
