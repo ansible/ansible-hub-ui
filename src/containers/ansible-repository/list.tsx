@@ -10,10 +10,10 @@ import {
 } from 'src/actions';
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
+import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
-import { Constants } from 'src/constants';
 
 const listItemActions = [
   // Edit
@@ -56,7 +56,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
           title: t`Approved`,
         },
       ],
-    }
+    },
   ],
   headerActions: [ansibleRepositoryCreateAction], // Add repository
   listItemActions,
