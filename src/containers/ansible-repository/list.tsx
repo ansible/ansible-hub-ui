@@ -13,6 +13,7 @@ import { DateComponent, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
+import { Constants } from 'src/constants';
 
 const listItemActions = [
   // Edit
@@ -37,6 +38,25 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       id: 'name__icontains',
       title: t`Repository name`,
     },
+    {
+      id: 'pulp_label_select',
+      title: t`Status`,
+      inputType: 'select',
+      options: [
+        {
+          id: 'pipeline=' + Constants.NOTCERTIFIED,
+          title: t`Rejected`,
+        },
+        {
+          id: 'pipeline=' + Constants.NEEDSREVIEW,
+          title: t`Needs Review`,
+        },
+        {
+          id: 'pipeline=' + Constants.APPROVED,
+          title: t`Approved`,
+        },
+      ],
+    }
   ],
   headerActions: [ansibleRepositoryCreateAction], // Add repository
   listItemActions,
