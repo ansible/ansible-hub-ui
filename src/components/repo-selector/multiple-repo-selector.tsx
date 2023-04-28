@@ -101,24 +101,6 @@ export const MultipleRepoSelector = (props: IProps) => {
     props.loadRepos(params, setRepositoryList, setLoading, setItemsCount);
   }, [params]);
 
-  /*useEffect(() => {
-    const fixedReposLocal = [];
-    const selectedReposLocal = [];
-
-    // check for approval repos that are already in collection and select them in UI
-    // this is handling of situation when collection is in inconsistent state
-    props.collectionVersion.repository_list.forEach((repo) => {
-      const count = props.allRepositories.filter((r) => r.name == repo).length;
-      if (count > 0) {
-        fixedReposLocal.push(repo);
-        selectedReposLocal.push(repo);
-      }
-    });
-
-    setSelectedRepos(selectedReposLocal);
-    setFixedRepos(fixedReposLocal);
-  }, []);*/
-
   function renderMultipleSelector() {
     function onToggle(isOpen: boolean) {
       setIsSelectorOpen(isOpen);

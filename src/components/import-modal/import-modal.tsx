@@ -304,28 +304,6 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  /*async copyToAll(response, artifact, selectedRepos)
-  {
-    const taskData = await waitForTaskUrl(response.data.task);
-
-    debugger;
-    let names = artifact.file.name.split('-');
-    const namespace = names[0];
-    const name = names[1];
-
-    const result = await CollectionAPI.list( { namespace, name}, selectedRepos[0]);
-
-    debugger;
-
-    if (result.data.data.length == 0)
-    {
-      this.addAlert(`Can not find collection ${namespace}, ${name}`, 'danger');
-      return;
-    }
-
-    const collection = result.data.data[0];
-  }*/
-
   async saveFile() {
     const selectedRepos = this.state.selectedRepos;
 
