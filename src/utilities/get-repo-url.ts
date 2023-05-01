@@ -4,7 +4,7 @@ export function getRepoUrl(reponame) {
   // Otherwise use the host that the UI is served from
   const host = API_HOST ? API_HOST : window.location.origin;
 
-  if (reponame == 'published') {
+  if (reponame === 'published') {
     return `${host}${API_BASE_PATH}`;
   }
   return `${host}${API_BASE_PATH}/content/${reponame}/`;
