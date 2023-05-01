@@ -114,7 +114,7 @@ const CollectionDistributions = (props: RouteProps) => {
       `server_list = ${distribution.base_path}`,
       '',
       `[galaxy_server.${distribution.base_path}]`,
-      `url=${getRepoUrl()}`,
+      `url=${getRepoUrl(distribution.base_path)}`,
       'token=<put your token here>',
     ].join('\n');
 

@@ -11,7 +11,7 @@ export const ansibleRepositoryCopyAction = Action({
       `server_list = ${item.name}_repo`,
       '',
       `[galaxy_server.${item.name}_repo]`,
-      `url=${getRepoUrl()}`,
+      `url=${getRepoUrl(item.name)}`,
       'token=<put your token here>',
     ].join('\n');
 

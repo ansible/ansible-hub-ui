@@ -186,7 +186,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 download content from Automation Hub.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>{getRepoUrl()}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoUrl('published')}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>

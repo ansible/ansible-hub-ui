@@ -272,7 +272,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         : null,
     ].filter(Boolean);
 
-    const repositoryUrl = getRepoUrl();
+    const repositoryUrl = getRepoUrl('published');
 
     const noData =
       itemCount === 0 &&
