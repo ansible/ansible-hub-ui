@@ -90,11 +90,9 @@ export class RepositoriesUtils {
   ): CollectionVersionSearch[] {
     // check if collection is already selected
     const selectedItem = collections.find(
-      ({ collection_version: { name, namespace, version }, repository }) =>
-        name === selectedCollection.collection_version.name &&
-        namespace === selectedCollection.collection_version.namespace &&
-        version === selectedCollection.collection_version.version &&
-        repository.name === selectedCollection.repository.name,
+      ({ collection_version: cv, repository }) =>
+        cv.pulp_href === selectedCollection.collection_version.pulp_href &&
+        repository.pulp_href === selectedCollection.repository.pulp_href,
     );
 
     // if collection is not selected, add it to selected items
@@ -104,14 +102,9 @@ export class RepositoriesUtils {
 
     // unselect collection
     return collections.filter(
-      ({ collection_version, repository }) =>
-        collection_version.name !==
-          selectedCollection.collection_version.name ||
-        collection_version.namespace !==
-          selectedCollection.collection_version.namespace ||
-        collection_version.version !==
-          selectedCollection.collection_version.version ||
-        repository.name !== selectedCollection.repository.name,
+      ({ collection_version: cv, repository }) =>
+        cv.pulp_href !== selectedCollection.collection_version.pulp_href ||
+        repository.pulp_href !== selectedCollection.repository.pulp_href,
     );
   }
 }
