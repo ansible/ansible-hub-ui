@@ -7,7 +7,7 @@ export function getRepoUrl(reponame) {
   if (reponame === 'published') {
     return `${host}${API_BASE_PATH}`;
   }
-  return `${host}${API_BASE_PATH}/content/${reponame}/`;
+  return `${host}${API_BASE_PATH}content/${reponame}/`;
 }
 
 // returns the server name for (protocol-less) container urls
