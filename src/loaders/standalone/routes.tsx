@@ -28,6 +28,7 @@ import {
   ExecutionEnvironmentRegistryList,
   GroupDetail,
   GroupList,
+  LandingPage,
   LegacyNamespace,
   LegacyNamespaces,
   LegacyRole,
@@ -287,7 +288,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: MyImports, path: Paths.myImports },
       { component: NamespaceDetail, path: Paths.namespace },
       { component: Search, path: Paths.collections },
-      { component: Search, path: Paths.search },
+      { component: LandingPage, path: Paths.landingPage },
     ];
   }
 

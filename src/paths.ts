@@ -11,6 +11,7 @@ export function formatPath(path: Paths, data = {}, params?: ParamType) {
           .replace(/\/$/, '')
       : '';
   url += (path as string) + '/';
+  url = url.replaceAll('//', '/');
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k, encodeURIComponent(data[k]));
@@ -86,7 +87,7 @@ export enum Paths {
   myImports = '/my-imports',
   login = '/login',
   logout = '/logout',
-  search = '/',
+  landingPage = '/',
   legacyRole = '/legacy/roles/:username/:name',
   legacyRoles = '/legacy/roles/',
   legacyNamespace = '/legacy/namespaces/:namespaceid',

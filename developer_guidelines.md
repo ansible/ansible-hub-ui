@@ -82,7 +82,7 @@ Example:
 
 ```
 // Static route
-<Link to={formatPath(Paths.search)} />
+<Link to={formatPath(Paths.collections)} />
 
 // Dynamic route
 <Link to={formatPath(Paths.editNamespace, { namespace: "NSname" })} />
