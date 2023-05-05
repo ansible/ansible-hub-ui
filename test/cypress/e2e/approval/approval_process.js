@@ -52,3 +52,105 @@ describe('Approval Dashboard process', () => {
     cy.contains('No collections yet');
   });
 });
+
+describe('Collection detail approval process', () => {
+  before(() => {
+    cy.deleteNamespacesAndCollections();
+    cy.galaxykit('-i namespace create', 'foo');
+    cy.galaxykit('-i collection upload', 'foo', 'bar');
+    cy.galaxykit('-i collection upload', 'foo', 'baz');
+  });
+
+  after(() => {
+    cy.deleteNamespacesAndCollections();
+  });
+
+  beforeEach(() => {
+    cy.login();
+  });
+
+  it.skip('should test approval process with exactly one published repository.', () => {
+    cy.visit(`${uiPrefix}repo/staging/foo/bar`);
+    cy.contains('Staging');
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.contains('Sign and approve').click();
+
+    cy.contains('Approval dashboard', { timeout: 8000 });
+
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-bar"]`).contains(
+      'foo',
+    );
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-bar"]`).contains(
+      'bar',
+    );
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-bar"]`).contains(
+      'Signed and approved',
+    );
+
+    cy.get('.pf-c-alert__title').contains(
+      'Certification status for collection "foo bar v1.0.0" has been successfully updated.',
+    );
+  });
+
+  it('should test approval process with multiple published repositories.', () => {
+    cy.galaxykit('-i repository create', 'published01', '--pipeline=approved');
+    cy.galaxykit('-i distribution create', 'published01');
+
+    cy.galaxykit('-i repository create', 'published02', '--pipeline=approved');
+    cy.galaxykit('-i distribution create', 'published02');
+
+    cy.galaxykit('-i task wait all');
+
+    cy.visit(`${uiPrefix}repo/staging/foo/baz`);
+    cy.contains('Staging');
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.contains('Sign and approve').click();
+
+    cy.contains('Select repositories');
+
+    cy.get('[data-cy="ApproveModal-CheckboxRow-row-published"] input').click();
+    cy.get(
+      '[data-cy="ApproveModal-CheckboxRow-row-published01"] input',
+    ).click();
+    cy.get(
+      '[data-cy="ApproveModal-CheckboxRow-row-published02"] input',
+    ).click();
+
+    cy.get('.pf-c-modal-box__footer').contains('Select').click();
+    cy.contains('Approval dashboard', { timeout: 8000 });
+
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-baz"]`).contains(
+      'foo',
+    );
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-baz"]`).contains(
+      'baz',
+    );
+    cy.get(`[data-cy="CertificationDashboard-row-published-foo-baz"]`).contains(
+      'published',
+    );
+
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published01-foo-baz"]`,
+    ).contains('foo');
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published01-foo-baz"]`,
+    ).contains('baz');
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published01-foo-baz"]`,
+    ).contains('published01');
+
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published02-foo-baz"]`,
+    ).contains('foo');
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published02-foo-baz"]`,
+    ).contains('baz');
+    cy.get(
+      `[data-cy="CertificationDashboard-row-published02-foo-baz"]`,
+    ).contains('published02');
+
+    cy.get('.pf-c-alert__title').contains(
+      'Certification status for collection "foo baz v1.0.0" has been successfully updated.',
+    );
+  });
+});
