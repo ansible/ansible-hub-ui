@@ -6,12 +6,19 @@ import {
   AnsibleRemoteType,
   AnsibleRepositoryType,
 } from 'src/api';
-import { Details, LazyDistributions, PulpLabels } from 'src/components';
+import {
+  CopyURL,
+  Details,
+  NonLazyDistributions,
+  PulpLabels,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType;
+  item: AnsibleRepositoryType & {
+    distributions: { name: string; base_path: string }[];
+  };
   actionContext: { addAlert: (alert) => void; state: { params } };
 }
 
@@ -38,7 +45,15 @@ export const DetailsTab = ({ item }: TabProps) => {
         },
         {
           label: t`Distribution`,
-          value: <LazyDistributions repositoryHref={item.pulp_href} />,
+          value: <NonLazyDistributions distributions={item.distributions} />,
+        },
+        {
+          label: t`Repository URL`,
+          value: item.distributions?.length ? (
+            <CopyURL url={getRepoURL(item.distributions[0].base_path)} />
+          ) : (
+            '---'
+          ),
         },
         {
           label: t`Labels`,
