@@ -21,6 +21,7 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
@@ -29,9 +30,11 @@ import {
   NamespaceType,
   SignCollectionAPI,
 } from 'src/api';
+import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
+  ApproveModal,
   BaseHeader,
   BreadcrumbType,
   Breadcrumbs,
@@ -52,6 +55,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
 import {
+  approve,
   canSignNamespace,
   parsePulpIDFromURL,
   waitForTask,
@@ -100,6 +104,12 @@ interface IState {
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate: CollectionVersionSearch;
   namespace: NamespaceType;
+  approvalModal?: {
+    collectionVersion?: CollectionVersion;
+    approvedRepos?: Repository[];
+    stagingRepos?: string[];
+    rejectedRepo?: string;
+  };
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -131,6 +141,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: undefined,
       namespace: null,
+      approvalModal: null,
     };
   }
 
@@ -181,6 +192,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isDeletionPending,
       showImportModal,
       updateCollection,
+      approvalModal,
     } = this.state;
 
     const urlKeys = [
@@ -192,8 +204,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.collection_version.pulp_created;
 
-    const { display_signatures, can_upload_signatures } =
-      this.context.featureFlags;
+    const {
+      display_signatures,
+      can_upload_signatures,
+      collection_auto_sign,
+      require_upload_signatures,
+    } = this.context.featureFlags;
 
     const signedString = () => {
       if (!display_signatures) {
@@ -224,6 +240,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNamespace(this.context, this.state.namespace);
 
     const { hasPermission } = this.context;
+
+    const autoSign = collection_auto_sign && !require_upload_signatures;
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({
@@ -282,6 +300,41 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       >
         {t`Upload new version`}
       </DropdownItem>,
+      collection.repository.pulp_labels?.pipeline === Constants.NEEDSREVIEW && (
+        <DropdownItem
+          key='approve-collection-version'
+          onClick={() =>
+            approve(
+              collection,
+              (state) => {
+                this.setState(state);
+              },
+              (title, variant, description) => {
+                if (variant === 'success') {
+                  this.context.queueAlert({ title, variant, description });
+                } else {
+                  this.addAlert({ title, variant, description });
+                }
+              },
+              () => {
+                this.setState({
+                  redirect: formatPath(
+                    Paths.approvalDashboard,
+                    {},
+                    {
+                      status: Constants.APPROVED,
+                      sort: '-pulp_created',
+                    },
+                  ),
+                });
+              },
+            )
+          }
+          data-cy='approve-collection-version-dropdown'
+        >
+          {autoSign ? t`Sign and approve` : t`Approve`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
 
     const issueUrl =
@@ -335,6 +388,37 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               onCancel={() => this.setState({ isOpenSignModal: false })}
             />
           </>
+        )}
+        {approvalModal && (
+          <ApproveModal
+            closeAction={() => {
+              this.setState({ approvalModal: null });
+            }}
+            finishAction={() => {
+              this.setState({
+                approvalModal: null,
+                redirect: formatPath(
+                  Paths.approvalDashboard,
+                  {},
+                  {
+                    status: Constants.APPROVED,
+                    sort: '-pulp_created',
+                  },
+                ),
+              });
+            }}
+            collectionVersion={approvalModal.collectionVersion}
+            addAlert={(alert: AlertType) => {
+              if (alert.variant === 'success') {
+                this.context.queueAlert(alert);
+              } else {
+                this.addAlert(alert);
+              }
+            }}
+            allRepositories={approvalModal.approvedRepos}
+            stagingRepoNames={approvalModal.stagingRepos}
+            rejectedRepoName={approvalModal.rejectedRepo}
+          />
         )}
         <Modal
           isOpen={isOpenVersionsModal}

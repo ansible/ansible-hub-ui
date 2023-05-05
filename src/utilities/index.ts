@@ -33,3 +33,8 @@ export { translateLockedRolesDescription } from './translate-locked-roles-desc';
 export { RouteProps, withRouter } from './with-router';
 export { mapNetworkErrors, validateInput } from './map-role-errors';
 export { RepositoriesUtils } from './repositories';
+export {
+  approve,
+  transformToCollectionVersion,
+  updateCertification,
+} from './approval-process';

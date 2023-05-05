@@ -18,10 +18,9 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionVersion,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
@@ -56,9 +55,12 @@ import {
   ParamHelper,
   RepositoriesUtils,
   RouteProps,
+  approve,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
+  transformToCollectionVersion,
+  updateCertification,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -83,8 +85,11 @@ interface IState {
   inputText: string;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersionSearch;
-  approveModalInfo: {
-    collectionVersion;
+  approvalModal?: {
+    collectionVersion?: CollectionVersion;
+    approvedRepos?: Repository[];
+    stagingRepos?: string[];
+    rejectedRepo?: string;
   };
   approvedRepositoryList: Repository[];
   stagingRepoNames: string[];
@@ -123,7 +128,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       inputText: '',
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
-      approveModalInfo: null,
+      approvalModal: null,
       approvedRepositoryList: [],
       rejectedRepoName: null,
       stagingRepoNames: [],
@@ -132,6 +137,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   componentDidMount() {
     const { user, hasPermission } = this.context;
+
+    // redirected from collection detail approval process
+    // TODO: call this only on redirect form collection detail
+    this.setState({ alerts: [...this.state.alerts, ...this.context.alerts] });
+
     if (
       !user ||
       user.is_anonymous ||
@@ -310,18 +320,16 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
             />
-            {this.state.approveModalInfo && (
+            {this.state.approvalModal && (
               <ApproveModal
                 closeAction={() => {
-                  this.setState({ approveModalInfo: null });
+                  this.setState({ approvalModal: null });
                 }}
                 finishAction={() => {
-                  this.setState({ approveModalInfo: null });
+                  this.setState({ approvalModal: null });
                   this.queryCollections(true);
                 }}
-                collectionVersion={
-                  this.state.approveModalInfo.collectionVersion
-                }
+                collectionVersion={this.state.approvalModal.collectionVersion}
                 addAlert={(alert) => this.addAlertObj(alert)}
                 allRepositories={this.state.approvedRepositoryList}
                 stagingRepoNames={this.state.stagingRepoNames}
@@ -681,47 +689,23 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private approve(collection) {
-    if (!collection) {
-      // I hope that this may not occure ever, but to be sure...
-      this.addAlert(
-        t`Approval failed.`,
-        'danger',
-        t`Collection not found in any repository.`,
-      );
-      return;
-    }
-
-    const { approvedRepositoryList } = this.state;
-
-    if (approvedRepositoryList.length == 1) {
-      if (collection.repository) {
-        this.updateCertification(
-          collection.collection_version,
-          collection.repository.name,
-          this.state.approvedRepositoryList[0].name,
-        );
-      } else {
-        // I hope that this may not occure ever, but to be sure...
-        this.addAlert(
-          t`Approval failed.`,
-          'danger',
-          t`Collection has to be in rejected or staging repository.`,
-        );
-      }
-    } else {
-      this.transformToCollectionVersion(collection).then(
-        (collectionVersion) => {
-          this.setState({ approveModalInfo: { collectionVersion } });
-        },
-      );
-    }
+    approve(
+      collection,
+      (state) => this.setState(state),
+      (title, variant, description) => {
+        this.addAlert(title, variant, description);
+      },
+      () => {
+        this.queryCollections(true);
+      },
+    );
   }
 
   private reject(collection) {
     const originalRepo = collection.repository.name;
     const version = collection.collection_version;
 
-    this.transformToCollectionVersion(collection)
+    transformToCollectionVersion(collection)
       .then((versionWithRepos) => {
         this.setState({ updatingVersions: [collection] });
         if (
@@ -754,71 +738,16 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             });
         } else {
           // collection is not in rejected state, move it there
-          this.updateCertification(
+          updateCertification(
             version,
             originalRepo,
             this.state.rejectedRepoName,
+            (title, variant, description) =>
+              this.addAlert(title, variant, description),
+            () => this.queryCollections(true),
           );
         }
       })
-      .catch((error) => {
-        const description = !error.response
-          ? error
-          : errorMessage(error.response.status, error.response.statusText);
-
-        this.addAlert(
-          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-          'danger',
-          description,
-        );
-      });
-  }
-
-  private async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
-    if (!repository) {
-      return Promise.reject(t`Failed to find repository ${name}`);
-    }
-
-    const distribution = (
-      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
-    )?.data?.results?.[0];
-    if (!distribution) {
-      return Promise.reject(
-        t`Failed to find a distribution for repository ${name}`,
-      );
-    }
-
-    return distribution;
-  }
-
-  private updateCertification(version, originalRepo, destinationRepo) {
-    // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
-    // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
-    return Promise.all([
-      this.distributionByRepoName(originalRepo),
-      this.distributionByRepoName(destinationRepo),
-    ])
-      .then(([source, destination]) =>
-        CollectionVersionAPI.move(
-          version.namespace,
-          version.name,
-          version.version,
-          source.base_path,
-          destination.base_path,
-        ),
-      )
-      .then((result) =>
-        waitForTask(result.data.remove_task_id, { waitMs: 500 }),
-      )
-      .then(() =>
-        this.addAlert(
-          t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
-          'success',
-        ),
-      )
-      .then(() => this.queryCollections(true))
       .catch((error) => {
         const description = !error.response
           ? error
@@ -908,42 +837,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private addAlertObj(alert) {
     this.addAlert(alert.title, alert.variant, alert.description);
-  }
-
-  async getCollectionRepoList(collection: CollectionVersionSearch) {
-    const { name, namespace, version } = collection.collection_version;
-
-    // get repository list for selected collection
-    const collectionInRepos = await CollectionVersionAPI.list({
-      namespace,
-      name,
-      version,
-      page_size: 100000,
-      offset: 0,
-    });
-
-    const collectionRepos = collectionInRepos.data.data.map(
-      ({ repository }) => repository.name,
-    );
-
-    return collectionRepos;
-  }
-
-  // compose from collectionVersionSearch to CollectionVersion structure for approval modal
-  async transformToCollectionVersion(collection: CollectionVersionSearch) {
-    const repoList = await this.getCollectionRepoList(collection);
-
-    const { collection_version } = collection;
-    const id = parsePulpIDFromURL(collection_version.pulp_href);
-    const collectionVersion = {
-      id,
-      version: collection_version.version,
-      namespace: collection_version.namespace,
-      name: collection_version.name,
-      repository_list: repoList,
-    };
-
-    return collectionVersion;
   }
 }
 

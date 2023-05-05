@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro';
+import { CollectionVersionAPI } from 'src/api/collection-version';
 import { Repositories } from 'src/api/repositories';
 import { CollectionVersionSearch } from 'src/api/response-types/collection';
 import { Repository } from 'src/api/response-types/repositories';
@@ -113,5 +114,26 @@ export class RepositoriesUtils {
           selectedCollection.collection_version.version ||
         repository.name !== selectedCollection.repository.name,
     );
+  }
+
+  public static async getCollectionRepoList(
+    collection: CollectionVersionSearch,
+  ) {
+    const { name, namespace, version } = collection.collection_version;
+
+    // get repository list for selected collection
+    const collectionInRepos = await CollectionVersionAPI.list({
+      namespace,
+      name,
+      version,
+      page_size: 100000,
+      offset: 0,
+    });
+
+    const collectionRepos = collectionInRepos.data.data.map(
+      ({ repository }) => repository.name,
+    );
+
+    return collectionRepos;
   }
 }
