@@ -337,6 +337,10 @@ msgstr "All"
 msgid "All associated permissions under this role were removed."
 msgstr "All associated permissions under this role were removed."
 
+#: src/containers/landing/landing-page.tsx:205
+msgid "All policies and guidelines"
+msgstr "All policies and guidelines"
+
 #: src/constants.tsx:172
 msgid "Allow all actions on a task."
 msgstr "Allow all actions on a task."
@@ -359,6 +363,10 @@ msgstr "Ansible Automation Platform"
 #: src/containers/namespace-detail/namespace-detail.tsx:850
 msgid "Ansible Lightspeed settings"
 msgstr "Ansible Lightspeed settings"
+
+#: src/containers/landing/landing-page.tsx:134
+msgid "AnsibleFest"
+msgstr "AnsibleFest"
 
 #: src/loaders/standalone/menu.tsx:66
 msgid "Approval"
@@ -973,6 +981,10 @@ msgstr "Content added"
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
+#: src/containers/landing/landing-page.tsx:71
+msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgstr "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "Content in repositories without a distribution will not be visible to clients for sync, download or search."
@@ -1424,6 +1436,10 @@ msgstr "Details"
 msgid "Digest"
 msgstr "Digest"
 
+#: src/containers/landing/landing-page.tsx:213
+msgid "Digital accessibility"
+msgstr "Digital accessibility"
+
 #: src/containers/ansible-remote/tab-details.tsx:72
 msgid "Disabled"
 msgstr "Disabled"
@@ -1466,6 +1482,7 @@ msgid "Done"
 msgstr "Done"
 
 #: src/components/collection-detail/collection-info.tsx:96
+#: src/containers/landing/landing-page.tsx:64
 msgid "Download"
 msgstr "Download"
 
@@ -1841,6 +1858,10 @@ msgstr "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgid "Expiration"
 msgstr "Expiration"
 
+#: src/containers/landing/landing-page.tsx:162
+msgid "Extend the power of Ansible to your entire team."
+msgstr "Extend the power of Ansible to your entire team."
+
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:61
@@ -1985,6 +2006,10 @@ msgstr "Failed to sync repository \"{name}\""
 msgid "Failed to {operation} tag \"{tag}\"."
 msgstr "Failed to {operation} tag \"{tag}\"."
 
+#: src/containers/landing/landing-page.tsx:130
+msgid "Featured"
+msgstr "Featured"
+
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:73
 msgid "Filter by name"
 msgstr "Filter by name"
@@ -2038,6 +2063,10 @@ msgstr "Galaxy Logo"
 #: src/containers/role-management/role-list.tsx:282
 msgid "Galaxy only"
 msgstr "Galaxy only"
+
+#: src/containers/landing/landing-page.tsx:173
+msgid "Get the trial"
+msgstr "Get the trial"
 
 #: src/containers/repositories/repository-list.tsx:301
 #~ msgid "Get token"
@@ -2171,6 +2200,10 @@ msgstr "Groups will appear once created"
 #: src/components/execution-environment/repository-form.tsx:384
 #~ msgid "Groups with access"
 #~ msgstr "Groups with access"
+
+#: src/containers/landing/landing-page.tsx:100
+msgid "Help other Ansible users by sharing the awesome roles and collections you create."
+msgstr "Help other Ansible users by sharing the awesome roles and collections you create."
 
 #: src/components/repositories/remote-form.tsx:493
 msgid "Hide advanced options"
@@ -2320,6 +2353,10 @@ msgstr "Issue tracker"
 #: src/components/execution-environment/tag-manifest-modal.tsx:220
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "It's safe to close this window. These tasks will finish in the background."
+
+#: src/containers/landing/landing-page.tsx:67
+msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
+msgstr "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
 
 #: src/containers/signature-keys/list.tsx:181
 msgid "Key fingerprint"
@@ -2507,6 +2544,10 @@ msgstr "Manage tokens"
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 
+#: src/containers/landing/landing-page.tsx:102
+msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
+msgstr "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
+
 #: src/containers/task-management/task_detail.tsx:313
 msgid "Message"
 msgstr "Message"
@@ -2656,7 +2697,7 @@ msgstr "Namespace names are limited to alphanumeric characters and underscores, 
 #~ msgstr "Namespace successfully edited."
 
 #: src/loaders/standalone/menu.tsx:48
-#: src/paths.ts:129
+#: src/paths.ts:130
 msgid "Namespaces"
 msgstr "Namespaces"
 
@@ -2970,7 +3011,7 @@ msgstr "Parent task"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
-#: src/paths.ts:130
+#: src/paths.ts:131
 msgid "Partners"
 msgstr "Partners"
 
@@ -3099,6 +3140,10 @@ msgstr "Plugin"
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:199
 msgid "Preview"
 msgstr "Preview"
+
+#: src/containers/landing/landing-page.tsx:189
+msgid "Privacy statement"
+msgstr "Privacy statement"
 
 #: src/containers/ansible-repository/tab-details.tsx:48
 msgid "Private"
@@ -3328,6 +3373,10 @@ msgstr "Reason: task {0}"
 #: src/components/repo-selector/repo-selector.tsx:31
 msgid "Red Hat Certified"
 msgstr "Red Hat Certified"
+
+#: src/containers/landing/landing-page.tsx:106
+msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
+msgstr "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
 
 #: src/components/execution-environment/repository-form.tsx:106
 msgid "Registries list could not be displayed."
@@ -3833,6 +3882,10 @@ msgstr "Setting a remote allows a repository to sync from elsewhere."
 msgid "Settings"
 msgstr "Settings"
 
+#: src/containers/landing/landing-page.tsx:97
+msgid "Share"
+msgstr "Share"
+
 #: src/utilities/chip-group-props.ts:7
 msgid "Show Less"
 msgstr "Show Less"
@@ -4238,9 +4291,14 @@ msgstr "Tasks will appear once created."
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
+#: src/containers/landing/landing-page.tsx:179
 #: src/loaders/standalone/menu.tsx:118
 msgid "Terms of Use"
 msgstr "Terms of Use"
+
+#: src/containers/landing/landing-page.tsx:197
+msgid "Terms of use"
+msgstr "Terms of use"
 
 #: src/components/namespace-form/namespace-form.tsx:121
 msgid "Text: {0}"
@@ -4487,6 +4545,10 @@ msgstr "Traceback"
 msgid "Training <0/>"
 msgstr "Training <0/>"
 
+#: src/containers/landing/landing-page.tsx:166
+msgid "Try Red Hat Ansible Automation Platform"
+msgstr "Try Red Hat Ansible Automation Platform"
+
 #: src/components/collection-detail/collection-content-list.tsx:104
 #: src/containers/task-management/task_detail.tsx:257
 msgid "Type"
@@ -4596,6 +4658,10 @@ msgstr "Use the <0>Repositories</0> page to sync collections curated by your org
 #: src/containers/token/token-insights.tsx:98
 #~ msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 #~ msgstr "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
+
+#: src/containers/landing/landing-page.tsx:76
+msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
+msgstr "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
 
 #: src/components/execution-environment/repository-form.tsx:214
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
@@ -4859,6 +4925,10 @@ msgstr "We use a number of keys to sign our software packages. The necessary pub
 #: src/components/headers/collection-header.tsx:188
 msgid "Website"
 msgstr "Website"
+
+#: src/containers/landing/landing-page.tsx:53
+msgid "Welcome to Beta Galaxy"
+msgstr "Welcome to Beta Galaxy"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:188
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277

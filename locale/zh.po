@@ -336,6 +336,10 @@ msgstr "所有"
 msgid "All associated permissions under this role were removed."
 msgstr "此角色下的所有关联权限都将被删除。"
 
+#: src/containers/landing/landing-page.tsx:205
+msgid "All policies and guidelines"
+msgstr ""
+
 #: src/constants.tsx:172
 msgid "Allow all actions on a task."
 msgstr "允许对一个任务的所有操作。"
@@ -357,6 +361,10 @@ msgstr ""
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
 #: src/containers/namespace-detail/namespace-detail.tsx:850
 msgid "Ansible Lightspeed settings"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx:134
+msgid "AnsibleFest"
 msgstr ""
 
 #: src/loaders/standalone/menu.tsx:66
@@ -972,6 +980,10 @@ msgstr ""
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
+#: src/containers/landing/landing-page.tsx:71
+msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgstr ""
+
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr ""
@@ -1423,6 +1435,10 @@ msgstr "详情"
 msgid "Digest"
 msgstr "摘要"
 
+#: src/containers/landing/landing-page.tsx:213
+msgid "Digital accessibility"
+msgstr ""
+
 #: src/containers/ansible-remote/tab-details.tsx:72
 msgid "Disabled"
 msgstr ""
@@ -1465,6 +1481,7 @@ msgid "Done"
 msgstr "完成"
 
 #: src/components/collection-detail/collection-info.tsx:96
+#: src/containers/landing/landing-page.tsx:64
 msgid "Download"
 msgstr ""
 
@@ -1840,6 +1857,10 @@ msgstr "执行环境 \"{selectedItem}\" 已成功删除。"
 msgid "Expiration"
 msgstr "过期"
 
+#: src/containers/landing/landing-page.tsx:162
+msgid "Extend the power of Ansible to your entire team."
+msgstr ""
+
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:61
@@ -1984,6 +2005,10 @@ msgstr ""
 msgid "Failed to {operation} tag \"{tag}\"."
 msgstr "{operation} tag \"{tag}\" 失败。"
 
+#: src/containers/landing/landing-page.tsx:130
+msgid "Featured"
+msgstr ""
+
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:73
 msgid "Filter by name"
 msgstr "按名称过滤"
@@ -2037,6 +2062,10 @@ msgstr "Galaxy 徽标"
 #: src/containers/role-management/role-list.tsx:282
 msgid "Galaxy only"
 msgstr "仅限 Galaxy"
+
+#: src/containers/landing/landing-page.tsx:173
+msgid "Get the trial"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:301
 #~ msgid "Get token"
@@ -2170,6 +2199,10 @@ msgstr "组在创建后会出现"
 #: src/components/execution-environment/repository-form.tsx:384
 #~ msgid "Groups with access"
 #~ msgstr "带有访问权限的组"
+
+#: src/containers/landing/landing-page.tsx:100
+msgid "Help other Ansible users by sharing the awesome roles and collections you create."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:493
 msgid "Hide advanced options"
@@ -2319,6 +2352,10 @@ msgstr "问题跟踪器"
 #: src/components/execution-environment/tag-manifest-modal.tsx:220
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "关闭这个窗口是安全的。这些任务将在后台结束。"
+
+#: src/containers/landing/landing-page.tsx:67
+msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
+msgstr ""
 
 #: src/containers/signature-keys/list.tsx:181
 msgid "Key fingerprint"
@@ -2506,6 +2543,10 @@ msgstr "管理令牌"
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "此屏幕目前不支持清单列表，请使用 <0>Images</0> 标签页来查看清单列表详细信息。"
 
+#: src/containers/landing/landing-page.tsx:102
+msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
+msgstr ""
+
 #: src/containers/task-management/task_detail.tsx:313
 msgid "Message"
 msgstr "信息"
@@ -2655,7 +2696,7 @@ msgstr "命名空间名称限制为字母数字字符和下划线，长度最少
 #~ msgstr "Namespace successfully edited."
 
 #: src/loaders/standalone/menu.tsx:48
-#: src/paths.ts:129
+#: src/paths.ts:130
 msgid "Namespaces"
 msgstr "命名空间"
 
@@ -2969,7 +3010,7 @@ msgstr "父任务"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
-#: src/paths.ts:130
+#: src/paths.ts:131
 msgid "Partners"
 msgstr "合作伙伴"
 
@@ -3098,6 +3139,10 @@ msgstr ""
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:199
 msgid "Preview"
 msgstr "预览"
+
+#: src/containers/landing/landing-page.tsx:189
+msgid "Privacy statement"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-details.tsx:48
 msgid "Private"
@@ -3327,6 +3372,10 @@ msgstr "原因：任务 {0}"
 #: src/components/repo-selector/repo-selector.tsx:31
 msgid "Red Hat Certified"
 msgstr "红帽认证"
+
+#: src/containers/landing/landing-page.tsx:106
+msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:106
 msgid "Registries list could not be displayed."
@@ -3832,6 +3881,10 @@ msgstr ""
 msgid "Settings"
 msgstr "设置"
 
+#: src/containers/landing/landing-page.tsx:97
+msgid "Share"
+msgstr ""
+
 #: src/utilities/chip-group-props.ts:7
 msgid "Show Less"
 msgstr ""
@@ -4237,8 +4290,13 @@ msgstr "任务在创建后将显示。"
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
+#: src/containers/landing/landing-page.tsx:179
 #: src/loaders/standalone/menu.tsx:118
 msgid "Terms of Use"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx:197
+msgid "Terms of use"
 msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:121
@@ -4486,6 +4544,10 @@ msgstr "追溯"
 msgid "Training <0/>"
 msgstr "培训 <0/>"
 
+#: src/containers/landing/landing-page.tsx:166
+msgid "Try Red Hat Ansible Automation Platform"
+msgstr ""
+
 #: src/components/collection-detail/collection-content-list.tsx:104
 #: src/containers/task-management/task_detail.tsx:257
 msgid "Type"
@@ -4595,6 +4657,10 @@ msgstr ""
 #: src/containers/token/token-insights.tsx:98
 #~ msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 #~ msgstr "使用 <0>存储库管理</0> 页面将您的机构策展的集合同步到您的私有 Automation Hub 中的红帽认证存储库。拥有正确权限的用户可以使用 <1>集合</1> 页面上的同步切换来控制哪些集合被添加到机构的同步存储库中。"
+
+#: src/containers/landing/landing-page.tsx:76
+msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:214
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
@@ -4858,6 +4924,10 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:188
 msgid "Website"
 msgstr "网站"
+
+#: src/containers/landing/landing-page.tsx:53
+msgid "Welcome to Beta Galaxy"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:188
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
