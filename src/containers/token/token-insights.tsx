@@ -182,7 +182,11 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`Server URL`}</h2>
             <p>
               <Trans>
-                Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml. [link to AAP synclist documentation]
+                Use this URL to configure the API endpoints that clients need to
+                download certified content from Automation Hub. Synclists are
+                deprecated in AAP 2.4 and will be removed in a future release,
+                instead use client-side requirements.yml. [link to AAP synclist
+                documentation]
               </Trans>
             </p>
             <ClipboardCopy isReadOnly>{getRepoURL('published')}</ClipboardCopy>
