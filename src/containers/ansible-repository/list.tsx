@@ -39,20 +39,20 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       title: t`Repository name`,
     },
     {
-      id: 'pulp_label_select',
+      id: 'status',
       title: t`Status`,
       inputType: 'select',
       options: [
         {
-          id: 'pipeline=' + Constants.NOTCERTIFIED,
+          id: Constants.NOTCERTIFIED,
           title: t`Rejected`,
         },
         {
-          id: 'pipeline=' + Constants.NEEDSREVIEW,
+          id: Constants.NEEDSREVIEW,
           title: t`Needs Review`,
         },
         {
-          id: 'pipeline=' + Constants.APPROVED,
+          id: Constants.APPROVED,
           title: t`Approved`,
         },
       ],
@@ -63,7 +63,16 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   noDataButton: ansibleRepositoryCreateAction.button,
   noDataDescription: t`Repositories will appear once created.`,
   noDataTitle: t`No repositories yet`,
-  query: ({ params }) => AnsibleRepositoryAPI.list(params),
+  query: ({ params }) => {
+    const queryParams = { ...params };
+
+    if (queryParams['status']) {
+      const status = queryParams['status'];
+      delete queryParams['status'];
+      queryParams['pulp_label_select'] = `pipeline=${status}`;
+    }
+    return AnsibleRepositoryAPI.list(queryParams);
+  },
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
     const { name, pulp_created, pulp_href } = item;
     const id = parsePulpIDFromURL(pulp_href);
