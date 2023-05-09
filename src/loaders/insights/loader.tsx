@@ -62,7 +62,7 @@ const App = (_props) => {
       <Alert
         isInline
         variant='info'
-        title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
+        title={t`Use the Repositories page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the Collections page to control which collections are added to their organization's sync repository.`}
       />
       <InsightsRoutes />
       <UIVersion />
