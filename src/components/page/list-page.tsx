@@ -204,17 +204,14 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       );
 
       let niceValues = {};
-
-      Object.values(filterConfig || []).forEach((item) => {
-        if (item['options'] && item['options'].length > 0) {
-          if (!niceValues[item['id']]) {
-            niceValues[item['id']] = {};
-          }
-        }
-        Object.values(item['options'] || []).forEach((option) => {
-          niceValues[item['id']][option['id']] = option['title'];
+      (filterConfig || [])
+        .filter((filter) => filter['options'] && filter['options'].length > 0)
+        .forEach((item) => {
+          let obj = (niceValues[item['id']] = {});
+          item['options'].forEach((option) => {
+            obj[option.id] = option.title;
+          });
         });
-      });
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
