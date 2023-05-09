@@ -189,7 +189,9 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 documentation]
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>{getRepoURL('published')}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>{`${getRepoUrl(
+              'published',
+            )}published/`}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>
