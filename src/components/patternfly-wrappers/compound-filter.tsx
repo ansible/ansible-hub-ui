@@ -54,6 +54,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
+    // this is called again in list page
+    debugger;
     this.state = {
       selectedFilter: props.filterConfig[0],
       isExpanded: false,
