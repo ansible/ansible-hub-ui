@@ -2,7 +2,9 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repository', () => {
-  before(() => {});
+  before(() => {
+    cy.deleteRepositories();
+  });
 
   beforeEach(() => {
     cy.visit(uiPrefix);
