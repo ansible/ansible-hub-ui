@@ -55,7 +55,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     super(props);
 
     // this is called again in repositories selector, but not in approval page (the same filter is here)...
-    debugger;
     this.state = {
       selectedFilter: props.filterConfig[0],
       isExpanded: false,
