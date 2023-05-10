@@ -203,11 +203,11 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         (filterConfig || []).map(({ id, title }) => [id, title]),
       );
 
-      let niceValues = {};
+      const niceValues = {};
       (filterConfig || [])
         .filter((filter) => filter['options'] && filter['options'].length > 0)
         .forEach((item) => {
-          let obj = (niceValues[item['id']] = {});
+          const obj = (niceValues[item['id']] = {});
           item['options'].forEach((option) => {
             obj[option.id] = option.title;
           });
