@@ -6,8 +6,10 @@ import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
 export class RepositoriesUtils {
-  // status - undefined, approved, staging, rejected
-  public static list(status, cycles): Promise<Repository[]> {
+  public static list(
+    status: 'rejected' | 'approved' | 'staging',
+    cycles,
+  ): Promise<Repository[]> {
     async function getAll() {
       let list = [];
 

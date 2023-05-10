@@ -1,7 +1,6 @@
 // https://on.cypress.io/custom-commands
 import { range } from 'lodash';
 import shell from 'shell-escape-tag';
-import { RepositoriesUtils } from 'src/utilities';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
@@ -507,14 +506,17 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
 
 Cypress.Commands.add('deleteRepositories', {}, () => {
   cy.login();
-  /*const path = `${apiPrefix}repositories/ansible/ansible/`;
-  debugger;
+  const path = `${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`;
   cy.intercept('GET', path).as('data');
-  RepositoriesUtils.list('', 1);
+  const visitUrl = `${uiPrefix}ansible/repositories/?page_size=100`;
+  cy.visit(visitUrl);
 
   cy.wait('@data').then((res) => {
-   debugger;
-  });*/
+    res.response.body.results.forEach((res) => {
+      cy.galaxykit('-i distribution delete ', res.name);
+      cy.galaxykit('-i repository delete ', res.name);
+    });
+  });
 });
 
 Cypress.Commands.add(
