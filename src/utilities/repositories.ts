@@ -6,21 +6,24 @@ import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
 export class RepositoriesUtils {
-  public static listApproved(): Promise<Repository[]> {
+  // status - undefined, approved, staging, rejected
+  public static list(status?): Promise<Repository[]> {
     async function getAll() {
       let list = [];
 
+      let filter = '';
+      if (status) {
+        filter = `&pulp_label_select=${encodeURIComponent(
+          'pipeline=${status}',
+        )}`;
+      }
       let page = 0;
       const pageSize = 100;
       // watchdog, in case something terrible happened, loop maximum of 10 times. I hope 1000 repos limit is enough
       // otherwise, doing more than 10 API calls is not acceptable either
       for (let i = 0; i < 10; i++) {
         const result = await Repositories.http.get(
-          `${
-            Repositories.apiPath
-          }?offset=${page}&limit=${pageSize}&pulp_label_select=${encodeURIComponent(
-            'pipeline=approved',
-          )}`,
+          `${Repositories.apiPath}?offset=${page}&limit=${pageSize}${filter}`,
         );
 
         list = list.concat(result.data.results);
@@ -33,6 +36,10 @@ export class RepositoriesUtils {
     }
 
     return getAll();
+  }
+
+  public static listApproved() {
+    return RepositoriesUtils.list('approved');
   }
 
   public static async deleteOrAddCollection(
