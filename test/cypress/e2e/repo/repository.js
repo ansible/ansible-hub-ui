@@ -3,7 +3,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repository', () => {
   before(() => {
-    //cy.deleteRepositories();
+    cy.deleteRepositories();
   });
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('Repository', () => {
   });
 
   it('creates and edit repository', () => {
-    /*cy.visit(uiPrefix + 'ansible/repositories');
+    cy.visit(uiPrefix + 'ansible/repositories');
     cy.contains('Repositories');
     cy.contains('button', 'Add repository').click();
     cy.contains('Add new repository');
@@ -31,7 +31,7 @@ describe('Repository', () => {
     cy.contains(
       '[data-cy="Page-AnsibleRepositoryEdit"] button',
       'Save',
-    ).click();*/
+    ).click();
 
     // check if created correctly
     cy.visit(uiPrefix + 'ansible/repositories/');
