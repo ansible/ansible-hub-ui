@@ -1,3 +1,5 @@
+import { createGzip } from 'zlib';
+
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
@@ -9,13 +11,19 @@ describe('Repository', () => {
       'exampleTestRepository',
       'https://www.example.com/',
     );
+    cy.galaxykit('-i namespace create repo_test_namespace');
+
+    cy.galaxykit(
+      `-i collection upload repo_test_namespace repo_test_collection`,
+    );
+    cy.galaxykit(`-i collection move repo_test_namespace repo_test_collection`);
   });
 
   beforeEach(() => {
     cy.login();
   });
 
-  it('creates and edit repository', () => {
+  it('creates, edit and sync repository', () => {
     cy.visit(uiPrefix + 'ansible/repositories');
     cy.contains('Repositories');
     cy.contains('button', 'Add repository').click();
@@ -83,5 +91,43 @@ describe('Repository', () => {
     cy.contains('Sync started for repository "repo1Test".');
     cy.contains('a', 'detail page').click();
     cy.contains('Failed', { timeout: 10000 });
+  });
+
+  it('adds and removes collections', () => {
+    cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+    cy.contains('button', 'Collection versions').click();
+    cy.contains('button', 'Add collection').click();
+    cy.contains('Select a collection');
+    cy.get('input[aria-label="keywords"]')
+      .clear()
+      .type('repo_test_collection{enter}');
+
+    cy.get(
+      'input[aria-label="repo_test_namespace.repo_test_collection v1.0.0"]',
+    ).click();
+    cy.contains('button', 'Select').click();
+    cy.contains(
+      'Started adding repo_test_namespace.repo_test_collection v1.0.0 from "published" to repository "repo1Test".',
+    );
+    cy.contains('a', 'detail page').click();
+    cy.contains('Completed', { timeout: 10000 });
+
+    cy.visit(
+      uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+    );
+    cy.contains('repo_test_collection');
+    cy.get('[aria-label="Actions"]').click();
+    cy.contains('a', 'Remove').click();
+    cy.contains('Remove collection version?');
+    cy.contains('button', 'Remove').click();
+    // checking for message and clicking detail page does not work, it fails, not sure why
+  });
+
+  it('checks if collection was removed', () => {
+    cy.visit(
+      uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+    );
+    cy.contains('repo_test_collection').should('not.exist');
+    cy.contains('No collection versions yet');
   });
 });
