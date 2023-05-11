@@ -10,7 +10,7 @@ describe('Repository', () => {
     cy.login();
   });
 
-  it('Create and edit repository', () => {
+  it('creates and edit repository', () => {
     /*cy.visit(uiPrefix + 'ansible/repositories');
     cy.contains('Repositories');
     cy.contains('button', 'Add repository').click();
@@ -34,7 +34,7 @@ describe('Repository', () => {
     ).click();*/
 
     // check if created correctly
-    cy.visit(uiPrefix + 'ansible/repositories');
+    cy.visit(uiPrefix + 'ansible/repositories/');
     cy.contains('Repositories');
     cy.contains('repo1Test');
     cy.contains('a', 'repo1Test').click();
