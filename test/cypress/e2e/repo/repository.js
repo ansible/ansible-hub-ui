@@ -4,6 +4,11 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('Repository', () => {
   before(() => {
     cy.deleteRepositories();
+    cy.galaxykit(
+      '-i remote create',
+      'exampleTestRepository',
+      'https://www.example.com/',
+    );
   });
 
   beforeEach(() => {
@@ -54,6 +59,13 @@ describe('Repository', () => {
     )
       .clear()
       .type('2');
+
+    // add remote
+    cy.get('[data-cy="remote"] button').click();
+    cy.contains('[data-cy="remote"]', 'rh-certified');
+    cy.contains('[data-cy="remote"]', 'community');
+    cy.contains('[data-cy="remote"] button', 'exampleTestRepository').click();
+
     cy.contains(
       '[data-cy="Page-AnsibleRepositoryEdit"] button',
       'Save',
@@ -65,5 +77,11 @@ describe('Repository', () => {
       '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
       '2',
     );
+
+    // try to sync it
+    cy.contains('button', 'Sync').click();
+    cy.contains('Sync started for repository "repo1Test".');
+    cy.contains('a', 'detail page').click();
+    cy.contains('Failed', { timeout: 10000 });
   });
 });

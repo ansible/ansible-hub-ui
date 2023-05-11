@@ -505,6 +505,14 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
 });
 
 Cypress.Commands.add('deleteRepositories', {}, () => {
+  const initRepos = [
+    'validated',
+    'rh-certified',
+    'community',
+    'published',
+    'rejected',
+    'staging',
+  ];
   cy.login();
   const path = `${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`;
   cy.intercept('GET', path).as('data');
@@ -513,8 +521,10 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
 
   cy.wait('@data').then((res) => {
     res.response.body.results.forEach((res) => {
-      cy.galaxykit('-i distribution delete ', res.name);
-      cy.galaxykit('-i repository delete ', res.name);
+      if (!initRepos.includes(res.name)) {
+        cy.galaxykit('-i distribution delete ', res.name);
+        cy.galaxykit('-i repository delete ', res.name);
+      }
     });
   });
 });
