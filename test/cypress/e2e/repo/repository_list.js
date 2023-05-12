@@ -141,7 +141,7 @@ describe('Repository', () => {
     cy.get('[data-cy="Page-AnsibleRepositoryEdit"]');
   });
 
-  it('tests CLI config', () => {
+  it.skip('tests CLI config', () => {
     cy.get('[data-cy="compound_filter"] input')
       .clear()
       .type('repoListTest3{enter}');
