@@ -466,6 +466,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
     cy.wait(3000);
 
     cy.galaxykit('collection list').then((res) => {
+      // here
       const data = JSON.parse(res[0]).data;
       if (data.length != 0) {
         waitForEmptyCollection(maxLoops - 1);
