@@ -480,7 +480,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
     cy.log(data.length + ' collections found for deletion.');
     data.forEach((record) => {
       cy.galaxykit(
-        'collection delete',
+        '-i collection delete',
         record.namespace,
         record.name,
         record.version,
