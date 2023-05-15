@@ -1,130 +1,143 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repository', () => {
-  before(() => {
-    cy.deleteRepositories();
-    cy.galaxykit(
-      '-i remote create',
-      'exampleTestRepository',
-      'https://www.example.com/',
-    );
-    cy.galaxykit('-i namespace create repo_test_namespace');
+  ['with remote', 'without remote'].forEach((mode) => {
+    it('creates, edit and sync repository ' + mode, () => {
+      cy.login();
 
-    cy.galaxykit(
-      `-i collection upload repo_test_namespace repo_test_collection`,
-    );
-    cy.galaxykit(`-i collection move repo_test_namespace repo_test_collection`);
-  });
+      cy.deleteRepositories();
 
-  beforeEach(() => {
-    cy.login();
-  });
+      if (mode == 'with remote') {
+        cy.galaxykit(
+          '-i remote create',
+          'exampleTestRepository',
+          'https://www.example.com/',
+        );
+      }
+      cy.galaxykit('-i namespace create repo_test_namespace');
 
-  it('creates, edit and sync repository', () => {
-    cy.visit(uiPrefix + 'ansible/repositories');
-    cy.contains('Repositories');
-    cy.contains('button', 'Add repository').click();
-    cy.contains('Add new repository');
-    cy.get('[data-cy="Page-AnsibleRepositoryEdit"] input[id="name"]').type(
-      'repo1Test',
-    );
-    cy.get(
-      '[data-cy="Page-AnsibleRepositoryEdit"] input[id="description"]',
-    ).type('repo1Test description');
+      cy.deleteNamespacesAndCollections();
+      cy.galaxykit(
+        `-i collection upload repo_test_namespace repo_test_collection`,
+      );
+      cy.galaxykit(
+        `-i collection move repo_test_namespace repo_test_collection`,
+      );
 
-    cy.get('[data-cy="pipeline"] button').click();
-    cy.contains('[data-cy="pipeline"]', 'Staging');
-    cy.contains('[data-cy="pipeline"]', 'Approved');
-    cy.contains('[data-cy="pipeline"]', 'None');
+      cy.visit(uiPrefix + 'ansible/repositories');
+      cy.contains('Repositories');
+      cy.contains('button', 'Add repository').click();
+      cy.contains('Add new repository');
+      cy.get('[data-cy="Page-AnsibleRepositoryEdit"] input[id="name"]').type(
+        'repo1Test',
+      );
+      cy.get(
+        '[data-cy="Page-AnsibleRepositoryEdit"] input[id="description"]',
+      ).type('repo1Test description');
 
-    cy.contains('[data-cy="pipeline"] button', 'Approved').click();
-    cy.contains(
-      '[data-cy="Page-AnsibleRepositoryEdit"] button',
-      'Save',
-    ).click();
+      cy.get('[data-cy="pipeline"] button').click();
+      cy.contains('[data-cy="pipeline"]', 'Staging');
+      cy.contains('[data-cy="pipeline"]', 'Approved');
+      cy.contains('[data-cy="pipeline"]', 'None');
 
-    // check if created correctly
-    cy.visit(uiPrefix + 'ansible/repositories/');
-    cy.contains('Repositories');
-    cy.contains('repo1Test');
-    cy.contains('a', 'repo1Test').click();
-    cy.contains(
-      '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
-      'repo1Test description',
-    );
-    cy.contains(
-      '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
-      'pipeline: approved',
-    );
+      cy.contains('[data-cy="pipeline"] button', 'Approved').click();
+      cy.contains(
+        '[data-cy="Page-AnsibleRepositoryEdit"] button',
+        'Save',
+      ).click();
 
-    // try to edit it
-    cy.contains('Edit').click();
-    cy.get(
-      '[data-cy="Page-AnsibleRepositoryEdit"] input[id="retain_repo_versions"]',
-    )
-      .clear()
-      .type('2');
+      // check if created correctly
+      cy.visit(uiPrefix + 'ansible/repositories/');
+      cy.contains('Repositories');
+      cy.contains('repo1Test');
+      cy.contains('a', 'repo1Test').click();
+      cy.contains(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
+        'repo1Test description',
+      );
+      cy.contains(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
+        'pipeline: approved',
+      );
 
-    // add remote
-    cy.get('[data-cy="remote"] button').click();
-    cy.contains('[data-cy="remote"]', 'rh-certified');
-    cy.contains('[data-cy="remote"]', 'community');
-    cy.contains('[data-cy="remote"] button', 'exampleTestRepository').click();
+      // try to edit it
+      cy.contains('Edit').click();
+      cy.get(
+        '[data-cy="Page-AnsibleRepositoryEdit"] input[id="retain_repo_versions"]',
+      )
+        .clear()
+        .type('2');
 
-    cy.contains(
-      '[data-cy="Page-AnsibleRepositoryEdit"] button',
-      'Save',
-    ).click();
+      if (mode == 'with remote') {
+        // add remote
+        cy.get('[data-cy="remote"] button').click();
+        cy.contains('[data-cy="remote"]', 'rh-certified');
+        cy.contains('[data-cy="remote"]', 'community');
+        cy.contains(
+          '[data-cy="remote"] button',
+          'exampleTestRepository',
+        ).click();
+      }
 
-    // check if edited correctly
-    cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
-    cy.contains(
-      '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
-      '2',
-    );
+      cy.contains(
+        '[data-cy="Page-AnsibleRepositoryEdit"] button',
+        'Save',
+      ).click();
 
-    // try to sync it
-    cy.contains('button', 'Sync').click();
-    cy.contains('Sync started for repository "repo1Test".');
-    cy.contains('a', 'detail page').click();
-    cy.contains('Failed', { timeout: 10000 });
-  });
+      // check if edited correctly
+      cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+      cy.contains(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
+        '2',
+      );
 
-  it('adds and removes collections', () => {
-    cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
-    cy.contains('button', 'Collection versions').click();
-    cy.contains('button', 'Add collection').click();
-    cy.contains('Select a collection');
-    cy.get('input[aria-label="keywords"]')
-      .clear()
-      .type('repo_test_collection{enter}');
+      if (mode == 'with remote') {
+        // try to sync it
+        cy.contains('button', 'Sync').click();
+        cy.contains('Sync started for repository "repo1Test".');
+        cy.contains('a', 'detail page').click();
+        cy.contains('Failed', { timeout: 10000 });
+      }
+    });
 
-    cy.get(
-      'input[aria-label="repo_test_namespace.repo_test_collection v1.0.0"]',
-    ).click();
-    cy.contains('button', 'Select').click();
-    cy.contains(
-      'Started adding repo_test_namespace.repo_test_collection v1.0.0 from "published" to repository "repo1Test".',
-    );
-    cy.contains('a', 'detail page').click();
-    cy.contains('Completed', { timeout: 10000 });
+    it('adds and removes collections ' + mode, () => {
+      cy.login();
+      cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+      cy.contains('button', 'Collection versions').click();
+      cy.contains('button', 'Add collection').click();
+      cy.contains('Select a collection');
+      cy.get('input[aria-label="keywords"]')
+        .clear()
+        .type('repo_test_collection{enter}');
 
-    cy.visit(
-      uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
-    );
-    cy.contains('repo_test_collection');
-    cy.get('[aria-label="Actions"]').click();
-    cy.contains('a', 'Remove').click();
-    cy.contains('Remove collection version?');
-    cy.contains('button', 'Remove').click();
-    // checking for message and clicking detail page does not work, it fails, not sure why
-  });
+      cy.get(
+        'input[aria-label="repo_test_namespace.repo_test_collection v1.0.0"]',
+      ).click();
+      cy.contains('button', 'Select').click();
+      cy.contains(
+        'Started adding repo_test_namespace.repo_test_collection v1.0.0 from "published" to repository "repo1Test".',
+      );
+      cy.contains('a', 'detail page').click();
+      cy.contains('Completed', { timeout: 10000 });
 
-  it('checks if collection was removed', () => {
-    cy.visit(
-      uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
-    );
-    cy.contains('repo_test_collection').should('not.exist');
-    cy.contains('No collection versions yet');
+      cy.visit(
+        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+      );
+      cy.contains('repo_test_collection');
+      cy.get('[aria-label="Actions"]').click();
+      cy.contains('a', 'Remove').click();
+      cy.contains('Remove collection version?');
+      cy.contains('button', 'Remove').click();
+      // checking for message and clicking detail page does not work, it fails, not sure why
+    });
+
+    it('checks if collection was removed ' + mode, () => {
+      cy.login();
+      cy.visit(
+        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+      );
+      cy.contains('repo_test_collection').should('not.exist');
+      cy.contains('No collection versions yet');
+    });
   });
 });
