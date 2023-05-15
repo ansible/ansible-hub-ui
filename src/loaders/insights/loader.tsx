@@ -1,6 +1,4 @@
 import '../app.scss';
-import { t } from '@lingui/macro';
-import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import React, { useEffect, useState } from 'react';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
@@ -59,11 +57,6 @@ const App = (_props) => {
           ),
       }}
     >
-      <Alert
-        isInline
-        variant='info'
-        title={t`Use the Repositories page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the Collections page to control which collections are added to their organization's sync repository.`}
-      />
       <InsightsRoutes />
       <UIVersion />
     </AppContext.Provider>
