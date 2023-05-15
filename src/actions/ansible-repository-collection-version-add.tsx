@@ -3,6 +3,7 @@ import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
@@ -55,9 +56,11 @@ const add = (
 const AddCollectionVersionModal = ({
   addAction,
   closeAction,
+  sourceRepository,
 }: {
   addAction: (selected) => void;
   closeAction: () => void;
+  sourceRepository: AnsibleRepositoryType;
 }) => {
   const [alerts, setAlerts] = useState([]);
   const [selected, setSelected] = useState<CollectionVersionSearch[]>([]);
@@ -93,6 +96,9 @@ const AddCollectionVersionModal = ({
       repository,
     } = item;
 
+    const isCollectionInRepo =
+      sourceRepository.pulp_href === repository.pulp_href;
+
     return (
       <tr
         onClick={() =>
@@ -106,8 +112,9 @@ const AddCollectionVersionModal = ({
           <Checkbox
             aria-label={`${namespace}.${name} v${version}`}
             id={`collection-${index}`}
-            isChecked={selected.includes(item)}
+            isChecked={isCollectionInRepo || selected.includes(item)}
             name={`collection-${index}`}
+            isDisabled={isCollectionInRepo}
           />
         </td>
         <td>
@@ -221,6 +228,7 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
         closeAction={() =>
           setState((ms) => ({ ...ms, addCollectionVersionModal: null }))
         }
+        sourceRepository={state.repository}
       />
     ) : null,
   onClick: (
