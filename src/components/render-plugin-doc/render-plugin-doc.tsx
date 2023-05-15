@@ -316,8 +316,8 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
   }
 
-  private renderDeprecated(doc: PluginDoc, pluginName: string) {
-    const isDeprecated = doc.deprecated || pluginName.startsWith('_');
+  private renderDeprecated(doc: PluginDoc, _pluginName: string) {
+    const isDeprecated = doc.deprecated;
 
     if (!isDeprecated) {
       return null;

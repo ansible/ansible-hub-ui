@@ -1,0 +1,1 @@
+Collection documentation: do not wrongly interpret plugins/modules whose name starts with `_` as deprecated.
