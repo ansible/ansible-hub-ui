@@ -456,6 +456,31 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add('deleteRepositories', {}, () => {
+  const initRepos = [
+    'validated',
+    'rh-certified',
+    'community',
+    'published',
+    'rejected',
+    'staging',
+  ];
+  cy.login();
+  const path = `${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`;
+  cy.intercept('GET', path).as('data');
+  const visitUrl = `${uiPrefix}ansible/repositories/?page_size=100`;
+  cy.visit(visitUrl);
+
+  cy.wait('@data').then((res) => {
+    res.response.body.results.forEach((res) => {
+      if (!initRepos.includes(res.name)) {
+        cy.galaxykit('-i distribution delete ', res.name);
+        cy.galaxykit('-i repository delete ', res.name);
+      }
+    });
+  });
+});
+
 Cypress.Commands.add('deleteAllCollections', {}, () => {
   const waitForEmptyCollection = (maxLoops) => {
     if (maxLoops == 0) {
