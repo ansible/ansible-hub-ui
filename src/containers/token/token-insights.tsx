@@ -1,7 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, ClipboardCopyVariant } from '@patternfly/react-core';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
@@ -12,7 +11,6 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { errorMessage, getRepoURL } from 'src/utilities';
 
@@ -96,16 +94,10 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`Connect Private Automation Hub`}</h2>
             <p>
               <Trans>
-                Use the{' '}
-                <Link to={formatPath(Paths.ansibleRepositories)}>
-                  Repositories
-                </Link>{' '}
-                page to sync collections curated by your organization to the Red
-                Hat Certified repository in your private Automation Hub. Users
-                with the correct permissions can use the sync toggles on the{' '}
-                <Link to={formatPath(Paths.collections)}>Collections</Link> page
-                to control which collections are added to their
-                organization&apos;s sync repository.
+                Use the Server URL below to sync certified collections to the
+                Red Hat Certified repository in your private Automation Hub. If
+                you wish to sync validated content, you can add a remote with a
+                server url pointed to the validated repo.
               </Trans>
             </p>
           </section>
@@ -185,13 +177,11 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 Use this URL to configure the API endpoints that clients need to
                 download certified content from Automation Hub. Synclists are
                 deprecated in AAP 2.4 and will be removed in a future release,
-                instead use client-side requirements.yml. [link to AAP synclist
-                documentation]
+                instead use client-side requirements.yml, see AAP 2.4
+                documentation.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>{`${getRepoUrl(
-              'published',
-            )}published/`}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoURL('published')}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>
