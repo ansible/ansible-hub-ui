@@ -1,4 +1,19 @@
+import { createGzip } from 'zlib';
+
 const uiPrefix = Cypress.env('uiPrefix');
+
+function versionCheck(version) {
+  cy.login();
+  cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+  cy.contains('button', 'Versions').click();
+  cy.get(
+    '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
+  );
+  cy.contains(
+    '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
+    version + ' (latest)',
+  );
+}
 
 describe('Repository', () => {
   ['with remote', 'without remote'].forEach((mode) => {
@@ -66,7 +81,7 @@ describe('Repository', () => {
         '[data-cy="Page-AnsibleRepositoryEdit"] input[id="retain_repo_versions"]',
       )
         .clear()
-        .type('2');
+        .type('5');
 
       if (mode == 'with remote') {
         // add remote
@@ -88,7 +103,7 @@ describe('Repository', () => {
       cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
       cy.contains(
         '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
-        '2',
+        '5',
       );
 
       if (mode == 'with remote') {
@@ -100,7 +115,11 @@ describe('Repository', () => {
       }
     });
 
-    it('adds and removes collections ' + mode, () => {
+    it('checks there is only 1 version ' + mode, () => {
+      versionCheck(0);
+    });
+
+    it('adds  collections ' + mode, () => {
       cy.login();
       cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
       cy.contains('button', 'Collection versions').click();
@@ -119,7 +138,25 @@ describe('Repository', () => {
       );
       cy.contains('a', 'detail page').click();
       cy.contains('Completed', { timeout: 10000 });
+    });
 
+    it(
+      'checks there are 2 versions and collection is here (' + mode + ')',
+      () => {
+        versionCheck(1);
+        cy.contains(
+          '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"] a',
+          1,
+        ).click();
+        cy.contains(
+          '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
+          'repo_test_namespace.repo_test_collection v1.0.0',
+        );
+      },
+    );
+
+    it('removes  collections ' + mode, () => {
+      cy.login();
       cy.visit(
         uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
       );
@@ -138,6 +175,26 @@ describe('Repository', () => {
       );
       cy.contains('repo_test_collection').should('not.exist');
       cy.contains('No collection versions yet');
+    });
+
+    it('checks there are 3 versions and revert repo ' + mode, () => {
+      versionCheck(2);
+      cy.get(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"] [aria-label="Actions"]',
+      )
+        .eq(1)
+        .click();
+      cy.contains('a', 'Revert to this version').click();
+      cy.contains('button', 'Revert').click();
+    });
+
+    it('checks if collection is added again ' + mode, () => {
+      cy.login();
+      cy.visit(
+        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+      );
+      cy.contains('repo_test_collection');
+      cy.contains('No collection versions yet').should('not.exist');
     });
   });
 });
