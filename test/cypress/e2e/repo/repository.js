@@ -1,5 +1,3 @@
-import { createGzip } from 'zlib';
-
 const uiPrefix = Cypress.env('uiPrefix');
 
 function versionCheck(version) {
