@@ -105,7 +105,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       // if the user can edit namespaces
       MyNamespaceAPI.list({})
         .then((results) => {
-          if (results.data.meta.count !== 0) {
+          if (results.data.count !== 0) {
             this.loadNamespaces();
           } else {
             this.setState({
@@ -319,7 +319,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
         </section>
       );
     }
-
     return (
       <section className='card-layout'>
         {namespaces.map((ns, i) => (
