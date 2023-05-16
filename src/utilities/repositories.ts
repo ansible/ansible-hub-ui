@@ -3,40 +3,45 @@ import {
   AnsibleDistributionAPI,
   AnsibleRepositoryAPI,
   CollectionVersionSearch,
-  Repositories,
+  CollectionVersionAPI,
+  Repositories
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
 export class RepositoriesUtils {
-  public static listApproved(): Promise<Repository[]> {
-    async function getAll() {
-      let list = [];
+  private static async getAll(additionalParams = {}) {
+    let list = [];
 
-      let page = 0;
-      const pageSize = 100;
-      // watchdog, in case something terrible happened, loop maximum of 10 times. I hope 1000 repos limit is enough
-      // otherwise, doing more than 10 API calls is not acceptable either
-      for (let i = 0; i < 10; i++) {
-        const result = await Repositories.http.get(
-          `${
-            Repositories.apiPath
-          }?offset=${page}&limit=${pageSize}&pulp_label_select=${encodeURIComponent(
-            'pipeline=approved',
-          )}`,
-        );
+    const params = Object.keys(additionalParams).reduce((acc, key) => {
+      return acc + `&${key}=${encodeURIComponent(additionalParams[key])}`;
+    }, '');
 
-        list = list.concat(result.data.results);
-        if (list.length >= result.data.count) {
-          return list;
-        }
+    let page = 0;
+    const pageSize = 100;
+    // watchdog, in case something terrible happened, loop maximum of 10 times. I hope 1000 repos limit is enough
+    // otherwise, doing more than 10 API calls is not acceptable either
+    for (let i = 0; i < 10; i++) {
+      const result = await Repositories.http.get(
+        `${Repositories.apiPath}?offset=${page}&limit=${pageSize}${params}`,
+      );
 
-        page += pageSize;
+      list = list.concat(result.data.results);
+      if (list.length >= result.data.count) {
+        return list;
       }
-    }
 
-    return getAll();
+      page += pageSize;
+    }
+  }
+
+  public static listApproved(): Promise<Repository[]> {
+    return this.getAll({ pulp_label_select: 'pipeline=approved' });
+  }
+
+  public static listAll(): Promise<Repository[]> {
+    return this.getAll();
   }
 
   public static async deleteOrAddCollection(
@@ -129,5 +134,26 @@ export class RepositoriesUtils {
     }
 
     return distribution;
+  }
+
+  public static async getCollectionRepoList(
+    collection: CollectionVersionSearch,
+  ) {
+    const { name, namespace, version } = collection.collection_version;
+
+    // get repository list for selected collection
+    const collectionInRepos = await CollectionVersionAPI.list({
+      namespace,
+      name,
+      version,
+      page_size: 100000,
+      offset: 0,
+    });
+
+    const collectionRepos = collectionInRepos.data.data.map(
+      ({ repository }) => repository.name,
+    );
+
+    return collectionRepos;
   }
 }
