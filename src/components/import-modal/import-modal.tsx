@@ -211,7 +211,7 @@ export class ImportModal extends React.Component<IProps, IState> {
               fixedRepos={[]}
               selectedRepos={this.state.selectedRepos}
               setSelectedRepos={(repos) =>
-                this.setState({ selectedRepos: repos })
+                this.setState({ selectedRepos: repos, errors: '' })
               }
               loadRepos={(
                 params,
