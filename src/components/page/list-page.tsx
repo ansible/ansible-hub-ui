@@ -347,8 +347,13 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
     }
 
     private addAlert(alert: AlertType) {
+      let alerts = this.state.alerts;
+      if (alert.id) {
+        alerts = alerts.filter(({ id }) => id !== alert.id);
+      }
+
       this.setState({
-        alerts: [...this.state.alerts, alert],
+        alerts: [...alerts, alert],
       });
     }
 
