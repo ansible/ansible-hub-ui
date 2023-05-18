@@ -6,7 +6,12 @@ import {
   AnsibleRemoteType,
   AnsibleRepositoryType,
 } from 'src/api';
-import { Details, NonLazyDistributions, PulpLabels } from 'src/components';
+import {
+  CopyURL,
+  Details,
+  NonLazyDistributions,
+  PulpLabels,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
@@ -44,9 +49,11 @@ export const DetailsTab = ({ item }: TabProps) => {
         },
         {
           label: t`Repository URL`,
-          value: item.distributions?.length
-            ? getRepoURL(item.distributions[0].base_path)
-            : '---',
+          value: item.distributions?.length ? (
+            <CopyURL url={getRepoURL(item.distributions[0].base_path)} />
+          ) : (
+            '---'
+          ),
         },
         {
           label: t`Labels`,
