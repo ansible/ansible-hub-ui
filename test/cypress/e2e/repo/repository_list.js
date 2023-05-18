@@ -141,7 +141,7 @@ describe('Repository', () => {
     cy.get('[data-cy="Page-AnsibleRepositoryEdit"]');
   });
 
-  it.skip('tests CLI config', () => {
+  it('tests CLI config', () => {
     cy.get('[data-cy="compound_filter"] input')
       .clear()
       .type('repoListTest3{enter}');
@@ -153,7 +153,7 @@ describe('Repository', () => {
       'Copy CLI configuration',
     )
       .focus()
-      .click();
+      .click({ force: true });
     cy.contains('Successfully copied to clipboard');
   });
 });
