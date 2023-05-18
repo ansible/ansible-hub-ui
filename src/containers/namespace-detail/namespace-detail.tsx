@@ -52,7 +52,7 @@ import {
   canSignNamespace,
   errorMessage,
   filterIsSet,
-  getRepoUrl,
+  getRepoURL,
   waitForTask,
 } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
@@ -272,7 +272,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         : null,
     ].filter(Boolean);
 
-    const repositoryUrl = getRepoUrl('published');
+    const repositoryUrl = getRepoURL('published');
 
     const noData =
       itemCount === 0 &&

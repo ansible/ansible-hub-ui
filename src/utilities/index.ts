@@ -10,7 +10,7 @@ export {
   isFormValid,
   mapErrorMessages,
 } from './map-error-messages';
-export { getContainersURL, getRepoUrl } from './get-repo-url';
+export { getContainersURL, getRepoURL } from './get-repo-url';
 export {
   clearSetFieldsFromRequest,
   isFieldSet,
