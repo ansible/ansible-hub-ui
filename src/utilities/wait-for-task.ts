@@ -4,12 +4,14 @@ import { parsePulpIDFromURL } from './parse-pulp-id';
 
 interface Options {
   bailAfter?: number;
+  multiplier?: number;
   waitMs?: number;
 }
 
 export function waitForTask(task, options: Options = {}) {
-  // default to 5s wait with max 10 attempts
-  const { waitMs = 5000, bailAfter = 10 } = options;
+  // default to starting with a 2s wait, increasing the wait time 1.5x each time, with max 10 attempts
+  // 2000, 1.5, 10 = ~226s ; 500, 1.5, 10 = ~57s
+  const { waitMs = 2000, multiplier = 1.5, bailAfter = 10 } = options;
 
   return TaskAPI.get(task).then((result) => {
     const failing = ['skipped', 'failed', 'canceled'];
@@ -28,7 +30,11 @@ export function waitForTask(task, options: Options = {}) {
       }
 
       return new Promise((r) => setTimeout(r, waitMs)).then(() =>
-        waitForTask(task, { ...options, bailAfter: bailAfter - 1 }),
+        waitForTask(task, {
+          ...options,
+          waitMs: Math.round(waitMs * multiplier),
+          bailAfter: bailAfter - 1,
+        }),
       );
     }
   });
