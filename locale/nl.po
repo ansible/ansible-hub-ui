@@ -230,7 +230,7 @@ msgstr "Voeg een README toe met instructies voor het gebruik van deze container.
 msgid "Add a role description here"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:210
+#: src/actions/ansible-repository-collection-version-add.tsx:217
 msgid "Add collection"
 msgstr ""
 
@@ -510,7 +510,7 @@ msgstr ""
 #~ msgid "Can't update remote without a distribution attached to it."
 #~ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:134
+#: src/actions/ansible-repository-collection-version-add.tsx:141
 #: src/actions/ansible-repository-version-revert.tsx:38
 #: src/components/approve-modal/approve-modal.tsx:451
 #: src/components/confirm-modal/confirm-modal.tsx:39
@@ -525,7 +525,7 @@ msgstr ""
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/role-form.tsx:148
 #: src/components/rbac/user-form.tsx:224
-#: src/components/repositories/ansible-repository-form.tsx:358
+#: src/components/repositories/ansible-repository-form.tsx:365
 #: src/components/repositories/remote-form.tsx:145
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
@@ -702,7 +702,7 @@ msgstr ""
 msgid "Code"
 msgstr "Code"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:181
+#: src/actions/ansible-repository-collection-version-add.tsx:188
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:79
 #: src/containers/ansible-repository/tab-collection-versions.tsx:127
 #: src/containers/ansible-repository/tab-repository-versions.tsx:101
@@ -836,7 +836,7 @@ msgstr "Upload collectie geannuleerd"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:196
+#: src/actions/ansible-repository-collection-version-add.tsx:203
 #: src/components/approve-modal/approve-modal.tsx:399
 #: src/components/headers/collection-header.tsx:341
 #: src/containers/ansible-repository/detail.tsx:23
@@ -846,13 +846,13 @@ msgstr "Upload collectie geannuleerd"
 msgid "Collection versions"
 msgstr "Collectie-versies"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:155
+#: src/actions/ansible-repository-collection-version-add.tsx:162
 #: src/containers/ansible-repository/tab-collection-versions.tsx:107
 #: src/containers/ansible-repository/tab-repository-versions.tsx:94
 msgid "Collection versions could not be displayed."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:170
+#: src/actions/ansible-repository-collection-version-add.tsx:177
 msgid "Collection versions will appear once a collection is uploaded."
 msgstr ""
 
@@ -1388,7 +1388,7 @@ msgstr "Afschrijven"
 msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:186
+#: src/actions/ansible-repository-collection-version-add.tsx:193
 #: src/components/collection-detail/collection-content-list.tsx:105
 #: src/components/execution-environment/repository-form.tsx:364
 #: src/components/namespace-form/namespace-form.tsx:81
@@ -1927,7 +1927,7 @@ msgstr ""
 #~ msgid "Failed to load pulp_id of collection repository."
 #~ msgstr ""
 
-#: src/components/repositories/ansible-repository-form.tsx:325
+#: src/components/repositories/ansible-repository-form.tsx:331
 msgid "Failed to load remotes: {remotesError}"
 msgstr ""
 
@@ -2208,7 +2208,7 @@ msgstr ""
 msgid "Hide advanced options"
 msgstr "Geavanceerde opties verbergen"
 
-#: src/components/repositories/ansible-repository-form.tsx:268
+#: src/components/repositories/ansible-repository-form.tsx:270
 msgid "Hide from search"
 msgstr ""
 
@@ -2361,14 +2361,14 @@ msgstr ""
 msgid "Key fingerprint"
 msgstr "Sleutel vingerafdruk"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:159
+#: src/actions/ansible-repository-collection-version-add.tsx:166
 #: src/components/collection-list/collection-filter.tsx:77
 #: src/components/collection-list/collection-filter.tsx:129
 #: src/containers/ansible-repository/tab-collection-versions.tsx:111
 msgid "Keywords"
 msgstr "Trefwoorden"
 
-#: src/components/repositories/ansible-repository-form.tsx:252
+#: src/components/repositories/ansible-repository-form.tsx:254
 #: src/containers/ansible-repository/tab-details.tsx:44
 msgid "Labels"
 msgstr ""
@@ -2509,12 +2509,12 @@ msgstr "Logo URL"
 msgid "Logout"
 msgstr "Afmelden"
 
-#: src/components/repositories/ansible-repository-form.tsx:278
-#: src/components/repositories/ansible-repository-form.tsx:283
+#: src/components/repositories/ansible-repository-form.tsx:280
+#: src/components/repositories/ansible-repository-form.tsx:285
 msgid "Make private"
 msgstr ""
 
-#: src/components/repositories/ansible-repository-form.tsx:279
+#: src/components/repositories/ansible-repository-form.tsx:281
 msgid "Make the repository private."
 msgstr ""
 
@@ -2639,7 +2639,7 @@ msgstr "Naam moet langer zijn dan 2 tekens"
 msgid "Name must not be empty."
 msgstr "De naam mag niet leeg zijn."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:163
+#: src/actions/ansible-repository-collection-version-add.tsx:170
 #: src/components/collection-list/collection-filter.tsx:87
 #: src/components/collection-list/collection-filter.tsx:131
 #: src/components/my-imports/import-list.tsx:253
@@ -2772,7 +2772,7 @@ msgstr "Geen onderliggende taak"
 msgid "No collection versions in this repository version."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:171
+#: src/actions/ansible-repository-collection-version-add.tsx:178
 #: src/containers/ansible-repository/tab-collection-versions.tsx:122
 #: src/containers/ansible-repository/tab-repository-versions.tsx:96
 msgid "No collection versions yet"
@@ -3417,7 +3417,7 @@ msgstr "Geweigerd"
 msgid "Released <0/>"
 msgstr ""
 
-#: src/components/repositories/ansible-repository-form.tsx:292
+#: src/components/repositories/ansible-repository-form.tsx:294
 #: src/containers/ansible-repository/tab-details.tsx:52
 #: src/containers/execution-environment-list/execution_environment_list.tsx:419
 msgid "Remote"
@@ -3549,8 +3549,8 @@ msgstr ""
 msgid "Repositories will appear once created."
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:167
-#: src/actions/ansible-repository-collection-version-add.tsx:191
+#: src/actions/ansible-repository-collection-version-add.tsx:174
+#: src/actions/ansible-repository-collection-version-add.tsx:198
 #: src/components/approve-modal/approve-modal.tsx:476
 #: src/components/collection-list/collection-filter.tsx:81
 #: src/components/collection-list/collection-filter.tsx:130
@@ -3721,7 +3721,7 @@ msgstr "SSO URL"
 #: src/components/rbac/group-modal.tsx:57
 #: src/components/rbac/role-form.tsx:142
 #: src/components/rbac/user-form.tsx:221
-#: src/components/repositories/ansible-repository-form.tsx:355
+#: src/components/repositories/ansible-repository-form.tsx:362
 #: src/components/repositories/remote-form.tsx:140
 #: src/containers/edit-namespace/edit-namespace.tsx:155
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:152
@@ -3769,12 +3769,12 @@ msgstr "Zie de <0>detailpagina</0> voor taakbeheer voor de status van deze taak.
 #~ msgid "See the task management <0>detail page</0>for the status of this task."
 #~ msgstr "Zie de <0>detailpagina</0> voor taakbeheer voor de status van deze taak."
 
-#: src/actions/ansible-repository-collection-version-add.tsx:131
+#: src/actions/ansible-repository-collection-version-add.tsx:138
 #: src/components/approve-modal/approve-modal.tsx:443
 msgid "Select"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:139
+#: src/actions/ansible-repository-collection-version-add.tsx:146
 msgid "Select a collection"
 msgstr ""
 
@@ -3788,7 +3788,7 @@ msgstr "Een groep selecteren"
 msgid "Select a registry"
 msgstr "Een register selecteren"
 
-#: src/components/repositories/ansible-repository-form.tsx:305
+#: src/components/repositories/ansible-repository-form.tsx:311
 msgid "Select a remote"
 msgstr ""
 
@@ -3873,7 +3873,7 @@ msgstr "Fout bij de server. Kom a.u.b. later terug."
 msgid "Server version"
 msgstr "Server-versie"
 
-#: src/components/repositories/ansible-repository-form.tsx:293
+#: src/components/repositories/ansible-repository-form.tsx:295
 msgid "Setting a remote allows a repository to sync from elsewhere."
 msgstr ""
 
@@ -4041,7 +4041,7 @@ msgstr ""
 msgid "Start from scratch"
 msgstr ""
 
-#: src/actions/ansible-repository-collection-version-add.tsx:35
+#: src/actions/ansible-repository-collection-version-add.tsx:36
 msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."
 msgstr ""
 
@@ -5127,7 +5127,7 @@ msgstr "wacht op goedkeuring"
 msgid "waiting for import to finish"
 msgstr "wacht tot importeren is voltooid"
 
-#: src/actions/ansible-repository-collection-version-add.tsx:45
+#: src/actions/ansible-repository-collection-version-add.tsx:46
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr ""
 
