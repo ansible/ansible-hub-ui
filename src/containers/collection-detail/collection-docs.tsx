@@ -171,9 +171,11 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                   // if plugin data is set render it
                   <RenderPluginDoc
                     plugin={pluginData}
-                    renderModuleLink={(moduleName) =>
-                      this.renderModuleLink(
-                        moduleName,
+                    renderPluginLink={(pluginName, pluginType, text) =>
+                      this.renderPluginLink(
+                        pluginName,
+                        pluginType,
+                        text ?? pluginName,
                         collection,
                         params,
                         content.contents,
@@ -243,9 +245,16 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     }
   }
 
-  private renderModuleLink(moduleName, collection, params, allContent) {
+  private renderPluginLink(
+    pluginName,
+    pluginType,
+    text,
+    collection,
+    params,
+    allContent,
+  ) {
     const module = allContent.find(
-      (x) => x.content_type === 'module' && x.name === moduleName,
+      (x) => x.content_type === pluginType && x.name === pluginName,
     );
 
     if (module) {
@@ -256,18 +265,18 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             {
               namespace: collection.collection_version.namespace,
               collection: collection.collection_version.name,
-              type: 'module',
-              name: moduleName,
+              type: pluginType,
+              name: pluginName,
               repo: this.props.routeParams.repo,
             },
             params,
           )}
         >
-          {moduleName}
+          {text}
         </Link>
       );
     } else {
-      return moduleName;
+      return text;
     }
   }
 
