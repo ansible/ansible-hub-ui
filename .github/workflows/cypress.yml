@@ -198,6 +198,7 @@ jobs:
       working-directory: 'ansible-hub-ui/test'
       run: |
         cp -aiv ../.github/workflows/cypress/cypress.env.json."$COMPOSE_PROFILE" cypress.env.json
+        cat cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
