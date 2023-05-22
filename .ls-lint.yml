@@ -15,7 +15,7 @@ ls:
     .js: kebab-case | snake_case
 
   .d.ts: kebab-case
-  .js: kebab-case
+  .js: kebab-case | point.case
   .test.js: kebab-case
   .ts: kebab-case
 
