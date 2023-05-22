@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import * as moment from 'moment';
 
-// remember to update .linguirc as well
+// remember to update lingui.config.js as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
 
 // map missing moment locales (node_modules/moment/src/locale/<locale>.js must exist, except for english)
