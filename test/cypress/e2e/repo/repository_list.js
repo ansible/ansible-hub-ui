@@ -9,6 +9,17 @@ describe('Repository', () => {
     range(5).forEach((i) => {
       cy.galaxykit('repository create repoListTest' + i);
     });
+
+    // chrome only - prevent 'Write permission denied.' when copying to clipboard
+    cy.wrap(
+      Cypress.automation('remote:debugger:protocol', {
+        command: 'Browser.grantPermissions',
+        params: {
+          permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
+          origin: window.location.origin,
+        },
+      }),
+    );
   });
 
   beforeEach(() => {
@@ -141,7 +152,7 @@ describe('Repository', () => {
     cy.get('[data-cy="Page-AnsibleRepositoryEdit"]');
   });
 
-  it.skip('tests CLI config', () => {
+  it('tests CLI config', () => {
     cy.get('[data-cy="compound_filter"] input')
       .clear()
       .type('repoListTest3{enter}');
