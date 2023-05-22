@@ -21,7 +21,7 @@ import {
   ParamHelper,
   RouteProps,
   filterIsSet,
-  getRepoUrl,
+  getRepoURL,
   withRouter,
 } from 'src/utilities';
 import { loadCollection } from './base';
@@ -114,7 +114,7 @@ const CollectionDistributions = (props: RouteProps) => {
       `server_list = ${distribution.base_path}`,
       '',
       `[galaxy_server.${distribution.base_path}]`,
-      `url=${getRepoUrl(distribution.base_path)}`,
+      `url=${getRepoURL(distribution.base_path)}`,
       'token=<put your token here>',
     ].join('\n');
 

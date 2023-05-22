@@ -14,7 +14,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
-import { errorMessage, getRepoUrl } from 'src/utilities';
+import { errorMessage, getRepoURL } from 'src/utilities';
 
 interface IState {
   tokenData: {
@@ -186,7 +186,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 download content from Automation Hub.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>{getRepoUrl('published')}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoURL('published')}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>

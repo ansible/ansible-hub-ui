@@ -5,6 +5,19 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import { errorMessage } from 'src/utilities';
 
+export const NonLazyDistributions = ({
+  distributions,
+  emptyText,
+}: {
+  distributions: { name: string }[];
+  emptyText?: string;
+}) => (
+  <>
+    {distributions?.map?.(({ name }) => name)?.join?.(', ') ||
+      (emptyText ?? '---')}
+  </>
+);
+
 export const LazyDistributions = ({
   emptyText,
   onLoad,
@@ -60,9 +73,6 @@ export const LazyDistributions = ({
   ) : error ? (
     errorElement
   ) : (
-    <>
-      {distributions?.map?.(({ name }) => name)?.join?.(', ') ||
-        (emptyText ?? '---')}
-    </>
+    <NonLazyDistributions distributions={distributions} emptyText={emptyText} />
   );
 };
