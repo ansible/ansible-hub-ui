@@ -14,6 +14,7 @@
         "@types/node": "^16.18.24",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
+        "antsibull-docs": "^1.0.0",
         "axios": "~1.4.0",
         "classnames": "^2.3.2",
         "csstype": "^3.1.2",
