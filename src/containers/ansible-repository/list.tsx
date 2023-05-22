@@ -10,6 +10,7 @@ import {
 } from 'src/actions';
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
+import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
@@ -37,13 +38,41 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       id: 'name__icontains',
       title: t`Repository name`,
     },
+    {
+      id: 'status',
+      title: t`Status`,
+      inputType: 'select',
+      options: [
+        {
+          id: Constants.NOTCERTIFIED,
+          title: t`Rejected`,
+        },
+        {
+          id: Constants.NEEDSREVIEW,
+          title: t`Needs Review`,
+        },
+        {
+          id: Constants.APPROVED,
+          title: t`Approved`,
+        },
+      ],
+    },
   ],
   headerActions: [ansibleRepositoryCreateAction], // Add repository
   listItemActions,
   noDataButton: ansibleRepositoryCreateAction.button,
   noDataDescription: t`Repositories will appear once created.`,
   noDataTitle: t`No repositories yet`,
-  query: ({ params }) => AnsibleRepositoryAPI.list(params),
+  query: ({ params }) => {
+    const queryParams = { ...params };
+
+    if (queryParams['status']) {
+      const status = queryParams['status'];
+      delete queryParams['status'];
+      queryParams['pulp_label_select'] = `pipeline=${status}`;
+    }
+    return AnsibleRepositoryAPI.list(queryParams);
+  },
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
     const { name, pulp_created, pulp_href } = item;
     const id = parsePulpIDFromURL(pulp_href);

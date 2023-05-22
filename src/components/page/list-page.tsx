@@ -203,6 +203,16 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         (filterConfig || []).map(({ id, title }) => [id, title]),
       );
 
+      const niceValues = {};
+      (filterConfig || [])
+        .filter((filter) => filter['options'] && filter['options'].length > 0)
+        .forEach((item) => {
+          const obj = (niceValues[item['id']] = {});
+          item['options'].forEach((option) => {
+            obj[option.id] = option.title;
+          });
+        });
+
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
         hasObjectPermission: () => false, // list items don't load my_permissions .. but superadmin should still work
@@ -278,6 +288,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                       params={params}
                       ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                       niceNames={niceNames}
+                      niceValues={niceValues}
                     />
                   </div>
                   {loading ? (
