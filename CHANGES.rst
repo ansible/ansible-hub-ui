@@ -1,3 +1,33 @@
+4.7.1 (2023-05-23)
+==================
+
+Features
+--------
+
+- Collection documentation: support semantic markup.
+  `AAH-2156 <https://issues.redhat.com/browse/AAH-2156>`_
+- Change Wisdom Modal and legacy namespaces menu, rename to Ansible Lightspeed
+  `AAH-2220 <https://issues.redhat.com/browse/AAH-2220>`_
+- Added filter for Approved, Staging and Rejected for Repository list.
+  `AAH-2259 <https://issues.redhat.com/browse/AAH-2259>`_
+- Disable checkbox for adding collection if collection is already assigned to repository
+  `AAH-2323 <https://issues.redhat.com/browse/AAH-2323>`_
+
+
+Bugfixes
+--------
+
+- Fix Edit collection ignoring repository object permissions
+  `AAH-2305 <https://issues.redhat.com/browse/AAH-2305>`_
+- Namespace detail: sign all collections only signs current repo now
+  `AAH-2308 <https://issues.redhat.com/browse/AAH-2308>`_
+- Collection documentation: do not wrongly interpret plugins/modules whose name starts with `_` as deprecated.
+  `AAH-3715 <https://issues.redhat.com/browse/AAH-3715>`_
+
+
+----
+
+
 4.7.0 (2023-04-17)
 ==================
 
