@@ -326,7 +326,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           <div key={i} className='card-wrapper'>
             <NamespaceCard
               namespaceURL={formatPath(namespacePath, {
-                namespace: ns.pulp_href.split('/').at(-2),
+                namespace: ns.name,
               })}
               key={i}
               {...ns}
