@@ -6,7 +6,11 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import {
+  AnsibleDistributionAPI,
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
+} from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
@@ -74,15 +78,27 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
           return Promise.reject({ response: { status: 404 } });
         }
 
-        return AnsibleRepositoryAPI.myPermissions(
-          parsePulpIDFromURL(repository.pulp_href),
-        )
-          .then(({ data: { permissions } }) => permissions)
-          .catch((e) => {
-            console.error(e);
-            return [];
+        const err = (e) => {
+          console.error(e);
+          return [];
+        };
+
+        return Promise.all([
+          AnsibleDistributionAPI.list({
+            repository: repository.pulp_href,
           })
-          .then((my_permissions) => ({ ...repository, my_permissions }));
+            .then(({ data: { results } }) => results)
+            .catch(err),
+          AnsibleRepositoryAPI.myPermissions(
+            parsePulpIDFromURL(repository.pulp_href),
+          )
+            .then(({ data: { permissions } }) => permissions)
+            .catch(err),
+        ]).then(([distributions, my_permissions]) => ({
+          ...repository,
+          distributions,
+          my_permissions,
+        }));
       });
   },
   renderTab: (tab, item, actionContext) =>

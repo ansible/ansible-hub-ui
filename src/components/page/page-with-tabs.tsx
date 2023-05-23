@@ -283,8 +283,13 @@ export const PageWithTabs = function <
     }
 
     private addAlert(alert: AlertType) {
+      let alerts = this.state.alerts;
+      if (alert.id) {
+        alerts = alerts.filter(({ id }) => id !== alert.id);
+      }
+
       this.setState({
-        alerts: [...this.state.alerts, alert],
+        alerts: [...alerts, alert],
       });
     }
 
