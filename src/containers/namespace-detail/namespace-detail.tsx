@@ -310,6 +310,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     delete tabParams.group;
 
     const repository = params['repository_name'] || null;
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : deleteCollection?.repository?.name;
 
     return (
       <React.Fragment>
@@ -347,12 +350,11 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 load: () => this.load(),
                 redirect: false,
                 addAlert: (alert) => this.addAlert(alert),
+                deleteFromRepo,
               }),
             )
           }
-          deleteFromRepo={
-            this.state.deleteAll ? null : deleteCollection?.repository?.name
-          }
+          deleteFromRepo={deleteFromRepo}
         />
         {isOpenNamespaceModal && (
           <DeleteModal

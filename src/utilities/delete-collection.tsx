@@ -6,7 +6,12 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
-import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import {
+  RepositoriesUtils,
+  errorMessage,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
 
 export class DeleteCollectionUtils {
   public static getUsedbyDependencies(collection: CollectionVersionSearch) {
@@ -118,31 +123,43 @@ export class DeleteCollectionUtils {
     load,
     redirect,
     addAlert,
+    deleteFromRepo,
   }) {
-    CollectionAPI.deleteCollection(collection)
+    let promise = null;
+    if (deleteFromRepo) {
+      promise = RepositoriesUtils.deleteCollection(
+        deleteFromRepo,
+        collection.collection_version.pulp_href,
+      );
+    } else {
+      promise = CollectionAPI.deleteCollection(collection);
+    }
+
+    promise
       .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-        const name = collection.collection_version.name;
-
-        waitForTask(taskId).then(() => {
-          addAlert({
-            variant: 'success',
-            title: (
-              <Trans>
-                Collection &quot;{name}
-                &quot; has been successfully deleted.
-              </Trans>
-            ),
-          });
-
-          if (redirect) {
-            setState({ redirect });
-          }
-
-          if (load) {
-            load();
-          }
+        if (!deleteFromRepo) {
+          const taskId = parsePulpIDFromURL(res.data.task);
+          return waitForTask(taskId);
+        }
+      })
+      .then(() => {
+        addAlert({
+          variant: 'success',
+          title: (
+            <Trans>
+              Collection &quot;{collection.collection_version.name}
+              &quot; has been successfully deleted.
+            </Trans>
+          ),
         });
+
+        if (redirect) {
+          setState({ redirect });
+        }
+
+        if (load) {
+          load();
+        }
       })
       .catch((err) => {
         const { status, statusText } = err.response;

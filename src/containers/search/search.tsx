@@ -160,6 +160,10 @@ class Search extends React.Component<RouteProps, IState> {
     const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
 
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : deleteCollection?.repository?.name;
+
     return (
       <div className='search-page'>
         <AlertList
@@ -181,12 +185,11 @@ class Search extends React.Component<RouteProps, IState> {
                 load: () => this.load(),
                 redirect: false,
                 addAlert: (alert) => this.addAlert(alert),
+                deleteFromRepo,
               }),
             )
           }
-          deleteFromRepo={
-            this.state.deleteAll ? null : deleteCollection?.repository?.name
-          }
+          deleteFromRepo={deleteFromRepo}
         />
 
         {showImportModal && (

@@ -312,6 +312,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         `${collection_version.namespace}-${collectionName}-${version}`,
       );
 
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : collection.repository.name;
+
     return (
       <React.Fragment>
         {showImportModal && (
@@ -426,12 +430,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       namespace: deleteCollection.collection_version.namespace,
                     }),
                     addAlert: (alert) => this.context.queueAlert(alert),
+                    deleteFromRepo,
                   });
             })
           }
-          deleteFromRepo={
-            this.state.deleteAll ? null : collection.repository.name
-          }
+          deleteFromRepo={deleteFromRepo}
         />
         {copyCollectionToRepositoryModal && (
           <CopyCollectionToRepositoryModal
