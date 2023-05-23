@@ -103,6 +103,7 @@ interface IState {
   versionToUploadCertificate: CollectionVersionSearch;
   namespace: NamespaceType;
   copyCollectionToRepositoryModal: CollectionVersionSearch;
+  deleteAll: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -123,6 +124,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
       },
       deleteCollection: null,
+      deleteAll: false,
       collectionVersion: null,
       confirmDelete: false,
       alerts: [],
@@ -233,7 +235,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
         noDependencies,
-        onClick: () => this.openDeleteModalWithConfirm(),
+        onClick: () => this.openDeleteModalWithConfirm(null, true),
+        deleteAll: true,
+      }),
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        noDependencies,
+        onClick: () => this.openDeleteModalWithConfirm(null, false),
+        deleteAll: false,
       }),
       hasPermission('ansible.delete_collection') && (
         <DropdownItem
@@ -419,6 +428,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                     addAlert: (alert) => this.context.queueAlert(alert),
                   });
             })
+          }
+          deleteFromRepo={
+            this.state.deleteAll ? null : collection.repository.name
           }
         />
         {copyCollectionToRepositoryModal && (
@@ -1016,11 +1028,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.setState({ showImportModal: isOpen });
   }
 
-  private openDeleteModalWithConfirm(version = null) {
+  private openDeleteModalWithConfirm(version = null, deleteAll = true) {
     this.setState({
       deleteCollection: this.props.collection,
       collectionVersion: version,
       confirmDelete: false,
+      deleteAll: deleteAll,
     });
   }
 

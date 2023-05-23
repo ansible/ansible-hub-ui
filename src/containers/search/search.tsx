@@ -65,6 +65,7 @@ interface IState {
   deleteCollection: CollectionVersionSearch;
   confirmDelete: boolean;
   isDeletionPending: boolean;
+  deleteAll: boolean;
 }
 
 class Search extends React.Component<RouteProps, IState> {
@@ -104,6 +105,7 @@ class Search extends React.Component<RouteProps, IState> {
       deleteCollection: null,
       confirmDelete: false,
       isDeletionPending: false,
+      deleteAll: true,
     };
   }
 
@@ -181,6 +183,9 @@ class Search extends React.Component<RouteProps, IState> {
                 addAlert: (alert) => this.addAlert(alert),
               }),
             )
+          }
+          deleteFromRepo={
+            this.state.deleteAll ? null : deleteCollection?.repository?.name
           }
         />
 
@@ -376,7 +381,21 @@ class Search extends React.Component<RouteProps, IState> {
             addAlert: (alert) => this.addAlert(alert),
             setState: (state) => this.setState(state),
             collection,
+            deleteAll: true,
           }),
+        deleteAll: true,
+      }),
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        noDependencies: null,
+        onClick: () =>
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+            addAlert: (alert) => this.addAlert(alert),
+            setState: (state) => this.setState(state),
+            collection,
+            deleteAll: false,
+          }),
+        deleteAll: false,
       }),
       hasPermission('galaxy.upload_to_namespace') && (
         <DropdownItem

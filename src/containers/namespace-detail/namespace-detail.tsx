@@ -91,6 +91,7 @@ interface IState {
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
   group: GroupType;
+  deleteAll: boolean;
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
@@ -137,6 +138,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showRoleRemoveModal: null,
       showRoleSelectWizard: null,
       group: null,
+      deleteAll: true,
     };
   }
 
@@ -347,6 +349,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 addAlert: (alert) => this.addAlert(alert),
               }),
             )
+          }
+          deleteFromRepo={
+            this.state.deleteAll ? null : deleteCollection?.repository?.name
           }
         />
         {isOpenNamespaceModal && (
@@ -977,7 +982,21 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   addAlert: (alert) => this.addAlert(alert),
                   setState: (state) => this.setState(state),
                   collection,
+                  deleteAll: true,
                 }),
+              deleteAll: true,
+            }),
+            DeleteCollectionUtils.deleteMenuOption({
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
+              noDependencies: null,
+              onClick: () =>
+                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+                  addAlert: (alert) => this.addAlert(alert),
+                  setState: (state) => this.setState(state),
+                  collection,
+                  deleteAll: false,
+                }),
+              deleteAll: false,
             }),
             <DropdownItem
               onClick={() =>

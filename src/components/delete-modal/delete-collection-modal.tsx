@@ -13,6 +13,7 @@ interface IProps {
   cancelAction: () => void;
   deleteAction: () => void;
   setConfirmDelete: (val) => void;
+  deleteFromRepo: any;
 }
 
 export const DeleteCollectionModal = (props: IProps) => {
@@ -25,6 +26,7 @@ export const DeleteCollectionModal = (props: IProps) => {
     cancelAction,
     deleteAction,
     setConfirmDelete,
+    deleteFromRepo,
   } = props;
 
   return (
@@ -50,6 +52,13 @@ export const DeleteCollectionModal = (props: IProps) => {
                     {deleteCollection.collection_version.name} v
                     {collectionVersion}
                   </b>{' '}
+                  {deleteFromRepo ? (
+                    <>
+                      from repository <b>{deleteFromRepo} </b>
+                    </>
+                  ) : (
+                    <>from the system </>
+                  )}{' '}
                   and its data will be lost and this will cause the entire
                   collection to be deleted.
                 </Trans>
@@ -60,14 +69,28 @@ export const DeleteCollectionModal = (props: IProps) => {
                     {deleteCollection.collection_version.name} v
                     {collectionVersion}
                   </b>{' '}
+                  {deleteFromRepo ? (
+                    <>
+                      from repository <b>{deleteFromRepo} </b>
+                    </>
+                  ) : (
+                    <>from the system </>
+                  )}{' '}
                   and its data will be lost.
                 </Trans>
               )}
             </>
           ) : (
             <Trans>
-              Deleting <b>{deleteCollection.collection_version.name}</b> and its
-              data will be lost.
+              Deleting <b>{deleteCollection.collection_version.name}</b>{' '}
+              {deleteFromRepo ? (
+                <>
+                  from repository <b>{deleteFromRepo} </b>
+                </>
+              ) : (
+                <>from the system </>
+              )}{' '}
+              and its data will be lost.
             </Trans>
           )}
         </Text>

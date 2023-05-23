@@ -27,10 +27,15 @@ export class DeleteCollectionUtils {
     canDeleteCollection,
     noDependencies,
     onClick,
+    deleteAll,
   }) {
     if (!canDeleteCollection) {
       return null;
     }
+
+    const caption = deleteAll
+      ? t`Delete entire collection from system`
+      : t`Delete collection from repository`;
 
     if (noDependencies === false) {
       return (
@@ -45,7 +50,7 @@ export class DeleteCollectionUtils {
             </Trans>
           }
         >
-          <DropdownItem isDisabled>{t`Delete entire collection`}</DropdownItem>
+          <DropdownItem isDisabled>{caption}</DropdownItem>
         </Tooltip>
       );
     }
@@ -56,7 +61,7 @@ export class DeleteCollectionUtils {
         onClick={onClick}
         data-cy='delete-collection-dropdown'
       >
-        {t`Delete entire collection`}
+        {caption}
       </DropdownItem>
     );
   }
@@ -65,6 +70,7 @@ export class DeleteCollectionUtils {
     addAlert,
     setState,
     collection,
+    deleteAll,
   }) {
     DeleteCollectionUtils.getUsedbyDependencies(collection)
       .then((noDependencies) =>
@@ -73,6 +79,7 @@ export class DeleteCollectionUtils {
           setState,
           noDependencies,
           collection,
+          deleteAll,
         }),
       )
       .catch((alert) => addAlert(alert));
@@ -83,11 +90,13 @@ export class DeleteCollectionUtils {
     setState,
     noDependencies,
     collection,
+    deleteAll,
   }) {
     if (noDependencies) {
       setState({
         deleteCollection: collection,
         confirmDelete: false,
+        deleteAll: deleteAll,
       });
     } else {
       addAlert({
@@ -99,11 +108,6 @@ export class DeleteCollectionUtils {
           </Trans>
         ),
         variant: 'warning',
-      });
-
-      setState({
-        deleteCollection: collection,
-        confirmDelete: false,
       });
     }
   }
