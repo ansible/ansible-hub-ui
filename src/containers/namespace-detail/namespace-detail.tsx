@@ -299,9 +299,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { hasPermission } = this.context;
 
     const canEditOwners =
-      this.state.namespace.related_fields.my_permissions?.includes(
-        'galaxy.change_namespace',
-      ) || hasPermission('galaxy.change_namespace');
+      this.state.namespace.my_permissions?.includes(
+        'ansible.change_ansiblenamespace',
+      ) || hasPermission('ansible.change_ansiblenamespace');
 
     // remove ?group (access tab) when switching tabs
     const tabParams = { ...params };
@@ -710,10 +710,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         is_highest: true,
       }),
       NamespaceAPI.get(this.props.routeParams.namespace, {
-        include_related: 'my_permissions',
+        // include_related: 'my_permissions',
       }),
       MyNamespaceAPI.get(this.props.routeParams.namespace, {
-        include_related: 'my_permissions',
+        // include_related: 'my_permissions',
       }).catch((e) => {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope

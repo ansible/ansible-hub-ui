@@ -46,6 +46,7 @@ interface IState {
     page_size?: number;
     tenant?: string;
     keywords?: string;
+    my_permissions?: string;
   };
   hasPermission: boolean;
   isModalOpen: boolean;
@@ -68,15 +69,16 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',
       'page_size',
+      'my_permissions',
     ]);
 
     if (!params['page_size']) {
       params['page_size'] = 20;
     }
 
-    if (!params['sort']) {
-      params['sort'] = 'name';
-    }
+    // if (!params['sort']) {
+    //   params['sort'] = 'name';
+    // }
 
     this.state = {
       alerts: [],
@@ -99,11 +101,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
   componentDidMount() {
     this.setState({ alerts: this.context.alerts || [] });
     this.context.setAlerts([]);
-
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({})
+      MyNamespaceAPI.list({ my_permissions: 'ansible.change_ansiblenamespace' })
         .then((results) => {
           if (results.data.count !== 0) {
             this.loadNamespaces();
@@ -290,7 +291,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       ? t`Namespaces will appear once created`
       : t`This account is not set up to manage any namespaces`;
 
-    const noDataButton = hasPermission('galaxy.add_namespace') ? (
+    const noDataButton = hasPermission('ansible.add_ansiblenamespace') ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
         {t`Create`}
       </Button>
@@ -325,7 +326,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           <div key={i} className='card-wrapper'>
             <NamespaceCard
               namespaceURL={formatPath(namespacePath, {
-                namespace: ns.name,
+                namespace: ns.pulp_href.split('/').at(-2),
               })}
               key={i}
               {...ns}

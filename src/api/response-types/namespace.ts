@@ -13,6 +13,7 @@ export class NamespaceListType {
   avatar_url: string;
   description: string;
   num_collections: number;
+  pulp_href: string;
 }
 
 export class NamespaceType extends NamespaceListType {
@@ -20,5 +21,5 @@ export class NamespaceType extends NamespaceListType {
   resources: string;
   owners: string[];
   links: NamespaceLinkType[];
-  related_fields: { my_permissions?: string[] };
+  my_permissions: string[];
 }

@@ -1,7 +1,7 @@
-import { HubAPI } from './hub';
+import { PulpAPI } from './pulp';
 
-class API extends HubAPI {
-  apiPath = this.getUIPath('my-namespaces/');
+class API extends PulpAPI {
+  apiPath = 'pulp_ansible/namespaces/';
 
   get(id: string, params = {}) {
     return this.http.get(this.apiPath + id + '/', { params });

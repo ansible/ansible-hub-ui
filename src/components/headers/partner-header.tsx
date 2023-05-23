@@ -66,7 +66,7 @@ export class PartnerHeader extends React.Component<IProps> {
               updateParams={(p) => updateParams(p)}
             />
           </div>
-          {namespace.links.length > 0 ? (
+          {namespace?.links?.length > 0 ? (
             <div className='links'>
               <div>
                 <ExternalLinkAltIcon />
