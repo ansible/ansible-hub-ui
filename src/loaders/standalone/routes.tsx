@@ -1,149 +1,59 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType, LoadingPageWithHeader } from 'src/components';
+import {
+  AnsibleRemoteDetail,
+  AnsibleRemoteEdit,
+  AnsibleRemoteList,
+  AnsibleRepositoryDetail,
+  AnsibleRepositoryEdit,
+  AnsibleRepositoryList,
+  CertificationDashboard,
+  CollectionContent,
+  CollectionDependencies,
+  CollectionDetail,
+  CollectionDistributions,
+  CollectionDocs,
+  CollectionImportLog,
+  EditNamespace,
+  EditRole,
+  EditUser,
+  ExecutionEnvironmentDetail,
+  ExecutionEnvironmentDetailAccess,
+  ExecutionEnvironmentDetailActivities,
+  ExecutionEnvironmentDetailImages,
+  ExecutionEnvironmentList,
+  ExecutionEnvironmentManifest,
+  ExecutionEnvironmentRegistryList,
+  GroupDetail,
+  GroupList,
+  LandingPage,
+  LegacyNamespace,
+  LegacyNamespaces,
+  LegacyRole,
+  LegacyRoles,
+  LoginPage,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  RoleCreate,
+  RoleList,
+  Search,
+  SignatureKeysList,
+  TaskDetail,
+  TaskListView,
+  TokenStandalone,
+  UserCreate,
+  UserDetail,
+  UserList,
+  UserProfile,
+} from 'src/containers';
 import { AppContext, useContext } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
-
-const AnsibleRemoteDetail = lazy(
-  () => import('src/containers/ansible-remote/detail'),
-);
-const AnsibleRemoteEdit = lazy(
-  () => import('src/containers/ansible-remote/edit'),
-);
-const AnsibleRemoteList = lazy(
-  () => import('src/containers/ansible-remote/list'),
-);
-const AnsibleRepositoryDetail = lazy(
-  () => import('src/containers/ansible-repository/detail'),
-);
-const AnsibleRepositoryEdit = lazy(
-  () => import('src/containers/ansible-repository/edit'),
-);
-const AnsibleRepositoryList = lazy(
-  () => import('src/containers/ansible-repository/list'),
-);
-const CertificationDashboard = lazy(
-  () =>
-    import('src/containers/certification-dashboard/certification-dashboard'),
-);
-const CollectionContent = lazy(
-  () => import('src/containers/collection-detail/collection-content'),
-);
-const CollectionDependencies = lazy(
-  () => import('src/containers/collection-detail/collection-dependencies'),
-);
-const CollectionDetail = lazy(
-  () => import('src/containers/collection-detail/collection-detail'),
-);
-const CollectionDistributions = lazy(
-  () => import('src/containers/collection-detail/collection-distributions'),
-);
-const CollectionDocs = lazy(
-  () => import('src/containers/collection-detail/collection-docs'),
-);
-const CollectionImportLog = lazy(
-  () => import('src/containers/collection-detail/collection-import-log'),
-);
-const EditNamespace = lazy(
-  () => import('src/containers/edit-namespace/edit-namespace'),
-);
-const EditRole = lazy(() => import('src/containers/role-management/role-edit'));
-const EditUser = lazy(() => import('src/containers/user-management/user-edit'));
-const ExecutionEnvironmentDetail = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-detail/execution_environment_detail'
-    ),
-);
-const ExecutionEnvironmentDetailAccess = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-detail/execution_environment_detail_access'
-    ),
-);
-const ExecutionEnvironmentDetailActivities = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-detail/execution_environment_detail_activities'
-    ),
-);
-const ExecutionEnvironmentDetailImages = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-detail/execution_environment_detail_images'
-    ),
-);
-const ExecutionEnvironmentList = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-list/execution_environment_list'
-    ),
-);
-const ExecutionEnvironmentManifest = lazy(
-  () =>
-    import(
-      'src/containers/execution-environment-manifest/execution-environment-manifest'
-    ),
-);
-const ExecutionEnvironmentRegistryList = lazy(
-  () => import('src/containers/execution-environment/registry-list'),
-);
-const GroupDetail = lazy(
-  () => import('src/containers/group-management/group-detail'),
-);
-const GroupList = lazy(
-  () => import('src/containers/group-management/group-list'),
-);
-const LandingPage = lazy(() => import('src/containers/landing/landing-page'));
-const LegacyNamespace = lazy(
-  () => import('src/containers/legacy-namespaces/legacy-namespace'),
-);
-const LegacyNamespaces = lazy(
-  () => import('src/containers/legacy-namespaces/legacy-namespaces'),
-);
-const LegacyRole = lazy(
-  () => import('src/containers/legacy-roles/legacy-role'),
-);
-const LegacyRoles = lazy(
-  () => import('src/containers/legacy-roles/legacy-roles'),
-);
-const LoginPage = lazy(() => import('src/containers/login/login'));
-const MyImports = lazy(() => import('src/containers/my-imports/my-imports'));
-const MyNamespaces = lazy(
-  () => import('src/containers/namespace-list/my-namespaces'),
-);
-const NamespaceDetail = lazy(
-  () => import('src/containers/namespace-detail/namespace-detail'),
-);
-const NotFound = lazy(() => import('src/containers/not-found/not-found'));
-const Partners = lazy(() => import('src/containers/namespace-list/partners'));
-const RoleCreate = lazy(
-  () => import('src/containers/role-management/role-create'),
-);
-const RoleList = lazy(() => import('src/containers/role-management/role-list'));
-const Search = lazy(() => import('src/containers/search/search'));
-const SignatureKeysList = lazy(
-  () => import('src/containers/signature-keys/list'),
-);
-const TaskDetail = lazy(
-  () => import('src/containers/task-management/task_detail'),
-);
-const TaskListView = lazy(
-  () => import('src/containers/task-management/task-list-view'),
-);
-const TokenStandalone = lazy(
-  () => import('src/containers/token/token-standalone'),
-);
-const UserCreate = lazy(
-  () => import('src/containers/user-management/user-create'),
-);
-const UserDetail = lazy(
-  () => import('src/containers/user-management/user-detail'),
-);
-const UserList = lazy(() => import('src/containers/user-management/user-list'));
-const UserProfile = lazy(() => import('src/containers/settings/user-profile'));
 
 type UpdateInitialData = (
   data: {

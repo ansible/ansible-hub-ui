@@ -1,89 +1,33 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
+import {
+  AnsibleRemoteDetail,
+  AnsibleRemoteEdit,
+  AnsibleRemoteList,
+  AnsibleRepositoryDetail,
+  AnsibleRepositoryEdit,
+  AnsibleRepositoryList,
+  CertificationDashboard,
+  CollectionContent,
+  CollectionDependencies,
+  CollectionDetail,
+  CollectionDistributions,
+  CollectionDocs,
+  CollectionImportLog,
+  EditNamespace,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  Search,
+  SignatureKeysList,
+  TaskDetail,
+  TaskListView,
+  TokenInsights,
+} from 'src/containers';
 import { Paths } from 'src/paths';
-
-const AnsibleRemoteDetail = lazy(
-  () => import('src/containers/ansible-remote/detail'),
-);
-const AnsibleRemoteEdit = lazy(
-  () => import('src/containers/ansible-remote/edit'),
-);
-const AnsibleRemoteList = lazy(
-  () => import('src/containers/ansible-remote/list'),
-);
-const AnsibleRepositoryDetail = lazy(
-  () => import('src/containers/ansible-repository/detail'),
-);
-const AnsibleRepositoryEdit = lazy(
-  () => import('src/containers/ansible-repository/edit'),
-);
-const AnsibleRepositoryList = lazy(
-  () => import('src/containers/ansible-repository/list'),
-);
-
-const CertificationDashboard = lazy(
-  () =>
-    import('src/containers/certification-dashboard/certification-dashboard'),
-);
-
-const CollectionContent = lazy(
-  () => import('src/containers/collection-detail/collection-content'),
-);
-
-const CollectionDependencies = lazy(
-  () => import('src/containers/collection-detail/collection-dependencies'),
-);
-
-const CollectionDetail = lazy(
-  () => import('src/containers/collection-detail/collection-detail'),
-);
-
-const CollectionDocs = lazy(
-  () => import('src/containers/collection-detail/collection-docs'),
-);
-
-const CollectionImportLog = lazy(
-  () => import('src/containers/collection-detail/collection-import-log'),
-);
-
-const CollectionDistributions = lazy(
-  () => import('src/containers/collection-detail/collection-distributions'),
-);
-
-const EditNamespace = lazy(
-  () => import('src/containers/edit-namespace/edit-namespace'),
-);
-
-const MyImports = lazy(() => import('src/containers/my-imports/my-imports'));
-
-const MyNamespaces = lazy(
-  () => import('src/containers/namespace-list/my-namespaces'),
-);
-
-const NamespaceDetail = lazy(
-  () => import('src/containers/namespace-detail/namespace-detail'),
-);
-
-const NotFound = lazy(() => import('src/containers/not-found/not-found'));
-
-const Partners = lazy(() => import('src/containers/namespace-list/partners'));
-
-const Search = lazy(() => import('src/containers/search/search'));
-
-const SignatureKeysList = lazy(
-  () => import('src/containers/signature-keys/list'),
-);
-
-const TaskDetail = lazy(
-  () => import('src/containers/task-management/task_detail'),
-);
-
-const TaskListView = lazy(
-  () => import('src/containers/task-management/task-list-view'),
-);
-
-const TokenInsights = lazy(() => import('src/containers/token/token-insights'));
 
 const routes = [
   { path: Paths.ansibleRemoteDetail, component: AnsibleRemoteDetail },
