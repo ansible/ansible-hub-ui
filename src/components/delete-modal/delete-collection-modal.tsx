@@ -42,6 +42,7 @@ export const DeleteCollectionModal = (props: IProps) => {
             : t`Delete collection?`
         }
       >
+        Repo:{deleteFromRepo}
         <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
           {collectionVersion ? (
             <>
