@@ -2,7 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
+import { NamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -187,13 +187,15 @@ class EditNamespace extends React.Component<RouteProps, IState> {
   }
 
   private loadNamespace() {
-    MyNamespaceAPI.get(this.props.routeParams.namespace)
+    NamespaceAPI.list({
+      name: this.props.routeParams.namespace,
+    })
       .then((response) => {
         // Add an empty link to the end of the links array to create an empty field
         // on the link edit form for adding new links
         const emptyLink: NamespaceLinkType = { name: '', url: '' };
         response.data.links.push(emptyLink);
-        this.setState({ loading: false, namespace: response.data });
+        this.setState({ loading: false, namespace: response.data.results[0] });
       })
       .catch(() => {
         this.setState({ unauthorized: true, loading: false });
@@ -214,7 +216,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
 
       namespace.links = setLinks;
 
-      MyNamespaceAPI.update(this.state.namespace.name, namespace)
+      NamespaceAPI.update(this.state.namespace.name, namespace)
         .then((result) => {
           this.setState(
             {
