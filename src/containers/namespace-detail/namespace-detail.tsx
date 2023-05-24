@@ -730,9 +730,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         this.setState({
           collections: val[0].data.data,
           itemCount: val[0].data.meta.count,
-          namespace: val[1].data,
-          showControls: !!val[2],
-          canSign: canSignNamespace(this.context, val[2]?.data),
+          namespace: val[1].data.results[0],
+          showControls: !!val[1].data.results[0],
+          canSign: canSignNamespace(this.context, val[1]?.data.results[0]),
           group: this.filterGroup(
             this.state.params['group'],
             val[1].data['groups'],
