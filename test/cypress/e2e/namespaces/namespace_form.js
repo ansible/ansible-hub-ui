@@ -24,7 +24,7 @@ describe('A namespace form', () => {
   beforeEach(() => {
     cy.login();
     createNamespace();
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
     cy.contains('button', 'Create').click();
     cy.contains('Create a new namespace');
   });

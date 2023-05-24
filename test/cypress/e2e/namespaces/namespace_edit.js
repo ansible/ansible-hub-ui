@@ -47,7 +47,7 @@ describe('Edit a namespace', () => {
   beforeEach(() => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.goToNamespaces();
+    cy.menuGo('Collections > Namespaces');
     cy.get(`a[href*="${uiPrefix}namespaces/testns1"]`).click();
     cy.contains('No collections yet');
     kebabToggle();

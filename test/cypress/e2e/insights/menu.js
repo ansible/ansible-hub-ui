@@ -30,6 +30,7 @@ describe('Insights Menu Tests', () => {
   });
 
   beforeEach(() => {
+    cy.on('uncaught:exception', () => false);
     cy.login();
     cy.visit(uiPrefix);
     cy.wait(2000);
@@ -71,12 +72,6 @@ describe('Insights Menu Tests', () => {
   });
 
   it('can navigate to Connect to Hub', () => {
-    cy.on('uncaught:exception', () => {
-      return false;
-      // this is needed, otherwise it fails on (fetch)POST 404 /api/featureflags/v0/client/metrics
-      // it seems that cy on duration is valid inside it, it does not catch api calls outisde
-    });
-
     menuClick('Connect to Hub');
     cy.contains('main', 'Connect Private Automation Hub');
     cy.contains('main .body', 'Connect Private Automation Hub');
