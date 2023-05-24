@@ -53,8 +53,9 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
-  canSignNamespace,
+  RepositoriesUtils,
   errorMessage,
+  canSignNamespace,
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
@@ -926,61 +927,79 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private deleteCollectionVersion = (collectionVersion) => {
     const { deleteCollection } = this.state;
     const { collections } = this.props;
-    CollectionAPI.deleteCollectionVersion(deleteCollection)
-      .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-        const name = deleteCollection.collection_version.name;
+    const { deleteAll } = this.state;
 
-        waitForTask(taskId).then(() => {
-          const topVersion = (collections || []).filter(
-            ({ collection_version }) =>
-              collection_version.version !== collectionVersion,
+    let promise = null;
+
+    if (deleteAll) {
+      promise = CollectionAPI.deleteCollectionVersion(deleteCollection);
+    } else {
+      promise = promise = RepositoriesUtils.deleteCollection(
+        deleteCollection.repository.name,
+        deleteCollection.collection_version.pulp_href,
+      );
+    }
+
+    const name = deleteCollection.collection_version.name;
+
+    promise
+      .then((res) => {
+        if (!deleteAll) {
+          return;
+        }
+
+        const taskId = parsePulpIDFromURL(res.data.task);
+        return waitForTask(taskId);
+      })
+      .then(() => {
+        const topVersion = (collections || []).filter(
+          ({ collection_version }) =>
+            collection_version.version !== collectionVersion,
+        );
+
+        if (topVersion.length) {
+          this.props.updateParams(
+            ParamHelper.setParam(
+              this.props.params,
+              'version',
+              topVersion[0].collection_version.version,
+            ),
           );
 
-          if (topVersion.length) {
-            this.props.updateParams(
-              ParamHelper.setParam(
-                this.props.params,
-                'version',
-                topVersion[0].collection_version.version,
-              ),
-            );
-
-            this.setState({
-              deleteCollection: null,
-              collectionVersion: null,
-              isDeletionPending: false,
-              alerts: [
-                ...this.state.alerts,
-                {
-                  variant: 'success',
-                  title: (
-                    <Trans>
-                      Collection &quot;{name} v{collectionVersion}&quot; has
-                      been successfully deleted.
-                    </Trans>
-                  ),
-                },
-              ],
-            });
-          } else {
-            // last version in collection => collection will be deleted => redirect
-            this.context.queueAlert({
-              variant: 'success',
-              title: (
-                <Trans>
-                  Collection &quot;{name} v{collectionVersion}&quot; has been
-                  successfully deleted.
-                </Trans>
-              ),
-            });
-            this.setState({
-              redirect: formatPath(Paths.namespaceDetail, {
-                namespace: deleteCollection.collection_version.namespace,
-              }),
-            });
-          }
-        });
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            isDeletionPending: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'success',
+                title: (
+                  <Trans>
+                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    successfully deleted.
+                  </Trans>
+                ),
+              },
+            ],
+          });
+        } else {
+          // last version in collection => collection will be deleted => redirect
+          this.context.queueAlert({
+            variant: 'success',
+            title: (
+              <Trans>
+                Collection &quot;{name} v{collectionVersion}&quot; has been
+                successfully deleted.
+              </Trans>
+            ),
+          });
+          this.setState({
+            redirect: formatPath(Paths.namespaceDetail, {
+              namespace: deleteCollection.collection_version.namespace,
+            }),
+          });
+        }
       })
       .catch((err) => {
         const {
