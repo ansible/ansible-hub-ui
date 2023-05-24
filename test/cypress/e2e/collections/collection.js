@@ -16,7 +16,10 @@ describe('collection tests', () => {
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.get('[data-cy=delete-collection-dropdown]').click();
+    cy.contains(
+      '[data-cy=delete-collection-dropdown]',
+      'Delete entire collection from system',
+    ).click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains('No collections yet', { timeout: 10000 });
@@ -34,7 +37,10 @@ describe('collection tests', () => {
       `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
     ).click();
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.get('[data-cy=delete-version-dropdown]').click();
+    cy.contains(
+      '[data-cy=delete-version-dropdown]',
+      'Delete version 1.0.0 from system',
+    ).click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
