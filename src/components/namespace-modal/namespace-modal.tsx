@@ -64,7 +64,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   private handleSubmit = () => {
     const data = {
       name: this.state.newNamespaceName,
-      groups: [],
     };
     NamespaceAPI.create(data)
       .then(() => {

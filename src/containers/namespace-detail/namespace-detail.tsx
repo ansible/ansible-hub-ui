@@ -709,11 +709,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         namespace: this.props.routeParams.namespace,
         is_highest: true,
       }),
-      NamespaceAPI.get(this.props.routeParams.namespace, {
-        // include_related: 'my_permissions',
-      }),
-      MyNamespaceAPI.get(this.props.routeParams.namespace, {
-        // include_related: 'my_permissions',
+      NamespaceAPI.list({
+        name: this.props.routeParams.namespace,
       }).catch((e) => {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope
