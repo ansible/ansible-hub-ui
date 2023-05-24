@@ -1,6 +1,4 @@
 import '../app.scss';
-import { t } from '@lingui/macro';
-import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import React, { useEffect, useState } from 'react';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
@@ -59,11 +57,6 @@ const App = (_props) => {
           ),
       }}
     >
-      <Alert
-        isInline
-        variant='info'
-        title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
-      />
       <InsightsRoutes />
       <UIVersion />
     </AppContext.Provider>
