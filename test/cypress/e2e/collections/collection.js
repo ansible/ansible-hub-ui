@@ -4,6 +4,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('collection tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
   });
 
   beforeEach(() => {
@@ -23,6 +24,37 @@ describe('collection tests', () => {
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains('No collections yet', { timeout: 10000 });
+  });
+
+  it('deletes an collection from repository', () => {
+    cy.createApprovedCollection('test_namespace', 'test_collection');
+    cy.galaxykit('repository create repo2 --pipeline approved');
+    cy.galaxykit('distribution create repo2');
+
+    cy.galaxykit('task wait all');
+    cy.galaxykit(
+      'collection copy test_namespace test_collection 1.0.0 published repo2',
+    );
+
+    cy.visit(`${uiPrefix}collections?view_type=list`);
+    cy.contains('Collections');
+    cy.contains('[data-cy="CollectionListItem"]', 'published');
+    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
+
+    cy.get('[aria-label="Actions"]:first').click();
+    cy.contains(
+      '[data-cy=delete-collection-dropdown]',
+      'Delete collection from repository',
+    ).click();
+    cy.get('input[id=delete_confirm]').click();
+    cy.get('button').contains('Delete').click();
+    cy.contains('Collection "test_collection" has been successfully deleted.', {
+      timeout: 10000,
+    });
+    cy.contains('[data-cy="CollectionListItem"]', 'published').should(
+      'not.exist',
+    );
+    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
   });
 
   it('deletes a collection version', () => {
