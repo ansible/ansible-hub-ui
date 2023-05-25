@@ -5056,7 +5056,7 @@ msgstr "patientez jusqu’à ce que l’importation se termine"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:45
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
-msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} autre {Failed to add collections to repository \"{repositoryName}\".}}"
+msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
@@ -5093,19 +5093,19 @@ msgstr "{company} logo"
 
 #: src/components/numeric-label/numeric-label.tsx:72
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
-msgstr "{count, plural, one {Dependency} autre {Dependencies}}"
+msgstr "{count, plural, one {Dependency} other {Dependencies}}"
 
 #: src/components/numeric-label/numeric-label.tsx:60
 msgid "{count, plural, one {Module} other {Modules}}"
-msgstr "{count, plural, one {Module} tous les {Modules}}"
+msgstr "{count, plural, one {Module} other {Modules}}"
 
 #: src/components/numeric-label/numeric-label.tsx:68
 msgid "{count, plural, one {Plugin} other {Plugins}}"
-msgstr "{count, plural, one {Plugin} tous les {Plugins}}"
+msgstr "{count, plural, one {Plugin} other {Plugins}}"
 
 #: src/components/numeric-label/numeric-label.tsx:64
 msgid "{count, plural, one {Role} other {Roles}}"
-msgstr "{count, plural, one {Role} tous les {Roles}}"
+msgstr "{count, plural, one {Role} other {Roles}}"
 
 #: src/utilities/chip-group-props.ts:6
 msgid "{count} more"
@@ -5113,7 +5113,7 @@ msgstr "{count} plus"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, plural, one {# byte} tous les {# bytes}}"
+msgstr "{n, plural, one {# byte} other {# bytes}}"
 
 #: src/containers/task-management/task-list-view.tsx:353
 msgid "{name} will be cancelled."
