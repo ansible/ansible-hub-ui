@@ -106,7 +106,7 @@ msgstr "<0>{0}</0> zal permanent worden verwijderd."
 
 #: src/components/patternfly-wrappers/pagination.tsx:43
 msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
-msgstr "van"
+msgstr "<0>{firstIndex} - {lastIndex}</0> van <1>{itemCount}</1>"
 
 #: src/components/rbac/delete-group-modal.tsx:27
 msgid "<0>{name}</0> will be permanently deleted."
@@ -1783,7 +1783,7 @@ msgstr "Fout {statusCode} - {statusText}: U hebt niet de vereiste machtigingen o
 
 #: src/utilities/fail-alerts.ts:16
 msgid "Error {statusCode} - {statusText}: {customMessage}"
-msgstr "Fout: {statusCode}"
+msgstr "Fout {statusCode} - {statusText}: {customMessage}"
 
 #: src/containers/execution-environment-detail/base.tsx:182
 #: src/containers/execution-environment-list/execution_environment_list.tsx:461
@@ -1940,11 +1940,11 @@ msgstr "Kan distributie niet verwijderen {name}"
 
 #: src/actions/ansible-remote-delete.tsx:40
 msgid "Failed to remove remote {name}"
-msgstr "Kan licentie niet verwijderen."
+msgstr "Kan afstandsbediening {name} niet verwijderen"
 
 #: src/actions/ansible-repository-delete.tsx:66
 msgid "Failed to remove repository {name}"
-msgstr "Kan licentie niet verwijderen."
+msgstr "Kan repository {name} niet verwijderen"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:33
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -3116,7 +3116,7 @@ msgstr "Beschermde repositories kunnen niet worden verwijderd."
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:83
 msgid "Provided by <0>{0}</0>"
-msgstr "Geleverd door <0>"
+msgstr "Geleverd door <0>{0}</0>"
 
 #: src/components/cards/collection-card.tsx:78
 #: src/components/collection-list/collection-list-item.tsx:85
@@ -3126,7 +3126,7 @@ msgstr "Geleverd door <0>"
 #: src/components/cards/collection-card.tsx:95
 #: src/components/collection-list/collection-list-item.tsx:91
 msgid "Provided by <0>{company}</0>"
-msgstr "Geleverd door <0>"
+msgstr "Geleverd door <0>{company}</0>"
 
 #: src/components/repositories/remote-form.tsx:499
 #: src/containers/ansible-remote/tab-details.tsx:67
@@ -3381,7 +3381,7 @@ msgstr "Externe registers"
 #: src/containers/ansible-remote/detail.tsx:44
 #: src/containers/ansible-remote/edit.tsx:43
 msgid "Remote could not be displayed."
-msgstr "Rol \"\" kan niet worden weergegeven."
+msgstr "Externe kan niet worden weergegeven."
 
 #: src/containers/ansible-remote/list.tsx:41
 #: src/containers/ansible-remote/list.tsx:74
@@ -3516,7 +3516,7 @@ msgstr "Naam repository"
 #: src/containers/ansible-repository/detail.tsx:51
 #: src/containers/ansible-repository/edit.tsx:38
 msgid "Repository could not be displayed."
-msgstr "Rol \"\" kan niet worden weergegeven."
+msgstr "Repository kan niet worden weergegeven."
 
 #: src/components/repositories/ansible-repository-form.tsx:185
 msgid "Repository labels can change the context in which a repository is seen.<0><1><2>Hide from search</2> (<3>hide_from_search</3>) - prevent collections in this repository from showing up on the home page</1><4>(<5>pipeline: *</5>) - see Pipeline above</4></0>"
@@ -3530,7 +3530,7 @@ msgstr "Naam repository"
 
 #: src/components/approve-modal/approve-modal.tsx:106
 msgid "Repository name {originRepoName} not found."
-msgstr "Naam repository"
+msgstr "Naam repository {originRepoName} niet gevonden."
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:317
 msgid "Repository versions"
@@ -3547,7 +3547,7 @@ msgstr "Repository-versies verschijnen zodra het archief is gewijzigd."
 #: src/utilities/repositories.ts:46
 #: src/utilities/repositories.ts:46
 msgid "Repository {repoName} not found."
-msgstr "Inventaris niet gevonden."
+msgstr "Repository {repoName} niet gevonden."
 
 #: src/components/collection-detail/collection-info.tsx:167
 msgid "Requires Ansible"
@@ -3598,7 +3598,7 @@ msgstr "Rol"
 
 #: src/containers/role-management/role-create.tsx:147
 msgid "Role \"{0}\" could not be created."
-msgstr "Rol '{0}' kan niet worden aangemaakt."
+msgstr "Rol \"{0}\" kan niet worden aangemaakt."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:120
 msgid "Role \"{0}\" could not be deleted."
@@ -3622,7 +3622,7 @@ msgstr "Rol \"{name}\" is verwijderd."
 
 #: src/containers/legacy-roles/legacy-role.tsx:385
 msgid "Role Header"
-msgstr "Titel"
+msgstr "Rolkop"
 
 #: src/components/rbac/role-form.tsx:95
 #: src/containers/role-management/role-list.tsx:144
@@ -3747,7 +3747,7 @@ msgstr "Een tag selecteren"
 
 #: src/components/approve-modal/approve-modal.tsx:345
 msgid "Select all ({0} items)"
-msgstr "Alles selecteren"
+msgstr "Alles selecteren ({0} items)"
 
 #: src/components/headers/collection-header.tsx:438
 msgid "Select collection version"
@@ -3862,7 +3862,7 @@ msgstr "Alle collecties ondertekenen"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:834
 msgid "Sign all collections in {repository}"
-msgstr "Alle collecties ondertekenen"
+msgstr "Alle collecties ondertekenen in {repository}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:540
 #: src/containers/certification-dashboard/certification-dashboard.tsx:571
@@ -3971,7 +3971,7 @@ msgstr "Maat"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:146
 msgid "Size: {size}"
-msgstr "Maat"
+msgstr "Maat: {size}"
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Sort results"
@@ -4047,11 +4047,11 @@ msgstr "Succesvol gekopieerd naar klembord!"
 
 #: src/containers/ansible-remote/edit.tsx:124
 msgid "Successfully created remote {0}"
-msgstr "{{resource}} aangemaakt"
+msgstr "{0} aangemaakt"
 
 #: src/containers/ansible-repository/edit.tsx:118
 msgid "Successfully created repository {0}"
-msgstr "{{resource}} aangemaakt"
+msgstr "{0} aangemaakt"
 
 #: src/components/headers/collection-header.tsx:545
 #~ msgid "Successfully deleted collection version."
@@ -4744,7 +4744,7 @@ msgstr "Versienummer"
 
 #: src/containers/ansible-repository/detail.tsx:44
 msgid "Version {repositoryVersion}"
-msgstr "Versie:"
+msgstr "Versie  {repositoryVersion}"
 
 #: src/components/my-imports/import-console.tsx:189
 msgid "Version:"

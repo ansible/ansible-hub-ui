@@ -30,7 +30,7 @@ msgstr "(cargado)"
 
 #: src/containers/not-found/not-found.tsx:11
 msgid "404 - Page not found"
-msgstr "No se encontró el usuario."
+msgstr "404 - Página no encontrada"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:155
 msgid "<0/> was added"
@@ -106,7 +106,7 @@ msgstr "<0>{0}</0> se eliminará permanentemente."
 
 #: src/components/patternfly-wrappers/pagination.tsx:43
 msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
-msgstr "de"
+msgstr "<0>{firstIndex} - {lastIndex}</0> de <1>{itemCount}</1>"
 
 #: src/components/rbac/delete-group-modal.tsx:27
 msgid "<0>{name}</0> will be permanently deleted."
@@ -276,7 +276,7 @@ msgstr "Añadir una nueva etiqueta a la imagen"
 
 #: src/actions/ansible-remote-create.tsx:8
 msgid "Add remote"
-msgstr "Remoto"
+msgstr "Añadir remoto"
 
 #: src/containers/execution-environment/registry-list.tsx:150
 #: src/containers/execution-environment/registry-list.tsx:213
@@ -285,7 +285,7 @@ msgstr "Añadir registro remoto"
 
 #: src/actions/ansible-repository-create.tsx:8
 msgid "Add repository"
-msgstr "Nombre del repositorio"
+msgstr "Añadir repositorio"
 
 #: src/components/rbac/access-tab.tsx:196
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:161
@@ -1042,7 +1042,7 @@ msgstr "Crear"
 
 #: src/components/repositories/ansible-repository-form.tsx:227
 msgid "Create a \"{0}\" distribution"
-msgstr "Crear una distribución \"{0}"
+msgstr "Crear una distribución \"{0}\""
 
 #: src/components/rbac/group-modal.tsx:45
 msgid "Create a group"
@@ -1783,7 +1783,7 @@ msgstr "Error {statusCode} - {statusText}: No tiene los permisos necesarios para
 
 #: src/utilities/fail-alerts.ts:16
 msgid "Error {statusCode} - {statusText}: {customMessage}"
-msgstr "Error {statusCode} - {statusText}"
+msgstr "Error {statusCode} - {statusText}: {customMessage}"
 
 #: src/containers/execution-environment-detail/base.tsx:182
 #: src/containers/execution-environment-list/execution_environment_list.tsx:461
@@ -1940,11 +1940,11 @@ msgstr "No se ha podido eliminar la distribución {name}"
 
 #: src/actions/ansible-remote-delete.tsx:40
 msgid "Failed to remove remote {name}"
-msgstr "Se produjo un error al eliminar la licencia."
+msgstr "Se produjo un error al eliminar {name}"
 
 #: src/actions/ansible-repository-delete.tsx:66
 msgid "Failed to remove repository {name}"
-msgstr "Se produjo un error al eliminar la licencia."
+msgstr "Se produjo un error al eliminar {name}"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:33
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -2834,7 +2834,7 @@ msgstr "Ningún resultado coincide con los criterios de filtrado. Pruebe cambiar
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "No roles yet"
-msgstr "No hay papeles todavía"
+msgstr "No hay roles todavía"
 
 #: src/containers/signature-keys/list.tsx:95
 msgid "No signature keys yet"
@@ -3116,7 +3116,7 @@ msgstr "Los repositorios protegidos no pueden borrarse."
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:83
 msgid "Provided by <0>{0}</0>"
-msgstr "Proporcionado por <0>"
+msgstr "Proporcionado por <0>{0}</0>"
 
 #: src/components/cards/collection-card.tsx:78
 #: src/components/collection-list/collection-list-item.tsx:85
@@ -3126,7 +3126,7 @@ msgstr "Proporcionado por <0>"
 #: src/components/cards/collection-card.tsx:95
 #: src/components/collection-list/collection-list-item.tsx:91
 msgid "Provided by <0>{company}</0>"
-msgstr "Proporcionado por <0>"
+msgstr "Proporcionado por <0>{company}</0>"
 
 #: src/components/repositories/remote-form.tsx:499
 #: src/containers/ansible-remote/tab-details.tsx:67
@@ -3530,7 +3530,7 @@ msgstr "Nombre del repositorio"
 
 #: src/components/approve-modal/approve-modal.tsx:106
 msgid "Repository name {originRepoName} not found."
-msgstr "Nombre del repositorio"
+msgstr "Nombre del repositorio {originRepoName} no encontrado."
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:317
 msgid "Repository versions"
@@ -3547,7 +3547,7 @@ msgstr "Las versiones del repositorio aparecerán cuando se modifique el reposit
 #: src/utilities/repositories.ts:46
 #: src/utilities/repositories.ts:46
 msgid "Repository {repoName} not found."
-msgstr "No se encontró el inventario."
+msgstr "Repositorio {repoName} no encontrado."
 
 #: src/components/collection-detail/collection-info.tsx:167
 msgid "Requires Ansible"
@@ -3747,7 +3747,7 @@ msgstr "Seleccione una etiqueta"
 
 #: src/components/approve-modal/approve-modal.tsx:345
 msgid "Select all ({0} items)"
-msgstr "Seleccionar todo"
+msgstr "Seleccionar todo ({0} items)"
 
 #: src/components/headers/collection-header.tsx:438
 msgid "Select collection version"
@@ -3862,7 +3862,7 @@ msgstr "Firmar todas las colecciones"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:834
 msgid "Sign all collections in {repository}"
-msgstr "Firmar todas las colecciones"
+msgstr "Firmar todas las colecciones en {repository}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:540
 #: src/containers/certification-dashboard/certification-dashboard.tsx:571
@@ -3880,7 +3880,7 @@ msgstr "Estado de la firma"
 
 #: src/components/headers/collection-header.tsx:252
 #~ msgid "Sign version {0}"
-#~ msgstr "Sign version {0}"
+#~ msgstr "Versión de firma {0}"
 
 #: src/components/headers/collection-header.tsx:267
 #: src/components/signing/sign-single-certificate-modal.tsx:27
@@ -3971,7 +3971,7 @@ msgstr "Tamaño"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:146
 msgid "Size: {size}"
-msgstr "Tamaño"
+msgstr "Tamaño: {size}"
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Sort results"
@@ -4047,11 +4047,11 @@ msgstr "Copiado correctamente en el portapapeles"
 
 #: src/containers/ansible-remote/edit.tsx:124
 msgid "Successfully created remote {0}"
-msgstr "{{ resource }} creado correctamente"
+msgstr "Remoto creado con éxito {0}"
 
 #: src/containers/ansible-repository/edit.tsx:118
 msgid "Successfully created repository {0}"
-msgstr "{{ resource }} creado correctamente"
+msgstr "Repositorio creado con éxito {0}"
 
 #: src/components/headers/collection-header.tsx:545
 #~ msgid "Successfully deleted collection version."
@@ -4744,7 +4744,7 @@ msgstr "Número de versión"
 
 #: src/containers/ansible-repository/detail.tsx:44
 msgid "Version {repositoryVersion}"
-msgstr "Versión:"
+msgstr "Versión  {repositoryVersion}"
 
 #: src/components/my-imports/import-console.tsx:189
 msgid "Version:"
@@ -4752,7 +4752,7 @@ msgstr "Versión:"
 
 #: src/containers/ansible-repository/detail.tsx:24
 msgid "Versions"
-msgstr "Versiones de ."
+msgstr "Versiones de"
 
 #: src/constants.tsx:122
 #~ msgid "View Ansible distribution"
@@ -4776,11 +4776,11 @@ msgstr "Ver colecciones"
 
 #: src/constants.tsx:172
 #~ msgid "View container's namespace"
-#~ msgstr "View container's namespace"
+#~ msgstr "Ver el espacio de nombres del contenedor"
 
 #: src/constants.tsx:175
 #~ msgid "View container's repository"
-#~ msgstr "View container's repository"
+#~ msgstr "Ver el repositorio del contenedor"
 
 #: src/constants.tsx:181
 #~ msgid "View distribution"
@@ -5056,7 +5056,7 @@ msgstr "esperando a que termine la importación"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:45
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
-msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName} other {Failed to add collections to repository \"{repositoryName}}"
+msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
