@@ -301,7 +301,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const canEditOwners =
       this.state.namespace.my_permissions?.includes(
         'ansible.change_ansiblenamespace',
-      ) || hasPermission('ansible.change_ansiblenamespace');
+      ) || hasPermission('galaxy.change_namespace');
 
     // remove ?group (access tab) when switching tabs
     const tabParams = { ...params };

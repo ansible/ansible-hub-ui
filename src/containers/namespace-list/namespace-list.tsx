@@ -104,7 +104,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({ my_permissions: 'ansible.change_ansiblenamespace' })
+      NamespaceAPI.list({ my_permissions: 'ansible.change_ansiblenamespace' })
         .then((results) => {
           if (results.data.count !== 0) {
             this.loadNamespaces();
