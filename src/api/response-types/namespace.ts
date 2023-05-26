@@ -1,3 +1,4 @@
+import { LatestMetadataType } from './latest-metadata';
 import { GroupObjectPermissionType } from './permissions';
 
 export class NamespaceLinkType {
@@ -13,7 +14,6 @@ export class NamespaceListType {
   avatar_url: string;
   description: string;
   num_collections: number;
-  pulp_href: string;
 }
 
 export class NamespaceType extends NamespaceListType {
@@ -22,4 +22,5 @@ export class NamespaceType extends NamespaceListType {
   owners: string[];
   links: NamespaceLinkType[];
   my_permissions: string[];
+  latest_metadata: LatestMetadataType;
 }

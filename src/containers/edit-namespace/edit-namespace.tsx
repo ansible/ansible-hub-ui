@@ -189,6 +189,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
   private loadNamespace() {
     NamespaceAPI.list({
       name: this.props.routeParams.namespace,
+      my_permissions: 'ansible.change_ansiblenamespace',
     })
       .then((response) => {
         // Add an empty link to the end of the links array to create an empty field

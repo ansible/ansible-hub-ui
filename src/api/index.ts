@@ -5,6 +5,7 @@ export {
   NamespaceListType,
   NamespaceLinkType,
 } from './response-types/namespace';
+export { LatestMetadataType } from './response-types/latest-metadata';
 export {
   CollectionDetailType,
   CollectionListType,

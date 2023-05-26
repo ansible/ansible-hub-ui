@@ -66,12 +66,12 @@ export class PartnerHeader extends React.Component<IProps> {
               updateParams={(p) => updateParams(p)}
             />
           </div>
-          {namespace?.links?.length > 0 ? (
+          {namespace?.latest_metadata?.links?.length > 0 ? (
             <div className='links'>
               <div>
                 <ExternalLinkAltIcon />
               </div>
-              {namespace.links.map((x, i) => {
+              {namespace.latest_metadata.links.map((x, i) => {
                 return (
                   <div className='link' key={i}>
                     <a href={x.url} target='blank'>
