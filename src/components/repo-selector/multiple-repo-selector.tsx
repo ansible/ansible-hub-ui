@@ -33,6 +33,7 @@ interface IProps {
   selectedRepos: string[];
   setSelectedRepos: (selectedRepos: string[]) => void;
   singleSelectionOnly?: boolean;
+  hideFixedRepos?: boolean;
 }
 
 export const MultipleRepoSelector = (props: IProps) => {
@@ -73,7 +74,9 @@ export const MultipleRepoSelector = (props: IProps) => {
           {props.selectedRepos.map((name) => {
             let label = null;
             if (props.fixedRepos.includes(name)) {
-              label = <Label>{name}</Label>;
+              if (!props.hideFixedRepos) {
+                label = <Label>{name}</Label>;
+              }
             } else {
               label = (
                 <Label onClose={() => changeSelection(name)}>{name}</Label>
@@ -274,7 +277,7 @@ export const MultipleRepoSelector = (props: IProps) => {
 
   return (
     <>
-      {!props.singleSelectionOnly && renderLabels()}
+      {renderLabels()}
       <div className='toolbar hub-toolbar'>
         <Toolbar>
           <ToolbarGroup>

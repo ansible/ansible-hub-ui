@@ -43,6 +43,7 @@ interface IState {
   alerts: AlertType[];
   selectedRepos: string[];
   onlyStaging: boolean;
+  fixedRepos: string[];
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
@@ -63,6 +64,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       alerts: [],
       selectedRepos: [],
       onlyStaging: true,
+      fixedRepos: [],
     };
   }
 
@@ -85,6 +87,21 @@ export class ImportModal extends React.Component<IProps, IState> {
         if (data.data.results.length == 1) {
           this.setState({ selectedRepos: [data.data.results[0].name] });
         }
+
+        // fill repos that user cant select
+        let res = [];
+
+        if (!this.state.onlyStaging) {
+          res = data.data.results
+            .filter(
+              (repo) =>
+                repo.pulp_labels?.pipeline &&
+                repo.pulp_labels?.pipeline != 'staging',
+            )
+            .map((repo) => repo.name);
+        }
+
+        this.setState({ fixedRepos: res });
       })
       .catch((error) => {
         this.addAlert(
@@ -243,11 +260,12 @@ export class ImportModal extends React.Component<IProps, IState> {
             <MultipleRepoSelector
               singleSelectionOnly={true}
               allRepositories={this.state.allRepos}
-              fixedRepos={[]}
+              fixedRepos={this.state.fixedRepos}
               selectedRepos={this.state.selectedRepos}
               setSelectedRepos={(repos) =>
                 this.setState({ selectedRepos: repos, errors: '' })
               }
+              hideFixedRepos={true}
               loadRepos={(
                 params,
                 setRepositoryList,
