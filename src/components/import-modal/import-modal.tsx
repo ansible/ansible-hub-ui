@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, Modal } from '@patternfly/react-core';
+import { Button, Modal, Radio } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
@@ -42,6 +42,7 @@ interface IState {
   loading: boolean;
   alerts: AlertType[];
   selectedRepos: string[];
+  onlyStaging: boolean;
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
@@ -61,6 +62,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       loading: true,
       alerts: [],
       selectedRepos: [],
+      onlyStaging: true,
     };
   }
 
@@ -69,7 +71,12 @@ export class ImportModal extends React.Component<IProps, IState> {
   }
 
   private loadAllRepos(pipeline) {
-    return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
+    let filter = {};
+    if (this.state.onlyStaging) {
+      filter = { pulp_label_select: `pipeline=${pipeline}` };
+    }
+
+    return Repositories.list(filter)
       .then((data) => {
         this.setState({
           allRepos: data.data.results,
@@ -105,9 +112,14 @@ export class ImportModal extends React.Component<IProps, IState> {
   private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
     // modify params
     const par = { ...params };
-    par['pulp_label_select'] = 'pipeline=staging';
+
+    if (this.state.onlyStaging) {
+      par['pulp_label_select'] = 'pipeline=staging';
+    }
+
     par['ordering'] = par['sort'];
     delete par['sort'];
+
     setLoading(true);
 
     Repositories.list(par)
@@ -205,6 +217,29 @@ export class ImportModal extends React.Component<IProps, IState> {
         {this.state.allRepos.length > 1 && (
           <>
             <br />
+            <Radio
+              isChecked={this.state.onlyStaging}
+              name='radio-1'
+              onChange={(val) => {
+                this.setState({ onlyStaging: val }, () =>
+                  this.loadAllRepos('staging'),
+                );
+              }}
+              label={t`Staging Repos`}
+              id='radio-staging'
+            ></Radio>
+            <Radio
+              isChecked={!this.state.onlyStaging}
+              name='radio-2'
+              onChange={(val) => {
+                this.setState({ onlyStaging: !val }, () =>
+                  this.loadAllRepos('staging'),
+                );
+              }}
+              label={t`All Repos`}
+              id='radio-all'
+            ></Radio>
+
             <MultipleRepoSelector
               singleSelectionOnly={true}
               allRepositories={this.state.allRepos}

@@ -99,7 +99,7 @@ export const MultipleRepoSelector = (props: IProps) => {
 
   useEffect(() => {
     props.loadRepos(params, setRepositoryList, setLoading, setItemsCount);
-  }, [params]);
+  }, [params, props.allRepositories]);
 
   function renderMultipleSelector() {
     function onToggle(isOpen: boolean) {
