@@ -181,7 +181,7 @@ msgstr "About"
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
 #: src/containers/ansible-remote/detail.tsx:20
-#: src/containers/ansible-repository/detail.tsx:22
+#: src/containers/ansible-repository/detail.tsx:26
 #: src/containers/group-management/group-detail.tsx:143
 #: src/containers/namespace-detail/namespace-detail.tsx:240
 #: src/containers/namespace-detail/namespace-detail.tsx:258
@@ -328,7 +328,7 @@ msgstr "Add tag(s) to include"
 msgid "Additional details"
 msgstr "Additional details"
 
-#: src/containers/ansible-repository/tab-details.tsx:37
+#: src/containers/ansible-repository/tab-details.tsx:44
 #: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "All"
@@ -395,6 +395,7 @@ msgid "Approve, reject and sync collections from remotes."
 msgstr "Approve, reject and sync collections from remotes."
 
 #: src/components/repositories/ansible-repository-form.tsx:160
+#: src/containers/ansible-repository/list.tsx:56
 #: src/containers/certification-dashboard/certification-dashboard.tsx:253
 #: src/containers/certification-dashboard/certification-dashboard.tsx:282
 #: src/containers/certification-dashboard/certification-dashboard.tsx:427
@@ -503,7 +504,7 @@ msgstr "CA certificate"
 msgid "CLI configuration"
 msgstr "CLI configuration"
 
-#: src/containers/token/token-insights.tsx:204
+#: src/containers/token/token-insights.tsx:201
 msgid "CRC public key"
 msgstr "CRC public key"
 
@@ -840,7 +841,7 @@ msgstr "Collection upload canceled"
 #: src/actions/ansible-repository-collection-version-add.tsx:203
 #: src/components/approve-modal/approve-modal.tsx:399
 #: src/components/headers/collection-header.tsx:341
-#: src/containers/ansible-repository/detail.tsx:23
+#: src/containers/ansible-repository/detail.tsx:27
 #: src/containers/ansible-repository/tab-collection-versions.tsx:137
 #: src/containers/ansible-repository/tab-repository-versions.tsx:111
 #: src/containers/certification-dashboard/certification-dashboard.tsx:390
@@ -895,7 +896,7 @@ msgid "Community"
 msgstr "Community"
 
 #: src/components/collection-detail/collection-content-list.tsx:145
-#: src/containers/collection-detail/collection-docs.tsx:288
+#: src/containers/collection-detail/collection-docs.tsx:297
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Community collections do not have docs nor content counts, but all content gets synchronized"
 
@@ -913,15 +914,15 @@ msgstr "Completed"
 #~ msgid "Configure"
 #~ msgstr "Configure"
 
-#: src/containers/token/token-insights.tsx:96
+#: src/containers/token/token-insights.tsx:94
 msgid "Connect Private Automation Hub"
 msgstr "Connect Private Automation Hub"
 
-#: src/containers/token/token-insights.tsx:113
+#: src/containers/token/token-insights.tsx:105
 msgid "Connect the ansible-galaxy client"
 msgstr "Connect the ansible-galaxy client"
 
-#: src/containers/token/token-insights.tsx:93
+#: src/containers/token/token-insights.tsx:91
 msgid "Connect to Hub"
 msgstr "Connect to Hub"
 
@@ -1014,7 +1015,7 @@ msgstr "Copied"
 msgid "Copy"
 msgstr "Copy"
 
-#: src/actions/ansible-repository-copy.tsx:7
+#: src/actions/ansible-repository-copy.tsx:8
 msgid "Copy CLI configuration"
 msgstr "Copy CLI configuration"
 
@@ -1113,7 +1114,7 @@ msgstr "Create, delete and change collection namespaces. Upload and delete colle
 msgid "Created"
 msgstr "Created"
 
-#: src/containers/ansible-repository/list.tsx:88
+#: src/containers/ansible-repository/list.tsx:117
 #: src/containers/ansible-repository/tab-repository-versions.tsx:247
 #: src/containers/ansible-repository/tab-repository-versions.tsx:312
 msgid "Created date"
@@ -1398,7 +1399,7 @@ msgstr "Deprecation status update starting for collection \"{name}\"."
 #: src/components/rbac/select-roles.tsx:98
 #: src/components/repositories/ansible-repository-form.tsx:205
 #: src/containers/ansible-repository/tab-collection-versions.tsx:132
-#: src/containers/ansible-repository/tab-details.tsx:34
+#: src/containers/ansible-repository/tab-details.tsx:41
 #: src/containers/ansible-repository/tab-repository-versions.tsx:106
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:220
@@ -1425,7 +1426,7 @@ msgstr "Detail"
 
 #: src/components/rbac/role-form.tsx:74
 #: src/containers/ansible-remote/detail.tsx:19
-#: src/containers/ansible-repository/detail.tsx:21
+#: src/containers/ansible-repository/detail.tsx:25
 msgid "Details"
 msgstr "Details"
 
@@ -1444,7 +1445,7 @@ msgstr "Digital accessibility"
 msgid "Disabled"
 msgstr "Disabled"
 
-#: src/containers/ansible-repository/tab-details.tsx:40
+#: src/containers/ansible-repository/tab-details.tsx:47
 msgid "Distribution"
 msgstr "Distribution"
 
@@ -1472,7 +1473,7 @@ msgstr "Docs site"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:107
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 
@@ -1920,7 +1921,7 @@ msgstr "Failed to load Ansible Lightspeed information."
 #~ msgid "Failed to load collection."
 #~ msgstr "Failed to load collection."
 
-#: src/components/repositories/lazy-distributions.tsx:51
+#: src/components/repositories/lazy-distributions.tsx:64
 msgid "Failed to load distributions: {error}"
 msgstr "Failed to load distributions: {error}"
 
@@ -2018,10 +2019,10 @@ msgstr "Filter by name"
 #~ msgid "Filter by repository"
 #~ msgstr "Filter by repository"
 
-#: src/components/patternfly-wrappers/compound-filter.tsx:125
-#: src/components/patternfly-wrappers/compound-filter.tsx:131
-#: src/components/patternfly-wrappers/compound-filter.tsx:186
-#: src/components/patternfly-wrappers/compound-filter.tsx:198
+#: src/components/patternfly-wrappers/compound-filter.tsx:126
+#: src/components/patternfly-wrappers/compound-filter.tsx:132
+#: src/components/patternfly-wrappers/compound-filter.tsx:187
+#: src/components/patternfly-wrappers/compound-filter.tsx:199
 msgid "Filter by {0}"
 msgstr "Filter by {0}"
 
@@ -2175,7 +2176,7 @@ msgid "Group {groupId}"
 msgstr "Group {groupId}"
 
 #: src/containers/ansible-remote/detail.tsx:39
-#: src/containers/ansible-repository/detail.tsx:46
+#: src/containers/ansible-repository/detail.tsx:50
 msgid "Group {group}"
 msgstr "Group {group}"
 
@@ -2370,7 +2371,7 @@ msgid "Keywords"
 msgstr "Keywords"
 
 #: src/components/repositories/ansible-repository-form.tsx:254
-#: src/containers/ansible-repository/tab-details.tsx:44
+#: src/containers/ansible-repository/tab-details.tsx:59
 msgid "Labels"
 msgstr "Labels"
 
@@ -2387,7 +2388,7 @@ msgstr "Last modified"
 msgid "Last name"
 msgstr "Last name"
 
-#: src/containers/ansible-repository/list.tsx:83
+#: src/containers/ansible-repository/list.tsx:112
 msgid "Last synced"
 msgstr "Last synced"
 
@@ -2400,7 +2401,7 @@ msgid "Last updated <0/>"
 msgstr "Last updated <0/>"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:82
-#: src/containers/ansible-repository/detail.tsx:62
+#: src/containers/ansible-repository/detail.tsx:66
 msgid "Last updated from registry {0}"
 msgstr "Last updated from registry {0}"
 
@@ -2480,10 +2481,14 @@ msgstr "List of Legacy Roles"
 msgid "List of versions"
 msgstr "List of versions"
 
-#: src/containers/token/token-insights.tsx:146
+#: src/containers/token/token-insights.tsx:138
 #: src/containers/token/token-standalone.tsx:100
 msgid "Load token"
 msgstr "Load token"
+
+#: src/actions/ansible-repository-copy.tsx:14
+msgid "Loading distribution..."
+msgstr "Loading distribution..."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:419
 msgid "Local"
@@ -2536,7 +2541,7 @@ msgstr "Manage collection remotes."
 msgid "Manage tags"
 msgstr "Manage tags"
 
-#: src/containers/token/token-insights.tsx:168
+#: src/containers/token/token-insights.tsx:160
 msgid "Manage tokens"
 msgstr "Manage tokens"
 
@@ -2715,6 +2720,7 @@ msgstr "Namespaces will appear once created"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr "Namespaces will appear once created or roles are imported"
 
+#: src/containers/ansible-repository/list.tsx:52
 #: src/containers/certification-dashboard/certification-dashboard.tsx:249
 #: src/containers/certification-dashboard/certification-dashboard.tsx:283
 msgid "Needs Review"
@@ -2741,7 +2747,7 @@ msgid "Next"
 msgstr "Next"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:187
-#: src/containers/ansible-repository/tab-details.tsx:49
+#: src/containers/ansible-repository/tab-details.tsx:64
 msgid "No"
 msgstr "No"
 
@@ -2858,7 +2864,7 @@ msgstr "No remote registries yet"
 msgid "No remotes yet"
 msgstr "No remotes yet"
 
-#: src/containers/ansible-repository/list.tsx:45
+#: src/containers/ansible-repository/list.tsx:65
 msgid "No repositories yet"
 msgstr "No repositories yet"
 
@@ -2925,8 +2931,8 @@ msgstr "No versions"
 #: src/containers/ansible-remote/tab-details.tsx:75
 #: src/containers/ansible-remote/tab-details.tsx:78
 #: src/containers/ansible-remote/tab-details.tsx:80
-#: src/containers/ansible-repository/tab-details.tsx:34
-#: src/containers/ansible-repository/tab-details.tsx:60
+#: src/containers/ansible-repository/tab-details.tsx:41
+#: src/containers/ansible-repository/tab-details.tsx:75
 #: src/containers/ansible-repository/tab-repository-versions.tsx:118
 #: src/containers/ansible-repository/tab-repository-versions.tsx:145
 msgid "None"
@@ -2938,7 +2944,7 @@ msgstr "Not a super user"
 
 #: src/components/rbac/permission-chip-selector.tsx:99
 #: src/components/typeahead/typeahead.tsx:90
-#: src/containers/collection-detail/collection-docs.tsx:277
+#: src/containers/collection-detail/collection-docs.tsx:286
 msgid "Not found"
 msgstr "Not found"
 
@@ -2966,7 +2972,7 @@ msgstr "Number must be greater than 0"
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
-#: src/containers/token/token-insights.tsx:130
+#: src/containers/token/token-insights.tsx:122
 msgid "Offline token"
 msgstr "Offline token"
 
@@ -3145,7 +3151,7 @@ msgstr "Preview"
 msgid "Privacy statement"
 msgstr "Privacy statement"
 
-#: src/containers/ansible-repository/tab-details.tsx:48
+#: src/containers/ansible-repository/tab-details.tsx:63
 msgid "Private"
 msgstr "Private"
 
@@ -3399,6 +3405,7 @@ msgid "Reject"
 msgstr "Reject"
 
 #: src/components/repo-selector/repo-selector.tsx:30
+#: src/containers/ansible-repository/list.tsx:48
 #: src/containers/certification-dashboard/certification-dashboard.tsx:245
 #: src/containers/certification-dashboard/certification-dashboard.tsx:284
 #: src/containers/certification-dashboard/certification-dashboard.tsx:434
@@ -3419,7 +3426,7 @@ msgid "Released <0/>"
 msgstr "Released <0/>"
 
 #: src/components/repositories/ansible-repository-form.tsx:294
-#: src/containers/ansible-repository/tab-details.tsx:52
+#: src/containers/ansible-repository/tab-details.tsx:67
 #: src/containers/execution-environment-list/execution_environment_list.tsx:419
 msgid "Remote"
 msgstr "Remote"
@@ -3535,18 +3542,18 @@ msgstr "Repo"
 #~ msgstr "Repo URL"
 
 #: src/containers/ansible-remote/tab-details.tsx:82
-#: src/containers/ansible-repository/detail.tsx:30
+#: src/containers/ansible-repository/detail.tsx:34
 #: src/containers/ansible-repository/edit.tsx:27
-#: src/containers/ansible-repository/list.tsx:93
+#: src/containers/ansible-repository/list.tsx:122
 #: src/loaders/standalone/menu.tsx:54
 msgid "Repositories"
 msgstr "Repositories"
 
-#: src/containers/ansible-repository/list.tsx:33
+#: src/containers/ansible-repository/list.tsx:34
 msgid "Repositories could not be displayed."
 msgstr "Repositories could not be displayed."
 
-#: src/containers/ansible-repository/list.tsx:44
+#: src/containers/ansible-repository/list.tsx:64
 msgid "Repositories will appear once created."
 msgstr "Repositories will appear once created."
 
@@ -3564,7 +3571,11 @@ msgstr "Repository"
 #~ msgid "Repository Management"
 #~ msgstr "Repository Management"
 
-#: src/containers/ansible-repository/detail.tsx:51
+#: src/containers/ansible-repository/tab-details.tsx:51
+msgid "Repository URL"
+msgstr "Repository URL"
+
+#: src/containers/ansible-repository/detail.tsx:55
 #: src/containers/ansible-repository/edit.tsx:38
 msgid "Repository could not be displayed."
 msgstr "Repository could not be displayed."
@@ -3573,9 +3584,9 @@ msgstr "Repository could not be displayed."
 msgid "Repository labels can change the context in which a repository is seen.<0><1><2>Hide from search</2> (<3>hide_from_search</3>) - prevent collections in this repository from showing up on the home page</1><4>(<5>pipeline: *</5>) - see Pipeline above</4></0>"
 msgstr "Repository labels can change the context in which a repository is seen.<0><1><2>Hide from search</2> (<3>hide_from_search</3>) - prevent collections in this repository from showing up on the home page</1><4>(<5>pipeline: *</5>) - see Pipeline above</4></0>"
 
-#: src/containers/ansible-repository/list.tsx:38
-#: src/containers/ansible-repository/list.tsx:73
-#: src/containers/ansible-repository/tab-details.tsx:33
+#: src/containers/ansible-repository/list.tsx:39
+#: src/containers/ansible-repository/list.tsx:102
+#: src/containers/ansible-repository/tab-details.tsx:40
 msgid "Repository name"
 msgstr "Repository name"
 
@@ -3620,7 +3631,7 @@ msgstr "Resources"
 msgid "Retained number of versions"
 msgstr "Retained number of versions"
 
-#: src/containers/ansible-repository/tab-details.tsx:36
+#: src/containers/ansible-repository/tab-details.tsx:43
 msgid "Retained version count"
 msgstr "Retained version count"
 
@@ -3713,7 +3724,7 @@ msgid "Running"
 msgstr "Running"
 
 #: src/components/repositories/remote-form.tsx:311
-#: src/containers/token/token-insights.tsx:192
+#: src/containers/token/token-insights.tsx:189
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3858,11 +3869,11 @@ msgstr "Selected group"
 msgid "Selected roles"
 msgstr "Selected roles"
 
-#: src/containers/token/token-insights.tsx:182
+#: src/containers/token/token-insights.tsx:174
 msgid "Server URL"
 msgstr "Server URL"
 
-#: src/containers/token/token-insights.tsx:63
+#: src/containers/token/token-insights.tsx:61
 msgid "Server URL could not be displayed."
 msgstr "Server URL could not be displayed."
 
@@ -4060,6 +4071,7 @@ msgstr "State"
 
 #: src/components/my-imports/import-list.tsx:88
 #: src/components/my-imports/import-list.tsx:122
+#: src/containers/ansible-repository/list.tsx:43
 #: src/containers/certification-dashboard/certification-dashboard.tsx:240
 #: src/containers/certification-dashboard/certification-dashboard.tsx:288
 #: src/containers/certification-dashboard/certification-dashboard.tsx:376
@@ -4092,7 +4104,7 @@ msgstr "Stop task?"
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
 
-#: src/actions/ansible-repository-copy.tsx:20
+#: src/actions/ansible-repository-copy.tsx:49
 #: src/containers/ansible-remote/tab-details.tsx:42
 msgid "Successfully copied to clipboard"
 msgstr "Successfully copied to clipboard"
@@ -4193,7 +4205,7 @@ msgstr "Sync started for remote registry \"{name}\"."
 msgid "Sync started for repository \"{name}\"."
 msgstr "Sync started for repository \"{name}\"."
 
-#: src/containers/ansible-repository/list.tsx:78
+#: src/containers/ansible-repository/list.tsx:107
 msgid "Sync status"
 msgstr "Sync status"
 
@@ -4305,8 +4317,8 @@ msgid "Text: {0}"
 msgstr "Text: {0}"
 
 #: src/loaders/insights/loader.tsx:65
-msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
-msgstr "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
+#~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
+#~ msgstr "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 
 #: src/utilities/validateURLHelper.ts:33
 msgid "The URL needs to be in 'http(s)://' format."
@@ -4352,7 +4364,7 @@ msgstr "The collection you have selected does not match this namespace."
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "The collection you have selected doesn't appear to match {0}"
 
-#: src/containers/collection-detail/collection-docs.tsx:278
+#: src/containers/collection-detail/collection-docs.tsx:287
 msgid "The file is not available for this version of {collectionName}"
 msgstr "The file is not available for this version of {collectionName}"
 
@@ -4396,7 +4408,7 @@ msgstr "The selected roles will be added to this specific Execution Environment.
 msgid "The selected roles will be added to this specific namespace."
 msgstr "The selected roles will be added to this specific namespace."
 
-#: src/containers/token/token-insights.tsx:154
+#: src/containers/token/token-insights.tsx:146
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
@@ -4427,6 +4439,11 @@ msgstr "There are currently no roles assigned to this group."
 #: src/components/rbac/select-roles.tsx:77
 msgid "There are currently no roles that can be assigned to this group."
 msgstr "There are currently no roles that can be assigned to this group."
+
+#: src/actions/ansible-repository-copy.tsx:30
+#: src/actions/ansible-repository-copy.tsx:55
+msgid "There are no distributions associated with this repository."
+msgstr "There are no distributions associated with this repository."
 
 #: src/actions/ansible-repository-sync.tsx:32
 msgid "There are no remotes associated with this repository."
@@ -4513,7 +4530,7 @@ msgstr "This will revoke all permissions associated with this role from the grou
 msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
 msgstr "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
 
-#: src/containers/token/token-insights.tsx:169
+#: src/containers/token/token-insights.tsx:161
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 
@@ -4652,8 +4669,8 @@ msgid "Use template"
 msgstr "Use template"
 
 #: src/containers/token/token-insights.tsx:98
-msgid "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
-msgstr "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
+#~ msgid "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
+#~ msgstr "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 
 #: src/containers/token/token-insights.tsx:98
 #~ msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
@@ -4663,6 +4680,10 @@ msgstr "Use the <0>Repositories</0> page to sync collections curated by your org
 msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
 msgstr "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
 
+#: src/containers/token/token-insights.tsx:96
+msgid "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
+msgstr "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
+
 #: src/components/execution-environment/repository-form.tsx:214
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 msgstr "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
@@ -4671,15 +4692,19 @@ msgstr "Use the namespace/name format for namespaced containers. Otherwise, use 
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "Use this URL to configure the API endpoints that clients need to"
 
+#: src/containers/token/token-insights.tsx:176
+msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
+msgstr "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
+
 #: src/containers/token/token-insights.tsx:184
-msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
-msgstr "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
+#~ msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
+#~ msgstr "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 
 #: src/containers/token/token-insights.tsx:141
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:194
+#: src/containers/token/token-insights.tsx:191
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 
@@ -4687,7 +4712,7 @@ msgstr "Use this URL to configure the authentication URLs that clients need to d
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "Use this token to authenticate clients that need to download"
 
-#: src/containers/token/token-insights.tsx:132
+#: src/containers/token/token-insights.tsx:124
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 
@@ -4812,7 +4837,7 @@ msgstr "Version"
 msgid "Version number"
 msgstr "Version number"
 
-#: src/containers/ansible-repository/detail.tsx:44
+#: src/containers/ansible-repository/detail.tsx:48
 msgid "Version {repositoryVersion}"
 msgstr "Version {repositoryVersion}"
 
@@ -4820,7 +4845,7 @@ msgstr "Version {repositoryVersion}"
 msgid "Version:"
 msgstr "Version:"
 
-#: src/containers/ansible-repository/detail.tsx:24
+#: src/containers/ansible-repository/detail.tsx:28
 msgid "Versions"
 msgstr "Versions"
 
@@ -4910,7 +4935,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "Waiting for {pendingTasks} task(s) to finish."
 
 #: src/components/collection-detail/collection-content-list.tsx:144
-#: src/containers/collection-detail/collection-docs.tsx:287
+#: src/containers/collection-detail/collection-docs.tsx:296
 msgid "Warning"
 msgstr "Warning"
 
@@ -4918,7 +4943,7 @@ msgstr "Warning"
 msgid "We couldn't find the page you're looking for!"
 msgstr "We couldn't find the page you're looking for!"
 
-#: src/containers/token/token-insights.tsx:206
+#: src/containers/token/token-insights.tsx:203
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 
@@ -4943,7 +4968,7 @@ msgstr "YAML requirements"
 
 #: src/components/confirm-modal/confirm-modal.tsx:35
 #: src/components/execution-environment/tag-manifest-modal.tsx:182
-#: src/containers/ansible-repository/tab-details.tsx:49
+#: src/containers/ansible-repository/tab-details.tsx:64
 msgid "Yes"
 msgstr "Yes"
 
