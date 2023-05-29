@@ -1,11 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  ExpandableRowContent,
-  TableComposable,
-  Tbody,
-  Td,
-  Tr,
-} from '@patternfly/react-table';
+import { ExpandableRowContent, TableComposable, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { useState } from 'react';
 import { SortTable } from 'src/components';
 
@@ -101,11 +95,7 @@ export const ExpandableRow: React.FC<{
       {expandableRowContent && (
         <Tr isExpanded={isExpanded}>
           <Td colSpan={colSpan ?? 4}>
-            {isExpanded && (
-              <ExpandableRowContent>
-                {expandableRowContent}
-              </ExpandableRowContent>
-            )}
+            {isExpanded && <ExpandableRowContent>{expandableRowContent}</ExpandableRowContent>}
           </Td>
         </Tr>
       )}

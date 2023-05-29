@@ -28,9 +28,7 @@ describe('Namespace detail screen', () => {
   });
 
   it('should show deprecation label after button click and page reload', () => {
-    cy.get(
-      '[data-cy="CollectionListItem"]:first button[aria-label="Actions"]',
-    ).click();
+    cy.get('[data-cy="CollectionListItem"]:first button[aria-label="Actions"]').click();
     cy.contains('.body ul a', 'Deprecate').click();
 
     // Reload the page
@@ -41,9 +39,7 @@ describe('Namespace detail screen', () => {
 
   it('should show the correct URL when clicking on the CLI configuration tab', () => {
     cy.get('.pf-c-tabs__link').eq(1).click();
-    cy.get('[aria-label="Copyable input"]')
-      .invoke('val')
-      .should('contain', apiPrefix);
+    cy.get('[aria-label="Copyable input"]').invoke('val').should('contain', apiPrefix);
   });
 
   it('should show an error when tring to upload a new collecting wiht invalid name', () => {
@@ -57,15 +53,9 @@ describe('Namespace detail screen', () => {
           mimeType: 'application/gzip',
         });
       });
-    cy.get('.file-error-messages').should(
-      'contain',
-      'does not match this namespace',
-    );
+    cy.get('.file-error-messages').should('contain', 'does not match this namespace');
 
-    cy.fixture(
-      'collections/namespace_detail_test-invalid-1.0.0(1).tar.gz',
-      'binary',
-    )
+    cy.fixture('collections/namespace_detail_test-invalid-1.0.0(1).tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)
       .then((fileContent) => {
         cy.get('input[type="file"]').attachFile({

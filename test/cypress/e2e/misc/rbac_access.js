@@ -70,26 +70,15 @@ describe('Execution Environment Access tab', () => {
   });
 });
 
-function testAccessTab({
-  num,
-  permission,
-  permissionGroup,
-  permissionLabel,
-  role,
-  roleFilter,
-}) {
+function testAccessTab({ num, permission, permissionGroup, permissionLabel, role, roleFilter }) {
   // new thing, expect no owners
   cy.get('.pf-c-empty-state');
   cy.get('button').contains('Select a group').click();
 
   // group role modal
   // find partner-engineers, select, check indicator, next
-  cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
-    'access{enter}',
-  );
-  cy.get(
-    '[data-cy="GroupListTable-CheckboxRow-row-access_group"] input[type=radio]',
-  ).click();
+  cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type('access{enter}');
+  cy.get('[data-cy="GroupListTable-CheckboxRow-row-access_group"] input[type=radio]').click();
 
   cy.get('strong').contains('Selected group');
   cy.get('.hub-permission').contains('access_group');
@@ -100,9 +89,7 @@ function testAccessTab({
   cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
     `${roleFilter}{enter}`,
   );
-  cy.get(
-    `[data-cy="RoleListTable-CheckboxRow-row-${role}"] input[type=checkbox]`,
-  ).click();
+  cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"] input[type=checkbox]`).click();
 
   cy.get('strong').contains('Selected roles');
   cy.get('.hub-permission').contains(role);
@@ -118,9 +105,7 @@ function testAccessTab({
 
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
-    .contains(
-      `Group "access_group" has been successfully added to "rbac_access_${num}".`,
-    )
+    .contains(`Group "access_group" has been successfully added to "rbac_access_${num}".`)
     .parent('.pf-c-alert')
     .find('button')
     .click();
@@ -135,25 +120,18 @@ function testAccessTab({
   // role list view, use modal
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
   cy.get('button').contains('Add roles').click();
-  cy.get('.pf-c-table__check input[type=checkbox]')
-    .not('[disabled]')
-    .first()
-    .click();
+  cy.get('.pf-c-table__check input[type=checkbox]').not('[disabled]').first().click();
   cy.get('footer button').contains('Next').click();
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
-    .contains(
-      `Group "access_group" roles successfully updated in "rbac_access_${num}".`,
-    )
+    .contains(`Group "access_group" roles successfully updated in "rbac_access_${num}".`)
     .parent('.pf-c-alert')
     .find('button')
     .click();
 
   // role list view, expand
   cy.get('tbody[role=rowgroup]').should('have.length', 2);
-  cy.get(
-    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] .pf-c-table__toggle button`,
-  ).click();
+  cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"] .pf-c-table__toggle button`).click();
   cy.contains('.pf-c-label', permissionLabel, { timeout: 10000 });
 
   // role list view, remove
@@ -166,9 +144,7 @@ function testAccessTab({
   cy.get('.pf-c-modal-box__body b').contains(`rbac_access_${num}`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
-    .contains(
-      `Group "access_group" roles successfully updated in "rbac_access_${num}".`,
-    )
+    .contains(`Group "access_group" roles successfully updated in "rbac_access_${num}".`)
     .parent('.pf-c-alert')
     .find('button')
     .click();
@@ -177,17 +153,13 @@ function testAccessTab({
   cy.get('.pf-c-breadcrumb__item a').last().click();
 
   // list view, delete, see empty
-  cy.get(
-    'tr[data-cy="AccessTab-row-access_group"] [data-cy=kebab-toggle] button',
-  ).click();
+  cy.get('tr[data-cy="AccessTab-row-access_group"] [data-cy=kebab-toggle] button').click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
   cy.get('.pf-c-modal-box__body b').contains('access_group');
   cy.get('.pf-c-modal-box__body b').contains(`rbac_access_${num}`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
-    .contains(
-      `Group "access_group" has been successfully removed from "rbac_access_${num}".`,
-    )
+    .contains(`Group "access_group" has been successfully removed from "rbac_access_${num}".`)
     .parent('.pf-c-alert')
     .find('button')
     .click();

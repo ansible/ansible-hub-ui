@@ -20,11 +20,7 @@ interface IProps {
   updateGroup?: (group) => void;
 }
 
-export const SelectGroup: React.FC<IProps> = ({
-  assignedGroups,
-  selectedGroup,
-  updateGroup,
-}) => {
+export const SelectGroup: React.FC<IProps> = ({ assignedGroups, selectedGroup, updateGroup }) => {
   const [inputText, setInputText] = useState<string>('');
   const [groups, setGroups] = useState<GroupType[]>([]);
   const [groupsCount, setGroupsCount] = useState<number>(0);
@@ -71,8 +67,7 @@ export const SelectGroup: React.FC<IProps> = ({
     );
   }
 
-  const isAssigned = ({ name }) =>
-    assignedGroups.some((group) => group.name === name);
+  const isAssigned = ({ name }) => assignedGroups.some((group) => group.name === name);
 
   const tabHeader = {
     headers: [
@@ -93,18 +88,14 @@ export const SelectGroup: React.FC<IProps> = ({
     <div className='hub-custom-wizard-layout'>
       <Flex
         justifyContent={{
-          default: noData
-            ? 'justifyContentFlexStart'
-            : 'justifyContentSpaceBetween',
+          default: noData ? 'justifyContentFlexStart' : 'justifyContentSpaceBetween',
         }}
         direction={{ default: 'column' }}
       >
         <FlexItem className='hub-select-roles-content'>
           <Flex
             justifyContent={{
-              default: noData
-                ? 'justifyContentFlexStart'
-                : 'justifyContentSpaceBetween',
+              default: noData ? 'justifyContentFlexStart' : 'justifyContentSpaceBetween',
             }}
             direction={{ default: 'column' }}
           >
@@ -119,10 +110,7 @@ export const SelectGroup: React.FC<IProps> = ({
 
                   <FlexItem flex={{ default: 'flex_1' }}>
                     <Flex>
-                      <FlexItem
-                        key={selectedGroup.name}
-                        className='hub-permission'
-                      >
+                      <FlexItem key={selectedGroup.name} className='hub-permission'>
                         <Label>{selectedGroup.name}</Label>
                       </FlexItem>
                     </Flex>

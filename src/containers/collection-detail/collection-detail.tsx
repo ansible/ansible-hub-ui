@@ -15,10 +15,7 @@ import { ParamHelper } from 'src/utilities/param-helper';
 import { IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
-class CollectionDetail extends React.Component<
-  RouteProps,
-  IBaseCollectionState
-> {
+class CollectionDetail extends React.Component<RouteProps, IBaseCollectionState> {
   constructor(props) {
     super(props);
 
@@ -46,14 +43,7 @@ class CollectionDetail extends React.Component<
   }
 
   render() {
-    const {
-      collections,
-      collectionsCount,
-      collection,
-      content,
-      params,
-      alerts,
-    } = this.state;
+    const { collections, collectionsCount, collection, content, params, alerts } = this.state;
 
     if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -76,10 +66,7 @@ class CollectionDetail extends React.Component<
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <CollectionHeader
           reload={() => this.loadCollections(true)}
           collections={collections}
@@ -87,9 +74,7 @@ class CollectionDetail extends React.Component<
           collection={collection}
           content={content}
           params={params}
-          updateParams={(p) =>
-            this.updateParams(p, () => this.loadCollections(true))
-          }
+          updateParams={(p) => this.updateParams(p, () => this.loadCollections(true))}
           breadcrumbs={breadcrumbs}
           activeTab='install'
           repo={this.props.routeParams.repo}

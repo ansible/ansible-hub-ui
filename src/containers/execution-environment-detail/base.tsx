@@ -128,12 +128,9 @@ export function withContainerRepo(WrappedComponent) {
 
       const permissions = this.state.repo.namespace.my_permissions;
       const showEdit =
-        permissions.includes(
-          'container.namespace_change_containerdistribution',
-        ) || permissions.includes('container.change_containernamespace');
-      const canSync = permissions.includes(
-        'container.change_containernamespace',
-      );
+        permissions.includes('container.namespace_change_containerdistribution') ||
+        permissions.includes('container.change_containernamespace');
+      const canSync = permissions.includes('container.change_containernamespace');
       const { hasPermission } = this.context;
       const dropdownItems = [
         this.state.repo.pulp.repository.remote && canSync && (
@@ -184,16 +181,13 @@ export function withContainerRepo(WrappedComponent) {
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
 
       // move to Owner tab when it can have its own breadcrumbs
-      const { group: groupId } = ParamHelper.parseParamString(
-        this.props.location.search,
-      ) as { group?: number };
+      const { group: groupId } = ParamHelper.parseParamString(this.props.location.search) as {
+        group?: number;
+      };
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          />
+          <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
           <PublishToControllerModal
             digest={publishToController?.digest}
             image={publishToController?.image}
@@ -260,9 +254,7 @@ export function withContainerRepo(WrappedComponent) {
                       }),
                     });
                     if (task) {
-                      waitForTask(
-                        task.data.task.split('tasks/')[1].replace('/', ''),
-                      ).then(() => {
+                      waitForTask(task.data.task.split('tasks/')[1].replace('/', '')).then(() => {
                         this.loadRepo();
                       });
                     } else {
@@ -274,16 +266,10 @@ export function withContainerRepo(WrappedComponent) {
                 distributionPulpId={this.state.repo.pulp.distribution.id}
                 isRemote={!!this.state.repo.pulp.repository.remote}
                 isNew={false}
-                upstreamName={
-                  this.state.repo.pulp.repository.remote?.upstream_name
-                }
+                upstreamName={this.state.repo.pulp.repository.remote?.upstream_name}
                 registry={this.state.repo.pulp.repository.remote?.registry}
-                excludeTags={
-                  this.state.repo.pulp.repository.remote?.exclude_tags || []
-                }
-                includeTags={
-                  this.state.repo.pulp.repository.remote?.include_tags || []
-                }
+                excludeTags={this.state.repo.pulp.repository.remote?.exclude_tags || []}
+                includeTags={this.state.repo.pulp.repository.remote?.include_tags || []}
                 remoteId={this.state.repo.pulp.repository.remote?.id}
               />
             )}
@@ -308,12 +294,8 @@ export function withContainerRepo(WrappedComponent) {
             loading: false,
           });
 
-          const last_sync_task =
-            result.data.pulp.repository.remote?.last_sync_task || {};
-          if (
-            last_sync_task.state &&
-            ['running', 'waiting'].includes(last_sync_task.state)
-          ) {
+          const last_sync_task = result.data.pulp.repository.remote?.last_sync_task || {};
+          if (last_sync_task.state && ['running', 'waiting'].includes(last_sync_task.state)) {
             // keep refreshing while a remove repo is being synced
             setTimeout(() => this.loadRepo(), 10000);
           }
@@ -361,12 +343,7 @@ export function withContainerRepo(WrappedComponent) {
     private sync(name) {
       ExecutionEnvironmentRemoteAPI.sync(name)
         .then(({ data }) => {
-          this.addAlertObj(
-            taskAlert(
-              data.task,
-              t`Sync started for remote registry "${name}".`,
-            ),
-          );
+          this.addAlertObj(taskAlert(data.task, t`Sync started for remote registry "${name}".`));
           this.loadRepo();
         })
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));

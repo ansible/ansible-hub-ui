@@ -8,12 +8,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import {
-  GroupObjectPermissionType,
-  GroupRoleAPI,
-  GroupRoleType,
-  RoleType,
-} from 'src/api';
+import { GroupObjectPermissionType, GroupRoleAPI, GroupRoleType, RoleType } from 'src/api';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -59,15 +54,12 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
   nonQueryParams,
 }) => {
   const [showAddRolesModal, setShowAddRolesModal] = useState<boolean>(false);
-  const [selectedDeleteRole, setSelectedDeleteRole] =
-    useState<GroupRoleType>(null);
+  const [selectedDeleteRole, setSelectedDeleteRole] = useState<GroupRoleType>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [roles, setRoles] = useState<GroupRoleType[]>([]);
   const [rolesItemCount, setRolesItemCount] = useState<number>(0);
   const [selectedRoles, setSelectedRoles] = useState<RoleType[]>([]);
-  const [inputText, setInputText] = useState<string>(
-    (params['role__icontains'] as string) || '',
-  );
+  const [inputText, setInputText] = useState<string>((params['role__icontains'] as string) || '');
   const [isRoleDeleting, setIsRoleDeleting] = useState(false);
 
   useEffect(() => {
@@ -143,21 +135,14 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
         <strong>{group?.name}</strong>.
       </Trans>
       <br />
-      <Trans>
-        This will revoke all permissions associated with this role from the
-        group.
-      </Trans>
+      <Trans>This will revoke all permissions associated with this role from the group.</Trans>
     </DeleteModal>
   );
 
   const { hasPermission } = context;
 
   const addRoles = hasPermission('galaxy.change_group') && (
-    <Button
-      onClick={() => setShowAddRolesModal(true)}
-      variant='primary'
-      data-cy='add-roles'
-    >
+    <Button onClick={() => setShowAddRolesModal(true)} variant='primary' data-cy='add-roles'>
       <Trans>Add roles</Trans>
     </Button>
   );
@@ -170,11 +155,9 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     );
   }
 
-  const noData =
-    roles.length === 0 && !filterIsSet(params, ['role__icontains']);
+  const noData = roles.length === 0 && !filterIsSet(params, ['role__icontains']);
 
-  const noFilteredData =
-    roles.length === 0 && filterIsSet(params, ['role__icontains']);
+  const noFilteredData = roles.length === 0 && filterIsSet(params, ['role__icontains']);
 
   const title = t`Add roles`;
 
@@ -320,25 +303,14 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
             style={{ marginTop: '16px' }}
             updateParams={(p) => updateParams(p)}
             params={params}
-            ignoredParams={[
-              'id',
-              'page',
-              'page_size',
-              'sort',
-              'tab',
-              ...nonQueryParams,
-            ]}
+            ignoredParams={['id', 'page', 'page_size', 'sort', 'tab', ...nonQueryParams]}
             niceNames={{
               role__icontains: t`Name`,
             }}
           />
           {!noFilteredData ? (
             <>
-              <RoleListTable
-                params={params}
-                updateParams={updateParams}
-                tableHeader={tableHeader}
-              >
+              <RoleListTable params={params} updateParams={updateParams} tableHeader={tableHeader}>
                 {roles.map((role, i) => (
                   <ExpandableRow
                     key={i}
@@ -353,12 +325,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
                     <td>{role.role}</td>
-                    <td>
-                      {translateLockedRolesDescription(
-                        role.role,
-                        role.description,
-                      )}
-                    </td>
+                    <td>{translateLockedRolesDescription(role.role, role.description)}</td>
                     <ListItemActions
                       kebabItems={[
                         hasPermission('galaxy.change_group') && (
@@ -376,19 +343,13 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
               </RoleListTable>
 
               <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
-                  params={params}
-                  updateParams={updateParams}
-                  count={rolesItemCount}
-                />
+                <Pagination params={params} updateParams={updateParams} count={rolesItemCount} />
               </div>
             </>
           ) : (
             <EmptyStateFilter
               clearAllFilters={() => {
-                updateParams(
-                  ParamHelper.setParam(params, 'role__icontains', ''),
-                );
+                updateParams(ParamHelper.setParam(params, 'role__icontains', ''));
               }}
             />
           )}

@@ -58,30 +58,23 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
                       : null,
                   }
                 : null,
-              tab === 'access' && groupId
-                ? { name: t`Group ${groupId}` }
-                : null,
+              tab === 'access' && groupId ? { name: t`Group ${groupId}` } : null,
             ].filter(Boolean)}
           />
         }
         pageControls={this.props.pageControls}
       >
-        {displaySignatures &&
-          this.props.container.pulp.repository.sign_state && (
-            <SignatureBadge
-              isCompact
-              signState={
-                this.props.container.pulp.repository.sign_state == 'signed'
-                  ? 'signed'
-                  : 'unsigned'
-              }
-            />
-          )}
+        {displaySignatures && this.props.container.pulp.repository.sign_state && (
+          <SignatureBadge
+            isCompact
+            signState={
+              this.props.container.pulp.repository.sign_state == 'signed' ? 'signed' : 'unsigned'
+            }
+          />
+        )}
         {last_sync_task && (
           <p className='hub-m-truncated'>
-            <Trans>
-              Last updated from registry {lastSynced({ last_sync_task })}
-            </Trans>{' '}
+            <Trans>Last updated from registry {lastSynced({ last_sync_task })}</Trans>{' '}
             {lastSyncStatus({ last_sync_task })}
           </p>
         )}
@@ -98,9 +91,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             <Tabs
               tabs={tabs}
               params={{ tab }}
-              updateParams={({ tab }) =>
-                this.props.updateState({ redirect: tab })
-              }
+              updateParams={({ tab }) => this.props.updateState({ redirect: tab })}
             />
           </div>
         </div>

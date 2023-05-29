@@ -118,10 +118,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
       <LoadingPageSpinner />
     ) : (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
           title={taskName}
@@ -136,19 +133,11 @@ class TaskDetail extends React.Component<RouteProps, IState> {
               </Button>
             )
           }
-          status={
-            <StatusIndicator
-              className={'hub-c-task-status'}
-              status={task.state}
-            />
-          }
+          status={<StatusIndicator className={'hub-c-task-status'} status={task.state} />}
         />
         <Main>
           <Flex>
-            <Flex
-              direction={{ default: 'column' }}
-              flex={{ default: 'flex_1' }}
-            >
+            <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
               <FlexItem>
                 <section className='body card-area'>
                   <Title headingLevel='h2' size='lg'>
@@ -158,16 +147,12 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                   <DescriptionList isHorizontal>
                     <DescriptionListGroup>
                       <DescriptionListTerm>{t`Task name`}</DescriptionListTerm>
-                      <DescriptionListDescription>
-                        {task.name}
-                      </DescriptionListDescription>
+                      <DescriptionListDescription>{task.name}</DescriptionListDescription>
                     </DescriptionListGroup>
                     {task.name !== taskName && (
                       <DescriptionListGroup>
                         <DescriptionListTerm>{t`Descriptive name`}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                          {taskName}
-                        </DescriptionListDescription>
+                        <DescriptionListDescription>{taskName}</DescriptionListDescription>
                       </DescriptionListGroup>
                     )}
                     <DescriptionListGroup>
@@ -219,9 +204,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                       <DescriptionListDescription>
                         {childTasks.length
                           ? childTasks.map((childTask) => {
-                              const childTaskId = parsePulpIDFromURL(
-                                childTask.pulp_href,
-                              );
+                              const childTaskId = parsePulpIDFromURL(childTask.pulp_href);
                               return (
                                 <React.Fragment key={childTaskId}>
                                   <Link
@@ -285,10 +268,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                 </section>
               </FlexItem>
             </Flex>
-            <Flex
-              direction={{ default: 'column' }}
-              flex={{ default: 'flex_1' }}
-            >
+            <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
               <FlexItem>
                 {!task.error && (
                   <section className='body card-area'>
@@ -298,34 +278,32 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     <br />
                     {task.progress_reports.length ? (
                       <DescriptionList isHorizontal>
-                        {task.progress_reports
-                          .reverse()
-                          .map((report, index) => {
-                            return (
-                              <React.Fragment key={index}>
-                                <hr />
-                                {Object.keys(report).map((key, index) => {
-                                  return (
-                                    !!report[key] && (
-                                      <DescriptionListGroup key={key + index}>
-                                        <DescriptionListTerm>
-                                          {{
-                                            message: t`Message`,
-                                            code: t`Code`,
-                                            state: t`State`,
-                                            done: t`Done`,
-                                          }[key] || capitalize(key)}
-                                        </DescriptionListTerm>
-                                        <DescriptionListDescription>
-                                          {report[key]}
-                                        </DescriptionListDescription>
-                                      </DescriptionListGroup>
-                                    )
-                                  );
-                                })}{' '}
-                              </React.Fragment>
-                            );
-                          })}
+                        {task.progress_reports.reverse().map((report, index) => {
+                          return (
+                            <React.Fragment key={index}>
+                              <hr />
+                              {Object.keys(report).map((key, index) => {
+                                return (
+                                  !!report[key] && (
+                                    <DescriptionListGroup key={key + index}>
+                                      <DescriptionListTerm>
+                                        {{
+                                          message: t`Message`,
+                                          code: t`Code`,
+                                          state: t`State`,
+                                          done: t`Done`,
+                                        }[key] || capitalize(key)}
+                                      </DescriptionListTerm>
+                                      <DescriptionListDescription>
+                                        {report[key]}
+                                      </DescriptionListDescription>
+                                    </DescriptionListGroup>
+                                  )
+                                );
+                              })}{' '}
+                            </React.Fragment>
+                          );
+                        })}
                       </DescriptionList>
                     ) : (
                       <EmptyStateCustom
@@ -346,9 +324,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
-                      <CodeBlock className={'hub-code-block'}>
-                        {task.error.traceback}
-                      </CodeBlock>
+                      <CodeBlock className={'hub-code-block'}>{task.error.traceback}</CodeBlock>
                     </React.Fragment>
                   </section>
                 )}
@@ -388,9 +364,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
             {
               variant: 'success',
               title: taskName,
-              description: (
-                <Trans>Task &quot;{taskName}&quot; stopped successfully.</Trans>
-              ),
+              description: <Trans>Task &quot;{taskName}&quot; stopped successfully.</Trans>,
             },
           ],
         });

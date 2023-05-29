@@ -14,9 +14,7 @@ export const ansibleRepositoryDeleteAction = Action({
     state.deleteModalOpen ? (
       <DeleteAnsibleRepositoryModal
         closeAction={() => setState({ deleteModalOpen: null })}
-        deleteAction={() =>
-          deleteRepository(state.deleteModalOpen, { addAlert, setState, query })
-        }
+        deleteAction={() => deleteRepository(state.deleteModalOpen, { addAlert, setState, query })}
         name={state.deleteModalOpen.name}
       />
     ) : null,
@@ -40,10 +38,7 @@ export const ansibleRepositoryDeleteAction = Action({
   },
 });
 
-async function deleteRepository(
-  { name, pulp_href, pulpId },
-  { addAlert, setState, query },
-) {
+async function deleteRepository({ name, pulp_href, pulpId }, { addAlert, setState, query }) {
   const distributionsToDelete = await AnsibleDistributionAPI.list({
     repository: pulp_href,
   })
@@ -73,23 +68,12 @@ async function deleteRepository(
     const distribution_id = parsePulpIDFromURL(pulp_href);
     return AnsibleDistributionAPI.delete(distribution_id)
       .then(({ data }) =>
-        addAlert(
-          taskAlert(data.task, t`Removal started for distribution ${name}`),
-        ),
+        addAlert(taskAlert(data.task, t`Removal started for distribution ${name}`)),
       )
-      .catch(
-        handleHttpError(
-          t`Failed to remove distribution ${name}`,
-          () => null,
-          addAlert,
-        ),
-      );
+      .catch(handleHttpError(t`Failed to remove distribution ${name}`, () => null, addAlert));
   };
 
-  return Promise.all([
-    deleteRepo,
-    ...distributionsToDelete.map(deleteDistribution),
-  ]).then(() => {
+  return Promise.all([deleteRepo, ...distributionsToDelete.map(deleteDistribution)]).then(() => {
     setState({ deleteModalOpen: null });
     query();
   });

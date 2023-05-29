@@ -2,11 +2,7 @@ import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import * as React from 'react';
 import { CollectionVersionSearch } from 'src/api';
-import {
-  CollectionListItem,
-  EmptyStateFilter,
-  Pagination,
-} from 'src/components';
+import { CollectionListItem, EmptyStateFilter, Pagination } from 'src/components';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './list.scss';
 
@@ -65,11 +61,7 @@ export const CollectionList = (props: IProps) => {
           />
         )}
       </DataList>
-      <Pagination
-        params={params}
-        updateParams={(p) => updateParams(p)}
-        count={itemCount}
-      />
+      <Pagination params={params} updateParams={(p) => updateParams(p)} count={itemCount} />
     </React.Fragment>
   );
 };

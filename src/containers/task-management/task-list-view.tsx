@@ -1,12 +1,6 @@
 import { i18n } from '@lingui/core';
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button, Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { TaskManagementAPI } from 'src/api';
@@ -60,10 +54,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -103,25 +94,14 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const {
-      params,
-      itemCount,
-      loading,
-      items,
-      alerts,
-      cancelModalVisible,
-      unauthorised,
-    } = this.state;
+    const { params, itemCount, loading, items, alerts, cancelModalVisible, unauthorised } =
+      this.state;
 
-    const noData =
-      items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
+    const noData = items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={t`Task Management`} />
         {unauthorised ? (
@@ -144,12 +124,8 @@ export class TaskListView extends React.Component<RouteProps, IState> {
                         <ToolbarItem>
                           <CompoundFilter
                             inputText={this.state.inputText}
-                            onChange={(text) =>
-                              this.setState({ inputText: text })
-                            }
-                            updateParams={(p) =>
-                              this.updateParams(p, () => this.queryTasks())
-                            }
+                            onChange={(text) => this.setState({ inputText: text })}
+                            updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
                             params={params}
                             filterConfig={[
                               {
@@ -187,9 +163,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
                   </Toolbar>
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryTasks())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
                     count={itemCount}
                     isTop
                   />
@@ -212,9 +186,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryTasks())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
                   count={itemCount}
                 />
               </section>
@@ -261,10 +233,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Task list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`Task list`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -276,8 +245,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 
   private renderTableRow(item, index: number) {
-    const { name, state, pulp_created, started_at, finished_at, pulp_href } =
-      item;
+    const { name, state, pulp_created, started_at, finished_at, pulp_href } = item;
     const taskId = parsePulpIDFromURL(pulp_href);
     return (
       <tr key={index}>
@@ -368,9 +336,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             {
               variant: 'success',
               title: name,
-              description: (
-                <Trans>Task &quot;{name}&quot; stopped successfully.</Trans>
-              ),
+              description: <Trans>Task &quot;{name}&quot; stopped successfully.</Trans>,
             },
           ],
         });

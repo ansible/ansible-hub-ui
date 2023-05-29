@@ -1,10 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  ButtonVariant,
-  Modal,
-  ModalVariant,
-} from '@patternfly/react-core';
+import { Button, ButtonVariant, Modal, ModalVariant } from '@patternfly/react-core';
 import React from 'react';
 
 interface Props {
@@ -43,8 +38,7 @@ export const SignSingleCertificateModal: React.FC<Props> = ({
   >
     <p>
       <Trans>
-        You are about to sign <strong>version {version}</strong> under{' '}
-        <strong>{name}</strong>.
+        You are about to sign <strong>version {version}</strong> under <strong>{name}</strong>.
       </Trans>
     </p>
   </Modal>

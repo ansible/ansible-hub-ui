@@ -41,18 +41,10 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
       release_date = lv.release_date;
       release_name = lv.name;
     }
-    if (
-      release_date === undefined ||
-      release_date === null ||
-      release_date === ''
-    ) {
+    if (release_date === undefined || release_date === null || release_date === '') {
       release_date = role.modified;
     }
-    if (
-      release_name === undefined ||
-      release_name === null ||
-      release_name === ''
-    ) {
+    if (release_name === undefined || release_name === null || release_name === '') {
       release_name = '';
     }
 

@@ -6,11 +6,7 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-} from 'src/api';
+import { AnsibleDistributionAPI, AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
@@ -33,14 +29,9 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
       { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-      (tab.id === 'repository-versions' && repositoryVersion) ||
-      (tab.id === 'access' && group)
+      (tab.id === 'repository-versions' && repositoryVersion) || (tab.id === 'access' && group)
         ? {
-            url: formatPath(
-              Paths.ansibleRepositoryDetail,
-              { name },
-              { tab: tab.id },
-            ),
+            url: formatPath(Paths.ansibleRepositoryDetail, { name }, { tab: tab.id }),
             name: tab.name,
           }
         : null,
@@ -63,8 +54,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     <>
       {item?.last_sync_task && (
         <p className='hub-m-truncated'>
-          <Trans>Last updated from registry {lastSynced(item)}</Trans>{' '}
-          {lastSyncStatus(item)}
+          <Trans>Last updated from registry {lastSynced(item)}</Trans> {lastSyncStatus(item)}
         </p>
       )}
     </>
@@ -89,9 +79,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
           })
             .then(({ data: { results } }) => results)
             .catch(err),
-          AnsibleRepositoryAPI.myPermissions(
-            parsePulpIDFromURL(repository.pulp_href),
-          )
+          AnsibleRepositoryAPI.myPermissions(parsePulpIDFromURL(repository.pulp_href))
             .then(({ data: { permissions } }) => permissions)
             .catch(err),
         ]).then(([distributions, my_permissions]) => ({
@@ -105,12 +93,8 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     ({
       details: <DetailsTab item={item} actionContext={actionContext} />,
       access: <RepositoryAccessTab item={item} actionContext={actionContext} />,
-      'collection-versions': (
-        <CollectionVersionsTab item={item} actionContext={actionContext} />
-      ),
-      'repository-versions': (
-        <RepositoryVersionsTab item={item} actionContext={actionContext} />
-      ),
+      'collection-versions': <CollectionVersionsTab item={item} actionContext={actionContext} />,
+      'repository-versions': <RepositoryVersionsTab item={item} actionContext={actionContext} />,
     }[tab]),
   tabs,
   tabUpdateParams: (p) => {

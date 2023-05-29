@@ -64,19 +64,14 @@ export const CollectionCard = ({
                       name: repository.name,
                     })}
                   >
-                    {repository.name === Constants.CERTIFIED_REPO
-                      ? t`Certified`
-                      : repository.name}
+                    {repository.name === Constants.CERTIFIED_REPO ? t`Certified` : repository.name}
                   </Link>
                 </Badge>
               </Text>
             </TextContent>
           ) : null}
           {displaySignatures ? (
-            <SignatureBadge
-              isCompact
-              signState={is_signed ? 'signed' : 'unsigned'}
-            />
+            <SignatureBadge isCompact signState={is_signed ? 'signed' : 'unsigned'} />
           ) : null}
         </div>
         {menu}
@@ -113,10 +108,7 @@ export const CollectionCard = ({
       <CardBody>
         <Tooltip content={<div>{collection_version.description}</div>}>
           <div className='description'>
-            {getDescription(
-              collection_version.description,
-              MAX_DESCRIPTION_LENGTH,
-            )}
+            {getDescription(collection_version.description, MAX_DESCRIPTION_LENGTH)}
           </div>
         </Tooltip>
       </CardBody>

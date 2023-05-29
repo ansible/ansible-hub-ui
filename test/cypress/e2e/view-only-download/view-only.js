@@ -8,11 +8,9 @@ describe('view-only mode - with download', () => {
   it('has limited menu, nav', () => {
     cy.visit(uiPrefix);
 
-    [
-      'Collections > Collections',
-      'Collections > Namespaces',
-      'Documentation',
-    ].forEach((item) => cy.menuPresent(item));
+    ['Collections > Collections', 'Collections > Namespaces', 'Documentation'].forEach((item) =>
+      cy.menuPresent(item),
+    );
 
     [
       'Collections > Repositories',

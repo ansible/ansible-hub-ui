@@ -30,12 +30,8 @@ describe('collection tests', () => {
 
     cy.visit(`${uiPrefix}collections`);
 
-    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
-      'reload',
-    );
-    cy.get(
-      `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
-    ).click();
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as('reload');
+    cy.get(`a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`).click();
     cy.get('[data-cy=kebab-toggle]').click();
     cy.get('[data-cy=delete-version-dropdown]').click();
     cy.get('input[id=delete_confirm]').click();

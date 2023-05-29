@@ -24,9 +24,7 @@ export function waitForTask(task, options: Options = {}) {
 
     if (result.data.state !== 'completed') {
       if (!bailAfter) {
-        return Promise.reject(
-          new Error(t`Giving up waiting for task after 10 attempts.`),
-        );
+        return Promise.reject(new Error(t`Giving up waiting for task after 10 attempts.`));
       }
 
       return new Promise((r) => setTimeout(r, waitMs)).then(() =>

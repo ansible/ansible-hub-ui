@@ -2,12 +2,7 @@ import { t } from '@lingui/macro';
 import { Pagination, Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
 import * as React from 'react';
-import {
-  ImportListType,
-  MyNamespaceAPI,
-  NamespaceType,
-  PulpStatus,
-} from 'src/api';
+import { ImportListType, MyNamespaceAPI, NamespaceType, PulpStatus } from 'src/api';
 import {
   APISearchTypeAhead,
   AppliedFilters,
@@ -131,9 +126,7 @@ export class ImportList extends React.Component<IProps, IState> {
             itemCount={numberOfResults}
             perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
             page={params.page || 1}
-            onSetPage={(_, p) =>
-              updateParams(ParamHelper.setParam(params, 'page', p))
-            }
+            onSetPage={(_, p) => updateParams(ParamHelper.setParam(params, 'page', p))}
             onPerPageSelect={(_, p) => {
               updateParams({ ...params, page: 1, page_size: p });
             }}
@@ -146,9 +139,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
   private renderList(selectImport, importList, selectedImport, loading) {
     if (!this.props.params.namespace) {
-      return (
-        <EmptyStateNoData title={t`No namespace selected.`} description={''} />
-      );
+      return <EmptyStateNoData title={t`No namespace selected.`} description={''} />;
     }
 
     if (loading) {
@@ -159,10 +150,7 @@ export class ImportList extends React.Component<IProps, IState> {
       );
     }
 
-    if (
-      importList.length === 0 &&
-      !filterIsSet(this.props.params, ['keywords', 'state'])
-    ) {
+    if (importList.length === 0 && !filterIsSet(this.props.params, ['keywords', 'state'])) {
       return (
         <EmptyStateNoData
           title={t`No imports`}
@@ -184,8 +172,7 @@ export class ImportList extends React.Component<IProps, IState> {
                 clickable: true,
                 'list-container': true,
                 'hub-c-toolbar__item-selected-item':
-                  item.type === selectedImport.type &&
-                  item.id === selectedImport.id,
+                  item.type === selectedImport.type && item.id === selectedImport.id,
               })}
               data-cy={`ImportList-row-${item.name}`}
             >
@@ -204,12 +191,10 @@ export class ImportList extends React.Component<IProps, IState> {
     return (
       <div>
         <div>
-          <span data-cy='item-name'>{item.name}</span>{' '}
-          {item.version ? 'v' + item.version : ''}
+          <span data-cy='item-name'>{item.name}</span> {item.version ? 'v' + item.version : ''}
         </div>
         <div className='sub-text'>
-          Status: {item.state}{' '}
-          {item.finished_at ? <DateComponent date={item.finished_at} /> : null}
+          Status: {item.state} {item.finished_at ? <DateComponent date={item.finished_at} /> : null}
         </div>
       </div>
     );
@@ -255,20 +240,12 @@ export class ImportList extends React.Component<IProps, IState> {
           <APISearchTypeAhead
             loadResults={(name) => this.loadNamespaces(name)}
             onSelect={(event, value) => {
-              const params = ParamHelper.setParam(
-                this.props.params,
-                'namespace',
-                value,
-              );
+              const params = ParamHelper.setParam(this.props.params, 'namespace', value);
               params['page'] = 1;
               this.props.updateParams(params);
             }}
             onClear={() => {
-              const params = ParamHelper.setParam(
-                this.props.params,
-                'namespace',
-                '',
-              );
+              const params = ParamHelper.setParam(this.props.params, 'namespace', '');
               params['page'] = 1;
               this.props.updateParams(params);
             }}

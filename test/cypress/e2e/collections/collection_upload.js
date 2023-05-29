@@ -17,18 +17,14 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
     cy.login(userName, userPassword);
-    cy.visit(
-      `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
-    );
+    cy.visit(`${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`);
     cy.contains('testcollection');
     cy.contains('Upload new version').should('not.exist');
   });
 
   it('should not upload new collection version in collection list/cards when user does not have permissions', () => {
     cy.login(userName, userPassword);
-    cy.visit(
-      `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
-    );
+    cy.visit(`${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`);
     cy.contains('testcollection');
     cy.get('[aria-label="Actions"]').should('not.exist');
   });
@@ -44,16 +40,12 @@ describe('Collection Upload Tests', () => {
 
   it('should see upload new collection version in collection list when user does have permissions', () => {
     cy.login();
-    cy.visit(
-      `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
-    );
+    cy.visit(`${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`);
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
     cy.contains('New version of testcollection');
 
-    cy.visit(
-      `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
-    );
+    cy.visit(`${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`);
     cy.contains('testcollection');
     cy.get('button[aria-label="Actions"]').click();
     cy.contains('Upload new version').click();
@@ -71,10 +63,9 @@ describe('Collection Upload Tests', () => {
 
   it('user should not be able to upload new collection without permissions', () => {
     cy.login(userName, userPassword);
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('upload');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'upload',
+    );
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
 
@@ -84,10 +75,9 @@ describe('Collection Upload Tests', () => {
 
   it('collection should be uploaded', () => {
     cy.login();
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('upload');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'upload',
+    );
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
 

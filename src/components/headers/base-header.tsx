@@ -32,9 +32,7 @@ export class BaseHeader extends React.Component<IProps> {
     return (
       <div className={cx('background', className)}>
         {contextSelector || null}
-        {breadcrumbs && (
-          <div className='breadcrumb-container'>{breadcrumbs}</div>
-        )}
+        {breadcrumbs && <div className='breadcrumb-container'>{breadcrumbs}</div>}
         {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
         <div className='column-section'>
@@ -47,9 +45,7 @@ export class BaseHeader extends React.Component<IProps> {
               </Title>
             </div>
           </div>
-          {pageControls ? (
-            <div className='header-right'>{pageControls}</div>
-          ) : null}
+          {pageControls ? <div className='header-right'>{pageControls}</div> : null}
         </div>
         {versionControl ? <>{versionControl}</> : null}
 

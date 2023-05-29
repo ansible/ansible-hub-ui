@@ -15,15 +15,10 @@ interface IProps {
 
 export class DeleteGroupModal extends React.Component<IProps> {
   render() {
-    const { cancelAction, count, deleteAction, name, users, canViewUsers } =
-      this.props;
+    const { cancelAction, count, deleteAction, name, users, canViewUsers } = this.props;
 
     return (
-      <DeleteModal
-        cancelAction={cancelAction}
-        deleteAction={deleteAction}
-        title={t`Delete group?`}
-      >
+      <DeleteModal cancelAction={cancelAction} deleteAction={deleteAction} title={t`Delete group?`}>
         <Trans>
           <b>{name}</b> will be permanently deleted.
         </Trans>
@@ -37,9 +32,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
           {users && count > 0 && count <= 10 && (
             <>
               <p>
-                <Trans>
-                  These users will lose access to the group content:
-                </Trans>
+                <Trans>These users will lose access to the group content:</Trans>
               </p>
               <List>
                 {users.map((u) => (
@@ -63,11 +56,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
               )}
             </>
           ) : (
-            <Alert
-              title={t`This group can include users`}
-              variant='warning'
-              isInline
-            >
+            <Alert title={t`This group can include users`} variant='warning' isInline>
               <Trans>You don&apos;t have permission to display users.</Trans>
             </Alert>
           )}

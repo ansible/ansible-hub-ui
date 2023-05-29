@@ -11,11 +11,7 @@ export {
   mapErrorMessages,
 } from './map-error-messages';
 export { getContainersURL, getRepoURL } from './get-repo-url';
-export {
-  clearSetFieldsFromRequest,
-  isFieldSet,
-  isWriteOnly,
-} from './write-only-fields';
+export { clearSetFieldsFromRequest, isFieldSet, isWriteOnly } from './write-only-fields';
 export { filterIsSet } from './filter-is-set';
 export { truncateSha } from './truncate_sha';
 export { getHumanSize } from './get_human_size';

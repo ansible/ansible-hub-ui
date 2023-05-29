@@ -1,8 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Pagination as PaginationPF,
-  PaginationVariant,
-} from '@patternfly/react-core';
+import { Pagination as PaginationPF, PaginationVariant } from '@patternfly/react-core';
 import React from 'react';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -67,17 +64,13 @@ export const Pagination = ({
       itemCount={count}
       perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
       page={params.page || 1}
-      onSetPage={(_, p) =>
-        updateParams(ParamHelper.setParam(params, 'page', p))
-      }
+      onSetPage={(_, p) => updateParams(ParamHelper.setParam(params, 'page', p))}
       onPerPageSelect={(_, p) => {
         updateParams({ ...params, page: 1, page_size: p });
       }}
       {...extraProps}
       isCompact={isTop || isCompact}
-      perPageOptions={mapPerPageOptions(
-        perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
-      )}
+      perPageOptions={mapPerPageOptions(perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS)}
       titles={{
         ofWord: t`of`,
         perPageSuffix: t`per page`,

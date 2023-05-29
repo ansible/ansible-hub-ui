@@ -9,12 +9,7 @@ import {
   AnsibleRepositoryVersionType,
   PulpAPI,
 } from 'src/api';
-import {
-  DateComponent,
-  DetailList,
-  Details,
-  ListItemActions,
-} from 'src/components';
+import { DateComponent, DetailList, Details, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';
 
@@ -134,13 +129,7 @@ const ContentSummary = ({ data }: { data: object }) => {
   );
 };
 
-const BaseVersion = ({
-  repositoryName,
-  data,
-}: {
-  repositoryName: string;
-  data?: string;
-}) => {
+const BaseVersion = ({ repositoryName, data }: { repositoryName: string; data?: string }) => {
   if (!data) {
     return <>{t`None`}</>;
   }
@@ -171,26 +160,22 @@ export const RepositoryVersionsTab = ({
   const pulpId = parsePulpIDFromURL(item.pulp_href);
   const latest_href = item.latest_version_href;
   const repositoryName = item.name;
-  const queryList = ({ params }) =>
-    AnsibleRepositoryAPI.listVersions(pulpId, params);
-  const queryDetail = ({ number }) =>
-    AnsibleRepositoryAPI.listVersions(pulpId, { number });
+  const queryList = ({ params }) => AnsibleRepositoryAPI.listVersions(pulpId, params);
+  const queryDetail = ({ number }) => AnsibleRepositoryAPI.listVersions(pulpId, { number });
   const [modalState, setModalState] = useState({});
   const [version, setVersion] = useState(null);
 
   useEffect(() => {
     if (state.params.repositoryVersion) {
-      queryDetail({ number: state.params.repositoryVersion }).then(
-        ({ data }) => {
-          if (!data?.results?.[0]) {
-            addAlert({
-              variant: 'danger',
-              title: t`Failed to find repository version`,
-            });
-          }
-          setVersion(data.results[0]);
-        },
-      );
+      queryDetail({ number: state.params.repositoryVersion }).then(({ data }) => {
+        if (!data?.results?.[0]) {
+          addAlert({
+            variant: 'danger',
+            title: t`Failed to find repository version`,
+          });
+        }
+        setVersion(data.results[0]);
+      });
     } else {
       setVersion(null);
     }
@@ -261,12 +246,7 @@ export const RepositoryVersionsTab = ({
             },
             {
               label: t`Base version`,
-              value: (
-                <BaseVersion
-                  repositoryName={repositoryName}
-                  data={version.base_version}
-                />
-              ),
+              value: <BaseVersion repositoryName={repositoryName} data={version.base_version} />,
             },
           ]}
         />

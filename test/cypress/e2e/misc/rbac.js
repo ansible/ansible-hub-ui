@@ -9,18 +9,9 @@ describe('RBAC test for user without permissions', () => {
   before(() => {
     cy.login();
 
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('-i registry create', 'docker', 'https://registry.hub.docker.com/');
 
-    cy.galaxykit(
-      '-i container create',
-      `testcontainer`,
-      'library/alpine',
-      `docker`,
-    );
+    cy.galaxykit('-i container create', `testcontainer`, 'library/alpine', `docker`);
 
     cy.galaxykit('-i user create', userName, userPassword);
     cy.galaxykit('-i group create', groupName);
@@ -80,9 +71,7 @@ describe('RBAC test for user without permissions', () => {
 
     // cannot Change and Delete user
     cy.visit(`${uiPrefix}users`);
-    cy.get('[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle]').should(
-      'not.exist',
-    );
+    cy.get('[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle]').should('not.exist');
   });
 
   it("shouldn't let view, add, change and delete groups when user doesn't have permission", () => {
@@ -159,10 +148,7 @@ describe('RBAC test for user with permissions', () => {
     },
     {
       group: 'collections',
-      permissions: [
-        'ansible.modify_ansible_repo_content',
-        'ansible.delete_collection',
-      ],
+      permissions: ['ansible.modify_ansible_repo_content', 'ansible.delete_collection'],
     },
     {
       group: 'users',
@@ -184,10 +170,7 @@ describe('RBAC test for user with permissions', () => {
     },
     {
       group: 'remotes',
-      permissions: [
-        'ansible.change_collectionremote',
-        'ansible.view_collectionremote',
-      ],
+      permissions: ['ansible.change_collectionremote', 'ansible.view_collectionremote'],
     },
     {
       group: 'containers',
@@ -217,11 +200,7 @@ describe('RBAC test for user with permissions', () => {
   before(() => {
     cy.login();
 
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('-i registry create', 'docker', 'https://registry.hub.docker.com/');
     cy.addRemoteContainer({
       name: `testcontainer`,
       upstream_name: 'library/alpine',
@@ -305,9 +284,7 @@ describe('RBAC test for user with permissions', () => {
 
     // can Change and Delete user
     cy.visit(`${uiPrefix}users`);
-    cy.get(
-      '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-c-dropdown',
-    ).click();
+    cy.get('[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-c-dropdown').click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
   });
@@ -325,9 +302,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Create').should('exist');
 
     // can Change and Delete group
-    cy.get(
-      '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-c-dropdown',
-    ).click();
+    cy.get('[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-c-dropdown').click();
     cy.contains('Delete').should('exist');
   });
 

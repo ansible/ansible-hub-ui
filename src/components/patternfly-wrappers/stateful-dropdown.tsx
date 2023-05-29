@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Dropdown,
-  DropdownPosition,
-  DropdownToggle,
-  KebabToggle,
-} from '@patternfly/react-core';
+import { Dropdown, DropdownPosition, DropdownToggle, KebabToggle } from '@patternfly/react-core';
 import React, { useState } from 'react';
 
 interface IProps {
@@ -44,9 +39,7 @@ export const StatefulDropdown = ({
 
   return (
     <Dropdown
-      onSelect={(e) =>
-        onSelect(e, { isOpen, onSelectProp, setOpen, setSelected })
-      }
+      onSelect={(e) => onSelect(e, { isOpen, onSelectProp, setOpen, setSelected })}
       toggle={renderToggle({ toggleType, defaultText, onToggle, selected })}
       isOpen={isOpen}
       isPlain={isPlain}

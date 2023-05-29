@@ -1,9 +1,6 @@
 import { t } from '@lingui/macro';
 import { Label, LabelProps } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import { CheckCircleIcon, ExclamationTriangleIcon } from '@patternfly/react-icons';
 import React, { FC } from 'react';
 
 interface Props extends LabelProps {
@@ -30,13 +27,7 @@ export const SignatureBadge: FC<Props> = ({
       variant='outline'
       className='hub-signature-badge'
       color={signState === 'signed' ? 'green' : 'orange'}
-      icon={
-        signState === 'signed' ? (
-          <CheckCircleIcon />
-        ) : (
-          <ExclamationTriangleIcon />
-        )
-      }
+      icon={signState === 'signed' ? <CheckCircleIcon /> : <ExclamationTriangleIcon />}
       isCompact={isCompact}
       {...props}
     >

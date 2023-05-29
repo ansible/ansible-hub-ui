@@ -17,13 +17,7 @@ import {
   SortTable,
 } from 'src/components';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import {
-  ParamHelper,
-  RouteProps,
-  filterIsSet,
-  getRepoURL,
-  withRouter,
-} from 'src/utilities';
+import { ParamHelper, RouteProps, filterIsSet, getRepoURL, withRouter } from 'src/utilities';
 import { loadCollection } from './base';
 
 const CollectionDistributions = (props: RouteProps) => {
@@ -128,10 +122,7 @@ const CollectionDistributions = (props: RouteProps) => {
 
   const renderTable = (distributions, params) => {
     if (distributions.length === 0) {
-      return filterIsSet(params, [
-        'name__icontains',
-        'base_path__icontains',
-      ]) ? (
+      return filterIsSet(params, ['name__icontains', 'base_path__icontains']) ? (
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
@@ -167,10 +158,7 @@ const CollectionDistributions = (props: RouteProps) => {
     };
 
     return (
-      <table
-        aria-label={t`Collection distributions`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`Collection distributions`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -208,9 +196,7 @@ const CollectionDistributions = (props: RouteProps) => {
         content={content}
         params={params}
         updateParams={(params) => {
-          updateParamsMixin(
-            ParamHelper.setParam(params, 'version', params.version),
-          );
+          updateParamsMixin(ParamHelper.setParam(params, 'version', params.version));
         }}
         breadcrumbs={breadcrumbs}
         activeTab='distributions'
@@ -267,11 +253,7 @@ const CollectionDistributions = (props: RouteProps) => {
               name__icontains: t`Name`,
             }}
           />
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            renderTable(distributions, params)
-          )}
+          {loading ? <LoadingPageSpinner /> : renderTable(distributions, params)}
           <Pagination
             params={params}
             updateParams={(p) => {

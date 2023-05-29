@@ -30,36 +30,24 @@ describe('Imports filter test', () => {
   });
 
   it('partial filter for name is working.', () => {
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`,
-    ).as('wait');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
     cy.wait('@wait');
 
-    cy.get('[data-cy="import-list-data"]')
-      .contains('different_name')
-      .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('different_name').should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
   });
 
   it('exact filter for name is working.', () => {
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`,
-    ).as('wait');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
     cy.wait('@wait');
 
-    cy.get('[data-cy="import-list-data"]')
-      .contains('my_collection2')
-      .should('not.exist');
-    cy.get('[data-cy="import-list-data"]')
-      .contains('different_name')
-      .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection2').should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('different_name').should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
@@ -70,10 +58,9 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('wait');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'wait',
+    );
     cy.contains('[data-cy="compound_filter"] a', 'Completed').click();
 
     cy.wait('@wait');
@@ -93,49 +80,39 @@ describe('Imports filter test', () => {
   });
 
   it('Exact search for name and completed is working.', () => {
-    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
-      'my_collection1{enter}',
-    );
+    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type('my_collection1{enter}');
     cy.get('[data-cy="compound_filter"] button:first').click();
     cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
     cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('wait');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'wait',
+    );
     cy.contains('a', 'Completed').click();
 
     cy.wait('@wait');
 
-    cy.get('[data-cy="import-list-data"]')
-      .contains('different_name')
-      .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('different_name').should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
   it('Partial search for name and completed is working.', () => {
-    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
-      'my_collection{enter}',
-    );
+    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type('my_collection{enter}');
     cy.get('[data-cy="compound_filter"] button:first').click();
     cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
     cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('wait');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'wait',
+    );
     cy.contains('a', 'Completed').click();
     cy.wait('@wait');
 
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
-    cy.get('[data-cy="import-list-data"]')
-      .contains('different_name')
-      .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('different_name').should('not.exist');
   });
 });

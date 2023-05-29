@@ -8,9 +8,7 @@ describe('Task detail', () => {
 
     cy.contains('Repositories');
 
-    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
-      'sync',
-    );
+    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as('sync');
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
 
@@ -31,15 +29,10 @@ describe('Task detail', () => {
     cy.contains('.card-area h2', 'Reserve resources');
 
     // rest of the content in containers
-    [
-      'Task name',
-      'Created on',
-      'Finished at',
-      'Task group',
-      'Parent task',
-      'Child task',
-    ].forEach((item) => {
-      cy.contains('.card-area', item);
-    });
+    ['Task name', 'Created on', 'Finished at', 'Task group', 'Parent task', 'Child task'].forEach(
+      (item) => {
+        cy.contains('.card-area', item);
+      },
+    );
   });
 });

@@ -8,11 +8,7 @@ interface IProps extends React.HTMLProps<HTMLElement> {
 
 export const Main = ({ children, className, ...extra }: IProps) => (
   <section
-    className={cx(
-      'pf-l-page__main-section',
-      'pf-c-page__main-section',
-      className,
-    )}
+    className={cx('pf-l-page__main-section', 'pf-c-page__main-section', className)}
     {...extra}
   >
     {children}

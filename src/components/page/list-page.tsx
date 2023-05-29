@@ -1,9 +1,4 @@
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import React from 'react';
 import { ActionType } from 'src/actions';
 import {
@@ -24,13 +19,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
-import {
-  ParamHelper,
-  RouteProps,
-  errorMessage,
-  filterIsSet,
-  withRouter,
-} from 'src/utilities';
+import { ParamHelper, RouteProps, errorMessage, filterIsSet, withRouter } from 'src/utilities';
 
 interface IState<T> {
   params: {
@@ -147,10 +136,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
     constructor(props) {
       super(props);
 
-      const params = ParamHelper.parseParamString(props.location.search, [
-        'page',
-        'page_size',
-      ]);
+      const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
       if (!params['page_size']) {
         params['page_size'] = defaultPageSize;
@@ -191,8 +177,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
     }
 
     render() {
-      const { alerts, itemCount, items, loading, params, unauthorised } =
-        this.state;
+      const { alerts, itemCount, items, loading, params, unauthorised } = this.state;
 
       const knownFilters = (filterConfig || []).map(({ id }) => id);
       const noData = items.length === 0 && !filterIsSet(params, knownFilters);
@@ -227,10 +212,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
           <BaseHeader title={title} />
           {renderModals?.(actionContext)}
           {unauthorised ? (
@@ -254,9 +236,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                           <ToolbarItem>
                             <CompoundFilter
                               inputText={this.state.inputText}
-                              onChange={(inputText) =>
-                                this.setState({ inputText })
-                              }
+                              onChange={(inputText) => this.setState({ inputText })}
                               updateParams={updateParams}
                               params={params}
                               filterConfig={filterConfig}
@@ -297,11 +277,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                     this.renderTable(params, updateParams, actionContext)
                   )}
 
-                  <Pagination
-                    params={params}
-                    updateParams={updateParams}
-                    count={itemCount}
-                  />
+                  <Pagination params={params} updateParams={updateParams} count={itemCount} />
                 </section>
               )}
             </Main>
@@ -324,9 +300,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
             params={params}
             updateParams={updateParams}
           />
-          <tbody>
-            {items.map((item, i) => renderTableRow(item, i, actionContext))}
-          </tbody>
+          <tbody>{items.map((item, i) => renderTableRow(item, i, actionContext))}</tbody>
         </table>
       );
     }

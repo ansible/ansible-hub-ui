@@ -54,12 +54,8 @@ const initialState = {
 export const PublishToControllerModal = (props: IProps) => {
   const [alerts, setAlerts] = useState(initialState.alerts);
   const [controllers, setControllers] = useState(initialState.controllers);
-  const [controllerCount, setControllerCount] = useState(
-    initialState.controllerCount,
-  );
-  const [controllerParams, setControllerParams] = useState(
-    initialState.controllerParams,
-  );
+  const [controllerCount, setControllerCount] = useState(initialState.controllerCount);
+  const [controllerParams, setControllerParams] = useState(initialState.controllerParams);
   const [digest, setDigest] = useState(initialState.digest);
   const [digestByTag, setDigestByTag] = useState(initialState.digestByTag);
   const [loading, setLoading] = useState(initialState.loading);
@@ -129,9 +125,10 @@ export const PublishToControllerModal = (props: IProps) => {
       ...(name ? { name__icontains: name } : {}),
     })
       .then(({ data }) => {
-        const tags = data.data.map(
-          ({ name: tag, tagged_manifest: { digest } }) => ({ digest, tag }),
-        );
+        const tags = data.data.map(({ name: tag, tagged_manifest: { digest } }) => ({
+          digest,
+          tag,
+        }));
 
         const digestByTag = {};
         tags.forEach(({ digest, tag }) => (digestByTag[tag] = digest));
@@ -241,9 +238,7 @@ export const PublishToControllerModal = (props: IProps) => {
   const docsLink =
     'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/';
 
-  const noData =
-    controllers?.length === 0 &&
-    !filterIsSet(controllerParams, ['host__icontains']);
+  const noData = controllers?.length === 0 && !filterIsSet(controllerParams, ['host__icontains']);
 
   const notListedMessage = (
     <>
@@ -284,19 +279,14 @@ export const PublishToControllerModal = (props: IProps) => {
         </div>
       )}
       {noData && !loading ? (
-        <EmptyStateNoData
-          title={t`No Controllers available`}
-          description={notListedMessage}
-        />
+        <EmptyStateNoData title={t`No Controllers available`} description={notListedMessage} />
       ) : null}
 
       {isOpen && !loading && !noData && controllers && (
         <>
           <DescriptionList isHorizontal>
             <DescriptionListGroup>
-              <DescriptionListTerm>
-                {t`Execution Environment`}
-              </DescriptionListTerm>
+              <DescriptionListTerm>{t`Execution Environment`}</DescriptionListTerm>
               <DescriptionListDescription>{image}</DescriptionListDescription>
             </DescriptionListGroup>
             <DescriptionListGroup>
@@ -339,16 +329,15 @@ export const PublishToControllerModal = (props: IProps) => {
           </DescriptionList>
           <Spacer />
           <Trans>
-            Click on the Controller URL that you want to use the above execution
-            environment in, and it will launch that Controller&apos;s console.
-            Log in (if necessary) and follow the steps to complete the
-            configuration.
+            Click on the Controller URL that you want to use the above execution environment in, and
+            it will launch that Controller&apos;s console. Log in (if necessary) and follow the
+            steps to complete the configuration.
           </Trans>
           <br />
           {!unsafeLinksSupported && (
             <Trans>
-              <b>Note:</b> The following links may be blocked by your browser.
-              Copy and paste the external link manually.
+              <b>Note:</b> The following links may be blocked by your browser. Copy and paste the
+              external link manually.
             </Trans>
           )}
           <Spacer />

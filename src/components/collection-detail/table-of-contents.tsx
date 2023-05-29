@@ -64,12 +64,8 @@ export const TableOfContents = (props: IProps) => {
             <SearchInput
               ref={props.searchBarRef}
               value={params.keywords}
-              onChange={(_e, val) =>
-                updateParams(ParamHelper.setParam(params, 'keywords', val))
-              }
-              onClear={() =>
-                updateParams(ParamHelper.setParam(params, 'keywords', ''))
-              }
+              onChange={(_e, val) => updateParams(ParamHelper.setParam(params, 'keywords', val))}
+              onClear={() => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
               aria-label={t`find-content`}
               placeholder={t`Find content`}
             />
@@ -173,13 +169,7 @@ function parseLinks(docs_blob: DocsBlobType, props): Table {
   return table;
 }
 
-function renderLinks(
-  links: DocsEntry[],
-  title,
-  filterString: string,
-  collapsedCategories,
-  props,
-) {
+function renderLinks(links: DocsEntry[], title, filterString: string, collapsedCategories, props) {
   const isExpanded = !collapsedCategories.includes(title);
   const filteredLinks = links.filter((link) =>
     link.display.toLowerCase().includes(filterString.toLowerCase()),

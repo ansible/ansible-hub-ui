@@ -128,10 +128,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             isGrouped
           >
             {[
-              <SelectGroup
-                label={t`Filter by ${selectedFilter.id}`}
-                key={selectedFilter.id}
-              >
+              <SelectGroup label={t`Filter by ${selectedFilter.id}`} key={selectedFilter.id}>
                 {selectedFilter.options.map((option) => (
                   // patternfly does not allow for us to set a display name aside from the ID
                   // which unfortunately means that multiple select will ignore the human readable
@@ -183,8 +180,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               this.submitFilter(value);
             }}
             placeholderText={
-              selectedFilter?.placeholder ||
-              t`Filter by ${selectedFilter.title.toLowerCase()}`
+              selectedFilter?.placeholder || t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             results={typeAheadResults}
           />
@@ -195,8 +191,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           <TextInput
             aria-label={selectedFilter.id}
             placeholder={
-              selectedFilter.placeholder ||
-              t`Filter by ${selectedFilter.title.toLowerCase()}`
+              selectedFilter.placeholder || t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.props.inputText}
             onChange={(k) => this.props.onChange(k)}
@@ -215,11 +210,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
   private submitMultiple(newValues: string[]) {
     this.props.updateParams({
-      ...ParamHelper.setParam(
-        this.props.params,
-        this.state.selectedFilter.id,
-        newValues,
-      ),
+      ...ParamHelper.setParam(this.props.params, this.state.selectedFilter.id, newValues),
       page: 1,
     });
   }

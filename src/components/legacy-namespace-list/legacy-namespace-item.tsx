@@ -55,9 +55,7 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
       (n) => n.username == this.context.user.username,
     ).length;
 
-    const showWisdom =
-      ai_deny_index &&
-      (this.context.user.is_superuser || userOwnsLegacyNamespace);
+    const showWisdom = ai_deny_index && (this.context.user.is_superuser || userOwnsLegacyNamespace);
 
     const dropdownItems = [];
 

@@ -66,9 +66,7 @@ export const LazyRepositories = ({
       {repositories?.map?.(({ name }, index) => (
         <>
           {index ? ', ' : ''}
-          <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
-            {name}
-          </Link>
+          <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>{name}</Link>
         </>
       ))}
       {!repositories?.length ? emptyText ?? '---' : null}

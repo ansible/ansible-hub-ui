@@ -62,17 +62,11 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentRegistryList extends React.Component<
-  RouteProps,
-  IState
-> {
+class ExecutionEnvironmentRegistryList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -116,8 +110,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       showDeleteModal,
       showRemoteFormModal,
     } = this.state;
-    const noData =
-      items.length === 0 && !filterIsSet(params, ['name__icontains']);
+    const noData = items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     if (this.context.user.is_anonymous) {
       return <EmptyStateUnauthorized />;
@@ -153,10 +146,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {showRemoteFormModal && (
           <RemoteForm
             remote={remoteToEdit}
@@ -195,9 +185,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                     () => this.queryRegistries(),
                   );
                 })
-                .catch((err) =>
-                  this.setState({ remoteFormErrors: mapErrorMessages(err) }),
-                );
+                .catch((err) => this.setState({ remoteFormErrors: mapErrorMessages(err) }));
             }}
             errorMessages={remoteFormErrors}
             showModal={showRemoteFormModal}
@@ -209,16 +197,12 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               })
             }
             allowEditName={remoteFormNew}
-            title={
-              remoteFormNew ? t`Add remote registry` : t`Edit remote registry`
-            }
+            title={remoteFormNew ? t`Add remote registry` : t`Edit remote registry`}
           />
         )}
         {showDeleteModal && remoteToEdit && (
           <DeleteModal
-            cancelAction={() =>
-              this.setState({ showDeleteModal: false, remoteToEdit: null })
-            }
+            cancelAction={() => this.setState({ showDeleteModal: false, remoteToEdit: null })}
             deleteAction={() => this.deleteRegistry(remoteToEdit)}
             title={t`Delete remote registry?`}
           >
@@ -247,12 +231,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                         <ToolbarItem>
                           <CompoundFilter
                             inputText={this.state.inputText}
-                            onChange={(text) =>
-                              this.setState({ inputText: text })
-                            }
-                            updateParams={(p) =>
-                              this.updateParams(p, () => this.queryRegistries())
-                            }
+                            onChange={(text) => this.setState({ inputText: text })}
+                            updateParams={(p) => this.updateParams(p, () => this.queryRegistries())}
                             params={params}
                             filterConfig={[
                               {
@@ -269,9 +249,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRegistries())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryRegistries())}
                     count={itemCount}
                     isTop
                   />
@@ -292,9 +270,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                 {this.renderTable(params)}
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryRegistries())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryRegistries())}
                   count={itemCount}
                 />
               </section>
@@ -351,9 +327,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) =>
-            this.updateParams(p, () => this.queryRegistries())
-          }
+          updateParams={(p) => this.updateParams(p, () => this.queryRegistries())}
         />
         <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
       </table>
@@ -364,11 +338,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     const { hasPermission } = this.context;
     const buttons = [
       hasPermission('galaxy.change_containerregistryremote') && (
-        <Button
-          key='sync'
-          variant='secondary'
-          onClick={() => this.syncRegistry(item)}
-        >
+        <Button key='sync' variant='secondary' onClick={() => this.syncRegistry(item)}>
           <Trans>Sync from registry</Trans>
         </Button>
       ),
@@ -412,19 +382,13 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             : t`Indexing execution environments is only supported on registry.redhat.io`
         }
       >
-        <DropdownItem
-          onClick={() => this.indexRegistry(item)}
-          isDisabled={!item.is_indexable}
-        >
+        <DropdownItem onClick={() => this.indexRegistry(item)} isDisabled={!item.is_indexable}>
           <Trans>Index execution environments</Trans>
         </DropdownItem>
       </Tooltip>,
     ].filter(Boolean);
     return (
-      <tr
-        data-cy={`ExecutionEnvironmentRegistryList-row-${item.name}`}
-        key={index}
-      >
+      <tr data-cy={`ExecutionEnvironmentRegistryList-row-${item.name}`} key={index}>
         <td>{item.name}</td>
         <td>
           <DateComponent date={item.created_at} />
@@ -468,9 +432,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ExecutionEnvironmentRegistryAPI.delete(id)
       .then(() =>
         this.addAlert(
-          <Trans>
-            Remote registry &quot;{name}&quot; has been successfully deleted.
-          </Trans>,
+          <Trans>Remote registry &quot;{name}&quot; has been successfully deleted.</Trans>,
           'success',
         ),
       )
@@ -491,9 +453,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   private syncRegistry({ id, name }) {
     ExecutionEnvironmentRegistryAPI.sync(id)
       .then(({ data }) => {
-        this.addAlertObj(
-          taskAlert(data.task, t`Sync started for remote registry "${name}".`),
-        );
+        this.addAlertObj(taskAlert(data.task, t`Sync started for remote registry "${name}".`));
         this.queryRegistries(true);
       })
       .catch((err) => {
@@ -510,11 +470,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ExecutionEnvironmentRegistryAPI.index(id)
       .then(({ data }) => {
         this.addAlertObj(
-          taskAlert(
-            data.task,
-            t`Indexing started for execution environment "${name}".`,
-            'success',
-          ),
+          taskAlert(data.task, t`Indexing started for execution environment "${name}".`, 'success'),
         );
       })
       .catch((err) => {

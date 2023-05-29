@@ -39,10 +39,7 @@ class API extends PulpAPI {
       params['signing_service'] = signing_service;
     }
 
-    return this.http.post(
-      this.apiPath + `${pulp_id}/copy_collection_version/`,
-      params,
-    );
+    return this.http.post(this.apiPath + `${pulp_id}/copy_collection_version/`, params);
   }
 
   moveCollectionVersion(
@@ -59,10 +56,7 @@ class API extends PulpAPI {
       params['signing_service'] = signing_service;
     }
 
-    return this.http.post(
-      this.apiPath + `${pulp_id}/move_collection_version/`,
-      params,
-    );
+    return this.http.post(this.apiPath + `${pulp_id}/move_collection_version/`, params);
   }
 
   modify(

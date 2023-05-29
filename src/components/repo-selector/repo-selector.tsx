@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Flex,
-  FlexItem,
-  InputGroup,
-  InputGroupText,
-} from '@patternfly/react-core';
+import { Flex, FlexItem, InputGroup, InputGroupText } from '@patternfly/react-core';
 import React from 'react';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';

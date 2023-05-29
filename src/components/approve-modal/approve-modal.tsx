@@ -17,12 +17,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import {
-  CollectionVersion,
-  CollectionVersionAPI,
-  Repositories,
-  SigningServiceAPI,
-} from 'src/api';
+import { CollectionVersion, CollectionVersionAPI, Repositories, SigningServiceAPI } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
@@ -35,11 +30,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
-import {
-  errorMessage,
-  parsePulpIDFromURL,
-  waitForTaskUrl,
-} from 'src/utilities';
+import { errorMessage, parsePulpIDFromURL, waitForTaskUrl } from 'src/utilities';
 
 interface IProps {
   closeAction: () => void;
@@ -78,9 +69,7 @@ export const ApproveModal = (props: IProps) => {
       let reapprove = false;
 
       let originRepoName = props.collectionVersion.repository_list.find(
-        (repo) =>
-          props.stagingRepoNames.includes(repo) ||
-          repo == props.rejectedRepoName,
+        (repo) => props.stagingRepoNames.includes(repo) || repo == props.rejectedRepoName,
       );
 
       // origin repo is not staging or rejected, so this is reapprove process, user can add collection to approved repos
@@ -115,17 +104,14 @@ export const ApproveModal = (props: IProps) => {
       const pulp_id = parsePulpIDFromURL(repoData.data.results[0].pulp_href);
 
       error = t`Collection with id ${props.collectionVersion.id} not found.`;
-      const collectionData = await CollectionVersionAPI.get(
-        props.collectionVersion.id,
-      );
+      const collectionData = await CollectionVersionAPI.get(props.collectionVersion.id);
       error = '';
 
       const autosign = context.settings.GALAXY_AUTO_SIGN_COLLECTIONS;
       let signingService_href = null;
 
       if (autosign) {
-        const signingServiceName =
-          context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+        const signingServiceName = context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
 
         error = t`Signing service ${signingServiceName} not found`;
         const signingList = await SigningServiceAPI.list({
@@ -233,9 +219,7 @@ export const ApproveModal = (props: IProps) => {
             if (fixedRepos.includes(name)) {
               label = <Label>{name}</Label>;
             } else {
-              label = (
-                <Label onClose={() => changeSelection(name)}>{name}</Label>
-              );
+              label = <Label onClose={() => changeSelection(name)}>{name}</Label>;
             }
             return <>{label} </>;
           })}
@@ -317,9 +301,7 @@ export const ApproveModal = (props: IProps) => {
 
     function deselectPage() {
       const newSelectedRepos = selectedRepos.filter(
-        (repo) =>
-          fixedRepos.includes(repo) ||
-          !repositoryList.find((repo2) => repo2.name == repo),
+        (repo) => fixedRepos.includes(repo) || !repositoryList.find((repo2) => repo2.name == repo),
       );
       setSelectedRepos(newSelectedRepos);
       setIsSelectorChecked(false);
@@ -395,10 +377,7 @@ export const ApproveModal = (props: IProps) => {
 
     return (
       <>
-        <table
-          aria-label={t`Collection versions`}
-          className='hub-c-table-content pf-c-table'
-        >
+        <table aria-label={t`Collection versions`} className='hub-c-table-content pf-c-table'>
           <SortTable
             options={sortTableOptions}
             params={params}
@@ -436,18 +415,11 @@ export const ApproveModal = (props: IProps) => {
             key='confirm'
             onClick={approve}
             variant='primary'
-            isDisabled={
-              selectedRepos.length - fixedRepos.length <= 0 || loading
-            }
+            isDisabled={selectedRepos.length - fixedRepos.length <= 0 || loading}
           >
             {t`Select`}
           </Button>,
-          <Button
-            key='cancel'
-            onClick={props.closeAction}
-            variant='link'
-            isDisabled={loading}
-          >
+          <Button key='cancel' onClick={props.closeAction} variant='link' isDisabled={loading}>
             {t`Cancel`}
           </Button>,
         ]}
@@ -505,18 +477,11 @@ export const ApproveModal = (props: IProps) => {
           {loading ? <Spinner /> : renderTable()}
 
           <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-            />
+            <Pagination params={params} updateParams={(p) => setParams(p)} count={itemsCount} />
           </div>
         </section>
 
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
-        />
+        <AlertList alerts={alerts} closeAlert={(i) => closeAlert(i, { alerts, setAlerts })} />
       </Modal>
     </>
   );

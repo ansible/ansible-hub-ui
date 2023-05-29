@@ -25,16 +25,8 @@ export class Logo extends React.Component<IProps, IState> {
   }
 
   render() {
-    const {
-      alt,
-      className,
-      fallbackToDefault,
-      image,
-      size,
-      unlockWidth,
-      width,
-      flexGrow,
-    } = this.props;
+    const { alt, className, fallbackToDefault, image, size, unlockWidth, width, flexGrow } =
+      this.props;
     const { failed } = this.state;
 
     const style = {
@@ -62,11 +54,7 @@ export class Logo extends React.Component<IProps, IState> {
           style={{ objectFit: 'contain', maxHeight: size }}
           src={failed ? DefaultLogo : image || DefaultLogo}
           alt={alt}
-          onError={
-            fallbackToDefault
-              ? () => this.setState({ failed: true })
-              : () => null
-          }
+          onError={fallbackToDefault ? () => this.setState({ failed: true }) : () => null}
         />
       </div>
     );

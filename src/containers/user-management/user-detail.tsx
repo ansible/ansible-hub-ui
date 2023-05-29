@@ -55,8 +55,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
       return <Navigate to={this.state.redirect} />;
     }
 
-    const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =
-      this.state;
+    const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } = this.state;
     const { user, hasPermission } = this.context;
 
     if (unauthorised) {
@@ -74,19 +73,14 @@ class UserDetail extends React.Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
           user={userDetail}
           addAlert={(text, variant, description = undefined) =>
             this.setState({
-              alerts: alerts.concat([
-                { title: text, variant: variant, description: description },
-              ]),
+              alerts: alerts.concat([{ title: text, variant: variant, description: description }]),
             })
           }
         ></DeleteUserModal>

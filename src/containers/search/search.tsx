@@ -73,10 +73,7 @@ class Search extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
@@ -85,9 +82,7 @@ class Search extends React.Component<RouteProps, IState> {
     // Load view type from local storage if it's not set. This allows a
     // user's view type preference to persist
     if (!params['view_type']) {
-      params['view_type'] = localStorage.getItem(
-        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-      );
+      params['view_type'] = localStorage.getItem(Constants.SEARCH_VIEW_TYPE_LOCAL_KEY);
     }
 
     this.state = {
@@ -147,23 +142,13 @@ class Search extends React.Component<RouteProps, IState> {
     } = this.state;
     const noData =
       collections.length === 0 &&
-      !filterIsSet(params, [
-        'keywords',
-        'tags',
-        'is_signed',
-        'repository_name',
-        'namespace',
-      ]);
+      !filterIsSet(params, ['keywords', 'tags', 'is_signed', 'repository_name', 'namespace']);
 
-    const updateParams = (p) =>
-      this.updateParams(p, () => this.queryCollections());
+    const updateParams = (p) => this.updateParams(p, () => this.queryCollections());
 
     return (
       <div className='search-page'>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         <DeleteCollectionModal
           deleteCollection={deleteCollection}
           collections={collections}
@@ -262,9 +247,7 @@ class Search extends React.Component<RouteProps, IState> {
             <section className='footer'>
               <Pagination
                 params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
+                updateParams={(p) => this.updateParams(p, () => this.queryCollections())}
                 perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                 count={numberOfResults}
               />
@@ -379,10 +362,7 @@ class Search extends React.Component<RouteProps, IState> {
           }),
       }),
       hasPermission('galaxy.upload_to_namespace') && (
-        <DropdownItem
-          onClick={() => this.handleControlClick(collection)}
-          key='deprecate'
-        >
+        <DropdownItem onClick={() => this.handleControlClick(collection)} key='deprecate'>
           {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
         </DropdownItem>
       ),
@@ -401,10 +381,7 @@ class Search extends React.Component<RouteProps, IState> {
     if (list) {
       return {
         uploadButton: hasPermission('galaxy.upload_to_namespace') ? (
-          <Button
-            onClick={() => this.checkUploadPrivilleges(collection)}
-            variant='secondary'
-          >
+          <Button onClick={() => this.checkUploadPrivilleges(collection)} variant='secondary'>
             {t`Upload new version`}
           </Button>
         ) : null,
@@ -416,9 +393,7 @@ class Search extends React.Component<RouteProps, IState> {
 
     return (
       <span className={cx(!displayMenu && 'hidden-menu-space')}>
-        {displayMenu && (
-          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-        )}
+        {displayMenu && <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />}
       </span>
     );
   }
@@ -458,11 +433,7 @@ class Search extends React.Component<RouteProps, IState> {
       include_related: 'my_permissions',
     })
       .then((value) => {
-        if (
-          value.data.related_fields.my_permissions.includes(
-            'galaxy.upload_to_namespace',
-          )
-        ) {
+        if (value.data.related_fields.my_permissions.includes('galaxy.upload_to_namespace')) {
           this.setState({
             updateCollection: collection,
             showImportModal: true,
@@ -497,9 +468,7 @@ class Search extends React.Component<RouteProps, IState> {
 
   private isCollectionSynced(name: string, namespace: string): boolean {
     const { synclist } = this.state;
-    const found = synclist.collections.find(
-      (el) => el.name === name && el.namespace === namespace,
-    );
+    const found = synclist.collections.find((el) => el.name === name && el.namespace === namespace);
 
     return synclist.policy === 'include' ? !!found : !found;
   }
@@ -535,9 +504,7 @@ class Search extends React.Component<RouteProps, IState> {
       if (result.data.meta.count === 1) {
         this.setState({ synclist: result.data.data[0] });
       } else {
-        console.error(
-          `my-synclist returned ${result.data.meta.count} synclists`,
-        );
+        console.error(`my-synclist returned ${result.data.meta.count} synclists`);
       }
     });
   }

@@ -37,10 +37,7 @@ interface LegacyNamespacesProps {
   alerts: AlertType[];
 }
 
-class LegacyNamespaces extends React.Component<
-  RouteProps,
-  LegacyNamespacesProps
-> {
+class LegacyNamespaces extends React.Component<RouteProps, LegacyNamespacesProps> {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,10 +137,7 @@ class LegacyNamespaces extends React.Component<
 
     return (
       <div>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         {this.state.isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}

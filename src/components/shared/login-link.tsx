@@ -17,11 +17,6 @@ export const LoginLink = ({ button, next }: IProps) => {
   if (featureFlags?.external_authentication && UI_EXTERNAL_LOGIN_URI) {
     return <a className={className} href={UI_EXTERNAL_LOGIN_URI}>{t`Login`}</a>;
   } else {
-    return (
-      <Link
-        className={className}
-        to={formatPath(Paths.login, {}, { next })}
-      >{t`Login`}</Link>
-    );
+    return <Link className={className} to={formatPath(Paths.login, {}, { next })}>{t`Login`}</Link>;
   }
 };

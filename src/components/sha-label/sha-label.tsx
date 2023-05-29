@@ -10,8 +10,6 @@ interface IProps {
 
 export const ShaLabel = ({ digest, grey, long }: IProps) => (
   <Tooltip content={digest}>
-    <Label color={grey ? 'grey' : 'blue'}>
-      {long ? digest : truncateSha(digest)}
-    </Label>
+    <Label color={grey ? 'grey' : 'blue'}>{long ? digest : truncateSha(digest)}</Label>
   </Tooltip>
 );

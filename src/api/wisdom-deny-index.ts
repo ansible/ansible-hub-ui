@@ -7,20 +7,14 @@ export class API extends HubAPI {
     return this.http
       .get(
         this.apiPath +
-          `?scope=${encodeURIComponent(scope)}&reference=${encodeURIComponent(
-            reference,
-          )}`,
+          `?scope=${encodeURIComponent(scope)}&reference=${encodeURIComponent(reference)}`,
       )
       .then(({ data }) => data.count > 0);
   }
 
   removeFromDenyIndex(scope, reference) {
     const removePath =
-      this.apiPath +
-      encodeURIComponent(scope) +
-      '/' +
-      encodeURIComponent(reference) +
-      '/';
+      this.apiPath + encodeURIComponent(scope) + '/' + encodeURIComponent(reference) + '/';
     return this.http.delete(removePath);
   }
 

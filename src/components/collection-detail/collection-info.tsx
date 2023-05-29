@@ -1,26 +1,10 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Alert,
-  Button,
-  Grid,
-  GridItem,
-  Split,
-  SplitItem,
-} from '@patternfly/react-core';
+import { Alert, Button, Grid, GridItem, Split, SplitItem } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  CollectionAPI,
-  CollectionVersionContentType,
-  CollectionVersionSearch,
-} from 'src/api';
-import {
-  ClipboardCopy,
-  LoadingPageSpinner,
-  LoginLink,
-  Tag,
-} from 'src/components';
+import { CollectionAPI, CollectionVersionContentType, CollectionVersionSearch } from 'src/api';
+import { ClipboardCopy, LoadingPageSpinner, LoginLink, Tag } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
@@ -71,9 +55,7 @@ export const CollectionInfo = ({
           <GridItem>
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`License`}</SplitItem>
-              <SplitItem isFilled>
-                {content.license ? content.license.join(', ') : ''}
-              </SplitItem>
+              <SplitItem isFilled>{content.license ? content.license.join(', ') : ''}</SplitItem>
             </Split>
           </GridItem>
         )}
@@ -84,8 +66,8 @@ export const CollectionInfo = ({
               <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
               <div>
                 <Trans>
-                  <b>Note:</b> Installing collections with ansible-galaxy is
-                  only supported in ansible 2.9+
+                  <b>Note:</b> Installing collections with ansible-galaxy is only supported in
+                  ansible 2.9+
                 </Trans>
               </div>
             </SplitItem>
@@ -95,16 +77,14 @@ export const CollectionInfo = ({
           <Split hasGutter={true}>
             <SplitItem className='install-title'>{t`Download`}</SplitItem>
             {context.user.is_anonymous &&
-            !context.settings
-              .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
+            !context.settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
               <Alert
                 className={'hub-collection-download-alert'}
                 isInline
                 variant='warning'
                 title={
                   <React.Fragment>
-                    {t`You have to be logged in to be able to download the tarball.`}{' '}
-                    <LoginLink />
+                    {t`You have to be logged in to be able to download the tarball.`} <LoginLink />
                   </React.Fragment>
                 }
               />
@@ -112,8 +92,8 @@ export const CollectionInfo = ({
               <SplitItem isFilled>
                 <div>
                   <Trans>
-                    To download this collection, configure your client to
-                    connect to one of this repositories{' '}
+                    To download this collection, configure your client to connect to one of this
+                    repositories{' '}
                     <Link
                       to={formatPath(Paths.collectionDistributionsByRepo, {
                         repo: repository.name,
@@ -153,19 +133,13 @@ export const CollectionInfo = ({
           collectionVersion={collection_version}
           repository={repository}
           addAlert={(status, statusText) =>
-            addAlert(
-              'danger',
-              t`Signatures could not be loaded.`,
-              errorMessage(status, statusText),
-            )
+            addAlert('danger', t`Signatures could not be loaded.`, errorMessage(status, statusText))
           }
         />
         {content?.requires_ansible && (
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>
-                {t`Requires Ansible`}
-              </SplitItem>
+              <SplitItem className='install-title'>{t`Requires Ansible`}</SplitItem>
               <SplitItem isFilled data-cy='ansible-requirement'>
                 {content?.requires_ansible}
               </SplitItem>

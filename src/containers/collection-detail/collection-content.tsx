@@ -13,10 +13,7 @@ import { ParamHelper } from 'src/utilities/param-helper';
 import { IBaseCollectionState, loadCollection } from './base';
 
 // renders list of contents in a collection
-class CollectionContent extends React.Component<
-  RouteProps,
-  IBaseCollectionState
-> {
+class CollectionContent extends React.Component<RouteProps, IBaseCollectionState> {
   constructor(props) {
     super(props);
 
@@ -36,8 +33,7 @@ class CollectionContent extends React.Component<
   }
 
   render() {
-    const { collections, collectionsCount, collection, params, content } =
-      this.state;
+    const { collections, collectionsCount, collection, params, content } = this.state;
 
     if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -73,9 +69,7 @@ class CollectionContent extends React.Component<
           collection={collection}
           content={content}
           params={params}
-          updateParams={(params) =>
-            this.updateParams(params, () => this.loadCollections(true))
-          }
+          updateParams={(params) => this.updateParams(params, () => this.loadCollections(true))}
           breadcrumbs={breadcrumbs}
           activeTab='contents'
         />

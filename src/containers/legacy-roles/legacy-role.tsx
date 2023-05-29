@@ -95,10 +95,7 @@ interface RoleVersionIProps {
   role_version: LegacyRoleVersionDetailType;
 }
 
-class LegacyRoleVersion extends React.Component<
-  RoleVersionIProps,
-  RoleVersionIProps
-> {
+class LegacyRoleVersion extends React.Component<RoleVersionIProps, RoleVersionIProps> {
   constructor(props) {
     super(props);
   }
@@ -106,9 +103,7 @@ class LegacyRoleVersion extends React.Component<
   render() {
     return (
       <DataListItemRow>
-        <DataListCell alignRight>
-          {this.props.role_version.version}
-        </DataListCell>
+        <DataListCell alignRight>{this.props.role_version.version}</DataListCell>
 
         <DataListCell alignRight>
           <Trans>
@@ -118,11 +113,7 @@ class LegacyRoleVersion extends React.Component<
 
         {/* Release tarballs hosted on github */}
         <DataListCell alignRight>
-          <a
-            href={this.props.role_version.download_url}
-            target='_blank'
-            rel='noreferrer'
-          />
+          <a href={this.props.role_version.download_url} target='_blank' rel='noreferrer' />
         </DataListCell>
       </DataListItemRow>
     );
@@ -156,9 +147,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
   render() {
     return (
       <div id='versions-div'>
-        {!this.state.loading &&
-        this.state.role_versions &&
-        this.state.role_versions.length == 0 ? (
+        {!this.state.loading && this.state.role_versions && this.state.role_versions.length == 0 ? (
           <EmptyStateNoData
             title={t`No versions`}
             description={t`The role is versionless and will always install from the head/main/master branch.`}
@@ -208,11 +197,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
   }
 
   componentDidMount() {
-    const url =
-      'roles/?github_user=' +
-      this.state.github_user +
-      '&name=' +
-      this.state.name;
+    const url = 'roles/?github_user=' + this.state.github_user + '&name=' + this.state.name;
 
     LegacyRoleAPI.get(url).then((response) => {
       const github_user = this.state.github_user;
@@ -241,8 +226,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const repository =
-      'https://github.com/' + role.github_user + '/' + role.github_repo;
+    const repository = 'https://github.com/' + role.github_user + '/' + role.github_repo;
     const namespace = role.summary_fields.namespace;
     const namespace_url = formatPath(Paths.legacyNamespace, {
       namespaceid: namespace.id,
@@ -255,18 +239,10 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
       release_date = lv.release_date;
       release_name = lv.name;
     }
-    if (
-      release_date === undefined ||
-      release_date === null ||
-      release_date === ''
-    ) {
+    if (release_date === undefined || release_date === null || release_date === '') {
       release_date = role.modified;
     }
-    if (
-      release_name === undefined ||
-      release_name === null ||
-      release_name === ''
-    ) {
+    if (release_name === undefined || release_name === null || release_name === '') {
       release_name = '';
     }
 

@@ -27,17 +27,11 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
       { url: formatPath(Paths.ansibleRemoteDetail, { name }), name },
       tab.id === 'access' && group
         ? {
-            url: formatPath(
-              Paths.ansibleRepositoryDetail,
-              { name },
-              { tab: tab.id },
-            ),
+            url: formatPath(Paths.ansibleRepositoryDetail, { name }, { tab: tab.id }),
             name: tab.name,
           }
         : null,
-      tab.id === 'access' && group
-        ? { name: t`Group ${group}` }
-        : { name: tab.name },
+      tab.id === 'access' && group ? { name: t`Group ${group}` } : { name: tab.name },
     ].filter(Boolean),
   condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
@@ -58,9 +52,7 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
           return Promise.reject({ response: { status: 404 } });
         }
 
-        return AnsibleRemoteAPI.myPermissions(
-          parsePulpIDFromURL(remote.pulp_href),
-        )
+        return AnsibleRemoteAPI.myPermissions(parsePulpIDFromURL(remote.pulp_href))
           .then(({ data: { permissions } }) => permissions)
           .catch((e) => {
             console.error(e);

@@ -36,9 +36,7 @@ describe('Execution Environments - Use in Controller', () => {
       'Created',
       'Last modified',
       'Container registry type',
-    ].forEach((header) =>
-      cy.get('tr[data-cy="SortTable-headers"] th').contains(header),
-    );
+    ].forEach((header) => cy.get('tr[data-cy="SortTable-headers"] th').contains(header));
 
     // one row of each type available
     cy.contains('.hub-c-table-content .pf-c-label', 'Remote');
@@ -56,14 +54,9 @@ describe('Execution Environments - Use in Controller', () => {
       .click();
 
   const detail = (type) => {
-    cy.contains('.hub-c-table-content .pf-c-label', type)
-      .parents('tr')
-      .find('td a')
-      .click();
+    cy.contains('.hub-c-table-content .pf-c-label', type).parents('tr').find('td a').click();
 
-    ['Detail', 'Activity', 'Images'].forEach((tab) =>
-      cy.contains('.pf-c-tabs__item', tab),
-    );
+    ['Detail', 'Activity', 'Images'].forEach((tab) => cy.contains('.pf-c-tabs__item', tab));
 
     cy.get('button[aria-label="Actions"]')
       .click()
@@ -89,9 +82,7 @@ describe('Execution Environments - Use in Controller', () => {
         cy.get('ul.pf-c-list > li > a').should('have.length', 2);
 
         // filter controllers
-        cy.get('input[placeholder="Filter by controller name"]')
-          .click()
-          .type('another{enter}');
+        cy.get('input[placeholder="Filter by controller name"]').click().type('another{enter}');
         cy.contains('a', 'https://another.example.com');
         cy.get('ul.pf-c-list > li > a').should('have.length', 1);
         cy.contains('a', 'https://www.example.com').should('not.exist');

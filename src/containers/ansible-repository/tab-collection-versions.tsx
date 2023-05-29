@@ -5,11 +5,7 @@ import {
   ansibleRepositoryCollectionVersionAddAction,
   ansibleRepositoryCollectionVersionRemoveAction,
 } from 'src/actions';
-import {
-  AnsibleRepositoryType,
-  CollectionVersionAPI,
-  CollectionVersionSearch,
-} from 'src/api';
+import { AnsibleRepositoryType, CollectionVersionAPI, CollectionVersionSearch } from 'src/api';
 import { DetailList, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';
@@ -62,9 +58,7 @@ export const CollectionVersionsTab = ({
       repository,
     } = item;
 
-    const kebabItems = listItemActions.map((action) =>
-      action.dropdownItem(item, actionContext),
-    );
+    const kebabItems = listItemActions.map((action) => action.dropdownItem(item, actionContext));
 
     return (
       <tr key={index}>
@@ -99,8 +93,7 @@ export const CollectionVersionsTab = ({
         setState: setModalState,
         query,
         hasPermission,
-        hasObjectPermission: (p: string): boolean =>
-          item?.my_permissions?.includes?.(p),
+        hasObjectPermission: (p: string): boolean => item?.my_permissions?.includes?.(p),
       }}
       defaultPageSize={10}
       defaultSort={'name'}

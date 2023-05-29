@@ -14,9 +14,7 @@ describe('Delete a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
 
-    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
-      'reload',
-    );
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as('reload');
     cy.get(`a[href*="${uiPrefix}namespaces/testns1"]`).click();
     cy.get('[data-cy="ns-kebab-toggle"]').click();
     cy.contains('Delete namespace').click();
@@ -28,9 +26,7 @@ describe('Delete a namespace', () => {
 
   it('cannot delete a non-empty namespace', () => {
     //create namespace
-    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
-      'reload',
-    );
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as('reload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
@@ -45,16 +41,13 @@ describe('Delete a namespace', () => {
     cy.wait(10000);
 
     // attempt deletion
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
-    ).as('namespaces');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`).as(
+      'namespaces',
+    );
     cy.menuGo('Collections > Namespaces');
     cy.wait('@namespaces');
     cy.contains('ansible').parent().contains('View collections').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
-    cy.contains('Delete namespace')
-      .invoke('attr', 'aria-disabled')
-      .should('eq', 'true');
+    cy.contains('Delete namespace').invoke('attr', 'aria-disabled').should('eq', 'true');
   });
 });

@@ -13,9 +13,7 @@ export const ansibleRemoteDeleteAction = Action({
     state.deleteModalOpen ? (
       <DeleteAnsibleRemoteModal
         closeAction={() => setState({ deleteModalOpen: null })}
-        deleteAction={() =>
-          deleteRemote(state.deleteModalOpen, { addAlert, setState, query })
-        }
+        deleteAction={() => deleteRemote(state.deleteModalOpen, { addAlert, setState, query })}
         name={state.deleteModalOpen.name}
       />
     ) : null,
@@ -36,7 +34,5 @@ function deleteRemote({ name, pulpId }, { addAlert, setState, query }) {
       setState({ deleteModalOpen: null });
       query();
     })
-    .catch(
-      handleHttpError(t`Failed to remove remote ${name}`, () => null, addAlert),
-    );
+    .catch(handleHttpError(t`Failed to remove remote ${name}`, () => null, addAlert));
 }

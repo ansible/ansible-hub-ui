@@ -1,16 +1,9 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-} from 'src/api';
+import { AnsibleDistributionAPI, AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import {
-  canAddAnsibleRepository,
-  canEditAnsibleRepository,
-} from 'src/permissions';
+import { canAddAnsibleRepository, canEditAnsibleRepository } from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 const initialRepository: AnsibleRepositoryType = {
@@ -40,9 +33,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
     return AnsibleRepositoryAPI.list({ name })
       .then(({ data: { results } }) => results[0])
       .then((repository) => {
-        return AnsibleRepositoryAPI.myPermissions(
-          parsePulpIDFromURL(repository.pulp_href),
-        )
+        return AnsibleRepositoryAPI.myPermissions(parsePulpIDFromURL(repository.pulp_href))
           .then(({ data: { permissions } }) => permissions)
           .catch((e) => {
             console.error(e);
@@ -72,11 +63,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       return null;
     }
 
-    const saveRepository = ({
-      createDistribution,
-      hideFromSearch,
-      pipeline,
-    }) => {
+    const saveRepository = ({ createDistribution, hideFromSearch, pipeline }) => {
       const { repositoryToEdit } = state;
 
       const data = { ...repositoryToEdit };
@@ -120,21 +107,17 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
 
             return newData.pulp_href;
           })
-        : AnsibleRepositoryAPI.update(
-            parsePulpIDFromURL(item.pulp_href),
-            data,
-          ).then(({ data: task }) => {
-            queueAlert(
-              taskAlert(task, t`Update started for repository ${data.name}`),
-            );
+        : AnsibleRepositoryAPI.update(parsePulpIDFromURL(item.pulp_href), data).then(
+            ({ data: task }) => {
+              queueAlert(taskAlert(task, t`Update started for repository ${data.name}`));
 
-            return item.pulp_href;
-          });
+              return item.pulp_href;
+            },
+          );
 
       if (createDistribution) {
         // only alphanumerics, slashes, underscores and dashes are allowed in base_path, transform anything else to _
-        const basePathTransform = (name) =>
-          name.replaceAll(/[^-a-zA-Z0-9_/]/g, '_');
+        const basePathTransform = (name) => name.replaceAll(/[^-a-zA-Z0-9_/]/g, '_');
         let distributionName = data.name;
 
         promise = promise
@@ -145,8 +128,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
               repository: pulp_href,
             }).catch(() => {
               // if distribution already exists, try a numeric suffix to name & base_path
-              distributionName =
-                data.name + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+              distributionName = data.name + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
               return AnsibleDistributionAPI.create({
                 name: distributionName,
                 base_path: basePathTransform(distributionName),
@@ -155,12 +137,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
             }),
           )
           .then(({ data: task }) =>
-            queueAlert(
-              taskAlert(
-                task,
-                t`Creation started for distribution ${distributionName}`,
-              ),
-            ),
+            queueAlert(taskAlert(task, t`Creation started for distribution ${distributionName}`)),
           );
       }
 

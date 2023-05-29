@@ -51,11 +51,7 @@ import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
-import {
-  canSignNamespace,
-  parsePulpIDFromURL,
-  waitForTask,
-} from 'src/utilities';
+import { canSignNamespace, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { SignatureBadge } from '../signing';
@@ -192,8 +188,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.collection_version.pulp_created;
 
-    const { display_signatures, can_upload_signatures } =
-      this.context.featureFlags;
+    const { display_signatures, can_upload_signatures } = this.context.featureFlags;
 
     const signedString = () => {
       if (!display_signatures) {
@@ -205,11 +200,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const isLatestVersion = (v) => {
       return `${moment(v.pulp_created).fromNow()} ${signedString()}
-      ${
-        v.version === collections[0].collection_version.version
-          ? t`(latest)`
-          : ''
-      }`;
+      ${v.version === collections[0].collection_version.version ? t`(latest)` : ''}`;
     };
 
     const { collection_version, namespace_metadata: namespace } = collection;
@@ -268,10 +259,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
       hasPermission('galaxy.upload_to_namespace') && (
-        <DropdownItem
-          onClick={() => this.deprecate(collection)}
-          key='deprecate'
-        >
+        <DropdownItem onClick={() => this.deprecate(collection)} key='deprecate'>
           {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
         </DropdownItem>
       ),
@@ -286,9 +274,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const issueUrl =
       'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
-      encodeURIComponent(
-        `${collection_version.namespace}-${collectionName}-${version}`,
-      );
+      encodeURIComponent(`${collection_version.namespace}-${collectionName}-${version}`);
 
     return (
       <React.Fragment>
@@ -423,9 +409,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               />
             )
           }
-          contextSelector={
-            <RepoSelector selectedRepo={collection.repository.name} />
-          }
+          contextSelector={<RepoSelector selectedRepo={collection.repository.name} />}
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={
             <div className='install-version-column'>
@@ -433,13 +417,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               <div className='install-version-dropdown'>
                 <Select
                   isOpen={isOpenVersionsSelect}
-                  onToggle={(isOpenVersionsSelect) =>
-                    this.setState({ isOpenVersionsSelect })
-                  }
+                  onToggle={(isOpenVersionsSelect) => this.setState({ isOpenVersionsSelect })}
                   variant={SelectVariant.single}
-                  onSelect={() =>
-                    this.setState({ isOpenVersionsSelect: false })
-                  }
+                  onSelect={() => this.setState({ isOpenVersionsSelect: false })}
                   selections={`v${version}`}
                   aria-label={t`Select collection version`}
                   loadingVariant={
@@ -463,11 +443,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                         value={`v${v.version}`}
                         onClick={() =>
                           updateParams(
-                            ParamHelper.setParam(
-                              params,
-                              'version',
-                              v.version.toString(),
-                            ),
+                            ParamHelper.setParam(params, 'version', v.version.toString()),
                           )
                         }
                       >
@@ -512,16 +488,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
         >
           {collection.is_deprecated && (
-            <Alert
-              variant='danger'
-              isInline
-              title={t`This collection has been deprecated.`}
-            />
+            <Alert variant='danger' isInline title={t`This collection has been deprecated.`} />
           )}
-          <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          />
+          <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
           <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
@@ -566,11 +535,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       include_related: 'my_permissions',
     })
       .then((value) => {
-        if (
-          value.data.related_fields.my_permissions.includes(
-            'galaxy.upload_to_namespace',
-          )
-        ) {
+        if (value.data.related_fields.my_permissions.includes('galaxy.upload_to_namespace')) {
           this.setState({
             updateCollection: collection,
             showImportModal: true,
@@ -607,11 +572,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       {
         active: active === 'contents',
         title: t`Contents`,
-        link: formatPath(
-          Paths.collectionContentListByRepo,
-          pathParams,
-          reduced,
-        ),
+        link: formatPath(Paths.collectionContentListByRepo, pathParams, reduced),
       },
       {
         active: active === 'import-log',
@@ -621,20 +582,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       {
         active: active === 'dependencies',
         title: t`Dependencies`,
-        link: formatPath(
-          Paths.collectionDependenciesByRepo,
-          pathParams,
-          reduced,
-        ),
+        link: formatPath(Paths.collectionDependenciesByRepo, pathParams, reduced),
       },
       {
         active: active === 'distributions',
         title: t`Distributions`,
-        link: formatPath(
-          Paths.collectionDistributionsByRepo,
-          pathParams,
-          reduced,
-        ),
+        link: formatPath(Paths.collectionDistributionsByRepo, pathParams, reduced),
       },
     ];
 
@@ -642,11 +595,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   private async submitCertificate(file: File) {
-    const { collection_version: version, repository } =
-      this.state.versionToUploadCertificate;
+    const { collection_version: version, repository } = this.state.versionToUploadCertificate;
 
-    const signed_collection =
-      this.props.collection.collection_version.pulp_href;
+    const signed_collection = this.props.collection.collection_version.pulp_href;
 
     this.setState({
       alerts: this.state.alerts.concat({
@@ -722,9 +673,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     })
       .then(({ data }) => data)
       .catch(() => ({ data: [] }))
-      .then(({ data: modalCollections }) =>
-        this.setState({ modalCollections }),
-      );
+      .then(({ data: modalCollections }) => this.setState({ modalCollections }));
   };
 
   private signCollection = () => {
@@ -765,9 +714,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           })
           .finally(() => {
             this.setState({
-              alerts: this.state.alerts.filter(
-                (x) => x?.id !== 'loading-signing',
-              ),
+              alerts: this.state.alerts.filter((x) => x?.id !== 'loading-signing'),
             });
           });
       })
@@ -780,8 +727,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private signVersion = () => {
-    const { name, version, namespace } =
-      this.props.collection.collection_version;
+    const { name, version, namespace } = this.props.collection.collection_version;
 
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
@@ -820,9 +766,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           })
           .finally(() => {
             this.setState({
-              alerts: this.state.alerts.filter(
-                (x) => x?.id !== 'loading-signing',
-              ),
+              alerts: this.state.alerts.filter((x) => x?.id !== 'loading-signing'),
             });
           });
       })
@@ -884,8 +828,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
         waitForTask(taskId).then(() => {
           const topVersion = (collections || []).filter(
-            ({ collection_version }) =>
-              collection_version.version !== collectionVersion,
+            ({ collection_version }) => collection_version.version !== collectionVersion,
           );
 
           if (topVersion.length) {
@@ -907,8 +850,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   variant: 'success',
                   title: (
                     <Trans>
-                      Collection &quot;{name} v{collectionVersion}&quot; has
-                      been successfully deleted.
+                      Collection &quot;{name} v{collectionVersion}&quot; has been successfully
+                      deleted.
                     </Trans>
                   ),
                 },
@@ -920,8 +863,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Collection &quot;{name} v{collectionVersion}&quot; has been
-                  successfully deleted.
+                  Collection &quot;{name} v{collectionVersion}&quot; has been successfully deleted.
                 </Trans>
               ),
             });

@@ -102,10 +102,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   constructor(props) {
     super(props);
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     params['namespace'] = props.routeParams.namespace;
     if (props.routeParams.repo && !params['repository_name']) {
@@ -150,10 +147,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    const params = ParamHelper.parseParamString(this.props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(this.props.location.search, ['page', 'page_size']);
 
     if (prevProps.location.search !== this.props.location.search) {
       params['namespace'] = this.props.routeParams.namespace;
@@ -167,8 +161,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     if (
       prevProps.routeParams.repo !== this.props.routeParams.repo &&
       this.props.routeParams.repo &&
-      (!params['repository_name'] ||
-        params['repository_name'] === prevProps.routeParams.repo)
+      (!params['repository_name'] || params['repository_name'] === prevProps.routeParams.repo)
     ) {
       params['repository_name'] = this.props.routeParams.repo;
       this.setState({ params });
@@ -267,41 +260,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               : null,
           }
         : null,
-      tab === 'access' && params.group
-        ? { name: t`Group ${params.group}` }
-        : null,
+      tab === 'access' && params.group ? { name: t`Group ${params.group}` } : null,
     ].filter(Boolean);
 
     const repositoryUrl = getRepoURL('published');
 
     const noData =
-      itemCount === 0 &&
-      !filterIsSet(params, [
-        'is_signed',
-        'keywords',
-        'repository_name',
-        'tags',
-      ]);
+      itemCount === 0 && !filterIsSet(params, ['is_signed', 'keywords', 'repository_name', 'tags']);
 
-    const updateParams = (params) =>
-      this.updateParams(params, () => this.loadCollections());
+    const updateParams = (params) => this.updateParams(params, () => this.loadCollections());
 
-    const ignoredParams = [
-      'namespace',
-      'page',
-      'page_size',
-      'sort',
-      'tab',
-      'group',
-      'view_type',
-    ];
+    const ignoredParams = ['namespace', 'page', 'page_size', 'sort', 'tab', 'group', 'view_type'];
 
     const { hasPermission } = this.context;
 
     const canEditOwners =
-      this.state.namespace.related_fields.my_permissions?.includes(
-        'galaxy.change_namespace',
-      ) || hasPermission('galaxy.change_namespace');
+      this.state.namespace.related_fields.my_permissions?.includes('galaxy.change_namespace') ||
+      hasPermission('galaxy.change_namespace');
 
     // remove ?group (access tab) when switching tabs
     const tabParams = { ...params };
@@ -385,11 +360,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             className='hub-c-alert-namespace'
             variant='warning'
             title={warning}
-            actionClose={
-              <AlertActionCloseButton
-                onClose={() => this.setState({ warning: '' })}
-              />
-            }
+            actionClose={<AlertActionCloseButton onClose={() => this.setState({ warning: '' })} />}
           ></Alert>
         ) : null}
         <PartnerHeader
@@ -430,9 +401,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 description={t`Collections will appear once uploaded`}
                 button={
                   this.state.showControls && (
-                    <Button
-                      onClick={() => this.setState({ showImportModal: true })}
-                    >
+                    <Button onClick={() => this.setState({ showImportModal: true })}>
                       {t`Upload collection`}
                     </Button>
                   )
@@ -446,12 +415,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   ignoredParams={ignoredParams}
                   collections={collections}
                   itemCount={itemCount}
-                  displaySignatures={
-                    this.context.featureFlags.display_signatures
-                  }
-                  collectionControls={(collection) =>
-                    this.renderCollectionControls(collection)
-                  }
+                  displaySignatures={this.context.featureFlags.display_signatures}
+                  collectionControls={(collection) => this.renderCollectionControls(collection)}
                 />
               </section>
             )
@@ -461,9 +426,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               <div>
                 <div>
                   <Trans>
-                    <b>Note:</b> Use this URL to configure ansible-galaxy to
-                    upload collections to this namespace. More information on
-                    ansible-galaxy configurations can be found{' '}
+                    <b>Note:</b> Use this URL to configure ansible-galaxy to upload collections to
+                    this namespace. More information on ansible-galaxy configurations can be found{' '}
                     <a
                       href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
                       target='_blank'
@@ -524,14 +488,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 const { name, groups } = namespace;
                 const newGroup = {
                   ...group,
-                  object_roles: [
-                    ...group.object_roles,
-                    ...roles.map(({ name }) => name),
-                  ],
+                  object_roles: [...group.object_roles, ...roles.map(({ name }) => name)],
                 };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                const newGroups = groups.map((g) => (g === group ? newGroup : g));
 
                 this.updateGroups({
                   groups: newGroups,
@@ -544,13 +503,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 const { name, groups } = namespace;
                 const newGroup = {
                   ...group,
-                  object_roles: group.object_roles.filter(
-                    (name) => name !== role,
-                  ),
+                  object_roles: group.object_roles.filter((name) => name !== role),
                 };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                const newGroups = groups.map((g) => (g === group ? newGroup : g));
 
                 this.updateGroups({
                   groups: newGroups,
@@ -673,9 +628,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           })
           .finally(() => {
             this.setState({
-              alerts: this.state.alerts.filter(
-                (x) => x?.id !== 'loading-signing',
-              ),
+              alerts: this.state.alerts.filter((x) => x?.id !== 'loading-signing'),
             });
           });
       })
@@ -724,9 +677,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           return null;
         }
         // expecting 404 - it just means we can not edit the namespace (unless both NamespaceAPI and MyNamespaceAPI fail)
-        return e.response && e.response.status === 404
-          ? null
-          : Promise.reject(e);
+        return e.response && e.response.status === 404 ? null : Promise.reject(e);
       }),
     ])
       .then((val) => {
@@ -736,10 +687,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           namespace: val[1].data,
           showControls: !!val[2],
           canSign: canSignNamespace(this.context, val[2]?.data),
-          group: this.filterGroup(
-            this.state.params['group'],
-            val[1].data['groups'],
-          ),
+          group: this.filterGroup(this.state.params['group'], val[1].data['groups']),
         });
       })
       .catch(() => {
@@ -785,9 +733,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
           {this.state.allCollections.length === 0 ? (
-            <DropdownItem
-              onClick={() => this.setState({ isOpenNamespaceModal: true })}
-            >
+            <DropdownItem onClick={() => this.setState({ isOpenNamespaceModal: true })}>
               {t`Delete namespace`}
             </DropdownItem>
           ) : (
@@ -898,11 +844,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           });
           this.context.queueAlert({
             variant: 'success',
-            title: (
-              <Trans>
-                Namespace &quot;{name}&quot; has been successfully deleted.
-              </Trans>
-            ),
+            title: <Trans>Namespace &quot;{name}&quot; has been successfully deleted.</Trans>,
           });
         })
         .catch((e) => {
@@ -956,10 +898,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       uploadButton: (
         <Button
           onClick={() =>
-            this.handleCollectionAction(
-              collection.collection_version.pulp_href,
-              'upload',
-            )
+            this.handleCollectionAction(collection.collection_version.pulp_href, 'upload')
           }
           variant='secondary'
         >
@@ -981,10 +920,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             }),
             <DropdownItem
               onClick={() =>
-                this.handleCollectionAction(
-                  collection.collection_version.pulp_href,
-                  'deprecate',
-                )
+                this.handleCollectionAction(collection.collection_version.pulp_href, 'deprecate')
               }
               key='deprecate'
             >

@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Repositories } from 'src/api';

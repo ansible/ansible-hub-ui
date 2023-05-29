@@ -46,14 +46,13 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
 
   const queryRoles = () => {
     setLoading(true);
-    RoleAPI.list(
-      { name__startswith: 'galaxy.', ...localParams },
-      pulpObjectType,
-    ).then(({ data }) => {
-      setRoles(data.results);
-      setRolesItemCount(data.count);
-      setLoading(false);
-    });
+    RoleAPI.list({ name__startswith: 'galaxy.', ...localParams }, pulpObjectType).then(
+      ({ data }) => {
+        setRoles(data.results);
+        setRolesItemCount(data.count);
+        setLoading(false);
+      },
+    );
   };
 
   if (loading) {
@@ -64,8 +63,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
     );
   }
 
-  const isRoleSelected = (name) =>
-    selectedRoles.map((r) => r.name).includes(name);
+  const isRoleSelected = (name) => selectedRoles.map((r) => r.name).includes(name);
 
   const noData = roles.length === 0;
 
@@ -106,18 +104,14 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
     <div className='hub-custom-wizard-layout'>
       <Flex
         justifyContent={{
-          default: noData
-            ? 'justifyContentFlexStart'
-            : 'justifyContentSpaceBetween',
+          default: noData ? 'justifyContentFlexStart' : 'justifyContentSpaceBetween',
         }}
         direction={{ default: 'column' }}
       >
         <FlexItem className='hub-select-roles-content'>
           <Flex
             justifyContent={{
-              default: noData
-                ? 'justifyContentFlexStart'
-                : 'justifyContentSpaceBetween',
+              default: noData ? 'justifyContentFlexStart' : 'justifyContentSpaceBetween',
             }}
             direction={{ default: 'column' }}
           >
@@ -148,11 +142,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                         >
                           <Label
                             onClose={() =>
-                              onRolesUpdate(
-                                selectedRoles.filter(
-                                  (r) => r.name !== role.name,
-                                ),
-                              )
+                              onRolesUpdate(selectedRoles.filter((r) => r.name !== role.name))
                             }
                           >
                             {role.name}
@@ -212,15 +202,11 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                       <CheckboxRow
                         rowIndex={i}
                         key={role.name}
-                        isSelected={
-                          isRoleSelected(role.name) || isAssigned(role.name)
-                        }
+                        isSelected={isRoleSelected(role.name) || isAssigned(role.name)}
                         onSelect={() =>
                           onRolesUpdate(
                             isRoleSelected(role.name)
-                              ? selectedRoles.filter(
-                                  (r) => r.name !== role.name,
-                                )
+                              ? selectedRoles.filter((r) => r.name !== role.name)
                               : [...selectedRoles, role],
                           )
                         }
@@ -228,12 +214,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                         data-cy={`RoleListTable-CheckboxRow-row-${role.name}`}
                       >
                         <td>{role.name}</td>
-                        <td>
-                          {translateLockedRolesDescription(
-                            role.name,
-                            role.description,
-                          )}
-                        </td>
+                        <td>{translateLockedRolesDescription(role.name, role.description)}</td>
                       </CheckboxRow>
                     ))}
                   </RoleListTable>

@@ -20,14 +20,7 @@ describe('My Profile Tests', () => {
   });
 
   it('only has input fields for name, email, username, password and pass confirmation', () => {
-    let inputs = [
-      'first_name',
-      'last_name',
-      'email',
-      'username',
-      'password',
-      'password-confirm',
-    ];
+    let inputs = ['first_name', 'last_name', 'email', 'username', 'password', 'password-confirm'];
     cy.get('.body').within(() => {
       // restricted to text input types because there's a checkbox now for the
       // 'super user' option, but it's disabled.
@@ -88,10 +81,7 @@ describe('My Profile Tests', () => {
     );
 
     cy.get('#password-confirm').clear().type('pwd123456');
-    cy.get('#password-confirm-helper').should(
-      'contain',
-      'Passwords do not match',
-    );
+    cy.get('#password-confirm-helper').should('contain', 'Passwords do not match');
 
     cy.get('#password').clear().type(password);
     cy.get('#password-confirm').clear().type(password);
@@ -100,24 +90,18 @@ describe('My Profile Tests', () => {
   });
 
   it('groups input is readonly', () => {
-    cy.get('[data-cy="UserForm-readonly-groups"]')
-      .find('input')
-      .should('not.exist');
+    cy.get('[data-cy="UserForm-readonly-groups"]').find('input').should('not.exist');
   });
 
   it('user can save form', () => {
     cy.intercept('PUT', `${apiPrefix}_ui/v1/me/`).as('saveForm');
 
     cy.contains('Save').click();
-    cy.get('[aria-label="Success Alert"]').contains(
-      'Saved changes to user "admin".',
-    );
+    cy.get('[aria-label="Success Alert"]').contains('Saved changes to user "admin".');
 
     cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
 
-    cy.get('[aria-label="Success Alert"]').contains(
-      'Saved changes to user "admin".',
-    );
+    cy.get('[aria-label="Success Alert"]').contains('Saved changes to user "admin".');
   });
 
   it('user can cancel form', () => {
@@ -128,21 +112,9 @@ describe('My Profile Tests', () => {
 
     cy.get('.pf-c-button').contains('Cancel').click();
 
-    cy.get('[data-cy="DataForm-field-username"]').should(
-      'not.contain',
-      'administrator',
-    );
-    cy.get('[data-cy="DataForm-field-first_name"]').should(
-      'not.contain',
-      'First Name',
-    );
-    cy.get('[data-cy="DataForm-field-last_name"]').should(
-      'not.contain',
-      'Last Name',
-    );
-    cy.get('[data-cy="DataForm-field-email"]').should(
-      'not.contain',
-      'administrator@example.com',
-    );
+    cy.get('[data-cy="DataForm-field-username"]').should('not.contain', 'administrator');
+    cy.get('[data-cy="DataForm-field-first_name"]').should('not.contain', 'First Name');
+    cy.get('[data-cy="DataForm-field-last_name"]').should('not.contain', 'Last Name');
+    cy.get('[data-cy="DataForm-field-email"]').should('not.contain', 'administrator@example.com');
   });
 });

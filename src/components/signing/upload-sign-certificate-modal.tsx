@@ -1,11 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  ButtonVariant,
-  FileUpload,
-  Modal,
-  ModalVariant,
-} from '@patternfly/react-core';
+import { Button, ButtonVariant, FileUpload, Modal, ModalVariant } from '@patternfly/react-core';
 import React, { useState } from 'react';
 
 interface Props {
@@ -14,11 +8,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const UploadSingCertificateModal: React.FC<Props> = ({
-  isOpen,
-  onSubmit,
-  onCancel,
-}) => {
+export const UploadSingCertificateModal: React.FC<Props> = ({ isOpen, onSubmit, onCancel }) => {
   const [filename, setFilename] = useState('');
   const [path, setPath] = useState<File | null>(null);
 

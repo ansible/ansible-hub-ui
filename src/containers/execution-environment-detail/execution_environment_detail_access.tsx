@@ -1,21 +1,12 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import {
-  ExecutionEnvironmentNamespaceAPI,
-  GroupAPI,
-  GroupType,
-  RoleType,
-} from 'src/api';
+import { ExecutionEnvironmentNamespaceAPI, GroupAPI, GroupType, RoleType } from 'src/api';
 import { AccessTab } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerParamFix, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -32,10 +23,7 @@ interface IState {
   showRoleSelectWizard?: { roles?: RoleType[] };
 }
 
-class ExecutionEnvironmentDetailAccess extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetailAccess extends React.Component<IDetailSharedProps, IState> {
   constructor(props) {
     super(props);
 
@@ -114,13 +102,10 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
         }}
         addGroup={(group, roles) => {
           const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                groups: [group.name],
-              },
-            ),
+            ExecutionEnvironmentNamespaceAPI.addRole(this.props.containerRepository.namespace.id, {
+              role: role.name,
+              groups: [group.name],
+            }),
           );
           this.updateGroupRoles({
             roles: rolePromises,
@@ -148,13 +133,10 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
         }}
         addRole={(group, roles) => {
           const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                groups: [group.name],
-              },
-            ),
+            ExecutionEnvironmentNamespaceAPI.addRole(this.props.containerRepository.namespace.id, {
+              role: role.name,
+              groups: [group.name],
+            }),
           );
           this.updateGroupRoles({
             roles: rolePromises,

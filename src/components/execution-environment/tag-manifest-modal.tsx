@@ -108,19 +108,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           <Button
             key='save'
             onClick={() => this.saveTags()}
-            isDisabled={
-              isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)
-            }
+            isDisabled={isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)}
           >
             {t`Save`}
             {isSaving && <Spinner size='sm'></Spinner>}
           </Button>,
-          <Button
-            isDisabled={isSaving}
-            key='cancel'
-            onClick={() => closeModal()}
-            variant='link'
-          >
+          <Button isDisabled={isSaving} key='cancel' onClick={() => closeModal()} variant='link'>
             {t`Cancel`}
           </Button>,
         ]}
@@ -181,9 +174,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                   >
                     {t`Yes`}
                   </AlertActionLink>
-                  <AlertActionLink
-                    onClick={() => this.setState({ tagToVerify: '' })}
-                  >
+                  <AlertActionLink onClick={() => this.setState({ tagToVerify: '' })}>
                     {t`No`}
                   </AlertActionLink>
                 </>
@@ -192,11 +183,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           )}
 
           <FormGroup fieldId='remove-tag' label={t`Current tags`}>
-            <LabelGroup
-              {...chipGroupProps()}
-              id='remove-tag'
-              defaultIsOpen={true}
-            >
+            <LabelGroup {...chipGroupProps()} id='remove-tag' defaultIsOpen={true}>
               {this.getCurrentTags().map((tag) => (
                 <Label
                   disabled={isSaving}
@@ -213,13 +200,10 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               isInline
               variant='info'
-              title={
-                <Trans>Waiting for {pendingTasks} task(s) to finish.</Trans>
-              }
+              title={<Trans>Waiting for {pendingTasks} task(s) to finish.</Trans>}
             >
               <Trans>
-                It&apos;s safe to close this window. These tasks will finish in
-                the background.
+                It&apos;s safe to close this window. These tasks will finish in the background.
               </Trans>
             </Alert>
           )}
@@ -254,18 +238,16 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     const { containerManifest } = this.props;
 
     this.setState({ isSaving: true }, () => {
-      const repository: ContainerRepositoryType =
-        this.props.containerRepository;
+      const repository: ContainerRepositoryType = this.props.containerRepository;
 
       const promises = [];
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({
           tag: tag,
-          promise: ContainerTagAPI.untag(
-            repository.pulp.repository.id,
-            tag,
-          ).catch((e) => this.handleFailedTag(tag, e, 'remove')),
+          promise: ContainerTagAPI.untag(repository.pulp.repository.id, tag).catch((e) =>
+            this.handleFailedTag(tag, e, 'remove'),
+          ),
         });
       }
 
@@ -341,9 +323,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           await new Promise((r) => setTimeout(r, 5000));
           queryTasks();
         } else {
-          this.setState({ isSaving: false, pendingTasks: 0 }, () =>
-            this.props.reloadManifests(),
-          );
+          this.setState({ isSaving: false, pendingTasks: 0 }, () => this.props.reloadManifests());
         }
       });
     };
@@ -376,9 +356,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             this.setState({ tagToVerify: tag, verifyingTag: false });
           })
           .catch(() => {
-            this.setState({ tagInForm: '', verifyingTag: false }, () =>
-              this.addTag(tag),
-            );
+            this.setState({ tagInForm: '', verifyingTag: false }, () => this.addTag(tag));
           });
       });
     }
@@ -411,10 +389,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
   }
 
   private getCurrentTags() {
-    const tags = new Set([
-      ...this.props.containerManifest.tags,
-      ...this.state.tagsToAdd,
-    ]);
+    const tags = new Set([...this.props.containerManifest.tags, ...this.state.tagsToAdd]);
 
     for (const tag of this.state.tagsToRemove) {
       tags.delete(tag);

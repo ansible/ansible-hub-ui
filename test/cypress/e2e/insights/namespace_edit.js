@@ -28,9 +28,7 @@ describe('Edit a namespace', () => {
 
   let getEditTab = () => {
     return cy
-      .get(
-        'ul.pf-c-tabs__list > li.pf-c-tabs__item > button > span.pf-c-tabs__item-text',
-      )
+      .get('ul.pf-c-tabs__list > li.pf-c-tabs__item > button > span.pf-c-tabs__item-text')
       .contains('Edit resources')
       .click();
   };
@@ -67,10 +65,7 @@ describe('Edit a namespace', () => {
       );
     saveButton().click();
     let helperText = cy.get('#company-helper');
-    helperText.should(
-      'have.text',
-      'Ensure this field has no more than 64 characters.',
-    );
+    helperText.should('have.text', 'Ensure this field has no more than 64 characters.');
   });
 
   it('saves a new company name', () => {
@@ -107,10 +102,7 @@ describe('Edit a namespace', () => {
     getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
     getUrlField().first().type('https://example.com');
     saveButton().click();
-    linksHelper().should(
-      'contain',
-      'Text: Ensure this field has no more than 32 characters.',
-    );
+    linksHelper().should('contain', 'Text: Ensure this field has no more than 32 characters.');
     getLinkTextField().first().clear();
     cy.contains('.useful-links', 'Name must not be empty.');
 
@@ -129,9 +121,7 @@ describe('Edit a namespace', () => {
   });
 
   it('removes a link', () => {
-    cy.get(
-      'div.useful-links:first-child > div.link-button > div.link-container svg',
-    )
+    cy.get('div.useful-links:first-child > div.link-button > div.link-container svg')
       .first()
       .click();
     saveButton().click();

@@ -43,11 +43,7 @@ export const Action = ({
           </Button>
         </Tooltip>
       ) : (
-        <Button
-          variant={buttonVariant}
-          key={title}
-          onClick={() => onClick(item, actionContext)}
-        >
+        <Button variant={buttonVariant} key={title} onClick={() => onClick(item, actionContext)}>
           {title}
         </Button>
       )
@@ -55,11 +51,7 @@ export const Action = ({
   dropdownItem: (item, actionContext) =>
     condition(actionContext, item) && visible(item, actionContext) ? (
       disabled(item, actionContext) ? (
-        <DropdownItem
-          key={title}
-          description={disabled(item, actionContext)}
-          isDisabled
-        >
+        <DropdownItem key={title} description={disabled(item, actionContext)} isDisabled>
           {title}
         </DropdownItem>
       ) : (

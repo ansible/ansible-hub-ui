@@ -6,6 +6,5 @@ import { Action } from './action';
 export const ansibleRepositoryEditAction = Action({
   condition: canEditAnsibleRepository,
   title: t`Edit`,
-  onClick: ({ name }, { navigate }) =>
-    navigate(formatPath(Paths.ansibleRepositoryEdit, { name })),
+  onClick: ({ name }, { navigate }) => navigate(formatPath(Paths.ansibleRepositoryEdit, { name })),
 });

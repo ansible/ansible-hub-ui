@@ -31,9 +31,7 @@ class UserEdit extends React.Component<RouteProps, IState> {
     const id = this.props.routeParams.userID;
 
     UserAPI.get(id)
-      .then((result) =>
-        this.setState({ user: result.data, unauthorized: false }),
-      )
+      .then((result) => this.setState({ user: result.data, unauthorized: false }))
       .catch(() => this.setState({ unauthorized: true }));
   }
 

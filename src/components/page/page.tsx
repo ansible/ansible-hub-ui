@@ -1,9 +1,4 @@
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import React from 'react';
 import { ActionType } from 'src/actions';
 import { LoadingPageSpinner } from 'src/components';
@@ -106,8 +101,7 @@ export const Page = function <
       this.query().then((item) => {
         const actionContext = {
           ...this.context,
-          hasObjectPermission: (permission) =>
-            item?.my_permissions?.includes?.(permission),
+          hasObjectPermission: (permission) => item?.my_permissions?.includes?.(permission),
         };
         if (!condition(actionContext)) {
           this.setState({ loading: false, unauthorised: true });
@@ -131,8 +125,7 @@ export const Page = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
-        hasObjectPermission: (permission) =>
-          item?.my_permissions?.includes?.(permission),
+        hasObjectPermission: (permission) => item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
@@ -146,10 +139,7 @@ export const Page = function <
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
           <BaseHeader
             title={title({ name })}
             breadcrumbs={

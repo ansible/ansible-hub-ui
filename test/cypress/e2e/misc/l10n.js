@@ -37,10 +37,7 @@ describe('Localization tests with the t`String` format', () => {
 });
 
 describe('Localization tests with the <Trans> format', () => {
-  const helper = languageCheckHelper(
-    `${uiPrefix}containers`,
-    '[data-cy="push-images-button"]',
-  );
+  const helper = languageCheckHelper(`${uiPrefix}containers`, '[data-cy="push-images-button"]');
 
   beforeEach(() => {
     cy.login();

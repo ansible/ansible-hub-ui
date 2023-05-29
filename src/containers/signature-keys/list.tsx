@@ -47,10 +47,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 100;
@@ -76,17 +73,13 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const { params, itemCount, loading, items, alerts, unauthorised } =
-      this.state;
+    const { params, itemCount, loading, items, alerts, unauthorised } = this.state;
 
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <BaseHeader title={t`Signature Keys`} />
         {unauthorised ? (
           <EmptyStateUnauthorized />
@@ -108,9 +101,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
                         <ToolbarItem>
                           <CompoundFilter
                             inputText={this.state.inputText}
-                            onChange={(text) =>
-                              this.setState({ inputText: text })
-                            }
+                            onChange={(text) => this.setState({ inputText: text })}
                             updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () => this.query());
@@ -129,9 +120,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
                   </Toolbar>
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.query())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.query())}
                     count={itemCount}
                     isTop
                   />
@@ -201,10 +190,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Signature keys`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`Signature keys`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -225,8 +211,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
       <DropdownItem
         key='download-key'
         onClick={() => {
-          document.location =
-            'data:application/octet-stream,' + encodeURIComponent(public_key);
+          document.location = 'data:application/octet-stream,' + encodeURIComponent(public_key);
         }}
       >
         {t`Download key`}

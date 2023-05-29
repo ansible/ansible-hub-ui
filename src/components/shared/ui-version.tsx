@@ -9,8 +9,5 @@ const HTMLComment = ({ text, ...props }: IProps) => (
 );
 
 export const UIVersion = () => (
-  <HTMLComment
-    className='hub-ui-version'
-    text={`ansible-hub-ui ${UI_COMMIT_HASH}`}
-  />
+  <HTMLComment className='hub-ui-version' text={`ansible-hub-ui ${UI_COMMIT_HASH}`} />
 );

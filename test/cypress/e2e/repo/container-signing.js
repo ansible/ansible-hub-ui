@@ -17,11 +17,7 @@ describe('Container Signing', () => {
     // user without sign privilleges
     cy.galaxykit('-i user create', user, password);
 
-    cy.galaxykit(
-      'registry create',
-      `docker`,
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('registry create', `docker`, 'https://registry.hub.docker.com/');
 
     cy.addRemoteContainer({
       name: 'remote1',

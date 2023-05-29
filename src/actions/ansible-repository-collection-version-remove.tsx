@@ -108,12 +108,7 @@ export const ansibleRepositoryCollectionVersionRemoveAction = Action({
     ) : null,
   onClick: (
     {
-      collection_version: {
-        namespace,
-        name,
-        version,
-        pulp_href: collectionVersionHref,
-      },
+      collection_version: { namespace, name, version, pulp_href: collectionVersionHref },
       repository: { name: repositoryName, pulp_href: repositoryHref },
     },
     { setState },

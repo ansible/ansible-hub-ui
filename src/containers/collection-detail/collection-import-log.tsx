@@ -1,12 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
-import {
-  CollectionHeader,
-  ImportConsole,
-  LoadingPageWithHeader,
-  Main,
-} from 'src/components';
+import { CollectionHeader, ImportConsole, LoadingPageWithHeader, Main } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -90,9 +85,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
           collection={collection}
           content={content}
           params={params}
-          updateParams={(params) =>
-            this.updateParams(params, () => this.loadData(true))
-          }
+          updateParams={(params) => this.updateParams(params, () => this.loadData(true))}
           breadcrumbs={breadcrumbs}
           activeTab='import-log'
         />
@@ -158,10 +151,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
       setCollection: (collections, collection, content, collectionsCount) =>
-        this.setState(
-          { collections, collection, content, collectionsCount },
-          callback,
-        ),
+        this.setState({ collections, collection, content, collectionsCount }, callback),
       stateParams: this.state.params,
     });
   }

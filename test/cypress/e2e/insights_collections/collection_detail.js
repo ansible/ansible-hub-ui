@@ -118,9 +118,7 @@ describe('Collection detail', () => {
      * For now it fails if the button is not there.
      */
     // should be able to download the tarball
-    cy.get('[data-cy="download-collection-tarball-button"]').contains(
-      'Download tarball',
-    );
+    cy.get('[data-cy="download-collection-tarball-button"]').contains('Download tarball');
 
     // should have the correct tags
     cy.get('[data-cy="tag"]').should('have.length', 1);

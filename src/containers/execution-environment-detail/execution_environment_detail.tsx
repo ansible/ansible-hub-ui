@@ -1,26 +1,11 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Card,
-  CardBody,
-  Flex,
-  FlexItem,
-  Title,
-} from '@patternfly/react-core';
+import { Button, Card, CardBody, Flex, FlexItem, Title } from '@patternfly/react-core';
 import * as React from 'react';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
-import {
-  ClipboardCopy,
-  EmptyStateNoData,
-  MarkdownEditor,
-} from 'src/components';
+import { ClipboardCopy, EmptyStateNoData, MarkdownEditor } from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerParamFix, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -33,10 +18,7 @@ interface IState {
   description: string;
 }
 
-class ExecutionEnvironmentDetail extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetail extends React.Component<IDetailSharedProps, IState> {
   constructor(props) {
     super(props);
 
@@ -90,19 +72,17 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Card>
               <CardBody>
                 <Title headingLevel='h2' size='lg'>
-                  {!this.state.markdownEditing &&
-                    this.state.readme &&
-                    canEdit && (
-                      <Button
-                        className={'hub-c-button-edit'}
-                        variant={'primary'}
-                        onClick={() => {
-                          this.setState({ markdownEditing: true });
-                        }}
-                      >
-                        {t`Edit`}
-                      </Button>
-                    )}
+                  {!this.state.markdownEditing && this.state.readme && canEdit && (
+                    <Button
+                      className={'hub-c-button-edit'}
+                      variant={'primary'}
+                      onClick={() => {
+                        this.setState({ markdownEditing: true });
+                      }}
+                    >
+                      {t`Edit`}
+                    </Button>
+                  )}
                 </Title>
                 {!this.state.markdownEditing && !this.state.readme ? (
                   <EmptyStateNoData
@@ -113,9 +93,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                         <div data-cy='add-readme'>
                           <Button
                             variant='primary'
-                            onClick={() =>
-                              this.setState({ markdownEditing: true })
-                            }
+                            onClick={() => this.setState({ markdownEditing: true })}
                           >
                             {t`Add`}
                           </Button>
@@ -143,10 +121,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                       <Button
                         variant={'primary'}
                         onClick={() =>
-                          this.saveReadme(
-                            this.props.containerRepository.name,
-                            this.state.readme,
-                          )
+                          this.saveReadme(this.props.containerRepository.name, this.state.readme)
                         }
                       >
                         {t`Save`}
@@ -198,6 +173,4 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 }
 
-export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetail)),
-);
+export default withRouter(withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetail)));

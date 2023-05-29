@@ -10,12 +10,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import {
-  GroupAPI,
-  GroupObjectPermissionType,
-  UserAPI,
-  UserType,
-} from 'src/api';
+import { GroupAPI, GroupObjectPermissionType, UserAPI, UserType } from 'src/api';
 import {
   APISearchTypeAhead,
   AlertList,
@@ -83,10 +78,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
     const id = this.props.routeParams.group;
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     this.state = {
       group: null,
@@ -96,8 +88,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
         id: id,
         page: 0,
         page_size: params['page_size'] || 10,
-        sort:
-          params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
+        sort: params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
         tab: params['tab'] || 'access',
       },
       itemCount: 0,
@@ -146,12 +137,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
     }
 
     if (!group && alerts && alerts.length) {
-      return (
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
-      );
+      return <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>;
     }
     if (unauthorised) {
       return <EmptyStateUnauthorized />;
@@ -167,10 +153,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
@@ -178,21 +161,14 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           title={group.name}
           breadcrumbs={
             <Breadcrumbs
-              links={[
-                { url: formatPath(Paths.groupList), name: t`Groups` },
-                { name: group.name },
-              ]}
+              links={[{ url: formatPath(Paths.groupList), name: t`Groups` }, { name: group.name }]}
             />
           }
           pageControls={this.renderControls()}
         >
           <div className='hub-tab-link-container'>
             <div className='tabs'>
-              <Tabs
-                tabs={tabs}
-                params={params}
-                updateParams={(p) => this.updateParams(p)}
-              />
+              <Tabs tabs={tabs} params={params} updateParams={(p) => this.updateParams(p)} />
             </div>
           </div>
         </BaseHeader>
@@ -213,10 +189,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
     return (
       <ToolbarItem>
-        <Button
-          onClick={() => this.setState({ showDeleteModal: true })}
-          variant='secondary'
-        >
+        <Button onClick={() => this.setState({ showDeleteModal: true })} variant='secondary'>
           {t`Delete`}
         </Button>
       </ToolbarItem>
@@ -231,9 +204,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
         updateParams={(p) => this.updateParams(p)}
         context={this.context}
         group={group}
-        addAlert={(title, variant, description) =>
-          this.addAlert(title, variant, description)
-        }
+        addAlert={(title, variant, description) => this.addAlert(title, variant, description)}
         nonQueryParams={this.userQueryStringParams}
       />
     );
@@ -264,11 +235,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
             key='add'
             variant='primary'
             isDisabled={this.state.selected.length === 0}
-            onClick={() =>
-              this.addUserToGroup(this.state.selected, this.state.group).then(
-                close,
-              )
-            }
+            onClick={() => this.addUserToGroup(this.state.selected, this.state.group).then(close)}
           >
             {t`Add`}
           </Button>,
@@ -308,24 +275,16 @@ class GroupDetail extends React.Component<RouteProps, IState> {
               })
           }
           onSelect={(event, selection) => {
-            const selectedUser = this.state.options.find(
-              (x) => x.name === selection,
-            );
+            const selectedUser = this.state.options.find((x) => x.name === selection);
             if (selectedUser) {
-              const newOptions = this.state.options.filter(
-                (x) => x.name !== selection,
-              );
+              const newOptions = this.state.options.filter((x) => x.name !== selection);
               this.setState({
                 selected: [...this.state.selected, selectedUser],
                 options: newOptions,
               });
             } else {
-              const deselectedUser = this.state.selected.find(
-                (x) => x.name === selection,
-              );
-              const newSelected = this.state.selected.filter(
-                (x) => x.name !== selection,
-              );
+              const deselectedUser = this.state.selected.find((x) => x.name === selection);
+              const newSelected = this.state.selected.filter((x) => x.name !== selection);
               this.setState({
                 selected: newSelected,
                 options: [...this.state.options, deselectedUser],
@@ -358,10 +317,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           this.setState({
             showDeleteModal: false,
           });
-          this.addAlert(
-            t`Group "${group}" has been successfully deleted.`,
-            'success',
-          );
+          this.addAlert(t`Group "${group}" has been successfully deleted.`, 'success');
           this.setState({ redirect: formatPath(Paths.groupList) });
         })
         .catch((e) => {
@@ -493,10 +449,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
             !!user &&
             hasPermission('galaxy.change_group') &&
             !isUserMgmtDisabled && (
-              <Button
-                variant='primary'
-                onClick={() => this.setState({ addModalVisible: true })}
-              >
+              <Button variant='primary' onClick={() => this.setState({ addModalVisible: true })}>
                 {t`Add`}
               </Button>
             )
@@ -515,9 +468,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
                   <CompoundFilter
                     inputText={this.state.inputText}
                     onChange={(text) => this.setState({ inputText: text })}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryUsers())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
                     params={params}
                     filterConfig={[
                       {
@@ -540,19 +491,15 @@ class GroupDetail extends React.Component<RouteProps, IState> {
                   />
                 </ToolbarItem>
               </ToolbarGroup>
-              {!!user &&
-                hasPermission('galaxy.change_group') &&
-                !isUserMgmtDisabled && (
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <Button
-                        onClick={() => this.setState({ addModalVisible: true })}
-                      >
-                        {t`Add`}
-                      </Button>
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                )}
+              {!!user && hasPermission('galaxy.change_group') && !isUserMgmtDisabled && (
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <Button onClick={() => this.setState({ addModalVisible: true })}>
+                      {t`Add`}
+                    </Button>
+                  </ToolbarItem>
+                </ToolbarGroup>
+              )}
             </ToolbarContent>
           </Toolbar>
 
@@ -570,14 +517,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
               this.setState({ inputText: '' });
             }}
             params={params}
-            ignoredParams={[
-              'id',
-              'page',
-              'page_size',
-              'sort',
-              'tab',
-              'role__icontains',
-            ]}
+            ignoredParams={['id', 'page', 'page_size', 'sort', 'tab', 'role__icontains']}
           />
         </div>
         {this.renderUsersTable(users)}
@@ -634,10 +574,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`User list`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -653,23 +590,16 @@ class GroupDetail extends React.Component<RouteProps, IState> {
     const { featureFlags, hasPermission } = this.context;
     const isUserMgmtDisabled = featureFlags.external_authentication;
     const dropdownItems = [
-      !!currentUser &&
-        hasPermission('galaxy.change_group') &&
-        !isUserMgmtDisabled && (
-          <DropdownItem
-            key='delete'
-            onClick={() => this.setState({ showUserRemoveModal: user })}
-          >
-            {t`Remove`}
-          </DropdownItem>
-        ),
+      !!currentUser && hasPermission('galaxy.change_group') && !isUserMgmtDisabled && (
+        <DropdownItem key='delete' onClick={() => this.setState({ showUserRemoveModal: user })}>
+          {t`Remove`}
+        </DropdownItem>
+      ),
     ];
     return (
       <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
         <td>
-          <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
-            {user.username}
-          </Link>
+          <Link to={formatPath(Paths.userDetail, { userID: user.id })}>{user.username}</Link>
         </td>
         <td>{user.email}</td>
         <td>{user.last_name}</td>
@@ -684,9 +614,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
   private queryUsers() {
     const params = {
-      ...ParamHelper.getReduced(this.state.params, [
-        ...this.roleQueryStringParams,
-      ]),
+      ...ParamHelper.getReduced(this.state.params, [...this.roleQueryStringParams]),
       sort: ParamHelper.validSortParams(
         this.state.params['sort'],
         this.userQueryStringParams,

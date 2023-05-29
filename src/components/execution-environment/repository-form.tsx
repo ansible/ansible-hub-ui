@@ -136,9 +136,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         variant='large'
         onClose={onCancel}
         isOpen={true}
-        title={
-          isNew ? t`Add execution environment` : t`Edit execution environment`
-        }
+        title={isNew ? t`Add execution environment` : t`Edit execution environment`}
         actions={[
           <Button
             key='save'
@@ -153,33 +151,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         <Form>
           {!isRemote ? (
             <>
               <FormGroup key='name' fieldId='name' label={t`Name`}>
-                <TextInput
-                  id='name'
-                  value={name}
-                  isDisabled={true}
-                  type='text'
-                />
+                <TextInput id='name' value={name} isDisabled={true} type='text' />
               </FormGroup>
 
-              <FormGroup
-                key='namespace'
-                fieldId='namespace'
-                label={t`Container namespace`}
-              >
-                <TextInput
-                  id='namespace'
-                  value={namespace}
-                  isDisabled={true}
-                  type='text'
-                />
+              <FormGroup key='namespace' fieldId='namespace' label={t`Container namespace`}>
+                <TextInput id='namespace' value={namespace} isDisabled={true} type='text' />
               </FormGroup>
             </>
           ) : (
@@ -229,13 +210,9 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 className='hub-formgroup-registry'
                 isRequired={true}
                 helperTextInvalid={
-                  this.state.formErrors['registries'] ||
-                  this.state.formErrors['registry']
+                  this.state.formErrors['registries'] || this.state.formErrors['registry']
                 }
-                validated={isFieldValid(this.state.formErrors, [
-                  'registries',
-                  'registry',
-                ])}
+                validated={isFieldValid(this.state.formErrors, ['registries', 'registry'])}
               >
                 {!formErrors?.registries && (
                   <>
@@ -245,9 +222,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                         onClear={() => this.setState({ registrySelection: [] })}
                         onSelect={(event, value) =>
                           this.setState({
-                            registrySelection: registries.filter(
-                              ({ name }) => name === value,
-                            ),
+                            registrySelection: registries.filter(({ name }) => name === value),
                             formErrors: { ...formErrors, registry: null },
                           })
                         }
@@ -262,10 +237,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 )}
               </FormGroup>
 
-              <FormGroup
-                fieldId='addTagsInclude'
-                label={t`Add tag(s) to include`}
-              >
+              <FormGroup fieldId='addTagsInclude' label={t`Add tag(s) to include`}>
                 <InputGroup>
                   <TextInput
                     type='text'
@@ -288,15 +260,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 </InputGroup>
               </FormGroup>
 
-              <FormGroup
-                fieldId='currentTag'
-                label={t`Currently included tags`}
-              >
-                <LabelGroup
-                  {...chipGroupProps()}
-                  id='remove-tag'
-                  defaultIsOpen={true}
-                >
+              <FormGroup fieldId='currentTag' label={t`Currently included tags`}>
+                <LabelGroup {...chipGroupProps()} id='remove-tag' defaultIsOpen={true}>
                   {includeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -309,10 +274,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 </LabelGroup>
               </FormGroup>
 
-              <FormGroup
-                fieldId='addTagsExclude'
-                label={t`Add tag(s) to exclude`}
-              >
+              <FormGroup fieldId='addTagsExclude' label={t`Add tag(s) to exclude`}>
                 <InputGroup>
                   <TextInput
                     type='text'
@@ -335,15 +297,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 </InputGroup>
               </FormGroup>
 
-              <FormGroup
-                fieldId='currentTag'
-                label={t`Currently excluded tags`}
-              >
-                <LabelGroup
-                  {...chipGroupProps()}
-                  id='remove-tag'
-                  defaultIsOpen={true}
-                >
+              <FormGroup fieldId='currentTag' label={t`Currently excluded tags`}>
+                <LabelGroup {...chipGroupProps()} id='remove-tag' defaultIsOpen={true}>
                   {excludeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -358,18 +313,12 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             </>
           )}
 
-          <FormGroup
-            key='description'
-            fieldId='description'
-            label={t`Description`}
-          >
+          <FormGroup key='description' fieldId='description' label={t`Description`}>
             <TextArea
               id='description'
               value={description || ''}
               isDisabled={
-                !this.props.permissions.includes(
-                  'container.namespace_change_containerdistribution',
-                )
+                !this.props.permissions.includes('container.namespace_change_containerdistribution')
               }
               onChange={(value) => this.setState({ description: value })}
               type='text'

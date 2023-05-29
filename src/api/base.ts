@@ -24,8 +24,7 @@ export class BaseAPI {
     // setting page state
     const params = { ...p };
 
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
+    const pageSize = parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
     const page = parseInt(params['page']) || 1;
 
     delete params['page'];

@@ -19,8 +19,7 @@ const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=
 
 // only run git when HUB_UI_VERSION is NOT provided
 const gitCommit =
-  process.env.HUB_UI_VERSION ||
-  execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
+  process.env.HUB_UI_VERSION || execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
 
 // Default user defined settings
 const defaultConfigs = [
@@ -62,9 +61,7 @@ const insightsMockAPIs = ({ app }) => {
     { url: '/api/quickstarts/v1/progress', response: { data: [] } },
     { url: '/api/rbac/v1/access', response: { data: [] } },
     { url: '/api/rbac/v1/cross-account-requests', response: { data: [] } },
-  ].forEach(({ url, response }) =>
-    app.get(url, (_req, res) => res.send(response)),
-  );
+  ].forEach(({ url, response }) => app.get(url, (_req, res) => res.send(response)));
 
   // POST
   [
@@ -74,9 +71,7 @@ const insightsMockAPIs = ({ app }) => {
       response: { data: [] },
     },
     { url: '/api/featureflags/v0/client/metrics', response: {} },
-  ].forEach(({ url, response }) =>
-    app.post(url, (_req, res) => res.send(response)),
-  );
+  ].forEach(({ url, response }) => app.post(url, (_req, res) => res.send(response)));
 };
 
 module.exports = (inputConfigs) => {
@@ -91,16 +86,12 @@ module.exports = (inputConfigs) => {
       customConfigs[item.name] = inputConfigs[item.name];
     }
     if (item.scope === 'global') {
-      globals[item.name] = JSON.stringify(
-        inputConfigs[item.name] || item.default,
-      );
+      globals[item.name] = JSON.stringify(inputConfigs[item.name] || item.default);
     }
   });
 
   // 4.6+: pulp APIs live under API_BASE_PATH now, ignore previous overrides
-  globals.PULP_API_BASE_PATH = JSON.stringify(
-    customConfigs.API_BASE_PATH + 'pulp/api/v3/',
-  );
+  globals.PULP_API_BASE_PATH = JSON.stringify(customConfigs.API_BASE_PATH + 'pulp/api/v3/');
 
   const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
 
@@ -123,10 +114,7 @@ module.exports = (inputConfigs) => {
     ...(!isStandalone &&
       !isBuild && {
         appUrl: customConfigs.UI_BASE_PATH.includes('/preview/')
-          ? [
-              customConfigs.UI_BASE_PATH,
-              customConfigs.UI_BASE_PATH.replace('/preview/', '/beta/'),
-            ]
+          ? [customConfigs.UI_BASE_PATH, customConfigs.UI_BASE_PATH.replace('/preview/', '/beta/')]
           : customConfigs.UI_BASE_PATH,
         deployment: cloudBeta !== 'false' ? 'beta/apps' : 'apps',
         standalone: {
@@ -234,23 +222,21 @@ module.exports = (inputConfigs) => {
      * Generates remote containers for chrome 2
      */
     plugins.push(
-      require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-        {
-          root: resolve(__dirname, '../'),
-          exposes: {
-            './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
-          },
-          shared: [
-            {
-              'react-router-dom': { singleton: true, requiredVersion: '*' },
-            },
-          ],
-          ...(!isBuild && {
-            // fixes "Shared module is not available for eager consumption"
-            exclude: ['@patternfly/react-core'],
-          }),
+      require('@redhat-cloud-services/frontend-components-config/federated-modules')({
+        root: resolve(__dirname, '../'),
+        exposes: {
+          './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
         },
-      ),
+        shared: [
+          {
+            'react-router-dom': { singleton: true, requiredVersion: '*' },
+          },
+        ],
+        ...(!isBuild && {
+          // fixes "Shared module is not available for eager consumption"
+          exclude: ['@patternfly/react-core'],
+        }),
+      }),
     );
   }
 

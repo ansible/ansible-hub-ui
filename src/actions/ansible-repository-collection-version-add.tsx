@@ -9,37 +9,24 @@ import {
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
-import {
-  RepositoriesUtils,
-  handleHttpError,
-  parsePulpIDFromURL,
-  taskAlert,
-} from 'src/utilities';
+import { RepositoriesUtils, handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
 
-const add = (
-  { repositoryHref, repositoryName },
-  collections,
-  { addAlert, setState, query },
-) => {
+const add = ({ repositoryHref, repositoryName }, collections, { addAlert, setState, query }) => {
   const pulpId = parsePulpIDFromURL(repositoryHref);
-  const collectionVersionHrefs = collections.map(
-    (c) => c.collection_version.pulp_href,
-  );
+  const collectionVersionHrefs = collections.map((c) => c.collection_version.pulp_href);
   return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHrefs)
     .then(({ data }) => {
-      collections.map(
-        ({ collection_version: { name, namespace, version }, repository }) => {
-          addAlert(
-            taskAlert(
-              data.task,
-              t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repositoryName}".`,
-            ),
-          );
-          setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
-          query({});
-        },
-      );
+      collections.map(({ collection_version: { name, namespace, version }, repository }) => {
+        addAlert(
+          taskAlert(
+            data.task,
+            t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repositoryName}".`,
+          ),
+        );
+        setState((ms) => ({ ...ms, addCollectionVersionModal: null }));
+        query({});
+      });
     })
     .catch(
       handleHttpError(
@@ -96,16 +83,11 @@ const AddCollectionVersionModal = ({
       repository,
     } = item;
 
-    const isCollectionInRepo =
-      sourceRepository.pulp_href === repository.pulp_href;
+    const isCollectionInRepo = sourceRepository.pulp_href === repository.pulp_href;
 
     return (
       <tr
-        onClick={() =>
-          setSelected(
-            RepositoriesUtils.pushToOrFilterOutCollections(item, selected),
-          )
-        }
+        onClick={() => setSelected(RepositoriesUtils.pushToOrFilterOutCollections(item, selected))}
         key={index}
       >
         <td>
@@ -204,10 +186,7 @@ const AddCollectionVersionModal = ({
         />
       </section>
 
-      <AlertList
-        alerts={alerts}
-        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
-      />
+      <AlertList alerts={alerts} closeAlert={(i) => closeAlert(i, { alerts, setAlerts })} />
     </Modal>
   );
 };
@@ -225,9 +204,7 @@ export const ansibleRepositoryCollectionVersionAddAction = Action({
             query,
           });
         }}
-        closeAction={() =>
-          setState((ms) => ({ ...ms, addCollectionVersionModal: null }))
-        }
+        closeAction={() => setState((ms) => ({ ...ms, addCollectionVersionModal: null }))}
         sourceRepository={state.repository}
       />
     ) : null,

@@ -68,11 +68,7 @@ export class Sort extends React.Component<IProps, IState> {
 
     this.setState({ isExpanded: false }, () =>
       this.props.updateParams({
-        ...ParamHelper.setParam(
-          this.props.params,
-          this.props.sortParamName,
-          desc + option.id,
-        ),
+        ...ParamHelper.setParam(this.props.params, this.props.sortParamName, desc + option.id),
         page: 1,
       }),
     );

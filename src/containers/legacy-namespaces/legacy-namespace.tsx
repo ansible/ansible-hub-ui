@@ -145,11 +145,7 @@ class LegacyNamespaceRoles extends React.Component<
             <div>
               <DataList aria-label={t`List of Legacy Roles`}>
                 {this.state.roles.map((lrole, ix) => (
-                  <LegacyRoleListItem
-                    key={ix}
-                    role={lrole}
-                    show_thumbnail={false}
-                  />
+                  <LegacyRoleListItem key={ix} role={lrole} show_thumbnail={false} />
                 ))}
               </DataList>
 
@@ -184,10 +180,7 @@ interface LegacyNamespaceProps {
   alerts: AlertType[];
 }
 
-class LegacyNamespace extends React.Component<
-  RouteProps,
-  LegacyNamespaceProps
-> {
+class LegacyNamespace extends React.Component<RouteProps, LegacyNamespaceProps> {
   // This is the details page for a legacy namespace
 
   constructor(props) {
@@ -215,15 +208,13 @@ class LegacyNamespace extends React.Component<
   }
 
   componentDidMount() {
-    LegacyNamespaceAPI.get('namespaces/' + this.state.namespaceid).then(
-      (response) => {
-        // set the user
-        this.setState(() => ({
-          loading: false,
-          namespace: response.data,
-        }));
-      },
-    );
+    LegacyNamespaceAPI.get('namespaces/' + this.state.namespaceid).then((response) => {
+      // set the user
+      this.setState(() => ({
+        loading: false,
+        namespace: response.data,
+      }));
+    });
   }
 
   render() {
@@ -266,14 +257,9 @@ class LegacyNamespace extends React.Component<
       ).length;
 
       const dropdownItems = [];
-      if (
-        ai_deny_index &&
-        (this.context.user.is_superuser || userOwnsLegacyNamespace)
-      ) {
+      if (ai_deny_index && (this.context.user.is_superuser || userOwnsLegacyNamespace)) {
         dropdownItems.push(
-          <DropdownItem
-            onClick={() => this.setState({ isOpenWisdomModal: true })}
-          >
+          <DropdownItem onClick={() => this.setState({ isOpenWisdomModal: true })}>
             {t`Ansible Lightspeed settings`}
           </DropdownItem>,
         );
@@ -300,14 +286,8 @@ class LegacyNamespace extends React.Component<
             reference={this.state.namespace.name}
           />
         )}
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
-        <DataList
-          aria-label={t`Namespace Header`}
-          className='hub-legacy-namespace-page'
-        >
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <DataList aria-label={t`Namespace Header`} className='hub-legacy-namespace-page'>
           <DataListItem data-cy='LegacyNamespace'>
             <DataListItemRow>
               <DataListItemCells dataListCells={infocells} />

@@ -22,8 +22,7 @@ describe('Group Roles Tests', () => {
     description: 'this is test container role',
     permissions: {
       'container.namespace_change_containerdistribution': 'Change containers',
-      'container.namespace_modify_content_containerpushrepository':
-        'Change image tags',
+      'container.namespace_modify_content_containerpushrepository': 'Change image tags',
       'container.delete_containerrepository': 'Delete container repository',
     },
   };
@@ -62,9 +61,9 @@ describe('Group Roles Tests', () => {
     cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
     cy.contains('100 per page').click();
 
-    cy.get(
-      `[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"] input`,
-    ).click({ force: true });
+    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"] input`).click({
+      force: true,
+    });
 
     cy.get('.pf-c-wizard__footer > button').contains('Next').click();
 
@@ -140,9 +139,7 @@ describe('Group Roles Tests', () => {
     cy.get('.hub-custom-wizard-layout').contains(groupName);
     cy.get('.hub-custom-wizard-layout').contains(testContainerRole.name);
 
-    cy.get('.pf-c-wizard__footer > button')
-      .contains('Add')
-      .should('not.be.disabled');
+    cy.get('.pf-c-wizard__footer > button').contains('Add').should('not.be.disabled');
   });
 
   it('should be able to remove role from group', () => {
@@ -163,9 +160,7 @@ describe('Group Roles Tests', () => {
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.get('[data-cy="EmptyState"]')
-      .contains(testContainerRole.name)
-      .should('not.exist');
+    cy.get('[data-cy="EmptyState"]').contains(testContainerRole.name).should('not.exist');
   });
 
   it('should show group empty state', () => {

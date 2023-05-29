@@ -45,15 +45,11 @@ describe('Remote Registry Tests', () => {
 
     // table headers
     cy.contains('Remote Registries');
-    [
-      'Name',
-      'Created',
-      'Last updated',
-      'Registry URL',
-      'Registry sync status',
-    ].forEach((element) => {
-      cy.contains('tr[data-cy="SortTable-headers"]', element);
-    });
+    ['Name', 'Created', 'Last updated', 'Registry URL', 'Registry sync status'].forEach(
+      (element) => {
+        cy.contains('tr[data-cy="SortTable-headers"]', element);
+      },
+    );
 
     cy.contains('table tr', 'New remote registry1');
     cy.contains('table tr', 'New remote registry2');
@@ -64,14 +60,9 @@ describe('Remote Registry Tests', () => {
   it('user can sync succesfully remote registry', () => {
     cy.visit(`${uiPrefix}registries`);
 
-    cy.intercept(
-      'POST',
-      `${apiPrefix}_ui/v1/execution-environments/registries/*/sync`,
-    ).as('sync');
+    cy.intercept('POST', `${apiPrefix}_ui/v1/execution-environments/registries/*/sync`).as('sync');
 
-    cy.get(
-      '[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]',
-    )
+    cy.get('[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]')
       .contains('Sync from registry')
       .click();
 
@@ -81,9 +72,10 @@ describe('Remote Registry Tests', () => {
       'Sync started for remote registry "New remote registry1".',
     );
 
-    cy.get(
-      '[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]',
-    ).contains('Completed', { timeout: 10000 });
+    cy.get('[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]').contains(
+      'Completed',
+      { timeout: 10000 },
+    );
   });
 
   it('users can index only redhat.registry.io', () => {
@@ -92,10 +84,7 @@ describe('Remote Registry Tests', () => {
     cy.get(
       'tr[data-cy="ExecutionEnvironmentRegistryList-row-registry.test.io"] button[aria-label="Actions"]',
     ).click();
-    cy.contains('Index execution environments').should(
-      'have.class',
-      'pf-m-disabled',
-    );
+    cy.contains('Index execution environments').should('have.class', 'pf-m-disabled');
 
     cy.addRemoteRegistry('registry.redhat.io', 'https://registry.redhat.io');
 
@@ -129,10 +118,9 @@ describe('Remote Registry Tests', () => {
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
 
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
-    ).as('registriesGet');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/execution-environments/registries/?*`).as(
+      'registriesGet',
+    );
 
     cy.contains('button', 'Save').click();
     cy.wait('@registriesGet');

@@ -43,9 +43,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
     }
 
     const { isOpen } = this.state;
-    const variant = this.props.multiple
-      ? SelectVariant.typeaheadMulti
-      : SelectVariant.typeahead;
+    const variant = this.props.multiple ? SelectVariant.typeaheadMulti : SelectVariant.typeahead;
 
     return (
       <Select
@@ -84,13 +82,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
     }
 
     if (options.length === 0) {
-      options.push(
-        <SelectOption
-          key={'not_found'}
-          value={t`Not found`}
-          isDisabled={true}
-        />,
-      );
+      options.push(<SelectOption key={'not_found'} value={t`Not found`} isDisabled={true} />);
     }
 
     return options;

@@ -13,10 +13,7 @@ interface IProps {
   })[];
 }
 
-export const CollectionDependenciesList = ({
-  collection,
-  dependencies_repos,
-}: IProps) => {
+export const CollectionDependenciesList = ({ collection, dependencies_repos }: IProps) => {
   const { dependencies } = collection.collection_version;
 
   if (!Object.keys(dependencies).length) {
@@ -30,9 +27,7 @@ export const CollectionDependenciesList = ({
 
   return (
     <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
-      {dependencies_repos.map((dependency, i) =>
-        listDep(dependency, i, dependencies),
-      )}
+      {dependencies_repos.map((dependency, i) => listDep(dependency, i, dependencies))}
     </List>
   );
 };
@@ -51,9 +46,7 @@ const listDep = (dependency, i, dependencies) => {
     return (
       <ListItem key={i} style={{ marginRight: '70px' }}>
         {fqn}: {version_range}
-        <HelperText
-          content={t`No version of ${fqn} exists that matches ${version_range}.`}
-        />
+        <HelperText content={t`No version of ${fqn} exists that matches ${version_range}.`} />
       </ListItem>
     );
   }

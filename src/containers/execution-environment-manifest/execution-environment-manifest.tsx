@@ -27,12 +27,7 @@ import {
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import {
-  RouteProps,
-  chipGroupProps,
-  getHumanSize,
-  withRouter,
-} from 'src/utilities';
+import { RouteProps, chipGroupProps, getHumanSize, withRouter } from 'src/utilities';
 import { withContainerParamFix } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
@@ -81,17 +76,8 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const {
-      container,
-      digest,
-      environment,
-      error,
-      labels,
-      layers,
-      loading,
-      selectedLayer,
-      size,
-    } = this.state;
+    const { container, digest, environment, error, labels, layers, loading, selectedLayer, size } =
+      this.state;
 
     if (loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -150,8 +136,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
         <Main>
           {error ? (
             <Trans>
-              Manifest lists are not currently supported on this screen, please
-              use the{' '}
+              Manifest lists are not currently supported on this screen, please use the{' '}
               <Link
                 to={formatEEPath(Paths.executionEnvironmentDetailImages, {
                   container: container.name,
@@ -173,9 +158,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                   <CardBody>
                     <DataList
                       aria-label={t`Image layers`}
-                      onSelectDataListItem={(id) =>
-                        this.setState({ selectedLayer: id })
-                      }
+                      onSelectDataListItem={(id) => this.setState({ selectedLayer: id })}
                       selectedDataListItemId={selectedLayer}
                     >
                       {layers.map(({ text, size }, index) => (
@@ -189,11 +172,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                                 >
                                   <code>{text}</code>
                                 </DataListCell>,
-                                size && (
-                                  <DataListCell key='secondary content'>
-                                    {size}
-                                  </DataListCell>
-                                ),
+                                size && <DataListCell key='secondary content'>{size}</DataListCell>,
                               ]}
                             />
                           </DataListItemRow>
@@ -204,10 +183,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                 </Card>
               </FlexItem>
 
-              <Flex
-                direction={{ default: 'column' }}
-                className='layers-max-width'
-              >
+              <Flex direction={{ default: 'column' }} className='layers-max-width'>
                 <FlexItem>
                   <Card>
                     <CardTitle>

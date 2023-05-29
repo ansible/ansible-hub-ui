@@ -26,11 +26,7 @@ interface IProps {
   addAlert: (status, statusText) => void;
 }
 
-export const DownloadSignatureGridItem = ({
-  collectionVersion,
-  repository,
-  addAlert,
-}: IProps) => {
+export const DownloadSignatureGridItem = ({ collectionVersion, repository, addAlert }: IProps) => {
   const { display_signatures } = useContext().featureFlags;
   const [show, setShow] = useState(false);
   const [signatures, setSignatures] = useState([]);
@@ -46,10 +42,7 @@ export const DownloadSignatureGridItem = ({
       AnsibleDistributionAPI.list({
         repository: repository.pulp_href,
       }).then((result) => {
-        const distroBasePath = findDistroBasePathByRepo(
-          result.data.results,
-          repository,
-        );
+        const distroBasePath = findDistroBasePathByRepo(result.data.results, repository);
 
         const { namespace, name, version } = collectionVersion;
 

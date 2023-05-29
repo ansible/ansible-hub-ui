@@ -92,9 +92,7 @@ const AuthHandler = ({
   updateInitialData,
 }: IAuthHandlerProps) => {
   const { user, settings, featureFlags } = useContext();
-  const [isLoading, setLoading] = useState<boolean>(
-    !user || !settings || !featureFlags,
-  );
+  const [isLoading, setLoading] = useState<boolean>(!user || !settings || !featureFlags);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -297,23 +295,21 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
 
     return (
       <Routes>
-        {this.getRoutes().map(
-          ({ component, isDisabled, noAuth, path }, index) => (
-            <Route
-              element={
-                <AuthHandler
-                  component={component}
-                  isDisabled={isDisabled}
-                  noAuth={noAuth}
-                  path={path}
-                  updateInitialData={updateInitialData}
-                />
-              }
-              key={index}
-              path={path}
-            />
-          ),
-        )}
+        {this.getRoutes().map(({ component, isDisabled, noAuth, path }, index) => (
+          <Route
+            element={
+              <AuthHandler
+                component={component}
+                isDisabled={isDisabled}
+                noAuth={noAuth}
+                path={path}
+                updateInitialData={updateInitialData}
+              />
+            }
+            key={index}
+            path={path}
+          />
+        ))}
         <Route
           path='*'
           element={

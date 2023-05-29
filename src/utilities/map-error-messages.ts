@@ -59,10 +59,7 @@ export function mapErrorMessages(err): ErrorMessagesType {
   return {};
 }
 
-export function isFieldValid(
-  errorMessagesType: ErrorMessagesType,
-  name,
-): 'default' | 'error' {
+export function isFieldValid(errorMessagesType: ErrorMessagesType, name): 'default' | 'error' {
   let names = [];
   if (Array.isArray(name)) {
     names = name;

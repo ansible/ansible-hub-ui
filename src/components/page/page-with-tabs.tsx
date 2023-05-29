@@ -1,9 +1,4 @@
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import React from 'react';
 import { ActionType } from 'src/actions';
 import {
@@ -20,13 +15,7 @@ import {
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
-import {
-  ParamHelper,
-  ParamType,
-  RouteProps,
-  errorMessage,
-  withRouter,
-} from 'src/utilities';
+import { ParamHelper, ParamType, RouteProps, errorMessage, withRouter } from 'src/utilities';
 
 interface IState<T> {
   alerts: AlertType[];
@@ -155,8 +144,7 @@ export const PageWithTabs = function <
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
-        hasObjectPermission: (permission) =>
-          item?.my_permissions?.includes?.(permission),
+        hasObjectPermission: (permission) => item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
         navigate: this.props.navigate,
         query: () => this.query(),
@@ -219,9 +207,7 @@ export const PageWithTabs = function <
                 <Tabs
                   tabs={tabs}
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)
-                  }
+                  updateParams={(p) => this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)}
                 />
               </div>
             </div>
@@ -234,10 +220,7 @@ export const PageWithTabs = function <
               {loading ? (
                 <LoadingPageSpinner />
               ) : (
-                <section
-                  className='body'
-                  data-cy={`PageWithTabs-${displayName}-${params.tab}`}
-                >
+                <section className='body' data-cy={`PageWithTabs-${displayName}-${params.tab}`}>
                   {this.renderTab(params.tab, actionContext)}
                 </section>
               )}

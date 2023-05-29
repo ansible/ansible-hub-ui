@@ -38,9 +38,7 @@ export const AppliedFilters = ({
   }
 
   const renderGroup = (key) => {
-    const chips = Array.isArray(params[key])
-      ? (params[key] as string[] | number[])
-      : [params[key]];
+    const chips = Array.isArray(params[key]) ? (params[key] as string[] | number[]) : [params[key]];
 
     const unsetFilter = (v) =>
       updateParams({
@@ -65,9 +63,7 @@ export const AppliedFilters = ({
     <div className={className} style={style}>
       {filters.map((key) => renderGroup(key))}
       <Button
-        onClick={() =>
-          ParamHelper.clearAllFilters({ params, ignoredParams, updateParams })
-        }
+        onClick={() => ParamHelper.clearAllFilters({ params, ignoredParams, updateParams })}
         variant='link'
       >
         {t`Clear all filters`}

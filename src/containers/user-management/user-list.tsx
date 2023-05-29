@@ -63,10 +63,7 @@ class UserList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -118,19 +115,14 @@ class UserList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
           user={deleteUser}
           addAlert={(text, variant, description = undefined) =>
             this.setState({
-              alerts: alerts.concat([
-                { title: text, variant: variant, description: description },
-              ]),
+              alerts: alerts.concat([{ title: text, variant: variant, description: description }]),
             })
           }
         ></DeleteUserModal>
@@ -147,12 +139,8 @@ class UserList extends React.Component<RouteProps, IState> {
                       <ToolbarItem>
                         <CompoundFilter
                           inputText={this.state.inputText}
-                          onChange={(input) =>
-                            this.setState({ inputText: input })
-                          }
-                          updateParams={(p) =>
-                            this.updateParams(p, () => this.queryUsers())
-                          }
+                          onChange={(input) => this.setState({ inputText: input })}
+                          updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
                           params={params}
                           filterConfig={[
                             {
@@ -189,9 +177,7 @@ class UserList extends React.Component<RouteProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryUsers())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
                   count={itemCount}
                   isTop
                 />
@@ -216,9 +202,7 @@ class UserList extends React.Component<RouteProps, IState> {
 
               <Pagination
                 params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
+                updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
                 count={itemCount}
               />
             </section>
@@ -294,10 +278,7 @@ class UserList extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`User list`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -337,9 +318,7 @@ class UserList extends React.Component<RouteProps, IState> {
     return (
       <tr data-cy={`UserList-row-${user.username}`} key={index}>
         <td>
-          <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
-            {user.username}
-          </Link>
+          <Link to={formatPath(Paths.userDetail, { userID: user.id })}>{user.username}</Link>
 
           {user.is_superuser && (
             <>

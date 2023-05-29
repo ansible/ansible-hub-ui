@@ -95,10 +95,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -132,11 +129,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   componentDidMount() {
     const { user, hasPermission } = this.context;
-    if (
-      !user ||
-      user.is_anonymous ||
-      !hasPermission('ansible.modify_ansible_repo_content')
-    ) {
+    if (!user || user.is_anonymous || !hasPermission('ansible.modify_ansible_repo_content')) {
       this.setState({ unauthorized: true });
     } else {
       this.setState({ loading: true });
@@ -202,10 +195,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     return (
       <React.Fragment>
         <BaseHeader title={t`Approval dashboard`}></BaseHeader>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
@@ -221,9 +211,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                           this.setState({ inputText: text });
                         }}
                         updateParams={(p) =>
-                          this.updateParams(p, () =>
-                            this.queryCollections(true),
-                          )
+                          this.updateParams(p, () => this.queryCollections(true))
                         }
                         params={params}
                         filterConfig={[
@@ -262,9 +250,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryCollections(true))
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryCollections(true))}
                   count={itemCount}
                   isTop
                 />
@@ -289,18 +275,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   }}
                 />
               </div>
-              {loading ? (
-                <LoadingPageSpinner />
-              ) : (
-                this.renderTable(versions, params)
-              )}
+              {loading ? <LoadingPageSpinner /> : this.renderTable(versions, params)}
 
               <div className='footer'>
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryCollections(true))
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryCollections(true))}
                   count={itemCount}
                 />
               </div>
@@ -319,9 +299,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   this.setState({ approveModalInfo: null });
                   this.queryCollections(true);
                 }}
-                collectionVersion={
-                  this.state.approveModalInfo.collectionVersion
-                }
+                collectionVersion={this.state.approveModalInfo.collectionVersion}
                 addAlert={(alert) => this.addAlertObj(alert)}
                 allRepositories={this.state.approvedRepositoryList}
                 stagingRepoNames={this.state.stagingRepoNames}
@@ -386,20 +364,13 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Collection versions`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`Collection versions`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) =>
-            this.updateParams(p, () => this.queryCollections(true))
-          }
+          updateParams={(p) => this.updateParams(p, () => this.queryCollections(true))}
         />
-        <tbody>
-          {versions.map((version, i) => this.renderRow(version, i))}
-        </tbody>
+        <tbody>{versions.map((version, i) => this.renderRow(version, i))}</tbody>
       </table>
     );
   }
@@ -422,9 +393,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       const { display_signatures } = this.context.featureFlags;
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {display_signatures && collectionData.is_signed
-            ? t`Signed and approved`
-            : t`Approved`}
+          {display_signatures && collectionData.is_signed ? t`Signed and approved` : t`Approved`}
         </Label>
       );
     }
@@ -436,17 +405,10 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       );
     }
     if (repoStatus === Constants.NEEDSREVIEW) {
-      const { can_upload_signatures, require_upload_signatures } =
-        this.context.featureFlags;
+      const { can_upload_signatures, require_upload_signatures } = this.context.featureFlags;
       return (
-        <Label
-          variant='outline'
-          color='orange'
-          icon={<ExclamationTriangleIcon />}
-        >
-          {!collectionData.is_signed &&
-          can_upload_signatures &&
-          require_upload_signatures
+        <Label variant='outline' color='orange' icon={<ExclamationTriangleIcon />}>
+          {!collectionData.is_signed && can_upload_signatures && require_upload_signatures
             ? t`Needs signature and review`
             : t`Needs review`}
         </Label>
@@ -480,12 +442,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           <Button
             variant={ButtonVariant.link}
             onClick={() => {
-              this.download(
-                repository,
-                version.namespace,
-                version.name,
-                version.version,
-              );
+              this.download(repository, version.namespace, version.name, version.version);
             }}
           >
             <DownloadIcon />
@@ -506,26 +463,20 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   private renderButtons(collectionData: CollectionVersionSearch) {
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
     const { collection_version: version, repository } = collectionData;
-    const {
-      can_upload_signatures,
-      collection_auto_sign,
-      require_upload_signatures,
-    } = this.context.featureFlags;
+    const { can_upload_signatures, collection_auto_sign, require_upload_signatures } =
+      this.context.featureFlags;
     if (this.isVersionUpdating(collectionData)) {
       return <ListItemActions />; // empty td;
     }
 
-    const canUploadSignature =
-      can_upload_signatures && !collectionData.is_signed;
+    const canUploadSignature = can_upload_signatures && !collectionData.is_signed;
     const mustUploadSignature = canUploadSignature && require_upload_signatures;
     const autoSign = collection_auto_sign && !require_upload_signatures;
 
     const approveButton = [
       canUploadSignature && (
         <React.Fragment key='upload'>
-          <Button
-            onClick={() => this.openUploadCertificateModal(collectionData)}
-          >
+          <Button onClick={() => this.openUploadCertificateModal(collectionData)}>
             {t`Upload signature`}
           </Button>{' '}
         </React.Fragment>
@@ -590,13 +541,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
     if (this.isApproved(collectionData)) {
       return (
-        <ListItemActions
-          kebabItems={[
-            certifyDropDown(true),
-            rejectDropDown(false),
-            importsLink,
-          ]}
-        />
+        <ListItemActions kebabItems={[certifyDropDown(true), rejectDropDown(false), importsLink]} />
       );
     }
 
@@ -604,13 +549,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       // render reject button if version is in multiple repositories including rejected state - handles inconsistency
       // and allows user to reject it again to move it all to rejected state
       return (
-        <ListItemActions
-          kebabItems={[
-            certifyDropDown(false),
-            rejectDropDown(true),
-            importsLink,
-          ]}
-        />
+        <ListItemActions kebabItems={[certifyDropDown(false), rejectDropDown(true), importsLink]} />
       );
     }
 
@@ -639,8 +578,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private submitCertificate(file: File) {
-    const { collection_version, repository } =
-      this.state.versionToUploadCertificate;
+    const { collection_version, repository } = this.state.versionToUploadCertificate;
     const signed_collection = collection_version.pulp_href;
     const { name, namespace, version } = collection_version;
     CertificateUploadAPI.upload({
@@ -675,19 +613,13 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       return false;
     }
 
-    return this.state.approvedRepositoryList.find(
-      (r) => r.name == collection.repository.name,
-    );
+    return this.state.approvedRepositoryList.find((r) => r.name == collection.repository.name);
   }
 
   private approve(collection) {
     if (!collection) {
       // I hope that this may not occure ever, but to be sure...
-      this.addAlert(
-        t`Approval failed.`,
-        'danger',
-        t`Collection not found in any repository.`,
-      );
+      this.addAlert(t`Approval failed.`, 'danger', t`Collection not found in any repository.`);
       return;
     }
 
@@ -709,11 +641,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         );
       }
     } else {
-      this.transformToCollectionVersion(collection).then(
-        (collectionVersion) => {
-          this.setState({ approveModalInfo: { collectionVersion } });
-        },
-      );
+      this.transformToCollectionVersion(collection).then((collectionVersion) => {
+        this.setState({ approveModalInfo: { collectionVersion } });
+      });
     }
   }
 
@@ -724,9 +654,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     this.transformToCollectionVersion(collection)
       .then((versionWithRepos) => {
         this.setState({ updatingVersions: [collection] });
-        if (
-          versionWithRepos.repository_list.includes(this.state.rejectedRepoName)
-        ) {
+        if (versionWithRepos.repository_list.includes(this.state.rejectedRepoName)) {
           // collection already in rejected repository, so remove it from aproved repo
 
           RepositoriesUtils.deleteCollection(originalRepo, version.pulp_href)
@@ -741,10 +669,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
               this.setState({ updatingVersions: [] });
               const description = !error.response
                 ? error
-                : errorMessage(
-                    error.response.status,
-                    error.response.statusText,
-                  );
+                : errorMessage(error.response.status, error.response.statusText);
 
               this.addAlert(
                 t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
@@ -754,11 +679,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             });
         } else {
           // collection is not in rejected state, move it there
-          this.updateCertification(
-            version,
-            originalRepo,
-            this.state.rejectedRepoName,
-          );
+          this.updateCertification(version, originalRepo, this.state.rejectedRepoName);
         }
       })
       .catch((error) => {
@@ -775,19 +696,15 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
+    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data?.results?.[0];
     if (!repository) {
       return Promise.reject(t`Failed to find repository ${name}`);
     }
 
-    const distribution = (
-      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
-    )?.data?.results?.[0];
+    const distribution = (await AnsibleDistributionAPI.list({ repository: repository.pulp_href }))
+      ?.data?.results?.[0];
     if (!distribution) {
-      return Promise.reject(
-        t`Failed to find a distribution for repository ${name}`,
-      );
+      return Promise.reject(t`Failed to find a distribution for repository ${name}`);
     }
 
     return distribution;
@@ -809,9 +726,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           destination.base_path,
         ),
       )
-      .then((result) =>
-        waitForTask(result.data.remove_task_id, { waitMs: 500 }),
-      )
+      .then((result) => waitForTask(result.data.remove_task_id, { waitMs: 500 }))
       .then(() =>
         this.addAlert(
           t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
@@ -922,9 +837,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       offset: 0,
     });
 
-    const collectionRepos = collectionInRepos.data.data.map(
-      ({ repository }) => repository.name,
-    );
+    const collectionRepos = collectionInRepos.data.data.map(({ repository }) => repository.name);
 
     return collectionRepos;
   }

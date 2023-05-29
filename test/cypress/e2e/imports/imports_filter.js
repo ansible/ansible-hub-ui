@@ -36,12 +36,10 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
     );
-    cy.get(
-      '[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar',
-    ).contains('Completed', { timeout: 10000 });
-    cy.get(
-      '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
-    ).contains('Done');
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar').contains('Completed', {
+      timeout: 10000,
+    });
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list').contains('Done');
   });
 
   it('should be able to switch between namespaces', () => {
@@ -50,13 +48,10 @@ describe('Imports filter test', () => {
       timeout: 8000,
     });
 
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/imports/collections/?namespace=test_namespace&*`,
-    ).as('collectionsInNamespace');
-    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as(
-      'collectionDetail',
+    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/?namespace=test_namespace&*`).as(
+      'collectionsInNamespace',
     );
+    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as('collectionDetail');
     cy.intercept(
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=test_namespace&name=*`,
@@ -76,9 +71,7 @@ describe('Imports filter test', () => {
       'GET',
       `${apiPrefix}_ui/v1/imports/collections/?namespace=filter_test_namespace&*`,
     ).as('collectionsInNamespace2');
-    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as(
-      'collectionDetail2',
-    );
+    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as('collectionDetail2');
     cy.intercept(
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=filter_test_namespace&name=*`,

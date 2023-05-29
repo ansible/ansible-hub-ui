@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Modal,
-  ModalVariant,
-  Wizard as PFWizard,
-  WizardStep,
-} from '@patternfly/react-core';
+import { Modal, ModalVariant, Wizard as PFWizard, WizardStep } from '@patternfly/react-core';
 import React from 'react';
 
 interface Props {
@@ -15,13 +10,7 @@ interface Props {
   onSave: () => void;
 }
 
-export const WizardModal = ({
-  steps,
-  title,
-  onClose,
-  onSave,
-  variant,
-}: Props) => (
+export const WizardModal = ({ steps, title, onClose, onSave, variant }: Props) => (
   <Modal
     isOpen
     variant={variant ?? ModalVariant.large}

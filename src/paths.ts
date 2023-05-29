@@ -6,9 +6,7 @@ export function formatPath(path: Paths, data = {}, params?: ParamType) {
   // insights router has basename="/", "/beta/" or "/preview/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
   let url =
     DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? UI_BASE_PATH.replace('/preview/', '/')
-          .replace('/beta/', '/')
-          .replace(/\/$/, '')
+      ? UI_BASE_PATH.replace('/preview/', '/').replace('/beta/', '/').replace(/\/$/, '')
       : '';
   url += (path as string) + '/';
   url = url.replaceAll('//', '/');
@@ -31,26 +29,18 @@ export function formatPath(path: Paths, data = {}, params?: ParamType) {
 // see also withContainerParamFix
 export function formatEEPath(path, data, params?) {
   const pathsWithNamespace = {
-    [Paths.executionEnvironmentDetail]:
-      Paths.executionEnvironmentDetailWithNamespace,
+    [Paths.executionEnvironmentDetail]: Paths.executionEnvironmentDetailWithNamespace,
     [Paths.executionEnvironmentDetailActivities]:
       Paths.executionEnvironmentDetailActivitiesWithNamespace,
-    [Paths.executionEnvironmentDetailImages]:
-      Paths.executionEnvironmentDetailImagesWithNamespace,
-    [Paths.executionEnvironmentDetailAccess]:
-      Paths.executionEnvironmentDetailAccessWithNamespace,
-    [Paths.executionEnvironmentManifest]:
-      Paths.executionEnvironmentManifestWithNamespace,
+    [Paths.executionEnvironmentDetailImages]: Paths.executionEnvironmentDetailImagesWithNamespace,
+    [Paths.executionEnvironmentDetailAccess]: Paths.executionEnvironmentDetailAccessWithNamespace,
+    [Paths.executionEnvironmentManifest]: Paths.executionEnvironmentManifestWithNamespace,
   };
 
   if (data.container?.includes('/')) {
     const [namespace, container] = data.container.split('/');
     const pathWithNamespace = pathsWithNamespace[path];
-    return formatPath(
-      pathWithNamespace,
-      { ...data, namespace, container },
-      params,
-    );
+    return formatPath(pathWithNamespace, { ...data, namespace, container }, params);
   }
 
   return formatPath(path, data, params);

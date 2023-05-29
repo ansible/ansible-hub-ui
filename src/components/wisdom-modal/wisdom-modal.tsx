@@ -1,11 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  ButtonVariant,
-  ExpandableSection,
-  Modal,
-  Spinner,
-} from '@patternfly/react-core';
+import { Button, ButtonVariant, ExpandableSection, Modal, Spinner } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { WisdomDenyIndexAPI } from 'src/api';
@@ -44,15 +38,10 @@ export const WisdomModal = (props: IProps) => {
       </Trans>
     );
     areYouSureToOptIn = (
-      <Trans>
-        The following namespace will be opted in to Ansible Lightspeed:
-      </Trans>
+      <Trans>The following namespace will be opted in to Ansible Lightspeed:</Trans>
     );
     areYouSureToOptOut = (
-      <Trans>
-        Are you sure you want to opt the following namespace out of Ansible
-        Lightspeed?
-      </Trans>
+      <Trans>Are you sure you want to opt the following namespace out of Ansible Lightspeed?</Trans>
     );
   }
 
@@ -68,14 +57,11 @@ export const WisdomModal = (props: IProps) => {
       </Trans>
     );
     areYouSureToOptIn = (
-      <Trans>
-        The following legacy namespace will be opted in to Ansible Lightspeed:
-      </Trans>
+      <Trans>The following legacy namespace will be opted in to Ansible Lightspeed:</Trans>
     );
     areYouSureToOptOut = (
       <Trans>
-        Are you sure you want to opt the following legacy namespace out of
-        Ansible Lightspeed?
+        Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?
       </Trans>
     );
   }
@@ -150,21 +136,13 @@ export const WisdomModal = (props: IProps) => {
   if (!loading) {
     if (isInDenyIndex) {
       actions.push(
-        <Button
-          key='remove'
-          onClick={removeFromDenyIndex}
-          variant={ButtonVariant.primary}
-        >
+        <Button key='remove' onClick={removeFromDenyIndex} variant={ButtonVariant.primary}>
           {t`Opt in to Ansible Lightspeed`}
         </Button>,
       );
     } else {
       actions.push(
-        <Button
-          key='add'
-          onClick={addToDenyIndex}
-          variant={ButtonVariant.primary}
-        >
+        <Button key='add' onClick={addToDenyIndex} variant={ButtonVariant.primary}>
           {t`Opt out of Ansible Lightspeed`}
         </Button>,
       );
@@ -193,10 +171,7 @@ export const WisdomModal = (props: IProps) => {
       variant='small'
       titleIconVariant={isInDenyIndex ? null : 'warning'}
     >
-      <AlertList
-        alerts={alerts}
-        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
-      />
+      <AlertList alerts={alerts} closeAlert={(i) => closeAlert(i, { alerts, setAlerts })} />
       {loading ? (
         <Spinner />
       ) : (
@@ -204,8 +179,8 @@ export const WisdomModal = (props: IProps) => {
           <div>
             <Trans>
               <p>
-                Red Hat is working on exciting new Ansible content development
-                capabilities within the context of{' '}
+                Red Hat is working on exciting new Ansible content development capabilities within
+                the context of{' '}
                 <a
                   href='https://www.redhat.com/en/engage/project-wisdom'
                   target='_blank'
@@ -213,8 +188,7 @@ export const WisdomModal = (props: IProps) => {
                 >
                   Ansible Lightspeed
                 </a>{' '}
-                <ExternalLinkAltIcon /> to help other automators build Ansible
-                content.
+                <ExternalLinkAltIcon /> to help other automators build Ansible content.
               </p>
             </Trans>
             <br />
@@ -225,15 +199,12 @@ export const WisdomModal = (props: IProps) => {
               <div>
                 <Trans>
                   <p>
-                    Your roles and collections may be used as training data for
-                    a machine learning model that provides Ansible automation
-                    content recommendations.
+                    Your roles and collections may be used as training data for a machine learning
+                    model that provides Ansible automation content recommendations.
                   </p>
                   <p>
                     If you have concerns, please contact the Ansible team at{' '}
-                    <a href='mailto:ansible-content-ai@redhat.com'>
-                      ansible-content-ai@redhat.com
-                    </a>
+                    <a href='mailto:ansible-content-ai@redhat.com'>ansible-content-ai@redhat.com</a>
                     .
                   </p>
                 </Trans>
@@ -241,9 +212,7 @@ export const WisdomModal = (props: IProps) => {
             </ExpandableSection>
           </div>
           <br />
-          <div>
-            {!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}
-          </div>
+          <div>{!loading && isInDenyIndex ? areYouSureToOptIn : areYouSureToOptOut}</div>
           <br />
           {props.reference}
         </div>

@@ -8,15 +8,10 @@ function openModal(menu) {
   cy.contains('Clear all filters').click();
 
   if (menu) {
-    cy.get(
-      '[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]',
-    ).click();
+    cy.get('[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]').click();
     cy.contains('a', 'Sign and approve').click();
   } else {
-    cy.contains(
-      '[data-cy^="CertificationDashboard-row"] button',
-      'Sign and approve',
-    ).click();
+    cy.contains('[data-cy^="CertificationDashboard-row"] button', 'Sign and approve').click();
   }
 
   cy.contains('Select repositories');
@@ -44,10 +39,7 @@ function rejectItem(repo) {
   );
   cy.visit(`${uiPrefix}approval-dashboard`);
   cy.contains('Clear all filters').click();
-  cy.contains(
-    `[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]`,
-    'Rejected',
-  );
+  cy.contains(`[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]`, 'Rejected');
 }
 
 const reposList = [];
@@ -73,30 +65,21 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     cy.galaxykit('-i task wait all');
 
-    cy.request(apiPrefix + 'pulp/api/v3/repositories/ansible/ansible/').then(
-      (data) => {
-        const list = data.body.results;
-        list.forEach((repo) => {
-          if (
-            repo.pulp_labels?.pipeline == 'approved' &&
-            repo.name != 'published'
-          ) {
-            cy.log('deleting repository' + repo.name);
-            cy.galaxykit('-i repository delete', repo.name);
-          }
-        });
-        cy.galaxykit('-i task wait all');
-        range(1, max).forEach((i) => {
-          cy.galaxykit(
-            `-i repository create`,
-            'repo' + i,
-            '--pipeline=approved',
-          );
-          cy.galaxykit('-i distribution create', 'repo' + i);
-        });
-        cy.galaxykit('-i task wait all');
-      },
-    );
+    cy.request(apiPrefix + 'pulp/api/v3/repositories/ansible/ansible/').then((data) => {
+      const list = data.body.results;
+      list.forEach((repo) => {
+        if (repo.pulp_labels?.pipeline == 'approved' && repo.name != 'published') {
+          cy.log('deleting repository' + repo.name);
+          cy.galaxykit('-i repository delete', repo.name);
+        }
+      });
+      cy.galaxykit('-i task wait all');
+      range(1, max).forEach((i) => {
+        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
+        cy.galaxykit('-i distribution create', 'repo' + i);
+      });
+      cy.galaxykit('-i task wait all');
+    });
 
     // prepare another staging
     cy.galaxykit('-i distribution delete', 'staging2');
@@ -138,18 +121,14 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     // 2 items should be left there
     cy.contains('.toolbar', '1 - 2 of 2');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]',
+    cy.get('[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]');
+    cy.get('[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]');
+    cy.get('[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]',
+    cy.get('[data-cy="CertificationDashboard-row-published-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]',
-    ).should('not.exist');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-published-namespace-collection1"]',
-    ).should('not.exist');
 
     // reapprove
     menuActionClick('rejected', 'Sign and approve');
@@ -165,37 +144,24 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('Clear all filters').click();
     cy.contains('.toolbar', '1 - 2 of 2');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]',
+    cy.get('[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]');
+    cy.get('[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]');
+    cy.get('[data-cy="CertificationDashboard-row-published-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]',
+    cy.get('[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-published-namespace-collection1"]',
-    ).should('not.exist');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]',
-    ).should('not.exist');
   });
 
   it('should be able to approve from different staging repo', () => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace');
     cy.galaxykit('-i collection upload', 'namespace', 'collection1');
-    cy.galaxykit(
-      '-i collection move',
-      'namespace',
-      'collection1',
-      '1.0.0',
-      'staging',
-      'staging2',
-    );
+    cy.galaxykit('-i collection move', 'namespace', 'collection1', '1.0.0', 'staging', 'staging2');
 
     cy.visit(`${uiPrefix}approval-dashboard`);
-    cy.get(
-      '[data-cy="CertificationDashboard-row-staging2-namespace-collection1"]',
-    );
+    cy.get('[data-cy="CertificationDashboard-row-staging2-namespace-collection1"]');
 
     openModal();
     toggleItem('repo1');

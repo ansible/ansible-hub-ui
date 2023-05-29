@@ -8,15 +8,10 @@ function openModal(menu) {
   cy.contains('Clear all filters').click();
 
   if (menu) {
-    cy.get(
-      '[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]',
-    ).click();
+    cy.get('[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]').click();
     cy.contains('a', 'Sign and approve').click();
   } else {
-    cy.contains(
-      '[data-cy^="CertificationDashboard-row"] button',
-      'Sign and approve',
-    ).click();
+    cy.contains('[data-cy^="CertificationDashboard-row"] button', 'Sign and approve').click();
   }
 
   cy.contains('Select repositories');
@@ -52,30 +47,21 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     cy.galaxykit('-i task wait all');
 
-    cy.request(apiPrefix + 'pulp/api/v3/repositories/ansible/ansible/').then(
-      (data) => {
-        const list = data.body.results;
-        list.forEach((repo) => {
-          if (
-            repo.pulp_labels?.pipeline == 'approved' &&
-            repo.name != 'published'
-          ) {
-            cy.log('deleting repository' + repo.name);
-            cy.galaxykit('-i repository delete', repo.name);
-          }
-        });
-        cy.galaxykit('-i task wait all');
-        range(1, max).forEach((i) => {
-          cy.galaxykit(
-            `-i repository create`,
-            'repo' + i,
-            '--pipeline=approved',
-          );
-          cy.galaxykit('-i distribution create', 'repo' + i);
-        });
-        cy.galaxykit('-i task wait all');
-      },
-    );
+    cy.request(apiPrefix + 'pulp/api/v3/repositories/ansible/ansible/').then((data) => {
+      const list = data.body.results;
+      list.forEach((repo) => {
+        if (repo.pulp_labels?.pipeline == 'approved' && repo.name != 'published') {
+          cy.log('deleting repository' + repo.name);
+          cy.galaxykit('-i repository delete', repo.name);
+        }
+      });
+      cy.galaxykit('-i task wait all');
+      range(1, max).forEach((i) => {
+        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
+        cy.galaxykit('-i distribution create', 'repo' + i);
+      });
+      cy.galaxykit('-i task wait all');
+    });
 
     // prepare another staging
     cy.galaxykit('-i distribution delete', 'staging2');
@@ -115,9 +101,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('.modal-body', 'repo1');
     cy.contains('.modal-body', 'published').should('not.exist');
 
-    cy.get('.modal-body [data-cy="compound_filter"] input')
-      .clear()
-      .type('repo2{enter}');
+    cy.get('.modal-body [data-cy="compound_filter"] input').clear().type('repo2{enter}');
     cy.contains('.modal-body', 'repo2');
     cy.contains('.modal-body', 'repo1').should('not.exist');
     cy.contains('.modal-body', 'published').should('not.exist');
@@ -138,9 +122,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.get('.toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect all (11 items)').click();
     reposList.forEach((repo) => {
-      cy.contains('[aria-label="Label group category"]', repo).should(
-        'not.exist',
-      );
+      cy.contains('[aria-label="Label group category"]', repo).should('not.exist');
     });
 
     // select page
@@ -150,9 +132,7 @@ describe('Approval Dashboard process with multiple repos', () => {
       if (repo != 'repo9') {
         cy.contains('[aria-label="Label group category"]', repo);
       } else {
-        cy.contains('[aria-label="Label group category"]', repo).should(
-          'not.exist',
-        );
+        cy.contains('[aria-label="Label group category"]', repo).should('not.exist');
       }
     });
 
@@ -165,9 +145,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('a', 'Deselect page (10 items)').click();
     reposList.forEach((repo) => {
       if (repo != 'repo9') {
-        cy.contains('[aria-label="Label group category"]', repo).should(
-          'not.exist',
-        );
+        cy.contains('[aria-label="Label group category"]', repo).should('not.exist');
       } else {
         cy.contains('[aria-label="Label group category"]', repo);
       }
@@ -182,14 +160,10 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('[aria-label="Label group category"]', 'published');
 
     toggleItem('published');
-    cy.contains('[aria-label="Label group category"]', 'published').should(
-      'not.exist',
-    );
+    cy.contains('[aria-label="Label group category"]', 'published').should('not.exist');
 
     toggleItem('published');
     cy.get('[aria-label="Close published"]').click();
-    cy.contains('[aria-label="Label group category"]', 'published').should(
-      'not.exist',
-    );
+    cy.contains('[aria-label="Label group category"]', 'published').should('not.exist');
   });
 });

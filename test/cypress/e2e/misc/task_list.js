@@ -8,9 +8,7 @@ describe('Task table contains correct headers and filter', () => {
 
     cy.contains('Repositories');
 
-    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
-      'sync',
-    );
+    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as('sync');
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
 
@@ -25,10 +23,8 @@ describe('Task table contains correct headers and filter', () => {
     cy.visit(`${uiPrefix}tasks`);
     cy.contains('Task Management');
     cy.get('[aria-label="name__contains"]');
-    ['Task name', 'Created on', 'Started at', 'Finished at', 'Status'].forEach(
-      (item) => {
-        cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
-      },
-    );
+    ['Task name', 'Created on', 'Started at', 'Finished at', 'Status'].forEach((item) => {
+      cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
+    });
   });
 });

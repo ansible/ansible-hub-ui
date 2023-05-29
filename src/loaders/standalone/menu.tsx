@@ -1,22 +1,12 @@
 /* eslint react/prop-types: 0 */
 import { t } from '@lingui/macro';
-import {
-  Nav,
-  NavExpandable,
-  NavGroup,
-  NavItem,
-  NavList,
-} from '@patternfly/react-core';
+import { Nav, NavExpandable, NavGroup, NavItem, NavList } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
-import {
-  canViewAnsibleRemotes,
-  canViewAnsibleRepositories,
-  isLoggedIn,
-} from 'src/permissions';
+import { canViewAnsibleRemotes, canViewAnsibleRepositories, isLoggedIn } from 'src/permissions';
 import { hasPermission } from 'src/utilities';
 
 const menuItem = (name, options = {}) => ({
@@ -42,14 +32,12 @@ function standaloneMenu() {
       menuItem(t`Collections`, {
         url: formatPath(Paths.collections),
         condition: ({ settings, user }) =>
-          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous,
+          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS || !user.is_anonymous,
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths[NAMESPACE_TERM]),
         condition: ({ settings, user }) =>
-          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous,
+          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS || !user.is_anonymous,
       }),
       menuItem(t`Repositories`, {
         condition: canViewAnsibleRepositories,
@@ -64,8 +52,7 @@ function standaloneMenu() {
         condition: isLoggedIn,
       }),
       menuItem(t`Approval`, {
-        condition: (context) =>
-          hasPermission(context, 'ansible.modify_ansible_repo_content'),
+        condition: (context) => hasPermission(context, 'ansible.modify_ansible_repo_content'),
         url: formatPath(Paths.approvalDashboard),
       }),
     ]),
@@ -105,15 +92,13 @@ function standaloneMenu() {
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
       condition: ({ featureFlags, user }) =>
-        (featureFlags.collection_signing || featureFlags.container_signing) &&
-        !user.is_anonymous,
+        (featureFlags.collection_signing || featureFlags.container_signing) && !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
       url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
       external: true,
       condition: ({ settings, user }) =>
-        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-        !user.is_anonymous,
+        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS || !user.is_anonymous,
     }),
     menuItem(t`Terms of Use`, {
       url: 'https://www.redhat.com/en/about/terms-use',
@@ -150,11 +135,7 @@ function activateMenu(items, pathname) {
 
 function ItemOrSection({ item, context, expandedSections }) {
   return item.type === 'section' ? (
-    <MenuSection
-      section={item}
-      context={context}
-      expandedSections={expandedSections}
-    />
+    <MenuSection section={item} context={context} expandedSections={expandedSections} />
   ) : (
     <MenuItem item={item} context={context} />
   );
@@ -170,16 +151,9 @@ function MenuItem({ item, context }) {
       }}
     >
       {item.url && item.external ? (
-        <a
-          href={item.url}
-          data-cy={item['data-cy']}
-          target='_blank'
-          rel='noreferrer'
-        >
+        <a href={item.url} data-cy={item['data-cy']} target='_blank' rel='noreferrer'>
           {item.name}
-          <ExternalLinkAltIcon
-            style={{ position: 'absolute', right: '32px' }}
-          />
+          <ExternalLinkAltIcon style={{ position: 'absolute', right: '32px' }} />
         </a>
       ) : item.url ? (
         <Link to={item.url}>{item.name}</Link>
@@ -198,11 +172,7 @@ function MenuSection({ section, context, expandedSections }) {
       isActive={section.active}
       isExpanded={expandedSections.includes(section.name)}
     >
-      <Menu
-        items={section.items}
-        context={context}
-        expandedSections={expandedSections}
-      />
+      <Menu items={section.items} context={context} expandedSections={expandedSections} />
     </NavExpandable>
   ) : null;
 }
@@ -233,9 +203,7 @@ export const StandaloneMenu = ({ context }) => {
   }, []);
   useEffect(() => {
     activateMenu(menu, location.pathname);
-    setExpandedSections(
-      menu.filter((i) => i.type === 'section' && i.active).map((i) => i.name),
-    );
+    setExpandedSections(menu.filter((i) => i.type === 'section' && i.active).map((i) => i.name));
   }, [menu, location.pathname]);
 
   const onToggle = ({ groupId, isExpanded }) => {
@@ -262,11 +230,7 @@ export const StandaloneMenu = ({ context }) => {
 
   return (
     <StandaloneNav>
-      <Menu
-        items={menu}
-        context={context}
-        expandedSections={expandedSections}
-      />
+      <Menu items={menu} context={context} expandedSections={expandedSections} />
     </StandaloneNav>
   );
 };

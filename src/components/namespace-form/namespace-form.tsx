@@ -30,13 +30,7 @@ export class NamespaceForm extends React.Component<IProps> {
         <div className='hub-card-row'>
           <div className='fields'>
             <FormGroup fieldId='name' label={t`Name`} isRequired>
-              <TextInput
-                isRequired
-                isDisabled
-                id='name'
-                type='text'
-                value={namespace.name}
-              />
+              <TextInput isRequired isDisabled id='name' type='text' value={namespace.name} />
             </FormGroup>
 
             <br />
@@ -99,16 +93,10 @@ export class NamespaceForm extends React.Component<IProps> {
             !('links__url' in errorMessages || 'links__name' in errorMessages),
           )}
         >
-          {namespace.links.map((link, index) =>
-            this.renderLinkGroup(link, index),
-          )}
+          {namespace.links.map((link, index) => this.renderLinkGroup(link, index))}
 
           {namespace.links.length === 0 && (
-            <PlusCircleIcon
-              className='clickable'
-              onClick={() => this.addLink()}
-              size='sm'
-            />
+            <PlusCircleIcon className='clickable' onClick={() => this.addLink()} size='sm' />
           )}
         </FormGroup>
       </Form>
@@ -228,20 +216,12 @@ export class NamespaceForm extends React.Component<IProps> {
         </div>
         <div className='link-button'>
           <div className='link-container'>
-            <TrashIcon
-              className='clickable'
-              onClick={() => this.removeLink(index)}
-              size='sm'
-            />
+            <TrashIcon className='clickable' onClick={() => this.removeLink(index)} size='sm' />
           </div>
 
           <div className='link-container'>
             {last && (
-              <PlusCircleIcon
-                className='clickable'
-                onClick={() => this.addLink()}
-                size='sm'
-              />
+              <PlusCircleIcon className='clickable' onClick={() => this.addLink()} size='sm' />
             )}
           </div>
         </div>

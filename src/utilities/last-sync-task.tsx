@@ -20,9 +20,7 @@ export function lastSyncStatus(entity) {
 
   let errorMessage = null;
   if (entity.last_sync_task.error) {
-    errorMessage = (
-      <HelperText content={entity.last_sync_task.error['description']} />
-    );
+    errorMessage = <HelperText content={entity.last_sync_task.error['description']} />;
   }
 
   return (

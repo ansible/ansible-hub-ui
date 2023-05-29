@@ -33,18 +33,14 @@ export const CardListSwitcher: React.FunctionComponent<IProps> = ({
         <ThLargeIcon
           size={size}
           className={cx(iconClasses, { selected: disp === 'card' })}
-          onClick={() =>
-            updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
-          }
+          onClick={() => updateParams(ParamHelper.setParam(params, 'view_type', 'card'))}
         />
       </span>
       <span data-cy='view_type_list'>
         <ListIcon
           size={size}
           className={cx(iconClasses, { selected: disp === 'list' })}
-          onClick={() =>
-            updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
-          }
+          onClick={() => updateParams(ParamHelper.setParam(params, 'view_type', 'list'))}
         />
       </span>
     </div>

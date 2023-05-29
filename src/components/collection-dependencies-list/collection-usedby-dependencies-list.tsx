@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  SearchInput,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { SearchInput, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionUsedByDependencies } from 'src/api';
@@ -60,24 +55,16 @@ export const CollectionUsedbyDependenciesList = ({
               <SearchInput
                 value={params.name__icontains || ''}
                 onChange={(_e, val) =>
-                  updateParams(
-                    ParamHelper.setParam(params, 'name__icontains', val),
-                  )
+                  updateParams(ParamHelper.setParam(params, 'name__icontains', val))
                 }
-                onClear={() =>
-                  updateParams(
-                    ParamHelper.setParam(params, 'name__icontains', ''),
-                  )
-                }
+                onClear={() => updateParams(ParamHelper.setParam(params, 'name__icontains', ''))}
                 aria-label='filter-collection-name'
                 placeholder={t`Filter by name`}
               />
             </ToolbarItem>
             <ToolbarItem>
               <Sort
-                options={[
-                  { title: t`Collection`, id: 'collection', type: 'alpha' },
-                ]}
+                options={[{ title: t`Collection`, id: 'collection', type: 'alpha' }]}
                 params={params}
                 updateParams={({ sort }) =>
                   updateParams(ParamHelper.setParam(params, 'sort', sort))
@@ -106,30 +93,25 @@ export const CollectionUsedbyDependenciesList = ({
             <>
               <table className='hub-c-table-content pf-c-table pf-m-compact'>
                 <tbody>
-                  {usedByDependencies.map(
-                    ({ name, namespace, version, repository_list }, i) => (
-                      <tr key={i}>
-                        <td>
-                          <Link
-                            to={formatPath(
-                              Paths.collectionByRepo,
-                              {
-                                collection: name,
-                                namespace,
-                                repo: repository_list[0],
-                              },
-                              ParamHelper.getReduced(
-                                { version },
-                                ignoredParams,
-                              ),
-                            )}
-                          >
-                            {namespace + '.' + name} v{version}
-                          </Link>
-                        </td>
-                      </tr>
-                    ),
-                  )}
+                  {usedByDependencies.map(({ name, namespace, version, repository_list }, i) => (
+                    <tr key={i}>
+                      <td>
+                        <Link
+                          to={formatPath(
+                            Paths.collectionByRepo,
+                            {
+                              collection: name,
+                              namespace,
+                              repo: repository_list[0],
+                            },
+                            ParamHelper.getReduced({ version }, ignoredParams),
+                          )}
+                        >
+                          {namespace + '.' + name} v{version}
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <Pagination

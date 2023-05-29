@@ -49,10 +49,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('[data-cy="DataForm-field-email"]').contains('example@example.com');
     cy.get('[data-cy="UserForm-readonly-groups"]').contains(`alphaGroup${num}`);
     // FIXME test the right value, not both
-    cy.get('.pf-c-switch > .pf-c-switch__label').should(
-      'have.text',
-      'Super userNot a super user',
-    );
+    cy.get('.pf-c-switch > .pf-c-switch__label').should('have.text', 'Super userNot a super user');
   });
 
   it('edits user', () => {
@@ -72,9 +69,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.wait('@user');
     cy.get('[data-cy="DataForm-field-first_name"]').contains('new_first_name');
     cy.get('[data-cy="DataForm-field-last_name"]').contains('new_last_name');
-    cy.get('[data-cy="DataForm-field-email"]').contains(
-      'new_example@example.com',
-    );
+    cy.get('[data-cy="DataForm-field-email"]').contains('new_example@example.com');
   });
 
   it('deletes user', () => {
@@ -93,10 +88,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('input[id="pf-login-username-id"]').type('testUser');
     cy.get('input[id="pf-login-password-id"]').type('testUserpassword');
     cy.get('button[type="submit"]').click();
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/repo/published/?deprecated=false&offset=0&limit=10`,
-    );
+    cy.intercept('GET', `${apiPrefix}_ui/v1/repo/published/?deprecated=false&offset=0&limit=10`);
 
     //unable to log in with test credentials
 

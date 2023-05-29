@@ -44,10 +44,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     params['sort'] = !params['sort'] ? '-collection' : 'collection';
 
@@ -124,9 +121,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           content={content}
           params={headerParams}
           updateParams={(p) => {
-            this.updateParams(this.combineParams(this.state.params, p), () =>
-              this.loadData(true),
-            );
+            this.updateParams(this.combineParams(this.state.params, p), () => this.loadData(true));
           }}
           breadcrumbs={breadcrumbs}
           activeTab='dependencies'
@@ -164,9 +159,8 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
                     params={dependenciesParams}
                     usedByDependenciesLoading={usedByDependenciesLoading}
                     updateParams={(p) =>
-                      this.updateParams(
-                        this.combineParams(this.state.params, p),
-                        () => this.loadUsedByDependencies(),
+                      this.updateParams(this.combineParams(this.state.params, p), () =>
+                        this.loadUsedByDependencies(),
                       )
                     }
                   />
@@ -181,9 +175,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   private loadData(forceReload = false) {
     this.loadCollection(forceReload, () =>
-      this.loadCollectionsDependenciesRepos(() =>
-        this.loadUsedByDependencies(),
-      ),
+      this.loadCollectionsDependenciesRepos(() => this.loadUsedByDependencies()),
     );
   }
 
@@ -292,13 +284,8 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
       setCollection: (collections, collection, content, collectionsCount) =>
-        this.setState(
-          { collections, collection, content, collectionsCount },
-          callback,
-        ),
-      stateParams: this.state.params.version
-        ? { version: this.state.params.version }
-        : {},
+        this.setState({ collections, collection, content, collectionsCount }, callback),
+      stateParams: this.state.params.version ? { version: this.state.params.version } : {},
     });
   }
 

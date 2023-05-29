@@ -70,15 +70,7 @@ export class UserForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const {
-      user,
-      errorMessages,
-      isReadonly,
-      saveUser,
-      onCancel,
-      isNewUser,
-      isMe,
-    } = this.props;
+    const { user, errorMessages, isReadonly, saveUser, onCancel, isNewUser, isMe } = this.props;
     const { passwordConfirm, formErrors } = this.state;
     const minLength = this.context.settings.GALAXY_MINIMUM_PASSWORD_LENGTH || 9; // actually counts codepoints, close enough
 
@@ -108,15 +100,11 @@ export class UserForm extends React.Component<IProps, IState> {
         isRequired={isNewUser || !!user.password}
         key='confirm-group'
         label={t`Password confirmation`}
-        validated={this.toError(
-          this.isPassSame(user.password, passwordConfirm),
-        )}
+        validated={this.toError(this.isPassSame(user.password, passwordConfirm))}
       >
         <TextInput
           placeholder={isNewUser ? '' : '••••••••••••••••••••••'}
-          validated={this.toError(
-            this.isPassSame(user.password, passwordConfirm),
-          )}
+          validated={this.toError(this.isPassSame(user.password, passwordConfirm))}
           isDisabled={isReadonly}
           id='password-confirm'
           value={passwordConfirm}
@@ -129,11 +117,7 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const readonlyAuth = () => (
-      <FormGroup
-        fieldId='auth_provider'
-        key='readonlyAuth'
-        label={t`Authentication provider`}
-      >
+      <FormGroup fieldId='auth_provider' key='readonlyAuth' label={t`Authentication provider`}>
         {user.auth_provider.map((provider) => (
           <Label key={provider}>{provider}</Label>
         ))}
@@ -194,16 +178,12 @@ export class UserForm extends React.Component<IProps, IState> {
         >
           <Switch
             isDisabled={
-              !this.context.user.is_superuser ||
-              isReadonly ||
-              this.context.user.id === user.id
+              !this.context.user.is_superuser || isReadonly || this.context.user.id === user.id
             }
             label={t`Super user`}
             labelOff={t`Not a super user`}
             isChecked={user.is_superuser}
-            onChange={() =>
-              this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
-            }
+            onChange={() => this.updateUserFieldByName(!user.is_superuser, 'is_superuser')}
           ></Switch>
         </Tooltip>
       </FormGroup>
@@ -214,8 +194,7 @@ export class UserForm extends React.Component<IProps, IState> {
         <Button
           type='submit'
           isDisabled={
-            !this.isPassValid(user.password, passwordConfirm) ||
-            !this.requiredFilled(user)
+            !this.isPassValid(user.password, passwordConfirm) || !this.requiredFilled(user)
           }
         >
           {t`Save`}
@@ -272,9 +251,7 @@ export class UserForm extends React.Component<IProps, IState> {
 
     const i = user.groups.findIndex((g) => g.name === selection);
     if (i === -1) {
-      const addedGroup = this.state.searchGroups.find(
-        (g) => g.name === selection,
-      );
+      const addedGroup = this.state.searchGroups.find((g) => g.name === selection);
       user.groups.push(addedGroup);
     } else {
       user.groups.splice(i, 1);

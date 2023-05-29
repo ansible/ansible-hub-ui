@@ -1,9 +1,4 @@
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { ActionType } from 'src/actions';
 import {
@@ -84,9 +79,7 @@ export function DetailList<T>({
 
   const renderModals = (actionContext) => (
     <>
-      {headerActions?.length
-        ? headerActions.map((action) => action?.modal?.(actionContext))
-        : null}
+      {headerActions?.length ? headerActions.map((action) => action?.modal?.(actionContext)) : null}
       {listItemActions?.length
         ? listItemActions.map((action) => action?.modal?.(actionContext))
         : null}
@@ -96,9 +89,7 @@ export function DetailList<T>({
   const knownFilters = (filterConfig || []).map(({ id }) => id);
   const noData = items.length === 0 && !filterIsSet(params, knownFilters);
 
-  const niceNames = Object.fromEntries(
-    (filterConfig || []).map(({ id, title }) => [id, title]),
-  );
+  const niceNames = Object.fromEntries((filterConfig || []).map(({ id, title }) => [id, title]));
 
   return (
     <>
@@ -136,12 +127,7 @@ export function DetailList<T>({
               </ToolbarContent>
             </Toolbar>
 
-            <Pagination
-              params={params}
-              updateParams={setParams}
-              count={itemCount}
-              isTop
-            />
+            <Pagination params={params} updateParams={setParams} count={itemCount} isTop />
           </div>
           <div>
             <AppliedFilters
@@ -159,27 +145,18 @@ export function DetailList<T>({
           ) : !items.length ? (
             <EmptyStateFilter />
           ) : (
-            <table
-              aria-label={title}
-              className='hub-c-table-content pf-c-table'
-            >
+            <table aria-label={title} className='hub-c-table-content pf-c-table'>
               <SortTable
                 options={{ headers: sortHeaders }}
                 params={params}
                 updateParams={setParams}
               />
               <tbody>
-                {items.map((item, i) =>
-                  renderTableRow(item, i, actionContext, listItemActions),
-                )}
+                {items.map((item, i) => renderTableRow(item, i, actionContext, listItemActions))}
               </tbody>
             </table>
           )}
-          <Pagination
-            params={params}
-            updateParams={setParams}
-            count={itemCount}
-          />
+          <Pagination params={params} updateParams={setParams} count={itemCount} />
         </>
       )}
     </>

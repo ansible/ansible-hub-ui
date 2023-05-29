@@ -17,12 +17,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
-import {
-  ErrorMessagesType,
-  ParamHelper,
-  errorMessage,
-  mapErrorMessages,
-} from 'src/utilities';
+import { ErrorMessagesType, ParamHelper, errorMessage, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;
@@ -72,15 +67,8 @@ class EditNamespace extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const {
-      namespace,
-      errorMessages,
-      saving,
-      redirect,
-      params,
-      unauthorized,
-      loading,
-    } = this.state;
+    const { namespace, errorMessages, saving, redirect, params, unauthorized, loading } =
+      this.state;
 
     const tabs = [
       { id: 'edit-details', name: t`Edit details` },
@@ -123,10 +111,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
           params={params}
           updateParams={(p) => this.updateParams(p)}
         ></PartnerHeader>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
@@ -140,10 +125,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
                 />
               ) : null}
               {params.tab === 'edit-resources' ? (
-                <ResourcesForm
-                  namespace={namespace}
-                  updateNamespace={updateNamespace}
-                />
+                <ResourcesForm namespace={namespace} updateNamespace={updateNamespace} />
               ) : null}
               <Form>
                 <ActionGroup>
@@ -161,9 +143,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
                   {saving ? <Spinner></Spinner> : null}
                 </ActionGroup>
                 {this.state.unsavedData ? (
-                  <div
-                    style={{ color: 'red' }}
-                  >{t`You have unsaved changes`}</div>
+                  <div style={{ color: 'red' }}>{t`You have unsaved changes`}</div>
                 ) : null}
               </Form>
             </section>

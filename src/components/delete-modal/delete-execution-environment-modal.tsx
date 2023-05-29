@@ -25,12 +25,7 @@ export const DeleteExecutionEnvironmentModal = (props: IProps) => {
       title={t`Delete container?`}
       cancelAction={() => closeAction()}
       deleteAction={() =>
-        deleteContainer(
-          selectedItem,
-          props,
-          setConfirmDelete,
-          setIsDeletionPending,
-        )
+        deleteContainer(selectedItem, props, setConfirmDelete, setIsDeletionPending)
       }
       isDisabled={!confirmDelete || isDeletionPending}
     >
@@ -49,12 +44,7 @@ export const DeleteExecutionEnvironmentModal = (props: IProps) => {
   );
 };
 
-function deleteContainer(
-  selectedItem: string,
-  props,
-  setConfirmDelete,
-  setIsDeletionPending,
-) {
+function deleteContainer(selectedItem: string, props, setConfirmDelete, setIsDeletionPending) {
   const { addAlert, closeAction, afterDelete } = props;
 
   setIsDeletionPending(true);
@@ -68,8 +58,7 @@ function deleteContainer(
         closeAction();
         addAlert(
           <Trans>
-            Execution environment &quot;{selectedItem}&quot; has been
-            successfully deleted.
+            Execution environment &quot;{selectedItem}&quot; has been successfully deleted.
           </Trans>,
           'success',
         );

@@ -12,10 +12,7 @@ describe('add and delete roles', () => {
 
     cy.get('input[id="role_name"]').type('a');
 
-    cy.get('[id="name-helper"]').should(
-      'have.text',
-      'This field must be longer than 2 characters',
-    );
+    cy.get('[id="name-helper"]').should('have.text', 'This field must be longer than 2 characters');
     cy.contains('Save').should('be.disabled');
     cy.get('input[id="role_name"]').clear().type('[');
     cy.get('[id="name-helper"]').should(
@@ -24,15 +21,9 @@ describe('add and delete roles', () => {
     );
     cy.contains('Save').should('be.disabled');
     cy.get('input[id="role_name"]').clear().type('test');
-    cy.get('[id="name-helper"]').should(
-      'have.text',
-      `This field must start with 'galaxy.'.`,
-    );
+    cy.get('[id="name-helper"]').should('have.text', `This field must start with 'galaxy.'.`);
     cy.get('input[id="role_name"]').clear();
-    cy.get('[id="name-helper"]').should(
-      'have.text',
-      'This field may not be blank.',
-    );
+    cy.get('[id="name-helper"]').should('have.text', 'This field may not be blank.');
     cy.contains('Save').should('be.disabled');
     cy.get('input[id="role_name"]').clear().type(`galaxy.test${num}`);
     cy.contains('Save').should('be.enabled');
@@ -48,20 +39,14 @@ describe('add and delete roles', () => {
     cy.contains('Save').should('be.disabled');
 
     cy.get('input[id="role_description"]').clear();
-    cy.get('[id="description-helper"]').should(
-      'have.text',
-      'This field may not be blank.',
-    );
+    cy.get('[id="description-helper"]').should('have.text', 'This field may not be blank.');
     cy.contains('Save').should('be.disabled');
     cy.get('input[id="role_description"]').clear().type('test description');
     cy.contains('Save').should('be.enabled');
 
     // add permissions
 
-    cy.contains('Collection Namespaces')
-      .parent()
-      .find('input', 'Select Permissions')
-      .click();
+    cy.contains('Collection Namespaces').parent().find('input', 'Select Permissions').click();
     cy.get('ul[role="listbox"] > li:first').click();
 
     cy.contains('Save').click();

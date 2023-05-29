@@ -6,6 +6,5 @@ import { Action } from './action';
 export const ansibleRemoteEditAction = Action({
   condition: canEditAnsibleRemote,
   title: t`Edit`,
-  onClick: ({ name }, { navigate }) =>
-    navigate(formatPath(Paths.ansibleRemoteEdit, { name })),
+  onClick: ({ name }, { navigate }) => navigate(formatPath(Paths.ansibleRemoteEdit, { name })),
 });

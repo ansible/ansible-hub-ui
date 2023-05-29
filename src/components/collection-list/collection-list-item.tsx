@@ -15,13 +15,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
-import {
-  CollectionNumericLabel,
-  DateComponent,
-  DeprecatedTag,
-  Logo,
-  Tag,
-} from 'src/components';
+import { CollectionNumericLabel, DateComponent, DeprecatedTag, Logo, Tag } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
@@ -107,10 +101,7 @@ export const CollectionListItem = ({
       <div className='hub-entry pf-l-flex pf-m-wrap'>
         {Object.keys(contentSummary.contents).map((type) => (
           <div key={type}>
-            <CollectionNumericLabel
-              count={contentSummary.contents[type]}
-              type={type}
-            />
+            <CollectionNumericLabel count={contentSummary.contents[type]} type={type} />
           </div>
         ))}
       </div>
@@ -126,14 +117,8 @@ export const CollectionListItem = ({
 
   cells.push(
     <DataListCell isFilled={false} alignRight key='stats'>
-      <Flex
-        direction={{ default: 'column' }}
-        alignItems={{ default: 'alignItemsFlexEnd' }}
-      >
-        <Flex
-          direction={{ default: 'column' }}
-          alignItems={{ default: 'alignItemsFlexStart' }}
-        >
+      <Flex direction={{ default: 'column' }} alignItems={{ default: 'alignItemsFlexEnd' }}>
+        <Flex direction={{ default: 'column' }} alignItems={{ default: 'alignItemsFlexStart' }}>
           {synclistSwitch && <FlexItem>{synclistSwitch}</FlexItem>}
           {uploadButton || dropdownMenu ? (
             <FlexItem>
@@ -150,10 +135,7 @@ export const CollectionListItem = ({
             <div>v{collection_version.version}</div>
           </FlexItem>
         </Flex>
-        <Flex
-          direction={{ default: 'row' }}
-          alignSelf={{ default: 'alignSelfFlexStart' }}
-        >
+        <Flex direction={{ default: 'row' }} alignSelf={{ default: 'alignSelfFlexStart' }}>
           {featureFlags.display_repositories ? (
             <FlexItem>
               <Label variant='outline'>
@@ -169,10 +151,7 @@ export const CollectionListItem = ({
           ) : null}
           {displaySignatures ? (
             <FlexItem>
-              <SignatureBadge
-                variant='outline'
-                signState={is_signed ? 'signed' : 'unsigned'}
-              />
+              <SignatureBadge variant='outline' signState={is_signed ? 'signed' : 'unsigned'} />
             </FlexItem>
           ) : null}
         </Flex>

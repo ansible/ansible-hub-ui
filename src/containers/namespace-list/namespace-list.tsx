@@ -1,12 +1,6 @@
 import { i18n } from '@lingui/core';
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button, Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
@@ -65,10 +59,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 20;
@@ -141,8 +132,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Navigate to={this.state.redirect} />;
     }
 
-    const { alerts, namespaces, params, itemCount, loading, inputText } =
-      this.state;
+    const { alerts, namespaces, params, itemCount, loading, inputText } = this.state;
     const { filterOwner } = this.props;
     const { hasPermission } = this.context;
 
@@ -206,9 +196,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                       <CompoundFilter
                         inputText={inputText}
                         onChange={(text) => this.setState({ inputText: text })}
-                        updateParams={(p) =>
-                          this.updateParams(p, () => this.loadNamespaces())
-                        }
+                        updateParams={(p) => this.updateParams(p, () => this.loadNamespaces())}
                         params={params}
                         filterConfig={[{ id: 'keywords', title: t`keywords` }]}
                       />
@@ -227,21 +215,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   <ToolbarGroup style={{ alignSelf: 'start' }}>
                     <ToolbarItem>
                       <Sort
-                        options={[
-                          { title: t`Name`, id: 'name', type: 'alpha' },
-                        ]}
+                        options={[{ title: t`Name`, id: 'name', type: 'alpha' }]}
                         params={params}
-                        updateParams={(p) =>
-                          this.updateParams(p, () => this.loadNamespaces())
-                        }
+                        updateParams={(p) => this.updateParams(p, () => this.loadNamespaces())}
                       />
                     </ToolbarItem>
                     {hasPermission('galaxy.add_namespace') && (
                       <ToolbarItem key='create-button'>
-                        <Button
-                          variant='primary'
-                          onClick={this.handleModalToggle}
-                        >
+                        <Button variant='primary' onClick={this.handleModalToggle}>
                           {t`Create`}
                         </Button>
                       </ToolbarItem>
@@ -252,9 +233,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               <div>
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.loadNamespaces())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.loadNamespaces())}
                   count={itemCount}
                   isCompact
                   perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
@@ -268,9 +247,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           <section className='footer'>
             <Pagination
               params={params}
-              updateParams={(p) =>
-                this.updateParams(p, () => this.loadNamespaces())
-              }
+              updateParams={(p) => this.updateParams(p, () => this.loadNamespaces())}
               perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
               count={itemCount}
             />

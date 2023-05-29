@@ -2,14 +2,7 @@ import { t } from '@lingui/macro';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { NamespaceType } from 'src/api';
-import {
-  BaseHeader,
-  BreadcrumbType,
-  Breadcrumbs,
-  Logo,
-  Tabs,
-  TabsType,
-} from 'src/components';
+import { BaseHeader, BreadcrumbType, Breadcrumbs, Logo, Tabs, TabsType } from 'src/components';
 import './header.scss';
 
 interface IProps {
@@ -25,15 +18,8 @@ interface IProps {
 
 export class PartnerHeader extends React.Component<IProps> {
   render() {
-    const {
-      breadcrumbs,
-      filters,
-      namespace,
-      pageControls,
-      params,
-      tabs,
-      updateParams,
-    } = this.props;
+    const { breadcrumbs, filters, namespace, pageControls, params, tabs, updateParams } =
+      this.props;
 
     const company = namespace.company || namespace.name;
 
@@ -60,11 +46,7 @@ export class PartnerHeader extends React.Component<IProps> {
 
         <div className='hub-tab-link-container'>
           <div className='tabs'>
-            <Tabs
-              tabs={tabs}
-              params={params}
-              updateParams={(p) => updateParams(p)}
-            />
+            <Tabs tabs={tabs} params={params} updateParams={(p) => updateParams(p)} />
           </div>
           {namespace.links.length > 0 ? (
             <div className='links'>

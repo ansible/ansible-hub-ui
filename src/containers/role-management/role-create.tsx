@@ -2,13 +2,7 @@ import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI } from 'src/api/role';
-import {
-  AlertType,
-  EmptyStateUnauthorized,
-  Main,
-  RoleForm,
-  RoleHeader,
-} from 'src/components';
+import { AlertType, EmptyStateUnauthorized, Main, RoleForm, RoleHeader } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -74,33 +68,21 @@ class RoleCreate extends React.Component<RouteProps, IState> {
                 name={name}
                 onNameChange={(value) => {
                   this.setState({ name: value }, () => {
-                    const errors = validateInput(
-                      value,
-                      'name',
-                      this.state.errorMessages,
-                    );
+                    const errors = validateInput(value, 'name', this.state.errorMessages);
                     this.setState({ errorMessages: errors });
                   });
                 }}
                 description={description}
-                descriptionValidated={
-                  errorMessages['description'] ? 'error' : null
-                }
+                descriptionValidated={errorMessages['description'] ? 'error' : null}
                 descriptionHelperText={errorMessages['description']}
                 onDescriptionChange={(value) => {
                   this.setState({ description: value }, () => {
-                    const errors = validateInput(
-                      value,
-                      'description',
-                      this.state.errorMessages,
-                    );
+                    const errors = validateInput(value, 'description', this.state.errorMessages);
                     this.setState({ errorMessages: errors });
                   });
                 }}
                 saveRole={this.createRole}
-                isSavingDisabled={
-                  'description' in errorMessages || 'name' in errorMessages
-                }
+                isSavingDisabled={'description' in errorMessages || 'name' in errorMessages}
                 cancelRole={this.cancelRole}
                 saving={saving}
               />

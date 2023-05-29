@@ -45,9 +45,7 @@ const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
     return AnsibleRemoteAPI.list({ name })
       .then(({ data: { results } }) => results[0])
       .then((remote) => {
-        return AnsibleRemoteAPI.myPermissions(
-          parsePulpIDFromURL(remote.pulp_href),
-        )
+        return AnsibleRemoteAPI.myPermissions(parsePulpIDFromURL(remote.pulp_href))
           .then(({ data: { permissions } }) => permissions)
           .catch((e) => {
             console.error(e);
@@ -103,11 +101,7 @@ const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
 
       const promise = !item
         ? AnsibleRemoteAPI.create(data)
-        : AnsibleRemoteAPI.smartUpdate(
-            parsePulpIDFromURL(item.pulp_href),
-            data,
-            item,
-          );
+        : AnsibleRemoteAPI.smartUpdate(parsePulpIDFromURL(item.pulp_href), data, item);
 
       promise
         .then(({ data: task }) => {

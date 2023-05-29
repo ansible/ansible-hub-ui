@@ -16,9 +16,7 @@ export function findDistroBasePathByRepo(distributions, repository) {
   }
 
   // try to look for match by name, if not, just use the first distro
-  const distro = distributions.find(
-    (distro) => distro.name === repository.name,
-  );
+  const distro = distributions.find((distro) => distro.name === repository.name);
 
   return distro ? distro.base_path : distributions[0].base_path;
 }
@@ -72,16 +70,12 @@ export class API extends HubAPI {
   }
 
   getExcludesCount(distributionPath: string) {
-    return this.http
-      .get(`content/${distributionPath}/v3/excludes/`)
-      .then((result) => {
-        return result.data;
-      });
+    return this.http.get(`content/${distributionPath}/v3/excludes/`).then((result) => {
+      return result.data;
+    });
   }
 
-  setDeprecation(
-    collection: CollectionVersionSearch,
-  ): Promise<{ data: { task: string } }> {
+  setDeprecation(collection: CollectionVersionSearch): Promise<{ data: { task: string } }> {
     const {
       collection_version: { namespace, name },
       repository,
@@ -92,10 +86,7 @@ export class API extends HubAPI {
         repository: repository.pulp_href,
       })
         .then((result) => {
-          const basePath = findDistroBasePathByRepo(
-            result.data.results,
-            repository,
-          );
+          const basePath = findDistroBasePathByRepo(result.data.results, repository);
 
           const path = `v3/plugin/ansible/content/${basePath}/collections/index/`;
           this.patch(
@@ -112,11 +103,7 @@ export class API extends HubAPI {
     });
   }
 
-  upload(
-    data: CollectionUploadType,
-    progressCallback: (e) => void,
-    cancelToken?,
-  ) {
+  upload(data: CollectionUploadType, progressCallback: (e) => void, cancelToken?) {
     const formData = new FormData();
     formData.append('file', data.file);
     // formData.append('sha256', artifact.sha256);
@@ -145,10 +132,7 @@ export class API extends HubAPI {
         repository: repository.pulp_href,
       })
         .then((result) => {
-          const basePath = findDistroBasePathByRepo(
-            result.data.results,
-            repository,
-          );
+          const basePath = findDistroBasePathByRepo(result.data.results, repository);
 
           this.http
             .get(
@@ -168,10 +152,7 @@ export class API extends HubAPI {
       repository: collection.repository.pulp_href,
     });
 
-    const distroBasePath = findDistroBasePathByRepo(
-      distros.data.results,
-      collection.repository,
-    );
+    const distroBasePath = findDistroBasePathByRepo(distros.data.results, collection.repository);
 
     return this.http.delete(
       `v3/plugin/ansible/content/${distroBasePath}/collections/index/${collection.collection_version.namespace}/${collection.collection_version.name}/versions/${collection.collection_version.version}/`,
@@ -183,26 +164,16 @@ export class API extends HubAPI {
       repository: collection.repository.pulp_href,
     });
 
-    const distroBasePath = findDistroBasePathByRepo(
-      distros.data.results,
-      collection.repository,
-    );
+    const distroBasePath = findDistroBasePathByRepo(distros.data.results, collection.repository);
 
     return this.http.delete(
       `v3/plugin/ansible/content/${distroBasePath}/collections/index/${collection.collection_version.namespace}/${collection.collection_version.name}/`,
     );
   }
 
-  getUsedDependenciesByCollection(
-    namespace,
-    collection,
-    params = {},
-    cancelToken = undefined,
-  ) {
+  getUsedDependenciesByCollection(namespace, collection, params = {}, cancelToken = undefined) {
     return this.http.get(
-      this.getUIPath(
-        `collection-versions/?dependency=${namespace}.${collection}`,
-      ),
+      this.getUIPath(`collection-versions/?dependency=${namespace}.${collection}`),
       { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
     );
   }

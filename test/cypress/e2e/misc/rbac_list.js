@@ -12,9 +12,7 @@ describe('RBAC table contains correct headers and filter', () => {
     cy.contains('Roles');
 
     // ensure role names begin with 'galaxy.'
-    cy.get('[data-cy="name-field"]').each((name) =>
-      cy.get(name).contains('galaxy.'),
-    );
+    cy.get('[data-cy="name-field"]').each((name) => cy.get(name).contains('galaxy.'));
 
     //ensure proper headers
     [('Role name', 'Description', 'Created', 'Editable')].forEach((item) => {

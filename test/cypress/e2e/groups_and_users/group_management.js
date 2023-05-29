@@ -59,9 +59,7 @@ describe('Hub Group Management Tests', () => {
     cy.get('[aria-label="Items per page"]').click();
     cy.contains('100 per page').click();
 
-    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${roleName}"]`)
-      .find('input')
-      .click();
+    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${roleName}"]`).find('input').click();
 
     cy.get('.pf-c-wizard__footer > button').contains('Next').click();
 
@@ -71,9 +69,7 @@ describe('Hub Group Management Tests', () => {
 
     cy.get('.pf-c-wizard__footer > button').contains('Add').click();
 
-    cy.contains(
-      `Role ${roleName} has been successfully added to ${groupName}.`,
-    );
+    cy.contains(`Role ${roleName} has been successfully added to ${groupName}.`);
 
     cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${roleName}"]`);
 

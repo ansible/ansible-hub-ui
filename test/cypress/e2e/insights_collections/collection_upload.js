@@ -24,10 +24,9 @@ describe('Collection Upload Tests', () => {
 
   it('collection should be uploaded', () => {
     cy.login();
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
-    ).as('upload');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`).as(
+      'upload',
+    );
     cy.galaxykit('-i namespace create', 'ansible');
     cy.visit(`${uiPrefix}partners`);
 

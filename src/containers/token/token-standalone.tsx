@@ -43,10 +43,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <BaseHeader title={t`API token`}></BaseHeader>
         <Main>
           {unauthorised ? (
@@ -60,8 +57,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
                 <CardBody>
                   <p>
                     <Trans>
-                      Use this token to authenticate the{' '}
-                      <code>ansible-galaxy</code> client.
+                      Use this token to authenticate the <code>ansible-galaxy</code> client.
                     </Trans>
                   </p>
                   {!this.context.user.auth_provider.includes('django') && (
@@ -77,8 +73,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
                   )}
                   <div className='pf-c-content'>
                     <Trans>
-                      <b>WARNING</b> loading a new token will delete your old
-                      token.
+                      <b>WARNING</b> loading a new token will delete your old token.
                     </Trans>
                   </div>
                   {token ? (
@@ -86,8 +81,8 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
                       <CardBody>
                         <div className='pf-c-content'>
                           <Trans>
-                            <b>WARNING</b> copy this token now. This is the only
-                            time you will ever see it.
+                            <b>WARNING</b> copy this token now. This is the only time you will ever
+                            see it.
                           </Trans>
                         </div>
                       </CardBody>
@@ -95,9 +90,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
                     </div>
                   ) : !token && !loadingToken ? (
                     <div className='load-token'>
-                      <Button
-                        onClick={() => this.loadToken()}
-                      >{t`Load token`}</Button>
+                      <Button onClick={() => this.loadToken()}>{t`Load token`}</Button>
                     </div>
                   ) : (
                     <LoadingPageSpinner />
@@ -114,9 +107,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
   private loadToken() {
     this.setState({ loadingToken: true }, () => {
       ActiveUserAPI.getToken()
-        .then((result) =>
-          this.setState({ token: result.data.token, loadingToken: false }),
-        )
+        .then((result) => this.setState({ token: result.data.token, loadingToken: false }))
         .catch((e) => {
           const { status, statusText } = e.response;
           this.setState({

@@ -63,8 +63,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    const { requirements_file, client_key, client_cert, ca_cert } =
-      props.remote || {};
+    const { requirements_file, client_key, client_cert, ca_cert } = props.remote || {};
 
     this.state = {
       filenames: {
@@ -88,10 +87,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     };
 
     // Shim in a default concurrency value to pass form validation (AAH-959)
-    if (
-      this.props.remoteType !== 'registry' &&
-      this.props.remote.download_concurrency === null
-    ) {
+    if (this.props.remoteType !== 'registry' && this.props.remote.download_concurrency === null) {
       this.updateRemote(10, 'download_concurrency');
     }
   }
@@ -179,9 +175,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     const { filenames } = this.state;
     const { collection_signing } = this.context.featureFlags;
     const writeOnlyFields =
-      remote[
-        remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields'
-      ];
+      remote[remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields'];
 
     const docsAnsibleLink = (
       <a
@@ -201,8 +195,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       '  - name: my_namespace.my_collection_name2',
     ].join('\n');
 
-    const filename = (field) =>
-      filenames[field].original ? t`(uploaded)` : filenames[field].name;
+    const filename = (field) => (filenames[field].original ? t`(uploaded)` : filenames[field].name);
     const fileOnChange = (field) => (value, name) => {
       this.setState(
         {
@@ -241,18 +234,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
         <FormGroup
           fieldId={'url'}
           label={t`URL`}
-          labelIcon={
-            <HelperText content={t`The URL of an external content source.`} />
-          }
+          labelIcon={<HelperText content={t`The URL of an external content source.`} />}
           isRequired={requiredFields.includes('url')}
           {...validateURLHelper(errorMessages['url'], remote.url)}
           helperTextIcon={<ExclamationTriangleIcon />}
           helperTextInvalidIcon={<ExclamationCircleIcon />}
         >
           <TextInput
-            validated={
-              validateURLHelper(errorMessages['url'], remote.url).validated
-            }
+            validated={validateURLHelper(errorMessages['url'], remote.url).validated}
             isRequired={requiredFields.includes('url')}
             isDisabled={disabledFields.includes('url')}
             id='url'
@@ -280,11 +269,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'token'}
             label={t`Token`}
-            labelIcon={
-              <HelperText
-                content={t`Token for authenticating to the server URL.`}
-              />
-            }
+            labelIcon={<HelperText content={t`Token for authenticating to the server URL.`} />}
             isRequired={requiredFields.includes('token')}
             validated={this.toError(!('token' in errorMessages))}
             helperTextInvalid={errorMessages['token']}
@@ -333,9 +318,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <HelperText
                 content={
                   <Trans>
-                    This uses the same {docsAnsibleLink} format as the
-                    ansible-galaxy CLI with the caveat that roles aren&apos;t
-                    supported and the source parameter is not supported.
+                    This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the
+                    caveat that roles aren&apos;t supported and the source parameter is not
+                    supported.
                   </Trans>
                 }
               />
@@ -347,9 +332,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
                 <FileUpload
-                  validated={this.toError(
-                    !('requirements_file' in errorMessages),
-                  )}
+                  validated={this.toError(!('requirements_file' in errorMessages))}
                   isRequired={requiredFields.includes('requirements_file')}
                   id='yaml'
                   type='text'
@@ -395,23 +378,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
                         <pre>{yamlTemplate}</pre>
                         <Button
                           variant='plain'
-                          onClick={() =>
-                            this.updateRemote(yamlTemplate, 'requirements_file')
-                          }
+                          onClick={() => this.updateRemote(yamlTemplate, 'requirements_file')}
                         >{t`Use template`}</Button>
                         <Button
                           variant='plain'
-                          onClick={() =>
-                            this.updateRemote('\n', 'requirements_file')
-                          }
+                          onClick={() => this.updateRemote('\n', 'requirements_file')}
                         >{t`Start from scratch`}</Button>
                       </>
                     }
                     height='20rem'
                     language={Language.yaml}
-                    onChange={(value) =>
-                      this.updateRemote(value, 'requirements_file')
-                    }
+                    onChange={(value) => this.updateRemote(value, 'requirements_file')}
                     onEditorDidMount={(editor) => editor.focus()}
                   />
                 </FlexItem>
@@ -439,8 +416,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         >
           <WriteOnlyField
             isValueSet={
-              isWriteOnly('username', writeOnlyFields) &&
-              isFieldSet('username', writeOnlyFields)
+              isWriteOnly('username', writeOnlyFields) && isFieldSet('username', writeOnlyFields)
             }
             onClear={() => this.updateIsSet('username', false)}
           >
@@ -534,9 +510,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   id='proxy_username'
                   type='text'
                   value={remote.proxy_username || ''}
-                  onChange={(value) =>
-                    this.updateRemote(value, 'proxy_username')
-                  }
+                  onChange={(value) => this.updateRemote(value, 'proxy_username')}
                 />
               </WriteOnlyField>
             </FormGroup>
@@ -560,9 +534,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   id='proxy_password'
                   type='password'
                   value={remote.proxy_password || ''}
-                  onChange={(value) =>
-                    this.updateRemote(value, 'proxy_password')
-                  }
+                  onChange={(value) => this.updateRemote(value, 'proxy_password')}
                 />
               </WriteOnlyField>
             </FormGroup>
@@ -571,9 +543,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'tls_validation'}
               label={t`TLS validation`}
               labelIcon={
-                <HelperText
-                  content={t`If selected, TLS peer validation must be performed.`}
-                />
+                <HelperText content={t`If selected, TLS peer validation must be performed.`} />
               }
               isRequired={requiredFields.includes('tls_validation')}
               validated={this.toError(!('tls_validation' in errorMessages))}
@@ -590,9 +560,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'client_key'}
               label={t`Client key`}
               labelIcon={
-                <HelperText
-                  content={t`A PEM encoded private key used for authentication.`}
-                />
+                <HelperText content={t`A PEM encoded private key used for authentication.`} />
               }
               isRequired={requiredFields.includes('client_key')}
               validated={this.toError(!('client_key' in errorMessages))}
@@ -646,10 +614,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     data-cy='client_cert'
                     isDisabled={!this.props.remote.client_cert}
                     onClick={() =>
-                      downloadString(
-                        this.props.remote.client_cert,
-                        filenames.client_cert.name,
-                      )
+                      downloadString(this.props.remote.client_cert, filenames.client_cert.name)
                     }
                     variant='plain'
                     aria-label={t`Download client certification file`}
@@ -690,10 +655,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     data-cy='ca_cert'
                     isDisabled={!this.props.remote.ca_cert}
                     onClick={() =>
-                      downloadString(
-                        this.props.remote.ca_cert,
-                        filenames.ca_cert.name,
-                      )
+                      downloadString(this.props.remote.ca_cert, filenames.ca_cert.name)
                     }
                     variant='plain'
                     aria-label={t`Download CA certification file`}
@@ -707,14 +669,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
             <FormGroup
               fieldId={'download_concurrency'}
               label={t`Download concurrency`}
-              labelIcon={
-                <HelperText
-                  content={t`Total number of simultaneous connections.`}
-                />
-              }
+              labelIcon={<HelperText content={t`Total number of simultaneous connections.`} />}
               validated={
-                !this.isNumericSet(remote.download_concurrency) ||
-                remote.download_concurrency > 0
+                !this.isNumericSet(remote.download_concurrency) || remote.download_concurrency > 0
                   ? 'default'
                   : 'error'
               }
@@ -725,14 +682,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 type='number'
                 value={remote.download_concurrency || ''}
                 validated={
-                  !this.isNumericSet(remote.download_concurrency) ||
-                  remote.download_concurrency > 0
+                  !this.isNumericSet(remote.download_concurrency) || remote.download_concurrency > 0
                     ? 'default'
                     : 'error'
                 }
-                onChange={(value) =>
-                  this.updateRemote(value, 'download_concurrency')
-                }
+                onChange={(value) => this.updateRemote(value, 'download_concurrency')}
               />
             </FormGroup>
 
@@ -740,13 +694,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'rate_limit'}
               label={t`Rate Limit`}
               labelIcon={
-                <HelperText
-                  content={t`Limits total download rate in requests per second.`}
-                />
+                <HelperText content={t`Limits total download rate in requests per second.`} />
               }
               validated={
-                !this.isNumericSet(remote.rate_limit) ||
-                Number.isInteger(remote.rate_limit)
+                !this.isNumericSet(remote.rate_limit) || Number.isInteger(remote.rate_limit)
                   ? 'default'
                   : 'error'
               }
@@ -803,9 +754,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
     const hiddenFieldsName =
       remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields';
 
-    const newFields: WriteOnlyFieldType[] = remote[hiddenFieldsName].map(
-      (field) =>
-        field.name === fieldName ? { ...field, is_set: value } : field,
+    const newFields: WriteOnlyFieldType[] = remote[hiddenFieldsName].map((field) =>
+      field.name === fieldName ? { ...field, is_set: value } : field,
     );
 
     this.props.updateRemote({

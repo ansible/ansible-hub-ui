@@ -16,21 +16,15 @@ type ContextFragment = {
 };
 
 export function loadContext(): Promise<ContextFragment> {
-  const getFeatureFlags = FeatureFlagsAPI.get().then(
-    ({ data: featureFlags }) => ({
-      alerts: (featureFlags._messages || []).map((msg) => ({
-        variant: 'warning',
-        title: msg.split(':')[1],
-      })),
-      featureFlags,
-    }),
-  );
+  const getFeatureFlags = FeatureFlagsAPI.get().then(({ data: featureFlags }) => ({
+    alerts: (featureFlags._messages || []).map((msg) => ({
+      variant: 'warning',
+      title: msg.split(':')[1],
+    })),
+    featureFlags,
+  }));
 
-  return Promise.all([
-    ActiveUserAPI.getUser(),
-    SettingsAPI.get(),
-    getFeatureFlags,
-  ])
+  return Promise.all([ActiveUserAPI.getUser(), SettingsAPI.get(), getFeatureFlags])
     .then(([user, { data: settings }, { alerts, featureFlags }]) => ({
       alerts,
       featureFlags,

@@ -44,11 +44,7 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerParamFix, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 
@@ -70,19 +66,13 @@ interface IState {
   isDeletionPending: boolean;
 }
 
-class ExecutionEnvironmentDetailImages extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetailImages extends React.Component<IDetailSharedProps, IState> {
   nonQueryStringParams = [];
 
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -128,10 +118,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       loading,
       isDeletionPending,
     } = this.state;
-    if (
-      images.length === 0 &&
-      !filterIsSet(params, ['tag', 'digest__icontains'])
-    ) {
+    if (images.length === 0 && !filterIsSet(params, ['tag', 'digest__icontains'])) {
       return (
         <EmptyStateNoData
           title={t`No images yet`}
@@ -188,10 +175,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       ],
     };
 
-    const canEditTags =
-      this.props.containerRepository.namespace.my_permissions.includes(
-        'container.namespace_modify_content_containerpushrepository',
-      );
+    const canEditTags = this.props.containerRepository.namespace.my_permissions.includes(
+      'container.namespace_modify_content_containerpushrepository',
+    );
     const { digest } = selectedImage || {};
 
     return (
@@ -228,12 +214,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <TagManifestModal
           isOpen={!!manageTagsManifestDigest}
           closeModal={() => this.setState({ manageTagsManifestDigest: null })}
-          containerManifest={images.find(
-            (el) => el.digest === manageTagsManifestDigest,
-          )}
-          reloadManifests={() =>
-            this.queryImages(this.props.containerRepository.name)
-          }
+          containerManifest={images.find((el) => el.digest === manageTagsManifestDigest)}
+          reloadManifests={() => this.queryImages(this.props.containerRepository.name)}
           repositoryName={this.props.containerRepository.name}
           onAlert={(alert) => this.props.addAlert(alert)}
           containerRepository={this.props.containerRepository}
@@ -255,9 +237,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                     inputText={this.state.inputText}
                     onChange={(text) => this.setState({ inputText: text })}
                     updateParams={(p) =>
-                      this.updateParams(p, () =>
-                        this.queryImages(this.props.routeParams.container),
-                      )
+                      this.updateParams(p, () => this.queryImages(this.props.routeParams.container))
                     }
                     params={params}
                     filterConfig={[
@@ -278,9 +258,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <Pagination
             params={params}
             updateParams={(p) =>
-              this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
-              )
+              this.updateParams(p, () => this.queryImages(this.props.routeParams.container))
             }
             count={this.state.numberOfImages}
             isTop
@@ -289,9 +267,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <div>
           <AppliedFilters
             updateParams={(p) => {
-              this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
-              );
+              this.updateParams(p, () => this.queryImages(this.props.routeParams.container));
               this.setState({ inputText: '' });
             }}
             params={params}
@@ -301,27 +277,17 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table
-            aria-label={t`Images`}
-            className='hub-c-table-content pf-c-table'
-          >
+          <table aria-label={t`Images`} className='hub-c-table-content pf-c-table'>
             <SortTable
               options={sortTableOptions}
               params={params}
               updateParams={(p) =>
-                this.updateParams(p, () =>
-                  this.queryImages(this.props.routeParams.container),
-                )
+                this.updateParams(p, () => this.queryImages(this.props.routeParams.container))
               }
             />
             <tbody>
               {images.map((image, i) =>
-                this.renderTableRow(
-                  image,
-                  i,
-                  canEditTags,
-                  sortTableOptions.headers.length,
-                ),
+                this.renderTableRow(image, i, canEditTags, sortTableOptions.headers.length),
               )}
             </tbody>
           </table>
@@ -330,9 +296,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <Pagination
           params={params}
           updateParams={(p) =>
-            this.updateParams(p, () =>
-              this.queryImages(this.props.routeParams.container),
-            )
+            this.updateParams(p, () => this.queryImages(this.props.routeParams.container))
           }
           count={this.state.numberOfImages}
         />
@@ -340,12 +304,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(
-    image,
-    index: number,
-    canEditTags: boolean,
-    cols: number,
-  ) {
+  private renderTableRow(image, index: number, canEditTags: boolean, cols: number) {
     const { hasPermission } = this.context;
     const container = this.props.routeParams.container;
     const manifestLink = (digestOrTag) =>
@@ -427,19 +386,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                   })
                 }
               >
-                {expandedImage === image ? (
-                  <AngleDownIcon />
-                ) : (
-                  <AngleRightIcon />
-                )}
+                {expandedImage === image ? <AngleDownIcon /> : <AngleRightIcon />}
               </Button>
             ) : null}
           </td>
           <td>
-            <LabelGroup
-              {...chipGroupProps()}
-              className={'hub-c-label-group-tags-column'}
-            >
+            <LabelGroup {...chipGroupProps()} className={'hub-c-label-group-tags-column'}>
               {image.tags
                 .sort()
                 .map((tag) =>
@@ -501,29 +453,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         />
         <tbody>
           {image_manifests.map(
-            ({
-              digest,
-              os,
-              os_version,
-              os_features,
-              architecture,
-              variant,
-              features,
-            }) => (
+            ({ digest, os, os_version, os_features, architecture, variant, features }) => (
               <tr key={digest}>
                 <td>
                   <ShaLink digest={digest} />
                 </td>
                 <td>
-                  {[
-                    os,
-                    os_version,
-                    os_features,
-                    '/',
-                    architecture,
-                    variant,
-                    features,
-                  ]
+                  {[os, os_version, os_features, '/', architecture, variant, features]
                     .filter(Boolean)
                     .join(' ')}
                 </td>
@@ -543,14 +479,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       })
         .then(({ data: { data, meta } }) => {
           const images = data.map(
-            ({
-              digest,
-              image_manifests,
-              layers,
-              media_type,
-              created_at,
-              tags,
-            }) => ({
+            ({ digest, image_manifests, layers, media_type, created_at, tags }) => ({
               digest,
               image_manifests,
               isManifestList: !!media_type.match('manifest.list'),
@@ -575,10 +504,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     const { selectedImage } = this.state;
     const { digest } = selectedImage;
     this.setState({ isDeletionPending: true }, () =>
-      ExecutionEnvironmentAPI.deleteImage(
-        this.props.routeParams.container,
-        selectedImage.digest,
-      )
+      ExecutionEnvironmentAPI.deleteImage(this.props.routeParams.container, selectedImage.digest)
         .then((result) => {
           const taskId = result.data.task.split('tasks/')[1].replace('/', '');
           this.setState({
@@ -592,11 +518,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             });
             this.props.addAlert({
               variant: 'success',
-              title: (
-                <Trans>
-                  Image &quot;{digest}&quot; has been successfully deleted.
-                </Trans>
-              ),
+              title: <Trans>Image &quot;{digest}&quot; has been successfully deleted.</Trans>,
             });
             this.queryImages(this.props.routeParams.container);
           });

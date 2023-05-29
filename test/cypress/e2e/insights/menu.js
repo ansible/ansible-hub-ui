@@ -2,10 +2,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Insights Menu Tests', () => {
   function menuPresent(item) {
-    cy.contains(
-      `[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`,
-      item,
-    );
+    cy.contains(`[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`, item);
   }
 
   function menuClick(item, ignoreErrors) {

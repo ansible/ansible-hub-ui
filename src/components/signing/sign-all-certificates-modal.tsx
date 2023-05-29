@@ -22,12 +22,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const SignAllCertificatesModal: React.FC<Props> = ({
-  name,
-  isOpen,
-  onSubmit,
-  onCancel,
-}) => {
+export const SignAllCertificatesModal: React.FC<Props> = ({ name, isOpen, onSubmit, onCancel }) => {
   return (
     <Modal
       variant={ModalVariant.medium}
@@ -52,8 +47,7 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
         <GridItem span={12}>
           <p>
             <Trans>
-              You are about to sign <strong>all versions</strong> under{' '}
-              <strong>{name}</strong>.
+              You are about to sign <strong>all versions</strong> under <strong>{name}</strong>.
             </Trans>
           </p>
         </GridItem>
@@ -70,15 +64,9 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
         </GridItem>
         <GridItem span={12}>
           <Form>
-            <FormGroup
-              fieldId='service-selector'
-              label={t`Signing service selector:`}
-            >
+            <FormGroup fieldId='service-selector' label={t`Signing service selector:`}>
               <FormSelect value='ansible-default' id='service-selector'>
-                <FormSelectOption
-                  value='ansible-default'
-                  label='ansible-default'
-                />
+                <FormSelectOption value='ansible-default' label='ansible-default' />
               </FormSelect>
             </FormGroup>
           </Form>

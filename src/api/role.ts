@@ -22,9 +22,7 @@ export class API extends PulpAPI {
   }
 
   getPermissions(id) {
-    return this.http.get(
-      this.apiPath + id + '/model-permissions/?limit=100000&offset=0',
-    );
+    return this.http.get(this.apiPath + id + '/model-permissions/?limit=100000&offset=0');
   }
 
   addPermission(id, data) {
@@ -32,9 +30,7 @@ export class API extends PulpAPI {
   }
 
   removePermission(id, permissionId) {
-    return this.http.delete(
-      this.apiPath + id + '/model-permissions/' + permissionId + '/',
-    );
+    return this.http.delete(this.apiPath + id + '/model-permissions/' + permissionId + '/');
   }
 }
 

@@ -34,11 +34,7 @@ export const DeleteCollectionModal = (props: IProps) => {
         cancelAction={() => cancelAction()}
         deleteAction={() => deleteAction()}
         isDisabled={!confirmDelete || isDeletionPending}
-        title={
-          collectionVersion
-            ? t`Delete collection version?`
-            : t`Delete collection?`
-        }
+        title={collectionVersion ? t`Delete collection version?` : t`Delete collection?`}
       >
         <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
           {collectionVersion ? (
@@ -47,18 +43,15 @@ export const DeleteCollectionModal = (props: IProps) => {
                 <Trans>
                   Deleting{' '}
                   <b>
-                    {deleteCollection.collection_version.name} v
-                    {collectionVersion}
+                    {deleteCollection.collection_version.name} v{collectionVersion}
                   </b>{' '}
-                  and its data will be lost and this will cause the entire
-                  collection to be deleted.
+                  and its data will be lost and this will cause the entire collection to be deleted.
                 </Trans>
               ) : (
                 <Trans>
                   Deleting{' '}
                   <b>
-                    {deleteCollection.collection_version.name} v
-                    {collectionVersion}
+                    {deleteCollection.collection_version.name} v{collectionVersion}
                   </b>{' '}
                   and its data will be lost.
                 </Trans>
@@ -66,8 +59,7 @@ export const DeleteCollectionModal = (props: IProps) => {
             </>
           ) : (
             <Trans>
-              Deleting <b>{deleteCollection.collection_version.name}</b> and its
-              data will be lost.
+              Deleting <b>{deleteCollection.collection_version.name}</b> and its data will be lost.
             </Trans>
           )}
         </Text>

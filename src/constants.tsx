@@ -11,9 +11,7 @@ export class Constants {
   static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
   static CERTIFIED_REPO =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'published'
-      : 'rh-certified';
+    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? 'published' : 'rh-certified';
 
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
@@ -52,8 +50,9 @@ export class Constants {
   ];
 
   static TASK_NAMES = {
-    'galaxy_ng.app.tasks.promotion._remove_content_from_repository':
-      defineMessage({ message: `Remove content from repository` }),
+    'galaxy_ng.app.tasks.promotion._remove_content_from_repository': defineMessage({
+      message: `Remove content from repository`,
+    }),
     'galaxy_ng.app.tasks.publishing.import_and_auto_approve': defineMessage({
       message: `Import and auto approve`,
     }),
@@ -69,8 +68,9 @@ export class Constants {
     'galaxy_ng.app.tasks.curate_all_synclist_repository': defineMessage({
       message: `Curate all synclist repository`,
     }),
-    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch':
-      defineMessage({ message: `Curate synclist repository batch` }),
+    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch': defineMessage({
+      message: `Curate synclist repository batch`,
+    }),
     'pulp_ansible.app.tasks.collections.sync': defineMessage({
       message: `Pulp Ansible: Collections sync`,
     }),
@@ -83,8 +83,9 @@ export class Constants {
     'pulp_ansible.app.tasks.roles.synchronize': defineMessage({
       message: `Pulp Ansible: Roles synchronize`,
     }),
-    'pulp_ansible.app.tasks.collections.update_collection_remote':
-      defineMessage({ message: `Pulp ansible: Update collection remote` }),
+    'pulp_ansible.app.tasks.collections.update_collection_remote': defineMessage({
+      message: `Pulp ansible: Update collection remote`,
+    }),
     'pulp_ansible.app.tasks.collections.import_collection': defineMessage({
       message: `Pulp ansible: Import collection`,
     }),

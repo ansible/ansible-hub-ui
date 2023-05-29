@@ -35,11 +35,7 @@ export class RepositoriesUtils {
     return getAll();
   }
 
-  public static async deleteOrAddCollection(
-    repoName,
-    collectionVersion_pulp_href,
-    add,
-  ) {
+  public static async deleteOrAddCollection(repoName, collectionVersion_pulp_href, add) {
     let data = await Repositories.getRepository({ name: repoName });
 
     if (data.data.results.length == 0) {
@@ -58,30 +54,17 @@ export class RepositoriesUtils {
       removeList.push(collectionVersion_pulp_href);
     }
 
-    data = await Repositories.modify(
-      pulp_id,
-      addList,
-      removeList,
-      repo.latest_version_href,
-    );
+    data = await Repositories.modify(pulp_id, addList, removeList, repo.latest_version_href);
 
     data = await waitForTaskUrl(data.data['task']);
   }
 
   public static async deleteCollection(repoName, collectionVersion_pulp_href) {
-    return RepositoriesUtils.deleteOrAddCollection(
-      repoName,
-      collectionVersion_pulp_href,
-      false,
-    );
+    return RepositoriesUtils.deleteOrAddCollection(repoName, collectionVersion_pulp_href, false);
   }
 
   public static async addCollection(repoName, collectionVersion_pulp_href) {
-    return RepositoriesUtils.deleteOrAddCollection(
-      repoName,
-      collectionVersion_pulp_href,
-      true,
-    );
+    return RepositoriesUtils.deleteOrAddCollection(repoName, collectionVersion_pulp_href, true);
   }
 
   public static pushToOrFilterOutCollections(

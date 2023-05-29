@@ -4,10 +4,7 @@ function clickWisdomSettings() {
   cy.get('[data-cy="kebab-toggle"] button[aria-label="Actions"]').click({
     force: true,
   });
-  cy.contains(
-    '[data-cy="kebab-toggle"] a',
-    'Ansible Lightspeed settings',
-  ).click({
+  cy.contains('[data-cy="kebab-toggle"] a', 'Ansible Lightspeed settings').click({
     force: true,
   });
 }

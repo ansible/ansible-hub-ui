@@ -3,11 +3,7 @@ import { Button, Modal } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import * as React from 'react';
-import {
-  CollectionAPI,
-  CollectionUploadType,
-  CollectionVersionSearch,
-} from 'src/api';
+import { CollectionAPI, CollectionUploadType, CollectionVersionSearch } from 'src/api';
 import './import-modal.scss';
 
 enum Status {
@@ -53,9 +49,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     return (
       <Modal
         variant='small'
-        title={
-          collection ? t`New version of ${collection.name}` : t`New collection`
-        }
+        title={collection ? t`New version of ${collection.name}` : t`New collection`}
         isOpen={isOpen}
         onClose={() => this.handleClose()}
         actions={[
@@ -68,11 +62,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           >
             {t`Upload`}
           </Button>,
-          <Button
-            key='cancel'
-            variant='secondary'
-            onClick={() => this.handleClose()}
-          >
+          <Button key='cancel' variant='secondary' onClick={() => this.handleClose()}>
             {t`Cancel`}
           </Button>,
         ]}
@@ -158,10 +148,7 @@ export class ImportModal extends React.Component<IProps, IState> {
         file: newCollection,
         uploadProgress: 0,
       });
-    } else if (
-      collection &&
-      collection.name !== newCollection.name.split('-')[1]
-    ) {
+    } else if (collection && collection.name !== newCollection.name.split('-')[1]) {
       this.setState({
         errors: t`The collection you have selected doesn't appear to match ${collection.name}`,
         file: newCollection,
@@ -213,10 +200,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             const messages = [];
             for (const err of errors.response.data.errors) {
               messages.push(
-                err.detail ||
-                  err.title ||
-                  err.code ||
-                  t`API error. Status code: ${err.status}`,
+                err.detail || err.title || err.code || t`API error. Status code: ${err.status}`,
               );
             }
             errorMessage = messages.join(', ');

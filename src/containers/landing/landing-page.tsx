@@ -46,10 +46,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <BaseHeader title={t`Welcome to Beta Galaxy`} />
         <Main>
           <div
@@ -74,12 +71,9 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 
                   <p>
                     <Trans>
-                      Use the{' '}
-                      <Link to={formatPath(Paths.collections)}>
-                        Search page{' '}
-                      </Link>
-                      to find content for your project, then download them onto
-                      your Ansible host using{' '}
+                      Use the <Link to={formatPath(Paths.collections)}>Search page </Link>
+                      to find content for your project, then download them onto your Ansible host
+                      using{' '}
                       <a
                         href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
                         target='_blank'
@@ -104,8 +98,8 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 
                   <p>
                     <Trans>
-                      Red Hat is working on exciting new Ansible content
-                      development capabilities within the context of{' '}
+                      Red Hat is working on exciting new Ansible content development capabilities
+                      within the context of{' '}
                       <a
                         href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'
                         target='_blank'
@@ -113,10 +107,9 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       >
                         Ansible Lightspeed
                       </a>{' '}
-                      to help other automators build Ansible content. Your roles
-                      and collections may be used as training data for a machine
-                      learning model that provides Ansible automation content
-                      recommendations. If you have concerns, please contact the
+                      to help other automators build Ansible content. Your roles and collections may
+                      be used as training data for a machine learning model that provides Ansible
+                      automation content recommendations. If you have concerns, please contact the
                       Ansible team at{' '}
                       <a href='mailto:ansible-content-ai@redhat.com'>
                         ansible-content-ai@redhat.com
@@ -158,9 +151,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                     }}
                   />
                   <p>
-                    <b>
-                      {t`Extend the power of Ansible to your entire team.`}{' '}
-                    </b>
+                    <b>{t`Extend the power of Ansible to your entire team.`} </b>
                   </p>
                   <br />
                   <p>{t`Try Red Hat Ansible Automation Platform`}</p>

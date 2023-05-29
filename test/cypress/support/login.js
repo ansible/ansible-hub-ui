@@ -20,8 +20,7 @@ function apiLogin(username, password) {
       });
     },
     {
-      validate: () =>
-        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+      validate: () => cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
     },
   );
 

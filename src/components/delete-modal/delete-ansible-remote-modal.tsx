@@ -9,11 +9,7 @@ interface IProps {
   name: string;
 }
 
-export const DeleteAnsibleRemoteModal = ({
-  closeAction,
-  deleteAction,
-  name,
-}: IProps) => {
+export const DeleteAnsibleRemoteModal = ({ closeAction, deleteAction, name }: IProps) => {
   const [pending, setPending] = useState(false);
 
   if (!name) {
@@ -37,8 +33,7 @@ export const DeleteAnsibleRemoteModal = ({
       <Text>
         <Trans>
           Are you sure you want to delete the remote <b>{name}</b>?<br />
-          <b>Note:</b> This will also delete all associated resources under this
-          remote.
+          <b>Note:</b> This will also delete all associated resources under this remote.
         </Trans>
       </Text>
     </DeleteModal>

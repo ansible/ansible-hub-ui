@@ -34,17 +34,11 @@ describe('Search for users', () => {
   };
 
   let search = () => {
-    return cy
-      .get(
-        '.pf-c-toolbar__item > .pf-c-input-group > .pf-c-button.pf-m-control',
-      )
-      .click();
+    return cy.get('.pf-c-toolbar__item > .pf-c-input-group > .pf-c-button.pf-m-control').click();
   };
 
   let filterDropdown = () => {
-    return cy
-      .get('.pf-c-toolbar__item > .pf-c-input-group > .pf-c-dropdown')
-      .click();
+    return cy.get('.pf-c-toolbar__item > .pf-c-input-group > .pf-c-dropdown').click();
   };
 
   let chooseField = () => {

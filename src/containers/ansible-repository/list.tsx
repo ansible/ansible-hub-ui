@@ -84,9 +84,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
     return (
       <tr key={index}>
         <td>
-          <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
-            {name}
-          </Link>
+          <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>{name}</Link>
         </td>
         <td>{lastSyncStatus(item) || '---'}</td>
         <td>{lastSynced(item) || '---'}</td>

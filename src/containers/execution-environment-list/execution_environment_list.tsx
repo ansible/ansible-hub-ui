@@ -39,13 +39,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
-import {
-  ParamHelper,
-  RouteProps,
-  filterIsSet,
-  taskAlert,
-  withRouter,
-} from 'src/utilities';
+import { ParamHelper, RouteProps, filterIsSet, taskAlert, withRouter } from 'src/utilities';
 import './execution-environment.scss';
 
 interface IState {
@@ -70,10 +64,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -128,8 +119,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
     } = this.state;
     const { hasPermission } = this.context;
 
-    const noData =
-      items.length === 0 && !filterIsSet(params, ['name__icontains']);
+    const noData = items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const pushImagesButton = (
       <Button
@@ -145,9 +135,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
-    const addRemoteButton = hasPermission(
-      'container.add_containernamespace',
-    ) && (
+    const addRemoteButton = hasPermission('container.add_containernamespace') && (
       <Button
         onClick={() =>
           this.setState({
@@ -163,10 +151,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <PublishToControllerModal
           digest={publishToController?.digest}
           image={publishToController?.image}
@@ -180,9 +165,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
         {showDeleteModal && (
           <DeleteExecutionEnvironmentModal
             selectedItem={selectedItem ? selectedItem.name : ''}
-            closeAction={() =>
-              this.setState({ showDeleteModal: false, selectedItem: null })
-            }
+            closeAction={() => this.setState({ showDeleteModal: false, selectedItem: null })}
             afterDelete={() => this.queryEnvironments()}
             addAlert={(text, variant, description = undefined) =>
               this.setState({
@@ -220,13 +203,9 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
                         <ToolbarItem>
                           <CompoundFilter
                             inputText={this.state.inputText}
-                            onChange={(text) =>
-                              this.setState({ inputText: text })
-                            }
+                            onChange={(text) => this.setState({ inputText: text })}
                             updateParams={(p) =>
-                              this.updateParams(p, () =>
-                                this.queryEnvironments(),
-                              )
+                              this.updateParams(p, () => this.queryEnvironments())
                             }
                             params={params}
                             filterConfig={[
@@ -245,9 +224,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryEnvironments())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryEnvironments())}
                     count={itemCount}
                     isTop
                   />
@@ -269,9 +246,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryEnvironments())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryEnvironments())}
                   count={itemCount}
                 />
               </section>
@@ -328,9 +303,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) =>
-            this.updateParams(p, () => this.queryEnvironments())
-          }
+          updateParams={(p) => this.updateParams(p, () => this.queryEnvironments())}
         />
         <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
       </table>
@@ -382,9 +355,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete'
-          onClick={() =>
-            this.setState({ selectedItem: item, showDeleteModal: true })
-          }
+          onClick={() => this.setState({ selectedItem: item, showDeleteModal: true })}
         >
           {t`Delete`}
         </DropdownItem>
@@ -460,8 +431,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
                   variant: 'success',
                   title: isNew ? (
                     <Trans>
-                      Execution environment &quot;{form.name}&quot; has been
-                      added successfully.
+                      Execution environment &quot;{form.name}&quot; has been added successfully.
                     </Trans>
                   ) : (
                     <Trans>
@@ -495,9 +465,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
             loading: false,
           });
         })
-        .catch((e) =>
-          this.addAlert(t`Error loading environments.`, 'danger', e?.message),
-        ),
+        .catch((e) => this.addAlert(t`Error loading environments.`, 'danger', e?.message)),
     );
   }
 
@@ -527,10 +495,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
     ExecutionEnvironmentRemoteAPI.sync(name)
       .then(({ data }) => {
         this.addAlertObj(
-          taskAlert(
-            data.task,
-            t`Sync started for execution environment "${name}".`,
-          ),
+          taskAlert(data.task, t`Sync started for execution environment "${name}".`),
         );
       })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));

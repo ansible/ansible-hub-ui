@@ -28,12 +28,7 @@ export const DeleteModal = ({
     <Modal
       actions={[
         <div data-cy='delete-button' key='delete'>
-          <Button
-            key='delete'
-            onClick={deleteAction}
-            variant='danger'
-            isDisabled={isDisabled}
-          >
+          <Button key='delete' onClick={deleteAction} variant='danger' isDisabled={isDisabled}>
             {isRemove ? t`Remove` : t`Delete`}
             {spinner && <Spinner size='sm'></Spinner>}
           </Button>

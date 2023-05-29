@@ -1,9 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
-  CollectionVersionSearch,
-} from 'src/api';
+import { AnsibleDistributionAPI, AnsibleRepositoryAPI, CollectionVersionSearch } from 'src/api';
 import { HubAPI } from './hub';
 
 interface SignNamespace {
@@ -28,8 +24,7 @@ class API extends HubAPI {
 
   async sign({ repository, repository_name: name, ...args }: SignProps) {
     if (!repository && name) {
-      repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-        ?.results?.[0];
+      repository = (await AnsibleRepositoryAPI.list({ name }))?.data?.results?.[0];
 
       if (!repository) {
         return Promise.reject({

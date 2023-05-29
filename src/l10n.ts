@@ -37,9 +37,7 @@ const userLanguage = navigator.languages
   .map((lang) => lang.replace(/[-_].*/, ''))
   .filter((lang) => availableLanguages.includes(lang))[0];
 
-const searchParams = Object.fromEntries(
-  new URLSearchParams(window.location.search),
-);
+const searchParams = Object.fromEntries(new URLSearchParams(window.location.search));
 
 if (searchParams.pseudolocalization === 'true') {
   window.localStorage.test_l10n = 'true';
@@ -72,9 +70,7 @@ if (overrideLanguage) {
 if (pseudolocalization) {
   console.debug(
     `pseudolocalization enabled, unset by visiting ${
-      window.location.origin +
-      window.location.pathname +
-      '?pseudolocalization=false'
+      window.location.origin + window.location.pathname + '?pseudolocalization=false'
     }`,
   );
 }

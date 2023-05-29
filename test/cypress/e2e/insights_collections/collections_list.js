@@ -6,9 +6,7 @@ describe('Collections list Tests', () => {
   function deprecate(list) {
     const container = list ? '.hub-list' : '.hub-cards';
 
-    cy.get('.toolbar')
-      .get('[aria-label="keywords"]:first')
-      .type('my_collection0{enter}');
+    cy.get('.toolbar').get('[aria-label="keywords"]:first').type('my_collection0{enter}');
     cy.get(container).contains('my_collection2').should('not.exist');
     cy.get(container).contains('my_collection0');
 
@@ -79,17 +77,13 @@ describe('Collections list Tests', () => {
   });
 
   it('filter is working', () => {
-    cy.get('.hub-cards')
-      .get('[aria-label="keywords"]:first')
-      .type('my_collection0{enter}');
+    cy.get('.hub-cards').get('[aria-label="keywords"]:first').type('my_collection0{enter}');
     cy.get('.hub-cards').contains('my_collection0');
     cy.get('.hub-cards').contains('my_collection1').should('not.exist');
   });
 
   it('set page size is working', () => {
-    cy.get('.hub-cards')
-      .get('button[aria-label="Items per page"]:first')
-      .click();
+    cy.get('.hub-cards').get('button[aria-label="Items per page"]:first').click();
     cy.get('.hub-cards').get('[data-action="per-page-20"]').click();
 
     cy.get('.collection-container').get('article').should('have.length', 11);
@@ -103,9 +97,7 @@ describe('Collections list Tests', () => {
 
   it('Can delete collection in collection list', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
-    cy.get('.toolbar')
-      .get('[aria-label="keywords"]:first')
-      .type('my_collection0{enter}');
+    cy.get('.toolbar').get('[aria-label="keywords"]:first').type('my_collection0{enter}');
     cy.get('.hub-list').contains('my_collection2').should('not.exist');
     cy.get('.hub-list').contains('my_collection0');
 
@@ -122,9 +114,7 @@ describe('Collections list Tests', () => {
 
   it('Can delete collection in namespace collection list', () => {
     cy.visit(`${uiPrefix}namespaces/my_namespace`);
-    cy.get('.toolbar')
-      .get('[aria-label="keywords"]:first')
-      .type('my_collection1{enter}');
+    cy.get('.toolbar').get('[aria-label="keywords"]:first').type('my_collection1{enter}');
 
     // because of randomized order of items in list and weird filter behavior
     // we have to check that all of them dissapeared, not only one particular

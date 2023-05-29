@@ -65,11 +65,7 @@ const statusToProps = (status): LabelPropType => {
   return null;
 };
 
-export const StatusIndicator = ({
-  status,
-  type = 'primary',
-  className,
-}: IProps) => {
+export const StatusIndicator = ({ status, type = 'primary', className }: IProps) => {
   const labelProps = statusToProps(status);
   if (!labelProps) {
     return <>---</>;

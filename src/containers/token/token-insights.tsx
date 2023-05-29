@@ -44,8 +44,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     MyDistributionAPI.list()
       .then(({ data }) => {
         const syncDistro =
-          data.data.find(({ base_path }) => base_path.includes('synclist'))
-            ?.base_path || '';
+          data.data.find(({ base_path }) => base_path.includes('synclist'))?.base_path || '';
         this.setState({
           repoUrl: syncDistro,
         });
@@ -84,20 +83,16 @@ class TokenInsights extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <BaseHeader title={t`Connect to Hub`}></BaseHeader>
         <Main>
           <section className='body pf-c-content'>
             <h2>{t`Connect Private Automation Hub`}</h2>
             <p>
               <Trans>
-                Use the Server URL below to sync certified collections to the
-                Red Hat Certified repository in your private Automation Hub. If
-                you wish to sync validated content, you can add a remote with a
-                server url pointed to the validated repo.
+                Use the Server URL below to sync certified collections to the Red Hat Certified
+                repository in your private Automation Hub. If you wish to sync validated content,
+                you can add a remote with a server url pointed to the validated repo.
               </Trans>
             </p>
           </section>
@@ -105,8 +100,8 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`Connect the ansible-galaxy client`}</h2>
             <p>
               <Trans>
-                Documentation on how to configure the{' '}
-                <code>ansible-galaxy</code> client can be found{' '}
+                Documentation on how to configure the <code>ansible-galaxy</code> client can be
+                found{' '}
                 <a
                   href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
                   target='_blank'
@@ -122,9 +117,9 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`Offline token`}</h2>
             <p>
               <Trans>
-                Use this token to authenticate clients that need to download
-                content from Automation Hub. This is a secret token used to
-                protect your content. Store your API token in a secure location.
+                Use this token to authenticate clients that need to download content from Automation
+                Hub. This is a secret token used to protect your content. Store your API token in a
+                secure location.
               </Trans>
             </p>
             {tokenData ? (
@@ -133,27 +128,17 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               </div>
             ) : (
               <div>
-                <Button
-                  onClick={() => this.loadToken()}
-                >{t`Load token`}</Button>
+                <Button onClick={() => this.loadToken()}>{t`Load token`}</Button>
               </div>
             )}
-            <div
-              className='pf-c-content'
-              style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
-            >
+            <div className='pf-c-content' style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
               <span>
                 <Trans>
-                  The token will expire after 30 days of inactivity. Run the
-                  command below periodically to prevent your token from
-                  expiring.
+                  The token will expire after 30 days of inactivity. Run the command below
+                  periodically to prevent your token from expiring.
                 </Trans>
               </span>
-              <ClipboardCopy
-                isCode
-                isReadOnly
-                variant={ClipboardCopyVariant.expansion}
-              >
+              <ClipboardCopy isCode isReadOnly variant={ClipboardCopyVariant.expansion}>
                 {renewTokenCmd}
               </ClipboardCopy>
             </div>
@@ -174,23 +159,20 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`Server URL`}</h2>
             <p>
               <Trans>
-                Use this URL to configure the API endpoints that clients need to
-                download certified content from Automation Hub. Synclists are
-                deprecated in AAP 2.4 and will be removed in a future release,
-                instead use client-side requirements.yml, see AAP 2.4
+                Use this URL to configure the API endpoints that clients need to download certified
+                content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed
+                in a future release, instead use client-side requirements.yml, see AAP 2.4
                 documentation.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>
-              {getRepoURL('published', true)}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoURL('published', true)}</ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>
             <p>
               <Trans>
-                Use this URL to configure the authentication URLs that clients
-                need to download content from Automation Hub.
+                Use this URL to configure the authentication URLs that clients need to download
+                content from Automation Hub.
               </Trans>
             </p>
             <ClipboardCopy isReadOnly>
@@ -201,10 +183,9 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <h2>{t`CRC public key`}</h2>
             <p>
               <Trans>
-                We use a number of keys to sign our software packages. The
-                necessary public keys are included in the relevant products and
-                are used to automatically verify software updates. You can also
-                verify the packages manually using the keys on this page. More
+                We use a number of keys to sign our software packages. The necessary public keys are
+                included in the relevant products and are used to automatically verify software
+                updates. You can also verify the packages manually using the keys on this page. More
                 information can be found{' '}
                 <a
                   href='https://access.redhat.com/security/team/key'

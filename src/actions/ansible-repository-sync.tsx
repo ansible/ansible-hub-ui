@@ -11,31 +11,19 @@ export const ansibleRepositorySyncAction = Action({
     const pulpId = parsePulpIDFromURL(pulp_href);
     AnsibleRepositoryAPI.sync(pulpId, { mirror: true })
       .then(({ data }) => {
-        addAlert(
-          taskAlert(data.task, t`Sync started for repository "${name}".`),
-        );
+        addAlert(taskAlert(data.task, t`Sync started for repository "${name}".`));
 
         query();
       })
-      .catch(
-        handleHttpError(
-          t`Failed to sync repository "${name}"`,
-          () => null,
-          addAlert,
-        ),
-      );
+      .catch(handleHttpError(t`Failed to sync repository "${name}"`, () => null, addAlert));
   },
-  visible: (_item, { hasPermission }) =>
-    hasPermission('ansible.change_collectionremote'),
+  visible: (_item, { hasPermission }) => hasPermission('ansible.change_collectionremote'),
   disabled: ({ remote, last_sync_task }) => {
     if (!remote) {
       return t`There are no remotes associated with this repository.`;
     }
 
-    if (
-      last_sync_task &&
-      ['running', 'waiting'].includes(last_sync_task.state)
-    ) {
+    if (last_sync_task && ['running', 'waiting'].includes(last_sync_task.state)) {
       return t`Sync task is already queued.`;
     }
 

@@ -45,30 +45,20 @@ const RevertModal = ({
       variant={'small'}
       data-cy='modal_checkbox'
     >
-      <Trans>
-        Are you sure you want to revert this repository to the version below?
-      </Trans>
+      <Trans>Are you sure you want to revert this repository to the version below?</Trans>
       <br />
       <b>{version}</b>
     </Modal>
   );
 };
 
-function revert(
-  { repositoryName, pulp_href, number },
-  { addAlert, setState, query },
-) {
+function revert({ repositoryName, pulp_href, number }, { addAlert, setState, query }) {
   // the uuid in version href is the reposotory uuid
   const pulpId = parsePulpIDFromURL(pulp_href);
 
   return AnsibleRepositoryAPI.revert(pulpId, pulp_href)
     .then(({ data }) => {
-      addAlert(
-        taskAlert(
-          data.task,
-          t`Revert started for repository "${repositoryName}".`,
-        ),
-      );
+      addAlert(taskAlert(data.task, t`Revert started for repository "${repositoryName}".`));
       setState({ revertModal: null });
       query();
     })
@@ -88,9 +78,7 @@ export const ansibleRepositoryVersionRevertAction = Action({
     state.revertModal ? (
       <RevertModal
         cancelAction={() => setState({ revertModal: null })}
-        revertAction={() =>
-          revert(state.revertModal, { addAlert, setState, query })
-        }
+        revertAction={() => revert(state.revertModal, { addAlert, setState, query })}
         version={state.revertModal.number}
       />
     ) : null,

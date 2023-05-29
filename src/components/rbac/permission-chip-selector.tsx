@@ -1,11 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Label,
-  LabelGroup,
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core';
+import { Label, LabelGroup, Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import * as React from 'react';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
@@ -51,9 +45,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
 
       return (
         <LabelGroup {...chipGroupProps()}>
-          {items.length ? null : (
-            <Label key='placeholder'>{t`No permission`}</Label>
-          )}
+          {items.length ? null : <Label key='placeholder'>{t`No permission`}</Label>}
           {items.map((text) => (
             <Label key={text.value} title={text.value}>
               {text.label}
@@ -76,9 +68,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         chipGroupProps={chipGroupProps()}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={(isOpen) => this.setState({ isOpen })}
-        onSelect={(event, permission) =>
-          onPermissionToggle(permission['value'] || permission)
-        }
+        onSelect={(event, permission) => onPermissionToggle(permission['value'] || permission)}
         onClear={() => onCategoryClear()}
         selections={selections}
         isOpen={isOpen}
@@ -92,13 +82,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         isDisabled={!!isDisabled}
       >
         {availablePermissions.length === 0
-          ? [
-              <SelectOption
-                isDisabled={true}
-                key={'not_found'}
-                value={t`Not found`}
-              />,
-            ]
+          ? [<SelectOption isDisabled={true} key={'not_found'} value={t`Not found`} />]
           : availablePermissions.map((permission) => (
               <SelectOption key={permission} value={permission}>
                 {model_permissions[permission]?.name || permission}

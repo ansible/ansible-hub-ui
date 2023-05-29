@@ -1,12 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Form,
-  FormGroup,
-  Modal,
-  ModalVariant,
-  TextInput,
-} from '@patternfly/react-core';
+import { Button, Form, FormGroup, Modal, ModalVariant, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
@@ -26,10 +19,7 @@ export class GroupModal extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      name:
-        !this.props.group || !this.props.group.name
-          ? ''
-          : this.props.group.name,
+      name: !this.props.group || !this.props.group.name ? '' : this.props.group.name,
     };
   }
 
@@ -73,9 +63,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             key='name'
             fieldId='name'
             label={t`Name`}
-            helperTextInvalid={
-              !this.props.errorMessage ? null : this.props.errorMessage.name
-            }
+            helperTextInvalid={!this.props.errorMessage ? null : this.props.errorMessage.name}
             validated={this.toError(!this.props.errorMessage)}
           >
             <TextInput

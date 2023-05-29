@@ -36,13 +36,7 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 Cypress.Commands.add(
   'createUser',
   {},
-  (
-    username,
-    password = null,
-    firstName = null,
-    lastName = null,
-    email = null,
-  ) => {
+  (username, password = null, firstName = null, lastName = null, email = null) => {
     cy.menuGo('User Access > Users');
 
     const user = {
@@ -97,33 +91,24 @@ Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
-Cypress.Commands.add(
-  'removeUserFromGroupManually',
-  {},
-  (groupName, userName) => {
-    cy.menuGo('User Access > Groups');
-    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.contains('button', 'Users').click();
-    cy.get(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-    ).click();
-    cy.containsnear(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-      'Remove',
-    ).click();
-    cy.contains('button.pf-m-danger', 'Delete').click();
-    cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
-  },
-);
+Cypress.Commands.add('removeUserFromGroupManually', {}, (groupName, userName) => {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.get(`[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`).click();
+  cy.containsnear(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+    'Remove',
+  ).click();
+  cy.contains('button.pf-m-danger', 'Delete').click();
+  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
+});
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.menuGo('User Access > Users');
   cy.intercept('DELETE', `${apiPrefix}_ui/v1/users/*`).as('deleteUser');
   cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
-  cy.containsnear(
-    `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
-    'Delete',
-  ).click();
+  cy.containsnear(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`, 'Delete').click();
 
   cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userList');
 
@@ -170,9 +155,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
   const cmd = shell`${shell.preserve(
     galaxykitCommand,
-  )} -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
-    operation,
-  )} ${args}`;
+  )} -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(operation)} ${args}`;
 
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
@@ -198,9 +181,7 @@ Cypress.Commands.add('deleteTestUsers', {}, () => {
 Cypress.Commands.add('deleteTestGroups', {}, () => {
   range(4).forEach(() => {
     cy.galaxykit('group list').then((lines) => {
-      lines
-        .map(col1)
-        .forEach((group) => cy.galaxykit('-i group delete', group));
+      lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
     });
   });
 });
@@ -238,15 +219,11 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
     cy.get('input[id="rate_limit"]').type(rate_limit);
   }
 
-  cy.intercept(
-    'POST',
-    `${apiPrefix}_ui/v1/execution-environments/registries/`,
-  ).as('registries');
+  cy.intercept('POST', `${apiPrefix}_ui/v1/execution-environments/registries/`).as('registries');
 
-  cy.intercept(
-    'GET',
-    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
-  ).as('registriesGet');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/execution-environments/registries/?*`).as(
+    'registriesGet',
+  );
 
   cy.contains('button', 'Save').click();
 
@@ -265,9 +242,7 @@ Cypress.Commands.add(
     cy.get('input[id="name"]').type(name);
     cy.get('input[id="upstreamName"]').type(upstream_name);
 
-    cy.get(
-      '.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead',
-    )
+    cy.get('.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead')
       .click()
       .type(registry);
     cy.contains('button', registry).click();
@@ -288,15 +263,11 @@ Cypress.Commands.add(
         .click();
     }
 
-    cy.intercept(
-      'POST',
-      `${apiPrefix}_ui/v1/execution-environments/remotes/`,
-    ).as('saved');
+    cy.intercept('POST', `${apiPrefix}_ui/v1/execution-environments/remotes/`).as('saved');
 
-    cy.intercept(
-      'GET',
-      `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
-    ).as('listLoad');
+    cy.intercept('GET', `${apiPrefix}v3/plugin/execution-environments/repositories/?*`).as(
+      'listLoad',
+    );
 
     cy.contains('button', 'Save').click();
 
@@ -305,43 +276,32 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add(
-  'addLocalContainer',
-  {},
-  (localName, remoteName, registry = 'docker.io/') => {
-    const log = ({ code, stderr, stdout }) =>
-      console.log(`CODE=${code} ERR=${stderr} OUT=${stdout}`);
-    const logFail = (...arr) => {
-      console.log(arr);
-      return Promise.reject(...arr);
-    };
-    const server = Cypress.env('containers');
+Cypress.Commands.add('addLocalContainer', {}, (localName, remoteName, registry = 'docker.io/') => {
+  const log = ({ code, stderr, stdout }) => console.log(`CODE=${code} ERR=${stderr} OUT=${stdout}`);
+  const logFail = (...arr) => {
+    console.log(arr);
+    return Promise.reject(...arr);
+  };
+  const server = Cypress.env('containers');
 
-    return cy
-      .exec(shell`podman pull ${registry + remoteName}`)
-      .then(log, logFail)
-      .then(() =>
-        cy.exec(
-          shell`podman image tag ${remoteName} ${server}/${localName}:latest`,
-        ),
-      )
-      .then(log, logFail)
-      .then(() =>
-        cy.exec(
-          shell`podman login ${server} --tls-verify=false --username=admin --password=admin`,
-          { failOnNonZeroExit: false },
-        ),
-      )
-      .then(log, logFail)
-      .then(() =>
-        cy.exec(
-          shell`podman push ${server}/${localName}:latest --tls-verify=false`,
-          { failOnNonZeroExit: false },
-        ),
-      )
-      .then(log, logFail);
-  },
-);
+  return cy
+    .exec(shell`podman pull ${registry + remoteName}`)
+    .then(log, logFail)
+    .then(() => cy.exec(shell`podman image tag ${remoteName} ${server}/${localName}:latest`))
+    .then(log, logFail)
+    .then(() =>
+      cy.exec(shell`podman login ${server} --tls-verify=false --username=admin --password=admin`, {
+        failOnNonZeroExit: false,
+      }),
+    )
+    .then(log, logFail)
+    .then(() =>
+      cy.exec(shell`podman push ${server}/${localName}:latest --tls-verify=false`, {
+        failOnNonZeroExit: false,
+      }),
+    )
+    .then(log, logFail);
+});
 
 Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   cy.menuGo('Execution Environments > Execution Environments');
@@ -351,20 +311,14 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .parents('tr')
     .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
     .click();
-  cy.contains(
-    '.pf-c-alert__title',
-    `Sync started for execution environment "${name}".`,
-  );
+  cy.contains('.pf-c-alert__title', `Sync started for execution environment "${name}".`);
   // wait for finish
   cy.contains('a', 'detail page').click();
   cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
 });
 
 Cypress.Commands.add('deleteRegistriesManual', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
-  ).as('registries');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/execution-environments/registries/?*`).as('registries');
 
   cy.visit(`${uiPrefix}registries`);
 
@@ -382,10 +336,7 @@ Cypress.Commands.add('deleteRegistriesManual', {}, () => {
 });
 
 Cypress.Commands.add('deleteRegistries', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
-  ).as('registries');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/execution-environments/registries/?*`).as('registries');
 
   cy.visit(`${uiPrefix}registries?page_size=100`);
 
@@ -398,10 +349,9 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
 });
 
 Cypress.Commands.add('deleteContainers', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
-  ).as('listLoad');
+  cy.intercept('GET', `${apiPrefix}v3/plugin/execution-environments/repositories/?*`).as(
+    'listLoad',
+  );
 
   cy.visit(`${uiPrefix}containers?page_size=100`);
 
@@ -414,10 +364,9 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 });
 
 Cypress.Commands.add('deleteContainersManual', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
-  ).as('listLoad');
+  cy.intercept('GET', `${apiPrefix}v3/plugin/execution-environments/repositories/?*`).as(
+    'listLoad',
+  );
 
   cy.visit(`${uiPrefix}containers`);
 
@@ -437,14 +386,7 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
 });
 
 Cypress.Commands.add('deleteRepositories', {}, () => {
-  const initRepos = [
-    'validated',
-    'rh-certified',
-    'community',
-    'published',
-    'rejected',
-    'staging',
-  ];
+  const initRepos = ['validated', 'rh-certified', 'community', 'published', 'rejected', 'staging'];
   cy.login();
   const path = `${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`;
   cy.intercept('GET', path).as('data');
@@ -525,14 +467,8 @@ Cypress.Commands.add(
 Cypress.Commands.add('deleteRole', {}, (role) => {
   cy.visit(`${uiPrefix}roles/`);
 
-  cy.get(
-    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,
-  ).click();
+  cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`).click();
 
   cy.contains('Delete').click();
-  cy.get('[data-cy=DeleteModal]')
-    .parent()
-    .get('button')
-    .contains('Delete')
-    .click();
+  cy.get('[data-cy=DeleteModal]').parent().get('button').contains('Delete').click();
 });

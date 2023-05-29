@@ -63,10 +63,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
     }
     return (
       <>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <UserFormPage
           isMe={true}
           user={user}
@@ -88,9 +85,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
             !isUserMgmtDisabled && (
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div>
-                  <Button onClick={() => this.setState({ inEditMode: true })}>
-                    {t`Edit`}
-                  </Button>
+                  <Button onClick={() => this.setState({ inEditMode: true })}>{t`Edit`}</Button>
                 </div>
               </div>
             )
@@ -114,9 +109,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
             alerts: alerts.concat([
               {
                 variant: 'success',
-                title: (
-                  <Trans>Saved changes to user &quot;{username}&quot;.</Trans>
-                ),
+                title: <Trans>Saved changes to user &quot;{username}&quot;.</Trans>,
               },
             ]),
           },

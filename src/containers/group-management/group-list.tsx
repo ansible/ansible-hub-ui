@@ -9,12 +9,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import {
-  GroupAPI,
-  GroupObjectPermissionType,
-  UserAPI,
-  UserType,
-} from 'src/api';
+import { GroupAPI, GroupObjectPermissionType, UserAPI, UserType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -37,12 +32,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import { RouteProps, withRouter } from 'src/utilities';
-import {
-  ErrorMessagesType,
-  ParamHelper,
-  filterIsSet,
-  mapErrorMessages,
-} from 'src/utilities';
+import { ErrorMessagesType, ParamHelper, filterIsSet, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   params: {
@@ -69,10 +59,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -122,8 +109,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     } = this.state;
 
     const { user, hasPermission } = this.context;
-    const noData =
-      groups.length === 0 && !filterIsSet(params, ['name__icontains']);
+    const noData = groups.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -131,10 +117,7 @@ class GroupList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
@@ -170,9 +153,7 @@ class GroupList extends React.Component<RouteProps, IState> {
                         <CompoundFilter
                           inputText={this.state.inputText}
                           onChange={(val) => this.setState({ inputText: val })}
-                          updateParams={(p) =>
-                            this.updateParams(p, () => this.queryGroups())
-                          }
+                          updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
                           params={params}
                           filterConfig={[
                             {
@@ -186,11 +167,7 @@ class GroupList extends React.Component<RouteProps, IState> {
                     {!!user && hasPermission('galaxy.add_group') && (
                       <ToolbarGroup>
                         <ToolbarItem>
-                          <Button
-                            onClick={() =>
-                              this.setState({ createModalVisible: true })
-                            }
-                          >
+                          <Button onClick={() => this.setState({ createModalVisible: true })}>
                             {t`Create`}
                           </Button>
                         </ToolbarItem>
@@ -201,9 +178,7 @@ class GroupList extends React.Component<RouteProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryGroups())
-                  }
+                  updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
                   count={itemCount}
                   isTop
                 />
@@ -225,9 +200,7 @@ class GroupList extends React.Component<RouteProps, IState> {
 
               <Pagination
                 params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
+                updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
                 count={itemCount}
               />
             </section>
@@ -240,9 +213,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   private renderCreateModal() {
     return (
       <GroupModal
-        onCancel={() =>
-          this.setState({ createModalVisible: false, groupError: null })
-        }
+        onCancel={() => this.setState({ createModalVisible: false, groupError: null })}
         onSave={(value) => this.saveGroup(value)}
         clearErrors={() => this.setState({ groupError: null })}
         errorMessage={this.state.groupError}
@@ -253,9 +224,7 @@ class GroupList extends React.Component<RouteProps, IState> {
   private renderEditModal() {
     return (
       <GroupModal
-        onCancel={() =>
-          this.setState({ editModalVisible: false, groupError: null })
-        }
+        onCancel={() => this.setState({ editModalVisible: false, groupError: null })}
         onSave={(value) => this.editGroup(value)}
         clearErrors={() => this.setState({ groupError: null })}
         group={this.state.selectedGroup}
@@ -386,10 +355,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Group list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table aria-label={t`Group list`} className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -453,11 +419,7 @@ class GroupList extends React.Component<RouteProps, IState> {
             ...this.state.alerts,
             {
               variant: 'success',
-              title: (
-                <Trans>
-                  Group &quot;{group.name}&quot; has been successfully deleted.
-                </Trans>
-              ),
+              title: <Trans>Group &quot;{group.name}&quot; has been successfully deleted.</Trans>,
             },
           ],
         });

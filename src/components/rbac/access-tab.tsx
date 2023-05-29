@@ -1,11 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  DropdownItem,
-  Toolbar,
-  ToolbarContent,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button, DropdownItem, Toolbar, ToolbarContent, ToolbarItem } from '@patternfly/react-core';
 import { sortBy } from 'lodash';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -74,11 +68,7 @@ export class AccessTab extends React.Component<IProps> {
         {noData ? (
           <EmptyStateNoData
             title={t`There are currently no owners assigned.`}
-            description={
-              canEditOwners
-                ? t`Please add an owner by using the button below.`
-                : ''
-            }
+            description={canEditOwners ? t`Please add an owner by using the button below.` : ''}
             button={canEditOwners ? buttonAdd : null}
           />
         ) : group ? (
@@ -106,10 +96,7 @@ export class AccessTab extends React.Component<IProps> {
           </div>
         )}
 
-        <table
-          aria-label={t`Group list`}
-          className='hub-c-table-content pf-c-table'
-        >
+        <table aria-label={t`Group list`} className='hub-c-table-content pf-c-table'>
           <SortTable
             options={{
               headers: [
@@ -128,9 +115,7 @@ export class AccessTab extends React.Component<IProps> {
             params={{}}
             updateParams={() => null}
           />
-          <tbody>
-            {sortedGroups.map((group, i) => this.renderGroupRow(group, i))}
-          </tbody>
+          <tbody>{sortedGroups.map((group, i) => this.renderGroupRow(group, i))}</tbody>
         </table>
       </>
     );
@@ -248,9 +233,7 @@ export class AccessTab extends React.Component<IProps> {
                   canEditOwners && (
                     <DropdownItem
                       key='remove-role'
-                      onClick={() =>
-                        this.props.updateProps({ showRoleRemoveModal: role })
-                      }
+                      onClick={() => this.props.updateProps({ showRoleRemoveModal: role })}
                     >
                       {t`Remove role`}
                     </DropdownItem>
@@ -271,9 +254,7 @@ export class AccessTab extends React.Component<IProps> {
 
     return (
       <DeleteModal
-        cancelAction={() =>
-          this.props.updateProps({ showGroupRemoveModal: null })
-        }
+        cancelAction={() => this.props.updateProps({ showGroupRemoveModal: null })}
         deleteAction={() => this.props.removeGroup(group)}
         title={t`Remove group ${groupname}?`}
       >
@@ -293,15 +274,12 @@ export class AccessTab extends React.Component<IProps> {
 
     return (
       <DeleteModal
-        cancelAction={() =>
-          this.props.updateProps({ showRoleRemoveModal: null })
-        }
+        cancelAction={() => this.props.updateProps({ showRoleRemoveModal: null })}
         deleteAction={() => this.props.removeRole(role, group)}
         title={t`Remove role ${role}?`}
       >
         <Trans>
-          You are about to remove <b>{role}</b> from <b>{groupname}</b> for{' '}
-          <b>{name}</b>.
+          You are about to remove <b>{role}</b> from <b>{groupname}</b> for <b>{name}</b>.
           <br />
           This will also remove all associated permissions.
         </Trans>
@@ -390,8 +368,7 @@ export class AccessTab extends React.Component<IProps> {
 
     const hasRoles = !!roles?.length;
 
-    const assignedRoles =
-      group?.object_roles?.map((name) => ({ role: name })) || [];
+    const assignedRoles = group?.object_roles?.map((name) => ({ role: name })) || [];
 
     const steps = [
       {
@@ -401,9 +378,7 @@ export class AccessTab extends React.Component<IProps> {
           <SelectRoles
             assignedRoles={assignedRoles}
             selectedRoles={roles}
-            onRolesUpdate={(roles) =>
-              this.props.updateProps({ showRoleSelectWizard: { roles } })
-            }
+            onRolesUpdate={(roles) => this.props.updateProps({ showRoleSelectWizard: { roles } })}
             pulpObjectType={pulpObjectType}
           />
         ),

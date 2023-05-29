@@ -32,9 +32,7 @@ export const withRouter = (ClassComponent) => {
       />
     );
   };
-  WithRouter.displayName = `withRouter(${
-    ClassComponent.displayName || ClassComponent.name
-  })`;
+  WithRouter.displayName = `withRouter(${ClassComponent.displayName || ClassComponent.name})`;
 
   return WithRouter;
 };

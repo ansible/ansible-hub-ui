@@ -13,25 +13,13 @@ interface IProps {
 }
 
 export const ConfirmModal = (props: IProps) => {
-  const {
-    cancelAction,
-    children,
-    confirmAction,
-    isDisabled,
-    title,
-    spinner,
-    confirmButtonTitle,
-  } = props;
+  const { cancelAction, children, confirmAction, isDisabled, title, spinner, confirmButtonTitle } =
+    props;
 
   return (
     <Modal
       actions={[
-        <Button
-          key='confirm'
-          onClick={confirmAction}
-          variant='primary'
-          isDisabled={isDisabled}
-        >
+        <Button key='confirm' onClick={confirmAction} variant='primary' isDisabled={isDisabled}>
           {confirmButtonTitle ? confirmButtonTitle : t`Yes`}
           {spinner && <Spinner size='sm'></Spinner>}
         </Button>,

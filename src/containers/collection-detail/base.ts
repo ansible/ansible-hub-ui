@@ -34,13 +34,7 @@ const cache = {
   content: null,
 };
 
-export function loadCollection({
-  forceReload,
-  matchParams,
-  navigate,
-  setCollection,
-  stateParams,
-}) {
+export function loadCollection({ forceReload, matchParams, navigate, setCollection, stateParams }) {
   const { version } = stateParams;
   const { collection: name, namespace, repo } = matchParams;
 
@@ -52,12 +46,7 @@ export function loadCollection({
     cache.name === name &&
     cache.version === version
   ) {
-    setCollection(
-      cache.collections,
-      cache.collection,
-      cache.content,
-      cache.collectionsCount,
-    );
+    setCollection(cache.collections, cache.collection, cache.content, cache.collectionsCount);
     return;
   }
 
@@ -75,11 +64,7 @@ export function loadCollection({
 
   const content = currentVersion
     .then((collection) =>
-      CollectionAPI.getContent(
-        namespace,
-        name,
-        collection.collection_version.version,
-      ),
+      CollectionAPI.getContent(namespace, name, collection.collection_version.version),
     )
     .then(({ data: { results } }) => results[0])
     .catch(() => navigate(formatPath(Paths.notFound)));

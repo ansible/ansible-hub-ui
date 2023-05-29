@@ -22,12 +22,7 @@ interface IProps {
   namespaceURL?: string;
 }
 
-export const NamespaceCard = ({
-  avatar_url,
-  name,
-  company,
-  namespaceURL,
-}: IProps) => {
+export const NamespaceCard = ({ avatar_url, name, company, namespaceURL }: IProps) => {
   const MAX_DESCRIPTION_LENGTH = 26;
   return (
     <Card className='hub-c-card-ns-container'>
@@ -43,9 +38,7 @@ export const NamespaceCard = ({
         </CardHeaderMain>
       </CardHeader>
       <Tooltip content={company || name}>
-        <CardTitle>
-          {getDescription(company || name, MAX_DESCRIPTION_LENGTH)}
-        </CardTitle>
+        <CardTitle>{getDescription(company || name, MAX_DESCRIPTION_LENGTH)}</CardTitle>
       </Tooltip>
       <Tooltip content={name}>
         <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>

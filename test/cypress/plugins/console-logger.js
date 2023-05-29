@@ -9,9 +9,7 @@ function isChrome(browser) {
 }
 
 function ensureRdpPort(args) {
-  const existing = args.find((arg) =>
-    arg.startsWith('--remote-debugging-port'),
-  );
+  const existing = args.find((arg) => arg.startsWith('--remote-debugging-port'));
   if (existing) {
     return Number(existing.split('=')[1]);
   }

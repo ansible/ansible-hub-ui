@@ -6,11 +6,7 @@ import { NamespaceList } from './namespace-list';
 class Partners extends React.Component<RouteProps> {
   render() {
     return (
-      <NamespaceList
-        {...this.props}
-        namespacePath={Paths.namespaceDetail}
-        filterOwner={false}
-      />
+      <NamespaceList {...this.props} namespacePath={Paths.namespaceDetail} filterOwner={false} />
     );
   }
 }

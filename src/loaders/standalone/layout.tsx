@@ -7,25 +7,12 @@ import {
   PageHeaderTools,
   PageSidebar,
 } from '@patternfly/react-core';
-import {
-  ExternalLinkAltIcon,
-  QuestionCircleIcon,
-} from '@patternfly/react-icons';
+import { ExternalLinkAltIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
-import {
-  ActiveUserAPI,
-  FeatureFlagsType,
-  SettingsType,
-  UserType,
-} from 'src/api';
-import {
-  AboutModalWindow,
-  LoginLink,
-  SmallLogo,
-  StatefulDropdown,
-} from 'src/components';
+import { ActiveUserAPI, FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { AboutModalWindow, LoginLink, SmallLogo, StatefulDropdown } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { StandaloneMenu } from './menu';
 
@@ -69,11 +56,7 @@ export const StandaloneLayout = ({
       <DropdownSeparator key='separator' />,
       <DropdownItem
         key='profile'
-        component={
-          <Link
-            to={formatPath(Paths.userProfileSettings)}
-          >{t`My profile`}</Link>
-        }
+        component={<Link to={formatPath(Paths.userProfileSettings)}>{t`My profile`}</Link>}
       ></DropdownItem>,
 
       <DropdownItem
@@ -86,11 +69,7 @@ export const StandaloneLayout = ({
     ];
 
     docsDropdownItems = [
-      <DropdownItem
-        key='customer_support'
-        href='https://access.redhat.com/support'
-        target='_blank'
-      >
+      <DropdownItem key='customer_support' href='https://access.redhat.com/support' target='_blank'>
         <Trans>
           Customer Support <ExternalLinkAltIcon />
         </Trans>
@@ -126,9 +105,7 @@ export const StandaloneLayout = ({
   const Header = (
     <PageHeader
       logo={<SmallLogo alt={APPLICATION_NAME}></SmallLogo>}
-      logoComponent={({ children }) => (
-        <Link to={formatPath(Paths.landingPage)}>{children}</Link>
-      )}
+      logoComponent={({ children }) => <Link to={formatPath(Paths.landingPage)}>{children}</Link>}
       headerTools={
         <PageHeaderTools>
           {!user || user.is_anonymous ? (
@@ -158,11 +135,7 @@ export const StandaloneLayout = ({
   const Sidebar = (
     <PageSidebar
       theme='dark'
-      nav={
-        <StandaloneMenu
-          context={{ user, settings, featureFlags, hasPermission }}
-        />
-      }
+      nav={<StandaloneMenu context={{ user, settings, featureFlags, hasPermission }} />}
     />
   );
 

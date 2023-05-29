@@ -3,12 +3,7 @@ import { Spinner, Tooltip } from '@patternfly/react-core';
 import cx from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  CollectionVersionSearch,
-  ImportDetailType,
-  ImportListType,
-  PulpStatus,
-} from 'src/api';
+import { CollectionVersionSearch, ImportDetailType, ImportListType, PulpStatus } from 'src/api';
 import { StatusIndicator } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
@@ -60,14 +55,10 @@ export class ImportConsole extends React.Component<IProps> {
     }
 
     this.isLoading =
-      selectedImport.state === PulpStatus.running ||
-      selectedImport.state === PulpStatus.waiting;
+      selectedImport.state === PulpStatus.running || selectedImport.state === PulpStatus.waiting;
 
     return (
-      <div
-        className='hub-import-console pf-c-content'
-        data-cy={'ImportConsole'}
-      >
+      <div className='hub-import-console pf-c-content' data-cy={'ImportConsole'}>
         {this.renderTitle(selectedImport)}
         <div className='message-list'>
           <div
@@ -76,10 +67,7 @@ export class ImportConsole extends React.Component<IProps> {
               'log-follow-button': true,
             })}
           >
-            <Tooltip
-              position='left'
-              content={this.isLoading ? t`Follow logs` : t`Scroll to end`}
-            >
+            <Tooltip position='left' content={this.isLoading ? t`Follow logs` : t`Scroll to end`}>
               <span
                 onClick={() => this.handleScrollClick()}
                 className='fa fa-arrow-circle-down clickable'
@@ -172,9 +160,7 @@ export class ImportConsole extends React.Component<IProps> {
 
     return (
       <div>
-        {!hideCollectionName && (
-          <div className='title-container'>{collectionHead}</div>
-        )}
+        {!hideCollectionName && <div className='title-container'>{collectionHead}</div>}
 
         <div className='title-bar'>
           <div>
@@ -182,18 +168,15 @@ export class ImportConsole extends React.Component<IProps> {
             <StatusIndicator type='secondary' status={selectedImport.state} />
           </div>
           <div>
-            <span className='data-title'>{t`Approval status:`}</span>{' '}
-            {approvalStatus}
+            <span className='data-title'>{t`Approval status:`}</span> {approvalStatus}
           </div>
           <div>
-            <span className='data-title'>{t`Version:`}</span>{' '}
-            {selectedImport.version}
+            <span className='data-title'>{t`Version:`}</span> {selectedImport.version}
           </div>
 
           {task && task.error ? (
             <div>
-              <span className='data-title'>{t`Error message:`}</span>{' '}
-              {task.error.code}
+              <span className='data-title'>{t`Error message:`}</span> {task.error.code}
               <pre>
                 <code>{task.error.description}</code>
               </pre>

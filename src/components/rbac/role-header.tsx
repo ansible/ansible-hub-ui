@@ -9,10 +9,7 @@ interface IProps {
 }
 
 export const RoleHeader = ({ title, subTitle, breadcrumbs }: IProps) => (
-  <BaseHeader
-    breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
-    title={title}
-  >
+  <BaseHeader breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>} title={title}>
     {' '}
     <div style={{ paddingBottom: '10px' }}>
       <Trans>{subTitle}</Trans>

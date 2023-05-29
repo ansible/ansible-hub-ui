@@ -1,8 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  FileUploadProps,
-  FileUpload as PFFileUpload,
-} from '@patternfly/react-core';
+import { FileUploadProps, FileUpload as PFFileUpload } from '@patternfly/react-core';
 import React from 'react';
 
 export const FileUpload = (props: FileUploadProps) => (

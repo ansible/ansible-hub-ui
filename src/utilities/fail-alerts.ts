@@ -1,11 +1,7 @@
 import { t } from '@lingui/macro';
 import { mapErrorMessages } from 'src/utilities';
 
-export function errorMessage(
-  statusCode: number,
-  statusText: string,
-  customMessage?: string,
-) {
+export function errorMessage(statusCode: number, statusText: string, customMessage?: string) {
   const messages = {
     500: t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`,
     401: t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`,

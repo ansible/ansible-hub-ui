@@ -1,11 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
 import React from 'react';
-import {
-  CollectionAPI,
-  CollectionVersionAPI,
-  CollectionVersionSearch,
-} from 'src/api';
+import { CollectionAPI, CollectionVersionAPI, CollectionVersionSearch } from 'src/api';
 import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 export class DeleteCollectionUtils {
@@ -23,11 +19,7 @@ export class DeleteCollectionUtils {
       });
   }
 
-  public static deleteMenuOption({
-    canDeleteCollection,
-    noDependencies,
-    onClick,
-  }) {
+  public static deleteMenuOption({ canDeleteCollection, noDependencies, onClick }) {
     if (!canDeleteCollection) {
       return null;
     }
@@ -61,11 +53,7 @@ export class DeleteCollectionUtils {
     );
   }
 
-  public static tryOpenDeleteModalWithConfirm({
-    addAlert,
-    setState,
-    collection,
-  }) {
+  public static tryOpenDeleteModalWithConfirm({ addAlert, setState, collection }) {
     DeleteCollectionUtils.getUsedbyDependencies(collection)
       .then((noDependencies) =>
         DeleteCollectionUtils.openDeleteModalWithConfirm({
@@ -78,12 +66,7 @@ export class DeleteCollectionUtils {
       .catch((alert) => addAlert(alert));
   }
 
-  private static openDeleteModalWithConfirm({
-    addAlert,
-    setState,
-    noDependencies,
-    collection,
-  }) {
+  private static openDeleteModalWithConfirm({ addAlert, setState, noDependencies, collection }) {
     if (noDependencies) {
       setState({
         deleteCollection: collection,
@@ -108,13 +91,7 @@ export class DeleteCollectionUtils {
     }
   }
 
-  public static deleteCollection({
-    collection,
-    setState,
-    load,
-    redirect,
-    addAlert,
-  }) {
+  public static deleteCollection({ collection, setState, load, redirect, addAlert }) {
     CollectionAPI.deleteCollection(collection)
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);

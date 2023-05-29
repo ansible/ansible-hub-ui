@@ -127,35 +127,21 @@ class EditRole extends React.Component<RouteProps, IState> {
     } = this.state;
 
     if (!role && alerts && alerts.length) {
-      return (
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
-      );
+      return <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>;
     }
 
     if (!role) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const breadcrumbs = [
-      { url: formatPath(Paths.roleList), name: t`Roles` },
-      { name: role.name },
-    ];
+    const breadcrumbs = [{ url: formatPath(Paths.roleList), name: t`Roles` }, { name: role.name }];
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
-          subTitle={translateLockedRolesDescription(
-            role.name,
-            role.description,
-          )}
+          subTitle={translateLockedRolesDescription(role.name, role.description)}
           breadcrumbs={breadcrumbs}
         />
         {unauthorised ? (
@@ -169,24 +155,16 @@ class EditRole extends React.Component<RouteProps, IState> {
                 nameDisabled={true}
                 description={description}
                 descriptionHelperText={errorMessages['description']}
-                descriptionValidated={
-                  errorMessages['description'] ? 'error' : null
-                }
+                descriptionValidated={errorMessages['description'] ? 'error' : null}
                 onDescriptionChange={(value) => {
                   this.setState({ description: value }, () => {
-                    const errors = validateInput(
-                      value,
-                      'description',
-                      this.state.errorMessages,
-                    );
+                    const errors = validateInput(value, 'description', this.state.errorMessages);
                     this.setState({ errorMessages: errors });
                   });
                 }}
                 saving={saving}
                 saveRole={this.editRole}
-                isSavingDisabled={
-                  'description' in errorMessages || 'name' in errorMessages
-                }
+                isSavingDisabled={'description' in errorMessages || 'name' in errorMessages}
                 cancelRole={this.cancelRole}
               />
             </section>

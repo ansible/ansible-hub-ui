@@ -21,9 +21,7 @@ export const Details = ({ item, fields = [] }: IProps) => (
     {item && (
       <>
         <hr />
-        <pre style={{ whiteSpace: 'pre-wrap' }}>
-          {JSON.stringify(item, null, 2)}
-        </pre>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(item, null, 2)}</pre>
       </>
     )}
   </>

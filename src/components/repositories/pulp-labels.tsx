@@ -2,11 +2,7 @@ import { t } from '@lingui/macro';
 import { Label, LabelGroup } from '@patternfly/react-core';
 import React from 'react';
 
-export const PulpLabels = ({
-  labels,
-}: {
-  labels: { [key: string]: string };
-}) => {
+export const PulpLabels = ({ labels }: { labels: { [key: string]: string } }) => {
   if (!labels || !Object.keys(labels).length) {
     return <>{t`None`}</>;
   }

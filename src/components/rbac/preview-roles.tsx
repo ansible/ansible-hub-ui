@@ -28,8 +28,7 @@ export const PreviewRoles = ({ group, selectedRoles }: Props) => {
     <div className='hub-custom-wizard-layout'>
       <p>
         <Trans>
-          The following roles will be applied to group:{' '}
-          <strong>{group.name}</strong>
+          The following roles will be applied to group: <strong>{group.name}</strong>
         </Trans>
       </p>
       <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
@@ -38,10 +37,7 @@ export const PreviewRoles = ({ group, selectedRoles }: Props) => {
             <FlexItem>
               <strong>{role.name}</strong>{' '}
               {role?.description &&
-                `- ${translateLockedRolesDescription(
-                  role.name,
-                  role.description,
-                )}`}
+                `- ${translateLockedRolesDescription(role.name, role.description)}`}
               <Flex className='hub-permissions'>
                 {role.permissions.map((permission) => (
                   <FlexItem
@@ -49,11 +45,7 @@ export const PreviewRoles = ({ group, selectedRoles }: Props) => {
                     className='hub-permission'
                     data-cy={`HubPermission-${permission}`}
                   >
-                    <Tooltip
-                      content={
-                        model_permissions[permission]?.name || permission
-                      }
-                    >
+                    <Tooltip content={model_permissions[permission]?.name || permission}>
                       <Label>{splitByDot(permission)}</Label>
                     </Tooltip>
                   </FlexItem>

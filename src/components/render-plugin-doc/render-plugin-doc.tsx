@@ -1,11 +1,6 @@
 import { dom, parse } from 'antsibull-docs';
 import * as React from 'react';
-import {
-  PluginContentType,
-  PluginDoc,
-  PluginOption,
-  ReturnedValue,
-} from 'src/api';
+import { PluginContentType, PluginDoc, PluginOption, ReturnedValue } from 'src/api';
 import './render-plugin-doc.scss';
 
 // Documentation for module doc string spec
@@ -24,10 +19,7 @@ interface IProps {
     text: React.ReactNode | undefined,
   ) => React.ReactElement;
   renderDocLink: (name: string, href: string) => React.ReactElement;
-  renderTableOfContentsLink: (
-    title: string,
-    section: string,
-  ) => React.ReactElement;
+  renderTableOfContentsLink: (title: string, section: string) => React.ReactElement;
   renderWarning: (text: string) => React.ReactElement;
 }
 
@@ -71,10 +63,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
           ),
           notes: this.renderNotes(doc),
           examples: this.renderExample(example),
-          returnValues: this.renderReturnValues(
-            returnVals,
-            this.returnContainMaxDepth,
-          ),
+          returnValues: this.renderReturnValues(returnVals, this.returnContainMaxDepth),
           shortDescription: this.renderShortDescription(doc),
           deprecated: this.renderDeprecated(doc, plugin.content_name),
           requirements: this.renderRequirements(doc),
@@ -112,9 +101,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     // error instead of crashing the whole app
     return (
       <React.Fragment>
-        {this.props.renderWarning(
-          'Documentation Syntax Error: cannot parse plugin documention.',
-        )}
+        {this.props.renderWarning('Documentation Syntax Error: cannot parse plugin documention.')}
         <br />
         <div>
           {plugin.content_type && plugin.content_name ? (
@@ -123,10 +110,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             </h1>
           ) : null}
           <p>
-            The documentation object for this plugin seems to contain invalid
-            syntax that makes it impossible for Automation Hub to parse. You can
-            still look at the unformatted documentation object bellow if you
-            need to.
+            The documentation object for this plugin seems to contain invalid syntax that makes it
+            impossible for Automation Hub to parse. You can still look at the unformatted
+            documentation object bellow if you need to.
           </p>
 
           <h2>Unformatted Documentation</h2>
@@ -300,11 +286,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     if (!part.plugin) {
       return content;
     }
-    return this.props.renderPluginLink(
-      part.plugin.fqcn,
-      part.plugin.type,
-      content,
-    );
+    return this.props.renderPluginLink(part.plugin.fqcn, part.plugin.type, content);
   }
 
   private formatPartOptionValue(part: dom.OptionValuePart): React.ReactNode {
@@ -312,11 +294,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
   }
 
   private formatPartPlugin(part: dom.PluginPart): React.ReactNode {
-    return this.props.renderPluginLink(
-      part.plugin.fqcn,
-      part.plugin.type,
-      undefined,
-    );
+    return this.props.renderPluginLink(part.plugin.fqcn, part.plugin.type, undefined);
   }
 
   private formatPart(part: dom.Part): React.ReactNode {
@@ -350,9 +328,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       case dom.PartType.PLUGIN:
         return this.formatPartPlugin(part as dom.PluginPart);
       case dom.PartType.RETURN_VALUE:
-        return this.formatPartOptionNameReturnValue(
-          part as dom.ReturnValuePart,
-        );
+        return this.formatPartOptionNameReturnValue(part as dom.ReturnValuePart);
     }
   }
 
@@ -361,11 +337,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     const parsed = parse(text);
 
     // Special case: result is a single paragraph consisting of a single text part
-    if (
-      parsed.length === 1 &&
-      parsed[0].length === 1 &&
-      parsed[0][0].type === dom.PartType.TEXT
-    ) {
+    if (parsed.length === 1 && parsed[0].length === 1 && parsed[0][0].type === dom.PartType.TEXT) {
       return <span>{parsed[0][0].text}</span>;
     }
 
@@ -419,9 +391,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
         <div>
           <b>Alternative: </b>
-          {deprecated.alternative
-            ? doc.deprecated.alternative
-            : 'No alternatives specified.'}
+          {deprecated.alternative ? doc.deprecated.alternative : 'No alternatives specified.'}
         </div>
       </React.Fragment>
     );
@@ -433,30 +403,19 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     return (
       <ul>
         {content['synopsis'] !== null && (
-          <li>
-            {this.props.renderTableOfContentsLink('Synopsis', 'synopsis')}
-          </li>
+          <li>{this.props.renderTableOfContentsLink('Synopsis', 'synopsis')}</li>
         )}
         {content['parameters'] !== null && (
-          <li>
-            {this.props.renderTableOfContentsLink('Parameters', 'parameters')}
-          </li>
+          <li>{this.props.renderTableOfContentsLink('Parameters', 'parameters')}</li>
         )}
         {content['notes'] !== null && (
           <li>{this.props.renderTableOfContentsLink('Notes', 'notes')}</li>
         )}
         {content['examples'] !== null && (
-          <li>
-            {this.props.renderTableOfContentsLink('Examples', 'examples')}
-          </li>
+          <li>{this.props.renderTableOfContentsLink('Examples', 'examples')}</li>
         )}
         {content['returnValues'] !== null && (
-          <li>
-            {this.props.renderTableOfContentsLink(
-              'Return Values',
-              'return-values',
-            )}
-          </li>
+          <li>{this.props.renderTableOfContentsLink('Return Values', 'return-values')}</li>
         )}
       </ul>
     );
@@ -479,23 +438,13 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private renderParameters(
-    parameters: PluginOption[],
-    content_type: string,
-    maxDepth: number,
-  ) {
+  private renderParameters(parameters: PluginOption[], content_type: string, maxDepth: number) {
     if (!parameters) {
       return null;
     }
 
     // render the entries first,
-    const paramEntries = this.renderParameterEntries(
-      parameters,
-      content_type,
-      0,
-      maxDepth,
-      '',
-    );
+    const paramEntries = this.renderParameterEntries(parameters, content_type, 0, maxDepth, '');
 
     return (
       <React.Fragment>
@@ -543,18 +492,12 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             // PARAMETER --------------------------------
           }
           {spacers}
-          <td
-            colSpan={maxDepth + 1 - depth}
-            className={option.suboptions ? 'parent' : ''}
-          >
+          <td colSpan={maxDepth + 1 - depth} className={option.suboptions ? 'parent' : ''}>
             <span className='option-name'>{option.name}</span>
             <small>
               {this.documentedType(option['type'])}
               {option['elements'] ? (
-                <span>
-                  {' '}
-                  / elements ={this.documentedType(option['elements'])}
-                </span>
+                <span> / elements ={this.documentedType(option['elements'])}</span>
               ) : null}
               {option['required'] ? (
                 <span>
@@ -571,9 +514,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
           {
             // CONFIGURATION (non module only) -------
           }
-          {content_type !== 'module' ? (
-            <td>{this.renderPluginConfiguration(option)}</td>
-          ) : null}
+          {content_type !== 'module' ? <td>{this.renderPluginConfiguration(option)}</td> : null}
           {
             // COMMENTS ------------------------------
           }
@@ -584,9 +525,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
             {option['aliases'] ? (
               <small>
-                <span className='green'>
-                  aliases: {option['aliases'].join(', ')}
-                </span>
+                <span className='green'>aliases: {option['aliases'].join(', ')}</span>
               </small>
             ) : null}
           </td>
@@ -596,13 +535,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       // recursively render sub options
       if (option.suboptions) {
         output = output.concat(
-          this.renderParameterEntries(
-            option.suboptions,
-            content_type,
-            depth + 1,
-            maxDepth,
-            key,
-          ),
+          this.renderParameterEntries(option.suboptions, content_type, depth + 1, maxDepth, key),
         );
       }
     });
@@ -666,13 +599,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             <span className='option-name'>Choices: </span>
             <ul>
               {choices.map((c, i) => (
-                <li key={i}>
-                  {c === defaul ? (
-                    <span className='blue'>{c} &nbsp;&larr;</span>
-                  ) : (
-                    c
-                  )}
-                </li>
+                <li key={i}>{c === defaul ? <span className='blue'>{c} &nbsp;&larr;</span> : c}</li>
               ))}
             </ul>
           </div>
@@ -772,10 +699,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       entries.push(
         <tr key={key}>
           {spacers}
-          <td
-            colSpan={maxDepth + 1 - depth}
-            className={option.contains ? 'parent' : ''}
-          >
+          <td colSpan={maxDepth + 1 - depth} className={option.contains ? 'parent' : ''}>
             {option.name} <br /> ({option.type})
           </td>
           <td>{option.returned}</td>
@@ -802,12 +726,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       if (option.contains) {
         entries = entries.concat(
           // recursively render values
-          this.renderReturnValueEntries(
-            option.contains,
-            depth + 1,
-            maxDepth,
-            key,
-          ),
+          this.renderReturnValueEntries(option.contains, depth + 1, maxDepth, key),
         );
       }
     });

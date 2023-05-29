@@ -25,7 +25,5 @@ export function getContainersURL({
 }) {
   const host = window.location.host;
 
-  return `${host}/${name}${tag ? `:${tag}` : ''}${
-    digest && !tag ? `@${digest}` : ''
-  }`;
+  return `${host}/${name}${tag ? `:${tag}` : ''}${digest && !tag ? `@${digest}` : ''}`;
 }

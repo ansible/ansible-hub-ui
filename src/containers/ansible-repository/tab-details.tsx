@@ -1,17 +1,8 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AnsibleRemoteAPI,
-  AnsibleRemoteType,
-  AnsibleRepositoryType,
-} from 'src/api';
-import {
-  CopyURL,
-  Details,
-  NonLazyDistributions,
-  PulpLabels,
-} from 'src/components';
+import { AnsibleRemoteAPI, AnsibleRemoteType, AnsibleRepositoryType } from 'src/api';
+import { CopyURL, Details, NonLazyDistributions, PulpLabels } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
@@ -66,9 +57,7 @@ export const DetailsTab = ({ item }: TabProps) => {
         {
           label: t`Remote`,
           value: remote ? (
-            <Link
-              to={formatPath(Paths.ansibleRemoteDetail, { name: remote.name })}
-            >
+            <Link to={formatPath(Paths.ansibleRemoteDetail, { name: remote.name })}>
               {remote.name}
             </Link>
           ) : (

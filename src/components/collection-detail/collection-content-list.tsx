@@ -1,10 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  SearchInput,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { SearchInput, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import cx from 'classnames';
 import * as React from 'react';
@@ -25,12 +20,7 @@ interface IProps {
   updateParams: (p) => void;
 }
 
-export const CollectionContentList = ({
-  contents,
-  collection,
-  params,
-  updateParams,
-}: IProps) => {
+export const CollectionContentList = ({ contents, collection, params, updateParams }: IProps) => {
   const ignoredParams = ['keywords', 'showing'];
 
   const toShow: ContentSummaryType[] = [];
@@ -66,12 +56,8 @@ export const CollectionContentList = ({
             <ToolbarItem>
               <SearchInput
                 value={params.keywords || ''}
-                onChange={(_e, val) =>
-                  updateParams(ParamHelper.setParam(params, 'keywords', val))
-                }
-                onClear={() =>
-                  updateParams(ParamHelper.setParam(params, 'keywords', ''))
-                }
+                onChange={(_e, val) => updateParams(ParamHelper.setParam(params, 'keywords', val))}
+                onClear={() => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
                 aria-label={t`find-content`}
                 placeholder={t`Find content`}
               />
@@ -87,9 +73,7 @@ export const CollectionContentList = ({
                   'hub-c-toolbar__item-selected-item': key === showing,
                   'hub-c-toolbar__item-type-selector': true,
                 })}
-                onClick={() =>
-                  updateParams(ParamHelper.setParam(params, 'showing', key))
-                }
+                onClick={() => updateParams(ParamHelper.setParam(params, 'showing', key))}
               >
                 {key} ({summary[key]})
               </ToolbarItem>
@@ -131,9 +115,7 @@ export const CollectionContentList = ({
           ))}
         </tbody>
       </table>
-      {summary.all <= 0 &&
-        repository.name === 'community' &&
-        renderCommunityWarningMessage()}
+      {summary.all <= 0 && repository.name === 'community' && renderCommunityWarningMessage()}
     </div>
   );
 };

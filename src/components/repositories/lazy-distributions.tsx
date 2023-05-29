@@ -11,12 +11,7 @@ export const NonLazyDistributions = ({
 }: {
   distributions: { name: string }[];
   emptyText?: string;
-}) => (
-  <>
-    {distributions?.map?.(({ name }) => name)?.join?.(', ') ||
-      (emptyText ?? '---')}
-  </>
-);
+}) => <>{distributions?.map?.(({ name }) => name)?.join?.(', ') || (emptyText ?? '---')}</>;
 
 export const LazyDistributions = ({
   emptyText,

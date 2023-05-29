@@ -1,9 +1,6 @@
 import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
-import {
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import { ExclamationCircleIcon, ExclamationTriangleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
@@ -48,8 +45,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection, collections, collectionsCount, content } =
-      this.state;
+    const { params, collection, collections, collectionsCount, content } = this.state;
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
@@ -78,8 +74,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       // check if contents exists
       if (content.docs_blob.contents) {
         const selectedContent = content.docs_blob.contents.find(
-          (x) =>
-            x.content_type === contentType && x.content_name === contentName,
+          (x) => x.content_type === contentType && x.content_name === contentName,
         );
 
         if (selectedContent) {
@@ -135,9 +130,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
           collection={collection}
           content={content}
           params={params}
-          updateParams={(p) =>
-            this.updateParams(p, () => this.loadCollection(true))
-          }
+          updateParams={(p) => this.updateParams(p, () => this.loadCollection(true))}
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
@@ -187,13 +180,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                     renderTableOfContentsLink={(title, section) => (
                       <HashLink to={'#' + section}>{title}</HashLink>
                     )}
-                    renderWarning={(text) => (
-                      <Alert isInline variant='warning' title={text} />
-                    )}
+                    renderWarning={(text) => <Alert isInline variant='warning' title={text} />}
                   />
                 )
-              ) : collection.repository.name === 'community' &&
-                !content.docs_blob.contents ? (
+              ) : collection.repository.name === 'community' && !content.docs_blob.contents ? (
                 this.renderCommunityWarningMessage()
               ) : (
                 this.renderNotFound(collection.collection_version.name)
@@ -205,12 +195,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     );
   }
 
-  private renderDocLink(
-    name,
-    href,
-    collection: CollectionVersionSearch,
-    params,
-  ) {
+  private renderDocLink(name, href, collection: CollectionVersionSearch, params) {
     if (!!href && href.startsWith('http')) {
       return (
         <a href={href} target='_blank' rel='noreferrer'>
@@ -245,17 +230,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     }
   }
 
-  private renderPluginLink(
-    pluginName,
-    pluginType,
-    text,
-    collection,
-    params,
-    allContent,
-  ) {
-    const module = allContent.find(
-      (x) => x.content_type === pluginType && x.name === pluginName,
-    );
+  private renderPluginLink(pluginName, pluginType, text, collection, params, allContent) {
+    const module = allContent.find((x) => x.content_type === pluginType && x.name === pluginName);
 
     if (module) {
       return (

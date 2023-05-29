@@ -6,6 +6,5 @@ import { Action } from './action';
 export const ansibleRepositoryCreateAction = Action({
   condition: canAddAnsibleRepository,
   title: t`Add repository`,
-  onClick: (item, { navigate }) =>
-    navigate(formatPath(Paths.ansibleRepositoryEdit, { name: '_' })),
+  onClick: (item, { navigate }) => navigate(formatPath(Paths.ansibleRepositoryEdit, { name: '_' })),
 });

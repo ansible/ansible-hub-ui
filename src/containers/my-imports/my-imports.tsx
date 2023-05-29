@@ -48,10 +48,7 @@ class MyImports extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     this.topOfPage = React.createRef();
 
@@ -129,10 +126,7 @@ class MyImports extends React.Component<RouteProps, IState> {
       <React.Fragment>
         <div ref={this.topOfPage}></div>
         <BaseHeader title={t`My imports`} />
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={this.state.alerts} closeAlert={(i) => this.closeAlert(i)} />
         <Main>
           <section className='body'>
             <div className='hub-page-container' data-cy='MyImports'>
@@ -153,8 +147,7 @@ class MyImports extends React.Component<RouteProps, IState> {
                             loadingImports: true,
                             loadingImportDetails: true,
                           },
-                          () =>
-                            this.loadImportList(() => this.loadTaskDetails()),
+                          () => this.loadImportList(() => this.loadTaskDetails()),
                         );
                       } else {
                         this.setState({
@@ -195,15 +188,12 @@ class MyImports extends React.Component<RouteProps, IState> {
   }
 
   private selectImport(sImport) {
-    this.setState(
-      { selectedImport: sImport, loadingImportDetails: true },
-      () => {
-        this.topOfPage.current.scrollIntoView({
-          behavior: 'smooth',
-        });
-        this.loadTaskDetails();
-      },
-    );
+    this.setState({ selectedImport: sImport, loadingImportDetails: true }, () => {
+      this.topOfPage.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+      this.loadTaskDetails();
+    });
   }
 
   private poll() {
@@ -217,9 +207,7 @@ class MyImports extends React.Component<RouteProps, IState> {
       }
 
       if (selectedImport.state !== selectedImportDetails.state) {
-        const importIndex = importList.findIndex(
-          (x) => x.id === selectedImport.id,
-        );
+        const importIndex = importList.findIndex((x) => x.id === selectedImport.id);
 
         const imports = cloneDeep(importList);
         const newSelectedImport = cloneDeep(selectedImport);

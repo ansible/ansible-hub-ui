@@ -3,20 +3,10 @@ import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
-import {
-  DateComponent,
-  EmptyStateNoData,
-  ShaLabel,
-  SortTable,
-  TagLabel,
-} from 'src/components';
+import { DateComponent, EmptyStateNoData, ShaLabel, SortTable, TagLabel } from 'src/components';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerParamFix, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -26,10 +16,7 @@ interface IState {
   page: number;
 }
 
-class ExecutionEnvironmentDetailActivities extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetailActivities extends React.Component<IDetailSharedProps, IState> {
   constructor(props) {
     super(props);
 
@@ -204,10 +191,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
             activities.push({
               created: '',
               action: (
-                <Button
-                  variant={'link'}
-                  onClick={() => this.queryActivities(name)}
-                >
+                <Button variant={'link'} onClick={() => this.queryActivities(name)}>
                   {' '}
                   Load more{' '}
                 </Button>
@@ -238,7 +222,5 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 }
 
 export default withRouter(
-  withContainerParamFix(
-    withContainerRepo(ExecutionEnvironmentDetailActivities),
-  ),
+  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailActivities)),
 );

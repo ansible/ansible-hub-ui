@@ -65,10 +65,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
-    const params = ParamHelper.parseParamString(props.location.search, [
-      'page',
-      'page_size',
-    ]);
+    const params = ParamHelper.parseParamString(props.location.search, ['page', 'page_size']);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -119,8 +116,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
       roles,
     } = this.state;
 
-    const noData =
-      roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
+    const noData = roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -174,15 +170,10 @@ export class RoleList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)}></AlertList>
         {showDeleteModal && roleToEdit && (
           <DeleteModal
-            cancelAction={() =>
-              this.setState({ showDeleteModal: false, roleToEdit: null })
-            }
+            cancelAction={() => this.setState({ showDeleteModal: false, roleToEdit: null })}
             deleteAction={() => this.deleteRole(roleToEdit)}
             title={t`Delete role?`}
             data-cy='DeleteModal'
@@ -191,10 +182,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
               <p>
                 Role <b>{roleToEdit.name}</b> will be permanently deleted.
               </p>
-              <p>
-                This will also remove all associated permissions under this
-                role.
-              </p>
+              <p>This will also remove all associated permissions under this role.</p>
             </Trans>
           </DeleteModal>
         )}
@@ -220,12 +208,8 @@ export class RoleList extends React.Component<RouteProps, IState> {
                         <ToolbarItem>
                           <CompoundFilter
                             inputText={this.state.inputText}
-                            onChange={(text) =>
-                              this.setState({ inputText: text })
-                            }
-                            updateParams={(p) =>
-                              this.updateParams(p, () => this.queryRoles())
-                            }
+                            onChange={(text) => this.setState({ inputText: text })}
+                            updateParams={(p) => this.updateParams(p, () => this.queryRoles())}
                             params={params}
                             filterConfig={[
                               {
@@ -257,9 +241,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
                   </Toolbar>
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRoles())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryRoles())}
                     count={roleCount}
                     isTop
                   />
@@ -309,33 +291,22 @@ export class RoleList extends React.Component<RouteProps, IState> {
                           rowIndex={i}
                         >
                           <td data-cy='name-field'>{role.name}</td>
-                          <td>
-                            {translateLockedRolesDescription(
-                              role.name,
-                              role.description,
-                            )}
-                          </td>
+                          <td>{translateLockedRolesDescription(role.name, role.description)}</td>
                           <td>
                             <DateComponent date={role.pulp_created} />
                           </td>
 
                           <td>
                             {role.locked ? (
-                              <Tooltip
-                                content={t`Built-in roles cannot be edited or deleted.`}
-                              >
-                                <span
-                                  style={{ whiteSpace: 'nowrap' }}
-                                >{t`Built-in`}</span>
+                              <Tooltip content={t`Built-in roles cannot be edited or deleted.`}>
+                                <span style={{ whiteSpace: 'nowrap' }}>{t`Built-in`}</span>
                               </Tooltip>
                             ) : (
                               t`Editable`
                             )}
                           </td>
                           {isSuperuser && (
-                            <ListItemActions
-                              kebabItems={this.renderDropdownItems(role)}
-                            />
+                            <ListItemActions kebabItems={this.renderDropdownItems(role)} />
                           )}
                         </ExpandableRow>
                       ))}
@@ -345,9 +316,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
                   )}
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRoles())
-                    }
+                    updateParams={(p) => this.updateParams(p, () => this.queryRoles())}
                     count={roleCount}
                   />
                 </>
@@ -362,12 +331,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
   private deleteRole({ pulp_href, name }) {
     const roleID = parsePulpIDFromURL(pulp_href);
     RoleAPI.delete(roleID)
-      .then(() =>
-        this.addAlert(
-          t`Role "${name}" has been successfully deleted.`,
-          'success',
-        ),
-      )
+      .then(() => this.addAlert(t`Role "${name}" has been successfully deleted.`, 'success'))
       .catch((e) => {
         const { status, statusText } = e.response;
         this.addAlert(
@@ -427,10 +391,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
           ),
           // hasPermission('galaxy.delete_containerregistryremote') &&
           locked ? (
-            <Tooltip
-              key='delete'
-              content={t`Built-in roles cannot be deleted.`}
-            >
+            <Tooltip key='delete' content={t`Built-in roles cannot be deleted.`}>
               {deleteItem}
             </Tooltip>
           ) : (

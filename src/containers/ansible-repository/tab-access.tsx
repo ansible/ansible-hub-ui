@@ -38,8 +38,7 @@ export const RepositoryAccessTab = ({
   const [groups, setGroups] = useState<GroupType[]>(null); // loading
   const [canEditOwners, setCanEditOwners] = useState<boolean>(false);
   const [selectedGroup, setSelectedGroup] = useState<GroupType>(null);
-  const [showGroupRemoveModal, setShowGroupRemoveModal] =
-    useState<GroupType>(null);
+  const [showGroupRemoveModal, setShowGroupRemoveModal] = useState<GroupType>(null);
   const [showGroupSelectWizard, setShowGroupSelectWizard] = useState<{
     group?: GroupType;
     roles?: RoleType[];
@@ -56,8 +55,7 @@ export const RepositoryAccessTab = ({
         setCanEditOwners(
           canEditAnsibleRepositoryAccess({
             hasPermission,
-            hasObjectPermission: (p: string): boolean =>
-              permissions.includes(p),
+            hasObjectPermission: (p: string): boolean => permissions.includes(p),
             user,
             featureFlags,
           }),
@@ -89,12 +87,7 @@ export const RepositoryAccessTab = ({
       });
   };
 
-  const updateGroupRoles = ({
-    roles,
-    alertSuccess,
-    alertFailure,
-    stateUpdate,
-  }) => {
+  const updateGroupRoles = ({ roles, alertSuccess, alertFailure, stateUpdate }) => {
     Promise.all(roles)
       .then(() => {
         addAlert({
@@ -178,9 +171,7 @@ export const RepositoryAccessTab = ({
           setShowGroupRemoveModal(v as GroupType);
           break;
         case 'showGroupSelectWizard':
-          setShowGroupSelectWizard(
-            v as { group?: GroupType; roles?: RoleType[] },
-          );
+          setShowGroupSelectWizard(v as { group?: GroupType; roles?: RoleType[] });
           break;
         case 'showRoleRemoveModal':
           setShowRoleRemoveModal(v as string);

@@ -45,15 +45,10 @@ export class PermissionCategories extends React.Component<IProps> {
 
     // show user/group permissions by default
     const userManagementFilter = (permission) =>
-      showUserManagement ||
-      !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission);
-    const allPermissions =
-      Object.keys(model_permissions).filter(userManagementFilter);
+      showUserManagement || !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission);
+    const allPermissions = Object.keys(model_permissions).filter(userManagementFilter);
 
-    const groups = knownPermissionsAndCategories(
-      model_permissions,
-      allPermissions,
-    );
+    const groups = knownPermissionsAndCategories(model_permissions, allPermissions);
 
     const allGroups = showCustom
       ? [
@@ -90,9 +85,7 @@ export class PermissionCategories extends React.Component<IProps> {
             key={'no-permissions'}
             data-cy={'PermissionCategories-no-permissions'}
           >
-            <FlexItem
-              style={{ minWidth: '200px' }}
-            >{t`No permissions`}</FlexItem>
+            <FlexItem style={{ minWidth: '200px' }}>{t`No permissions`}</FlexItem>
             <FlexItem grow={{ default: 'grow' }}></FlexItem>
           </Flex>
         )}
@@ -111,10 +104,7 @@ export class PermissionCategories extends React.Component<IProps> {
                 isViewOnly={!setSelected}
                 onCategoryClear={() =>
                   setSelected(
-                    permissions.filter(
-                      (permission) =>
-                        !group.allPermissions.includes(permission),
-                    ),
+                    permissions.filter((permission) => !group.allPermissions.includes(permission)),
                   )
                 }
                 onPermissionToggle={(permission) => {

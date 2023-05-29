@@ -11,11 +11,7 @@ class MyNamespaces extends React.Component<RouteProps> {
       return <EmptyStateUnauthorized />;
     }
     return (
-      <NamespaceList
-        {...this.props}
-        namespacePath={Paths.namespaceDetail}
-        filterOwner={true}
-      />
+      <NamespaceList {...this.props} namespacePath={Paths.namespaceDetail} filterOwner={true} />
     );
   }
 }

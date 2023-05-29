@@ -2,20 +2,10 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
-import {
-  BaseHeader,
-  Breadcrumbs,
-  EmptyStateUnauthorized,
-  UserFormPage,
-} from 'src/components';
+import { BaseHeader, Breadcrumbs, EmptyStateUnauthorized, UserFormPage } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import {
-  ErrorMessagesType,
-  RouteProps,
-  mapErrorMessages,
-  withRouter,
-} from 'src/utilities';
+import { ErrorMessagesType, RouteProps, mapErrorMessages, withRouter } from 'src/utilities';
 
 interface IState {
   user: UserType;
@@ -47,8 +37,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
     }
     const { hasPermission } = this.context;
     const { user, errorMessages } = this.state;
-    const notAuthorised =
-      !this.context.user || !hasPermission('galaxy.add_user');
+    const notAuthorised = !this.context.user || !hasPermission('galaxy.add_user');
     const breadcrumbs = [
       { url: formatPath(Paths.userList), name: t`Users` },
       { name: t`Create new user` },

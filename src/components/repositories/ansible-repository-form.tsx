@@ -12,12 +12,7 @@ import {
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
-import {
-  APISearchTypeAhead,
-  HelperText,
-  LazyDistributions,
-  PulpLabels,
-} from 'src/components';
+import { APISearchTypeAhead, HelperText, LazyDistributions, PulpLabels } from 'src/components';
 import { ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
@@ -72,9 +67,7 @@ export const AnsibleRepositoryForm = ({
         isDisabled={disabledFields.includes(fieldName)}
         id={fieldName}
         value={repository[fieldName] || ''}
-        onChange={(value) =>
-          updateRepository({ ...repository, [fieldName]: value })
-        }
+        onChange={(value) => updateRepository({ ...repository, [fieldName]: value })}
         {...props}
       />,
     );
@@ -120,9 +113,7 @@ export const AnsibleRepositoryForm = ({
 
   useEffect(() => loadRemotes(), []);
 
-  const selectedRemote = remotes?.find?.(
-    ({ pulp_href }) => pulp_href === repository?.remote,
-  );
+  const selectedRemote = remotes?.find?.(({ pulp_href }) => pulp_href === repository?.remote);
 
   const [selectedPipeline, setSelectedPipeline] = useState(
     hideFromSearch && pipeline === 'staging'
@@ -166,17 +157,17 @@ export const AnsibleRepositoryForm = ({
       Pipeline adds repository labels with pre-defined meanings:
       <ul>
         <li>
-          <b>None</b> - users require permissions to modify content in this
-          repository to upload collection.
+          <b>None</b> - users require permissions to modify content in this repository to upload
+          collection.
         </li>
         <li>
-          <b>Approved</b> - collections can be moved here on approval.
-          Publishing directly to this repository is disabled.
+          <b>Approved</b> - collections can be moved here on approval. Publishing directly to this
+          repository is disabled.
         </li>
         <li>
-          <b>Staging</b> - collections uploaded here require approval before
-          showing up on the search page. Anyone with upload permissions for a
-          namespace can upload collections to this repository.
+          <b>Staging</b> - collections uploaded here require approval before showing up on the
+          search page. Anyone with upload permissions for a namespace can upload collections to this
+          repository.
         </li>
       </ul>
     </Trans>
@@ -186,14 +177,11 @@ export const AnsibleRepositoryForm = ({
       Repository labels can change the context in which a repository is seen.
       <ul>
         <li>
-          <b>Hide from search</b> (
-          <pre style={{ display: 'inline-block' }}>hide_from_search</pre>) -
-          prevent collections in this repository from showing up on the home
-          page
+          <b>Hide from search</b> (<pre style={{ display: 'inline-block' }}>hide_from_search</pre>)
+          - prevent collections in this repository from showing up on the home page
         </li>
         <li>
-          (<pre style={{ display: 'inline-block' }}>pipeline: *</pre>) - see
-          Pipeline above
+          (<pre style={{ display: 'inline-block' }}>pipeline: *</pre>) - see Pipeline above
         </li>
       </ul>
     </Trans>
@@ -283,9 +271,7 @@ export const AnsibleRepositoryForm = ({
           id='private'
           isChecked={repository.private}
           label={t`Make private`}
-          onChange={(value) =>
-            updateRepository({ ...repository, private: value })
-          }
+          onChange={(value) => updateRepository({ ...repository, private: value })}
         />,
       )}
 
@@ -298,14 +284,11 @@ export const AnsibleRepositoryForm = ({
             {remotes ? (
               <APISearchTypeAhead
                 loadResults={loadRemotes}
-                onClear={() =>
-                  updateRepository({ ...repository, remote: null })
-                }
+                onClear={() => updateRepository({ ...repository, remote: null })}
                 onSelect={(_event, value) =>
                   updateRepository({
                     ...repository,
-                    remote: remotes.find(({ name }) => name === value)
-                      ?.pulp_href,
+                    remote: remotes.find(({ name }) => name === value)?.pulp_href,
                   })
                 }
                 placeholderText={t`Select a remote`}
