@@ -1,6 +1,3 @@
-singleQuote: true
-jsxSingleQuote: true
-trailingComma: 'all'
 bracketSameLine: false
 importOrder:
   - '^[.][.]/app.scss'
@@ -8,3 +5,7 @@ importOrder:
   - "^src/"
   - "^[./]"
 importOrderSortSpecifiers: true
+jsxSingleQuote: true
+printWidth: 100
+singleQuote: true
+trailingComma: 'all'
