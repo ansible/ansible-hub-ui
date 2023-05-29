@@ -15,7 +15,6 @@ import {
   Pagination,
   Sort,
 } from 'src/components';
-import 'src/containers/collection-detail/collection-dependencies.scss';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, filterIsSet } from 'src/utilities';
 

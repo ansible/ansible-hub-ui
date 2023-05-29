@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersion, CollectionVersionSearch } from 'src/api';
 import { EmptyStateNoData, HelperText } from 'src/components';
-import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   collection: CollectionVersionSearch;
