@@ -141,6 +141,11 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
     );
   };
 
+  const translateTitle = ({ title, ...rest }) => ({
+    ...rest,
+    title: i18n._(title),
+  });
+
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
@@ -195,17 +200,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       const { alerts, itemCount, items, loading, params, unauthorised } =
         this.state;
 
-      const translateTitle = ({ title, ...rest }) => ({
-        ...rest,
-        title: i18n._(title),
-      });
       const localizedFilterConfig = (filterConfig || [])
         .map(translateTitle)
         .map(({ options, ...rest }) => ({
           ...rest,
           options: options?.map(translateTitle),
         }));
-      const localizedSortHeaders = (sortHeaders || []).map(translateTitle);
 
       const knownFilters = localizedFilterConfig.map(({ id }) => id);
       const noData = items.length === 0 && !filterIsSet(params, knownFilters);
@@ -326,6 +326,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       if (!items.length) {
         return <EmptyStateFilter />;
       }
+
+      const localizedSortHeaders = (sortHeaders || []).map(translateTitle);
 
       return (
         <table
