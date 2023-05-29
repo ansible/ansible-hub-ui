@@ -1,4 +1,4 @@
-import { t, msg } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import React from 'react';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';

@@ -1,4 +1,4 @@
-import { t, msg } from '@lingui/macro';
+import { msg } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {

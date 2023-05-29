@@ -1,4 +1,4 @@
-import { Trans, t, msg } from '@lingui/macro';
+import { Trans, msg, t } from '@lingui/macro';
 import React from 'react';
 import {
   ansibleRepositoryCopyAction,
