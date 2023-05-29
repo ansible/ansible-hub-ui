@@ -43,11 +43,8 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
-        <BaseHeader title={t`API token`}></BaseHeader>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <BaseHeader title={t`API token`} />
         <Main>
           {unauthorised ? (
             <EmptyStateUnauthorized />

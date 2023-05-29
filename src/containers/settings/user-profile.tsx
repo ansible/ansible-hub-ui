@@ -59,14 +59,11 @@ class UserProfile extends React.Component<RouteProps, IState> {
     const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (!user) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
     return (
       <>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <UserFormPage
           isMe={true}
           user={user}
@@ -95,7 +92,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
               </div>
             )
           }
-        ></UserFormPage>
+        />
       </>
     );
   }

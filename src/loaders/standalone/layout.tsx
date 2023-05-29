@@ -74,7 +74,7 @@ export const StandaloneLayout = ({
             to={formatPath(Paths.userProfileSettings)}
           >{t`My profile`}</Link>
         }
-      ></DropdownItem>,
+      />,
 
       <DropdownItem
         key='logout'
@@ -119,13 +119,13 @@ export const StandaloneLayout = ({
         productName={APPLICATION_NAME}
         user={user}
         userName={userName}
-      ></AboutModalWindow>
+      />
     );
   }
 
   const Header = (
     <PageHeader
-      logo={<SmallLogo alt={APPLICATION_NAME}></SmallLogo>}
+      logo={<SmallLogo alt={APPLICATION_NAME} />}
       logoComponent={({ children }) => (
         <Link to={formatPath(Paths.landingPage)}>{children}</Link>
       )}

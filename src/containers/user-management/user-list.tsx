@@ -118,10 +118,7 @@ class UserList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
@@ -133,8 +130,8 @@ class UserList extends React.Component<RouteProps, IState> {
               ]),
             })
           }
-        ></DeleteUserModal>
-        <BaseHeader title={t`Users`}></BaseHeader>
+        />
+        <BaseHeader title={t`Users`} />
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (

@@ -33,7 +33,7 @@ export const ConfirmModal = (props: IProps) => {
           isDisabled={isDisabled}
         >
           {confirmButtonTitle ? confirmButtonTitle : t`Yes`}
-          {spinner && <Spinner size='sm'></Spinner>}
+          {spinner && <Spinner size='sm' />}
         </Button>,
         <Button key='cancel' onClick={cancelAction} variant='link'>
           {t`Cancel`}

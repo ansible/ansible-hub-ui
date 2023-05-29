@@ -152,7 +152,7 @@ class LegacyNamespaces extends React.Component<
             reference={this.state.wisdomReference}
           />
         )}
-        <BaseHeader title={t`Legacy Namespaces`}></BaseHeader>
+        <BaseHeader title={t`Legacy Namespaces`} />
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />

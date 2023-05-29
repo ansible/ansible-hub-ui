@@ -130,9 +130,9 @@ export class ImportModal extends React.Component<IProps, IState> {
   private renderFileIcon() {
     switch (this.state.uploadStatus) {
       case Status.uploading:
-        return <SpinnerIcon className='fa-spin'></SpinnerIcon>;
+        return <SpinnerIcon className='fa-spin' />;
       default:
-        return <FolderOpenIcon></FolderOpenIcon>;
+        return <FolderOpenIcon />;
     }
   }
 

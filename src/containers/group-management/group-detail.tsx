@@ -147,30 +147,24 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
     if (!group && alerts && alerts.length) {
       return (
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
       );
     }
     if (unauthorised) {
       return <EmptyStateUnauthorized />;
     }
     if (!group) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     if (params.tab == 'users' && !users && !unauthorised) {
       this.queryUsers();
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}

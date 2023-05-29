@@ -83,7 +83,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const { collection_version: version, repository } = collection;

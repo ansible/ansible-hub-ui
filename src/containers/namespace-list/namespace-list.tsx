@@ -152,7 +152,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       namespaces.length === 0;
 
     if (loading) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     // Namespaces or Partners
@@ -174,7 +174,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               ),
             })
           }
-        ></NamespaceModal>
+        />
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
           {!this.context.user.is_anonymous && (
@@ -299,7 +299,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (loading) {
       return (
         <section>
-          <LoadingPageSpinner></LoadingPageSpinner>;
+          <LoadingPageSpinner />;
         </section>
       );
     }
@@ -330,7 +330,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               })}
               key={i}
               {...ns}
-            ></NamespaceCard>
+            />
           </div>
         ))}
       </section>

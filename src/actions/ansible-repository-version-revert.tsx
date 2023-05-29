@@ -31,7 +31,7 @@ const RevertModal = ({
             isDisabled={pending}
           >
             {t`Revert`}
-            {pending && <Spinner size='sm'></Spinner>}
+            {pending && <Spinner size='sm' />}
           </Button>
         </div>,
         <Button key='cancel' onClick={cancelAction} variant='link'>

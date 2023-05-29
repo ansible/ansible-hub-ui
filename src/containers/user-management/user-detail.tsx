@@ -63,7 +63,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
       return <EmptyStateUnauthorized />;
     }
     if (!userDetail) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const breadcrumbs = [
@@ -74,10 +74,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
@@ -89,7 +86,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
               ]),
             })
           }
-        ></DeleteUserModal>
+        />
         <UserFormPage
           user={userDetail}
           breadcrumbs={breadcrumbs}
@@ -122,7 +119,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
               ) : null}
             </div>
           }
-        ></UserFormPage>
+        />
       </>
     );
   }

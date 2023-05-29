@@ -131,14 +131,11 @@ class GroupList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
-        <BaseHeader title={t`Groups`}></BaseHeader>
+        <BaseHeader title={t`Groups`} />
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : loading ? (

@@ -204,7 +204,7 @@ export class UserForm extends React.Component<IProps, IState> {
             onChange={() =>
               this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
             }
-          ></Switch>
+          />
         </Tooltip>
       </FormGroup>
     );

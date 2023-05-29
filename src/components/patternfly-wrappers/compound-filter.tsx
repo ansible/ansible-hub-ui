@@ -108,7 +108,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           variant={ButtonVariant.control}
           isDisabled={!this.props.inputText.trim().length}
         >
-          <SearchIcon></SearchIcon>
+          <SearchIcon />
         </Button>
       </InputGroup>
     );

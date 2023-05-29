@@ -57,7 +57,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     } = this.state;
 
     if (!collection) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const { collection_version, repository } = collection;

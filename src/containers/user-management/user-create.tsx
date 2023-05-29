@@ -58,9 +58,9 @@ class UserCreate extends React.Component<RouteProps, IState> {
     return notAuthorised ? (
       <React.Fragment>
         <BaseHeader
-          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={title}
-        ></BaseHeader>
+        />
         <EmptyStateUnauthorized />
       </React.Fragment>
     ) : (
@@ -75,7 +75,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
         saveUser={this.saveUser}
         onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
         isNewUser={true}
-      ></UserFormPage>
+      />
     );
   }
   private saveUser = () => {

@@ -94,7 +94,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
     } = this.state;
 
     if (loading) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const command = (layers[selectedLayer.split(/-/)[1]] || {}).text;

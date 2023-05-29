@@ -138,7 +138,7 @@ export const CollectionListItem = ({
           {uploadButton || dropdownMenu ? (
             <FlexItem>
               {uploadButton}
-              {dropdownMenu || <span className='hidden-menu-space'></span>}
+              {dropdownMenu || <span className='hidden-menu-space' />}
             </FlexItem>
           ) : null}
           <FlexItem>

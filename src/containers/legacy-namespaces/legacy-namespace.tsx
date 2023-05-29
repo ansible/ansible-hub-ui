@@ -249,14 +249,14 @@ class LegacyNamespace extends React.Component<
             size='90px'
             unlockWidth
             width='90px'
-          ></Logo>
+          />
           <Link to={namespace_url}>{this.state.namespace.name}</Link>
         </DataListCell>,
       );
 
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns-name'>
-          <BaseHeader title={this.state.namespace.name}></BaseHeader>
+          <BaseHeader title={this.state.namespace.name} />
         </DataListCell>,
       );
 

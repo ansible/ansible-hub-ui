@@ -127,7 +127,7 @@ class MyImports extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <div ref={this.topOfPage}></div>
+        <div ref={this.topOfPage} />
         <BaseHeader title={t`My imports`} />
         <AlertList
           alerts={this.state.alerts}

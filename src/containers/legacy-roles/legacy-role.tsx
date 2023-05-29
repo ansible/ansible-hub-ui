@@ -85,7 +85,7 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
         <div
           className='pf-c-content'
           dangerouslySetInnerHTML={{ __html: this.state.readme_html }}
-        ></div>
+        />
       </div>
     );
   }
@@ -238,7 +238,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
   render() {
     const { role } = this.state;
     if (!role) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const repository =
@@ -281,7 +281,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
             size='70px'
             unlockWidth
             width='97px'
-          ></Logo>
+          />
           <Link to={namespace_url}>{namespace.name}</Link>
         </DataListCell>,
       );
@@ -337,7 +337,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
             github_user={this.state.github_user}
             name={this.state.name}
             id={this.state.role.id}
-          ></LegacyRoleInstall>
+          />
         );
       } else if (this.state.activeItem === 'documentation') {
         return (
@@ -346,7 +346,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
             github_user={this.state.github_user}
             name={this.state.name}
             id={this.state.role.id}
-          ></LegacyRoleDocs>
+          />
         );
       } else if (this.state.activeItem === 'versions') {
         return (
@@ -355,10 +355,10 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
             github_user={this.state.github_user}
             name={this.state.name}
             id={this.state.role.id}
-          ></LegacyRoleVersions>
+          />
         );
       } else {
-        return <div></div>;
+        return <div />;
       }
     };
 

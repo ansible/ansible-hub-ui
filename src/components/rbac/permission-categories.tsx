@@ -93,7 +93,7 @@ export class PermissionCategories extends React.Component<IProps> {
             <FlexItem
               style={{ minWidth: '200px' }}
             >{t`No permissions`}</FlexItem>
-            <FlexItem grow={{ default: 'grow' }}></FlexItem>
+            <FlexItem grow={{ default: 'grow' }} />
           </Flex>
         )}
         {groupsToShow.map((group) => (
