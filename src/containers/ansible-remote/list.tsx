@@ -38,7 +38,7 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   filterConfig: [
     {
       id: 'name__icontains',
-      title: t`Remote name`,
+      title: msg`Remote name`,
     },
   ],
   headerActions: [ansibleRemoteCreateAction], // Add remote
@@ -71,12 +71,12 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   },
   sortHeaders: [
     {
-      title: t`Remote name`,
+      title: msg`Remote name`,
       type: 'alpha',
       id: 'name',
     },
     {
-      title: t`URL`,
+      title: msg`URL`,
       type: 'alpha',
       id: 'url',
     },

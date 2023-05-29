@@ -36,24 +36,24 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   filterConfig: [
     {
       id: 'name__icontains',
-      title: t`Repository name`,
+      title: msg`Repository name`,
     },
     {
       id: 'status',
-      title: t`Status`,
+      title: msg`Status`,
       inputType: 'select',
       options: [
         {
           id: Constants.NOTCERTIFIED,
-          title: t`Rejected`,
+          title: msg`Rejected`,
         },
         {
           id: Constants.NEEDSREVIEW,
-          title: t`Needs Review`,
+          title: msg`Needs Review`,
         },
         {
           id: Constants.APPROVED,
-          title: t`Approved`,
+          title: msg`Approved`,
         },
       ],
     },
@@ -99,22 +99,22 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   },
   sortHeaders: [
     {
-      title: t`Repository name`,
+      title: msg`Repository name`,
       type: 'alpha',
       id: 'name',
     },
     {
-      title: t`Sync status`,
+      title: msg`Sync status`,
       type: 'none',
       id: 'lastSyncStatus',
     },
     {
-      title: t`Last synced`,
+      title: msg`Last synced`,
       type: 'none',
       id: 'lastSynced',
     },
     {
-      title: t`Created date`,
+      title: msg`Created date`,
       type: 'numeric',
       id: 'pulp_created',
     },

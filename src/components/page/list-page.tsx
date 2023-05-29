@@ -195,17 +195,29 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       const { alerts, itemCount, items, loading, params, unauthorised } =
         this.state;
 
-      const knownFilters = (filterConfig || []).map(({ id }) => id);
+      const translateTitle = ({ title, ...rest }) => ({
+        ...rest,
+        title: i18n._(title),
+      });
+      const localizedFilterConfig = (filterConfig || [])
+        .map(translateTitle)
+        .map(({ options, ...rest }) => ({
+          ...rest,
+          options: options?.map(translateTitle),
+        }));
+      const localizedSortHeaders = (sortHeaders || []).map(translateTitle);
+
+      const knownFilters = localizedFilterConfig.map(({ id }) => id);
       const noData = items.length === 0 && !filterIsSet(params, knownFilters);
 
       const updateParams = (p) => this.updateParams(p, () => this.query());
 
       const niceNames = Object.fromEntries(
-        (filterConfig || []).map(({ id, title }) => [id, title]),
+        localizedFilterConfig.map(({ id, title }) => [id, title]),
       );
 
       const niceValues = {};
-      (filterConfig || [])
+      localizedFilterConfig
         .filter((filter) => filter['options'] && filter['options'].length > 0)
         .forEach((item) => {
           const obj = (niceValues[item['id']] = {});
@@ -257,7 +269,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                               }
                               updateParams={updateParams}
                               params={params}
-                              filterConfig={filterConfig}
+                              filterConfig={localizedFilterConfig}
                             />
                           </ToolbarItem>
                           {headerActions?.length &&
@@ -321,7 +333,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
           className='hub-c-table-content pf-c-table'
         >
           <SortTable
-            options={{ headers: sortHeaders }}
+            options={{ headers: localizedSortHeaders }}
             params={params}
             updateParams={updateParams}
           />
