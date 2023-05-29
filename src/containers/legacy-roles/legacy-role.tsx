@@ -33,7 +33,6 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, chipGroupProps, withRouter } from 'src/utilities';
-import './legacy-roles.scss';
 
 interface RoleMeta {
   role: LegacyRoleDetailType;

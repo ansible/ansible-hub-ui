@@ -13,7 +13,6 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
-import './legacy-roles.scss';
 
 interface IProps {
   legacyroles: LegacyRoleListType[];
