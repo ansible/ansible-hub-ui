@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {

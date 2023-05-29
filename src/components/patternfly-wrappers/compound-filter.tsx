@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 

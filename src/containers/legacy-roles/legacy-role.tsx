@@ -15,7 +15,7 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleAPI } from 'src/api/legacyrole';
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';

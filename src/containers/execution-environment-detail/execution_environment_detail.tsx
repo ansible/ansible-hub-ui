@@ -7,7 +7,7 @@ import {
   FlexItem,
   Title,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import {
   ClipboardCopy,

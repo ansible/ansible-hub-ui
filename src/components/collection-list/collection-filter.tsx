@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Repositories } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';

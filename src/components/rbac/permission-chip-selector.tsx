@@ -6,7 +6,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
 

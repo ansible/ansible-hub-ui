@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, DropdownItem } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   ContainerRepositoryType,

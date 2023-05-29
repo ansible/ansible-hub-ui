@@ -8,7 +8,7 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
 import {
   AlertList,

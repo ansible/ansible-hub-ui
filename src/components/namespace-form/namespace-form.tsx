@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Form, FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { NamespaceType } from 'src/api';
 import { NamespaceCard } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';

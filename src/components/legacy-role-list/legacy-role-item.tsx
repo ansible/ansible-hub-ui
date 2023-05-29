@@ -9,7 +9,7 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
 import { DateComponent, Logo, Tag } from 'src/components';

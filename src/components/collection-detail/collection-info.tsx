@@ -8,7 +8,7 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import { DownloadIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,

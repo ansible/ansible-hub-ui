@@ -1,5 +1,5 @@
 import { dom, parse } from 'antsibull-docs';
-import * as React from 'react';
+import React from 'react';
 import {
   PluginContentType,
   PluginDoc,

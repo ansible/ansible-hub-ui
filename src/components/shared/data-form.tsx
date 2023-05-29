@@ -4,7 +4,7 @@ import {
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {

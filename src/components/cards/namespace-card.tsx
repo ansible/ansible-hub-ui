@@ -8,7 +8,7 @@ import {
   CardTitle,
   Tooltip,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'src/components';
 import './cards.scss';

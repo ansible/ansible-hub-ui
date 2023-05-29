@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, Title } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 
 interface IProps {
   title: string;

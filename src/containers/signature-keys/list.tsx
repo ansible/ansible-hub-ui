@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   AlertList,

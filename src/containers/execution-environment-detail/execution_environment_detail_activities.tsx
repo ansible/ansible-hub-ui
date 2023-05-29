@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {

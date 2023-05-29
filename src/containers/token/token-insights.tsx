@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, ClipboardCopyVariant } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
