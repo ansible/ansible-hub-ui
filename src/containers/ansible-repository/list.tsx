@@ -61,8 +61,8 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   headerActions: [ansibleRepositoryCreateAction], // Add repository
   listItemActions,
   noDataButton: ansibleRepositoryCreateAction.button,
-  noDataDescription: t`Repositories will appear once created.`,
-  noDataTitle: t`No repositories yet`,
+  noDataDescription: msg`Repositories will appear once created.`,
+  noDataTitle: msg`No repositories yet`,
   query: ({ params }) => {
     const queryParams = { ...params };
 
@@ -119,7 +119,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       id: 'pulp_created',
     },
   ],
-  title: t`Repositories`,
+  title: msg`Repositories`,
 });
 
 export default AnsibleRepositoryList;

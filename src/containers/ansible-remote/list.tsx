@@ -44,8 +44,8 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   headerActions: [ansibleRemoteCreateAction], // Add remote
   listItemActions,
   noDataButton: ansibleRemoteCreateAction.button,
-  noDataDescription: t`Remotes will appear once created.`,
-  noDataTitle: t`No remotes yet`,
+  noDataDescription: msg`Remotes will appear once created.`,
+  noDataTitle: msg`No remotes yet`,
   query: ({ params }) => AnsibleRemoteAPI.list(params),
   renderTableRow(item: AnsibleRemoteType, index: number, actionContext) {
     const { name, pulp_href, url } = item;
@@ -81,7 +81,7 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
       id: 'url',
     },
   ],
-  title: t`Remotes`,
+  title: msg`Remotes`,
 });
 
 export default AnsibleRemoteList;
