@@ -8,8 +8,8 @@ describe('collection tests', () => {
   });
 
   after(() => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteRepositories();
+    //cy.deleteNamespacesAndCollections();
+    //cy.deleteRepositories();
   });
 
   beforeEach(() => {
@@ -18,7 +18,6 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
-
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.contains('test_collection');
@@ -34,13 +33,13 @@ describe('collection tests', () => {
   });
 
   it('deletes an collection from repository', () => {
-    cy.createApprovedCollection('test_namespace', 'test_collection');
+    cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
 
     cy.galaxykit('task wait all');
     cy.galaxykit(
-      'collection copy test_namespace test_collection 1.0.0 published repo2',
+      'collection copy test_namespace test_repo_collection2 1.0.0 published repo2',
     );
 
     cy.visit(`${uiPrefix}collections?view_type=list`);

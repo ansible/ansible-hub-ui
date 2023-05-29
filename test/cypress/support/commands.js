@@ -462,23 +462,10 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
 });
 
 Cypress.Commands.add('deleteAllCollections', {}, () => {
-  const waitForEmptyCollection = (maxLoops) => {
-    if (maxLoops == 0) {
-      cy.log('Max loops reached while waiting for the empty collections.');
-      return;
-    }
-
-    cy.wait(3000);
-
-    cy.galaxykit('collection list').then((res) => {
-      const data = JSON.parse(res[0]).data;
-      if (data.length != 0) {
-        waitForEmptyCollection(maxLoops - 1);
-      } else {
-        cy.log('Collections are empty!');
-      }
-    });
-  };
+  cy.exec(
+    'cd ../../oci_env; oci-env exec pulp -v orphan cleanup --protection-time 0 </dev/tty',
+  );
+  cy.galaxykit('task wait all');
 
   cy.galaxykit('collection list').then((res) => {
     const data = JSON.parse(res[0]).data;
@@ -494,7 +481,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
     });
   });
 
-  waitForEmptyCollection(10);
+  cy.galaxykit('task wait all');
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
