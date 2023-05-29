@@ -1,3 +1,4 @@
+import { MessageDescriptor } from '@lingui/core';
 import React, { useEffect, useState } from 'react';
 import { RoleAPI } from 'src/api';
 import { LoadingPageSpinner, RolePermissions } from 'src/components';
@@ -7,7 +8,7 @@ import { translateLockedRolesDescription } from 'src/utilities';
 interface IProps {
   name: string;
   filteredPermissions?: {
-    [key: string]: string;
+    [key: string]: MessageDescriptor;
   };
 }
 

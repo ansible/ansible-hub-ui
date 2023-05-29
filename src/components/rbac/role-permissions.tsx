@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+import { MessageDescriptor, i18n } from '@lingui/core';
 import { t } from '@lingui/macro';
 import { Flex, FlexItem } from '@patternfly/react-core';
 import * as React from 'react';
@@ -7,7 +7,7 @@ import { Constants } from 'src/constants';
 import { twoWayMapper } from 'src/utilities';
 
 interface IProps {
-  filteredPermissions: { [key: string]: string };
+  filteredPermissions: { [key: string]: MessageDescriptor };
   selectedPermissions: string[];
   setPermissions?: (permissions) => void;
   showEmpty: boolean;
