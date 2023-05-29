@@ -1,3 +1,4 @@
+import { i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -349,7 +350,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
               itemCount: 0,
             });
             this.addAlert({
-              title: errorTitle,
+              title: i18n._(errorTitle),
               variant: 'danger',
               description: errorMessage(status, statusText),
             });

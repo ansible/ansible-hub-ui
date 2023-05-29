@@ -1,3 +1,4 @@
+import { i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -219,7 +220,7 @@ export const Page = function <
                 item: null,
               });
               this.addAlert({
-                title: errorTitle,
+                title: i18n._(errorTitle),
                 variant: 'danger',
                 description: errorMessage(status, statusText),
               });

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, msg } from '@lingui/macro';
 import React from 'react';
 import {
   ansibleRemoteDeleteAction,
@@ -41,7 +41,7 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
     ].filter(Boolean),
   condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
-  errorTitle: t`Remote could not be displayed.`,
+  errorTitle: msg`Remote could not be displayed.`,
   headerActions: [
     ansibleRemoteEditAction,
     ansibleRemoteDownloadRequirementsAction,

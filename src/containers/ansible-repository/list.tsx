@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, msg } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -31,7 +31,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRepositoryList',
-  errorTitle: t`Repositories could not be displayed.`,
+  errorTitle: msg`Repositories could not be displayed.`,
   extraState: {},
   filterConfig: [
     {
