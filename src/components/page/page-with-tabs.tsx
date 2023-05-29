@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -51,14 +51,14 @@ interface PageWithTabsParams<T, ExtraState> {
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
   headerActions?: ActionType[];
   headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => React.ReactNode;
-  tabs: { id: string; name: string }[];
+  tabs: { id: string; name: MessageDescriptor }[];
   tabUpdateParams?: (params: ParamType) => ParamType;
 }
 

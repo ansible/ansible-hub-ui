@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -16,7 +16,6 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  FilterOption,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -64,7 +63,13 @@ export type RenderTableRow<T> = (
   listItemActions?,
 ) => React.ReactNode;
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
-export type SortHeaders = {
+type SortHeaders = {
+  title: MessageDescriptor;
+  type: string;
+  id: string;
+  className?: string;
+}[];
+export type LocalizedSortHeaders = {
   title: string;
   type: string;
   id: string;
@@ -77,19 +82,20 @@ interface ListPageParams<T, ExtraState> {
   defaultSort?: string;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
-  filterConfig: FilterOption[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filterConfig: any[]; // FilterOption[] but { title: MessageDescriptor }
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
   noDataButton?: (item, actionContext) => React.ReactNode;
-  noDataDescription: string;
-  noDataTitle: string;
+  noDataDescription: MessageDescriptor;
+  noDataTitle: MessageDescriptor;
   query: Query<T>;
   renderModals?: RenderModals;
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
-  title: string;
+  title: MessageDescriptor;
 }
 
 export const ListPage = function <T, ExtraState = Record<string, never>>({
@@ -141,7 +147,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
     );
   };
 
-  const translateTitle = ({ title, ...rest }) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const translateTitle = ({ title, ...rest }: any) => ({
     ...rest,
     title: i18n._(title),
   });
@@ -327,7 +334,9 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         return <EmptyStateFilter />;
       }
 
-      const localizedSortHeaders = (sortHeaders || []).map(translateTitle);
+      const localizedSortHeaders = (sortHeaders || []).map(
+        translateTitle,
+      ) as LocalizedSortHeaders;
 
       return (
         <table
