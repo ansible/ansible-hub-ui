@@ -229,15 +229,15 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       return (
         <React.Fragment>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-          <BaseHeader title={title} />
+          <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
           {unauthorised ? (
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
             <EmptyStateNoData
               button={<>{noDataButton?.(null, actionContext)}</>}
-              description={noDataDescription}
-              title={noDataTitle}
+              description={i18n._(noDataDescription)}
+              title={i18n._(noDataTitle)}
             />
           ) : (
             <Main>
@@ -316,7 +316,10 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       }
 
       return (
-        <table aria-label={title} className='hub-c-table-content pf-c-table'>
+        <table
+          aria-label={i18n._(title)}
+          className='hub-c-table-content pf-c-table'
+        >
           <SortTable
             options={{ headers: sortHeaders }}
             params={params}
