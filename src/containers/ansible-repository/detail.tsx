@@ -1,4 +1,4 @@
-import { Trans, t } from '@lingui/macro';
+import { Trans, t, msg } from '@lingui/macro';
 import React from 'react';
 import {
   ansibleRepositoryCopyAction,
@@ -52,7 +52,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     ].filter(Boolean),
   condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',
-  errorTitle: t`Repository could not be displayed.`,
+  errorTitle: msg`Repository could not be displayed.`,
   headerActions: [
     ansibleRepositoryEditAction,
     ansibleRepositorySyncAction,

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, msg } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -33,7 +33,7 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRemoteList',
-  errorTitle: t`Remotes could not be displayed.`,
+  errorTitle: msg`Remotes could not be displayed.`,
   extraState: {},
   filterConfig: [
     {

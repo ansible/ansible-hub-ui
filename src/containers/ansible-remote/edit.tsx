@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, msg } from '@lingui/macro';
 import React from 'react';
 import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';
@@ -40,7 +40,7 @@ const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
   condition: (context, item?) =>
     canAddAnsibleRemote(context) || canEditAnsibleRemote(context, item),
   displayName: 'AnsibleRemoteEdit',
-  errorTitle: t`Remote could not be displayed.`,
+  errorTitle: msg`Remote could not be displayed.`,
   query: ({ name }) => {
     return AnsibleRemoteAPI.list({ name })
       .then(({ data: { results } }) => results[0])
