@@ -7,6 +7,11 @@ describe('collection tests', () => {
     cy.deleteRepositories();
   });
 
+  after(() => {
+    cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
+  });
+
   beforeEach(() => {
     cy.login();
   });
@@ -15,6 +20,8 @@ describe('collection tests', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
+
+    cy.contains('test_collection');
 
     cy.get('[data-cy=kebab-toggle]').click();
     cy.contains(
@@ -55,6 +62,8 @@ describe('collection tests', () => {
       'not.exist',
     );
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
+
+    cy.deleteRepositories();
   });
 
   it('deletes a collection version', () => {
