@@ -168,7 +168,11 @@ export const PageWithTabs = function <
       };
 
       const name = item?.name || routeParams.name;
-      const tab = tabs.find((t) => t.id == params.tab) || tabs[0];
+      const localizedTabs = tabs.map(({ name, ...rest }) => ({
+        ...rest,
+        name: i18n._(name),
+      }));
+      const tab = localizedTabs.find((t) => t.id == params.tab) || tabs[0];
 
       if (!loading && !unauthorised && !item) {
         return (
@@ -218,7 +222,7 @@ export const PageWithTabs = function <
             <div className='hub-tab-link-container'>
               <div className='tabs'>
                 <Tabs
-                  tabs={tabs}
+                  tabs={localizedTabs}
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)

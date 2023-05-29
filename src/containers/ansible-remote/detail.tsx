@@ -16,8 +16,8 @@ import { RemoteAccessTab } from './tab-access';
 import { DetailsTab } from './tab-details';
 
 const tabs = [
-  { id: 'details', name: t`Details` },
-  { id: 'access', name: t`Access` },
+  { id: 'details', name: msg`Details` },
+  { id: 'access', name: msg`Access` },
 ];
 
 const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
