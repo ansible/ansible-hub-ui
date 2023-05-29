@@ -1,4 +1,4 @@
-import { Trans, t } from '@lingui/macro';
+import { Trans, msg, t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
@@ -83,7 +83,7 @@ function revert(
 
 export const ansibleRepositoryVersionRevertAction = Action({
   condition: canRevertAnsibleRepositoryVersion,
-  title: t`Revert to this version`,
+  title: msg`Revert to this version`,
   modal: ({ addAlert, state, setState, query }) =>
     state.revertModal ? (
       <RevertModal

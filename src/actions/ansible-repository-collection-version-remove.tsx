@@ -1,4 +1,4 @@
-import { Trans, t } from '@lingui/macro';
+import { Trans, msg, t } from '@lingui/macro';
 import { Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
@@ -88,7 +88,7 @@ const RemoveCollectionVersionModal = ({
 
 export const ansibleRepositoryCollectionVersionRemoveAction = Action({
   condition: canEditAnsibleRepository,
-  title: t`Remove`,
+  title: msg`Remove`,
   modal: ({ addAlert, state, setState, query }) =>
     state.removeCollectionVersionModal ? (
       <RemoveCollectionVersionModal
