@@ -47,9 +47,9 @@ export { ImportList } from './my-imports/import-list';
 export { ImportModal } from './import-modal/import-modal';
 export {
   ListPage,
+  type LocalizedSortHeaders,
   type Query,
   type RenderTableRow,
-  type SortHeaders,
 } from './page/list-page';
 export { PageWithTabs } from './page/page-with-tabs';
 export { Page } from './page/page';

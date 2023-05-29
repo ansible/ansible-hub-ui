@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -40,7 +40,7 @@ interface PageParams<T, ExtraState> {
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
   headerActions?: ActionType[];
   query: ({ name }) => Promise<T>;
