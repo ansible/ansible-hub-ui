@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths } from 'src/paths';

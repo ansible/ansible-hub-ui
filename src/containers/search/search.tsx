@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,

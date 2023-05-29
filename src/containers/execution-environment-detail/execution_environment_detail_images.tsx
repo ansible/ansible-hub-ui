@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 import { sum } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {

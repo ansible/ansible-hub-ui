@@ -6,7 +6,7 @@ import {
   SortAmountDownIcon,
   SortAmountUpIcon,
 } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { ParamHelper } from 'src/utilities/param-helper';
 import './sort.scss';
 

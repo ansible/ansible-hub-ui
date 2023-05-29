@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Button, Modal } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
-import * as React from 'react';
+import React from 'react';
 import {
   CollectionAPI,
   CollectionUploadType,

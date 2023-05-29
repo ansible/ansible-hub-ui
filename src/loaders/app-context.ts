@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 

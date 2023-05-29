@@ -1,6 +1,6 @@
 import { Title } from '@patternfly/react-core';
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import './header.scss';
 
 interface IProps {

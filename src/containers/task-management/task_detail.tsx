@@ -13,7 +13,7 @@ import {
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { capitalize } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';

@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';

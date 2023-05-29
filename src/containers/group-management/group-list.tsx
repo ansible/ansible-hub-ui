@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,

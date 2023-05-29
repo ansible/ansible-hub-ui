@@ -15,7 +15,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import {

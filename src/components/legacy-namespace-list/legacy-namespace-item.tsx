@@ -6,7 +6,7 @@ import {
   DataListItemRow,
   DropdownItem,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';

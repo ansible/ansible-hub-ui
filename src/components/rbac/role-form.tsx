@@ -10,7 +10,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { PermissionCategories } from 'src/components';
 
 interface IState {

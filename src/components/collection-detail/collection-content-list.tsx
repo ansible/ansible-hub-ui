@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
 import { EmptyStateCustom } from 'src/components';

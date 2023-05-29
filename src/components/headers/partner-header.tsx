@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import * as React from 'react';
+import React from 'react';
 import { NamespaceType } from 'src/api';
 import {
   BaseHeader,

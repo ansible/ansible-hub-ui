@@ -16,7 +16,7 @@ import {
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import * as moment from 'moment';
-import * as React from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
