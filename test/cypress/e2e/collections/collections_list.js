@@ -2,7 +2,6 @@ import { range } from 'lodash';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
 
 describe('Collections list Tests', () => {
   function deprecate(list) {
@@ -49,7 +48,7 @@ describe('Collections list Tests', () => {
     cy.galaxykit('namespace create my_namespace');
     // insert test data
     range(11).forEach((i) => {
-      cy.createApprovedCollection('my_namespace', 'my_collection' + i);
+      cy.galaxykit(`-i collection upload my_namespace my_collection${i}`);
     });
   });
 
@@ -64,11 +63,9 @@ describe('Collections list Tests', () => {
     cy.contains('Collections');
   });
 
-  if (!insightsLogin) {
-    it('checks if its deprecated and if yes, undeprecate it', () => {
-      undeprecateIfDeprecated();
-    });
-  }
+  it('checks if its deprecated and if yes, undeprecate it', () => {
+    undeprecateIfDeprecated();
+  });
 
   it('can deprecate', () => {
     cy.get('[data-cy="view_type_list"] svg').click();

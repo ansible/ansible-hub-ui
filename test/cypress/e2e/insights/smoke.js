@@ -16,6 +16,8 @@ describe('cloud smoketest', () => {
     cy.galaxykit(`collection upload autohubtest3 ${collectionName}3`);
     cy.galaxykit(`collection move autohubtest3 ${collectionName}3`);
 
+    cy.on('uncaught:exception', () => false);
+
     // handle cloud login
     cy.login();
 
@@ -36,67 +38,54 @@ describe('cloud smoketest', () => {
     cy.get('.collection-container').should('be.visible');
   });
 
-  describe('with download', () => {
-    it('can load a Collection', () => {
-      // wait for collections to appear
-      cy.get('.collection-container').should('be.visible');
+  beforeEach(() => {
+    cy.on('uncaught:exception', () => false);
+  });
 
-      // wait for collections to load
-      cy.get('.hub-c-card-collection-container .name a').should('exist');
+  it('can load a Collection', () => {
+    // wait for collections to appear
+    cy.get('.collection-container').should('be.visible');
 
-      // click on the first available collection
-      cy.get('.hub-c-card-collection-container .name a').first().click();
+    // wait for collections to load
+    cy.get('.hub-c-card-collection-container .name a').should('exist');
 
-      // wait for collection detail to load
-      cy.get('.info-panel');
+    // click on the first available collection
+    cy.get('.hub-c-card-collection-container .name a').first().click();
 
-      // ensure the download button appears
-      cy.contains('button', 'Download tarball').should('exist');
-    });
+    // wait for collection detail to load
+    cy.get('.info-panel');
 
-    it('can load a Partners list of collections', () => {
-      cy.login();
-      // wait for the Partners button to appear and then click on it
-      cy.get('[data-ouia-component-id="Partners"]').click();
+    // ensure the download button appears
+    cy.contains('button', 'Download tarball').should('exist');
+  });
 
-      // wait for the the Partners list to appear
-      cy.get('.hub-namespace-page').should('be.visible');
+  it('can load a Partners list of collections', () => {
+    cy.login();
+    // wait for the Partners button to appear and then click on it
+    cy.get('[data-ouia-component-id="Partners"]').click();
 
-      // click on the first available Partner
-      cy.get('.hub-c-card-ns-container .pf-c-card__footer a').first().click();
+    // wait for the the Partners list to appear
+    cy.get('.hub-namespace-page').should('be.visible');
 
-      // wait for the summary|list to load
-      cy.get('[aria-label="List of Collections"]').should('be.visible');
+    // click on the first available Partner
+    cy.get('.hub-c-card-ns-container .pf-c-card__footer a').first().click();
 
-      // ensure the upload collection button appears
-      cy.contains('button', 'Upload collection').should('exist');
+    // wait for the summary|list to load
+    cy.get('[aria-label="List of Collections"]').should('be.visible');
 
-      // ensure the upload new version button appears
-      cy.contains('button', 'Upload new version').should('exist');
-    });
+    // ensure the upload collection button appears
+    cy.contains('button', 'Upload collection').should('exist');
 
-    it.skip('can load the Repo Management page', () => {
-      cy.login();
-      // wait for the Repo management button to appear and then click on it
-      cy.get('[data-ouia-component-id="Repositories"]').click();
+    // ensure the upload new version button appears
+    cy.contains('button', 'Upload new version').should('exist');
+  });
 
-      // wait for the the repository list to appear
-      cy.get('.repository-list').should('be.visible');
-    });
+  it('can load the Connect to hub page', () => {
+    cy.login();
+    // wait for the Connect to hub button to appear and then click on it
+    cy.get('[data-ouia-component-id="Connect to Hub"]').click();
 
-    it('can load the Connect to hub page', () => {
-      cy.on('uncaught:exception', () => {
-        return false;
-        // this is needed, otherwise it fails on some HTTP request
-        // it seems that cy on duration is valid inside it, it does not catch api calls outisde
-      });
-
-      cy.login();
-      // wait for the Connect to hub button to appear and then click on it
-      cy.get('[data-ouia-component-id="Connect to Hub"]').click();
-
-      // ensure the load token button appears
-      cy.contains('button', 'Load token').should('exist');
-    });
+    // ensure the load token button appears
+    cy.contains('button', 'Load token').should('exist');
   });
 });

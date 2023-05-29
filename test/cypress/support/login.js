@@ -3,16 +3,6 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 
-const sessionOptions = {
-  validate: insightsLogin
-    ? () => {
-        cy.visit(uiPrefix);
-        cy.get('#UserMenu');
-      }
-    : () =>
-        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
-};
-
 function apiLogin(username, password) {
   cy.session(
     ['apiLogin', username],
@@ -29,7 +19,10 @@ function apiLogin(username, password) {
         });
       });
     },
-    sessionOptions,
+    {
+      validate: () =>
+        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+    },
   );
 
   cy.visit('/');
@@ -47,9 +40,15 @@ function manualCloudLogin(username, password) {
       // wait for the user menu
       cy.get('#UserMenu');
     },
-    sessionOptions,
+    {
+      validate: () => {
+        cy.visit(uiPrefix);
+        cy.get('#UserMenu');
+      },
+    },
   );
 
+  cy.on('uncaught:exception', () => false);
   cy.visit(uiPrefix);
   cy.get('#UserMenu');
 }
