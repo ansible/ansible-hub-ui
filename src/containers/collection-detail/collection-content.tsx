@@ -65,7 +65,7 @@ class CollectionContent extends React.Component<
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           reload={() => this.loadCollections(true)}
           collections={collections}
@@ -89,7 +89,7 @@ class CollectionContent extends React.Component<
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
