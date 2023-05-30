@@ -234,17 +234,19 @@ export const AnsibleRepositoryForm = ({
         'pipeline',
         t`Pipeline`,
         pipelineHelp,
-        <Select
-          variant='single'
-          isOpen={selectOpen}
-          onToggle={() => setSelectOpen(!selectOpen)}
-          onSelect={(_e, value: { id }) => selectPipeline(value.id)}
-          selections={selectOptions[selectedPipeline]}
-        >
-          {Object.entries(selectOptions).map(([k, v]) => (
-            <SelectOption key={k} value={v} />
-          ))}
-        </Select>,
+        <div data-cy='pipeline'>
+          <Select
+            variant='single'
+            isOpen={selectOpen}
+            onToggle={() => setSelectOpen(!selectOpen)}
+            onSelect={(_e, value: { id }) => selectPipeline(value.id)}
+            selections={selectOptions[selectedPipeline]}
+          >
+            {Object.entries(selectOptions).map(([k, v]) => (
+              <SelectOption key={k} value={v} />
+            ))}
+          </Select>
+        </div>,
       )}
 
       {formGroup(
@@ -292,40 +294,45 @@ export const AnsibleRepositoryForm = ({
         t`Remote`,
         t`Setting a remote allows a repository to sync from elsewhere.`,
         <>
-          {remotes ? (
-            <APISearchTypeAhead
-              loadResults={loadRemotes}
-              onClear={() => updateRepository({ ...repository, remote: null })}
-              onSelect={(_event, value) =>
-                updateRepository({
-                  ...repository,
-                  remote: remotes.find(({ name }) => name === value)?.pulp_href,
-                })
-              }
-              placeholderText={t`Select a remote`}
-              results={remotes}
-              selections={
-                selectedRemote
-                  ? [
-                      {
-                        name: selectedRemote.name,
-                        id: selectedRemote.pulp_href,
-                      },
-                    ]
-                  : []
-              }
-            />
-          ) : null}
-          {remotesError ? (
-            <span
-              style={{
-                color: 'var(--pf-global--danger-color--200)',
-              }}
-            >
-              {t`Failed to load remotes: ${remotesError}`}
-            </span>
-          ) : null}
-          {!remotes && !remotesError ? <Spinner size='sm' /> : null}
+          <div data-cy='remote'>
+            {remotes ? (
+              <APISearchTypeAhead
+                loadResults={loadRemotes}
+                onClear={() =>
+                  updateRepository({ ...repository, remote: null })
+                }
+                onSelect={(_event, value) =>
+                  updateRepository({
+                    ...repository,
+                    remote: remotes.find(({ name }) => name === value)
+                      ?.pulp_href,
+                  })
+                }
+                placeholderText={t`Select a remote`}
+                results={remotes}
+                selections={
+                  selectedRemote
+                    ? [
+                        {
+                          name: selectedRemote.name,
+                          id: selectedRemote.pulp_href,
+                        },
+                      ]
+                    : []
+                }
+              />
+            ) : null}
+            {remotesError ? (
+              <span
+                style={{
+                  color: 'var(--pf-global--danger-color--200)',
+                }}
+              >
+                {t`Failed to load remotes: ${remotesError}`}
+              </span>
+            ) : null}
+            {!remotes && !remotesError ? <Spinner size='sm' /> : null}
+          </div>
         </>,
       )}
 
