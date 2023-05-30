@@ -454,9 +454,7 @@ class Search extends React.Component<RouteProps, IState> {
       });
     };
 
-    MyNamespaceAPI.get(collection.collection_version.namespace, {
-      include_related: 'my_permissions',
-    })
+    MyNamespaceAPI.get(collection.collection_version.namespace, {})
       .then((value) => {
         if (
           value.data.related_fields.my_permissions.includes(
