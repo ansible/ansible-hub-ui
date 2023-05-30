@@ -3,14 +3,11 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('collection tests', () => {
   before(() => {
-    cy.deleteNamespacesAndCollections();
+    cy.deleteAllCollections();
     cy.deleteRepositories();
   });
 
-  after(() => {
-    //cy.deleteNamespacesAndCollections();
-    //cy.deleteRepositories();
-  });
+  after(() => {});
 
   beforeEach(() => {
     cy.login();

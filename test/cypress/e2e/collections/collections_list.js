@@ -43,7 +43,7 @@ describe('Collections list Tests', () => {
   }
 
   before(() => {
-    cy.deleteNamespacesAndCollections();
+    cy.deleteAllCollections();
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
