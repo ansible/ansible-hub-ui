@@ -29,17 +29,13 @@ export class BaseHeader extends React.Component<IProps> {
       status,
     } = this.props;
 
-    const showRepoSelector = !!contextSelector;
-
     return (
       <div className={cx('background', className)}>
-        {showRepoSelector && (
-          <div className='breadcrumb-container'>{contextSelector}</div>
-        )}
+        {contextSelector || null}
         {breadcrumbs && (
           <div className='breadcrumb-container'>{breadcrumbs}</div>
         )}
-        {!breadcrumbs && !showRepoSelector && <div className='placeholder' />}
+        {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
         <div className='column-section'>
           <div className='title-box'>

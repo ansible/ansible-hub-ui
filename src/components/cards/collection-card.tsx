@@ -40,6 +40,7 @@ export const CollectionCard = ({
 
   const company = namespace?.company || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
+  const display_repositories = true; // no feature flag in 4.7
 
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
@@ -53,21 +54,23 @@ export const CollectionCard = ({
           flexGrow
         />
         <div className='card-badge-area'>
-          <TextContent>
-            <Text component={TextVariants.small}>
-              <Badge isRead>
-                <Link
-                  to={formatPath(Paths.ansibleRepositoryDetail, {
-                    name: repository.name,
-                  })}
-                >
-                  {repository.name === Constants.CERTIFIED_REPO
-                    ? t`Certified`
-                    : repository.name}
-                </Link>
-              </Badge>
-            </Text>
-          </TextContent>
+          {display_repositories ? (
+            <TextContent>
+              <Text component={TextVariants.small}>
+                <Badge isRead>
+                  <Link
+                    to={formatPath(Paths.ansibleRepositoryDetail, {
+                      name: repository.name,
+                    })}
+                  >
+                    {repository.name === Constants.CERTIFIED_REPO
+                      ? t`Certified`
+                      : repository.name}
+                  </Link>
+                </Badge>
+              </Text>
+            </TextContent>
+          ) : null}
           {displaySignatures ? (
             <SignatureBadge
               isCompact

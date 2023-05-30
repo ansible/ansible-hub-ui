@@ -122,6 +122,7 @@ export const CollectionListItem = ({
     </DataListCell>,
   );
 
+  const display_repositories = true; // no feature flag in 4.7
   cells.push(
     <DataListCell isFilled={false} alignRight key='stats'>
       <Flex
@@ -152,17 +153,19 @@ export const CollectionListItem = ({
           direction={{ default: 'row' }}
           alignSelf={{ default: 'alignSelfFlexStart' }}
         >
-          <FlexItem>
-            <Label variant='outline'>
-              <Link
-                to={formatPath(Paths.ansibleRepositoryDetail, {
-                  name: repository.name,
-                })}
-              >
-                {repository.name}
-              </Link>
-            </Label>
-          </FlexItem>
+          {display_repositories ? (
+            <FlexItem>
+              <Label variant='outline'>
+                <Link
+                  to={formatPath(Paths.ansibleRepositoryDetail, {
+                    name: repository.name,
+                  })}
+                >
+                  {repository.name}
+                </Link>
+              </Label>
+            </FlexItem>
+          ) : null}
           {displaySignatures ? (
             <FlexItem>
               <SignatureBadge

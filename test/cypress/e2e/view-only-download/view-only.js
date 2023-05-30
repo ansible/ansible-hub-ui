@@ -11,11 +11,11 @@ describe('view-only mode - with download', () => {
     [
       'Collections > Collections',
       'Collections > Namespaces',
+      'Collections > Repositories',
       'Documentation',
     ].forEach((item) => cy.menuPresent(item));
 
     [
-      'Collections > Repositories',
       'Collections > Remotes',
       'Collections > API token',
       'Collections > Approval',
@@ -58,7 +58,7 @@ describe('view-only mode - with download', () => {
   });
 
   it('gets Unauthorized elsewhere', () => {
-    cy.visit(`${uiPrefix}ansible/repositories`);
+    cy.visit(`${uiPrefix}ansible/remotes`);
     cy.contains('You do not have access to Automation Hub');
     cy.contains('.pf-c-button', 'Login');
   });
