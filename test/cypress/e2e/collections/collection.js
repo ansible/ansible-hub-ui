@@ -54,9 +54,12 @@ describe('collection tests', () => {
     ).click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
-    cy.contains('Collection "test_collection" has been successfully deleted.', {
-      timeout: 10000,
-    });
+    cy.contains(
+      'Collection "test_repo_collection2" has been successfully deleted.',
+      {
+        timeout: 10000,
+      },
+    );
     cy.contains('[data-cy="CollectionListItem"]', 'published').should(
       'not.exist',
     );
