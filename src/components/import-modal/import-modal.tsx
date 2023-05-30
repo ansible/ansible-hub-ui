@@ -170,7 +170,7 @@ export class ImportModal extends React.Component<IProps, IState> {
 
     return (
       <Modal
-        variant={this.state.allRepos.length > 1 ? 'large' : 'small'}
+        variant={'large'}
         title={
           collection ? t`New version of ${collection.name}` : t`New collection`
         }
@@ -231,57 +231,54 @@ export class ImportModal extends React.Component<IProps, IState> {
             </span>
           ) : null}
         </div>
-        {this.state.allRepos.length > 1 && (
-          <>
-            <br />
-            <Radio
-              isChecked={this.state.onlyStaging}
-              name='radio-1'
-              onChange={(val) => {
-                this.setState({ onlyStaging: val }, () =>
-                  this.loadAllRepos('staging'),
-                );
-              }}
-              label={t`Staging Repos`}
-              id='radio-staging'
-            ></Radio>
-            <Radio
-              isChecked={!this.state.onlyStaging}
-              name='radio-2'
-              onChange={(val) => {
-                this.setState({ onlyStaging: !val }, () =>
-                  this.loadAllRepos('staging'),
-                );
-              }}
-              label={t`All Repos`}
-              id='radio-all'
-            ></Radio>
 
-            <MultipleRepoSelector
-              singleSelectionOnly={true}
-              allRepositories={this.state.allRepos}
-              fixedRepos={this.state.fixedRepos}
-              selectedRepos={this.state.selectedRepos}
-              setSelectedRepos={(repos) =>
-                this.setState({ selectedRepos: repos, errors: '' })
-              }
-              hideFixedRepos={true}
-              loadRepos={(
+        <>
+          <br />
+          <Radio
+            isChecked={this.state.onlyStaging}
+            name='radio-1'
+            onChange={(val) => {
+              this.setState({ onlyStaging: val }, () =>
+                this.loadAllRepos('staging'),
+              );
+            }}
+            label={t`Staging Repos`}
+            id='radio-staging'
+          ></Radio>
+          <Radio
+            isChecked={!this.state.onlyStaging}
+            name='radio-2'
+            onChange={(val) => {
+              this.setState({ onlyStaging: !val }, () =>
+                this.loadAllRepos('staging'),
+              );
+            }}
+            label={t`All Repos`}
+            id='radio-all'
+          ></Radio>
+          {!this.state.onlyStaging && (
+            <>{t`Please note that those repositories are not filtered by permission, if operation fail, you don't have it.`}</>
+          )}
+
+          <MultipleRepoSelector
+            singleSelectionOnly={true}
+            allRepositories={this.state.allRepos}
+            fixedRepos={this.state.fixedRepos}
+            selectedRepos={this.state.selectedRepos}
+            setSelectedRepos={(repos) =>
+              this.setState({ selectedRepos: repos, errors: '' })
+            }
+            hideFixedRepos={true}
+            loadRepos={(params, setRepositoryList, setLoading, setItemsCount) =>
+              this.loadRepos(
                 params,
                 setRepositoryList,
                 setLoading,
                 setItemsCount,
-              ) =>
-                this.loadRepos(
-                  params,
-                  setRepositoryList,
-                  setLoading,
-                  setItemsCount,
-                )
-              }
-            />
-          </>
-        )}
+              )
+            }
+          />
+        </>
       </Modal>
     );
   }
