@@ -1,3 +1,4 @@
+/*
 import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
@@ -52,3 +53,5 @@ class API extends PulpAPI {
 }
 
 export const AnsibleRepositoryAPI = new API();
+
+*/

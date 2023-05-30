@@ -71,7 +71,6 @@ export { Repositories } from './repositories';
 export { AnsibleDistributionAPI } from './ansible-distribution';
 export { AnsibleRemoteAPI } from './ansible-remote';
 export { AnsibleRemoteType } from './response-types/ansible-remote';
-export { AnsibleRepositoryAPI } from './ansible-repository';
 export {
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
