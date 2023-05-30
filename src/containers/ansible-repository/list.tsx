@@ -9,7 +9,12 @@ import {
   ansibleRepositorySyncAction,
 } from 'src/actions';
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
-import { DateComponent, ListItemActions, ListPage } from 'src/components';
+import {
+  DateComponent,
+  ListItemActions,
+  ListPage,
+  PulpLabels,
+} from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
@@ -74,7 +79,15 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
     return AnsibleRepositoryAPI.list(queryParams);
   },
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
-    const { name, pulp_created, pulp_href } = item;
+    const {
+      last_sync_task,
+      name,
+      private: isPrivate,
+      pulp_created,
+      pulp_href,
+      pulp_labels,
+      remote,
+    } = item;
     const id = parsePulpIDFromURL(pulp_href);
 
     const kebabItems = listItemActions.map((action) =>
@@ -89,9 +102,13 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
           </Link>
         </td>
         <td>
-          {!item.remote ? (
+          <PulpLabels labels={pulp_labels} />
+        </td>
+        <td>{isPrivate ? t`Yes` : t`No`}</td>
+        <td>
+          {!remote ? (
             t`no remote`
-          ) : !item.last_sync_task ? (
+          ) : !last_sync_task ? (
             t`never synced`
           ) : (
             <>
@@ -111,6 +128,16 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       title: msg`Repository name`,
       type: 'alpha',
       id: 'name',
+    },
+    {
+      title: msg`Labels`,
+      type: 'none',
+      id: 'pulp_labels',
+    },
+    {
+      title: msg`Private`,
+      type: 'none',
+      id: 'private',
     },
     {
       title: msg`Sync status`,
