@@ -66,9 +66,10 @@ export const CollectionFilter = (props: IProps) => {
   }, [inputText]);
 
   const { ignoredParams, params, updateParams } = props;
-  const { display_signatures } = context.featureFlags;
+  const { display_signatures, display_repositories } = context.featureFlags;
   const displayTags = ignoredParams.includes('tags') === false;
-  const displayRepos = ignoredParams.includes('repository_name') === false;
+  const displayRepos =
+    ignoredParams.includes('repository_name') === false && display_repositories;
   const displayNamespaces = ignoredParams.includes('namespace') === false;
 
   const filterConfig = [
