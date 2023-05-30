@@ -88,8 +88,17 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
             {name}
           </Link>
         </td>
-        <td>{lastSyncStatus(item) || '---'}</td>
-        <td>{lastSynced(item) || '---'}</td>
+        <td>
+          {!item.remote ? (
+            t`no remote`
+          ) : !item.last_sync_task ? (
+            t`never synced`
+          ) : (
+            <>
+              {lastSyncStatus(item)} {lastSynced(item)}
+            </>
+          )}
+        </td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
@@ -106,12 +115,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
     {
       title: msg`Sync status`,
       type: 'none',
-      id: 'lastSyncStatus',
-    },
-    {
-      title: msg`Last synced`,
-      type: 'none',
-      id: 'lastSynced',
+      id: 'last_sync_task',
     },
     {
       title: msg`Created date`,
