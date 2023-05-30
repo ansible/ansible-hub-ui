@@ -465,8 +465,6 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
   cy.exec(
     'cd ../../oci_env; oci-env exec pulp -v orphan cleanup --protection-time 0 </dev/tty',
   );
-  cy.galaxykit('task wait all');
-
   cy.galaxykit('collection list').then((res) => {
     const data = JSON.parse(res[0]).data;
     cy.log(data.length + ' collections found for deletion.');
@@ -484,6 +482,9 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
   });
 
   cy.galaxykit('task wait all');
+  cy.exec(
+    'cd ../../oci_env; oci-env exec pulp -v orphan cleanup --protection-time 0 </dev/tty',
+  );
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {

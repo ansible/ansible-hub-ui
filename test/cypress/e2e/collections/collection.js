@@ -62,6 +62,7 @@ describe('collection tests', () => {
     );
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
+    cy.deleteAllCollections();
     cy.deleteRepositories();
   });
 
