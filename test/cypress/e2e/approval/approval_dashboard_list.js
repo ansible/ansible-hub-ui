@@ -87,13 +87,13 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
-    cy.get('[data-cy="CertificationDashboard-row"]:first').contains(
+    cy.get('[data-cy^="CertificationDashboard-row"]:first').contains(
       items[items.length - 1].name,
     );
-    cy.get('[data-cy="CertificationDashboard-row"]').contains(
+    cy.get('[data-cy^="CertificationDashboard-row"]').contains(
       items[items.length - 2].name,
     );
-    cy.get('[data-cy="CertificationDashboard-row"]').contains(
+    cy.get('[data-cy^="CertificationDashboard-row"]').contains(
       items[items.length - 3].name,
     );
   });
