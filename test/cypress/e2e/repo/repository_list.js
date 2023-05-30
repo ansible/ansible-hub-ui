@@ -9,6 +9,7 @@ describe('Repository', () => {
     range(5).forEach((i) => {
       cy.galaxykit('repository create repoListTest' + i);
     });
+    cy.galaxykit('distribution create repoListTest3');
 
     // chrome only - prevent 'Write permission denied.' when copying to clipboard
     cy.wrap(
