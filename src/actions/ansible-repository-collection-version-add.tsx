@@ -2,10 +2,10 @@ import { msg, plural, t } from '@lingui/macro';
 import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
-  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
+  Repositories,
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
@@ -26,7 +26,7 @@ const add = (
   const collectionVersionHrefs = collections.map(
     (c) => c.collection_version.pulp_href,
   );
-  return AnsibleRepositoryAPI.addContent(pulpId, collectionVersionHrefs)
+  return Repositories.addContent(pulpId, collectionVersionHrefs)
     .then(({ data }) => {
       collections.map(
         ({ collection_version: { name, namespace, version }, repository }) => {

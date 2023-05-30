@@ -1,6 +1,6 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
+import { AnsibleDistributionAPI, Repositories } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
 import { Constants } from 'src/constants';
 import { canDeleteAnsibleRepository } from 'src/permissions';
@@ -57,7 +57,7 @@ async function deleteRepository(
       return [];
     });
 
-  const deleteRepo = AnsibleRepositoryAPI.delete(pulpId)
+  const deleteRepo = Repositories.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for repository ${name}`));
     })

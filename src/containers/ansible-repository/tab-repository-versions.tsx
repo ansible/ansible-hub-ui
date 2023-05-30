@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ansibleRepositoryVersionRevertAction } from 'src/actions';
 import {
-  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   AnsibleRepositoryVersionType,
   PulpAPI,
+  Repositories,
 } from 'src/api';
 import {
   DateComponent,
@@ -171,10 +171,9 @@ export const RepositoryVersionsTab = ({
   const pulpId = parsePulpIDFromURL(item.pulp_href);
   const latest_href = item.latest_version_href;
   const repositoryName = item.name;
-  const queryList = ({ params }) =>
-    AnsibleRepositoryAPI.listVersions(pulpId, params);
+  const queryList = ({ params }) => Repositories.listVersions(pulpId, params);
   const queryDetail = ({ number }) =>
-    AnsibleRepositoryAPI.listVersions(pulpId, { number });
+    Repositories.listVersions(pulpId, { number });
   const [modalState, setModalState] = useState({});
   const [version, setVersion] = useState(null);
 

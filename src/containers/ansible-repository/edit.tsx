@@ -2,8 +2,8 @@ import { msg, t } from '@lingui/macro';
 import React from 'react';
 import {
   AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
+  Repositories,
 } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -37,10 +37,10 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
   displayName: 'AnsibleRepositoryEdit',
   errorTitle: msg`Repository could not be displayed.`,
   query: ({ name }) => {
-    return AnsibleRepositoryAPI.list({ name })
+    return Repositories.list({ name })
       .then(({ data: { results } }) => results[0])
       .then((repository) => {
-        return AnsibleRepositoryAPI.myPermissions(
+        return Repositories.myPermissions(
           parsePulpIDFromURL(repository.pulp_href),
         )
           .then(({ data: { permissions } }) => permissions)
@@ -112,7 +112,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
       }
 
       let promise = !item
-        ? AnsibleRepositoryAPI.create(data).then(({ data: newData }) => {
+        ? Repositories.create(data).then(({ data: newData }) => {
             queueAlert({
               variant: 'success',
               title: t`Successfully created repository ${data.name}`,
@@ -120,16 +120,15 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
 
             return newData.pulp_href;
           })
-        : AnsibleRepositoryAPI.update(
-            parsePulpIDFromURL(item.pulp_href),
-            data,
-          ).then(({ data: task }) => {
-            queueAlert(
-              taskAlert(task, t`Update started for repository ${data.name}`),
-            );
+        : Repositories.update(parsePulpIDFromURL(item.pulp_href), data).then(
+            ({ data: task }) => {
+              queueAlert(
+                taskAlert(task, t`Update started for repository ${data.name}`),
+              );
 
-            return item.pulp_href;
-          });
+              return item.pulp_href;
+            },
+          );
 
       if (createDistribution) {
         // only alphanumerics, slashes, underscores and dashes are allowed in base_path, transform anything else to _

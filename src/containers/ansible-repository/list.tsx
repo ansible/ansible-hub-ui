@@ -8,7 +8,7 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import { AnsibleRepositoryType, Repositories } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
@@ -71,7 +71,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       delete queryParams['status'];
       queryParams['pulp_label_select'] = `pipeline=${status}`;
     }
-    return AnsibleRepositoryAPI.list(queryParams);
+    return Repositories.list(queryParams);
   },
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
     const { name, pulp_created, pulp_href } = item;

@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import {
-  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   GroupAPI,
   GroupType,
+  Repositories,
   RoleType,
 } from 'src/api';
 import { AccessTab } from 'src/components';
@@ -51,7 +51,7 @@ export const RepositoryAccessTab = ({
 
   const query = () => {
     setGroups(null);
-    AnsibleRepositoryAPI.myPermissions(id)
+    Repositories.myPermissions(id)
       .then(({ data: { permissions } }) => {
         setCanEditOwners(
           canEditAnsibleRepositoryAccess({
@@ -62,7 +62,7 @@ export const RepositoryAccessTab = ({
             featureFlags,
           }),
         );
-        AnsibleRepositoryAPI.listRoles(id)
+        Repositories.listRoles(id)
           .then(({ data: { roles } }) => {
             const groupRoles = [];
             for (const { groups, role } of roles) {
@@ -117,7 +117,7 @@ export const RepositoryAccessTab = ({
 
   const addGroup = (group, roles) => {
     const rolePromises = roles.map((role) =>
-      AnsibleRepositoryAPI.addRole(id, {
+      Repositories.addRole(id, {
         role: role.name,
         groups: [group.name],
       }),
@@ -132,7 +132,7 @@ export const RepositoryAccessTab = ({
 
   const removeGroup = (group) => {
     const roles = group.object_roles.map((role) =>
-      AnsibleRepositoryAPI.removeRole(id, {
+      Repositories.removeRole(id, {
         role,
         groups: [group.name],
       }),
@@ -146,7 +146,7 @@ export const RepositoryAccessTab = ({
   };
   const addRole = (group, roles) => {
     const rolePromises = roles.map((role) =>
-      AnsibleRepositoryAPI.addRole(id, {
+      Repositories.addRole(id, {
         role: role.name,
         groups: [group.name],
       }),
@@ -159,7 +159,7 @@ export const RepositoryAccessTab = ({
     });
   };
   const removeRole = (role, group) => {
-    const removedRole = AnsibleRepositoryAPI.removeRole(id, {
+    const removedRole = Repositories.removeRole(id, {
       role,
       groups: [group.name],
     });

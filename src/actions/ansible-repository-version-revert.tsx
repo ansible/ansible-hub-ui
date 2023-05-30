@@ -1,7 +1,7 @@
 import { Trans, msg, t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useState } from 'react';
-import { AnsibleRepositoryAPI } from 'src/api';
+import { Repositories } from 'src/api';
 import { canRevertAnsibleRepositoryVersion } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
@@ -61,7 +61,7 @@ function revert(
   // the uuid in version href is the reposotory uuid
   const pulpId = parsePulpIDFromURL(pulp_href);
 
-  return AnsibleRepositoryAPI.revert(pulpId, pulp_href)
+  return Repositories.revert(pulpId, pulp_href)
     .then(({ data }) => {
       addAlert(
         taskAlert(

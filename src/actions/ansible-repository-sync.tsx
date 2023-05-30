@@ -7,8 +7,8 @@ import {
   Switch,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRepositoryAPI } from 'src/api';
 import { HelperText } from 'src/components';
+import { Repositories } from 'src/api';
 import { canSyncAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
@@ -138,7 +138,7 @@ export const ansibleRepositorySyncAction = Action({
 
 function syncRepository({ name, pulp_href }, { addAlert, query }, syncParams) {
   const pulpId = parsePulpIDFromURL(pulp_href);
-  return AnsibleRepositoryAPI.sync(pulpId, syncParams || { mirror: true })
+  return Repositories.sync(pulpId, syncParams || { mirror: true })
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Sync started for repository "${name}".`));
 

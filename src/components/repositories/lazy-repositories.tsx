@@ -3,7 +3,7 @@ import { Button, Spinner, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AnsibleRepositoryAPI } from 'src/api';
+import { Repositories } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 
@@ -33,7 +33,7 @@ export const LazyRepositories = ({
     setError(null);
     setLoading(true);
 
-    AnsibleRepositoryAPI.list({ remote: remoteHref })
+    Repositories.list({ remote: remoteHref })
       .then(({ data }) => {
         setRepositories(data.results);
         setError(null);

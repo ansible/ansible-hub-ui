@@ -19,7 +19,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
   CertificateUploadAPI,
   CollectionAPI,
   CollectionVersionAPI,
@@ -775,8 +774,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
+    const repository = (await Repositories.list({ name }))?.data?.results?.[0];
     if (!repository) {
       return Promise.reject(t`Failed to find repository ${name}`);
     }

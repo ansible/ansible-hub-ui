@@ -1,7 +1,7 @@
 import { Trans, msg, t } from '@lingui/macro';
 import { Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
-import { AnsibleRepositoryAPI } from 'src/api';
+import { Repositories } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
@@ -17,7 +17,7 @@ const remove = (
   { addAlert, setState, query },
 ) => {
   const pulpId = parsePulpIDFromURL(repositoryHref);
-  return AnsibleRepositoryAPI.removeContent(pulpId, collectionVersionHref)
+  return Repositories.removeContent(pulpId, collectionVersionHref)
     .then(({ data }) => {
       addAlert(
         taskAlert(

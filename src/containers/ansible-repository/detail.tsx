@@ -8,8 +8,8 @@ import {
 } from 'src/actions';
 import {
   AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
+  Repositories,
 } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -70,7 +70,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     </>
   ),
   query: ({ name }) => {
-    return AnsibleRepositoryAPI.list({ name })
+    return Repositories.list({ name })
       .then(({ data: { results } }) => results[0])
       .then((repository) => {
         // using the list api, so an empty array is really a 404
@@ -89,9 +89,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
           })
             .then(({ data: { results } }) => results)
             .catch(err),
-          AnsibleRepositoryAPI.myPermissions(
-            parsePulpIDFromURL(repository.pulp_href),
-          )
+          Repositories.myPermissions(parsePulpIDFromURL(repository.pulp_href))
             .then(({ data: { permissions } }) => permissions)
             .catch(err),
         ]).then(([distributions, my_permissions]) => ({
