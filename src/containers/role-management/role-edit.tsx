@@ -128,15 +128,12 @@ class EditRole extends React.Component<RouteProps, IState> {
 
     if (!role && alerts && alerts.length) {
       return (
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
       );
     }
 
     if (!role) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const breadcrumbs = [
@@ -146,10 +143,7 @@ class EditRole extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
           subTitle={translateLockedRolesDescription(

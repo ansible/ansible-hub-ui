@@ -126,7 +126,7 @@ export const CollectionInfo = ({
                     .
                   </Trans>
                 </div>
-                <a ref={downloadLinkRef} style={{ display: 'none' }}></a>
+                <a ref={downloadLinkRef} style={{ display: 'none' }} />
                 <Button
                   className='download-button'
                   variant='link'
@@ -182,7 +182,7 @@ export const CollectionInfo = ({
                   __html: content?.docs_blob?.collection_readme.html,
                 }}
               />
-              <div className='hub-fade-out'></div>
+              <div className='hub-fade-out' />
             </div>
             <Link
               to={formatPath(

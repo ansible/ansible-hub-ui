@@ -230,7 +230,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     }
 
     if (!namespace) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const tabs = [
@@ -390,7 +390,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 onClose={() => this.setState({ warning: '' })}
               />
             }
-          ></Alert>
+          />
         ) : null}
         <PartnerHeader
           namespace={namespace}
@@ -421,7 +421,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               </div>
             ) : null
           }
-        ></PartnerHeader>
+        />
         <Main>
           {tab === 'collections' ? (
             noData ? (
@@ -852,7 +852,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       ),
     ].filter(Boolean);
     if (!this.state.showControls) {
-      return <div className='hub-namespace-page-controls'></div>;
+      return <div className='hub-namespace-page-controls' />;
     }
     return (
       <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>

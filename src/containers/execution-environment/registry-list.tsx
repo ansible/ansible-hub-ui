@@ -153,10 +153,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {showRemoteFormModal && (
           <RemoteForm
             remote={remoteToEdit}
@@ -227,7 +224,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             </Trans>
           </DeleteModal>
         )}
-        <BaseHeader title={t`Remote Registries`}></BaseHeader>
+        <BaseHeader title={t`Remote Registries`} />
         {noData && !loading ? (
           <EmptyStateNoData
             title={t`No remote registries yet`}

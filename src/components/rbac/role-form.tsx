@@ -146,7 +146,7 @@ export class RoleForm extends React.Component<IProps, IState> {
               variant='secondary'
               onClick={cancelRole}
             >{t`Cancel`}</Button>
-            {saving ? <Spinner></Spinner> : null}
+            {saving ? <Spinner /> : null}
           </ActionGroup>
         </Form>
       </React.Fragment>

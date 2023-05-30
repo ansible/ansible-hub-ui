@@ -196,12 +196,12 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   render() {
     const { versions, params, itemCount, loading, unauthorized } = this.state;
     if (!versions && !unauthorized) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     return (
       <React.Fragment>
-        <BaseHeader title={t`Approval dashboard`}></BaseHeader>
+        <BaseHeader title={t`Approval dashboard`} />
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}

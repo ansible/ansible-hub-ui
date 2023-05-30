@@ -12,12 +12,12 @@ export class LoadingPageWithHeader extends React.Component {
           }
         >
           <Title headingLevel='h1'>
-            <Skeleton></Skeleton>
+            <Skeleton />
           </Title>
         </section>
         <Main>
           <section>
-            <LoadingPageSpinner></LoadingPageSpinner>
+            <LoadingPageSpinner />
           </section>
         </Main>
       </React.Fragment>

@@ -85,7 +85,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                             <DateComponent date={action.created} />
                           </td>
                         ) : (
-                          <td></td>
+                          <td />
                         )}
                       </tr>
                     );

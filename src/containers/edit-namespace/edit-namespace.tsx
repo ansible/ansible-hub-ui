@@ -122,7 +122,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
           tabs={tabs}
           params={params}
           updateParams={(p) => this.updateParams(p)}
-        ></PartnerHeader>
+        />
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -158,7 +158,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
                     {t`Cancel`}
                   </Button>
 
-                  {saving ? <Spinner></Spinner> : null}
+                  {saving ? <Spinner /> : null}
                 </ActionGroup>
                 {this.state.unsavedData ? (
                   <div

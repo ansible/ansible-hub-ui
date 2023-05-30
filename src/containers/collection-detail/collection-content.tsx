@@ -40,7 +40,7 @@ class CollectionContent extends React.Component<
       this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const { collection_version, repository } = collection;
@@ -86,7 +86,7 @@ class CollectionContent extends React.Component<
               collection={collection}
               params={params}
               updateParams={(p) => this.updateParams(p)}
-            ></CollectionContentList>
+            />
           </section>
         </Main>
       </React.Fragment>

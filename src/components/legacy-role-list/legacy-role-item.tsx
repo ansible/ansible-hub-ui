@@ -67,7 +67,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
             size='70px'
             unlockWidth
             width='97px'
-          ></Logo>
+          />
         </DataListCell>,
       );
     }

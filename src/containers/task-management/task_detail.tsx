@@ -118,14 +118,11 @@ class TaskDetail extends React.Component<RouteProps, IState> {
       <LoadingPageSpinner />
     ) : (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
           title={taskName}
-          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           pageControls={
             ['running', 'waiting'].includes(task.state) && (
               <Button

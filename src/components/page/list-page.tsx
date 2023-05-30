@@ -227,10 +227,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader title={title} />
           {renderModals?.(actionContext)}
           {unauthorised ? (

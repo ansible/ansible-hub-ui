@@ -174,10 +174,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {showDeleteModal && roleToEdit && (
           <DeleteModal
             cancelAction={() =>
@@ -198,7 +195,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
             </Trans>
           </DeleteModal>
         )}
-        <BaseHeader title={t`Roles`}></BaseHeader>
+        <BaseHeader title={t`Roles`} />
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (

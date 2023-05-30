@@ -259,7 +259,7 @@ export const PublishToControllerModal = (props: IProps) => {
     </>
   );
 
-  const Spacer = () => <div style={{ paddingTop: '24px' }}></div>;
+  const Spacer = () => <div style={{ paddingTop: '24px' }} />;
   const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
   return (
@@ -277,7 +277,7 @@ export const PublishToControllerModal = (props: IProps) => {
       <AlertList
         alerts={alerts}
         closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
-      ></AlertList>
+      />
       {loading && (
         <div style={{ padding: '16px' }}>
           <LoadingPageSpinner />
@@ -322,7 +322,7 @@ export const PublishToControllerModal = (props: IProps) => {
                       toggleIcon={<TagIcon />}
                     />
                   </FlexItem>
-                  <FlexItem></FlexItem>
+                  <FlexItem />
                 </Flex>
               </DescriptionListDescription>
             </DescriptionListGroup>
@@ -370,7 +370,7 @@ export const PublishToControllerModal = (props: IProps) => {
                 ]}
               />
             </FlexItem>
-            <FlexItem grow={{ default: 'grow' }}></FlexItem>
+            <FlexItem grow={{ default: 'grow' }} />
             <FlexItem>
               <Pagination
                 params={controllerParams}

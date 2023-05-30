@@ -37,7 +37,7 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
           size='40px'
           unlockWidth
           width='97px'
-        ></Logo>
+        />
       </DataListCell>,
     );
 

@@ -212,7 +212,7 @@ export function withContainerRepo(WrappedComponent) {
               addAlert={(text, variant, description = undefined) =>
                 this.addAlert(text, variant, description)
               }
-            ></DeleteExecutionEnvironmentModal>
+            />
           )}
           <ExecutionEnvironmentHeader
             id={this.props.routeParams.container}
@@ -232,7 +232,7 @@ export function withContainerRepo(WrappedComponent) {
                     {t`Edit`}
                   </Button>
                 ) : null}
-                <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+                <StatefulDropdown items={dropdownItems} />
               </>
             }
           />

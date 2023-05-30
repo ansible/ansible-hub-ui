@@ -163,10 +163,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <PublishToControllerModal
           digest={publishToController?.digest}
           image={publishToController?.image}
@@ -175,7 +172,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
           tag={publishToController?.tag}
         />
         {showRemoteModal && this.renderRemoteModal(itemToEdit)}
-        <BaseHeader title={t`Execution Environments`}></BaseHeader>
+        <BaseHeader title={t`Execution Environments`} />
 
         {showDeleteModal && (
           <DeleteExecutionEnvironmentModal
@@ -191,7 +188,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
                 ]),
               })
             }
-          ></DeleteExecutionEnvironmentModal>
+          />
         )}
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -407,7 +404,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
             <Tooltip content={description}>{description}</Tooltip>
           </td>
         ) : (
-          <td></td>
+          <td />
         )}
         <td>
           <DateComponent date={item.created_at} />

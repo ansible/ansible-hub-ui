@@ -46,10 +46,10 @@ export class UserFormPage extends React.Component<IProps> {
     return (
       <React.Fragment>
         <BaseHeader
-          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           pageControls={extraControls}
           title={title}
-        ></BaseHeader>
+        />
         <Main>
           <section className='body'>
             <UserForm
@@ -61,7 +61,7 @@ export class UserFormPage extends React.Component<IProps> {
               saveUser={saveUser}
               onCancel={onCancel}
               isNewUser={isNewUser}
-            ></UserForm>
+            />
           </section>
         </Main>
       </React.Fragment>

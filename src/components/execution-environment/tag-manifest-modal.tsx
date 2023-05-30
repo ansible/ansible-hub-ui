@@ -113,7 +113,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             }
           >
             {t`Save`}
-            {isSaving && <Spinner size='sm'></Spinner>}
+            {isSaving && <Spinner size='sm' />}
           </Button>,
           <Button
             isDisabled={isSaving}
@@ -161,7 +161,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 onClick={this.verifyAndAddTag}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
               >
-                {t`Add`} {verifyingTag && <Spinner size='sm'></Spinner>}
+                {t`Add`} {verifyingTag && <Spinner size='sm' />}
               </Button>
             </InputGroup>
           </FormGroup>

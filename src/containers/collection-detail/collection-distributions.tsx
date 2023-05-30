@@ -84,7 +84,7 @@ const CollectionDistributions = (props: RouteProps) => {
   }, [params]);
 
   if (!collection || !content || collections.length <= 0) {
-    return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    return <LoadingPageWithHeader />;
   }
 
   const { collection_version, repository } = collection;

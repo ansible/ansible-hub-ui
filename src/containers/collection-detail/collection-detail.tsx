@@ -56,7 +56,7 @@ class CollectionDetail extends React.Component<
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     const { collection_version: version } = collection;
@@ -76,10 +76,7 @@ class CollectionDetail extends React.Component<
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           reload={() => this.loadCollections(true)}
           collections={collections}

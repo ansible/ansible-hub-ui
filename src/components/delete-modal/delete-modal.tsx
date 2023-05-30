@@ -35,7 +35,7 @@ export const DeleteModal = ({
             isDisabled={isDisabled}
           >
             {isRemove ? t`Remove` : t`Delete`}
-            {spinner && <Spinner size='sm'></Spinner>}
+            {spinner && <Spinner size='sm' />}
           </Button>
         </div>,
         <Button key='cancel' onClick={cancelAction} variant='link'>

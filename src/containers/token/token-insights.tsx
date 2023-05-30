@@ -84,11 +84,8 @@ class TokenInsights extends React.Component<RouteProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
-        <BaseHeader title={t`Connect to Hub`}></BaseHeader>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <BaseHeader title={t`Connect to Hub`} />
         <Main>
           <section className='body pf-c-content'>
             <h2>{t`Connect Private Automation Hub`}</h2>

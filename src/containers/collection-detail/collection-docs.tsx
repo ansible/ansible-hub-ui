@@ -53,7 +53,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+      return <LoadingPageWithHeader />;
     }
 
     // If the parser can't find anything that matches the URL, neither of
@@ -155,7 +155,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
               params={params}
               updateParams={(p) => this.updateParams(p)}
               searchBarRef={this.searchBarRef}
-            ></TableOfContents>
+            />
 
             <div className='body docs pf-c-content' ref={this.docsRef}>
               {displayHTML || pluginData ? (
@@ -166,7 +166,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                     dangerouslySetInnerHTML={{
                       __html: displayHTML,
                     }}
-                  ></div>
+                  />
                 ) : (
                   // if plugin data is set render it
                   <RenderPluginDoc

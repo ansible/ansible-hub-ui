@@ -146,10 +146,7 @@ export const Page = function <
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader
             title={title({ name })}
             breadcrumbs={
