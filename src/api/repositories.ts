@@ -1,5 +1,5 @@
 import { PulpAPI } from './pulp';
-import { Repository } from './response-types/repositories';
+import { RepositoryType } from './response-types/repositories';
 
 interface GetRepository {
   name: string;
@@ -10,7 +10,7 @@ interface ReturnRepository {
     count: number;
     next: string;
     previous: string;
-    results: Repository[];
+    results: RepositoryType[];
   };
 }
 

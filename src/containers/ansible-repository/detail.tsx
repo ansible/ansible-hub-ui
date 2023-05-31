@@ -6,11 +6,7 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryType,
-  Repositories,
-} from 'src/api';
+import { AnsibleDistributionAPI, Repositories, RepositoryType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
@@ -28,7 +24,7 @@ const tabs = [
   { id: 'repository-versions', name: msg`Versions` },
 ];
 
-const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
+const AnsibleRepositoryDetail = PageWithTabs<RepositoryType>({
   breadcrumbs: ({ name, tab, params: { repositoryVersion, group } }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },

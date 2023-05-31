@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
+import { AnsibleRemoteAPI, RepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,
   HelperText,
@@ -25,7 +25,7 @@ interface IProps {
   errorMessages: ErrorMessagesType;
   onCancel: () => void;
   onSave: ({ createDistribution, hideFromSearch, pipeline }) => void;
-  repository: AnsibleRepositoryType;
+  repository: RepositoryType;
   updateRepository: (r) => void;
 }
 

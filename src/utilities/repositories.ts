@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
 import { Repositories } from 'src/api/repositories';
 import { CollectionVersionSearch } from 'src/api/response-types/collection';
-import { Repository } from 'src/api/response-types/repositories';
+import { RepositoryType } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
 export class RepositoriesUtils {
-  public static listApproved(): Promise<Repository[]> {
+  public static listApproved(): Promise<RepositoryType[]> {
     async function getAll() {
       let list = [];
 

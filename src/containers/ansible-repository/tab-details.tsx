@@ -1,11 +1,7 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AnsibleRemoteAPI,
-  AnsibleRemoteType,
-  AnsibleRepositoryType,
-} from 'src/api';
+import { AnsibleRemoteAPI, AnsibleRemoteType, RepositoryType } from 'src/api';
 import {
   CopyURL,
   Details,
@@ -16,7 +12,7 @@ import { Paths, formatPath } from 'src/paths';
 import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType & {
+  item: RepositoryType & {
     distributions: { name: string; base_path: string }[];
   };
   actionContext: { addAlert: (alert) => void; state: { params } };

@@ -25,7 +25,7 @@ import {
   CollectionVersionSearch,
   Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
+import { RepositoryType } from 'src/api/response-types/repositories';
 import {
   ApproveModal,
   BaseHeader,
@@ -85,7 +85,7 @@ interface IState {
   approveModalInfo: {
     collectionVersion;
   };
-  approvedRepositoryList: Repository[];
+  approvedRepositoryList: RepositoryType[];
   stagingRepoNames: string[];
   rejectedRepoName: string;
 }

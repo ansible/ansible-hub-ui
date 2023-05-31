@@ -1,10 +1,6 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryType,
-  Repositories,
-} from 'src/api';
+import { AnsibleDistributionAPI, Repositories, RepositoryType } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -13,7 +9,7 @@ import {
 } from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
-const initialRepository: AnsibleRepositoryType = {
+const initialRepository: RepositoryType = {
   name: '',
   description: '',
   retain_repo_versions: 1,
@@ -21,7 +17,7 @@ const initialRepository: AnsibleRepositoryType = {
   remote: null,
 };
 
-const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
+const AnsibleRepositoryEdit = Page<RepositoryType>({
   breadcrumbs: ({ name }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },

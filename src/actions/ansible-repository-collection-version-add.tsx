@@ -2,10 +2,10 @@ import { msg, plural, t } from '@lingui/macro';
 import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
-  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
+  RepositoryType,
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
@@ -60,7 +60,7 @@ const AddCollectionVersionModal = ({
 }: {
   addAction: (selected) => void;
   closeAction: () => void;
-  sourceRepository: AnsibleRepositoryType;
+  sourceRepository: RepositoryType;
 }) => {
   const [alerts, setAlerts] = useState([]);
   const [selected, setSelected] = useState<CollectionVersionSearch[]>([]);

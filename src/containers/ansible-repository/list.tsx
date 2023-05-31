@@ -8,7 +8,7 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import { AnsibleRepositoryType, Repositories } from 'src/api';
+import { Repositories, RepositoryType } from 'src/api';
 import { DateComponent, ListItemActions, ListPage } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
@@ -26,7 +26,7 @@ const listItemActions = [
   ansibleRepositoryDeleteAction,
 ];
 
-const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
+const AnsibleRepositoryList = ListPage<RepositoryType>({
   condition: canViewAnsibleRepositories,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
@@ -73,7 +73,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
     }
     return Repositories.list(queryParams);
   },
-  renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
+  renderTableRow(item: RepositoryType, index: number, actionContext) {
     const { name, pulp_created, pulp_href } = item;
     const id = parsePulpIDFromURL(pulp_href);
 

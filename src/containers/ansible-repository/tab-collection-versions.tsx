@@ -6,16 +6,16 @@ import {
   ansibleRepositoryCollectionVersionRemoveAction,
 } from 'src/actions';
 import {
-  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
+  RepositoryType,
 } from 'src/api';
 import { DetailList, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType;
+  item: RepositoryType;
   actionContext: {
     addAlert: (alert) => void;
     state: { params };

@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ansibleRepositoryVersionRevertAction } from 'src/actions';
 import {
-  AnsibleRepositoryType,
-  AnsibleRepositoryVersionType,
   PulpAPI,
   Repositories,
+  RepositoryType,
+  RepositoryVersionType,
 } from 'src/api';
 import {
   DateComponent,
@@ -19,7 +19,7 @@ import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType;
+  item: RepositoryType;
   actionContext: {
     addAlert: (alert) => void;
     state: { params };
@@ -196,7 +196,7 @@ export const RepositoryVersionsTab = ({
   }, [state.params.repositoryVersion]);
 
   const renderTableRow = (
-    item: AnsibleRepositoryVersionType,
+    item: RepositoryVersionType,
     index: number,
     actionContext,
     listItemActions,
@@ -282,7 +282,7 @@ export const RepositoryVersionsTab = ({
       <Spinner size='md' />
     )
   ) : (
-    <DetailList<AnsibleRepositoryVersionType>
+    <DetailList<RepositoryVersionType>
       actionContext={{
         addAlert,
         state: modalState,

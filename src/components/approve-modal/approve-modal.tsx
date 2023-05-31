@@ -23,7 +23,7 @@ import {
   Repositories,
   SigningServiceAPI,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
+import { RepositoryType } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
@@ -45,7 +45,7 @@ interface IProps {
   closeAction: () => void;
   collectionVersion: CollectionVersion;
   addAlert: (alert) => void;
-  allRepositories: Repository[];
+  allRepositories: RepositoryType[];
   finishAction: () => void;
   stagingRepoNames: string[];
   rejectedRepoName: string;
@@ -55,7 +55,7 @@ export const ApproveModal = (props: IProps) => {
   const [isSelectorChecked, setIsSelectorChecked] = useState(false);
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [inputText, setInputText] = useState('');
-  const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
+  const [repositoryList, setRepositoryList] = useState<RepositoryType[]>([]);
   const [itemsCount, setItemsCount] = useState(0);
   const [alerts, setAlerts] = useState([]);
   const [selectedRepos, setSelectedRepos] = useState([]);

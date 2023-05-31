@@ -1,9 +1,32 @@
-export interface Repository {
-  name: string;
+export class RepositoryType {
   description: string;
+  latest_version_href?: string;
+  name: string;
+  pulp_created?: string;
+  pulp_href?: string;
+  pulp_labels?: { [key: string]: string };
+  remote?: string;
+  retain_repo_versions: number;
+  private?: boolean;
+
+  // gpgkey
+  // last_synced_metadata_time
+  // versions_href
+
+  my_permissions?: string[];
+}
+
+type ContentSummary = { [key: string]: { count: number; href: string } };
+
+export class RepositoryVersionType {
   pulp_href: string;
   pulp_created: string;
-  versions_href: string;
-  pulp_labels: { pipeline?: string };
-  latest_version_href: string;
+  number: number;
+  repository: string;
+  base_version: null;
+  content_summary: {
+    added: ContentSummary;
+    removed: ContentSummary;
+    present: ContentSummary;
+  };
 }

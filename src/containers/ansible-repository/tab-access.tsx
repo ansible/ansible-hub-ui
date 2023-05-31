@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import {
-  AnsibleRepositoryType,
   GroupAPI,
   GroupType,
   Repositories,
+  RepositoryType,
   RoleType,
 } from 'src/api';
 import { AccessTab } from 'src/components';
@@ -13,7 +13,7 @@ import { canEditAnsibleRepositoryAccess } from 'src/permissions';
 import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType;
+  item: RepositoryType;
   actionContext: {
     addAlert: (alert) => void;
     featureFlags;
