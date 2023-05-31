@@ -9,7 +9,7 @@ import {
   ansibleRemoteDownloadRequirementsAction,
   ansibleRemoteEditAction,
 } from 'src/actions';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, RemoteType } from 'src/api';
 import { CopyURL, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';
@@ -28,7 +28,7 @@ const listItemActions = [
   ansibleRemoteDeleteAction,
 ];
 
-const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
+const AnsibleRemoteList = ListPage<RemoteType>({
   condition: canViewAnsibleRemotes,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
@@ -47,7 +47,7 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   noDataDescription: msg`Remotes will appear once created.`,
   noDataTitle: msg`No remotes yet`,
   query: ({ params }) => AnsibleRemoteAPI.list(params),
-  renderTableRow(item: AnsibleRemoteType, index: number, actionContext) {
+  renderTableRow(item: RemoteType, index: number, actionContext) {
     const { name, pulp_href, url } = item;
     const id = parsePulpIDFromURL(pulp_href);
 

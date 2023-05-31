@@ -47,4 +47,21 @@ export class RemoteType {
   }[];
   last_sync_task: LastSyncType;
   download_concurrency: number;
+  // connect_timeout
+  // headers
+  // max_retries
+  // policy
+  // pulp_created
+  // pulp_labels
+  // pulp_last_updated
+  // sock_connect_timeout
+  // sock_read_timeout
+  // sync_dependencies
+  // total_timeout
+  hidden_fields: {
+    is_set: boolean;
+    name: string;
+  }[];
+
+  my_permissions?: string[];
 }

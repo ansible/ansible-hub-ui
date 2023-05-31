@@ -1,12 +1,12 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, RemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canAddAnsibleRemote, canEditAnsibleRemote } from 'src/permissions';
 import { parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
-const initialRemote: AnsibleRemoteType = {
+const initialRemote = {
   name: '',
   url: '',
   ca_cert: null,
@@ -29,7 +29,7 @@ const initialRemote: AnsibleRemoteType = {
   ].map((name) => ({ name, is_set: false })),
 };
 
-const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
+const AnsibleRemoteEdit = Page<RemoteType>({
   breadcrumbs: ({ name }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },

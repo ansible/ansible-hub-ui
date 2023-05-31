@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AnsibleRemoteAPI, AnsibleRemoteType, RepositoryType } from 'src/api';
+import { AnsibleRemoteAPI, RemoteType, RepositoryType } from 'src/api';
 import {
   CopyURL,
   Details,
@@ -19,7 +19,7 @@ interface TabProps {
 }
 
 export const DetailsTab = ({ item }: TabProps) => {
-  const [remote, setRemote] = useState<AnsibleRemoteType>(null);
+  const [remote, setRemote] = useState<RemoteType>(null);
 
   useEffect(() => {
     const pk = item.remote && parsePulpIDFromURL(item.remote);

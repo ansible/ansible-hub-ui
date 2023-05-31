@@ -6,11 +6,11 @@ import {
   CodeBlockCode,
 } from '@patternfly/react-core';
 import React from 'react';
-import { AnsibleRemoteType } from 'src/api';
+import { RemoteType } from 'src/api';
 import { CopyURL, Details, LazyRepositories } from 'src/components';
 
 interface TabProps {
-  item: AnsibleRemoteType;
+  item: RemoteType;
   actionContext: object;
 }
 

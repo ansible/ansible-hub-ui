@@ -7,7 +7,7 @@ import {
   ansibleRemoteDownloadRequirementsAction,
   ansibleRemoteEditAction,
 } from 'src/actions';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, RemoteType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';
@@ -20,7 +20,7 @@ const tabs = [
   { id: 'access', name: msg`Access` },
 ];
 
-const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
+const AnsibleRemoteDetail = PageWithTabs<RemoteType>({
   breadcrumbs: ({ name, tab, params: { group } }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },

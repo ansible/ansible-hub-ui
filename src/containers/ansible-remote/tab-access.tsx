@@ -2,9 +2,9 @@ import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRemoteAPI,
-  AnsibleRemoteType,
   GroupAPI,
   GroupType,
+  RemoteType,
   RoleType,
 } from 'src/api';
 import { AccessTab } from 'src/components';
@@ -13,7 +13,7 @@ import { canEditAnsibleRemoteAccess } from 'src/permissions';
 import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRemoteType;
+  item: RemoteType;
   actionContext: {
     addAlert: (alert) => void;
     featureFlags;

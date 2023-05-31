@@ -1,11 +1,8 @@
 import { PulpAPI } from './pulp';
-import { AnsibleRemoteType } from './response-types/ansible-remote';
+import { RemoteType } from './response-types/remote';
 
 // simplified version of smartUpdate from remote.ts
-function smartUpdate(
-  remote: AnsibleRemoteType,
-  unmodifiedRemote: AnsibleRemoteType,
-) {
+function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {
   // Pulp complains if auth_url gets sent with a request that doesn't include a
   // valid token, even if the token exists in the database and isn't being changed.
   // To solve this issue, simply delete auth_url from the request if it hasn't
@@ -36,7 +33,7 @@ class API extends PulpAPI {
   // delete(uuid)
   // list(params?)
 
-  smartUpdate(pk, newValue: AnsibleRemoteType, oldValue: AnsibleRemoteType) {
+  smartUpdate(pk, newValue: RemoteType, oldValue: RemoteType) {
     const reducedData = smartUpdate(newValue, oldValue);
     return super.update(pk, reducedData);
   }

@@ -70,7 +70,6 @@ export { CertificateUploadAPI } from './certificate-upload';
 export { Repositories } from './repositories';
 export { AnsibleDistributionAPI } from './ansible-distribution';
 export { AnsibleRemoteAPI } from './ansible-remote';
-export { AnsibleRemoteType } from './response-types/ansible-remote';
 export {
   RepositoryType,
   RepositoryVersionType,
