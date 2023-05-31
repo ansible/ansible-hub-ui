@@ -42,7 +42,6 @@ export const DeleteCollectionModal = (props: IProps) => {
             : t`Delete collection?`
         }
       >
-        Repo:{deleteFromRepo}
         <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
           {collectionVersion ? (
             <>
@@ -53,15 +52,8 @@ export const DeleteCollectionModal = (props: IProps) => {
                     {deleteCollection.collection_version.name} v
                     {collectionVersion}
                   </b>{' '}
-                  {deleteFromRepo ? (
-                    <>
-                      from repository <b>{deleteFromRepo} </b>
-                    </>
-                  ) : (
-                    <>from the system </>
-                  )}{' '}
-                  and its data will be lost and this will cause the entire
-                  collection to be deleted.
+                  <>from the system </> and its data will be lost and this will
+                  cause the entire collection to be deleted.
                 </Trans>
               ) : (
                 <Trans>
@@ -70,29 +62,23 @@ export const DeleteCollectionModal = (props: IProps) => {
                     {deleteCollection.collection_version.name} v
                     {collectionVersion}
                   </b>{' '}
-                  {deleteFromRepo ? (
-                    <>
-                      from repository <b>{deleteFromRepo} </b>
-                    </>
-                  ) : (
-                    <>from the system </>
-                  )}{' '}
-                  and its data will be lost.
+                  <>from the system </> and its data will be lost.
                 </Trans>
               )}
             </>
           ) : (
             <Trans>
               Deleting <b>{deleteCollection.collection_version.name}</b>{' '}
-              {deleteFromRepo ? (
-                <>
-                  from repository <b>{deleteFromRepo} </b>
-                </>
-              ) : (
-                <>from the system </>
-              )}{' '}
-              and its data will be lost.
+              <>from the system </> and its data will be lost.
             </Trans>
+          )}
+          {deleteFromRepo && (
+            <>
+              {' '}
+              <br></br>
+              <br></br>
+              {t`The collection will be deleted only from repository ${deleteFromRepo}.`}
+            </>
           )}
         </Text>
         <Checkbox
