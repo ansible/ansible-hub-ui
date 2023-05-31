@@ -7,7 +7,10 @@ describe('collection tests', () => {
     cy.deleteRepositories();
   });
 
-  after(() => {});
+  after(() => {
+    cy.deleteAllCollections();
+    cy.deleteRepositories();
+  });
 
   beforeEach(() => {
     cy.login();
