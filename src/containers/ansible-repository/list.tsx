@@ -44,20 +44,20 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       title: msg`Repository name`,
     },
     {
-      id: 'status',
-      title: msg`Status`,
+      id: 'pulp_label_select',
+      title: msg`Pipeline`,
       inputType: 'select',
       options: [
         {
-          id: Constants.NOTCERTIFIED,
+          id: `pipeline=${Constants.NOTCERTIFIED}`,
           title: msg`Rejected`,
         },
         {
-          id: Constants.NEEDSREVIEW,
+          id: `pipeline=${Constants.NEEDSREVIEW}`,
           title: msg`Needs Review`,
         },
         {
-          id: Constants.APPROVED,
+          id: `pipeline=${Constants.APPROVED}`,
           title: msg`Approved`,
         },
       ],
@@ -68,16 +68,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   noDataButton: ansibleRepositoryCreateAction.button,
   noDataDescription: msg`Repositories will appear once created.`,
   noDataTitle: msg`No repositories yet`,
-  query: ({ params }) => {
-    const queryParams = { ...params };
-
-    if (queryParams['status']) {
-      const status = queryParams['status'];
-      delete queryParams['status'];
-      queryParams['pulp_label_select'] = `pipeline=${status}`;
-    }
-    return AnsibleRepositoryAPI.list(queryParams);
-  },
+  query: ({ params }) => AnsibleRepositoryAPI.list(params),
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
     const {
       last_sync_task,
