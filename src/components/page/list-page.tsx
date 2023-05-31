@@ -225,11 +225,11 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       const niceValues = {};
       localizedFilterConfig
-        .filter((filter) => filter['options'] && filter['options'].length > 0)
-        .forEach((item) => {
-          const obj = (niceValues[item['id']] = {});
-          item['options'].forEach((option) => {
-            obj[option.id] = option.title;
+        .filter(({ options }) => options?.length)
+        .forEach(({ id: filterId, options }) => {
+          const obj = (niceValues[filterId] = {});
+          options.forEach(({ id: optionId, title }) => {
+            obj[optionId] = title;
           });
         });
 
@@ -274,7 +274,10 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                               onChange={(inputText) =>
                                 this.setState({ inputText })
                               }
-                              updateParams={updateParams}
+                              updateParams={(p) => {
+                                this.setState({ inputText: '' });
+                                updateParams(p);
+                              }}
                               params={params}
                               filterConfig={localizedFilterConfig}
                             />

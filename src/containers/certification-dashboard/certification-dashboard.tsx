@@ -141,8 +141,18 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
       const promises = [];
 
-      promises.push(this.loadRepos('staging'));
-      promises.push(this.loadRepos('rejected'));
+      promises.push(
+        this.loadRepos('staging').then((stagingRepoNames) =>
+          this.setState({
+            stagingRepoNames,
+          }),
+        ),
+      );
+      promises.push(
+        this.loadRepos('rejected').then(([rejectedRepoName]) =>
+          this.setState({ rejectedRepoName }),
+        ),
+      );
 
       promises.push(
         RepositoriesUtils.listApproved()
@@ -169,19 +179,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private loadRepos(pipeline) {
     return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
-      .then((data) => {
-        if (data.data.results.length > 0) {
-          if (pipeline == 'staging') {
-            this.setState({
-              stagingRepoNames: data.data.results.map((res) => res.name),
-            });
-          }
-
-          if (pipeline == 'rejected') {
-            this.setState({ rejectedRepoName: data.data.results[0].name });
-          }
-        }
-      })
+      .then(({ data: { results } }) => (results || []).map(({ name }) => name))
       .catch((error) => {
         this.addAlert(
           t`Error loading repository with label ${pipeline}.`,
