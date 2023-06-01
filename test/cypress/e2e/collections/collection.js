@@ -138,10 +138,7 @@ describe('collection tests', () => {
       `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
     ).click();
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.contains(
-      '[data-cy=delete-version-dropdown]',
-      'Delete version 1.0.0 from system',
-    ).click();
+    cy.contains('Delete version 1.0.0 from system').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
