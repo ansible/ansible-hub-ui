@@ -39,7 +39,7 @@
         "@ls-lint/ls-lint": "^1.11.2",
         "@redhat-cloud-services/frontend-components-config": "^4.7.2",
         "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-        "@typescript-eslint/eslint-plugin": "^5.54.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.8",
         "@typescript-eslint/parser": "^5.50.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-lodash": "^3.3.4",
