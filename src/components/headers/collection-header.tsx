@@ -197,7 +197,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.collection_version.pulp_created;
 
-    const { display_signatures, can_upload_signatures } =
+    const { display_signatures, can_upload_signatures, display_repositories } =
       this.context.featureFlags;
 
     const signedString = () => {
@@ -216,7 +216,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           : ''
       }`;
     };
-
     const { collection_version, namespace_metadata: namespace } = collection;
     const { name: collectionName, version } = collection_version;
 
@@ -287,13 +286,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       >
         {t`Upload new version`}
       </DropdownItem>,
-      <DropdownItem
-        key='copy-collection-version-to-repository-dropdown'
-        onClick={() => this.copyToRepository(collection)}
-        data-cy='copy-collection-version-to-repository-dropdown'
-      >
-        {t`Copy version ${version} to repositories`}
-      </DropdownItem>,
+      display_repositories && (
+        <DropdownItem
+          key='copy-collection-version-to-repository-dropdown'
+          onClick={() => this.copyToRepository(collection)}
+          data-cy='copy-collection-version-to-repository-dropdown'
+        >
+          {t`Copy version ${version} to repositories`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
 
     const issueUrl =

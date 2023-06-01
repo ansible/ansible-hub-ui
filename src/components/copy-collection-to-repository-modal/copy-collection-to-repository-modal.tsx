@@ -124,11 +124,21 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
     const signingServiceName =
       context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
 
-    const signingList = await SigningServiceAPI.list({
-      name: signingServiceName,
-    });
-
-    const signingService = signingList.data.results[0].pulp_href;
+    let signingService = null;
+    try {
+      const signingList = await SigningServiceAPI.list({
+        name: signingServiceName,
+      });
+      signingService = signingList.data.results[0].pulp_href;
+    } catch {
+      setLoading(false);
+      props.addAlert({
+        title: t`Failed to copy collection version.`,
+        variant: 'danger',
+        description: t`Signing service ${signingServiceName} not found`,
+      });
+      return;
+    }
 
     const repoHrefs = repositoryList
       .filter((repo) => selectedRepos.includes(repo.name))
