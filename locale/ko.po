@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: ko\n"
+"Language: en\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -31,7 +31,7 @@ msgstr "(업로드됨)"
 
 #: src/containers/not-found/not-found.tsx:11
 msgid "404 - Page not found"
-msgstr ""
+msgstr "404 - 페이지를 찾을 수 없음"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:155
 msgid "<0/> was added"
@@ -55,7 +55,7 @@ msgstr "<0/>이/가 <1/>에서 제거되었습니다"
 
 #: src/components/collection-detail/collection-info.tsx:86
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다."
+msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:349
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
@@ -75,29 +75,29 @@ msgstr "<0>참고:</0> 이 URL을 사용하여 이 네임스페이스에 컬렉�
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:205
 msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
-msgstr ""
+msgstr "<0>Red Hat은 다른 Automators가 Ansible 콘텐츠를 빌드하는 데 도움이 되도록 <1>Ansible Lightspeed</1> <2/> 컨텍스트에서 새로운 Ansible 콘텐츠 개발 기능을 개발하고 있습니다.</0>"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:213
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
-#~ msgstr ""
+#~ msgstr "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
 
-#: src/containers/role-management/role-list.tsx:190
+#: src/containers/role-management/role-list.tsx:187
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
 msgstr "<0>역할 <1>{0}</1>은 영구적으로 삭제됩니다.</0>이 역할 아래에 연결된 모든 관련 권한도 제거됩니다.<2></2>"
 
-#: src/containers/token/token-standalone.tsx:88
+#: src/containers/token/token-standalone.tsx:85
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
-msgstr "<0>경고</0> 이 토큰을 지금 복사합니다. 이 토큰이 표시되는 유일한 시간입니다."
+msgstr "<0>경고</0> 이 토큰을 지금 복사합니다. 토큰이 표시됩니다."
 
-#: src/containers/token/token-standalone.tsx:79
+#: src/containers/token/token-standalone.tsx:76
 msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>경고</0> 새 토큰을 로드하면 이전 토큰이 삭제됩니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:226
 msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
-msgstr ""
+msgstr "<0>역할 및 컬렉션은 Ansible 자동화 콘텐츠 권장 사항을 제공하는 머신 학습 모델의 교육 데이터로 사용할 수 있습니다.</0><1>문제가 있는 경우 <2>ansible-content-ai@redhat.com</2>에 문의하십시오.</1>"
 
-#: src/containers/execution-environment/registry-list.tsx:225
+#: src/containers/execution-environment/registry-list.tsx:222
 msgid "<0>{0}</0> will be deleted."
 msgstr "<0>{0}</0>이/가 삭제됩니다."
 
@@ -107,7 +107,7 @@ msgstr "<0>{0}</0>이/가 영구적으로 삭제됩니다."
 
 #: src/components/patternfly-wrappers/pagination.tsx:43
 msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
-msgstr ""
+msgstr "<0>{firstIndex} - {lastIndex}</0> / <1>{itemCount}</1>"
 
 #: src/components/rbac/delete-group-modal.tsx:27
 msgid "<0>{name}</0> will be permanently deleted."
@@ -162,8 +162,8 @@ msgstr "API 오류: {status}"
 msgid "API error. Status code: {0}"
 msgstr "API 오류. 상태 코드: {0}"
 
-#: src/containers/token/token-standalone.tsx:50
-#: src/containers/token/token-standalone.tsx:58
+#: src/containers/token/token-standalone.tsx:47
+#: src/containers/token/token-standalone.tsx:55
 #: src/loaders/standalone/menu.tsx:62
 msgid "API token"
 msgstr "API 토큰"
@@ -171,7 +171,7 @@ msgstr "API 토큰"
 #: src/containers/token/token-standalone.tsx:50
 #: src/loaders/standalone/menu.tsx:55
 #~ msgid "API token management"
-#~ msgstr "API 토큰 관리"
+#~ msgstr "API token management"
 
 #: src/loaders/standalone/layout.tsx:108
 msgid "About"
@@ -197,7 +197,7 @@ msgstr "활동"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:58
 msgid "Activities will appear once you push something"
-msgstr "컨텐츠를 푸시한 후 활동이 표시됩니다."
+msgstr "컨텐츠를 푸시한 후 활동이 표시됩니다"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:25
 msgid "Activity"
@@ -212,15 +212,15 @@ msgstr "활동"
 #: src/containers/ansible-repository/edit.tsx:32
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:120
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:201
-#: src/containers/group-management/group-detail.tsx:273
-#: src/containers/group-management/group-detail.tsx:500
-#: src/containers/group-management/group-detail.tsx:551
+#: src/containers/group-management/group-detail.tsx:267
+#: src/containers/group-management/group-detail.tsx:494
+#: src/containers/group-management/group-detail.tsx:545
 msgid "Add"
 msgstr "추가"
 
 #: src/constants.tsx:114
 #~ msgid "Add Ansible distribution"
-#~ msgstr "Ansible 배포 추가"
+#~ msgstr "Add Ansible distribution"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:110
 msgid "Add a README with instructions for using this container."
@@ -228,23 +228,23 @@ msgstr "이 컨테이너 사용에 대한 정보가 포함된 README를 추가�
 
 #: src/components/rbac/role-form.tsx:115
 msgid "Add a role description here"
-msgstr ""
+msgstr "여기에 역할 설명을 추가"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:217
 msgid "Add collection"
-msgstr ""
+msgstr "컬렉션 추가"
 
 #: src/constants.tsx:115
 #~ msgid "Add collection remote"
-#~ msgstr "원격 컬렉션 추가"
+#~ msgstr "Add collection remote"
 
 #: src/constants.tsx:124
 #~ msgid "Add container distribution"
-#~ msgstr "컨테이너 배포 추가"
+#~ msgstr "Add container distribution"
 
 #: src/constants.tsx:126
 #~ msgid "Add container repository"
-#~ msgstr "컨테이너 리포지토리 추가"
+#~ msgstr "Add container repository"
 
 #: src/components/execution-environment/repository-form.tsx:140
 #: src/containers/execution-environment-list/execution_environment_list.tsx:160
@@ -253,19 +253,19 @@ msgstr "실행 환경 추가"
 
 #: src/constants.tsx:142
 #~ msgid "Add group"
-#~ msgstr "그룹 추가"
+#~ msgstr "Add group"
 
 #: src/constants.tsx:143
 #~ msgid "Add namespace"
-#~ msgstr "네임스페이스 추가"
+#~ msgstr "Add namespace"
 
 #: src/containers/ansible-remote/edit.tsx:60
 msgid "Add new remote"
-msgstr ""
+msgstr "새 원격 추가"
 
 #: src/containers/ansible-repository/edit.tsx:55
 msgid "Add new repository"
-msgstr ""
+msgstr "새 리포지토리 추가"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:141
 msgid "Add new tag"
@@ -277,16 +277,16 @@ msgstr "이미지에 새 태그 추가"
 
 #: src/actions/ansible-remote-create.tsx:8
 msgid "Add remote"
-msgstr ""
+msgstr "원격 추가"
 
 #: src/containers/execution-environment/registry-list.tsx:150
-#: src/containers/execution-environment/registry-list.tsx:213
+#: src/containers/execution-environment/registry-list.tsx:210
 msgid "Add remote registry"
 msgstr "원격 레지스트리 추가"
 
 #: src/actions/ansible-repository-create.tsx:8
 msgid "Add repository"
-msgstr ""
+msgstr "리포지토리 추가"
 
 #: src/components/rbac/access-tab.tsx:196
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:161
@@ -295,13 +295,13 @@ msgstr ""
 msgid "Add roles"
 msgstr "역할 추가"
 
-#: src/containers/group-management/group-detail.tsx:259
+#: src/containers/group-management/group-detail.tsx:253
 msgid "Add selected users to group"
 msgstr "그룹에 선택한 사용자 추가"
 
 #: src/constants.tsx:144
 #~ msgid "Add synclist"
-#~ msgstr "동기화 목록 추가"
+#~ msgstr "Add synclist"
 
 #: src/components/execution-environment/repository-form.tsx:314
 msgid "Add tag(s) to exclude"
@@ -313,7 +313,7 @@ msgstr "포함할 태그 추가"
 
 #: src/constants.tsx:145
 #~ msgid "Add user"
-#~ msgstr "사용자 추가"
+#~ msgstr "Add user"
 
 #: src/components/execution-environment/repository-form.tsx:388
 #~ msgid ""
@@ -325,7 +325,7 @@ msgstr "포함할 태그 추가"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:180
 msgid "Additional details"
-msgstr ""
+msgstr "추가 세부 정보"
 
 #: src/containers/ansible-repository/tab-details.tsx:44
 #: src/containers/namespace-list/namespace-list.tsx:186
@@ -336,7 +336,7 @@ msgstr "모두"
 msgid "All associated permissions under this role were removed."
 msgstr "이 역할에 있는 연결된 모든 권한이 제거되었습니다."
 
-#: src/containers/landing/landing-page.tsx:205
+#: src/containers/landing/landing-page.tsx:202
 msgid "All policies and guidelines"
 msgstr ""
 
@@ -350,20 +350,20 @@ msgstr "작업 스케줄에 대한 모든 작업을 허용합니다."
 
 #: src/actions/ansible-repository-version-revert.tsx:101
 msgid "Already the current version"
-msgstr ""
+msgstr "이미 현재 버전"
 
 #: src/components/about-modal/about-modal.tsx:85
 msgid "Ansible Automation Platform"
-msgstr ""
+msgstr "Ansible Automation Platform"
 
 #: src/components/legacy-namespace-list/legacy-namespace-item.tsx:66
 #: src/components/wisdom-modal/wisdom-modal.tsx:188
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
 #: src/containers/namespace-detail/namespace-detail.tsx:850
 msgid "Ansible Lightspeed settings"
-msgstr ""
+msgstr "Ansible Lightspeed 설정"
 
-#: src/containers/landing/landing-page.tsx:134
+#: src/containers/landing/landing-page.tsx:131
 msgid "AnsibleFest"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr "승인 대시보드"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:687
 #: src/containers/certification-dashboard/certification-dashboard.tsx:706
 msgid "Approval failed."
-msgstr ""
+msgstr "승인에 실패했습니다."
 
 #: src/components/my-imports/import-console.tsx:185
 msgid "Approval status:"
@@ -403,43 +403,43 @@ msgstr "승인됨"
 
 #: src/components/delete-modal/delete-ansible-remote-modal.tsx:38
 msgid "Are you sure you want to delete the remote <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this remote."
-msgstr ""
+msgstr "원격 <0>{name}</0> 을 삭제하시겠습니까?<1/><2>참고:</2> 이 원격에서 연결된 모든 리소스도 삭제합니다."
 
 #: src/components/delete-modal/delete-ansible-repository-modal.tsx:38
 msgid "Are you sure you want to delete the repository <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this repository."
-msgstr ""
+msgstr "리포지토리<0>{name}</0>를 삭제하시겠습니까?<1/><2>참고:</2> 이 리포지터리 아래에 연결된 모든 리소스도 삭제됩니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:70
 #~ msgid "Are you sure you want to opt the following legacy namespace in to Wisdom?"
-#~ msgstr ""
+#~ msgstr "Are you sure you want to opt the following legacy namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:76
 msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
-msgstr ""
+msgstr "Ansible Lightspeed에서 다음과 같은 레거시 네임스페이스를 선택하시겠습니까?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:76
 #~ msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
-#~ msgstr ""
+#~ msgstr "Are you sure you want to opt the following legacy namespace out of Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:47
 #~ msgid "Are you sure you want to opt the following namespace in to Wisdom?"
-#~ msgstr ""
+#~ msgstr "Are you sure you want to opt the following namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:52
 msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
-msgstr ""
+msgstr "다음 네임스페이스를 Ansible Lightspeed에서 선택하시겠습니까?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:52
 #~ msgid "Are you sure you want to opt the following namespace out of Wisdom?"
-#~ msgstr ""
+#~ msgstr "Are you sure you want to opt the following namespace out of Wisdom?"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:77
 msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
-msgstr ""
+msgstr "<1>{repositoryName}</1> 리포지터리에서 컬렉션 버전 <0>{namespace} {name}.{version}v</0>을 제거하시겠습니까?"
 
 #: src/actions/ansible-repository-version-revert.tsx:48
 msgid "Are you sure you want to revert this repository to the version below?"
-msgstr ""
+msgstr "이 리포지토리를 아래 버전으로 되돌리시겠습니까?"
 
 #: src/components/rbac/user-form.tsx:135
 msgid "Authentication provider"
@@ -447,17 +447,17 @@ msgstr "인증 제공자"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:36
 msgid "Back"
-msgstr ""
+msgstr "뒤로"
 
 #: src/containers/collection-detail/collection-distributions.tsx:152
 #: src/containers/collection-detail/collection-distributions.tsx:240
 #: src/containers/collection-detail/collection-distributions.tsx:266
 msgid "Base path"
-msgstr ""
+msgstr "기본 경로"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:263
 msgid "Base version"
-msgstr ""
+msgstr "서명 버전"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:10
 msgid "Browse..."
@@ -471,21 +471,21 @@ msgstr "브라우저 OS"
 msgid "Browser Version"
 msgstr "브라우저 버전"
 
-#: src/containers/role-management/role-list.tsx:243
-#: src/containers/role-management/role-list.tsx:276
-#: src/containers/role-management/role-list.tsx:329
+#: src/containers/role-management/role-list.tsx:240
+#: src/containers/role-management/role-list.tsx:273
+#: src/containers/role-management/role-list.tsx:326
 msgid "Built-in"
 msgstr "내장됨"
 
-#: src/containers/role-management/role-list.tsx:432
+#: src/containers/role-management/role-list.tsx:429
 msgid "Built-in roles cannot be deleted."
 msgstr "기본 제공 역할은 삭제할 수 없습니다."
 
-#: src/containers/role-management/role-list.tsx:325
+#: src/containers/role-management/role-list.tsx:322
 msgid "Built-in roles cannot be edited or deleted."
 msgstr "기본 제공 역할은 편집하거나 삭제할 수 없습니다."
 
-#: src/containers/role-management/role-list.tsx:422
+#: src/containers/role-management/role-list.tsx:419
 msgid "Built-in roles cannot be edited."
 msgstr "기본 제공 역할은 편집할 수 없습니다."
 
@@ -503,13 +503,13 @@ msgstr "CA 인증서"
 msgid "CLI configuration"
 msgstr "CLI 구성"
 
-#: src/containers/token/token-insights.tsx:201
+#: src/containers/token/token-insights.tsx:198
 msgid "CRC public key"
-msgstr ""
+msgstr "CRC public key"
 
 #: src/containers/repositories/repository-list.tsx:155
 #~ msgid "Can't update remote without a distribution attached to it."
-#~ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수 없습니다."
+#~ msgstr "Can't update remote without a distribution attached to it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:141
 #: src/actions/ansible-repository-version-revert.tsx:38
@@ -535,7 +535,7 @@ msgstr ""
 #: src/containers/edit-namespace/edit-namespace.tsx:158
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:164
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:194
-#: src/containers/group-management/group-detail.tsx:276
+#: src/containers/group-management/group-detail.tsx:270
 msgid "Cancel"
 msgstr "취소"
 
@@ -545,7 +545,7 @@ msgstr "취소됨"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:797
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
-msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다."
+msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다"
 
 #: src/utilities/delete-collection.tsx:41
 #: src/utilities/delete-collection.tsx:95
@@ -558,7 +558,7 @@ msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증서가 성공적으로 업로
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:654
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
-msgstr ""
+msgstr "컬렉션 \"{namespace} {name} v{version}\"에 대한 인증서가 성공적으로 업로드되었습니다."
 
 #: src/components/approve-modal/approve-modal.tsx:166
 #: src/containers/certification-dashboard/certification-dashboard.tsx:735
@@ -576,7 +576,7 @@ msgstr "변경"
 
 #: src/constants.tsx:116
 #~ msgid "Change Ansible distribution"
-#~ msgstr "Ansible 배포 변경"
+#~ msgstr "Change Ansible distribution"
 
 #: src/constants.tsx:158
 msgid "Change and upload collections to namespaces."
@@ -584,62 +584,62 @@ msgstr "컬렉션을 네임스페이스에 변경하고 업로드합니다."
 
 #: src/constants.tsx:117
 #~ msgid "Change collection remote"
-#~ msgstr "컬렉션 원격 변경"
+#~ msgstr "Change collection remote"
 
 #: src/constants.tsx:127
 #~ msgid "Change container distribution"
-#~ msgstr "컨테이너 배포 변경"
+#~ msgstr "Change container distribution"
 
 #: src/constants.tsx:128
 #: src/constants.tsx:170
 #~ msgid "Change container namespace permissions"
-#~ msgstr "컨테이너 네임스페이스 권한 변경"
+#~ msgstr "Change container namespace permissions"
 
 #: src/constants.tsx:129
 #~ msgid "Change container repository"
-#~ msgstr "컨테이너 리포지토리 변경"
+#~ msgstr "Change container repository"
 
 #: src/constants.tsx:133
 #~ msgid "Change containers"
-#~ msgstr "컨테이너 변경"
+#~ msgstr "Change containers"
 
 #: src/constants.tsx:177
 #~ msgid "Change distribution"
-#~ msgstr "배포 변경"
+#~ msgstr "Change distribution"
 
 #: src/constants.tsx:163
 msgid "Change existing execution environments."
-msgstr "기존 실행 환경 변경"
+msgstr "기존 실행 환경 변경."
 
 #: src/constants.tsx:147
 #~ msgid "Change group"
-#~ msgstr "그룹 변경"
+#~ msgstr "Change group"
 
 #: src/constants.tsx:134
 #: src/constants.tsx:169
 #~ msgid "Change image tags"
-#~ msgstr "이미지 태그 변경"
+#~ msgstr "Change image tags"
 
 #: src/constants.tsx:148
 #: src/constants.tsx:163
 #~ msgid "Change namespace"
-#~ msgstr "네임스페이스 변경"
+#~ msgstr "Change namespace"
 
 #: src/constants.tsx:146
 #~ msgid "Change remote registry"
-#~ msgstr "원격 레지스트리 변경"
+#~ msgstr "Change remote registry"
 
 #: src/constants.tsx:149
 #~ msgid "Change synclist"
-#~ msgstr "동기화 목록 변경"
+#~ msgstr "Change synclist"
 
 #: src/constants.tsx:138
 #~ msgid "Change task"
-#~ msgstr "작업 변경"
+#~ msgstr "Change task"
 
 #: src/constants.tsx:150
 #~ msgid "Change user"
-#~ msgstr "사용자 변경"
+#~ msgstr "Change user"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:750
 #: src/containers/certification-dashboard/certification-dashboard.tsx:770
@@ -647,7 +647,7 @@ msgstr "기존 실행 환경 변경"
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태 변경 사항을 저장할 수 없습니다."
 
-#: src/containers/group-management/group-list.tsx:360
+#: src/containers/group-management/group-list.tsx:357
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "그룹 \"{0}\"에 대한 변경 사항을 저장할 수 없습니다."
 
@@ -655,7 +655,7 @@ msgstr "그룹 \"{0}\"에 대한 변경 사항을 저장할 수 없습니다."
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "네임스페이스 \"{0}\"에 대한 변경 사항을 저장할 수 없습니다."
 
-#: src/containers/role-management/role-edit.tsx:238
+#: src/containers/role-management/role-edit.tsx:232
 msgid "Changes to role \"{name}\" could not be saved."
 msgstr "역할 \"{name}\"에 대한 변경 사항을 저장할 수 없습니다."
 
@@ -663,7 +663,7 @@ msgstr "역할 \"{name}\"에 대한 변경 사항을 저장할 수 없습니다.
 msgid "Checking for affected users... <0/>"
 msgstr "영향을 받는 사용자를 확인합니다... <0/>"
 
-#: src/containers/task-management/task_detail.tsx:218
+#: src/containers/task-management/task_detail.tsx:215
 msgid "Child tasks"
 msgstr "하위 작업"
 
@@ -697,9 +697,9 @@ msgstr "닫기"
 
 #: src/components/repositories/remote-form.tsx:379
 msgid "Close YAML editor"
-msgstr ""
+msgstr "YAML 편집기 종료"
 
-#: src/containers/task-management/task_detail.tsx:314
+#: src/containers/task-management/task_detail.tsx:311
 msgid "Code"
 msgstr "코드"
 
@@ -713,31 +713,31 @@ msgstr "컬렉션"
 
 #: src/components/headers/collection-header.tsx:976
 msgid "Collection \"{0} v{collectionVersion}\" could not be deleted."
-msgstr ""
+msgstr "컬렉션 \"{0} v{collectionVersion}\"을/를 삭제할 수 없습니다."
 
 #: src/utilities/delete-collection.tsx:148
 msgid "Collection \"{0}\" could not be deleted."
-msgstr ""
+msgstr "컬렉션 \"{0}\"을/를 삭제할 수 없습니다."
 
 #: src/components/headers/collection-header.tsx:868
 msgid "Collection \"{0}\" could not be deprecated."
-msgstr "컬렉션 \"{0}\"을/를 더 이상 사용하지 않을 수 없습니다."
+msgstr "컬렉션 \"{0}\"을/를 사용 중단할 수 없습니다."
 
 #: src/components/headers/collection-header.tsx:869
 msgid "Collection \"{0}\" could not be undeprecated."
-msgstr "컬렉션 \"{0}\"을/를 지원 중단할 수 없습니다."
+msgstr "컬렉션 \"{0}\"을/를 사용 중단 해제할 수 없습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:607
 #~ msgid "Collection \"{0}\" has been successfully deprecated."
-#~ msgstr "컬렉션 \"{0}\"이/가 더 이상 사용되지 않습니다."
+#~ msgstr "Collection \"{0}\" has been successfully deprecated."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:606
 #~ msgid "Collection \"{0}\" has been successfully undeprecated."
-#~ msgstr "컬렉션 \"{0}\"이/가 성공적으로 지원 중단되었습니다."
+#~ msgstr "Collection \"{0}\" has been successfully undeprecated."
 
 #: src/components/headers/collection-header.tsx:952
 #~ msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
-#~ msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 삭제할 수 없습니다."
+#~ msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 
 #: src/components/headers/collection-header.tsx:909
 #: src/components/headers/collection-header.tsx:922
@@ -746,11 +746,11 @@ msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제�
 
 #: src/utilities/delete-collection.tsx:145
 #~ msgid "Collection \"{name}\" could not be deleted."
-#~ msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
+#~ msgstr "Collection \"{name}\" could not be deleted."
 
 #: src/containers/search/search.tsx:359
 msgid "Collection \"{name}\" could not be deprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"을/를 사용 중단할 수 없습니다."
 
 #: src/components/collection-detail/collection-info.tsx:229
 msgid "Collection \"{name}\" could not be downloaded."
@@ -758,7 +758,7 @@ msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
 #: src/containers/search/search.tsx:360
 msgid "Collection \"{name}\" could not be undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"을/를 사용 중단 해제할 수 없습니다."
 
 #: src/utilities/delete-collection.tsx:127
 msgid "Collection \"{name}\" has been successfully deleted."
@@ -766,11 +766,11 @@ msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:609
 msgid "Collection \"{name}\" has been successfully deprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"이/가 성공적으로 지원 중단되었습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:608
 msgid "Collection \"{name}\" has been successfully undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"이/가 성공적으로 지원 중단 해제되었습니다."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:236
 msgid "Collection Name"
@@ -778,23 +778,23 @@ msgstr "컬렉션 이름"
 
 #: src/constants.tsx:27
 #~ msgid "Collection Namespaces"
-#~ msgstr "컬렉션 네임스페이스"
+#~ msgstr "Collection Namespaces"
 
 #: src/constants.tsx:65
 #~ msgid "Collection Remotes"
-#~ msgstr "원격 걸렉션"
+#~ msgstr "Collection Remotes"
 
 #: src/components/repositories/local-repository-table.tsx:54
 #~ msgid "Collection count"
-#~ msgstr "컬렉션 수"
+#~ msgstr "Collection count"
 
 #: src/components/collection-count/collection-count.tsx:44
 #~ msgid "Collection count for \"{distributionPath}\" could not be displayed."
-#~ msgstr "\"{distributionPath}\"에 대한 컬렉션 수를 표시할 수 없습니다."
+#~ msgstr "Collection count for \"{distributionPath}\" could not be displayed."
 
 #: src/containers/collection-detail/collection-distributions.tsx:171
 msgid "Collection distributions"
-msgstr ""
+msgstr "컬렉션 배포"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:144
 #: src/containers/collection-detail/collection-dependencies.tsx:152
@@ -807,15 +807,15 @@ msgstr "컬렉션에는 종속성이 없습니다."
 
 #: src/containers/collection-detail/collection-distributions.tsx:139
 msgid "Collection doesn't have any distribution assigned."
-msgstr ""
+msgstr "컬렉션에는 배포판이 할당되지 않습니다."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:751
 #~ msgid "Collection failed to be removed from those repositories: {0}"
-#~ msgstr ""
+#~ msgstr "Collection failed to be removed from those repositories: {0}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:708
 msgid "Collection has to be in rejected or staging repository."
-msgstr ""
+msgstr "컬렉션은 거부되거나 스테이징 리포지토리에 있어야 합니다."
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:49
 msgid "Collection is not being used by any collection."
@@ -823,11 +823,11 @@ msgstr "컬렉션은 어떤 컬렉션에서도 사용되고 있지 않습니다.
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:689
 msgid "Collection not found in any repository."
-msgstr ""
+msgstr "리포지토리에서 컬렉션을 찾을 수 없습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:776
 #~ msgid "Collection repositories could not be displayed."
-#~ msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
+#~ msgstr "Collection repositories could not be displayed."
 
 #: src/components/import-modal/import-modal.tsx:241
 msgid "Collection upload canceled"
@@ -835,7 +835,7 @@ msgstr "컬렉션 업로드 취소됨"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
-#~ msgstr ""
+#~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:203
 #: src/components/approve-modal/approve-modal.tsx:399
@@ -851,27 +851,27 @@ msgstr "컬렉션 버전"
 #: src/containers/ansible-repository/tab-collection-versions.tsx:107
 #: src/containers/ansible-repository/tab-repository-versions.tsx:94
 msgid "Collection versions could not be displayed."
-msgstr ""
+msgstr "컬렉션 버전을 표시할 수 없습니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:177
 msgid "Collection versions will appear once a collection is uploaded."
-msgstr ""
+msgstr "컬렉션이 업로드되면 컬렉션 버전이 표시됩니다."
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx:121
 msgid "Collection versions will appear once the collection is modified."
-msgstr ""
+msgstr "컬렉션을 수정하면 컬렉션 버전이 표시됩니다."
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:46
 #~ msgid "Collection was not found in the system. You must upload it."
-#~ msgstr "컬렉션을 시스템에서 찾을 수 없습니다. 업로드해야 합니다."
+#~ msgstr "Collection was not found in the system. You must upload it."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:741
 #~ msgid "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
-#~ msgstr ""
+#~ msgstr "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 
 #: src/components/approve-modal/approve-modal.tsx:117
 msgid "Collection with id {0} not found."
-msgstr ""
+msgstr "ID인 컬렉션 {0}을/를 찾을 수 없음."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 #: src/containers/search/search.tsx:207
@@ -884,7 +884,7 @@ msgstr "컬렉션"
 #: src/containers/namespace-detail/namespace-detail.tsx:430
 #: src/containers/search/search.tsx:255
 msgid "Collections will appear once uploaded"
-msgstr "업로드 후 컬렉션이 나타납니다."
+msgstr "업로드 후 컬렉션이 나타납니다"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:215
 msgid "Command"
@@ -897,7 +897,7 @@ msgstr "커뮤니티"
 #: src/components/collection-detail/collection-content-list.tsx:145
 #: src/containers/collection-detail/collection-docs.tsx:297
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
-msgstr "커뮤니티 컬렉션에는 문서 또는 컨텐츠 수가 없지만 모든 콘텐츠가 동기화됩니다."
+msgstr "커뮤니티 컬렉션에는 문서 또는 컨텐츠 수가 없지만 모든 콘텐츠가 동기화됩니다"
 
 #: src/components/namespace-form/namespace-form.tsx:46
 msgid "Company name"
@@ -905,25 +905,25 @@ msgstr "회사 이름"
 
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:54
-#: src/containers/task-management/task-list-view.tsx:166
+#: src/containers/task-management/task-list-view.tsx:163
 msgid "Completed"
 msgstr "완료됨"
 
 #: src/components/repositories/remote-repository-table.tsx:166
 #~ msgid "Configure"
-#~ msgstr "구성"
-
-#: src/containers/token/token-insights.tsx:94
-msgid "Connect Private Automation Hub"
-msgstr "프라이빗 Automation Hub 연결"
-
-#: src/containers/token/token-insights.tsx:105
-msgid "Connect the ansible-galaxy client"
-msgstr "ansible-galaxy 클라이언트 연결"
+#~ msgstr "Configure"
 
 #: src/containers/token/token-insights.tsx:91
+msgid "Connect Private Automation Hub"
+msgstr "Connect Private Automation Hub"
+
+#: src/containers/token/token-insights.tsx:102
+msgid "Connect the ansible-galaxy client"
+msgstr "Connect the ansible-galaxy client"
+
+#: src/containers/token/token-insights.tsx:88
 msgid "Connect to Hub"
-msgstr "Hub에 연결"
+msgstr "Connect to Hub"
 
 #: src/utilities/validateURLHelper.ts:20
 msgid "Consider using a secure URL (https://)."
@@ -956,18 +956,18 @@ msgstr "컨테이너 이름에는 영숫자 문자 \".\", \"_\", \"-\" 및 최�
 msgid "Container namespace"
 msgstr "컨테이너 네임스페이스"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:314
+#: src/containers/execution-environment-list/execution_environment_list.tsx:311
 msgid "Container registry type"
 msgstr "컨테이너 레지스트리 유형"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:235
-#: src/containers/execution-environment-list/execution_environment_list.tsx:294
+#: src/containers/execution-environment-list/execution_environment_list.tsx:232
+#: src/containers/execution-environment-list/execution_environment_list.tsx:291
 msgid "Container repository name"
 msgstr "컨테이너 리포지터리 이름"
 
 #: src/constants.tsx:73
 #~ msgid "Containers"
-#~ msgstr "컨테이너"
+#~ msgstr "Containers"
 
 #: src/containers/collection-detail/collection-content.tsx:64
 msgid "Content"
@@ -975,23 +975,23 @@ msgstr "콘텐츠"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:251
 msgid "Content added"
-msgstr ""
+msgstr "콘텐츠 추가됨"
 
 #: src/components/repositories/local-repository-table.tsx:54
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
-#: src/containers/landing/landing-page.tsx:71
+#: src/containers/landing/landing-page.tsx:68
 msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
 msgstr ""
 
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
-msgstr ""
+msgstr "배포판이 없는 리포지토리의 콘텐츠는 동기화, 다운로드 또는 검색을 위해 클라이언트에 표시되지 않습니다."
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
-msgstr ""
+msgstr "삭제된 콘텐츠"
 
 #: src/components/headers/collection-header.tsx:609
 msgid "Contents"
@@ -1008,15 +1008,15 @@ msgstr "컨트롤러 목록을 표시할 수 없습니다."
 
 #: src/components/patternfly-wrappers/copy-url.tsx:19
 msgid "Copied"
-msgstr ""
+msgstr "복사됨"
 
 #: src/components/patternfly-wrappers/copy-url.tsx:18
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: src/actions/ansible-repository-copy.tsx:8
 msgid "Copy CLI configuration"
-msgstr ""
+msgstr "CLI 구성 복사"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:225
 #: src/components/execution-environment/publish-to-controller-modal.tsx:228
@@ -1037,26 +1037,26 @@ msgstr "가져오기 로그를 로드할 수 없음"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:124
 msgid "Count"
-msgstr ""
+msgstr "수량"
 
 #: src/components/namespace-modal/namespace-modal.tsx:107
 #: src/components/rbac/group-modal.tsx:57
-#: src/containers/group-management/group-list.tsx:157
-#: src/containers/group-management/group-list.tsx:194
+#: src/containers/group-management/group-list.tsx:154
+#: src/containers/group-management/group-list.tsx:191
 #: src/containers/namespace-list/namespace-list.tsx:245
 #: src/containers/namespace-list/namespace-list.tsx:295
-#: src/containers/user-management/user-list.tsx:182
-#: src/containers/user-management/user-list.tsx:247
+#: src/containers/user-management/user-list.tsx:179
+#: src/containers/user-management/user-list.tsx:244
 msgid "Create"
 msgstr "만들기"
 
 #: src/components/repositories/ansible-repository-form.tsx:212
 #~ msgid "Create a \"content: approved_for_use\" label"
-#~ msgstr ""
+#~ msgstr "Create a \"content: approved_for_use\" label"
 
 #: src/components/repositories/ansible-repository-form.tsx:227
 msgid "Create a \"{0}\" distribution"
-msgstr ""
+msgstr "\"{0}\" 배포 만들기"
 
 #: src/components/rbac/group-modal.tsx:45
 msgid "Create a group"
@@ -1084,12 +1084,12 @@ msgstr "기존 컨테이너 네임스페이스에서 실행 환경을 생성하�
 
 #: src/components/headers/collection-header.tsx:501
 msgid "Create issue"
-msgstr ""
+msgstr "Create issue"
 
 #: src/constants.tsx:125
 #: src/constants.tsx:165
 #~ msgid "Create new containers"
-#~ msgstr "새 컨테이너 만들기"
+#~ msgstr "Create new containers"
 
 #: src/containers/role-management/role-create.tsx:60
 msgid "Create new role"
@@ -1105,11 +1105,11 @@ msgid "Create, delete and change collection namespaces. Upload and delete collec
 msgstr "컬렉션 네임스페이스를 생성, 삭제 및 변경합니다. 컬렉션을 업로드하고 삭제합니다. 원격에서 컬렉션을 동기화합니다. 컬렉션을 승인 및 거부합니다."
 
 #: src/containers/collection-detail/collection-distributions.tsx:157
-#: src/containers/execution-environment/registry-list.tsx:322
-#: src/containers/execution-environment-list/execution_environment_list.tsx:304
-#: src/containers/group-management/group-detail.tsx:624
+#: src/containers/execution-environment/registry-list.tsx:319
+#: src/containers/execution-environment-list/execution_environment_list.tsx:301
+#: src/containers/group-management/group-detail.tsx:618
 #: src/containers/role-management/role-list.tsx:154
-#: src/containers/user-management/user-list.tsx:284
+#: src/containers/user-management/user-list.tsx:281
 msgid "Created"
 msgstr "생성됨"
 
@@ -1117,37 +1117,37 @@ msgstr "생성됨"
 #: src/containers/ansible-repository/tab-repository-versions.tsx:247
 #: src/containers/ansible-repository/tab-repository-versions.tsx:312
 msgid "Created date"
-msgstr ""
+msgstr "생성된 날짜"
 
-#: src/containers/signature-keys/list.tsx:186
-#: src/containers/task-management/task-list-view.tsx:241
-#: src/containers/task-management/task_detail.tsx:180
+#: src/containers/signature-keys/list.tsx:183
+#: src/containers/task-management/task-list-view.tsx:238
+#: src/containers/task-management/task_detail.tsx:177
 msgid "Created on"
 msgstr "생성된 시간"
 
 #: src/containers/ansible-repository/edit.tsx:147
 #~ msgid "Creation started for distribution {0}"
-#~ msgstr ""
+#~ msgstr "Creation started for distribution {0}"
 
 #: src/containers/ansible-repository/edit.tsx:161
 msgid "Creation started for distribution {distributionName}"
-msgstr ""
+msgstr "배포를 위한 생성 시작 {distributionName}"
 
 #: src/constants.tsx:69
 msgid "Curate all synclist repository"
-msgstr "모든 동기화 목록 리포지토리 선별"
+msgstr "모든 동기화 목록 리포지토리 관리"
 
 #: src/constants.tsx:60
 msgid "Curate synclist repository"
-msgstr "동기화 목록 리포지토리 선별"
+msgstr "동기화 목록 리포지토리 관리"
 
 #: src/constants.tsx:73
 msgid "Curate synclist repository batch"
-msgstr "동기화 목록 리포지토리 배치 선별"
+msgstr "동기화 목록 리포지토리 배치 관리"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:259
 msgid "Current content"
-msgstr ""
+msgstr "현재 콘텐츠"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:194
 msgid "Current tags"
@@ -1184,31 +1184,31 @@ msgstr "생성된 날짜"
 #: src/actions/ansible-remote-delete.tsx:11
 #: src/actions/ansible-repository-delete.tsx:12
 #: src/components/delete-modal/delete-modal.tsx:37
-#: src/containers/execution-environment/registry-list.tsx:404
+#: src/containers/execution-environment/registry-list.tsx:401
 #: src/containers/execution-environment-detail/base.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:412
-#: src/containers/execution-environment-list/execution_environment_list.tsx:389
-#: src/containers/group-management/group-detail.tsx:220
-#: src/containers/group-management/group-list.tsx:417
-#: src/containers/role-management/role-list.tsx:413
-#: src/containers/task-management/task-list-view.tsx:312
-#: src/containers/task-management/task-list-view.tsx:328
-#: src/containers/user-management/user-detail.tsx:119
-#: src/containers/user-management/user-list.tsx:333
+#: src/containers/execution-environment-list/execution_environment_list.tsx:386
+#: src/containers/group-management/group-detail.tsx:214
+#: src/containers/group-management/group-list.tsx:414
+#: src/containers/role-management/role-list.tsx:410
+#: src/containers/task-management/task-list-view.tsx:309
+#: src/containers/task-management/task-list-view.tsx:325
+#: src/containers/user-management/user-detail.tsx:116
+#: src/containers/user-management/user-list.tsx:330
 msgid "Delete"
 msgstr "삭제"
 
 #: src/constants.tsx:118
 #~ msgid "Delete Ansible distribution"
-#~ msgstr "Ansible 배포 삭제"
+#~ msgstr "Delete Ansible distribution"
 
 #: src/constants.tsx:119
 #~ msgid "Delete collection"
-#~ msgstr "컬렉션 삭제"
+#~ msgstr "Delete collection"
 
 #: src/constants.tsx:120
 #~ msgid "Delete collection remote"
-#~ msgstr "원격 컬렉션 삭제"
+#~ msgstr "Delete collection remote"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:39
 msgid "Delete collection version?"
@@ -1220,23 +1220,23 @@ msgstr "컬렉션을 삭제하시겠습니까?"
 
 #: src/constants.tsx:130
 #~ msgid "Delete container distribution"
-#~ msgstr "컨테이너 배포 삭제"
+#~ msgstr "Delete container distribution"
 
 #: src/constants.tsx:131
 #~ msgid "Delete container namespace"
-#~ msgstr "컨테이너 네임스페이스 삭제"
+#~ msgstr "Delete container namespace"
 
 #: src/constants.tsx:132
 #~ msgid "Delete container repository"
-#~ msgstr "컨테이너 리포지토리 삭제"
+#~ msgstr "Delete container repository"
 
 #: src/constants.tsx:174
 #~ msgid "Delete container's distribution"
-#~ msgstr "컨테이너 배포 삭제"
+#~ msgstr "Delete container's distribution"
 
 #: src/constants.tsx:173
 #~ msgid "Delete container's namespace"
-#~ msgstr "컨테이너의 네임스페이스 삭제"
+#~ msgstr "Delete container's namespace"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:25
 msgid "Delete container?"
@@ -1244,7 +1244,7 @@ msgstr "컨테이너를 삭제하시겠습니까?"
 
 #: src/constants.tsx:178
 #~ msgid "Delete distribution"
-#~ msgstr "배포 삭제"
+#~ msgstr "Delete distribution"
 
 #: src/utilities/delete-collection.tsx:48
 #: src/utilities/delete-collection.tsx:59
@@ -1253,7 +1253,7 @@ msgstr "전체 컬렉션 삭제"
 
 #: src/constants.tsx:152
 #~ msgid "Delete group"
-#~ msgstr "그룹 삭제"
+#~ msgstr "Delete group"
 
 #: src/components/rbac/delete-group-modal.tsx:25
 msgid "Delete group?"
@@ -1274,39 +1274,39 @@ msgstr "네임스페이스를 삭제하시겠습니까?"
 
 #: src/constants.tsx:151
 #~ msgid "Delete remote registry"
-#~ msgstr "원격 레지스트리 삭제"
+#~ msgstr "Delete remote registry"
 
-#: src/containers/execution-environment/registry-list.tsx:223
+#: src/containers/execution-environment/registry-list.tsx:220
 msgid "Delete remote registry?"
 msgstr "원격 레지스트리를 삭제하시겠습니까?"
 
 #: src/components/delete-modal/delete-ansible-remote-modal.tsx:35
 msgid "Delete remote?"
-msgstr ""
+msgstr "원격을 삭제하시겠습니까?"
 
 #: src/components/delete-modal/delete-ansible-repository-modal.tsx:35
 msgid "Delete repository?"
-msgstr ""
+msgstr "리포지토리를 삭제하시겠습니가?"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:134
 msgid "Delete role: {0}"
 msgstr "역할 삭제: {0}"
 
-#: src/containers/role-management/role-list.tsx:187
+#: src/containers/role-management/role-list.tsx:184
 msgid "Delete role?"
 msgstr "역할을 삭제하시겠습니까?"
 
 #: src/constants.tsx:154
 #~ msgid "Delete synclist"
-#~ msgstr "동기화 목록 삭제"
+#~ msgstr "Delete synclist"
 
 #: src/constants.tsx:139
 #~ msgid "Delete task"
-#~ msgstr "작업 삭제"
+#~ msgstr "Delete task"
 
 #: src/constants.tsx:155
 #~ msgid "Delete user"
-#~ msgstr "사용자 삭제"
+#~ msgstr "Delete user"
 
 #: src/components/rbac/delete-user-modal.tsx:42
 msgid "Delete user?"
@@ -1314,11 +1314,11 @@ msgstr "사용자를 삭제하시겠습니까?"
 
 #: src/components/headers/collection-header.tsx:225
 #~ msgid "Delete version {0}"
-#~ msgstr "버전 삭제 {0}"
+#~ msgstr "Delete version {0}"
 
 #: src/components/headers/collection-header.tsx:240
 msgid "Delete version {version}"
-msgstr ""
+msgstr "버전 삭제 {version}"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:47
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
@@ -1343,7 +1343,7 @@ msgstr "<0>{digest}</0>을/를 삭제하면 해당 데이터가 손실됩니다.
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:38
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
-msgstr "<0>{selectedItem}</0>을/를 삭제하면 해당 데이터가 손실됩니다. "
+msgstr "<0>{selectedItem}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
 
 #: src/components/rbac/delete-user-modal.tsx:51
 msgid "Deleting super users is not allowed."
@@ -1383,11 +1383,11 @@ msgstr "더 이상 사용되지 않음"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:593
 #~ msgid "Deprecation status update starting for collection \"{0}\"."
-#~ msgstr "\"{0}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작합니다."
+#~ msgstr "Deprecation status update starting for collection \"{0}\"."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:599
 msgid "Deprecation status update starting for collection \"{name}\"."
-msgstr ""
+msgstr "\"{name}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작합니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:193
 #: src/components/collection-detail/collection-content-list.tsx:105
@@ -1400,24 +1400,24 @@ msgstr ""
 #: src/containers/ansible-repository/tab-collection-versions.tsx:132
 #: src/containers/ansible-repository/tab-details.tsx:41
 #: src/containers/ansible-repository/tab-repository-versions.tsx:106
-#: src/containers/execution-environment-list/execution_environment_list.tsx:299
+#: src/containers/execution-environment-list/execution_environment_list.tsx:296
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:220
 #: src/containers/role-management/role-list.tsx:149
-#: src/containers/task-management/task_detail.tsx:346
+#: src/containers/task-management/task_detail.tsx:343
 msgid "Description"
 msgstr "설명"
 
-#: src/containers/task-management/task_detail.tsx:167
+#: src/containers/task-management/task_detail.tsx:164
 msgid "Descriptive name"
-msgstr "설명적인 이름"
+msgstr "설명이 포함된 이름"
 
 #: src/components/approve-modal/approve-modal.tsx:354
 msgid "Deselect all ({0} items)"
-msgstr ""
+msgstr "모두 선택 해제 ({0} 항목)"
 
 #: src/components/approve-modal/approve-modal.tsx:350
 msgid "Deselect page ({0} items)"
-msgstr ""
+msgstr "페이지 선택 해제 ({0} 항목)"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:24
 msgid "Detail"
@@ -1436,31 +1436,31 @@ msgstr "세부 정보"
 msgid "Digest"
 msgstr "요약"
 
-#: src/containers/landing/landing-page.tsx:213
+#: src/containers/landing/landing-page.tsx:210
 msgid "Digital accessibility"
 msgstr ""
 
 #: src/containers/ansible-remote/tab-details.tsx:72
 msgid "Disabled"
-msgstr ""
+msgstr "비활성화됨"
 
 #: src/containers/ansible-repository/tab-details.tsx:47
 msgid "Distribution"
-msgstr ""
+msgstr "배포"
 
 #: src/components/repositories/local-repository-table.tsx:64
 #~ msgid "Distribution URL"
-#~ msgstr "배포 URL"
+#~ msgstr "Distribution URL"
 
 #: src/components/repositories/local-repository-table.tsx:44
 #~ msgid "Distribution name"
-#~ msgstr "배포 이름"
+#~ msgstr "Distribution name"
 
 #: src/components/headers/collection-header.tsx:632
 #: src/components/repositories/ansible-repository-form.tsx:214
 #: src/containers/collection-detail/collection-distributions.tsx:108
 msgid "Distributions"
-msgstr ""
+msgstr "배포"
 
 #: src/components/headers/collection-header.tsx:187
 msgid "Docs site"
@@ -1472,23 +1472,23 @@ msgstr "문서 사이트"
 msgid "Documentation"
 msgstr "문서"
 
-#: src/containers/token/token-insights.tsx:107
+#: src/containers/token/token-insights.tsx:104
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
-msgstr "<0>ansible-octets</0> 클라이언트를 구성하는 방법에 대한 설명서는 <1>여기</1>에서 찾을 수 있습니다. 다음 매개변수를 사용하여 클라이언트를 구성하십시오."
+msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 
 #: src/components/my-imports/import-console.tsx:103
-#: src/containers/task-management/task_detail.tsx:316
+#: src/containers/task-management/task_detail.tsx:313
 msgid "Done"
 msgstr "완료"
 
 #: src/components/collection-detail/collection-info.tsx:96
-#: src/containers/landing/landing-page.tsx:64
+#: src/containers/landing/landing-page.tsx:61
 msgid "Download"
-msgstr ""
+msgstr "다운로드"
 
 #: src/actions/ansible-remote-download-ca.tsx:6
 msgid "Download CA certificate"
-msgstr ""
+msgstr "CA 인증서 다운로드"
 
 #: src/components/repositories/remote-form.tsx:699
 msgid "Download CA certification file"
@@ -1496,7 +1496,7 @@ msgstr "CA 인증서 파일 다운로드"
 
 #: src/actions/ansible-remote-download-client.tsx:6
 msgid "Download client certificate"
-msgstr ""
+msgstr "클라이언트 인증서 다운로드"
 
 #: src/components/repositories/remote-form.tsx:655
 msgid "Download client certification file"
@@ -1507,7 +1507,7 @@ msgstr "클라이언트 인증 파일 다운로드"
 msgid "Download concurrency"
 msgstr "동시 다운로드"
 
-#: src/containers/signature-keys/list.tsx:232
+#: src/containers/signature-keys/list.tsx:229
 msgid "Download key"
 msgstr "키 다운로드"
 
@@ -1517,7 +1517,7 @@ msgstr "서명된 컬렉션만 다운로드"
 
 #: src/actions/ansible-remote-download-requirements.tsx:6
 msgid "Download requirements YAML"
-msgstr ""
+msgstr "요구 사항 YAML 다운로드"
 
 #: src/components/repositories/remote-form.tsx:372
 msgid "Download requirements file"
@@ -1529,15 +1529,15 @@ msgstr "Tarball 다운로드"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:12
 msgid "Drag a file here or browse to upload"
-msgstr "여기에 파일을 드래그하거나 업로드할 파일을 찾습니다."
+msgstr "여기에 파일을 드래그하거나 업로드할 파일을 찾습니다"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:58
 #~ msgid "Drag and drop a file or upload one'"
-#~ msgstr "파일을 드래그 앤 드롭하거나 파일 업로드"
+#~ msgstr "Drag and drop a file or upload one'"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:58
 msgid "Drag and drop a file or upload one."
-msgstr ""
+msgstr "파일을 드래그 앤 드롭하거나 업로드하십시오."
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:66
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:72
@@ -1549,15 +1549,15 @@ msgstr "드롭다운"
 #: src/containers/ansible-remote/edit.tsx:37
 #: src/containers/ansible-repository/edit.tsx:32
 #: src/containers/edit-namespace/edit-namespace.tsx:120
-#: src/containers/execution-environment/registry-list.tsx:391
+#: src/containers/execution-environment/registry-list.tsx:388
 #: src/containers/execution-environment-detail/base.tsx:232
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:103
-#: src/containers/execution-environment-list/execution_environment_list.tsx:362
-#: src/containers/role-management/role-list.tsx:399
-#: src/containers/settings/user-profile.tsx:92
-#: src/containers/user-management/user-detail.tsx:109
+#: src/containers/execution-environment-list/execution_environment_list.tsx:359
+#: src/containers/role-management/role-list.tsx:396
+#: src/containers/settings/user-profile.tsx:89
+#: src/containers/user-management/user-detail.tsx:106
 #: src/containers/user-management/user-edit.tsx:67
-#: src/containers/user-management/user-list.tsx:324
+#: src/containers/user-management/user-list.tsx:321
 msgid "Edit"
 msgstr "편집"
 
@@ -1575,7 +1575,7 @@ msgstr "실행 환경 편집"
 
 #: src/components/repositories/remote-form.tsx:380
 msgid "Edit in YAML editor"
-msgstr ""
+msgstr "YAML 편집기에서 편집"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:781
 msgid "Edit namespace"
@@ -1585,7 +1585,7 @@ msgstr "네임스페이스 편집"
 msgid "Edit remote"
 msgstr "원격 편집"
 
-#: src/containers/execution-environment/registry-list.tsx:213
+#: src/containers/execution-environment/registry-list.tsx:210
 msgid "Edit remote registry"
 msgstr "원격 레지스트리 편집"
 
@@ -1597,7 +1597,7 @@ msgstr "원격 레지스트리 편집"
 msgid "Edit resources"
 msgstr "리소스 편집"
 
-#: src/containers/role-management/role-edit.tsx:154
+#: src/containers/role-management/role-edit.tsx:148
 msgid "Edit role permissions"
 msgstr "역할 권한 편집"
 
@@ -1611,26 +1611,26 @@ msgstr "사용자 편집"
 
 #: src/components/rbac/role-list-table.tsx:52
 #: src/containers/role-management/role-list.tsx:159
-#: src/containers/role-management/role-list.tsx:238
-#: src/containers/role-management/role-list.tsx:247
-#: src/containers/role-management/role-list.tsx:276
-#: src/containers/role-management/role-list.tsx:280
-#: src/containers/role-management/role-list.tsx:332
+#: src/containers/role-management/role-list.tsx:235
+#: src/containers/role-management/role-list.tsx:244
+#: src/containers/role-management/role-list.tsx:273
+#: src/containers/role-management/role-list.tsx:277
+#: src/containers/role-management/role-list.tsx:329
 msgid "Editable"
 msgstr "편집 가능"
 
 #: src/components/rbac/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:537
-#: src/containers/group-management/group-detail.tsx:609
-#: src/containers/user-management/user-list.tsx:172
-#: src/containers/user-management/user-list.tsx:211
-#: src/containers/user-management/user-list.tsx:274
+#: src/containers/group-management/group-detail.tsx:531
+#: src/containers/group-management/group-detail.tsx:603
+#: src/containers/user-management/user-list.tsx:169
+#: src/containers/user-management/user-list.tsx:208
+#: src/containers/user-management/user-list.tsx:271
 msgid "Email"
 msgstr "이메일"
 
 #: src/containers/ansible-remote/tab-details.tsx:72
 msgid "Enabled"
-msgstr ""
+msgstr "활성화됨"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:227
 msgid "Environment"
@@ -1644,7 +1644,7 @@ msgstr "환경"
 #~ msgid "Error deleting collection."
 #~ msgstr "Error deleting collection."
 
-#: src/containers/group-management/group-list.tsx:472
+#: src/containers/group-management/group-list.tsx:469
 msgid "Error deleting group."
 msgstr "그룹을 삭제하는 동안 오류가 발생했습니다."
 
@@ -1693,7 +1693,7 @@ msgstr "컬렉션을 로드하는 동안 오류가 발생했습니다."
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:499
+#: src/containers/execution-environment-list/execution_environment_list.tsx:496
 msgid "Error loading environments."
 msgstr "환경을 로드하는 동안 오류가 발생했습니다."
 
@@ -1728,7 +1728,7 @@ msgstr "환경을 로드하는 동안 오류가 발생했습니다."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:189
 msgid "Error loading repository with label {pipeline}."
-msgstr ""
+msgstr "{pipeline} 레이블이 있는 리포지토리를 로드하는 동안 오류가 발생했습니다."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:154
 #~ msgid "Error loading tags"
@@ -1751,7 +1751,7 @@ msgstr ""
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx:342
+#: src/containers/task-management/task_detail.tsx:339
 msgid "Error message"
 msgstr "오류 메시지"
 
@@ -1774,7 +1774,7 @@ msgstr "오류 메시지:"
 
 #: src/components/execution-environment/repository-form.tsx:493
 msgid "Error when saving registry."
-msgstr ""
+msgstr "레지스트리를 저장할 때 오류가 발생했습니다."
 
 #: src/utilities/fail-alerts.ts:15
 msgid "Error {statusCode} - {statusText}"
@@ -1802,7 +1802,7 @@ msgstr "오류 {statusCode} - {statusText}: 이 요청을 진행하는 데 필�
 
 #: src/utilities/fail-alerts.ts:16
 msgid "Error {statusCode} - {statusText}: {customMessage}"
-msgstr ""
+msgstr "오류 {statusCode} - {statusText} {customMessage}"
 
 #: src/containers/execution-environment-detail/base.tsx:182
 #: src/containers/execution-environment-list/execution_environment_list.tsx:461
@@ -1819,18 +1819,18 @@ msgid "Execution Environment"
 msgstr "실행 환경"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:40
-#: src/containers/execution-environment-list/execution_environment_list.tsx:178
+#: src/containers/execution-environment-list/execution_environment_list.tsx:175
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:110
 #: src/loaders/standalone/menu.tsx:73
 #: src/loaders/standalone/menu.tsx:79
 msgid "Execution Environments"
 msgstr "실행 환경"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:462
+#: src/containers/execution-environment-list/execution_environment_list.tsx:459
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr "실행 환경 \"{0}\"이/가 성공적으로 추가되었습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:523
+#: src/containers/execution-environment/registry-list.tsx:520
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "실행 환경 \"{name}\"을/를 인덱싱할 수 없습니다."
 
@@ -1854,28 +1854,28 @@ msgstr "실행 환경 \"{selectedItem}\"이/가 성공적으로 삭제되었습�
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
-#: src/containers/token/token-standalone.tsx:69
+#: src/containers/token/token-standalone.tsx:66
 msgid "Expiration"
 msgstr "만료"
 
-#: src/containers/landing/landing-page.tsx:162
+#: src/containers/landing/landing-page.tsx:159
 msgid "Extend the power of Ansible to your entire team."
 msgstr ""
 
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:61
-#: src/containers/task-management/task-list-view.tsx:170
+#: src/containers/task-management/task-list-view.tsx:167
 msgid "Failed"
 msgstr "실패"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:33
 #~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
-#~ msgstr ""
+#~ msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
 #: src/components/approve-modal/approve-modal.tsx:176
 msgid "Failed to approve collection."
-msgstr ""
+msgstr "컬렉션을 승인하지 못했습니다."
 
 #: src/containers/execution-environment/registry-list.tsx:470
 #~ msgid "Failed to delete remote registry {name}"
@@ -1886,92 +1886,92 @@ msgstr ""
 #: src/containers/certification-dashboard/certification-dashboard.tsx:789
 #: src/containers/certification-dashboard/certification-dashboard.tsx:789
 msgid "Failed to find a distribution for repository {name}"
-msgstr ""
+msgstr "리포지토리{name}에 대한 배포를 찾을 수 없음"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:188
 msgid "Failed to find repository version"
-msgstr ""
+msgstr "리포지토리 버전을 찾을 수 없음"
 
 #: src/api/sign-collections.ts:36
 #: src/api/sign-collections.ts:36
 #: src/containers/certification-dashboard/certification-dashboard.tsx:781
 #: src/containers/certification-dashboard/certification-dashboard.tsx:781
 msgid "Failed to find repository {name}"
-msgstr ""
+msgstr "리포지토리 {name}를 찾을 수 없음"
 
 #: src/actions/ansible-repository-delete.tsx:53
 #: src/actions/ansible-repository-delete.tsx:53
 msgid "Failed to list distributions, removing only the repository."
-msgstr ""
+msgstr "리포지토리만 제거하여 배포를 나열하지 못했습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:94
 msgid "Failed to load Ansible Lightspeed information."
-msgstr ""
+msgstr "Ansible Lightspeed 정보를 로드하지 못했습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:94
 #~ msgid "Failed to load Wisdom information."
-#~ msgstr ""
+#~ msgstr "Failed to load Wisdom information."
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx:23
 #~ msgid "Failed to load collection versions"
-#~ msgstr ""
+#~ msgstr "Failed to load collection versions"
 
 #: src/components/approve-modal/approve-modal.tsx:121
 #~ msgid "Failed to load collection."
-#~ msgstr ""
+#~ msgstr "Failed to load collection."
 
 #: src/components/repositories/lazy-distributions.tsx:64
 msgid "Failed to load distributions: {error}"
-msgstr ""
+msgstr "배포판을 로드하지 못했습니다: {error}"
 
 #: src/components/approve-modal/approve-modal.tsx:59
 #~ msgid "Failed to load pulp_id of collection repository."
-#~ msgstr ""
+#~ msgstr "Failed to load pulp_id of collection repository."
 
 #: src/components/repositories/ansible-repository-form.tsx:331
 msgid "Failed to load remotes: {remotesError}"
-msgstr ""
+msgstr "원격을 로드하지 못했습니다: {remotesError}"
 
 #: src/components/approve-modal/approve-modal.tsx:220
 #: src/containers/certification-dashboard/certification-dashboard.tsx:156
 msgid "Failed to load repositories."
-msgstr ""
+msgstr "리포지토리를 로드하지 못했습니다."
 
 #: src/components/repositories/lazy-repositories.tsx:53
 msgid "Failed to load repositories: {error}"
-msgstr ""
+msgstr "리포지토리를 로드하지 못했습니다: {error}"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:124
 msgid "Failed to opt in to Ansible Lightspeed."
-msgstr ""
+msgstr "Ansible Lightspeed를 선택하지 못했습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:124
 #~ msgid "Failed to opt in to Wisdom."
-#~ msgstr ""
+#~ msgstr "Failed to opt in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:140
 msgid "Failed to opt out of Ansible Lightspeed."
-msgstr ""
+msgstr "Ansible Lightspeed를 선택 해제하지 못했습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:140
 #~ msgid "Failed to opt out of Wisdom."
-#~ msgstr ""
+#~ msgstr "Failed to opt out of Wisdom."
 
 #: src/actions/ansible-repository-delete.tsx:82
 msgid "Failed to remove distribution {name}"
-msgstr ""
+msgstr "배포 {name}를 제거하지 못했습니다"
 
 #: src/actions/ansible-remote-delete.tsx:40
 msgid "Failed to remove remote {name}"
-msgstr ""
+msgstr "원격 {name}을 제거하지 못했습니다"
 
 #: src/actions/ansible-repository-delete.tsx:66
 msgid "Failed to remove repository {name}"
-msgstr ""
+msgstr "리포지토리 {name}를 제거하지 못했습니다"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:33
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
-msgstr ""
+msgstr "리포지터리 \"{repositoryName}\"에서 {namespace}.{name} v{version} 를 제거하지 못했습니다."
 
 #: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
@@ -1979,7 +1979,7 @@ msgstr "사용자 데이터를 검색하지 못했습니다."
 
 #: src/actions/ansible-repository-version-revert.tsx:77
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
-msgstr ""
+msgstr "리포지토리 \"{repositoryName}\"를 버전 \"{number}으로 되돌리지 못했습니다"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:642
 msgid "Failed to sign all collections."
@@ -2000,13 +2000,13 @@ msgstr "버전에 서명하지 못했습니다."
 
 #: src/actions/ansible-repository-sync.tsx:22
 msgid "Failed to sync repository \"{name}\""
-msgstr ""
+msgstr "리포지토리 \"{name}\"를 동기화하지 못했습니다"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:248
 msgid "Failed to {operation} tag \"{tag}\"."
 msgstr "{operation} 태그 \"{tag}\"에 실패했습니다."
 
-#: src/containers/landing/landing-page.tsx:130
+#: src/containers/landing/landing-page.tsx:127
 msgid "Featured"
 msgstr ""
 
@@ -2016,7 +2016,7 @@ msgstr "이름으로 필터링"
 
 #: src/components/repo-selector/repo-selector.tsx:51
 #~ msgid "Filter by repository"
-#~ msgstr "리포지터리로 필터링"
+#~ msgstr "Filter by repository"
 
 #: src/components/patternfly-wrappers/compound-filter.tsx:126
 #: src/components/patternfly-wrappers/compound-filter.tsx:132
@@ -2034,21 +2034,21 @@ msgstr "{0}로/으로 필터링"
 msgid "Find content"
 msgstr "콘텐츠 검색"
 
-#: src/containers/execution-environment/registry-list.tsx:411
+#: src/containers/execution-environment/registry-list.tsx:408
 msgid "Find execution environments in this registry"
 msgstr "이 레지스트리에서 실행 환경 찾기"
 
-#: src/containers/task-management/task-list-view.tsx:251
-#: src/containers/task-management/task_detail.tsx:174
+#: src/containers/task-management/task-list-view.tsx:248
+#: src/containers/task-management/task_detail.tsx:171
 msgid "Finished at"
 msgstr "완료"
 
 #: src/components/rbac/user-form.tsx:87
-#: src/containers/group-management/group-detail.tsx:529
-#: src/containers/group-management/group-detail.tsx:619
-#: src/containers/user-management/user-list.tsx:164
-#: src/containers/user-management/user-list.tsx:209
-#: src/containers/user-management/user-list.tsx:262
+#: src/containers/group-management/group-detail.tsx:523
+#: src/containers/group-management/group-detail.tsx:613
+#: src/containers/user-management/user-list.tsx:161
+#: src/containers/user-management/user-list.tsx:206
+#: src/containers/user-management/user-list.tsx:259
 msgid "First name"
 msgstr "이름"
 
@@ -2060,19 +2060,19 @@ msgstr "로그 추적"
 msgid "Galaxy Logo"
 msgstr "Galaxy 로고"
 
-#: src/containers/role-management/role-list.tsx:282
+#: src/containers/role-management/role-list.tsx:279
 msgid "Galaxy only"
 msgstr "Galaxy 전용"
 
-#: src/containers/landing/landing-page.tsx:173
+#: src/containers/landing/landing-page.tsx:170
 msgid "Get the trial"
 msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:301
 #~ msgid "Get token"
-#~ msgstr "토큰 받기"
+#~ msgstr "Get token"
 
-#: src/utilities/wait-for-task.ts:26
+#: src/utilities/wait-for-task.ts:28
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10번 시도 후에 대기 중인 작업을 포기합니다."
 
@@ -2110,7 +2110,7 @@ msgstr "그룹 \"{0}\"을/를 \"{name}\"에서 제거할 수 없습니다."
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "그룹\"{0}\"이/가 \"{name}\"에 성공적으로 추가되었습니다."
 
-#: src/containers/group-management/group-list.tsx:457
+#: src/containers/group-management/group-list.tsx:454
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "그룹 \"{0}\"이/가 성공적으로 삭제되었습니다."
 
@@ -2143,26 +2143,26 @@ msgstr "그룹 \"{0}\" 역할은 \"{name}\"에서 업데이트할 수 없습니�
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr "그룹 \"{0}\" 역할이 \"{name}\"에서 성공적으로 업데이트되었습니다."
 
-#: src/containers/group-management/group-detail.tsx:370
+#: src/containers/group-management/group-detail.tsx:364
 msgid "Group \"{group}\" could not be deleted."
 msgstr "그룹 \"{group}\"을/를 삭제할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:362
+#: src/containers/group-management/group-detail.tsx:356
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "그룹 \"{group}\"이/가 성공적으로 삭제되었습니다."
 
-#: src/containers/group-management/group-detail.tsx:728
+#: src/containers/group-management/group-detail.tsx:722
 msgid "Group could not be displayed."
 msgstr "그룹을 표시할 수 없습니다."
 
 #: src/components/rbac/access-tab.tsx:110
-#: src/containers/group-management/group-list.tsx:390
+#: src/containers/group-management/group-list.tsx:387
 msgid "Group list"
 msgstr "그룹 목록"
 
-#: src/containers/group-management/group-list.tsx:180
-#: src/containers/group-management/group-list.tsx:220
-#: src/containers/group-management/group-list.tsx:376
+#: src/containers/group-management/group-list.tsx:177
+#: src/containers/group-management/group-list.tsx:217
+#: src/containers/group-management/group-list.tsx:373
 msgid "Group name"
 msgstr "그룹 이름"
 
@@ -2177,31 +2177,31 @@ msgstr "그룹 {groupId}"
 #: src/containers/ansible-remote/detail.tsx:39
 #: src/containers/ansible-repository/detail.tsx:50
 msgid "Group {group}"
-msgstr ""
+msgstr "그룹 {group}"
 
 #: src/components/rbac/user-form.tsx:147
 #: src/components/rbac/user-form.tsx:161
-#: src/containers/group-management/group-detail.tsx:182
-#: src/containers/group-management/group-list.tsx:141
-#: src/containers/user-management/user-list.tsx:280
+#: src/containers/group-management/group-detail.tsx:176
+#: src/containers/group-management/group-list.tsx:138
+#: src/containers/user-management/user-list.tsx:277
 #: src/loaders/standalone/menu.tsx:128
 msgid "Groups"
 msgstr "그룹"
 
 #: src/components/rbac/user-form.tsx:296
-#: src/containers/group-management/group-list.tsx:499
+#: src/containers/group-management/group-list.tsx:496
 msgid "Groups list could not be displayed."
 msgstr "그룹 목록을 표시할 수 없습니다."
 
-#: src/containers/group-management/group-list.tsx:149
+#: src/containers/group-management/group-list.tsx:146
 msgid "Groups will appear once created"
-msgstr "그룹이 생성되면 나타납니다."
+msgstr "그룹이 생성되면 나타납니다"
 
 #: src/components/execution-environment/repository-form.tsx:384
 #~ msgid "Groups with access"
-#~ msgstr "액세스 권한이 있는 그룹"
+#~ msgstr "Groups with access"
 
-#: src/containers/landing/landing-page.tsx:100
+#: src/containers/landing/landing-page.tsx:97
 msgid "Help other Ansible users by sharing the awesome roles and collections you create."
 msgstr ""
 
@@ -2211,7 +2211,7 @@ msgstr "고급 옵션 숨기기"
 
 #: src/components/repositories/ansible-repository-form.tsx:270
 msgid "Hide from search"
-msgstr ""
+msgstr "검색에서 숨기기"
 
 #: src/components/collection-detail/download-signature-grid-item.tsx:85
 msgid "Hide the signature"
@@ -2234,7 +2234,7 @@ msgstr "컨트롤러가 표에 나열되지 않은 경우 settings.py를 확인�
 
 #: src/components/repositories/remote-form.tsx:385
 msgid "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
-msgstr ""
+msgstr "이 요구 사항 파일을 채우면 이 원격은 이 파일의 컬렉션만 동기화하며, 그렇지 않으면 모든 컬렉션은 동기화됩니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:614
 msgid "Image \"{digest}\" could not be deleted."
@@ -2279,9 +2279,9 @@ msgstr "가져오기"
 
 #: src/components/repositories/ansible-repository-form.tsx:209
 msgid "In order to retain all versions, leave this field blank."
-msgstr ""
+msgstr "모든 버전을 유지하려면 이 필드를 비워 둡니다."
 
-#: src/containers/execution-environment/registry-list.tsx:419
+#: src/containers/execution-environment/registry-list.tsx:416
 msgid "Index execution environments"
 msgstr "인덱스 실행 환경"
 
@@ -2289,15 +2289,15 @@ msgstr "인덱스 실행 환경"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:412
+#: src/containers/execution-environment/registry-list.tsx:409
 msgid "Indexing execution environments is only supported on registry.redhat.io"
-msgstr "인덱스 실행 환경은 registry.redhat.io에서만 지원됩니다."
+msgstr "인덱스 실행 환경은 registry.redhat.io에서만 지원됩니다"
 
 #: src/containers/execution-environment/registry-list.tsx:517
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:515
+#: src/containers/execution-environment/registry-list.tsx:512
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 인덱싱이 시작되었습니다."
 
@@ -2316,7 +2316,7 @@ msgstr "설치"
 
 #: src/containers/legacy-roles/legacy-role.tsx:55
 msgid "Installation:"
-msgstr ""
+msgstr "설치:"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:80
 msgid "Instructions"
@@ -2332,7 +2332,7 @@ msgstr "파일 형식이 잘못되었습니다."
 
 #: src/components/import-modal/import-modal.tsx:157
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
-msgstr "잘못된 파일 이름입니다. 컬렉션은 'namespace-collection_name-1.0.0'로 포맷해야 합니다."
+msgstr "잘못된 파일 이름입니다. 컬렉션은 'namespace-collection_name-1.0.0'로 포맷해야 합니다"
 
 #: src/containers/login/login.tsx:106
 msgid "Invalid login credentials."
@@ -2354,17 +2354,17 @@ msgstr "문제 추적기"
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라운드에서 완료됩니다."
 
-#: src/containers/landing/landing-page.tsx:67
+#: src/containers/landing/landing-page.tsx:64
 msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
 msgstr ""
 
-#: src/containers/signature-keys/list.tsx:181
+#: src/containers/signature-keys/list.tsx:178
 msgid "Key fingerprint"
 msgstr "키 지문"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:166
-#: src/components/collection-list/collection-filter.tsx:77
-#: src/components/collection-list/collection-filter.tsx:129
+#: src/components/collection-list/collection-filter.tsx:78
+#: src/components/collection-list/collection-filter.tsx:130
 #: src/containers/ansible-repository/tab-collection-versions.tsx:111
 msgid "Keywords"
 msgstr "키워드"
@@ -2372,18 +2372,18 @@ msgstr "키워드"
 #: src/components/repositories/ansible-repository-form.tsx:254
 #: src/containers/ansible-repository/tab-details.tsx:59
 msgid "Labels"
-msgstr ""
+msgstr "레이블"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:309
+#: src/containers/execution-environment-list/execution_environment_list.tsx:306
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
 #: src/components/rbac/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:533
-#: src/containers/group-management/group-detail.tsx:614
-#: src/containers/user-management/user-list.tsx:168
-#: src/containers/user-management/user-list.tsx:210
-#: src/containers/user-management/user-list.tsx:268
+#: src/containers/group-management/group-detail.tsx:527
+#: src/containers/group-management/group-detail.tsx:608
+#: src/containers/user-management/user-list.tsx:165
+#: src/containers/user-management/user-list.tsx:207
+#: src/containers/user-management/user-list.tsx:265
 msgid "Last name"
 msgstr "성"
 
@@ -2391,7 +2391,7 @@ msgstr "성"
 msgid "Last synced"
 msgstr "마지막으로 동기화됨"
 
-#: src/containers/execution-environment/registry-list.tsx:327
+#: src/containers/execution-environment/registry-list.tsx:324
 msgid "Last updated"
 msgstr "마지막 업데이트"
 
@@ -2414,37 +2414,37 @@ msgstr "더 알아보기"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:180
 #~ msgid "Learn more about Ansible Wisdom."
-#~ msgstr ""
+#~ msgstr "Learn more about Ansible Wisdom."
 
 #: src/loaders/standalone/menu.tsx:88
 msgid "Legacy"
-msgstr ""
+msgstr "레거시"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx:155
 #: src/loaders/standalone/menu.tsx:96
 msgid "Legacy Namespaces"
-msgstr ""
+msgstr "레거시 네임스페이스"
 
 #: src/containers/legacy-roles/legacy-roles.tsx:128
 #: src/loaders/standalone/menu.tsx:93
 msgid "Legacy Roles"
-msgstr ""
+msgstr "레거시 역할"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:61
 msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr ""
+msgstr "레거시 네임스페이스 <0>{name}</0> 가 Ansible Lightspeed로 선택됩니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:60
 #~ msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
-#~ msgstr ""
+#~ msgstr "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:66
 msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr ""
+msgstr "레거시 네임스페이스 <0>{name}</0> 는 Ansible Lightspeed에서 선택 해제됩니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:65
 #~ msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
-#~ msgstr ""
+#~ msgstr "Legacy namespace <0>{name}</0> is opted out of Wisdom."
 
 #: src/components/collection-detail/collection-info.tsx:73
 msgid "License"
@@ -2469,19 +2469,19 @@ msgstr "컬렉션 목록"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx:178
 msgid "List of Legacy Namespaces"
-msgstr ""
+msgstr "레거시 네임스페이스 목록"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:146
 #: src/containers/legacy-roles/legacy-roles.tsx:152
 msgid "List of Legacy Roles"
-msgstr ""
+msgstr "레거시 역할 목록"
 
 #: src/containers/legacy-roles/legacy-role.tsx:170
 msgid "List of versions"
-msgstr ""
+msgstr "버전 목록"
 
-#: src/containers/token/token-insights.tsx:138
-#: src/containers/token/token-standalone.tsx:100
+#: src/containers/token/token-insights.tsx:135
+#: src/containers/token/token-standalone.tsx:97
 msgid "Load token"
 msgstr "토큰 로드"
 
@@ -2489,7 +2489,7 @@ msgstr "토큰 로드"
 msgid "Loading distribution..."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:419
+#: src/containers/execution-environment-list/execution_environment_list.tsx:416
 msgid "Local"
 msgstr "지역"
 
@@ -2517,11 +2517,11 @@ msgstr "로그 아웃"
 #: src/components/repositories/ansible-repository-form.tsx:280
 #: src/components/repositories/ansible-repository-form.tsx:285
 msgid "Make private"
-msgstr ""
+msgstr "비공개로 설정"
 
 #: src/components/repositories/ansible-repository-form.tsx:281
 msgid "Make the repository private."
-msgstr ""
+msgstr "리포지토리를 비공개로 설정합니다."
 
 #: src/constants.tsx:161
 msgid "Manage all content types."
@@ -2529,48 +2529,48 @@ msgstr "모든 콘텐츠 유형을 관리합니다."
 
 #: src/constants.tsx:155
 msgid "Manage ansible repositories."
-msgstr ""
+msgstr "ansible 리포지토리를 관리합니다."
 
 #: src/constants.tsx:160
 msgid "Manage collection remotes."
-msgstr ""
+msgstr "컬렉션을 원격으로 관리합니다."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:388
 msgid "Manage tags"
 msgstr "태그 관리"
 
-#: src/containers/token/token-insights.tsx:160
+#: src/containers/token/token-insights.tsx:157
 msgid "Manage tokens"
-msgstr "토큰 관리"
+msgstr "Manage tokens"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:152
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "현재 이 화면에서 매니페스트 목록이 지원되지 않습니다. <0>Images</0> 탭을 사용하여 매니페스트 목록 세부 정보를 확인하십시오."
 
-#: src/containers/landing/landing-page.tsx:102
+#: src/containers/landing/landing-page.tsx:99
 msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx:313
+#: src/containers/task-management/task_detail.tsx:310
 msgid "Message"
 msgstr "메시지"
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
-#~ msgstr "Ansible 리포지토리 콘텐츠 수정"
+#~ msgstr "Modify Ansible repo content"
 
 #: src/components/namespace-form/namespace-form.tsx:81
 #~ msgid "Moved to the <0>Namespace owners</0> <1/> tab"
-#~ msgstr "<0>네임스페이스 소유자</0> <1/> 탭으로 이동합니다."
+#~ msgstr "Moved to the <0>Namespace owners</0> <1/> tab"
 
 #: src/components/execution-environment/repository-form.tsx:394
 #~ msgid "Moved to the <0>Owners</0> <1/> tab"
-#~ msgstr "<0>소유자</0> <1/> 탭으로 이동합니다."
+#~ msgstr "Moved to the <0>Owners</0> <1/> tab"
 
 #: src/components/execution-environment/repository-form.tsx:390
 #~ msgid "Moved to the <0>Owners</0> tab"
-#~ msgstr "<0>소유자</0> 탭으로 이동합니다."
+#~ msgstr "Moved to the <0>Owners</0> tab"
 
 #: src/components/repositories/remote-form.tsx:753
 msgid "Must be an integer."
@@ -2584,8 +2584,8 @@ msgstr "내 가져오기"
 msgid "My namespaces"
 msgstr "내 네임스페이스"
 
-#: src/containers/settings/user-profile.tsx:73
-#: src/containers/settings/user-profile.tsx:74
+#: src/containers/settings/user-profile.tsx:70
+#: src/containers/settings/user-profile.tsx:71
 #: src/loaders/standalone/layout.tsx:75
 msgid "My profile"
 msgstr "내 프로필"
@@ -2610,17 +2610,17 @@ msgstr "내 프로필"
 #: src/containers/collection-detail/collection-distributions.tsx:147
 #: src/containers/collection-detail/collection-distributions.tsx:236
 #: src/containers/collection-detail/collection-distributions.tsx:267
-#: src/containers/execution-environment/registry-list.tsx:260
-#: src/containers/execution-environment/registry-list.tsx:288
-#: src/containers/execution-environment/registry-list.tsx:317
-#: src/containers/execution-environment-list/execution_environment_list.tsx:264
+#: src/containers/execution-environment/registry-list.tsx:257
+#: src/containers/execution-environment/registry-list.tsx:285
+#: src/containers/execution-environment/registry-list.tsx:314
+#: src/containers/execution-environment-list/execution_environment_list.tsx:261
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:300
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:332
 #: src/containers/namespace-list/namespace-list.tsx:231
-#: src/containers/signature-keys/list.tsx:122
-#: src/containers/signature-keys/list.tsx:148
-#: src/containers/signature-keys/list.tsx:176
-#: src/containers/task-management/task_detail.tsx:272
+#: src/containers/signature-keys/list.tsx:119
+#: src/containers/signature-keys/list.tsx:145
+#: src/containers/signature-keys/list.tsx:173
+#: src/containers/task-management/task_detail.tsx:269
 msgid "Name"
 msgstr "이름"
 
@@ -2630,23 +2630,23 @@ msgstr "이름"
 
 #: src/components/namespace-modal/namespace-modal.tsx:49
 msgid "Name can only contain letters and numbers"
-msgstr "이름은 문자와 숫자만 포함할 수 있습니다."
+msgstr "이름은 문자와 숫자만 포함할 수 있습니다"
 
 #: src/components/namespace-modal/namespace-modal.tsx:53
 msgid "Name cannot begin with '_'"
-msgstr "이름은 '_'로 시작할 수 없습니다."
+msgstr "이름은 '_'로 시작할 수 없습니다"
 
 #: src/components/namespace-modal/namespace-modal.tsx:51
 msgid "Name must be longer than 2 characters"
-msgstr "이름은 2자 이상이어야 합니다."
+msgstr "이름은 2자 이상이어야 합니다"
 
 #: src/components/namespace-form/namespace-form.tsx:176
 msgid "Name must not be empty."
 msgstr "이름은 비워 둘 수 없습니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:170
-#: src/components/collection-list/collection-filter.tsx:87
-#: src/components/collection-list/collection-filter.tsx:131
+#: src/components/collection-list/collection-filter.tsx:88
+#: src/components/collection-list/collection-filter.tsx:132
 #: src/components/my-imports/import-list.tsx:253
 #: src/containers/ansible-repository/tab-collection-versions.tsx:115
 #: src/containers/certification-dashboard/certification-dashboard.tsx:232
@@ -2664,23 +2664,23 @@ msgstr "네임스페이스 \"{name}\"을/를 성공적으로 삭제했습니다.
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:37
 msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr ""
+msgstr "네임 스페이스 <0>{name}</0> 는 Ansible Lightspeed에 선택되어 있습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:37
 #~ msgid "Namespace <0>{name}</0> is opted in to Wisdom."
-#~ msgstr ""
+#~ msgstr "Namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:42
 msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr ""
+msgstr "네임 스페이스 <0>{name}</0> 는 Ansible Lightspeed에서 선택 해제되어 있습니다."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:42
 #~ msgid "Namespace <0>{name}</0> is opted out of Wisdom."
-#~ msgstr ""
+#~ msgstr "Namespace <0>{name}</0> is opted out of Wisdom."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:308
 msgid "Namespace Header"
-msgstr ""
+msgstr "네임스페이스 헤더"
 
 #: src/components/namespace-modal/namespace-modal.tsx:129
 msgid "Namespace name"
@@ -2694,7 +2694,7 @@ msgstr "네임스페이스 이름은 영숫자와 밑줄로 제한되며 최소 
 #: src/containers/namespace-detail/namespace-detail.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:249
 #~ msgid "Namespace owners"
-#~ msgstr "네임 스페이스 소유자"
+#~ msgstr "Namespace owners"
 
 #: src/containers/edit-namespace/edit-namespace.tsx:262
 #~ msgid "Namespace successfully edited."
@@ -2713,11 +2713,11 @@ msgstr "네임스페이스 목록을 표시할 수 없습니다."
 
 #: src/containers/namespace-list/namespace-list.tsx:290
 msgid "Namespaces will appear once created"
-msgstr "생성된 네임스페이스가 나타납니다."
+msgstr "생성된 네임스페이스가 나타납니다"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx:162
 msgid "Namespaces will appear once created or roles are imported"
-msgstr ""
+msgstr "생성된 네임스페이스 또는 역할을 가져오면 네임스페이스가 나타납니다"
 
 #: src/containers/ansible-repository/list.tsx:52
 #: src/containers/certification-dashboard/certification-dashboard.tsx:249
@@ -2743,7 +2743,7 @@ msgstr "{0}의 새로운 버전"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:39
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:187
 #: src/containers/ansible-repository/tab-details.tsx:64
@@ -2760,7 +2760,7 @@ msgstr "README 없음"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:57
 msgid "No activities yet"
-msgstr "아직 활동이 없습니다."
+msgstr "아직 활동이 없습니다"
 
 #: src/components/rbac/select-group.tsx:67
 msgid "No assignable groups."
@@ -2770,26 +2770,26 @@ msgstr "할당 가능한 그룹이 없습니다."
 msgid "No assignable roles."
 msgstr "할당할 수 있는 역할이 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:238
+#: src/containers/task-management/task_detail.tsx:235
 msgid "No child task"
 msgstr "하위 작업 없음"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:95
 msgid "No collection versions in this repository version."
-msgstr ""
+msgstr "이 리포지토리 버전에는 컬렉션 버전이 없습니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:178
 #: src/containers/ansible-repository/tab-collection-versions.tsx:122
 #: src/containers/ansible-repository/tab-repository-versions.tsx:96
 msgid "No collection versions yet"
-msgstr ""
+msgstr "아직 컬렉션 버전이 없음"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:429
 #: src/containers/search/search.tsx:254
 msgid "No collections yet"
-msgstr "아직 컬렉션이 없습니다."
+msgstr "아직 컬렉션이 없습니다"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:200
+#: src/containers/execution-environment-list/execution_environment_list.tsx:197
 msgid "No container repositories yet"
 msgstr "아직 컨테이너 리포지토리가 없음"
 
@@ -2807,9 +2807,9 @@ msgstr "Python 종속 항목"
 
 #: src/containers/collection-detail/collection-distributions.tsx:138
 msgid "No distributions yet"
-msgstr ""
+msgstr "아직 배포되지 않음"
 
-#: src/containers/group-management/group-list.tsx:148
+#: src/containers/group-management/group-list.tsx:145
 msgid "No groups yet"
 msgstr "아직 그룹 없음"
 
@@ -2823,11 +2823,11 @@ msgstr "가져오기 없음"
 
 #: src/components/repositories/local-repository-table.tsx:31
 #~ msgid "No local repositories yet"
-#~ msgstr "아직 로컬 리포지토리가 없음"
+#~ msgstr "No local repositories yet"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:343
 msgid "No managed collections yet"
-msgstr "아직 관리되는 컬렉션이 없습니다."
+msgstr "아직 관리되는 컬렉션이 없습니다"
 
 #: src/components/my-imports/import-list.tsx:150
 msgid "No namespace selected."
@@ -2838,7 +2838,7 @@ msgstr "선택된 네임스페이스가 없습니다."
 msgid "No namespaces yet"
 msgstr "아직 네임스페이스가 없음"
 
-#: src/containers/task-management/task_detail.tsx:213
+#: src/containers/task-management/task_detail.tsx:210
 msgid "No parent task"
 msgstr "상위 작업 없음"
 
@@ -2849,27 +2849,27 @@ msgstr "권한 없음"
 
 #: src/components/rbac/permission-categories.tsx:95
 msgid "No permissions"
-msgstr ""
+msgstr "권한 없음"
 
-#: src/containers/execution-environment/registry-list.tsx:233
+#: src/containers/execution-environment/registry-list.tsx:230
 msgid "No remote registries yet"
 msgstr "원격 레지스트리 없음"
 
 #: src/containers/repositories/repository-list.tsx:225
 #~ msgid "No remote repositories yet"
-#~ msgstr "아직 원격 리포지토리가 없음"
+#~ msgstr "No remote repositories yet"
 
 #: src/containers/ansible-remote/list.tsx:48
 msgid "No remotes yet"
-msgstr ""
+msgstr "원격이 아직 없음"
 
 #: src/containers/ansible-repository/list.tsx:65
 msgid "No repositories yet"
-msgstr ""
+msgstr "아직 리포지토리가 없음"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:302
 msgid "No repository versions yet"
-msgstr ""
+msgstr "아직 리포지토리 버전이 없음"
 
 #: src/components/empty-state/empty-state-filter.tsx:14
 msgid "No results found"
@@ -2882,17 +2882,17 @@ msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 �
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:141
 #: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "No roles yet"
-msgstr ""
+msgstr "역할이 없음"
 
-#: src/containers/signature-keys/list.tsx:95
+#: src/containers/signature-keys/list.tsx:92
 msgid "No signature keys yet"
 msgstr "서명 키가 없음"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:195
 msgid "No tag or digest selected."
-msgstr "태그 또는 요악이 선택되어 있지 않습니다."
+msgstr "태그 또는 다이제스트가 선택되어 있지 않습니다."
 
-#: src/containers/task-management/task_detail.tsx:198
+#: src/containers/task-management/task_detail.tsx:195
 msgid "No task group"
 msgstr "작업 그룹 없음"
 
@@ -2900,26 +2900,26 @@ msgstr "작업 그룹 없음"
 msgid "No task messages available"
 msgstr "사용 가능한 작업 메시지 없음"
 
-#: src/containers/task-management/task-list-view.tsx:131
+#: src/containers/task-management/task-list-view.tsx:128
 msgid "No tasks yet"
-msgstr "아직 작업이 없습니다."
+msgstr "아직 작업이 없습니다"
 
 #: src/components/rbac/delete-group-modal.tsx:56
 msgid "No users will be affected."
 msgstr "사용자에게 영향을 미치지 않습니다."
 
-#: src/containers/group-management/group-detail.tsx:490
-#: src/containers/user-management/user-list.tsx:243
+#: src/containers/group-management/group-detail.tsx:484
+#: src/containers/user-management/user-list.tsx:240
 msgid "No users yet"
 msgstr "아직 사용자가 없음"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:55
 msgid "No version of {fqn} exists that matches {version_range}."
-msgstr ""
+msgstr "{version_range}과 일치하는 {fqn} 버전이 없습니다."
 
 #: src/containers/legacy-roles/legacy-role.tsx:163
 msgid "No versions"
-msgstr ""
+msgstr "버전이 없음"
 
 #: src/components/patternfly-wrappers/copy-url.tsx:13
 #: src/components/repositories/ansible-repository-form.tsx:161
@@ -2935,7 +2935,7 @@ msgstr ""
 #: src/containers/ansible-repository/tab-repository-versions.tsx:118
 #: src/containers/ansible-repository/tab-repository-versions.tsx:145
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 #: src/components/rbac/user-form.tsx:202
 msgid "Not a super user"
@@ -2965,46 +2965,46 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 
 #: src/components/repositories/remote-form.tsx:721
 msgid "Number must be greater than 0"
-msgstr "이 필드는 0보다 커야 합니다."
+msgstr "이 필드는 0보다 커야 합니다"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:493
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
-#: src/containers/token/token-insights.tsx:122
+#: src/containers/token/token-insights.tsx:119
 msgid "Offline token"
-msgstr "오프라인 토큰"
+msgstr "Offline token"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
-msgstr ""
+msgstr "Ansible Lightspeed 선택"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 #~ msgid "Opt in to Wisdom"
-#~ msgstr ""
+#~ msgstr "Opt in to Wisdom"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:168
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 msgid "Opt out of Ansible Lightspeed"
-msgstr ""
+msgstr "Ansible Lightspeed 선택 해제"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:168
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
-#~ msgstr ""
+#~ msgstr "Opt out of Wisdom"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
 #~ msgid "Owners"
-#~ msgstr "소유자"
+#~ msgstr "Owners"
 
 #: src/components/headers/base-header.tsx:47
 #~ msgid "Page logo"
 #~ msgstr "Page logo"
 
-#: src/containers/task-management/task_detail.tsx:202
+#: src/containers/task-management/task_detail.tsx:199
 msgid "Parent task"
 msgstr "상위 작업"
 
@@ -3018,7 +3018,7 @@ msgstr "상위 작업"
 
 #: src/paths.ts:131
 msgid "Partners"
-msgstr "파트너"
+msgstr "Partners"
 
 #: src/components/rbac/user-form.tsx:92
 #: src/components/repositories/remote-form.tsx:462
@@ -3088,7 +3088,7 @@ msgstr "보류 중"
 
 #: src/components/rbac/role-form.tsx:125
 msgid "Permissions"
-msgstr "Permissions"
+msgstr "권한"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:97
 msgid "Permissions for group \"{0}\" could not be displayed."
@@ -3096,14 +3096,14 @@ msgstr "그룹 \"{0}\"에 대한 권한을 표시할 수 없습니다."
 
 #: src/components/repositories/ansible-repository-form.tsx:235
 msgid "Pipeline"
-msgstr ""
+msgstr "파이프라인"
 
 #: src/components/repositories/ansible-repository-form.tsx:165
 msgid "Pipeline adds repository labels with pre-defined meanings:<0><1><2>None</2> - users require permissions to modify content in this repository to upload collection.</1><3><4>Approved</4> - collections can be moved here on approval. Publishing directly to this repository is disabled.</3><5><6>Staging</6> - collections uploaded here require approval before showing up on the search page. Anyone with upload permissions for a namespace can upload collections to this repository.</5></0>"
-msgstr ""
+msgstr "파이프라인은 미리 정의된 의미가 있는 리포지토리 레이블을 추가합니다:<0><1><2>없음(None)</2> - 사용자가 컬렉션을 업로드하려면 이 리포지토리의 콘텐츠를 수정하는 권한이 필요합니다.</1><3><4>승인됨(Approved)</4>- 컬렉션은 승인 후 여기로 이동할 수 있습니다. 이 리포지토리에 직접 게시할 수 없습니다. .</3><5><6>준비(Staging)</6> - 업로드된 컬렉션은 검색 페이지에 표시되기 전에 승인이 필요합니다. 네임스페이스 업로드 권한이 있는 사용자는 누구나 컬렉션을 이 리포지토리에 업로드할 수 있습니다.</5></0>"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:281
-#: src/containers/role-management/role-list.tsx:207
+#: src/containers/role-management/role-list.tsx:204
 msgid "Please add a role by using the button below."
 msgstr "아래 버튼을 사용하여 역할을 추가하십시오."
 
@@ -3121,7 +3121,7 @@ msgstr "아래 버튼을 사용하여 소유자를 추가하십시오."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:840
 msgid "Please select a repository filter"
-msgstr ""
+msgstr "리포지토리 필터를 선택하십시오"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:54
 msgid "Please select a signature file to upload."
@@ -3133,11 +3133,11 @@ msgstr "하나 이상의 파일을 선택하지 마십시오."
 
 #: src/components/namespace-modal/namespace-modal.tsx:47
 msgid "Please, provide the namespace name"
-msgstr "네임 스페이스 이름을 입력하십시오."
+msgstr "네임 스페이스 이름을 입력하십시오"
 
-#: src/containers/task-management/task_detail.tsx:264
+#: src/containers/task-management/task_detail.tsx:261
 msgid "Plugin"
-msgstr ""
+msgstr "플로그인"
 
 #: src/components/markdown-editor/markdown-editor.tsx:37
 #: src/components/rbac/access-tab.tsx:363
@@ -3146,39 +3146,39 @@ msgstr ""
 msgid "Preview"
 msgstr "미리보기"
 
-#: src/containers/landing/landing-page.tsx:189
+#: src/containers/landing/landing-page.tsx:186
 msgid "Privacy statement"
 msgstr ""
 
 #: src/containers/ansible-repository/tab-details.tsx:63
 msgid "Private"
-msgstr ""
+msgstr "비공개"
 
 #: src/containers/settings/user-profile.tsx:121
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx:296
+#: src/containers/task-management/task_detail.tsx:293
 msgid "Progress messages"
 msgstr "진행 상황 메시지"
 
 #: src/actions/ansible-repository-delete.tsx:36
 msgid "Protected repositories cannot be deleted."
-msgstr ""
+msgstr "보호된 리포지토리는 삭제할 수 없습니다."
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:83
 msgid "Provided by <0>{0}</0>"
-msgstr ""
+msgstr "<0>{0}</0>에서 제공"
 
 #: src/components/cards/collection-card.tsx:78
 #: src/components/collection-list/collection-list-item.tsx:85
 #~ msgid "Provided by {company}"
-#~ msgstr "{company} 제공"
+#~ msgstr "Provided by {company}"
 
 #: src/components/cards/collection-card.tsx:99
 #: src/components/collection-list/collection-list-item.tsx:93
 msgid "Provided by <0>{company}</0>"
-msgstr ""
+msgstr "<0>{company}</0>에서 제공"
 
 #: src/components/repositories/remote-form.tsx:499
 #: src/containers/ansible-remote/tab-details.tsx:67
@@ -3193,7 +3193,7 @@ msgstr "프록시 암호"
 msgid "Proxy username"
 msgstr "프록시 사용자 이름"
 
-#: src/containers/signature-keys/list.tsx:191
+#: src/containers/signature-keys/list.tsx:188
 msgid "Public key"
 msgstr "공개 키"
 
@@ -3204,12 +3204,12 @@ msgstr "게시됨"
 
 #: src/constants.tsx:180
 #~ msgid "Pull distribution"
-#~ msgstr "풀 배포"
+#~ msgstr "Pull distribution"
 
 #: src/constants.tsx:135
 #: src/constants.tsx:166
 #~ msgid "Pull private containers"
-#~ msgstr "개인 컨테이너 가져오기"
+#~ msgstr "Pull private containers"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:83
 msgid "Pull this image"
@@ -3273,7 +3273,7 @@ msgstr "Pulp 컨테이너: 이미지 태그 분리"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:125
 msgid "Pulp type"
-msgstr ""
+msgstr "Pulp 유형"
 
 #: src/constants.tsx:145
 msgid "Pulpcore: Add and remove"
@@ -3333,19 +3333,19 @@ msgstr "컨테이너 이미지 푸시"
 
 #: src/constants.tsx:179
 #~ msgid "Push distribution"
-#~ msgstr "배포 푸시"
+#~ msgstr "Push distribution"
 
 #: src/constants.tsx:171
 #~ msgid "Push images to existing containers"
-#~ msgstr "기존 컨테이너로 이미지 푸시"
+#~ msgstr "Push images to existing containers"
 
 #: src/constants.tsx:176
 #~ msgid "Push new containers"
-#~ msgstr "새 컨테이너 푸시"
+#~ msgstr "Push new containers"
 
 #: src/constants.tsx:136
 #~ msgid "Push to existing containers"
-#~ msgstr "기존 컨테이너로 푸시"
+#~ msgstr "Push to existing containers"
 
 #: src/constants.tsx:165
 msgid "Push, and change execution environments."
@@ -3361,7 +3361,7 @@ msgstr "속도 제한"
 
 #: src/containers/ansible-remote/tab-details.tsx:80
 msgid "Rate limit"
-msgstr ""
+msgstr "속도 제한"
 
 #: src/components/markdown-editor/markdown-editor.tsx:25
 msgid "Raw Markdown"
@@ -3379,7 +3379,7 @@ msgstr "이유: {0} 작업"
 msgid "Red Hat Certified"
 msgstr "Red Hat 인증"
 
-#: src/containers/landing/landing-page.tsx:106
+#: src/containers/landing/landing-page.tsx:103
 msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
 msgstr ""
 
@@ -3391,11 +3391,11 @@ msgstr "레지스트리 목록을 표시할 수 없습니다."
 msgid "Registry"
 msgstr "레지스트리"
 
-#: src/containers/execution-environment/registry-list.tsx:332
+#: src/containers/execution-environment/registry-list.tsx:329
 msgid "Registry URL"
 msgstr "레지스트리 URL"
 
-#: src/containers/execution-environment/registry-list.tsx:337
+#: src/containers/execution-environment/registry-list.tsx:334
 msgid "Registry sync status"
 msgstr "레지스트리 동기화 상태"
 
@@ -3414,23 +3414,23 @@ msgstr "거부됨"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:681
 #: src/containers/certification-dashboard/certification-dashboard.tsx:749
 #~ msgid "Rejection failed."
-#~ msgstr ""
+#~ msgstr "Rejection failed."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:739
 #~ msgid "Rejection summary."
-#~ msgstr ""
+#~ msgstr "Rejection summary."
 
 #: src/containers/legacy-roles/legacy-role.tsx:114
 msgid "Released <0/>"
-msgstr ""
+msgstr "<0/>이/가 릴리스됨"
 
 #: src/components/repositories/ansible-repository-form.tsx:294
 #: src/containers/ansible-repository/tab-details.tsx:67
-#: src/containers/execution-environment-list/execution_environment_list.tsx:419
+#: src/containers/execution-environment-list/execution_environment_list.tsx:416
 msgid "Remote"
 msgstr "원격"
 
-#: src/containers/execution-environment/registry-list.tsx:230
+#: src/containers/execution-environment/registry-list.tsx:227
 #: src/loaders/standalone/menu.tsx:82
 msgid "Remote Registries"
 msgstr "원격 레지스트리"
@@ -3438,7 +3438,7 @@ msgstr "원격 레지스트리"
 #: src/containers/ansible-remote/detail.tsx:44
 #: src/containers/ansible-remote/edit.tsx:43
 msgid "Remote could not be displayed."
-msgstr ""
+msgstr "원격을 표시할 수 없습니다."
 
 #: src/containers/ansible-remote/list.tsx:41
 #: src/containers/ansible-remote/list.tsx:74
@@ -3446,62 +3446,62 @@ msgstr ""
 msgid "Remote name"
 msgstr "원격 이름"
 
-#: src/containers/execution-environment/registry-list.tsx:480
+#: src/containers/execution-environment/registry-list.tsx:477
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "원격 레지스트리 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:502
+#: src/containers/execution-environment/registry-list.tsx:499
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "원격 레지스트리 \"{name}\"을/를 동기화할 수 없습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:471
+#: src/containers/execution-environment/registry-list.tsx:468
 msgid "Remote registry \"{name}\" has been successfully deleted."
-msgstr "원격 레지스트리 \"{name}\"을/를 성공적으로 삭제했습니다"
+msgstr "원격 레지스트리 \"{name}\"을/를 성공적으로 삭제했습니다."
 
 #: src/containers/repositories/repository-list.tsx:226
 #~ msgid "Remote repositories will appear once added"
-#~ msgstr "추가 후 원격 리포지토리가 나타납니다."
+#~ msgstr "Remote repositories will appear once added"
 
 #: src/containers/ansible-remote/detail.tsx:26
 #: src/containers/ansible-remote/edit.tsx:35
 #: src/containers/ansible-remote/list.tsx:84
 #: src/loaders/standalone/menu.tsx:58
 msgid "Remotes"
-msgstr ""
+msgstr "원격"
 
 #: src/containers/ansible-remote/list.tsx:36
 msgid "Remotes could not be displayed."
-msgstr ""
+msgstr "원격을 표시할 수 없습니다."
 
 #: src/containers/ansible-remote/list.tsx:47
 msgid "Remotes will appear once created."
-msgstr ""
+msgstr "생성된 원격이 표시됩니다."
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:25
 msgid "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
-msgstr ""
+msgstr "리포지터리 \"{repositoryName}\"에서 {namespace}.{name} v{version} 제거가 시작되었습니다."
 
 #: src/actions/ansible-repository-delete.tsx:77
 msgid "Removal started for distribution {name}"
-msgstr ""
+msgstr "배포 {name} 제거 시작"
 
 #: src/actions/ansible-remote-delete.tsx:34
 msgid "Removal started for remote {name}"
-msgstr ""
+msgstr "원격 {name} 제거 시작"
 
 #: src/actions/ansible-repository-delete.tsx:62
 msgid "Removal started for repository {name}"
-msgstr ""
+msgstr "리포지토리 {name} 제거 시작"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:91
 #: src/components/delete-modal/delete-modal.tsx:37
-#: src/containers/group-management/group-detail.tsx:663
+#: src/containers/group-management/group-detail.tsx:657
 msgid "Remove"
 msgstr "제거"
 
 #: src/actions/ansible-repository-collection-version-remove.tsx:74
 msgid "Remove collection version?"
-msgstr ""
+msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
 #: src/constants.tsx:56
 msgid "Remove content from repository"
@@ -3524,7 +3524,7 @@ msgstr "역할 제거"
 msgid "Remove role {role}?"
 msgstr "역할 {role}을/를 제거하시겠습니까?"
 
-#: src/containers/group-management/group-detail.tsx:406
+#: src/containers/group-management/group-detail.tsx:400
 msgid "Remove user from group?"
 msgstr "그룹에서 사용자를 제거하시겠습니까?"
 
@@ -3534,7 +3534,7 @@ msgstr "리포지토리"
 
 #: src/containers/repositories/repository-list.tsx:168
 #~ msgid "Repo Management"
-#~ msgstr "리포지토리 관리"
+#~ msgstr "Repo Management"
 
 #: src/components/repositories/local-repository-table.tsx:64
 #~ msgid "Repo URL"
@@ -3550,25 +3550,25 @@ msgstr "리포지토리"
 
 #: src/containers/ansible-repository/list.tsx:34
 msgid "Repositories could not be displayed."
-msgstr ""
+msgstr "리포지토리를 표시할 수 없습니다."
 
 #: src/containers/ansible-repository/list.tsx:64
 msgid "Repositories will appear once created."
-msgstr ""
+msgstr "생성된 리포지토리가 나타납니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:174
 #: src/actions/ansible-repository-collection-version-add.tsx:198
 #: src/components/approve-modal/approve-modal.tsx:476
-#: src/components/collection-list/collection-filter.tsx:81
-#: src/components/collection-list/collection-filter.tsx:130
+#: src/components/collection-list/collection-filter.tsx:82
+#: src/components/collection-list/collection-filter.tsx:131
 #: src/components/repo-selector/repo-selector.tsx:42
 #: src/containers/certification-dashboard/certification-dashboard.tsx:371
 msgid "Repository"
-msgstr ""
+msgstr "리포지토리"
 
 #: src/loaders/standalone/menu.tsx:52
 #~ msgid "Repository Management"
-#~ msgstr "리포지토리 관리"
+#~ msgstr "Repository Management"
 
 #: src/containers/ansible-repository/tab-details.tsx:51
 msgid "Repository URL"
@@ -3577,11 +3577,11 @@ msgstr ""
 #: src/containers/ansible-repository/detail.tsx:55
 #: src/containers/ansible-repository/edit.tsx:38
 msgid "Repository could not be displayed."
-msgstr ""
+msgstr "리포지토리를 표시할 수 없습니다."
 
 #: src/components/repositories/ansible-repository-form.tsx:185
 msgid "Repository labels can change the context in which a repository is seen.<0><1><2>Hide from search</2> (<3>hide_from_search</3>) - prevent collections in this repository from showing up on the home page</1><4>(<5>pipeline: *</5>) - see Pipeline above</4></0>"
-msgstr ""
+msgstr "리포지터리 레이블은 리포지토리가 표시되는 컨텍스트를 변경할 수 있습니다.<0><1><2>검색에서 숨기기</2> (<3>hide_from_search</3>) -이 리포지토리의 컬렉션이 홈 페이지에 표시되지 않도록 합니다. </1><4>(<5>파이프라인: *</5> 위의 파이프라인을 참조하십시오</4></0>"
 
 #: src/containers/ansible-repository/list.tsx:39
 #: src/containers/ansible-repository/list.tsx:102
@@ -3591,24 +3591,24 @@ msgstr "리포지터리 이름"
 
 #: src/components/approve-modal/approve-modal.tsx:106
 msgid "Repository name {originRepoName} not found."
-msgstr ""
+msgstr "리포지토리 이름 {originRepoName} 을/를 찾을 수 없습니다."
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:317
 msgid "Repository versions"
-msgstr ""
+msgstr "리포지터리 버전"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:297
 msgid "Repository versions could not be displayed."
-msgstr ""
+msgstr "리포지토리 버전을 표시할 수 없습니다."
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:301
 msgid "Repository versions will appear once the repository is modified."
-msgstr ""
+msgstr "리포지토리가 수정되면 리포지토리 버전이 표시됩니다."
 
 #: src/utilities/repositories.ts:46
 #: src/utilities/repositories.ts:46
 msgid "Repository {repoName} not found."
-msgstr ""
+msgstr "리포지토리 {repoName} 을/를 찾을 수 없음."
 
 #: src/components/collection-detail/collection-info.tsx:167
 msgid "Requires Ansible"
@@ -3618,7 +3618,7 @@ msgstr "Ansible 필요"
 msgid "Requires super user permissions to edit."
 msgstr "편집하려면 슈퍼 사용자 권한이 필요합니다."
 
-#: src/containers/task-management/task_detail.tsx:247
+#: src/containers/task-management/task_detail.tsx:244
 msgid "Reserve resources"
 msgstr "리소스 예약"
 
@@ -3628,27 +3628,27 @@ msgstr "리소스"
 
 #: src/components/repositories/ansible-repository-form.tsx:208
 msgid "Retained number of versions"
-msgstr ""
+msgstr "보유 버전 수"
 
 #: src/containers/ansible-repository/tab-details.tsx:43
 msgid "Retained version count"
-msgstr ""
+msgstr "보유 버전 수"
 
 #: src/actions/ansible-repository-version-revert.tsx:33
 msgid "Revert"
-msgstr ""
+msgstr "되돌리기"
 
 #: src/actions/ansible-repository-version-revert.tsx:43
 msgid "Revert repository"
-msgstr ""
+msgstr "리포지토리 되돌리기"
 
 #: src/actions/ansible-repository-version-revert.tsx:69
 msgid "Revert started for repository \"{repositoryName}\"."
-msgstr ""
+msgstr "리포지토리 \"{repositoryName}\"을/를 복원하기 시작했습니다."
 
 #: src/actions/ansible-repository-version-revert.tsx:86
 msgid "Revert to this version"
-msgstr ""
+msgstr "이 버전으로 되돌리기"
 
 #: src/components/rbac/access-tab.tsx:226
 #: src/components/rbac/role-list-table.tsx:42
@@ -3673,22 +3673,22 @@ msgstr "역할 \"{0}\"을/를 표시할 수 없습니다."
 msgid "Role \"{0}\" has been successfully removed."
 msgstr "역할 \"{0}\"이/가 성공적으로 제거되었습니다."
 
-#: src/containers/role-management/role-list.tsx:374
+#: src/containers/role-management/role-list.tsx:371
 msgid "Role \"{name}\" could not be deleted."
 msgstr "역할 \"{name}\"을/를 삭제할 수 없습니다."
 
-#: src/containers/role-management/role-list.tsx:367
+#: src/containers/role-management/role-list.tsx:364
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr "역할 \"{name}\"이/가 성공적으로 삭제되었습니다."
 
 #: src/containers/legacy-roles/legacy-role.tsx:385
 msgid "Role Header"
-msgstr ""
+msgstr "역할 헤더"
 
 #: src/components/rbac/role-form.tsx:95
 #: src/containers/role-management/role-list.tsx:144
-#: src/containers/role-management/role-list.tsx:233
-#: src/containers/role-management/role-list.tsx:281
+#: src/containers/role-management/role-list.tsx:230
+#: src/containers/role-management/role-list.tsx:278
 msgid "Role name"
 msgstr "역할 이름"
 
@@ -3701,29 +3701,29 @@ msgid "Role {0} has been successfully added to {1}."
 msgstr "역할 {0}이/가 {1}에 성공적으로 추가되었습니다."
 
 #: src/containers/role-management/role-create.tsx:59
-#: src/containers/role-management/role-edit.tsx:143
-#: src/containers/role-management/role-list.tsx:201
+#: src/containers/role-management/role-edit.tsx:140
+#: src/containers/role-management/role-list.tsx:198
 #: src/loaders/standalone/menu.tsx:132
 msgid "Roles"
 msgstr "역할"
 
-#: src/containers/role-management/role-list.tsx:463
+#: src/containers/role-management/role-list.tsx:460
 msgid "Roles list could not be displayed."
 msgstr "역할 목록을 표시할 수 없습니다."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:142
 #: src/containers/legacy-roles/legacy-roles.tsx:135
 msgid "Roles will appear once imported"
-msgstr ""
+msgstr "가져온 후 역할이 나타납니다"
 
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:49
-#: src/containers/task-management/task-list-view.tsx:174
+#: src/containers/task-management/task-list-view.tsx:171
 msgid "Running"
 msgstr "실행 중"
 
 #: src/components/repositories/remote-form.tsx:311
-#: src/containers/token/token-insights.tsx:189
+#: src/containers/token/token-insights.tsx:186
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -3740,7 +3740,7 @@ msgid "Save"
 msgstr "저장"
 
 #: src/containers/execution-environment-detail/base.tsx:255
-#: src/containers/execution-environment-list/execution_environment_list.tsx:467
+#: src/containers/execution-environment-list/execution_environment_list.tsx:464
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "실행 환경 \"{0}\"에 대한 변경 사항을 저장했습니다."
 
@@ -3752,7 +3752,7 @@ msgstr "실행 환경 \"{0}\"에 대한 변경 사항을 저장했습니다."
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "네임스페이스 \"{0}\"에 변경 사항을 저장했습니다."
 
-#: src/containers/settings/user-profile.tsx:118
+#: src/containers/settings/user-profile.tsx:115
 msgid "Saved changes to user \"{username}\"."
 msgstr "사용자 \"{username}\"에 변경 사항을 저장했습니다."
 
@@ -3778,16 +3778,16 @@ msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페�
 
 #: src/containers/execution-environment/registry-list.tsx:526
 #~ msgid "See the task management <0>detail page</0>for the status of this task."
-#~ msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페이지</0>를 참조하십시오."
+#~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:138
 #: src/components/approve-modal/approve-modal.tsx:443
 msgid "Select"
-msgstr ""
+msgstr "선택"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:146
 msgid "Select a collection"
-msgstr ""
+msgstr "컬렉션 선택"
 
 #: src/components/rbac/access-tab.tsx:63
 #: src/components/rbac/access-tab.tsx:327
@@ -3801,7 +3801,7 @@ msgstr "레지스트리 선택"
 
 #: src/components/repositories/ansible-repository-form.tsx:311
 msgid "Select a remote"
-msgstr ""
+msgstr "원격 선택"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:319
 msgid "Select a tag"
@@ -3809,7 +3809,7 @@ msgstr "태그 선택"
 
 #: src/components/approve-modal/approve-modal.tsx:345
 msgid "Select all ({0} items)"
-msgstr ""
+msgstr "모두 선택 ({0} 항목)"
 
 #: src/components/headers/collection-header.tsx:444
 msgid "Select collection version"
@@ -3834,7 +3834,7 @@ msgstr "네임스페이스 선택"
 
 #: src/components/approve-modal/approve-modal.tsx:341
 msgid "Select page ({0} items)"
-msgstr ""
+msgstr "페이지 선택 ({0} 항목)"
 
 #: src/components/rbac/permission-chip-selector.tsx:77
 #: src/components/rbac/permission-chip-selector.tsx:87
@@ -3843,7 +3843,7 @@ msgstr "권한 선택"
 
 #: src/components/approve-modal/approve-modal.tsx:456
 msgid "Select repositories"
-msgstr ""
+msgstr "리포지토리 선택"
 
 #: src/components/rbac/access-tab.tsx:344
 #: src/components/rbac/access-tab.tsx:399
@@ -3852,13 +3852,13 @@ msgstr ""
 msgid "Select role(s)"
 msgstr "역할 선택"
 
-#: src/containers/group-management/group-detail.tsx:335
+#: src/containers/group-management/group-detail.tsx:329
 msgid "Select users"
 msgstr "사용자 선택"
 
 #: src/components/approve-modal/approve-modal.tsx:250
 msgid "Selected"
-msgstr ""
+msgstr "선택됨"
 
 #: src/components/rbac/select-group.tsx:116
 msgid "Selected group"
@@ -3868,13 +3868,13 @@ msgstr "선택된 그룹"
 msgid "Selected roles"
 msgstr "선택된 역할"
 
-#: src/containers/token/token-insights.tsx:174
+#: src/containers/token/token-insights.tsx:171
 msgid "Server URL"
-msgstr "서버 URL"
+msgstr "Server URL"
 
 #: src/containers/token/token-insights.tsx:61
 msgid "Server URL could not be displayed."
-msgstr "서버 URL을 표시할 수 없습니다."
+msgstr "Server URL could not be displayed."
 
 #: src/containers/login/login.tsx:101
 msgid "Server error. Please come back later."
@@ -3886,19 +3886,19 @@ msgstr "서버 버전"
 
 #: src/components/repositories/ansible-repository-form.tsx:295
 msgid "Setting a remote allows a repository to sync from elsewhere."
-msgstr ""
+msgstr "원격을 설정하면 리포지토리가 다른 위치에서 동기화할 수 있습니다."
 
-#: src/containers/settings/user-profile.tsx:73
+#: src/containers/settings/user-profile.tsx:70
 msgid "Settings"
 msgstr "설정"
 
-#: src/containers/landing/landing-page.tsx:97
+#: src/containers/landing/landing-page.tsx:94
 msgid "Share"
 msgstr ""
 
 #: src/utilities/chip-group-props.ts:7
 msgid "Show Less"
-msgstr ""
+msgstr "더 적은 수를 표시"
 
 #: src/components/repositories/remote-form.tsx:494
 msgid "Show advanced options"
@@ -3928,7 +3928,7 @@ msgstr "모든 컬렉션에 서명"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:834
 msgid "Sign all collections in {repository}"
-msgstr ""
+msgstr "{repository}에서 모든 컬렉션에 서명"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:541
 #: src/containers/certification-dashboard/certification-dashboard.tsx:572
@@ -3939,14 +3939,14 @@ msgstr "서명 및 승인"
 msgid "Sign entire collection"
 msgstr "전체 컬렉션에 서명"
 
-#: src/components/collection-list/collection-filter.tsx:100
-#: src/components/collection-list/collection-filter.tsx:127
+#: src/components/collection-list/collection-filter.tsx:101
+#: src/components/collection-list/collection-filter.tsx:128
 msgid "Sign state"
 msgstr "서명 상태"
 
 #: src/components/headers/collection-header.tsx:252
 #~ msgid "Sign version {0}"
-#~ msgstr "서명 버전 {0}"
+#~ msgstr "Sign version {0}"
 
 #: src/components/headers/collection-header.tsx:267
 #: src/components/signing/sign-single-certificate-modal.tsx:27
@@ -3957,28 +3957,28 @@ msgstr "서명 버전 {version}"
 msgid "Signature"
 msgstr "서명"
 
-#: src/containers/signature-keys/list.tsx:90
+#: src/containers/signature-keys/list.tsx:87
 #: src/loaders/standalone/menu.tsx:105
 msgid "Signature Keys"
 msgstr "서명 키"
 
-#: src/containers/signature-keys/list.tsx:205
+#: src/containers/signature-keys/list.tsx:202
 msgid "Signature keys"
 msgstr "서명 키"
 
-#: src/containers/signature-keys/list.tsx:275
+#: src/containers/signature-keys/list.tsx:272
 msgid "Signature keys could not be displayed."
 msgstr "서명 키를 표시할 수 없습니다."
 
-#: src/containers/signature-keys/list.tsx:96
+#: src/containers/signature-keys/list.tsx:93
 msgid "Signature keys will appear once created."
-msgstr "서명 키가 생성된 후 표시됩니다"
+msgstr "서명 키가 생성된 후 표시됩니다."
 
 #: src/components/collection-detail/collection-info.tsx:158
 msgid "Signatures could not be loaded."
-msgstr ""
+msgstr "서명을 로드할 수 없습니다."
 
-#: src/components/collection-list/collection-filter.tsx:103
+#: src/components/collection-list/collection-filter.tsx:104
 #: src/components/signing/signature-badge.tsx:21
 msgid "Signed"
 msgstr "서명됨"
@@ -3997,11 +3997,11 @@ msgstr "서명된 버전"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:75
 msgid "Signing service selector:"
-msgstr "서비스 선택기에 서명합니다."
+msgstr "서비스 선택기에 서명합니다:"
 
 #: src/components/approve-modal/approve-modal.tsx:130
 msgid "Signing service {signingServiceName} not found"
-msgstr ""
+msgstr "서명 서비스 {signingServiceName}를 찾을 수 없음"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:659
 msgid "Signing started for all collections in namespace \"{0}\"."
@@ -4009,19 +4009,19 @@ msgstr "네임스페이스 \"{0}\"의 모든 컬렉션에 대해 서명이 시�
 
 #: src/components/headers/collection-header.tsx:715
 #~ msgid "Signing started for all versions in collection \"{0}\""
-#~ msgstr "컬렉션 \"{0}\"의 모든 버전에 대해 서명이 시작되었습니다."
+#~ msgstr "Signing started for all versions in collection \"{0}\""
 
 #: src/components/headers/collection-header.tsx:744
 msgid "Signing started for all versions in collection \"{name}\""
-msgstr ""
+msgstr "컬렉션 \"{name}\"의 모든 버전에 대해 서명이 시작되었습니다"
 
 #: src/components/headers/collection-header.tsx:766
 #~ msgid "Signing started for collection \"{0} v{1}\"."
-#~ msgstr "\"{0} v{1}\" 컬렉션에 대한 서명이 시작되었습니다."
+#~ msgstr "Signing started for collection \"{0} v{1}\"."
 
 #: src/components/headers/collection-header.tsx:798
 msgid "Signing started for collection \"{name} v{version}\"."
-msgstr ""
+msgstr "\"{name} v{version}\" 컬렉션에 대한 서명이 시작되었습니다."
 
 #: src/utilities/repo-signing.ts:40
 msgid "Signing started for container \"{0}\"."
@@ -4037,7 +4037,7 @@ msgstr "크기"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:146
 msgid "Size: {size}"
-msgstr ""
+msgstr "크기: {size}"
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Sort results"
@@ -4046,25 +4046,25 @@ msgstr "결과 정렬"
 #: src/components/repo-selector/repo-selector.tsx:32
 #: src/components/repositories/ansible-repository-form.tsx:159
 msgid "Staging"
-msgstr ""
+msgstr "스테이징"
 
 #: src/components/repositories/remote-form.tsx:407
 msgid "Start from scratch"
-msgstr ""
+msgstr "처음부터 시작"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:36
 msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."
-msgstr ""
+msgstr "\"{0}\"에서 리포지토리 \"{repositoryName}\"에 {namespace}.{name} v{version}을/를 추가하기 시작했습니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx:25
 #~ msgid "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
-#~ msgstr ""
+#~ msgstr "Started adding {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
-#: src/containers/task-management/task-list-view.tsx:246
+#: src/containers/task-management/task-list-view.tsx:243
 msgid "Started at"
 msgstr "시작 시간"
 
-#: src/containers/task-management/task_detail.tsx:315
+#: src/containers/task-management/task_detail.tsx:312
 msgid "State"
 msgstr "상태"
 
@@ -4074,9 +4074,9 @@ msgstr "상태"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:240
 #: src/containers/certification-dashboard/certification-dashboard.tsx:288
 #: src/containers/certification-dashboard/certification-dashboard.tsx:376
-#: src/containers/task-management/task-list-view.tsx:161
-#: src/containers/task-management/task-list-view.tsx:207
-#: src/containers/task-management/task-list-view.tsx:256
+#: src/containers/task-management/task-list-view.tsx:158
+#: src/containers/task-management/task-list-view.tsx:204
+#: src/containers/task-management/task-list-view.tsx:253
 msgid "Status"
 msgstr "상태"
 
@@ -4084,14 +4084,14 @@ msgstr "상태"
 msgid "Status:"
 msgstr "상태:"
 
-#: src/containers/task-management/task-list-view.tsx:321
-#: src/containers/task-management/task-list-view.tsx:337
-#: src/containers/task-management/task_detail.tsx:135
-#: src/containers/task-management/task_detail.tsx:369
+#: src/containers/task-management/task-list-view.tsx:318
+#: src/containers/task-management/task-list-view.tsx:334
+#: src/containers/task-management/task_detail.tsx:132
+#: src/containers/task-management/task_detail.tsx:366
 msgid "Stop task"
 msgstr "작업 중지"
 
-#: src/containers/task-management/task-list-view.tsx:350
+#: src/containers/task-management/task-list-view.tsx:347
 msgid "Stop task?"
 msgstr "작업을 중지하시겠습니까?"
 
@@ -4106,19 +4106,19 @@ msgstr "작업을 중지하시겠습니까?"
 #: src/actions/ansible-repository-copy.tsx:49
 #: src/containers/ansible-remote/tab-details.tsx:42
 msgid "Successfully copied to clipboard"
-msgstr ""
+msgstr "클립보드에 성공적으로 복사되었습니다"
 
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:13
 msgid "Successfully copied to clipboard!"
-msgstr "클립보드에 성공적으로 복사되었습니다."
+msgstr "클립보드에 성공적으로 복사되었습니다!"
 
 #: src/containers/ansible-remote/edit.tsx:124
 msgid "Successfully created remote {0}"
-msgstr ""
+msgstr "원격이 성공적으로 생성됨 {0}"
 
 #: src/containers/ansible-repository/edit.tsx:118
 msgid "Successfully created repository {0}"
-msgstr ""
+msgstr "리포지토리가 성공적으로 생성됨 {0}"
 
 #: src/components/headers/collection-header.tsx:545
 #~ msgid "Successfully deleted collection version."
@@ -4156,7 +4156,7 @@ msgstr ""
 #~ msgstr "Successfully stopped task."
 
 #: src/components/rbac/user-form.tsx:201
-#: src/containers/user-management/user-list.tsx:351
+#: src/containers/user-management/user-list.tsx:348
 msgid "Super user"
 msgstr "슈퍼유저"
 
@@ -4165,7 +4165,7 @@ msgid "Super users can't disable themselves."
 msgstr "슈퍼유저는 자신을 비활성화할 수 없습니다."
 
 #: src/components/rbac/user-form.tsx:193
-#: src/containers/user-management/user-list.tsx:348
+#: src/containers/user-management/user-list.tsx:345
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "슈퍼유저는 어떤 그룹에 있는지에 관계없이 모든 시스템 권한을 갖습니다."
 
@@ -4175,13 +4175,13 @@ msgid "Sync"
 msgstr "동기화"
 
 #: src/containers/execution-environment-detail/base.tsx:372
-#: src/containers/execution-environment-list/execution_environment_list.tsx:536
+#: src/containers/execution-environment-list/execution_environment_list.tsx:533
 msgid "Sync failed for {name}"
 msgstr "{name}에 대한 동기화 실패"
 
-#: src/containers/execution-environment/registry-list.tsx:372
+#: src/containers/execution-environment/registry-list.tsx:369
 #: src/containers/execution-environment-detail/base.tsx:147
-#: src/containers/execution-environment-list/execution_environment_list.tsx:367
+#: src/containers/execution-environment-list/execution_environment_list.tsx:364
 msgid "Sync from registry"
 msgstr "레지스트리에서 동기화"
 
@@ -4191,18 +4191,18 @@ msgstr "레지스트리에서 동기화"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:532
+#: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 동기화가 시작되었습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:495
+#: src/containers/execution-environment/registry-list.tsx:492
 #: src/containers/execution-environment-detail/base.tsx:367
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습니다."
 
 #: src/actions/ansible-repository-sync.tsx:15
 msgid "Sync started for repository \"{name}\"."
-msgstr ""
+msgstr "리포지토리 \"{name}\"의 동기화가 시작되었습니다."
 
 #: src/containers/ansible-repository/list.tsx:107
 msgid "Sync status"
@@ -4210,66 +4210,66 @@ msgstr "동기화 상태"
 
 #: src/actions/ansible-repository-sync.tsx:39
 msgid "Sync task is already queued."
-msgstr ""
+msgstr "동기화 작업이 이미 대기열에 있습니다."
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
 msgid "TLS validation"
 msgstr "TLS 인증"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:92
 #: src/components/execution-environment/publish-to-controller-modal.tsx:303
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:266
 msgid "Tag"
 msgstr "태그"
 
-#: src/components/collection-list/collection-filter.tsx:128
+#: src/components/collection-list/collection-filter.tsx:129
 msgid "Tags"
-msgstr ""
+msgstr "태그"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:152
 msgid "Tags could not be displayed."
 msgstr "태그를 표시할 수 없습니다."
 
-#: src/containers/task-management/task-list-view.tsx:388
+#: src/containers/task-management/task-list-view.tsx:385
 msgid "Task \"{name}\" could not be stopped."
 msgstr "작업 \"{name}\"을/를 중지할 수 없습니다."
 
-#: src/containers/task-management/task-list-view.tsx:372
+#: src/containers/task-management/task-list-view.tsx:369
 msgid "Task \"{name}\" stopped successfully."
 msgstr "작업 \"{name}\"이/가 성공적으로 중지되었습니다."
 
-#: src/containers/task-management/task_detail.tsx:408
+#: src/containers/task-management/task_detail.tsx:405
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "작업 \"{taskName}\"을/를 중지할 수 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:392
+#: src/containers/task-management/task_detail.tsx:389
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "작업 \"{taskName}\"이/가 성공적으로 중지되었습니다."
 
-#: src/containers/task-management/task-list-view.tsx:126
+#: src/containers/task-management/task-list-view.tsx:123
 #: src/loaders/standalone/menu.tsx:101
 msgid "Task Management"
 msgstr "작업 관리"
 
-#: src/containers/task-management/task_detail.tsx:155
+#: src/containers/task-management/task_detail.tsx:152
 msgid "Task detail"
 msgstr "작업 세부 정보"
 
-#: src/utilities/wait-for-task.ts:19
+#: src/utilities/wait-for-task.ts:21
 msgid "Task failed without error message."
 msgstr "오류 메시지 없이 작업이 실패했습니다."
 
-#: src/containers/task-management/task_detail.tsx:196
+#: src/containers/task-management/task_detail.tsx:193
 msgid "Task group"
 msgstr "작업 그룹"
 
-#: src/containers/task-management/task_detail.tsx:191
+#: src/containers/task-management/task_detail.tsx:188
 msgid "Task groups"
 msgstr "작업 그룹"
 
-#: src/containers/task-management/task-list-view.tsx:265
+#: src/containers/task-management/task-list-view.tsx:262
 msgid "Task list"
 msgstr "작업 목록"
 
@@ -4277,10 +4277,10 @@ msgstr "작업 목록"
 msgid "Task management"
 msgstr "작업 관리"
 
-#: src/containers/task-management/task-list-view.tsx:157
-#: src/containers/task-management/task-list-view.tsx:206
-#: src/containers/task-management/task-list-view.tsx:236
-#: src/containers/task-management/task_detail.tsx:160
+#: src/containers/task-management/task-list-view.tsx:154
+#: src/containers/task-management/task-list-view.tsx:203
+#: src/containers/task-management/task-list-view.tsx:233
+#: src/containers/task-management/task_detail.tsx:157
 msgid "Task name"
 msgstr "작업 이름"
 
@@ -4288,13 +4288,13 @@ msgstr "작업 이름"
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "\"{0}\" 태그를 변경하는 작업을 완료할 수 없습니다."
 
-#: src/containers/task-management/task-list-view.tsx:420
+#: src/containers/task-management/task-list-view.tsx:417
 msgid "Tasks list could not be displayed."
 msgstr "작업 목록을 표시할 수 없습니다."
 
-#: src/containers/task-management/task-list-view.tsx:132
+#: src/containers/task-management/task-list-view.tsx:129
 msgid "Tasks will appear once created."
-msgstr "작업이 생성된 후 표시됩니다"
+msgstr "작업이 생성된 후 표시됩니다."
 
 #: src/components/collection-list/collection-list.tsx:103
 #: src/components/headers/collection-header.tsx:262
@@ -4302,12 +4302,12 @@ msgstr "작업이 생성된 후 표시됩니다"
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
-#: src/containers/landing/landing-page.tsx:179
+#: src/containers/landing/landing-page.tsx:176
 #: src/loaders/standalone/menu.tsx:118
 msgid "Terms of Use"
-msgstr ""
+msgstr "이용 약관"
 
-#: src/containers/landing/landing-page.tsx:197
+#: src/containers/landing/landing-page.tsx:194
 msgid "Terms of use"
 msgstr ""
 
@@ -4317,7 +4317,7 @@ msgstr "텍스트: {0}"
 
 #: src/loaders/insights/loader.tsx:65
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
-#~ msgstr "Automation Hub 동기화 토글은 이제 AAP 2.0에서만 지원됩니다. 이전 버전의 AAP는 모든 컬렉션을 자동으로 동기화합니다."
+#~ msgstr "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 
 #: src/utilities/validateURLHelper.ts:33
 msgid "The URL needs to be in 'http(s)://' format."
@@ -4337,7 +4337,7 @@ msgstr "\"{0} {1} v{2}\"의 인증서가 업로드되고 있습니다."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:665
 msgid "The certificate for \"{namespace} {name} v{version}\" could not be saved."
-msgstr ""
+msgstr "\"{namespace} {name} v{version}\"의 인증서를 저장할 수 없습니다."
 
 #: src/components/headers/collection-header.tsx:843
 msgid "The collection \"{0}\" has been successfully deprecated."
@@ -4349,11 +4349,11 @@ msgstr "컬렉션 \"{0}\"을/를 성공적으로 삭제했습니다."
 
 #: src/containers/search/search.tsx:337
 msgid "The collection \"{name}\" has been successfully deprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
 #: src/containers/search/search.tsx:338
 msgid "The collection \"{name}\" has been successfully undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
 #: src/components/import-modal/import-modal.tsx:172
 msgid "The collection you have selected does not match this namespace."
@@ -4361,23 +4361,23 @@ msgstr "선택한 컬렉션이 이 네임스페이스와 일치하지 않습니�
 
 #: src/components/import-modal/import-modal.tsx:166
 msgid "The collection you have selected doesn't appear to match {0}"
-msgstr "선택한 컬렉션이 {0}와/과 일치하지 않습니다."
+msgstr "선택한 컬렉션이 {0}와/과 일치하지 않습니다"
 
 #: src/containers/collection-detail/collection-docs.tsx:287
 msgid "The file is not available for this version of {collectionName}"
-msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니다."
+msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니다"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:71
 msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
-msgstr ""
+msgstr "다음 레거시 네임스페이스를 Ansible Lightspeed로 선택합니다:"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx:47
 msgid "The following namespace will be opted in to Ansible Lightspeed:"
-msgstr ""
+msgstr "다음 네임스페이스를 Ansible Lightspeed로 선택합니다:"
 
 #: src/components/rbac/preview-roles.tsx:30
 msgid "The following roles will be applied to group: <0>{0}</0>"
-msgstr "다음 역할이 다음 그룹에 적용됩니다. <0>{0}</0>"
+msgstr "다음 역할이 다음 그룹에 적용됩니다: <0>{0}</0>"
 
 #: src/components/repositories/remote-form.tsx:467
 msgid "The password to be used for authentication when syncing."
@@ -4389,15 +4389,15 @@ msgstr "동기화 시 인증에 사용할 암호입니다. 토큰을 사용할 �
 
 #: src/containers/legacy-roles/legacy-role.tsx:164
 msgid "The role is versionless and will always install from the head/main/master branch."
-msgstr ""
+msgstr "역할은 버전이 없으며 항상 head/main/master 브랜치에서 설치됩니다."
 
 #: src/containers/ansible-remote/tab-access.tsx:224
 msgid "The selected roles will be added to this specific Ansible remote."
-msgstr ""
+msgstr "선택한 역할은 이 특정 Ansible 원격에 추가됩니다."
 
 #: src/containers/ansible-repository/tab-access.tsx:224
 msgid "The selected roles will be added to this specific Ansible repository."
-msgstr ""
+msgstr "선택한 역할은 이 특정 Ansible 리포지토리에 추가됩니다."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:181
 msgid "The selected roles will be added to this specific Execution Environment."
@@ -4407,9 +4407,9 @@ msgstr "선택한 역할은 이 특정 실행 환경에 추가됩니다."
 msgid "The selected roles will be added to this specific namespace."
 msgstr "선택한 역할이 이 특정 네임스페이스에 추가됩니다."
 
-#: src/containers/token/token-insights.tsx:146
+#: src/containers/token/token-insights.tsx:143
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
-msgstr "토큰은 30일 동안 활동이 없으면 만료됩니다. 다음 명령을 주기적으로 실행하여 토큰이 만료되지 않도록 하십시오."
+msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
 #: src/components/repositories/remote-form.tsx:431
 msgid "The username to be used for authentication when syncing."
@@ -4427,9 +4427,9 @@ msgstr "현재 이 네임스페이스에 할당할 수 있는 그룹이 없습�
 msgid "There are currently no owners assigned."
 msgstr "현재는 소유자가 할당되어 있지 않습니다."
 
-#: src/containers/role-management/role-list.tsx:206
+#: src/containers/role-management/role-list.tsx:203
 msgid "There are currently no roles"
-msgstr "현재는 역할이 없습니다."
+msgstr "현재는 역할이 없습니다"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:280
 msgid "There are currently no roles assigned to this group."
@@ -4446,32 +4446,32 @@ msgstr ""
 
 #: src/actions/ansible-repository-sync.tsx:32
 msgid "There are no remotes associated with this repository."
-msgstr ""
+msgstr "이 리포지토리와 연결된 원격은 없습니다."
 
 #: src/components/repositories/remote-repository-table.tsx:118
 #~ msgid "There are no repos associated with this remote."
-#~ msgstr "원격 연결된 리포지토리가 없습니다."
+#~ msgstr "There are no repos associated with this remote."
 
 #: src/components/my-imports/import-list.tsx:169
 msgid "There have not been any imports on this namespace."
 msgstr "이 네임 스페이스에는 가져오기가 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:333
-#: src/containers/task-management/task_detail.tsx:334
+#: src/containers/task-management/task_detail.tsx:330
+#: src/containers/task-management/task_detail.tsx:331
 msgid "There is no progress message."
 msgstr "진행 중인 메시지가 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:283
+#: src/containers/task-management/task_detail.tsx:280
 msgid "There's no resource record"
-msgstr "리소스 레코드가 없습니다."
+msgstr "리소스 레코드가 없습니다"
 
 #: src/components/rbac/delete-group-modal.tsx:40
 msgid "These users will lose access to the group content:"
-msgstr "이러한 사용자는 그룹 콘텐츠에 대한 액세스 권한을 잃게 됩니다."
+msgstr "이러한 사용자는 그룹 콘텐츠에 대한 액세스 권한을 잃게 됩니다:"
 
 #: src/containers/namespace-list/namespace-list.tsx:291
 msgid "This account is not set up to manage any namespaces"
-msgstr "이 계정은 네임스페이스를 관리하도록 설정되지 않았습니다."
+msgstr "이 계정은 네임스페이스를 관리하도록 설정되지 않았습니다"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
@@ -4483,15 +4483,15 @@ msgstr "이 컬렉션은 더 이상 사용되지 않습니다."
 
 #: src/containers/collection-detail/collection-dependencies.tsx:160
 msgid "This collection is being used by"
-msgstr "이 컬렉션은 사용 중입니다."
+msgstr "이 컬렉션은 사용 중입니다"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:148
 msgid "This collections requires the following collections for use"
-msgstr "이 컬렉션을 사용하려면 다음 컬렉션이 필요합니다."
+msgstr "이 컬렉션을 사용하려면 다음 컬렉션이 필요합니다"
 
 #: src/utilities/map-role-errors.ts:16
 msgid "This field can only contain letters and numbers"
-msgstr "이 필드는 문자와 숫자만 포함할 수 있습니다."
+msgstr "이 필드는 문자와 숫자만 포함할 수 있습니다"
 
 #: src/utilities/map-role-errors.ts:14
 msgid "This field may not be blank."
@@ -4499,11 +4499,11 @@ msgstr "이 필드는 비워 둘 수 없습니다."
 
 #: src/utilities/map-role-errors.ts:18
 msgid "This field must be longer than 2 characters"
-msgstr "이 필드는 2자 이상이어야 합니다."
+msgstr "이 필드는 2자 이상이어야 합니다"
 
 #: src/utilities/map-role-errors.ts:20
 msgid "This field must start with 'galaxy.'."
-msgstr "이 필드는 'galaxy.'로 시작해야 합니다."
+msgstr "이 필드는 'galaxy'로 시작해야 합니다."
 
 #: src/components/rbac/delete-group-modal.tsx:67
 msgid "This group can include users"
@@ -4527,17 +4527,17 @@ msgstr "이렇게 하면 그룹에서 이 역할과 연결된 모든 권한이 �
 
 #: src/components/collection-detail/collection-info.tsx:114
 msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
-msgstr ""
+msgstr "이 컬렉션을 다운로드하려면 이 리포지토리 <0>배포판</0> 중 하나에 연결하도록 클라이언트를 구성합니다."
 
-#: src/containers/token/token-insights.tsx:161
+#: src/containers/token/token-insights.tsx:158
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
-msgstr "토큰을 취소하거나 모든 토큰을 보려면 <0>오프라인 API 토큰 관리</0> 페이지를 참조하십시오."
+msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 
 #: src/components/repositories/remote-form.tsx:282
 msgid "Token"
 msgstr "토큰"
 
-#: src/containers/token/token-standalone.tsx:127
+#: src/containers/token/token-standalone.tsx:124
 msgid "Token could not be displayed."
 msgstr "토큰을 표시할 수 없습니다."
 
@@ -4553,7 +4553,7 @@ msgstr "서버 URL을 인증하는 데 사용되는 토큰입니다."
 msgid "Total number of simultaneous connections."
 msgstr "총 동시 연결 수입니다."
 
-#: src/containers/task-management/task_detail.tsx:348
+#: src/containers/task-management/task_detail.tsx:345
 msgid "Traceback"
 msgstr "추적"
 
@@ -4561,12 +4561,12 @@ msgstr "추적"
 msgid "Training <0/>"
 msgstr "교육 <0/>"
 
-#: src/containers/landing/landing-page.tsx:166
+#: src/containers/landing/landing-page.tsx:163
 msgid "Try Red Hat Ansible Automation Platform"
 msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:104
-#: src/containers/task-management/task_detail.tsx:257
+#: src/containers/task-management/task_detail.tsx:254
 msgid "Type"
 msgstr "유형"
 
@@ -4594,7 +4594,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
-#: src/components/collection-list/collection-filter.tsx:104
+#: src/components/collection-list/collection-filter.tsx:105
 #: src/components/signing/signature-badge.tsx:23
 msgid "Unsigned"
 msgstr "서명되지 않음"
@@ -4605,15 +4605,15 @@ msgstr "서명되지 않은 버전"
 
 #: src/constants.tsx:167
 #~ msgid "Update container information"
-#~ msgstr "컨테이너 정보 업데이트"
+#~ msgstr "Update container information"
 
 #: src/containers/ansible-remote/edit.tsx:121
 msgid "Update started for remote {0}"
-msgstr ""
+msgstr "원격 {0} 업데이트 시작"
 
 #: src/containers/ansible-repository/edit.tsx:128
 msgid "Update started for repository {0}"
-msgstr ""
+msgstr "리포지터리 {0}업데이트 시작"
 
 #: src/components/collection-list/collection-list-item.tsx:146
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
@@ -4650,7 +4650,7 @@ msgstr "서명 업로드"
 #: src/constants.tsx:156
 #: src/constants.tsx:164
 #~ msgid "Upload to namespace"
-#~ msgstr "네임스페이스에 업로드"
+#~ msgstr "Upload to namespace"
 
 #: src/components/execution-environment/repository-form.tsx:210
 msgid "Upstream name"
@@ -4659,27 +4659,27 @@ msgstr "업스트림 이름"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:268
 #: src/containers/execution-environment-detail/base.tsx:160
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:403
-#: src/containers/execution-environment-list/execution_environment_list.tsx:380
+#: src/containers/execution-environment-list/execution_environment_list.tsx:377
 msgid "Use in Controller"
 msgstr "컨트롤러에서 사용"
 
 #: src/components/repositories/remote-form.tsx:401
 msgid "Use template"
-msgstr ""
+msgstr "템플릿 사용"
 
 #: src/containers/token/token-insights.tsx:98
 #~ msgid "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
-#~ msgstr ""
+#~ msgstr "Use the <0>Repositories</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 
 #: src/containers/token/token-insights.tsx:98
 #~ msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
-#~ msgstr "<0>Repository Management</0> 페이지를 사용하여 조직에서 선별한 컬렉션을 프라이빗 Automation Hub의 Red Hat 인증 리포지토리와 동기화합니다. 올바른 권한이 있는 사용자는 <1>Collections</1> 페이지에서 동기화 토글을 사용하여 조직의 동기화 리포지토리에 추가되는 컬렉션을 제어할 수 있습니다."
+#~ msgstr "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 
-#: src/containers/landing/landing-page.tsx:76
+#: src/containers/landing/landing-page.tsx:73
 msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:96
+#: src/containers/token/token-insights.tsx:93
 msgid "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
 msgstr ""
 
@@ -4691,31 +4691,31 @@ msgstr "네임스페이스가 지정된 컨테이너의 경우 네임스페이�
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "Use this URL to configure the API endpoints that clients need to"
 
-#: src/containers/token/token-insights.tsx:176
+#: src/containers/token/token-insights.tsx:173
 msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
 msgstr ""
 
 #: src/containers/token/token-insights.tsx:184
 #~ msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
-#~ msgstr "이 URL을 사용하여 클라이언트가 Automation Hub에서 콘텐츠를 다운로드해야 하는 API 엔드포인트를 구성합니다."
+#~ msgstr "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 
 #: src/containers/token/token-insights.tsx:141
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
-#: src/containers/token/token-insights.tsx:191
+#: src/containers/token/token-insights.tsx:188
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
-msgstr "이 URL을 사용하여 클라이언트가 Automation Hub에서 콘텐츠를 다운로드하는 데 필요한 인증 URL을 구성합니다."
+msgstr "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 
 #: src/containers/token/token-insights.tsx:88
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "Use this token to authenticate clients that need to download"
 
-#: src/containers/token/token-insights.tsx:124
+#: src/containers/token/token-insights.tsx:121
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
-msgstr "이 토큰을 사용하여 Automation Hub에서 콘텐츠를 다운로드해야 하는 클라이언트를 인증합니다. 이는 콘텐츠를 보호하는 데 사용되는 시크릿 토큰입니다. API 토큰을 안전한 위치에 저장합니다."
+msgstr "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 
-#: src/containers/token/token-standalone.tsx:62
+#: src/containers/token/token-standalone.tsx:59
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "이 토큰을 사용하여 <0>ansible-CBC</0> 클라이언트를 인증합니다."
 
@@ -4723,7 +4723,7 @@ msgstr "이 토큰을 사용하여 <0>ansible-CBC</0> 클라이언트를 인증�
 msgid "Useful links"
 msgstr "유용한 링크"
 
-#: src/containers/group-management/group-detail.tsx:434
+#: src/containers/group-management/group-detail.tsx:428
 msgid "User \"{0}\" could not be added to group \"{1}\"."
 msgstr "사용자 \"{0}\"을/를 그룹 \"{1}\"에 추가할 수 없습니다."
 
@@ -4732,11 +4732,11 @@ msgstr "사용자 \"{0}\"을/를 그룹 \"{1}\"에 추가할 수 없습니다."
 msgid "User \"{0}\" could not be deleted."
 msgstr "사용자 \"{0}\"을/를 삭제할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:759
+#: src/containers/group-management/group-detail.tsx:753
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "사용자 \"{0}\"을/를 그룹 \"{name}\"에서 제거할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:427
+#: src/containers/group-management/group-detail.tsx:421
 msgid "User \"{0}\" has been successfully added to group \"{1}\"."
 msgstr "사용자 \"{0}\"이/가 그룹 \"{1}\"에 성공적으로 추가되었습니다."
 
@@ -4744,7 +4744,7 @@ msgstr "사용자 \"{0}\"이/가 그룹 \"{1}\"에 성공적으로 추가되었�
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "사용자 \"{0}\"이/가 성공적으로 삭제되었습니다."
 
-#: src/containers/group-management/group-detail.tsx:751
+#: src/containers/group-management/group-detail.tsx:745
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr "사용자 \"{0}\"이/가 그룹 \"{name}\"에서 성공적으로 제거되었습니다."
 
@@ -4752,7 +4752,7 @@ msgstr "사용자 \"{0}\"이/가 그룹 \"{name}\"에서 성공적으로 제거�
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 #~ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
 
-#: src/containers/group-management/group-detail.tsx:408
+#: src/containers/group-management/group-detail.tsx:402
 msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
 msgstr "사용자 <0>{username}</0>이/가 그룹 <1>{groupname}</1>에서 삭제됩니다."
 
@@ -4772,8 +4772,8 @@ msgstr "사용자 그룹"
 msgid "User details"
 msgstr "사용자 세부 정보"
 
-#: src/containers/group-management/group-detail.tsx:638
-#: src/containers/user-management/user-list.tsx:298
+#: src/containers/group-management/group-detail.tsx:632
+#: src/containers/user-management/user-list.tsx:295
 msgid "User list"
 msgstr "사용자 목록"
 
@@ -4784,12 +4784,12 @@ msgstr "사용자 유형"
 #: src/components/about-modal/about-modal.tsx:93
 #: src/components/rbac/user-form.tsx:86
 #: src/components/repositories/remote-form.tsx:426
-#: src/containers/group-management/group-detail.tsx:525
-#: src/containers/group-management/group-detail.tsx:604
+#: src/containers/group-management/group-detail.tsx:519
+#: src/containers/group-management/group-detail.tsx:598
 #: src/containers/login/login.tsx:51
-#: src/containers/user-management/user-list.tsx:160
-#: src/containers/user-management/user-list.tsx:208
-#: src/containers/user-management/user-list.tsx:257
+#: src/containers/user-management/user-list.tsx:157
+#: src/containers/user-management/user-list.tsx:205
+#: src/containers/user-management/user-list.tsx:254
 msgid "Username"
 msgstr "사용자 이름"
 
@@ -4801,26 +4801,26 @@ msgstr "사용자 이름: {0}"
 #: src/containers/user-management/user-create.tsx:53
 #: src/containers/user-management/user-detail.tsx:70
 #: src/containers/user-management/user-edit.tsx:62
-#: src/containers/user-management/user-list.tsx:137
+#: src/containers/user-management/user-list.tsx:134
 #: src/loaders/standalone/menu.tsx:124
 msgid "Users"
 msgstr "사용자"
 
-#: src/containers/group-management/group-detail.tsx:304
-#: src/containers/group-management/group-detail.tsx:453
-#: src/containers/group-management/group-detail.tsx:710
-#: src/containers/group-management/group-list.tsx:318
-#: src/containers/user-management/user-list.tsx:412
+#: src/containers/group-management/group-detail.tsx:298
+#: src/containers/group-management/group-detail.tsx:447
+#: src/containers/group-management/group-detail.tsx:704
+#: src/containers/group-management/group-list.tsx:315
+#: src/containers/user-management/user-list.tsx:409
 msgid "Users list could not be displayed."
 msgstr "사용자 목록을 표시할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:491
+#: src/containers/group-management/group-detail.tsx:485
 msgid "Users will appear once added to this group"
-msgstr "사용자가 그룹에 추가되면 나타납니다."
+msgstr "사용자가 그룹에 추가되면 나타납니다"
 
-#: src/containers/user-management/user-list.tsx:244
+#: src/containers/user-management/user-list.tsx:241
 msgid "Users will appear once created"
-msgstr "사용자가 생성되면 나타납니다."
+msgstr "사용자가 생성되면 나타납니다"
 
 #: src/components/repo-selector/repo-selector.tsx:33
 msgid "Validated"
@@ -4834,11 +4834,11 @@ msgstr "버전"
 #: src/containers/ansible-repository/tab-repository-versions.tsx:245
 #: src/containers/ansible-repository/tab-repository-versions.tsx:307
 msgid "Version number"
-msgstr ""
+msgstr "버전 번호"
 
 #: src/containers/ansible-repository/detail.tsx:48
 msgid "Version {repositoryVersion}"
-msgstr ""
+msgstr "버전 {repositoryVersion}"
 
 #: src/components/my-imports/import-console.tsx:189
 msgid "Version:"
@@ -4846,23 +4846,23 @@ msgstr "버전:"
 
 #: src/containers/ansible-repository/detail.tsx:28
 msgid "Versions"
-msgstr ""
+msgstr "버전"
 
 #: src/constants.tsx:122
 #~ msgid "View Ansible distribution"
-#~ msgstr "Ansible 배포 보기"
+#~ msgstr "View Ansible distribution"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:560
 msgid "View Import Logs"
-msgstr "가져오기 로그 보기"
+msgstr "로그 가져오기 보기"
 
 #: src/constants.tsx:140
 #~ msgid "View all tasks"
-#~ msgstr "모든 작업 보기"
+#~ msgstr "View all tasks"
 
 #: src/constants.tsx:123
 #~ msgid "View collection remote"
-#~ msgstr "원격 컬렉션 보기"
+#~ msgstr "View collection remote"
 
 #: src/components/cards/namespace-card.tsx:56
 msgid "View collections"
@@ -4870,19 +4870,19 @@ msgstr "컬렉션 보기"
 
 #: src/constants.tsx:172
 #~ msgid "View container's namespace"
-#~ msgstr "컨테이너의 네임스페이스 보기"
+#~ msgstr "View container's namespace"
 
 #: src/constants.tsx:175
 #~ msgid "View container's repository"
-#~ msgstr "컨테이너의 리포지토리 보기"
+#~ msgstr "View container's repository"
 
 #: src/constants.tsx:181
 #~ msgid "View distribution"
-#~ msgstr "배포 보기"
+#~ msgstr "View distribution"
 
 #: src/constants.tsx:157
 #~ msgid "View group"
-#~ msgstr "그룹 보기"
+#~ msgstr "View group"
 
 #: src/components/headers/collection-header.tsx:448
 msgid "View more"
@@ -4891,11 +4891,11 @@ msgstr "더 알아보기"
 #: src/constants.tsx:137
 #: src/constants.tsx:168
 #~ msgid "View private containers"
-#~ msgstr "개인 컨테이너 보기"
+#~ msgstr "View private containers"
 
 #: src/constants.tsx:158
 #~ msgid "View synclist"
-#~ msgstr "동기화 목록 보기"
+#~ msgstr "View synclist"
 
 #: src/containers/execution-environment/registry-list.tsx:485
 #: src/containers/execution-environment/registry-list.tsx:507
@@ -4906,7 +4906,7 @@ msgstr "더 알아보기"
 
 #: src/constants.tsx:159
 #~ msgid "View user"
-#~ msgstr "사용자 보기"
+#~ msgstr "View user"
 
 #: src/constants.tsx:166
 msgid "View, add, remove and change groups."
@@ -4925,7 +4925,7 @@ msgid "View, and cancel any task."
 msgstr "작업을 확인 및 제거합니다."
 
 #: src/components/my-imports/import-list.tsx:105
-#: src/containers/task-management/task-list-view.tsx:178
+#: src/containers/task-management/task-list-view.tsx:175
 msgid "Waiting"
 msgstr "대기 중"
 
@@ -4940,17 +4940,17 @@ msgstr "경고"
 
 #: src/containers/not-found/not-found.tsx:17
 msgid "We couldn't find the page you're looking for!"
-msgstr "페이지를 찾을 수 없습니다."
+msgstr "페이지를 찾을 수 없습니다!"
 
-#: src/containers/token/token-insights.tsx:203
+#: src/containers/token/token-insights.tsx:200
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
-msgstr ""
+msgstr "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 
 #: src/components/headers/collection-header.tsx:188
 msgid "Website"
 msgstr "웹 사이트"
 
-#: src/containers/landing/landing-page.tsx:53
+#: src/containers/landing/landing-page.tsx:50
 msgid "Welcome to Beta Galaxy"
 msgstr ""
 
@@ -4958,7 +4958,7 @@ msgstr ""
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:277
 #: src/containers/namespace-detail/namespace-detail.tsx:837
 #~ msgid "Wisdom settings"
-#~ msgstr ""
+#~ msgstr "Wisdom settings"
 
 #: src/components/repositories/remote-form.tsx:331
 #: src/containers/ansible-remote/tab-details.tsx:86
@@ -4971,8 +4971,8 @@ msgstr "YAML 요구 사항"
 msgid "Yes"
 msgstr "제공됨"
 
-#: src/containers/task-management/task-list-view.tsx:352
-#: src/containers/task-management/task_detail.tsx:370
+#: src/containers/task-management/task-list-view.tsx:349
+#: src/containers/task-management/task_detail.tsx:367
 msgid "Yes, stop"
 msgstr "예, 중지합니다"
 
@@ -4998,13 +4998,13 @@ msgstr "<1>{name}</1>에서 <0>모든 버전</0>에 서명하려고 합니다."
 
 #: src/components/signing/sign-single-certificate-modal.tsx:45
 msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
-msgstr "<1>{name}</1>에서 <0>version {version}</0> 에 서명하려고 합니다."
+msgstr "<1>{name}</1>에서 <0>version {version}</0>에 서명하려고 합니다."
 
 #: src/components/signing/sign-all-certificates-modal.tsx:59
 #~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
 #~ msgstr "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
 
-#: src/containers/token/token-standalone.tsx:71
+#: src/containers/token/token-standalone.tsx:68
 msgid "You are an SSO user. Your token will expire <0/>."
 msgstr "SSO 사용자입니다. 토큰은 <0/> 만료됩니다."
 
@@ -5012,17 +5012,17 @@ msgstr "SSO 사용자입니다. 토큰은 <0/> 만료됩니다."
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "여기에서 사용자 정의 마크다운을 입력하여 프로필의 리소스 탭을 사용자 지정할 수 있습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:201
+#: src/containers/execution-environment-list/execution_environment_list.tsx:198
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "현재 컨테이너 리포지토리가 없습니다. 시작하려면 CLI를 통해 컨테이너 리포지토리를 추가합니다."
 
-#: src/containers/execution-environment/registry-list.tsx:234
+#: src/containers/execution-environment/registry-list.tsx:231
 msgid "You currently have no remote registries."
 msgstr "현재 원격 레지스트리가 없습니다."
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:11
 msgid "You do not have access to Automation Hub"
-msgstr "Automation Hub에 액세스할 수 없습니다."
+msgstr "Automation Hub에 액세스할 수 없습니다"
 
 #: src/containers/task-management/task-list-view.tsx:99
 msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
@@ -5053,7 +5053,7 @@ msgstr "tarball을 다운로드하려면 로그인해야 합니다."
 msgid "You have unsaved changes"
 msgstr "저장되지 않은 변경 사항이 있습니다"
 
-#: src/containers/group-management/group-detail.tsx:255
+#: src/containers/group-management/group-detail.tsx:249
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
@@ -5081,7 +5081,7 @@ msgstr "키워드"
 
 #: src/components/collection-list/collection-filter.tsx:131
 #~ msgid "namespace"
-#~ msgstr ""
+#~ msgstr "namespace"
 
 #: src/components/patternfly-wrappers/pagination.tsx:82
 msgid "of"
@@ -5105,12 +5105,12 @@ msgstr "거부됨"
 
 #: src/components/collection-list/collection-filter.tsx:130
 #~ msgid "repository"
-#~ msgstr ""
+#~ msgstr "repository"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
 #~ msgid "role.github_user logo"
-#~ msgstr ""
+#~ msgstr "role.github_user logo"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
@@ -5122,23 +5122,23 @@ msgstr "거부됨"
 
 #: src/components/collection-list/collection-filter.tsx:127
 #~ msgid "sign state"
-#~ msgstr "서명 상태"
+#~ msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx:136
+#: src/components/collection-list/collection-filter.tsx:137
 msgid "signed"
-msgstr ""
+msgstr "서명됨"
 
 #: src/components/collection-list/collection-filter.tsx:128
 #~ msgid "tags"
-#~ msgstr "태그"
+#~ msgstr "tags"
 
-#: src/containers/role-management/role-list.tsx:277
+#: src/containers/role-management/role-list.tsx:274
 msgid "true"
 msgstr "true"
 
-#: src/components/collection-list/collection-filter.tsx:135
+#: src/components/collection-list/collection-filter.tsx:136
 msgid "unsigned"
-msgstr ""
+msgstr "서명되지 않음"
 
 #: src/components/headers/collection-header.tsx:374
 msgid "updated {0}"
@@ -5154,12 +5154,12 @@ msgstr "가져오기가 완료될 때까지 대기 중"
 
 #: src/actions/ansible-repository-collection-version-add.tsx:46
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
-msgstr ""
+msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:65
 #: src/containers/legacy-roles/legacy-role.tsx:278
 msgid "{0} logo"
-msgstr ""
+msgstr "{0} 로고"
 
 #: src/components/headers/collection-header.tsx:511
 #~ msgid "{0} released {1}"
@@ -5207,21 +5207,21 @@ msgstr "{count, plural, one {Role} other {Roles}}"
 
 #: src/utilities/chip-group-props.ts:6
 msgid "{count} more"
-msgstr ""
+msgstr "{count} 기타 정보"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/containers/task-management/task-list-view.tsx:353
+#: src/containers/task-management/task-list-view.tsx:350
 msgid "{name} will be cancelled."
 msgstr "{name}이/가 취소됩니다."
 
-#: src/containers/task-management/task_detail.tsx:372
+#: src/containers/task-management/task_detail.tsx:369
 msgid "{name} will stop running."
 msgstr "{name}이/가 실행을 중지합니다."
 
-#: src/components/rbac/role-header.tsx:18
+#: src/components/rbac/role-header.tsx:15
 msgid "{subTitle}"
 msgstr "{subTitle}"
 
