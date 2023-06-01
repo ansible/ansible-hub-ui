@@ -1,0 +1,1 @@
+Deduplicate some duplicit API classes and types.
