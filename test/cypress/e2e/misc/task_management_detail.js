@@ -16,6 +16,7 @@ describe('Task detail', () => {
 
     cy.get('[aria-label="Actions"]').eq(1).click();
     cy.get('tr').eq(2).contains('Sync').click();
+    cy.get('.pf-c-modal-box__footer .pf-m-primary').contains('Sync').click();
 
     cy.get('.pf-c-alert.pf-m-info');
   });
