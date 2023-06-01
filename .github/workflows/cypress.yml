@@ -271,14 +271,24 @@ jobs:
       run: |
         ls ansible-hub-ui/test/screenshots.js/
 
-    - name: "Run cypress"
+    - name: "Set specPattern from matrix"
       working-directory: 'ansible-hub-ui/test'
-      env:
-        CONSOLE_LOG_TO_TERMINAL: true
       run: |
         sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
         grep specPattern cypress.config.js
 
+    - name: "Run cypress (standalone)"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
+      working-directory: 'ansible-hub-ui/test'
+      env:
+        CONSOLE_LOG_TO_TERMINAL: true
+      run: |
+        npm run cypress:chrome
+
+    - name: "Run cypress (insights)"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
+      working-directory: 'ansible-hub-ui/test'
+      run: |
         npm run cypress:chrome
 
     - name: "List new screenshots"
