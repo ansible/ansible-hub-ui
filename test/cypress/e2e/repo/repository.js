@@ -107,6 +107,10 @@ describe('Repository', () => {
       if (mode == 'with remote') {
         // try to sync it
         cy.contains('button', 'Sync').click();
+        cy.get('.pf-c-modal-box__footer .pf-m-primary')
+          .contains('Sync')
+          .click();
+
         cy.contains('Sync started for repository "repo1Test".');
         cy.contains('a', 'detail page').click();
         cy.contains('Failed', { timeout: 10000 });
