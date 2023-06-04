@@ -368,8 +368,8 @@ msgstr "Approval"
 msgid "Approval dashboard"
 msgstr "Approval dashboard"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:686
-#: src/containers/certification-dashboard/certification-dashboard.tsx:705
+#: src/containers/certification-dashboard/certification-dashboard.tsx:687
+#: src/containers/certification-dashboard/certification-dashboard.tsx:706
 msgid "Approval failed."
 msgstr "Approval failed."
 
@@ -377,8 +377,8 @@ msgstr "Approval failed."
 msgid "Approval status:"
 msgstr "Approval status:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:540
-#: src/containers/certification-dashboard/certification-dashboard.tsx:571
+#: src/containers/certification-dashboard/certification-dashboard.tsx:541
+#: src/containers/certification-dashboard/certification-dashboard.tsx:572
 msgid "Approve"
 msgstr "Approve"
 
@@ -519,7 +519,7 @@ msgstr "CLI configuration"
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/role-form.tsx:148
 #: src/components/rbac/user-form.tsx:224
-#: src/components/repositories/ansible-repository-form.tsx:358
+#: src/components/repositories/ansible-repository-form.tsx:365
 #: src/components/repositories/remote-form.tsx:145
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
@@ -549,17 +549,17 @@ msgstr "Cannot delete until collections <0/>that depend on this collection <1/>h
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:653
+#: src/containers/certification-dashboard/certification-dashboard.tsx:654
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 
 #: src/components/approve-modal/approve-modal.tsx:166
-#: src/containers/certification-dashboard/certification-dashboard.tsx:734
-#: src/containers/certification-dashboard/certification-dashboard.tsx:816
+#: src/containers/certification-dashboard/certification-dashboard.tsx:735
+#: src/containers/certification-dashboard/certification-dashboard.tsx:817
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 
-#: src/components/cards/collection-card.tsx:65
+#: src/components/cards/collection-card.tsx:67
 msgid "Certified"
 msgstr "Certified"
 
@@ -634,9 +634,9 @@ msgstr "Change existing execution environments."
 #~ msgid "Change user"
 #~ msgstr "Change user"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:749
-#: src/containers/certification-dashboard/certification-dashboard.tsx:769
-#: src/containers/certification-dashboard/certification-dashboard.tsx:827
+#: src/containers/certification-dashboard/certification-dashboard.tsx:750
+#: src/containers/certification-dashboard/certification-dashboard.tsx:770
+#: src/containers/certification-dashboard/certification-dashboard.tsx:828
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 
@@ -683,6 +683,7 @@ msgstr "Client certificate"
 msgid "Client key"
 msgstr "Client key"
 
+#: src/actions/ansible-repository-sync.tsx:60
 #: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
@@ -806,7 +807,7 @@ msgstr "Collection doesn't have any distribution assigned."
 #~ msgid "Collection failed to be removed from those repositories: {0}"
 #~ msgstr "Collection failed to be removed from those repositories: {0}"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:707
+#: src/containers/certification-dashboard/certification-dashboard.tsx:708
 msgid "Collection has to be in rejected or staging repository."
 msgstr "Collection has to be in rejected or staging repository."
 
@@ -814,7 +815,7 @@ msgstr "Collection has to be in rejected or staging repository."
 msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:688
+#: src/containers/certification-dashboard/certification-dashboard.tsx:689
 msgid "Collection not found in any repository."
 msgstr "Collection not found in any repository."
 
@@ -977,6 +978,10 @@ msgstr "Content added"
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "Content in repositories without a distribution will not be visible to clients for sync, download or search."
+
+#: src/actions/ansible-repository-sync.tsx:79
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr "Content not present in remote repository will be removed from the local repository"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
@@ -1669,7 +1674,7 @@ msgstr "Error fetching import from API"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:866
+#: src/containers/certification-dashboard/certification-dashboard.tsx:867
 msgid "Error loading collections."
 msgstr "Error loading collections."
 
@@ -1863,8 +1868,8 @@ msgstr "Failed to approve collection."
 
 #: src/api/sign-collections.ts:51
 #: src/api/sign-collections.ts:51
-#: src/containers/certification-dashboard/certification-dashboard.tsx:788
-#: src/containers/certification-dashboard/certification-dashboard.tsx:788
+#: src/containers/certification-dashboard/certification-dashboard.tsx:789
+#: src/containers/certification-dashboard/certification-dashboard.tsx:789
 msgid "Failed to find a distribution for repository {name}"
 msgstr "Failed to find a distribution for repository {name}"
 
@@ -1874,8 +1879,8 @@ msgstr "Failed to find repository version"
 
 #: src/api/sign-collections.ts:36
 #: src/api/sign-collections.ts:36
-#: src/containers/certification-dashboard/certification-dashboard.tsx:780
-#: src/containers/certification-dashboard/certification-dashboard.tsx:780
+#: src/containers/certification-dashboard/certification-dashboard.tsx:781
+#: src/containers/certification-dashboard/certification-dashboard.tsx:781
 msgid "Failed to find repository {name}"
 msgstr "Failed to find repository {name}"
 
@@ -1908,7 +1913,7 @@ msgstr "Failed to load distributions: {error}"
 #~ msgid "Failed to load pulp_id of collection repository."
 #~ msgstr "Failed to load pulp_id of collection repository."
 
-#: src/components/repositories/ansible-repository-form.tsx:325
+#: src/components/repositories/ansible-repository-form.tsx:331
 msgid "Failed to load remotes: {remotesError}"
 msgstr "Failed to load remotes: {remotesError}"
 
@@ -1978,7 +1983,7 @@ msgstr "Failed to sign the container version."
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
-#: src/actions/ansible-repository-sync.tsx:22
+#: src/actions/ansible-repository-sync.tsx:149
 msgid "Failed to sync repository \"{name}\""
 msgstr "Failed to sync repository \"{name}\""
 
@@ -2032,6 +2037,10 @@ msgstr "First name"
 msgid "Follow logs"
 msgstr "Follow logs"
 
+#: src/actions/ansible-repository-sync.tsx:96
+msgid "Force a sync to happen."
+msgstr "Force a sync to happen."
+
 #: src/loaders/standalone/layout.tsx:118
 msgid "Galaxy Logo"
 msgstr "Galaxy Logo"
@@ -2057,8 +2066,8 @@ msgstr "Go to documentation"
 msgid "Group"
 msgstr "Group"
 
-#: src/containers/ansible-remote/tab-access.tsx:125
-#: src/containers/ansible-repository/tab-access.tsx:125
+#: src/containers/ansible-remote/tab-access.tsx:128
+#: src/containers/ansible-repository/tab-access.tsx:128
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:128
 #: src/containers/namespace-detail/namespace-detail.tsx:509
 msgid "Group \"{0}\" could not be added to \"{name}\"."
@@ -2068,15 +2077,15 @@ msgstr "Group \"{0}\" could not be added to \"{name}\"."
 #~ msgid "Group \"{0}\" could not be displayed."
 #~ msgstr "Group \"{0}\" could not be displayed."
 
-#: src/containers/ansible-remote/tab-access.tsx:140
-#: src/containers/ansible-repository/tab-access.tsx:140
+#: src/containers/ansible-remote/tab-access.tsx:143
+#: src/containers/ansible-repository/tab-access.tsx:143
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:145
 #: src/containers/namespace-detail/namespace-detail.tsx:519
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "Group \"{0}\" could not be removed from \"{name}\"."
 
-#: src/containers/ansible-remote/tab-access.tsx:124
-#: src/containers/ansible-repository/tab-access.tsx:124
+#: src/containers/ansible-remote/tab-access.tsx:127
+#: src/containers/ansible-repository/tab-access.tsx:127
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:127
 #: src/containers/namespace-detail/namespace-detail.tsx:508
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
@@ -2086,17 +2095,17 @@ msgstr "Group \"{0}\" has been successfully added to \"{name}\"."
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "Group \"{0}\" has been successfully deleted."
 
-#: src/containers/ansible-remote/tab-access.tsx:139
-#: src/containers/ansible-repository/tab-access.tsx:139
+#: src/containers/ansible-remote/tab-access.tsx:142
+#: src/containers/ansible-repository/tab-access.tsx:142
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:144
 #: src/containers/namespace-detail/namespace-detail.tsx:518
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "Group \"{0}\" has been successfully removed from \"{name}\"."
 
-#: src/containers/ansible-remote/tab-access.tsx:154
-#: src/containers/ansible-remote/tab-access.tsx:166
-#: src/containers/ansible-repository/tab-access.tsx:154
-#: src/containers/ansible-repository/tab-access.tsx:166
+#: src/containers/ansible-remote/tab-access.tsx:157
+#: src/containers/ansible-remote/tab-access.tsx:169
+#: src/containers/ansible-repository/tab-access.tsx:157
+#: src/containers/ansible-repository/tab-access.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:162
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:177
 #: src/containers/namespace-detail/namespace-detail.tsx:539
@@ -2104,10 +2113,10 @@ msgstr "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr "Group \"{0}\" roles could not be update in \"{name}\"."
 
-#: src/containers/ansible-remote/tab-access.tsx:153
-#: src/containers/ansible-remote/tab-access.tsx:165
-#: src/containers/ansible-repository/tab-access.tsx:153
-#: src/containers/ansible-repository/tab-access.tsx:165
+#: src/containers/ansible-remote/tab-access.tsx:156
+#: src/containers/ansible-remote/tab-access.tsx:168
+#: src/containers/ansible-repository/tab-access.tsx:156
+#: src/containers/ansible-repository/tab-access.tsx:168
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:161
 #: src/containers/execution-environment-detail/execution_environment_detail_access.tsx:176
 #: src/containers/namespace-detail/namespace-detail.tsx:538
@@ -2177,7 +2186,7 @@ msgstr "Groups will appear once created"
 msgid "Hide advanced options"
 msgstr "Hide advanced options"
 
-#: src/components/repositories/ansible-repository-form.tsx:268
+#: src/components/repositories/ansible-repository-form.tsx:270
 msgid "Hide from search"
 msgstr "Hide from search"
 
@@ -2195,6 +2204,10 @@ msgstr "I understand that this action cannot be undone."
 #: src/components/repositories/remote-form.tsx:575
 msgid "If selected, TLS peer validation must be performed."
 msgstr "If selected, TLS peer validation must be performed."
+
+#: src/actions/ansible-repository-sync.tsx:72
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
@@ -2333,7 +2346,7 @@ msgstr "Key fingerprint"
 msgid "Keywords"
 msgstr "Keywords"
 
-#: src/components/repositories/ansible-repository-form.tsx:252
+#: src/components/repositories/ansible-repository-form.tsx:254
 #: src/containers/ansible-repository/tab-details.tsx:59
 msgid "Labels"
 msgstr "Labels"
@@ -2477,12 +2490,12 @@ msgstr "Logo URL"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/components/repositories/ansible-repository-form.tsx:278
-#: src/components/repositories/ansible-repository-form.tsx:283
+#: src/components/repositories/ansible-repository-form.tsx:280
+#: src/components/repositories/ansible-repository-form.tsx:285
 msgid "Make private"
 msgstr "Make private"
 
-#: src/components/repositories/ansible-repository-form.tsx:279
+#: src/components/repositories/ansible-repository-form.tsx:281
 msgid "Make the repository private."
 msgstr "Make the repository private."
 
@@ -2514,6 +2527,10 @@ msgstr "Manifest lists are not currently supported on this screen, please use th
 #: src/containers/task-management/task_detail.tsx:313
 msgid "Message"
 msgstr "Message"
+
+#: src/actions/ansible-repository-sync.tsx:69
+msgid "Mirror"
+msgstr "Mirror"
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
@@ -2935,6 +2952,14 @@ msgstr "OS / Arch"
 #~ msgid "Offline token"
 #~ msgstr "Offline token"
 
+#: src/actions/ansible-repository-sync.tsx:95
+msgid "Only perform the sync if no changes are reported by the remote server."
+msgstr "Only perform the sync if no changes are reported by the remote server."
+
+#: src/actions/ansible-repository-sync.tsx:88
+msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
@@ -2954,6 +2979,10 @@ msgstr "Opt out of Ansible Lightspeed"
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
 #~ msgstr "Opt out of Wisdom"
+
+#: src/actions/ansible-repository-sync.tsx:85
+msgid "Optimize"
+msgstr "Optimize"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -3131,7 +3160,7 @@ msgstr "Provided by <0>{0}</0>"
 #~ msgid "Provided by {company}"
 #~ msgstr "Provided by {company}"
 
-#: src/components/cards/collection-card.tsx:95
+#: src/components/cards/collection-card.tsx:98
 #: src/components/collection-list/collection-list-item.tsx:91
 msgid "Provided by <0>{company}</0>"
 msgstr "Provided by <0>{company}</0>"
@@ -3351,7 +3380,7 @@ msgstr "Registry URL"
 msgid "Registry sync status"
 msgstr "Registry sync status"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:584
+#: src/containers/certification-dashboard/certification-dashboard.tsx:585
 msgid "Reject"
 msgstr "Reject"
 
@@ -3376,7 +3405,7 @@ msgstr "Rejected"
 msgid "Released <0/>"
 msgstr "Released <0/>"
 
-#: src/components/repositories/ansible-repository-form.tsx:292
+#: src/components/repositories/ansible-repository-form.tsx:294
 #: src/containers/ansible-repository/tab-details.tsx:67
 #: src/containers/execution-environment-list/execution_environment_list.tsx:419
 msgid "Remote"
@@ -3513,7 +3542,7 @@ msgstr "Repositories will appear once created."
 #: src/components/approve-modal/approve-modal.tsx:476
 #: src/components/collection-list/collection-filter.tsx:81
 #: src/components/collection-list/collection-filter.tsx:130
-#: src/components/repo-selector/repo-selector.tsx:30
+#: src/components/repo-selector/repo-selector.tsx:31
 #: src/containers/certification-dashboard/certification-dashboard.tsx:371
 msgid "Repository"
 msgstr "Repository"
@@ -3683,7 +3712,7 @@ msgstr "SSO URL"
 #: src/components/rbac/group-modal.tsx:57
 #: src/components/rbac/role-form.tsx:142
 #: src/components/rbac/user-form.tsx:221
-#: src/components/repositories/ansible-repository-form.tsx:355
+#: src/components/repositories/ansible-repository-form.tsx:362
 #: src/components/repositories/remote-form.tsx:140
 #: src/containers/edit-namespace/edit-namespace.tsx:155
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:152
@@ -3750,7 +3779,7 @@ msgstr "Select a group"
 msgid "Select a registry"
 msgstr "Select a registry"
 
-#: src/components/repositories/ansible-repository-form.tsx:305
+#: src/components/repositories/ansible-repository-form.tsx:311
 msgid "Select a remote"
 msgstr "Select a remote"
 
@@ -3835,7 +3864,7 @@ msgstr "Server error. Please come back later."
 msgid "Server version"
 msgstr "Server version"
 
-#: src/components/repositories/ansible-repository-form.tsx:293
+#: src/components/repositories/ansible-repository-form.tsx:295
 msgid "Setting a remote allows a repository to sync from elsewhere."
 msgstr "Setting a remote allows a repository to sync from elsewhere."
 
@@ -3877,8 +3906,8 @@ msgstr "Sign all collections"
 msgid "Sign all collections in {repository}"
 msgstr "Sign all collections in {repository}"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:540
-#: src/containers/certification-dashboard/certification-dashboard.tsx:571
+#: src/containers/certification-dashboard/certification-dashboard.tsx:541
+#: src/containers/certification-dashboard/certification-dashboard.tsx:572
 msgid "Sign and approve"
 msgstr "Sign and approve"
 
@@ -4116,7 +4145,8 @@ msgstr "Super users can't disable themselves."
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Super users have all system permissions regardless of what groups they are in."
 
-#: src/actions/ansible-repository-sync.tsx:9
+#: src/actions/ansible-repository-sync.tsx:55
+#: src/actions/ansible-repository-sync.tsx:106
 msgid "Sync"
 msgstr "Sync"
 
@@ -4137,6 +4167,10 @@ msgstr "Sync from registry"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
+#: src/actions/ansible-repository-sync.tsx:65
+msgid "Sync repository \"{name}\""
+msgstr "Sync repository \"{name}\""
+
 #: src/containers/execution-environment-list/execution_environment_list.tsx:532
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Sync started for execution environment \"{name}\"."
@@ -4146,7 +4180,7 @@ msgstr "Sync started for execution environment \"{name}\"."
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "Sync started for remote registry \"{name}\"."
 
-#: src/actions/ansible-repository-sync.tsx:15
+#: src/actions/ansible-repository-sync.tsx:143
 msgid "Sync started for repository \"{name}\"."
 msgstr "Sync started for repository \"{name}\"."
 
@@ -4154,9 +4188,13 @@ msgstr "Sync started for repository \"{name}\"."
 msgid "Sync status"
 msgstr "Sync status"
 
-#: src/actions/ansible-repository-sync.tsx:39
+#: src/actions/ansible-repository-sync.tsx:132
 msgid "Sync task is already queued."
 msgstr "Sync task is already queued."
+
+#: src/actions/ansible-repository-sync.tsx:80
+msgid "Sync will only add missing content"
+msgstr "Sync will only add missing content"
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
@@ -4276,7 +4314,7 @@ msgstr "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "The certificate for \"{0} {1} v{2}\" is being uploaded."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:664
+#: src/containers/certification-dashboard/certification-dashboard.tsx:665
 msgid "The certificate for \"{namespace} {name} v{version}\" could not be saved."
 msgstr "The certificate for \"{namespace} {name} v{version}\" could not be saved."
 
@@ -4332,11 +4370,11 @@ msgstr "The password to be used for authentication when syncing. This is not req
 msgid "The role is versionless and will always install from the head/main/master branch."
 msgstr "The role is versionless and will always install from the head/main/master branch."
 
-#: src/containers/ansible-remote/tab-access.tsx:221
+#: src/containers/ansible-remote/tab-access.tsx:224
 msgid "The selected roles will be added to this specific Ansible remote."
 msgstr "The selected roles will be added to this specific Ansible remote."
 
-#: src/containers/ansible-repository/tab-access.tsx:221
+#: src/containers/ansible-repository/tab-access.tsx:224
 msgid "The selected roles will be added to this specific Ansible repository."
 msgstr "The selected roles will be added to this specific Ansible repository."
 
@@ -4385,7 +4423,7 @@ msgstr "There are currently no roles that can be assigned to this group."
 msgid "There are no distributions associated with this repository."
 msgstr "There are no distributions associated with this repository."
 
-#: src/actions/ansible-repository-sync.tsx:32
+#: src/actions/ansible-repository-sync.tsx:125
 msgid "There are no remotes associated with this repository."
 msgstr "There are no remotes associated with this repository."
 
@@ -4552,7 +4590,7 @@ msgstr "Update started for remote {0}"
 msgid "Update started for repository {0}"
 msgstr "Update started for repository {0}"
 
-#: src/components/collection-list/collection-list-item.tsx:144
+#: src/components/collection-list/collection-list-item.tsx:145
 #: src/components/legacy-role-list/legacy-role-item.tsx:103
 #: src/containers/legacy-roles/legacy-role.tsx:312
 msgid "Updated <0/>"
@@ -4580,7 +4618,7 @@ msgid "Upload new version"
 msgstr "Upload new version"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:528
+#: src/containers/certification-dashboard/certification-dashboard.tsx:529
 msgid "Upload signature"
 msgstr "Upload signature"
 
@@ -4777,7 +4815,7 @@ msgstr "Versions"
 #~ msgid "View Ansible distribution"
 #~ msgstr "View Ansible distribution"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:559
+#: src/containers/certification-dashboard/certification-dashboard.tsx:560
 msgid "View Import Logs"
 msgstr "View Import Logs"
 
@@ -5102,11 +5140,11 @@ msgstr "{0} was added"
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}'s versions."
 
-#: src/components/cards/collection-card.tsx:48
+#: src/components/cards/collection-card.tsx:49
 #: src/components/cards/namespace-card.tsx:37
 #: src/components/collection-list/collection-list-item.tsx:61
 #: src/components/headers/collection-header.tsx:411
-#: src/components/headers/partner-header.tsx:48
+#: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} logo"
 
