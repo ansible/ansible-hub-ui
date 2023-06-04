@@ -690,6 +690,7 @@ msgstr "客户端证书"
 msgid "Client key"
 msgstr "客户端密钥"
 
+#: src/actions/ansible-repository-sync.tsx:60
 #: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
@@ -988,6 +989,10 @@ msgstr ""
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "在软件仓库中没有发行版的内容对客户端无法进行同步、下载或搜索。"
+
+#: src/actions/ansible-repository-sync.tsx:79
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
@@ -1998,7 +2003,7 @@ msgstr "为容器版本签名失败。"
 msgid "Failed to sign the version."
 msgstr "为版本签名失败。"
 
-#: src/actions/ansible-repository-sync.tsx:22
+#: src/actions/ansible-repository-sync.tsx:149
 msgid "Failed to sync repository \"{name}\""
 msgstr "同步软件仓库 \"{name}\" 失败"
 
@@ -2055,6 +2060,10 @@ msgstr "名"
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
 msgstr "跟踪日志"
+
+#: src/actions/ansible-repository-sync.tsx:96
+msgid "Force a sync to happen."
+msgstr ""
 
 #: src/loaders/standalone/layout.tsx:118
 msgid "Galaxy Logo"
@@ -2227,6 +2236,10 @@ msgstr "我理解这个行动是无法撤销的。"
 #: src/components/repositories/remote-form.tsx:575
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
+
+#: src/actions/ansible-repository-sync.tsx:72
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
@@ -2555,6 +2568,10 @@ msgstr ""
 #: src/containers/task-management/task_detail.tsx:310
 msgid "Message"
 msgstr "信息"
+
+#: src/actions/ansible-repository-sync.tsx:69
+msgid "Mirror"
+msgstr ""
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
@@ -2975,6 +2992,14 @@ msgstr "OS/ Arch"
 msgid "Offline token"
 msgstr "Offline token"
 
+#: src/actions/ansible-repository-sync.tsx:95
+msgid "Only perform the sync if no changes are reported by the remote server."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx:88
+msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr ""
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
@@ -2994,6 +3019,10 @@ msgstr "选择不再使用 Ansible Lightspeed"
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
 #~ msgstr "Opt out of Wisdom"
+
+#: src/actions/ansible-repository-sync.tsx:85
+msgid "Optimize"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -4169,7 +4198,8 @@ msgstr "超级用户无法禁用自身。"
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "超级用户具有所有系统权限，无论他们所在的组是什么。"
 
-#: src/actions/ansible-repository-sync.tsx:9
+#: src/actions/ansible-repository-sync.tsx:55
+#: src/actions/ansible-repository-sync.tsx:106
 #: src/containers/search/search.tsx:437
 msgid "Sync"
 msgstr "同步"
@@ -4191,6 +4221,10 @@ msgstr "从注册表进行同步"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
+#: src/actions/ansible-repository-sync.tsx:65
+msgid "Sync repository \"{name}\""
+msgstr ""
+
 #: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "执行环境 \"{name}\" 的同步开始。"
@@ -4200,7 +4234,7 @@ msgstr "执行环境 \"{name}\" 的同步开始。"
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "远程注册表\"{name}\" 的同步开始。"
 
-#: src/actions/ansible-repository-sync.tsx:15
+#: src/actions/ansible-repository-sync.tsx:143
 msgid "Sync started for repository \"{name}\"."
 msgstr "为仓库 \"{name}\" 启动的同步。"
 
@@ -4208,9 +4242,13 @@ msgstr "为仓库 \"{name}\" 启动的同步。"
 msgid "Sync status"
 msgstr "同步状态"
 
-#: src/actions/ansible-repository-sync.tsx:39
+#: src/actions/ansible-repository-sync.tsx:132
 msgid "Sync task is already queued."
 msgstr "同步任务已经排队。"
+
+#: src/actions/ansible-repository-sync.tsx:80
+msgid "Sync will only add missing content"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
@@ -4444,7 +4482,7 @@ msgstr "目前没有可分配给此组的角色。"
 msgid "There are no distributions associated with this repository."
 msgstr ""
 
-#: src/actions/ansible-repository-sync.tsx:32
+#: src/actions/ansible-repository-sync.tsx:125
 msgid "There are no remotes associated with this repository."
 msgstr "没有与此仓库关联的远程。"
 

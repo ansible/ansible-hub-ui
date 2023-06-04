@@ -690,6 +690,7 @@ msgstr "클라이언트 인증서"
 msgid "Client key"
 msgstr "클라이언트 키"
 
+#: src/actions/ansible-repository-sync.tsx:60
 #: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
@@ -988,6 +989,10 @@ msgstr ""
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "배포판이 없는 리포지토리의 콘텐츠는 동기화, 다운로드 또는 검색을 위해 클라이언트에 표시되지 않습니다."
+
+#: src/actions/ansible-repository-sync.tsx:79
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
@@ -1998,7 +2003,7 @@ msgstr "컨테이너 버전에 서명하지 못했습니다."
 msgid "Failed to sign the version."
 msgstr "버전에 서명하지 못했습니다."
 
-#: src/actions/ansible-repository-sync.tsx:22
+#: src/actions/ansible-repository-sync.tsx:149
 msgid "Failed to sync repository \"{name}\""
 msgstr "리포지토리 \"{name}\"를 동기화하지 못했습니다"
 
@@ -2055,6 +2060,10 @@ msgstr "이름"
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
 msgstr "로그 추적"
+
+#: src/actions/ansible-repository-sync.tsx:96
+msgid "Force a sync to happen."
+msgstr ""
 
 #: src/loaders/standalone/layout.tsx:118
 msgid "Galaxy Logo"
@@ -2227,6 +2236,10 @@ msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 #: src/components/repositories/remote-form.tsx:575
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
+
+#: src/actions/ansible-repository-sync.tsx:72
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
@@ -2555,6 +2568,10 @@ msgstr ""
 #: src/containers/task-management/task_detail.tsx:310
 msgid "Message"
 msgstr "메시지"
+
+#: src/actions/ansible-repository-sync.tsx:69
+msgid "Mirror"
+msgstr ""
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
@@ -2975,6 +2992,14 @@ msgstr "OS/ Arch"
 msgid "Offline token"
 msgstr "Offline token"
 
+#: src/actions/ansible-repository-sync.tsx:95
+msgid "Only perform the sync if no changes are reported by the remote server."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx:88
+msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr ""
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
@@ -2994,6 +3019,10 @@ msgstr "Ansible Lightspeed 선택 해제"
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
 #~ msgstr "Opt out of Wisdom"
+
+#: src/actions/ansible-repository-sync.tsx:85
+msgid "Optimize"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -4169,7 +4198,8 @@ msgstr "슈퍼유저는 자신을 비활성화할 수 없습니다."
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "슈퍼유저는 어떤 그룹에 있는지에 관계없이 모든 시스템 권한을 갖습니다."
 
-#: src/actions/ansible-repository-sync.tsx:9
+#: src/actions/ansible-repository-sync.tsx:55
+#: src/actions/ansible-repository-sync.tsx:106
 #: src/containers/search/search.tsx:437
 msgid "Sync"
 msgstr "동기화"
@@ -4191,6 +4221,10 @@ msgstr "레지스트리에서 동기화"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
+#: src/actions/ansible-repository-sync.tsx:65
+msgid "Sync repository \"{name}\""
+msgstr ""
+
 #: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 동기화가 시작되었습니다."
@@ -4200,7 +4234,7 @@ msgstr "실행 환경 \"{name}\"에 대한 동기화가 시작되었습니다."
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습니다."
 
-#: src/actions/ansible-repository-sync.tsx:15
+#: src/actions/ansible-repository-sync.tsx:143
 msgid "Sync started for repository \"{name}\"."
 msgstr "리포지토리 \"{name}\"의 동기화가 시작되었습니다."
 
@@ -4208,9 +4242,13 @@ msgstr "리포지토리 \"{name}\"의 동기화가 시작되었습니다."
 msgid "Sync status"
 msgstr "동기화 상태"
 
-#: src/actions/ansible-repository-sync.tsx:39
+#: src/actions/ansible-repository-sync.tsx:132
 msgid "Sync task is already queued."
 msgstr "동기화 작업이 이미 대기열에 있습니다."
+
+#: src/actions/ansible-repository-sync.tsx:80
+msgid "Sync will only add missing content"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
@@ -4444,7 +4482,7 @@ msgstr "현재 이 그룹에 할당할 수 있는 역할이 없습니다."
 msgid "There are no distributions associated with this repository."
 msgstr ""
 
-#: src/actions/ansible-repository-sync.tsx:32
+#: src/actions/ansible-repository-sync.tsx:125
 msgid "There are no remotes associated with this repository."
 msgstr "이 리포지토리와 연결된 원격은 없습니다."
 

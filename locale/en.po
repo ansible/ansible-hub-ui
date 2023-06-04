@@ -691,6 +691,7 @@ msgstr "Client certificate"
 msgid "Client key"
 msgstr "Client key"
 
+#: src/actions/ansible-repository-sync.tsx:60
 #: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
@@ -989,6 +990,10 @@ msgstr "Content from roles and collections can be referenced in Ansible PlayBook
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "Content in repositories without a distribution will not be visible to clients for sync, download or search."
+
+#: src/actions/ansible-repository-sync.tsx:79
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr "Content not present in remote repository will be removed from the local repository"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
@@ -1999,7 +2004,7 @@ msgstr "Failed to sign the container version."
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
-#: src/actions/ansible-repository-sync.tsx:22
+#: src/actions/ansible-repository-sync.tsx:149
 msgid "Failed to sync repository \"{name}\""
 msgstr "Failed to sync repository \"{name}\""
 
@@ -2056,6 +2061,10 @@ msgstr "First name"
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
 msgstr "Follow logs"
+
+#: src/actions/ansible-repository-sync.tsx:96
+msgid "Force a sync to happen."
+msgstr "Force a sync to happen."
 
 #: src/loaders/standalone/layout.tsx:118
 msgid "Galaxy Logo"
@@ -2228,6 +2237,10 @@ msgstr "I understand that this action cannot be undone."
 #: src/components/repositories/remote-form.tsx:575
 msgid "If selected, TLS peer validation must be performed."
 msgstr "If selected, TLS peer validation must be performed."
+
+#: src/actions/ansible-repository-sync.tsx:72
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
@@ -2556,6 +2569,10 @@ msgstr "Maybe you have automation for installing and configuring a popular softw
 #: src/containers/task-management/task_detail.tsx:310
 msgid "Message"
 msgstr "Message"
+
+#: src/actions/ansible-repository-sync.tsx:69
+msgid "Mirror"
+msgstr "Mirror"
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
@@ -2976,6 +2993,14 @@ msgstr "OS / Arch"
 msgid "Offline token"
 msgstr "Offline token"
 
+#: src/actions/ansible-repository-sync.tsx:95
+msgid "Only perform the sync if no changes are reported by the remote server."
+msgstr "Only perform the sync if no changes are reported by the remote server."
+
+#: src/actions/ansible-repository-sync.tsx:88
+msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
@@ -2995,6 +3020,10 @@ msgstr "Opt out of Ansible Lightspeed"
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
 #~ msgstr "Opt out of Wisdom"
+
+#: src/actions/ansible-repository-sync.tsx:85
+msgid "Optimize"
+msgstr "Optimize"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -4170,7 +4199,8 @@ msgstr "Super users can't disable themselves."
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Super users have all system permissions regardless of what groups they are in."
 
-#: src/actions/ansible-repository-sync.tsx:9
+#: src/actions/ansible-repository-sync.tsx:55
+#: src/actions/ansible-repository-sync.tsx:106
 #: src/containers/search/search.tsx:437
 msgid "Sync"
 msgstr "Sync"
@@ -4192,6 +4222,10 @@ msgstr "Sync from registry"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
+#: src/actions/ansible-repository-sync.tsx:65
+msgid "Sync repository \"{name}\""
+msgstr "Sync repository \"{name}\""
+
 #: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Sync started for execution environment \"{name}\"."
@@ -4201,7 +4235,7 @@ msgstr "Sync started for execution environment \"{name}\"."
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "Sync started for remote registry \"{name}\"."
 
-#: src/actions/ansible-repository-sync.tsx:15
+#: src/actions/ansible-repository-sync.tsx:143
 msgid "Sync started for repository \"{name}\"."
 msgstr "Sync started for repository \"{name}\"."
 
@@ -4209,9 +4243,13 @@ msgstr "Sync started for repository \"{name}\"."
 msgid "Sync status"
 msgstr "Sync status"
 
-#: src/actions/ansible-repository-sync.tsx:39
+#: src/actions/ansible-repository-sync.tsx:132
 msgid "Sync task is already queued."
 msgstr "Sync task is already queued."
+
+#: src/actions/ansible-repository-sync.tsx:80
+msgid "Sync will only add missing content"
+msgstr "Sync will only add missing content"
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
@@ -4445,7 +4483,7 @@ msgstr "There are currently no roles that can be assigned to this group."
 msgid "There are no distributions associated with this repository."
 msgstr "There are no distributions associated with this repository."
 
-#: src/actions/ansible-repository-sync.tsx:32
+#: src/actions/ansible-repository-sync.tsx:125
 msgid "There are no remotes associated with this repository."
 msgstr "There are no remotes associated with this repository."
 

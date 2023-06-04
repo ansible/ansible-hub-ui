@@ -690,6 +690,7 @@ msgstr "クライアント証明書"
 msgid "Client key"
 msgstr "クライアントキー"
 
+#: src/actions/ansible-repository-sync.tsx:60
 #: src/components/execution-environment/publish-to-controller-modal.tsx:273
 #: src/components/patternfly-wrappers/wizard-modal.tsx:38
 msgid "Close"
@@ -988,6 +989,10 @@ msgstr ""
 #: src/components/repositories/ansible-repository-form.tsx:215
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
 msgstr "ディストリビューションのないリポジトリーのコンテンツは、クライアントに表示されないため、同期、ダウンロード、または検索できません。"
+
+#: src/actions/ansible-repository-sync.tsx:79
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx:255
 msgid "Content removed"
@@ -1998,7 +2003,7 @@ msgstr "コンテナーバージョンに署名できませんでした。"
 msgid "Failed to sign the version."
 msgstr "バージョンへの署名に失敗しました。"
 
-#: src/actions/ansible-repository-sync.tsx:22
+#: src/actions/ansible-repository-sync.tsx:149
 msgid "Failed to sync repository \"{name}\""
 msgstr "リポジトリー \"{name}\" の同期に失敗しました"
 
@@ -2055,6 +2060,10 @@ msgstr "名"
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
 msgstr "ログのフォロー"
+
+#: src/actions/ansible-repository-sync.tsx:96
+msgid "Force a sync to happen."
+msgstr ""
 
 #: src/loaders/standalone/layout.tsx:118
 msgid "Galaxy Logo"
@@ -2227,6 +2236,10 @@ msgstr "この操作は元に戻せないことを理解しています。"
 #: src/components/repositories/remote-form.tsx:575
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
+
+#: src/actions/ansible-repository-sync.tsx:72
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:250
 msgid "If the Controller is not listed in the table, check settings.py."
@@ -2555,6 +2568,10 @@ msgstr ""
 #: src/containers/task-management/task_detail.tsx:310
 msgid "Message"
 msgstr "メッセージ"
+
+#: src/actions/ansible-repository-sync.tsx:69
+msgid "Mirror"
+msgstr ""
 
 #: src/constants.tsx:121
 #~ msgid "Modify Ansible repo content"
@@ -2975,6 +2992,14 @@ msgstr "OS / アーキテクチャー"
 msgid "Offline token"
 msgstr "Offline token"
 
+#: src/actions/ansible-repository-sync.tsx:95
+msgid "Only perform the sync if no changes are reported by the remote server."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx:88
+msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr ""
+
 #: src/components/wisdom-modal/wisdom-modal.tsx:158
 #: src/components/wisdom-modal/wisdom-modal.tsx:190
 msgid "Opt in to Ansible Lightspeed"
@@ -2994,6 +3019,10 @@ msgstr "Ansible Lightspeed からオプトアウトする"
 #: src/components/wisdom-modal/wisdom-modal.tsx:191
 #~ msgid "Opt out of Wisdom"
 #~ msgstr "Opt out of Wisdom"
+
+#: src/actions/ansible-repository-sync.tsx:85
+msgid "Optimize"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/components/execution-environment-header/execution-environment-header.tsx:53
@@ -4169,7 +4198,8 @@ msgstr "スーパーユーザーは、自分自身を無効にできません。
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "スーパーユーザーには、所属するグループに関係なく、すべてのシステムパーミッションが割り当てられています。"
 
-#: src/actions/ansible-repository-sync.tsx:9
+#: src/actions/ansible-repository-sync.tsx:55
+#: src/actions/ansible-repository-sync.tsx:106
 #: src/containers/search/search.tsx:437
 msgid "Sync"
 msgstr "同期"
@@ -4191,6 +4221,10 @@ msgstr "レジストリーからの同期"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
+#: src/actions/ansible-repository-sync.tsx:65
+msgid "Sync repository \"{name}\""
+msgstr ""
+
 #: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" の同期が開始されました。"
@@ -4200,7 +4234,7 @@ msgstr "実行環境 \"{name}\" の同期が開始されました。"
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "リモートレジストリー \"{name}\" の同期が開始されました。"
 
-#: src/actions/ansible-repository-sync.tsx:15
+#: src/actions/ansible-repository-sync.tsx:143
 msgid "Sync started for repository \"{name}\"."
 msgstr "リポジトリー \"{name}\" の同期を開始しました。"
 
@@ -4208,9 +4242,13 @@ msgstr "リポジトリー \"{name}\" の同期を開始しました。"
 msgid "Sync status"
 msgstr "同期のステータス"
 
-#: src/actions/ansible-repository-sync.tsx:39
+#: src/actions/ansible-repository-sync.tsx:132
 msgid "Sync task is already queued."
 msgstr "同期タスクはすでにキューに入れられています。"
+
+#: src/actions/ansible-repository-sync.tsx:80
+msgid "Sync will only add missing content"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:572
 #: src/containers/ansible-remote/tab-details.tsx:71
@@ -4444,7 +4482,7 @@ msgstr "現在、このグループに割り当てることができるロール
 msgid "There are no distributions associated with this repository."
 msgstr ""
 
-#: src/actions/ansible-repository-sync.tsx:32
+#: src/actions/ansible-repository-sync.tsx:125
 msgid "There are no remotes associated with this repository."
 msgstr "このリポジトリーに関連付けられたリモートはありません。"
 
