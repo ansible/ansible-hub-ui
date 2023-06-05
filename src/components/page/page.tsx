@@ -1,3 +1,4 @@
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -39,7 +40,7 @@ interface PageParams<T, ExtraState> {
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
   headerActions?: ActionType[];
   query: ({ name }) => Promise<T>;
@@ -219,7 +220,7 @@ export const Page = function <
                 item: null,
               });
               this.addAlert({
-                title: errorTitle,
+                title: i18n._(errorTitle),
                 variant: 'danger',
                 description: errorMessage(status, statusText),
               });

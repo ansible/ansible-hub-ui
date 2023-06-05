@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import {
   Button,
   FormGroup,
@@ -103,7 +103,7 @@ const SyncModal = ({
 
 export const ansibleRepositorySyncAction = Action({
   condition: canSyncAnsibleRepository,
-  title: t`Sync`,
+  title: msg`Sync`,
   modal: ({ addAlert, query, setState, state }) =>
     state.syncModalOpen ? (
       <SyncModal

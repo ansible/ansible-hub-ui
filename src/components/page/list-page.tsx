@@ -1,3 +1,4 @@
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -15,7 +16,6 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  FilterOption,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -63,7 +63,13 @@ export type RenderTableRow<T> = (
   listItemActions?,
 ) => React.ReactNode;
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
-export type SortHeaders = {
+type SortHeaders = {
+  title: MessageDescriptor;
+  type: string;
+  id: string;
+  className?: string;
+}[];
+export type LocalizedSortHeaders = {
   title: string;
   type: string;
   id: string;
@@ -76,19 +82,20 @@ interface ListPageParams<T, ExtraState> {
   defaultSort?: string;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
-  filterConfig: FilterOption[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filterConfig: any[]; // FilterOption[] but { title: MessageDescriptor }
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
   noDataButton?: (item, actionContext) => React.ReactNode;
-  noDataDescription: string;
-  noDataTitle: string;
+  noDataDescription: MessageDescriptor;
+  noDataTitle: MessageDescriptor;
   query: Query<T>;
   renderModals?: RenderModals;
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
-  title: string;
+  title: MessageDescriptor;
 }
 
 export const ListPage = function <T, ExtraState = Record<string, never>>({
@@ -139,6 +146,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       </>
     );
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const translateTitle = ({ title, ...rest }: any) => ({
+    ...rest,
+    title: i18n._(title),
+  });
 
   const klass = class extends React.Component<RouteProps, IState<T>> {
     static displayName = displayName;
@@ -194,17 +207,24 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
       const { alerts, itemCount, items, loading, params, unauthorised } =
         this.state;
 
-      const knownFilters = (filterConfig || []).map(({ id }) => id);
+      const localizedFilterConfig = (filterConfig || [])
+        .map(translateTitle)
+        .map(({ options, ...rest }) => ({
+          ...rest,
+          options: options?.map(translateTitle),
+        }));
+
+      const knownFilters = localizedFilterConfig.map(({ id }) => id);
       const noData = items.length === 0 && !filterIsSet(params, knownFilters);
 
       const updateParams = (p) => this.updateParams(p, () => this.query());
 
       const niceNames = Object.fromEntries(
-        (filterConfig || []).map(({ id, title }) => [id, title]),
+        localizedFilterConfig.map(({ id, title }) => [id, title]),
       );
 
       const niceValues = {};
-      (filterConfig || [])
+      localizedFilterConfig
         .filter((filter) => filter['options'] && filter['options'].length > 0)
         .forEach((item) => {
           const obj = (niceValues[item['id']] = {});
@@ -227,19 +247,16 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          ></AlertList>
-          <BaseHeader title={title} />
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
           {unauthorised ? (
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
             <EmptyStateNoData
               button={<>{noDataButton?.(null, actionContext)}</>}
-              description={noDataDescription}
-              title={noDataTitle}
+              description={i18n._(noDataDescription)}
+              title={i18n._(noDataTitle)}
             />
           ) : (
             <Main>
@@ -259,7 +276,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                               }
                               updateParams={updateParams}
                               params={params}
-                              filterConfig={filterConfig}
+                              filterConfig={localizedFilterConfig}
                             />
                           </ToolbarItem>
                           {headerActions?.length &&
@@ -317,10 +334,17 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         return <EmptyStateFilter />;
       }
 
+      const localizedSortHeaders = (sortHeaders || []).map(
+        translateTitle,
+      ) as LocalizedSortHeaders;
+
       return (
-        <table aria-label={title} className='hub-c-table-content pf-c-table'>
+        <table
+          aria-label={i18n._(title)}
+          className='hub-c-table-content pf-c-table'
+        >
           <SortTable
-            options={{ headers: sortHeaders }}
+            options={{ headers: localizedSortHeaders }}
             params={params}
             updateParams={updateParams}
           />
@@ -349,7 +373,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
               itemCount: 0,
             });
             this.addAlert({
-              title: errorTitle,
+              title: i18n._(errorTitle),
               variant: 'danger',
               description: errorMessage(status, statusText),
             });

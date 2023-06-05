@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -33,19 +33,19 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRemoteList',
-  errorTitle: t`Remotes could not be displayed.`,
+  errorTitle: msg`Remotes could not be displayed.`,
   extraState: {},
   filterConfig: [
     {
       id: 'name__icontains',
-      title: t`Remote name`,
+      title: msg`Remote name`,
     },
   ],
   headerActions: [ansibleRemoteCreateAction], // Add remote
   listItemActions,
   noDataButton: ansibleRemoteCreateAction.button,
-  noDataDescription: t`Remotes will appear once created.`,
-  noDataTitle: t`No remotes yet`,
+  noDataDescription: msg`Remotes will appear once created.`,
+  noDataTitle: msg`No remotes yet`,
   query: ({ params }) => AnsibleRemoteAPI.list(params),
   renderTableRow(item: AnsibleRemoteType, index: number, actionContext) {
     const { name, pulp_href, url } = item;
@@ -71,17 +71,17 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
   },
   sortHeaders: [
     {
-      title: t`Remote name`,
+      title: msg`Remote name`,
       type: 'alpha',
       id: 'name',
     },
     {
-      title: t`URL`,
+      title: msg`URL`,
       type: 'alpha',
       id: 'url',
     },
   ],
-  title: t`Remotes`,
+  title: msg`Remotes`,
 });
 
 export default AnsibleRemoteList;

@@ -1,4 +1,4 @@
-import { Trans, t } from '@lingui/macro';
+import { Trans, msg, t } from '@lingui/macro';
 import React from 'react';
 import {
   ansibleRepositoryCopyAction,
@@ -22,10 +22,10 @@ import { DetailsTab } from './tab-details';
 import { RepositoryVersionsTab } from './tab-repository-versions';
 
 const tabs = [
-  { id: 'details', name: t`Details` },
-  { id: 'access', name: t`Access` },
-  { id: 'collection-versions', name: t`Collection versions` },
-  { id: 'repository-versions', name: t`Versions` },
+  { id: 'details', name: msg`Details` },
+  { id: 'access', name: msg`Access` },
+  { id: 'collection-versions', name: msg`Collection versions` },
+  { id: 'repository-versions', name: msg`Versions` },
 ];
 
 const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
@@ -52,7 +52,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
     ].filter(Boolean),
   condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',
-  errorTitle: t`Repository could not be displayed.`,
+  errorTitle: msg`Repository could not be displayed.`,
   headerActions: [
     ansibleRepositoryEditAction,
     ansibleRepositorySyncAction,

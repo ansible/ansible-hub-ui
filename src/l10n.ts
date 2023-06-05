@@ -1,8 +1,7 @@
 import { i18n } from '@lingui/core';
-import * as plurals from 'make-plural/plurals';
 import * as moment from 'moment';
 
-// remember to update .linguirc as well
+// remember to update lingui.config.js as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
 
 // map missing moment locales (node_modules/moment/src/locale/<locale>.js must exist, except for english)
@@ -25,7 +24,6 @@ async function activate(locale: string, pseudolocalization = false) {
     });
   }
 
-  i18n.loadLocaleData(locale, { plurals: plurals[locale] });
   i18n.load(locale, messages);
   i18n.activate(locale);
 

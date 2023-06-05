@@ -1,3 +1,4 @@
+import { MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -50,14 +51,14 @@ interface PageWithTabsParams<T, ExtraState> {
   condition: PermissionContextType;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
-  errorTitle: string;
+  errorTitle: MessageDescriptor;
   extraState?: ExtraState;
   headerActions?: ActionType[];
   headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => React.ReactNode;
-  tabs: { id: string; name: string }[];
+  tabs: { id: string; name: MessageDescriptor }[];
   tabUpdateParams?: (params: ParamType) => ParamType;
 }
 
@@ -167,7 +168,11 @@ export const PageWithTabs = function <
       };
 
       const name = item?.name || routeParams.name;
-      const tab = tabs.find((t) => t.id == params.tab) || tabs[0];
+      const localizedTabs = tabs.map(({ name, ...rest }) => ({
+        ...rest,
+        name: i18n._(name),
+      }));
+      const tab = localizedTabs.find((t) => t.id == params.tab) || tabs[0];
 
       if (!loading && !unauthorised && !item) {
         return (
@@ -217,7 +222,7 @@ export const PageWithTabs = function <
             <div className='hub-tab-link-container'>
               <div className='tabs'>
                 <Tabs
-                  tabs={tabs}
+                  tabs={localizedTabs}
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)
@@ -274,7 +279,7 @@ export const PageWithTabs = function <
               item: null,
             });
             this.addAlert({
-              title: errorTitle,
+              title: i18n._(errorTitle),
               variant: 'danger',
               description: errorMessage(status, statusText),
             });

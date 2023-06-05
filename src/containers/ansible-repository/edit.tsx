@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import React from 'react';
 import {
   AnsibleDistributionAPI,
@@ -35,7 +35,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
   condition: (context, item?) =>
     canAddAnsibleRepository(context) || canEditAnsibleRepository(context, item),
   displayName: 'AnsibleRepositoryEdit',
-  errorTitle: t`Repository could not be displayed.`,
+  errorTitle: msg`Repository could not be displayed.`,
   query: ({ name }) => {
     return AnsibleRepositoryAPI.list({ name })
       .then(({ data: { results } }) => results[0])

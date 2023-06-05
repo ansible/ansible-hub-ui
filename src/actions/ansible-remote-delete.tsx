@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import React from 'react';
 import { AnsibleRemoteAPI } from 'src/api';
 import { DeleteAnsibleRemoteModal } from 'src/components';
@@ -8,7 +8,7 @@ import { Action } from './action';
 
 export const ansibleRemoteDeleteAction = Action({
   condition: canDeleteAnsibleRemote,
-  title: t`Delete`,
+  title: msg`Delete`,
   modal: ({ addAlert, query, setState, state }) =>
     state.deleteModalOpen ? (
       <DeleteAnsibleRemoteModal
