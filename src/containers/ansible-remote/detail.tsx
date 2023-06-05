@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import React from 'react';
 import {
   ansibleRemoteDeleteAction,
@@ -16,8 +16,8 @@ import { RemoteAccessTab } from './tab-access';
 import { DetailsTab } from './tab-details';
 
 const tabs = [
-  { id: 'details', name: t`Details` },
-  { id: 'access', name: t`Access` },
+  { id: 'details', name: msg`Details` },
+  { id: 'access', name: msg`Access` },
 ];
 
 const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
@@ -41,7 +41,7 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
     ].filter(Boolean),
   condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
-  errorTitle: t`Remote could not be displayed.`,
+  errorTitle: msg`Remote could not be displayed.`,
   headerActions: [
     ansibleRemoteEditAction,
     ansibleRemoteDownloadRequirementsAction,

@@ -1,3 +1,4 @@
+import { MessageDescriptor, i18n } from '@lingui/core';
 import { Button, DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { Tooltip } from 'src/components';
@@ -11,7 +12,7 @@ interface ActionParams {
   disabled?: (item, actionContext) => string | null;
   modal?: ModalType;
   onClick: (item, actionContext) => void;
-  title: string;
+  title: MessageDescriptor;
   visible?: (item, actionContext) => boolean;
 }
 
@@ -33,22 +34,22 @@ export const Action = ({
   title,
   visible = () => true,
 }: ActionParams): ActionType => ({
-  title,
+  title: i18n._(title),
   button: (item, actionContext) =>
     condition(actionContext, item) && visible(item, actionContext) ? (
       disabled(item, actionContext) ? (
-        <Tooltip content={disabled(item, actionContext)} key={title}>
+        <Tooltip content={disabled(item, actionContext)} key={i18n._(title)}>
           <Button variant={buttonVariant} isDisabled>
-            {title}
+            {i18n._(title)}
           </Button>
         </Tooltip>
       ) : (
         <Button
           variant={buttonVariant}
-          key={title}
+          key={i18n._(title)}
           onClick={() => onClick(item, actionContext)}
         >
-          {title}
+          {i18n._(title)}
         </Button>
       )
     ) : null,
@@ -56,15 +57,18 @@ export const Action = ({
     condition(actionContext, item) && visible(item, actionContext) ? (
       disabled(item, actionContext) ? (
         <DropdownItem
-          key={title}
+          key={i18n._(title)}
           description={disabled(item, actionContext)}
           isDisabled
         >
-          {title}
+          {i18n._(title)}
         </DropdownItem>
       ) : (
-        <DropdownItem key={title} onClick={() => onClick(item, actionContext)}>
-          {title}
+        <DropdownItem
+          key={i18n._(title)}
+          onClick={() => onClick(item, actionContext)}
+        >
+          {i18n._(title)}
         </DropdownItem>
       )
     ) : null,

@@ -13,10 +13,10 @@ import {
   EmptyStateNoData,
   FilterOption,
   LoadingPageSpinner,
+  LocalizedSortHeaders,
   Pagination,
   Query,
   RenderTableRow,
-  SortHeaders,
   SortTable,
 } from 'src/components';
 import { filterIsSet, handleHttpError } from 'src/utilities';
@@ -41,7 +41,7 @@ interface IProps<T> {
   noDataTitle: string;
   query: Query<T>;
   renderTableRow: RenderTableRow<T>;
-  sortHeaders: SortHeaders;
+  sortHeaders: LocalizedSortHeaders;
   title: string;
 }
 
