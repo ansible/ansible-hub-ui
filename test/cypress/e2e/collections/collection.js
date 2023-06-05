@@ -49,7 +49,7 @@ describe('collection tests', () => {
     const rand = Math.floor(Math.random() * 9999999);
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
-    cy.createApprovedCollection(namespace, collection);
+    cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
     cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
 
     cy.get('[data-cy="kebab-toggle"]').click();
