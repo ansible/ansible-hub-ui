@@ -18,8 +18,10 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
+    cy.galaxykit('task wait all');
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
+    cy.wait(2000);
     cy.contains('test_collection');
 
     cy.get('[data-cy=kebab-toggle]').click();
@@ -47,7 +49,9 @@ describe('collection tests', () => {
     cy.contains('[data-cy="CollectionListItem"]', 'published');
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
-    cy.get('[aria-label="Actions"]:first').click();
+    cy.get('.collection-container [aria-label="Actions"]:first').click({
+      force: true,
+    });
     cy.contains(
       '[data-cy=delete-collection-dropdown]',
       'Delete collection from repository',
@@ -98,7 +102,7 @@ describe('collection tests', () => {
       `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
     );
 
-    cy.get('[aria-label="Actions"]:first').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]:first').click();
     cy.contains('Delete version 1.0.0 from repository').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
