@@ -7,8 +7,8 @@ import {
   Switch,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { HelperText } from 'src/components';
 import { Repositories } from 'src/api';
+import { HelperText } from 'src/components';
 import { canSyncAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
