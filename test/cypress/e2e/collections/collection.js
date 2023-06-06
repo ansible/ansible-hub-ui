@@ -25,10 +25,7 @@ describe('collection tests', () => {
     cy.contains('test_collection');
 
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.contains(
-      '[data-cy=delete-collection-dropdown]',
-      'Delete entire collection from system',
-    ).click();
+    cy.contains('Delete entire collection from system').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains('No collections yet', { timeout: 10000 });
@@ -52,10 +49,7 @@ describe('collection tests', () => {
     cy.get('.collection-container [aria-label="Actions"]:first').click({
       force: true,
     });
-    cy.contains(
-      '[data-cy=delete-collection-dropdown]',
-      'Delete collection from repository',
-    ).click();
+    cy.contains('Delete collection from repository').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains(
