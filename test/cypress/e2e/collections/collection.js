@@ -3,7 +3,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 
 function clear() {
-  cy.deleteAllCollections();
+  cy.deleteNamespacesAndCollections();
 
   if (!insightsLogin) {
     cy.deleteRepositories();
