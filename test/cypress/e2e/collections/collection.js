@@ -50,7 +50,7 @@ describe('collection tests', () => {
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
     cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
-    cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
+    cy.visit(`${uiPrefix}repo/staging/${namespace}/${collection}`);
 
     cy.get('[data-cy="kebab-toggle"]').click();
     cy.get(
@@ -70,7 +70,7 @@ describe('collection tests', () => {
     cy.get('.pf-m-primary').contains('Select').click();
 
     cy.get('[data-cy="AlertList"]').contains(
-      `Started adding ${namespace}.${collection} v1.0.0 from "published" to repository "validated".`,
+      `Started adding ${namespace}.${collection} v1.0.0 from "staging" to repository "validated".`,
     );
     cy.get('[data-cy="AlertList"]').contains('detail page').click();
     cy.contains('Completed');

@@ -2,9 +2,9 @@ import { t } from '@lingui/macro';
 import {
   AnsibleDistributionAPI,
   AnsibleRepositoryAPI,
-  CollectionVersionSearch,
   CollectionVersionAPI,
-  Repositories
+  CollectionVersionSearch,
+  Repositories,
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
 import { waitForTaskUrl } from 'src/utilities';
