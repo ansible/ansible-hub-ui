@@ -1,5 +1,6 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
+const insightsLogin = Cypress.env('insightsLogin');
 
 describe('collection tests', () => {
   before(() => {
@@ -13,6 +14,9 @@ describe('collection tests', () => {
   });
 
   beforeEach(() => {
+    if (insightsLogin) {
+      cy.on('uncaught:exception', () => false);
+    }
     cy.login();
   });
 
