@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, Modal } from '@patternfly/react-core';
+import { Button, Modal, Radio } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import * as React from 'react';
@@ -7,7 +7,16 @@ import {
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
+  Repositories,
 } from 'src/api';
+import { Repository } from 'src/api/response-types/repositories';
+import {
+  AlertList,
+  AlertType,
+  MultipleRepoSelector,
+  closeAlertMixin,
+} from 'src/components';
+import { RepositoriesUtils, errorMessage } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -29,6 +38,12 @@ interface IState {
   errors?: string;
   uploadProgress: number;
   uploadStatus: Status;
+  allRepos: Repository[];
+  loading: boolean;
+  alerts: AlertType[];
+  selectedRepos: string[];
+  onlyStaging: boolean;
+  fixedRepos: string[];
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
@@ -44,15 +59,118 @@ export class ImportModal extends React.Component<IProps, IState> {
       errors: '',
       uploadProgress: 0,
       uploadStatus: Status.waiting,
+      allRepos: [],
+      loading: true,
+      alerts: [],
+      selectedRepos: [],
+      onlyStaging: true,
+      fixedRepos: [],
     };
   }
+
+  componentDidMount() {
+    this.loadAllRepos('staging');
+  }
+
+  private loadAllRepos(pipeline) {
+    let filter = {};
+    if (this.state.onlyStaging) {
+      filter = { pulp_label_select: `pipeline=${pipeline}` };
+    }
+
+    return Repositories.list(filter)
+      .then((data) => {
+        this.setState({
+          allRepos: data.data.results,
+        });
+        this.setState({ loading: false });
+        if (data.data.results.length == 1) {
+          this.setState({ selectedRepos: [data.data.results[0].name] });
+        }
+
+        // fill repos that user cant select
+        let res = [];
+
+        if (!this.state.onlyStaging) {
+          res = data.data.results
+            .filter(
+              (repo) =>
+                repo.pulp_labels?.pipeline &&
+                repo.pulp_labels?.pipeline != 'staging',
+            )
+            .map((repo) => repo.name);
+        }
+
+        this.setState({ fixedRepos: res });
+      })
+      .catch((error) => {
+        this.addAlert(
+          t`Error loading repositories with label ${pipeline}.`,
+          'danger',
+          error?.message,
+        );
+        this.setState({ loading: false });
+      });
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
+    });
+  }
+
+  private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
+    // modify params
+    const par = { ...params };
+
+    if (this.state.onlyStaging) {
+      par['pulp_label_select'] = 'pipeline=staging';
+    }
+
+    par['ordering'] = par['sort'];
+    delete par['sort'];
+
+    setLoading(true);
+
+    Repositories.list(par)
+      .then((data) => {
+        setLoading(false);
+        setRepositoryList(data.data.results);
+        setItemsCount(data.data.count);
+      })
+      .catch(({ response: { status, statusText } }) => {
+        setLoading(false);
+        this.addAlertObj({
+          title: t`Failed to load repositories.`,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
+      });
+  }
+
+  private addAlertObj(alert) {
+    this.addAlert(alert.title, alert.variant, alert.description);
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
   render() {
     const { isOpen, collection } = this.props;
 
     const { file, errors, uploadProgress, uploadStatus } = this.state;
+
     return (
       <Modal
-        variant='small'
+        variant={'large'}
         title={
           collection ? t`New version of ${collection.name}` : t`New collection`
         }
@@ -63,7 +181,9 @@ export class ImportModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={() => this.saveFile()}
-            isDisabled={!this.canUpload()}
+            isDisabled={
+              !this.canUpload() || this.state.selectedRepos.length == 0
+            }
             data-cy={'confirm-upload'}
           >
             {t`Upload`}
@@ -78,6 +198,10 @@ export class ImportModal extends React.Component<IProps, IState> {
         ]}
       >
         <div className='upload-collection'>
+          <AlertList
+            alerts={this.state.alerts}
+            closeAlert={(i) => this.closeAlert(i)}
+          />
           <form>
             <input
               disabled={uploadStatus !== Status.waiting}
@@ -107,6 +231,54 @@ export class ImportModal extends React.Component<IProps, IState> {
             </span>
           ) : null}
         </div>
+
+        <>
+          <br />
+          <Radio
+            isChecked={this.state.onlyStaging}
+            name='radio-1'
+            onChange={(val) => {
+              this.setState({ onlyStaging: val }, () =>
+                this.loadAllRepos('staging'),
+              );
+            }}
+            label={t`Staging Repos`}
+            id='radio-staging'
+          ></Radio>
+          <Radio
+            isChecked={!this.state.onlyStaging}
+            name='radio-2'
+            onChange={(val) => {
+              this.setState({ onlyStaging: !val }, () =>
+                this.loadAllRepos('staging'),
+              );
+            }}
+            label={t`All Repos`}
+            id='radio-all'
+          ></Radio>
+          {!this.state.onlyStaging && (
+            <>{t`Please note that those repositories are not filtered by permission, if operation fail, you don't have it.`}</>
+          )}
+
+          <MultipleRepoSelector
+            singleSelectionOnly={true}
+            allRepositories={this.state.allRepos}
+            fixedRepos={this.state.fixedRepos}
+            selectedRepos={this.state.selectedRepos}
+            setSelectedRepos={(repos) =>
+              this.setState({ selectedRepos: repos, errors: '' })
+            }
+            hideFixedRepos={true}
+            loadRepos={(params, setRepositoryList, setLoading, setItemsCount) =>
+              this.loadRepos(
+                params,
+                setRepositoryList,
+                setLoading,
+                setItemsCount,
+              )
+            }
+          />
+        </>
       </Modal>
     );
   }
@@ -182,11 +354,27 @@ export class ImportModal extends React.Component<IProps, IState> {
     }
   }
 
-  saveFile() {
+  async saveFile() {
+    const selectedRepos = this.state.selectedRepos;
+
     this.setState({ uploadStatus: Status.uploading });
+
+    let distro = null;
+    distro = await RepositoriesUtils.distributionByRepoName(
+      selectedRepos[0],
+    ).catch((error) => {
+      this.addAlert(error, 'danger');
+    });
+
+    if (!distro) {
+      this.setState({ uploadStatus: Status.waiting });
+      return;
+    }
+
     const artifact = {
       file: this.state.file,
       sha256: '',
+      distro_base_path: distro.base_path,
     } as CollectionUploadType;
 
     this.cancelToken = CollectionAPI.getCancelToken();
