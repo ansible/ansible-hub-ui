@@ -4,6 +4,7 @@ export class CollectionUploadType {
   id: string;
   file: File;
   sha256: string;
+  distro_base_path?: string;
 }
 
 export class CollectionVersion {
