@@ -2,15 +2,21 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 
+function clear() {
+  cy.deleteAllCollections();
+
+  if (!insightsLogin) {
+    cy.deleteRepositories();
+  }
+}
+
 describe('collection tests', () => {
   before(() => {
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
+    clear();
   });
 
   after(() => {
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
+    clear();
   });
 
   beforeEach(() => {
