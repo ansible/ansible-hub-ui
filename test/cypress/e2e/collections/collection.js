@@ -35,98 +35,100 @@ describe('collection tests', () => {
     cy.contains('No collections yet', { timeout: 10000 });
   });
 
-  it('deletes an collection from repository', () => {
-    cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
-    cy.galaxykit('repository create repo2 --pipeline approved');
-    cy.galaxykit('distribution create repo2');
+  if (!insightsLogin) {
+    it('deletes an collection from repository', () => {
+      cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
+      cy.galaxykit('repository create repo2 --pipeline approved');
+      cy.galaxykit('distribution create repo2');
 
-    cy.galaxykit('task wait all');
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection2 1.0.0 published repo2',
-    );
+      cy.galaxykit('task wait all');
+      cy.galaxykit(
+        'collection copy test_namespace test_repo_collection2 1.0.0 published repo2',
+      );
 
-    cy.visit(`${uiPrefix}collections?view_type=list`);
-    cy.contains('Collections');
-    cy.contains('[data-cy="CollectionListItem"]', 'published');
-    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
+      cy.visit(`${uiPrefix}collections?view_type=list`);
+      cy.contains('Collections');
+      cy.contains('[data-cy="CollectionListItem"]', 'published');
+      cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
-    cy.get('.collection-container [aria-label="Actions"]:first').click({
-      force: true,
+      cy.get('.collection-container [aria-label="Actions"]:first').click({
+        force: true,
+      });
+      cy.contains('Delete collection from repository').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.get('button').contains('Delete').click();
+      cy.contains(
+        'Collection "test_repo_collection2" has been successfully deleted.',
+        {
+          timeout: 10000,
+        },
+      );
+      cy.contains('[data-cy="CollectionListItem"]', 'repo2');
+      cy.contains('[data-cy="CollectionListItem"]', 'published').should(
+        'not.exist',
+      );
+
+      cy.deleteAllCollections();
+      cy.deleteRepositories();
     });
-    cy.contains('Delete collection from repository').click();
-    cy.get('input[id=delete_confirm]').click();
-    cy.get('button').contains('Delete').click();
-    cy.contains(
-      'Collection "test_repo_collection2" has been successfully deleted.',
-      {
-        timeout: 10000,
-      },
-    );
-    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
-    cy.contains('[data-cy="CollectionListItem"]', 'published').should(
-      'not.exist',
-    );
 
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
-  });
+    it('deletes an collection version from repository', () => {
+      cy.galaxykit('repository create repo2 --pipeline approved');
+      cy.galaxykit('distribution create repo2');
 
-  it('deletes an collection version from repository', () => {
-    cy.galaxykit('repository create repo2 --pipeline approved');
-    cy.galaxykit('distribution create repo2');
+      cy.galaxykit(
+        '-i collection upload test_namespace test_repo_collection_version2 1.0.0',
+      );
+      cy.galaxykit('task wait all');
+      cy.galaxykit(
+        'collection copy test_namespace test_repo_collection_version2 1.0.0 published repo2',
+      );
 
-    cy.galaxykit(
-      '-i collection upload test_namespace test_repo_collection_version2 1.0.0',
-    );
-    cy.galaxykit('task wait all');
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection_version2 1.0.0 published repo2',
-    );
+      cy.galaxykit(
+        '-i collection upload test_namespace test_repo_collection_version2 1.0.1',
+      );
+      cy.galaxykit('task wait all');
+      cy.galaxykit(
+        'collection copy test_namespace test_repo_collection_version2 1.0.1 published repo2',
+      );
 
-    cy.galaxykit(
-      '-i collection upload test_namespace test_repo_collection_version2 1.0.1',
-    );
-    cy.galaxykit('task wait all');
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection_version2 1.0.1 published repo2',
-    );
+      cy.visit(`${uiPrefix}collections?view_type=list`);
+      cy.contains('Collections');
+      cy.contains('[data-cy="CollectionListItem"]', 'published');
+      cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
-    cy.visit(`${uiPrefix}collections?view_type=list`);
-    cy.contains('Collections');
-    cy.contains('[data-cy="CollectionListItem"]', 'published');
-    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
+      cy.visit(
+        `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
+      );
 
-    cy.visit(
-      `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
-    );
+      cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]:first').click();
+      cy.contains('Delete version 1.0.0 from repository').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.get('button').contains('Delete').click();
+      cy.contains(
+        'Collection "test_repo_collection_version2 v1.0.0" has been successfully deleted.',
+        {
+          timeout: 10000,
+        },
+      );
 
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]:first').click();
-    cy.contains('Delete version 1.0.0 from repository').click();
-    cy.get('input[id=delete_confirm]').click();
-    cy.get('button').contains('Delete').click();
-    cy.contains(
-      'Collection "test_repo_collection_version2 v1.0.0" has been successfully deleted.',
-      {
-        timeout: 10000,
-      },
-    );
+      cy.visit(
+        `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
+      );
+      cy.contains(`We couldn't find the page you're looking for!`);
 
-    cy.visit(
-      `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
-    );
-    cy.contains(`We couldn't find the page you're looking for!`);
+      cy.visit(
+        `${uiPrefix}repo/published/test_namespace/test_repo_collection_version2/?version=1.0.0`,
+      );
+      cy.contains('test_repo_collection_version2');
+      cy.contains(`We couldn't find the page you're looking for!`).should(
+        'not.exist',
+      );
 
-    cy.visit(
-      `${uiPrefix}repo/published/test_namespace/test_repo_collection_version2/?version=1.0.0`,
-    );
-    cy.contains('test_repo_collection_version2');
-    cy.contains(`We couldn't find the page you're looking for!`).should(
-      'not.exist',
-    );
-
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
-  });
+      cy.deleteAllCollections();
+      cy.deleteRepositories();
+    });
+  }
 
   it('deletes a collection version', () => {
     cy.galaxykit('-i collection upload my_namespace my_collection');
