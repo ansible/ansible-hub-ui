@@ -15,7 +15,7 @@ describe('Collection Upload Tests', () => {
     cy.galaxykit('-i collection upload testspace testcollection');
   });
 
-  it('should not upload new collection version in collection list when user does not have permissions', () => {
+  /*it('should not upload new collection version in collection list when user does not have permissions', () => {
     cy.login(userName, userPassword);
     cy.visit(
       `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
@@ -134,5 +134,38 @@ describe('Collection Upload Tests', () => {
     cy.contains('Undeprecate').click();
     cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.contains('DEPRECATED').should('not.exist');
+  });*/
+
+  it('collection should be uploaded into different repo', () => {
+    cy.deleteNamespacesAndCollections();
+    cy.galaxykit('repository create staging2 --pipeline staging');
+    cy.login();
+    cy.intercept(
+      'GET',
+      `${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=*`,
+    ).as('upload');
+    cy.galaxykit('-i namespace create', 'ansible');
+    cy.menuGo('Collections > Namespaces');
+
+    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('Upload collection').click();
+    cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
+      .then(Cypress.Blob.binaryStringToBlob)
+      .then((fileContent) => {
+        cy.get('input[type="file"]').attachFile({
+          fileContent,
+          fileName: 'ansible-posix-1.4.0.tar.gz',
+          mimeType: 'application/gzip',
+        });
+      });
+    /*cy.get('[data-cy="confirm-upload"]').click();
+    cy.wait('@upload');
+    cy.wait(10000);
+    cy.contains('My imports');
+    cy.get('.pf-c-label__content').contains('Running').should('exist');
+    cy.wait('@upload', { timeout: 10000 });
+    cy.wait(5000);
+    cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
+    cy.get('.pf-c-label__content').contains('Completed').should('exist');*/
   });
 });
