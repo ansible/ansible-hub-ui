@@ -7,6 +7,7 @@ export { filterIsSet } from './filter-is-set';
 export { getContainersURL, getRepoUrl } from './get-repo-url';
 export { getHumanSize } from './get_human_size';
 export { lastSyncStatus, lastSynced } from './last-sync-task';
+export { ParamHelper, type ParamType } from './param-helper';
 export {
   ErrorMessagesType,
   alertErrorsWithoutFields,
@@ -14,7 +15,6 @@ export {
   isFormValid,
   mapErrorMessages,
 } from './map-error-messages';
-export { ParamHelper } from './param-helper';
 export { parsePulpIDFromURL } from './parse-pulp-id';
 export { RepoSigningUtils } from './repo-signing';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
