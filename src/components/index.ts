@@ -127,3 +127,4 @@ export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespac
 export { WisdomModal } from './wisdom-modal/wisdom-modal';
 export { ApproveModal } from './approve-modal/approve-modal';
 export { MultipleRepoSelector } from './repo-selector/multiple-repo-selector';
+export { CopyCollectionToRepositoryModal } from './copy-collection-to-repository-modal/copy-collection-to-repository-modal';
