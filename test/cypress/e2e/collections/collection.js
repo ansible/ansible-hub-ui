@@ -62,10 +62,10 @@ describe('collection tests', () => {
         timeout: 10000,
       },
     );
+    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
     cy.contains('[data-cy="CollectionListItem"]', 'published').should(
       'not.exist',
     );
-    cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
     cy.deleteAllCollections();
     cy.deleteRepositories();
