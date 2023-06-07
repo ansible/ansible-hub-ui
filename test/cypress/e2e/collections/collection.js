@@ -44,4 +44,35 @@ describe('collection tests', () => {
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );
   });
+
+  it('should copy collection version to validated repository', () => {
+    const rand = Math.floor(Math.random() * 9999999);
+    const namespace = `foo_${rand}`;
+    const collection = `bar_${rand}`;
+    cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
+    cy.visit(`${uiPrefix}repo/staging/${namespace}/${collection}`);
+
+    cy.get('[data-cy="kebab-toggle"]').click();
+    cy.get(
+      '[data-cy="copy-collection-version-to-repository-dropdown"]',
+    ).click();
+
+    cy.contains('Select repositories');
+    cy.get(
+      '[data-cy="ApproveModal-CheckboxRow-row-published"] .pf-c-table__check input',
+    ).should('be.disabled');
+
+    cy.get("[aria-label='name__icontains']").type('validate{enter}');
+    cy.get(
+      "[data-cy='ApproveModal-CheckboxRow-row-validated'] .pf-c-table__check input",
+    ).check();
+
+    cy.get('.pf-m-primary').contains('Select').click();
+
+    cy.get('[data-cy="AlertList"]').contains(
+      `Started adding ${namespace}.${collection} v1.0.0 from "staging" to repository "validated".`,
+    );
+    cy.get('[data-cy="AlertList"]').contains('detail page').click();
+    cy.contains('Completed');
+  });
 });

@@ -35,6 +35,7 @@ import {
   BaseHeader,
   BreadcrumbType,
   Breadcrumbs,
+  CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
   ImportModal,
   LinkTabs,
@@ -50,9 +51,10 @@ import {
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { DeleteCollectionUtils, errorMessage } from 'src/utilities';
 import {
+  DeleteCollectionUtils,
   canSignNamespace,
+  errorMessage,
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
@@ -100,6 +102,7 @@ interface IState {
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate: CollectionVersionSearch;
   namespace: NamespaceType;
+  copyCollectionToRepositoryModal: CollectionVersionSearch;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -131,6 +134,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: undefined,
       namespace: null,
+      copyCollectionToRepositoryModal: null,
     };
   }
 
@@ -181,6 +185,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isDeletionPending,
       showImportModal,
       updateCollection,
+      copyCollectionToRepositoryModal,
     } = this.state;
 
     const urlKeys = [
@@ -192,7 +197,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.collection_version.pulp_created;
 
-    const { display_signatures, can_upload_signatures } =
+    const { display_signatures, can_upload_signatures, display_repositories } =
       this.context.featureFlags;
 
     const signedString = () => {
@@ -211,7 +216,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           : ''
       }`;
     };
-
     const { collection_version, namespace_metadata: namespace } = collection;
     const { name: collectionName, version } = collection_version;
 
@@ -282,6 +286,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       >
         {t`Upload new version`}
       </DropdownItem>,
+      display_repositories && (
+        <DropdownItem
+          key='copy-collection-version-to-repository-dropdown'
+          onClick={() => this.copyToRepository(collection)}
+          data-cy='copy-collection-version-to-repository-dropdown'
+        >
+          {t`Copy version ${version} to repositories`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
 
     const issueUrl =
@@ -408,6 +421,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             })
           }
         />
+        {copyCollectionToRepositoryModal && (
+          <CopyCollectionToRepositoryModal
+            collection={collection}
+            closeAction={() => {
+              this.setState({ copyCollectionToRepositoryModal: null });
+            }}
+            addAlert={(alert) => {
+              this.addAlert(alert);
+              this.setState({ copyCollectionToRepositoryModal: null });
+            }}
+          />
+        )}
         <BaseHeader
           className={className}
           title={collection_version.name}
@@ -997,6 +1022,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       collectionVersion: version,
       confirmDelete: false,
     });
+  }
+
+  private copyToRepository(collection: CollectionVersionSearch) {
+    this.setState({ copyCollectionToRepositoryModal: collection });
   }
 
   private closeModal = () => {
