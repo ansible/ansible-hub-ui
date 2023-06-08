@@ -467,6 +467,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
     cy.log(data.length + ' collections found for deletion.');
     data.forEach((record) => {
       if (record.repository_list.length > 0) {
+        // do not delete orphan collection, it will fail
         cy.galaxykit(
           'collection delete',
           record.namespace,
@@ -494,15 +495,14 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
     });
   });
 
-  // if orphan collection found, do not delete namespaces
+  // if orphan collection found, do not delete namespaces, otherwise it will fail
   if (deleteNamespaces) {
-    range(4).forEach(() => {
-      cy.galaxykit('namespace list').then((json) => {
-        JSON.parse(json).data.forEach((namespace) => {
-          cy.galaxykit('namespace delete', namespace.name);
-        });
+    cy.galaxykit('namespace list').then((json) => {
+      JSON.parse(json).data.forEach((namespace) => {
+        cy.galaxykit('namespace delete', namespace.name);
       });
     });
+    cy.galaxykit('task wait all');
   }
 });
 
