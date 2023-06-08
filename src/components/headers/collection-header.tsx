@@ -54,8 +54,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   RepositoriesUtils,
-  errorMessage,
   canSignNamespace,
+  errorMessage,
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
