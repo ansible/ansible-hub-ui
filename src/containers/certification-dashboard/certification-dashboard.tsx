@@ -889,28 +889,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     this.addAlert(alert.title, alert.variant, alert.description);
   }
 
-  async getCollectionRepoList(collection: CollectionVersionSearch) {
-    const { name, namespace, version } = collection.collection_version;
-
-    // get repository list for selected collection
-    const collectionInRepos = await CollectionVersionAPI.list({
-      namespace,
-      name,
-      version,
-      page_size: 100000,
-      offset: 0,
-    });
-
-    const collectionRepos = collectionInRepos.data.data.map(
-      ({ repository }) => repository.name,
-    );
-
-    return collectionRepos;
-  }
-
   // compose from collectionVersionSearch to CollectionVersion structure for approval modal
   async transformToCollectionVersion(collection: CollectionVersionSearch) {
-    const repoList = await this.getCollectionRepoList(collection);
+    const repoList = await RepositoriesUtils.getCollectionRepoList(collection);
 
     const { collection_version } = collection;
     const id = parsePulpIDFromURL(collection_version.pulp_href);
