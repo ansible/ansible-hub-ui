@@ -4,6 +4,12 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('collection tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
+  });
+
+  after(() => {
+    cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
   });
 
   beforeEach(() => {
@@ -77,6 +83,8 @@ describe('collection tests', () => {
   });
 
   it('deletes an collection from repository', () => {
+    cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
     cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
@@ -113,6 +121,8 @@ describe('collection tests', () => {
   });
 
   it('deletes an collection version from repository', () => {
+    cy.deleteNamespacesAndCollections();
+    cy.deleteRepositories();
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
 
