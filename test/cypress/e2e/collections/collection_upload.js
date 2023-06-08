@@ -6,7 +6,7 @@ describe('Collection Upload Tests', () => {
   const userPassword = 'I am a complicated passw0rd';
 
   before(() => {
-    cy.deleteAllCollections();
+    cy.deleteNamespacesAndCollections();
 
     cy.login();
     cy.deleteTestGroups();
