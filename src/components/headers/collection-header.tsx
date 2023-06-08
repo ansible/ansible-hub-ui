@@ -197,8 +197,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.collection_version.pulp_created;
 
-    const { display_signatures, can_upload_signatures, display_repositories } =
+    const { display_signatures, can_upload_signatures } =
       this.context.featureFlags;
+    const display_repositories = true;
 
     const signedString = () => {
       if (!display_signatures) {
