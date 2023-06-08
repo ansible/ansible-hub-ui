@@ -64,7 +64,11 @@ export class DeleteCollectionUtils {
       <DropdownItem
         key='delete-collection-enabled'
         onClick={onClick}
-        data-cy='delete-collection-dropdown'
+        data-cy={
+          deleteAll
+            ? 'delete-collection-dropdown'
+            : 'delete-collection-from-repo-dropdown'
+        }
       >
         {caption}
       </DropdownItem>
