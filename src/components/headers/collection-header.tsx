@@ -254,15 +254,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${version} from system`}
         </DropdownItem>
       ),
-      hasPermission('ansible.delete_collection') && (
-        <DropdownItem
-          data-cy='delete-version-from-repo-dropdown'
-          key='delete-collection-version'
-          onClick={() => this.openDeleteModalWithConfirm(version, false)}
-        >
-          {t`Delete version ${version} from repository`}
-        </DropdownItem>
-      ),
+      hasPermission('ansible.delete_collection') &&
+        DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE && (
+          <DropdownItem
+            data-cy='delete-version-from-repo-dropdown'
+            key='delete-collection-version'
+            onClick={() => this.openDeleteModalWithConfirm(version, false)}
+          >
+            {t`Delete version ${version} from repository`}
+          </DropdownItem>
+        ),
       canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-all'

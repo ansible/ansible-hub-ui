@@ -6,6 +6,7 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
+import { Constants } from 'src/constants';
 import {
   RepositoriesUtils,
   errorMessage,
@@ -35,6 +36,10 @@ export class DeleteCollectionUtils {
     deleteAll,
   }) {
     if (!canDeleteCollection) {
+      return null;
+    }
+
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE && !deleteAll) {
       return null;
     }
 
