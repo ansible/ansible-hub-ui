@@ -184,7 +184,7 @@ msgstr "Activité"
 #: src/components/rbac/owners-tab.tsx:367
 #: src/components/rbac/owners-tab.tsx:419
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:212
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:215
 #: src/containers/group-management/group-detail.tsx:280
 #: src/containers/group-management/group-detail.tsx:507
 #: src/containers/group-management/group-detail.tsx:558
@@ -243,8 +243,8 @@ msgid "Add remote registry"
 msgstr "Ajouter un registre à distance"
 
 #: src/components/rbac/owners-tab.tsx:206
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:172
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:190
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:175
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:193
 #: src/containers/role-management/role-list.tsx:158
 msgid "Add roles"
 msgstr "Ajouter des rôles"
@@ -281,7 +281,7 @@ msgstr "Ajouter un utilisateur"
 msgid "All"
 msgstr "Tout"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:112
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:115
 msgid "All associated permissions under this role were removed."
 msgstr "Toutes les permissions associées à ce rôle ont été supprimées."
 
@@ -393,7 +393,7 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:205
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:208
 #: src/containers/group-management/group-detail.tsx:283
 msgid "Cancel"
 msgstr "Annuler"
@@ -994,7 +994,7 @@ msgstr "Supprimer le registre distant ?"
 msgid "Delete remote registry?"
 msgstr "Supprimer le registre distant ?"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:132
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:135
 msgid "Delete role: {0}"
 msgstr "Supprimer le rôle : {0}"
 
@@ -1094,7 +1094,7 @@ msgstr "La mise à jour de l'état de dépréciation commence pour la collection
 #: src/components/rbac/role-list-table.tsx:47
 #: src/components/rbac/select-roles.tsx:98
 #: src/containers/execution-environment-list/execution_environment_list.tsx:294
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:231
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:234
 #: src/containers/role-management/role-list.tsx:174
 #: src/containers/task-management/task_detail.tsx:351
 msgid "Description"
@@ -1981,8 +1981,8 @@ msgstr "Mon profil"
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:316
 #: src/containers/execution-environment-list/execution_environment_list.tsx:259
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:311
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:343
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:314
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:346
 #: src/containers/namespace-list/namespace-list.tsx:224
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
@@ -2045,7 +2045,7 @@ msgstr "Propriétaires de l'espace de nommage"
 
 #: src/containers/namespace-list/namespace-list.tsx:172
 #: src/loaders/standalone/standalone-loader.tsx:348
-#: src/paths.ts:76
+#: src/paths.ts:74
 msgid "Namespaces"
 msgstr "Espaces de noms"
 
@@ -2351,11 +2351,11 @@ msgstr "En attente"
 msgid "Permissions"
 msgstr "Permissions"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:95
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:98
 msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "Les permissions du groupe \"{0}\" n’ont pas pu être affichées."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:292
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:295
 #: src/containers/role-management/role-list.tsx:232
 msgid "Please add a role by using the button below."
 msgstr "Veuillez ajouter un rôle en utilisant le bouton ci-dessous."
@@ -2391,7 +2391,7 @@ msgstr ""
 #: src/components/markdown-editor/markdown-editor.tsx:37
 #: src/components/rbac/owners-tab.tsx:365
 #: src/components/rbac/owners-tab.tsx:417
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:210
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:213
 msgid "Preview"
 msgstr "Prévisualisation"
 
@@ -2672,7 +2672,7 @@ msgid "Remove group {groupname}?"
 msgstr "Supprimer le groupe {groupname}?"
 
 #: src/components/rbac/owners-tab.tsx:265
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:381
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:384
 msgid "Remove role"
 msgstr "Supprimer le rôle"
 
@@ -2727,7 +2727,7 @@ msgstr "Ressources"
 #: src/components/rbac/owners-tab.tsx:236
 #: src/components/rbac/role-list-table.tsx:42
 #: src/components/rbac/select-roles.tsx:93
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:226
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:229
 msgid "Role"
 msgstr "Rôle"
 
@@ -2735,7 +2735,7 @@ msgstr "Rôle"
 msgid "Role \"{0}\" could not be created."
 msgstr "Le rôle \"{0}\" n'a pas pu être créé."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:118
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:121
 msgid "Role \"{0}\" could not be deleted."
 msgstr "Le rôle \"{0}\" n’a pas pu être supprimé."
 
@@ -2743,7 +2743,7 @@ msgstr "Le rôle \"{0}\" n’a pas pu être supprimé."
 msgid "Role \"{0}\" could not be displayed."
 msgstr "Le rôle \"{0}\" n’a pas pu être affiché."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:110
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:113
 msgid "Role \"{0}\" has been successfully removed."
 msgstr "Le rôle \"{0}\" a été supprimé du groupe \"\"."
 
@@ -2762,11 +2762,11 @@ msgstr "Le rôle \"{name}\" a été supprimé."
 msgid "Role name"
 msgstr "Nom du rôle"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:272
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:275
 msgid "Role {0} could not be assigned to group {1}."
 msgstr "Le rôle {0} n'a pas pu être attribué au groupe {1}."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:259
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:262
 msgid "Role {0} has been successfully added to {1}."
 msgstr "Le rôle \"{0}\" a été ajouté au groupe \"{1}\"."
 
@@ -2889,7 +2889,7 @@ msgstr "Ajouter les permissions"
 #: src/components/rbac/owners-tab.tsx:348
 #: src/components/rbac/owners-tab.tsx:401
 #: src/components/rbac/owners-tab.tsx:428
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:197
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:200
 msgid "Select role(s)"
 msgstr "Sélectionner des rôles"
 
@@ -3356,7 +3356,7 @@ msgstr "Il n'y a actuellement aucun propriétaire assigné."
 msgid "There are currently no roles"
 msgstr "Il n'y a actuellement aucun rôle"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:291
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:294
 msgid "There are currently no roles assigned to this group."
 msgstr "Il n'y a actuellement aucun rôle attribué à ce groupe."
 
@@ -3437,7 +3437,7 @@ msgstr "Ce tag est déjà sélectionnée pour cette image. Vous ne pouvez pas l'
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Il utilise le même format {docsAnsibleLink} que le CLI ansible-galaxy avec la réserve que les rôles ne sont pas supportés et que le paramètre source n'est pas supporté."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:144
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:147
 msgid "This will revoke all permissions associated with this role from the group."
 msgstr "Ceci révoquera toutes les permissions associées à ce rôle du groupe."
 
@@ -3825,7 +3825,7 @@ msgstr "Oui"
 msgid "Yes, stop"
 msgstr "Oui, arrêtez"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:139
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:142
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr "Vous êtes sur le point de retirer <0>{0}</0> de <1>{1}</1>."
 
