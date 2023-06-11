@@ -1769,7 +1769,7 @@ msgstr "네임 스페이스 소유자"
 
 #: src/containers/namespace-list/namespace-list.tsx:173
 #: src/loaders/standalone/standalone-loader.tsx:348
-#: src/paths.ts:70
+#: src/paths.ts:68
 msgid "Namespaces"
 msgstr "네임스페이스"
 
