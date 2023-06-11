@@ -378,6 +378,10 @@ msgstr "Todos"
 msgid "All associated permissions under this role were removed."
 msgstr "Se han eliminado todos los permisos asociados a este rol."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "All Repos"
+msgstr ""
+
 #: src/constants.tsx
 msgid "Allow all actions on a task."
 msgstr "Permitir todas las acciones en una tarea."
@@ -583,6 +587,7 @@ msgstr "Certificado de CA"
 #: src/actions/ansible-repository-version-revert.tsx
 #: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -850,6 +855,10 @@ msgstr "Se pasó a desuso correctamente la colección \"{name}\"."
 msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "Se canceló correctamente el traspaso a desuso de la colección \"{name}\"."
 
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {0}.{1} v{2} could not be copied."
+msgstr ""
+
 #: src/components/repositories/local-repository-table.tsx
 #~ msgid "Collection count"
 #~ msgstr "Collection count"
@@ -916,8 +925,9 @@ msgstr "Carga de la colección cancelada"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1103,6 +1113,10 @@ msgstr "Copiar configuración CLI"
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
+
+#: src/components/headers/collection-header.tsx
+msgid "Copy version {version} to repositories"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx
 msgid "could not be determined yet"
@@ -1497,11 +1511,16 @@ msgstr "Descripción"
 msgid "Descriptive name"
 msgstr "Nombre descriptivo"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect all ({0} items)"
 msgstr "Deseleccionar todo ({0} elementos)"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Deselect all ({itemsCount} items)"
+msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "Deseleccionar página ({0} elementos)"
 
@@ -1835,6 +1854,10 @@ msgstr "Error al cargar los entornos."
 #~ msgid "Error loading registries."
 #~ msgstr "Error loading registries."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories with label {pipeline}."
+msgstr ""
+
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Error loading repository with label {pipeline}."
 msgstr "Error al cargar el repositorio con la etiqueta {pipeline}."
@@ -1958,17 +1981,21 @@ msgstr "No se pudo {operation} la etiqueta \"{tag}\"."
 msgid "Failed to approve collection."
 msgstr "La aprobación de la colección ha fallado."
 
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Failed to copy collection version."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
 #: src/api/sign-collections.ts
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/utilities/repositories.ts
 msgid "Failed to find a distribution for repository {name}"
 msgstr "No se ha encontrado una distribución para el repositorio {name}"
 
 #: src/api/sign-collections.ts
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/utilities/repositories.ts
 msgid "Failed to find repository {name}"
 msgstr "No se ha encontrado el repositorio {name}"
 
@@ -2009,6 +2036,7 @@ msgid "Failed to load repositories: {error}"
 msgstr "Error al cargar repositorios: {error}"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/import-modal/import-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Failed to load repositories."
 msgstr "Error al cargar repositorios."
@@ -2667,9 +2695,9 @@ msgstr "Mis espacios de nombres"
 msgid "My profile"
 msgstr "Mi perfil"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/collection-detail/collection-content-list.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2682,6 +2710,8 @@ msgstr "Mi perfil"
 #: src/components/rbac/select-group.tsx
 #: src/components/rbac/select-roles.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
@@ -3221,6 +3251,10 @@ msgstr "Agregue un propietario con el siguiente botón."
 #~ msgid "Please finish editing permissions first."
 #~ msgstr "Please finish editing permissions first."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgstr ""
+
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
 msgstr "Por favor, selecciona un filtro de repositorio"
@@ -3668,9 +3702,10 @@ msgstr "Los repositorios aparecerán una vez creados."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
@@ -3899,6 +3934,7 @@ msgstr "Consulte la página de detalle <0>de gestión de tareas </0>para ver el 
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -3924,9 +3960,13 @@ msgstr "Seleccionar un remoto"
 msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select all ({0} items)"
 msgstr "Seleccionar todo ({0} elementos)"
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Select all ({itemsCount} items)"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -3949,7 +3989,8 @@ msgstr "Seleccionar grupos"
 msgid "Select namespace"
 msgstr "Seleccione el espacio de nombres"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "Seleccionar página ({0} elementos)"
 
@@ -3959,6 +4000,7 @@ msgid "Select permissions"
 msgstr "Seleccionar permisos"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select repositories"
 msgstr "Seleccionar repositorios"
 
@@ -3973,7 +4015,8 @@ msgstr "Seleccionar rol(es)"
 msgid "Select users"
 msgstr "Seleccionar usuarios"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "Seleccionado"
 
@@ -4117,6 +4160,7 @@ msgid "Signed version(s)"
 msgstr "Versión(es) firmada(s)"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "No se encontró el servicio de firmas {signingServiceName}"
 
@@ -4173,9 +4217,17 @@ msgstr "SSO URL"
 msgid "Staging"
 msgstr "Puesta en escena"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Staging Repos"
+msgstr ""
+
 #: src/components/repositories/remote-form.tsx
 msgid "Start from scratch"
 msgstr "Empezar de cero"
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+msgstr ""
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."

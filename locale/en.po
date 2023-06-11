@@ -379,6 +379,10 @@ msgstr "All"
 msgid "All associated permissions under this role were removed."
 msgstr "All associated permissions under this role were removed."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "All Repos"
+msgstr "All Repos"
+
 #: src/constants.tsx
 msgid "Allow all actions on a task."
 msgstr "Allow all actions on a task."
@@ -584,6 +588,7 @@ msgstr "CA certificate"
 #: src/actions/ansible-repository-version-revert.tsx
 #: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -851,6 +856,10 @@ msgstr "Collection \"{name}\" has been successfully deprecated."
 msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "Collection \"{name}\" has been successfully undeprecated."
 
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {0}.{1} v{2} could not be copied."
+msgstr "Collection {0}.{1} v{2} could not be copied."
+
 #: src/components/repositories/local-repository-table.tsx
 #~ msgid "Collection count"
 #~ msgstr "Collection count"
@@ -917,8 +926,9 @@ msgstr "Collection upload canceled"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1104,6 +1114,10 @@ msgstr "Copy CLI configuration"
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
 msgid "Copy to clipboard"
 msgstr "Copy to clipboard"
+
+#: src/components/headers/collection-header.tsx
+msgid "Copy version {version} to repositories"
+msgstr "Copy version {version} to repositories"
 
 #: src/components/my-imports/import-console.tsx
 msgid "could not be determined yet"
@@ -1498,11 +1512,16 @@ msgstr "Description"
 msgid "Descriptive name"
 msgstr "Descriptive name"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect all ({0} items)"
 msgstr "Deselect all ({0} items)"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Deselect all ({itemsCount} items)"
+msgstr "Deselect all ({itemsCount} items)"
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "Deselect page ({0} items)"
 
@@ -1836,6 +1855,10 @@ msgstr "Error loading environments."
 #~ msgid "Error loading registries."
 #~ msgstr "Error loading registries."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories with label {pipeline}."
+msgstr "Error loading repositories with label {pipeline}."
+
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Error loading repository with label {pipeline}."
 msgstr "Error loading repository with label {pipeline}."
@@ -1959,17 +1982,21 @@ msgstr "Failed to {operation} tag \"{tag}\"."
 msgid "Failed to approve collection."
 msgstr "Failed to approve collection."
 
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Failed to copy collection version."
+msgstr "Failed to copy collection version."
+
 #: src/containers/execution-environment/registry-list.tsx
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
 #: src/api/sign-collections.ts
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/utilities/repositories.ts
 msgid "Failed to find a distribution for repository {name}"
 msgstr "Failed to find a distribution for repository {name}"
 
 #: src/api/sign-collections.ts
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/utilities/repositories.ts
 msgid "Failed to find repository {name}"
 msgstr "Failed to find repository {name}"
 
@@ -2010,6 +2037,7 @@ msgid "Failed to load repositories: {error}"
 msgstr "Failed to load repositories: {error}"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/import-modal/import-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Failed to load repositories."
 msgstr "Failed to load repositories."
@@ -2668,9 +2696,9 @@ msgstr "My namespaces"
 msgid "My profile"
 msgstr "My profile"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/collection-detail/collection-content-list.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2683,6 +2711,8 @@ msgstr "My profile"
 #: src/components/rbac/select-group.tsx
 #: src/components/rbac/select-roles.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
@@ -3222,6 +3252,10 @@ msgstr "Please add an owner by using the button below."
 #~ msgid "Please finish editing permissions first."
 #~ msgstr "Please finish editing permissions first."
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgstr "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
 msgstr "Please select a repository filter"
@@ -3669,9 +3703,10 @@ msgstr "Repositories will appear once created."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
@@ -3900,6 +3935,7 @@ msgstr "See the task management <0>detail page </0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select"
 msgstr "Select"
 
@@ -3925,9 +3961,13 @@ msgstr "Select a remote"
 msgid "Select a tag"
 msgstr "Select a tag"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select all ({0} items)"
 msgstr "Select all ({0} items)"
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Select all ({itemsCount} items)"
+msgstr "Select all ({itemsCount} items)"
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -3950,7 +3990,8 @@ msgstr "Select groups"
 msgid "Select namespace"
 msgstr "Select namespace"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "Select page ({0} items)"
 
@@ -3960,6 +4001,7 @@ msgid "Select permissions"
 msgstr "Select permissions"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select repositories"
 msgstr "Select repositories"
 
@@ -3974,7 +4016,8 @@ msgstr "Select role(s)"
 msgid "Select users"
 msgstr "Select users"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "Selected"
 
@@ -4118,6 +4161,7 @@ msgid "Signed version(s)"
 msgstr "Signed version(s)"
 
 #: src/components/approve-modal/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "Signing service {signingServiceName} not found"
 
@@ -4174,9 +4218,17 @@ msgstr "SSO URL"
 msgid "Staging"
 msgstr "Staging"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "Staging Repos"
+msgstr "Staging Repos"
+
 #: src/components/repositories/remote-form.tsx
 msgid "Start from scratch"
 msgstr "Start from scratch"
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+msgstr "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."
