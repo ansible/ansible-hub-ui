@@ -230,6 +230,12 @@ export const ListPage = function <T>({
         user: this.context.user,
       };
 
+      const resetCompoundFilter = () =>
+        this.setState({
+          inputText: '',
+          selectedFilter: localizedFilterConfig[0].id,
+        });
+
       return (
         <React.Fragment>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -268,7 +274,7 @@ export const ListPage = function <T>({
                                 }
                               }}
                               updateParams={(p) => {
-                                this.setState({ inputText: '' });
+                                resetCompoundFilter();
                                 updateParams(p);
                               }}
                               params={params}
@@ -306,8 +312,8 @@ export const ListPage = function <T>({
                   <div>
                     <AppliedFilters
                       updateParams={(p) => {
+                        resetCompoundFilter();
                         updateParams(p);
-                        this.setState({ inputText: '' });
                       }}
                       params={params}
                       ignoredParams={['page_size', 'page', 'sort', 'ordering']}
