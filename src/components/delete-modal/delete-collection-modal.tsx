@@ -29,6 +29,8 @@ export const DeleteCollectionModal = (props: IProps) => {
     deleteFromRepo,
   } = props;
 
+  const lastCollectionVersion = collectionVersion && collections.length === 1;
+
   return (
     deleteCollection && (
       <DeleteModal
@@ -44,42 +46,28 @@ export const DeleteCollectionModal = (props: IProps) => {
       >
         <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
           {collectionVersion ? (
-            <>
-              {(collections as CollectionVersionSearch[]).length === 1 ? (
-                <Trans>
-                  Deleting{' '}
-                  <b>
-                    {deleteCollection.collection_version.name} v
-                    {collectionVersion}
-                  </b>{' '}
-                  <>from the system </> and its data will be lost and this will
-                  cause the entire collection to be deleted.
-                </Trans>
-              ) : (
-                <Trans>
-                  Deleting{' '}
-                  <b>
-                    {deleteCollection.collection_version.name} v
-                    {collectionVersion}
-                  </b>{' '}
-                  <>from the system </> and its data will be lost.
-                </Trans>
-              )}
-            </>
+            <Trans>
+              Deleting{' '}
+              <b>
+                {deleteCollection.collection_version.name} v{collectionVersion}
+              </b>
+              , its data will be lost.
+            </Trans>
           ) : (
             <Trans>
-              Deleting <b>{deleteCollection.collection_version.name}</b>{' '}
-              <>from the system </> and its data will be lost.
+              Deleting <b>{deleteCollection.collection_version.name}</b>, its
+              data will be lost.
             </Trans>
           )}
-          {deleteFromRepo && (
+          {lastCollectionVersion ? (
+            <> {t`This will cause the entire collection to be deleted.`}</>
+          ) : null}
+          {deleteFromRepo ? (
             <>
               {' '}
-              <br></br>
-              <br></br>
               {t`The collection will be deleted only from repository ${deleteFromRepo}.`}
             </>
-          )}
+          ) : null}
         </Text>
         <Checkbox
           isChecked={confirmDelete}
