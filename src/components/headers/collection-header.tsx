@@ -229,7 +229,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }
 
     const canSign = canSignNamespace(this.context, this.state.namespace);
-
     const { hasPermission } = this.context;
 
     const dropdownItems = [
@@ -238,12 +237,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         noDependencies,
         onClick: () => this.openDeleteModalWithConfirm(null, true),
         deleteAll: true,
+        display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
         noDependencies,
         onClick: () => this.openDeleteModalWithConfirm(null, false),
         deleteAll: false,
+        display_repositories: display_repositories,
       }),
       hasPermission('ansible.delete_collection') && (
         <DropdownItem
@@ -254,16 +255,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${version} from system`}
         </DropdownItem>
       ),
-      hasPermission('ansible.delete_collection') &&
-        DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE && (
-          <DropdownItem
-            data-cy='delete-version-from-repo-dropdown'
-            key='delete-collection-version'
-            onClick={() => this.openDeleteModalWithConfirm(version, false)}
-          >
-            {t`Delete version ${version} from repository`}
-          </DropdownItem>
-        ),
+      hasPermission('ansible.delete_collection') && display_repositories && (
+        <DropdownItem
+          data-cy='delete-version-from-repo-dropdown'
+          key='delete-collection-version'
+          onClick={() => this.openDeleteModalWithConfirm(version, false)}
+        >
+          {t`Delete version ${version} from repository`}
+        </DropdownItem>
+      ),
       canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-all'

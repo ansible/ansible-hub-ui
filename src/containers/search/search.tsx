@@ -375,6 +375,8 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
+    const { display_repositories } = this.context.featureFlags;
+
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
@@ -387,6 +389,7 @@ class Search extends React.Component<RouteProps, IState> {
             deleteAll: true,
           }),
         deleteAll: true,
+        display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
@@ -399,6 +402,7 @@ class Search extends React.Component<RouteProps, IState> {
             deleteAll: false,
           }),
         deleteAll: false,
+        display_repositories: display_repositories,
       }),
       hasPermission('galaxy.upload_to_namespace') && (
         <DropdownItem

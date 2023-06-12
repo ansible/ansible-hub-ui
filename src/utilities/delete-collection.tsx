@@ -6,7 +6,6 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
-import { Constants } from 'src/constants';
 import {
   RepositoriesUtils,
   errorMessage,
@@ -34,12 +33,14 @@ export class DeleteCollectionUtils {
     noDependencies,
     onClick,
     deleteAll,
+    display_repositories,
   }) {
     if (!canDeleteCollection) {
       return null;
     }
 
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE && !deleteAll) {
+    if (!display_repositories && !deleteAll) {
+      // cant display delete from repository when repositories are turned off
       return null;
     }
 

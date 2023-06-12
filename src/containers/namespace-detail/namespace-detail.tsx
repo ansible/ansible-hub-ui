@@ -954,6 +954,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { hasPermission } = this.context;
     const { showControls } = this.state;
+    const { display_repositories } = this.context.featureFlags;
 
     if (!showControls) {
       return;
@@ -987,6 +988,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   deleteAll: true,
                 }),
               deleteAll: true,
+              display_repositories: display_repositories,
             }),
             DeleteCollectionUtils.deleteMenuOption({
               canDeleteCollection: hasPermission('ansible.delete_collection'),
@@ -999,6 +1001,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   deleteAll: false,
                 }),
               deleteAll: false,
+              display_repositories: display_repositories,
             }),
             <DropdownItem
               onClick={() =>
