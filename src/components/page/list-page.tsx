@@ -76,14 +76,12 @@ export type LocalizedSortHeaders = {
   className?: string;
 }[];
 
-interface ListPageParams<T, ExtraState> {
+interface ListPageParams<T> {
   condition: PermissionContextType;
   defaultPageSize: number;
   defaultSort?: string;
-  didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: MessageDescriptor;
-  extraState?: ExtraState;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filterConfig: any[]; // FilterOption[] but { title: MessageDescriptor }
   headerActions?: ActionType[];
@@ -98,11 +96,9 @@ interface ListPageParams<T, ExtraState> {
   title: MessageDescriptor;
 }
 
-export const ListPage = function <T, ExtraState = Record<string, never>>({
+export const ListPage = function <T>({
   // { featureFlags, settings, user } => bool
   condition,
-  // extra code to run on mount
-  didMount,
   // component name for debugging
   displayName,
   // initial page size
@@ -111,8 +107,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   defaultSort,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // filters
   filterConfig,
   // displayed after filters
@@ -133,7 +127,7 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   sortHeaders,
   // container title
   title,
-}: ListPageParams<T, ExtraState>) {
+}: ListPageParams<T>) {
   renderModals ||= function (actionContext) {
     return (
       <>
@@ -181,7 +175,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         loading: true,
         params,
         unauthorised: false,
-        ...extraState,
       };
     }
 
@@ -194,13 +187,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       this.setState({ alerts: this.context.alerts || [] });
       this.context.setAlerts([]);
-
-      if (didMount) {
-        didMount({
-          context: this.context,
-          addAlert: (alert) => this.addAlert(alert),
-        });
-      }
     }
 
     render() {

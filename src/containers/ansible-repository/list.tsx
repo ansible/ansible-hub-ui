@@ -37,7 +37,6 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRepositoryList',
   errorTitle: msg`Repositories could not be displayed.`,
-  extraState: {},
   filterConfig: [
     {
       id: 'name__icontains',
