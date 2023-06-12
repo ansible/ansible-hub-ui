@@ -166,9 +166,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           />
         );
       case 'typeahead': {
-        const typeAheadResults = this.props.filterConfig
+        const typeaheadResults = this.props.filterConfig
           .find(({ id }) => id === selectedFilter.id)
           .options.map(({ id, title }) => ({ id, name: title }));
+
         return (
           <APISearchTypeAhead
             multiple={false}
@@ -179,13 +180,14 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               this.props.onChange('');
             }}
             onSelect={(event, value) => {
-              this.submitFilter(value);
+              const item = typeaheadResults.find(({ name }) => name === value);
+              this.submitFilter(item?.id || value);
             }}
             placeholderText={
               selectedFilter?.placeholder ||
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
-            results={typeAheadResults}
+            results={typeaheadResults}
           />
         );
       }

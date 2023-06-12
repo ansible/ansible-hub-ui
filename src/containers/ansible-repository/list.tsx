@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg, t } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -8,7 +8,11 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import {
+  AnsibleRemoteAPI,
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
+} from 'src/api';
 import {
   DateComponent,
   ListItemActions,
@@ -31,34 +35,58 @@ const listItemActions = [
   ansibleRepositoryDeleteAction,
 ];
 
+const typeaheadQuery = ({ inputText, selectedFilter, setState }) => {
+  if (selectedFilter !== 'remote') {
+    return;
+  }
+
+  return AnsibleRemoteAPI.list({ name__icontains: inputText })
+    .then(({ data: { results } }) =>
+      results.map(({ name, pulp_href }) => ({ id: pulp_href, title: name })),
+    )
+    .then((remotes) => setState({ remotes }));
+};
+
 const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   condition: canViewAnsibleRepositories,
   defaultPageSize: 10,
   defaultSort: '-pulp_created',
   displayName: 'AnsibleRepositoryList',
   errorTitle: msg`Repositories could not be displayed.`,
-  filterConfig: [
+  filterConfig: ({ state: { remotes } }) => [
     {
       id: 'name__icontains',
-      title: msg`Repository name`,
+      title: t`Repository name`,
     },
     {
       id: 'pulp_label_select',
-      title: msg`Pipeline`,
+      title: t`Pipeline`,
       inputType: 'select',
       options: [
         {
           id: `pipeline=${Constants.NOTCERTIFIED}`,
-          title: msg`Rejected`,
+          title: t`Rejected`,
         },
         {
           id: `pipeline=${Constants.NEEDSREVIEW}`,
-          title: msg`Needs Review`,
+          title: t`Needs Review`,
         },
         {
           id: `pipeline=${Constants.APPROVED}`,
-          title: msg`Approved`,
+          title: t`Approved`,
         },
+      ],
+    },
+    {
+      id: 'remote',
+      title: t`Remote`,
+      inputType: 'typeahead',
+      options: [
+        {
+          id: 'null',
+          title: t`None`,
+        },
+        ...(remotes || []),
       ],
     },
   ],
@@ -68,6 +96,7 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
   noDataDescription: msg`Repositories will appear once created.`,
   noDataTitle: msg`No repositories yet`,
   query: ({ params }) => AnsibleRepositoryAPI.list(params),
+  typeaheadQuery,
   renderTableRow(item: AnsibleRepositoryType, index: number, actionContext) {
     const {
       last_sync_task,
