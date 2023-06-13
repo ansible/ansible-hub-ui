@@ -101,12 +101,6 @@ export const MultipleRepoSelector = (props: IProps) => {
   }
 
   useEffect(() => {
-    if (props.allRepositories.find((a) => a.name == 'staging')) {
-      props.setSelectedRepos(['staging']);
-    }
-  }, []);
-
-  useEffect(() => {
     props.loadRepos(params, setRepositoryList, setLoading, setItemsCount);
   }, [params, props.allRepositories]);
 
