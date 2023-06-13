@@ -13,7 +13,7 @@ interface IProps {
   cancelAction: () => void;
   deleteAction: () => void;
   setConfirmDelete: (val) => void;
-  deleteFromRepo: any;
+  deleteFromRepo: string;
 }
 
 export const DeleteCollectionModal = (props: IProps) => {
