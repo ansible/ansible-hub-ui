@@ -286,7 +286,7 @@ describe('RBAC test for user with permissions', () => {
 
     // can Delete collection
     cy.get('[data-cy=kebab-toggle]').should('exist').click();
-    cy.contains('Delete entire collection');
+    cy.contains('Delete entire collection from system');
   });
 
   it('should let view, add, change and delete users when user has permissions', () => {

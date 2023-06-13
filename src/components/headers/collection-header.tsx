@@ -53,6 +53,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
+  RepositoriesUtils,
   canSignNamespace,
   errorMessage,
   parsePulpIDFromURL,
@@ -103,6 +104,7 @@ interface IState {
   versionToUploadCertificate: CollectionVersionSearch;
   namespace: NamespaceType;
   copyCollectionToRepositoryModal: CollectionVersionSearch;
+  deleteAll: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -123,6 +125,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
       },
       deleteCollection: null,
+      deleteAll: false,
       collectionVersion: null,
       confirmDelete: false,
       alerts: [],
@@ -227,22 +230,39 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }
 
     const canSign = canSignNamespace(this.context, this.state.namespace);
-
     const { hasPermission } = this.context;
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
         noDependencies,
-        onClick: () => this.openDeleteModalWithConfirm(),
+        onClick: () => this.openDeleteModalWithConfirm(null, true),
+        deleteAll: true,
+        display_repositories: display_repositories,
+      }),
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        noDependencies,
+        onClick: () => this.openDeleteModalWithConfirm(null, false),
+        deleteAll: false,
+        display_repositories: display_repositories,
       }),
       hasPermission('ansible.delete_collection') && (
         <DropdownItem
           data-cy='delete-version-dropdown'
           key='delete-collection-version'
-          onClick={() => this.openDeleteModalWithConfirm(version)}
+          onClick={() => this.openDeleteModalWithConfirm(version, true)}
         >
-          {t`Delete version ${version}`}
+          {t`Delete version ${version} from system`}
+        </DropdownItem>
+      ),
+      hasPermission('ansible.delete_collection') && display_repositories && (
+        <DropdownItem
+          data-cy='delete-version-from-repo-dropdown'
+          key='delete-collection-version'
+          onClick={() => this.openDeleteModalWithConfirm(version, false)}
+        >
+          {t`Delete version ${version} from repository`}
         </DropdownItem>
       ),
       canSign && !can_upload_signatures && (
@@ -297,6 +317,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
     ].filter(Boolean);
+
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : collection.repository.name;
 
     return (
       <React.Fragment>
@@ -412,9 +436,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       namespace: deleteCollection.collection_version.namespace,
                     }),
                     addAlert: (alert) => this.context.queueAlert(alert),
+                    deleteFromRepo,
                   });
             })
           }
+          deleteFromRepo={deleteFromRepo}
         />
         {copyCollectionToRepositoryModal && (
           <CopyCollectionToRepositoryModal
@@ -889,61 +915,79 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private deleteCollectionVersion = (collectionVersion) => {
     const { deleteCollection } = this.state;
     const { collections } = this.props;
-    CollectionAPI.deleteCollectionVersion(deleteCollection)
-      .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-        const name = deleteCollection.collection_version.name;
+    const { deleteAll } = this.state;
 
-        waitForTask(taskId).then(() => {
-          const topVersion = (collections || []).filter(
-            ({ collection_version }) =>
-              collection_version.version !== collectionVersion,
+    let promise = null;
+
+    if (deleteAll) {
+      promise = CollectionAPI.deleteCollectionVersion(deleteCollection);
+    } else {
+      promise = promise = RepositoriesUtils.deleteCollection(
+        deleteCollection.repository.name,
+        deleteCollection.collection_version.pulp_href,
+      );
+    }
+
+    const name = deleteCollection.collection_version.name;
+
+    promise
+      .then((res) => {
+        if (!deleteAll) {
+          return;
+        }
+
+        const taskId = parsePulpIDFromURL(res.data.task);
+        return waitForTask(taskId);
+      })
+      .then(() => {
+        const topVersion = (collections || []).filter(
+          ({ collection_version }) =>
+            collection_version.version !== collectionVersion,
+        );
+
+        if (topVersion.length) {
+          this.props.updateParams(
+            ParamHelper.setParam(
+              this.props.params,
+              'version',
+              topVersion[0].collection_version.version,
+            ),
           );
 
-          if (topVersion.length) {
-            this.props.updateParams(
-              ParamHelper.setParam(
-                this.props.params,
-                'version',
-                topVersion[0].collection_version.version,
-              ),
-            );
-
-            this.setState({
-              deleteCollection: null,
-              collectionVersion: null,
-              isDeletionPending: false,
-              alerts: [
-                ...this.state.alerts,
-                {
-                  variant: 'success',
-                  title: (
-                    <Trans>
-                      Collection &quot;{name} v{collectionVersion}&quot; has
-                      been successfully deleted.
-                    </Trans>
-                  ),
-                },
-              ],
-            });
-          } else {
-            // last version in collection => collection will be deleted => redirect
-            this.context.queueAlert({
-              variant: 'success',
-              title: (
-                <Trans>
-                  Collection &quot;{name} v{collectionVersion}&quot; has been
-                  successfully deleted.
-                </Trans>
-              ),
-            });
-            this.setState({
-              redirect: formatPath(Paths.namespaceDetail, {
-                namespace: deleteCollection.collection_version.namespace,
-              }),
-            });
-          }
-        });
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            isDeletionPending: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'success',
+                title: (
+                  <Trans>
+                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    successfully deleted.
+                  </Trans>
+                ),
+              },
+            ],
+          });
+        } else {
+          // last version in collection => collection will be deleted => redirect
+          this.context.queueAlert({
+            variant: 'success',
+            title: (
+              <Trans>
+                Collection &quot;{name} v{collectionVersion}&quot; has been
+                successfully deleted.
+              </Trans>
+            ),
+          });
+          this.setState({
+            redirect: formatPath(Paths.namespaceDetail, {
+              namespace: deleteCollection.collection_version.namespace,
+            }),
+          });
+        }
       })
       .catch((err) => {
         const {
@@ -1003,11 +1047,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.setState({ showImportModal: isOpen });
   }
 
-  private openDeleteModalWithConfirm(version = null) {
+  private openDeleteModalWithConfirm(version = null, deleteAll = true) {
     this.setState({
       deleteCollection: this.props.collection,
       collectionVersion: version,
       confirmDelete: false,
+      deleteAll: deleteAll,
     });
   }
 

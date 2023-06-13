@@ -91,6 +91,7 @@ interface IState {
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
   group: GroupType;
+  deleteAll: boolean;
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
@@ -137,6 +138,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showRoleRemoveModal: null,
       showRoleSelectWizard: null,
       group: null,
+      deleteAll: true,
     };
   }
 
@@ -308,6 +310,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     delete tabParams.group;
 
     const repository = params['repository_name'] || null;
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : deleteCollection?.repository?.name;
 
     return (
       <React.Fragment>
@@ -345,9 +350,11 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 load: () => this.load(),
                 redirect: false,
                 addAlert: (alert) => this.addAlert(alert),
+                deleteFromRepo,
               }),
             )
           }
+          deleteFromRepo={deleteFromRepo}
         />
         {isOpenNamespaceModal && (
           <DeleteModal
@@ -947,6 +954,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { hasPermission } = this.context;
     const { showControls } = this.state;
+    const { display_repositories } = this.context.featureFlags;
 
     if (!showControls) {
       return;
@@ -977,7 +985,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   addAlert: (alert) => this.addAlert(alert),
                   setState: (state) => this.setState(state),
                   collection,
+                  deleteAll: true,
                 }),
+              deleteAll: true,
+              display_repositories: display_repositories,
+            }),
+            DeleteCollectionUtils.deleteMenuOption({
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
+              noDependencies: null,
+              onClick: () =>
+                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+                  addAlert: (alert) => this.addAlert(alert),
+                  setState: (state) => this.setState(state),
+                  collection,
+                  deleteAll: false,
+                }),
+              deleteAll: false,
+              display_repositories: display_repositories,
             }),
             <DropdownItem
               onClick={() =>

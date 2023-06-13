@@ -6,7 +6,12 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
-import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import {
+  RepositoriesUtils,
+  errorMessage,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
 
 export class DeleteCollectionUtils {
   public static getUsedbyDependencies(collection: CollectionVersionSearch) {
@@ -27,10 +32,21 @@ export class DeleteCollectionUtils {
     canDeleteCollection,
     noDependencies,
     onClick,
+    deleteAll,
+    display_repositories,
   }) {
     if (!canDeleteCollection) {
       return null;
     }
+
+    if (!display_repositories && !deleteAll) {
+      // cant display delete from repository when repositories are turned off
+      return null;
+    }
+
+    const caption = deleteAll
+      ? t`Delete entire collection from system`
+      : t`Delete collection from repository`;
 
     if (noDependencies === false) {
       return (
@@ -45,7 +61,7 @@ export class DeleteCollectionUtils {
             </Trans>
           }
         >
-          <DropdownItem isDisabled>{t`Delete entire collection`}</DropdownItem>
+          <DropdownItem isDisabled>{caption}</DropdownItem>
         </Tooltip>
       );
     }
@@ -54,9 +70,13 @@ export class DeleteCollectionUtils {
       <DropdownItem
         key='delete-collection-enabled'
         onClick={onClick}
-        data-cy='delete-collection-dropdown'
+        data-cy={
+          deleteAll
+            ? 'delete-collection-dropdown'
+            : 'delete-collection-from-repo-dropdown'
+        }
       >
-        {t`Delete entire collection`}
+        {caption}
       </DropdownItem>
     );
   }
@@ -65,6 +85,7 @@ export class DeleteCollectionUtils {
     addAlert,
     setState,
     collection,
+    deleteAll,
   }) {
     DeleteCollectionUtils.getUsedbyDependencies(collection)
       .then((noDependencies) =>
@@ -73,6 +94,7 @@ export class DeleteCollectionUtils {
           setState,
           noDependencies,
           collection,
+          deleteAll,
         }),
       )
       .catch((alert) => addAlert(alert));
@@ -83,11 +105,13 @@ export class DeleteCollectionUtils {
     setState,
     noDependencies,
     collection,
+    deleteAll,
   }) {
     if (noDependencies) {
       setState({
         deleteCollection: collection,
         confirmDelete: false,
+        deleteAll: deleteAll,
       });
     } else {
       addAlert({
@@ -100,11 +124,6 @@ export class DeleteCollectionUtils {
         ),
         variant: 'warning',
       });
-
-      setState({
-        deleteCollection: collection,
-        confirmDelete: false,
-      });
     }
   }
 
@@ -114,31 +133,43 @@ export class DeleteCollectionUtils {
     load,
     redirect,
     addAlert,
+    deleteFromRepo,
   }) {
-    CollectionAPI.deleteCollection(collection)
+    let promise = null;
+    if (deleteFromRepo) {
+      promise = RepositoriesUtils.deleteCollection(
+        deleteFromRepo,
+        collection.collection_version.pulp_href,
+      );
+    } else {
+      promise = CollectionAPI.deleteCollection(collection);
+    }
+
+    promise
       .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-        const name = collection.collection_version.name;
-
-        waitForTask(taskId).then(() => {
-          addAlert({
-            variant: 'success',
-            title: (
-              <Trans>
-                Collection &quot;{name}
-                &quot; has been successfully deleted.
-              </Trans>
-            ),
-          });
-
-          if (redirect) {
-            setState({ redirect });
-          }
-
-          if (load) {
-            load();
-          }
+        if (!deleteFromRepo) {
+          const taskId = parsePulpIDFromURL(res.data.task);
+          return waitForTask(taskId);
+        }
+      })
+      .then(() => {
+        addAlert({
+          variant: 'success',
+          title: (
+            <Trans>
+              Collection &quot;{collection.collection_version.name}
+              &quot; has been successfully deleted.
+            </Trans>
+          ),
         });
+
+        if (redirect) {
+          setState({ redirect });
+        }
+
+        if (load) {
+          load();
+        }
       })
       .catch((err) => {
         const { status, statusText } = err.response;
