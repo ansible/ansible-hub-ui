@@ -3,8 +3,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('Approval Dashboard process', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
-    cy.galaxykit('-i namespace create', 'appp_n_test');
-    cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
   });
 
   after(() => {
@@ -16,6 +14,9 @@ describe('Approval Dashboard process', () => {
   });
 
   it('should test the whole approval process.', () => {
+    cy.galaxykit('-i namespace create', 'appp_n_test');
+    cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
+    cy.galaxykit('task wait all');
     cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');
 
