@@ -35,13 +35,11 @@ interface IState<T> {
 
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 
-interface PageParams<T, ExtraState> {
+interface PageParams<T> {
   breadcrumbs: ({ name }) => { url?: string; name: string }[];
   condition: PermissionContextType;
-  didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: MessageDescriptor;
-  extraState?: ExtraState;
   headerActions?: ActionType[];
   query: ({ name }) => Promise<T>;
   title: ({ name }) => string;
@@ -52,20 +50,15 @@ interface PageParams<T, ExtraState> {
 
 export const Page = function <
   T extends { name: string; my_permissions?: string[] },
-  ExtraState = Record<string, never>,
 >({
   // ({ name }) => [{ url?, name }]
   breadcrumbs,
   // { featureFlags, settings, user } => bool
   condition,
-  // extra code to run on mount
-  didMount,
   // component name for debugging
   displayName,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // displayed after filters
   headerActions,
   // () => Promise<T>
@@ -75,7 +68,7 @@ export const Page = function <
   // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
   renderModals,
   render,
-}: PageParams<T, ExtraState>) {
+}: PageParams<T>) {
   renderModals ||= function (actionContext) {
     return (
       <>
@@ -98,7 +91,6 @@ export const Page = function <
         item: null,
         loading: true,
         unauthorised: false,
-        ...extraState,
       };
     }
 
@@ -116,13 +108,6 @@ export const Page = function <
 
         this.setState({ alerts: this.context.alerts || [] });
         this.context.setAlerts([]);
-
-        if (didMount) {
-          didMount({
-            context: this.context,
-            addAlert: (alert) => this.addAlert(alert),
-          });
-        }
       });
     }
 

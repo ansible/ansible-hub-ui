@@ -54,7 +54,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    // this is called again in repositories selector, but not in approval page (the same filter is here)...
     this.state = {
       selectedFilter: props.filterConfig[0],
       isExpanded: false,
@@ -167,9 +166,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           />
         );
       case 'typeahead': {
-        const typeAheadResults = this.props.filterConfig
+        const typeaheadResults = this.props.filterConfig
           .find(({ id }) => id === selectedFilter.id)
           .options.map(({ id, title }) => ({ id, name: title }));
+
         return (
           <APISearchTypeAhead
             multiple={false}
@@ -180,13 +180,14 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               this.props.onChange('');
             }}
             onSelect={(event, value) => {
-              this.submitFilter(value);
+              const item = typeaheadResults.find(({ name }) => name === value);
+              this.submitFilter(item?.id || value);
             }}
             placeholderText={
               selectedFilter?.placeholder ||
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
-            results={typeAheadResults}
+            results={typeaheadResults}
           />
         );
       }
