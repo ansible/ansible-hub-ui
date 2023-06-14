@@ -69,7 +69,7 @@ interface IState {
     collection?: string;
     page?: number;
     page_size?: number;
-    status?: string;
+    repository_label?: string;
     sort?: string;
   };
   alerts: AlertType[];
@@ -106,8 +106,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       params['sort'] = '-pulp_created';
     }
 
-    if (!params['status']) {
-      params['status'] = Constants.NEEDSREVIEW;
+    if (!params['repository_label']) {
+      params['repository_label'] = `pipeline=${Constants.NEEDSREVIEW}`;
     }
 
     this.state = {
@@ -141,8 +141,18 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
       const promises = [];
 
-      promises.push(this.loadRepos('staging'));
-      promises.push(this.loadRepos('rejected'));
+      promises.push(
+        this.loadRepos('staging').then((stagingRepoNames) =>
+          this.setState({
+            stagingRepoNames,
+          }),
+        ),
+      );
+      promises.push(
+        this.loadRepos('rejected').then(([rejectedRepoName]) =>
+          this.setState({ rejectedRepoName }),
+        ),
+      );
 
       promises.push(
         RepositoriesUtils.listApproved()
@@ -169,19 +179,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private loadRepos(pipeline) {
     return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
-      .then((data) => {
-        if (data.data.results.length > 0) {
-          if (pipeline == 'staging') {
-            this.setState({
-              stagingRepoNames: data.data.results.map((res) => res.name),
-            });
-          }
-
-          if (pipeline == 'rejected') {
-            this.setState({ rejectedRepoName: data.data.results[0].name });
-          }
-        }
-      })
+      .then(({ data: { results } }) => (results || []).map(({ name }) => name))
       .catch((error) => {
         this.addAlert(
           t`Error loading repository with label ${pipeline}.`,
@@ -234,20 +232,20 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                             title: t`Collection Name`,
                           },
                           {
-                            id: 'status',
+                            id: 'repository_label',
                             title: t`Status`,
                             inputType: 'select',
                             options: [
                               {
-                                id: Constants.NOTCERTIFIED,
+                                id: `pipeline=${Constants.NOTCERTIFIED}`,
                                 title: t`Rejected`,
                               },
                               {
-                                id: Constants.NEEDSREVIEW,
+                                id: `pipeline=${Constants.NEEDSREVIEW}`,
                                 title: t`Needs Review`,
                               },
                               {
-                                id: Constants.APPROVED,
+                                id: `pipeline=${Constants.APPROVED}`,
                                 title: t`Approved`,
                               },
                             ],
@@ -276,14 +274,14 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{
-                    status: {
-                      [Constants.APPROVED]: t`Approved`,
-                      [Constants.NEEDSREVIEW]: t`Needs Review`,
-                      [Constants.NOTCERTIFIED]: t`Rejected`,
+                    repository_label: {
+                      [`pipeline=${Constants.APPROVED}`]: t`Approved`,
+                      [`pipeline=${Constants.NEEDSREVIEW}`]: t`Needs Review`,
+                      [`pipeline=${Constants.NOTCERTIFIED}`]: t`Rejected`,
                     },
                   }}
                   niceNames={{
-                    status: t`Status`,
+                    repository_label: t`Status`,
                   }}
                 />
               </div>
@@ -334,7 +332,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return filterIsSet(params, ['namespace', 'name', 'status']) ? (
+      return filterIsSet(params, ['namespace', 'name', 'repository_label']) ? (
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
@@ -373,7 +371,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         {
           title: t`Status`,
           type: 'none',
-          id: 'status',
+          id: 'repository_label',
         },
         {
           title: '',
@@ -818,16 +816,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       });
     }
 
-    const { status, sort, ...params } = this.state.params;
-
+    const { sort, ...params } = this.state.params;
     const updatedParams = {
       order_by: sort,
       ...params,
     };
-
-    if (status) {
-      updatedParams['repository_label'] = `pipeline=${status}`;
-    }
 
     return CollectionVersionAPI.list(updatedParams)
       .then((result) => {
