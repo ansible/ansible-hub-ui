@@ -1,13 +1,16 @@
+import { LastSyncType } from './remote';
+
 export class AnsibleRepositoryType {
   description: string;
+  last_sync_task?: LastSyncType;
   latest_version_href?: string;
   name: string;
+  private?: boolean;
   pulp_created?: string;
   pulp_href?: string;
   pulp_labels?: { [key: string]: string };
   remote?: string;
   retain_repo_versions: number;
-  private?: boolean;
 
   // gpgkey
   // last_synced_metadata_time

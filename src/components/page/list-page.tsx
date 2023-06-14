@@ -16,6 +16,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  FilterOption,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -43,6 +44,7 @@ interface IState<T> {
   alerts: AlertType[];
   unauthorised: boolean;
   inputText: string;
+  selectedFilter: string;
 }
 
 // states:
@@ -76,16 +78,13 @@ export type LocalizedSortHeaders = {
   className?: string;
 }[];
 
-interface ListPageParams<T, ExtraState> {
+interface ListPageParams<T> {
   condition: PermissionContextType;
   defaultPageSize: number;
   defaultSort?: string;
-  didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: MessageDescriptor;
-  extraState?: ExtraState;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  filterConfig: any[]; // FilterOption[] but { title: MessageDescriptor }
+  filterConfig: ({ state }) => FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
   noDataButton?: (item, actionContext) => React.ReactNode;
@@ -96,13 +95,12 @@ interface ListPageParams<T, ExtraState> {
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
   title: MessageDescriptor;
+  typeaheadQuery?: ({ inputText, selectedFilter, setState }) => void;
 }
 
-export const ListPage = function <T, ExtraState = Record<string, never>>({
+export const ListPage = function <T>({
   // { featureFlags, settings, user } => bool
   condition,
-  // extra code to run on mount
-  didMount,
   // component name for debugging
   displayName,
   // initial page size
@@ -111,8 +109,6 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   defaultSort,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // filters
   filterConfig,
   // displayed after filters
@@ -133,7 +129,9 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   sortHeaders,
   // container title
   title,
-}: ListPageParams<T, ExtraState>) {
+  // for typeahed filters
+  typeaheadQuery,
+}: ListPageParams<T>) {
   renderModals ||= function (actionContext) {
     return (
       <>
@@ -180,8 +178,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         items: [],
         loading: true,
         params,
+        selectedFilter: null,
         unauthorised: false,
-        ...extraState,
       };
     }
 
@@ -194,26 +192,13 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       this.setState({ alerts: this.context.alerts || [] });
       this.context.setAlerts([]);
-
-      if (didMount) {
-        didMount({
-          context: this.context,
-          addAlert: (alert) => this.addAlert(alert),
-        });
-      }
     }
 
     render() {
       const { alerts, itemCount, items, loading, params, unauthorised } =
         this.state;
 
-      const localizedFilterConfig = (filterConfig || [])
-        .map(translateTitle)
-        .map(({ options, ...rest }) => ({
-          ...rest,
-          options: options?.map(translateTitle),
-        }));
-
+      const localizedFilterConfig = filterConfig({ state: this.state }) || [];
       const knownFilters = localizedFilterConfig.map(({ id }) => id);
       const noData = items.length === 0 && !filterIsSet(params, knownFilters);
 
@@ -225,11 +210,11 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
 
       const niceValues = {};
       localizedFilterConfig
-        .filter((filter) => filter['options'] && filter['options'].length > 0)
-        .forEach((item) => {
-          const obj = (niceValues[item['id']] = {});
-          item['options'].forEach((option) => {
-            obj[option.id] = option.title;
+        .filter(({ options }) => options?.length)
+        .forEach(({ id: filterId, options }) => {
+          const obj = (niceValues[filterId] = {});
+          options.forEach(({ id: optionId, title }) => {
+            obj[optionId] = title;
           });
         });
 
@@ -244,6 +229,12 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
         state: this.state,
         user: this.context.user,
       };
+
+      const resetCompoundFilter = () =>
+        this.setState({
+          inputText: '',
+          selectedFilter: localizedFilterConfig[0].id,
+        });
 
       return (
         <React.Fragment>
@@ -271,12 +262,34 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                           <ToolbarItem>
                             <CompoundFilter
                               inputText={this.state.inputText}
-                              onChange={(inputText) =>
-                                this.setState({ inputText })
-                              }
-                              updateParams={updateParams}
+                              onChange={(inputText) => {
+                                this.setState({ inputText });
+
+                                if (typeaheadQuery) {
+                                  typeaheadQuery({
+                                    inputText,
+                                    selectedFilter: this.state.selectedFilter,
+                                    setState: (s) => this.setState(s),
+                                  });
+                                }
+                              }}
+                              updateParams={(p) => {
+                                resetCompoundFilter();
+                                updateParams(p);
+                              }}
                               params={params}
                               filterConfig={localizedFilterConfig}
+                              selectFilter={(selectedFilter) => {
+                                this.setState({ selectedFilter });
+
+                                if (typeaheadQuery) {
+                                  typeaheadQuery({
+                                    inputText: '',
+                                    selectedFilter,
+                                    setState: (s) => this.setState(s),
+                                  });
+                                }
+                              }}
                             />
                           </ToolbarItem>
                           {headerActions?.length &&
@@ -299,8 +312,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                   <div>
                     <AppliedFilters
                       updateParams={(p) => {
+                        resetCompoundFilter();
                         updateParams(p);
-                        this.setState({ inputText: '' });
                       }}
                       params={params}
                       ignoredParams={['page_size', 'page', 'sort', 'ordering']}

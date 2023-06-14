@@ -46,13 +46,11 @@ interface IState<T> {
 
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 
-interface PageWithTabsParams<T, ExtraState> {
+interface PageWithTabsParams<T> {
   breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
   condition: PermissionContextType;
-  didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: MessageDescriptor;
-  extraState?: ExtraState;
   headerActions?: ActionType[];
   headerDetails?: (item) => React.ReactNode;
   query: ({ name }) => Promise<T>;
@@ -64,20 +62,15 @@ interface PageWithTabsParams<T, ExtraState> {
 
 export const PageWithTabs = function <
   T extends { name: string; my_permissions?: string[] },
-  ExtraState = Record<string, never>,
 >({
   // ({ name }) => [{ url?, name }]
   breadcrumbs,
   // { featureFlags, settings, user } => bool
   condition,
-  // extra code to run on mount
-  didMount,
   // component name for debugging
   displayName,
   // alert on query failure
   errorTitle,
-  // extra initial state
-  extraState,
   // displayed after filters
   headerActions,
   // under title
@@ -91,7 +84,7 @@ export const PageWithTabs = function <
   tabs,
   // params => params
   tabUpdateParams,
-}: PageWithTabsParams<T, ExtraState>) {
+}: PageWithTabsParams<T>) {
   renderModals ||= function (actionContext) {
     return (
       <>
@@ -121,7 +114,6 @@ export const PageWithTabs = function <
         loading: true,
         unauthorised: false,
         params,
-        ...extraState,
       };
     }
 
@@ -134,13 +126,6 @@ export const PageWithTabs = function <
 
       this.setState({ alerts: this.context.alerts || [] });
       this.context.setAlerts([]);
-
-      if (didMount) {
-        didMount({
-          context: this.context,
-          addAlert: (alert) => this.addAlert(alert),
-        });
-      }
     }
 
     componentDidUpdate(prevProps) {
