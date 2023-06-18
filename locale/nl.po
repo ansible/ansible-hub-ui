@@ -2476,6 +2476,7 @@ msgid "Keywords"
 msgstr "Trefwoorden"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Labels"
 msgstr "Labels"
@@ -2494,8 +2495,8 @@ msgid "Last name"
 msgstr "Achternaam"
 
 #: src/containers/ansible-repository/list.tsx
-msgid "Last synced"
-msgstr "Laatste synchronisatie"
+#~ msgid "Last synced"
+#~ msgstr "Laatste synchronisatie"
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Last updated"
@@ -2845,6 +2846,10 @@ msgstr "Vereist herziening"
 msgid "Needs signature and review"
 msgstr "Moet worden bekeken en ondertekend"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "never synced"
+msgstr ""
+
 #: src/components/import-modal/import-modal.tsx
 msgid "New collection"
 msgstr "Nieuwe collectie"
@@ -2858,6 +2863,7 @@ msgid "Next"
 msgstr "Volgende"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "No"
 msgstr "Geen"
@@ -2963,6 +2969,10 @@ msgstr "Geen machtigingen"
 msgid "No README"
 msgstr "Geen README"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "no remote"
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "No remote registries yet"
 msgstr "Nog geen registers op afstand"
@@ -3042,6 +3052,7 @@ msgstr "Geen versies"
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -3227,6 +3238,7 @@ msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "Rechten voor groep \"{0}\" konden niet worden weergegeven."
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 msgid "Pipeline"
 msgstr "Pipeline"
 
@@ -3286,6 +3298,7 @@ msgstr "popover-voorbeeld"
 msgid "Preview"
 msgstr "Voorvertoning"
 
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Private"
 msgstr "Privé"
@@ -3565,6 +3578,7 @@ msgid "Released <0/>"
 msgstr "Heeft <0/> vrijgegeven"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Remote"
@@ -4247,7 +4261,6 @@ msgstr "Staat"
 
 #: src/components/my-imports/import-list.tsx
 #: src/components/my-imports/import-list.tsx
-#: src/containers/ansible-repository/list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -5151,6 +5164,7 @@ msgstr "YAML-eisen"
 
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Yes"
 msgstr "Ja"

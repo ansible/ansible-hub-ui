@@ -2476,6 +2476,7 @@ msgid "Keywords"
 msgstr "키워드"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Labels"
 msgstr "레이블"
@@ -2494,8 +2495,8 @@ msgid "Last name"
 msgstr "성"
 
 #: src/containers/ansible-repository/list.tsx
-msgid "Last synced"
-msgstr "마지막으로 동기화됨"
+#~ msgid "Last synced"
+#~ msgstr "마지막으로 동기화됨"
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Last updated"
@@ -2845,6 +2846,10 @@ msgstr "검토 필요"
 msgid "Needs signature and review"
 msgstr "서명 및 검토 필요"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "never synced"
+msgstr ""
+
 #: src/components/import-modal/import-modal.tsx
 msgid "New collection"
 msgstr "새 컬렉션"
@@ -2858,6 +2863,7 @@ msgid "Next"
 msgstr "다음"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "No"
 msgstr "제공되지 않음"
@@ -2963,6 +2969,10 @@ msgstr "권한 없음"
 msgid "No README"
 msgstr "README 없음"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "no remote"
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "No remote registries yet"
 msgstr "원격 레지스트리 없음"
@@ -3042,6 +3052,7 @@ msgstr "버전이 없음"
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -3227,6 +3238,7 @@ msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "그룹 \"{0}\"에 대한 권한을 표시할 수 없습니다."
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 msgid "Pipeline"
 msgstr "파이프라인"
 
@@ -3286,6 +3298,7 @@ msgstr "팝업 예제"
 msgid "Preview"
 msgstr "미리보기"
 
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Private"
 msgstr "비공개"
@@ -3565,6 +3578,7 @@ msgid "Released <0/>"
 msgstr "<0/>이/가 릴리스됨"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Remote"
@@ -4247,7 +4261,6 @@ msgstr "상태"
 
 #: src/components/my-imports/import-list.tsx
 #: src/components/my-imports/import-list.tsx
-#: src/containers/ansible-repository/list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -5151,6 +5164,7 @@ msgstr "YAML 요구 사항"
 
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Yes"
 msgstr "제공됨"

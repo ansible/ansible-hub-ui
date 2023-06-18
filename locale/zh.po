@@ -2476,6 +2476,7 @@ msgid "Keywords"
 msgstr "关键字"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Labels"
 msgstr "标签"
@@ -2494,8 +2495,8 @@ msgid "Last name"
 msgstr "姓"
 
 #: src/containers/ansible-repository/list.tsx
-msgid "Last synced"
-msgstr "最后同步"
+#~ msgid "Last synced"
+#~ msgstr "最后同步"
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Last updated"
@@ -2845,6 +2846,10 @@ msgstr "需要审核"
 msgid "Needs signature and review"
 msgstr "需要签名并审核"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "never synced"
+msgstr ""
+
 #: src/components/import-modal/import-modal.tsx
 msgid "New collection"
 msgstr "新集合"
@@ -2858,6 +2863,7 @@ msgid "Next"
 msgstr "下一步"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "No"
 msgstr "否"
@@ -2963,6 +2969,10 @@ msgstr "没有权限"
 msgid "No README"
 msgstr "没有 README"
 
+#: src/containers/ansible-repository/list.tsx
+msgid "no remote"
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "No remote registries yet"
 msgstr "没有远程注册表"
@@ -3042,6 +3052,7 @@ msgstr "没有版本"
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -3227,6 +3238,7 @@ msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "无法显示组 \"{0}\" 的权限。"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 msgid "Pipeline"
 msgstr "管道"
 
@@ -3286,6 +3298,7 @@ msgstr "弹出示例"
 msgid "Preview"
 msgstr "预览"
 
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Private"
 msgstr "私有"
@@ -3565,6 +3578,7 @@ msgid "Released <0/>"
 msgstr "发布的 <0/>"
 
 #: src/components/repositories/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Remote"
@@ -4247,7 +4261,6 @@ msgstr "状态"
 
 #: src/components/my-imports/import-list.tsx
 #: src/components/my-imports/import-list.tsx
-#: src/containers/ansible-repository/list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -5151,6 +5164,7 @@ msgstr "YAML 要求"
 
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Yes"
 msgstr "是"
