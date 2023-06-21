@@ -21,6 +21,7 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionDetailType,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
@@ -37,6 +38,7 @@ import {
   Breadcrumbs,
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
+  DownloadCount,
   ImportModal,
   LinkTabs,
   Logo,
@@ -68,6 +70,7 @@ interface IProps {
   collections: CollectionVersionSearch[];
   collectionsCount: number;
   collection: CollectionVersionSearch;
+  actuallyCollection: CollectionDetailType;
   content: CollectionVersionContentType;
   params: {
     version?: string;
@@ -164,15 +167,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   render() {
     const {
+      activeTab,
+      actuallyCollection,
+      breadcrumbs,
+      className,
+      collection,
       collections,
       collectionsCount,
-      collection,
       content,
       params,
       updateParams,
-      breadcrumbs,
-      activeTab,
-      className,
     } = this.props;
 
     const {
@@ -545,20 +549,28 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </div>
           }
           pageControls={
-            <Flex>
-              {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
-                <FlexItem>
-                  <a href={issueUrl} target='_blank' rel='noreferrer'>
-                    {t`Create issue`}
-                  </a>{' '}
-                  <ExternalLinkAltIcon />
-                </FlexItem>
-              ) : null}
-              {dropdownItems.length > 0 ? (
-                <FlexItem data-cy='kebab-toggle'>
-                  <StatefulDropdown items={dropdownItems} />
-                </FlexItem>
-              ) : null}
+            <Flex
+              direction={{ default: 'column' }}
+              alignItems={{ default: 'alignItemsFlexEnd' }}
+            >
+              <Flex direction={{ default: 'row' }}>
+                {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
+                  <FlexItem>
+                    <a href={issueUrl} target='_blank' rel='noreferrer'>
+                      {t`Create issue`}
+                    </a>{' '}
+                    <ExternalLinkAltIcon />
+                  </FlexItem>
+                ) : null}
+                {dropdownItems.length > 0 ? (
+                  <FlexItem data-cy='kebab-toggle'>
+                    <StatefulDropdown items={dropdownItems} />
+                  </FlexItem>
+                ) : null}
+              </Flex>
+              <FlexItem>
+                <DownloadCount item={actuallyCollection} />
+              </FlexItem>
             </Flex>
           }
         >
