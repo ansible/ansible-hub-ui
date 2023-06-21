@@ -62,7 +62,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
         reload={loadAll}
         selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
         updateGroups={(groups) =>
-          ExecutionEnvironmentNamespaceAPI.update(name, {
+          ExecutionEnvironmentNamespaceAPI.update(this.getNamespace(name), {
             groups,
           })
         }
@@ -74,7 +74,9 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 
   queryNamespace(name) {
-    ExecutionEnvironmentNamespaceAPI.get(name).then(
+    const namespace = this.getNamespace(name);
+
+    ExecutionEnvironmentNamespaceAPI.get(namespace).then(
       ({ data: { groups, my_permissions } }) =>
         this.setState({
           name: name,
@@ -84,6 +86,11 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
             this.context.user.model_permissions.change_containernamespace,
         }),
     );
+  }
+
+  // filter namespace name
+  private getNamespace(name) {
+    return name.includes('/') ? name.split('/')[0] : name;
   }
 }
 
