@@ -1,7 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, ClipboardCopyVariant } from '@patternfly/react-core';
 import React from 'react';
-import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -12,7 +11,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
-import { errorMessage, getRepoURL } from 'src/utilities';
+import { getRepoURL } from 'src/utilities';
 
 interface IState {
   tokenData: {
@@ -26,7 +25,6 @@ interface IState {
     token_type: string;
   };
   alerts: AlertType[];
-  repoUrl: string;
 }
 
 class TokenInsights extends React.Component<RouteProps, IState> {
@@ -36,34 +34,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     this.state = {
       tokenData: undefined,
       alerts: [],
-      repoUrl: '',
     };
-  }
-
-  private getMyDistributionPath() {
-    MyDistributionAPI.list()
-      .then(({ data }) => {
-        const syncDistro =
-          data.data.find(({ base_path }) => base_path.includes('synclist'))
-            ?.base_path || '';
-        this.setState({
-          repoUrl: syncDistro,
-        });
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        this.setState({
-          repoUrl: '',
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Server URL could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
   }
 
   componentDidMount() {
@@ -72,8 +43,6 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     window.insights.chrome.auth.getOfflineToken().then((result) => {
       this.setState({ tokenData: result.data });
     });
-
-    this.getMyDistributionPath();
   }
 
   render() {

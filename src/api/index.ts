@@ -40,7 +40,6 @@ export { GroupAPI } from './group';
 export { RoleAPI } from './role';
 export { ApplicationInfoAPI } from './application-info';
 export { RemoteType } from './response-types/remote';
-export { MyDistributionAPI } from './my-distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {
