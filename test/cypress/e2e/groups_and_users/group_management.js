@@ -16,6 +16,18 @@ function createGroupManually(name) {
   cy.contains(name).should('exist');
 }
 
+function addUserToGroupManually(groupName, userName) {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.contains('button', 'Add').click();
+  cy.get('input.pf-c-select__toggle-typeahead').type(userName);
+  cy.contains('button', userName).click();
+  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
+  cy.contains('footer > button', 'Add').click({ force: true });
+  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
+}
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -48,7 +60,7 @@ describe('Hub Group Management Tests', () => {
     cy.createUser(userName);
     createGroupManually(groupName);
 
-    cy.addUserToGroupManually(groupName, userName);
+    addUserToGroupManually(groupName, userName);
 
     cy.removeUserFromGroupManually(groupName, userName);
 
