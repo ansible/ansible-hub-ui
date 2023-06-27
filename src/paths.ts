@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro';
 import { ParamHelper, ParamType } from 'src/utilities';
 
 export function formatPath(path: Paths, data = {}, params?: ParamType) {
@@ -115,8 +114,3 @@ export enum Paths {
   signatureKeys = '/signature-keys',
   collections = '/collections',
 }
-
-export const namespaceBreadcrumb = {
-  name: t`Namespaces`,
-  url: formatPath(Paths.namespaces),
-};
