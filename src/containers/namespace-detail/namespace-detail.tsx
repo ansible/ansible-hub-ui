@@ -47,7 +47,7 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
@@ -191,7 +191,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const tab = params['tab'] || 'collections';
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         name: namespace.name,
         url:
@@ -774,7 +774,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: formatPath(namespaceBreadcrumb.url, {}),
+            redirect: formatPath(Paths.namespaces),
             confirmDelete: false,
             isNamespacePending: false,
           });
