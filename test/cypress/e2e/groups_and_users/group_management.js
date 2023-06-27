@@ -9,7 +9,7 @@ function createGroupManually(name) {
   cy.contains('Create').click();
 
   cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
-  cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
+  cy.contains('div', 'Name *').closest('*:has(input)').find('input').first().type(`${name}{enter}`);
   cy.wait('@submitGroup');
 
   // Wait for the list to update

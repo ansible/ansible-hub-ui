@@ -5,10 +5,6 @@ import shell from 'shell-escape-tag';
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
-Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
-  return subject.closest(`*:has(${selector})`).find(selector);
-});
-
 Cypress.Commands.add('containsnear', {}, (...args) => {
   if (args.length >= 2) {
     if (typeof args[0] === 'string' && typeof args[1] === 'string') {
