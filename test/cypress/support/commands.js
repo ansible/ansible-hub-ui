@@ -89,30 +89,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('deleteUser', {}, (username) => {
-  cy.menuGo('User Access > Users');
-  cy.intercept('DELETE', `${apiPrefix}_ui/v1/users/*`).as('deleteUser');
-  cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
-  cy.containsnear(
-    `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
-    'Delete',
-  ).click();
-
-  cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userList');
-
-  cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteUser').then(({ response }) => {
-    expect(response.statusCode).to.eq(204);
-  });
-
-  // Wait for navigation
-  cy.wait('@userList');
-  cy.get('h4[class=pf-c-alert__title]').should(
-    'have.text',
-    'Success alert:User "testUser" has been successfully deleted.',
-  );
-});
-
 // GalaxyKit Integration
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
