@@ -70,21 +70,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('createGroupManually', {}, (name) => {
-  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');
-  cy.menuGo('User Access > Groups');
-  cy.wait('@loadGroups');
-
-  cy.contains('Create').click();
-
-  cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
-  cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
-  cy.wait('@submitGroup');
-
-  // Wait for the list to update
-  cy.contains(name).should('exist');
-});
-
 Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();

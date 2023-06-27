@@ -1,6 +1,21 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const pulpPrefix = Cypress.env('pulpPrefix');
 
+function createGroupManually(name) {
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');
+  cy.menuGo('User Access > Groups');
+  cy.wait('@loadGroups');
+
+  cy.contains('Create').click();
+
+  cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
+  cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
+  cy.wait('@submitGroup');
+
+  // Wait for the list to update
+  cy.contains(name).should('exist');
+}
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -20,7 +35,7 @@ describe('Hub Group Management Tests', () => {
   it('admin user can create/delete a group', () => {
     const name = 'testGroup';
 
-    cy.createGroupManually(name);
+    createGroupManually(name);
 
     cy.deleteGroupManually(name);
     cy.contains('No groups yet').should('exist');
@@ -31,7 +46,7 @@ describe('Hub Group Management Tests', () => {
     let userName = 'testUser';
 
     cy.createUser(userName);
-    cy.createGroupManually(groupName);
+    createGroupManually(groupName);
 
     cy.addUserToGroupManually(groupName, userName);
 
