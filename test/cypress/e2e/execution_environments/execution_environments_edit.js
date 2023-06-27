@@ -1,10 +1,36 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
+function deleteContainersManual() {
+  cy.intercept(
+    'GET',
+    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
+  ).as('listLoad');
+
+  cy.visit(`${uiPrefix}containers`);
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@listLoad', { timeout: 50000 });
+      cy.get('.pf-c-alert__action').click();
+    });
+  });
+}
+
 describe('execution environments', () => {
   let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
     cy.deleteRegistriesManual();
-    cy.deleteContainersManual();
+    deleteContainersManual();
 
     cy.galaxykit(
       'registry create',

@@ -386,29 +386,6 @@ Cypress.Commands.add('deleteContainers', {}, () => {
   });
 });
 
-Cypress.Commands.add('deleteContainersManual', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
-  ).as('listLoad');
-
-  cy.visit(`${uiPrefix}containers`);
-
-  cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
-      cy.get(
-        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
-      ).click();
-      cy.contains('a', 'Delete').click();
-      cy.get('input[id=delete_confirm]').click();
-      cy.contains('button', 'Delete').click();
-      cy.wait('@listLoad', { timeout: 50000 });
-      cy.get('.pf-c-alert__action').click();
-    });
-  });
-});
-
 Cypress.Commands.add('deleteRepositories', {}, () => {
   const initRepos = [
     'validated',
