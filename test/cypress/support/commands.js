@@ -66,25 +66,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add(
-  'removeUserFromGroupManually',
-  {},
-  (groupName, userName) => {
-    cy.menuGo('User Access > Groups');
-    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.contains('button', 'Users').click();
-    cy.get(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-    ).click();
-    cy.containsnear(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-      'Remove',
-    ).click();
-    cy.contains('button.pf-m-danger', 'Delete').click();
-    cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
-  },
-);
-
 // GalaxyKit Integration
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {

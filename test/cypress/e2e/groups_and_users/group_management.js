@@ -44,6 +44,21 @@ function deleteGroupManually(name) {
   cy.contains('No groups yet').should('exist');
 }
 
+function removeUserFromGroupManually(groupName, userName) {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.get(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+  ).click();
+  cy.containsnear(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+    'Remove',
+  ).click();
+  cy.contains('button.pf-m-danger', 'Delete').click();
+  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
+}
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -77,7 +92,7 @@ describe('Hub Group Management Tests', () => {
 
     addUserToGroupManually(groupName, userName);
 
-    cy.removeUserFromGroupManually(groupName, userName);
+    removeUserFromGroupManually(groupName, userName);
 
     cy.galaxykit('group delete', groupName);
     cy.galaxykit('user delete', userName);
