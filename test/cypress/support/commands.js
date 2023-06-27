@@ -431,18 +431,3 @@ Cypress.Commands.add(
     );
   },
 );
-
-Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.visit(`${uiPrefix}roles/`);
-
-  cy.get(
-    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,
-  ).click();
-
-  cy.contains('Delete').click();
-  cy.get('[data-cy=DeleteModal]')
-    .parent()
-    .get('button')
-    .contains('Delete')
-    .click();
-});
