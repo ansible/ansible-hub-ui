@@ -113,22 +113,6 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   );
 });
 
-Cypress.Commands.add('deleteGroupManually', {}, (name) => {
-  cy.menuGo('User Access > Groups');
-  cy.intercept('DELETE', `${apiPrefix}_ui/v1/groups/*`).as('deleteGroup');
-  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('listGroups');
-  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
-  cy.get('[aria-label=Delete]').click();
-  cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteGroup').then(({ response }) => {
-    expect(response.statusCode).to.eq(204);
-  });
-
-  // Wait for list reload
-  cy.wait('@listGroups');
-  cy.contains('No groups yet').should('exist');
-});
-
 // GalaxyKit Integration
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {

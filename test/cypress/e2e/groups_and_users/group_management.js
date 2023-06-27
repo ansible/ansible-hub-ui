@@ -28,6 +28,22 @@ function addUserToGroupManually(groupName, userName) {
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 }
 
+function deleteGroupManually(name) {
+  cy.menuGo('User Access > Groups');
+  cy.intercept('DELETE', `${apiPrefix}_ui/v1/groups/*`).as('deleteGroup');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('listGroups');
+  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
+  cy.get('[aria-label=Delete]').click();
+  cy.contains('[role=dialog] button', 'Delete').click();
+  cy.wait('@deleteGroup').then(({ response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
+
+  // Wait for list reload
+  cy.wait('@listGroups');
+  cy.contains('No groups yet').should('exist');
+}
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -48,14 +64,13 @@ describe('Hub Group Management Tests', () => {
     const name = 'testGroup';
 
     createGroupManually(name);
-
-    cy.deleteGroupManually(name);
+    deleteGroupManually(name);
     cy.contains('No groups yet').should('exist');
   });
 
   it('admin user can add/remove a user to/from a group', () => {
-    let groupName = 'testGroup';
-    let userName = 'testUser';
+    const groupName = 'testGroup';
+    const userName = 'testUser';
 
     cy.createUser(userName);
     createGroupManually(groupName);
