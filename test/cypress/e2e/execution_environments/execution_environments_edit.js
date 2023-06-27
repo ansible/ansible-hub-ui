@@ -24,12 +24,33 @@ function deleteContainersManual() {
   });
 }
 
+function deleteRegistriesManual() {
+  cy.intercept(
+    'GET',
+    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
+  ).as('registries');
+
+  cy.visit(`${uiPrefix}registries`);
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@registries');
+    });
+  });
+}
+
 describe('execution environments', () => {
   let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
-    cy.deleteRegistriesManual();
+    deleteRegistriesManual();
     deleteContainersManual();
 
     cy.galaxykit(
