@@ -15,7 +15,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import {
   ErrorMessagesType,
@@ -110,7 +110,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
-            namespaceBreadcrumb,
+            { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
             {
               name: namespace.name,
               url: formatPath(Paths.namespaceDetail, {

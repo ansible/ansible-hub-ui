@@ -17,7 +17,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
@@ -89,7 +89,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     const { collection_version: version, repository } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,
