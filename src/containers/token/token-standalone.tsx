@@ -39,7 +39,12 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
     const { token, alerts, loadingToken } = this.state;
     const unauthorised = !this.context.user || this.context.user.is_anonymous;
     const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
-    const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
+    const expirationDate = expiration
+      ? new Date(Date.now() + 1000 * 60 * expiration)
+      : null;
+    const isSSO =
+      !this.context.user.auth_provider.includes('django') &&
+      !this.context.user.auth_provider.includes('github');
 
     return (
       <React.Fragment>
@@ -64,14 +69,22 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
                       <code>ansible-galaxy</code> client.
                     </Trans>
                   </p>
-                  {!this.context.user.auth_provider.includes('django') && (
+                  {isSSO && (
                     <div>
                       <h2>{t`Expiration`}</h2>
                       <p>
-                        <Trans>
-                          You are an SSO user. Your token will expire{' '}
-                          <DateComponent date={expirationDate.toISOString()} />.
-                        </Trans>
+                        <Trans>You are an SSO user.</Trans>{' '}
+                        {expirationDate ? (
+                          <Trans>
+                            Your token will expire{' '}
+                            <DateComponent
+                              date={expirationDate.toISOString()}
+                            />
+                            .
+                          </Trans>
+                        ) : (
+                          <Trans>Your token will not expire.</Trans>
+                        )}
                       </p>
                     </div>
                   )}
