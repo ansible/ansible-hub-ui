@@ -20,7 +20,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './collection-dependencies.scss';
 
@@ -87,7 +87,7 @@ class CollectionDependencies extends React.Component<
     }
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

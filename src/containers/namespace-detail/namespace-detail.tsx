@@ -45,7 +45,7 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   canSign as canSignNS,
@@ -245,7 +245,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ) : null}
         <PartnerHeader
           namespace={namespace}
-          breadcrumbs={[namespaceBreadcrumb, { name: namespace.name }]}
+          breadcrumbs={[
+            { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
+            { name: namespace.name },
+          ]}
           tabs={tabs}
           params={params}
           updateParams={(p) => this.updateParams(p)}
@@ -656,7 +659,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: formatPath(namespaceBreadcrumb.url, {}),
+            redirect: formatPath(Paths.namespaces),
             confirmDelete: false,
             isNamespacePending: false,
           });
