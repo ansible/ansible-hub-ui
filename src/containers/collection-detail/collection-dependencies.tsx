@@ -89,7 +89,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     const { collection_version: version, repository } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,

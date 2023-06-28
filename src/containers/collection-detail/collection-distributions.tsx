@@ -90,7 +90,7 @@ const CollectionDistributions = (props: RouteProps) => {
   const { collection_version, repository } = collection;
 
   const breadcrumbs = [
-    namespaceBreadcrumb,
+    namespaceBreadcrumb(),
     {
       url: formatPath(Paths.namespaceDetail, {
         namespace: collection_version.namespace,

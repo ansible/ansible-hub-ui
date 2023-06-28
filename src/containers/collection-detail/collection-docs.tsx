@@ -99,7 +99,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const { collection_version, repository } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: collection_version.namespace,

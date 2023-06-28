@@ -62,7 +62,7 @@ class CollectionDetail extends React.Component<
     const { collection_version: version } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,

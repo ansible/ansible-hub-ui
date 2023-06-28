@@ -125,10 +125,8 @@ export enum Paths {
   collections = '/collections',
 }
 
-export const namespaceBreadcrumb = {
-  name: {
-    namespaces: t`Namespaces`,
-    partners: t`Partners`,
-  }[NAMESPACE_TERM],
-  url: formatPath(Paths[NAMESPACE_TERM]),
-};
+export const namespaceBreadcrumb = () =>
+  ({
+    namespaces: { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
+    partners: { name: t`Partners`, url: formatPath(Paths.partners) },
+  }[NAMESPACE_TERM]);

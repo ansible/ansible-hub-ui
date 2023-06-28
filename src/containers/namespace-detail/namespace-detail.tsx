@@ -245,7 +245,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const tab = params['tab'] || 'collections';
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         name: namespace.name,
         url:
@@ -899,7 +899,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: namespaceBreadcrumb.url,
+            redirect: namespaceBreadcrumb().url,
             confirmDelete: false,
             isNamespacePending: false,
           });

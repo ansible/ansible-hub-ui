@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { t } from '@lingui/macro';
 import {
   Button,
@@ -156,7 +155,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     // Namespaces or Partners
-    const title = i18n._(namespaceBreadcrumb.name);
+    const title = namespaceBreadcrumb().name;
 
     return (
       <div className='hub-namespace-page'>
