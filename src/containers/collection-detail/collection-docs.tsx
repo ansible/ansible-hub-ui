@@ -16,7 +16,7 @@ import {
   TableOfContents,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';
@@ -100,7 +100,7 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
