@@ -59,39 +59,39 @@ import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import './namespace-detail.scss';
 
 interface IState {
+  alerts: AlertType[];
   canSign: boolean;
   collections: CollectionVersionSearch[];
-  allCollections: CollectionVersionSearch[];
-  namespace: NamespaceType;
-  params: {
-    sort?: string;
-    page?: number;
-    page_size?: number;
-    tab?: string;
-    keywords?: string;
-    namespace?: string;
-    group?: number;
-  };
-  redirect: string;
-  itemCount: number;
-  showImportModal: boolean;
-  warning: string;
-  updateCollection: CollectionVersionSearch;
-  showControls: boolean;
+  confirmDelete: boolean;
+  deleteAll: boolean;
+  deleteCollection: CollectionVersionSearch;
+  filteredCount: number;
+  group: GroupType;
+  isDeletionPending: boolean;
+  isNamespacePending: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
   isOpenWisdomModal: boolean;
-  confirmDelete: boolean;
-  isNamespacePending: boolean;
-  alerts: AlertType[];
-  deleteCollection: CollectionVersionSearch;
-  isDeletionPending: boolean;
+  namespace: NamespaceType;
+  params: {
+    group?: number;
+    keywords?: string;
+    namespace?: string;
+    page?: number;
+    page_size?: number;
+    sort?: string;
+    tab?: string;
+  };
+  redirect: string;
+  showControls: boolean;
   showGroupRemoveModal?: GroupType;
   showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
+  showImportModal: boolean;
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
-  group: GroupType;
-  deleteAll: boolean;
+  unfilteredCount: number;
+  updateCollection: CollectionVersionSearch;
+  warning: string;
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
@@ -114,38 +114,36 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
+      alerts: [],
       canSign: false,
       collections: [],
-      allCollections: [],
-      namespace: null,
-      params: params,
-      redirect: null,
-      itemCount: 0,
-      showImportModal: false,
-      warning: '',
-      updateCollection: null,
-      showControls: false, // becomes true when my-namespaces doesn't 404
+      confirmDelete: false,
+      deleteAll: true,
+      deleteCollection: null,
+      filteredCount: 0,
+      group: null,
+      isDeletionPending: false,
+      isNamespacePending: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
       isOpenWisdomModal: false,
-      confirmDelete: false,
-      isNamespacePending: false,
-      alerts: [],
-      deleteCollection: null,
-      isDeletionPending: false,
+      namespace: null,
+      params,
+      redirect: null,
+      showControls: false, // becomes true when my-namespaces doesn't 404
       showGroupRemoveModal: null,
       showGroupSelectWizard: null,
+      showImportModal: false,
       showRoleRemoveModal: null,
       showRoleSelectWizard: null,
-      group: null,
-      deleteAll: true,
+      unfilteredCount: 0,
+      updateCollection: null,
+      warning: '',
     };
   }
 
   componentDidMount() {
     this.load();
-
-    this.loadAllCollections();
 
     this.setState({ alerts: this.context.alerts || [] });
     this.context.setAlerts([]);
@@ -208,23 +206,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
       canSign,
       collections,
+      confirmDelete,
+      deleteCollection,
+      filteredCount,
+      isDeletionPending,
+      isNamespacePending,
+      isOpenNamespaceModal,
+      isOpenWisdomModal,
       namespace,
       params,
       redirect,
-      itemCount,
       showControls,
       showImportModal,
-      warning,
       updateCollection,
-      isOpenNamespaceModal,
-      isOpenWisdomModal,
-      confirmDelete,
-      isNamespacePending,
-      alerts,
-      deleteCollection,
-      isDeletionPending,
+      warning,
     } = this.state;
 
     if (redirect) {
@@ -277,7 +275,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const repositoryUrl = getRepoURL('published');
 
     const noData =
-      itemCount === 0 &&
+      filteredCount === 0 &&
       !filterIsSet(params, [
         'is_signed',
         'keywords',
@@ -420,7 +418,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                     <Pagination
                       params={params}
                       updateParams={updateParams}
-                      count={itemCount}
+                      count={filteredCount}
                       isTop
                     />
                   </div>
@@ -452,7 +450,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   params={params}
                   ignoredParams={ignoredParams}
                   collections={collections}
-                  itemCount={itemCount}
+                  itemCount={filteredCount}
                   displaySignatures={
                     this.context.featureFlags.display_signatures
                   }
@@ -671,7 +669,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
         waitForTask(result.data.task_id)
           .then(() => {
-            this.load();
+            this.loadCollections();
           })
           .catch((error) => {
             this.setState({
@@ -695,26 +693,32 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       });
   }
 
-  private loadCollections() {
-    CollectionVersionAPI.list({
-      ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      repository_label: '!hide_from_search',
+  private loadAllCollections(params) {
+    return CollectionVersionAPI.list({
+      ...params,
+      is_highest: true,
       namespace: this.props.routeParams.namespace,
-    }).then((result) => {
+      repository_label: '!hide_from_search',
+    });
+  }
+
+  private loadCollections() {
+    return this.loadAllCollections(
+      ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+    ).then((result) => {
       this.setState({
         collections: result.data.data,
-        itemCount: result.data.meta.count,
+        filteredCount: result.data.meta.count,
       });
     });
   }
 
   private load() {
     Promise.all([
-      CollectionVersionAPI.list({
-        ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-        repository_label: '!hide_from_search',
-        namespace: this.props.routeParams.namespace,
-        is_highest: true,
+      this.loadCollections(),
+      this.loadAllCollections({
+        page: 1,
+        page_size: 1,
       }),
       NamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
@@ -736,33 +740,32 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           : Promise.reject(e);
       }),
     ])
-      .then((val) => {
-        this.setState({
-          collections: val[0].data.data,
-          itemCount: val[0].data.meta.count,
-          namespace: val[1].data,
-          showControls: !!val[2],
-          canSign: canSignNamespace(this.context, val[2]?.data),
-          group: this.filterGroup(
-            this.state.params['group'],
-            val[1].data['groups'],
-          ),
-        });
-      })
+      .then(
+        ([
+          _collections,
+          {
+            data: {
+              meta: { count: unfilteredCount },
+            },
+          },
+          { data: namespace },
+          myNamespace,
+        ]) => {
+          this.setState({
+            canSign: canSignNamespace(this.context, myNamespace?.data),
+            group: this.filterGroup(
+              this.state.params['group'],
+              namespace['groups'],
+            ),
+            namespace,
+            showControls: !!myNamespace,
+            unfilteredCount,
+          });
+        },
+      )
       .catch(() => {
         this.setState({ redirect: formatPath(Paths.notFound) });
       });
-  }
-
-  private loadAllCollections() {
-    CollectionVersionAPI.list({
-      ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      namespace: this.props.routeParams.namespace,
-    }).then((result) => {
-      this.setState({
-        allCollections: result.data.data,
-      });
-    });
   }
 
   private get updateParams() {
@@ -770,7 +773,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderPageControls() {
-    const { canSign, collections } = this.state;
+    const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
@@ -791,7 +794,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       />,
       hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
-          {this.state.allCollections.length === 0 ? (
+          {unfilteredCount === 0 ? (
             <DropdownItem
               onClick={() => this.setState({ isOpenNamespaceModal: true })}
             >
