@@ -8,7 +8,7 @@
         "@babel/runtime": "^7.20.7",
         "@lingui/react": "^3.17.2",
         "@patternfly/patternfly": "^4.224.2",
-        "@patternfly/react-core": "^4.276.6",
+        "@patternfly/react-core": "^4.276.8",
         "@patternfly/react-table": "^4.112.39",
         "@types/node": "^16.18.13",
         "@types/react": "^16.14.24",
