@@ -2043,9 +2043,15 @@ msgstr "Propriétaires de l'espace de nommage"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx:47
+#: src/containers/collection-detail/collection-dependencies.tsx:90
+#: src/containers/collection-detail/collection-detail.tsx:57
+#: src/containers/collection-detail/collection-docs.tsx:103
+#: src/containers/collection-detail/collection-import-log.tsx:58
+#: src/containers/edit-namespace/edit-namespace.tsx:112
+#: src/containers/namespace-detail/namespace-detail.tsx:194
 #: src/containers/namespace-list/namespace-list.tsx:172
 #: src/loaders/standalone/standalone-loader.tsx:348
-#: src/paths.ts:74
 msgid "Namespaces"
 msgstr "Espaces de noms"
 
