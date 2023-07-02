@@ -4127,8 +4127,8 @@ msgid "Server URL"
 msgstr "Server URL"
 
 #: src/containers/token/token-insights.tsx
-msgid "Server URL could not be displayed."
-msgstr "Server URL could not be displayed."
+#~ msgid "Server URL could not be displayed."
+#~ msgstr "Server URL could not be displayed."
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Server version"
@@ -5318,8 +5318,12 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "Vous êtes sur le point de signer <0>version {version}</0> sous <1>{name}</1>."
 
 #: src/containers/token/token-standalone.tsx
-msgid "You are an SSO user. Your token will expire <0/>."
-msgstr "Vous êtes un utilisateur SSO. Votre jeton va expirer <0/>."
+msgid "You are an SSO user."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+#~ msgid "You are an SSO user. Your token will expire <0/>."
+#~ msgstr "Vous êtes un utilisateur SSO. Votre jeton va expirer <0/>."
 
 #: src/components/namespace-form/resources-form.tsx
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
@@ -5365,3 +5369,11 @@ msgstr "Vous devez être connecté pour pouvoir télécharger l'archive tarball.
 #: src/containers/edit-namespace/edit-namespace.tsx
 msgid "You have unsaved changes"
 msgstr "Vous avez des changements qui n’ont pas été sauvegardés"
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will expire <0/>."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will not expire."
+msgstr ""
