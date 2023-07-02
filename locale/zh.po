@@ -2812,9 +2812,16 @@ msgstr "命名空间名称限制为字母数字字符和下划线，长度最少
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+#: src/containers/collection-detail/collection-detail.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/collection-detail/collection-import-log.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
-#: src/paths.ts
 msgid "Namespaces"
 msgstr "命名空间"
 
@@ -5203,8 +5210,12 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "您将签发 <1>{name}</1> 下 <0> 版本 {version}</0>。"
 
 #: src/containers/token/token-standalone.tsx
-msgid "You are an SSO user. Your token will expire <0/>."
-msgstr "您是一个 SSO 用户。您的令牌将过期 <0/>。"
+msgid "You are an SSO user."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+#~ msgid "You are an SSO user. Your token will expire <0/>."
+#~ msgstr "您是一个 SSO 用户。您的令牌将过期 <0/>。"
 
 #: src/components/namespace-form/resources-form.tsx
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
@@ -5250,3 +5261,11 @@ msgstr "您必须登录才能下载 tar 包。"
 #: src/containers/edit-namespace/edit-namespace.tsx
 msgid "You have unsaved changes"
 msgstr "您有未保存的更改"
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will expire <0/>."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will not expire."
+msgstr ""

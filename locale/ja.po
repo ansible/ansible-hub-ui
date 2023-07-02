@@ -2812,9 +2812,16 @@ msgstr "名前空間の名前に使用できるのは、英数字とアンダー
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+#: src/containers/collection-detail/collection-detail.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/collection-detail/collection-import-log.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
-#: src/paths.ts
 msgid "Namespaces"
 msgstr "名前空間"
 
@@ -5203,8 +5210,12 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "<1>{name}</1> として <0>バージョン {version}</0> に署名しようとしています。"
 
 #: src/containers/token/token-standalone.tsx
-msgid "You are an SSO user. Your token will expire <0/>."
-msgstr "SSO ユーザーです。トークンは <0/> に期限が切れます。"
+msgid "You are an SSO user."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+#~ msgid "You are an SSO user. Your token will expire <0/>."
+#~ msgstr "SSO ユーザーです。トークンは <0/> に期限が切れます。"
 
 #: src/components/namespace-form/resources-form.tsx
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
@@ -5250,3 +5261,11 @@ msgstr "tarball をダウンロードするには、ログインしている必�
 #: src/containers/edit-namespace/edit-namespace.tsx
 msgid "You have unsaved changes"
 msgstr "変更が保存されていません"
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will expire <0/>."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will not expire."
+msgstr ""
