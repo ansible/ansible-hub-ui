@@ -64,7 +64,7 @@ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:320
+#: src/containers/namespace-detail/namespace-detail.tsx:323
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
@@ -113,7 +113,7 @@ msgstr "Una etiqueta puede contener caracteres alfabéticos ASCII en minúsculas
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:396
+#: src/containers/namespace-detail/namespace-detail.tsx:399
 msgid "API Error: Failed to set deprecation."
 msgstr "Error de API: No se ha podido pasar a desuso."
 
@@ -124,7 +124,7 @@ msgstr "Error de API: No se ha podido pasar a desuso."
 
 #: src/components/headers/collection-header.tsx:577
 #: src/components/headers/collection-header.tsx:628
-#: src/containers/namespace-detail/namespace-detail.tsx:414
+#: src/containers/namespace-detail/namespace-detail.tsx:417
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
 
@@ -333,7 +333,7 @@ msgstr "Cancelar"
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:584
+#: src/containers/namespace-detail/namespace-detail.tsx:587
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
@@ -467,11 +467,11 @@ msgstr "Código"
 msgid "Collection"
 msgstr "Colección"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:381
+#: src/containers/namespace-detail/namespace-detail.tsx:384
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:380
+#: src/containers/namespace-detail/namespace-detail.tsx:383
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
@@ -521,7 +521,7 @@ msgstr "La colección no tiene dependencias."
 msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:544
+#: src/containers/namespace-detail/namespace-detail.tsx:547
 msgid "Collection repositories could not be displayed."
 msgstr "No se pudieron mostrar los repositorios de colecciones."
 
@@ -545,7 +545,7 @@ msgid "Collections"
 msgstr "Colecciones"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:238
-#: src/containers/namespace-detail/namespace-detail.tsx:288
+#: src/containers/namespace-detail/namespace-detail.tsx:291
 #: src/containers/search/search.tsx:141
 msgid "Collections will appear once uploaded"
 msgstr "Las colecciones aparecerán una vez cargadas"
@@ -836,8 +836,8 @@ msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
 #: src/constants.tsx:153
-#: src/containers/namespace-detail/namespace-detail.tsx:578
-#: src/containers/namespace-detail/namespace-detail.tsx:592
+#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:595
 msgid "Delete namespace"
 msgstr "Eliminar el espacio de nombres"
 
@@ -1038,7 +1038,7 @@ msgstr "Modificar entorno de ejecución"
 msgid "Edit group permissions"
 msgstr "Editar los permisos de los grupos"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:568
+#: src/containers/namespace-detail/namespace-detail.tsx:571
 msgid "Edit namespace"
 msgstr "Editar el espacio de nombres"
 
@@ -1305,7 +1305,7 @@ msgstr "Fallido"
 msgid "Failed to retrieve user data."
 msgstr "Fallo en la recuperación de los datos del usuario."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:415
+#: src/containers/namespace-detail/namespace-detail.tsx:418
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
@@ -1494,7 +1494,7 @@ msgstr "Importar y trasladar a la puesta en escena"
 msgid "Import log"
 msgstr "Registro de importación"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:609
+#: src/containers/namespace-detail/namespace-detail.tsx:612
 msgid "Imports"
 msgstr "Importaciones"
 
@@ -1744,11 +1744,11 @@ msgstr "El nombre no debe estar vacío."
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:689
+#: src/containers/namespace-detail/namespace-detail.tsx:692
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el espacio de nombres \"{name}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:668
+#: src/containers/namespace-detail/namespace-detail.tsx:671
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
@@ -1769,9 +1769,15 @@ msgstr "Propietarios de espacios de nombres"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx:43
+#: src/containers/collection-detail/collection-dependencies.tsx:90
+#: src/containers/collection-detail/collection-detail.tsx:53
+#: src/containers/collection-detail/collection-docs.tsx:99
+#: src/containers/collection-detail/collection-import-log.tsx:58
+#: src/containers/edit-namespace/edit-namespace.tsx:106
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 #: src/containers/namespace-list/namespace-list.tsx:173
 #: src/loaders/standalone/standalone-loader.tsx:348
-#: src/paths.ts:68
 msgid "Namespaces"
 msgstr "Espacios de nombres"
 
@@ -1825,7 +1831,7 @@ msgstr "Todavía no hay actividades"
 msgid "No child task"
 msgstr "Ninguna tarea infantil"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:287
+#: src/containers/namespace-detail/namespace-detail.tsx:290
 #: src/containers/search/search.tsx:140
 msgid "No collections yet"
 msgstr "Todavía no hay colecciones"
@@ -2527,7 +2533,7 @@ msgid "Sign all"
 msgstr "Firmar todo"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:618
+#: src/containers/namespace-detail/namespace-detail.tsx:621
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
@@ -2569,7 +2575,7 @@ msgstr "Firmado y aprobado"
 msgid "Signed only"
 msgstr "Solo firmado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:424
+#: src/containers/namespace-detail/namespace-detail.tsx:427
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
@@ -2977,8 +2983,8 @@ msgstr "Actualizado <0/>"
 msgid "Upload"
 msgstr "Subir"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:294
-#: src/containers/namespace-detail/namespace-detail.tsx:630
+#: src/containers/namespace-detail/namespace-detail.tsx:297
+#: src/containers/namespace-detail/namespace-detail.tsx:633
 msgid "Upload collection"
 msgstr "Subir la colección"
 

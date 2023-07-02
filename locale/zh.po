@@ -64,7 +64,7 @@ msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:320
+#: src/containers/namespace-detail/namespace-detail.tsx:323
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1><2></2><3/>。"
 
@@ -113,7 +113,7 @@ msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划�
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:396
+#: src/containers/namespace-detail/namespace-detail.tsx:399
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
@@ -124,7 +124,7 @@ msgstr "API 错误：无法设置弃用。"
 
 #: src/components/headers/collection-header.tsx:577
 #: src/components/headers/collection-header.tsx:628
-#: src/containers/namespace-detail/namespace-detail.tsx:414
+#: src/containers/namespace-detail/namespace-detail.tsx:417
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
 
@@ -331,7 +331,7 @@ msgstr "取消"
 msgid "Canceled"
 msgstr "已取消"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:584
+#: src/containers/namespace-detail/namespace-detail.tsx:587
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
@@ -465,11 +465,11 @@ msgstr "代码"
 msgid "Collection"
 msgstr "集合"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:381
+#: src/containers/namespace-detail/namespace-detail.tsx:384
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:380
+#: src/containers/namespace-detail/namespace-detail.tsx:383
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
@@ -519,7 +519,7 @@ msgstr "集合没有依赖项。"
 msgid "Collection is not being used by any collection."
 msgstr "集合没有被任何集合使用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:544
+#: src/containers/namespace-detail/namespace-detail.tsx:547
 msgid "Collection repositories could not be displayed."
 msgstr "无法显示集合仓库。"
 
@@ -543,7 +543,7 @@ msgid "Collections"
 msgstr "集合"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:238
-#: src/containers/namespace-detail/namespace-detail.tsx:288
+#: src/containers/namespace-detail/namespace-detail.tsx:291
 #: src/containers/search/search.tsx:141
 msgid "Collections will appear once uploaded"
 msgstr "上传后会出现集合"
@@ -834,8 +834,8 @@ msgid "Delete image?"
 msgstr "删除镜像？"
 
 #: src/constants.tsx:153
-#: src/containers/namespace-detail/namespace-detail.tsx:578
-#: src/containers/namespace-detail/namespace-detail.tsx:592
+#: src/containers/namespace-detail/namespace-detail.tsx:581
+#: src/containers/namespace-detail/namespace-detail.tsx:595
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
@@ -1036,7 +1036,7 @@ msgstr "编辑执行环境"
 msgid "Edit group permissions"
 msgstr "编辑组权限"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:568
+#: src/containers/namespace-detail/namespace-detail.tsx:571
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
@@ -1303,7 +1303,7 @@ msgstr "失败"
 msgid "Failed to retrieve user data."
 msgstr "获取用户数据失败。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:415
+#: src/containers/namespace-detail/namespace-detail.tsx:418
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
@@ -1492,7 +1492,7 @@ msgstr "导入并移至 staging"
 msgid "Import log"
 msgstr "导入日志"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:609
+#: src/containers/namespace-detail/namespace-detail.tsx:612
 msgid "Imports"
 msgstr "导入"
 
@@ -1742,11 +1742,11 @@ msgstr "名称不能为空。"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:689
+#: src/containers/namespace-detail/namespace-detail.tsx:692
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:668
+#: src/containers/namespace-detail/namespace-detail.tsx:671
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
@@ -1767,9 +1767,15 @@ msgstr "命名空间所有者"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx:43
+#: src/containers/collection-detail/collection-dependencies.tsx:90
+#: src/containers/collection-detail/collection-detail.tsx:53
+#: src/containers/collection-detail/collection-docs.tsx:99
+#: src/containers/collection-detail/collection-import-log.tsx:58
+#: src/containers/edit-namespace/edit-namespace.tsx:106
+#: src/containers/namespace-detail/namespace-detail.tsx:249
 #: src/containers/namespace-list/namespace-list.tsx:173
 #: src/loaders/standalone/standalone-loader.tsx:348
-#: src/paths.ts:68
 msgid "Namespaces"
 msgstr "命名空间"
 
@@ -1823,7 +1829,7 @@ msgstr "还没有活动"
 msgid "No child task"
 msgstr "没有子任务"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:287
+#: src/containers/namespace-detail/namespace-detail.tsx:290
 #: src/containers/search/search.tsx:140
 msgid "No collections yet"
 msgstr "还没有集合"
@@ -2525,7 +2531,7 @@ msgid "Sign all"
 msgstr "签发所有"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:618
+#: src/containers/namespace-detail/namespace-detail.tsx:621
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
@@ -2567,7 +2573,7 @@ msgstr "已签名并批准"
 msgid "Signed only"
 msgstr "仅包括签发的"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:424
+#: src/containers/namespace-detail/namespace-detail.tsx:427
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
@@ -2975,8 +2981,8 @@ msgstr "更新的 <0/>"
 msgid "Upload"
 msgstr "上传"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:294
-#: src/containers/namespace-detail/namespace-detail.tsx:630
+#: src/containers/namespace-detail/namespace-detail.tsx:297
+#: src/containers/namespace-detail/namespace-detail.tsx:633
 msgid "Upload collection"
 msgstr "上传集合"
 
