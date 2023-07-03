@@ -115,11 +115,6 @@ function standaloneMenu() {
         settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
         !user.is_anonymous,
     }),
-    menuItem(t`Terms of Use`, {
-      url: 'https://www.redhat.com/en/about/terms-use',
-      external: true,
-      condition: ({ featureFlags }) => featureFlags.legacy_roles,
-    }),
     menuSection(t`User Access`, {}, [
       menuItem(t`Users`, {
         condition: (context) => hasPermission(context, 'galaxy.view_user'),
