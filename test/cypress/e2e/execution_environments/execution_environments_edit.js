@@ -69,7 +69,6 @@ describe('execution environments', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.wait(10000);
     cy.menuGo('Execution Environments > Execution Environments');
   });
 
