@@ -12,7 +12,6 @@ import {
   LegacyNamespaceListItem,
   LoadingPageSpinner,
   Pagination,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -32,8 +31,6 @@ interface LegacyNamespacesProps {
   };
   updateParams: (params) => void;
   ignoredParams: string[];
-  isOpenWisdomModal: boolean;
-  wisdomReference: string;
   alerts: AlertType[];
 }
 
@@ -55,8 +52,6 @@ class LegacyNamespaces extends React.Component<
       mounted: false,
       count: 0,
       legacynamespaces: [],
-      isOpenWisdomModal: false,
-      wisdomReference: null,
       alerts: [],
     };
   }
@@ -96,10 +91,6 @@ class LegacyNamespaces extends React.Component<
       });
     });
   };
-
-  openModal(namespace) {
-    this.setState({ isOpenWisdomModal: true, wisdomReference: namespace.name });
-  }
 
   private addAlert(alert: AlertType) {
     this.setState({
@@ -144,14 +135,6 @@ class LegacyNamespaces extends React.Component<
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
-        {this.state.isOpenWisdomModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'legacy_namespace'}
-            reference={this.state.wisdomReference}
-          />
-        )}
         <BaseHeader title={t`Legacy Namespaces`}></BaseHeader>
         <React.Fragment>
           {loading ? (
@@ -181,7 +164,6 @@ class LegacyNamespaces extends React.Component<
                     <LegacyNamespaceListItem
                       key={lnamespace.id}
                       namespace={lnamespace}
-                      openModal={(namespace) => this.openModal(namespace)}
                     />
                   ))}
               </DataList>

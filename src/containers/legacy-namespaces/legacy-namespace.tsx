@@ -22,7 +22,6 @@ import {
   Logo,
   Pagination,
   StatefulDropdown,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -180,7 +179,6 @@ interface LegacyNamespaceProps {
   };
   updateParams: (params) => void;
   ignoredParams: string[];
-  isOpenWisdomModal: boolean;
   alerts: AlertType[];
 }
 
@@ -199,7 +197,6 @@ class LegacyNamespace extends React.Component<
       namespaceid: namespaceid,
       namespace: null,
       roles: null,
-      isOpenWisdomModal: false,
       alerts: [],
     };
   }
@@ -230,8 +227,6 @@ class LegacyNamespace extends React.Component<
     if (this.state.loading === true) {
       return <LoadingPageSpinner />;
     }
-
-    const { ai_deny_index } = this.context.featureFlags;
 
     const infocells = [];
 
@@ -265,41 +260,9 @@ class LegacyNamespace extends React.Component<
         (n) => n.username == this.context.user.username,
       ).length;
 
-      const dropdownItems = [];
-      if (
-        ai_deny_index &&
-        (this.context.user.is_superuser || userOwnsLegacyNamespace)
-      ) {
-        dropdownItems.push(
-          <DropdownItem
-            onClick={() => this.setState({ isOpenWisdomModal: true })}
-          >
-            {t`Ansible Lightspeed settings`}
-          </DropdownItem>,
-        );
-      }
-
-      if (dropdownItems.length) {
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={true} key='kebab'>
-            <div data-cy='ns-kebab-toggle' className='hub-kebab-toggle'>
-              <StatefulDropdown items={dropdownItems} />
-            </div>
-          </DataListCell>,
-        );
-      }
-    }
 
     return (
       <React.Fragment>
-        {this.state.isOpenWisdomModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'legacy_namespace'}
-            reference={this.state.namespace.name}
-          />
-        )}
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
