@@ -1,5 +1,9 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
+function communityLogin() {
+  cy.login(null, null, '/', 'Welcome to Beta Galaxy');
+}
+
 function clickWisdomSettings() {
   cy.get('[data-cy="kebab-toggle"] button[aria-label="Actions"]').click({
     force: true,
@@ -31,7 +35,7 @@ describe('Ansible Lightspeed Modal Test', () => {
   });
 
   it('can opt in or opt out of namespace.', () => {
-    cy.login();
+    communityLogin();
     cy.visit(`${uiPrefix}namespaces/testns1`);
     optOut();
     optIn();
@@ -41,7 +45,7 @@ describe('Ansible Lightspeed Modal Test', () => {
 
   // We will unskip this test after this functionality is implemented on the backend (AAH-2166)
   it.skip('does remove namespace from deny list when namespace deleted.', () => {
-    cy.login();
+    communityLogin();
     cy.visit(`${uiPrefix}repo/published/testns1`);
 
     optOut();

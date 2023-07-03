@@ -32,8 +32,11 @@ describe('view-only mode - with download', () => {
     cy.contains('.pf-c-page__header-tools a', 'Login');
   });
 
-  it('can load Collections', () => {
+  it('can load Dashboard & Collections', () => {
     cy.visit(uiPrefix);
+    cy.contains('.pf-c-title', 'Welcome to Beta Galaxy');
+
+    cy.visit(`${uiPrefix}collections`);
     cy.contains('.pf-c-title', 'Collections');
 
     // go to a detail screen
