@@ -26,7 +26,7 @@ function apiLogin(username, password, url = '/', title = 'Collections') {
   );
 
   cy.visit(url);
-  cy.contains('.pf-c-title', title);
+  cy.assertTitle(title);
 }
 
 function manualCloudLogin(username, password) {

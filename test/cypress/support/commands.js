@@ -29,6 +29,10 @@ Cypress.Commands.add('menuGo', {}, (name) => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
+Cypress.Commands.add('assertTitle', {}, (title) => {
+  cy.contains('.pf-c-title', title);
+});
+
 Cypress.Commands.add(
   'createUser',
   {},
@@ -62,7 +66,7 @@ Cypress.Commands.add(
     cy.wait('@createUser');
 
     // Wait for navigation
-    cy.contains('.pf-c-title', 'Users');
+    cy.assertTitle('Users');
   },
 );
 
