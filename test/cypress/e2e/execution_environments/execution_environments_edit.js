@@ -1,11 +1,57 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
+function deleteContainersManual() {
+  cy.intercept(
+    'GET',
+    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
+  ).as('listLoad');
+
+  cy.visit(`${uiPrefix}containers`);
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@listLoad', { timeout: 50000 });
+      cy.get('.pf-c-alert__action').click();
+    });
+  });
+}
+
+function deleteRegistriesManual() {
+  cy.intercept(
+    'GET',
+    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
+  ).as('registries');
+
+  cy.visit(`${uiPrefix}registries`);
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@registries');
+    });
+  });
+}
+
 describe('execution environments', () => {
   let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
-
-    cy.deleteRegistriesManual();
-    cy.deleteContainersManual();
+    deleteRegistriesManual();
+    deleteContainersManual();
 
     cy.galaxykit(
       'registry create',

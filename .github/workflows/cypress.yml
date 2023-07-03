@@ -37,8 +37,6 @@ jobs:
         - 'misc'
         - 'namespaces'
         - 'repo'
-        - 'view-only-access'
-        - 'view-only-download'
 
     steps:
 

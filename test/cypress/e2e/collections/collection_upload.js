@@ -12,7 +12,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteTestGroups();
     cy.deleteTestUsers();
     cy.createUser(userName, userPassword);
-    cy.createApprovedCollection('testspace', 'testcollection');
+    cy.galaxykit('-i collection upload testspace testcollection');
   });
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {

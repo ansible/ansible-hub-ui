@@ -1,12 +1,8 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
-const sessionOptions = {
-  validate: () =>
-    cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
-};
-
-function apiLogin(username, password) {
+function apiLogin(username, password, url = '/', title = 'Collections') {
   cy.session(
     ['apiLogin', username],
     () => {
@@ -22,18 +18,22 @@ function apiLogin(username, password) {
         });
       });
     },
-    sessionOptions,
+    {
+      validate: () =>
+        cy.request(`${apiPrefix}_ui/v1/me/`).its('status').should('eq', 200),
+    },
   );
 
-  cy.visit('/');
+  cy.visit(url);
+  cy.assertTitle(title);
 }
 
-Cypress.Commands.add('login', {}, (username, password) => {
+Cypress.Commands.add('login', {}, (username, password, url, title) => {
   if (!username && !password) {
     // default to admin
     username = Cypress.env('username');
     password = Cypress.env('password');
   }
 
-  apiLogin(username, password);
+  apiLogin(username, password, url, title);
 });

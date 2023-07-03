@@ -48,7 +48,7 @@ describe('Collections list Tests', () => {
     cy.galaxykit('namespace create my_namespace');
     // insert test data
     range(11).forEach((i) => {
-      cy.createApprovedCollection('my_namespace', 'my_collection' + i);
+      cy.galaxykit(`-i collection upload my_namespace my_collection${i}`);
     });
   });
 

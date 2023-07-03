@@ -17,7 +17,7 @@ describe('collection tests', () => {
   });
 
   it('deletes an entire collection', () => {
-    cy.createApprovedCollection('test_namespace', 'test_collection');
+    cy.galaxykit('-i collection upload test_namespace test_collection');
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
@@ -29,7 +29,7 @@ describe('collection tests', () => {
   });
 
   it('deletes a collection version', () => {
-    cy.createApprovedCollection('my_namespace', 'my_collection');
+    cy.galaxykit('-i collection upload my_namespace my_collection');
 
     cy.visit(`${uiPrefix}collections`);
 

@@ -12,6 +12,8 @@ const manualLogin = (username, password) => {
 
   cy.wait('@login');
   cy.wait('@feature-flags');
+
+  cy.assertTitle('Collections');
 };
 
 const manualLogout = () => {
