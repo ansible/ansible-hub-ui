@@ -62,6 +62,7 @@ interface IState {
   deleteCollection: CollectionVersionSearch;
   confirmDelete: boolean;
   isDeletionPending: boolean;
+  deleteAll: boolean;
 }
 
 class Search extends React.Component<RouteProps, IState> {
@@ -100,6 +101,7 @@ class Search extends React.Component<RouteProps, IState> {
       deleteCollection: null,
       confirmDelete: false,
       isDeletionPending: false,
+      deleteAll: true,
     };
   }
 
@@ -150,6 +152,10 @@ class Search extends React.Component<RouteProps, IState> {
     const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
 
+    const deleteFromRepo = this.state.deleteAll
+      ? null
+      : deleteCollection?.repository?.name;
+
     return (
       <div className='search-page'>
         <AlertList
@@ -171,9 +177,11 @@ class Search extends React.Component<RouteProps, IState> {
                 load: () => this.load(),
                 redirect: false,
                 addAlert: (alert) => this.addAlert(alert),
+                deleteFromRepo,
               }),
             )
           }
+          deleteFromRepo={deleteFromRepo}
         />
 
         {showImportModal && (
@@ -355,6 +363,8 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
+    const { display_repositories } = this.context.featureFlags;
+
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
         canDeleteCollection: hasPermission('ansible.delete_collection'),
@@ -364,7 +374,23 @@ class Search extends React.Component<RouteProps, IState> {
             addAlert: (alert) => this.addAlert(alert),
             setState: (state) => this.setState(state),
             collection,
+            deleteAll: true,
           }),
+        deleteAll: true,
+        display_repositories: display_repositories,
+      }),
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        noDependencies: null,
+        onClick: () =>
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+            addAlert: (alert) => this.addAlert(alert),
+            setState: (state) => this.setState(state),
+            collection,
+            deleteAll: false,
+          }),
+        deleteAll: false,
+        display_repositories: display_repositories,
       }),
       hasPermission('galaxy.upload_to_namespace') && (
         <DropdownItem
