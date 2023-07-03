@@ -1,6 +1,5 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
-const uiPrefix = Cypress.env('uiPrefix');
 
 function apiLogin(username, password, url = '/', title = 'Collections') {
   cy.session(

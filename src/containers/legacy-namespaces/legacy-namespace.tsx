@@ -5,7 +5,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DropdownItem,
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -21,7 +20,6 @@ import {
   LoadingPageSpinner,
   Logo,
   Pagination,
-  StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -254,12 +252,7 @@ class LegacyNamespace extends React.Component<
           <BaseHeader title={this.state.namespace.name}></BaseHeader>
         </DataListCell>,
       );
-
-      const summary_fields = this.state.namespace.summary_fields;
-      const userOwnsLegacyNamespace = summary_fields?.owners?.filter(
-        (n) => n.username == this.context.user.username,
-      ).length;
-
+    }
 
     return (
       <React.Fragment>
