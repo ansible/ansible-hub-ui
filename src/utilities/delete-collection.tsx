@@ -48,10 +48,12 @@ export class DeleteCollectionUtils {
       ? t`Delete entire collection from system`
       : t`Delete collection from repository`;
 
+    const key = deleteAll ? 'delete-collection' : 'remove-collection';
+
     if (noDependencies === false) {
       return (
         <Tooltip
-          key='delete-collection-disabled'
+          key={key}
           position='left'
           content={
             <Trans>
@@ -67,15 +69,7 @@ export class DeleteCollectionUtils {
     }
 
     return (
-      <DropdownItem
-        key='delete-collection-enabled'
-        onClick={onClick}
-        data-cy={
-          deleteAll
-            ? 'delete-collection-dropdown'
-            : 'delete-collection-from-repo-dropdown'
-        }
-      >
+      <DropdownItem data-cy={key} key={key} onClick={onClick}>
         {caption}
       </DropdownItem>
     );
