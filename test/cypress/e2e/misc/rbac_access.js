@@ -175,6 +175,7 @@ function testAccessTab({
 
   // breadcrumb back to group list
   cy.get('.pf-c-breadcrumb__item a').last().click();
+  cy.contains('button', 'Select a group');
 
   // list view, delete, see empty
   cy.get(
