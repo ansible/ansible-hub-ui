@@ -810,6 +810,10 @@ msgstr "コレクション \"{0}\" を非推奨化できませんでした。"
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化を解除できませんでした。"
 
+#: src/utilities/delete-collection.tsx
+msgid "Collection \"{0}\" has been successfully deleted."
+msgstr ""
+
 #: src/containers/namespace-detail/namespace-detail.tsx
 #~ msgid "Collection \"{0}\" has been successfully deprecated."
 #~ msgstr "Collection \"{0}\" has been successfully deprecated."
@@ -844,8 +848,8 @@ msgid "Collection \"{name}\" could not be undeprecated."
 msgstr "コレクション \"{name}\" の非推奨化を解除できませんでした。"
 
 #: src/utilities/delete-collection.tsx
-msgid "Collection \"{name}\" has been successfully deleted."
-msgstr "コレクション \"{name}\" が正常に削除されました。"
+#~ msgid "Collection \"{name}\" has been successfully deleted."
+#~ msgstr "コレクション \"{name}\" が正常に削除されました。"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Collection \"{name}\" has been successfully deprecated."
@@ -1302,6 +1306,10 @@ msgstr "削除"
 #~ msgid "Delete collection"
 #~ msgstr "Delete collection"
 
+#: src/utilities/delete-collection.tsx
+msgid "Delete collection from repository"
+msgstr ""
+
 #: src/constants.tsx
 #~ msgid "Delete collection remote"
 #~ msgstr "Delete collection remote"
@@ -1344,8 +1352,12 @@ msgstr "コンテナーを削除しますか?"
 
 #: src/utilities/delete-collection.tsx
 #: src/utilities/delete-collection.tsx
-msgid "Delete entire collection"
-msgstr "コレクション全体の削除"
+#~ msgid "Delete entire collection"
+#~ msgstr "コレクション全体の削除"
+
+#: src/utilities/delete-collection.tsx
+msgid "Delete entire collection from system"
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Delete group"
@@ -1413,21 +1425,36 @@ msgstr "ユーザーを削除しますか?"
 #~ msgstr "Delete version {0}"
 
 #: src/components/headers/collection-header.tsx
-msgid "Delete version {version}"
-msgstr "バージョン {version} の削除"
+#~ msgid "Delete version {version}"
+#~ msgstr "バージョン {version} の削除"
+
+#: src/components/headers/collection-header.tsx
+msgid "Delete version {version} from repository"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx
+msgid "Delete version {version} from system"
+msgstr ""
 
 #: src/components/delete-modal/delete-collection-modal.tsx
-msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
-msgstr "<0>{0} v{collectionVersion}</0> を削除するとそのデータが失われ、コレクション全体が削除されます。"
+#~ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
+#~ msgstr "<0>{0} v{collectionVersion}</0> を削除するとそのデータが失われ、コレクション全体が削除されます。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx
-msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
-msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
+#~ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
+#~ msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx
+msgid "Deleting <0>{0} v{collectionVersion}</0>, its data will be lost."
+msgstr ""
+
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> を削除すると、そのデータが失われます。"
+
+#: src/components/delete-modal/delete-collection-modal.tsx
+msgid "Deleting <0>{0}</0>, its data will be lost."
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "Deleting <0>{digest}</0> and its data will be lost."
@@ -4546,6 +4573,10 @@ msgstr "コレクション \"{name}\" が正常に非推奨化されました。
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr "コレクション \"{name}\" の非推奨化が正常に解除されました。"
 
+#: src/components/delete-modal/delete-collection-modal.tsx
+msgid "The collection will be deleted only from repository {deleteFromRepo}."
+msgstr ""
+
 #: src/components/import-modal/import-modal.tsx
 msgid "The collection you have selected does not match this namespace."
 msgstr "選択したコレクションは、この名前空間と一致しません。"
@@ -4719,6 +4750,10 @@ msgstr "このタグはすでにこのイメージに対して選択されてい
 #: src/components/repositories/remote-form.tsx
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
+
+#: src/components/delete-modal/delete-collection-modal.tsx
+msgid "This will cause the entire collection to be deleted."
+msgstr ""
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 msgid "This will revoke all permissions associated with this role from the group."
