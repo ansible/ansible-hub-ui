@@ -77,7 +77,7 @@ describe('Edit a namespace', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}namespaces/testns1`));
-    cy.get('.pf-c-title').should('contain', 'Company name');
+    cy.assertTitle('Company name');
   });
 
   it('tests the Logo URL field', () => {

@@ -30,6 +30,7 @@ jobs:
         - 'approval'
         - 'approval_modal'
         - 'collections'
+        - 'community'
         - 'ee_controller'
         - 'execution_environments'
         - 'groups_and_users'
@@ -39,8 +40,6 @@ jobs:
         - 'misc'
         - 'namespaces'
         - 'repo'
-        - 'view-only-access'
-        - 'view-only-download'
 
     steps:
 

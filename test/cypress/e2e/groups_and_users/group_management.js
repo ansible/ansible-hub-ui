@@ -1,6 +1,68 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const pulpPrefix = Cypress.env('pulpPrefix');
 
+function createGroupManually(name) {
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');
+  cy.menuGo('User Access > Groups');
+  cy.wait('@loadGroups');
+
+  cy.contains('Create').click();
+
+  cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
+  cy.contains('div', 'Name *')
+    .closest('*:has(input)')
+    .find('input')
+    .first()
+    .type(`${name}{enter}`);
+  cy.wait('@submitGroup');
+
+  // Wait for the list to update
+  cy.contains(name).should('exist');
+}
+
+function addUserToGroupManually(groupName, userName) {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.contains('button', 'Add').click();
+  cy.get('input.pf-c-select__toggle-typeahead').type(userName);
+  cy.contains('button', userName).click();
+  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
+  cy.contains('footer > button', 'Add').click({ force: true });
+  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
+}
+
+function deleteGroupManually(name) {
+  cy.menuGo('User Access > Groups');
+  cy.intercept('DELETE', `${apiPrefix}_ui/v1/groups/*`).as('deleteGroup');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('listGroups');
+  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
+  cy.get('[aria-label=Delete]').click();
+  cy.contains('[role=dialog] button', 'Delete').click();
+  cy.wait('@deleteGroup').then(({ response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
+
+  // Wait for list reload
+  cy.wait('@listGroups');
+  cy.contains('No groups yet').should('exist');
+}
+
+function removeUserFromGroupManually(groupName, userName) {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.get(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+  ).click();
+  cy.containsnear(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+    'Remove',
+  ).click();
+  cy.contains('button.pf-m-danger', 'Delete').click();
+  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
+}
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -20,22 +82,21 @@ describe('Hub Group Management Tests', () => {
   it('admin user can create/delete a group', () => {
     const name = 'testGroup';
 
-    cy.createGroupManually(name);
-
-    cy.deleteGroupManually(name);
+    createGroupManually(name);
+    deleteGroupManually(name);
     cy.contains('No groups yet').should('exist');
   });
 
   it('admin user can add/remove a user to/from a group', () => {
-    let groupName = 'testGroup';
-    let userName = 'testUser';
+    const groupName = 'testGroup';
+    const userName = 'testUser';
 
     cy.createUser(userName);
-    cy.createGroupManually(groupName);
+    createGroupManually(groupName);
 
-    cy.addUserToGroupManually(groupName, userName);
+    addUserToGroupManually(groupName, userName);
 
-    cy.removeUserFromGroupManually(groupName, userName);
+    removeUserFromGroupManually(groupName, userName);
 
     cy.galaxykit('group delete', groupName);
     cy.galaxykit('user delete', userName);

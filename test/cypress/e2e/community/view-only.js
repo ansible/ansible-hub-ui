@@ -32,9 +32,12 @@ describe('view-only mode - with download', () => {
     cy.contains('.pf-c-page__header-tools a', 'Login');
   });
 
-  it('can load Collections', () => {
+  it('can load Dashboard & Collections', () => {
     cy.visit(uiPrefix);
-    cy.contains('.pf-c-title', 'Collections');
+    cy.assertTitle('Welcome to Beta Galaxy');
+
+    cy.visit(`${uiPrefix}collections`);
+    cy.assertTitle('Collections');
 
     // go to a detail screen
     cy.get('.pf-c-card__header .name a').first().click();
@@ -44,14 +47,14 @@ describe('view-only mode - with download', () => {
 
   it('can load Namespaces', () => {
     cy.visit(`${uiPrefix}namespaces`);
-    cy.contains('.pf-c-title', 'Namespaces');
+    cy.assertTitle('Namespaces');
 
     cy.contains('button', 'Create').should('not.exist');
     cy.contains('.pf-c-tabs__item a', 'My namespaces').should('not.exist');
 
     // go to a (namespace) detail screen
     cy.contains('a', 'View collections').click();
-    cy.contains('.pf-c-title', 'admin');
+    cy.assertTitle('admin');
 
     cy.contains('button', 'Upload collection').should('not.exist');
     cy.contains('button', 'Upload new version').should('not.exist');

@@ -10,56 +10,36 @@ describe('Search for users', () => {
     cy.menuGo('User Access > Users');
   });
 
-  let usernamefilterInput = () => {
-    return cy.get('input[aria-label="username__contains"]').click();
-  };
-
-  let firstnamefilterInput = () => {
-    return cy.get('input[aria-label="first_name__contains"]').click();
-  };
-
-  let lastnamefilterInput = () => {
-    return cy.get('input[aria-label="last_name__contains"]').click();
-  };
-
-  let emailfilterInput = () => {
-    return cy.get('input[aria-label="email__contains"]').click();
-  };
-
-  let checkUserEntry = () => {
-    return cy
+  const usernamefilterInput = () =>
+    cy.get('input[aria-label="username__contains"]').click();
+  const firstnamefilterInput = () =>
+    cy.get('input[aria-label="first_name__contains"]').click();
+  const lastnamefilterInput = () =>
+    cy.get('input[aria-label="last_name__contains"]').click();
+  const emailfilterInput = () =>
+    cy.get('input[aria-label="email__contains"]').click();
+  const checkUserEntry = () =>
+    cy
       .get('tbody > tr[data-cy="UserList-row-new_user"] > td > a')
       .contains('new_user')
       .should('be.visible');
-  };
-
-  let search = () => {
-    return cy
+  const search = () =>
+    cy
       .get(
         '.pf-c-toolbar__item > .pf-c-input-group > .pf-c-button.pf-m-control',
       )
       .click();
-  };
-
-  let filterDropdown = () => {
-    return cy
-      .get('.pf-c-toolbar__item > .pf-c-input-group > .pf-c-dropdown')
-      .click();
-  };
-
-  let chooseField = () => {
-    return cy.get('.pf-c-dropdown__menu > li > a');
-  };
-
-  let emptyState = () => {
-    return cy
+  const filterDropdown = () =>
+    cy.get('.pf-c-toolbar__item > .pf-c-input-group > .pf-c-dropdown').click();
+  const chooseField = () => cy.get('.pf-c-dropdown__menu > li > a');
+  const emptyState = () =>
+    cy
       .get('.pf-c-empty-state__content > .pf-c-title')
       .should('have.text', 'No results found');
-  };
 
   it('filters users', () => {
     // should have title
-    cy.get('.pf-c-title').should('have.text', 'Users');
+    cy.assertTitle('Users');
 
     // creates a new user
     cy.createUser(

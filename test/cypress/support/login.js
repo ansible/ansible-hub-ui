@@ -3,7 +3,7 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 
-function apiLogin(username, password) {
+function apiLogin(username, password, url = '/', title = 'Collections') {
   cy.session(
     ['apiLogin', username],
     () => {
@@ -25,7 +25,8 @@ function apiLogin(username, password) {
     },
   );
 
-  cy.visit('/');
+  cy.visit(url);
+  cy.assertTitle(title);
 }
 
 function manualCloudLogin(username, password) {
@@ -53,7 +54,7 @@ function manualCloudLogin(username, password) {
   cy.get('#UserMenu');
 }
 
-Cypress.Commands.add('login', {}, (username, password) => {
+Cypress.Commands.add('login', {}, (username, password, url, title) => {
   if (!username && !password) {
     // default to admin
     username = Cypress.env('username');
@@ -63,6 +64,6 @@ Cypress.Commands.add('login', {}, (username, password) => {
   if (insightsLogin) {
     manualCloudLogin(username, password);
   } else {
-    apiLogin(username, password);
+    apiLogin(username, password, url, title);
   }
 });

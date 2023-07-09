@@ -18,11 +18,12 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
+    cy.galaxykit('task wait all');
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.get('[data-cy=delete-collection-dropdown]').click();
+    cy.get('[data-cy=delete-collection]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains('No collections yet', { timeout: 10000 });
@@ -30,6 +31,7 @@ describe('collection tests', () => {
 
   it('deletes a collection version', () => {
     cy.galaxykit('-i collection upload my_namespace my_collection');
+    cy.galaxykit('task wait all');
 
     cy.visit(`${uiPrefix}collections`);
 
@@ -40,7 +42,7 @@ describe('collection tests', () => {
       `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
     ).click();
     cy.get('[data-cy=kebab-toggle]').click();
-    cy.get('[data-cy=delete-version-dropdown]').click();
+    cy.get('[data-cy=delete-collection-version]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });

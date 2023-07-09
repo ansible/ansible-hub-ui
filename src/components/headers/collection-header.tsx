@@ -248,7 +248,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       }),
       hasPermission('ansible.delete_collection') && (
         <DropdownItem
-          data-cy='delete-version-dropdown'
+          data-cy='delete-collection-version'
           key='delete-collection-version'
           onClick={() => this.openDeleteModalWithConfirm(version, true)}
         >
@@ -257,8 +257,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       ),
       hasPermission('ansible.delete_collection') && display_repositories && (
         <DropdownItem
-          data-cy='delete-version-from-repo-dropdown'
-          key='delete-collection-version'
+          data-cy='remove-collection-version'
+          key='remove-collection-version'
           onClick={() => this.openDeleteModalWithConfirm(version, false)}
         >
           {t`Delete version ${version} from repository`}
