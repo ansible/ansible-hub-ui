@@ -109,16 +109,11 @@ function standaloneMenu() {
         !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
-      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4',
       external: true,
       condition: ({ settings, user }) =>
         settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
         !user.is_anonymous,
-    }),
-    menuItem(t`Terms of Use`, {
-      url: 'https://www.redhat.com/en/about/terms-use',
-      external: true,
-      condition: ({ featureFlags }) => featureFlags.legacy_roles,
     }),
     menuSection(t`User Access`, {}, [
       menuItem(t`Users`, {

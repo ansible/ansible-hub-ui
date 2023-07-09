@@ -82,5 +82,3 @@ export {
   LegacyNamespaceDetailType,
   LegacyNamespaceListType,
 } from './response-types/legacy-namespace';
-
-export { WisdomDenyIndexAPI } from './wisdom-deny-index';

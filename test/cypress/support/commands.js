@@ -5,10 +5,6 @@ import shell from 'shell-escape-tag';
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
-Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
-  return subject.closest(`*:has(${selector})`).find(selector);
-});
-
 Cypress.Commands.add('containsnear', {}, (...args) => {
   if (args.length >= 2) {
     if (typeof args[0] === 'string' && typeof args[1] === 'string') {
@@ -31,6 +27,10 @@ Cypress.Commands.add('menuMissing', {}, (name) => {
 Cypress.Commands.add('menuGo', {}, (name) => {
   const last = name.split(' > ').pop();
   return cy.contains('#page-sidebar a', last).click({ force: true });
+});
+
+Cypress.Commands.add('assertTitle', {}, (title) => {
+  cy.contains('.pf-c-title', title);
 });
 
 Cypress.Commands.add(
@@ -66,95 +66,9 @@ Cypress.Commands.add(
     cy.wait('@createUser');
 
     // Wait for navigation
-    cy.contains('.pf-c-title', 'Users');
+    cy.assertTitle('Users');
   },
 );
-
-Cypress.Commands.add('createGroupManually', {}, (name) => {
-  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');
-  cy.menuGo('User Access > Groups');
-  cy.wait('@loadGroups');
-
-  cy.contains('Create').click();
-
-  cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
-  cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
-  cy.wait('@submitGroup');
-
-  // Wait for the list to update
-  cy.contains(name).should('exist');
-});
-
-Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
-  cy.contains('button', 'Add').click();
-  cy.get('input.pf-c-select__toggle-typeahead').type(userName);
-  cy.contains('button', userName).click();
-  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
-  cy.contains('footer > button', 'Add').click({ force: true });
-  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
-});
-
-Cypress.Commands.add(
-  'removeUserFromGroupManually',
-  {},
-  (groupName, userName) => {
-    cy.menuGo('User Access > Groups');
-    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.contains('button', 'Users').click();
-    cy.get(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-    ).click();
-    cy.containsnear(
-      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-      'Remove',
-    ).click();
-    cy.contains('button.pf-m-danger', 'Delete').click();
-    cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
-  },
-);
-
-Cypress.Commands.add('deleteUser', {}, (username) => {
-  cy.menuGo('User Access > Users');
-  cy.intercept('DELETE', `${apiPrefix}_ui/v1/users/*`).as('deleteUser');
-  cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
-  cy.containsnear(
-    `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
-    'Delete',
-  ).click();
-
-  cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userList');
-
-  cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteUser').then(({ response }) => {
-    expect(response.statusCode).to.eq(204);
-  });
-
-  // Wait for navigation
-  cy.wait('@userList');
-  cy.get('h4[class=pf-c-alert__title]').should(
-    'have.text',
-    'Success alert:User "testUser" has been successfully deleted.',
-  );
-});
-
-Cypress.Commands.add('deleteGroupManually', {}, (name) => {
-  cy.menuGo('User Access > Groups');
-  cy.intercept('DELETE', `${apiPrefix}_ui/v1/groups/*`).as('deleteGroup');
-  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('listGroups');
-  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
-  cy.get('[aria-label=Delete]').click();
-  cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteGroup').then(({ response }) => {
-    expect(response.statusCode).to.eq(204);
-  });
-
-  // Wait for list reload
-  cy.wait('@listGroups');
-  cy.contains('No groups yet').should('exist');
-});
 
 // GalaxyKit Integration
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
@@ -360,27 +274,6 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
 });
 
-Cypress.Commands.add('deleteRegistriesManual', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
-  ).as('registries');
-
-  cy.visit(`${uiPrefix}registries`);
-
-  cy.wait('@registries').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
-      cy.get(
-        `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
-      ).click();
-      cy.contains('a', 'Delete').click();
-      cy.contains('button', 'Delete').click();
-      cy.wait('@registries');
-    });
-  });
-});
-
 Cypress.Commands.add('deleteRegistries', {}, () => {
   cy.intercept(
     'GET',
@@ -412,37 +305,6 @@ Cypress.Commands.add('deleteContainers', {}, () => {
     });
   });
 });
-
-Cypress.Commands.add('deleteContainersManual', {}, () => {
-  cy.intercept(
-    'GET',
-    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
-  ).as('listLoad');
-
-  cy.visit(`${uiPrefix}containers`);
-
-  cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
-      cy.get(
-        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
-      ).click();
-      cy.contains('a', 'Delete').click();
-      cy.get('input[id=delete_confirm]').click();
-      cy.contains('button', 'Delete').click();
-      cy.wait('@listLoad', { timeout: 50000 });
-      cy.get('.pf-c-alert__action').click();
-    });
-  });
-});
-
-Cypress.Commands.add(
-  'createApprovedCollection',
-  {},
-  (namespace, collection) => {
-    cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
-  },
-);
 
 Cypress.Commands.add('deleteRepositories', {}, () => {
   const initRepos = [
@@ -526,18 +388,3 @@ Cypress.Commands.add(
     );
   },
 );
-
-Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.visit(`${uiPrefix}roles/`);
-
-  cy.get(
-    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,
-  ).click();
-
-  cy.contains('Delete').click();
-  cy.get('[data-cy=DeleteModal]')
-    .parent()
-    .get('button')
-    .contains('Delete')
-    .click();
-});
