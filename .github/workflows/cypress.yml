@@ -153,13 +153,12 @@ jobs:
         mv ansible-hub-ui/dist www/static/galaxy_ng
         cd www
         echo '{}' > package.json
-        npm install local-web-server lws-cors
+        npm install local-web-server
         node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
           --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
           --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
-          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' \
-          --cors.origin 'http://localhost:5001' &
+          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
 
     - name: "Run insights UI"
       if: ${{ env.COMPOSE_PROFILE == 'insights' }}
