@@ -28,6 +28,14 @@ updates:
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: 'npm'
+    directory: '/test'
+    target-branch: 'stable-4.7'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[stable-4.7] '
+
+  - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'stable-4.6'
     schedule:
