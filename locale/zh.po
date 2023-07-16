@@ -171,8 +171,8 @@ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collectio
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1><2></2><3/>。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
-msgstr "<0>红帽正在 <1>Ansible Lightspeed</1> <2/> 中开发新的 Ansible 内容开发功能，以帮助其他自动器构建 Ansible 内容。</0>"
+#~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
+#~ msgstr "<0>红帽正在 <1>Ansible Lightspeed</1> <2/> 中开发新的 Ansible 内容开发功能，以帮助其他自动器构建 Ansible 内容。</0>"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
@@ -191,8 +191,8 @@ msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>警告</0> 加载新令牌将删除您的旧令牌。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
-msgstr "<0>您的角色和集合可用作机器学习模型的培训数据，提供 Ansible 自动化内容建议。</0><1>如果有疑问，请联系 Ansible 团队 <2>ansible-content-ai@redhat.com</2>。</1>"
+#~ msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
+#~ msgstr "<0>您的角色和集合可用作机器学习模型的培训数据，提供 Ansible 自动化内容建议。</0><1>如果有疑问，请联系 Ansible 团队 <2>ansible-content-ai@redhat.com</2>。</1>"
 
 #: src/containers/not-found/not-found.tsx
 msgid "404 - Page not found"
@@ -366,8 +366,8 @@ msgstr "add-user-modal"
 #~ "\"{namespace}\" container namespace."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Additional details"
-msgstr "其它详情"
+#~ msgid "Additional details"
+#~ msgstr "其它详情"
 
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/namespace-list/namespace-list.tsx
@@ -402,8 +402,8 @@ msgstr "Ansible Automation Platform"
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Ansible Lightspeed settings"
-msgstr "Ansible Lightspeed 设置"
+#~ msgid "Ansible Lightspeed settings"
+#~ msgstr "Ansible Lightspeed 设置"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
@@ -499,8 +499,8 @@ msgstr "您确定要删除软件仓库 <0>{name}</0> <1/>？<2>注意：</2>这�
 #~ msgstr "Are you sure you want to opt the following legacy namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
-msgstr "您确定要从 Ansible Lightspeed 中取消以下传统命名空间吗？"
+#~ msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
+#~ msgstr "您确定要从 Ansible Lightspeed 中取消以下传统命名空间吗？"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
@@ -511,8 +511,8 @@ msgstr "您确定要从 Ansible Lightspeed 中取消以下传统命名空间吗�
 #~ msgstr "Are you sure you want to opt the following namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
-msgstr "您确定要从 Ansible Lightspeed 中取消以下命名空间吗？"
+#~ msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
+#~ msgstr "您确定要从 Ansible Lightspeed 中取消以下命名空间吗？"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following namespace out of Wisdom?"
@@ -604,7 +604,6 @@ msgstr "CA 证书"
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
@@ -2035,8 +2034,8 @@ msgid "Failed to list distributions, removing only the repository."
 msgstr "列出发布失败，仅删除仓库。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to load Ansible Lightspeed information."
-msgstr "加载 Ansible Lightspeed 信息失败。"
+#~ msgid "Failed to load Ansible Lightspeed information."
+#~ msgstr "加载 Ansible Lightspeed 信息失败。"
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #~ msgid "Failed to load collection versions"
@@ -2073,16 +2072,16 @@ msgstr "加载软件仓库失败。"
 #~ msgstr "Failed to load Wisdom information."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt in to Ansible Lightspeed."
-msgstr "选择使用 Ansible Lightspeed 失败。"
+#~ msgid "Failed to opt in to Ansible Lightspeed."
+#~ msgstr "选择使用 Ansible Lightspeed 失败。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt in to Wisdom."
 #~ msgstr "Failed to opt in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt out of Ansible Lightspeed."
-msgstr "选择不再使用 Ansible Lightspeed 失败。"
+#~ msgid "Failed to opt out of Ansible Lightspeed."
+#~ msgstr "选择不再使用 Ansible Lightspeed 失败。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
@@ -2555,16 +2554,16 @@ msgid "Legacy"
 msgstr "传统"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "传统命名空间 <0>{name}</0> 被选择使用 Ansible Lightspeed。"
+#~ msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "传统命名空间 <0>{name}</0> 被选择使用 Ansible Lightspeed。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "传统命名空间 <0>{name}</0> 被选择不使用 Ansible Lightspeed。"
+#~ msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "传统命名空间 <0>{name}</0> 被选择不使用 Ansible Lightspeed。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
@@ -2802,16 +2801,16 @@ msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "命名空间 <0>{name}</0> 被选择使用 Ansible Lightspeed。"
+#~ msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "命名空间 <0>{name}</0> 被选择使用 Ansible Lightspeed。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "命名空间 <0>{name}</0> 被选择不使用 Ansible Lightspeed。"
+#~ msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "命名空间 <0>{name}</0> 被选择不使用 Ansible Lightspeed。"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted out of Wisdom."
@@ -3142,8 +3141,8 @@ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt in to Ansible Lightspeed"
-msgstr "选择使用 Ansible Lightspeed"
+#~ msgid "Opt in to Ansible Lightspeed"
+#~ msgstr "选择使用 Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3152,8 +3151,8 @@ msgstr "选择使用 Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt out of Ansible Lightspeed"
-msgstr "选择不再使用 Ansible Lightspeed"
+#~ msgid "Opt out of Ansible Lightspeed"
+#~ msgstr "选择不再使用 Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4534,8 +4533,8 @@ msgstr "任务在创建后将显示。"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/loaders/standalone/menu.tsx
-msgid "Terms of Use"
-msgstr "使用条款"
+#~ msgid "Terms of Use"
+#~ msgstr "使用条款"
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
@@ -4590,12 +4589,12 @@ msgid "The file is not available for this version of {collectionName}"
 msgstr "文件不适用于 {collectionName} 的这个版本"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
-msgstr "以下传统命名空间将选择 Ansible Lightspeed："
+#~ msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "以下传统命名空间将选择 Ansible Lightspeed："
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following namespace will be opted in to Ansible Lightspeed:"
-msgstr "以下命名空间将选择 Ansible Lightspeed："
+#~ msgid "The following namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "以下命名空间将选择 Ansible Lightspeed："
 
 #: src/components/rbac/preview-roles.tsx
 msgid "The following roles will be applied to group: <0>{0}</0>"

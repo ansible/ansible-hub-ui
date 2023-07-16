@@ -171,8 +171,8 @@ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collectio
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
-msgstr "<0>Red Hat está trabajando en nuevas e interesantes capacidades de desarrollo de contenidos de Ansible en el contexto de <1>Ansible Lightspeed</1> <2/> para ayudar a otros automatizadores a crear contenido de Ansible.</0>"
+#~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
+#~ msgstr "<0>Red Hat está trabajando en nuevas e interesantes capacidades de desarrollo de contenidos de Ansible en el contexto de <1>Ansible Lightspeed</1> <2/> para ayudar a otros automatizadores a crear contenido de Ansible.</0>"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
@@ -191,8 +191,8 @@ msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>ADVERTENCIA</0> cargar un nuevo token borrará su antiguo token."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
-msgstr "<0>Sus funciones y colecciones pueden utilizarse como datos de entrenamiento para un modelo de aprendizaje automático que proporciona recomendaciones de contenido de automatización de Ansible.</0><1>Si tiene alguna duda, póngase en contacto con el equipo de Ansible en <2>ansible-content-ai@redhat.com</2>.</1>"
+#~ msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
+#~ msgstr "<0>Sus funciones y colecciones pueden utilizarse como datos de entrenamiento para un modelo de aprendizaje automático que proporciona recomendaciones de contenido de automatización de Ansible.</0><1>Si tiene alguna duda, póngase en contacto con el equipo de Ansible en <2>ansible-content-ai@redhat.com</2>.</1>"
 
 #: src/containers/not-found/not-found.tsx
 msgid "404 - Page not found"
@@ -366,8 +366,8 @@ msgstr "add-user-modal"
 #~ "\"{namespace}\" container namespace."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Additional details"
-msgstr "Más información"
+#~ msgid "Additional details"
+#~ msgstr "Más información"
 
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/namespace-list/namespace-list.tsx
@@ -402,8 +402,8 @@ msgstr "Plataforma de Automatización de Ansible"
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Ansible Lightspeed settings"
-msgstr "Configuración de Ansible Lightspeed"
+#~ msgid "Ansible Lightspeed settings"
+#~ msgstr "Configuración de Ansible Lightspeed"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
@@ -499,8 +499,8 @@ msgstr "¿Está seguro de que quiere borrar el repositorio <0>{name}</0>?<1/><2>
 #~ msgstr "Are you sure you want to opt the following legacy namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
-msgstr "¿Está seguro de que desea excluir el siguiente espacio de nombres heredado de Ansible Lightspeed?"
+#~ msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
+#~ msgstr "¿Está seguro de que desea excluir el siguiente espacio de nombres heredado de Ansible Lightspeed?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
@@ -511,8 +511,8 @@ msgstr "¿Está seguro de que desea excluir el siguiente espacio de nombres here
 #~ msgstr "Are you sure you want to opt the following namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
-msgstr "¿Está seguro de que desea excluir el siguiente espacio de nombres de Ansible Lightspeed?"
+#~ msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
+#~ msgstr "¿Está seguro de que desea excluir el siguiente espacio de nombres de Ansible Lightspeed?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following namespace out of Wisdom?"
@@ -604,7 +604,6 @@ msgstr "Certificado de CA"
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
@@ -2035,8 +2034,8 @@ msgid "Failed to list distributions, removing only the repository."
 msgstr "Fallo al listar distribuciones, eliminando solo el repositorio."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to load Ansible Lightspeed information."
-msgstr "Error al cargar la información de Ansible Lightspeed."
+#~ msgid "Failed to load Ansible Lightspeed information."
+#~ msgstr "Error al cargar la información de Ansible Lightspeed."
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #~ msgid "Failed to load collection versions"
@@ -2073,16 +2072,16 @@ msgstr "Error al cargar repositorios."
 #~ msgstr "Failed to load Wisdom information."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt in to Ansible Lightspeed."
-msgstr "No se pudo integrar en Ansible Lightspeed."
+#~ msgid "Failed to opt in to Ansible Lightspeed."
+#~ msgstr "No se pudo integrar en Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt in to Wisdom."
 #~ msgstr "Failed to opt in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt out of Ansible Lightspeed."
-msgstr "No se pudo excluir de Ansible Lightspeed."
+#~ msgid "Failed to opt out of Ansible Lightspeed."
+#~ msgstr "No se pudo excluir de Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
@@ -2555,16 +2554,16 @@ msgid "Legacy"
 msgstr "Heredado"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "El espacio de nombres heredado <0>{name}</0> está integrado en Ansible Lightspeed."
+#~ msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "El espacio de nombres heredado <0>{name}</0> está integrado en Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "El espacio de nombres heredado <0>{name}</0> está excluido de Ansible Lightspeed."
+#~ msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "El espacio de nombres heredado <0>{name}</0> está excluido de Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
@@ -2802,16 +2801,16 @@ msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "El espacio de nombres <0>{name}</0> está integrado en Ansible Lightspeed."
+#~ msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "El espacio de nombres <0>{name}</0> está integrado en Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "El espacio de nombres <0>{name}</0> no está incluido en Ansible Lightspeed."
+#~ msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "El espacio de nombres <0>{name}</0> no está incluido en Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted out of Wisdom."
@@ -3142,8 +3141,8 @@ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt in to Ansible Lightspeed"
-msgstr "Integrar en Ansible Lightspeed"
+#~ msgid "Opt in to Ansible Lightspeed"
+#~ msgstr "Integrar en Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3152,8 +3151,8 @@ msgstr "Integrar en Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt out of Ansible Lightspeed"
-msgstr "Excluir de Ansible Lightspeed"
+#~ msgid "Opt out of Ansible Lightspeed"
+#~ msgstr "Excluir de Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4534,8 +4533,8 @@ msgstr "Las tareas aparecerán una vez creadas."
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/loaders/standalone/menu.tsx
-msgid "Terms of Use"
-msgstr "Condiciones de uso"
+#~ msgid "Terms of Use"
+#~ msgstr "Condiciones de uso"
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
@@ -4590,12 +4589,12 @@ msgid "The file is not available for this version of {collectionName}"
 msgstr "El archivo no está disponible para esta versión de {collectionName}"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
-msgstr "El siguiente espacio de nombres heredado se incluirá en Ansible Lightspeed:"
+#~ msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "El siguiente espacio de nombres heredado se incluirá en Ansible Lightspeed:"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following namespace will be opted in to Ansible Lightspeed:"
-msgstr "El siguiente espacio de nombres se integrará en Ansible Lightspeed:"
+#~ msgid "The following namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "El siguiente espacio de nombres se integrará en Ansible Lightspeed:"
 
 #: src/components/rbac/preview-roles.tsx
 msgid "The following roles will be applied to group: <0>{0}</0>"
