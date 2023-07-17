@@ -11,7 +11,7 @@
         "@patternfly/react-code-editor": "^4.82.115",
         "@patternfly/react-core": "^4.276.6",
         "@patternfly/react-table": "^4.113.0",
-        "@types/node": "^16.18.24",
+        "@types/node": "^16.18.38",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
         "antsibull-docs": "^1.0.0",
