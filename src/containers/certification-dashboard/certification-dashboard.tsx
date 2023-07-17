@@ -57,6 +57,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
+  repositoryBasePath,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -774,16 +775,16 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
     // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
     return Promise.all([
-      RepositoriesUtils.distributionByRepoName(originalRepo),
-      RepositoriesUtils.distributionByRepoName(destinationRepo),
+      repositoryBasePath(originalRepo),
+      repositoryBasePath(destinationRepo),
     ])
       .then(([source, destination]) =>
         CollectionVersionAPI.move(
           version.namespace,
           version.name,
           version.version,
-          source.base_path,
-          destination.base_path,
+          source,
+          destination,
         ),
       )
       .then((result) =>

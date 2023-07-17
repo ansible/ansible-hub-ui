@@ -16,7 +16,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { RepositoriesUtils, errorMessage } from 'src/utilities';
+import { errorMessage, repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -359,14 +359,13 @@ export class ImportModal extends React.Component<IProps, IState> {
 
     this.setState({ uploadStatus: Status.uploading });
 
-    let distro = null;
-    distro = await RepositoriesUtils.distributionByRepoName(
-      selectedRepos[0],
-    ).catch((error) => {
-      this.addAlert(error, 'danger');
-    });
+    const distro_base_path = await repositoryBasePath(selectedRepos[0]).catch(
+      (error) => {
+        this.addAlert(error, 'danger');
+      },
+    );
 
-    if (!distro) {
+    if (!distro_base_path) {
       this.setState({ uploadStatus: Status.waiting });
       return;
     }
@@ -374,7 +373,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     const artifact = {
       file: this.state.file,
       sha256: '',
-      distro_base_path: distro.base_path,
+      distro_base_path,
     } as CollectionUploadType;
 
     this.cancelToken = CollectionAPI.getCancelToken();
