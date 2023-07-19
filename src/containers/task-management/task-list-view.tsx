@@ -87,7 +87,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user } = this.context;
     if (!user || user.is_anonymous) {
       this.setState({ loading: false, unauthorised: true });
     } else {
