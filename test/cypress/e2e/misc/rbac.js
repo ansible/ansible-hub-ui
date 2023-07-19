@@ -210,7 +210,7 @@ describe('RBAC test for user with permissions', () => {
     },
     {
       group: 'task_management',
-      permissions: ['core.view_task', 'core.delete_task', 'core.change_task'],
+      permissions: ['core.delete_task', 'core.change_task'],
     },
   ];
 
@@ -377,7 +377,7 @@ describe('RBAC test for user with permissions', () => {
     );
   });
 
-  it('should let view all tasks, change and delete task when user has permission', () => {
+  it('should let view all tasks. should let change and delete task when user has permission', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_task_management');
     cy.login(userName, userPassword);
 

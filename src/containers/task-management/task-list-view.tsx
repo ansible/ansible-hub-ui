@@ -93,13 +93,6 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     } else {
       this.queryTasks();
     }
-
-    if (!hasPermission('core.view_task')) {
-      this.addAlert(
-        t`You do not have permission to view all tasks. Only tasks created by you are visible.`,
-        'info',
-      );
-    }
   }
 
   render() {
