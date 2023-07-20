@@ -137,12 +137,11 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Sync from registry').should('not.exist');
   });
 
-  it("shouldn't let view all tasks, change and delete task when user doesn't have permission", () => {
+  // TODO Create test for change/delete task without permission
+  it("should let view task when user doesn't have permission", () => {
     cy.visit(`${uiPrefix}tasks`);
-
     cy.get('[aria-label="Task list"] tr td a').first().click();
-
-    cy.contains('404 - Page not found');
+    cy.contains('Task detail');
   });
 });
 
@@ -210,7 +209,7 @@ describe('RBAC test for user with permissions', () => {
     },
     {
       group: 'task_management',
-      permissions: ['core.view_task', 'core.delete_task', 'core.change_task'],
+      permissions: ['core.delete_task', 'core.change_task'],
     },
   ];
 
@@ -377,7 +376,8 @@ describe('RBAC test for user with permissions', () => {
     );
   });
 
-  it('should let view all tasks, change and delete task when user has permission', () => {
+  // TODO Create test for change/delete task with permission
+  it('should let view task when user has permission', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_task_management');
     cy.login(userName, userPassword);
 
