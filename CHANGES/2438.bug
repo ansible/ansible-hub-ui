@@ -1,0 +1,1 @@
+Removed alert from task view page stating users could only see their tasks.  All authenticated users can list and retrieve task details.
