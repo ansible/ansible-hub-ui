@@ -118,9 +118,6 @@ describe('collection tests', () => {
     cy.contains('[data-cy="CollectionListItem"]', 'published').should(
       'not.exist',
     );
-
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
   });
 
   it('deletes an collection version from repository', () => {
@@ -177,8 +174,5 @@ describe('collection tests', () => {
     cy.contains(`We couldn't find the page you're looking for!`).should(
       'not.exist',
     );
-
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
   });
 });

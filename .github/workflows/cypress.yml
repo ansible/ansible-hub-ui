@@ -45,6 +45,8 @@ jobs:
 
     - name: "Install galaxykit dependency"
       run: |
+        ## pip install git+https://github.com/ansible/galaxykit.git@branch_name
+        # pip install galaxykit==0.14.0
         pip install git+https://github.com/ansible/galaxykit.git@collection-delete
 
     - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
