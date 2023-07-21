@@ -3,7 +3,12 @@ import React from 'react';
 import { AnsibleRemoteAPI } from 'src/api';
 import { DeleteAnsibleRemoteModal } from 'src/components';
 import { canDeleteAnsibleRemote } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+  waitForTaskUrl,
+} from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRemoteDeleteAction = Action({
@@ -32,10 +37,10 @@ function deleteRemote({ name, pulpId }, { addAlert, setState, listQuery }) {
   return AnsibleRemoteAPI.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for remote ${name}`));
-
       setState({ deleteModalOpen: null });
-      listQuery();
+      return waitForTaskUrl(data.task);
     })
+    .then(() => listQuery())
     .catch(
       handleHttpError(t`Failed to remove remote ${name}`, () => null, addAlert),
     );

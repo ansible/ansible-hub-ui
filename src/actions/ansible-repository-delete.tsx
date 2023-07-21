@@ -4,7 +4,12 @@ import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
 import { Constants } from 'src/constants';
 import { canDeleteAnsibleRepository } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+  waitForTaskUrl,
+} from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositoryDeleteAction = Action({
@@ -64,6 +69,7 @@ async function deleteRepository(
   const deleteRepo = AnsibleRepositoryAPI.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for repository ${name}`));
+      return waitForTaskUrl(data.task);
     })
     .catch(
       handleHttpError(
@@ -76,11 +82,12 @@ async function deleteRepository(
   const deleteDistribution = ({ name, pulp_href }) => {
     const distribution_id = parsePulpIDFromURL(pulp_href);
     return AnsibleDistributionAPI.delete(distribution_id)
-      .then(({ data }) =>
+      .then(({ data }) => {
         addAlert(
           taskAlert(data.task, t`Removal started for distribution ${name}`),
-        ),
-      )
+        );
+        return waitForTaskUrl(data.task);
+      })
       .catch(
         handleHttpError(
           t`Failed to remove distribution ${name}`,
