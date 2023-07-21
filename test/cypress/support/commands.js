@@ -336,16 +336,13 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
     const data = JSON.parse(res[0]).data;
     cy.log(data.length + ' collections found for deletion.');
     data.forEach((record) => {
-      if (record.repository_list.length > 0) {
-        // do not delete orphan collection, it will fail
-        cy.galaxykit(
-          'collection delete',
-          record.namespace,
-          record.name,
-          record.version,
-          record.repository_list[0],
-        );
-      }
+      cy.galaxykit(
+        'collection delete',
+        record.latest_version.namespace,
+        record.latest_version.name,
+        record.latest_version.version,
+        'published', // TODO
+      );
     });
   });
 
@@ -355,25 +352,13 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.deleteAllCollections();
 
-  let deleteNamespaces = true;
-  cy.galaxykit('collection list').then((res) => {
-    const data = JSON.parse(res[0]).data;
-    data.forEach((record) => {
-      if (record.repository_list.length == 0) {
-        deleteNamespaces = false;
-      }
+  // TODO if orphan collection found, do not delete namespaces, otherwise it will fail?
+  cy.galaxykit('namespace list').then((json) => {
+    JSON.parse(json).data.forEach((namespace) => {
+      cy.galaxykit('namespace delete', namespace.name);
     });
   });
-
-  // if orphan collection found, do not delete namespaces, otherwise it will fail
-  if (deleteNamespaces) {
-    cy.galaxykit('namespace list').then((json) => {
-      JSON.parse(json).data.forEach((namespace) => {
-        cy.galaxykit('namespace delete', namespace.name);
-      });
-    });
-    cy.galaxykit('task wait all');
-  }
+  cy.galaxykit('task wait all');
 });
 
 Cypress.Commands.add(
