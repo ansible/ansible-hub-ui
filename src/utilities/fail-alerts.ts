@@ -22,27 +22,25 @@ export function errorMessage(
 }
 
 export const handleHttpError = (title, callback, addAlert) => (e) => {
-  const { status, statusText } = e.response;
-  console.log(typeof e.response.data);
+  let description = e.toString();
 
-  let message = '';
-  const err_detail = mapErrorMessages(e);
-  for (const msg in err_detail) {
-    message = message + err_detail[msg] + ' ';
-  }
+  if (e.response) {
+    // HTTP error
+    const { status, statusText } = e.response;
 
-  let description;
+    const err = mapErrorMessages(e);
+    const message = Object.values(err).join(' ');
 
-  if (message !== '') {
-    description = errorMessage(status, statusText, message);
-  } else {
-    description = errorMessage(status, statusText);
+    description = message
+      ? errorMessage(status, statusText, message)
+      : errorMessage(status, statusText);
   }
 
   addAlert({
     title,
     variant: 'danger',
-    description: description,
+    description,
   });
+
   callback();
 };
