@@ -332,13 +332,16 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
-  cy.galaxykit('collection list')
-    .then((json) => JSON.parse(json))
-    .then(({ data }) =>
-      data.forEach(({ latest_version: { namespace, name } }) =>
-        cy.galaxykit('collection delete', namespace, name),
+  ['published', 'staging', 'rejected'].forEach((repo) =>
+    cy
+      .galaxykit('collection list', repo)
+      .then((json) => JSON.parse(json))
+      .then(({ data }) =>
+        data.forEach(({ latest_version: { namespace, name } }) =>
+          cy.galaxykit('collection delete', namespace, name),
+        ),
       ),
-    );
+  );
 
   cy.galaxykit('namespace list')
     .then((json) => JSON.parse(json))
