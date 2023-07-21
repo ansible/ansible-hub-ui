@@ -238,36 +238,34 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const canSign = canSignNamespace(this.context, this.state.namespace);
     const { hasPermission } = this.context;
     const hasObjectPermission = (permission, namespace) =>
       namespace?.related_fields?.my_permissions?.includes?.(permission);
 
-    const canDeleteCommunityCollection =
-      IS_COMMUNITY &&
-      hasObjectPermission('galaxy.change_namespace', this.state.namespace);
+    const canDeleteCollection =
+      hasPermission('ansible.delete_collection') ||
+      (IS_COMMUNITY &&
+        hasObjectPermission('galaxy.change_namespace', this.state.namespace));
+    const canSign = canSignNamespace(this.context, this.state.namespace);
+    const canUpload = hasPermission('galaxy.upload_to_namespace');
+    const canDeprecate = canUpload;
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection:
-          hasPermission('ansible.delete_collection') ||
-          canDeleteCommunityCollection,
+        canDeleteCollection,
         noDependencies,
         onClick: () => this.openDeleteModalWithConfirm(null, true),
         deleteAll: true,
         display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection:
-          hasPermission('ansible.delete_collection') ||
-          canDeleteCommunityCollection,
+        canDeleteCollection,
         noDependencies,
         onClick: () => this.openDeleteModalWithConfirm(null, false),
         deleteAll: false,
         display_repositories: display_repositories,
       }),
-      (hasPermission('ansible.delete_collection') ||
-        canDeleteCommunityCollection) && (
+      canDeleteCollection && (
         <DropdownItem
           data-cy='delete-collection-version'
           key='delete-collection-version'
@@ -276,17 +274,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${version} from system`}
         </DropdownItem>
       ),
-      (hasPermission('ansible.delete_collection') ||
-        canDeleteCommunityCollection) &&
-        display_repositories && (
-          <DropdownItem
-            data-cy='remove-collection-version'
-            key='remove-collection-version'
-            onClick={() => this.openDeleteModalWithConfirm(version, false)}
-          >
-            {t`Delete version ${version} from repository`}
-          </DropdownItem>
-        ),
+      canDeleteCollection && display_repositories && (
+        <DropdownItem
+          data-cy='remove-collection-version'
+          key='remove-collection-version'
+          onClick={() => this.openDeleteModalWithConfirm(version, false)}
+        >
+          {t`Delete version ${version} from repository`}
+        </DropdownItem>
+      ),
       canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-all'
@@ -314,7 +310,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign version ${version}`}
         </DropdownItem>
       ),
-      hasPermission('galaxy.upload_to_namespace') && (
+      canDeprecate && (
         <DropdownItem
           onClick={() => this.deprecate(collection)}
           key='deprecate'
@@ -322,13 +318,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
         </DropdownItem>
       ),
-      <DropdownItem
-        key='upload-collection-version'
-        onClick={() => this.checkUploadPrivilleges(collection)}
-        data-cy='upload-collection-version-dropdown'
-      >
-        {t`Upload new version`}
-      </DropdownItem>,
+      canUpload && (
+        <DropdownItem
+          key='upload-collection-version'
+          onClick={() => this.checkUploadPrivilleges(collection)}
+          data-cy='upload-collection-version-dropdown'
+        >
+          {t`Upload new version`}
+        </DropdownItem>
+      ),
       display_repositories && (
         <DropdownItem
           key='copy-collection-version-to-repository-dropdown'

@@ -1004,16 +1004,20 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { showControls } = this.state;
     const { display_repositories } = this.context.featureFlags;
-    const canDeleteCommunityCollection =
-      IS_COMMUNITY &&
-      hasObjectPermission('galaxy.change_namespace', this.state.namespace);
+
+    const canDeleteCollection =
+      hasPermission('ansible.delete_collection') ||
+      (IS_COMMUNITY &&
+        hasObjectPermission('galaxy.change_namespace', this.state.namespace));
+    const canUpload = hasPermission('galaxy.upload_to_namespace');
+    const canDeprecate = canUpload;
 
     if (!showControls) {
       return;
     }
 
     return {
-      uploadButton: (
+      uploadButton: canUpload && (
         <Button
           onClick={() =>
             this.handleCollectionAction(
@@ -1030,9 +1034,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
+              canDeleteCollection,
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -1045,9 +1047,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               display_repositories: display_repositories,
             }),
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
+              canDeleteCollection,
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -1059,17 +1059,19 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               deleteAll: false,
               display_repositories: display_repositories,
             }),
-            <DropdownItem
-              onClick={() =>
-                this.handleCollectionAction(
-                  collection.collection_version.pulp_href,
-                  'deprecate',
-                )
-              }
-              key='deprecate'
-            >
-              {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-            </DropdownItem>,
+            canDeprecate && (
+              <DropdownItem
+                onClick={() =>
+                  this.handleCollectionAction(
+                    collection.collection_version.pulp_href,
+                    'deprecate',
+                  )
+                }
+                key='deprecate'
+              >
+                {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
+              </DropdownItem>
+            ),
           ].filter(Boolean)}
           ariaLabel='collection-kebab'
         />

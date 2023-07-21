@@ -364,18 +364,20 @@ class Search extends React.Component<RouteProps, IState> {
     const hasObjectPermission = (permission, namespace) =>
       namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { display_repositories } = this.context.featureFlags;
-    const canDeleteCommunityCollection =
-      IS_COMMUNITY &&
-      hasObjectPermission(
-        'galaxy.change_namespace',
-        collection.collection_version.namespace,
-      );
+
+    const canDeleteCollection =
+      hasPermission('ansible.delete_collection') ||
+      (IS_COMMUNITY &&
+        hasObjectPermission(
+          'galaxy.change_namespace',
+          collection.collection_version.namespace,
+        ));
+    const canUpload = hasPermission('galaxy.upload_to_namespace');
+    const canDeprecate = canUpload;
 
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection:
-          hasPermission('ansible.delete_collection') ||
-          canDeleteCommunityCollection,
+        canDeleteCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -388,9 +390,7 @@ class Search extends React.Component<RouteProps, IState> {
         display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection:
-          hasPermission('ansible.delete_collection') ||
-          canDeleteCommunityCollection,
+        canDeleteCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -402,7 +402,7 @@ class Search extends React.Component<RouteProps, IState> {
         deleteAll: false,
         display_repositories: display_repositories,
       }),
-      hasPermission('galaxy.upload_to_namespace') && (
+      canDeprecate && (
         <DropdownItem
           onClick={() => this.handleControlClick(collection)}
           key='deprecate'
@@ -410,7 +410,7 @@ class Search extends React.Component<RouteProps, IState> {
           {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
         </DropdownItem>
       ),
-      !list && hasPermission('galaxy.upload_to_namespace') && (
+      !list && canUpload && (
         <DropdownItem
           onClick={() => this.checkUploadPrivilleges(collection)}
           key='upload new version'
@@ -424,7 +424,7 @@ class Search extends React.Component<RouteProps, IState> {
 
     if (list) {
       return {
-        uploadButton: hasPermission('galaxy.upload_to_namespace') ? (
+        uploadButton: canUpload ? (
           <Button
             onClick={() => this.checkUploadPrivilleges(collection)}
             variant='secondary'
