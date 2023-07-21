@@ -36,6 +36,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
     canAddAnsibleRepository(context) || canEditAnsibleRepository(context, item),
   displayName: 'AnsibleRepositoryEdit',
   errorTitle: msg`Repository could not be displayed.`,
+  listUrl: formatPath(Paths.ansibleRepositories),
   query: ({ name }) => {
     return AnsibleRepositoryAPI.list({ name })
       .then(({ data: { results } }) => results[0])

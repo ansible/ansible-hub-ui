@@ -69,6 +69,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
       )}
     </>
   ),
+  listUrl: formatPath(Paths.ansibleRepositories),
   query: ({ name }) => {
     return AnsibleRepositoryAPI.list({ name })
       .then(({ data: { results } }) => results[0])

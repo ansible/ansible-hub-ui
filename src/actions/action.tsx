@@ -4,7 +4,13 @@ import React from 'react';
 import { Tooltip } from 'src/components';
 import { type PermissionContextType } from 'src/permissions';
 
-type ModalType = ({ addAlert, state, setState, query }) => React.ReactNode;
+type ModalType = ({
+  addAlert,
+  listQuery,
+  query,
+  setState,
+  state,
+}) => React.ReactNode;
 
 interface ActionParams {
   buttonVariant?: 'primary' | 'secondary';

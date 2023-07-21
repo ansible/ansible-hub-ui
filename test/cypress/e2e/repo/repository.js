@@ -13,14 +13,16 @@ function versionCheck(version) {
   );
 }
 
-describe('Repository', () => {
-  ['with remote', 'without remote'].forEach((mode) => {
-    it('creates, edit and sync repository ' + mode, () => {
+['with remote', 'without remote'].forEach((mode) => {
+  const withRemote = mode === 'with remote';
+
+  describe(`Repository ${mode}`, () => {
+    it('creates, edit and sync repository', () => {
       cy.login();
 
       cy.deleteRepositories();
 
-      if (mode == 'with remote') {
+      if (withRemote) {
         cy.galaxykit(
           '-i remote create',
           'exampleTestRepository',
@@ -81,7 +83,7 @@ describe('Repository', () => {
         .clear()
         .type('5');
 
-      if (mode == 'with remote') {
+      if (withRemote) {
         // add remote
         cy.get('[data-cy="remote"] button').click();
         cy.contains('[data-cy="remote"]', 'rh-certified');
@@ -104,7 +106,7 @@ describe('Repository', () => {
         '5',
       );
 
-      if (mode == 'with remote') {
+      if (withRemote) {
         // try to sync it
         cy.contains('button', 'Sync').click();
         cy.get('.pf-c-modal-box__footer .pf-m-primary')
@@ -117,11 +119,11 @@ describe('Repository', () => {
       }
     });
 
-    it('checks there is only 1 version ' + mode, () => {
+    it('checks there is only 1 version', () => {
       versionCheck(0);
     });
 
-    it('adds  collections ' + mode, () => {
+    it('adds collections', () => {
       cy.login();
       cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
       cy.contains('button', 'Collection versions').click();
@@ -142,22 +144,19 @@ describe('Repository', () => {
       cy.contains('Completed', { timeout: 10000 });
     });
 
-    it(
-      'checks there are 2 versions and collection is here (' + mode + ')',
-      () => {
-        versionCheck(1);
-        cy.contains(
-          '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"] a',
-          1,
-        ).click();
-        cy.contains(
-          '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
-          'repo_test_namespace.repo_test_collection v1.0.0',
-        );
-      },
-    );
+    it('checks there are 2 versions and collection is here', () => {
+      versionCheck(1);
+      cy.contains(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"] a',
+        1,
+      ).click();
+      cy.contains(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
+        'repo_test_namespace.repo_test_collection v1.0.0',
+      );
+    });
 
-    it('removes  collections ' + mode, () => {
+    it('removes collections', () => {
       cy.login();
       cy.visit(
         uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
@@ -170,7 +169,7 @@ describe('Repository', () => {
       // checking for message and clicking detail page does not work, it fails, not sure why
     });
 
-    it('checks if collection was removed ' + mode, () => {
+    it('checks if collection was removed', () => {
       cy.login();
       cy.visit(
         uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
@@ -179,7 +178,7 @@ describe('Repository', () => {
       cy.contains('No collection versions yet');
     });
 
-    it('checks there are 3 versions and revert repo ' + mode, () => {
+    it('checks there are 3 versions and revert repo', () => {
       versionCheck(2);
       cy.get(
         '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"] [aria-label="Actions"]',
@@ -190,7 +189,7 @@ describe('Repository', () => {
       cy.contains('button', 'Revert').click();
     });
 
-    it('checks if collection is added again ' + mode, () => {
+    it('checks if collection is added again', () => {
       cy.login();
       cy.visit(
         uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
