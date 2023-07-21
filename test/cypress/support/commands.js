@@ -334,7 +334,7 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   ['published', 'staging', 'rejected'].forEach((repo) =>
     cy
-      .galaxykit('collection list', repo)
+      .galaxykit('collection list -l 100', repo)
       .then((json) => JSON.parse(json))
       .then(({ data }) =>
         data.forEach(({ latest_version: { namespace, name } }) =>
