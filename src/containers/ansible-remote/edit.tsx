@@ -41,6 +41,7 @@ const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
     canAddAnsibleRemote(context) || canEditAnsibleRemote(context, item),
   displayName: 'AnsibleRemoteEdit',
   errorTitle: msg`Remote could not be displayed.`,
+  listUrl: formatPath(Paths.ansibleRemotes),
   query: ({ name }) => {
     return AnsibleRemoteAPI.list({ name })
       .then(({ data: { results } }) => results[0])
