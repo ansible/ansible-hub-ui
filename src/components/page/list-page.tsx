@@ -64,7 +64,13 @@ export type RenderTableRow<T> = (
   { addAlert, setState = null },
   listItemActions?,
 ) => React.ReactNode;
-type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
+type RenderModals = ({
+  addAlert,
+  listQuery,
+  query,
+  setState,
+  state,
+}) => React.ReactNode;
 type SortHeaders = {
   title: MessageDescriptor;
   type: string;
@@ -222,6 +228,7 @@ export const ListPage = function <T>({
         addAlert: (alert) => this.addAlert(alert),
         hasObjectPermission: () => false, // list items don't load my_permissions .. but superadmin should still work
         hasPermission: this.context.hasPermission,
+        listQuery: () => this.query(),
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,

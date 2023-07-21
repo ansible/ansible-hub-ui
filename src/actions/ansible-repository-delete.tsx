@@ -4,18 +4,27 @@ import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
 import { Constants } from 'src/constants';
 import { canDeleteAnsibleRepository } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+  waitForTaskUrl,
+} from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositoryDeleteAction = Action({
   condition: canDeleteAnsibleRepository,
   title: msg`Delete`,
-  modal: ({ addAlert, query, setState, state }) =>
+  modal: ({ addAlert, listQuery, setState, state }) =>
     state.deleteModalOpen ? (
       <DeleteAnsibleRepositoryModal
         closeAction={() => setState({ deleteModalOpen: null })}
         deleteAction={() =>
-          deleteRepository(state.deleteModalOpen, { addAlert, setState, query })
+          deleteRepository(state.deleteModalOpen, {
+            addAlert,
+            listQuery,
+            setState,
+          })
         }
         name={state.deleteModalOpen.name}
       />
@@ -42,7 +51,7 @@ export const ansibleRepositoryDeleteAction = Action({
 
 async function deleteRepository(
   { name, pulp_href, pulpId },
-  { addAlert, setState, query },
+  { addAlert, setState, listQuery },
 ) {
   const distributionsToDelete = await AnsibleDistributionAPI.list({
     repository: pulp_href,
@@ -60,6 +69,7 @@ async function deleteRepository(
   const deleteRepo = AnsibleRepositoryAPI.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for repository ${name}`));
+      return waitForTaskUrl(data.task);
     })
     .catch(
       handleHttpError(
@@ -72,11 +82,12 @@ async function deleteRepository(
   const deleteDistribution = ({ name, pulp_href }) => {
     const distribution_id = parsePulpIDFromURL(pulp_href);
     return AnsibleDistributionAPI.delete(distribution_id)
-      .then(({ data }) =>
+      .then(({ data }) => {
         addAlert(
           taskAlert(data.task, t`Removal started for distribution ${name}`),
-        ),
-      )
+        );
+        return waitForTaskUrl(data.task);
+      })
       .catch(
         handleHttpError(
           t`Failed to remove distribution ${name}`,
@@ -91,6 +102,6 @@ async function deleteRepository(
     ...distributionsToDelete.map(deleteDistribution),
   ]).then(() => {
     setState({ deleteModalOpen: null });
-    query();
+    listQuery();
   });
 }

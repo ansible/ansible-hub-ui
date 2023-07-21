@@ -44,7 +44,13 @@ interface IState<T> {
 // unauthorised - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
-type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
+type RenderModals = ({
+  addAlert,
+  listQuery,
+  query,
+  setState,
+  state,
+}) => React.ReactNode;
 
 interface PageWithTabsParams<T> {
   breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
@@ -53,6 +59,7 @@ interface PageWithTabsParams<T> {
   errorTitle: MessageDescriptor;
   headerActions?: ActionType[];
   headerDetails?: (item) => React.ReactNode;
+  listUrl: string;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => React.ReactNode;
@@ -75,6 +82,8 @@ export const PageWithTabs = function <
   headerActions,
   // under title
   headerDetails,
+  // formatPath result to navigate to - to get to the list screen
+  listUrl,
   // () => Promise<T>
   query,
   // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
@@ -144,6 +153,7 @@ export const PageWithTabs = function <
         hasObjectPermission: (permission) =>
           item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
+        listQuery: () => this.props.navigate(listUrl),
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,

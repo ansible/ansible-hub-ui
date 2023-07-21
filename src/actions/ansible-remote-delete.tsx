@@ -3,18 +3,23 @@ import React from 'react';
 import { AnsibleRemoteAPI } from 'src/api';
 import { DeleteAnsibleRemoteModal } from 'src/components';
 import { canDeleteAnsibleRemote } from 'src/permissions';
-import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import {
+  handleHttpError,
+  parsePulpIDFromURL,
+  taskAlert,
+  waitForTaskUrl,
+} from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRemoteDeleteAction = Action({
   condition: canDeleteAnsibleRemote,
   title: msg`Delete`,
-  modal: ({ addAlert, query, setState, state }) =>
+  modal: ({ addAlert, listQuery, setState, state }) =>
     state.deleteModalOpen ? (
       <DeleteAnsibleRemoteModal
         closeAction={() => setState({ deleteModalOpen: null })}
         deleteAction={() =>
-          deleteRemote(state.deleteModalOpen, { addAlert, setState, query })
+          deleteRemote(state.deleteModalOpen, { addAlert, setState, listQuery })
         }
         name={state.deleteModalOpen.name}
       />
@@ -28,14 +33,14 @@ export const ansibleRemoteDeleteAction = Action({
     }),
 });
 
-function deleteRemote({ name, pulpId }, { addAlert, setState, query }) {
+function deleteRemote({ name, pulpId }, { addAlert, setState, listQuery }) {
   return AnsibleRemoteAPI.delete(pulpId)
     .then(({ data }) => {
       addAlert(taskAlert(data.task, t`Removal started for remote ${name}`));
-
       setState({ deleteModalOpen: null });
-      query();
+      return waitForTaskUrl(data.task);
     })
+    .then(() => listQuery())
     .catch(
       handleHttpError(t`Failed to remove remote ${name}`, () => null, addAlert),
     );
