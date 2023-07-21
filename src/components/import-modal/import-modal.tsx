@@ -43,7 +43,6 @@ interface IState {
   alerts: AlertType[];
   selectedRepos: string[];
   onlyStaging: boolean;
-  fixedRepos: string[];
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
@@ -64,51 +63,34 @@ export class ImportModal extends React.Component<IProps, IState> {
       alerts: [],
       selectedRepos: [],
       onlyStaging: true,
-      fixedRepos: [],
     };
   }
 
   componentDidMount() {
-    this.loadAllRepos('staging');
+    this.loadAllRepos();
   }
 
-  private loadAllRepos(pipeline) {
-    let filter = {};
-    if (this.state.onlyStaging) {
-      filter = { pulp_label_select: `pipeline=${pipeline}` };
-    }
+  private loadAllRepos() {
+    const { onlyStaging } = this.state;
 
-    return AnsibleRepositoryAPI.list(filter)
-      .then((data) => {
+    return AnsibleRepositoryAPI.list({
+      pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
+      page_size: 1,
+    })
+      .then(({ data: { count, results } }) => {
         this.setState({
-          allRepos: data.data.results,
+          selectedRepos: onlyStaging
+            ? ['staging']
+            : count === 1
+            ? [results[0].name]
+            : [],
+          loading: false,
+          // new value triggers MultipleRepoSelector reload (loadRepos)
+          allRepos: [],
         });
-        this.setState({ loading: false });
-        if (data.data.results.length == 1) {
-          this.setState({ selectedRepos: [data.data.results[0].name] });
-        }
-
-        // fill repos that user cant select
-        let res = [];
-
-        if (!this.state.onlyStaging) {
-          res = data.data.results
-            .filter(
-              (repo) =>
-                repo.pulp_labels?.pipeline &&
-                repo.pulp_labels?.pipeline != 'staging',
-            )
-            .map((repo) => repo.name);
-        }
-
-        this.setState({ fixedRepos: res });
       })
       .catch((error) => {
-        this.addAlert(
-          t`Error loading repositories with label ${pipeline}.`,
-          'danger',
-          error?.message,
-        );
+        this.addAlert(t`Error loading repositories.`, 'danger', error?.message);
         this.setState({ loading: false });
       });
   }
@@ -127,14 +109,14 @@ export class ImportModal extends React.Component<IProps, IState> {
   }
 
   private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
-    // modify params
-    const par = { ...params };
-    if (this.state.onlyStaging) {
-      par['pulp_label_select'] = 'pipeline=staging';
-    }
+    const { onlyStaging } = this.state;
 
     setLoading(true);
-    AnsibleRepositoryAPI.list(par)
+
+    AnsibleRepositoryAPI.list({
+      ...params,
+      pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
+    })
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);
@@ -233,9 +215,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             isChecked={this.state.onlyStaging}
             name='radio-1'
             onChange={(val) => {
-              this.setState({ onlyStaging: val }, () =>
-                this.loadAllRepos('staging'),
-              );
+              this.setState({ onlyStaging: val }, () => this.loadAllRepos());
             }}
             label={t`Staging Repos`}
             id='radio-staging'
@@ -244,9 +224,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             isChecked={!this.state.onlyStaging}
             name='radio-2'
             onChange={(val) => {
-              this.setState({ onlyStaging: !val }, () =>
-                this.loadAllRepos('staging'),
-              );
+              this.setState({ onlyStaging: !val }, () => this.loadAllRepos());
             }}
             label={t`All Repos`}
             id='radio-all'
@@ -258,7 +236,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           <MultipleRepoSelector
             singleSelectionOnly={true}
             allRepositories={this.state.allRepos}
-            fixedRepos={this.state.fixedRepos}
+            fixedRepos={[]}
             selectedRepos={this.state.selectedRepos}
             setSelectedRepos={(repos) =>
               this.setState({ selectedRepos: repos, errors: '' })

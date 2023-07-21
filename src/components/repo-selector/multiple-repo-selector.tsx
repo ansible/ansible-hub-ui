@@ -2,7 +2,6 @@ import { t } from '@lingui/macro';
 import {
   Dropdown,
   DropdownItem,
-  DropdownSeparator,
   DropdownToggle,
   DropdownToggleCheckbox,
   Flex,
@@ -120,11 +119,6 @@ export const MultipleRepoSelector = (props: IProps) => {
       onFocus();
     }
 
-    function selectAll() {
-      props.setSelectedRepos(props.allRepositories.map((a) => a.name));
-      setIsSelectorChecked(true);
-    }
-
     function selectPage() {
       const newRepos = [...props.selectedRepos];
 
@@ -168,18 +162,13 @@ export const MultipleRepoSelector = (props: IProps) => {
         key='select-page'
       >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
       <DropdownItem
-        onClick={selectAll}
-        key='select-all'
-      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
-      <DropdownSeparator key='separator' />,
-      <DropdownItem
         onClick={deselectPage}
         key='deselect-page'
       >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
       <DropdownItem
         onClick={deselectAll}
         key='deselect-all'
-      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
+      >{t`Deselect all (${props.selectedRepos.length} items)`}</DropdownItem>,
     ];
 
     return (
