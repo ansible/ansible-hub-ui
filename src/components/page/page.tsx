@@ -33,7 +33,13 @@ interface IState<T> {
 // unauthorised - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
-type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
+type RenderModals = ({
+  addAlert,
+  listQuery,
+  query,
+  setState,
+  state,
+}) => React.ReactNode;
 
 interface PageParams<T> {
   breadcrumbs: ({ name }) => { url?: string; name: string }[];
@@ -41,6 +47,7 @@ interface PageParams<T> {
   displayName: string;
   errorTitle: MessageDescriptor;
   headerActions?: ActionType[];
+  listUrl: string;
   query: ({ name }) => Promise<T>;
   title: ({ name }) => string;
   transformParams: (routeParams) => Record<string, string>;
@@ -61,6 +68,8 @@ export const Page = function <
   errorTitle,
   // displayed after filters
   headerActions,
+  // formatPath result to navigate to - to get to the list screen
+  listUrl,
   // () => Promise<T>
   query,
   title,
@@ -120,6 +129,7 @@ export const Page = function <
         hasObjectPermission: (permission) =>
           item?.my_permissions?.includes?.(permission),
         hasPermission: this.context.hasPermission,
+        listQuery: () => this.props.navigate(listUrl),
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: this.context.queueAlert,

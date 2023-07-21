@@ -49,6 +49,7 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
     ansibleRemoteDownloadCAAction,
     ansibleRemoteDeleteAction,
   ],
+  listUrl: formatPath(Paths.ansibleRemotes),
   query: ({ name }) => {
     return AnsibleRemoteAPI.list({ name })
       .then(({ data: { results } }) => results[0])

@@ -10,12 +10,16 @@ import { Action } from './action';
 export const ansibleRepositoryDeleteAction = Action({
   condition: canDeleteAnsibleRepository,
   title: msg`Delete`,
-  modal: ({ addAlert, query, setState, state }) =>
+  modal: ({ addAlert, listQuery, setState, state }) =>
     state.deleteModalOpen ? (
       <DeleteAnsibleRepositoryModal
         closeAction={() => setState({ deleteModalOpen: null })}
         deleteAction={() =>
-          deleteRepository(state.deleteModalOpen, { addAlert, setState, query })
+          deleteRepository(state.deleteModalOpen, {
+            addAlert,
+            listQuery,
+            setState,
+          })
         }
         name={state.deleteModalOpen.name}
       />
@@ -42,7 +46,7 @@ export const ansibleRepositoryDeleteAction = Action({
 
 async function deleteRepository(
   { name, pulp_href, pulpId },
-  { addAlert, setState, query },
+  { addAlert, setState, listQuery },
 ) {
   const distributionsToDelete = await AnsibleDistributionAPI.list({
     repository: pulp_href,
@@ -91,6 +95,6 @@ async function deleteRepository(
     ...distributionsToDelete.map(deleteDistribution),
   ]).then(() => {
     setState({ deleteModalOpen: null });
-    query();
+    listQuery();
   });
 }
