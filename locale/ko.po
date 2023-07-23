@@ -5342,8 +5342,8 @@ msgid "You do not have access to Automation Hub"
 msgstr "Automation Hub에 액세스할 수 없습니다"
 
 #: src/containers/task-management/task-list-view.tsx
-msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
-msgstr "모든 작업을 볼 수 있는 권한이 없습니다. 사용자가 만든 작업만 볼 수 있습니다."
+#~ msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
+#~ msgstr "모든 작업을 볼 수 있는 권한이 없습니다. 사용자가 만든 작업만 볼 수 있습니다."
 
 #: src/components/rbac/owners-tab.tsx
 #~ msgid "You do not have the required permissions."

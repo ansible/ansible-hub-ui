@@ -5342,8 +5342,8 @@ msgid "You do not have access to Automation Hub"
 msgstr "您无法访问 Automation Hub"
 
 #: src/containers/task-management/task-list-view.tsx
-msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
-msgstr "您没有查看所有任务的权限。只有您所创建的任务是可见的。"
+#~ msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
+#~ msgstr "您没有查看所有任务的权限。只有您所创建的任务是可见的。"
 
 #: src/components/rbac/owners-tab.tsx
 #~ msgid "You do not have the required permissions."
