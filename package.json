@@ -42,7 +42,7 @@
         "@lingui/macro": "^4.3.0",
         "@ls-lint/ls-lint": "^2.0.1",
         "@redhat-cloud-services/frontend-components-config": "^5.0.5",
-        "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+        "@trivago/prettier-plugin-sort-imports": "^4.2.0",
         "@typescript-eslint/eslint-plugin": "^5.61.0",
         "@typescript-eslint/parser": "^5.62.0",
         "babel-core": "^7.0.0-bridge.0",
