@@ -56,9 +56,7 @@ export class CollectionVersionDetail extends CollectionVersion {
 export class CollectionVersionSearch {
   collection_version: {
     contents: ContentSummaryType[];
-    dependencies: {
-      [collection: string]: string;
-    };
+    dependencies: Record<string, string>;
     description: string;
     name: string;
     namespace: string;

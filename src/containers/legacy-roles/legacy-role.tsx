@@ -99,10 +99,6 @@ class LegacyRoleVersion extends React.Component<
   RoleVersionIProps,
   RoleVersionIProps
 > {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <DataListItemRow>
