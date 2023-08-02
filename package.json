@@ -37,7 +37,7 @@
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-lodash": "^3.3.4",
         "css-loader": "^6.8.1",
-        "eslint": "^8.44.0",
+        "eslint": "^8.46.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-react": "^7.33.1",
         "html-webpack-plugin": "^5.5.3",
