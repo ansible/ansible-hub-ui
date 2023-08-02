@@ -44,7 +44,7 @@ interface IState {
     page_size?: number;
   };
   loading: boolean;
-  items: Array<TaskType>;
+  items: TaskType[];
   itemCount: number;
   alerts: AlertType[];
   cancelModalVisible: boolean;
