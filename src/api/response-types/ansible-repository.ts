@@ -8,7 +8,7 @@ export class AnsibleRepositoryType {
   private?: boolean;
   pulp_created?: string;
   pulp_href?: string;
-  pulp_labels?: { [key: string]: string };
+  pulp_labels?: Record<string, string>;
   remote?: string;
   retain_repo_versions: number;
 
@@ -19,7 +19,14 @@ export class AnsibleRepositoryType {
   my_permissions?: string[];
 }
 
-type ContentSummary = { [key: string]: { count: number; href: string } };
+type ContentSummary = Record<
+  string,
+  {
+    count: number;
+    href: string;
+  }
+>;
+
 export class AnsibleRepositoryVersionType {
   pulp_href: string;
   pulp_created: string;

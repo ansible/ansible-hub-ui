@@ -54,16 +54,22 @@ interface IState<T> {
 // !items.length - no visible data but a filter is on, EmptyStateFilter with a clear filters button, CompoundFilter + AppliedFilters
 // (data) - also renders SortTable
 
-type ParamsType = { page?: number; page_size?: number };
+interface ParamsType {
+  page?: number;
+  page_size?: number;
+}
+
 export type Query<T> = (o: {
   params?: ParamsType;
 }) => Promise<{ data: { count: number; results: T[] } }>;
+
 export type RenderTableRow<T> = (
   item: T,
   index: number,
   { addAlert, setState = null },
   listItemActions?,
 ) => React.ReactNode;
+
 type RenderModals = ({
   addAlert,
   listQuery,
@@ -71,12 +77,14 @@ type RenderModals = ({
   setState,
   state,
 }) => React.ReactNode;
+
 type SortHeaders = {
   title: MessageDescriptor;
   type: string;
   id: string;
   className?: string;
 }[];
+
 export type LocalizedSortHeaders = {
   title: string;
   type: string;
