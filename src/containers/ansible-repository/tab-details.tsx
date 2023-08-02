@@ -13,11 +13,7 @@ import {
   PulpLabels,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import {
-  getRepoURL,
-  parsePulpIDFromURL,
-  repositoryBasePath,
-} from 'src/utilities';
+import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
   item: AnsibleRepositoryType & { distroBasePath?: string };
