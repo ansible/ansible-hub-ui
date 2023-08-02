@@ -1,10 +1,8 @@
 import { t } from '@lingui/macro';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
-  CollectionVersionSearch,
-} from 'src/api';
+import { AnsibleDistributionAPI } from './ansible-distribution';
+import { AnsibleRepositoryAPI } from './ansible-repository';
 import { HubAPI } from './hub';
+import { CollectionVersionSearch } from './response-types/collection';
 
 interface SignNamespace {
   signing_service?: string;

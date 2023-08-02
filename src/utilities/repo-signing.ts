@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { SignContainersAPI } from 'src/api';
-import { waitForTaskUrl } from 'src/utilities';
+import { waitForTaskUrl } from './wait-for-task';
 
 export class RepoSigningUtils {
   public static getContainerPulpType(item) {

@@ -5,8 +5,8 @@ import {
   Repositories,
 } from 'src/api';
 import { Repository } from 'src/api/response-types/repositories';
-import { waitForTaskUrl } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import { parsePulpIDFromURL } from './parse-pulp-id';
+import { waitForTaskUrl } from './wait-for-task';
 
 export class RepositoriesUtils {
   private static async getAll(additionalParams = {}) {

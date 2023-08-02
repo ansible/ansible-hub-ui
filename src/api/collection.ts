@@ -1,12 +1,12 @@
 import axios from 'axios';
+import { AnsibleDistributionAPI } from './ansible-distribution';
+import { HubAPI } from './hub';
 import {
-  AnsibleDistributionAPI,
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
   CollectionVersionSearch,
-} from 'src/api';
-import { HubAPI } from './hub';
+} from './response-types/collection';
 
 // return correct distro
 export function findDistroBasePathByRepo(distributions, repository) {
