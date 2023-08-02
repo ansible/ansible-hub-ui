@@ -1,4 +1,4 @@
-export { CollectionAPI, findDistroBasePathByRepo } from './collection';
+export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
 export {
   NamespaceType,

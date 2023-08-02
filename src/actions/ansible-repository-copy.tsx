@@ -1,7 +1,6 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleDistributionAPI } from 'src/api';
-import { getRepoURL } from 'src/utilities';
+import { getRepoURL, repositoryBasePath } from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositoryCopyAction = Action({
@@ -15,11 +14,9 @@ export const ansibleRepositoryCopyAction = Action({
         variant: 'info',
       });
 
-      distribution = (
-        await AnsibleDistributionAPI.list({
-          repository: item.pulp_href,
-        })
-      )?.data?.results?.[0];
+      distribution = await repositoryBasePath(item.name, item.pulp_href)
+        .then((base_path) => ({ base_path }))
+        .catch(() => null);
     } else {
       distribution = item.distributions?.[0];
     }
