@@ -20,7 +20,7 @@ interface IProps {
   formSuffix?: React.ReactNode;
   isReadonly: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  model: { [key: string]: any };
+  model: Record<string, any>;
   requiredFields: string[];
   updateField: (value, event) => void;
   onSave: () => void;
