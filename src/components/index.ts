@@ -54,10 +54,7 @@ export {
 export { PageWithTabs } from './page/page-with-tabs';
 export { Page } from './page/page';
 export { PulpLabels } from './repositories/pulp-labels';
-export {
-  NonLazyDistributions,
-  LazyDistributions,
-} from './repositories/lazy-distributions';
+export { LazyDistributions } from './repositories/lazy-distributions';
 export { LazyRepositories } from './repositories/lazy-repositories';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';

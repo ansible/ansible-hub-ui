@@ -53,8 +53,11 @@ async function deleteRepository(
   { name, pulp_href, pulpId },
   { addAlert, setState, listQuery },
 ) {
+  // TODO: handle more pages
   const distributionsToDelete = await AnsibleDistributionAPI.list({
     repository: pulp_href,
+    page: 1,
+    page_size: 100,
   })
     .then(({ data: { results } }) => results || [])
     .catch((e) => {

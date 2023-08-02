@@ -5,60 +5,68 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import { errorMessage } from 'src/utilities';
 
-export const NonLazyDistributions = ({
-  distributions,
-  emptyText,
-}: {
-  distributions: { name: string }[];
-  emptyText?: string;
-}) => (
-  <>
-    {distributions?.map?.(({ name }) => name)?.join?.(', ') ||
-      (emptyText ?? '---')}
-  </>
-);
-
 export const LazyDistributions = ({
   emptyText,
-  onLoad,
   repositoryHref,
 }: {
   emptyText?: string;
-  onLoad?: (distributions) => void;
   repositoryHref: string;
 }) => {
   const [distributions, setDistributions] = useState([]);
+  const [count, setCount] = useState(null);
+  const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const query = (prepend?) => {
+    AnsibleDistributionAPI.list({
+      repository: repositoryHref,
+      sort: 'pulp_created',
+      page,
+      page_size: 10,
+    })
+      .then(({ data: { count, results } }) => {
+        setDistributions(prepend ? [...prepend, ...results] : results);
+        setCount(count);
+        setError(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        setDistributions(prepend || []);
+        setCount(null);
+        setError(errorMessage(status, statusText));
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     if (!repositoryHref) {
       setDistributions([]);
+      setCount(null);
+      setPage(1);
       setError(null);
       setLoading(false);
-      onLoad?.([]);
       return;
     }
 
     setDistributions([]);
+    setCount(null);
+    setPage(1);
     setError(null);
     setLoading(true);
 
-    AnsibleDistributionAPI.list({ repository: repositoryHref })
-      .then(({ data }) => {
-        setDistributions(data.results);
-        setError(null);
-        setLoading(false);
-        onLoad?.(data.results);
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        setDistributions([]);
-        setError(errorMessage(status, statusText));
-        setLoading(false);
-        onLoad?.([]);
-      });
+    query();
   }, [repositoryHref]);
+
+  // support pagination, but page == 1 is handled above
+  useEffect(() => {
+    if (page === 1) {
+      return;
+    }
+
+    query(distributions);
+  }, [page]);
 
   const errorElement = error && (
     <Tooltip content={t`Failed to load distributions: ${error}`} key='empty'>
@@ -68,11 +76,24 @@ export const LazyDistributions = ({
     </Tooltip>
   );
 
+  const loadMore = () => {
+    setPage((page) => page + 1);
+  };
+
   return loading ? (
     <Spinner size='sm' />
   ) : error ? (
     errorElement
   ) : (
-    <NonLazyDistributions distributions={distributions} emptyText={emptyText} />
+    <>
+      {distributions?.map?.(({ name }) => name)?.join?.(', ') ||
+        (emptyText ?? '---')}
+      {count > distributions?.length ? (
+        <>
+          {' '}
+          <a onClick={loadMore}>(more)</a>
+        </>
+      ) : null}
+    </>
   );
 };

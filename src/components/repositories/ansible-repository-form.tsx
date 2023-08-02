@@ -18,7 +18,11 @@ import {
   LazyDistributions,
   PulpLabels,
 } from 'src/components';
-import { ErrorMessagesType, errorMessage } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  errorMessage,
+  repositoryBasePath,
+} from 'src/utilities';
 
 interface IProps {
   allowEditName: boolean;
@@ -87,8 +91,8 @@ export const AnsibleRepositoryForm = ({
 
   const [createDistribution, setCreateDistribution] = useState(true);
   const [disabledDistribution, setDisabledDistribution] = useState(false);
-  const onDistributionsLoad = (distributions) => {
-    if (distributions?.find?.(({ name }) => name === repository.name)) {
+  const onDistributionsLoad = (distroBasePath) => {
+    if (distroBasePath) {
       setCreateDistribution(false);
       setDisabledDistribution(true);
     } else {
@@ -119,6 +123,17 @@ export const AnsibleRepositoryForm = ({
   };
 
   useEffect(() => loadRemotes(), []);
+
+  useEffect(() => {
+    if (!repository) {
+      onDistributionsLoad(null);
+      return;
+    }
+
+    repositoryBasePath(repository.name, repository.pulp_href)
+      .catch(() => null)
+      .then(onDistributionsLoad);
+  }, [repository?.pulp_href]);
 
   const selectedRemote = remotes?.find?.(
     ({ pulp_href }) => pulp_href === repository?.remote,
@@ -217,7 +232,6 @@ export const AnsibleRepositoryForm = ({
           <LazyDistributions
             emptyText={t`None`}
             repositoryHref={repository.pulp_href}
-            onLoad={onDistributionsLoad}
           />
           <br />
           <Checkbox
