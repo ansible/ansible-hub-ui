@@ -48,7 +48,7 @@ interface IState {
   description: string;
   roleError: ErrorMessagesType;
   nameError: boolean;
-  errorMessages: { [key: string]: string };
+  errorMessages: Record<string, string>;
 }
 
 class EditRole extends React.Component<RouteComponentProps, IState> {

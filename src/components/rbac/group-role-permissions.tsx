@@ -6,9 +6,7 @@ import { translateLockedRolesDescription } from 'src/utilities';
 
 interface IProps {
   name: string;
-  filteredPermissions?: {
-    [key: string]: string;
-  };
+  filteredPermissions?: Record<string, string>;
 }
 
 export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {

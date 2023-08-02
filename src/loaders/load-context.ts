@@ -8,12 +8,12 @@ import {
 } from 'src/api';
 import { AlertType } from 'src/components';
 
-type ContextFragment = {
+interface ContextFragment {
   alerts: AlertType[];
   featureFlags: FeatureFlagsType;
   settings?: SettingsType;
   user?: UserType;
-};
+}
 
 export function loadContext(): Promise<ContextFragment> {
   const getFeatureFlags = FeatureFlagsAPI.get().then(
