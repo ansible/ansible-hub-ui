@@ -18,13 +18,13 @@ function processPackage(name, pkg, result) {
         result[entry] = entry
     }
 
-    if (pkg.dependencies) {
+    if (pkg.packages) {
         processDependencies(pkg, result);
     }
 }
 
 function processDependencies(pkg, result) {
-    Object.entries(pkg.dependencies).forEach(([name, entry]) => {
+    Object.entries(pkg.packages).forEach(([name, entry]) => {
         if (entry.dev === true) {
             return;
         }
