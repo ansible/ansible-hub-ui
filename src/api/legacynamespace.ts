@@ -4,10 +4,6 @@ import { LegacyAPI } from './legacy';
 export class API extends LegacyAPI {
   apiPath = this.getApiPath('');
 
-  constructor() {
-    super();
-  }
-
   list(params?) {
     const path = this.apiPath + 'namespaces/';
 
