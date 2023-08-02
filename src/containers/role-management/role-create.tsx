@@ -19,7 +19,7 @@ import { errorMessage } from 'src/utilities';
 
 interface IState {
   saving: boolean;
-  errorMessages: { [key: string]: string };
+  errorMessages: Record<string, string>;
   redirect?: string;
   permissions: string[];
   name: string;

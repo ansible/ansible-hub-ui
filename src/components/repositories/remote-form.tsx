@@ -37,10 +37,10 @@ interface IProps {
   updateRemote: (remote) => void;
 }
 
-type FormFilename = {
+interface FormFilename {
   name: string;
   original: boolean;
-};
+}
 
 interface IState {
   filenames: {
