@@ -48,7 +48,7 @@ interface IState {
     host__icontains?: string;
   };
   digest?: string;
-  digestByTag: { [key: string]: string };
+  digestByTag: Record<string, string>;
   loading: boolean;
   tag?: string;
   tagResults: { name: string; id: string }[];

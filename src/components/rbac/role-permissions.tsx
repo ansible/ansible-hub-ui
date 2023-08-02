@@ -7,7 +7,7 @@ import { Constants } from 'src/constants';
 import { twoWayMapper } from 'src/utilities';
 
 interface IProps {
-  filteredPermissions: { [key: string]: string };
+  filteredPermissions: Record<string, string>;
   selectedPermissions: string[];
   setPermissions?: (permissions) => void;
   showEmpty: boolean;
