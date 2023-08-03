@@ -1,24 +1,20 @@
 import { PulpAPI } from './pulp';
-import { Repository } from './response-types/repositories';
-
-interface GetRepository {
-  name: string;
-}
+import { AnsibleRepositoryType } from './response-types/ansible-repository';
 
 interface ReturnRepository {
   data: {
     count: number;
     next: string;
     previous: string;
-    results: Repository[];
+    results: AnsibleRepositoryType[];
   };
 }
 
 class API extends PulpAPI {
   apiPath = '/repositories/ansible/ansible/';
 
-  getRepository(data: GetRepository): Promise<ReturnRepository> {
-    return this.http.get(`${this.apiPath}?name=${data.name}`);
+  getRepository({ name }: { name: string }): Promise<ReturnRepository> {
+    return this.http.get(`${this.apiPath}?name=${name}`);
   }
 
   list(params?) {

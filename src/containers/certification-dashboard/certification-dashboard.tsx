@@ -18,13 +18,13 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   ApproveModal,
   BaseHeader,
@@ -85,7 +85,7 @@ interface IState {
   approveModalInfo: {
     collectionVersion;
   };
-  approvedRepositoryList: Repository[];
+  approvedRepositoryList: AnsibleRepositoryType[];
   stagingRepoNames: string[];
   rejectedRepoName: string;
 }

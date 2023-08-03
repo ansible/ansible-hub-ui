@@ -15,8 +15,7 @@ import { CubesIcon } from '@patternfly/react-icons';
 import { capitalize } from 'lodash';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
-import { TaskType } from 'src/api/response-types/task';
+import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
 import {
   AlertList,
   AlertType,

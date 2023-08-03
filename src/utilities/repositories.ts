@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import {
+  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
   Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { waitForTaskUrl } from './wait-for-task';
 
@@ -34,11 +34,11 @@ export class RepositoriesUtils {
     }
   }
 
-  public static listApproved(): Promise<Repository[]> {
+  public static listApproved(): Promise<AnsibleRepositoryType[]> {
     return this.getAll({ pulp_label_select: 'pipeline=approved' });
   }
 
-  public static listAll(): Promise<Repository[]> {
+  public static listAll(): Promise<AnsibleRepositoryType[]> {
     return this.getAll();
   }
 
@@ -121,11 +121,12 @@ export class RepositoriesUtils {
     const { name, namespace, version } = collection.collection_version;
 
     // get repository list for selected collection
+    // TODO: support more pages
     const collectionInRepos = await CollectionVersionAPI.list({
       namespace,
       name,
       version,
-      page_size: 100000,
+      page_size: 100,
       offset: 0,
     });
 

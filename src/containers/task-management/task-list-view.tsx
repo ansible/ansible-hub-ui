@@ -9,8 +9,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TaskManagementAPI } from 'src/api';
-import { TaskType } from 'src/api/response-types/task';
+import { TaskManagementAPI, TaskType } from 'src/api';
 import {
   AlertList,
   AlertType,

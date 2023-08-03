@@ -2,12 +2,12 @@ import { t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
+  AnsibleRepositoryType,
   CollectionVersion,
   CollectionVersionAPI,
   Repositories,
   SigningServiceAPI,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
@@ -25,7 +25,7 @@ interface IProps {
   closeAction: () => void;
   collectionVersion: CollectionVersion;
   addAlert: (alert) => void;
-  allRepositories: Repository[];
+  allRepositories: AnsibleRepositoryType[];
   finishAction: () => void;
   stagingRepoNames: string[];
   rejectedRepoName: string;

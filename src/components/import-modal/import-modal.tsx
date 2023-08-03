@@ -4,12 +4,12 @@ import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
 import {
+  AnsibleRepositoryType,
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
   Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
@@ -38,7 +38,7 @@ interface IState {
   errors?: string;
   uploadProgress: number;
   uploadStatus: Status;
-  allRepos: Repository[];
+  allRepos: AnsibleRepositoryType[];
   loading: boolean;
   alerts: AlertType[];
   selectedRepos: string[];

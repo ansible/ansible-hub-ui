@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import React from 'react';
-import { LegacyRoleListType } from 'src/api';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
+import { LegacyRoleAPI, LegacyRoleListType } from 'src/api';
 import {
   BaseHeader,
   CollectionFilter,
