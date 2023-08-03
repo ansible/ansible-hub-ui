@@ -28,6 +28,7 @@ describe('RBAC test for user without permissions', () => {
 
     cy.galaxykit('-i namespace create', 'testspace');
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit('task wait all');
   });
 
   after(() => {
@@ -281,6 +282,8 @@ describe('RBAC test for user with permissions', () => {
     cy.login(userName, userPassword);
 
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit('task wait all');
+
     cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
 
     // can Delete collection
