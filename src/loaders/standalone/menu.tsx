@@ -111,9 +111,18 @@ function standaloneMenu() {
     menuItem(t`Documentation`, {
       url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
       external: true,
-      condition: ({ settings, user }) =>
-        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-        !user.is_anonymous,
+      condition: ({ featureFlags, settings, user }) =>
+        !featureFlags.ai_deny_index &&
+        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          !user.is_anonymous),
+    }),
+    menuItem(t`Documentation`, {
+      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
+      external: true,
+      condition: ({ featureFlags, settings, user }) =>
+        featureFlags.ai_deny_index &&
+        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          !user.is_anonymous),
     }),
     menuItem(t`Terms of Use`, {
       url: 'https://www.redhat.com/en/about/terms-use',
