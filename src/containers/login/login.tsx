@@ -7,8 +7,7 @@ import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper } from 'src/utilities/';
+import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   usernameValue: string;

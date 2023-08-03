@@ -1,7 +1,7 @@
 import { ListIcon, ThLargeIcon } from '@patternfly/react-icons';
 import cx from 'classnames';
 import React from 'react';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 import './switcher.scss';
 
 interface IProps {

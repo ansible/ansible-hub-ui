@@ -5,7 +5,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { Constants } from 'src/constants';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 
 interface IProps {
   /** Number of total items returned by the query */

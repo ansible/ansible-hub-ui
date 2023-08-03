@@ -18,8 +18,7 @@ import {
   Main,
   closeAlertMixin,
 } from 'src/components';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 import './my-imports.scss';
 
 interface IState {

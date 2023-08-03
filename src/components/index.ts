@@ -108,6 +108,7 @@ export { LazyRepositories } from './repositories/lazy-repositories';
 export { PulpLabels } from './repositories/pulp-labels';
 export { RemoteForm } from './repositories/remote-form';
 export { ShaLabel } from './sha-label/sha-label';
+export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';
 export { LoginLink } from './shared/login-link';

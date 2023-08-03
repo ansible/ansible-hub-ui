@@ -32,9 +32,14 @@ import {
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import {
+  ParamHelper,
+  RouteProps,
+  errorMessage,
+  filterIsSet,
+  parsePulpIDFromURL,
+  withRouter,
+} from 'src/utilities';
 import './task.scss';
 
 interface IState {

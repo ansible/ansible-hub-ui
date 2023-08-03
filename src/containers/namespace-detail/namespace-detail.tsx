@@ -45,17 +45,18 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   DeleteCollectionUtils,
   ParamHelper,
+  RouteProps,
   canSignNamespace,
   errorMessage,
   filterIsSet,
   getRepoURL,
+  parsePulpIDFromURL,
   waitForTask,
+  withRouter,
 } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import './namespace-detail.scss';
 
 interface IState {
