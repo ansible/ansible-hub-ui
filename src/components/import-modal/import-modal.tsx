@@ -4,11 +4,11 @@ import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
 import {
+  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
 import {
   AlertList,
@@ -78,7 +78,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       filter = { pulp_label_select: `pipeline=${pipeline}` };
     }
 
-    return Repositories.list(filter)
+    return AnsibleRepositoryAPI.list(filter)
       .then((data) => {
         this.setState({
           allRepos: data.data.results,
@@ -129,17 +129,12 @@ export class ImportModal extends React.Component<IProps, IState> {
   private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
     // modify params
     const par = { ...params };
-
     if (this.state.onlyStaging) {
       par['pulp_label_select'] = 'pipeline=staging';
     }
 
-    par['ordering'] = par['sort'];
-    delete par['sort'];
-
     setLoading(true);
-
-    Repositories.list(par)
+    AnsibleRepositoryAPI.list(par)
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);

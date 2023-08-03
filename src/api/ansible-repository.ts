@@ -6,48 +6,76 @@ class API extends PulpAPI {
 
   // list(params?)
 
-  listVersions(uuid, params?) {
-    return this.list(params, this.getPath(null) + uuid + '/versions/');
+  listVersions(pulp_id: string, params?) {
+    return this.list(params, this.apiPath + pulp_id + '/versions/');
   }
 
-  // delete(uuid)
+  // delete(pulp_id: string)
 
-  sync(id, body = {}) {
-    return this.http.post(this.apiPath + id + '/sync/', body);
+  sync(pulp_id: string, body = {}) {
+    return this.http.post(this.apiPath + pulp_id + '/sync/', body);
   }
 
-  revert(id, version_href) {
-    return this.http.post(this.apiPath + id + '/modify/', {
+  revert(pulp_id: string, version_href) {
+    return this.http.post(this.apiPath + pulp_id + '/modify/', {
       base_version: version_href,
     });
   }
 
-  addContent(id, collection_version_hrefs) {
-    return this.http.post(this.apiPath + id + '/modify/', {
+  addContent(pulp_id: string, collection_version_hrefs) {
+    return this.http.post(this.apiPath + pulp_id + '/modify/', {
       add_content_units: collection_version_hrefs,
     });
   }
 
-  removeContent(id, collection_version_href) {
-    return this.http.post(this.apiPath + id + '/modify/', {
+  removeContent(pulp_id: string, collection_version_href) {
+    return this.http.post(this.apiPath + pulp_id + '/modify/', {
       remove_content_units: [collection_version_href],
     });
   }
 
-  listRoles(id, params?) {
-    return super.list(params, this.apiPath + id + '/list_roles/');
+  listRoles(pulp_id: string, params?) {
+    return super.list(params, this.apiPath + pulp_id + '/list_roles/');
   }
 
-  addRole(id, role) {
-    return super.create(role, this.apiPath + id + '/add_role/');
+  addRole(pulp_id: string, role) {
+    return super.create(role, this.apiPath + pulp_id + '/add_role/');
   }
 
-  myPermissions(id, params?) {
-    return super.list(params, this.apiPath + id + '/my_permissions/');
+  myPermissions(pulp_id: string, params?) {
+    return super.list(params, this.apiPath + pulp_id + '/my_permissions/');
   }
 
-  removeRole(id, role) {
-    return super.create(role, this.apiPath + id + '/remove_role/');
+  removeRole(pulp_id: string, role) {
+    return super.create(role, this.apiPath + pulp_id + '/remove_role/');
+  }
+
+  copyCollectionVersion(
+    pulp_id: string,
+    body: {
+      collection_versions: string[];
+      destination_repositories: string[];
+      signing_service?: string;
+    },
+  ) {
+    return this.http.post(
+      this.apiPath + pulp_id + '/copy_collection_version/',
+      body,
+    );
+  }
+
+  moveCollectionVersion(
+    pulp_id: string,
+    body: {
+      collection_versions: string[];
+      destination_repositories: string[];
+      signing_service?: string;
+    },
+  ) {
+    return this.http.post(
+      this.apiPath + pulp_id + '/move_collection_version/',
+      body,
+    );
   }
 }
 

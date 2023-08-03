@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Repositories } from 'src/api';
+import { AnsibleRepositoryAPI } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
@@ -33,7 +33,7 @@ export const CollectionFilter = (props: IProps) => {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   const loadRepos = () => {
-    Repositories.list({
+    AnsibleRepositoryAPI.list({
       name__icontains: inputText,
       pulp_label_select: '!hide_from_search',
     }).then((res) => {

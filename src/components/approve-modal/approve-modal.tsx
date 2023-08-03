@@ -2,10 +2,10 @@ import { t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
+  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CollectionVersion,
   CollectionVersionAPI,
-  Repositories,
   SigningServiceAPI,
 } from 'src/api';
 import {
@@ -74,15 +74,15 @@ export const ApproveModal = (props: IProps) => {
         .map((repo) => repo.pulp_href);
 
       error = t`Repository name ${originRepoName} not found.`;
-      const repoData = await Repositories.getRepository({
-        name: originRepoName,
-      });
-      if (repoData.data.results.length == 0) {
+      const repo = (
+        await AnsibleRepositoryAPI.list({ name: originRepoName, page_size: 1 })
+      )?.data?.results?.[0];
+      if (!repo) {
         throw new Error();
       }
       error = '';
 
-      const pulp_id = parsePulpIDFromURL(repoData.data.results[0].pulp_href);
+      const pulp_id = parsePulpIDFromURL(repo.pulp_href);
 
       error = t`Collection with id ${props.collectionVersion.id} not found.`;
       const collectionData = await CollectionVersionAPI.get(
@@ -109,26 +109,20 @@ export const ApproveModal = (props: IProps) => {
         error = '';
       }
 
-      let promiseCopyOrMove = null;
-      if (reapprove) {
-        // reapprove takes first
-        promiseCopyOrMove = Repositories.copyCollectionVersion(
-          pulp_id,
-          [collectionData.data.pulp_href],
-          repositoriesRef,
-          signingService_href,
-        );
-      } else {
-        promiseCopyOrMove = Repositories.moveCollectionVersion(
-          pulp_id,
-          [collectionData.data.pulp_href],
-          repositoriesRef,
-          signingService_href,
-        );
+      const params = {
+        collection_versions: [collectionData.data.pulp_href],
+        destination_repositories: repositoriesRef,
+      };
+      if (signingService_href) {
+        params['signing_service'] = signingService_href;
       }
 
-      const task = await promiseCopyOrMove;
-      await waitForTaskUrl(task['data'].task);
+      const task = (
+        await (reapprove
+          ? AnsibleRepositoryAPI.copyCollectionVersion(pulp_id, params)
+          : AnsibleRepositoryAPI.moveCollectionVersion(pulp_id, params))
+      )?.data?.task;
+      await waitForTaskUrl(task);
 
       setLoading(false);
       props.finishAction();
@@ -158,11 +152,9 @@ export const ApproveModal = (props: IProps) => {
     // modify params
     const par = { ...params };
     par['pulp_label_select'] = 'pipeline=approved';
-    par['ordering'] = par['sort'];
-    delete par['sort'];
-    setLoading(true);
 
-    Repositories.list(par)
+    setLoading(true);
+    AnsibleRepositoryAPI.list(par)
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);

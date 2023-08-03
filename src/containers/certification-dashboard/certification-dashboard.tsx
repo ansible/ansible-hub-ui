@@ -18,12 +18,12 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
 import {
   ApproveModal,
@@ -156,6 +156,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       );
 
       promises.push(
+        // TODO: replace getAll pagination
         RepositoriesUtils.listApproved()
           .then((data) => {
             this.setState({ approvedRepositoryList: data });
@@ -179,7 +180,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private loadRepos(pipeline) {
-    return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
+    return AnsibleRepositoryAPI.list({
+      pulp_label_select: `pipeline=${pipeline}`,
+    })
       .then(({ data: { results } }) => (results || []).map(({ name }) => name))
       .catch((error) => {
         this.addAlert(
