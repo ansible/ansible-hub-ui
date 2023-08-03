@@ -59,6 +59,7 @@ describe('collection tests', () => {
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
     cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
+    cy.galaxykit('task wait all');
     cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
 
     cy.get('[data-cy="kebab-toggle"]').click();
