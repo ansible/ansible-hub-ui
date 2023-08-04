@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
 import { EmptyStateCustom } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 import './collection-content-list.scss';
 
 interface IProps {

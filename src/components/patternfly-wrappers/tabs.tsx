@@ -1,6 +1,6 @@
 import { Tabs as PFTabs, Tab, TabTitleText } from '@patternfly/react-core';
 import React from 'react';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 
 export class TabsType {
   id: string;

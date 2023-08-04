@@ -1,96 +1,56 @@
 import { t } from '@lingui/macro';
 import {
-  AnsibleDistributionAPI,
   AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
-import { waitForTaskUrl } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import { parsePulpIDFromURL } from './parse-pulp-id';
+import { waitForTaskUrl } from './wait-for-task';
+
+async function getAll(additionalParams = {}) {
+  let list = [];
+
+  // loop max 10 times (= 1000 items)
+  for (let page = 1; page <= 10; page++) {
+    const result = await AnsibleRepositoryAPI.list({
+      ...additionalParams,
+      page,
+      page_size: 100,
+    });
+
+    list = list.concat(result.data.results);
+    if (list.length >= result.data.count) {
+      return list;
+    }
+  }
+}
 
 export class RepositoriesUtils {
-  private static async getAll(additionalParams = {}) {
-    let list = [];
-
-    const params = Object.keys(additionalParams).reduce((acc, key) => {
-      return acc + `&${key}=${encodeURIComponent(additionalParams[key])}`;
-    }, '');
-
-    let page = 0;
-    const pageSize = 100;
-    // watchdog, in case something terrible happened, loop maximum of 10 times. I hope 1000 repos limit is enough
-    // otherwise, doing more than 10 API calls is not acceptable either
-    for (let i = 0; i < 10; i++) {
-      const result = await Repositories.http.get(
-        `${Repositories.apiPath}?offset=${page}&limit=${pageSize}${params}`,
-      );
-
-      list = list.concat(result.data.results);
-      if (list.length >= result.data.count) {
-        return list;
-      }
-
-      page += pageSize;
-    }
+  public static listApproved(): Promise<AnsibleRepositoryType[]> {
+    return getAll({ pulp_label_select: 'pipeline=approved' });
   }
 
-  public static listApproved(): Promise<Repository[]> {
-    return this.getAll({ pulp_label_select: 'pipeline=approved' });
-  }
-
-  public static listAll(): Promise<Repository[]> {
-    return this.getAll();
-  }
-
-  public static async deleteOrAddCollection(
-    repoName,
-    collectionVersion_pulp_href,
-    add,
-  ) {
-    let data = await Repositories.getRepository({ name: repoName });
-
-    if (data.data.results.length == 0) {
-      return Promise.reject({ error: t`Repository ${repoName} not found.` });
-    }
-
-    const repo = data.data.results[0];
-    const pulp_id = parsePulpIDFromURL(repo.pulp_href);
-
-    const addList = [];
-    const removeList = [];
-
-    if (add) {
-      addList.push(collectionVersion_pulp_href);
-    } else {
-      removeList.push(collectionVersion_pulp_href);
-    }
-
-    data = await Repositories.modify(
-      pulp_id,
-      addList,
-      removeList,
-      repo.latest_version_href,
-    );
-
-    data = await waitForTaskUrl(data.data['task']);
+  public static listAll(): Promise<AnsibleRepositoryType[]> {
+    return getAll();
   }
 
   public static async deleteCollection(repoName, collectionVersion_pulp_href) {
-    return RepositoriesUtils.deleteOrAddCollection(
-      repoName,
-      collectionVersion_pulp_href,
-      false,
-    );
-  }
+    const repo = (
+      await AnsibleRepositoryAPI.list({ name: repoName, page_size: 1 })
+    )?.data?.results?.[0];
+    if (!repo) {
+      return Promise.reject({ error: t`Repository ${repoName} not found.` });
+    }
 
-  public static async addCollection(repoName, collectionVersion_pulp_href) {
-    return RepositoriesUtils.deleteOrAddCollection(
-      repoName,
-      collectionVersion_pulp_href,
-      true,
-    );
+    const task = (
+      await AnsibleRepositoryAPI.removeContent(
+        parsePulpIDFromURL(repo.pulp_href),
+        collectionVersion_pulp_href,
+      )
+    )?.data?.task;
+
+    await waitForTaskUrl(task);
   }
 
   public static pushToOrFilterOutCollections(
@@ -117,36 +77,18 @@ export class RepositoriesUtils {
     );
   }
 
-  public static async distributionByRepoName(name) {
-    const repository = (await AnsibleRepositoryAPI.list({ name }))?.data
-      ?.results?.[0];
-    if (!repository) {
-      return Promise.reject(t`Failed to find repository ${name}`);
-    }
-
-    const distribution = (
-      await AnsibleDistributionAPI.list({ repository: repository.pulp_href })
-    )?.data?.results?.[0];
-    if (!distribution) {
-      return Promise.reject(
-        t`Failed to find a distribution for repository ${name}`,
-      );
-    }
-
-    return distribution;
-  }
-
   public static async getCollectionRepoList(
     collection: CollectionVersionSearch,
   ) {
     const { name, namespace, version } = collection.collection_version;
 
     // get repository list for selected collection
+    // TODO: support more pages
     const collectionInRepos = await CollectionVersionAPI.list({
       namespace,
       name,
       version,
-      page_size: 100000,
+      page_size: 100,
       offset: 0,
     });
 

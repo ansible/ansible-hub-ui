@@ -12,8 +12,12 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { GroupAPI, UserType } from 'src/api';
-import { APISearchTypeAhead, AlertType, HelperText } from 'src/components';
-import { DataForm } from 'src/components/shared/data-form';
+import {
+  APISearchTypeAhead,
+  AlertType,
+  DataForm,
+  HelperText,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { ErrorMessagesType, errorMessage } from 'src/utilities';
 

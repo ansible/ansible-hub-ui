@@ -7,7 +7,7 @@ import {
   SortAmountUpIcon,
 } from '@patternfly/react-icons';
 import React from 'react';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 import './sort.scss';
 
 class SortFieldType {

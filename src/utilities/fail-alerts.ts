@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { mapErrorMessages } from 'src/utilities';
+import { mapErrorMessages } from './map-error-messages';
 
 export function errorMessage(
   statusCode: number,

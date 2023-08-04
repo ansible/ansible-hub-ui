@@ -18,13 +18,13 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   ApproveModal,
   BaseHeader,
@@ -57,6 +57,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
+  repositoryBasePath,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -84,7 +85,7 @@ interface IState {
   approveModalInfo: {
     collectionVersion;
   };
-  approvedRepositoryList: Repository[];
+  approvedRepositoryList: AnsibleRepositoryType[];
   stagingRepoNames: string[];
   rejectedRepoName: string;
 }
@@ -155,6 +156,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       );
 
       promises.push(
+        // TODO: replace getAll pagination
         RepositoriesUtils.listApproved()
           .then((data) => {
             this.setState({ approvedRepositoryList: data });
@@ -178,7 +180,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private loadRepos(pipeline) {
-    return Repositories.list({ pulp_label_select: `pipeline=${pipeline}` })
+    return AnsibleRepositoryAPI.list({
+      pulp_label_select: `pipeline=${pipeline}`,
+    })
       .then(({ data: { results } }) => (results || []).map(({ name }) => name))
       .catch((error) => {
         this.addAlert(
@@ -774,16 +778,16 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
     // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
     return Promise.all([
-      RepositoriesUtils.distributionByRepoName(originalRepo),
-      RepositoriesUtils.distributionByRepoName(destinationRepo),
+      repositoryBasePath(originalRepo),
+      repositoryBasePath(destinationRepo),
     ])
       .then(([source, destination]) =>
         CollectionVersionAPI.move(
           version.namespace,
           version.name,
           version.version,
-          source.base_path,
-          destination.base_path,
+          source,
+          destination,
         ),
       )
       .then((result) =>

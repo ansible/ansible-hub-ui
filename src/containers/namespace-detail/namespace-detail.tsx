@@ -45,17 +45,18 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   DeleteCollectionUtils,
   ParamHelper,
+  RouteProps,
   canSignNamespace,
   errorMessage,
   filterIsSet,
   getRepoURL,
+  parsePulpIDFromURL,
   waitForTask,
+  withRouter,
 } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import './namespace-detail.scss';
 
 interface IState {
@@ -726,7 +727,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       MyNamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
       }).catch((e) => {
-        // TODO this needs fixing on backend to return nothing in these cases with 200 status
+        // this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope
         if (
           this.context.user.is_anonymous &&
@@ -734,6 +735,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         ) {
           return null;
         }
+
         // expecting 404 - it just means we can not edit the namespace (unless both NamespaceAPI and MyNamespaceAPI fail)
         return e.response && e.response.status === 404
           ? null

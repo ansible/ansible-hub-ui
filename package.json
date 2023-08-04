@@ -96,6 +96,7 @@
         "lint:yaml:setup": "pip install --upgrade yamllint",
         "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
+        "sort-exports": "perl -i -pe 's/^export/import/' src/**/index.ts ; npm run prettier ; perl -i -pe 's/^import/export/' src/**/index.ts",
         "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
         "start-insights": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",

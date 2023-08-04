@@ -1,30 +1,29 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleDistributionAPI } from 'src/api';
-import { getRepoURL } from 'src/utilities';
+import { getRepoURL, repositoryBasePath } from 'src/utilities';
 import { Action } from './action';
 
 export const ansibleRepositoryCopyAction = Action({
   title: msg`Copy CLI configuration`,
   onClick: async (item, { addAlert }) => {
-    let distribution = null;
-    if (!item.distributions) {
+    let distroBasePath = null;
+
+    if (!item.distroBasePath) {
       addAlert({
         id: 'copy-cli-config',
         title: t`Loading distribution...`,
         variant: 'info',
       });
 
-      distribution = (
-        await AnsibleDistributionAPI.list({
-          repository: item.pulp_href,
-        })
-      )?.data?.results?.[0];
+      distroBasePath = await repositoryBasePath(
+        item.name,
+        item.pulp_href,
+      ).catch(() => null);
     } else {
-      distribution = item.distributions?.[0];
+      distroBasePath = item.distroBasePath;
     }
 
-    if (!distribution) {
+    if (!distroBasePath) {
       addAlert({
         id: 'copy-cli-config',
         title: t`There are no distributions associated with this repository.`,
@@ -35,10 +34,10 @@ export const ansibleRepositoryCopyAction = Action({
 
     const cliConfig = [
       '[galaxy]',
-      `server_list = ${distribution.base_path}`,
+      `server_list = ${distroBasePath}`,
       '',
-      `[galaxy_server.${distribution.base_path}]`,
-      `url=${getRepoURL(distribution.base_path)}`,
+      `[galaxy_server.${distroBasePath}]`,
+      `url=${getRepoURL(distroBasePath)}`,
       'token=<put your token here>',
     ].join('\n');
 
@@ -50,8 +49,9 @@ export const ansibleRepositoryCopyAction = Action({
       variant: 'success',
     });
   },
-  disabled: ({ distributions }) => {
-    if (distributions && !distributions.length) {
+  disabled: (item) => {
+    // disabled check only available on detail screen
+    if ('distroBasePath' in item && !item.distroBasePath) {
       return t`There are no distributions associated with this repository.`;
     }
 

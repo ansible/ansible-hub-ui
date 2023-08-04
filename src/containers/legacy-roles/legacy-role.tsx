@@ -17,9 +17,11 @@ import {
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
-import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
-import { LegacyRoleVersionDetailType } from 'src/api/response-types/legacy-role';
+import {
+  LegacyRoleAPI,
+  LegacyRoleDetailType,
+  LegacyRoleVersionDetailType,
+} from 'src/api';
 import { EmptyStateNoData } from 'src/components';
 import {
   Breadcrumbs,

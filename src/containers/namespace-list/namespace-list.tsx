@@ -29,9 +29,12 @@ import {
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps } from 'src/utilities';
-import { errorMessage, filterIsSet } from 'src/utilities';
-import { ParamHelper } from 'src/utilities/param-helper';
+import {
+  ParamHelper,
+  RouteProps,
+  errorMessage,
+  filterIsSet,
+} from 'src/utilities';
 import './namespace-list.scss';
 
 interface IState {

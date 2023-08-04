@@ -4,19 +4,19 @@ import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import React from 'react';
 import {
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CollectionAPI,
   CollectionUploadType,
   CollectionVersionSearch,
-  Repositories,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertList,
   AlertType,
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { RepositoriesUtils, errorMessage } from 'src/utilities';
+import { errorMessage, repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -38,7 +38,7 @@ interface IState {
   errors?: string;
   uploadProgress: number;
   uploadStatus: Status;
-  allRepos: Repository[];
+  allRepos: AnsibleRepositoryType[];
   loading: boolean;
   alerts: AlertType[];
   selectedRepos: string[];
@@ -78,7 +78,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       filter = { pulp_label_select: `pipeline=${pipeline}` };
     }
 
-    return Repositories.list(filter)
+    return AnsibleRepositoryAPI.list(filter)
       .then((data) => {
         this.setState({
           allRepos: data.data.results,
@@ -129,17 +129,12 @@ export class ImportModal extends React.Component<IProps, IState> {
   private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
     // modify params
     const par = { ...params };
-
     if (this.state.onlyStaging) {
       par['pulp_label_select'] = 'pipeline=staging';
     }
 
-    par['ordering'] = par['sort'];
-    delete par['sort'];
-
     setLoading(true);
-
-    Repositories.list(par)
+    AnsibleRepositoryAPI.list(par)
       .then((data) => {
         setLoading(false);
         setRepositoryList(data.data.results);
@@ -359,14 +354,13 @@ export class ImportModal extends React.Component<IProps, IState> {
 
     this.setState({ uploadStatus: Status.uploading });
 
-    let distro = null;
-    distro = await RepositoriesUtils.distributionByRepoName(
-      selectedRepos[0],
-    ).catch((error) => {
-      this.addAlert(error, 'danger');
-    });
+    const distro_base_path = await repositoryBasePath(selectedRepos[0]).catch(
+      (error) => {
+        this.addAlert(error, 'danger');
+      },
+    );
 
-    if (!distro) {
+    if (!distro_base_path) {
       this.setState({ uploadStatus: Status.waiting });
       return;
     }
@@ -374,7 +368,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     const artifact = {
       file: this.state.file,
       sha256: '',
-      distro_base_path: distro.base_path,
+      distro_base_path,
     } as CollectionUploadType;
 
     this.cancelToken = CollectionAPI.getCancelToken();

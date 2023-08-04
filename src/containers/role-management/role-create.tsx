@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoleAPI } from 'src/api/role';
+import { RoleAPI } from 'src/api';
 import {
   AlertType,
   EmptyStateUnauthorized,

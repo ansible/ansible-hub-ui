@@ -18,11 +18,11 @@ import {
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CollectionVersionSearch,
-  Repositories,
   SigningServiceAPI,
 } from 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
 import {
   AlertType,
   AppliedFilters,
@@ -48,7 +48,9 @@ interface IProps {
 export const CopyCollectionToRepositoryModal = (props: IProps) => {
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [isSelectorChecked, setIsSelectorChecked] = useState(false);
-  const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
+  const [repositoryList, setRepositoryList] = useState<AnsibleRepositoryType[]>(
+    [],
+  );
   const [fixedRepos, setFixedRepos] = useState<string[]>([]);
   const [selectedRepos, setSelectedRepos] = useState<string[]>([]);
   const [inputText, setInputText] = useState('');
@@ -74,13 +76,10 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
 
   const loadRepos = async () => {
     const par = { ...params };
-    par['ordering'] = par['sort'];
     par['name__contains'] = inputText;
-    delete par['sort'];
 
     setLoading(true);
-
-    const repos = await Repositories.list(par);
+    const repos = await AnsibleRepositoryAPI.list(par);
 
     setItemsCount(repos.data.count);
     setRepositoryList(repos.data.results);
@@ -89,6 +88,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
 
   const loadAllRepos = () => {
     setLoading(true);
+    // TODO: replace getAll pagination
     RepositoriesUtils.listAll().then((repos) => {
       setSelectedRepos(repos.map((repo) => repo.name));
       setRepositoryList(repos);
@@ -144,12 +144,15 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
       .filter((repo) => selectedRepos.includes(repo.name))
       .map((repo) => repo.pulp_href);
 
-    Repositories.copyCollectionVersion(
-      pulpId,
-      [collection_version.pulp_href],
-      repoHrefs,
-      signingService,
-    )
+    const copyParams = {
+      collection_versions: [collection_version.pulp_href],
+      destination_repositories: repoHrefs,
+    };
+    if (signingService) {
+      copyParams['signing_service'] = signingService;
+    }
+
+    AnsibleRepositoryAPI.copyCollectionVersion(pulpId, copyParams)
       .then(({ data }) => {
         selectedRepos.map((repo) => {
           props.addAlert(

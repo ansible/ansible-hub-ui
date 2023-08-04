@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoleType } from 'src/api/response-types/role';
-import { RoleAPI } from 'src/api/role';
+import { RoleAPI, RoleType } from 'src/api';
 import {
   AlertList,
   AlertType,

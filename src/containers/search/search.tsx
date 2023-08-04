@@ -33,6 +33,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
+  ParamHelper,
   RouteProps,
   errorMessage,
   filterIsSet,
@@ -40,7 +41,6 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import { ParamHelper } from 'src/utilities/param-helper';
 import './search.scss';
 
 interface IState {

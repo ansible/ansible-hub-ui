@@ -1,27 +1,12 @@
 import axios from 'axios';
+import { repositoryBasePath } from 'src/utilities';
+import { HubAPI } from './hub';
 import {
-  AnsibleDistributionAPI,
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
   CollectionVersionSearch,
-} from 'src/api';
-import { HubAPI } from './hub';
-
-// return correct distro
-export function findDistroBasePathByRepo(distributions, repository) {
-  if (distributions.length === 0) {
-    // if distribution doesn't exist, use repository name
-    return repository.name;
-  }
-
-  // try to look for match by name, if not, just use the first distro
-  const distro = distributions.find(
-    (distro) => distro.name === repository.name,
-  );
-
-  return distro ? distro.base_path : distributions[0].base_path;
-}
+} from './response-types/collection';
 
 function filterContents(contents) {
   if (contents) {
@@ -63,53 +48,23 @@ export class API extends HubAPI {
     }));
   }
 
-  getPublishedCount(distributionPath: string) {
-    return this.http
-      .get(`v3/plugin/ansible/content/${distributionPath}/collections/index/`)
-      .then((result) => {
-        return result.data.meta.count;
-      });
-  }
+  async setDeprecation({
+    collection_version: { namespace, name },
+    repository,
+    is_deprecated,
+  }: CollectionVersionSearch): Promise<{ data: { task: string } }> {
+    const distroBasePath = await repositoryBasePath(
+      repository.name,
+      repository.pulp_href,
+    );
 
-  getExcludesCount(distributionPath: string) {
-    return this.http
-      .get(`content/${distributionPath}/v3/excludes/`)
-      .then((result) => {
-        return result.data;
-      });
-  }
-
-  setDeprecation(
-    collection: CollectionVersionSearch,
-  ): Promise<{ data: { task: string } }> {
-    const {
-      collection_version: { namespace, name },
-      repository,
-      is_deprecated,
-    } = collection;
-    return new Promise((resolve, reject) => {
-      AnsibleDistributionAPI.list({
-        repository: repository.pulp_href,
-      })
-        .then((result) => {
-          const basePath = findDistroBasePathByRepo(
-            result.data.results,
-            repository,
-          );
-
-          const path = `v3/plugin/ansible/content/${basePath}/collections/index/`;
-          this.patch(
-            `${namespace}/${name}`,
-            {
-              deprecated: !is_deprecated,
-            },
-            path,
-          )
-            .then((res) => resolve(res))
-            .catch((err) => reject(err));
-        })
-        .catch((err) => reject(err));
-    });
+    return this.patch(
+      `${namespace}/${name}`,
+      {
+        deprecated: !is_deprecated,
+      },
+      `v3/plugin/ansible/content/${distroBasePath}/collections/index/`,
+    );
   }
 
   upload(
@@ -147,58 +102,45 @@ export class API extends HubAPI {
     return axios.CancelToken.source();
   }
 
-  getDownloadURL(repository, namespace, name, version) {
+  async getDownloadURL(repository, namespace, name, version) {
     // UI API doesn't have tarball download link, so query it separately here
-    return new Promise((resolve, reject) => {
-      AnsibleDistributionAPI.list({
-        repository: repository.pulp_href,
-      })
-        .then((result) => {
-          const basePath = findDistroBasePathByRepo(
-            result.data.results,
-            repository,
-          );
+    const distroBasePath = await repositoryBasePath(
+      repository.name,
+      repository.pulp_href,
+    );
 
-          this.http
-            .get(
-              `v3/plugin/ansible/content/${basePath}/collections/index/${namespace}/${name}/versions/${version}/`,
-            )
-            .then((result) => {
-              resolve(result.data['download_url']);
-            })
-            .catch((err) => reject(err));
-        })
-        .catch((err) => reject(err));
-    });
+    return this.http
+      .get(
+        `v3/plugin/ansible/content/${distroBasePath}/collections/index/${namespace}/${name}/versions/${version}/`,
+      )
+      .then(({ data: { download_url } }) => download_url);
   }
 
-  async deleteCollectionVersion(collection: CollectionVersionSearch) {
-    const distros = await AnsibleDistributionAPI.list({
-      repository: collection.repository.pulp_href,
-    });
-
-    const distroBasePath = findDistroBasePathByRepo(
-      distros.data.results,
-      collection.repository,
+  async deleteCollectionVersion({
+    collection_version: { namespace, name, version },
+    repository,
+  }: CollectionVersionSearch) {
+    const distroBasePath = await repositoryBasePath(
+      repository.name,
+      repository.pulp_href,
     );
 
     return this.http.delete(
-      `v3/plugin/ansible/content/${distroBasePath}/collections/index/${collection.collection_version.namespace}/${collection.collection_version.name}/versions/${collection.collection_version.version}/`,
+      `v3/plugin/ansible/content/${distroBasePath}/collections/index/${namespace}/${name}/versions/${version}/`,
     );
   }
 
-  async deleteCollection(collection: CollectionVersionSearch) {
-    const distros = await AnsibleDistributionAPI.list({
-      repository: collection.repository.pulp_href,
-    });
-
-    const distroBasePath = findDistroBasePathByRepo(
-      distros.data.results,
-      collection.repository,
+  async deleteCollection({
+    collection_version: { namespace, name },
+    repository,
+  }: CollectionVersionSearch) {
+    const distroBasePath = await repositoryBasePath(
+      repository.name,
+      repository.pulp_href,
     );
 
     return this.http.delete(
-      `v3/plugin/ansible/content/${distroBasePath}/collections/index/${collection.collection_version.namespace}/${collection.collection_version.name}/`,
+      `v3/plugin/ansible/content/${distroBasePath}/collections/index/${namespace}/${name}/`,
     );
   }
 
@@ -216,7 +158,12 @@ export class API extends HubAPI {
     );
   }
 
-  getSignatures(distroBasePath, namespace, name, version) {
+  async getSignatures(repository, namespace, name, version) {
+    const distroBasePath = await repositoryBasePath(
+      repository.name,
+      repository.pulp_href,
+    );
+
     return this.http.get(
       `v3/plugin/ansible/content/${distroBasePath}/collections/index/${namespace}/${name}/versions/${version}/`,
     );

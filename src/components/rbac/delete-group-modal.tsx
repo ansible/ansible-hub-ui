@@ -2,7 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { Alert, List, ListItem, Spinner } from '@patternfly/react-core';
 import React from 'react';
 import { UserType } from 'src/api';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { DeleteModal } from 'src/components';
 
 interface IProps {
   count?: number;
