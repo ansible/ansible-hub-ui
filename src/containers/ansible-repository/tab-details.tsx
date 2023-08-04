@@ -9,16 +9,14 @@ import {
 import {
   CopyURL,
   Details,
-  NonLazyDistributions,
+  LazyDistributions,
   PulpLabels,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { getRepoURL, parsePulpIDFromURL } from 'src/utilities';
 
 interface TabProps {
-  item: AnsibleRepositoryType & {
-    distributions: { name: string; base_path: string }[];
-  };
+  item: AnsibleRepositoryType & { distroBasePath?: string };
   actionContext: { addAlert: (alert) => void; state: { params } };
 }
 
@@ -45,12 +43,12 @@ export const DetailsTab = ({ item }: TabProps) => {
         },
         {
           label: t`Distribution`,
-          value: <NonLazyDistributions distributions={item.distributions} />,
+          value: <LazyDistributions repositoryHref={item?.pulp_href} />,
         },
         {
           label: t`Repository URL`,
-          value: item.distributions?.length ? (
-            <CopyURL url={getRepoURL(item.distributions[0].base_path)} />
+          value: item?.distroBasePath ? (
+            <CopyURL url={getRepoURL(item.distroBasePath)} />
           ) : (
             '---'
           ),

@@ -9,45 +9,61 @@ import { errorMessage } from 'src/utilities';
 
 export const LazyRepositories = ({
   emptyText,
-  onLoad,
   remoteHref,
 }: {
   emptyText?: string;
-  onLoad?: (repositories) => void;
   remoteHref: string;
 }) => {
   const [repositories, setRepositories] = useState([]);
+  const [count, setCount] = useState(null);
+  const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const query = (prepend?) => {
+    AnsibleRepositoryAPI.list({ remote: remoteHref, page, page_size: 10 })
+      .then(({ data: { count, results } }) => {
+        setRepositories(prepend ? [...prepend, ...results] : results);
+        setCount(count);
+        setError(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        setRepositories(prepend || []);
+        setCount(null);
+        setError(errorMessage(status, statusText));
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     if (!remoteHref) {
       setRepositories([]);
+      setCount(null);
+      setPage(1);
       setError(null);
       setLoading(false);
-      onLoad?.([]);
       return;
     }
 
     setRepositories([]);
+    setCount(null);
+    setPage(1);
     setError(null);
     setLoading(true);
 
-    AnsibleRepositoryAPI.list({ remote: remoteHref })
-      .then(({ data }) => {
-        setRepositories(data.results);
-        setError(null);
-        setLoading(false);
-        onLoad?.(data.results);
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        setRepositories([]);
-        setError(errorMessage(status, statusText));
-        setLoading(false);
-        onLoad?.([]);
-      });
+    query();
   }, [remoteHref]);
+
+  // support pagination, but page == 1 is handled above
+  useEffect(() => {
+    if (page === 1) {
+      return;
+    }
+
+    query(repositories);
+  }, [page]);
 
   const errorElement = error && (
     <Tooltip content={t`Failed to load repositories: ${error}`} key='empty'>
@@ -56,6 +72,10 @@ export const LazyRepositories = ({
       </Button>
     </Tooltip>
   );
+
+  const loadMore = () => {
+    setPage((page) => page + 1);
+  };
 
   return loading ? (
     <Spinner size='sm' />
@@ -72,6 +92,12 @@ export const LazyRepositories = ({
         </>
       ))}
       {!repositories?.length ? emptyText ?? '---' : null}
+      {count > repositories?.length ? (
+        <>
+          {' '}
+          <a onClick={loadMore}>(more)</a>
+        </>
+      ) : null}
     </>
   );
 };

@@ -28,6 +28,7 @@ describe('RBAC test for user without permissions', () => {
 
     cy.galaxykit('-i namespace create', 'testspace');
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit('task wait all');
   });
 
   after(() => {
@@ -261,14 +262,14 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_namespaces');
     cy.login(userName, userPassword);
 
-    cy.galaxykit('-i namespace create', 'testspace');
+    cy.galaxykit('-i namespace create', 'testspace2');
     cy.visit(`${uiPrefix}namespaces`);
 
     // can Add namespace
     cy.contains('Create').should('exist');
-    cy.galaxykit('-i namespace create', 'testspace');
+    cy.galaxykit('-i namespace create', 'testspace2');
 
-    cy.visit(`${uiPrefix}namespaces/testspace`);
+    cy.visit(`${uiPrefix}namespaces/testspace2`);
     cy.get('[data-cy="ns-kebab-toggle"]').should('exist').click();
     cy.contains('Edit namespace');
     cy.contains('Delete namespace');
@@ -281,8 +282,10 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_collections');
     cy.login(userName, userPassword);
 
-    cy.galaxykit('-i collection upload testspace testcollection');
-    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
+    cy.galaxykit('-i collection upload testspace2 testcollection2');
+    cy.galaxykit('task wait all');
+
+    cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
 
     // can Delete collection
     cy.get('[data-cy=kebab-toggle]').should('exist').click();

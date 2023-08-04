@@ -6,15 +6,11 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import {
-  AnsibleDistributionAPI,
-  AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-} from 'src/api';
+import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
-import { parsePulpIDFromURL } from 'src/utilities';
+import { parsePulpIDFromURL, repositoryBasePath } from 'src/utilities';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
@@ -71,7 +67,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
   ),
   listUrl: formatPath(Paths.ansibleRepositories),
   query: ({ name }) => {
-    return AnsibleRepositoryAPI.list({ name })
+    return AnsibleRepositoryAPI.list({ name, page_size: 1 })
       .then(({ data: { results } }) => results[0])
       .then((repository) => {
         // using the list api, so an empty array is really a 404
@@ -79,25 +75,23 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
           return Promise.reject({ response: { status: 404 } });
         }
 
-        const err = (e) => {
+        const err = (val) => (e) => {
           console.error(e);
-          return [];
+          return val;
         };
 
         return Promise.all([
-          AnsibleDistributionAPI.list({
-            repository: repository.pulp_href,
-          })
-            .then(({ data: { results } }) => results)
-            .catch(err),
+          repositoryBasePath(repository.name, repository.pulp_href).catch(
+            err(null),
+          ),
           AnsibleRepositoryAPI.myPermissions(
             parsePulpIDFromURL(repository.pulp_href),
           )
             .then(({ data: { permissions } }) => permissions)
-            .catch(err),
-        ]).then(([distributions, my_permissions]) => ({
+            .catch(err([])),
+        ]).then(([distroBasePath, my_permissions]) => ({
           ...repository,
-          distributions,
+          distroBasePath,
           my_permissions,
         }));
       });
