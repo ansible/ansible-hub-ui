@@ -15,8 +15,7 @@ import { CubesIcon } from '@patternfly/react-icons';
 import { capitalize } from 'lodash';
 import * as React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
-import { TaskType } from 'src/api/response-types/task';
+import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -32,8 +31,12 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, errorMessage, withRouter } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import {
+  RouteProps,
+  errorMessage,
+  parsePulpIDFromURL,
+  withRouter,
+} from 'src/utilities';
 import './task.scss';
 
 interface IState {

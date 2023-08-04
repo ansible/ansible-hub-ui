@@ -53,13 +53,13 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
+  ParamHelper,
   RepositoriesUtils,
   canSignNamespace,
   errorMessage,
   parsePulpIDFromURL,
   waitForTask,
 } from 'src/utilities';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { SignatureBadge } from '../signing';
 import './header.scss';

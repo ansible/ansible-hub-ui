@@ -8,9 +8,12 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { LegacyNamespaceListType, LegacyRoleListType } from 'src/api';
-import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
+import {
+  LegacyNamespaceAPI,
+  LegacyNamespaceListType,
+  LegacyRoleAPI,
+  LegacyRoleListType,
+} from 'src/api';
 import {
   AlertList,
   AlertType,

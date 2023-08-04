@@ -2,9 +2,9 @@ import { Trans, t } from '@lingui/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 import { waitForTask } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
+import { DeleteModal } from './delete-modal';
 
 interface IProps {
   closeAction: () => void;

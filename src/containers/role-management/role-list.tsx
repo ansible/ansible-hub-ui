@@ -10,8 +10,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { RoleType } from 'src/api/response-types/role';
-import { RoleAPI } from 'src/api/role';
+import { RoleAPI, RoleType } from 'src/api';
 import {
   AlertList,
   AlertType,

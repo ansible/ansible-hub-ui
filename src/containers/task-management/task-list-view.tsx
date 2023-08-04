@@ -9,8 +9,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { TaskManagementAPI } from 'src/api';
-import { TaskType } from 'src/api/response-types/task';
+import { TaskManagementAPI, TaskType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -33,9 +32,14 @@ import {
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import {
+  ParamHelper,
+  RouteProps,
+  errorMessage,
+  filterIsSet,
+  parsePulpIDFromURL,
+  withRouter,
+} from 'src/utilities';
 import './task.scss';
 
 interface IState {

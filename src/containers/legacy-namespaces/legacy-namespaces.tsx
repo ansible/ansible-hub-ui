@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
-import * as React from 'react';
-import { LegacyNamespaceListType } from 'src/api';
-import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
+import React from 'react';
+import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
 import {
   AlertList,
   AlertType,

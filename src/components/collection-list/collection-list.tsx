@@ -7,7 +7,7 @@ import {
   EmptyStateFilter,
   Pagination,
 } from 'src/components';
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper } from 'src/utilities';
 import './list.scss';
 
 interface IProps {

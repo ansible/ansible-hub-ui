@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
+import { LegacyRoleDetailType } from 'src/api';
 import { DateComponent, Logo, Tag } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps } from 'src/utilities';

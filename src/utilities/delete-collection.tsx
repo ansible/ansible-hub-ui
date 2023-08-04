@@ -6,12 +6,10 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
-import {
-  RepositoriesUtils,
-  errorMessage,
-  parsePulpIDFromURL,
-  waitForTask,
-} from 'src/utilities';
+import { errorMessage } from './fail-alerts';
+import { parsePulpIDFromURL } from './parse-pulp-id';
+import { RepositoriesUtils } from './repositories';
+import { waitForTask } from './wait-for-task';
 
 export class DeleteCollectionUtils {
   public static getUsedbyDependencies(collection: CollectionVersionSearch) {

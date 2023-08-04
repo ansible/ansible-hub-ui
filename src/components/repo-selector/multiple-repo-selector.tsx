@@ -15,8 +15,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import 'src/api';
-import { Repository } from 'src/api/response-types/repositories';
+import { AnsibleRepositoryType } from 'src/api';
 import {
   AppliedFilters,
   CheckboxRow,
@@ -27,7 +26,7 @@ import {
 } from 'src/components';
 
 interface IProps {
-  allRepositories: Repository[];
+  allRepositories: AnsibleRepositoryType[];
   fixedRepos: string[];
   loadRepos: (params, setRepositoryList, setLoading, setItemsCount) => void;
   selectedRepos: string[];
@@ -40,7 +39,9 @@ export const MultipleRepoSelector = (props: IProps) => {
   const [isSelectorChecked, setIsSelectorChecked] = useState(false);
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [inputText, setInputText] = useState('');
-  const [repositoryList, setRepositoryList] = useState<Repository[]>([]);
+  const [repositoryList, setRepositoryList] = useState<AnsibleRepositoryType[]>(
+    [],
+  );
   const [itemsCount, setItemsCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState({
