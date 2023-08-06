@@ -7,6 +7,7 @@ import {
 } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import { repositoryBasePath } from 'src/utilities';
 
 export interface IBaseCollectionState {
   actuallyCollection?: CollectionDetailType;
@@ -98,12 +99,9 @@ export function loadCollection({
     .then(({ data }) => data)
     .catch(() => ({ data: [], meta: { count: 0 } }));
 
-  // FIXME: repo -> base_path
-  const actuallyCollection = CollectionAPI.getDetail(
-    repo,
-    namespace,
-    name,
-  ).then(({ data }) => data);
+  const actuallyCollection = repositoryBasePath(repo)
+    .then((basePath) => CollectionAPI.getDetail(basePath, namespace, name))
+    .then(({ data }) => data);
 
   return Promise.all([
     versions,
