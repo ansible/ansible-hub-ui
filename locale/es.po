@@ -1613,6 +1613,7 @@ msgstr "Sitio de Docs"
 #: src/components/headers/collection-header.tsx
 #: src/containers/collection-detail/collection-docs.tsx
 #: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
 msgid "Documentation"
 msgstr "Documentación"
 
@@ -2037,13 +2038,11 @@ msgstr ""
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/api/sign-collections.ts
-#: src/utilities/repositories.ts
+#: src/utilities/repository-base-path.ts
 msgid "Failed to find a distribution for repository {name}"
 msgstr "No se ha encontrado una distribución para el repositorio {name}"
 
-#: src/api/sign-collections.ts
-#: src/utilities/repositories.ts
+#: src/utilities/repository-base-path.ts
 msgid "Failed to find repository {name}"
 msgstr "No se ha encontrado el repositorio {name}"
 
