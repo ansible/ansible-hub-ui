@@ -40,6 +40,7 @@ export class Constants {
     'application',
     'cloud',
     'database',
+    'event_driven_ansible_content',
     'infrastructure',
     'linux',
     'monitoring',
