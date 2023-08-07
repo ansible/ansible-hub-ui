@@ -73,7 +73,7 @@ const label = (count, type) =>
       one: 'Dependency',
       other: 'Dependencies',
     }),
-  }[type] || type);
+  })[type] || type;
 
 export const CollectionNumericLabel = ({ count, newline, type }: ICNLProps) => (
   <NumericLabel number={count} newline={newline} label={label(count, type)} />
