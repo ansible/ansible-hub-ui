@@ -106,7 +106,7 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
       'repository-versions': (
         <RepositoryVersionsTab item={item} actionContext={actionContext} />
       ),
-    }[tab]),
+    })[tab],
   tabs,
   tabUpdateParams: (p) => {
     delete p.repositoryVersion;
