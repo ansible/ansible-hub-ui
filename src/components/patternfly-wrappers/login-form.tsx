@@ -1,6 +1,7 @@
 // this comes from @patternfly/react-core@4.276.11
 // packages/react-core/src/components/LoginPage/LoginForm.tsx
 // w/ fixed imports, prettier
+// and added autocomplete="off" for username & password
 import {
   ActionGroup,
   Button,
@@ -113,6 +114,7 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
       }
       value={passwordValue}
       onChange={onChangePassword}
+      autoComplete='off'
     />
   );
 
@@ -144,6 +146,7 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
           name='pf-login-username-id'
           value={usernameValue}
           onChange={onChangeUsername}
+          autoComplete='off'
         />
       </FormGroup>
       <FormGroup
