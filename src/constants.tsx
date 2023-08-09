@@ -40,6 +40,7 @@ export class Constants {
     'application',
     'cloud',
     'database',
+    'eda',
     'infrastructure',
     'linux',
     'monitoring',
