@@ -7,7 +7,6 @@ import {
   Label,
   Switch,
   TextInput,
-  TextInputTypes,
   Tooltip,
 } from '@patternfly/react-core';
 import * as React from 'react';
@@ -94,7 +93,7 @@ export class UserForm extends React.Component<IProps, IState> {
       !isReadonly && {
         id: 'password',
         title: t`Password`,
-        type: TextInputTypes.password,
+        type: 'password',
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
           <HelperText
@@ -128,6 +127,7 @@ export class UserForm extends React.Component<IProps, IState> {
             this.setState({ passwordConfirm: value });
           }}
           type='password'
+          autoComplete='off'
         />
       </FormGroup>
     );
