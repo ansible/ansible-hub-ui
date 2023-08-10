@@ -14,7 +14,7 @@ interface IProps {
     id: string;
     placeholder?: string;
     title: string;
-    type?: TextInputTypes;
+    type?: string;
   }[];
   formPrefix?: React.ReactNode;
   formSuffix?: React.ReactNode;
@@ -64,9 +64,10 @@ export class DataForm extends React.Component<IProps> {
               id={field.id}
               onChange={updateField}
               placeholder={field.placeholder}
-              type={field.type || 'text'}
+              type={(field.type as TextInputTypes) || 'text'}
               validated={validated}
               value={model[field.id]}
+              {...(field.type === 'password' ? { autoComplete: 'off' } : {})}
             />
           )}
         </FormGroup>
