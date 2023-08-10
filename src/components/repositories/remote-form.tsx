@@ -260,6 +260,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 validated={this.toError(!('token' in errorMessages))}
                 isRequired={requiredFields.includes('token')}
                 type='password'
+                autoComplete='off'
                 id='token'
                 value={remote.token || ''}
                 onChange={(value) => this.updateRemote(value, 'token')}
@@ -405,6 +406,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               isDisabled={disabledFields.includes('password')}
               id='password'
               type='password'
+              autoComplete='off'
               value={remote.password || ''}
               onChange={(value) => this.updateRemote(value, 'password')}
             />
@@ -483,6 +485,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   isDisabled={disabledFields.includes('proxy_password')}
                   id='proxy_password'
                   type='password'
+                  autoComplete='off'
                   value={remote.proxy_password || ''}
                   onChange={(value) =>
                     this.updateRemote(value, 'proxy_password')
