@@ -483,94 +483,91 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={
-            <div className='install-version-column'>
-              <span>{t`Version`}</span>
-              <div className='install-version-dropdown'>
-                <Select
-                  isOpen={isOpenVersionsSelect}
-                  onToggle={(isOpenVersionsSelect) =>
-                    this.setState({ isOpenVersionsSelect })
-                  }
-                  variant={SelectVariant.single}
-                  onSelect={() =>
-                    this.setState({ isOpenVersionsSelect: false })
-                  }
-                  selections={`v${version}`}
-                  aria-label={t`Select collection version`}
-                  loadingVariant={
-                    collections.length < collectionsCount
-                      ? {
-                          text: t`View more`,
-                          onClick: () =>
-                            this.setState({
-                              isOpenVersionsModal: true,
-                              isOpenVersionsSelect: false,
-                            }),
-                        }
-                      : null
-                  }
-                >
-                  {collections
-                    .map((c) => c.collection_version)
-                    .map((v) => (
-                      <SelectOption
-                        key={v.version}
-                        value={`v${v.version}`}
-                        onClick={() =>
-                          updateParams(
-                            ParamHelper.setParam(
-                              params,
-                              'version',
-                              v.version.toString(),
-                            ),
-                          )
-                        }
-                      >
-                        <Trans>
-                          {v.version} updated {isLatestVersion(v)}
-                        </Trans>
-                      </SelectOption>
-                    ))}
-                </Select>
+            <div className='column-section'>
+              <div className='install-version-column'>
+                <span>{t`Version`}</span>
+                <div className='install-version-dropdown'>
+                  <Select
+                    isOpen={isOpenVersionsSelect}
+                    onToggle={(isOpenVersionsSelect) =>
+                      this.setState({ isOpenVersionsSelect })
+                    }
+                    variant={SelectVariant.single}
+                    onSelect={() =>
+                      this.setState({ isOpenVersionsSelect: false })
+                    }
+                    selections={`v${version}`}
+                    aria-label={t`Select collection version`}
+                    loadingVariant={
+                      collections.length < collectionsCount
+                        ? {
+                            text: t`View more`,
+                            onClick: () =>
+                              this.setState({
+                                isOpenVersionsModal: true,
+                                isOpenVersionsSelect: false,
+                              }),
+                          }
+                        : null
+                    }
+                  >
+                    {collections
+                      .map((c) => c.collection_version)
+                      .map((v) => (
+                        <SelectOption
+                          key={v.version}
+                          value={`v${v.version}`}
+                          onClick={() =>
+                            updateParams(
+                              ParamHelper.setParam(
+                                params,
+                                'version',
+                                v.version.toString(),
+                              ),
+                            )
+                          }
+                        >
+                          <Trans>
+                            {v.version} updated {isLatestVersion(v)}
+                          </Trans>
+                        </SelectOption>
+                      ))}
+                  </Select>
+                </div>
+                {latestVersion ? (
+                  <span className='last-updated'>
+                    <Trans>
+                      Last updated <DateComponent date={latestVersion} />
+                    </Trans>
+                  </span>
+                ) : null}
+                {display_signatures ? (
+                  <SignatureBadge
+                    isCompact
+                    signState={collection.is_signed ? 'signed' : 'unsigned'}
+                  />
+                ) : null}
               </div>
-              {latestVersion ? (
-                <span className='last-updated'>
-                  <Trans>
-                    Last updated <DateComponent date={latestVersion} />
-                  </Trans>
-                </span>
-              ) : null}
-              {display_signatures ? (
-                <SignatureBadge
-                  isCompact
-                  signState={collection.is_signed ? 'signed' : 'unsigned'}
-                />
-              ) : null}
+              <div style={{ alignSelf: 'center' }}>
+                <DownloadCount item={actuallyCollection} />
+              </div>
             </div>
           }
           pageControls={
-            <Flex
-              direction={{ default: 'column' }}
-              alignItems={{ default: 'alignItemsFlexEnd' }}
-            >
-              <Flex direction={{ default: 'row' }}>
-                {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
-                  <FlexItem>
-                    <a href={issueUrl} target='_blank' rel='noreferrer'>
-                      {t`Create issue`}
-                    </a>{' '}
-                    <ExternalLinkAltIcon />
-                  </FlexItem>
-                ) : null}
-                {dropdownItems.length > 0 ? (
-                  <FlexItem data-cy='kebab-toggle'>
-                    <StatefulDropdown items={dropdownItems} />
-                  </FlexItem>
-                ) : null}
-              </Flex>
-              <FlexItem>
-                <DownloadCount item={actuallyCollection} />
-              </FlexItem>
+            <Flex>
+              {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
+                <FlexItem>
+                  <a href={issueUrl} target='_blank' rel='noreferrer'>
+                    {t`Create issue`}
+                  </a>{' '}
+                  <ExternalLinkAltIcon />
+                </FlexItem>
+              ) : null}
+              {dropdownItems.length > 0 ? (
+                <FlexItem data-cy='kebab-toggle'>
+                  <StatefulDropdown items={dropdownItems} />
+                </FlexItem>
+              ) : null}
             </Flex>
           }
         >

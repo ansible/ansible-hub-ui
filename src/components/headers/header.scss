@@ -6,16 +6,12 @@ $breakpoint-md: 1000px;
 
 .title-box {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .column-section {
   display: flex;
   justify-content: space-between;
-
-  .header-right {
-    align-items: right;
-  }
 }
 
 .install-version-column {
