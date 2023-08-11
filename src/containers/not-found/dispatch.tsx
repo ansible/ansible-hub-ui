@@ -7,6 +7,7 @@ import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,
   CollectionListItem,
+  EmptyStateNoData,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Main,
@@ -51,8 +52,6 @@ export const Dispatch = (props: RouteProps) => {
     }
   }, [pathname]);
 
-  // TODO empty states proper
-
   return (
     <>
       <BaseHeader title={t`404 - Page not found`} />
@@ -82,23 +81,30 @@ export const Dispatch = (props: RouteProps) => {
           {collections === null ? (
             <LoadingPageSpinner />
           ) : collections.length === 0 ? (
+            <EmptyStateNoData
+              title={t`No matching collections found.`}
+              description={
+                <Link
+                  to={formatPath(Paths.collections)}
+                >{t`Show all collections`}</Link>
+              }
+            />
+          ) : (
             <>
-              <div>{t`No matching collections found.`}</div>
+              <DataList aria-label={t`Available matching collections`}>
+                {collections.map((c, i) => (
+                  <CollectionListItem
+                    key={i}
+                    collection={c}
+                    displaySignatures={featureFlags.display_signatures}
+                    showNamespace={true}
+                  />
+                ))}
+              </DataList>
               <Link
                 to={formatPath(Paths.collections)}
               >{t`Show all collections`}</Link>
             </>
-          ) : (
-            <DataList aria-label={t`Available matching collections`}>
-              {collections.map((c, i) => (
-                <CollectionListItem
-                  key={i}
-                  collection={c}
-                  displaySignatures={featureFlags.display_signatures}
-                  showNamespace={true}
-                />
-              ))}
-            </DataList>
           )}
         </PageSection>
         {featureFlags.legacy_roles ? (
@@ -110,22 +116,29 @@ export const Dispatch = (props: RouteProps) => {
               {roles === null ? (
                 <LoadingPageSpinner />
               ) : roles.length === 0 ? (
+                <EmptyStateNoData
+                  title={t`No matching legacy roles found.`}
+                  description={
+                    <Link
+                      to={formatPath(Paths.legacyRoles)}
+                    >{t`Show all legacy roles`}</Link>
+                  }
+                />
+              ) : (
                 <>
-                  <div>{t`No matching legacy roles found.`}</div>
+                  <DataList aria-label={t`Available matching legacy roles`}>
+                    {roles.map((r) => (
+                      <LegacyRoleListItem
+                        key={r.id}
+                        role={r}
+                        show_thumbnail={true}
+                      />
+                    ))}
+                  </DataList>
                   <Link
                     to={formatPath(Paths.legacyRoles)}
                   >{t`Show all legacy roles`}</Link>
                 </>
-              ) : (
-                <DataList aria-label={t`Available matching legacy roles`}>
-                  {roles.map((r) => (
-                    <LegacyRoleListItem
-                      key={r.id}
-                      role={r}
-                      show_thumbnail={true}
-                    />
-                  ))}
-                </DataList>
               )}
             </PageSection>
           </>
