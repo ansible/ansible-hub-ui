@@ -1,7 +1,8 @@
 import { Trans, t } from '@lingui/macro';
-import { DataList } from '@patternfly/react-core';
+import { Bullseye, DataList } from '@patternfly/react-core';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import NotFoundImage from 'src/../static/images/not_found.svg';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,
@@ -51,23 +52,28 @@ export const Dispatch = (props: RouteProps) => {
   }, [pathname]);
 
   // TODO empty states proper
-  // TODO center empty state top
 
   return (
     <>
       <BaseHeader title={t`404 - Page not found`} />
       <Main>
         <PageSection>
-          <div>{t`We couldn't find the page you're looking for!`}</div>
-          <div>
-            <Trans>
-              Pathname <pre style={{ display: 'inline-block' }}>{pathname}</pre>{' '}
-              could refer to a collection or a role.
-            </Trans>{' '}
-            {featureFlags.legacy_roles ? null : (
-              <Trans>Roles are not currently enabled.</Trans>
-            )}
-          </div>
+          <Bullseye>
+            <div className='hub-c-bullseye__center'>
+              <img src={NotFoundImage} alt={t`Not found`} width='128px' />
+              <div>{t`We couldn't find the page you're looking for!`}</div>
+              <div className='pf-c-content'>
+                <Trans>
+                  Pathname{' '}
+                  <pre style={{ display: 'inline-block' }}>{pathname}</pre>{' '}
+                  could refer to a collection or a role.
+                </Trans>{' '}
+                {featureFlags.legacy_roles ? null : (
+                  <Trans>Roles are not currently enabled.</Trans>
+                )}
+              </div>
+            </div>
+          </Bullseye>
         </PageSection>
         <SectionSeparator />
         <PageSection>
