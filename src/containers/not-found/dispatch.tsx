@@ -1,6 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import React, { ReactNode, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,
@@ -9,6 +10,8 @@ import {
   LoadingPageSpinner,
   Main,
 } from 'src/components';
+import { useContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 
 const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
@@ -24,6 +27,8 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
 );
 
 export const Dispatch = (props: RouteProps) => {
+  const { featureFlags } = useContext();
+
   const { pathname } = ParamHelper.parseParamString(props.location.search) as {
     pathname: string;
   };
@@ -37,12 +42,14 @@ export const Dispatch = (props: RouteProps) => {
     CollectionVersionAPI.list({ namespace, name, is_highest: true })
       .then(({ data: { data } }) => setCollections(data || []))
       .catch(() => setCollections([]));
-    LegacyRoleAPI.list({ username: namespace, name })
-      .then(({ data: { results } }) => setRoles(results || []))
-      .catch(() => setRoles([]));
+
+    if (featureFlags.legacy_roles) {
+      LegacyRoleAPI.list({ username: namespace, name })
+        .then(({ data: { results } }) => setRoles(results || []))
+        .catch(() => setRoles([]));
+    }
   }, [pathname]);
 
-  // TODO condition for roles feature flag, signatures feature flag
   // TODO empty states proper
   // TODO center empty state top
 
@@ -56,7 +63,10 @@ export const Dispatch = (props: RouteProps) => {
             <Trans>
               Pathname <pre style={{ display: 'inline-block' }}>{pathname}</pre>{' '}
               could refer to a collection or a role.
-            </Trans>
+            </Trans>{' '}
+            {featureFlags.legacy_roles ? null : (
+              <Trans>Roles are not currently enabled.</Trans>
+            )}
           </div>
         </PageSection>
         <SectionSeparator />
@@ -66,36 +76,54 @@ export const Dispatch = (props: RouteProps) => {
           {collections === null ? (
             <LoadingPageSpinner />
           ) : collections.length === 0 ? (
-            <div>{t`No matching collections found.`}</div>
+            <>
+              <div>{t`No matching collections found.`}</div>
+              <Link
+                to={formatPath(Paths.collections)}
+              >{t`Show all collections`}</Link>
+            </>
           ) : (
             <DataList aria-label={t`Available matching collections`}>
               {collections.map((c, i) => (
                 <CollectionListItem
                   key={i}
                   collection={c}
-                  displaySignatures={true}
+                  displaySignatures={featureFlags.display_signatures}
                   showNamespace={true}
                 />
               ))}
             </DataList>
           )}
         </PageSection>
-        <SectionSeparator />
-        <PageSection>
-          <SectionTitle>{t`Legacy roles`}</SectionTitle>
+        {featureFlags.legacy_roles ? (
+          <>
+            <SectionSeparator />
+            <PageSection>
+              <SectionTitle>{t`Legacy roles`}</SectionTitle>
 
-          {roles === null ? (
-            <LoadingPageSpinner />
-          ) : roles.length === 0 ? (
-            <div>{t`No matching legacy roles found.`}</div>
-          ) : (
-            <DataList aria-label={t`Available matching legacy roles`}>
-              {roles.map((r) => (
-                <LegacyRoleListItem key={r.id} role={r} show_thumbnail={true} />
-              ))}
-            </DataList>
-          )}
-        </PageSection>
+              {roles === null ? (
+                <LoadingPageSpinner />
+              ) : roles.length === 0 ? (
+                <>
+                  <div>{t`No matching legacy roles found.`}</div>
+                  <Link
+                    to={formatPath(Paths.legacyRoles)}
+                  >{t`Show all legacy roles`}</Link>
+                </>
+              ) : (
+                <DataList aria-label={t`Available matching legacy roles`}>
+                  {roles.map((r) => (
+                    <LegacyRoleListItem
+                      key={r.id}
+                      role={r}
+                      show_thumbnail={true}
+                    />
+                  ))}
+                </DataList>
+              )}
+            </PageSection>
+          </>
+        ) : null}
       </Main>
     </>
   );

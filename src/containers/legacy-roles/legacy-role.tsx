@@ -363,7 +363,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
     const breadcrumbs = [
       {
         name: 'Legacy Roles',
-        url: formatPath(Paths.legacyRoles, {}),
+        url: formatPath(Paths.legacyRoles),
       },
       {
         name: this.state.github_user,
