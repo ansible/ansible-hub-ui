@@ -22,6 +22,7 @@ export const WriteOnlyField = ({ onClear, isValueSet, children }: IProps) =>
         aria-label={t`hidden value`}
         placeholder='••••••••••••••••••••••'
         type='password'
+        autoComplete='off'
         isDisabled={isValueSet}
       />
       {isValueSet && (
