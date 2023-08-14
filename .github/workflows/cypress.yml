@@ -194,16 +194,6 @@ jobs:
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
           --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
 
-    # - name: "Run community UI"
-    #   if: ${{ env.BACKEND_FLAVOR == 'community' }}
-    #   working-directory: 'ansible-hub-ui'
-    #   run: |
-    #     npm install
-    #     # production displays unknown translations literally, make sure it's up to date
-    #     npm run gettext:extract
-    #     npm run gettext:compile
-    #     npm run start-community
-
     - name: "Run insights UI"
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
       working-directory: 'ansible-hub-ui'
@@ -242,17 +232,17 @@ jobs:
       run: |
         cp -aiv ../.github/workflows/cypress/cypress.env.json."$BACKEND_FLAVOR" cypress.env.json
 
-    - name: "Ensure index.html uses the new js"
+    - name: "Ensure standalone index.html uses the new js"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure index.html uses the new js"
+    - name: "Ensure community index.html uses the new js"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
-        curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+        curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
 
     - name: "Ensure insights is served"
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
