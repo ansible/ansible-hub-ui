@@ -6,7 +6,7 @@
     "private": true,
     "dependencies": {
         "@babel/runtime": "^7.22.10",
-        "@lingui/react": "^4.3.0",
+        "@lingui/react": "^4.4.0",
         "@patternfly/patternfly": "^4.224.2",
         "@patternfly/react-code-editor": "^4.82.115",
         "@patternfly/react-core": "^4.276.11",
