@@ -28,4 +28,4 @@ The app will run on http://localhost:8002/ui and proxy requests for `/api/automa
 
 ## UI Testing
 
-For more information about UI testing go to [test README](https://github.com/ansible/ansible-hub-ui/tree/master/test/README.md).
+For more information about UI testing go to [test README](https://github.com/ansible/ansible-hub-ui/tree/stable-4.6/test/README.md).
