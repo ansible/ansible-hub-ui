@@ -207,7 +207,7 @@ function Menu({ items, context, expandedSections }) {
     <>
       {items.map((item) => (
         <ItemOrSection
-          key={item.name}
+          key={item.url || item.name}
           item={item}
           context={context}
           expandedSections={expandedSections}
