@@ -242,8 +242,8 @@ jobs:
     - name: "Ensure community index.html uses the new js"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
-        echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
-        curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
+        echo 'expecting /js/App.'"$BUILD_HASH"'.js'
+        curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
 
     - name: "Ensure insights is served"
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
