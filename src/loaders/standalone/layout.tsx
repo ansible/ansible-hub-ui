@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
+  Alert,
   DropdownItem,
   DropdownSeparator,
   Page,
@@ -168,6 +169,24 @@ export const StandaloneLayout = ({
 
   return (
     <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+      <Alert
+        isInline
+        variant='info'
+        title={
+          <Trans>
+            Thanks for trying out the new and improved Beta Galaxy, please share
+            your feedback on{' '}
+            <a
+              href='https://github.com/ansible/galaxy_ng/discussions'
+              target='_blank'
+              rel='noreferrer'
+            >
+              github.com/ansible/galaxy_ng/discussions
+            </a>
+            .
+          </Trans>
+        }
+      />
       {children}
       {aboutModalVisible && aboutModal}
     </Page>
