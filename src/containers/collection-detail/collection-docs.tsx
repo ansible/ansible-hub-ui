@@ -33,11 +33,12 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
+      actuallyCollection: null,
+      collection: null,
       collections: [],
       collectionsCount: 0,
-      collection: null,
       content: null,
-      params: params,
+      params,
     };
     this.docsRef = React.createRef();
     this.searchBarRef = React.createRef();
@@ -48,8 +49,14 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection, collections, collectionsCount, content } =
-      this.state;
+    const {
+      actuallyCollection,
+      collection,
+      collections,
+      collectionsCount,
+      content,
+      params,
+    } = this.state;
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
@@ -117,30 +124,22 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       { name: t`Documentation` },
     ];
 
-    // scroll to top of page
-
-    // if (
-    //   this.docsRef.current &&
-    //   this.searchBarRef.current !== window.document.activeElement
-    // ) {
-    //   this.docsRef.current.scrollIntoView();
-    // }
-
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.loadCollection(true)}
+          activeTab='documentation'
+          actuallyCollection={actuallyCollection}
+          breadcrumbs={breadcrumbs}
+          className='header'
+          collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
-          collection={collection}
           content={content}
           params={params}
+          reload={() => this.loadCollection(true)}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollection(true))
           }
-          breadcrumbs={breadcrumbs}
-          activeTab='documentation'
-          className='header'
         />
         <Main className='main'>
           <section className='docs-container'>
@@ -305,8 +304,20 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content, collectionsCount) =>
-        this.setState({ collections, collection, content, collectionsCount }),
+      setCollection: (
+        collections,
+        collection,
+        content,
+        collectionsCount,
+        actuallyCollection,
+      ) =>
+        this.setState({
+          collections,
+          collection,
+          content,
+          collectionsCount,
+          actuallyCollection,
+        }),
       stateParams: this.state.params,
     });
   }

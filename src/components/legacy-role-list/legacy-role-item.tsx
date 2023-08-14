@@ -12,7 +12,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api';
-import { DateComponent, Logo, Tag } from 'src/components';
+import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps } from 'src/utilities';
 import './legacy-role-item.scss';
@@ -105,6 +105,9 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
           </Trans>
         </div>
         <div className='hub-entry'>{release_name}</div>
+        <div className='hub-entry'>
+          <DownloadCount item={role} />
+        </div>
       </DataListCell>,
     );
 

@@ -57,7 +57,7 @@ const overrideLanguage =
   window.localStorage.override_l10n &&
   availableLanguages.includes(window.localStorage.override_l10n) &&
   window.localStorage.override_l10n;
-const language = overrideLanguage || userLanguage || 'en';
+export const language = overrideLanguage || userLanguage || 'en';
 const pseudolocalization = window.localStorage.test_l10n === 'true';
 
 if (overrideLanguage) {

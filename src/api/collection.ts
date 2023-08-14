@@ -179,6 +179,12 @@ export class API extends HubAPI {
       `pulp/api/v3/content/ansible/collection_versions/`,
     );
   }
+
+  getDetail(distroBasePath, namespace, name) {
+    return this.http.get(
+      `v3/plugin/ansible/content/${distroBasePath}/collections/index/${namespace}/${name}/`,
+    );
+  }
 }
 
 export const CollectionAPI = new API();

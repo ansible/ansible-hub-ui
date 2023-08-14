@@ -26,15 +26,16 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
+      actuallyCollection: null,
+      apiError: undefined,
       collection: null,
       collections: [],
       collectionsCount: 0,
       content: null,
-      params: params,
       loadingImports: true,
-      selectedImportDetail: undefined,
+      params,
       selectedImport: undefined,
-      apiError: undefined,
+      selectedImportDetail: undefined,
     };
   }
 
@@ -44,15 +45,16 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
 
   render() {
     const {
+      actuallyCollection,
+      apiError,
       collection,
       collections,
       collectionsCount,
-      params,
-      loadingImports,
-      selectedImportDetail,
-      selectedImport,
-      apiError,
       content,
+      loadingImports,
+      params,
+      selectedImport,
+      selectedImportDetail,
     } = this.state;
 
     if (!collection) {
@@ -83,17 +85,18 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.loadData(true)}
+          activeTab='import-log'
+          actuallyCollection={actuallyCollection}
+          breadcrumbs={breadcrumbs}
+          collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
-          collection={collection}
           content={content}
           params={params}
+          reload={() => this.loadData(true)}
           updateParams={(params) =>
             this.updateParams(params, () => this.loadData(true))
           }
-          breadcrumbs={breadcrumbs}
-          activeTab='import-log'
         />
         <Main>
           <section className='body'>
@@ -156,9 +159,21 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (collections, collection, content, collectionsCount) =>
+      setCollection: (
+        collections,
+        collection,
+        content,
+        collectionsCount,
+        actuallyCollection,
+      ) =>
         this.setState(
-          { collections, collection, content, collectionsCount },
+          {
+            collections,
+            collection,
+            content,
+            collectionsCount,
+            actuallyCollection,
+          },
           callback,
         ),
       stateParams: this.state.params,
