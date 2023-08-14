@@ -1,4 +1,4 @@
-import { PulpStatus } from 'src/api';
+import { PulpStatus } from './pulp';
 
 export class TaskType {
   pulp_created: string;
