@@ -8,7 +8,7 @@ push () {
     .travis/release.sh "$1"
 }
 
-if [ "${TRAVIS_BRANCH}" = "master" ]; then
+if [ "${TRAVIS_BRANCH}" = "main" ]; then
     # always push to stage-beta
     HUB_CLOUD_BETA="true" npm run deploy
     push "qa-beta"

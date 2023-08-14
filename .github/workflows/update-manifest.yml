@@ -3,7 +3,7 @@ name: "Generate package manifest"
 on:
   workflow_dispatch: # allow running manually
   push:
-    branches: [ 'master', 'stable-prod' ]
+    branches: [ 'main', 'stable-prod' ]
 
 concurrency:
   group: update-manifest-${{ github.ref }}

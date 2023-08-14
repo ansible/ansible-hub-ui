@@ -2,7 +2,7 @@ name: Automerge
 
 on:
   pull_request_target:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
+    branches: [ 'main', 'stable-*', 'feature/*' ]
 
 jobs:
   automerge:

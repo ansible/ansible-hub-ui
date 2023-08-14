@@ -20,7 +20,7 @@ export IMAGE_FRONTEND_SHA1=$(git rev-parse HEAD)
 export IMAGE=${IMAGE_FRONTEND}
 
 export IMAGE_BACKEND="quay.io/cloudservices/automation-hub-galaxy-ng"
-export IMAGE_BACKEND_TAG=$(curl -s https://api.github.com/repos/ansible/galaxy_ng/commits/master | jq -r '.sha' | head -c7)
+export IMAGE_BACKEND_TAG=$(curl -s https://api.github.com/repos/ansible/galaxy_ng/commits/main | jq -r '.sha' | head -c7)
 export BACKUP_APP_ROOT=$APP_ROOT
 
 set -exv
@@ -42,7 +42,7 @@ bonfire deploy \
     ${APP_NAME} \
     --source=appsre \
     --ref-env insights-stage \
-    --set-template-ref ${COMPONENT_NAME}=master \
+    --set-template-ref ${COMPONENT_NAME}=main \
     --set-image-tag ${IMAGE_BACKEND}=${IMAGE_BACKEND_TAG} \
     --set-image-tag ${IMAGE_FRONTEND}=${IMAGE_FRONTEND_TAG} \
     --set-template-ref automation-hub-frontend=${IMAGE_FRONTEND_SHA1} \

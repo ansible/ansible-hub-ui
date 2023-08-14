@@ -27,7 +27,7 @@ if [[ "$TRAVIS_PULL_REQUEST" != 'false' ]]; then
 fi
 
 
-if [[ "${TRAVIS_BRANCH}" == 'master' ]]; then
+if [[ "${TRAVIS_BRANCH}" == 'main' ]]; then
     manifests_branch='master'
 elif [[ "${TRAVIS_BRANCH}" == 'stable-prod' ]]; then
     manifests_branch='stable' # FIXME: no such branch

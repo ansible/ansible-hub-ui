@@ -140,7 +140,7 @@ module.exports = (inputConfigs) => {
         registry: [insightsMockAPIs],
       }),
 
-    // insights deployments from master
+    // insights deployments from main
     ...(!isStandalone &&
       cloudBeta && {
         deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',

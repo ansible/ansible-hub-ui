@@ -1,4 +1,4 @@
-name: "Enable automatic stage-stable deploy on push to master"
+name: "Enable automatic stage-stable deploy on push to main"
 
 on:
   workflow_dispatch: # allow running manually
@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: "Checkout ansible-hub-ui master"
+    - name: "Checkout ansible-hub-ui main"
       uses: actions/checkout@v3
       with:
-        ref: 'master'
+        ref: 'main'
 
-    - name: "Enable, push to master"
+    - name: "Enable, push to main"
       run: |
         git config --global user.name 'GH Actions'
         git config --global user.email 'gh_actions@users.noreply.github.com'
@@ -23,4 +23,4 @@ jobs:
 
         git commit -m 'Enable cloud stage cron deploy '`date --iso=d`
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
-        git push origin HEAD:master
+        git push origin HEAD:main
