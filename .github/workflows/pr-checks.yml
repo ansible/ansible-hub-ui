@@ -2,7 +2,7 @@ name: "PR checks"
 
 on:
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'main', 'stable-*' ]
 
 jobs:
 
@@ -23,7 +23,7 @@ jobs:
         START_COMMIT: ${{ github.event.before }}
         END_COMMIT: ${{ github.event.after }}
       run: |
-        curl https://raw.githubusercontent.com/ansible/galaxy_ng/master/.ci/scripts/validate_commit_message_custom.py | python
+        curl https://raw.githubusercontent.com/ansible/galaxy_ng/main/.ci/scripts/validate_commit_message_custom.py | python
 
   pr-checks:
     runs-on: ubuntu-latest
