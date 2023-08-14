@@ -21,7 +21,6 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
-  CollectionDetailType,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
@@ -38,7 +37,6 @@ import {
   Breadcrumbs,
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
-  DownloadCount,
   ImportModal,
   LinkTabs,
   Logo,
@@ -70,7 +68,6 @@ interface IProps {
   collections: CollectionVersionSearch[];
   collectionsCount: number;
   collection: CollectionVersionSearch;
-  actuallyCollection: CollectionDetailType;
   content: CollectionVersionContentType;
   params: {
     version?: string;
@@ -168,7 +165,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   render() {
     const {
       activeTab,
-      actuallyCollection,
       breadcrumbs,
       className,
       collection,
@@ -542,9 +538,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                     signState={collection.is_signed ? 'signed' : 'unsigned'}
                   />
                 ) : null}
-              </div>
-              <div style={{ alignSelf: 'center' }}>
-                <DownloadCount item={actuallyCollection} />
               </div>
             </div>
           }

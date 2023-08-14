@@ -1,16 +1,13 @@
 import {
   CollectionAPI,
-  CollectionDetailType,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
 } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { repositoryBasePath } from 'src/utilities';
 
 export interface IBaseCollectionState {
-  actuallyCollection?: CollectionDetailType;
   alerts?: AlertType[];
   collection?: CollectionVersionSearch;
   collections?: CollectionVersionSearch[];
@@ -31,7 +28,6 @@ const cache = {
   name: null,
   version: null,
 
-  actuallyCollection: null,
   collection: null,
   collections: [],
   collectionsCount: 0,
@@ -61,7 +57,6 @@ export function loadCollection({
       cache.collection,
       cache.content,
       cache.collectionsCount,
-      cache.actuallyCollection,
     );
     return;
   }
@@ -99,16 +94,7 @@ export function loadCollection({
     .then(({ data }) => data)
     .catch(() => ({ data: [], meta: { count: 0 } }));
 
-  const actuallyCollection = repositoryBasePath(repo)
-    .then((basePath) => CollectionAPI.getDetail(basePath, namespace, name))
-    .then(({ data }) => data);
-
-  return Promise.all([
-    versions,
-    currentVersion,
-    content,
-    actuallyCollection,
-  ]).then(
+  return Promise.all([versions, currentVersion, content]).then(
     ([
       {
         data: collections,
@@ -116,22 +102,14 @@ export function loadCollection({
       },
       collection,
       content,
-      actuallyCollection,
     ]) => {
-      setCollection(
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      );
+      setCollection(collections, collection, content, collectionsCount);
 
       cache.repository = repo;
       cache.namespace = namespace;
       cache.name = name;
       cache.version = version;
 
-      cache.actuallyCollection = actuallyCollection;
       cache.collection = collection;
       cache.collections = collections;
       cache.collectionsCount = collectionsCount;

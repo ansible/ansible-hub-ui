@@ -22,7 +22,6 @@ class CollectionContent extends React.Component<
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      actuallyCollection: null,
       collection: null,
       collections: [],
       collectionsCount: 0,
@@ -36,14 +35,8 @@ class CollectionContent extends React.Component<
   }
 
   render() {
-    const {
-      actuallyCollection,
-      collection,
-      collections,
-      collectionsCount,
-      content,
-      params,
-    } = this.state;
+    const { collection, collections, collectionsCount, content, params } =
+      this.state;
 
     if (collections.length <= 0) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -74,7 +67,6 @@ class CollectionContent extends React.Component<
       <React.Fragment>
         <CollectionHeader
           activeTab='contents'
-          actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
           collection={collection}
           collections={collections}
@@ -105,19 +97,12 @@ class CollectionContent extends React.Component<
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) =>
+      setCollection: (collections, collection, content, collectionsCount) =>
         this.setState({
           collections,
           collection,
           content,
           collectionsCount,
-          actuallyCollection,
         }),
       stateParams: this.state.params,
     });

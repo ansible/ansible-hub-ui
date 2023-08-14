@@ -33,7 +33,6 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      actuallyCollection: null,
       collection: null,
       collections: [],
       collectionsCount: 0,
@@ -49,14 +48,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const {
-      actuallyCollection,
-      collection,
-      collections,
-      collectionsCount,
-      content,
-      params,
-    } = this.state;
+    const { collection, collections, collectionsCount, content, params } =
+      this.state;
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
@@ -128,7 +121,6 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       <React.Fragment>
         <CollectionHeader
           activeTab='documentation'
-          actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
           className='header'
           collection={collection}
@@ -304,19 +296,12 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) =>
+      setCollection: (collections, collection, content, collectionsCount) =>
         this.setState({
           collections,
           collection,
           content,
           collectionsCount,
-          actuallyCollection,
         }),
       stateParams: this.state.params,
     });

@@ -29,7 +29,6 @@ import { loadCollection } from './base';
 const CollectionDistributions = (props: RouteProps) => {
   const routeParams = ParamHelper.parseParamString(props.location.search);
 
-  const [actuallyCollection, setActuallyCollection] = useState(null);
   const [collection, setCollection] = useState(null);
   const [collections, setCollections] = useState([]);
   const [collectionsCount, setCollectionsCount] = useState(0);
@@ -51,14 +50,7 @@ const CollectionDistributions = (props: RouteProps) => {
       forceReload,
       matchParams: props.routeParams,
       navigate: props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) => {
-        setActuallyCollection(actuallyCollection);
+      setCollection: (collections, collection, content, collectionsCount) => {
         setCollection(collection);
         setCollections(collections);
         setCollectionsCount(collectionsCount);
@@ -209,7 +201,6 @@ const CollectionDistributions = (props: RouteProps) => {
     <React.Fragment>
       <CollectionHeader
         activeTab='distributions'
-        actuallyCollection={actuallyCollection}
         breadcrumbs={breadcrumbs}
         collection={collection}
         collections={collections}

@@ -52,7 +52,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     params['sort'] = !params['sort'] ? '-collection' : 'collection';
 
     this.state = {
-      actuallyCollection: null,
       alerts: [],
       collection: null,
       collections: [],
@@ -72,7 +71,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   render() {
     const {
-      actuallyCollection,
       alerts,
       collection,
       collections,
@@ -120,7 +118,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           activeTab='dependencies'
-          actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
           collection={collection}
           collections={collections}
@@ -294,20 +291,13 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) =>
+      setCollection: (collections, collection, content, collectionsCount) =>
         this.setState(
           {
             collections,
             collection,
             content,
             collectionsCount,
-            actuallyCollection,
           },
           callback,
         ),

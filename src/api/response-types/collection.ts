@@ -221,8 +221,6 @@ export class CollectionDetailType {
     company: string;
     related_fields: { my_permissions?: string[] };
   };
-
-  download_count: number;
 }
 
 export class CollectionUsedByDependencies extends CollectionDetailType {

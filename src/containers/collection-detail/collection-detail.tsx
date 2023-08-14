@@ -25,7 +25,6 @@ class CollectionDetail extends React.Component<
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      actuallyCollection: null,
       alerts: [],
       collection: null,
       collections: [],
@@ -48,7 +47,6 @@ class CollectionDetail extends React.Component<
 
   render() {
     const {
-      actuallyCollection,
       alerts,
       collection,
       collections,
@@ -84,7 +82,6 @@ class CollectionDetail extends React.Component<
         ></AlertList>
         <CollectionHeader
           activeTab='install'
-          actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
           collection={collection}
           collections={collections}
@@ -128,19 +125,12 @@ class CollectionDetail extends React.Component<
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) =>
+      setCollection: (collections, collection, content, collectionsCount) =>
         this.setState({
           collections,
           collection,
           content,
           collectionsCount,
-          actuallyCollection,
         }),
       stateParams: this.state.params,
     });

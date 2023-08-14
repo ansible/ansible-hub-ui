@@ -26,7 +26,6 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
-      actuallyCollection: null,
       apiError: undefined,
       collection: null,
       collections: [],
@@ -45,7 +44,6 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
 
   render() {
     const {
-      actuallyCollection,
       apiError,
       collection,
       collections,
@@ -86,7 +84,6 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       <React.Fragment>
         <CollectionHeader
           activeTab='import-log'
-          actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
           collection={collection}
           collections={collections}
@@ -159,20 +156,13 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
       forceReload,
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
-      setCollection: (
-        collections,
-        collection,
-        content,
-        collectionsCount,
-        actuallyCollection,
-      ) =>
+      setCollection: (collections, collection, content, collectionsCount) =>
         this.setState(
           {
             collections,
             collection,
             content,
             collectionsCount,
-            actuallyCollection,
           },
           callback,
         ),
