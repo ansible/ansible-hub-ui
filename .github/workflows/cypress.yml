@@ -7,9 +7,9 @@ on:
     branches: [ 'main', 'stable-*', 'feature/*' ]
   push:
     branches: [ 'main', 'stable-*', 'feature/*' ]
-  # daily on main
+  # monthly on stable-4.6
   schedule:
-  - cron: '30 5 * * *'
+  - cron: '30 5 1 * *'
 
 concurrency:
   group: cypress-${{ github.ref }}
@@ -19,8 +19,8 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
     env:
-      # base of a PR, or pushed-to branch outside PRs, or main
-      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/main' }}
+      # base of a PR, or pushed-to branch outside PRs, or stable-4.6
+      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/stable-4.6' }}
 
     strategy:
       fail-fast: false
