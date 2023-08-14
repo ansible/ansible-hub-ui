@@ -184,7 +184,7 @@ jobs:
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
         mkdir -p www/
-        mv ansible-hub-ui/dist www/
+        mv ansible-hub-ui/dist/* www/
         cd www
         echo '{}' > package.json
 
