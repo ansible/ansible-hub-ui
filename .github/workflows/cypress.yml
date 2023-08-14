@@ -218,10 +218,10 @@ jobs:
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    # - name: "Ensure community is served"
-    #   if: ${{ env.COMPOSE_PROFILE == 'community' }}
-    #   run: |
-    #     curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/static/galaxy_ng/js/App'
+    - name: "Ensure community is served"
+      if: ${{ env.COMPOSE_PROFILE == 'community' }}
+      run: |
+        curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/static/galaxy_ng/js/App'
 
     - name: "Ensure insights is served"
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
