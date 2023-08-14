@@ -21,6 +21,7 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
+  CollectionDetailType,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
@@ -37,6 +38,7 @@ import {
   Breadcrumbs,
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
+  DownloadCount,
   ImportModal,
   LinkTabs,
   Logo,
@@ -68,6 +70,7 @@ interface IProps {
   collections: CollectionVersionSearch[];
   collectionsCount: number;
   collection: CollectionVersionSearch;
+  actuallyCollection: CollectionDetailType;
   content: CollectionVersionContentType;
   params: {
     version?: string;
@@ -164,15 +167,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   render() {
     const {
+      activeTab,
+      actuallyCollection,
+      breadcrumbs,
+      className,
+      collection,
       collections,
       collectionsCount,
-      collection,
       content,
       params,
       updateParams,
-      breadcrumbs,
-      activeTab,
-      className,
     } = this.props;
 
     const {
@@ -479,69 +483,74 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={
-            <div className='install-version-column'>
-              <span>{t`Version`}</span>
-              <div className='install-version-dropdown'>
-                <Select
-                  isOpen={isOpenVersionsSelect}
-                  onToggle={(isOpenVersionsSelect) =>
-                    this.setState({ isOpenVersionsSelect })
-                  }
-                  variant={SelectVariant.single}
-                  onSelect={() =>
-                    this.setState({ isOpenVersionsSelect: false })
-                  }
-                  selections={`v${version}`}
-                  aria-label={t`Select collection version`}
-                  loadingVariant={
-                    collections.length < collectionsCount
-                      ? {
-                          text: t`View more`,
-                          onClick: () =>
-                            this.setState({
-                              isOpenVersionsModal: true,
-                              isOpenVersionsSelect: false,
-                            }),
-                        }
-                      : null
-                  }
-                >
-                  {collections
-                    .map((c) => c.collection_version)
-                    .map((v) => (
-                      <SelectOption
-                        key={v.version}
-                        value={`v${v.version}`}
-                        onClick={() =>
-                          updateParams(
-                            ParamHelper.setParam(
-                              params,
-                              'version',
-                              v.version.toString(),
-                            ),
-                          )
-                        }
-                      >
-                        <Trans>
-                          {v.version} updated {isLatestVersion(v)}
-                        </Trans>
-                      </SelectOption>
-                    ))}
-                </Select>
+            <div className='column-section'>
+              <div className='install-version-column'>
+                <span>{t`Version`}</span>
+                <div className='install-version-dropdown'>
+                  <Select
+                    isOpen={isOpenVersionsSelect}
+                    onToggle={(isOpenVersionsSelect) =>
+                      this.setState({ isOpenVersionsSelect })
+                    }
+                    variant={SelectVariant.single}
+                    onSelect={() =>
+                      this.setState({ isOpenVersionsSelect: false })
+                    }
+                    selections={`v${version}`}
+                    aria-label={t`Select collection version`}
+                    loadingVariant={
+                      collections.length < collectionsCount
+                        ? {
+                            text: t`View more`,
+                            onClick: () =>
+                              this.setState({
+                                isOpenVersionsModal: true,
+                                isOpenVersionsSelect: false,
+                              }),
+                          }
+                        : null
+                    }
+                  >
+                    {collections
+                      .map((c) => c.collection_version)
+                      .map((v) => (
+                        <SelectOption
+                          key={v.version}
+                          value={`v${v.version}`}
+                          onClick={() =>
+                            updateParams(
+                              ParamHelper.setParam(
+                                params,
+                                'version',
+                                v.version.toString(),
+                              ),
+                            )
+                          }
+                        >
+                          <Trans>
+                            {v.version} updated {isLatestVersion(v)}
+                          </Trans>
+                        </SelectOption>
+                      ))}
+                  </Select>
+                </div>
+                {latestVersion ? (
+                  <span className='last-updated'>
+                    <Trans>
+                      Last updated <DateComponent date={latestVersion} />
+                    </Trans>
+                  </span>
+                ) : null}
+                {display_signatures ? (
+                  <SignatureBadge
+                    isCompact
+                    signState={collection.is_signed ? 'signed' : 'unsigned'}
+                  />
+                ) : null}
               </div>
-              {latestVersion ? (
-                <span className='last-updated'>
-                  <Trans>
-                    Last updated <DateComponent date={latestVersion} />
-                  </Trans>
-                </span>
-              ) : null}
-              {display_signatures ? (
-                <SignatureBadge
-                  isCompact
-                  signState={collection.is_signed ? 'signed' : 'unsigned'}
-                />
-              ) : null}
+              <div style={{ alignSelf: 'center' }}>
+                <DownloadCount item={actuallyCollection} />
+              </div>
             </div>
           }
           pageControls={

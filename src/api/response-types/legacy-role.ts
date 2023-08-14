@@ -44,6 +44,7 @@ export class LegacyRoleListType {
   commit: string;
   name: string;
   description: string;
+  download_count: number;
   summary_fields: {
     dependencies: string[];
     namespace: {
@@ -77,6 +78,7 @@ export class LegacyRoleDetailType {
   commit: string;
   name: string;
   description: string;
+  download_count: number;
   summary_fields: {
     dependencies: string[];
     namespace: {

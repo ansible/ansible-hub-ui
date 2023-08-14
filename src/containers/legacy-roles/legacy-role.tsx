@@ -27,6 +27,7 @@ import {
   Breadcrumbs,
   ClipboardCopy,
   DateComponent,
+  DownloadCount,
   LoadingPageWithHeader,
   Logo,
   Main,
@@ -316,6 +317,9 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
             <a href={repository}>
               Github Repository <ExternalLinkAltIcon />
             </a>
+          </div>
+          <div className='hub-entry'>
+            <DownloadCount item={role} />
           </div>
         </DataListCell>,
       );

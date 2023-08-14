@@ -47,11 +47,9 @@ export class BaseHeader extends React.Component<IProps> {
               </Title>
             </div>
           </div>
-          {pageControls ? (
-            <div className='header-right'>{pageControls}</div>
-          ) : null}
+          {pageControls || null}
         </div>
-        {versionControl ? <>{versionControl}</> : null}
+        {versionControl || null}
 
         {children ? (
           <div className='header-bottom'>{children}</div>

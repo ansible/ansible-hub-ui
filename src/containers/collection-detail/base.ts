@@ -1,24 +1,27 @@
 import {
   CollectionAPI,
+  CollectionDetailType,
   CollectionVersionAPI,
   CollectionVersionContentType,
   CollectionVersionSearch,
 } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import { repositoryBasePath } from 'src/utilities';
 
 export interface IBaseCollectionState {
+  actuallyCollection?: CollectionDetailType;
+  alerts?: AlertType[];
+  collection?: CollectionVersionSearch;
+  collections?: CollectionVersionSearch[];
+  collectionsCount?: number;
+  content?: CollectionVersionContentType;
+  distroBasePath?: string;
   params: {
     version?: string;
     showing?: string;
     keywords?: string;
   };
-  collections?: CollectionVersionSearch[];
-  collectionsCount?: number;
-  collection?: CollectionVersionSearch;
-  content?: CollectionVersionContentType;
-  alerts?: AlertType[];
-  distroBasePath?: string;
 }
 
 // Caches the collection data when matching, prevents redundant fetches between collection detail tabs
@@ -28,9 +31,10 @@ const cache = {
   name: null,
   version: null,
 
+  actuallyCollection: null,
+  collection: null,
   collections: [],
   collectionsCount: 0,
-  collection: null,
   content: null,
 };
 
@@ -57,6 +61,7 @@ export function loadCollection({
       cache.collection,
       cache.content,
       cache.collectionsCount,
+      cache.actuallyCollection,
     );
     return;
   }
@@ -94,7 +99,16 @@ export function loadCollection({
     .then(({ data }) => data)
     .catch(() => ({ data: [], meta: { count: 0 } }));
 
-  return Promise.all([versions, currentVersion, content]).then(
+  const actuallyCollection = repositoryBasePath(repo)
+    .then((basePath) => CollectionAPI.getDetail(basePath, namespace, name))
+    .then(({ data }) => data);
+
+  return Promise.all([
+    versions,
+    currentVersion,
+    content,
+    actuallyCollection,
+  ]).then(
     ([
       {
         data: collections,
@@ -102,17 +116,25 @@ export function loadCollection({
       },
       collection,
       content,
+      actuallyCollection,
     ]) => {
-      setCollection(collections, collection, content, collectionsCount);
+      setCollection(
+        collections,
+        collection,
+        content,
+        collectionsCount,
+        actuallyCollection,
+      );
 
       cache.repository = repo;
       cache.namespace = namespace;
       cache.name = name;
       cache.version = version;
 
+      cache.actuallyCollection = actuallyCollection;
+      cache.collection = collection;
       cache.collections = collections;
       cache.collectionsCount = collectionsCount;
-      cache.collection = collection;
       cache.content = content;
     },
   );
