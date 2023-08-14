@@ -183,18 +183,13 @@ jobs:
     - name: "Serve community UI"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
-        mkdir -p www/static/
-        mv ansible-hub-ui/dist www/static/galaxy_ng
+        mkdir -p www/
+        mv ansible-hub-ui/dist www/
         cd www
         echo '{}' > package.json
 
-        ls
-        ls static/
-        ls ansible-hub-ui/dist
-        ls ansible-hub-ui
-
         npm install local-web-server
-        node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
+        node_modules/.bin/ws --port 8002 --directory . --spa index.html \
           --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
           --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
