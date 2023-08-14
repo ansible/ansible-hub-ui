@@ -187,6 +187,12 @@ jobs:
         mv ansible-hub-ui/dist www/static/galaxy_ng
         cd www
         echo '{}' > package.json
+
+        ls
+        ls static/
+        ls ansible-hub-ui/dist
+        ls ansible-hub-ui
+
         npm install local-web-server
         node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
           --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
