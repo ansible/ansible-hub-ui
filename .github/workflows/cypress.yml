@@ -4,10 +4,10 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
+    branches: [ 'main', 'stable-*', 'feature/*' ]
   push:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
-  # daily on master
+    branches: [ 'main', 'stable-*', 'feature/*' ]
+  # daily on main
   schedule:
   - cron: '30 5 * * *'
 
@@ -19,8 +19,8 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
     env:
-      # base of a PR, or pushed-to branch outside PRs, or master
-      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
+      # base of a PR, or pushed-to branch outside PRs, or main
+      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/main' }}
 
     strategy:
       fail-fast: false
@@ -55,8 +55,8 @@ jobs:
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
       run: |
-        UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
-        echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
+        UI_COMMIT_MAIN=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        echo "UI_COMMIT_MAIN=${UI_COMMIT_MAIN}" >> $GITHUB_ENV
 
         COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
         echo 'compare screenshots:'
@@ -182,12 +182,12 @@ jobs:
       run: |
         diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
-    - name: "Cache master screenshots"
+    - name: "Cache original screenshots"
       if: matrix.test == 'screenshots'
       uses: actions/cache@v3
       with:
         path: ansible-hub-ui/test/screenshots-main/
-        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MASTER }}
+        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MAIN }}
         restore-keys: |
           screenshots-${{env.SHORT_BRANCH}}-
 
@@ -238,7 +238,7 @@ jobs:
           exit 1
         fi
 
-    - name: "Move Cache master screenshots"
+    - name: "Move cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
