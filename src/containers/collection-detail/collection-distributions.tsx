@@ -29,16 +29,14 @@ import { loadCollection } from './base';
 const CollectionDistributions = (props: RouteProps) => {
   const routeParams = ParamHelper.parseParamString(props.location.search);
 
+  const [collection, setCollection] = useState(null);
   const [collections, setCollections] = useState([]);
   const [collectionsCount, setCollectionsCount] = useState(0);
-  const [collection, setCollection] = useState(null);
   const [content, setContent] = useState(null);
-  const [inputText, setInputText] = useState('');
-
-  const [distributions, setDistributions] = useState(null);
   const [count, setCount] = useState(0);
+  const [distributions, setDistributions] = useState(null);
+  const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(true);
-
   const [params, setParams] = useState(
     Object.keys(routeParams).length
       ? routeParams
@@ -46,15 +44,16 @@ const CollectionDistributions = (props: RouteProps) => {
           sort: '-pulp_created',
         },
   );
+
   const loadCollections = (forceReload) => {
     loadCollection({
       forceReload,
       matchParams: props.routeParams,
       navigate: props.navigate,
       setCollection: (collections, collection, content, collectionsCount) => {
+        setCollection(collection);
         setCollections(collections);
         setCollectionsCount(collectionsCount);
-        setCollection(collection);
         setContent(content);
 
         loadDistributions(collection.repository.pulp_href);
@@ -201,19 +200,19 @@ const CollectionDistributions = (props: RouteProps) => {
   return (
     <React.Fragment>
       <CollectionHeader
-        reload={() => loadCollections(true)}
+        activeTab='distributions'
+        breadcrumbs={breadcrumbs}
+        collection={collection}
         collections={collections}
         collectionsCount={collectionsCount}
-        collection={collection}
         content={content}
         params={params}
+        reload={() => loadCollections(true)}
         updateParams={(params) => {
           updateParamsMixin(
             ParamHelper.setParam(params, 'version', params.version),
           );
         }}
-        breadcrumbs={breadcrumbs}
-        activeTab='distributions'
       />
       <Main>
         <section className='body'>

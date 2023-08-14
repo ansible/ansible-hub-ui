@@ -111,6 +111,7 @@ export { ShaLabel } from './sha-label/sha-label';
 export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';
+export { DownloadCount } from './shared/download-count';
 export { LoginLink } from './shared/login-link';
 export { UIVersion } from './shared/ui-version';
 export {

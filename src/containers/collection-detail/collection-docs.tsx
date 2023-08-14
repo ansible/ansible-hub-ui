@@ -33,11 +33,11 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
+      collection: null,
       collections: [],
       collectionsCount: 0,
-      collection: null,
       content: null,
-      params: params,
+      params,
     };
     this.docsRef = React.createRef();
     this.searchBarRef = React.createRef();
@@ -48,7 +48,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   }
 
   render() {
-    const { params, collection, collections, collectionsCount, content } =
+    const { collection, collections, collectionsCount, content, params } =
       this.state;
     const urlFields = this.props.routeParams;
 
@@ -117,30 +117,21 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       { name: t`Documentation` },
     ];
 
-    // scroll to top of page
-
-    // if (
-    //   this.docsRef.current &&
-    //   this.searchBarRef.current !== window.document.activeElement
-    // ) {
-    //   this.docsRef.current.scrollIntoView();
-    // }
-
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.loadCollection(true)}
+          activeTab='documentation'
+          breadcrumbs={breadcrumbs}
+          className='header'
+          collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
-          collection={collection}
           content={content}
           params={params}
+          reload={() => this.loadCollection(true)}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollection(true))
           }
-          breadcrumbs={breadcrumbs}
-          activeTab='documentation'
-          className='header'
         />
         <Main className='main'>
           <section className='docs-container'>
@@ -306,7 +297,12 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       matchParams: this.props.routeParams,
       navigate: this.props.navigate,
       setCollection: (collections, collection, content, collectionsCount) =>
-        this.setState({ collections, collection, content, collectionsCount }),
+        this.setState({
+          collections,
+          collection,
+          content,
+          collectionsCount,
+        }),
       stateParams: this.state.params,
     });
   }

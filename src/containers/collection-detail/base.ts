@@ -8,17 +8,17 @@ import { AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
 export interface IBaseCollectionState {
+  alerts?: AlertType[];
+  collection?: CollectionVersionSearch;
+  collections?: CollectionVersionSearch[];
+  collectionsCount?: number;
+  content?: CollectionVersionContentType;
+  distroBasePath?: string;
   params: {
     version?: string;
     showing?: string;
     keywords?: string;
   };
-  collections?: CollectionVersionSearch[];
-  collectionsCount?: number;
-  collection?: CollectionVersionSearch;
-  content?: CollectionVersionContentType;
-  alerts?: AlertType[];
-  distroBasePath?: string;
 }
 
 // Caches the collection data when matching, prevents redundant fetches between collection detail tabs
@@ -28,9 +28,9 @@ const cache = {
   name: null,
   version: null,
 
+  collection: null,
   collections: [],
   collectionsCount: 0,
-  collection: null,
   content: null,
 };
 
@@ -110,9 +110,9 @@ export function loadCollection({
       cache.name = name;
       cache.version = version;
 
+      cache.collection = collection;
       cache.collections = collections;
       cache.collectionsCount = collectionsCount;
-      cache.collection = collection;
       cache.content = content;
     },
   );

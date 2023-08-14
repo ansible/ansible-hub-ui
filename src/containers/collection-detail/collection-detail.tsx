@@ -25,13 +25,13 @@ class CollectionDetail extends React.Component<
     const params = ParamHelper.parseParamString(props.location.search);
 
     this.state = {
+      alerts: [],
+      collection: null,
       collections: [],
       collectionsCount: 0,
-      collection: null,
       content: null,
       distroBasePath: null,
-      params: params,
-      alerts: [],
+      params,
     };
   }
 
@@ -47,12 +47,12 @@ class CollectionDetail extends React.Component<
 
   render() {
     const {
+      alerts,
+      collection,
       collections,
       collectionsCount,
-      collection,
       content,
       params,
-      alerts,
     } = this.state;
 
     if (collections.length <= 0) {
@@ -81,18 +81,18 @@ class CollectionDetail extends React.Component<
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <CollectionHeader
-          reload={() => this.loadCollections(true)}
+          activeTab='install'
+          breadcrumbs={breadcrumbs}
+          collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
-          collection={collection}
           content={content}
           params={params}
+          reload={() => this.loadCollections(true)}
+          repo={this.props.routeParams.repo}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollections(true))
           }
-          breadcrumbs={breadcrumbs}
-          activeTab='install'
-          repo={this.props.routeParams.repo}
         />
         <Main>
           <section className='body'>

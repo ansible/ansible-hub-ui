@@ -52,16 +52,16 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     params['sort'] = !params['sort'] ? '-collection' : 'collection';
 
     this.state = {
+      alerts: [],
+      collection: null,
       collections: [],
       collectionsCount: 0,
-      collection: null,
       content: null,
       dependencies_repos: [],
-      params: params,
+      params,
       usedByDependencies: [],
       usedByDependenciesCount: 0,
       usedByDependenciesLoading: true,
-      alerts: [],
     };
   }
 
@@ -71,15 +71,15 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
+      collection,
       collections,
       collectionsCount,
-      collection,
       content,
       params,
       usedByDependencies,
       usedByDependenciesCount,
       usedByDependenciesLoading,
-      alerts,
     } = this.state;
 
     if (collections.length <= 0) {
@@ -117,20 +117,20 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
-          reload={() => this.loadData(true)}
+          activeTab='dependencies'
+          breadcrumbs={breadcrumbs}
+          collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
-          collection={collection}
           content={content}
           params={headerParams}
+          reload={() => this.loadData(true)}
+          repo={repository.name}
           updateParams={(p) => {
             this.updateParams(this.combineParams(this.state.params, p), () =>
               this.loadData(true),
             );
           }}
-          breadcrumbs={breadcrumbs}
-          activeTab='dependencies'
-          repo={repository.name}
         />
         <Main>
           <section className='body'>
@@ -293,7 +293,12 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
       navigate: this.props.navigate,
       setCollection: (collections, collection, content, collectionsCount) =>
         this.setState(
-          { collections, collection, content, collectionsCount },
+          {
+            collections,
+            collection,
+            content,
+            collectionsCount,
+          },
           callback,
         ),
       stateParams: this.state.params.version
