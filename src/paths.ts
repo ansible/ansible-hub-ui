@@ -63,6 +63,7 @@ export enum Paths {
   ansibleRepositories = '/ansible/repositories',
   ansibleRepositoryDetail = '/ansible/repositories/:name',
   ansibleRepositoryEdit = '/ansible/repositories/:name/edit',
+  dispatch = '/dispatch',
   executionEnvironmentDetail = '/containers/:container',
   executionEnvironmentDetailWithNamespace = '/containers/:namespace/:container',
   executionEnvironmentDetailActivities = '/containers/:container/_content/activity',

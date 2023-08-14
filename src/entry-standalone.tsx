@@ -8,9 +8,18 @@ import App from './loaders/standalone/loader';
 
 // Entrypoint for compiling the app to run in standalone mode
 
-if (!window.location.pathname.includes(UI_BASE_PATH)) {
+if (!window.location.pathname.startsWith(UI_BASE_PATH)) {
   // react-router v6 won't redirect to base path by default
-  window.history.pushState(null, null, UI_BASE_PATH);
+  // also support old-galaxy /namespace/name/ urls
+  const originalPath = window.location.pathname;
+  const newPath = originalPath.match(/^\/(\w+)\/(\w+)\/?$/)
+    ? UI_BASE_PATH.replace(
+        /\/$/,
+        '/dispatch/?pathname=' + encodeURIComponent(originalPath),
+      )
+    : UI_BASE_PATH;
+
+  window.history.pushState(null, null, newPath);
 }
 
 ReactDOM.render(

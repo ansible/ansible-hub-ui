@@ -16,6 +16,7 @@ import {
   CollectionDistributions,
   CollectionDocs,
   CollectionImportLog,
+  Dispatch,
   EditNamespace,
   EditRole,
   EditUser,
@@ -289,6 +290,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: NamespaceDetail, path: Paths.namespace },
       { component: Search, path: Paths.collections },
       { component: LandingPage, path: Paths.landingPage },
+      { component: Dispatch, path: Paths.dispatch },
     ];
   }
 
