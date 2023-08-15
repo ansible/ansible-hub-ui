@@ -21,7 +21,9 @@ Cypress.Commands.add('menuPresent', {}, (name) => {
 
 Cypress.Commands.add('menuMissing', {}, (name) => {
   const last = name.split(' > ').pop();
-  return cy.contains('#page-sidebar a', last).should('not.exist');
+  return cy.get('#page-sidebar a').each(($el) => {
+    expect($el.text()).not.to.equal(last);
+  });
 });
 
 Cypress.Commands.add('menuGo', {}, (name) => {

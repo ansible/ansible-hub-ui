@@ -53,6 +53,10 @@ jobs:
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
 
         case "${{ matrix.test }}" in
+          community*)
+            BACKEND_FLAVOR=community
+            echo "community"
+            ;;
           insights*)
             BACKEND_FLAVOR=insights
             echo "insights"
@@ -146,6 +150,22 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
+    - name: "Build community UI"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      working-directory: 'ansible-hub-ui'
+      run: |
+        npm install
+
+        # production displays unknown translations literally, make sure it's up to date
+        npm run gettext:extract
+        npm run gettext:compile
+
+        npm run build-community
+
+        # save the App.*.js hash for later verification
+        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
+        echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
+
     - name: "Serve standalone UI"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
@@ -155,6 +175,21 @@ jobs:
         echo '{}' > package.json
         npm install local-web-server
         node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
+          --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
+          --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
+          --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
+          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
+
+    - name: "Serve community UI"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      run: |
+        mkdir -p www/
+        mv ansible-hub-ui/dist/* www/
+        cd www
+        echo '{}' > package.json
+
+        npm install local-web-server
+        node_modules/.bin/ws --port 8002 --directory . --spa index.html \
           --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
           --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
@@ -198,11 +233,17 @@ jobs:
       run: |
         cp -aiv ../.github/workflows/cypress/cypress.env.json."$BACKEND_FLAVOR" cypress.env.json
 
-    - name: "Ensure index.html uses the new js"
+    - name: "Ensure standalone index.html uses the new js"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+
+    - name: "Ensure community index.html uses the new js"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      run: |
+        echo 'expecting /js/App.'"$BUILD_HASH"'.js'
+        curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
 
     - name: "Ensure insights is served"
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
@@ -211,6 +252,11 @@ jobs:
         sleep 30
         curl http://localhost:8002/preview/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
         sleep 30
+
+    - name: "Ensure galaxykit can connect to API (community)"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      run: |
+        galaxykit -s http://localhost:8002/api/ -u admin -p admin collection list
 
     - name: "Ensure galaxykit can connect to API (standalone)"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
@@ -225,6 +271,11 @@ jobs:
           --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
           collection list
 
+    - name: "Check initial feature flags (community)"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      run: |
+        curl -s http://localhost:5001/api/_ui/v1/feature-flags/ | jq
+
     - name: "Check initial feature flags (standalone)"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
@@ -234,6 +285,13 @@ jobs:
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
       run: |
         curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
+
+    - name: "Check component versions & settings (community)"
+      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+      run: |
+        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/ | jq
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/_ui/v1/settings/ | jq
 
     - name: "Check component versions & settings (standalone)"
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
