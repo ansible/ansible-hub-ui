@@ -169,20 +169,22 @@ export const StandaloneLayout = ({
 
   return (
     <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-      <Banner>
-        <Trans>
-          Thanks for trying out the new and improved Beta Galaxy, please share
-          your feedback on{' '}
-          <a
-            href='https://github.com/ansible/galaxy_ng/discussions'
-            target='_blank'
-            rel='noreferrer'
-          >
-            github.com/ansible/galaxy_ng/discussions
-          </a>
-          .
-        </Trans>
-      </Banner>
+      {featureFlags?.ai_deny_index ? (
+        <Banner>
+          <Trans>
+            Thanks for trying out the new and improved Beta Galaxy, please share
+            your feedback on{' '}
+            <a
+              href='https://github.com/ansible/galaxy_ng/discussions'
+              target='_blank'
+              rel='noreferrer'
+            >
+              github.com/ansible/galaxy_ng/discussions
+            </a>
+            .
+          </Trans>
+        </Banner>
+      ) : null}
       {children}
       {aboutModalVisible && aboutModal}
     </Page>
