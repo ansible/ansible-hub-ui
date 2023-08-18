@@ -81,7 +81,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             <TextInput
               id='group_name'
               value={this.state.name}
-              onChange={(value) => {
+              onChange={(_event, value) => {
                 this.setState({ name: value });
                 clearErrors();
               }}

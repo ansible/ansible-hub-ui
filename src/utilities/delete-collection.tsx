@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
-import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import { Tooltip } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React from 'react';
 import {
   CollectionAPI,

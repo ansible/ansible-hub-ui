@@ -1,10 +1,9 @@
 import { t } from '@lingui/macro';
+import { Modal, ModalVariant } from '@patternfly/react-core';
 import {
-  Modal,
-  ModalVariant,
   Wizard as PFWizard,
   WizardStep,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 
 interface Props {

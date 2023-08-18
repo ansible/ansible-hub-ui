@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Label,
   LabelGroup,
   Toolbar,
@@ -10,6 +9,7 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { UserPlusIcon } from '@patternfly/react-icons';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';

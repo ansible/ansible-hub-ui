@@ -2,13 +2,13 @@ import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
-  DropdownItem,
   Label,
   LabelGroup,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import {
   CheckCircleIcon,
   DownloadIcon,

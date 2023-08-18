@@ -232,8 +232,8 @@ export class ImportModal extends React.Component<IProps, IState> {
           <Radio
             isChecked={this.state.onlyStaging}
             name='radio-1'
-            onChange={(val) => {
-              this.setState({ onlyStaging: val }, () =>
+            onChange={(_event, onlyStaging) => {
+              this.setState({ onlyStaging }, () =>
                 this.loadAllRepos('staging'),
               );
             }}
@@ -243,7 +243,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           <Radio
             isChecked={!this.state.onlyStaging}
             name='radio-2'
-            onChange={(val) => {
+            onChange={(_event, val) => {
               this.setState({ onlyStaging: !val }, () =>
                 this.loadAllRepos('staging'),
               );

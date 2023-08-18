@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import {
   ExpandableRowContent,
-  TableComposable,
+  Table,
   Tbody,
   Td,
   Tr,
@@ -62,7 +62,7 @@ export const RoleListTable: React.FC<Props> = ({
   };
 
   return (
-    <TableComposable
+    <Table
       aria-label='role-list-table'
       data-cy='RoleListTable'
       variant={isCompact ? 'compact' : undefined}
@@ -74,7 +74,7 @@ export const RoleListTable: React.FC<Props> = ({
         updateParams={updateParams}
       />
       {children}
-    </TableComposable>
+    </Table>
   );
 };
 
@@ -124,7 +124,7 @@ export const CheckboxRow: React.FC<{
     <Tr data-cy={props['data-cy']}>
       <Td
         select={{
-          disable: isDisabled,
+          isDisabled,
           variant: 'checkbox',
           rowIndex,
           onSelect,
@@ -147,7 +147,7 @@ export const RadioRow: React.FC<{
     <Tr data-cy={props['data-cy']}>
       <Td
         select={{
-          disable: isDisabled,
+          isDisabled,
           variant: 'radio',
           rowIndex,
           onSelect,

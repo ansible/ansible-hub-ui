@@ -173,8 +173,8 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                   <CardBody>
                     <DataList
                       aria-label={t`Image layers`}
-                      onSelectDataListItem={(id) =>
-                        this.setState({ selectedLayer: id })
+                      onSelectDataListItem={(_event, selectedLayer) =>
+                        this.setState({ selectedLayer })
                       }
                       selectedDataListItemId={selectedLayer}
                     >

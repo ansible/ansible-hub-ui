@@ -2,7 +2,6 @@ import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Checkbox,
-  DropdownItem,
   LabelGroup,
   Text,
   Toolbar,
@@ -10,6 +9,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 import { sum } from 'lodash';
 import React from 'react';
@@ -219,7 +219,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </>
             <Checkbox
               isChecked={confirmDelete}
-              onChange={(value) => this.setState({ confirmDelete: value })}
+              onChange={(_event, confirmDelete) =>
+                this.setState({ confirmDelete })
+              }
               label={t`I understand that this action cannot be undone.`}
               id='delete_confirm'
             />

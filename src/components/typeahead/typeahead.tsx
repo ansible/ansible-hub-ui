@@ -1,5 +1,9 @@
 import { t } from '@lingui/macro';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { chipGroupProps } from 'src/utilities';
 
@@ -52,7 +56,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
         menuAppendTo={this.props.menuAppendTo}
         onClear={this.onClear}
         onSelect={this.onSelect}
-        onToggle={this.onToggle}
+        onToggle={(_event, isOpen) => this.onToggle(isOpen)}
         variant={variant}
         selections={selected}
         isOpen={isOpen}

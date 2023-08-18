@@ -2,18 +2,20 @@ import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Button,
-  DropdownItem,
   Flex,
   FlexItem,
   List,
   ListItem,
   Modal,
-  Select,
-  SelectOption,
-  SelectVariant,
   Spinner,
   Text,
 } from '@patternfly/react-core';
+import {
+  DropdownItem,
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import * as moment from 'moment';
 import React from 'react';
@@ -489,7 +491,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 <div className='install-version-dropdown'>
                   <Select
                     isOpen={isOpenVersionsSelect}
-                    onToggle={(isOpenVersionsSelect) =>
+                    onToggle={(_event, isOpenVersionsSelect) =>
                       this.setState({ isOpenVersionsSelect })
                     }
                     variant={SelectVariant.single}

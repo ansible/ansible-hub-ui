@@ -1,13 +1,13 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';

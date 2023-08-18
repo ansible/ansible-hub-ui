@@ -1,11 +1,11 @@
 import { t } from '@lingui/macro';
 import {
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {

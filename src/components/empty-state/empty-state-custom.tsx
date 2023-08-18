@@ -1,10 +1,11 @@
 import {
   EmptyState,
+  EmptyStateActions,
   EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
   EmptyStateIcon,
-  EmptyStatePrimary,
   EmptyStateVariant,
-  Title,
 } from '@patternfly/react-core';
 import React from 'react';
 import { ComponentClass } from 'react';
@@ -27,12 +28,15 @@ export const EmptyStateCustom = ({
 }: IProps) => {
   return (
     <EmptyState variant={EmptyStateVariant[variant]} data-cy='EmptyState'>
-      <EmptyStateIcon icon={icon} />
-      <Title headingLevel='h4' size='lg'>
-        {title}
-      </Title>
+      <EmptyStateHeader
+        titleText={title}
+        icon={<EmptyStateIcon icon={icon} />}
+        headingLevel='h4'
+      />
       <EmptyStateBody>{description}</EmptyStateBody>
-      {button && <EmptyStatePrimary>{button}</EmptyStatePrimary>}
+      <EmptyStateFooter>
+        {button && <EmptyStateActions>{button}</EmptyStateActions>}
+      </EmptyStateFooter>
     </EmptyState>
   );
 };

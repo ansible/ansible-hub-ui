@@ -4,10 +4,10 @@ import {
   AlertActionCloseButton,
   Button,
   Checkbox,
-  DropdownItem,
   Text,
   Tooltip,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -371,7 +371,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               </Text>
               <Checkbox
                 isChecked={confirmDelete}
-                onChange={(val) => this.setState({ confirmDelete: val })}
+                onChange={(_event, confirmDelete) =>
+                  this.setState({ confirmDelete })
+                }
                 label={t`I understand that this action cannot be undone.`}
                 id='delete_confirm'
               />

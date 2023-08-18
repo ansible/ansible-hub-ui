@@ -198,12 +198,6 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
       name: roleName,
       activeItem: 'install',
     };
-
-    this.onSelect = (result) => {
-      this.setState({
-        activeItem: result.itemId,
-      });
-    };
   }
 
   componentDidMount() {
@@ -228,10 +222,10 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
     });
   }
 
-  onSelect(e) {
-    this.setState(() => ({
-      activeItem: e.itemId,
-    }));
+  onSelect(item) {
+    this.setState({
+      activeItem: item.itemId,
+    });
   }
 
   render() {
@@ -398,7 +392,11 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         </DataList>
 
         <Panel isScrollable>
-          <Nav theme='light' variant='tertiary' onSelect={this.onSelect}>
+          <Nav
+            theme='light'
+            variant='tertiary'
+            onSelect={(_event, item) => this.onSelect(item)}
+          >
             <NavList>
               {Object.keys(table).map((key) => {
                 return (

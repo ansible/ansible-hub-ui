@@ -1,11 +1,11 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { sortBy } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';

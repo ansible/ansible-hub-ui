@@ -1,11 +1,6 @@
 import { t } from '@lingui/macro';
 import {
   Button,
-  Dropdown,
-  DropdownItem,
-  DropdownSeparator,
-  DropdownToggle,
-  DropdownToggleCheckbox,
   Flex,
   FlexItem,
   Label,
@@ -16,6 +11,13 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+} from '@patternfly/react-core/deprecated';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryAPI,
@@ -271,7 +273,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
                 onChange={onToggleCheckbox}
               />,
             ]}
-            onToggle={onToggle}
+            onToggle={(_event, isOpen: boolean) => onToggle(isOpen)}
             id='toggle-split-button'
           />
         }

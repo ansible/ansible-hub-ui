@@ -10,6 +10,7 @@ import {
   FormGroup,
   FormHelperText,
   InputGroup,
+  InputGroupItem,
   TextInput,
   ValidatedOptions,
 } from '@patternfly/react-core';
@@ -120,13 +121,7 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
 
   return (
     <Form className={className} {...props}>
-      <FormHelperText
-        isError={!isValidUsername || !isValidPassword}
-        isHidden={!showHelperText}
-        icon={helperTextIcon}
-      >
-        {helperText}
-      </FormHelperText>
+      <FormHelperText>{helperText}</FormHelperText>
       <FormGroup
         label={usernameLabel}
         isRequired
@@ -160,15 +155,17 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
         {isShowPasswordEnabled && (
           <InputGroup>
             {passwordInput}
-            <Button
-              variant='control'
-              onClick={() => setPasswordHidden(!passwordHidden)}
-              aria-label={
-                passwordHidden ? showPasswordAriaLabel : hidePasswordAriaLabel
-              }
-            >
-              {passwordHidden ? <EyeIcon /> : <EyeSlashIcon />}
-            </Button>
+            <InputGroupItem>
+              <Button
+                variant='control'
+                onClick={() => setPasswordHidden(!passwordHidden)}
+                aria-label={
+                  passwordHidden ? showPasswordAriaLabel : hidePasswordAriaLabel
+                }
+              >
+                {passwordHidden ? <EyeIcon /> : <EyeSlashIcon />}
+              </Button>
+            </InputGroupItem>
           </InputGroup>
         )}
         {!isShowPasswordEnabled && passwordInput}

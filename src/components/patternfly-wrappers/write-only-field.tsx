@@ -1,5 +1,10 @@
 import { t } from '@lingui/macro';
-import { Button, InputGroup, TextInput } from '@patternfly/react-core';
+import {
+  Button,
+  InputGroup,
+  InputGroupItem,
+  TextInput,
+} from '@patternfly/react-core';
 import React from 'react';
 
 interface IProps {
@@ -18,13 +23,15 @@ export const WriteOnlyField = ({ onClear, isValueSet, children }: IProps) =>
     <>{children}</>
   ) : (
     <InputGroup>
-      <TextInput
-        aria-label={t`hidden value`}
-        placeholder='••••••••••••••••••••••'
-        type='password'
-        autoComplete='off'
-        isDisabled={isValueSet}
-      />
+      <InputGroupItem isFill>
+        <TextInput
+          aria-label={t`hidden value`}
+          placeholder='••••••••••••••••••••••'
+          type='password'
+          autoComplete='off'
+          isDisabled={isValueSet}
+        />
+      </InputGroupItem>
       {isValueSet && (
         <Button onClick={() => onClear()} variant='control'>
           {t`Clear`}

@@ -4,7 +4,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  CardHeaderMain,
   CardTitle,
   Tooltip,
 } from '@patternfly/react-core';
@@ -31,8 +30,8 @@ export const NamespaceCard = ({
   const MAX_DESCRIPTION_LENGTH = 26;
   return (
     <Card className='hub-c-card-ns-container'>
-      <CardHeader>
-        <CardHeaderMain>
+      <CardHeader
+        actions={
           <Logo
             alt={t`${company} logo`}
             fallbackToDefault
@@ -40,8 +39,8 @@ export const NamespaceCard = ({
             size='40px'
             unlockWidth
           />
-        </CardHeaderMain>
-      </CardHeader>
+        }
+      />
       <Tooltip content={company || name}>
         <CardTitle>
           {getDescription(company || name, MAX_DESCRIPTION_LENGTH)}

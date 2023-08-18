@@ -4,6 +4,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
+  InputGroupItem,
   Modal,
   ModalVariant,
   TextInput,
@@ -131,19 +132,21 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             }
           >
             <InputGroup>
-              <TextInput
-                validated={this.toError(this.state.newNamespaceNameValid)}
-                isRequired
-                type='text'
-                id='newNamespaceName'
-                name='newNamespaceName'
-                value={newNamespaceName}
-                onChange={(value) => {
-                  this.setState({ newNamespaceName: value }, () => {
-                    this.newNamespaceNameIsValid();
-                  });
-                }}
-              />
+              <InputGroupItem isFill>
+                <TextInput
+                  validated={this.toError(this.state.newNamespaceNameValid)}
+                  isRequired
+                  type='text'
+                  id='newNamespaceName'
+                  name='newNamespaceName'
+                  value={newNamespaceName}
+                  onChange={(_event, value) => {
+                    this.setState({ newNamespaceName: value }, () => {
+                      this.newNamespaceNameIsValid();
+                    });
+                  }}
+                />
+              </InputGroupItem>
             </InputGroup>
           </FormGroup>
         </Form>

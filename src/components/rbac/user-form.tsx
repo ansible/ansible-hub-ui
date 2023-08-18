@@ -123,8 +123,8 @@ export class UserForm extends React.Component<IProps, IState> {
           isDisabled={isReadonly}
           id='password-confirm'
           value={passwordConfirm}
-          onChange={(value) => {
-            this.setState({ passwordConfirm: value });
+          onChange={(_event, passwordConfirm) => {
+            this.setState({ passwordConfirm });
           }}
           type='password'
           autoComplete='off'

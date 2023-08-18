@@ -1,13 +1,12 @@
 import { Trans, t } from '@lingui/macro';
+import { Page, PageSidebar, PageSidebarBody } from '@patternfly/react-core';
 import {
   Banner,
   DropdownItem,
   DropdownSeparator,
-  Page,
   PageHeader,
   PageHeaderTools,
-  PageSidebar,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import {
   ExternalLinkAltIcon,
   QuestionCircleIcon,
@@ -157,14 +156,13 @@ export const StandaloneLayout = ({
   );
 
   const Sidebar = (
-    <PageSidebar
-      theme='dark'
-      nav={
+    <PageSidebar theme='dark'>
+      <PageSidebarBody>
         <StandaloneMenu
           context={{ user, settings, featureFlags, hasPermission }}
         />
-      }
-    />
+      </PageSidebarBody>
+    </PageSidebar>
   );
 
   return (

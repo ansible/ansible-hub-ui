@@ -52,7 +52,7 @@ export class NamespaceForm extends React.Component<IProps> {
                 id='company'
                 type='text'
                 value={namespace.company}
-                onChange={(value, event) => this.updateField(value, event)}
+                onChange={(event, value) => this.updateField(value, event)}
               />
             </FormGroup>
           </div>
@@ -72,7 +72,7 @@ export class NamespaceForm extends React.Component<IProps> {
             id='avatar_url'
             type='text'
             value={namespace.avatar_url}
-            onChange={(value, event) => this.updateField(value, event)}
+            onChange={(event, value) => this.updateField(value, event)}
           />
         </FormGroup>
 
@@ -87,7 +87,7 @@ export class NamespaceForm extends React.Component<IProps> {
             id='description'
             type='text'
             value={namespace.description}
-            onChange={(value, event) => this.updateField(value, event)}
+            onChange={(event, value) => this.updateField(value, event)}
           />
         </FormGroup>
 
@@ -209,7 +209,7 @@ export class NamespaceForm extends React.Component<IProps> {
               type='text'
               placeholder={t`Link text`}
               value={link.name}
-              onChange={(value, event) => this.updateLink(index, value, event)}
+              onChange={(event, value) => this.updateLink(index, value, event)}
               validated={NamespaceForm.validateName(link).validated}
             />
           </FormGroup>
@@ -221,7 +221,7 @@ export class NamespaceForm extends React.Component<IProps> {
               type='text'
               placeholder={t`Link URL`}
               value={link.url}
-              onChange={(value, event) => this.updateLink(index, value, event)}
+              onChange={(event, value) => this.updateLink(index, value, event)}
               validated={NamespaceForm.validateUrl(link.url).validated}
             />
           </FormGroup>

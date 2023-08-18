@@ -1,11 +1,10 @@
 import { t } from '@lingui/macro';
+import { Label, LabelGroup } from '@patternfly/react-core';
 import {
-  Label,
-  LabelGroup,
   Select,
   SelectOption,
   SelectVariant,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
@@ -75,7 +74,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         variant={SelectVariant.typeaheadMulti}
         chipGroupProps={chipGroupProps()}
         typeAheadAriaLabel={t`Select permissions`}
-        onToggle={(isOpen) => this.setState({ isOpen })}
+        onToggle={(_event, isOpen) => this.setState({ isOpen })}
         onSelect={(event, permission) =>
           onPermissionToggle(permission['value'] || permission)
         }

@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
-import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
+import { Button, DataList, Switch } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import cx from 'classnames';
 import React from 'react';
 import { Navigate } from 'react-router-dom';

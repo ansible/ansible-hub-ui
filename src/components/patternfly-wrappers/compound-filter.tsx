@@ -2,14 +2,17 @@ import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
-  DropdownItem,
   InputGroup,
+  InputGroupItem,
+  TextInput,
+} from '@patternfly/react-core';
+import {
+  DropdownItem,
   Select,
   SelectGroup,
   SelectOption,
   SelectVariant,
-  TextInput,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 import React from 'react';
 import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
@@ -102,13 +105,15 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           />
         )}
         {this.renderInput(selectedFilter)}
-        <Button
-          onClick={() => this.submitFilter()}
-          variant={ButtonVariant.control}
-          isDisabled={!this.props.inputText.trim().length}
-        >
-          <SearchIcon />
-        </Button>
+        <InputGroupItem>
+          <Button
+            onClick={() => this.submitFilter()}
+            variant={ButtonVariant.control}
+            isDisabled={!this.props.inputText.trim().length}
+          >
+            <SearchIcon />
+          </Button>
+        </InputGroupItem>
       </InputGroup>
     );
   }
@@ -200,7 +205,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.props.inputText}
-            onChange={(k) => this.props.onChange(k)}
+            onChange={(_event, k) => this.props.onChange(k)}
             onKeyPress={(e) => this.handleEnter(e)}
           />
         );
