@@ -1,0 +1,94 @@
+/home/himdel/ansible-hub-ui/src/components/card-list-switcher/card-list-switcher.tsx
+  42:9  error  The size, color, and noVerticalAlign properties have been removed from react-icons. Wrap your react-icon with the <Icon> component to customize its size and color  @patternfly/pf-codemods/react-icons-remove-props
+
+/home/himdel/ansible-hub-ui/src/components/execution-environment/repository-form.tsx
+  188:15  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  228:15  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  228:15  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/execution-environment/tag-manifest-modal.tsx
+  138:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/markdown-editor/markdown-editor.tsx
+  24:15  error    helperText prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/namespace-form/namespace-form.tsx
+   44:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   44:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   64:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   64:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   79:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   79:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   94:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   94:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  107:13  error    The size, color, and noVerticalAlign properties have been removed from react-icons. Wrap your react-icon with the <Icon> component to customize its size and color  @patternfly/pf-codemods/react-icons-remove-props
+  240:15  error    The size, color, and noVerticalAlign properties have been removed from react-icons. Wrap your react-icon with the <Icon> component to customize its size and color  @patternfly/pf-codemods/react-icons-remove-props
+
+/home/himdel/ansible-hub-ui/src/components/namespace-modal/namespace-modal.tsx
+  121:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  121:11  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/patternfly-wrappers/login-form.tsx
+  125:7  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  147:7  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/rbac/group-modal.tsx
+  71:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  71:11  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/rbac/role-form.tsx
+   79:15  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+   79:15  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  103:15  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  103:15  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/rbac/user-form.tsx
+  108:7   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  108:7   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  161:7   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  161:7   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  188:7   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                                  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  188:7   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  188:7   error    helperText prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children                                                                                                 @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/repositories/ansible-repository-form.tsx
+  48:5  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  48:5  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/repositories/remote-form.tsx
+  223:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  223:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  241:9   error    helperTextIcon prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children         @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  241:9   error    helperTextInvalidIcon prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  282:11  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  282:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  312:11  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  312:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  332:11  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  332:11  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  426:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  426:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  462:9   error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  462:9   error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  501:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  501:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  521:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  521:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  550:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  550:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  577:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  577:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  598:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  598:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  628:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  628:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  672:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  672:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  716:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  716:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  748:13  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children              @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  748:13  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children      @patternfly/pf-codemods/formgroup-remove-helpertextProps
+
+/home/himdel/ansible-hub-ui/src/components/shared/data-form.tsx
+  50:9  error    helperTextInvalid prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children  @patternfly/pf-codemods/formgroup-remove-helpertextProps
+  50:9  error    validated prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children          @patternfly/pf-codemods/formgroup-remove-helpertextProps
