@@ -86,6 +86,10 @@ msgstr "{count, plural, one {Role} other {Roles}}"
 msgid "{count} more"
 msgstr "{count} plus"
 
+#: src/components/shared/download-count.tsx
+msgid "{downloadCount} Downloads"
+msgstr ""
+
 #: src/utilities/get_human_size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
@@ -194,6 +198,7 @@ msgstr "<0>ATTENTION</0> le chargement d'un nouveau jeton supprimera votre ancie
 msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
 msgstr "<0>Vos rôles et collections peuvent être utilisés comme données d'entraînement pour un modèle d'apprentissage automatique qui fournit des recommandations de contenu d'automatisation Ansible.</0><1>Si vous avez des préoccupations, veuillez contacter l'équipe Ansible à l'adresse suivante <2>ansible-content-ai@redhat.com</2>.</1>"
 
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/not-found.tsx
 msgid "404 - Page not found"
 msgstr "404 - Page non trouvée"
@@ -537,6 +542,14 @@ msgstr "Êtes-vous sûr de vouloir revenir à la version ci-dessous ?"
 #: src/components/rbac/user-form.tsx
 msgid "Authentication provider"
 msgstr "Fournisseur d’authentification"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching collections"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching legacy roles"
+msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Back"
@@ -974,6 +987,7 @@ msgid "Collection with id {0} not found."
 msgstr "La collection avec l'identifiant {0} n'a pas été trouvée."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/search/search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -1651,6 +1665,10 @@ msgstr "Télécharger le fichier de certification du client"
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Download concurrency"
 msgstr "Télécharger la concurrence"
+
+#: src/components/shared/download-count.tsx
+msgid "Download count is the sum of all versions' download counts"
+msgstr ""
 
 #: src/containers/signature-keys/list.tsx
 msgid "Download key"
@@ -2611,6 +2629,10 @@ msgstr "L'espace de noms hérité <0>{name}</0> est exclu d'Ansible Lightspeed."
 msgid "Legacy Namespaces"
 msgstr "Mes espaces de noms hérités"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "Legacy roles"
+msgstr ""
+
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Legacy Roles"
@@ -3010,6 +3032,14 @@ msgstr "Pas d'importations"
 msgid "No managed collections yet"
 msgstr "Pas encore de collections gérées"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching collections found."
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching legacy roles found."
+msgstr ""
+
 #: src/components/my-imports/import-list.tsx
 msgid "No namespace selected."
 msgstr "Aucun espace de nom n'a été sélectionné."
@@ -3134,6 +3164,7 @@ msgstr "Ne correspond pas à un super utilisateur"
 #: src/components/rbac/permission-chip-selector.tsx
 #: src/components/typeahead/typeahead.tsx
 #: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/not-found/dispatch.tsx
 msgid "Not found"
 msgstr "Introuvable"
 
@@ -3239,6 +3270,10 @@ msgstr "Confirmation du mot de passe"
 #: src/components/rbac/user-form.tsx
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Pathname <0>{pathname}</0> could refer to a collection or a role."
+msgstr ""
 
 #: src/components/status/status-indicator.tsx
 msgid "Pending"
@@ -3945,6 +3980,10 @@ msgstr "Nom du rôle"
 msgid "Roles"
 msgstr "Rôles"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "Roles are not currently enabled."
+msgstr ""
+
 #: src/containers/role-management/role-list.tsx
 msgid "Roles list could not be displayed."
 msgstr "La liste des rôles n’a pas pu être affichée."
@@ -4148,6 +4187,16 @@ msgstr ""
 #: src/components/repositories/remote-form.tsx
 msgid "Show advanced options"
 msgstr "Afficher les options avancées"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all collections"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all legacy roles"
+msgstr ""
 
 #: src/utilities/chip-group-props.ts
 msgid "Show Less"
@@ -5249,6 +5298,7 @@ msgstr "patientez jusqu’à ce que l’importation se termine"
 msgid "Warning"
 msgstr "Avertissement"
 
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/not-found.tsx
 msgid "We couldn't find the page you're looking for!"
 msgstr "Nous n'avons pas trouvé la page que vous recherchez !"
