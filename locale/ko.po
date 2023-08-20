@@ -86,6 +86,10 @@ msgstr "{count, plural, one {Role} other {Roles}}"
 msgid "{count} more"
 msgstr "{count} 기타 정보"
 
+#: src/components/shared/download-count.tsx
+msgid "{downloadCount} Downloads"
+msgstr ""
+
 #: src/utilities/get_human_size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
@@ -194,6 +198,7 @@ msgstr "<0>경고</0> 새 토큰을 로드하면 이전 토큰이 삭제됩니�
 #~ msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
 #~ msgstr "<0>역할 및 컬렉션은 Ansible 자동화 콘텐츠 권장 사항을 제공하는 머신 학습 모델의 교육 데이터로 사용할 수 있습니다.</0><1>문제가 있는 경우 <2>ansible-content-ai@redhat.com</2>에 문의하십시오.</1>"
 
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/not-found.tsx
 msgid "404 - Page not found"
 msgstr "404 - 페이지를 찾을 수 없음"
@@ -529,6 +534,14 @@ msgstr "이 리포지토리를 아래 버전으로 되돌리시겠습니까?"
 #: src/components/rbac/user-form.tsx
 msgid "Authentication provider"
 msgstr "인증 제공자"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching collections"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching legacy roles"
+msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Back"
@@ -965,6 +978,7 @@ msgid "Collection with id {0} not found."
 msgstr "ID인 컬렉션 {0}을/를 찾을 수 없음."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/search/search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -1632,6 +1646,10 @@ msgstr "클라이언트 인증 파일 다운로드"
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Download concurrency"
 msgstr "동시 다운로드"
+
+#: src/components/shared/download-count.tsx
+msgid "Download count is the sum of all versions' download counts"
+msgstr ""
 
 #: src/containers/signature-keys/list.tsx
 msgid "Download key"
@@ -2572,6 +2590,10 @@ msgstr "레거시"
 msgid "Legacy Namespaces"
 msgstr "레거시 네임스페이스"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "Legacy roles"
+msgstr ""
+
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Legacy Roles"
@@ -2974,6 +2996,14 @@ msgstr "가져오기 없음"
 msgid "No managed collections yet"
 msgstr "아직 관리되는 컬렉션이 없습니다"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching collections found."
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching legacy roles found."
+msgstr ""
+
 #: src/components/my-imports/import-list.tsx
 msgid "No namespace selected."
 msgstr "선택된 네임스페이스가 없습니다."
@@ -3098,6 +3128,7 @@ msgstr "슈퍼 유저가 아닙니다"
 #: src/components/rbac/permission-chip-selector.tsx
 #: src/components/typeahead/typeahead.tsx
 #: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/not-found/dispatch.tsx
 msgid "Not found"
 msgstr "찾을 수 없음"
 
@@ -3203,6 +3234,10 @@ msgstr "암호 확인"
 #: src/components/rbac/user-form.tsx
 msgid "Passwords do not match"
 msgstr "암호가 일치하지 않음"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Pathname <0>{pathname}</0> could refer to a collection or a role."
+msgstr ""
 
 #: src/components/status/status-indicator.tsx
 msgid "Pending"
@@ -3901,6 +3936,10 @@ msgstr "역할 이름"
 msgid "Roles"
 msgstr "역할"
 
+#: src/containers/not-found/dispatch.tsx
+msgid "Roles are not currently enabled."
+msgstr ""
+
 #: src/containers/role-management/role-list.tsx
 msgid "Roles list could not be displayed."
 msgstr "역할 목록을 표시할 수 없습니다."
@@ -4100,6 +4139,16 @@ msgstr "설정"
 #: src/components/repositories/remote-form.tsx
 msgid "Show advanced options"
 msgstr "고급 옵션 표시"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all collections"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all legacy roles"
+msgstr ""
 
 #: src/utilities/chip-group-props.ts
 msgid "Show Less"
@@ -5178,6 +5227,7 @@ msgstr "가져오기가 완료될 때까지 대기 중"
 msgid "Warning"
 msgstr "경고"
 
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/not-found.tsx
 msgid "We couldn't find the page you're looking for!"
 msgstr "페이지를 찾을 수 없습니다!"
