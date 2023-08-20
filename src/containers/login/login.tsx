@@ -13,7 +13,7 @@ import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 interface IState {
   usernameValue: string;
   passwordValue: string;
-  errorMessage: string;
+  errorMessage?: string;
   redirect?: string;
 }
 
@@ -23,13 +23,15 @@ class LoginPage extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: undefined,
+      errorMessage: null,
       usernameValue: '',
       passwordValue: '',
     };
 
-    const params = ParamHelper.parseParamString(this.props.location.search);
-    this.redirectPage = params['next'] || formatPath(Paths.landingPage);
+    const params = ParamHelper.parseParamString(this.props.location.search) as {
+      next?: string;
+    };
+    this.redirectPage = params.next || formatPath(Paths.landingPage);
   }
 
   render() {
@@ -50,10 +52,14 @@ class LoginPage extends React.Component<RouteProps, IState> {
         helperText={helperText}
         usernameLabel={t`Username`}
         usernameValue={this.state.usernameValue}
-        onChangeUsername={this.handleUsernameChange}
+        onChangeUsername={(_e, usernameValue) =>
+          this.setState({ usernameValue })
+        }
         passwordLabel={t`Password`}
         passwordValue={this.state.passwordValue}
-        onChangePassword={this.handlePasswordChange}
+        onChangePassword={(_e, passwordValue) =>
+          this.setState({ passwordValue })
+        }
         onLoginButtonClick={this.onLoginButtonClick}
         loginButtonLabel={t`Log In`}
       />
@@ -70,14 +76,6 @@ class LoginPage extends React.Component<RouteProps, IState> {
       </PFLoginPage>
     );
   }
-
-  private handleUsernameChange = (usernameValue) => {
-    this.setState({ usernameValue });
-  };
-
-  private handlePasswordChange = (passwordValue) => {
-    this.setState({ passwordValue });
-  };
 
   private onLoginButtonClick = (event) => {
     ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)

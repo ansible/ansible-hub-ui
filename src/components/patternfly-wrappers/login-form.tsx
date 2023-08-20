@@ -1,4 +1,4 @@
-// this comes from @patternfly/react-core@4.276.11
+// this comes from @patternfly/react-core@5.0.0
 // packages/react-core/src/components/LoginPage/LoginForm.tsx
 // w/ fixed imports, prettier
 // and added autocomplete="off" for username & password
@@ -9,6 +9,8 @@ import {
   Form,
   FormGroup,
   FormHelperText,
+  HelperText,
+  HelperTextItem,
   InputGroup,
   InputGroupItem,
   TextInput,
@@ -36,8 +38,8 @@ export interface LoginFormProps
   usernameValue?: string;
   /** Function that handles the onChange event for the username */
   onChangeUsername?: (
-    value: string,
     event: React.FormEvent<HTMLInputElement>,
+    value: string,
   ) => void;
   /** Flag indicating if the username is valid */
   isValidUsername?: boolean;
@@ -47,8 +49,8 @@ export interface LoginFormProps
   passwordValue?: string;
   /** Function that handles the onChange event for the password */
   onChangePassword?: (
-    value: string,
     event: React.FormEvent<HTMLInputElement>,
+    value: string,
   ) => void;
   /** Flag indicating if the password is valid */
   isValidPassword?: boolean;
@@ -72,8 +74,8 @@ export interface LoginFormProps
   isRememberMeChecked?: boolean;
   /** Function that handles the onChange event for the remember me checkbox */
   onChangeRememberMe?: (
-    checked: boolean,
     event: React.FormEvent<HTMLInputElement>,
+    checked: boolean,
   ) => void;
 }
 
@@ -121,13 +123,23 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
 
   return (
     <Form className={className} {...props}>
-      <FormHelperText>{helperText}</FormHelperText>
+      {showHelperText && (
+        <FormHelperText>
+          <HelperText>
+            <HelperTextItem
+              variant={
+                !isValidUsername || !isValidPassword ? 'error' : 'default'
+              }
+              icon={helperTextIcon}
+            >
+              {helperText}
+            </HelperTextItem>
+          </HelperText>
+        </FormHelperText>
+      )}
       <FormGroup
         label={usernameLabel}
         isRequired
-        validated={
-          isValidUsername ? ValidatedOptions.default : ValidatedOptions.error
-        }
         fieldId='pf-login-username-id'
       >
         <TextInput
@@ -147,14 +159,11 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
       <FormGroup
         label={passwordLabel}
         isRequired
-        validated={
-          isValidPassword ? ValidatedOptions.default : ValidatedOptions.error
-        }
         fieldId='pf-login-password-id'
       >
         {isShowPasswordEnabled && (
           <InputGroup>
-            {passwordInput}
+            <InputGroupItem isFill>{passwordInput}</InputGroupItem>
             <InputGroupItem>
               <Button
                 variant='control'
