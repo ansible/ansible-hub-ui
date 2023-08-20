@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'src/l10n';
 import App from './loaders/standalone/loader';
@@ -22,7 +22,9 @@ if (!window.location.pathname.startsWith(UI_BASE_PATH)) {
   window.history.pushState(null, null, newPath);
 }
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
     <Router basename={UI_BASE_PATH}>
       <I18nProvider i18n={i18n}>
@@ -30,5 +32,4 @@ ReactDOM.render(
       </I18nProvider>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
