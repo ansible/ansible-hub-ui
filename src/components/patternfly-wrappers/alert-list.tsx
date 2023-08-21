@@ -17,8 +17,8 @@ interface IProps {
 export class AlertType {
   id?: string;
   variant: AlertProps['variant'];
-  title: string | ReactNode;
-  description?: string | ReactNode;
+  title: string | ReactNode | JSX.Element;
+  description?: string | ReactNode | JSX.Element;
 }
 
 export const AlertList = ({ alerts, closeAlert }: IProps) => (

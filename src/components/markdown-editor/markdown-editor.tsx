@@ -2,6 +2,7 @@ import { t } from '@lingui/macro';
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { FormFieldHelper } from 'src/components';
 import './markdown-editor.scss';
 
 interface IProps {
@@ -21,7 +22,7 @@ export class MarkdownEditor extends React.Component<IProps> {
         <div className='markdown-editor'>
           {editing && (
             <div className='column editor'>
-              <FormGroup fieldId='resources' helperText={helperText}>
+              <FormGroup fieldId='resources'>
                 <div id='markdown-title'>{t`Raw Markdown`}</div>
                 <TextArea
                   aria-labelledby='markdown-title'
@@ -30,6 +31,9 @@ export class MarkdownEditor extends React.Component<IProps> {
                   onChange={(_event, value) => updateText(value)}
                   placeholder={placeholder}
                 />
+                <FormFieldHelper variant='default'>
+                  {helperText}
+                </FormFieldHelper>
               </FormGroup>
             </div>
           )}

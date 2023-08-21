@@ -2,6 +2,7 @@ import {
   FormHelperText,
   HelperText,
   HelperTextItem,
+  HelperTextItemProps,
 } from '@patternfly/react-core';
 import {
   ExclamationCircleIcon,
@@ -13,8 +14,8 @@ export function FormFieldHelper({
   variant,
   children,
 }: {
-  variant: string;
-  children: ReactNode;
+  variant: HelperTextItemProps['variant'];
+  children?: ReactNode;
 }) {
   return (
     <FormHelperText>

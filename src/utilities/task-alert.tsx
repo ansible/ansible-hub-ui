@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 
-type VariantType = 'default' | 'success' | 'danger' | 'warning' | 'info';
+type VariantType = 'success' | 'danger' | 'warning' | 'info';
 
 // task can be { task: (pulp_href) } or "(pulp_href)" or "(uuid)"
-export const taskAlert = (task, title, variant: VariantType = 'info') => ({
+export const taskAlert = (
+  task,
+  title: string,
+  variant: VariantType = 'info',
+) => ({
   title,
   variant,
   description: (

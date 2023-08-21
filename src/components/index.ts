@@ -73,7 +73,7 @@ export {
   FilterOption,
 } from './patternfly-wrappers/compound-filter';
 export { CopyURL } from './patternfly-wrappers/copy-url';
-export { FileUpload } from './patternfly-wrappers/fileupload';
+export { FileUpload } from './patternfly-wrappers/file-upload';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoginForm } from './patternfly-wrappers/login-form';
 export { Main } from './patternfly-wrappers/main';

@@ -208,7 +208,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
-    const fileOnChange = (field) => (value, name) => {
+    // TODO no FileUpload on*Change with such sig now
+    const fileOnChange = (field) => (_event, value, name) => {
       this.setState(
         {
           filenames: {
