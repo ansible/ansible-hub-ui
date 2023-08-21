@@ -238,10 +238,6 @@ class EditRole extends React.Component<RouteProps, IState> {
     });
   };
 
-  private toError(validated: boolean) {
-    return validated ? 'default' : 'error';
-  }
-
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }

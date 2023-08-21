@@ -43,7 +43,11 @@ export { SmallLogo } from './logo/small-logo';
 export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
-export { NamespaceForm } from './namespace-form/namespace-form';
+export {
+  NamespaceForm,
+  validateName,
+  validateURL,
+} from './namespace-form/namespace-form';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { NamespaceModal } from './namespace-modal/namespace-modal';
 export { CollectionNumericLabel } from './numeric-label/numeric-label';
@@ -113,6 +117,7 @@ export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';
 export { DownloadCount } from './shared/download-count';
+export { FormFieldHelper } from './shared/form-field-helper';
 export { LoginLink } from './shared/login-link';
 export { UIVersion } from './shared/ui-version';
 export {

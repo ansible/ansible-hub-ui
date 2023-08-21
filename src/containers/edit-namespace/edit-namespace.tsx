@@ -13,6 +13,8 @@ import {
   PartnerHeader,
   ResourcesForm,
   closeAlertMixin,
+  validateName,
+  validateURL,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
@@ -177,8 +179,8 @@ class EditNamespace extends React.Component<RouteProps, IState> {
     const namespace = this.state.namespace;
     return namespace.links.some(
       (link) =>
-        NamespaceForm.validateName(link).validated == 'error' ||
-        NamespaceForm.validateUrl(link).validated == 'error',
+        validateName(link).variant == 'error' ||
+        validateURL(link).variant == 'error',
     );
   }
 

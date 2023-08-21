@@ -1,35 +1,35 @@
 import { t } from '@lingui/macro';
 
+// use with <FormFieldHelper {...validateURLHelper(err, url)} />
 export function validateURLHelper(
   outsideError: string | undefined,
   url: string,
 ): {
-  validated: 'default' | 'warning' | 'error';
-  helperTextInvalid?: string;
-  helperText?: string;
+  variant: 'default' | 'warning' | 'error';
+  children?: string;
 } {
   if (outsideError) {
-    return { validated: 'error', helperTextInvalid: outsideError };
+    return { variant: 'error', children: outsideError };
   }
 
   try {
     const { protocol } = new URL(url);
     if (protocol === 'http:') {
       return {
-        validated: 'warning',
-        helperText: t`Consider using a secure URL (https://).`,
+        variant: 'warning',
+        children: t`Consider using a secure URL (https://).`,
       };
     }
 
     if (protocol === 'https:') {
-      return { validated: 'default' };
+      return { variant: 'default' };
     }
   } catch (_) {
     // fallthrough
   }
 
   return {
-    validated: 'error',
-    helperTextInvalid: t`The URL needs to be in 'http(s)://' format.`,
+    variant: 'error',
+    children: t`The URL needs to be in 'http(s)://' format.`,
   };
 }

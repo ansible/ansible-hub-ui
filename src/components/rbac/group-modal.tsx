@@ -8,6 +8,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React from 'react';
+import { FormFieldHelper } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -20,6 +21,10 @@ interface IProps {
 
 interface IState {
   name: string;
+}
+
+function toError(validated: boolean): 'default' | 'error' {
+  return validated ? 'default' : 'error';
 }
 
 export class GroupModal extends React.Component<IProps, IState> {
@@ -73,10 +78,6 @@ export class GroupModal extends React.Component<IProps, IState> {
             key='name'
             fieldId='name'
             label={t`Name`}
-            helperTextInvalid={
-              !this.props.errorMessage ? null : this.props.errorMessage.name
-            }
-            validated={this.toError(!this.props.errorMessage)}
           >
             <TextInput
               id='group_name'
@@ -86,15 +87,14 @@ export class GroupModal extends React.Component<IProps, IState> {
                 clearErrors();
               }}
               type='text'
-              validated={this.toError(!this.props.errorMessage)}
+              validated={toError(!this.props.errorMessage)}
             />
+            <FormFieldHelper variant={toError(!this.props.errorMessage)}>
+              {!this.props.errorMessage ? null : this.props.errorMessage.name}
+            </FormFieldHelper>
           </FormGroup>
         </Form>
       </Modal>
     );
-  }
-
-  private toError(validated: boolean) {
-    return validated ? 'default' : 'error';
   }
 }

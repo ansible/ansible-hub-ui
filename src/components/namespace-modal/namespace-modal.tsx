@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { NamespaceAPI } from 'src/api';
-import { HelperText } from 'src/components';
+import { FormFieldHelper, HelperText } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -24,6 +24,10 @@ interface IState {
   newNamespaceName: string;
   newNamespaceNameValid: boolean;
   errorMessages: ErrorMessagesType;
+}
+
+function toError(validated: boolean): 'default' | 'error' {
+  return validated ? 'default' : 'error';
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
@@ -122,8 +126,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             label={t`Name`}
             isRequired
             fieldId='name'
-            helperTextInvalid={this.state.errorMessages['name']}
-            validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
               <HelperText
                 content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
@@ -134,7 +136,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             <InputGroup>
               <InputGroupItem isFill>
                 <TextInput
-                  validated={this.toError(this.state.newNamespaceNameValid)}
+                  validated={toError(this.state.newNamespaceNameValid)}
                   isRequired
                   type='text'
                   id='newNamespaceName'
@@ -148,17 +150,14 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                 />
               </InputGroupItem>
             </InputGroup>
+            <FormFieldHelper
+              variant={toError(this.state.newNamespaceNameValid)}
+            >
+              {this.state.errorMessages['name']}
+            </FormFieldHelper>
           </FormGroup>
         </Form>
       </Modal>
     );
-  }
-
-  private toError(validated: boolean) {
-    if (validated) {
-      return 'default';
-    } else {
-      return 'error';
-    }
   }
 }

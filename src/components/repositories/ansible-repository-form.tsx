@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,
+  FormFieldHelper,
   HelperText,
   LazyDistributions,
   PulpLabels,
@@ -58,10 +59,11 @@ export const AnsibleRepositoryForm = ({
         )
       }
       isRequired={requiredFields.includes(fieldName)}
-      validated={toError(!(fieldName in errorMessages))}
-      helperTextInvalid={errorMessages[fieldName]}
     >
       {children}
+      <FormFieldHelper variant={toError(!(fieldName in errorMessages))}>
+        {errorMessages[fieldName]}
+      </FormFieldHelper>
     </FormGroup>
   );
   const inputField = (fieldName, label, helperText, props) =>

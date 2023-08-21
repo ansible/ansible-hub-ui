@@ -15,6 +15,7 @@ import {
   APISearchTypeAhead,
   AlertType,
   DataForm,
+  FormFieldHelper,
   HelperText,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -48,6 +49,10 @@ interface IState {
   formErrors: {
     groups: AlertType;
   };
+}
+
+function toError(validated: boolean): 'default' | 'error' {
+  return validated ? 'default' : 'error';
 }
 
 export class UserForm extends React.Component<IProps, IState> {
@@ -107,19 +112,13 @@ export class UserForm extends React.Component<IProps, IState> {
     const passwordConfirmGroup = () => (
       <FormGroup
         fieldId='password-confirm'
-        helperTextInvalid={t`Passwords do not match`}
         isRequired={isNewUser || !!user.password}
         key='confirm-group'
         label={t`Password confirmation`}
-        validated={this.toError(
-          this.isPassSame(user.password, passwordConfirm),
-        )}
       >
         <TextInput
           placeholder={isNewUser ? '' : '••••••••••••••••••••••'}
-          validated={this.toError(
-            this.isPassSame(user.password, passwordConfirm),
-          )}
+          validated={toError(this.isPassSame(user.password, passwordConfirm))}
           isDisabled={isReadonly}
           id='password-confirm'
           value={passwordConfirm}
@@ -129,6 +128,11 @@ export class UserForm extends React.Component<IProps, IState> {
           type='password'
           autoComplete='off'
         />
+        <FormFieldHelper
+          variant={toError(this.isPassSame(user.password, passwordConfirm))}
+        >
+          {t`Passwords do not match`}
+        </FormFieldHelper>
       </FormGroup>
     );
 
@@ -158,13 +162,7 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const editGroups = () => (
-      <FormGroup
-        fieldId='groups'
-        helperTextInvalid={errorMessages['groups']}
-        key='editGroups'
-        label={t`Groups`}
-        validated={this.toError(!('groups' in errorMessages))}
-      >
+      <FormGroup fieldId='groups' key='editGroups' label={t`Groups`}>
         {formErrors.groups ? (
           <Alert title={formErrors.groups.title} variant='danger' isInline>
             {formErrors.groups.description}
@@ -181,17 +179,17 @@ export class UserForm extends React.Component<IProps, IState> {
             isDisabled={isReadonly}
           />
         )}
+        <FormFieldHelper variant={toError(!('groups' in errorMessages))}>
+          {errorMessages['groups']}
+        </FormFieldHelper>
       </FormGroup>
     );
 
     const superuserLabel = (
       <FormGroup
-        validated={this.toError(!('is_superuser' in errorMessages))}
         fieldId='is_superuser'
         key='superuserLabel'
         label={t`User type`}
-        helperTextInvalid={errorMessages['is_superuser']}
-        helperText={this.getSuperUserHelperText(user)}
       >
         <Tooltip
           content={t`Super users have all system permissions regardless of what groups they are in.`}
@@ -210,6 +208,9 @@ export class UserForm extends React.Component<IProps, IState> {
             }
           />
         </Tooltip>
+        <FormFieldHelper variant={toError(!('is_superuser' in errorMessages))}>
+          {errorMessages['is_superuser'] || this.getSuperUserHelperText(user)}
+        </FormFieldHelper>
       </FormGroup>
     );
 
@@ -304,14 +305,6 @@ export class UserForm extends React.Component<IProps, IState> {
         });
       });
   };
-
-  private toError(validated: boolean) {
-    if (validated) {
-      return 'default';
-    } else {
-      return 'error';
-    }
-  }
 
   // confirm is empty, or matches password
   private isPassSame(pass, confirm) {

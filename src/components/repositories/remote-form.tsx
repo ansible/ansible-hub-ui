@@ -13,14 +13,15 @@ import {
   Switch,
   TextInput,
 } from '@patternfly/react-core';
-import {
-  DownloadIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import { DownloadIcon, ExclamationTriangleIcon } from '@patternfly/react-icons';
 import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
-import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
+import {
+  FileUpload,
+  FormFieldHelper,
+  HelperText as HelperPopover,
+  WriteOnlyField,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
@@ -55,6 +56,10 @@ interface IState {
     client_cert: FormFilename;
     ca_cert: FormFilename;
   };
+}
+
+function toError(validated: boolean): 'default' | 'error' {
+  return validated ? 'default' : 'error';
 }
 
 export class RemoteForm extends React.Component<IProps, IState> {
@@ -218,54 +223,60 @@ export class RemoteForm extends React.Component<IProps, IState> {
       );
     };
 
+    const textField = (
+      { id, label, value },
+      formGroupProps = {},
+      textInputProps = {},
+      helperProps = null,
+    ) => {
+      if (!helperProps) {
+        const variant = id in errorMessages ? 'error' : 'default';
+        const children = errorMessages[id];
+        helperProps = { variant, children };
+      }
+
+      return (
+        <FormGroup
+          fieldId={id}
+          label={label}
+          isRequired={requiredFields.includes(id)}
+          {...formGroupProps}
+        >
+          <TextInput
+            validated={helperProps.variant}
+            isRequired={requiredFields.includes(id)}
+            isDisabled={disabledFields.includes(id)}
+            id={id}
+            type='text'
+            value={value || ''}
+            onChange={(_event, value) => this.updateRemote(value, id)}
+            {...textInputProps}
+          />
+          <FormFieldHelper {...helperProps} />
+        </FormGroup>
+      );
+    };
+
     return (
       <Form>
-        <FormGroup
-          fieldId={'name'}
-          label={t`Name`}
-          isRequired={requiredFields.includes('name')}
-          validated={this.toError(!('name' in errorMessages))}
-          helperTextInvalid={errorMessages['name']}
-        >
-          <TextInput
-            validated={this.toError(!('name' in errorMessages))}
-            isRequired={requiredFields.includes('name')}
-            isDisabled={disabledFields.includes('name')}
-            id='name'
-            type='text'
-            value={remote.name || ''}
-            onChange={(_event, value) => this.updateRemote(value, 'name')}
-          />
-        </FormGroup>
-
-        <FormGroup
-          fieldId={'url'}
-          label={t`URL`}
-          labelIcon={
-            <HelperText content={t`The URL of an external content source.`} />
-          }
-          isRequired={requiredFields.includes('url')}
-          {...validateURLHelper(errorMessages['url'], remote.url)}
-          helperTextIcon={<ExclamationTriangleIcon />}
-          helperTextInvalidIcon={<ExclamationCircleIcon />}
-        >
-          <TextInput
-            validated={
-              validateURLHelper(errorMessages['url'], remote.url).validated
-            }
-            isRequired={requiredFields.includes('url')}
-            isDisabled={disabledFields.includes('url')}
-            id='url'
-            type='text'
-            value={remote.url || ''}
-            onChange={(_event, value) => this.updateRemote(value, 'url')}
-          />
-        </FormGroup>
+        {textField({ id: 'name', label: t`Name`, value: remote.name })}
+        {textField(
+          { id: 'url', label: t`URL`, value: remote.url },
+          {
+            labelIcon: (
+              <HelperPopover
+                content={t`The URL of an external content source.`}
+              />
+            ),
+          },
+          {},
+          validateURLHelper(errorMessages['url'], remote.url),
+        )}
 
         {!disabledFields.includes('signed_only') && collection_signing ? (
           <FormGroup
             fieldId={'signed_only'}
-            name={t`Signed only`}
+            name={t`Signed only` /* TODO name? */}
             label={t`Download only signed collections`}
           >
             <Switch
@@ -283,20 +294,18 @@ export class RemoteForm extends React.Component<IProps, IState> {
             fieldId={'token'}
             label={t`Token`}
             labelIcon={
-              <HelperText
+              <HelperPopover
                 content={t`Token for authenticating to the server URL.`}
               />
             }
             isRequired={requiredFields.includes('token')}
-            validated={this.toError(!('token' in errorMessages))}
-            helperTextInvalid={errorMessages['token']}
           >
             <WriteOnlyField
               isValueSet={isFieldSet('token', writeOnlyFields)}
               onClear={() => this.updateIsSet('token', false)}
             >
               <TextInput
-                validated={this.toError(!('token' in errorMessages))}
+                validated={toError(!('token' in errorMessages))}
                 isRequired={requiredFields.includes('token')}
                 type='password'
                 autoComplete='off'
@@ -305,35 +314,26 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 onChange={(_event, value) => this.updateRemote(value, 'token')}
               />
             </WriteOnlyField>
+            <FormFieldHelper variant={toError(!('token' in errorMessages))}>
+              {errorMessages['token']}
+            </FormFieldHelper>
           </FormGroup>
         )}
 
-        {!disabledFields.includes('auth_url') && (
-          <FormGroup
-            fieldId={'auth_url'}
-            label={t`SSO URL`}
-            labelIcon={<HelperText content={t`Single sign on URL.`} />}
-            isRequired={requiredFields.includes('auth_url')}
-            validated={this.toError(!('auth_url' in errorMessages))}
-            helperTextInvalid={errorMessages['auth_url']}
-          >
-            <TextInput
-              validated={this.toError(!('auth_url' in errorMessages))}
-              isRequired={requiredFields.includes('auth_url')}
-              id='ssoUrl'
-              type='text'
-              value={this.props.remote.auth_url || ''}
-              onChange={(_event, value) => this.updateRemote(value, 'auth_url')}
-            />
-          </FormGroup>
-        )}
+        {!disabledFields.includes('auth_url') &&
+          textField(
+            { id: 'auth_url', label: t`SSO URL`, value: remote.auth_url },
+            {
+              labelIcon: <HelperPopover content={t`Single sign on URL.`} />,
+            },
+          )}
 
         {!disabledFields.includes('requirements_file') && (
           <FormGroup
             fieldId={'yaml'}
             label={t`YAML requirements`}
             labelIcon={
-              <HelperText
+              <HelperPopover
                 content={
                   <Trans>
                     This uses the same {docsAnsibleLink} format as the
@@ -344,18 +344,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
               />
             }
             isRequired={requiredFields.includes('requirements_file')}
-            validated={this.toError(!('requirements_file' in errorMessages))}
-            helperTextInvalid={errorMessages['requirements_file']}
           >
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
                 <FileUpload
-                  validated={this.toError(
-                    !('requirements_file' in errorMessages),
-                  )}
+                  validated={toError(!('requirements_file' in errorMessages))}
                   isRequired={requiredFields.includes('requirements_file')}
                   id='yaml'
-                  type='text'
                   filename={filename('requirements_file')}
                   value={this.props.remote.requirements_file || ''}
                   hideDefaultPreview
@@ -420,6 +415,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
               </Flex>
             </ExpandableSection>
+            <FormFieldHelper
+              variant={toError(!('requirements_file' in errorMessages))}
+            >
+              {errorMessages['requirements_file']}
+            </FormFieldHelper>
           </FormGroup>
         )}
 
@@ -428,7 +428,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           fieldId={'username'}
           label={t`Username`}
           labelIcon={
-            <HelperText
+            <HelperPopover
               content={
                 disabledFields.includes('token')
                   ? t`The username to be used for authentication when syncing.`
@@ -437,8 +437,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
             />
           }
           isRequired={requiredFields.includes('username')}
-          validated={this.toError(!('username' in errorMessages))}
-          helperTextInvalid={errorMessages['username']}
         >
           <WriteOnlyField
             isValueSet={
@@ -448,7 +446,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onClear={() => this.updateIsSet('username', false)}
           >
             <TextInput
-              validated={this.toError(!('username' in errorMessages))}
+              validated={toError(!('username' in errorMessages))}
               isRequired={requiredFields.includes('username')}
               isDisabled={disabledFields.includes('username')}
               id='username'
@@ -457,6 +455,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               onChange={(_event, value) => this.updateRemote(value, 'username')}
             />
           </WriteOnlyField>
+          <FormFieldHelper variant={toError(!('username' in errorMessages))}>
+            {errorMessages['username']}
+          </FormFieldHelper>
         </FormGroup>
 
         <FormGroup
@@ -464,7 +465,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           fieldId={'password'}
           label={t`Password`}
           labelIcon={
-            <HelperText
+            <HelperPopover
               content={
                 disabledFields.includes('token')
                   ? t`The password to be used for authentication when syncing.`
@@ -473,15 +474,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
             />
           }
           isRequired={requiredFields.includes('password')}
-          validated={this.toError(!('password' in errorMessages))}
-          helperTextInvalid={errorMessages['password']}
         >
           <WriteOnlyField
             isValueSet={isFieldSet('password', writeOnlyFields)}
             onClear={() => this.updateIsSet('password', false)}
           >
             <TextInput
-              validated={this.toError(!('password' in errorMessages))}
+              validated={toError(!('password' in errorMessages))}
               isRequired={requiredFields.includes('password')}
               isDisabled={disabledFields.includes('password')}
               id='password'
@@ -491,6 +490,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               onChange={(_event, value) => this.updateRemote(value, 'password')}
             />
           </WriteOnlyField>
+          <FormFieldHelper variant={toError(!('password' in errorMessages))}>
+            {errorMessages['password']}
+          </FormFieldHelper>
         </FormGroup>
 
         <ExpandableSection
@@ -498,33 +500,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
           toggleTextCollapsed={t`Show advanced options`}
         >
           <div className='pf-c-form'>
-            <FormGroup
-              fieldId={'proxy_url'}
-              label={t`Proxy URL`}
-              isRequired={requiredFields.includes('proxy_url')}
-              validated={this.toError(!('proxy_url' in errorMessages))}
-              helperTextInvalid={errorMessages['proxy_url']}
-            >
-              <TextInput
-                validated={this.toError(!('proxy_url' in errorMessages))}
-                isRequired={requiredFields.includes('proxy_url')}
-                isDisabled={disabledFields.includes('proxy_url')}
-                id='proxy_url'
-                type='text'
-                value={remote.proxy_url || ''}
-                onChange={(_event, value) =>
-                  this.updateRemote(value, 'proxy_url')
-                }
-              />
-            </FormGroup>
+            {textField({
+              id: 'proxy_url',
+              label: t`Proxy URL`,
+              value: remote.proxy_url,
+            })}
 
             <FormGroup
               data-cy='proxy_username'
               fieldId={'proxy_username'}
               label={t`Proxy username`}
               isRequired={requiredFields.includes('proxy_username')}
-              validated={this.toError(!('proxy_username' in errorMessages))}
-              helperTextInvalid={errorMessages['proxy_username']}
             >
               <WriteOnlyField
                 isValueSet={
@@ -534,7 +520,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 onClear={() => this.updateIsSet('proxy_username', false)}
               >
                 <TextInput
-                  validated={this.toError(!('proxy_username' in errorMessages))}
+                  validated={toError(!('proxy_username' in errorMessages))}
                   isRequired={requiredFields.includes('proxy_username')}
                   isDisabled={disabledFields.includes('proxy_username')}
                   id='proxy_username'
@@ -545,6 +531,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   }
                 />
               </WriteOnlyField>
+              <FormFieldHelper
+                variant={toError(!('proxy_username' in errorMessages))}
+              >
+                {errorMessages['proxy_username']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
@@ -552,15 +543,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'proxy_password'}
               label={t`Proxy password`}
               isRequired={requiredFields.includes('proxy_password')}
-              validated={this.toError(!('proxy_password' in errorMessages))}
-              helperTextInvalid={errorMessages['proxy_password']}
             >
               <WriteOnlyField
                 isValueSet={isFieldSet('proxy_password', writeOnlyFields)}
                 onClear={() => this.updateIsSet('proxy_password', false)}
               >
                 <TextInput
-                  validated={this.toError(!('proxy_password' in errorMessages))}
+                  validated={toError(!('proxy_password' in errorMessages))}
                   isRequired={requiredFields.includes('proxy_password')}
                   isDisabled={disabledFields.includes('proxy_password')}
                   id='proxy_password'
@@ -572,19 +561,22 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   }
                 />
               </WriteOnlyField>
+              <FormFieldHelper
+                variant={toError(!('proxy_password' in errorMessages))}
+              >
+                {errorMessages['proxy_password']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'tls_validation'}
               label={t`TLS validation`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`If selected, TLS peer validation must be performed.`}
                 />
               }
               isRequired={requiredFields.includes('tls_validation')}
-              validated={this.toError(!('tls_validation' in errorMessages))}
-              helperTextInvalid={errorMessages['tls_validation']}
             >
               <Checkbox
                 onChange={(_event, value) =>
@@ -593,19 +585,22 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 id='tls_validation'
                 isChecked={remote.tls_validation}
               />
+              <FormFieldHelper
+                variant={toError(!('tls_validation' in errorMessages))}
+              >
+                {errorMessages['tls_validation']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'client_key'}
               label={t`Client key`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`A PEM encoded private key used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('client_key')}
-              validated={this.toError(!('client_key' in errorMessages))}
-              helperTextInvalid={errorMessages['client_key']}
             >
               <WriteOnlyField
                 isValueSet={isFieldSet('client_key', writeOnlyFields)}
@@ -613,37 +608,38 @@ export class RemoteForm extends React.Component<IProps, IState> {
               >
                 <FileUpload
                   data-cy='client_key'
-                  validated={this.toError(!('client_key' in errorMessages))}
+                  validated={toError(!('client_key' in errorMessages))}
                   isRequired={requiredFields.includes('client_key')}
                   id='yaml'
-                  type='text'
                   filename={filename('client_key')}
                   value={this.props.remote.client_key || ''}
                   hideDefaultPreview
                   onChange={fileOnChange('client_key')}
                 />
               </WriteOnlyField>
+              <FormFieldHelper
+                variant={toError(!('client_key' in errorMessages))}
+              >
+                {errorMessages['client_key']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'client_cert'}
               label={t`Client certificate`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('client_cert')}
-              validated={this.toError(!('client_cert' in errorMessages))}
-              helperTextInvalid={errorMessages['client_cert']}
             >
               <Flex>
                 <FlexItem grow={{ default: 'grow' }}>
                   <FileUpload
-                    validated={this.toError(!('client_cert' in errorMessages))}
+                    validated={toError(!('client_cert' in errorMessages))}
                     isRequired={requiredFields.includes('client_cert')}
                     id='yaml'
-                    type='text'
                     filename={filename('client_cert')}
                     value={this.props.remote.client_cert || ''}
                     hideDefaultPreview
@@ -667,27 +663,29 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   </Button>
                 </FlexItem>
               </Flex>
+              <FormFieldHelper
+                variant={toError(!('client_cert' in errorMessages))}
+              >
+                {errorMessages['client_cert']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'ca_cert'}
               label={t`CA certificate`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('ca_cert')}
-              validated={this.toError(!('ca_cert' in errorMessages))}
-              helperTextInvalid={errorMessages['ca_cert']}
             >
               <Flex>
                 <FlexItem grow={{ default: 'grow' }}>
                   <FileUpload
-                    validated={this.toError(!('ca_cert' in errorMessages))}
+                    validated={toError(!('ca_cert' in errorMessages))}
                     isRequired={requiredFields.includes('ca_cert')}
                     id='yaml'
-                    type='text'
                     filename={filename('ca_cert')}
                     value={this.props.remote.ca_cert || ''}
                     hideDefaultPreview
@@ -711,23 +709,19 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   </Button>
                 </FlexItem>
               </Flex>
+              <FormFieldHelper variant={toError(!('ca_cert' in errorMessages))}>
+                {errorMessages['ca_cert']}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'download_concurrency'}
               label={t`Download concurrency`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`Total number of simultaneous connections.`}
                 />
               }
-              validated={
-                !this.isNumericSet(remote.download_concurrency) ||
-                remote.download_concurrency > 0
-                  ? 'default'
-                  : 'error'
-              }
-              helperTextInvalid={t`Number must be greater than 0`}
             >
               <TextInput
                 id='download_concurrency'
@@ -743,23 +737,26 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   this.updateRemote(value, 'download_concurrency')
                 }
               />
+              <FormFieldHelper
+                variant={
+                  !this.isNumericSet(remote.download_concurrency) ||
+                  remote.download_concurrency > 0
+                    ? 'default'
+                    : 'error'
+                }
+              >
+                {t`Number must be greater than 0`}
+              </FormFieldHelper>
             </FormGroup>
 
             <FormGroup
               fieldId={'rate_limit'}
               label={t`Rate Limit`}
               labelIcon={
-                <HelperText
+                <HelperPopover
                   content={t`Limits total download rate in requests per second.`}
                 />
               }
-              validated={
-                !this.isNumericSet(remote.rate_limit) ||
-                Number.isInteger(remote.rate_limit)
-                  ? 'default'
-                  : 'error'
-              }
-              helperTextInvalid={t`Must be an integer.`}
             >
               <TextInput
                 id='rate_limit'
@@ -769,6 +766,16 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   this.updateRemote(value, 'rate_limit')
                 }
               />
+              <FormFieldHelper
+                variant={
+                  !this.isNumericSet(remote.rate_limit) ||
+                  Number.isInteger(remote.rate_limit)
+                    ? 'default'
+                    : 'error'
+                }
+              >
+                {t`Must be an integer.`}
+              </FormFieldHelper>
             </FormGroup>
           </div>
         </ExpandableSection>
@@ -802,7 +809,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       }
     }
 
-    if (validateURLHelper(null, remote.url).validated == 'error') {
+    if (validateURLHelper(null, remote.url).variant == 'error') {
       return false;
     }
 
@@ -839,14 +846,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
     }
 
     this.props.updateRemote({ ...remote, [field]: value });
-  }
-
-  private toError(validated: boolean) {
-    if (validated) {
-      return 'default';
-    } else {
-      return 'error';
-    }
   }
 
   private isNumericSet(value) {

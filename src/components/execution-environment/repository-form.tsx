@@ -23,6 +23,7 @@ import {
   APISearchTypeAhead,
   AlertList,
   AlertType,
+  FormFieldHelper,
   HelperText,
   closeAlertMixin,
 } from 'src/components';
@@ -190,8 +191,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='name'
                 fieldId='name'
                 label={t`Name`}
-                helperTextInvalid={this.state.formErrors['name']}
-                validated={isFieldValid(this.state.formErrors, 'name')}
               >
                 <TextInput
                   id='name'
@@ -203,6 +202,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   }}
                   validated={isFieldValid(this.state.formErrors, 'name')}
                 />
+                <FormFieldHelper
+                  variant={isFieldValid(this.state.formErrors, 'name')}
+                >
+                  {this.state.formErrors['name']}
+                </FormFieldHelper>
               </FormGroup>
 
               <FormGroup
@@ -231,14 +235,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 label={t`Registry`}
                 className='hub-formgroup-registry'
                 isRequired={true}
-                helperTextInvalid={
-                  this.state.formErrors['registries'] ||
-                  this.state.formErrors['registry']
-                }
-                validated={isFieldValid(this.state.formErrors, [
-                  'registries',
-                  'registry',
-                ])}
               >
                 {!formErrors?.registries && (
                   <>
@@ -263,6 +259,15 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                     )}
                   </>
                 )}
+                <FormFieldHelper
+                  variant={isFieldValid(this.state.formErrors, [
+                    'registries',
+                    'registry',
+                  ])}
+                >
+                  {this.state.formErrors['registries'] ||
+                    this.state.formErrors['registry']}
+                </FormFieldHelper>
               </FormGroup>
 
               <FormGroup

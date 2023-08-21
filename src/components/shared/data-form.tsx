@@ -5,6 +5,7 @@ import {
   TextInputTypes,
 } from '@patternfly/react-core';
 import React from 'react';
+import { FormFieldHelper } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -49,12 +50,10 @@ export class DataForm extends React.Component<IProps> {
       return (
         <FormGroup
           fieldId={field.id}
-          helperTextInvalid={errorMessages[field.id]}
           isRequired={!isReadonly && requiredFields.includes(field.id)}
           key={field.id}
           label={field.title}
           labelIcon={!isReadonly && field.formGroupLabelIcon}
-          validated={isReadonly ? 'default' : validated}
           data-cy={`DataForm-field-${field.id}`}
         >
           {isReadonly ? (
@@ -70,6 +69,9 @@ export class DataForm extends React.Component<IProps> {
               {...(field.type === 'password' ? { autoComplete: 'off' } : {})}
             />
           )}
+          <FormFieldHelper variant={isReadonly ? 'default' : validated}>
+            {errorMessages[field.id]}
+          </FormFieldHelper>
         </FormGroup>
       );
     });
