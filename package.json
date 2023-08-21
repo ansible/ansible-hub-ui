@@ -63,7 +63,7 @@
         "sass-loader": "^13.3.2",
         "source-map-loader": "^4.0.1",
         "style-loader": "^3.3.3",
-        "stylelint": "^15.10.1",
+        "stylelint": "^15.10.3",
         "stylelint-config-standard-scss": "^10.0.0",
         "stylelint-scss": "^5.0.0",
         "typescript": "^5.1.6",
