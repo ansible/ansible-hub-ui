@@ -1,7 +1,11 @@
 import { Trans, t } from '@lingui/macro';
-import { Page, PageSidebar, PageSidebarBody } from '@patternfly/react-core';
 import {
   Banner,
+  Page,
+  PageSidebar,
+  PageSidebarBody,
+} from '@patternfly/react-core';
+import {
   DropdownItem,
   DropdownSeparator,
   PageHeader,
