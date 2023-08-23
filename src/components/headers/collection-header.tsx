@@ -64,7 +64,6 @@ import {
 } from 'src/utilities';
 import { DateComponent } from '../date-component/date-component';
 import { SignatureBadge } from '../signing';
-import './header.scss';
 
 interface IProps {
   collections: CollectionVersionSearch[];
