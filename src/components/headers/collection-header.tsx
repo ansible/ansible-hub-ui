@@ -944,7 +944,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     if (deleteAll) {
       promise = CollectionAPI.deleteCollectionVersion(deleteCollection);
     } else {
-      promise = promise = RepositoriesUtils.deleteCollection(
+      promise = RepositoriesUtils.deleteCollection(
         deleteCollection.repository.name,
         deleteCollection.collection_version.pulp_href,
       );

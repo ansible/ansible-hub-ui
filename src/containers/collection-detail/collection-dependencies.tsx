@@ -19,7 +19,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import { ParamHelper, errorMessage } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 import './collection-dependencies.scss';
 
@@ -139,43 +139,34 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           <section className='body'>
             <div className='pf-c-content collection-dependencies'>
               <h1>{t`Dependencies`}</h1>
-              {noDependencies &&
-              !usedByDependenciesCount &&
-              !filterIsSet(params, ['name__icontains']) ? (
+              <p>{t`This collections requires the following collections for use`}</p>
+
+              {noDependencies ? (
                 <EmptyStateNoData
                   title={t`No dependencies`}
                   description={t`Collection does not have any dependencies.`}
                 />
               ) : (
-                <>
-                  <p>{t`This collections requires the following collections for use`}</p>
-                  {noDependencies ? (
-                    <EmptyStateNoData
-                      title={t`No dependencies`}
-                      description={t`Collection does not have any dependencies.`}
-                    />
-                  ) : (
-                    <CollectionDependenciesList
-                      collection={this.state.collection}
-                      dependencies_repos={this.state.dependencies_repos}
-                    />
-                  )}
-                  <p>{t`This collection is being used by`}</p>
-                  <CollectionUsedbyDependenciesList
-                    usedByDependencies={usedByDependencies}
-                    itemCount={usedByDependenciesCount}
-                    params={dependenciesParams}
-                    usedByDependenciesLoading={usedByDependenciesLoading}
-                    updateParams={(p) =>
-                      this.updateParams(
-                        this.combineParams(this.state.params, p),
-                        () => this.loadUsedByDependencies(),
-                      )
-                    }
-                  />
-                </>
+                <CollectionDependenciesList
+                  collection={this.state.collection}
+                  dependencies_repos={this.state.dependencies_repos}
+                />
               )}
+
+              <p>{t`This collection is being used by`}</p>
             </div>
+            <CollectionUsedbyDependenciesList
+              usedByDependencies={usedByDependencies}
+              itemCount={usedByDependenciesCount}
+              params={dependenciesParams}
+              usedByDependenciesLoading={usedByDependenciesLoading}
+              updateParams={(p) =>
+                this.updateParams(
+                  this.combineParams(this.state.params, p),
+                  () => this.loadUsedByDependencies(),
+                )
+              }
+            />
           </section>
         </Main>
       </React.Fragment>

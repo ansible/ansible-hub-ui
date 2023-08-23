@@ -1,10 +1,4 @@
-// resets to default, possible bug pagination shows disc list-style-type with 'pf-c-content' className
-.pf-c-options-menu__menu {
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-  list-style: none !important;
-}
-
+// CollectionDependenciesList
 .hub-c-list-dependencies li {
   list-style: disc;
 }
