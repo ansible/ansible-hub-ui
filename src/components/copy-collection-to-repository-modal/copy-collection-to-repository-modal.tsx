@@ -362,7 +362,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
       >
         <section className='modal-body' data-cy='modal-body'>
           {renderLabels(selectedRepos)}
-          <div className='toolbar hub-toolbar'>
+          <div className='hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
                 <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>

@@ -214,8 +214,8 @@ class Search extends React.Component<RouteProps, IState> {
         )}
         <BaseHeader className='hub-header-bordered' title={t`Collections`}>
           {!noData && (
-            <div className='hub-toolbar-wrapper'>
-              <div className='toolbar'>
+            <div>
+              <div className='hub-toolbar hub-toolbar-left'>
                 <CollectionFilter
                   ignoredParams={['page', 'page_size', 'sort', 'view_type']}
                   params={params}

@@ -53,9 +53,15 @@ body,
 }
 
 // list screen toolbars
-// FIXME: merge with search, namespace-list, namespace-details, hub-toolbar-wrapper
 .hub-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+// collections and namespaces - align with cards/lists, instead of table columns
+.hub-toolbar-left {
+  .pf-c-toolbar__content {
+    padding-left: 0;
+  }
 }

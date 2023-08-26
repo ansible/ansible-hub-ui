@@ -407,8 +407,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           pageControls={this.renderPageControls()}
           filters={
             tab === 'collections' ? (
-              <div className='hub-toolbar-wrapper namespace-detail'>
-                <div className='toolbar'>
+              <div>
+                <div className='hub-toolbar hub-toolbar-left'>
                   <CollectionFilter
                     ignoredParams={ignoredParams}
                     params={params}

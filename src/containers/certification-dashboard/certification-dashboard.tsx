@@ -212,7 +212,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         ) : (
           <Main className='hub-certification-dashboard'>
             <section className='body' data-cy='body'>
-              <div className='toolbar hub-toolbar'>
+              <div className='hub-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
