@@ -318,7 +318,7 @@ jobs:
       if: matrix.test == 'screenshots'
       uses: actions/cache@v3
       with:
-        path: ansible-hub-ui/test/screenshots.js/
+        path: ansible-hub-ui/test/screenshots-main/
         key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MASTER }}
         restore-keys: |
           screenshots-${{env.SHORT_BRANCH}}-
@@ -326,7 +326,7 @@ jobs:
     - name: "List cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
       run: |
-        ls ansible-hub-ui/test/screenshots.js/
+        ls ansible-hub-ui/test/screenshots-main/
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
@@ -343,7 +343,7 @@ jobs:
       if: matrix.test == 'screenshots'
       continue-on-error: true
       run: |
-        ls ansible-hub-ui/test/cypress/screenshots/screenshots.js/
+        ls ansible-hub-ui/test/cypress/screenshots/screenshots/screenshots.js/
 
     - name: "Compare screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
@@ -351,10 +351,10 @@ jobs:
       run: |
         changed=false
 
-        for orig in screenshots.js/*; do
+        for orig in screenshots-main/*; do
           echo $orig
-          new=cypress/screenshots/"$orig"
-          diff=cypress/screenshots/diff--"$(basename "$orig")"
+          new=cypress/screenshots/screenshots/screenshots.js/"$(basename "$orig")"
+          diff=cypress/screenshots/screenshots/diff--"$(basename "$orig")"
 
           num=$(compare -metric RMSE "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
           echo $num
@@ -374,8 +374,8 @@ jobs:
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
-        rm -rf screenshots.js/
-        mv cypress/screenshots/screenshots.js/ ./
+        rm -rf screenshots-main/
+        mv cypress/screenshots/screenshots/screenshots.js ./screenshots-main
 
     - uses: actions/upload-artifact@v3
       if: failure()
