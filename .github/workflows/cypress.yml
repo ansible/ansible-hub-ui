@@ -334,7 +334,8 @@ jobs:
         CONSOLE_LOG_TO_TERMINAL: true
       run: |
         sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
-        grep specPattern cypress.config.js
+        sed -i "/screenshotsFolder:/s/',$/\/${{matrix.test}}',/" cypress.config.js
+        git diff cypress.config.js
 
         npm run cypress:chrome
 

@@ -10,8 +10,11 @@ module.exports = defineConfig({
       }
     },
     baseUrl: 'http://localhost:8002',
+    // overridden in cypress.yml
     specPattern: 'cypress/e2e/**/*.js',
   },
+  // overridden in cypress.yml
+  screenshotsFolder: 'cypress/screenshots',
   // only record videos when running action in debug mode
   video: !!process.env.RUNNER_DEBUG,
 });

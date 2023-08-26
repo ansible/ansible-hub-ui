@@ -22,28 +22,37 @@ describe('screenshots', () => {
   });
 
   it('takes screenshots', () => {
-    const screenshot = (path) => {
+    const screenshot = (path, options = {}) => {
+      const filename = path.replaceAll('/', '__').replace(/^__$/, 'root');
+
       cy.visit(`${uiPrefix}${path}`.replace('//', '/'));
       cy.wait(3000);
-      cy.screenshot(path.replaceAll('/', '__'));
+      cy.screenshot(filename, options);
       cy.wait(1000);
     };
 
     screenshot('/');
+
     screenshot('/collections');
     screenshot('/namespaces');
-    // TODO - problems - repositories are showing minutes, so text may quickly change and generate diff
-    //screenshot('/ansible/repositories');
+    screenshot('/ansible/repositories', { blackout: ['time'] });
     screenshot('/ansible/remotes');
     screenshot('/token');
     screenshot('/approval-dashboard');
+    screenshot('/my-imports');
+
     screenshot('/containers');
     screenshot('/registries');
-    // screenshot('/tasks'); // TODO fake empty API response
-    // screenshot('/signature-keys'); // TODO fake empty API response
-    //screenshot('/users');
-    screenshot('/group-list');
 
-    // screenshot('/roles');  // TODO fake empty API response
+    screenshot('/legacy/roles');
+    screenshot('/legacy/namespaces');
+
+    screenshot('/tasks', { blackout: ['time'] });
+    screenshot('/signature-keys', { blackout: ['time'] });
+    screenshot('/users', { blackout: ['time'] });
+    screenshot('/group-list');
+    screenshot('/roles', { blackout: ['time'] });
+
+    screenshot('/settings/user-profile');
   });
 });

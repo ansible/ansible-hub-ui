@@ -11,9 +11,11 @@ export const DateComponent = (props: IProps) => {
 
   return (
     date && (
-      <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
-        {moment(date).fromNow()}
-      </Tooltip>
+      <time datetime={date}>
+        <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
+          {moment(date).fromNow()}
+        </Tooltip>
+      </time>
     )
   );
 };
