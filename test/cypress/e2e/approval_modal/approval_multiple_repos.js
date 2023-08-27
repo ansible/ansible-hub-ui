@@ -137,7 +137,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     rejectItem('published');
 
     // 2 items should be left there
-    cy.contains('.toolbar', '1 - 2 of 2');
+    cy.contains('.hub-toolbar', '1 - 2 of 2');
     cy.get(
       '[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]',
     );
@@ -164,7 +164,7 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('Clear all filters').click();
-    cy.contains('.toolbar', '1 - 2 of 2');
+    cy.contains('.hub-toolbar', '1 - 2 of 2');
     cy.get(
       '[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]',
     );

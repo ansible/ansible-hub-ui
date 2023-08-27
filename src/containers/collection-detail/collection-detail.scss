@@ -1,19 +1,11 @@
 $breakpoint-md: 1000px;
 
-.main {
+.hub-docs-main {
   margin: 0;
   padding: 0;
 }
 
-.header {
-  border-bottom: 1px solid #d8d8d8;
-}
-
-.pf-c-toolbar__group {
-  margin-left: 16px;
-}
-
-.docs-container {
+.hub-docs-container {
   padding-top: 24px;
   background-color: white;
 
@@ -21,39 +13,43 @@ $breakpoint-md: 1000px;
     display: flex;
   }
 
-  .sidebar {
-    // This width lines up the border nicely with the tabs
-    min-width: 294px;
-    max-width: 294px;
-    border-right: 1px solid #d8d8d8;
-    padding: 0;
-    padding-top: 0;
+  pre {
+    white-space: pre-wrap;
   }
+}
 
-  .docs {
-    flex-grow: 1;
-    padding: 24px;
-    padding-top: 0;
-    overflow-x: auto;
+.hub-docs-content {
+  flex-grow: 1;
+  padding: 24px;
+  padding-top: 0;
+  overflow-x: auto;
 
-    // make the height close to the height ofthe page so short docs don't
-    // look weird
-    min-height: calc(100vh - 250px);
+  // make the height close to the height ofthe page so short docs don't look weird
+  min-height: calc(100vh - 250px);
 
-    table {
-      tr:nth-child(2n) {
-        background-color: #f2f2f2;
-      }
+  table {
+    tr:nth-child(2n) {
+      background-color: #f2f2f2;
+    }
 
-      td,
-      th {
-        border: 1px solid #ccc;
-        padding: 5px;
-      }
+    td,
+    th {
+      border: 1px solid #ccc;
+      padding: 5px;
     }
   }
 }
 
-.docs-container pre {
-  white-space: pre-wrap;
+.hub-docs-sidebar {
+  // This width lines up the border nicely with the tabs
+  min-width: 294px;
+  max-width: 294px;
+  border-right: 1px solid #d8d8d8;
+  padding: 0;
+  padding-top: 0;
+
+  // Find content
+  .pf-c-toolbar__group {
+    margin-left: 16px;
+  }
 }

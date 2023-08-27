@@ -15,7 +15,6 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
-import './legacy-namespaces.scss';
 
 interface LegacyNamespacesProps {
   legacynamespaces: LegacyNamespaceListType[];

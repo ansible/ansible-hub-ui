@@ -52,7 +52,7 @@ export class BaseHeader extends React.Component<IProps> {
         {versionControl || null}
 
         {children ? (
-          <div className='header-bottom'>{children}</div>
+          <div className='hub-header-bottom'>{children}</div>
         ) : (
           <div className='placeholder' />
         )}

@@ -7,7 +7,7 @@ describe('Collections list Tests', () => {
   function deprecate(list) {
     const container = list ? '.hub-list' : '.hub-cards';
 
-    cy.get('.toolbar')
+    cy.get('.hub-toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
     cy.get(container).contains('my_collection2').should('not.exist');
@@ -120,7 +120,7 @@ describe('Collections list Tests', () => {
 
   it('Can delete collection in collection list', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
-    cy.get('.toolbar')
+    cy.get('.hub-toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
     cy.get('.hub-list').contains('my_collection2').should('not.exist');
@@ -139,7 +139,7 @@ describe('Collections list Tests', () => {
 
   it('Can delete collection in namespace collection list', () => {
     cy.visit(`${uiPrefix}namespaces/my_namespace`);
-    cy.get('.toolbar')
+    cy.get('.hub-toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');
 

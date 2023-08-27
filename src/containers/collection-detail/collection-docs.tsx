@@ -122,7 +122,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         <CollectionHeader
           activeTab='documentation'
           breadcrumbs={breadcrumbs}
-          className='header'
+          className='hub-header-bordered'
           collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}
@@ -133,10 +133,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             this.updateParams(p, () => this.loadCollection(true))
           }
         />
-        <Main className='main'>
-          <section className='docs-container'>
+        <Main className='hub-docs-main'>
+          <section className='hub-docs-container'>
             <TableOfContents
-              className='sidebar'
+              className='hub-docs-sidebar'
               namespace={collection.collection_version.namespace}
               collection={collection.collection_version.name}
               repository={collection.repository.name}
@@ -148,7 +148,10 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
               searchBarRef={this.searchBarRef}
             ></TableOfContents>
 
-            <div className='body docs pf-c-content' ref={this.docsRef}>
+            <div
+              className='body hub-docs-content pf-c-content'
+              ref={this.docsRef}
+            >
               {displayHTML || pluginData ? (
                 // if neither variable is set, render not found
                 displayHTML ? (

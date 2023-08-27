@@ -99,7 +99,7 @@ describe('Edit a namespace', () => {
     );
     cy.get('#description').clear().type('A namespace description');
     saveButton().click();
-    cy.get('.header-bottom').should('contain', 'A namespace description');
+    cy.get('.hub-header-bottom').should('contain', 'A namespace description');
   });
 
   it('tests the Links field', () => {

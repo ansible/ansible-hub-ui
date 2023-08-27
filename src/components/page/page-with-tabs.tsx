@@ -194,7 +194,7 @@ export const PageWithTabs = function <
             }
             pageControls={
               loading ? null : (
-                <div className='hub-list-toolbar'>
+                <div className='hub-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>

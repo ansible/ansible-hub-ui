@@ -140,7 +140,7 @@ class UserList extends React.Component<RouteProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='hub-list-toolbar'>
+              <div className='hub-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>

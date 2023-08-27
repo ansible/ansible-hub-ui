@@ -204,10 +204,10 @@ class Search extends React.Component<RouteProps, IState> {
             namespace={updateCollection.collection_version.namespace}
           />
         )}
-        <BaseHeader className='header' title={t`Collections`}>
+        <BaseHeader className='hub-header-bordered' title={t`Collections`}>
           {!noData && (
-            <div className='hub-toolbar-wrapper'>
-              <div className='toolbar'>
+            <div>
+              <div className='hub-toolbar hub-toolbar-left'>
                 <CollectionFilter
                   ignoredParams={['page', 'page_size', 'sort', 'view_type']}
                   params={params}

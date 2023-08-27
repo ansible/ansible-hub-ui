@@ -6,6 +6,7 @@ import {
   Label,
   LabelGroup,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
@@ -211,53 +212,55 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         ) : (
           <Main className='hub-certification-dashboard'>
             <section className='body' data-cy='body'>
-              <div className='toolbar hub-toolbar'>
+              <div className='hub-toolbar'>
                 <Toolbar>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        inputText={this.state.inputText}
-                        onChange={(text) => {
-                          this.setState({ inputText: text });
-                        }}
-                        updateParams={(p) =>
-                          this.updateParams(p, () =>
-                            this.queryCollections(true),
-                          )
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'namespace',
-                            title: t`Namespace`,
-                          },
-                          {
-                            id: 'name',
-                            title: t`Collection Name`,
-                          },
-                          {
-                            id: 'repository_label',
-                            title: t`Status`,
-                            inputType: 'select',
-                            options: [
-                              {
-                                id: `pipeline=${Constants.NOTCERTIFIED}`,
-                                title: t`Rejected`,
-                              },
-                              {
-                                id: `pipeline=${Constants.NEEDSREVIEW}`,
-                                title: t`Needs Review`,
-                              },
-                              {
-                                id: `pipeline=${Constants.APPROVED}`,
-                                title: t`Approved`,
-                              },
-                            ],
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
+                  <ToolbarContent>
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <CompoundFilter
+                          inputText={this.state.inputText}
+                          onChange={(text) => {
+                            this.setState({ inputText: text });
+                          }}
+                          updateParams={(p) =>
+                            this.updateParams(p, () =>
+                              this.queryCollections(true),
+                            )
+                          }
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'namespace',
+                              title: t`Namespace`,
+                            },
+                            {
+                              id: 'name',
+                              title: t`Collection name`,
+                            },
+                            {
+                              id: 'repository_label',
+                              title: t`Status`,
+                              inputType: 'select',
+                              options: [
+                                {
+                                  id: `pipeline=${Constants.NOTCERTIFIED}`,
+                                  title: t`Rejected`,
+                                },
+                                {
+                                  id: `pipeline=${Constants.NEEDSREVIEW}`,
+                                  title: t`Needs Review`,
+                                },
+                                {
+                                  id: `pipeline=${Constants.APPROVED}`,
+                                  title: t`Approved`,
+                                },
+                              ],
+                            },
+                          ]}
+                        />
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  </ToolbarContent>
                 </Toolbar>
 
                 <Pagination
@@ -285,6 +288,8 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                     },
                   }}
                   niceNames={{
+                    name: t`Collection name`,
+                    namespace: t`Namespace`,
                     repository_label: t`Status`,
                   }}
                 />

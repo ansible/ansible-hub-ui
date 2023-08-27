@@ -101,7 +101,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='hub-list-toolbar'>
+                <div className='hub-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>

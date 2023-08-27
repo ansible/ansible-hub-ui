@@ -91,11 +91,11 @@ describe('Approval Dashboard process with multiple repos', () => {
 
   it('should test paging.', () => {
     openModal();
-    cy.contains('.modal-body .toolbar', '1 - 10 of 11');
+    cy.contains('.modal-body .hub-toolbar', '1 - 10 of 11');
     cy.contains('.modal-body', 'repo1');
     cy.contains('.modal-body', 'published');
-    cy.get('.modal-body .toolbar [data-action="next"]').click();
-    cy.contains('.modal-body .toolbar', '11 - 11 of 11');
+    cy.get('.modal-body .hub-toolbar [data-action="next"]').click();
+    cy.contains('.modal-body .hub-toolbar', '11 - 11 of 11');
     cy.contains('.modal-body', 'repo9');
   });
 
@@ -127,7 +127,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     openModal();
 
     // select all
-    cy.get('.toolbar [aria-label="Select"] svg').click();
+    cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Select all (11 items)').click();
     cy.contains('[aria-label="Label group category"] button', '8 more').click();
     reposList.forEach((repo) => {
@@ -135,7 +135,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     });
 
     // deselect all
-    cy.get('.toolbar [aria-label="Select"] svg').click();
+    cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect all (11 items)').click();
     reposList.forEach((repo) => {
       cy.contains('[aria-label="Label group category"]', repo).should(
@@ -144,7 +144,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     });
 
     // select page
-    cy.get('.toolbar [aria-label="Select"] svg').click();
+    cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Select page (10 items)').click();
     reposList.forEach((repo) => {
       if (repo != 'repo9') {
@@ -161,7 +161,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('Clear all filters').click();
 
     // deselect page and repo9 should remain here
-    cy.get('.toolbar [aria-label="Select"] svg').click();
+    cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect page (10 items)').click();
     reposList.forEach((repo) => {
       if (repo != 'repo9') {
