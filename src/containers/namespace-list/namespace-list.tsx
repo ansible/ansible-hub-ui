@@ -200,7 +200,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           )}
           {noData ? null : (
-            <div className='toolbar'>
+            <div className='hub-toolbar hub-toolbar-left'>
               <Toolbar>
                 <ToolbarContent>
                   <ToolbarGroup style={{ marginLeft: 0 }}>

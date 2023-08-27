@@ -106,7 +106,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
-      'Collection Name',
+      'Collection name',
     ).click();
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="sort_name"]').click();
@@ -124,13 +124,13 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
-      'Collection Name',
+      'Collection name',
     ).click();
-    cy.get('[data-cy="body"] .toolbar input').type(
+    cy.get('[data-cy="body"] .hub-toolbar input').type(
       'approval_dashboard_collection_test0{enter}',
     );
 
-    cy.get('[data-cy="body"] .toolbar button:first').click();
+    cy.get('[data-cy="body"] .hub-toolbar button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
       'Namespace',

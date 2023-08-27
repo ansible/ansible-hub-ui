@@ -225,7 +225,7 @@ const CollectionDistributions = (props: RouteProps) => {
       />
       <Main>
         <section className='body'>
-          <div className='toolbar hub-toolbar'>
+          <div className='hub-toolbar'>
             <Toolbar>
               <ToolbarGroup>
                 <ToolbarItem>

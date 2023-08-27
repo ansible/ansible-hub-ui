@@ -501,7 +501,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
     return (
       <section className='body'>
-        <div className='toolbar'>
+        <div className='hub-toolbar'>
           <Toolbar>
             <ToolbarContent>
               <ToolbarGroup>

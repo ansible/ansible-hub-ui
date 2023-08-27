@@ -1,12 +1,4 @@
-.hub-toolbar-wrapper {
-  .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .hub-pagination-container {
-      display: flex;
-      align-items: center;
-    }
-  }
+.hub-pagination-container {
+  display: flex;
+  align-items: center;
 }

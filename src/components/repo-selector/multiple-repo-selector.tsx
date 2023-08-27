@@ -279,7 +279,7 @@ export const MultipleRepoSelector = (props: IProps) => {
   return (
     <>
       {renderLabels()}
-      <div className='toolbar hub-toolbar'>
+      <div className='hub-toolbar'>
         <Toolbar>
           <ToolbarGroup>
             {!props.singleSelectionOnly && (

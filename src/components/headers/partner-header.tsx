@@ -10,7 +10,6 @@ import {
   Tabs,
   TabsType,
 } from 'src/components';
-import './header.scss';
 
 interface IProps {
   namespace: NamespaceType;
@@ -54,7 +53,7 @@ export class PartnerHeader extends React.Component<IProps> {
         }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={pageControls}
-        className='header'
+        className='hub-header-bordered'
       >
         {namespace.description ? <div>{namespace.description}</div> : null}
 

@@ -16,7 +16,7 @@
     var(--pf-global--palette--black-800);
 }
 
-section.pf-c-nav__section.nav-title > h2 {
+.hub-nav-title > .pf-c-nav__section-title {
   height: 50px;
   font-size: var(--pf-c-nav__link--FontSize);
   font-weight: var(--pf-c-nav__link--FontWeight);
@@ -53,18 +53,14 @@ body,
 }
 
 // list screen toolbars
-// FIXME: merge these 2; also with search, namespace-list, namespace-details, hub-toolbar-wrapper
 .hub-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.hub-list-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+// collections and namespaces - align with cards/lists, instead of table columns
+.hub-toolbar-left {
   .pf-c-toolbar__content {
     padding-left: 0;
   }
