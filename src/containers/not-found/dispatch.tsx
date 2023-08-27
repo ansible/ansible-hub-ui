@@ -46,7 +46,7 @@ export const Dispatch = (props: RouteProps) => {
       .catch(() => setCollections([]));
 
     if (featureFlags.legacy_roles) {
-      LegacyRoleAPI.list({ username: namespace, name })
+      LegacyRoleAPI.list({ github_user: namespace, name })
         .then(({ data: { results } }) => setRoles(results || []))
         .catch(() => setRoles([]));
     }
