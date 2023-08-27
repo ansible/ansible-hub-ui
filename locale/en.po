@@ -898,7 +898,6 @@ msgid "Collection distributions"
 msgstr "Collection distributions"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "Collection does not have any dependencies."
 
@@ -923,8 +922,13 @@ msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "Collection Name"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr "Collection name"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "Collection Name"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -2854,6 +2858,7 @@ msgstr "Name must not be empty."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "Namespace"
 
@@ -3004,7 +3009,6 @@ msgid "No data"
 msgstr "No data"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "No dependencies"
@@ -4642,6 +4646,10 @@ msgstr "Terms of Use"
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
 msgstr "Text: {0}"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+msgstr "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."

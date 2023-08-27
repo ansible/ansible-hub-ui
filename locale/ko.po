@@ -897,7 +897,6 @@ msgid "Collection distributions"
 msgstr "컬렉션 배포"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "컬렉션에는 종속성이 없습니다."
 
@@ -922,8 +921,13 @@ msgid "Collection is not being used by any collection."
 msgstr "컬렉션은 어떤 컬렉션에서도 사용되고 있지 않습니다."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "컬렉션 이름"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "컬렉션 이름"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -2853,6 +2857,7 @@ msgstr "이름은 비워 둘 수 없습니다."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "네임스페이스"
 
@@ -3003,7 +3008,6 @@ msgid "No data"
 msgstr "데이터 없음"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "Python 종속 항목"
@@ -4641,6 +4645,10 @@ msgstr "이용 약관"
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
 msgstr "텍스트: {0}"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+msgstr ""
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."

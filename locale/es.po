@@ -897,7 +897,6 @@ msgid "Collection distributions"
 msgstr "Distribución de las colecciones"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "La colección no tiene ninguna dependencia."
 
@@ -922,8 +921,13 @@ msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "Nombre de la colección"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "Nombre de la colección"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -2853,6 +2857,7 @@ msgstr "El nombre no debe estar vacío."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
@@ -3003,7 +3008,6 @@ msgid "No data"
 msgstr "No hay datos"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "No hay dependencias"
@@ -4641,6 +4645,10 @@ msgstr "Condiciones de uso"
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
 msgstr "Texto: {0}"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+msgstr ""
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
