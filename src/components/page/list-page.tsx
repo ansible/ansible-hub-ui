@@ -270,7 +270,7 @@ export const ListPage = function <T>({
                 <LoadingPageSpinner />
               ) : (
                 <section className='body' data-cy={`ListPage-${displayName}`}>
-                  <div className='hub-list-toolbar'>
+                  <div className='hub-toolbar'>
                     <Toolbar>
                       <ToolbarContent>
                         <ToolbarGroup>

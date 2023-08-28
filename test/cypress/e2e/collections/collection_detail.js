@@ -73,7 +73,7 @@ describe('Collection detail', () => {
       // better synchronization, wait for the rest of the page to load
 
       if (tab.name == 'Documentation') {
-        cy.contains('.docs-container', 'Documentation');
+        cy.contains('.hub-docs-container', 'Documentation');
       }
 
       if (tab.name == 'Import log') {
@@ -131,15 +131,15 @@ describe('Collection detail', () => {
     cy.get('.body').get('input[aria-label="find-content"');
 
     // should have Readme menu item
-    cy.get('.sidebar').contains('Readme');
+    cy.get('.hub-docs-sidebar').contains('Readme');
 
     // should still show the readme when searching readme
     cy.get('input[aria-label="find-content"').type('readme');
-    cy.get('.sidebar').contains('Readme');
+    cy.get('.hub-docs-sidebar').contains('Readme');
 
     // should not display readme if searching for no entry
     cy.get('input[aria-label="find-content"').type('no entry');
-    cy.get('.sidebar').not(':contains("Readme")');
+    cy.get('.hub-docs-sidebar').not(':contains("Readme")');
   });
 
   it('should have a search field and the table headers on contents tab', () => {

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
-import { List, ListItem, ListVariant } from '@patternfly/react-core';
-import * as React from 'react';
+import { List, ListItem } from '@patternfly/react-core';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersion, CollectionVersionSearch } from 'src/api';
 import { EmptyStateNoData, HelperText } from 'src/components';
@@ -29,7 +29,7 @@ export const CollectionDependenciesList = ({
   }
 
   return (
-    <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
+    <List className='hub-c-list-dependencies'>
       {dependencies_repos.map((dependency, i) =>
         listDep(dependency, i, dependencies),
       )}
@@ -50,7 +50,7 @@ const listDep = (dependency, i, dependencies) => {
   } else {
     return (
       <ListItem key={i} style={{ marginRight: '70px' }}>
-        {fqn}: {version_range}
+        {fqn}: {version_range}{' '}
         <HelperText
           content={t`No version of ${fqn} exists that matches ${version_range}.`}
         />

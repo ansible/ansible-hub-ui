@@ -113,7 +113,7 @@ export function DetailList<T>({
         <LoadingPageSpinner />
       ) : (
         <>
-          <div className='hub-list-toolbar' data-cy={`DetailList`}>
+          <div className='hub-toolbar' data-cy={`DetailList`}>
             <Toolbar>
               <ToolbarContent>
                 <ToolbarGroup>

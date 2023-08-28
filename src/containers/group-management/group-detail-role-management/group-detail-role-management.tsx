@@ -284,7 +284,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
         </section>
       ) : (
         <section className='body'>
-          <div className='hub-list-toolbar'>
+          <div className='hub-toolbar'>
             <Toolbar>
               <ToolbarContent>
                 <ToolbarGroup>
