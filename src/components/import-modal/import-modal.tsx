@@ -314,8 +314,10 @@ export class ImportModal extends React.Component<IProps, IState> {
         errors: t`Please select no more than one file.`,
       });
     } else if (!this.acceptedFileTypes.includes(newCollection.type)) {
+      const detectedType = newCollection.type || t`unknown`;
+      const acceptedTypes: string = this.acceptedFileTypes.join(', ');
       this.setState({
-        errors: t`Invalid file format.`,
+        errors: t`Invalid file format: ${detectedType} (expected: ${acceptedTypes}).`,
         file: newCollection,
         uploadProgress: 0,
       });
