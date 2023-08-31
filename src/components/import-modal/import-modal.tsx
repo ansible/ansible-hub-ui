@@ -2,6 +2,7 @@ import { t } from '@lingui/macro';
 import { Button, Modal, Radio } from '@patternfly/react-core';
 import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 import axios from 'axios';
+import cx from 'classnames';
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
@@ -36,6 +37,7 @@ interface IProps {
 interface IState {
   file?: File;
   errors?: string;
+  errorVariant: 'default' | 'skippable' | 'skipped';
   uploadProgress: number;
   uploadStatus: Status;
   allRepos: AnsibleRepositoryType[];
@@ -57,6 +59,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     this.state = {
       file: undefined,
       errors: '',
+      errorVariant: 'default' as const,
       uploadProgress: 0,
       uploadStatus: Status.waiting,
       allRepos: [],
@@ -161,7 +164,13 @@ export class ImportModal extends React.Component<IProps, IState> {
   render() {
     const { isOpen, collection } = this.props;
 
-    const { file, errors, uploadProgress, uploadStatus } = this.state;
+    const { file, errors, errorVariant, uploadProgress, uploadStatus } =
+      this.state;
+    const skipError = () => {
+      if (errorVariant === 'skippable') {
+        this.setState({ errorVariant: 'skipped' as const });
+      }
+    };
 
     return (
       <Modal
@@ -221,8 +230,14 @@ export class ImportModal extends React.Component<IProps, IState> {
             </label>
           </form>
           {errors ? (
-            <span className='file-error-messages'>
-              <i className='pficon-error-circle-o' /> {errors}
+            <span className={cx('file-error-messages', errorVariant)}>
+              {errors}
+              {errorVariant === 'skippable' && (
+                <>
+                  {' '}
+                  <a onClick={skipError}>{t`Upload anyway?`}</a>
+                </>
+              )}
             </span>
           ) : null}
         </div>
@@ -261,7 +276,11 @@ export class ImportModal extends React.Component<IProps, IState> {
             fixedRepos={this.state.fixedRepos}
             selectedRepos={this.state.selectedRepos}
             setSelectedRepos={(repos) =>
-              this.setState({ selectedRepos: repos, errors: '' })
+              this.setState({
+                selectedRepos: repos,
+                errors: '',
+                errorVariant: 'default' as const,
+              })
             }
             hideFixedRepos={true}
             loadRepos={(params, setRepositoryList, setLoading, setItemsCount) =>
@@ -279,7 +298,7 @@ export class ImportModal extends React.Component<IProps, IState> {
   }
 
   private canUpload() {
-    if (this.state.errors) {
+    if (this.state.errors && this.state.errorVariant !== 'skipped') {
       return false;
     }
 
@@ -312,18 +331,21 @@ export class ImportModal extends React.Component<IProps, IState> {
     if (files.length > 1) {
       this.setState({
         errors: t`Please select no more than one file.`,
+        errorVariant: 'default' as const,
       });
     } else if (!this.acceptedFileTypes.includes(newCollection.type)) {
       const detectedType = newCollection.type || t`unknown`;
       const acceptedTypes: string = this.acceptedFileTypes.join(', ');
       this.setState({
         errors: t`Invalid file format: ${detectedType} (expected: ${acceptedTypes}).`,
+        errorVariant: 'skippable' as const,
         file: newCollection,
         uploadProgress: 0,
       });
     } else if (!this.COLLECTION_NAME_REGEX.test(newCollection.name)) {
       this.setState({
         errors: t`Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
+        errorVariant: 'default' as const,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -333,18 +355,21 @@ export class ImportModal extends React.Component<IProps, IState> {
     ) {
       this.setState({
         errors: t`The collection you have selected doesn't appear to match ${collection.name}`,
+        errorVariant: 'default' as const,
         file: newCollection,
         uploadProgress: 0,
       });
     } else if (this.props.namespace != newCollection.name.split('-')[0]) {
       this.setState({
         errors: t`The collection you have selected does not match this namespace.`,
+        errorVariant: 'default' as const,
         file: newCollection,
         uploadProgress: 0,
       });
     } else {
       this.setState({
         errors: '',
+        errorVariant: 'default' as const,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -412,6 +437,7 @@ export class ImportModal extends React.Component<IProps, IState> {
         this.setState({
           uploadStatus: Status.waiting,
           errors: errorMessage,
+          errorVariant: 'default' as const,
         });
       })
       .finally(() => {
@@ -430,6 +456,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       {
         file: undefined,
         errors: '',
+        errorVariant: 'default' as const,
         uploadProgress: 0,
         uploadStatus: Status.waiting,
       },
