@@ -2,7 +2,6 @@ import { t } from '@lingui/macro';
 import {
   Dropdown,
   DropdownItem,
-  DropdownSeparator,
   DropdownToggle,
   DropdownToggleCheckbox,
   Flex,
@@ -120,11 +119,6 @@ export const MultipleRepoSelector = (props: IProps) => {
       onFocus();
     }
 
-    function selectAll() {
-      props.setSelectedRepos(props.allRepositories.map((a) => a.name));
-      setIsSelectorChecked(true);
-    }
-
     function selectPage() {
       const newRepos = [...props.selectedRepos];
 
@@ -168,18 +162,13 @@ export const MultipleRepoSelector = (props: IProps) => {
         key='select-page'
       >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
       <DropdownItem
-        onClick={selectAll}
-        key='select-all'
-      >{t`Select all (${props.allRepositories.length} items)`}</DropdownItem>,
-      <DropdownSeparator key='separator' />,
-      <DropdownItem
         onClick={deselectPage}
         key='deselect-page'
       >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
       <DropdownItem
         onClick={deselectAll}
         key='deselect-all'
-      >{t`Deselect all (${props.allRepositories.length} items)`}</DropdownItem>,
+      >{t`Deselect all (${props.selectedRepos.length} items)`}</DropdownItem>,
     ];
 
     return (
@@ -210,69 +199,65 @@ export const MultipleRepoSelector = (props: IProps) => {
     const sortTableOptions = {
       headers: [
         {
+          title: '',
+          type: 'none',
+          id: 'expander',
+        },
+        {
           title: t`Name`,
           type: 'alpha',
           id: 'name',
+        },
+        {
+          title: t`Description`,
+          type: 'none',
+          id: 'description',
         },
       ],
     };
 
     return (
-      <>
-        <table
-          aria-label={t`Collection versions`}
-          className='hub-c-table-content pf-c-table'
-        >
-          <SortTable
-            options={sortTableOptions}
-            params={params}
-            updateParams={(p) => setParams(p)}
-          />
-          <tbody>
-            {repositoryList.map((repo, i) => (
-              <>
-                {!props.singleSelectionOnly && (
-                  <CheckboxRow
-                    rowIndex={i}
-                    key={repo.name}
-                    isSelected={props.selectedRepos.includes(repo.name)}
-                    onSelect={() => {
-                      changeSelection(repo.name);
-                    }}
-                    isDisabled={props.fixedRepos.includes(repo.name)}
-                    data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
-                  >
-                    <td>
-                      <div>{repo.name}</div>
-                      <div>{repo.description}</div>
-                    </td>
-                  </CheckboxRow>
-                )}
-
-                {props.singleSelectionOnly && (
-                  <>
-                    <RadioRow
-                      rowIndex={i}
-                      key={repo.name}
-                      isSelected={props.selectedRepos.includes(repo.name)}
-                      onSelect={() => {
-                        props.setSelectedRepos([repo.name]);
-                      }}
-                      isDisabled={props.fixedRepos.includes(repo.name)}
-                      data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
-                    >
-                      <td>
-                        <div>{repo.name}</div>
-                        <div>{repo.description}</div>
-                      </td>
-                    </RadioRow>
-                  </>
-                )}
-              </>
-            ))}
-          </tbody>
-        </table>
-      </>
+      <table
+        aria-label={t`Repositories`}
+        className='hub-c-table-content pf-c-table'
+      >
+        <SortTable
+          options={sortTableOptions}
+          params={params}
+          updateParams={(p) => setParams(p)}
+        />
+        {repositoryList.map((repo, i) =>
+          props.singleSelectionOnly ? (
+            <RadioRow
+              rowIndex={i}
+              key={repo.name}
+              isSelected={props.selectedRepos.includes(repo.name)}
+              onSelect={() => {
+                props.setSelectedRepos([repo.name]);
+              }}
+              isDisabled={props.fixedRepos.includes(repo.name)}
+              data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
+            >
+              <td>{repo.name}</td>
+              <td>{repo.description}</td>
+            </RadioRow>
+          ) : (
+            <CheckboxRow
+              rowIndex={i}
+              key={repo.name}
+              isSelected={props.selectedRepos.includes(repo.name)}
+              onSelect={() => {
+                changeSelection(repo.name);
+              }}
+              isDisabled={props.fixedRepos.includes(repo.name)}
+              data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
+            >
+              <td>{repo.name}</td>
+              <td>{repo.description}</td>
+            </CheckboxRow>
+          ),
+        )}
+      </table>
     );
   }
 
