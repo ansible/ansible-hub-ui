@@ -230,7 +230,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             id='radio-all'
           ></Radio>
           {!this.state.onlyStaging && (
-            <>{t`Please note that those repositories are not filtered by permission, if operation fail, you don't have it.`}</>
+            <>{t`Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions.`}</>
           )}
 
           <MultipleRepoSelector
