@@ -52,6 +52,7 @@ export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { FileUpload } from './patternfly-wrappers/fileupload';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
+export { LoginForm } from './patternfly-wrappers/login-form';
 export { Main } from './patternfly-wrappers/main';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { Sort } from './patternfly-wrappers/sort';

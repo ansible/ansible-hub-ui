@@ -1,10 +1,11 @@
 import { t } from '@lingui/macro';
-import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
+import { LoginPage as PFLoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
+import { LoginForm } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths } from 'src/paths';
 import { ParamHelper } from 'src/utilities/';
@@ -70,8 +71,8 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private handleUsernameChange = (value) => {
-    this.setState({ usernameValue: value });
+  private handleUsernameChange = (usernameValue) => {
+    this.setState({ usernameValue });
   };
 
   private handlePasswordChange = (passwordValue) => {
