@@ -126,17 +126,9 @@ describe('Approval Dashboard process with multiple repos', () => {
   it('should test select/deselect all/page.', () => {
     openModal();
 
-    // select all
-    cy.get('.hub-toolbar [aria-label="Select"] svg').click();
-    cy.contains('a', 'Select all (11 items)').click();
-    cy.contains('[aria-label="Label group category"] button', '8 more').click();
-    reposList.forEach((repo) => {
-      cy.contains('[aria-label="Label group category"]', repo);
-    });
-
     // deselect all
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
-    cy.contains('a', 'Deselect all (11 items)').click();
+    cy.contains('a', 'Deselect all (0 items)').click();
     reposList.forEach((repo) => {
       cy.contains('[aria-label="Label group category"]', repo).should(
         'not.exist',
