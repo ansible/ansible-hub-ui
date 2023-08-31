@@ -1,5 +1,5 @@
 import { Label } from '@patternfly/react-core';
-import { TagIcon } from '@patternfly/react-icons';
+import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React from 'react';
 
 interface IProps {

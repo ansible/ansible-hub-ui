@@ -219,9 +219,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               activities.push({
                 created: lastActivity.created,
                 action: (
-                  <React.Fragment>
-                    {t`${this.props.containerRepository.name} was added`}
-                  </React.Fragment>
+                  <React.Fragment>{t`${this.props.containerRepository.name} was added`}</React.Fragment>
                 ),
               });
             }

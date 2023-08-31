@@ -11,7 +11,7 @@ import {
   FlexItem,
   Title,
 } from '@patternfly/react-core';
-import { CubesIcon } from '@patternfly/react-icons';
+import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';

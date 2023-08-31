@@ -541,9 +541,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
                     <ToolbarItem>
                       <Button
                         onClick={() => this.setState({ addModalVisible: true })}
-                      >
-                        {t`Add`}
-                      </Button>
+                      >{t`Add`}</Button>
                     </ToolbarItem>
                   </ToolbarGroup>
                 )}

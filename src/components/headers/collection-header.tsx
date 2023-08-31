@@ -14,7 +14,7 @@ import {
   Spinner,
   Text,
 } from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import * as moment from 'moment';
 import React from 'react';
 import { Navigate } from 'react-router-dom';

@@ -1,11 +1,9 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import {
-  SortAlphaDownIcon,
-  SortAlphaUpIcon,
-  SortAmountDownIcon,
-  SortAmountUpIcon,
-} from '@patternfly/react-icons';
+import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-down-icon';
+import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
+import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
+import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
 import React from 'react';
 import { ParamHelper } from 'src/utilities';
 import './sort.scss';

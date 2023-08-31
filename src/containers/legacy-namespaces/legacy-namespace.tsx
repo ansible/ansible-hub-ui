@@ -276,9 +276,7 @@ class LegacyNamespace extends React.Component<
         dropdownItems.push(
           <DropdownItem
             onClick={() => this.setState({ isOpenWisdomModal: true })}
-          >
-            {t`Ansible Lightspeed settings`}
-          </DropdownItem>,
+          >{t`Ansible Lightspeed settings`}</DropdownItem>,
         );
       }
 

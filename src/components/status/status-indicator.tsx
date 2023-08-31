@@ -1,12 +1,10 @@
 import { t } from '@lingui/macro';
 import { Label, LabelProps } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ExclamationIcon,
-  OutlinedClockIcon,
-  SyncAltIcon,
-} from '@patternfly/react-icons';
+import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
+import ExclamationIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-icon';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
+import SyncAltIcon from '@patternfly/react-icons/dist/esm/icons/sync-alt-icon';
 import React from 'react';
 import { PulpStatus } from 'src/api';
 

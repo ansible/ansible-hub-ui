@@ -1,9 +1,7 @@
 import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
-import {
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
+import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';

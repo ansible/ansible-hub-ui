@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import { NamespaceType } from 'src/api';
 import {

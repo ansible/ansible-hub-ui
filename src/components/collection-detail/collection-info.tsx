@@ -7,7 +7,7 @@ import {
   Split,
   SplitItem,
 } from '@patternfly/react-core';
-import { DownloadIcon } from '@patternfly/react-icons';
+import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -163,9 +163,7 @@ export const CollectionInfo = ({
         {content?.requires_ansible && (
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>
-                {t`Requires Ansible`}
-              </SplitItem>
+              <SplitItem className='install-title'>{t`Requires Ansible`}</SplitItem>
               <SplitItem isFilled data-cy='ansible-requirement'>
                 {content?.requires_ansible}
               </SplitItem>

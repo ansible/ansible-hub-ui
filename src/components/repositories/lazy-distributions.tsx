@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Spinner, Tooltip } from '@patternfly/react-core';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import { errorMessage } from 'src/utilities';
