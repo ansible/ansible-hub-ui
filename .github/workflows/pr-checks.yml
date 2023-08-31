@@ -2,7 +2,7 @@ name: "PR checks"
 
 on:
   pull_request:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
+    branches: [ 'main', 'stable-*', 'feature/*' ]
 
 jobs:
 
