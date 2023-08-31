@@ -138,6 +138,8 @@ describe('Approval Dashboard process with multiple repos', () => {
     // select page
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Select page (10 items)').click();
+    cy.contains('.pf-c-label.pf-m-overflow', 'more').click();
+
     reposList.forEach((repo) => {
       if (repo != 'repo9') {
         cy.contains('[aria-label="Label group category"]', repo);
@@ -155,6 +157,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     // deselect page and repo9 should remain here
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect page (10 items)').click();
+
     reposList.forEach((repo) => {
       if (repo != 'repo9') {
         cy.contains('[aria-label="Label group category"]', repo).should(
