@@ -222,7 +222,7 @@ export function withContainerRepo(WrappedComponent) {
             container={this.state.repo}
             displaySignatures={this.context.featureFlags.container_signing}
             pageControls={
-              <>
+              <div style={{ display: 'flex' }}>
                 {showEdit ? (
                   <Button
                     onClick={() => this.setState({ editing: true })}
@@ -232,8 +232,8 @@ export function withContainerRepo(WrappedComponent) {
                     {t`Edit`}
                   </Button>
                 ) : null}
-                <StatefulDropdown items={dropdownItems}></StatefulDropdown>
-              </>
+                <StatefulDropdown items={dropdownItems} />
+              </div>
             }
           />
           <Main>
