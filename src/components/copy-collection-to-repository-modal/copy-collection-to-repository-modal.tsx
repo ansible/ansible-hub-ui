@@ -63,7 +63,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
     sort: 'name',
   });
 
-  const context = useContext();
+  const { settings } = useContext();
 
   useEffect(() => {
     loadRepos();
@@ -121,8 +121,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
 
     const pulpId = parsePulpIDFromURL(repository.pulp_href);
 
-    const signingServiceName =
-      context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+    const signingServiceName = settings.GALAXY_COLLECTION_SIGNING_SERVICE;
 
     let signingService = null;
     try {

@@ -37,7 +37,7 @@ export const ApproveModal = (props: IProps) => {
   const [fixedRepos, setFixedRepos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const context = useContext();
+  const { settings } = useContext();
 
   function approve() {
     let error = '';
@@ -90,12 +90,11 @@ export const ApproveModal = (props: IProps) => {
       );
       error = '';
 
-      const autosign = context.settings.GALAXY_AUTO_SIGN_COLLECTIONS;
+      const autosign = settings.GALAXY_AUTO_SIGN_COLLECTIONS;
       let signingService_href = null;
 
       if (autosign) {
-        const signingServiceName =
-          context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+        const signingServiceName = settings.GALAXY_COLLECTION_SIGNING_SERVICE;
 
         error = t`Signing service ${signingServiceName} not found`;
         const signingList = await SigningServiceAPI.list({
@@ -189,49 +188,45 @@ export const ApproveModal = (props: IProps) => {
   }, []);
 
   return (
-    <>
-      <Modal
-        actions={[
-          <Button
-            key='confirm'
-            onClick={approve}
-            variant='primary'
-            isDisabled={
-              selectedRepos.length - fixedRepos.length <= 0 || loading
-            }
-          >
-            {t`Select`}
-          </Button>,
-          <Button
-            key='cancel'
-            onClick={props.closeAction}
-            variant='link'
-            isDisabled={loading}
-          >
-            {t`Cancel`}
-          </Button>,
-        ]}
-        isOpen={true}
-        onClose={props.closeAction}
-        title={t`Select repositories`}
-        variant='large'
-      >
-        <section className='modal-body' data-cy='modal-body'>
-          <MultipleRepoSelector
-            allRepositories={props.allRepositories}
-            fixedRepos={fixedRepos}
-            selectedRepos={selectedRepos}
-            setSelectedRepos={setSelectedRepos}
-            loadRepos={loadRepos}
-          />
-          {loading && <Spinner />}
-        </section>
-
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+    <Modal
+      actions={[
+        <Button
+          key='confirm'
+          onClick={approve}
+          variant='primary'
+          isDisabled={selectedRepos.length - fixedRepos.length <= 0 || loading}
+        >
+          {t`Select`}
+        </Button>,
+        <Button
+          key='cancel'
+          onClick={props.closeAction}
+          variant='link'
+          isDisabled={loading}
+        >
+          {t`Cancel`}
+        </Button>,
+      ]}
+      isOpen={true}
+      onClose={props.closeAction}
+      title={t`Select repositories`}
+      variant='large'
+    >
+      <section className='modal-body' data-cy='modal-body'>
+        <MultipleRepoSelector
+          allRepositories={props.allRepositories}
+          fixedRepos={fixedRepos}
+          selectedRepos={selectedRepos}
+          setSelectedRepos={setSelectedRepos}
+          loadRepos={loadRepos}
         />
-      </Modal>
-    </>
+        {loading && <Spinner />}
+      </section>
+
+      <AlertList
+        alerts={alerts}
+        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+      />
+    </Modal>
   );
 };
