@@ -33,8 +33,9 @@ import {
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import {
-  RepositoriesUtils,
   errorMessage,
+  getCollectionRepoList,
+  listAll,
   parsePulpIDFromURL,
   taskAlert,
 } from 'src/utilities';
@@ -89,7 +90,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
   const loadAllRepos = () => {
     setLoading(true);
     // TODO: replace getAll pagination
-    RepositoriesUtils.listAll().then((repos) => {
+    listAll().then((repos) => {
       setSelectedRepos(repos.map((repo) => repo.name));
       setRepositoryList(repos);
       setLoading(false);
@@ -97,9 +98,7 @@ export const CopyCollectionToRepositoryModal = (props: IProps) => {
   };
 
   const loadAssociatedRepoList = async () => {
-    const repoList = await RepositoriesUtils.getCollectionRepoList(
-      props.collection,
-    );
+    const repoList = await getCollectionRepoList(props.collection);
     setFixedRepos(repoList);
   };
 

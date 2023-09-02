@@ -56,10 +56,10 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RepositoriesUtils,
   canSignNamespace,
   errorMessage,
   parsePulpIDFromURL,
+  repositoryRemoveCollection,
   waitForTask,
 } from 'src/utilities';
 import { DateComponent } from '../date-component/date-component';
@@ -943,7 +943,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     if (deleteAll) {
       promise = CollectionAPI.deleteCollectionVersion(deleteCollection);
     } else {
-      promise = RepositoriesUtils.deleteCollection(
+      promise = repositoryRemoveCollection(
         deleteCollection.repository.name,
         deleteCollection.collection_version.pulp_href,
       );

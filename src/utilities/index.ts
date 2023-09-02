@@ -20,7 +20,12 @@ export { mapNetworkErrors, validateInput } from './map-role-errors';
 export { ParamHelper, type ParamType } from './param-helper';
 export { parsePulpIDFromURL } from './parse-pulp-id';
 export { RepoSigningUtils } from './repo-signing';
-export { RepositoriesUtils } from './repositories';
+export {
+  listApproved,
+  listAll,
+  getCollectionRepoList,
+  repositoryRemoveCollection,
+} from './repositories';
 export { repositoryBasePath } from './repository-base-path';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export { taskAlert } from './task-alert';

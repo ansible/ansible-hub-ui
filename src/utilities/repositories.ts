@@ -26,53 +26,53 @@ async function getAll(additionalParams = {}) {
   }
 }
 
-export class RepositoriesUtils {
-  public static listApproved(): Promise<AnsibleRepositoryType[]> {
-    return getAll({ pulp_label_select: 'pipeline=approved' });
+export function listApproved(): Promise<AnsibleRepositoryType[]> {
+  return getAll({ pulp_label_select: 'pipeline=approved' });
+}
+
+export function listAll(): Promise<AnsibleRepositoryType[]> {
+  return getAll();
+}
+
+export async function repositoryRemoveCollection(
+  repoName,
+  collectionVersion_pulp_href,
+) {
+  const repo = (
+    await AnsibleRepositoryAPI.list({ name: repoName, page_size: 1 })
+  )?.data?.results?.[0];
+  if (!repo) {
+    return Promise.reject({ error: t`Repository ${repoName} not found.` });
   }
 
-  public static listAll(): Promise<AnsibleRepositoryType[]> {
-    return getAll();
-  }
+  const task = (
+    await AnsibleRepositoryAPI.removeContent(
+      parsePulpIDFromURL(repo.pulp_href),
+      collectionVersion_pulp_href,
+    )
+  )?.data?.task;
 
-  public static async deleteCollection(repoName, collectionVersion_pulp_href) {
-    const repo = (
-      await AnsibleRepositoryAPI.list({ name: repoName, page_size: 1 })
-    )?.data?.results?.[0];
-    if (!repo) {
-      return Promise.reject({ error: t`Repository ${repoName} not found.` });
-    }
+  await waitForTaskUrl(task);
+}
 
-    const task = (
-      await AnsibleRepositoryAPI.removeContent(
-        parsePulpIDFromURL(repo.pulp_href),
-        collectionVersion_pulp_href,
-      )
-    )?.data?.task;
+export async function getCollectionRepoList(
+  collection: CollectionVersionSearch,
+) {
+  const { name, namespace, version } = collection.collection_version;
 
-    await waitForTaskUrl(task);
-  }
+  // get repository list for selected collection
+  // TODO: support more pages
+  const collectionInRepos = await CollectionVersionAPI.list({
+    namespace,
+    name,
+    version,
+    page_size: 100,
+    offset: 0,
+  });
 
+  const collectionRepos = collectionInRepos.data.data.map(
+    ({ repository }) => repository.name,
+  );
 
-  public static async getCollectionRepoList(
-    collection: CollectionVersionSearch,
-  ) {
-    const { name, namespace, version } = collection.collection_version;
-
-    // get repository list for selected collection
-    // TODO: support more pages
-    const collectionInRepos = await CollectionVersionAPI.list({
-      namespace,
-      name,
-      version,
-      page_size: 100,
-      offset: 0,
-    });
-
-    const collectionRepos = collectionInRepos.data.data.map(
-      ({ repository }) => repository.name,
-    );
-
-    return collectionRepos;
-  }
+  return collectionRepos;
 }

@@ -51,12 +51,14 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RepositoriesUtils,
   RouteProps,
   errorMessage,
   filterIsSet,
+  getCollectionRepoList,
+  listApproved,
   parsePulpIDFromURL,
   repositoryBasePath,
+  repositoryRemoveCollection,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -156,7 +158,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
       promises.push(
         // TODO: replace getAll pagination
-        RepositoriesUtils.listApproved()
+        listApproved()
           .then((data) => {
             this.setState({ approvedRepositoryList: data });
           })
@@ -730,7 +732,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         ) {
           // collection already in rejected repository, so remove it from aproved repo
 
-          RepositoriesUtils.deleteCollection(originalRepo, version.pulp_href)
+          repositoryRemoveCollection(originalRepo, version.pulp_href)
             .then(() => {
               this.addAlert(
                 t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
@@ -889,7 +891,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   // compose from collectionVersionSearch to CollectionVersion structure for approval modal
   async transformToCollectionVersion(collection: CollectionVersionSearch) {
-    const repoList = await RepositoriesUtils.getCollectionRepoList(collection);
+    const repoList = await getCollectionRepoList(collection);
 
     const { collection_version } = collection;
     const id = parsePulpIDFromURL(collection_version.pulp_href);
