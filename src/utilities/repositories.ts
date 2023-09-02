@@ -53,29 +53,6 @@ export class RepositoriesUtils {
     await waitForTaskUrl(task);
   }
 
-  public static pushToOrFilterOutCollections(
-    selectedCollection: CollectionVersionSearch,
-    collections: CollectionVersionSearch[],
-  ): CollectionVersionSearch[] {
-    // check if collection is already selected
-    const selectedItem = collections.find(
-      ({ collection_version: cv, repository }) =>
-        cv.pulp_href === selectedCollection.collection_version.pulp_href &&
-        repository.pulp_href === selectedCollection.repository.pulp_href,
-    );
-
-    // if collection is not selected, add it to selected items
-    if (!selectedItem) {
-      return [...collections, selectedCollection];
-    }
-
-    // unselect collection
-    return collections.filter(
-      ({ collection_version: cv, repository }) =>
-        cv.pulp_href !== selectedCollection.collection_version.pulp_href ||
-        repository.pulp_href !== selectedCollection.repository.pulp_href,
-    );
-  }
 
   public static async getCollectionRepoList(
     collection: CollectionVersionSearch,

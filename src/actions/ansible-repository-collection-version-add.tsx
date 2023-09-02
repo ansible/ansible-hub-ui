@@ -9,12 +9,7 @@ import {
 } from 'src/api';
 import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
-import {
-  RepositoriesUtils,
-  handleHttpError,
-  parsePulpIDFromURL,
-  taskAlert,
-} from 'src/utilities';
+import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
 
 const add = (
@@ -52,6 +47,30 @@ const add = (
       ),
     );
 };
+
+function pushToOrFilterOutCollections(
+  selectedCollection: CollectionVersionSearch,
+  collections: CollectionVersionSearch[],
+): CollectionVersionSearch[] {
+  // check if collection is already selected
+  const selectedItem = collections.find(
+    ({ collection_version: cv, repository }) =>
+      cv.pulp_href === selectedCollection.collection_version.pulp_href &&
+      repository.pulp_href === selectedCollection.repository.pulp_href,
+  );
+
+  // if collection is not selected, add it to selected items
+  if (!selectedItem) {
+    return [...collections, selectedCollection];
+  }
+
+  // unselect collection
+  return collections.filter(
+    ({ collection_version: cv, repository }) =>
+      cv.pulp_href !== selectedCollection.collection_version.pulp_href ||
+      repository.pulp_href !== selectedCollection.repository.pulp_href,
+  );
+}
 
 const AddCollectionVersionModal = ({
   addAction,
@@ -102,9 +121,7 @@ const AddCollectionVersionModal = ({
     return (
       <tr
         onClick={() =>
-          setSelected(
-            RepositoriesUtils.pushToOrFilterOutCollections(item, selected),
-          )
+          setSelected(pushToOrFilterOutCollections(item, selected))
         }
         key={index}
       >
