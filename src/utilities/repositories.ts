@@ -1,38 +1,11 @@
 import { t } from '@lingui/macro';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { waitForTaskUrl } from './wait-for-task';
-
-async function getAll(additionalParams = {}) {
-  let list = [];
-
-  // loop max 10 times (= 1000 items)
-  for (let page = 1; page <= 10; page++) {
-    const result = await AnsibleRepositoryAPI.list({
-      ...additionalParams,
-      page,
-      page_size: 100,
-    });
-
-    list = list.concat(result.data.results);
-    if (list.length >= result.data.count) {
-      return list;
-    }
-  }
-}
-
-export function listApproved(): Promise<AnsibleRepositoryType[]> {
-  return getAll({ pulp_label_select: 'pipeline=approved' });
-}
-
-export function listAll(): Promise<AnsibleRepositoryType[]> {
-  return getAll();
-}
 
 export async function repositoryRemoveCollection(
   repoName,

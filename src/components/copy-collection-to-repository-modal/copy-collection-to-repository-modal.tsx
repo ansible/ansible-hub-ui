@@ -35,7 +35,6 @@ import { useContext } from 'src/loaders/app-context';
 import {
   errorMessage,
   getCollectionRepoList,
-  listAll,
   parsePulpIDFromURL,
   taskAlert,
 } from 'src/utilities';

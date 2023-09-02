@@ -55,7 +55,6 @@ import {
   errorMessage,
   filterIsSet,
   getCollectionRepoList,
-  listApproved,
   parsePulpIDFromURL,
   repositoryBasePath,
   repositoryRemoveCollection,

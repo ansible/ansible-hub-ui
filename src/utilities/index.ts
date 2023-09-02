@@ -21,8 +21,6 @@ export { ParamHelper, type ParamType } from './param-helper';
 export { parsePulpIDFromURL } from './parse-pulp-id';
 export { RepoSigningUtils } from './repo-signing';
 export {
-  listApproved,
-  listAll,
   getCollectionRepoList,
   repositoryRemoveCollection,
 } from './repositories';
