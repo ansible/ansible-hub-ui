@@ -889,7 +889,6 @@ msgid "Collection distributions"
 msgstr "Collection distributions"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "Collection does not have any dependencies."
 
@@ -914,8 +913,13 @@ msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "Collection Name"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr "Collection name"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "Collection Name"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -944,7 +948,6 @@ msgstr "Collection upload canceled"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
-#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1537,6 +1540,7 @@ msgstr "Deprecation status update starting for collection \"{name}\"."
 #: src/components/rbac/role-form.tsx
 #: src/components/rbac/role-list-table.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
@@ -1900,8 +1904,12 @@ msgstr "Error loading environments."
 #~ msgstr "Error loading registries."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Error loading repositories with label {pipeline}."
-msgstr "Error loading repositories with label {pipeline}."
+#~ msgid "Error loading repositories with label {pipeline}."
+#~ msgstr "Error loading repositories with label {pipeline}."
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories."
+msgstr "Error loading repositories."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Error loading repository with label {pipeline}."
@@ -2475,8 +2483,12 @@ msgstr "Instructions"
 #~ msgstr "Internal Server Error"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Invalid file format."
-msgstr "Invalid file format."
+msgid "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+msgstr "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Invalid file format."
+#~ msgstr "Invalid file format."
 
 #: src/components/import-modal/import-modal.tsx
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
@@ -2810,6 +2822,7 @@ msgstr "Name must not be empty."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "Namespace"
 
@@ -2968,7 +2981,6 @@ msgid "No data"
 msgstr "No data"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "No dependencies"
@@ -3331,8 +3343,12 @@ msgstr "Please add an owner by using the button below."
 #~ msgstr "Please finish editing permissions first."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
-msgstr "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgid "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
+msgstr "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+#~ msgstr "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
@@ -3761,6 +3777,7 @@ msgstr "Repo"
 #~ msgid "Repo URL"
 #~ msgstr "Repo URL"
 
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/edit.tsx
@@ -4046,8 +4063,8 @@ msgid "Select a tag"
 msgstr "Select a tag"
 
 #: src/components/repo-selector/multiple-repo-selector.tsx
-msgid "Select all ({0} items)"
-msgstr "Select all ({0} items)"
+#~ msgid "Select all ({0} items)"
+#~ msgstr "Select all ({0} items)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select all ({itemsCount} items)"
@@ -4866,6 +4883,10 @@ msgstr "UI Version"
 msgid "Undeprecate"
 msgstr "Undeprecate"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "unknown"
+msgstr "unknown"
+
 #: src/components/collection-list/collection-filter.tsx
 msgid "unsigned"
 msgstr "unsigned"
@@ -4909,6 +4930,10 @@ msgstr "Upload"
 #: src/constants.tsx
 msgid "Upload and modify collections."
 msgstr "Upload and modify collections."
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Upload anyway?"
+msgstr "Upload anyway?"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx

@@ -888,7 +888,6 @@ msgid "Collection distributions"
 msgstr "Distribución de las colecciones"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "La colección no tiene ninguna dependencia."
 
@@ -913,8 +912,13 @@ msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "Nombre de la colección"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "Nombre de la colección"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -943,7 +947,6 @@ msgstr "Carga de la colección cancelada"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
-#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1536,6 +1539,7 @@ msgstr "Actualización del estado de desuso a partir de la colección \"{name}\"
 #: src/components/rbac/role-form.tsx
 #: src/components/rbac/role-list-table.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
@@ -1899,7 +1903,11 @@ msgstr "Error al cargar los entornos."
 #~ msgstr "Error loading registries."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Error loading repositories with label {pipeline}."
+#~ msgid "Error loading repositories with label {pipeline}."
+#~ msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories."
 msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -2474,8 +2482,12 @@ msgstr "Instrucciones"
 #~ msgstr "Internal Server Error"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Invalid file format."
-msgstr "Formato de archivo no válido."
+msgid "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Invalid file format."
+#~ msgstr "Formato de archivo no válido."
 
 #: src/components/import-modal/import-modal.tsx
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
@@ -2809,6 +2821,7 @@ msgstr "El nombre no debe estar vacío."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
@@ -2967,7 +2980,6 @@ msgid "No data"
 msgstr "No hay datos"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "No hay dependencias"
@@ -3330,8 +3342,12 @@ msgstr "Agregue un propietario con el siguiente botón."
 #~ msgstr "Please finish editing permissions first."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgid "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
 msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+#~ msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
@@ -3760,6 +3776,7 @@ msgstr "Repo"
 #~ msgid "Repo URL"
 #~ msgstr "Repo URL"
 
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/edit.tsx
@@ -4045,8 +4062,8 @@ msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
 #: src/components/repo-selector/multiple-repo-selector.tsx
-msgid "Select all ({0} items)"
-msgstr "Seleccionar todo ({0} elementos)"
+#~ msgid "Select all ({0} items)"
+#~ msgstr "Seleccionar todo ({0} elementos)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select all ({itemsCount} items)"
@@ -4865,6 +4882,10 @@ msgstr "Versión de la UI"
 msgid "Undeprecate"
 msgstr "Cancelar traspaso a desuso"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "unknown"
+msgstr ""
+
 #: src/components/collection-list/collection-filter.tsx
 msgid "unsigned"
 msgstr "sin firmar"
@@ -4908,6 +4929,10 @@ msgstr "Subir"
 #: src/constants.tsx
 msgid "Upload and modify collections."
 msgstr "Subir y modificar colecciones."
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Upload anyway?"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx

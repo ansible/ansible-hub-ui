@@ -888,7 +888,6 @@ msgid "Collection distributions"
 msgstr "Distributie van de collectie"
 
 #: src/containers/collection-detail/collection-dependencies.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 msgid "Collection does not have any dependencies."
 msgstr "Collectie heeft geen afhankelijkheden."
 
@@ -913,8 +912,13 @@ msgid "Collection is not being used by any collection."
 msgstr "Collectie wordt niet gebruikt door een collectie."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection Name"
-msgstr "Naam collectie"
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#~ msgid "Collection Name"
+#~ msgstr "Naam collectie"
 
 #: src/constants.tsx
 #~ msgid "Collection Namespaces"
@@ -943,7 +947,6 @@ msgstr "Upload collectie geannuleerd"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
-#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1536,6 +1539,7 @@ msgstr "Bijwerking van afschrijvingsstatus van collectie \"{name}\"."
 #: src/components/rbac/role-form.tsx
 #: src/components/rbac/role-list-table.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
@@ -1899,7 +1903,11 @@ msgstr "Fout bij het laden van omgevingen."
 #~ msgstr "Error loading registries."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Error loading repositories with label {pipeline}."
+#~ msgid "Error loading repositories with label {pipeline}."
+#~ msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories."
 msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -2474,8 +2482,12 @@ msgstr "Instructies"
 #~ msgstr "Internal Server Error"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Invalid file format."
-msgstr "Ongeldig bestandsformaat."
+msgid "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Invalid file format."
+#~ msgstr "Ongeldig bestandsformaat."
 
 #: src/components/import-modal/import-modal.tsx
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
@@ -2809,6 +2821,7 @@ msgstr "De naam mag niet leeg zijn."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Namespace"
 msgstr "Namespace"
 
@@ -2967,7 +2980,6 @@ msgid "No data"
 msgstr "Geen gegevens"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx
-#: src/containers/collection-detail/collection-dependencies.tsx
 #: src/containers/collection-detail/collection-dependencies.tsx
 msgid "No dependencies"
 msgstr "Geen afhankelijkheden"
@@ -3330,8 +3342,12 @@ msgstr "Voeg een eigenaar toe via onderstaande knop."
 #~ msgstr "Please finish editing permissions first."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgid "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
 msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+#~ msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
@@ -3760,6 +3776,7 @@ msgstr "Repo"
 #~ msgid "Repo URL"
 #~ msgstr "Repo URL"
 
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/edit.tsx
@@ -4045,8 +4062,8 @@ msgid "Select a tag"
 msgstr "Een tag selecteren"
 
 #: src/components/repo-selector/multiple-repo-selector.tsx
-msgid "Select all ({0} items)"
-msgstr "Alle ({0} items) selecteren"
+#~ msgid "Select all ({0} items)"
+#~ msgstr "Alle ({0} items) selecteren"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select all ({itemsCount} items)"
@@ -4865,6 +4882,10 @@ msgstr "UI-versie"
 msgid "Undeprecate"
 msgstr "Afschrijving ongedaan maken"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "unknown"
+msgstr ""
+
 #: src/components/collection-list/collection-filter.tsx
 msgid "unsigned"
 msgstr "niet ondertekend"
@@ -4908,6 +4929,10 @@ msgstr "Uploaden"
 #: src/constants.tsx
 msgid "Upload and modify collections."
 msgstr "Collecties uploaden en wijzigen."
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Upload anyway?"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
