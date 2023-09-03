@@ -956,7 +956,6 @@ msgstr "集合上传已取消"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
-#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -1553,6 +1552,7 @@ msgstr "为集合 \"{name}\" 开始的弃用状态更新。"
 #: src/components/rbac/role-form.tsx
 #: src/components/rbac/role-list-table.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
@@ -1922,7 +1922,11 @@ msgstr "加载环境时出错。"
 #~ msgstr "Error loading registries."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Error loading repositories with label {pipeline}."
+#~ msgid "Error loading repositories with label {pipeline}."
+#~ msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Error loading repositories."
 msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -2513,8 +2517,12 @@ msgstr "说明"
 #~ msgstr "Internal Server Error"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Invalid file format."
-msgstr "文件格式无效。"
+msgid "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Invalid file format."
+#~ msgstr "文件格式无效。"
 
 #: src/components/import-modal/import-modal.tsx
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
@@ -3370,8 +3378,12 @@ msgstr "请使用以下按钮添加所有者。"
 #~ msgstr "Please finish editing permissions first."
 
 #: src/components/import-modal/import-modal.tsx
-msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+msgid "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
 msgstr ""
+
+#: src/components/import-modal/import-modal.tsx
+#~ msgid "Please note that those repositories are not filtered by permission, if operation fail, you don't have it."
+#~ msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Please select a repository filter"
@@ -3808,6 +3820,7 @@ msgstr "仓库"
 #~ msgid "Repo URL"
 #~ msgstr "Repo URL"
 
+#: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/edit.tsx
@@ -4093,8 +4106,8 @@ msgid "Select a tag"
 msgstr "选择标签"
 
 #: src/components/repo-selector/multiple-repo-selector.tsx
-msgid "Select all ({0} items)"
-msgstr "选择所有（{0} 个项）"
+#~ msgid "Select all ({0} items)"
+#~ msgstr "选择所有（{0} 个项）"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Select all ({itemsCount} items)"
@@ -4932,6 +4945,10 @@ msgstr "UI 版本"
 msgid "Undeprecate"
 msgstr "取消弃用"
 
+#: src/components/import-modal/import-modal.tsx
+msgid "unknown"
+msgstr ""
+
 #: src/components/collection-list/collection-filter.tsx
 msgid "unsigned"
 msgstr "未签名"
@@ -4975,6 +4992,10 @@ msgstr "上传"
 #: src/constants.tsx
 msgid "Upload and modify collections."
 msgstr "上传和修改集合。"
+
+#: src/components/import-modal/import-modal.tsx
+msgid "Upload anyway?"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
