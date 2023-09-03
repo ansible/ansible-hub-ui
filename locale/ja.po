@@ -96,12 +96,12 @@ msgstr "<0>{name}</0> は完全に削除されます。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:551
+#: src/components/repositories/remote-form.tsx:597
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "認証に使用する PEM でエンコードされたクライアント証明書。"
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:521
 msgid "A PEM encoded private key used for authentication."
 msgstr "認証に使用する PEM でエンコードされた秘密鍵。"
 
@@ -292,7 +292,7 @@ msgstr "ブラウザー OS"
 msgid "Browser Version"
 msgstr "ブラウザーのバージョン"
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:594
 msgid "CA certificate"
 msgstr "CA 証明書"
 
@@ -431,7 +431,7 @@ msgid "Child tasks"
 msgstr "子タスク"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
-#: src/components/patternfly-wrappers/write-only-field.tsx:34
+#: src/components/patternfly-wrappers/write-only-field.tsx:30
 msgid "Clear"
 msgstr "消去"
 
@@ -444,11 +444,11 @@ msgstr "すべてのフィルターの解除"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログインして (必要な場合)、手順に従い、設定を完了します。"
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:548
 msgid "Client certificate"
 msgstr "クライアント証明書"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:518
 msgid "Client key"
 msgstr "クライアントキー"
 
@@ -688,7 +688,7 @@ msgstr "新規名前空間の作成"
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 #~ msgstr "特殊文字 (例: <!@$%>) を含めた 9 文字以上のパスワードを作成します。一般的な名前または式は使用しないでください。"
 
-#: src/components/user-form/user-form.tsx:97
+#: src/components/user-form/user-form.tsx:96
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr ""
 
@@ -976,15 +976,15 @@ msgstr "ドキュメント"
 msgid "Done"
 msgstr "完了"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:630
 msgid "Download CA certification file"
 msgstr "CA 証明書ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:584
 msgid "Download client certification file"
 msgstr "クライアント認定ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:640
 msgid "Download concurrency"
 msgstr "同時実行のダウンロード"
 
@@ -992,7 +992,7 @@ msgstr "同時実行のダウンロード"
 msgid "Download only signed collections"
 msgstr "署名済みコレクションのみのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:337
+#: src/components/repositories/remote-form.tsx:338
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
@@ -1064,7 +1064,7 @@ msgstr "リソースの編集"
 msgid "Edit user"
 msgstr "ユーザーの編集"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:731
 #: src/containers/group-management/group-detail.tsx:803
 #: src/containers/user-management/user-list.tsx:175
@@ -1299,7 +1299,7 @@ msgstr "失敗"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/login/login.tsx:92
+#: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "ユーザーデータの取得に失敗しました。"
 
@@ -1351,7 +1351,7 @@ msgstr "このレジストリーでの実行環境の検索"
 msgid "Finished at"
 msgstr "終了日時"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:723
 #: src/containers/group-management/group-detail.tsx:813
 #: src/containers/user-management/user-list.tsx:167
@@ -1432,7 +1432,7 @@ msgstr "グループは作成後に表示されます"
 msgid "Groups with access"
 msgstr "アクセス権のあるグループ"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:417
 msgid "Hide advanced options"
 msgstr "詳細オプションの非表示"
 
@@ -1447,7 +1447,7 @@ msgstr "署名の非表示"
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:502
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
@@ -1545,7 +1545,7 @@ msgstr "ファイル形式が無効です。"
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "ファイル名が無効です。コレクションの形式は 'namespace-collection_name-1.0.0' のようにする必要があります。"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Invalid login credentials."
 msgstr "ログイン認証情報が無効です。"
 
@@ -1573,7 +1573,7 @@ msgstr "キーワード"
 msgid "Last modified"
 msgstr "最終更新日"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:727
 #: src/containers/group-management/group-detail.tsx:808
 #: src/containers/user-management/user-list.tsx:171
@@ -1612,7 +1612,7 @@ msgstr "詳細情報"
 msgid "License"
 msgstr "ライセンス"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:675
 msgid "Limits total download rate in requests per second."
 msgstr "1 秒あたりの要求の合計ダウンロード速度を制限します。"
 
@@ -1638,11 +1638,11 @@ msgstr "トークンの読み込み"
 msgid "Local"
 msgstr "ローカル"
 
-#: src/containers/login/login.tsx:57
+#: src/containers/login/login.tsx:58
 msgid "Log In"
 msgstr "ログイン"
 
-#: src/containers/login/login.tsx:65
+#: src/containers/login/login.tsx:66
 msgid "Log in to your account"
 msgstr "アカウントにログイン"
 
@@ -1680,7 +1680,7 @@ msgstr "メッセージ"
 msgid "Modify Ansible repo content"
 msgstr "Ansible リポジトリーコンテンツの変更"
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:684
 msgid "Must be an integer."
 msgstr "整数でなければなりません。"
 
@@ -1951,7 +1951,7 @@ msgstr "他のコレクションでの使用には必要ありません。"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:652
 msgid "Number must be greater than 0"
 msgstr "数字は 0 より大きくなければなりません"
 
@@ -1983,17 +1983,17 @@ msgstr "部分署名済み"
 #~ msgid "Partners"
 #~ msgstr "パートナー"
 
-#: src/components/repositories/remote-form.tsx:384
-#: src/components/user-form/user-form.tsx:92
-#: src/containers/login/login.tsx:53
+#: src/components/repositories/remote-form.tsx:385
+#: src/components/user-form/user-form.tsx:91
+#: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "パスワード"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:109
 msgid "Password confirmation"
 msgstr "パスワードの確認"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:106
 msgid "Passwords do not match"
 msgstr "パスワードが一致しません"
 
@@ -2090,15 +2090,15 @@ msgstr "進捗メッセージ"
 msgid "Provided by {company}"
 msgstr "{company} により提供"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:423
 msgid "Proxy URL"
 msgstr "プロキシー URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "プロキシーパスワード"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
 msgstr "プロキシーユーザー名"
 
@@ -2248,7 +2248,7 @@ msgstr "新規コンテナーのプッシュ"
 msgid "Push to existing containers"
 msgstr "既存コンテナーへのプッシュ"
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:672
 msgid "Rate Limit"
 msgstr "速度制限"
 
@@ -2388,7 +2388,7 @@ msgstr "リソース"
 msgid "Running"
 msgstr "実行中"
 
-#: src/components/repositories/remote-form.tsx:274
+#: src/components/repositories/remote-form.tsx:275
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2494,7 +2494,7 @@ msgstr "ユーザーの選択"
 #~ msgid "Server URL could not be displayed."
 #~ msgstr "サーバーの URL を表示できませんでした。"
 
-#: src/containers/login/login.tsx:100
+#: src/containers/login/login.tsx:101
 msgid "Server error. Please come back later."
 msgstr "サーバーエラー。後でもう一度お試しください。"
 
@@ -2510,7 +2510,7 @@ msgstr "設定"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:418
 msgid "Show advanced options"
 msgstr "詳細オプションの表示"
 
@@ -2585,7 +2585,7 @@ msgstr "コレクション \"{0}\" のすべてのバージョンで署名を開
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "コレクション \"{0} v{1}\" の署名を開始しました。"
 
-#: src/components/repositories/remote-form.tsx:275
+#: src/components/repositories/remote-form.tsx:276
 msgid "Single sign on URL."
 msgstr "シングルサインオン URL。"
 
@@ -2730,7 +2730,7 @@ msgstr "リモートレジストリー \"{name}\" の同期が開始されまし
 msgid "Sync status"
 msgstr "同期のステータス"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:499
 msgid "TLS validation"
 msgstr "TLS 検証"
 
@@ -2834,11 +2834,11 @@ msgstr "選択したコレクションは、{0} と一致しないようです�
 msgid "The file is not available for this version of {collectionName}"
 msgstr "このファイルは、このバージョンの {collectionName} では使用できません。"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "同期時に認証に使用するパスワード。"
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
@@ -2846,11 +2846,11 @@ msgstr "同期時に認証に使用するパスワード。トークンを使用
 #~ msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 #~ msgstr "トークンは、30 日のアクティブではない状態が続くと期限切れになります。トークンの有効期限が切れないように、定期的に以下のコマンドを実行します。"
 
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:355
 msgid "The username to be used for authentication when syncing."
 msgstr "同期時に認証に使用するユーザー名。"
 
-#: src/components/repositories/remote-form.tsx:355
+#: src/components/repositories/remote-form.tsx:356
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するユーザー名。トークンを使用する場合は不要です。"
 
@@ -2903,7 +2903,7 @@ msgstr "このタグは別のイメージにすでに存在します。このイ
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "このタグはすでにこのイメージに対して選択されています。タグは 2 回追加できません。"
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:299
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
 
@@ -2927,7 +2927,7 @@ msgstr "サーバー URL に対する認証に使用するトークンです。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:643
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
@@ -3101,11 +3101,11 @@ msgid "User type"
 msgstr "ユーザータイプ"
 
 #: src/components/about-modal/about-modal.tsx:82
-#: src/components/repositories/remote-form.tsx:349
-#: src/components/user-form/user-form.tsx:86
+#: src/components/repositories/remote-form.tsx:350
+#: src/components/user-form/user-form.tsx:85
 #: src/containers/group-management/group-detail.tsx:719
 #: src/containers/group-management/group-detail.tsx:798
-#: src/containers/login/login.tsx:50
+#: src/containers/login/login.tsx:51
 #: src/containers/user-management/user-list.tsx:163
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:260
@@ -3234,7 +3234,7 @@ msgstr "お探しのページは見つかりませんでした!"
 msgid "Website"
 msgstr "Web サイト"
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:295
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
@@ -3305,7 +3305,7 @@ msgstr "まだ判断できません。"
 msgid "find-content"
 msgstr "find-content"
 
-#: src/components/patternfly-wrappers/write-only-field.tsx:27
+#: src/components/patternfly-wrappers/write-only-field.tsx:22
 msgid "hidden value"
 msgstr "非表示の値"
 

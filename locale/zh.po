@@ -96,12 +96,12 @@ msgstr "<0>{name}</0> 将被永久删除。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:551
+#: src/components/repositories/remote-form.tsx:597
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "用于身份验证的 PEM 编码客户端证书。"
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:521
 msgid "A PEM encoded private key used for authentication."
 msgstr "用于验证的 PEM 编码私钥。"
 
@@ -292,7 +292,7 @@ msgstr "浏览器 OS"
 msgid "Browser Version"
 msgstr "浏览器版本"
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:594
 msgid "CA certificate"
 msgstr "CA 证书"
 
@@ -431,7 +431,7 @@ msgid "Child tasks"
 msgstr "子任务"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
-#: src/components/patternfly-wrappers/write-only-field.tsx:34
+#: src/components/patternfly-wrappers/write-only-field.tsx:30
 msgid "Clear"
 msgstr "清除"
 
@@ -444,11 +444,11 @@ msgstr "清除所有过滤器"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的 Controller URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:548
 msgid "Client certificate"
 msgstr "客户端证书"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:518
 msgid "Client key"
 msgstr "客户端密钥"
 
@@ -688,7 +688,7 @@ msgstr "创建新的命名空间,"
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 #~ msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
 
-#: src/components/user-form/user-form.tsx:97
+#: src/components/user-form/user-form.tsx:96
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr ""
 
@@ -976,15 +976,15 @@ msgstr "文档"
 msgid "Done"
 msgstr "完成"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:630
 msgid "Download CA certification file"
 msgstr "下载 CA 认证文件"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:584
 msgid "Download client certification file"
 msgstr "下载客户端认证文件"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:640
 msgid "Download concurrency"
 msgstr "下载并发"
 
@@ -992,7 +992,7 @@ msgstr "下载并发"
 msgid "Download only signed collections"
 msgstr "仅下载签名的集合"
 
-#: src/components/repositories/remote-form.tsx:337
+#: src/components/repositories/remote-form.tsx:338
 msgid "Download requirements file"
 msgstr "下载要求文件"
 
@@ -1064,7 +1064,7 @@ msgstr "编辑资源"
 msgid "Edit user"
 msgstr "编辑用户"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:731
 #: src/containers/group-management/group-detail.tsx:803
 #: src/containers/user-management/user-list.tsx:175
@@ -1299,7 +1299,7 @@ msgstr "失败"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/login/login.tsx:92
+#: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "获取用户数据失败。"
 
@@ -1351,7 +1351,7 @@ msgstr "在此 registry 中查找执行环境"
 msgid "Finished at"
 msgstr "完成于"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:723
 #: src/containers/group-management/group-detail.tsx:813
 #: src/containers/user-management/user-list.tsx:167
@@ -1432,7 +1432,7 @@ msgstr "组在创建后会出现"
 msgid "Groups with access"
 msgstr "带有访问权限的组"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:417
 msgid "Hide advanced options"
 msgstr "隐藏高级选项"
 
@@ -1447,7 +1447,7 @@ msgstr "隐藏签名"
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:502
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
@@ -1545,7 +1545,7 @@ msgstr "文件格式无效。"
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "无效的文件名。集合的格式为 'namespace-collection_name-1.0.0'"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Invalid login credentials."
 msgstr "登录凭据无效。"
 
@@ -1573,7 +1573,7 @@ msgstr "关键字"
 msgid "Last modified"
 msgstr "最后修改"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:727
 #: src/containers/group-management/group-detail.tsx:808
 #: src/containers/user-management/user-list.tsx:171
@@ -1612,7 +1612,7 @@ msgstr "了解更多"
 msgid "License"
 msgstr "许可证"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:675
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
@@ -1638,11 +1638,11 @@ msgstr "加载令牌"
 msgid "Local"
 msgstr "本地"
 
-#: src/containers/login/login.tsx:57
+#: src/containers/login/login.tsx:58
 msgid "Log In"
 msgstr "登录"
 
-#: src/containers/login/login.tsx:65
+#: src/containers/login/login.tsx:66
 msgid "Log in to your account"
 msgstr "登录到您的帐户"
 
@@ -1680,7 +1680,7 @@ msgstr "信息"
 msgid "Modify Ansible repo content"
 msgstr "修改 Ansible repo 内容"
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:684
 msgid "Must be an integer."
 msgstr "必须是整数。"
 
@@ -1951,7 +1951,7 @@ msgstr "其他集合不需要使用"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:652
 msgid "Number must be greater than 0"
 msgstr "此字段必须大于 0"
 
@@ -1983,17 +1983,17 @@ msgstr "部分签名"
 #~ msgid "Partners"
 #~ msgstr "合作伙伴"
 
-#: src/components/repositories/remote-form.tsx:384
-#: src/components/user-form/user-form.tsx:92
-#: src/containers/login/login.tsx:53
+#: src/components/repositories/remote-form.tsx:385
+#: src/components/user-form/user-form.tsx:91
+#: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "密码"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:109
 msgid "Password confirmation"
 msgstr "确认密码"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:106
 msgid "Passwords do not match"
 msgstr "密码不匹配"
 
@@ -2090,15 +2090,15 @@ msgstr "进度消息"
 msgid "Provided by {company}"
 msgstr "由 {company} 提供"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:423
 msgid "Proxy URL"
 msgstr "代理 URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "代理密码"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
 msgstr "代理用户名"
 
@@ -2248,7 +2248,7 @@ msgstr "推送新容器"
 msgid "Push to existing containers"
 msgstr "推送到现有容器"
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:672
 msgid "Rate Limit"
 msgstr "速率限制"
 
@@ -2388,7 +2388,7 @@ msgstr "资源"
 msgid "Running"
 msgstr "运行中"
 
-#: src/components/repositories/remote-form.tsx:274
+#: src/components/repositories/remote-form.tsx:275
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2494,7 +2494,7 @@ msgstr "选择用户"
 #~ msgid "Server URL could not be displayed."
 #~ msgstr "无法显示服务器 URL。"
 
-#: src/containers/login/login.tsx:100
+#: src/containers/login/login.tsx:101
 msgid "Server error. Please come back later."
 msgstr "服务器错误。请稍后返回。"
 
@@ -2510,7 +2510,7 @@ msgstr "设置"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:418
 msgid "Show advanced options"
 msgstr "显示高级选项"
 
@@ -2585,7 +2585,7 @@ msgstr "开始签发集合中所有版本 \"{0}\""
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "开始签发集合 \"{0} v{1}\"。"
 
-#: src/components/repositories/remote-form.tsx:275
+#: src/components/repositories/remote-form.tsx:276
 msgid "Single sign on URL."
 msgstr "单点登录。"
 
@@ -2730,7 +2730,7 @@ msgstr "远程 registry \"{name}\" 的同步开始。"
 msgid "Sync status"
 msgstr "同步状态"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:499
 msgid "TLS validation"
 msgstr "TLS 验证"
 
@@ -2834,11 +2834,11 @@ msgstr "您选择的集合没与 {0} 不匹配。"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "文件不适用于 {collectionName} 的这个版本"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "同步时用于身份验证的密码。"
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
@@ -2846,11 +2846,11 @@ msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此
 #~ msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 #~ msgstr "令牌将在 30 天没有活动时过期。定期运行以下命令以防止您的令牌过期。"
 
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:355
 msgid "The username to be used for authentication when syncing."
 msgstr "同步时用于身份验证的用户名。"
 
-#: src/components/repositories/remote-form.tsx:355
+#: src/components/repositories/remote-form.tsx:356
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的用户名。在使用令牌时不需要此用户名。"
 
@@ -2903,7 +2903,7 @@ msgstr "该标签已存在于其他镜像上。您要将其移至此镜像吗？
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "已为此镜像选择此标签。您不能添加两次。"
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:299
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "这使用与 ansible-galaxy CLI 相同的 {docsAnsibleLink} 格式，但不支持角色，并且不支持 source 参数。"
 
@@ -2927,7 +2927,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:643
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
@@ -3101,11 +3101,11 @@ msgid "User type"
 msgstr "用户类型"
 
 #: src/components/about-modal/about-modal.tsx:82
-#: src/components/repositories/remote-form.tsx:349
-#: src/components/user-form/user-form.tsx:86
+#: src/components/repositories/remote-form.tsx:350
+#: src/components/user-form/user-form.tsx:85
 #: src/containers/group-management/group-detail.tsx:719
 #: src/containers/group-management/group-detail.tsx:798
-#: src/containers/login/login.tsx:50
+#: src/containers/login/login.tsx:51
 #: src/containers/user-management/user-list.tsx:163
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:260
@@ -3234,7 +3234,7 @@ msgstr "我们无法找到您要查找的页面！"
 msgid "Website"
 msgstr "网站"
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:295
 msgid "YAML requirements"
 msgstr "YAML 要求"
 
@@ -3305,7 +3305,7 @@ msgstr "还无法决定"
 msgid "find-content"
 msgstr "查找内容"
 
-#: src/components/patternfly-wrappers/write-only-field.tsx:27
+#: src/components/patternfly-wrappers/write-only-field.tsx:22
 msgid "hidden value"
 msgstr "隐藏值"
 
