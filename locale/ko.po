@@ -100,12 +100,12 @@ msgstr "<0>{name}</0>이/가 영구적으로 삭제됩니다."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:551
+#: src/components/repositories/remote-form.tsx:597
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 클라이언트 인증서입니다."
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:521
 msgid "A PEM encoded private key used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 개인 키입니다."
 
@@ -358,7 +358,7 @@ msgstr "기본 제공 역할은 편집하거나 삭제할 수 없습니다."
 msgid "Built-in roles cannot be edited."
 msgstr "기본 제공 역할은 편집할 수 없습니다."
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:594
 msgid "CA certificate"
 msgstr "CA 인증서"
 
@@ -520,7 +520,7 @@ msgid "Child tasks"
 msgstr "하위 작업"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
-#: src/components/patternfly-wrappers/write-only-field.tsx:34
+#: src/components/patternfly-wrappers/write-only-field.tsx:30
 msgid "Clear"
 msgstr "지우기"
 
@@ -533,11 +533,11 @@ msgstr "모든 필터 지우기"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:548
 msgid "Client certificate"
 msgstr "클라이언트 인증서"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:518
 msgid "Client key"
 msgstr "클라이언트 키"
 
@@ -808,7 +808,7 @@ msgstr "새 역할 생성"
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 #~ msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 
-#: src/components/rbac/user-form.tsx:97
+#: src/components/rbac/user-form.tsx:96
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 {minLength}자로 암호를 생성합니다."
 
@@ -1142,15 +1142,15 @@ msgstr "문서"
 msgid "Done"
 msgstr "완료"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:630
 msgid "Download CA certification file"
 msgstr "CA 인증서 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:584
 msgid "Download client certification file"
 msgstr "클라이언트 인증 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:640
 msgid "Download concurrency"
 msgstr "동시 다운로드"
 
@@ -1162,7 +1162,7 @@ msgstr "키 다운로드"
 msgid "Download only signed collections"
 msgstr "서명된 컬렉션만 다운로드"
 
-#: src/components/repositories/remote-form.tsx:337
+#: src/components/repositories/remote-form.tsx:338
 msgid "Download requirements file"
 msgstr "요구 사항 파일 다운로드"
 
@@ -1251,7 +1251,7 @@ msgstr "사용자 편집"
 msgid "Editable"
 msgstr "편집 가능"
 
-#: src/components/rbac/user-form.tsx:89
+#: src/components/rbac/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:544
 #: src/containers/group-management/group-detail.tsx:616
 #: src/containers/user-management/user-list.tsx:174
@@ -1490,7 +1490,7 @@ msgstr "실패"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/login/login.tsx:92
+#: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "사용자 데이터를 검색하지 못했습니다."
 
@@ -1547,7 +1547,7 @@ msgstr "이 레지스트리에서 실행 환경 찾기"
 msgid "Finished at"
 msgstr "완료"
 
-#: src/components/rbac/user-form.tsx:87
+#: src/components/rbac/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:536
 #: src/containers/group-management/group-detail.tsx:626
 #: src/containers/user-management/user-list.tsx:166
@@ -1673,7 +1673,7 @@ msgstr "그룹이 생성되면 나타납니다."
 msgid "Groups with access"
 msgstr "액세스 권한이 있는 그룹"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:417
 msgid "Hide advanced options"
 msgstr "고급 옵션 숨기기"
 
@@ -1688,7 +1688,7 @@ msgstr "서명 숨기기"
 msgid "I understand that this action cannot be undone."
 msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:502
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
@@ -1786,7 +1786,7 @@ msgstr "파일 형식이 잘못되었습니다."
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "잘못된 파일 이름입니다. 컬렉션은 'namespace-collection_name-1.0.0'로 포맷해야 합니다."
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Invalid login credentials."
 msgstr "잘못된 로그인 자격 증명입니다."
 
@@ -1818,7 +1818,7 @@ msgstr "키워드"
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
-#: src/components/rbac/user-form.tsx:88
+#: src/components/rbac/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:540
 #: src/containers/group-management/group-detail.tsx:621
 #: src/containers/user-management/user-list.tsx:170
@@ -1857,7 +1857,7 @@ msgstr "더 알아보기"
 msgid "License"
 msgstr "라이센스"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:675
 msgid "Limits total download rate in requests per second."
 msgstr "초당 요청의 총 다운로드 속도를 제한합니다."
 
@@ -1883,11 +1883,11 @@ msgstr "토큰 로드"
 msgid "Local"
 msgstr "지역"
 
-#: src/containers/login/login.tsx:57
+#: src/containers/login/login.tsx:58
 msgid "Log In"
 msgstr "로그인"
 
-#: src/containers/login/login.tsx:65
+#: src/containers/login/login.tsx:66
 msgid "Log in to your account"
 msgstr "계정에 로그인"
 
@@ -1941,7 +1941,7 @@ msgstr "<0>소유자</0> <1/> 탭으로 이동합니다."
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "<0>소유자</0> 탭으로 이동합니다."
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:684
 msgid "Must be an integer."
 msgstr "정수여야 합니다."
 
@@ -2246,7 +2246,7 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:652
 msgid "Number must be greater than 0"
 msgstr "이 필드는 0보다 커야 합니다."
 
@@ -2283,17 +2283,17 @@ msgstr "상위 작업"
 #~ msgid "Partners"
 #~ msgstr "파트너"
 
-#: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:384
-#: src/containers/login/login.tsx:53
+#: src/components/rbac/user-form.tsx:91
+#: src/components/repositories/remote-form.tsx:385
+#: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "암호"
 
-#: src/components/rbac/user-form.tsx:110
+#: src/components/rbac/user-form.tsx:109
 msgid "Password confirmation"
 msgstr "암호 확인"
 
-#: src/components/rbac/user-form.tsx:107
+#: src/components/rbac/user-form.tsx:106
 msgid "Passwords do not match"
 msgstr "암호가 일치하지 않음"
 
@@ -2410,15 +2410,15 @@ msgstr "진행 상황 메시지"
 msgid "Provided by {company}"
 msgstr "{company} 제공"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:423
 msgid "Proxy URL"
 msgstr "프록시 URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "프록시 암호"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
 msgstr "프록시 사용자 이름"
 
@@ -2580,7 +2580,7 @@ msgstr "실행 환경을 푸시하고 변경합니다."
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "실행 환경을 푸시, 삭제 및 변경합니다. 원격 레지스트리를 생성, 삭제 및 변경합니다."
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:672
 msgid "Rate Limit"
 msgstr "속도 제한"
 
@@ -2790,7 +2790,7 @@ msgstr "역할 목록을 표시할 수 없습니다."
 msgid "Running"
 msgstr "실행 중"
 
-#: src/components/repositories/remote-form.tsx:274
+#: src/components/repositories/remote-form.tsx:275
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2915,7 +2915,7 @@ msgstr "선택된 역할"
 #~ msgid "Server URL could not be displayed."
 #~ msgstr "서버 URL을 표시할 수 없습니다."
 
-#: src/containers/login/login.tsx:100
+#: src/containers/login/login.tsx:101
 msgid "Server error. Please come back later."
 msgstr "서버 오류. 나중에 다시 시도하십시오."
 
@@ -2931,7 +2931,7 @@ msgstr "설정"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:418
 msgid "Show advanced options"
 msgstr "고급 옵션 표시"
 
@@ -3036,7 +3036,7 @@ msgstr "\"{0} v{1}\" 컬렉션에 대한 서명이 시작되었습니다."
 msgid "Signing started for container \"{0}\"."
 msgstr "\"{0}\" 컨테이너에 대한 서명이 시작되었습니다."
 
-#: src/components/repositories/remote-form.tsx:275
+#: src/components/repositories/remote-form.tsx:276
 msgid "Single sign on URL."
 msgstr "로그인 URL입니다."
 
@@ -3181,7 +3181,7 @@ msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습
 msgid "Sync status"
 msgstr "동기화 상태"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:499
 msgid "TLS validation"
 msgstr "TLS 인증"
 
@@ -3318,11 +3318,11 @@ msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니�
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "다음 역할이 다음 그룹에 적용됩니다. <0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "동기화 시 인증에 사용할 암호입니다."
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "동기화 시 인증에 사용할 암호입니다. 토큰을 사용할 때는 필요하지 않습니다."
 
@@ -3338,11 +3338,11 @@ msgstr "선택한 역할이 이 특정 네임스페이스에 추가됩니다."
 #~ msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 #~ msgstr "토큰은 30일 동안 활동이 없으면 만료됩니다. 다음 명령을 주기적으로 실행하여 토큰이 만료되지 않도록 하십시오."
 
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:355
 msgid "The username to be used for authentication when syncing."
 msgstr "동기화 시 인증에 사용할 사용자 이름입니다."
 
-#: src/components/repositories/remote-form.tsx:355
+#: src/components/repositories/remote-form.tsx:356
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "동기화 시 인증에 사용할 사용자 이름입니다. 이 사용자 이름은 토큰을 사용할 때 필요하지 않습니다."
 
@@ -3435,7 +3435,7 @@ msgstr "이 태그는 다른 이미지에 이미 존재합니다. 이 이미지�
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "이 태그는 이 이미지에 대해 이미 선택되어 있습니다. 두 번 추가할 수 없습니다."
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:299
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "이는 역할이 지원되지 않고 소스 매개변수가 지원되지 않는다는 경고와 함께 ansible-ax CLI와 동일한 {docsAnsibleLink} 형식을 사용합니다."
 
@@ -3463,7 +3463,7 @@ msgstr "서버 URL을 인증하는 데 사용되는 토큰입니다."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:643
 msgid "Total number of simultaneous connections."
 msgstr "총 동시 연결 수입니다."
 
@@ -3660,11 +3660,11 @@ msgid "User type"
 msgstr "사용자 유형"
 
 #: src/components/about-modal/about-modal.tsx:95
-#: src/components/rbac/user-form.tsx:86
-#: src/components/repositories/remote-form.tsx:349
+#: src/components/rbac/user-form.tsx:85
+#: src/components/repositories/remote-form.tsx:350
 #: src/containers/group-management/group-detail.tsx:532
 #: src/containers/group-management/group-detail.tsx:611
-#: src/containers/login/login.tsx:50
+#: src/containers/login/login.tsx:51
 #: src/containers/user-management/user-list.tsx:162
 #: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
@@ -3813,7 +3813,7 @@ msgstr "페이지를 찾을 수 없습니다."
 msgid "Website"
 msgstr "웹 사이트"
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:295
 msgid "YAML requirements"
 msgstr "YAML 요구 사항"
 
@@ -3921,7 +3921,7 @@ msgstr "아직 결정할 수 없음"
 msgid "find-content"
 msgstr "콘텐츠 찾기"
 
-#: src/components/patternfly-wrappers/write-only-field.tsx:27
+#: src/components/patternfly-wrappers/write-only-field.tsx:22
 msgid "hidden value"
 msgstr "숨겨진 값"
 

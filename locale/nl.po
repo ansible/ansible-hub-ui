@@ -100,12 +100,12 @@ msgstr "<0>{name}</0> zal permanent worden verwijderd."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:548
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:551
+#: src/components/repositories/remote-form.tsx:597
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "Een PEM-gecodeerd cliëntcertificaat dat wordt gebruikt voor authenticatie."
 
-#: src/components/repositories/remote-form.tsx:518
+#: src/components/repositories/remote-form.tsx:521
 msgid "A PEM encoded private key used for authentication."
 msgstr "Een PEM-gecodeerde privésleutel die wordt gebruikt voor authentificatie."
 
@@ -358,7 +358,7 @@ msgstr "Ingebouwde rollen kunnen niet worden bewerkt of verwijderd."
 msgid "Built-in roles cannot be edited."
 msgstr "Ingebouwde rollen kunnen niet worden bewerkt."
 
-#: src/components/repositories/remote-form.tsx:591
+#: src/components/repositories/remote-form.tsx:594
 msgid "CA certificate"
 msgstr "CA-certificaat"
 
@@ -520,7 +520,7 @@ msgid "Child tasks"
 msgstr "Onderliggende taken"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
-#: src/components/patternfly-wrappers/write-only-field.tsx:34
+#: src/components/patternfly-wrappers/write-only-field.tsx:30
 msgid "Clear"
 msgstr "Wissen"
 
@@ -533,11 +533,11 @@ msgstr "Alle filters wissen"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Klik op de controller-URL waarin u de bovenstaande uitvoeringsomgeving wilt gebruiken, en het zal de console van die controller starten. Log in (indien nodig) en volg de stappen om de configuratie te voltooien."
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:548
 msgid "Client certificate"
 msgstr "Klantcertificaat"
 
-#: src/components/repositories/remote-form.tsx:515
+#: src/components/repositories/remote-form.tsx:518
 msgid "Client key"
 msgstr "Klantsleutel"
 
@@ -808,7 +808,7 @@ msgstr "Een nieuwe rol aanmaken"
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 #~ msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 
-#: src/components/rbac/user-form.tsx:97
+#: src/components/rbac/user-form.tsx:96
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "Maak een wachtwoord van ten minste {minLength} tekens, inclusief speciale tekens, bijvoorbeeld <!@$%>. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
 
@@ -1142,15 +1142,15 @@ msgstr "Documentatie"
 msgid "Done"
 msgstr "Gereed"
 
-#: src/components/repositories/remote-form.tsx:627
+#: src/components/repositories/remote-form.tsx:630
 msgid "Download CA certification file"
 msgstr "Certificeringsbestand CA downloaden"
 
-#: src/components/repositories/remote-form.tsx:581
+#: src/components/repositories/remote-form.tsx:584
 msgid "Download client certification file"
 msgstr "Certificeringsbestand client downloaden"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:640
 msgid "Download concurrency"
 msgstr "Gelijktijdigheid downloaden"
 
@@ -1162,7 +1162,7 @@ msgstr "Download sleutel"
 msgid "Download only signed collections"
 msgstr "Alleen ondertekende collecties downloaden"
 
-#: src/components/repositories/remote-form.tsx:337
+#: src/components/repositories/remote-form.tsx:338
 msgid "Download requirements file"
 msgstr "Bestand met vereisten downloaden"
 
@@ -1251,7 +1251,7 @@ msgstr "Gebruiker wijzigen"
 msgid "Editable"
 msgstr "Bewerkbare"
 
-#: src/components/rbac/user-form.tsx:89
+#: src/components/rbac/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:544
 #: src/containers/group-management/group-detail.tsx:616
 #: src/containers/user-management/user-list.tsx:174
@@ -1490,7 +1490,7 @@ msgstr "Mislukt"
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/login/login.tsx:92
+#: src/containers/login/login.tsx:93
 msgid "Failed to retrieve user data."
 msgstr "Ophalen gebruikersgegevens mislukt."
 
@@ -1547,7 +1547,7 @@ msgstr "Uitvoeringsomgevingen in dit register zoeken"
 msgid "Finished at"
 msgstr "Voltooid op"
 
-#: src/components/rbac/user-form.tsx:87
+#: src/components/rbac/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:536
 #: src/containers/group-management/group-detail.tsx:626
 #: src/containers/user-management/user-list.tsx:166
@@ -1673,7 +1673,7 @@ msgstr "Groepen zullen verschijnen zodra ze zijn aangemaakt"
 msgid "Groups with access"
 msgstr "Groepen met toegang"
 
-#: src/components/repositories/remote-form.tsx:415
+#: src/components/repositories/remote-form.tsx:417
 msgid "Hide advanced options"
 msgstr "Geavanceerde opties verbergen"
 
@@ -1688,7 +1688,7 @@ msgstr "Verberg de handtekening"
 msgid "I understand that this action cannot be undone."
 msgstr "Ik begrijp dat deze actie niet ongedaan kan worden gemaakt."
 
-#: src/components/repositories/remote-form.tsx:499
+#: src/components/repositories/remote-form.tsx:502
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Indien geselecteerd, moet TLS-peervalidatie worden uitgevoerd."
 
@@ -1786,7 +1786,7 @@ msgstr "Ongeldig bestandsformaat."
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "Ongeldige bestandsnaam. Collecties moeten worden geformatteerd als 'namespace-collection_name-1.0.0'"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Invalid login credentials."
 msgstr "Ongeldige inloggegevens."
 
@@ -1818,7 +1818,7 @@ msgstr "Trefwoorden"
 msgid "Last modified"
 msgstr "Laatste wijziging"
 
-#: src/components/rbac/user-form.tsx:88
+#: src/components/rbac/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:540
 #: src/containers/group-management/group-detail.tsx:621
 #: src/containers/user-management/user-list.tsx:170
@@ -1857,7 +1857,7 @@ msgstr "Meer lezen"
 msgid "License"
 msgstr "Licentie"
 
-#: src/components/repositories/remote-form.tsx:672
+#: src/components/repositories/remote-form.tsx:675
 msgid "Limits total download rate in requests per second."
 msgstr "Beperkt de totale downloadsnelheid in verzoeken per seconde."
 
@@ -1883,11 +1883,11 @@ msgstr "Laadtoken"
 msgid "Local"
 msgstr "Lokaal"
 
-#: src/containers/login/login.tsx:57
+#: src/containers/login/login.tsx:58
 msgid "Log In"
 msgstr "Inloggen"
 
-#: src/containers/login/login.tsx:65
+#: src/containers/login/login.tsx:66
 msgid "Log in to your account"
 msgstr "Log in op uw account"
 
@@ -1941,7 +1941,7 @@ msgstr "Verplaatst naar het tabblad <0>Eigenaren</0> <1/> "
 msgid "Moved to the <0>Owners</0> tab"
 msgstr "Verplaatst naar het tabblad <0>Eigenaren</0> "
 
-#: src/components/repositories/remote-form.tsx:681
+#: src/components/repositories/remote-form.tsx:684
 msgid "Must be an integer."
 msgstr "Moet een geheel getal zijn."
 
@@ -2246,7 +2246,7 @@ msgstr "Niet vereist voor gebruik door andere collecties"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:652
 msgid "Number must be greater than 0"
 msgstr "Getal moet groter zijn dan 0"
 
@@ -2283,17 +2283,17 @@ msgstr "Bovenliggende taak"
 #~ msgid "Partners"
 #~ msgstr "Partners"
 
-#: src/components/rbac/user-form.tsx:92
-#: src/components/repositories/remote-form.tsx:384
-#: src/containers/login/login.tsx:53
+#: src/components/rbac/user-form.tsx:91
+#: src/components/repositories/remote-form.tsx:385
+#: src/containers/login/login.tsx:54
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: src/components/rbac/user-form.tsx:110
+#: src/components/rbac/user-form.tsx:109
 msgid "Password confirmation"
 msgstr "Bevestiging wachtwoord"
 
-#: src/components/rbac/user-form.tsx:107
+#: src/components/rbac/user-form.tsx:106
 msgid "Passwords do not match"
 msgstr "Wachtwoorden komen niet overeen"
 
@@ -2410,15 +2410,15 @@ msgstr "Voortgangsberichten"
 msgid "Provided by {company}"
 msgstr "Geleverd door {company}"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:423
 msgid "Proxy URL"
 msgstr "Proxy-URL"
 
-#: src/components/repositories/remote-form.tsx:468
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "Proxy-wachtwoord"
 
-#: src/components/repositories/remote-form.tsx:440
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
 msgstr "Proxy-gebruikersnaam"
 
@@ -2580,7 +2580,7 @@ msgstr "Push, en verander uitvoeringsomgevingen."
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "Push, delete en wijzig uitvoeringsomgevingen. Externe registers aanmaken, verwijderen en wijzigen."
 
-#: src/components/repositories/remote-form.tsx:669
+#: src/components/repositories/remote-form.tsx:672
 msgid "Rate Limit"
 msgstr "Tarieflimiet"
 
@@ -2790,7 +2790,7 @@ msgstr "De rollenlijst kon niet worden weergegeven."
 msgid "Running"
 msgstr "In uitvoering"
 
-#: src/components/repositories/remote-form.tsx:274
+#: src/components/repositories/remote-form.tsx:275
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2915,7 +2915,7 @@ msgstr "Geselecteerde rollen"
 #~ msgid "Server URL could not be displayed."
 #~ msgstr "Server-URL kon niet worden weergegeven."
 
-#: src/containers/login/login.tsx:100
+#: src/containers/login/login.tsx:101
 msgid "Server error. Please come back later."
 msgstr "Fout bij de server. Kom a.u.b. later terug."
 
@@ -2931,7 +2931,7 @@ msgstr "Instellingen"
 msgid "Show Less"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:416
+#: src/components/repositories/remote-form.tsx:418
 msgid "Show advanced options"
 msgstr "Geavanceerde opties tonen"
 
@@ -3036,7 +3036,7 @@ msgstr "Ondertekening gestart voor collectie \"{0} v{1}\"."
 msgid "Signing started for container \"{0}\"."
 msgstr "Ondertekening gestart voor collectie \"{0} v\"."
 
-#: src/components/repositories/remote-form.tsx:275
+#: src/components/repositories/remote-form.tsx:276
 msgid "Single sign on URL."
 msgstr "Enkele URL voor aanmelden."
 
@@ -3181,7 +3181,7 @@ msgstr "Sync gestart voor extern register \"{name}\"."
 msgid "Sync status"
 msgstr "Synchronisatiestatus"
 
-#: src/components/repositories/remote-form.tsx:496
+#: src/components/repositories/remote-form.tsx:499
 msgid "TLS validation"
 msgstr "TLS-validatie"
 
@@ -3318,11 +3318,11 @@ msgstr "Het bestand is niet beschikbaar voor deze versie van {collectionName}"
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "De volgende rollen worden toegepast op de groep: <0>{0}</0>"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 msgid "The password to be used for authentication when syncing."
 msgstr "Het wachtwoord dat moet worden gebruikt voor authenticatie bij het synchroniseren."
 
-#: src/components/repositories/remote-form.tsx:390
+#: src/components/repositories/remote-form.tsx:391
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Het wachtwoord dat moet worden gebruikt voor authenticatie bij het synchroniseren. Dit is niet nodig bij gebruik van een token."
 
@@ -3338,11 +3338,11 @@ msgstr "De geselecteerde rollen worden toegevoegd aan deze specifieke naamruimte
 #~ msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 #~ msgstr "Het token zal verlopen na 30 dagen van inactiviteit. Voer het onderstaande opdracht regelmatig uit om te voorkomen dat uw token verloopt."
 
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:355
 msgid "The username to be used for authentication when syncing."
 msgstr "De gebruikersnaam die moet worden gebruikt voor authenticatie bij het synchroniseren."
 
-#: src/components/repositories/remote-form.tsx:355
+#: src/components/repositories/remote-form.tsx:356
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "De gebruikersnaam die moet worden gebruikt voor authenticatie bij het synchroniseren. Dit is niet nodig bij gebruik van een token."
 
@@ -3435,7 +3435,7 @@ msgstr "Deze tag bestaat al op een andere afbeelding. Wilt u hem verplaatsen naa
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "Deze tag is al geselecteerd voor deze afbeelding. U kunt deze niet tweemaal toevoegen."
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:299
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Dit gebruikt dezelfde {docsAnsibleLink}-indeling als de ansible-galaxy CLI met het voorbehoud dat rollen niet worden ondersteund en dat de bronparameter niet wordt ondersteund."
 
@@ -3463,7 +3463,7 @@ msgstr "Token voor verificatie naar de server-URL."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:643
 msgid "Total number of simultaneous connections."
 msgstr "Totaal aantal gelijktijdige verbindingen."
 
@@ -3660,11 +3660,11 @@ msgid "User type"
 msgstr "Type gebruiker"
 
 #: src/components/about-modal/about-modal.tsx:95
-#: src/components/rbac/user-form.tsx:86
-#: src/components/repositories/remote-form.tsx:349
+#: src/components/rbac/user-form.tsx:85
+#: src/components/repositories/remote-form.tsx:350
 #: src/containers/group-management/group-detail.tsx:532
 #: src/containers/group-management/group-detail.tsx:611
-#: src/containers/login/login.tsx:50
+#: src/containers/login/login.tsx:51
 #: src/containers/user-management/user-list.tsx:162
 #: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
@@ -3813,7 +3813,7 @@ msgstr "We konden de pagina die u zoekt niet vinden!"
 msgid "Website"
 msgstr "Website"
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:295
 msgid "YAML requirements"
 msgstr "YAML-eisen"
 
@@ -3921,7 +3921,7 @@ msgstr "kon nog niet worden vastgesteld"
 msgid "find-content"
 msgstr "find-content"
 
-#: src/components/patternfly-wrappers/write-only-field.tsx:27
+#: src/components/patternfly-wrappers/write-only-field.tsx:22
 msgid "hidden value"
 msgstr "verborgen waarde"
 
