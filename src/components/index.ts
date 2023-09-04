@@ -1,5 +1,6 @@
 export { AboutModalWindow } from './about-modal/about-modal';
-export { ApproveModal } from './approve-modal/approve-modal';
+export { ApprovalRow } from './approval/approval-row';
+export { ApproveModal } from './approval/approve-modal';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
 export { CollectionCard } from './cards/collection-card';
 export { LandingPageCard } from './cards/landing-page-card';

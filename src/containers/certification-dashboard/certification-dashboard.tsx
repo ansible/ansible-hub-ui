@@ -1,37 +1,25 @@
 import { t } from '@lingui/macro';
 import {
-  Button,
-  ButtonVariant,
-  DropdownItem,
-  Label,
-  LabelGroup,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
-import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
-import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
   CertificateUploadAPI,
-  CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
 import {
+  ApprovalRow,
   ApproveModal,
   BaseHeader,
-  DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  ListItemActions,
   Main,
 } from 'src/components';
 import {
@@ -48,7 +36,6 @@ import {
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RouteProps,
@@ -114,7 +101,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     this.state = {
       versions: undefined,
       itemCount: 0,
-      params: params,
+      params,
       loading: true,
       updatingVersions: [],
       alerts: [],
@@ -402,7 +389,19 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           }
         />
         <tbody>
-          {versions.map((version, i) => this.renderRow(version, i))}
+          {versions.map((version, i) => (
+            <ApprovalRow
+              approve={(v) => this.approve(v)}
+              collectionVersion={version}
+              context={this.context}
+              isVersionUpdating={(v) => this.isVersionUpdating(v)}
+              key={i}
+              openUploadCertificateModal={(v) =>
+                this.openUploadCertificateModal(v)
+              }
+              reject={(v) => this.reject(v)}
+            />
+          ))}
         </tbody>
       </table>
     );
@@ -412,218 +411,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     return this.state.updatingVersions.find((v) => {
       return v == collection;
     });
-  }
-
-  private renderStatus(collectionData: CollectionVersionSearch) {
-    const { repository } = collectionData;
-    const repoStatus = repository.pulp_labels?.pipeline;
-
-    if (this.isVersionUpdating(collectionData)) {
-      return <span className='fa fa-lg fa-spin fa-spinner' />;
-    }
-
-    if (this.isApproved(collectionData)) {
-      const { display_signatures } = this.context.featureFlags;
-      return (
-        <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {display_signatures && collectionData.is_signed
-            ? t`Signed and approved`
-            : t`Approved`}
-        </Label>
-      );
-    }
-    if (repoStatus === Constants.NOTCERTIFIED) {
-      return (
-        <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
-          {t`Rejected`}
-        </Label>
-      );
-    }
-    if (repoStatus === Constants.NEEDSREVIEW) {
-      const { can_upload_signatures, require_upload_signatures } =
-        this.context.featureFlags;
-      return (
-        <Label
-          variant='outline'
-          color='orange'
-          icon={<ExclamationTriangleIcon />}
-        >
-          {!collectionData.is_signed &&
-          can_upload_signatures &&
-          require_upload_signatures
-            ? t`Needs signature and review`
-            : t`Needs review`}
-        </Label>
-      );
-    }
-  }
-
-  private renderRow(collectionData: CollectionVersionSearch, index) {
-    const { collection_version: version, repository } = collectionData;
-    const data_cy = `CertificationDashboard-row-${collectionData.repository.name}-${collectionData.collection_version.namespace}-${collectionData.collection_version.name}`;
-    return (
-      <tr key={index} data-cy={data_cy}>
-        <td>{version.namespace}</td>
-        <td>{version.name}</td>
-        <td>
-          <Link
-            to={formatPath(
-              Paths.collectionByRepo,
-              {
-                namespace: version.namespace,
-                collection: version.name,
-                repo: repository.name,
-              },
-              {
-                version: version.version,
-              },
-            )}
-          >
-            {version.version}
-          </Link>
-          <Button
-            variant={ButtonVariant.link}
-            onClick={() => {
-              this.download(
-                repository,
-                version.namespace,
-                version.name,
-                version.version,
-              );
-            }}
-          >
-            <DownloadIcon />
-          </Button>
-        </td>
-        <td>
-          <DateComponent date={version.pulp_created} />
-        </td>
-        <td>
-          <LabelGroup>{repository.name}</LabelGroup>
-        </td>
-        <td>{this.renderStatus(collectionData)}</td>
-        {this.renderButtons(collectionData)}
-      </tr>
-    );
-  }
-
-  private renderButtons(collectionData: CollectionVersionSearch) {
-    // not checking namespace permissions here, auto_sign happens API side, so is the permission check
-    const { collection_version: version, repository } = collectionData;
-    const {
-      can_upload_signatures,
-      collection_auto_sign,
-      require_upload_signatures,
-    } = this.context.featureFlags;
-    if (this.isVersionUpdating(collectionData)) {
-      return <ListItemActions />; // empty td;
-    }
-
-    const canUploadSignature =
-      can_upload_signatures && !collectionData.is_signed;
-    const mustUploadSignature = canUploadSignature && require_upload_signatures;
-    const autoSign = collection_auto_sign && !require_upload_signatures;
-
-    const approveButton = [
-      canUploadSignature && (
-        <React.Fragment key='upload'>
-          <Button
-            onClick={() => this.openUploadCertificateModal(collectionData)}
-          >{t`Upload signature`}</Button>{' '}
-        </React.Fragment>
-      ),
-      <Button
-        key='approve'
-        isDisabled={mustUploadSignature}
-        data-cy='approve-button'
-        onClick={() => {
-          this.approve(collectionData);
-        }}
-      >
-        {autoSign ? t`Sign and approve` : t`Approve`}
-      </Button>,
-    ].filter(Boolean);
-
-    const importsLink = (
-      <DropdownItem
-        key='imports'
-        component={
-          <Link
-            to={formatPath(
-              Paths.myImports,
-              {},
-              {
-                namespace: version.namespace,
-                name: version.name,
-                version: version.version,
-              },
-            )}
-          >
-            {t`View Import Logs`}
-          </Link>
-        }
-      />
-    );
-
-    const certifyDropDown = (isDisabled: boolean) => (
-      <DropdownItem
-        onClick={() => this.approve(collectionData)}
-        isDisabled={isDisabled}
-        key='certify'
-      >
-        {autoSign ? t`Sign and approve` : t`Approve`}
-      </DropdownItem>
-    );
-
-    const rejectDropDown = (isDisabled: boolean) => (
-      <DropdownItem
-        onClick={() => {
-          this.reject(collectionData);
-        }}
-        isDisabled={isDisabled}
-        className='rejected-icon'
-        key='reject'
-      >
-        {t`Reject`}
-      </DropdownItem>
-    );
-
-    const repoStatus = repository.pulp_labels?.pipeline;
-
-    if (this.isApproved(collectionData)) {
-      return (
-        <ListItemActions
-          kebabItems={[
-            certifyDropDown(true),
-            rejectDropDown(false),
-            importsLink,
-          ]}
-        />
-      );
-    }
-
-    if (repoStatus === Constants.NOTCERTIFIED) {
-      // render reject button if version is in multiple repositories including rejected state - handles inconsistency
-      // and allows user to reject it again to move it all to rejected state
-      return (
-        <ListItemActions
-          kebabItems={[
-            certifyDropDown(false),
-            rejectDropDown(true),
-            importsLink,
-          ]}
-        />
-      );
-    }
-
-    if (repoStatus === Constants.NEEDSREVIEW) {
-      return (
-        <ListItemActions
-          kebabItems={[rejectDropDown(false), importsLink]}
-          buttons={approveButton}
-        />
-      );
-    }
   }
 
   private openUploadCertificateModal(version: CollectionVersionSearch) {
@@ -670,16 +457,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         );
       })
       .finally(() => this.closeUploadCertificateModal());
-  }
-
-  private isApproved(collection: CollectionVersionSearch) {
-    if (!collection) {
-      return false;
-    }
-
-    return this.state.approvedRepositoryList.find(
-      (r) => r.name == collection.repository.name,
-    );
   }
 
   private approve(collection) {
@@ -848,19 +625,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           updatingVersions: [],
         });
       });
-  }
-
-  private download(
-    repository: CollectionVersionSearch['repository'],
-    namespace: string,
-    name: string,
-    version: string,
-  ) {
-    CollectionAPI.getDownloadURL(repository, namespace, name, version).then(
-      (downloadURL: string) => {
-        window.location.assign(downloadURL);
-      },
-    );
   }
 
   private get updateParams() {
