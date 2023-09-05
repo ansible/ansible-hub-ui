@@ -34,7 +34,6 @@ import {
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import {
   ParamHelper,
@@ -95,7 +94,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     if (!params['repository_label']) {
-      params['repository_label'] = `pipeline=${Constants.NEEDSREVIEW}`;
+      params['repository_label'] = 'pipeline=staging';
     }
 
     this.state = {
@@ -229,15 +228,15 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                               inputType: 'select',
                               options: [
                                 {
-                                  id: `pipeline=${Constants.NOTCERTIFIED}`,
+                                  id: 'pipeline=rejected',
                                   title: t`Rejected`,
                                 },
                                 {
-                                  id: `pipeline=${Constants.NEEDSREVIEW}`,
+                                  id: 'pipeline=staging',
                                   title: t`Needs Review`,
                                 },
                                 {
-                                  id: `pipeline=${Constants.APPROVED}`,
+                                  id: 'pipeline=approved',
                                   title: t`Approved`,
                                 },
                               ],
@@ -268,9 +267,9 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{
                     repository_label: {
-                      [`pipeline=${Constants.APPROVED}`]: t`Approved`,
-                      [`pipeline=${Constants.NEEDSREVIEW}`]: t`Needs Review`,
-                      [`pipeline=${Constants.NOTCERTIFIED}`]: t`Rejected`,
+                      'pipeline=approved': t`Approved`,
+                      'pipeline=rejected': t`Rejected`,
+                      'pipeline=staging': t`Needs Review`,
                     },
                   }}
                   niceNames={{
