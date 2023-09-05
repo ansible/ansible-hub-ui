@@ -15,7 +15,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionAPI, CollectionVersionSearch } from 'src/api';
 import { DateComponent, ListItemActions } from 'src/components';
-import { Constants } from 'src/constants';
 import { IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -87,18 +86,23 @@ export const ApprovalRow = ({
 
   function renderButtons(collectionVersion: CollectionVersionSearch) {
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
-    const { collection_version: version, repository } = collectionVersion;
+    const {
+      collection_version: version,
+      repository,
+      is_signed,
+    } = collectionVersion;
     const {
       can_upload_signatures,
       collection_auto_sign,
       require_upload_signatures,
     } = featureFlags;
-    if (isVersionUpdating(collectionVersion)) {
+    const pipeline = repository?.pulp_labels?.pipeline;
+
+    if (isVersionUpdating(collectionVersion) || !pipeline) {
       return <ListItemActions />; // empty td;
     }
 
-    const canUploadSignature =
-      can_upload_signatures && !collectionVersion.is_signed;
+    const canUploadSignature = can_upload_signatures && !is_signed;
     const mustUploadSignature = canUploadSignature && require_upload_signatures;
     const autoSign = collection_auto_sign && !require_upload_signatures;
 
@@ -161,9 +165,7 @@ export const ApprovalRow = ({
       </DropdownItem>
     );
 
-    const repoStatus = repository.pulp_labels?.pipeline;
-
-    if (isApproved(collectionVersion)) {
+    if (pipeline === 'approved') {
       return (
         <ListItemActions
           kebabItems={[
@@ -175,7 +177,7 @@ export const ApprovalRow = ({
       );
     }
 
-    if (repoStatus === Constants.NOTCERTIFIED) {
+    if (pipeline === 'rejected') {
       // render reject button if version is in multiple repositories including rejected state - handles inconsistency
       // and allows user to reject it again to move it all to rejected state
       return (
@@ -189,7 +191,7 @@ export const ApprovalRow = ({
       );
     }
 
-    if (repoStatus === Constants.NEEDSREVIEW) {
+    if (pipeline === 'staging') {
       return (
         <ListItemActions
           kebabItems={[rejectDropDown(false), importsLink]}
@@ -200,31 +202,33 @@ export const ApprovalRow = ({
   }
 
   function renderStatus(collectionVersion: CollectionVersionSearch) {
-    const { repository } = collectionVersion;
-    const repoStatus = repository.pulp_labels?.pipeline;
+    const { repository, is_signed } = collectionVersion;
+    const pipeline = repository?.pulp_labels?.pipeline;
 
     if (isVersionUpdating(collectionVersion)) {
       return <Spinner size='lg' />;
     }
 
-    if (isApproved(collectionVersion)) {
+    if (pipeline === 'approved') {
       const { display_signatures } = featureFlags;
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {display_signatures && collectionVersion.is_signed
+          {display_signatures && is_signed
             ? t`Signed and approved`
             : t`Approved`}
         </Label>
       );
     }
-    if (repoStatus === Constants.NOTCERTIFIED) {
+
+    if (pipeline === 'rejected') {
       return (
         <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
           {t`Rejected`}
         </Label>
       );
     }
-    if (repoStatus === Constants.NEEDSREVIEW) {
+
+    if (pipeline === 'staging') {
       const { can_upload_signatures, require_upload_signatures } = featureFlags;
       return (
         <Label
@@ -232,22 +236,12 @@ export const ApprovalRow = ({
           color='orange'
           icon={<ExclamationTriangleIcon />}
         >
-          {!collectionVersion.is_signed &&
-          can_upload_signatures &&
-          require_upload_signatures
+          {!is_signed && can_upload_signatures && require_upload_signatures
             ? t`Needs signature and review`
             : t`Needs review`}
         </Label>
       );
     }
-  }
-
-  function isApproved(collection: CollectionVersionSearch) {
-    if (!collection) {
-      return false;
-    }
-
-    return collection.repository?.pulp_labels?.pipeline === 'approved';
   }
 
   function download(
