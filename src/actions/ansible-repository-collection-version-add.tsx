@@ -133,7 +133,7 @@ const AddCollectionVersionModal = ({
           key='confirm'
           onClick={() => addAction(selected)}
           variant='primary'
-          isDisabled={!selected}
+          isDisabled={!selected.length}
         >
           {t`Select`}
         </Button>,
