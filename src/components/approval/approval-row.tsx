@@ -115,7 +115,7 @@ export const ApprovalRow = ({
         </React.Fragment>
       ),
       <Button
-        key='approve'
+        key='approve-button'
         isDisabled={mustUploadSignature}
         data-cy='approve-button'
         onClick={() => approve(collectionVersion)}
@@ -123,6 +123,26 @@ export const ApprovalRow = ({
         {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
     ].filter(Boolean);
+
+    const approveDropDown = (isDisabled: boolean) => (
+      <DropdownItem
+        onClick={() => approve(collectionVersion)}
+        isDisabled={isDisabled}
+        key='approve'
+      >
+        {autoSign ? t`Sign and approve` : t`Approve`}
+      </DropdownItem>
+    );
+
+    const rejectDropDown = (isDisabled: boolean) => (
+      <DropdownItem
+        onClick={() => reject(collectionVersion)}
+        isDisabled={isDisabled}
+        key='reject'
+      >
+        {t`Reject`}
+      </DropdownItem>
+    );
 
     const importsLink = (
       <DropdownItem
@@ -145,31 +165,11 @@ export const ApprovalRow = ({
       />
     );
 
-    const certifyDropDown = (isDisabled: boolean) => (
-      <DropdownItem
-        onClick={() => approve(collectionVersion)}
-        isDisabled={isDisabled}
-        key='certify'
-      >
-        {autoSign ? t`Sign and approve` : t`Approve`}
-      </DropdownItem>
-    );
-
-    const rejectDropDown = (isDisabled: boolean) => (
-      <DropdownItem
-        onClick={() => reject(collectionVersion)}
-        isDisabled={isDisabled}
-        key='reject'
-      >
-        {t`Reject`}
-      </DropdownItem>
-    );
-
     if (pipeline === 'approved') {
       return (
         <ListItemActions
           kebabItems={[
-            certifyDropDown(true),
+            approveDropDown(true),
             rejectDropDown(false),
             importsLink,
           ]}
@@ -183,7 +183,7 @@ export const ApprovalRow = ({
       return (
         <ListItemActions
           kebabItems={[
-            certifyDropDown(false),
+            approveDropDown(false),
             rejectDropDown(true),
             importsLink,
           ]}
