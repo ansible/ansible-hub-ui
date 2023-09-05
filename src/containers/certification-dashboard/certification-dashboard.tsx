@@ -71,9 +71,11 @@ interface IState {
   approveModalInfo: {
     collectionVersion;
   };
-  approvedRepositoryList: AnsibleRepositoryType[];
-  stagingRepoNames: string[];
-  rejectedRepoName: string;
+  repositories: {
+    approved?: AnsibleRepositoryType;
+    rejected?: AnsibleRepositoryType;
+    staging?: AnsibleRepositoryType;
+  };
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
@@ -109,9 +111,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
       approveModalInfo: null,
-      approvedRepositoryList: [],
-      rejectedRepoName: null,
-      stagingRepoNames: [],
+      repositories: { approved: null, rejected: null, staging: null },
     };
   }
 
@@ -126,57 +126,44 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     } else {
       this.setState({ loading: true });
 
-      const promises = [];
-
-      promises.push(
-        this.loadRepos('staging').then((stagingRepoNames) =>
-          this.setState({
-            stagingRepoNames,
-          }),
-        ),
-      );
-      promises.push(
-        this.loadRepos('rejected').then(([rejectedRepoName]) =>
-          this.setState({ rejectedRepoName }),
-        ),
-      );
-
-      promises.push(
-        // TODO: replace getAll pagination
-        listApproved()
-          .then((data) => {
-            this.setState({ approvedRepositoryList: data });
-          })
-          .catch(({ response: { status, statusText } }) => {
-            this.addAlertObj({
-              title: t`Failed to load repositories.`,
-              variant: 'danger',
-              description: errorMessage(status, statusText),
-            });
-          }),
-      );
-
-      promises.push(this.queryCollections(false));
-
-      Promise.all(promises).then(() => {
+      Promise.all([
+        this.queryCollections(false),
+        this.queryRepositories(),
+      ]).then(() => {
         this.setState({ loading: false });
         this.setState({ updatingVersions: [] });
       });
     }
   }
 
-  private loadRepos(pipeline) {
-    return AnsibleRepositoryAPI.list({
-      pulp_label_select: `pipeline=${pipeline}`,
-    })
-      .then(({ data: { results } }) => (results || []).map(({ name }) => name))
-      .catch((error) => {
-        this.addAlert(
-          t`Error loading repository with label ${pipeline}.`,
-          'danger',
-          error?.message,
-        );
-      });
+  private queryRepositories() {
+    const repoOrNull = (pipeline) =>
+      AnsibleRepositoryAPI.list({
+        page: 1,
+        page_size: 1,
+        pulp_label_select: `pipeline=${pipeline}`,
+      })
+        .then(({ count, data: { results } }) =>
+          count === 1 ? results[0] : null,
+        )
+        .catch((error) => {
+          this.addAlert(
+            t`Error loading repository with label ${pipeline}.`,
+            'danger',
+            error?.message,
+          );
+          return null;
+        });
+
+    return Promise.all([
+      repoOrNull('approved'),
+      repoOrNull('rejected'),
+      repoOrNull('staging'),
+    ]).then(([approved, rejected, staging]) =>
+      this.setState({
+        repositories: { approved, rejected, staging },
+      }),
+    );
   }
 
   render() {
