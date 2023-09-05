@@ -38,9 +38,11 @@ export const ApprovalRow = ({
   reject,
 }: IProps) => {
   const { collection_version: version, repository } = collectionVersion;
-  const data_cy = `CertificationDashboard-row-${collectionVersion.repository.name}-${collectionVersion.collection_version.namespace}-${collectionVersion.collection_version.name}`;
+
   return (
-    <tr data-cy={data_cy}>
+    <tr
+      data-cy={`ApprovalRow-${repository.name}-${version.namespace}-${version.name}`}
+    >
       <td>{version.namespace}</td>
       <td>{version.name}</td>
       <td>
@@ -178,8 +180,6 @@ export const ApprovalRow = ({
     }
 
     if (pipeline === 'rejected') {
-      // render reject button if version is in multiple repositories including rejected state - handles inconsistency
-      // and allows user to reject it again to move it all to rejected state
       return (
         <ListItemActions
           kebabItems={[

@@ -8,15 +8,10 @@ function openModal(menu) {
   cy.contains('Clear all filters').click();
 
   if (menu) {
-    cy.get(
-      '[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]',
-    ).click();
+    cy.get('[data-cy^="ApprovalRow"] [aria-label="Actions"]').click();
     cy.contains('a', 'Sign and approve').click();
   } else {
-    cy.contains(
-      '[data-cy^="CertificationDashboard-row"] button',
-      'Sign and approve',
-    ).click();
+    cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
   }
 
   cy.contains('Select repositories');
