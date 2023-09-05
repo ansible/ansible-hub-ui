@@ -43,7 +43,6 @@ import {
   getCollectionRepoList,
   parsePulpIDFromURL,
   repositoryBasePath,
-  repositoryRemoveCollection,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -68,13 +67,10 @@ interface IState {
   inputText: string;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate?: CollectionVersionSearch;
-  approveModalInfo: {
-    collectionVersion;
-  };
+  approveModalInfo?: CollectionVersionSearch;
   repositories: {
     approved?: AnsibleRepositoryType;
     rejected?: AnsibleRepositoryType;
-    staging?: AnsibleRepositoryType;
   };
 }
 
@@ -111,7 +107,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: null,
       approveModalInfo: null,
-      repositories: { approved: null, rejected: null, staging: null },
+      repositories: { approved: null, rejected: null },
     };
   }
 
@@ -143,7 +139,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         page_size: 1,
         pulp_label_select: `pipeline=${pipeline}`,
       })
-        .then(({ count, data: { results } }) =>
+        .then(({ data: { count, results } }) =>
           count === 1 ? results[0] : null,
         )
         .catch((error) => {
@@ -155,14 +151,11 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           return null;
         });
 
-    return Promise.all([
-      repoOrNull('approved'),
-      repoOrNull('rejected'),
-      repoOrNull('staging'),
-    ]).then(([approved, rejected, staging]) =>
-      this.setState({
-        repositories: { approved, rejected, staging },
-      }),
+    return Promise.all([repoOrNull('approved'), repoOrNull('rejected')]).then(
+      ([approved, rejected]) =>
+        this.setState({
+          repositories: { approved, rejected },
+        }),
     );
   }
 
@@ -173,7 +166,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <BaseHeader title={t`Approval dashboard`} />
         <AlertList
           alerts={this.state.alerts}
@@ -296,9 +289,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                   this.setState({ approveModalInfo: null });
                   this.queryCollections(true);
                 }}
-                collectionVersion={
-                  this.state.approveModalInfo.collectionVersion
-                }
+                collectionVersion={this.state.approveModalInfo}
                 addAlert={(alert) => this.addAlertObj(alert)}
                 allRepositories={this.state.approvedRepositoryList}
                 stagingRepoNames={this.state.stagingRepoNames}
@@ -307,7 +298,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -322,6 +313,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
         />
       );
     }
+
     const sortTableOptions = {
       headers: [
         {
@@ -394,7 +386,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
   }
 
   private isVersionUpdating(collection: CollectionVersionSearch) {
-    return this.state.updatingVersions.find((v) => {
+    return !!this.state.updatingVersions.find((v) => {
       return v == collection;
     });
   }
@@ -418,12 +410,13 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       this.state.versionToUploadCertificate;
     const signed_collection = collection_version.pulp_href;
     const { name, namespace, version } = collection_version;
+
     CertificateUploadAPI.upload({
       file,
       repository: repository.pulp_href,
       signed_collection,
     })
-      .then((result) => waitForTask(parsePulpIDFromURL(result.data.task)))
+      .then(({ data: { task } }) => waitForTask(task))
       .then(() =>
         this.addAlert(
           t`Certificate for collection "${namespace} ${name} v${version}" has been successfully uploaded.`,
@@ -445,106 +438,60 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       .finally(() => this.closeUploadCertificateModal());
   }
 
-  private approve(collection) {
-    if (!collection) {
-      // I hope that this may not occure ever, but to be sure...
+  private setUpdatingVersion(collectionVersion) {
+    const { updatingVersions } = this.state;
+    this.setState({
+      updatingVersions: [...updatingVersions, collectionVersion],
+    });
+  }
+
+  private unsetUpdatingVersion(collectionVersion) {
+    const { updatingVersions } = this.state;
+    this.setState({
+      updatingVersions: updatingVersions.filter((v) => v !== collectionVersion),
+    });
+  }
+
+  private async approve(collection) {
+    const { repositories } = this.state;
+
+    if (repositories.approved) {
+      this.move(collection, repositories.approved);
+    } else {
+      this.setState({ approveModalInfo: collectionVersion });
+    }
+  }
+
+  private async reject(collection) {
+    const { repositories } = this.state;
+
+    if (!repositories.rejected) {
+      const version = collection.collection_version;
       this.addAlert(
-        t`Approval failed.`,
+        t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
         'danger',
-        t`Collection not found in any repository.`,
+        t`There must be only one repository with pipeline=rejected.`,
       );
       return;
     }
 
-    const { approvedRepositoryList } = this.state;
-
-    if (approvedRepositoryList.length == 1) {
-      if (collection.repository) {
-        this.updateCertification(
-          collection.collection_version,
-          collection.repository.name,
-          this.state.approvedRepositoryList[0].name,
-        );
-      } else {
-        // I hope that this may not occure ever, but to be sure...
-        this.addAlert(
-          t`Approval failed.`,
-          'danger',
-          t`Collection has to be in rejected or staging repository.`,
-        );
-      }
+    if (await this.isRejected(collection)) {
+      // collection already in rejected repository, so remove it from aproved repo
+      this.remove(collection);
     } else {
-      this.transformToCollectionVersion(collection).then(
-        (collectionVersion) => {
-          this.setState({ approveModalInfo: { collectionVersion } });
-        },
-      );
+      // collection is not in rejected state, move it there
+      this.move(collection, repositories.rejected);
     }
   }
 
-  private reject(collection) {
-    const originalRepo = collection.repository.name;
-    const version = collection.collection_version;
+  private move(collection, destinationRepo) {
+    const { collection_version: version, repository: originalRepo } =
+      collection;
 
-    this.transformToCollectionVersion(collection)
-      .then((versionWithRepos) => {
-        this.setState({ updatingVersions: [collection] });
-        if (
-          versionWithRepos.repository_list.includes(this.state.rejectedRepoName)
-        ) {
-          // collection already in rejected repository, so remove it from aproved repo
-
-          repositoryRemoveCollection(originalRepo, version.pulp_href)
-            .then(() => {
-              this.addAlert(
-                t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
-                'success',
-              );
-              this.queryCollections(true);
-            })
-            .catch((error) => {
-              this.setState({ updatingVersions: [] });
-              const description = !error.response
-                ? error
-                : errorMessage(
-                    error.response.status,
-                    error.response.statusText,
-                  );
-
-              this.addAlert(
-                t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                'danger',
-                description,
-              );
-            });
-        } else {
-          // collection is not in rejected state, move it there
-          this.updateCertification(
-            version,
-            originalRepo,
-            this.state.rejectedRepoName,
-          );
-        }
-      })
-      .catch((error) => {
-        const description = !error.response
-          ? error
-          : errorMessage(error.response.status, error.response.statusText);
-
-        this.addAlert(
-          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-          'danger',
-          description,
-        );
-      });
-  }
-
-  private updateCertification(version, originalRepo, destinationRepo) {
-    // galaxy_ng CollectionRepositoryMixing.get_repos uses the distribution base path to look up repository pk
-    // there ..may be room for simplification since we already know the repo; OTOH also compatibility concerns
+    this.setUpdatingVersion(collection);
     return Promise.all([
-      repositoryBasePath(originalRepo),
-      repositoryBasePath(destinationRepo),
+      repositoryBasePath(originalRepo.name, originalRepo.pulp_href),
+      repositoryBasePath(destinationRepo.name, destinationRepo.pulp_href),
     ])
       .then(([source, destination]) =>
         CollectionVersionAPI.move(
@@ -575,7 +522,56 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
           'danger',
           description,
         );
-      });
+      })
+      .finally(() => this.unsetUpdatingVersion(collection));
+  }
+
+  private remove(collection) {
+    const { collection_version: version, repository } = collection;
+
+    this.setUpdatingVersion(collection);
+    return AnsibleRepositoryAPI.removeContent(
+      parsePulpIDFromURL(repository.pulp_href),
+      version.pulp_href,
+    )
+      .then(({ data: { task } }) => waitForTask(task))
+      .then(() =>
+        this.addAlert(
+          t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+          'success',
+        ),
+      )
+      .then(() => this.queryCollections(true))
+      .catch((error) => {
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
+
+        this.addAlert(
+          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
+        );
+      })
+      .finally(() => this.unsetUpdatingVersion(collection));
+  }
+
+  // is collection *also* in the rejected repo (regardless of collection.repository)
+  // really a "wouldRejectionFail"
+  private async isRejected(collection) {
+    const { repositories } = this.state;
+    const { name, namespace, version } = collection.collection_version;
+
+    return CollectionVersionAPI.list({
+      name,
+      namespace,
+      page: 1,
+      page_size: 1,
+      repository: parsePulpIDFromURL(repositories.rejected.pulp_href),
+      version,
+    })
+      .then((result) => !!result.data.meta.count)
+      .catch(() => false);
   }
 
   private queryCollections(handleLoading) {
