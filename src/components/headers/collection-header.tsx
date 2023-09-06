@@ -452,14 +452,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         />
         {copyCollectionToRepositoryModal && (
           <CopyCollectionToRepositoryModal
-            collection={collection}
-            closeAction={() => {
-              this.setState({ copyCollectionToRepositoryModal: null });
-            }}
-            addAlert={(alert) => {
-              this.addAlert(alert);
-              this.setState({ copyCollectionToRepositoryModal: null });
-            }}
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() =>
+              this.setState({ copyCollectionToRepositoryModal: null })
+            }
+            collectionVersion={collection}
+            finishAction={() =>
+              this.setState({ copyCollectionToRepositoryModal: null })
+            }
           />
         )}
         <BaseHeader

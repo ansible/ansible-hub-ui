@@ -21,7 +21,7 @@ import {
 } from 'src/utilities';
 
 interface IProps {
-  addAlert: (alert) => void;
+  addAlert: (alert: AlertType) => void;
   closeAction: () => void;
   collectionVersion: CollectionVersionSearch;
   finishAction: () => void;

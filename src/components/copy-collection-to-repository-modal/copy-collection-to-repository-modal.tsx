@@ -7,7 +7,12 @@ import {
   CollectionVersionSearch,
   SigningServiceAPI,
 } from 'src/api';
-import { AlertType, MultipleRepoSelector } from 'src/components';
+import {
+  AlertList,
+  AlertType,
+  MultipleRepoSelector,
+  closeAlert,
+} from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import {
   errorMessage,
@@ -19,15 +24,18 @@ import {
 interface IProps {
   addAlert: (alert: AlertType) => void;
   closeAction: () => void;
-  collection: CollectionVersionSearch;
+  collectionVersion: CollectionVersionSearch;
+  finishAction: () => void;
 }
 
-// TODO unify with approveModal
+// TODO unify with approveModal, then move getCollectionRepoList (t)here
 export const CopyCollectionToRepositoryModal = ({
-  addAlert,
+  addAlert: parentAddAlert,
   closeAction,
-  collection: { collection_version, repository },
+  collectionVersion: { collection_version, repository },
+  finishAction,
 }: IProps) => {
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [disabledRepos, setDisabledRepos] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedRepos, setSelectedRepos] = useState<AnsibleRepositoryType[]>(
@@ -37,7 +45,7 @@ export const CopyCollectionToRepositoryModal = ({
   const { settings } = useContext();
   const { namespace, name, version, pulp_href } = collection_version;
 
-  const copyToRepositories = async () => {
+  async function copyToRepositories() {
     setLoading(true);
 
     const repo_id = parsePulpIDFromURL(repository.pulp_href);
@@ -71,14 +79,14 @@ export const CopyCollectionToRepositoryModal = ({
     return AnsibleRepositoryAPI.copyCollectionVersion(repo_id, params)
       .then(({ data }) => {
         selectedRepos.forEach(({ name: repo }) =>
-          addAlert(
+          parentAddAlert(
             taskAlert(
               data.task,
               t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repo}".`,
             ),
           ),
         );
-        closeAction();
+        finishAction();
       })
       .catch((e) =>
         addAlert({
@@ -88,7 +96,11 @@ export const CopyCollectionToRepositoryModal = ({
         }),
       )
       .finally(() => setLoading(false));
-  };
+  }
+
+  function addAlert(alert: AlertType) {
+    setAlerts((prevAlerts) => [...prevAlerts, alert]);
+  }
 
   useEffect(() => {
     // check for approval repos that are already in collection and select them in UI
@@ -132,6 +144,11 @@ export const CopyCollectionToRepositoryModal = ({
         />
         {loading && <Spinner size='lg' />}
       </section>
+
+      <AlertList
+        alerts={alerts}
+        closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
+      />
     </Modal>
   );
 };
