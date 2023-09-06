@@ -10,7 +10,7 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
-import { UserPlusIcon } from '@patternfly/react-icons';
+import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';

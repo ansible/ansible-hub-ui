@@ -10,7 +10,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
+import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
+import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { sum } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';

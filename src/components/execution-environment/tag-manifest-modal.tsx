@@ -12,7 +12,7 @@ import {
   Spinner,
   TextInput,
 } from '@patternfly/react-core';
-import { TagIcon } from '@patternfly/react-icons';
+import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React from 'react';
 import {
   ContainerManifestType,
@@ -178,14 +178,10 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                         this.addTag(tagToVerify),
                       )
                     }
-                  >
-                    {t`Yes`}
-                  </AlertActionLink>
+                  >{t`Yes`}</AlertActionLink>
                   <AlertActionLink
                     onClick={() => this.setState({ tagToVerify: '' })}
-                  >
-                    {t`No`}
-                  </AlertActionLink>
+                  >{t`No`}</AlertActionLink>
                 </>
               }
             />

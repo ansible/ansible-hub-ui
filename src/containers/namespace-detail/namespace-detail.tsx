@@ -8,7 +8,7 @@ import {
   Text,
   Tooltip,
 } from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, Navigate } from 'react-router-dom';
@@ -438,9 +438,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   this.state.showControls && (
                     <Button
                       onClick={() => this.setState({ showImportModal: true })}
-                    >
-                      {t`Upload collection`}
-                    </Button>
+                    >{t`Upload collection`}</Button>
                   )
                 }
               />
@@ -799,9 +797,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           {unfilteredCount === 0 ? (
             <DropdownItem
               onClick={() => this.setState({ isOpenNamespaceModal: true })}
-            >
-              {t`Delete namespace`}
-            </DropdownItem>
+            >{t`Delete namespace`}</DropdownItem>
           ) : (
             <Tooltip
               isVisible={false}
@@ -870,9 +866,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
         {' '}
         {collections.length !== 0 && (
-          <Button onClick={() => this.setState({ showImportModal: true })}>
-            {t`Upload collection`}
-          </Button>
+          <Button
+            onClick={() => this.setState({ showImportModal: true })}
+          >{t`Upload collection`}</Button>
         )}
         {dropdownItems.length > 0 && (
           <div data-cy='ns-kebab-toggle'>

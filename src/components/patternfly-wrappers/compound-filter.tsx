@@ -10,7 +10,8 @@ import {
   SelectVariant,
   TextInput,
 } from '@patternfly/react-core';
-import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
+import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
+import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React from 'react';
 import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
 import { ParamHelper } from 'src/utilities';

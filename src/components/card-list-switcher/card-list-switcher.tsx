@@ -1,4 +1,5 @@
-import { ListIcon, ThLargeIcon } from '@patternfly/react-icons';
+import ListIcon from '@patternfly/react-icons/dist/esm/icons/list-icon';
+import ThLargeIcon from '@patternfly/react-icons/dist/esm/icons/th-large-icon';
 import cx from 'classnames';
 import React from 'react';
 import { ParamHelper } from 'src/utilities';

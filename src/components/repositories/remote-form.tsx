@@ -13,11 +13,9 @@ import {
   Switch,
   TextInput,
 } from '@patternfly/react-core';
-import {
-  DownloadIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
+import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';

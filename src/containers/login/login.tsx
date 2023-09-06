@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { LoginPage as PFLoginPage } from '@patternfly/react-core';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';

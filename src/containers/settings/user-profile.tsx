@@ -85,9 +85,9 @@ class UserProfile extends React.Component<RouteProps, IState> {
             !isUserMgmtDisabled && (
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div>
-                  <Button onClick={() => this.setState({ inEditMode: true })}>
-                    {t`Edit`}
-                  </Button>
+                  <Button
+                    onClick={() => this.setState({ inEditMode: true })}
+                  >{t`Edit`}</Button>
                 </div>
               </div>
             )

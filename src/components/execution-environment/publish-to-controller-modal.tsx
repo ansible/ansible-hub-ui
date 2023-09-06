@@ -12,7 +12,8 @@ import {
   ListItem,
   Modal,
 } from '@patternfly/react-core';
-import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
+import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React, { useEffect, useState } from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -294,9 +295,7 @@ export const PublishToControllerModal = (props: IProps) => {
         <>
           <DescriptionList isHorizontal>
             <DescriptionListGroup>
-              <DescriptionListTerm>
-                {t`Execution Environment`}
-              </DescriptionListTerm>
+              <DescriptionListTerm>{t`Execution Environment`}</DescriptionListTerm>
               <DescriptionListDescription>{image}</DescriptionListDescription>
             </DescriptionListGroup>
             <DescriptionListGroup>

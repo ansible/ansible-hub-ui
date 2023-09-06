@@ -187,9 +187,7 @@ class GroupList extends React.Component<RouteProps, IState> {
                             onClick={() =>
                               this.setState({ createModalVisible: true })
                             }
-                          >
-                            {t`Create`}
-                          </Button>
+                          >{t`Create`}</Button>
                         </ToolbarItem>
                       </ToolbarGroup>
                     )}

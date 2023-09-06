@@ -6,7 +6,7 @@ import {
   Modal,
   Spinner,
 } from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React, { useEffect, useState } from 'react';
 import { WisdomDenyIndexAPI } from 'src/api';
 import { AlertList, AlertType, closeAlert } from 'src/components';
