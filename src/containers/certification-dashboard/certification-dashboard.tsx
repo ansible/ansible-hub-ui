@@ -40,7 +40,6 @@ import {
   RouteProps,
   errorMessage,
   filterIsSet,
-  getCollectionRepoList,
   parsePulpIDFromURL,
   repositoryBasePath,
   waitForTask,
@@ -291,9 +290,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
                 }}
                 collectionVersion={this.state.approveModalInfo}
                 addAlert={(alert) => this.addAlertObj(alert)}
-                allRepositories={this.state.approvedRepositoryList}
-                stagingRepoNames={this.state.stagingRepoNames}
-                rejectedRepoName={this.state.rejectedRepoName}
               />
             )}
           </Main>
@@ -458,7 +454,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
     if (repositories.approved) {
       this.move(collection, repositories.approved);
     } else {
-      this.setState({ approveModalInfo: collectionVersion });
+      this.setState({ approveModalInfo: collection });
     }
   }
 
@@ -632,23 +628,6 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 
   private addAlertObj(alert) {
     this.addAlert(alert.title, alert.variant, alert.description);
-  }
-
-  // compose from collectionVersionSearch to CollectionVersion structure for approval modal
-  async transformToCollectionVersion(collection: CollectionVersionSearch) {
-    const repoList = await getCollectionRepoList(collection);
-
-    const { collection_version } = collection;
-    const id = parsePulpIDFromURL(collection_version.pulp_href);
-    const collectionVersion = {
-      id,
-      version: collection_version.version,
-      namespace: collection_version.namespace,
-      name: collection_version.name,
-      repository_list: repoList,
-    };
-
-    return collectionVersion;
   }
 }
 

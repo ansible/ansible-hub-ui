@@ -10,17 +10,21 @@ import { waitForTaskUrl } from './wait-for-task';
 export async function repositoryRemoveCollection(
   repoName,
   collectionVersion_pulp_href,
+  repoHref = null,
 ) {
-  const repo = (
-    await AnsibleRepositoryAPI.list({ name: repoName, page_size: 1 })
-  )?.data?.results?.[0];
-  if (!repo) {
+  if (!repoHref) {
+    repoHref = (
+      await AnsibleRepositoryAPI.list({ name: repoName, page_size: 1 })
+    )?.data?.results?.[0]?.pulp_href;
+  }
+
+  if (!repoHref) {
     return Promise.reject({ error: t`Repository ${repoName} not found.` });
   }
 
   const task = (
     await AnsibleRepositoryAPI.removeContent(
-      parsePulpIDFromURL(repo.pulp_href),
+      parsePulpIDFromURL(repoHref),
       collectionVersion_pulp_href,
     )
   )?.data?.task;
@@ -30,6 +34,7 @@ export async function repositoryRemoveCollection(
 
 export async function getCollectionRepoList(
   collection: CollectionVersionSearch,
+  params = {},
 ) {
   const { name, namespace, version } = collection.collection_version;
 
@@ -39,8 +44,9 @@ export async function getCollectionRepoList(
     namespace,
     name,
     version,
+    page: 1,
     page_size: 100,
-    offset: 0,
+    ...params,
   });
 
   const collectionRepos = collectionInRepos.data.data.map(
