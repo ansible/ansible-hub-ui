@@ -32,6 +32,7 @@ export async function repositoryRemoveCollection(
   await waitForTaskUrl(task);
 }
 
+// TODO: remove?
 export async function getCollectionRepoList(
   collection: CollectionVersionSearch,
   params = {},

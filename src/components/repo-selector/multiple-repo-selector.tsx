@@ -29,7 +29,7 @@ import { errorMessage } from 'src/utilities';
 interface IProps {
   addAlert: (alert: AlertType) => void;
   disabledRepos?: string[];
-  params: { pulp_label_select: string };
+  params?: { pulp_label_select: string };
   selectedRepos: AnsibleRepositoryType[];
   setSelectedRepos: (selectedRepos: AnsibleRepositoryType[]) => void;
   singleSelectionOnly?: boolean;
@@ -61,7 +61,7 @@ export const MultipleRepoSelector = (props: IProps) => {
 
     AnsibleRepositoryAPI.list({
       ...params,
-      ...props.params,
+      ...(props.params || {}),
     })
       .then(({ data: { count, results } }) => {
         setRepositoryList(results);
@@ -121,7 +121,7 @@ export const MultipleRepoSelector = (props: IProps) => {
 
   useEffect(() => {
     loadRepos();
-  }, [params, props.params.pulp_label_select]);
+  }, [params, props.params?.pulp_label_select]);
 
   function renderMultipleSelector() {
     function onToggle(isOpen: boolean) {
@@ -330,7 +330,7 @@ export const MultipleRepoSelector = (props: IProps) => {
         />
       </div>
 
-      {loading ? <Spinner /> : renderTable()}
+      {loading ? <Spinner size='lg' /> : renderTable()}
 
       <div className='footer'>
         <Pagination

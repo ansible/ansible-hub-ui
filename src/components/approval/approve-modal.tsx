@@ -3,6 +3,7 @@ import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
   CollectionVersionSearch,
   SigningServiceAPI,
 } from 'src/api';
@@ -32,10 +33,12 @@ export const ApproveModal = ({
   collectionVersion: { collection_version, repository },
   finishAction,
 }: IProps) => {
-  const [alerts, setAlerts] = useState([]);
-  const [disabledRepos, setDisabledRepos] = useState([]);
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
+  const [disabledRepos, setDisabledRepos] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedRepos, setSelectedRepos] = useState([]);
+  const [selectedRepos, setSelectedRepos] = useState<AnsibleRepositoryType[]>(
+    [],
+  );
 
   const { settings } = useContext();
   const { namespace, name, version, pulp_href } = collection_version;

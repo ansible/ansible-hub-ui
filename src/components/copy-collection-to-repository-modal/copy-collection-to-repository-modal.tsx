@@ -1,21 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownSeparator,
-  DropdownToggle,
-  DropdownToggleCheckbox,
-  Flex,
-  FlexItem,
-  Label,
-  LabelGroup,
-  Modal,
-  Spinner,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryAPI,
@@ -23,14 +7,7 @@ import {
   CollectionVersionSearch,
   SigningServiceAPI,
 } from 'src/api';
-import {
-  AlertType,
-  AppliedFilters,
-  CheckboxRow,
-  CompoundFilter,
-  Pagination,
-  SortTable,
-} from 'src/components';
+import { AlertType, MultipleRepoSelector } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import {
   errorMessage,
@@ -40,380 +17,121 @@ import {
 } from 'src/utilities';
 
 interface IProps {
-  collection: CollectionVersionSearch;
-  closeAction: () => void;
   addAlert: (alert: AlertType) => void;
+  closeAction: () => void;
+  collection: CollectionVersionSearch;
 }
 
-export const CopyCollectionToRepositoryModal = (props: IProps) => {
-  const [isSelectorOpen, setIsSelectorOpen] = useState(false);
-  const [isSelectorChecked, setIsSelectorChecked] = useState(false);
-  const [repositoryList, setRepositoryList] = useState<AnsibleRepositoryType[]>(
+// TODO unify with approveModal
+export const CopyCollectionToRepositoryModal = ({
+  addAlert,
+  closeAction,
+  collection: { collection_version, repository },
+}: IProps) => {
+  const [disabledRepos, setDisabledRepos] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedRepos, setSelectedRepos] = useState<AnsibleRepositoryType[]>(
     [],
   );
-  const [fixedRepos, setFixedRepos] = useState<string[]>([]);
-  const [selectedRepos, setSelectedRepos] = useState<string[]>([]);
-  const [inputText, setInputText] = useState('');
-  const [itemsCount, setItemsCount] = useState(0);
-  // const [alerts, setAlerts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [params, setParams] = useState({
-    page: 1,
-    page_size: 10,
-    sort: 'name',
-  });
 
   const { settings } = useContext();
-
-  useEffect(() => {
-    loadRepos();
-    loadAssociatedRepoList();
-  }, []);
-
-  useEffect(() => {
-    loadRepos();
-  }, [params]);
-
-  const loadRepos = async () => {
-    const par = { ...params };
-    par['name__contains'] = inputText;
-
-    setLoading(true);
-    const repos = await AnsibleRepositoryAPI.list(par);
-
-    setItemsCount(repos.data.count);
-    setRepositoryList(repos.data.results);
-    setLoading(false);
-  };
-
-  const loadAllRepos = () => {
-    setLoading(true);
-    // TODO: replace getAll pagination
-    listAll().then((repos) => {
-      setSelectedRepos(repos.map((repo) => repo.name));
-      setRepositoryList(repos);
-      setLoading(false);
-    });
-  };
-
-  const loadAssociatedRepoList = async () => {
-    const repoList = await getCollectionRepoList(props.collection);
-    setFixedRepos(repoList);
-  };
-
-  const changeSelection = (name: string) => {
-    const checked = selectedRepos.includes(name);
-
-    if (checked) {
-      // remove
-      setSelectedRepos(selectedRepos.filter((element) => element != name));
-    } else {
-      // add
-      setSelectedRepos([...selectedRepos, name]);
-    }
-  };
+  const { namespace, name, version, pulp_href } = collection_version;
 
   const copyToRepositories = async () => {
     setLoading(true);
-    const { collection_version, repository } = props.collection;
 
-    const pulpId = parsePulpIDFromURL(repository.pulp_href);
+    const repo_id = parsePulpIDFromURL(repository.pulp_href);
+    const params = {
+      collection_versions: [pulp_href],
+      destination_repositories: selectedRepos.map((repo) => repo.pulp_href),
+    };
 
     const signingServiceName = settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+    if (signingServiceName) {
+      let signingService = null;
+      try {
+        const signingList = await SigningServiceAPI.list({
+          name: signingServiceName,
+          page_size: 1,
+        });
+        signingService = signingList.data.results[0].pulp_href;
+      } catch {
+        setLoading(false);
+        addAlert({
+          title: t`Failed to copy collection version.`,
+          variant: 'danger',
+          description: t`Signing service ${signingServiceName} not found`,
+        });
+        return;
+      }
 
-    let signingService = null;
-    try {
-      const signingList = await SigningServiceAPI.list({
-        name: signingServiceName,
-      });
-      signingService = signingList.data.results[0].pulp_href;
-    } catch {
-      setLoading(false);
-      props.addAlert({
-        title: t`Failed to copy collection version.`,
-        variant: 'danger',
-        description: t`Signing service ${signingServiceName} not found`,
-      });
-      return;
+      params['signing_service'] = signingService;
     }
 
-    const repoHrefs = repositoryList
-      .filter((repo) => selectedRepos.includes(repo.name))
-      .map((repo) => repo.pulp_href);
-
-    const copyParams = {
-      collection_versions: [collection_version.pulp_href],
-      destination_repositories: repoHrefs,
-    };
-    if (signingService) {
-      copyParams['signing_service'] = signingService;
-    }
-
-    AnsibleRepositoryAPI.copyCollectionVersion(pulpId, copyParams)
+    return AnsibleRepositoryAPI.copyCollectionVersion(repo_id, params)
       .then(({ data }) => {
-        selectedRepos.map((repo) => {
-          props.addAlert(
+        selectedRepos.forEach(({ name: repo }) =>
+          addAlert(
             taskAlert(
               data.task,
-              t`Started adding ${collection_version.namespace}.${collection_version.name} v${collection_version.version} from "${repository.name}" to repository "${repo}".`,
+              t`Started adding ${namespace}.${name} v${version} from "${repository.name}" to repository "${repo}".`,
             ),
-          );
-        });
+          ),
+        );
+        closeAction();
       })
-      .catch((e) => {
-        setLoading(false);
-        props.addAlert({
+      .catch((e) =>
+        addAlert({
           variant: 'danger',
-          title: t`Collection ${collection_version.namespace}.${collection_version.name} v${collection_version.version} could not be copied.`,
+          title: t`Collection ${namespace}.${name} v${version} could not be copied.`,
           description: errorMessage(e.status, e.statusText),
-        });
-      });
+        }),
+      )
+      .finally(() => setLoading(false));
   };
 
-  const renderLabels = (repos: string[]) => {
-    const labels = (
-      <LabelGroup>
-        {repos.map((name, i) => (
-          <Label key={i} onClose={() => changeSelection(name)}>
-            {name}
-          </Label>
-        ))}
-      </LabelGroup>
-    );
-    return (
-      <Flex>
-        <FlexItem>
-          <b>{t`Selected`}</b>
-        </FlexItem>
-        <FlexItem>{labels}</FlexItem>
-      </Flex>
-    );
-  };
-
-  const renderMultipleSelector = () => {
-    const onToggle = (isOpen: boolean) => {
-      setIsSelectorOpen(isOpen);
-    };
-
-    const onFocus = () => {
-      const element = document.getElementById('toggle-split-button');
-      element.focus();
-    };
-
-    const onSelect = () => {
-      setIsSelectorOpen(false);
-      onFocus();
-    };
-
-    const selectAll = () => {
-      loadAllRepos();
-      setIsSelectorChecked(true);
-    };
-
-    const selectPage = () => {
-      setSelectedRepos(repositoryList.map((repo) => repo.name));
-      setIsSelectorChecked(true);
-    };
-
-    const deselectAll = () => {
-      setSelectedRepos([]);
-      setIsSelectorChecked(false);
-    };
-
-    const deselectPage = () => {
-      setSelectedRepos([]);
-      setIsSelectorChecked(false);
-    };
-
-    const onToggleCheckbox = () => {
-      setIsSelectorChecked(!isSelectorChecked);
-      if (isSelectorChecked) {
-        deselectPage();
-      } else {
-        selectPage();
-      }
-    };
-
-    const dropdownItems = [
-      <DropdownItem
-        onClick={selectPage}
-        key='select-page'
-      >{t`Select page (${repositoryList.length} items)`}</DropdownItem>,
-      <DropdownItem
-        onClick={selectAll}
-        key='select-all'
-      >{t`Select all (${itemsCount} items)`}</DropdownItem>,
-      <DropdownSeparator key='separator' />,
-      <DropdownItem
-        onClick={deselectPage}
-        key='deselect-page'
-      >{t`Deselect page (${repositoryList.length} items)`}</DropdownItem>,
-      <DropdownItem
-        onClick={deselectAll}
-        key='deselect-all'
-      >{t`Deselect all (${itemsCount} items)`}</DropdownItem>,
-    ];
-
-    return (
-      <Dropdown
-        onSelect={onSelect}
-        toggle={
-          <DropdownToggle
-            splitButtonItems={[
-              <DropdownToggleCheckbox
-                id='split-button-toggle-checkbox'
-                key='split-checkbox'
-                aria-label='Select all'
-                checked={isSelectorChecked}
-                onChange={onToggleCheckbox}
-              />,
-            ]}
-            onToggle={onToggle}
-            id='toggle-split-button'
-          />
-        }
-        isOpen={isSelectorOpen}
-        dropdownItems={dropdownItems}
-      />
-    );
-  };
-
-  const renderTable = () => {
-    if (!props.collection) {
-      return;
-    }
-
-    const sortTableOptions = {
-      headers: [
-        {
-          title: t`Name`,
-          type: 'alpha',
-          id: 'name',
-        },
-      ],
-    };
-
-    return (
-      <>
-        <table
-          aria-label={t`Collection versions`}
-          className='hub-c-table-content pf-c-table'
-        >
-          <SortTable
-            options={sortTableOptions}
-            params={params}
-            updateParams={(p) => setParams(p)}
-          />
-          <tbody>
-            {repositoryList.map((repo, i) => (
-              <CheckboxRow
-                rowIndex={i}
-                key={repo.name}
-                isSelected={
-                  fixedRepos.includes(repo.name) ||
-                  selectedRepos.includes(repo.name)
-                }
-                onSelect={() => {
-                  changeSelection(repo.name);
-                }}
-                isDisabled={fixedRepos.includes(repo.name)}
-                data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
-              >
-                <td>
-                  <div>{repo.name}</div>
-                  <div>{repo.description}</div>
-                </td>
-              </CheckboxRow>
-            ))}
-          </tbody>
-        </table>
-      </>
-    );
-  };
+  useEffect(() => {
+    // check for approval repos that are already in collection and select them in UI
+    // TODO better way?
+    getCollectionRepoList({
+      collection_version,
+    } as CollectionVersionSearch).then(setDisabledRepos);
+  }, []);
 
   return (
-    <>
-      <Modal
-        actions={[
-          <Button
-            key='confirm'
-            onClick={() => copyToRepositories()}
-            variant='primary'
-            isDisabled={selectedRepos.length <= 0 || loading}
-          >
-            {t`Select`}
-          </Button>,
-          <Button
-            key='cancel'
-            onClick={props.closeAction}
-            variant='link'
-            isDisabled={loading}
-          >
-            {t`Cancel`}
-          </Button>,
-        ]}
-        isOpen={true}
-        onClose={props.closeAction}
-        title={t`Select repositories`}
-        variant='large'
-      >
-        <section className='modal-body' data-cy='modal-body'>
-          {renderLabels(selectedRepos)}
-          <div className='hub-toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>{renderMultipleSelector()}</ToolbarItem>
-                <ToolbarItem>
-                  <CompoundFilter
-                    inputText={inputText}
-                    onChange={(text) => {
-                      setInputText(text);
-                    }}
-                    updateParams={(p) => setParams(p)}
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'name__icontains',
-                        title: t`Repository`,
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-              isTop
-            />
-          </div>
-          <div>
-            <AppliedFilters
-              updateParams={(p) => {
-                setParams(p);
-                setInputText('');
-              }}
-              params={params}
-              ignoredParams={['page_size', 'page', 'sort']}
-              niceNames={{
-                name__icontains: t`Name`,
-              }}
-            />
-          </div>
-
-          {loading ? <Spinner /> : renderTable()}
-
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={(p) => setParams(p)}
-              count={itemsCount}
-            />
-          </div>
-        </section>
-      </Modal>
-    </>
+    <Modal
+      actions={[
+        <Button
+          key='confirm'
+          onClick={copyToRepositories}
+          variant='primary'
+          isDisabled={!selectedRepos.length || loading}
+        >
+          {t`Select`}
+        </Button>,
+        <Button
+          key='cancel'
+          onClick={closeAction}
+          variant='link'
+          isDisabled={loading}
+        >
+          {t`Cancel`}
+        </Button>,
+      ]}
+      isOpen={true}
+      onClose={closeAction}
+      title={t`Select repositories`}
+      variant='large'
+    >
+      <section className='modal-body' data-cy='modal-body'>
+        <MultipleRepoSelector
+          addAlert={addAlert}
+          disabledRepos={disabledRepos}
+          selectedRepos={selectedRepos}
+          setSelectedRepos={setSelectedRepos}
+        />
+        {loading && <Spinner size='lg' />}
+      </section>
+    </Modal>
   );
 };
