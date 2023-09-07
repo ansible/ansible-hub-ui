@@ -150,7 +150,7 @@ class LegacyNamespaces extends React.Component<
             reference={this.state.wisdomReference}
           />
         )}
-        <BaseHeader title={t`Legacy Namespaces`} />
+        <BaseHeader title={t`Namespaces`} />
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
@@ -173,7 +173,7 @@ class LegacyNamespaces extends React.Component<
                 count={this.state.count}
               />
 
-              <DataList aria-label={t`List of Legacy Namespaces`}>
+              <DataList aria-label={t`List of namespaces`}>
                 {this.state.legacynamespaces &&
                   this.state.legacynamespaces.map((lnamespace) => (
                     <LegacyNamespaceListItem

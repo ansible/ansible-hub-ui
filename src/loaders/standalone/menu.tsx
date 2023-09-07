@@ -85,15 +85,15 @@ function standaloneMenu() {
       ],
     ),
     menuSection(
-      t`Legacy`,
+      t`Roles`,
       {
         condition: ({ featureFlags }) => featureFlags.legacy_roles,
       },
       [
-        menuItem(t`Legacy Roles`, {
+        menuItem(t`Roles`, {
           url: formatPath(Paths.legacyRoles),
         }),
-        menuItem(t`Legacy Namespaces`, {
+        menuItem(t`Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
         }),
       ],

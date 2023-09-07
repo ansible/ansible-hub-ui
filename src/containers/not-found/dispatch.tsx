@@ -111,22 +111,22 @@ export const Dispatch = (props: RouteProps) => {
           <>
             <SectionSeparator />
             <PageSection>
-              <SectionTitle>{t`Legacy roles`}</SectionTitle>
+              <SectionTitle>{t`Roles`}</SectionTitle>
 
               {roles === null ? (
                 <LoadingPageSpinner />
               ) : roles.length === 0 ? (
                 <EmptyStateNoData
-                  title={t`No matching legacy roles found.`}
+                  title={t`No matching roles found.`}
                   description={
                     <Link
                       to={formatPath(Paths.legacyRoles)}
-                    >{t`Show all legacy roles`}</Link>
+                    >{t`Show all roles`}</Link>
                   }
                 />
               ) : (
                 <>
-                  <DataList aria-label={t`Available matching legacy roles`}>
+                  <DataList aria-label={t`Available matching roles`}>
                     {roles.map((r) => (
                       <LegacyRoleListItem
                         key={r.id}
@@ -137,7 +137,7 @@ export const Dispatch = (props: RouteProps) => {
                   </DataList>
                   <Link
                     to={formatPath(Paths.legacyRoles)}
-                  >{t`Show all legacy roles`}</Link>
+                  >{t`Show all roles`}</Link>
                 </>
               )}
             </PageSection>

@@ -123,7 +123,7 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
 
     return (
       <div>
-        <BaseHeader title={t`Legacy Roles`} />
+        <BaseHeader title={t`Roles`} />
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
@@ -147,7 +147,7 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
                 count={this.state.count}
               />
 
-              <DataList aria-label={t`List of Legacy Roles`}>
+              <DataList aria-label={t`List of roles`}>
                 {this.state.legacyroles &&
                   this.state.legacyroles.map((lrole) => (
                     <LegacyRoleListItem
