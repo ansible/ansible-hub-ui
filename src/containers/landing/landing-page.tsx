@@ -128,19 +128,19 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               body={
                 <React.Fragment>
                   <b>
-                    <p>{t`AnsibleFest`}</p>
+                    <p>{t`Ansible Lightspeed`}</p>
                   </b>
                   <br />
                   <p>
                     <a
-                      href='https://www.redhat.com/en/summit/ansiblefest?intcmp=7013a0000034lvmAAA'
+                      href='https://redhat.com/ansible-lightspeed'
                       target='_blank'
                       rel='noreferrer'
                     >
                       <img
-                        width='100%'
-                        alt='Ansible Fest at Red Hat Summit May 23rd to 25th 2023'
-                        src='https://www.ansible.com/hubfs/rh-2023-summit-ansiblefest-ansible-galaxy-site-200x200.png'
+                        width='50%'
+                        alt='Generative Ai, The Ansible way. Try Ansible Lightspeed with IBM watsonx Code Assistant'
+                        src='/static/images/LightspeedGalaxyAd1.png'
                       />
                     </a>
                   </p>
