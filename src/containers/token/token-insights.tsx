@@ -1,6 +1,7 @@
 import { Trans, t } from '@lingui/macro';
-import { Button, ClipboardCopyVariant } from '@patternfly/react-core';
+import { Alert, Button, ClipboardCopyVariant } from '@patternfly/react-core';
 import React from 'react';
+import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -10,11 +11,13 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
+import { RouteProps, errorMessage, withRouter } from 'src/utilities';
 import { getRepoURL } from 'src/utilities';
 
 interface IState {
-  tokenData: {
+  alerts: AlertType[];
+  synclistBasePath?: string;
+  tokenData?: {
     access_token: string;
     expires_in: number;
     id_token: string;
@@ -24,7 +27,6 @@ interface IState {
     session_state: string;
     token_type: string;
   };
-  alerts: AlertType[];
 }
 
 class TokenInsights extends React.Component<RouteProps, IState> {
@@ -32,21 +34,58 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     super(props);
 
     this.state = {
-      tokenData: undefined,
       alerts: [],
+      synclistBasePath: null,
+      tokenData: null,
     };
   }
 
   componentDidMount() {
+    this.getTokenData();
+    this.getSynclistBasePath();
+  }
+
+  getTokenData() {
+    if (!window.insights?.chrome) {
+      // outside insights platform
+      return;
+    }
+
     // this function will fail if chrome.auth.doOffline() hasn't been called
     // so it never works the first time .. loadToken() causes a reload and then it works => no error handling
-    window.insights.chrome.auth.getOfflineToken().then((result) => {
-      this.setState({ tokenData: result.data });
-    });
+    window.insights.chrome.auth
+      .getOfflineToken()
+      .then(({ data: tokenData }) => this.setState({ tokenData }));
+  }
+
+  getSynclistBasePath() {
+    MyDistributionAPI.list()
+      .then(({ data }) => {
+        const syncDistro = data.data.find(({ base_path }) =>
+          base_path.includes('synclist'),
+        );
+        this.setState({
+          synclistBasePath: syncDistro?.base_path,
+        });
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        this.setState({
+          synclistBasePath: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Server URL could not be displayed.`,
+              description: errorMessage(status, statusText),
+            },
+          ],
+        });
+      });
   }
 
   render() {
-    const { tokenData, alerts } = this.state;
+    const { alerts, synclistBasePath, tokenData } = this.state;
     const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="cloud-services" -d refresh_token="${
       tokenData?.refresh_token ?? '{{ user_token }}'
     }" --fail --silent --show-error --output /dev/null`;
@@ -136,15 +175,33 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               <p>
                 <Trans>
                   Use this URL to configure the API endpoints that clients need
-                  to download certified content from Automation Hub. Synclists
-                  are deprecated in AAP 2.4 and will be removed in a future
-                  release, instead use client-side requirements.yml, see AAP 2.4
-                  documentation.
+                  to download certified content from Automation Hub.{' '}
                 </Trans>
               </p>
               <ClipboardCopy isReadOnly>
                 {getRepoURL('published', true)}
               </ClipboardCopy>
+              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+                <Trans>
+                  Synclists are deprecated in AAP 2.4 and will be removed in a
+                  future release, use client-side requirements.yml instead.
+                  <br />
+                  If you&apos;re using sync toggles with AAP 2.3 or older, you
+                  will need to use a different URL:
+                </Trans>
+              </p>
+              {synclistBasePath ? (
+                <ClipboardCopy isReadOnly>
+                  {getRepoURL(synclistBasePath)}
+                </ClipboardCopy>
+              ) : (
+                <Alert
+                  variant='danger'
+                  isInline
+                  title={t`Synclist distribution was not found.`}
+                  className='hub-content-alert-fix'
+                />
+              )}
             </section>
             <section className='body'>
               <h2>{t`SSO URL`}</h2>
