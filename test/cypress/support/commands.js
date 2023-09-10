@@ -14,21 +14,25 @@ Cypress.Commands.add('containsnear', {}, (...args) => {
   cy.log('constainsnear requires selector and content parameters');
 });
 
+const name2element = (name) => {
+  const [first, last] = name.split(' > ');
+  return last
+    ? cy.get(
+        `#page-sidebar [data-cy="hub-menu-section-${first}"] [data-cy="hub-menu-item-${last}"]`,
+      )
+    : cy.get(`#page-sidebar [data-cy="hub-menu-item-${first}"]`);
+};
+
 Cypress.Commands.add('menuPresent', {}, (name) => {
-  const last = name.split(' > ').pop();
-  return cy.contains('#page-sidebar a', last).should('exist');
+  return name2element(name).should('exist');
 });
 
 Cypress.Commands.add('menuMissing', {}, (name) => {
-  const last = name.split(' > ').pop();
-  return cy.get('#page-sidebar a').each(($el) => {
-    expect($el.text()).not.to.equal(last);
-  });
+  return name2element(name).should('not.exist');
 });
 
 Cypress.Commands.add('menuGo', {}, (name) => {
-  const last = name.split(' > ').pop();
-  return cy.contains('#page-sidebar a', last).click({ force: true });
+  return name2element(name).click({ force: true });
 });
 
 Cypress.Commands.add('assertTitle', {}, (title) => {
