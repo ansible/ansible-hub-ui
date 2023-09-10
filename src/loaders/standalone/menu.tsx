@@ -93,7 +93,7 @@ function standaloneMenu() {
         menuItem(t`Roles`, {
           url: formatPath(Paths.legacyRoles),
         }),
-        menuItem(t`Namespaces`, {
+        menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
         }),
       ],

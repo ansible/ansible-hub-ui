@@ -150,14 +150,14 @@ class LegacyNamespaces extends React.Component<
             reference={this.state.wisdomReference}
           />
         )}
-        <BaseHeader title={t`Namespaces`} />
+        <BaseHeader title={t`Role Namespaces`} />
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
           ) : noData ? (
             <EmptyStateNoData
-              title={t`No namespaces yet`}
-              description={t`Namespaces will appear once created or roles are imported`}
+              title={t`No role namespaces yet`}
+              description={t`Role namespaces will appear once created or roles are imported`}
             />
           ) : (
             <div>
@@ -173,7 +173,7 @@ class LegacyNamespaces extends React.Component<
                 count={this.state.count}
               />
 
-              <DataList aria-label={t`List of namespaces`}>
+              <DataList aria-label={t`List of role namespaces`}>
                 {this.state.legacynamespaces &&
                   this.state.legacynamespaces.map((lnamespace) => (
                     <LegacyNamespaceListItem
