@@ -44,14 +44,14 @@ function standaloneMenu() {
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        activeUrls: [formatPath(Paths.searchByRepo)],
+        alternativeUrls: [formatPath(Paths.searchByRepo)],
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths[NAMESPACE_TERM]),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        activeUrls: [formatPath(Paths.myNamespaces)],
+        alternativeUrls: [formatPath(Paths.myNamespaces)],
       }),
       menuItem(t`Repositories`, {
         condition: canViewAnsibleRepositories,
@@ -94,18 +94,18 @@ function standaloneMenu() {
       [
         menuItem(t`Legacy Roles`, {
           url: formatPath(Paths.legacyRoles),
-          // activeUrls: [formatPath(Paths.compatLegacyRoles)],
+          // alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Legacy Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
-          // activeUrls: [formatPath(Paths.compatLegacyNamespaces)],
+          // alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],
     ),
     menuItem(t`Task Management`, {
       url: formatPath(Paths.taskList),
       condition: isLoggedIn,
-      activeUrls: [formatPath(Paths.taskDetail)],
+      alternativeUrls: [formatPath(Paths.taskDetail)],
     }),
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
@@ -142,12 +142,12 @@ function standaloneMenu() {
       menuItem(t`Groups`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.groupList),
-        activeUrls: [formatPath(Paths.groupDetail)],
+        alternativeUrls: [formatPath(Paths.groupDetail)],
       }),
       menuItem(t`Roles`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.roleList),
-        activeUrls: [formatPath(Paths.roleEdit)],
+        alternativeUrls: [formatPath(Paths.roleEdit)],
       }),
     ]),
   ];
@@ -165,8 +165,8 @@ function activateMenu(items, pathname) {
       item.type === 'section'
         ? activateMenu(item.items, pathname)
         : normalizedPathname.startsWith(normalize(item.url)) ||
-          (item.activeUrls?.length &&
-            item.activeUrls.some((url) =>
+          (item.alternativeUrls?.length &&
+            item.alternativeUrls.some((url) =>
               normalizedPathname.startsWith(normalize(url)),
             ));
   });
