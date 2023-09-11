@@ -8,7 +8,7 @@ import {
 } from 'src/api';
 import { errorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';
-import { repositoryRemoveCollection } from './repositories';
+import { repositoryRemoveCollection } from './repository-remove-collection';
 import { waitForTask } from './wait-for-task';
 
 export class DeleteCollectionUtils {
