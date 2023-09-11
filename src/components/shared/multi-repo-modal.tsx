@@ -39,7 +39,7 @@ export const MultiRepoModal = ({
 
   function queryDisabled() {
     // get repository list for selected collection
-    // TODO: support more pages, better UX for fail
+    // TODO: handle more pages
     const { name, namespace, version } = collection_version;
 
     CollectionVersionAPI.list({
@@ -50,10 +50,28 @@ export const MultiRepoModal = ({
       page_size: 100,
       ...(pipeline ? { repository_label: pipeline } : {}),
     })
-      .then(({ data: { data } }) =>
-        data.map(({ repository: { name } }) => name),
+      .then(
+        ({
+          data: {
+            data,
+            meta: { count },
+          },
+        }) => {
+          setDisabledRepos(data.map(({ repository: { name } }) => name));
+          if (count > 100) {
+            addAlert({
+              variant: 'warning',
+              title: t`The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly.`,
+            });
+          }
+        },
       )
-      .then(setDisabledRepos);
+      .catch(() =>
+        addAlert({
+          variant: 'danger',
+          title: t`Failed to query repositories.`,
+        }),
+      );
   }
 
   useEffect(() => {
