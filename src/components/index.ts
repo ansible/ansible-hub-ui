@@ -115,6 +115,7 @@ export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';
 export { DownloadCount } from './shared/download-count';
 export { LoginLink } from './shared/login-link';
+export { MultiRepoModal } from './shared/multi-repo-modal';
 export { UIVersion } from './shared/ui-version';
 export {
   SignAllCertificatesModal,

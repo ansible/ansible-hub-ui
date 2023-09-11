@@ -1,9 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  AnsibleRepositoryAPI,
-  CollectionVersionAPI,
-  CollectionVersionSearch,
-} from 'src/api';
+import { AnsibleRepositoryAPI } from 'src/api';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { waitForTaskUrl } from './wait-for-task';
 
@@ -30,29 +26,4 @@ export async function repositoryRemoveCollection(
   )?.data?.task;
 
   await waitForTaskUrl(task);
-}
-
-// TODO: remove?
-export async function getCollectionRepoList(
-  collection: CollectionVersionSearch,
-  params = {},
-) {
-  const { name, namespace, version } = collection.collection_version;
-
-  // get repository list for selected collection
-  // TODO: support more pages
-  const collectionInRepos = await CollectionVersionAPI.list({
-    namespace,
-    name,
-    version,
-    page: 1,
-    page_size: 100,
-    ...params,
-  });
-
-  const collectionRepos = collectionInRepos.data.data.map(
-    ({ repository }) => repository.name,
-  );
-
-  return collectionRepos;
 }

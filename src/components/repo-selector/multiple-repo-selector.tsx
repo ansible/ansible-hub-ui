@@ -29,7 +29,7 @@ import { errorMessage } from 'src/utilities';
 interface IProps {
   addAlert: (alert: AlertType) => void;
   disabledRepos?: string[];
-  params?: { pulp_label_select: string };
+  params?: { pulp_label_select?: string };
   selectedRepos: AnsibleRepositoryType[];
   setSelectedRepos: (selectedRepos: AnsibleRepositoryType[]) => void;
   singleSelectionOnly?: boolean;
