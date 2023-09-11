@@ -13,14 +13,12 @@ interface IProps {
   addAlert: (alert: AlertType) => void;
   closeAction: () => void;
   collectionVersion: CollectionVersionSearch;
-  finishAction: () => void;
 }
 
 export const CopyCollectionToRepositoryModal = ({
   addAlert: parentAddAlert,
   closeAction,
   collectionVersion,
-  finishAction,
 }: IProps) => {
   const { settings } = useContext();
   const { collection_version, repository } = collectionVersion;
@@ -67,7 +65,7 @@ export const CopyCollectionToRepositoryModal = ({
             ),
           ),
         );
-        finishAction();
+        closeAction();
       })
       .catch((e) =>
         addAlert({
