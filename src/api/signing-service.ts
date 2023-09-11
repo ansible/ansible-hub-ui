@@ -11,6 +11,7 @@ export class SigningServiceType {
 
 export class API extends PulpAPI {
   apiPath = 'signing-services/';
+  useOrdering = true;
 
   // list(params?)
 }
