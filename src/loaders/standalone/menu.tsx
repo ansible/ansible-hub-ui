@@ -154,9 +154,9 @@ function standaloneMenu() {
 }
 
 function activateMenu(items, pathname) {
-  const normalize = (s) => s.replace(/\/$/, '').replace(/\/:[^\/:]+$/, '');
+  const normalize = (s) => s.replace(/\/$/, '').replace(/\/:[^/:]+$/, '');
   const normalizedPathname = normalize(pathname).replace(
-    /\/repo\/[^\/]+\//,
+    /\/repo\/[^/]+\//,
     '/repo/:repo/',
   );
 
