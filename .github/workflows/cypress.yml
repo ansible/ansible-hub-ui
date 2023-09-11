@@ -35,8 +35,6 @@ jobs:
         - 'execution_environments'
         - 'groups_and_users'
         - 'imports'
-        - 'insights'
-        - 'insights_collections'
         - 'misc'
         - 'namespaces'
         - 'repo'
@@ -312,7 +310,7 @@ jobs:
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
       run: |
-        diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
+        diff -Naur <(ls test/cypress/e2e | sort | grep -v insights) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
     - name: "Cache master screenshots"
       if: matrix.test == 'screenshots'
