@@ -48,7 +48,9 @@ describe('screenshots', () => {
     screenshot('/legacy/namespaces');
 
     screenshot('/tasks', { blackout: ['time'] });
-    screenshot('/signature-keys', { blackout: ['time'] });
+    screenshot('/signature-keys', {
+      blackout: ['time', '[data-cy=hub-signature-list-fingerprint]'],
+    });
     screenshot('/users', { blackout: ['time'] });
     screenshot('/group-list');
     screenshot('/roles', { blackout: ['time'] });
