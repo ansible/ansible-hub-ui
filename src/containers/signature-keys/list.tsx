@@ -236,7 +236,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     return (
       <tr key={index}>
         <td>{name}</td>
-        <td>{pubkey_fingerprint}</td>
+        <td data-cy='hub-signature-list-fingerprint'>{pubkey_fingerprint}</td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
@@ -256,7 +256,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
 
   private query() {
     this.setState({ loading: true }, () => {
-      SigningServiceAPI.list(this.state.params)
+      SigningServiceAPI.list({ sort: 'name', ...this.state.params })
         .then((result) => {
           this.setState({
             items: result.data.results,
