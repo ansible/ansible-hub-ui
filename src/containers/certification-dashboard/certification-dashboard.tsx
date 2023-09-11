@@ -43,6 +43,7 @@ import {
   parsePulpIDFromURL,
   repositoryBasePath,
   waitForTask,
+  waitForTaskUrl,
   withRouter,
 } from 'src/utilities';
 import './certification-dashboard.scss';
@@ -530,7 +531,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
       parsePulpIDFromURL(repository.pulp_href),
       version.pulp_href,
     )
-      .then(({ data: { task } }) => waitForTask(task))
+      .then(({ data: { task } }) => waitForTaskUrl(task))
       .then(() =>
         this.addAlert(
           t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
