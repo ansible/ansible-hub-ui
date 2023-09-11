@@ -81,19 +81,19 @@ jobs:
         echo "COMPARE_SCREENSHOTS=${COMPARE_SCREENSHOTS}" >> $GITHUB_ENV
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: 'ansible-hub-ui'
 
     - name: "Checkout galaxy_ng (${{ env.SHORT_BRANCH }})"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: 'ansible/galaxy_ng'
         ref: '${{ env.SHORT_BRANCH }}'
         path: 'galaxy_ng'
 
     - name: "Checkout oci_env (main)"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: 'pulp/oci_env'
         path: 'oci_env'
