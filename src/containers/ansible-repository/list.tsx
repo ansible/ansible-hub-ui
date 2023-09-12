@@ -19,7 +19,6 @@ import {
   ListPage,
   PulpLabels,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
 import { lastSyncStatus, lastSynced, parsePulpIDFromURL } from 'src/utilities';
@@ -64,15 +63,15 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
       inputType: 'select',
       options: [
         {
-          id: `pipeline=${Constants.NOTCERTIFIED}`,
+          id: 'pipeline=rejected',
           title: t`Rejected`,
         },
         {
-          id: `pipeline=${Constants.NEEDSREVIEW}`,
+          id: 'pipeline=staging',
           title: t`Needs Review`,
         },
         {
-          id: `pipeline=${Constants.APPROVED}`,
+          id: 'pipeline=approved',
           title: t`Approved`,
         },
       ],
