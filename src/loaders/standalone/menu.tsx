@@ -87,16 +87,16 @@ function standaloneMenu() {
       ],
     ),
     menuSection(
-      t`Legacy`,
+      t`Roles`,
       {
         condition: ({ featureFlags }) => featureFlags.legacy_roles,
       },
       [
-        menuItem(t`Legacy Roles`, {
+        menuItem(t`Roles`, {
           url: formatPath(Paths.legacyRoles),
           // alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
-        menuItem(t`Legacy Namespaces`, {
+        menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
           // alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
@@ -198,9 +198,9 @@ function MenuItem({ item, context }) {
       {item.url && item.external ? (
         <a
           href={item.url}
-          data-cy={item['data-cy']}
           target='_blank'
           rel='noreferrer'
+          data-cy={`hub-menu-item-${item.name}`}
         >
           {item.name}
           <ExternalLinkAltIcon
@@ -208,7 +208,9 @@ function MenuItem({ item, context }) {
           />
         </a>
       ) : item.url ? (
-        <Link to={item.url}>{item.name}</Link>
+        <Link to={item.url} data-cy={`hub-menu-item-${item.name}`}>
+          {item.name}
+        </Link>
       ) : (
         item.name
       )}
@@ -223,6 +225,7 @@ function MenuSection({ section, context, expandedSections }) {
       groupId={section.name}
       isActive={section.active}
       isExpanded={expandedSections.includes(section.name)}
+      data-cy={`hub-menu-section-${section.name}`}
     >
       <Menu
         items={section.items}

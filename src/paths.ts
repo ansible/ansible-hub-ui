@@ -89,10 +89,10 @@ export enum Paths {
   login = '/login',
   logout = '/logout',
   landingPage = '/',
-  legacyRole = '/legacy/roles/:username/:name',
-  legacyRoles = '/legacy/roles/',
-  legacyNamespace = '/legacy/namespaces/:namespaceid',
-  legacyNamespaces = '/legacy/namespaces/',
+  legacyRole = '/standalone/roles/:username/:name',
+  legacyRoles = '/standalone/roles/',
+  legacyNamespace = '/standalone/namespaces/:namespaceid',
+  legacyNamespaces = '/standalone/namespaces/',
   searchByRepo = '/repo/:repo',
   myCollectionsByRepo = '/repo/:repo/my-namespaces/:namespace',
   collectionByRepo = '/repo/:repo/:namespace/:collection',
@@ -124,6 +124,12 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
+
+  // for compatibility with old beta routes, remove later
+  compatLegacyRole = '/legacy/roles/:username/:name',
+  compatLegacyRoles = '/legacy/roles/',
+  compatLegacyNamespace = '/legacy/namespaces/:namespaceid',
+  compatLegacyNamespaces = '/legacy/namespaces/',
 }
 
 export const namespaceBreadcrumb = () =>

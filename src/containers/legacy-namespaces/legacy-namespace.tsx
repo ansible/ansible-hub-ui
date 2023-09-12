@@ -306,7 +306,7 @@ class LegacyNamespace extends React.Component<
           closeAlert={(i) => this.closeAlert(i)}
         />
         <DataList
-          aria-label={t`Namespace Header`}
+          aria-label={t`Role namespace header`}
           className='hub-legacy-namespace-page'
         >
           <DataListItem data-cy='LegacyNamespace'>

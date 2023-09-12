@@ -210,11 +210,16 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
         isDisabled: isContainerDisabled,
       },
 
-      // LEGACY ...
+      // roles ...
       { component: LegacyNamespace, path: Paths.legacyNamespace },
       { component: LegacyNamespaces, path: Paths.legacyNamespaces },
       { component: LegacyRole, path: Paths.legacyRole },
       { component: LegacyRoles, path: Paths.legacyRoles },
+      // ... but still support legacy urls
+      { component: LegacyNamespace, path: Paths.compatLegacyNamespace },
+      { component: LegacyNamespaces, path: Paths.compatLegacyNamespaces },
+      { component: LegacyRole, path: Paths.compatLegacyRole },
+      { component: LegacyRoles, path: Paths.compatLegacyRoles },
 
       {
         component: TaskListView,
