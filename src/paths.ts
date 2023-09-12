@@ -114,10 +114,4 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
-
-  // for compatibility with old beta routes, remove later
-  compatLegacyRole = '/legacy/roles/:username/:name',
-  compatLegacyRoles = '/legacy/roles/',
-  compatLegacyNamespace = '/legacy/namespaces/:namespaceid',
-  compatLegacyNamespaces = '/legacy/namespaces/',
 }
