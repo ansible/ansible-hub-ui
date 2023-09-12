@@ -44,12 +44,14 @@ function standaloneMenu() {
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
+        alternativeUrls: [formatPath(Paths.searchByRepo)],
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths[NAMESPACE_TERM]),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
+        alternativeUrls: [formatPath(Paths.myNamespaces)],
       }),
       menuItem(t`Repositories`, {
         condition: canViewAnsibleRepositories,
@@ -92,15 +94,18 @@ function standaloneMenu() {
       [
         menuItem(t`Legacy Roles`, {
           url: formatPath(Paths.legacyRoles),
+          // alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Legacy Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
+          // alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],
     ),
     menuItem(t`Task Management`, {
       url: formatPath(Paths.taskList),
       condition: isLoggedIn,
+      alternativeUrls: [formatPath(Paths.taskDetail)],
     }),
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
@@ -137,21 +142,33 @@ function standaloneMenu() {
       menuItem(t`Groups`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.groupList),
+        alternativeUrls: [formatPath(Paths.groupDetail)],
       }),
       menuItem(t`Roles`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.roleList),
+        alternativeUrls: [formatPath(Paths.roleEdit)],
       }),
     ]),
   ];
 }
 
 function activateMenu(items, pathname) {
+  const normalize = (s) => s.replace(/\/$/, '').replace(/\/:[^/:]+$/, '');
+  const normalizedPathname = normalize(pathname).replace(
+    /\/repo\/[^/]+\//,
+    '/repo/:repo/',
+  );
+
   items.forEach((item) => {
     item.active =
       item.type === 'section'
         ? activateMenu(item.items, pathname)
-        : pathname.replace(/\/$/, '').startsWith(item.url.replace(/\/$/, ''));
+        : normalizedPathname.startsWith(normalize(item.url)) ||
+          (item.alternativeUrls?.length &&
+            item.alternativeUrls.some((url) =>
+              normalizedPathname.startsWith(normalize(url)),
+            ));
   });
 
   return some(items, 'active');
