@@ -4,12 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'main', 'stable-*', 'feature/*' ]
+    branches: [ 'stable-*' ]
   push:
-    branches: [ 'main', 'stable-*', 'feature/*' ]
-  # monthly on stable-4.6
-  schedule:
-  - cron: '30 5 1 * *'
+    branches: [ 'stable-*' ]
 
 concurrency:
   group: cypress-${{ github.ref }}
