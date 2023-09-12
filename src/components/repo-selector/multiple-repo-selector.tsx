@@ -14,8 +14,9 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRepositoryType } from 'src/api';
+import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import {
+  AlertType,
   AppliedFilters,
   CheckboxRow,
   CompoundFilter,
@@ -23,19 +24,18 @@ import {
   RadioRow,
   SortTable,
 } from 'src/components';
+import { errorMessage } from 'src/utilities';
 
 interface IProps {
-  allRepositories: AnsibleRepositoryType[];
-  fixedRepos: string[];
-  loadRepos: (params, setRepositoryList, setLoading, setItemsCount) => void;
-  selectedRepos: string[];
-  setSelectedRepos: (selectedRepos: string[]) => void;
+  addAlert: (alert: AlertType) => void;
+  disabledRepos?: string[];
+  params?: { pulp_label_select?: string };
+  selectedRepos: AnsibleRepositoryType[];
+  setSelectedRepos: (selectedRepos: AnsibleRepositoryType[]) => void;
   singleSelectionOnly?: boolean;
-  hideFixedRepos?: boolean;
 }
 
 export const MultipleRepoSelector = (props: IProps) => {
-  const [isSelectorChecked, setIsSelectorChecked] = useState(false);
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [inputText, setInputText] = useState('');
   const [repositoryList, setRepositoryList] = useState<AnsibleRepositoryType[]>(
@@ -49,60 +49,79 @@ export const MultipleRepoSelector = (props: IProps) => {
     sort: 'name',
   });
 
-  function changeSelection(name) {
-    if (props.fixedRepos.includes(name)) {
+  const selectedRepos = props.selectedRepos.map(({ name }) => name);
+  const disabledRepos = props.disabledRepos || [];
+
+  const isSelectorChecked = repositoryList
+    .map(({ name }) => name)
+    .every((n) => selectedRepos.includes(n) || disabledRepos.includes(n));
+
+  function loadRepos() {
+    setLoading(true);
+
+    AnsibleRepositoryAPI.list({
+      ...params,
+      ...(props.params || {}),
+    })
+      .then(({ data: { count, results } }) => {
+        setRepositoryList(results);
+        setItemsCount(count);
+      })
+      .catch(({ response: { status, statusText } }) =>
+        props.addAlert({
+          title: t`Failed to load repositories.`,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        }),
+      )
+      .finally(() => setLoading(false));
+  }
+
+  function changeSelection(repo) {
+    const { name } = repo;
+    if (disabledRepos.includes(name)) {
       return;
     }
 
-    const checked = props.selectedRepos.includes(name);
+    const checked = selectedRepos.includes(name);
 
     if (checked) {
       // remove
       props.setSelectedRepos(
-        props.selectedRepos.filter((element) => element != name),
+        props.selectedRepos.filter(({ name: element }) => element != name),
       );
     } else {
       // add
-      props.setSelectedRepos([...props.selectedRepos, name]);
+      props.setSelectedRepos([...props.selectedRepos, repo]);
     }
   }
 
-  function renderLabels() {
-    const labels = (
-      <>
-        <LabelGroup>
-          {props.selectedRepos.map((name) => {
-            let label = null;
-            if (props.fixedRepos.includes(name)) {
-              if (!props.hideFixedRepos) {
-                label = <Label>{name}</Label>;
-              }
-            } else {
-              label = (
-                <Label onClose={() => changeSelection(name)}>{name}</Label>
-              );
-            }
-            return <>{label} </>;
-          })}
-        </LabelGroup>
-      </>
-    );
+  function setSelection(repo) {
+    props.setSelectedRepos(repo ? [repo] : null);
+  }
 
+  function renderLabels() {
     return (
-      <>
-        <Flex>
-          <FlexItem>
-            <b>{t`Selected`}</b>
-          </FlexItem>
-          <FlexItem>{labels}</FlexItem>
-        </Flex>
-      </>
+      <Flex>
+        <FlexItem>
+          <b>{t`Selected`}</b>
+        </FlexItem>
+        <FlexItem>
+          <LabelGroup>
+            {selectedRepos.map((name) => (
+              <>
+                <Label onClose={() => changeSelection({ name })}>{name}</Label>{' '}
+              </>
+            ))}
+          </LabelGroup>
+        </FlexItem>
+      </Flex>
     );
   }
 
   useEffect(() => {
-    props.loadRepos(params, setRepositoryList, setLoading, setItemsCount);
-  }, [params, props.allRepositories]);
+    loadRepos();
+  }, [params, props.params?.pulp_label_select]);
 
   function renderMultipleSelector() {
     function onToggle(isOpen: boolean) {
@@ -123,32 +142,31 @@ export const MultipleRepoSelector = (props: IProps) => {
       const newRepos = [...props.selectedRepos];
 
       repositoryList.forEach((repo) => {
-        if (!props.selectedRepos.includes(repo.name)) {
-          newRepos.push(repo.name);
+        if (
+          !selectedRepos.includes(repo.name) &&
+          !disabledRepos.includes(repo.name)
+        ) {
+          newRepos.push(repo);
         }
       });
 
       props.setSelectedRepos(newRepos);
-      setIsSelectorChecked(true);
     }
 
     function deselectAll() {
-      props.setSelectedRepos(props.fixedRepos);
-      setIsSelectorChecked(false);
+      props.setSelectedRepos([]);
     }
 
     function deselectPage() {
-      const newSelectedRepos = props.selectedRepos.filter(
-        (repo) =>
-          props.fixedRepos.includes(repo) ||
-          !repositoryList.find((repo2) => repo2.name == repo),
+      const newRepos = props.selectedRepos.filter(
+        ({ name: repo1 }) =>
+          !repositoryList.find(({ name: repo2 }) => repo1 === repo2),
       );
-      props.setSelectedRepos(newSelectedRepos);
-      setIsSelectorChecked(false);
+
+      props.setSelectedRepos(newRepos);
     }
 
     function onToggleCheckbox() {
-      setIsSelectorChecked(!isSelectorChecked);
       if (isSelectorChecked) {
         deselectPage();
       } else {
@@ -168,7 +186,7 @@ export const MultipleRepoSelector = (props: IProps) => {
       <DropdownItem
         onClick={deselectAll}
         key='deselect-all'
-      >{t`Deselect all (${props.selectedRepos.length} items)`}</DropdownItem>,
+      >{t`Deselect all (${selectedRepos.length} items)`}</DropdownItem>,
     ];
 
     return (
@@ -180,7 +198,7 @@ export const MultipleRepoSelector = (props: IProps) => {
               <DropdownToggleCheckbox
                 id='split-button-toggle-checkbox'
                 key='split-checkbox'
-                aria-label='Select all'
+                aria-label={t`Select page`}
                 checked={isSelectorChecked}
                 onChange={onToggleCheckbox}
               />,
@@ -231,11 +249,12 @@ export const MultipleRepoSelector = (props: IProps) => {
             <RadioRow
               rowIndex={i}
               key={repo.name}
-              isSelected={props.selectedRepos.includes(repo.name)}
-              onSelect={() => {
-                props.setSelectedRepos([repo.name]);
-              }}
-              isDisabled={props.fixedRepos.includes(repo.name)}
+              isSelected={
+                selectedRepos.includes(repo.name) ||
+                disabledRepos.includes(repo.name)
+              }
+              onSelect={() => setSelection(repo)}
+              isDisabled={disabledRepos.includes(repo.name)}
               data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
             >
               <td>{repo.name}</td>
@@ -245,11 +264,12 @@ export const MultipleRepoSelector = (props: IProps) => {
             <CheckboxRow
               rowIndex={i}
               key={repo.name}
-              isSelected={props.selectedRepos.includes(repo.name)}
-              onSelect={() => {
-                changeSelection(repo.name);
-              }}
-              isDisabled={props.fixedRepos.includes(repo.name)}
+              isSelected={
+                selectedRepos.includes(repo.name) ||
+                disabledRepos.includes(repo.name)
+              }
+              onSelect={() => changeSelection(repo)}
+              isDisabled={disabledRepos.includes(repo.name)}
               data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
             >
               <td>{repo.name}</td>
@@ -310,7 +330,7 @@ export const MultipleRepoSelector = (props: IProps) => {
         />
       </div>
 
-      {loading ? <Spinner /> : renderTable()}
+      {loading ? <Spinner size='lg' /> : renderTable()}
 
       <div className='footer'>
         <Pagination

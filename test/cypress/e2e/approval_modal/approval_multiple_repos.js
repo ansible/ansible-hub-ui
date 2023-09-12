@@ -8,15 +8,10 @@ function openModal(menu) {
   cy.contains('Clear all filters').click();
 
   if (menu) {
-    cy.get(
-      '[data-cy^="CertificationDashboard-row"] [aria-label="Actions"]',
-    ).click();
+    cy.get('[data-cy^="ApprovalRow"] [aria-label="Actions"]').click();
     cy.contains('a', 'Sign and approve').click();
   } else {
-    cy.contains(
-      '[data-cy^="CertificationDashboard-row"] button',
-      'Sign and approve',
-    ).click();
+    cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
   }
 
   cy.contains('Select repositories');
@@ -31,7 +26,7 @@ function toggleItem(name) {
 
 function menuActionClick(repo, action) {
   cy.get(
-    `[data-cy="CertificationDashboard-row-${repo}-namespace-collection1"] [aria-label="Actions"]`,
+    `[data-cy="ApprovalRow-${repo}-namespace-collection1"] [aria-label="Actions"]`,
   ).click();
   cy.contains('[data-cy="kebab-toggle"] a', action).click();
 }
@@ -45,7 +40,7 @@ function rejectItem(repo) {
   cy.visit(`${uiPrefix}approval-dashboard`);
   cy.contains('Clear all filters').click();
   cy.contains(
-    `[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]`,
+    `[data-cy="ApprovalRow-rejected-namespace-collection1"]`,
     'Rejected',
   );
 }
@@ -138,18 +133,14 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     // 2 items should be left there
     cy.contains('.hub-toolbar', '1 - 2 of 2');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]',
+    cy.get('[data-cy="ApprovalRow-rejected-namespace-collection1"]');
+    cy.get('[data-cy="ApprovalRow-repo2-namespace-collection1"]');
+    cy.get('[data-cy="ApprovalRow-repo1-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]',
+    cy.get('[data-cy="ApprovalRow-published-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]',
-    ).should('not.exist');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-published-namespace-collection1"]',
-    ).should('not.exist');
 
     // reapprove
     menuActionClick('rejected', 'Sign and approve');
@@ -165,18 +156,14 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('Clear all filters').click();
     cy.contains('.hub-toolbar', '1 - 2 of 2');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo2-namespace-collection1"]',
+    cy.get('[data-cy="ApprovalRow-repo2-namespace-collection1"]');
+    cy.get('[data-cy="ApprovalRow-repo1-namespace-collection1"]');
+    cy.get('[data-cy="ApprovalRow-published-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-repo1-namespace-collection1"]',
+    cy.get('[data-cy="ApprovalRow-rejected-namespace-collection1"]').should(
+      'not.exist',
     );
-    cy.get(
-      '[data-cy="CertificationDashboard-row-published-namespace-collection1"]',
-    ).should('not.exist');
-    cy.get(
-      '[data-cy="CertificationDashboard-row-rejected-namespace-collection1"]',
-    ).should('not.exist');
   });
 
   it('should be able to approve from different staging repo', () => {
@@ -193,9 +180,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     );
 
     cy.visit(`${uiPrefix}approval-dashboard`);
-    cy.get(
-      '[data-cy="CertificationDashboard-row-staging2-namespace-collection1"]',
-    );
+    cy.get('[data-cy="ApprovalRow-staging2-namespace-collection1"]');
 
     openModal();
     toggleItem('repo1');
