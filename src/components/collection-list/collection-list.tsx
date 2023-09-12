@@ -23,7 +23,6 @@ interface IProps {
   ignoredParams: string[];
   collectionControls: (collection) => {
     dropdownMenu?: React.ReactNode | null;
-    synclistSwitch?: React.ReactNode | null;
     uploadButton?: React.ReactNode | null;
   };
 }
