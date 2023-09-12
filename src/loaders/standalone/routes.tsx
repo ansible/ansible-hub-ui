@@ -29,7 +29,6 @@ import {
   ExecutionEnvironmentRegistryList,
   GroupDetail,
   GroupList,
-  LandingPage,
   LegacyNamespace,
   LegacyNamespaces,
   LegacyRole,
@@ -264,7 +263,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: CertificationDashboard, path: Paths.approvalDashboard },
       { component: NotFound, path: Paths.notFound },
       { component: TokenStandalone, path: Paths.token },
-      { component: Partners, path: Paths[NAMESPACE_TERM] },
+      { component: Partners, path: Paths.namespaces },
       { component: EditNamespace, path: Paths.editNamespace },
       { component: NamespaceDetail, path: Paths.myCollections },
       { component: NamespaceDetail, path: Paths.myCollectionsByRepo },
@@ -294,7 +293,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: MyImports, path: Paths.myImports },
       { component: NamespaceDetail, path: Paths.namespace },
       { component: Search, path: Paths.collections },
-      { component: LandingPage, path: Paths.landingPage },
+      { component: Search, path: Paths.landingPage },
       { component: Dispatch, path: Paths.dispatch },
     ];
   }

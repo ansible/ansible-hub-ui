@@ -4,12 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
+    branches: [ 'stable-*' ]
   push:
-    branches: [ 'master', 'stable-*', 'feature/*' ]
-  # daily on master
-  schedule:
-  - cron: '30 5 * * *'
+    branches: [ 'stable-*' ]
 
 concurrency:
   group: cypress-${{ github.ref }}
@@ -19,8 +16,8 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
     env:
-      # base of a PR, or pushed-to branch outside PRs, or master
-      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
+      # base of a PR, or pushed-to branch outside PRs, or stable-4.8
+      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/stable-4.8' }}
 
     strategy:
       fail-fast: false
@@ -30,7 +27,6 @@ jobs:
         - 'approval'
         - 'approval_modal'
         - 'collections'
-        - 'community'
         - 'ee_controller'
         - 'execution_environments'
         - 'groups_and_users'
@@ -44,36 +40,21 @@ jobs:
     - name: "Install galaxykit dependency"
       run: |
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
+        # TODO: pip install galaxykit
         pip install git+https://github.com/ansible/galaxykit.git
 
-    - name: "Set env.SHORT_BRANCH, BACKEND_FLAVOR"
+    - name: "Set env.SHORT_BRANCH"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
 
-        case "${{ matrix.test }}" in
-          community*)
-            BACKEND_FLAVOR=community
-            echo "community"
-            ;;
-          insights*)
-            BACKEND_FLAVOR=insights
-            echo "insights"
-            ;;
-          *)
-            BACKEND_FLAVOR=standalone
-            echo "standalone"
-            ;;
-        esac
-
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
-        echo "BACKEND_FLAVOR=${BACKEND_FLAVOR}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
 
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
       run: |
-        UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
-        echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
+        UI_COMMIT_MAIN=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        echo "UI_COMMIT_MAIN=${UI_COMMIT_MAIN}" >> $GITHUB_ENV
 
         COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
         echo 'compare screenshots:'
@@ -104,7 +85,7 @@ jobs:
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
         cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$BACKEND_FLAVOR" \
+          ../ansible-hub-ui/.github/workflows/cypress/compose.env.standalone \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -144,7 +125,6 @@ jobs:
         npm run gettext:compile
 
     - name: "Build standalone UI"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       working-directory: 'ansible-hub-ui'
       run: |
         npm run build-standalone
@@ -153,18 +133,7 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
-    - name: "Build community UI"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      working-directory: 'ansible-hub-ui'
-      run: |
-        npm run build-community
-
-        # save the App.*.js hash for later verification
-        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
-        echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
-
     - name: "Serve standalone UI"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         mkdir -p www/static/
         mv ansible-hub-ui/dist www/static/galaxy_ng
@@ -176,38 +145,6 @@ jobs:
           --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
           --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
-
-    - name: "Serve community UI"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        mkdir -p www/
-        mv ansible-hub-ui/dist/* www/
-        cd www
-        echo '{}' > package.json
-
-        npm install local-web-server
-        node_modules/.bin/ws --port 8002 --directory . --spa index.html \
-          --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
-          --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
-          --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
-          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
-
-    - name: "Run insights UI"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      working-directory: 'ansible-hub-ui'
-      run: |
-        # pre-pull containers (and check for version changes)
-        FROM=node_modules/@redhat-cloud-services/frontend-components-config-utilities/standalone/services/
-        grep postgres:9.6 "$FROM"/rbac.js
-        docker pull postgres:9.6
-        grep redis:5.0.4 "$FROM"/rbac.js
-        docker pull redis:5.0.4
-        grep quay.io/cloudservices/rbac "$FROM"/rbac.js
-        docker pull quay.io/cloudservices/rbac
-        grep jboss/keycloak "$FROM"/default/chrome.js
-        docker pull jboss/keycloak
-
-        npm run start-insights &
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
@@ -222,95 +159,38 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json."$BACKEND_FLAVOR" cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json.standalone cypress.env.json
 
-    - name: "Ensure standalone index.html uses the new js"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
+    - name: "Ensure index.html uses the new js"
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure community index.html uses the new js"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        echo 'expecting /js/App.'"$BUILD_HASH"'.js'
-        curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
-
-    - name: "Ensure insights is served"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        echo waiting for containers to start
-        sleep 30
-        curl http://localhost:8002/preview/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
-        sleep 30
-
-    - name: "Ensure galaxykit can connect to API (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        galaxykit -s http://localhost:8002/api/ -u admin -p admin collection list
-
     - name: "Ensure galaxykit can connect to API (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Ensure galaxykit can connect to API (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        galaxykit -s http://localhost:8002/api/automation-hub/ \
-          -u admin -p admin \
-          --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
-          collection list
-
-    - name: "Check initial feature flags (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        curl -s http://localhost:5001/api/_ui/v1/feature-flags/ | jq
-
     - name: "Check initial feature flags (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
 
-    - name: "Check initial feature flags (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
-
-    - name: "Check component versions & settings (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/v3/auth/token/ | jq -r .token`
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/ | jq
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/_ui/v1/settings/ | jq
-
     - name: "Check component versions & settings (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
 
-    - name: "Check component versions & settings (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        BEARER=`curl -s -H "Content-Type: application/x-www-form-urlencoded" \
-          -d "client_id=cloud-services&username=admin&password=admin&grant_type=password" \
-          http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token | jq -r .access_token`
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/ | jq
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/_ui/v1/settings/ | jq
-
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
       run: |
-        diff -Naur <(ls test/cypress/e2e | sort | grep -v insights) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
+        diff -Naur <(ls test/cypress/e2e | sort) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
-    - name: "Cache master screenshots"
+    - name: "Cache original screenshots"
       if: matrix.test == 'screenshots'
       uses: actions/cache@v3
       with:
         path: ansible-hub-ui/test/screenshots-main/
-        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MASTER }}
+        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MAIN }}
         restore-keys: |
           screenshots-${{env.SHORT_BRANCH}}-
 
@@ -361,7 +241,7 @@ jobs:
           exit 1
         fi
 
-    - name: "Move Cache master screenshots"
+    - name: "Move cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
       working-directory: 'ansible-hub-ui/test'
       run: |

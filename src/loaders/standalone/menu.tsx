@@ -47,7 +47,7 @@ function standaloneMenu() {
         alternativeUrls: [formatPath(Paths.searchByRepo)],
       }),
       menuItem(t`Namespaces`, {
-        url: formatPath(Paths[NAMESPACE_TERM]),
+        url: formatPath(Paths.namespaces),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
@@ -94,11 +94,9 @@ function standaloneMenu() {
       [
         menuItem(t`Roles`, {
           url: formatPath(Paths.legacyRoles),
-          // alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.legacyNamespaces),
-          // alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],
     ),
@@ -114,25 +112,11 @@ function standaloneMenu() {
         !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
-      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4',
       external: true,
-      condition: ({ featureFlags, settings, user }) =>
-        !featureFlags.ai_deny_index &&
-        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous),
-    }),
-    menuItem(t`Documentation`, {
-      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
-      external: true,
-      condition: ({ featureFlags, settings, user }) =>
-        featureFlags.ai_deny_index &&
-        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous),
-    }),
-    menuItem(t`Terms of Use`, {
-      url: 'https://www.redhat.com/en/about/terms-use',
-      external: true,
-      condition: ({ featureFlags }) => featureFlags.legacy_roles,
+      condition: ({ settings, user }) =>
+        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+        !user.is_anonymous,
     }),
     menuSection(t`User Access`, {}, [
       menuItem(t`Users`, {

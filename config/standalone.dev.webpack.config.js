@@ -19,12 +19,6 @@ module.exports = webpackBase({
   // Port that the UI is served over
   UI_PORT: 8002,
 
-  // Determines if the app should be compiled to run on insights or on
-  // another platform. Options: insights, standalone
-  DEPLOYMENT_MODE: 'standalone',
-
-  NAMESPACE_TERM: 'namespaces',
-
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 

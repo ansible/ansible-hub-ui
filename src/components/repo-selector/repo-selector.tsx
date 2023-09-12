@@ -6,7 +6,6 @@ import {
   InputGroupText,
 } from '@patternfly/react-core';
 import React from 'react';
-import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
 
 interface IProps {
@@ -16,9 +15,6 @@ interface IProps {
 export const RepoSelector = ({ selectedRepo }: IProps) => {
   const { featureFlags } = useContext();
 
-  if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-    return null;
-  }
   if (!featureFlags.display_repositories) {
     return null;
   }
