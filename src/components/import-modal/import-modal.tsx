@@ -18,7 +18,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { errorMessage, repositoryBasePath } from 'src/utilities';
+import { repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 
 enum Status {
@@ -41,10 +41,9 @@ interface IState {
   errorVariant: 'default' | 'skippable' | 'skipped';
   uploadProgress: number;
   uploadStatus: Status;
-  allRepos: AnsibleRepositoryType[];
   loading: boolean;
   alerts: AlertType[];
-  selectedRepos: string[];
+  selectedRepos: AnsibleRepositoryType[]; // 0 or 1 repos
   onlyStaging: boolean;
 }
 
@@ -62,7 +61,6 @@ export class ImportModal extends React.Component<IProps, IState> {
       errorVariant: 'default' as const,
       uploadProgress: 0,
       uploadStatus: Status.waiting,
-      allRepos: [],
       loading: true,
       alerts: [],
       selectedRepos: [],
@@ -74,29 +72,36 @@ export class ImportModal extends React.Component<IProps, IState> {
     this.loadAllRepos();
   }
 
-  private loadAllRepos() {
+  private async loadAllRepos() {
     const { onlyStaging } = this.state;
+
+    const staging = onlyStaging
+      ? await AnsibleRepositoryAPI.list({
+          name: 'staging',
+          page_size: 1,
+          pulp_label_select: 'pipeline=staging',
+        })
+          .then(({ data: { results } }) => results[0])
+          .catch(() => null)
+      : null;
 
     return AnsibleRepositoryAPI.list({
       pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
       page_size: 1,
     })
-      .then(({ data: { count, results } }) => {
+      .then(({ data: { count, results } }) =>
         this.setState({
           selectedRepos: onlyStaging
-            ? ['staging']
+            ? [staging || results[0]].filter(Boolean)
             : count === 1
-            ? [results[0].name]
+            ? [results[0]]
             : [],
-          loading: false,
-          // new value triggers MultipleRepoSelector reload (loadRepos)
-          allRepos: [],
-        });
-      })
-      .catch((error) => {
-        this.addAlert(t`Error loading repositories.`, 'danger', error?.message);
-        this.setState({ loading: false });
-      });
+        }),
+      )
+      .catch((error) =>
+        this.addAlert(t`Error loading repositories.`, 'danger', error?.message),
+      )
+      .finally(() => this.setState({ loading: false }));
   }
 
   private addAlert(title, variant, description?) {
@@ -112,30 +117,6 @@ export class ImportModal extends React.Component<IProps, IState> {
     });
   }
 
-  private loadRepos(params, setRepositoryList, setLoading, setItemsCount) {
-    const { onlyStaging } = this.state;
-
-    setLoading(true);
-
-    AnsibleRepositoryAPI.list({
-      ...params,
-      pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
-    })
-      .then((data) => {
-        setLoading(false);
-        setRepositoryList(data.data.results);
-        setItemsCount(data.data.count);
-      })
-      .catch(({ response: { status, statusText } }) => {
-        setLoading(false);
-        this.addAlertObj({
-          title: t`Failed to load repositories.`,
-          variant: 'danger',
-          description: errorMessage(status, statusText),
-        });
-      });
-  }
-
   private addAlertObj(alert) {
     this.addAlert(alert.title, alert.variant, alert.description);
   }
@@ -146,9 +127,15 @@ export class ImportModal extends React.Component<IProps, IState> {
 
   render() {
     const { isOpen, collection } = this.props;
+    const {
+      errors,
+      errorVariant,
+      file,
+      onlyStaging,
+      uploadProgress,
+      uploadStatus,
+    } = this.state;
 
-    const { file, errors, errorVariant, uploadProgress, uploadStatus } =
-      this.state;
     const skipError = () => {
       if (errorVariant === 'skippable') {
         this.setState({ errorVariant: 'skipped' as const });
@@ -168,9 +155,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={() => this.saveFile()}
-            isDisabled={
-              !this.canUpload() || this.state.selectedRepos.length == 0
-            }
+            isDisabled={!this.canUpload() || !this.state.selectedRepos.length}
             data-cy={'confirm-upload'}
           >
             {t`Upload`}
@@ -250,25 +235,18 @@ export class ImportModal extends React.Component<IProps, IState> {
           )}
 
           <MultipleRepoSelector
+            addAlert={(a) => this.addAlertObj(a)}
+            params={{
+              pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
+            }}
             singleSelectionOnly={true}
-            allRepositories={this.state.allRepos}
-            fixedRepos={[]}
             selectedRepos={this.state.selectedRepos}
-            setSelectedRepos={(repos) =>
+            setSelectedRepos={(selectedRepos) =>
               this.setState({
-                selectedRepos: repos,
+                selectedRepos,
                 errors: '',
                 errorVariant: 'default' as const,
               })
-            }
-            hideFixedRepos={true}
-            loadRepos={(params, setRepositoryList, setLoading, setItemsCount) =>
-              this.loadRepos(
-                params,
-                setRepositoryList,
-                setLoading,
-                setItemsCount,
-              )
             }
           />
         </>
@@ -356,15 +334,16 @@ export class ImportModal extends React.Component<IProps, IState> {
   }
 
   async saveFile() {
-    const selectedRepos = this.state.selectedRepos;
+    const [repo] = this.state.selectedRepos;
 
     this.setState({ uploadStatus: Status.uploading });
 
-    const distro_base_path = await repositoryBasePath(selectedRepos[0]).catch(
-      (error) => {
-        this.addAlert(error, 'danger');
-      },
-    );
+    const distro_base_path = await repositoryBasePath(
+      repo.name,
+      repo.pulp_href,
+    ).catch((error) => {
+      this.addAlert(error, 'danger');
+    });
 
     if (!distro_base_path) {
       this.setState({ uploadStatus: Status.waiting });

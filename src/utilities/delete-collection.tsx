@@ -8,7 +8,7 @@ import {
 } from 'src/api';
 import { errorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';
-import { RepositoriesUtils } from './repositories';
+import { repositoryRemoveCollection } from './repository-remove-collection';
 import { waitForTask } from './wait-for-task';
 
 export class DeleteCollectionUtils {
@@ -129,7 +129,7 @@ export class DeleteCollectionUtils {
   }) {
     let promise = null;
     if (deleteFromRepo) {
-      promise = RepositoriesUtils.deleteCollection(
+      promise = repositoryRemoveCollection(
         deleteFromRepo,
         collection.collection_version.pulp_href,
       );

@@ -56,10 +56,10 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RepositoriesUtils,
   canSignNamespace,
   errorMessage,
   parsePulpIDFromURL,
+  repositoryRemoveCollection,
   waitForTask,
 } from 'src/utilities';
 import { DateComponent } from '../date-component/date-component';
@@ -452,14 +452,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         />
         {copyCollectionToRepositoryModal && (
           <CopyCollectionToRepositoryModal
-            collection={collection}
-            closeAction={() => {
-              this.setState({ copyCollectionToRepositoryModal: null });
-            }}
-            addAlert={(alert) => {
-              this.addAlert(alert);
-              this.setState({ copyCollectionToRepositoryModal: null });
-            }}
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() =>
+              this.setState({ copyCollectionToRepositoryModal: null })
+            }
+            collectionVersion={collection}
           />
         )}
         <BaseHeader
@@ -943,7 +940,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     if (deleteAll) {
       promise = CollectionAPI.deleteCollectionVersion(deleteCollection);
     } else {
-      promise = RepositoriesUtils.deleteCollection(
+      promise = repositoryRemoveCollection(
         deleteCollection.repository.name,
         deleteCollection.collection_version.pulp_href,
       );

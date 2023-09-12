@@ -10,7 +10,6 @@ import {
   PulpStatus,
 } from 'src/api';
 import { StatusIndicator } from 'src/components';
-import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import './my-imports.scss';
 
@@ -139,12 +138,12 @@ export class ImportConsole extends React.Component<IProps> {
     let approvalStatus = t`waiting for import to finish`;
 
     if (collection) {
-      const repoStatus = collection.repository.pulp_labels?.pipeline;
-      if (repoStatus === Constants.NOTCERTIFIED) {
+      const pipeline = collection.repository?.pulp_labels?.pipeline;
+      if (pipeline === 'rejected') {
         approvalStatus = t`rejected`;
-      } else if (repoStatus === Constants.NEEDSREVIEW) {
+      } else if (pipeline === 'staging') {
         approvalStatus = t`waiting for approval`;
-      } else if (repoStatus === Constants.APPROVED) {
+      } else if (pipeline === 'approved') {
         approvalStatus = t`approved`;
       } else {
         approvalStatus = t`could not be determined yet`;

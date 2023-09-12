@@ -15,10 +15,6 @@ export class Constants {
       ? 'published'
       : 'rh-certified';
 
-  static NOTCERTIFIED = 'rejected';
-  static NEEDSREVIEW = 'staging';
-  static APPROVED = 'approved';
-
   static USER_GROUP_MGMT_PERMISSIONS = [
     'galaxy.delete_user',
     'galaxy.add_user',
