@@ -4,12 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'main', 'stable-*', 'feature/*' ]
+    branches: [ 'stable-*' ]
   push:
-    branches: [ 'main', 'stable-*', 'feature/*' ]
-  # weekly on stable-4.7
-  schedule:
-  - cron: '30 5 * * 1'
+    branches: [ 'stable-*' ]
 
 concurrency:
   group: cypress-${{ github.ref }}
@@ -43,7 +40,8 @@ jobs:
     - name: "Install galaxykit dependency"
       run: |
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
-        pip install galaxykit
+        # TODO: pip install galaxykit
+        pip install git+https://github.com/ansible/galaxykit.git
 
     - name: "Set env.SHORT_BRANCH"
       run: |
@@ -115,15 +113,20 @@ jobs:
           npm-${{ env.SHORT_BRANCH }}-
           npm-
 
-    - name: "Build standalone UI"
+    - name: 'npm install'
+      working-directory: 'ansible-hub-ui'
+      run: 'npm install'
+
+    - name: 'gettext extract & compile'
       working-directory: 'ansible-hub-ui'
       run: |
-        npm install
-
         # production displays unknown translations literally, make sure it's up to date
         npm run gettext:extract
         npm run gettext:compile
 
+    - name: "Build standalone UI"
+      working-directory: 'ansible-hub-ui'
+      run: |
         npm run build-standalone
 
         # save the App.*.js hash for later verification
@@ -180,7 +183,7 @@ jobs:
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
       run: |
-        diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
+        diff -Naur <(ls test/cypress/e2e | sort) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
     - name: "Cache original screenshots"
       if: matrix.test == 'screenshots'
