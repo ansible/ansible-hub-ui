@@ -471,15 +471,15 @@ msgstr "承認ダッシュボード"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Approval failed."
-msgstr "承認に失敗しました。"
+#~ msgid "Approval failed."
+#~ msgstr "承認に失敗しました。"
 
 #: src/components/my-imports/import-console.tsx
 msgid "Approval status:"
 msgstr "承認状態:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Approve"
 msgstr "承認"
 
@@ -491,9 +491,9 @@ msgstr "リモートからのコレクションを承認、拒否、同期しま
 msgid "approved"
 msgstr "承認"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Approved"
@@ -606,9 +606,7 @@ msgstr "CA 証明書"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -622,6 +620,7 @@ msgstr "CA 証明書"
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/components/shared/multi-repo-modal.tsx
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
@@ -654,11 +653,14 @@ msgstr "コレクション \"{0} {1} v{2}\" の証明書が正常にアップロ
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr "コレクション \"{namespace} {name} v{version}\" の証明書が正常にアップロードされました。"
 
-#: src/components/approve-modal/approve-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスが正常に更新されました。"
+
+#: src/components/approval/approve-modal.tsx
+msgid "Certification status for collection \"{namespace} {name} v{version}\" has been successfully updated."
+msgstr ""
 
 #: src/components/cards/collection-card.tsx
 msgid "Certified"
@@ -881,7 +883,11 @@ msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "コレクション \"{name}\" の非推奨化が正常に解除されました。"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {namespace}.{name} v{version} could not be copied."
 msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx
@@ -913,8 +919,8 @@ msgstr "コレクションにはディストリビューションが割り当て
 #~ msgstr "Collection failed to be removed from those repositories: {0}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection has to be in rejected or staging repository."
-msgstr "コレクションは、拒否されたリポジトリーまたはステージングリポジトリーになければなりません。"
+#~ msgid "Collection has to be in rejected or staging repository."
+#~ msgstr "コレクションは、拒否されたリポジトリーまたはステージングリポジトリーになければなりません。"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 msgid "Collection is not being used by any collection."
@@ -934,8 +940,8 @@ msgstr ""
 #~ msgstr "Collection Namespaces"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection not found in any repository."
-msgstr "コレクションがどのリポジトリーにも見つかりません。"
+#~ msgid "Collection not found in any repository."
+#~ msgstr "コレクションがどのリポジトリーにも見つかりません。"
 
 #: src/constants.tsx
 #~ msgid "Collection Remotes"
@@ -954,7 +960,6 @@ msgstr "コレクションのアップロードが取り消されました"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -986,8 +991,8 @@ msgstr "コレクションが変更されると、コレクションのバージ
 #~ msgstr "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Collection with id {0} not found."
-msgstr "ID {0} 付きコレクションが見つかりません。"
+#~ msgid "Collection with id {0} not found."
+#~ msgstr "ID {0} 付きコレクションが見つかりません。"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
@@ -1573,10 +1578,9 @@ msgid "Deselect all ({0} items)"
 msgstr "すべての選択を解除 ({0} 項目)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Deselect all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Deselect all ({itemsCount} items)"
+#~ msgstr ""
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "ページの選択を解除 ({0} 項目)"
@@ -2052,7 +2056,7 @@ msgstr "タグ \"{tag}\" の {operation} に失敗しました。"
 #~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 #~ msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 msgid "Failed to approve collection."
 msgstr "コレクションの承認に失敗しました。"
 
@@ -2108,9 +2112,7 @@ msgstr "リモートの読み込みに失敗しました: {remotesError}"
 msgid "Failed to load repositories: {error}"
 msgstr "リポジトリーの読み込みに失敗しました: {error}"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/import-modal/import-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "リポジトリーの読み込みに失敗しました。"
 
@@ -2133,6 +2135,10 @@ msgstr "Ansible Lightspeed のオプトアウトに失敗しました。"
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
 #~ msgstr "Failed to opt out of Wisdom."
+
+#: src/components/shared/multi-repo-modal.tsx
+msgid "Failed to query repositories."
+msgstr ""
 
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -2799,8 +2805,6 @@ msgid "My profile"
 msgstr "自分のプロファイル"
 
 #: src/components/collection-detail/collection-content-list.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2934,7 +2938,7 @@ msgstr "名前空間は作成後に表示されます"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr "名前空間は、作成されるかロールがインポートされると表示されます"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs review"
 msgstr "レビューが必要"
 
@@ -2944,7 +2948,7 @@ msgstr "レビューが必要"
 msgid "Needs Review"
 msgstr "レビューが必要"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs signature and review"
 msgstr "署名とレビューが必要"
 
@@ -3670,7 +3674,7 @@ msgstr "レジストリーの同期ステータス"
 msgid "Registry URL"
 msgstr "レジストリー URL"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Reject"
 msgstr "拒否"
 
@@ -3678,9 +3682,9 @@ msgstr "拒否"
 msgid "rejected"
 msgstr "拒否"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Rejected"
@@ -3845,14 +3849,13 @@ msgstr "リポジトリーが作成されると表示されます。"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
 msgstr "リポジトリー"
 
-#: src/utilities/repositories.ts
+#: src/utilities/repository-remove-collection.ts
 msgid "Repository {repoName} not found."
 msgstr "リポジトリー {repoName} が見つかりません。"
 
@@ -3876,8 +3879,8 @@ msgid "Repository name"
 msgstr "リポジトリー名"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Repository name {originRepoName} not found."
-msgstr "リポジトリー名 {originRepoName} が見つかりません。"
+#~ msgid "Repository name {originRepoName} not found."
+#~ msgstr "リポジトリー名 {originRepoName} が見つかりません。"
 
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Repository URL"
@@ -4078,8 +4081,7 @@ msgstr "このタスクのステータスについては、タスク管理の <0
 #~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select"
 msgstr "選択"
 
@@ -4110,8 +4112,8 @@ msgstr "タグの選択"
 #~ msgstr "すべて選択 ({0} 項目)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Select all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Select all ({itemsCount} items)"
+#~ msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -4134,7 +4136,10 @@ msgstr "グループの選択"
 msgid "Select namespace"
 msgstr "名前空間の選択"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+msgid "Select page"
+msgstr ""
+
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "ページの選択 ({0} 項目)"
@@ -4144,8 +4149,7 @@ msgstr "ページの選択 ({0} 項目)"
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select repositories"
 msgstr "リポジトリーの選択"
 
@@ -4160,7 +4164,6 @@ msgstr "ロールの選択"
 msgid "Select users"
 msgstr "ユーザーの選択"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "選択済み"
@@ -4245,8 +4248,8 @@ msgstr "すべてのコレクションへの署名"
 msgid "Sign all collections in {repository}"
 msgstr "{repository} ですべてのコレクションに署名します"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Sign and approve"
 msgstr "署名および承認"
 
@@ -4306,7 +4309,7 @@ msgstr "署名済み"
 msgid "Signed"
 msgstr "署名済み"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
@@ -4318,7 +4321,7 @@ msgstr "署名済みのみ"
 msgid "Signed version(s)"
 msgstr "署名済みバージョン"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "署名サービス {signingServiceName} が見つかりません"
@@ -4386,7 +4389,11 @@ msgid "Start from scratch"
 msgstr "ゼロから始めます"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repo}\"."
 msgstr ""
 
 #: src/actions/ansible-repository-collection-version-add.tsx
@@ -4695,6 +4702,10 @@ msgstr "コレクション \"{name}\" が正常に非推奨化されました。
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr "コレクション \"{name}\" の非推奨化が正常に解除されました。"
 
+#: src/components/shared/multi-repo-modal.tsx
+msgid "The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly."
+msgstr ""
+
 #: src/components/delete-modal/delete-collection-modal.tsx
 msgid "The collection will be deleted only from repository {deleteFromRepo}."
 msgstr ""
@@ -4812,6 +4823,10 @@ msgstr "この名前空間へのインポートはありません。"
 #: src/containers/task-management/task_detail.tsx
 msgid "There is no progress message."
 msgstr "進捗メッセージはありません。"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "There must be only one repository with pipeline=rejected."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "There's no resource record"
@@ -5009,8 +5024,8 @@ msgstr "コレクションのアップロード"
 msgid "Upload new version"
 msgstr "新規バージョンのアップロード"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Upload signature"
 msgstr "署名のアップロード"
 
@@ -5261,7 +5276,7 @@ msgstr "コレクションの表示"
 #~ msgid "View group"
 #~ msgstr "View group"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 

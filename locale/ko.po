@@ -471,15 +471,15 @@ msgstr "승인 대시보드"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Approval failed."
-msgstr "승인에 실패했습니다."
+#~ msgid "Approval failed."
+#~ msgstr "승인에 실패했습니다."
 
 #: src/components/my-imports/import-console.tsx
 msgid "Approval status:"
 msgstr "승인 상태:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Approve"
 msgstr "승인"
 
@@ -491,9 +491,9 @@ msgstr "원격에서 컬렉션을 승인, 거부 및 동기화합니다."
 msgid "approved"
 msgstr "승인됨"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Approved"
@@ -606,9 +606,7 @@ msgstr "CA 인증서"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -622,6 +620,7 @@ msgstr "CA 인증서"
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/components/shared/multi-repo-modal.tsx
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
@@ -654,11 +653,14 @@ msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증서가 성공적으로 업로
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr "컬렉션 \"{namespace} {name} v{version}\"에 대한 인증서가 성공적으로 업로드되었습니다."
 
-#: src/components/approve-modal/approve-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태가 성공적으로 업데이트되었습니다."
+
+#: src/components/approval/approve-modal.tsx
+msgid "Certification status for collection \"{namespace} {name} v{version}\" has been successfully updated."
+msgstr ""
 
 #: src/components/cards/collection-card.tsx
 msgid "Certified"
@@ -881,7 +883,11 @@ msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "컬렉션 \"{name}\"이/가 성공적으로 지원 중단 해제되었습니다."
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {namespace}.{name} v{version} could not be copied."
 msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx
@@ -913,8 +919,8 @@ msgstr "컬렉션에는 배포판이 할당되지 않습니다."
 #~ msgstr "Collection failed to be removed from those repositories: {0}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection has to be in rejected or staging repository."
-msgstr "컬렉션은 거부되거나 스테이징 리포지토리에 있어야 합니다."
+#~ msgid "Collection has to be in rejected or staging repository."
+#~ msgstr "컬렉션은 거부되거나 스테이징 리포지토리에 있어야 합니다."
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 msgid "Collection is not being used by any collection."
@@ -934,8 +940,8 @@ msgstr ""
 #~ msgstr "Collection Namespaces"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection not found in any repository."
-msgstr "리포지토리에서 컬렉션을 찾을 수 없습니다."
+#~ msgid "Collection not found in any repository."
+#~ msgstr "리포지토리에서 컬렉션을 찾을 수 없습니다."
 
 #: src/constants.tsx
 #~ msgid "Collection Remotes"
@@ -954,7 +960,6 @@ msgstr "컬렉션 업로드 취소됨"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -986,8 +991,8 @@ msgstr "컬렉션을 수정하면 컬렉션 버전이 표시됩니다."
 #~ msgstr "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Collection with id {0} not found."
-msgstr "ID인 컬렉션 {0}을/를 찾을 수 없음."
+#~ msgid "Collection with id {0} not found."
+#~ msgstr "ID인 컬렉션 {0}을/를 찾을 수 없음."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
@@ -1573,10 +1578,9 @@ msgid "Deselect all ({0} items)"
 msgstr "모두 선택 해제 ({0} 항목)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Deselect all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Deselect all ({itemsCount} items)"
+#~ msgstr ""
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "페이지 선택 해제 ({0} 항목)"
@@ -2052,7 +2056,7 @@ msgstr "{operation} 태그 \"{tag}\"에 실패했습니다."
 #~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 #~ msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 msgid "Failed to approve collection."
 msgstr "컬렉션을 승인하지 못했습니다."
 
@@ -2108,9 +2112,7 @@ msgstr "원격을 로드하지 못했습니다: {remotesError}"
 msgid "Failed to load repositories: {error}"
 msgstr "리포지토리를 로드하지 못했습니다: {error}"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/import-modal/import-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "리포지토리를 로드하지 못했습니다."
 
@@ -2133,6 +2135,10 @@ msgstr "Ansible Lightspeed를 선택 해제하지 못했습니다."
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
 #~ msgstr "Failed to opt out of Wisdom."
+
+#: src/components/shared/multi-repo-modal.tsx
+msgid "Failed to query repositories."
+msgstr ""
 
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -2799,8 +2805,6 @@ msgid "My profile"
 msgstr "내 프로필"
 
 #: src/components/collection-detail/collection-content-list.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2934,7 +2938,7 @@ msgstr "생성된 네임스페이스가 나타납니다"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr "생성된 네임스페이스 또는 역할을 가져오면 네임스페이스가 나타납니다"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs review"
 msgstr "검토 필요"
 
@@ -2944,7 +2948,7 @@ msgstr "검토 필요"
 msgid "Needs Review"
 msgstr "검토 필요"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs signature and review"
 msgstr "서명 및 검토 필요"
 
@@ -3670,7 +3674,7 @@ msgstr "레지스트리 동기화 상태"
 msgid "Registry URL"
 msgstr "레지스트리 URL"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Reject"
 msgstr "거부"
 
@@ -3678,9 +3682,9 @@ msgstr "거부"
 msgid "rejected"
 msgstr "거부됨"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Rejected"
@@ -3845,14 +3849,13 @@ msgstr "생성된 리포지토리가 나타납니다."
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
 msgstr "리포지토리"
 
-#: src/utilities/repositories.ts
+#: src/utilities/repository-remove-collection.ts
 msgid "Repository {repoName} not found."
 msgstr "리포지토리 {repoName} 을/를 찾을 수 없음."
 
@@ -3876,8 +3879,8 @@ msgid "Repository name"
 msgstr "리포지터리 이름"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Repository name {originRepoName} not found."
-msgstr "리포지토리 이름 {originRepoName} 을/를 찾을 수 없습니다."
+#~ msgid "Repository name {originRepoName} not found."
+#~ msgstr "리포지토리 이름 {originRepoName} 을/를 찾을 수 없습니다."
 
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Repository URL"
@@ -4078,8 +4081,7 @@ msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페�
 #~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select"
 msgstr "선택"
 
@@ -4110,8 +4112,8 @@ msgstr "태그 선택"
 #~ msgstr "모두 선택 ({0} 항목)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Select all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Select all ({itemsCount} items)"
+#~ msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -4134,7 +4136,10 @@ msgstr "그룹 선택"
 msgid "Select namespace"
 msgstr "네임스페이스 선택"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+msgid "Select page"
+msgstr ""
+
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "페이지 선택 ({0} 항목)"
@@ -4144,8 +4149,7 @@ msgstr "페이지 선택 ({0} 항목)"
 msgid "Select permissions"
 msgstr "권한 선택"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select repositories"
 msgstr "리포지토리 선택"
 
@@ -4160,7 +4164,6 @@ msgstr "역할 선택"
 msgid "Select users"
 msgstr "사용자 선택"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "선택됨"
@@ -4245,8 +4248,8 @@ msgstr "모든 컬렉션에 서명"
 msgid "Sign all collections in {repository}"
 msgstr "{repository}에서 모든 컬렉션에 서명"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Sign and approve"
 msgstr "서명 및 승인"
 
@@ -4306,7 +4309,7 @@ msgstr "서명됨"
 msgid "Signed"
 msgstr "서명됨"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Signed and approved"
 msgstr "서명 및 승인됨"
 
@@ -4318,7 +4321,7 @@ msgstr "서명된 항목만 포함"
 msgid "Signed version(s)"
 msgstr "서명된 버전"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "서명 서비스 {signingServiceName}를 찾을 수 없음"
@@ -4386,7 +4389,11 @@ msgid "Start from scratch"
 msgstr "처음부터 시작"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repo}\"."
 msgstr ""
 
 #: src/actions/ansible-repository-collection-version-add.tsx
@@ -4695,6 +4702,10 @@ msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
+#: src/components/shared/multi-repo-modal.tsx
+msgid "The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly."
+msgstr ""
+
 #: src/components/delete-modal/delete-collection-modal.tsx
 msgid "The collection will be deleted only from repository {deleteFromRepo}."
 msgstr ""
@@ -4812,6 +4823,10 @@ msgstr "이 네임 스페이스에는 가져오기가 없습니다."
 #: src/containers/task-management/task_detail.tsx
 msgid "There is no progress message."
 msgstr "진행 중인 메시지가 없습니다."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "There must be only one repository with pipeline=rejected."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "There's no resource record"
@@ -5009,8 +5024,8 @@ msgstr "컬렉션 업로드"
 msgid "Upload new version"
 msgstr "새 버전 업로드"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Upload signature"
 msgstr "서명 업로드"
 
@@ -5261,7 +5276,7 @@ msgstr "컬렉션 보기"
 #~ msgid "View group"
 #~ msgstr "View group"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "View Import Logs"
 msgstr "로그 가져오기 보기"
 
