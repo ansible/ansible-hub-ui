@@ -60,7 +60,7 @@ jobs:
         key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2547
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: 'ansible-hub-ui'
 
