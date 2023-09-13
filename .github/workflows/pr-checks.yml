@@ -10,7 +10,7 @@ jobs:
     steps:
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: "Install node 16"
       uses: actions/setup-node@v3
@@ -40,7 +40,7 @@ jobs:
     # need to checkout out head, the merge commit won't have any merges in history
     # also need more than 1 commit, assuming no PR will have more than 128
     - name: "Checkout ansible-hub-ui HEAD"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 128
         ref: ${{ github.event.pull_request.head.sha }}
