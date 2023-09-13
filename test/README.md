@@ -43,8 +43,7 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "username": "<your username here>",
         "password": "<your password here>",
         "containers": "<container push target>",
-        "galaxykit": "<galaxykit command>",
-        "insightsLogin": true|false
+        "galaxykit": "<galaxykit command>"
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
@@ -159,7 +158,7 @@ name like `$collection-form.js`
 name like `$collection-$action.js` (using camel\_case for both collection name and action name)
 
 * test the action on each available screen
-  * prefer to loop the same test over an array of "get me there" functions (see [`execution_environments_use_in_controller.js`](https://github.com/ansible/ansible-hub-ui/blob/master/test/cypress/integration/execution_environments_use_in_controller.js#L53-L83) for an example)
+  * prefer to loop the same test over an array of "get me there" functions (see [`execution_environments_use_in_controller.js`](https://github.com/ansible/ansible-hub-ui/blob/stable-4.8/test/cypress/integration/execution_environments_use_in_controller.js#L53-L83) for an example)
 * make sure to wait until every request associated with submitting that action ends, including tasks, and subsequent list screen reloads
 
 ## GalaxyKit Integration

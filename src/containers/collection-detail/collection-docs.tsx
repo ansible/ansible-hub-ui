@@ -15,7 +15,7 @@ import {
   TableOfContents,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
@@ -104,7 +104,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const { collection_version, repository } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: collection_version.namespace,

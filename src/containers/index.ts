@@ -21,7 +21,6 @@ export { default as ExecutionEnvironmentManifest } from './execution-environment
 export { default as ExecutionEnvironmentRegistryList } from './execution-environment/registry-list';
 export { default as GroupDetail } from './group-management/group-detail';
 export { default as GroupList } from './group-management/group-list';
-export { default as LandingPage } from './landing/landing-page';
 export { default as LegacyNamespace } from './legacy-namespaces/legacy-namespace';
 export { default as LegacyNamespaces } from './legacy-namespaces/legacy-namespaces';
 export { default as LegacyRole } from './legacy-roles/legacy-role';

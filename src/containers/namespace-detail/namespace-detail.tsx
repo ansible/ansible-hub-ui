@@ -40,11 +40,10 @@ import {
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
@@ -72,7 +71,6 @@ interface IState {
   isNamespacePending: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
-  isOpenWisdomModal: boolean;
   namespace: NamespaceType;
   params: {
     group?: number;
@@ -127,7 +125,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       isNamespacePending: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
-      isOpenWisdomModal: false,
       namespace: null,
       params,
       redirect: null,
@@ -216,7 +213,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       isDeletionPending,
       isNamespacePending,
       isOpenNamespaceModal,
-      isOpenWisdomModal,
       namespace,
       params,
       redirect,
@@ -244,7 +240,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const tab = params['tab'] || 'collections';
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         name: namespace.name,
         url:
@@ -377,14 +373,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               />
             </>
           </DeleteModal>
-        )}
-        {isOpenWisdomModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'namespace'}
-            reference={this.state.namespace.name}
-          />
         )}
         {warning ? (
           <Alert
@@ -775,7 +763,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   private renderPageControls() {
     const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
-    const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
     const repository = this.state.params['repository_name'] || null;
 
@@ -850,14 +837,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             {t`Sign all collections`}
           </DropdownItem>
         )),
-      ai_deny_index && (
-        <DropdownItem
-          key='wisdom-settings'
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
-        >
-          {t`Ansible Lightspeed settings`}
-        </DropdownItem>
-      ),
     ].filter(Boolean);
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls' />;
@@ -900,7 +879,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: namespaceBreadcrumb().url,
+            redirect: formatPath(Paths.namespaces),
             confirmDelete: false,
             isNamespacePending: false,
           });
