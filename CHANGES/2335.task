@@ -1,1 +1,0 @@
-Ajdust UI messages to reflect synclist deprecation.
