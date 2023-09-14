@@ -1,3 +1,55 @@
+4.7.2 (2023-09-14)
+==================
+
+Features
+--------
+
+- Expose legacy role download count in the UI
+  `AAH-2241 <https://issues.redhat.com/browse/AAH-2241>`_
+- Repository tests - detail, list.
+  `AAH-2245 <https://issues.redhat.com/browse/AAH-2245>`_
+- cypress tests for Approval with multiple repositories
+  `AAH-2248 <https://issues.redhat.com/browse/AAH-2248>`_
+- add collection upload modal + refactor Approve Modal - extract multiple repo selector and use it both in ApproveModal and UploadModal.
+  `AAH-2250 <https://issues.redhat.com/browse/AAH-2250>`_
+- Cypress tests for collection upload with multiple repositories.
+  `AAH-2251 <https://issues.redhat.com/browse/AAH-2251>`_
+- Add copy collection version in collection detail screen
+  `AAH-2255 <https://issues.redhat.com/browse/AAH-2255>`_
+- Delete collection or version from repo only.
+  `AAH-2261 <https://issues.redhat.com/browse/AAH-2261>`_
+- Repository list - add columns, filters
+  `AAH-2271 <https://issues.redhat.com/browse/AAH-2271>`_
+- Repository sync - modal to set mirror, optimize
+  `AAH-2301 <https://issues.redhat.com/browse/AAH-2301>`_
+
+
+Bugfixes
+--------
+
+- community - fix token page expiration notice when auth provider is github
+  `AAH-2324 <https://issues.redhat.com/browse/AAH-2324>`_
+- Repositories, Remotes - clean filter text on search
+  `AAH-2340 <https://issues.redhat.com/browse/AAH-2340>`_
+- Support old galaxy URLs outside of base path, disambiguate
+  `AAH-2342 <https://issues.redhat.com/browse/AAH-2342>`_
+- Approval dashboard: fix when more than 10 staging repos
+  `AAH-2366 <https://issues.redhat.com/browse/AAH-2366>`_
+- Fix Namespaces/Partners breadcrumb
+  `AAH-2433 <https://issues.redhat.com/browse/AAH-2433>`_
+- Namespace detail: use is_highest consistently
+  `AAH-2443 <https://issues.redhat.com/browse/AAH-2443>`_
+- Better choice of distribution when multiple per repo
+  `AAH-2586 <https://issues.redhat.com/browse/AAH-2586>`_
+- Add autocomplete=off to login form fields
+  `AAH-2625 <https://issues.redhat.com/browse/AAH-2625>`_
+- Fix dispatch page filter param
+  `AAH-2670 <https://issues.redhat.com/browse/AAH-2670>`_
+
+
+----
+
+
 4.7.1 (2023-05-23)
 ==================
 
