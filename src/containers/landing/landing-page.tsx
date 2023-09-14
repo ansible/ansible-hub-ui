@@ -138,7 +138,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       rel='noreferrer'
                     >
                       <img
-                        width='50%'
+                        width='100%'
                         alt='Generative Ai, The Ansible way. Try Ansible Lightspeed with IBM watsonx Code Assistant'
                         src='/static/images/LightspeedGalaxyAd1.png'
                       />
