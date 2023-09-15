@@ -363,7 +363,7 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
-    const { display_repositories } = this.context.featureFlags;
+    const display_repositories = true; // no feature flag in 4.7
 
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({

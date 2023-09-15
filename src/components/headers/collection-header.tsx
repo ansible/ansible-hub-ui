@@ -201,7 +201,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const { display_signatures, can_upload_signatures } =
       this.context.featureFlags;
-    const display_repositories = true;
+    const display_repositories = true; // no feature flag in 4.7
 
     const signedString = () => {
       if (!display_signatures) {

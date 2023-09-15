@@ -938,7 +938,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { hasPermission } = this.context;
     const { showControls } = this.state;
-    const { display_repositories } = this.context.featureFlags;
+    const display_repositories = true; // no feature flag in 4.7
 
     if (!showControls) {
       return;
