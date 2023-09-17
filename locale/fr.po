@@ -175,8 +175,8 @@ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collectio
 msgstr "<0>Remarque : </0>Utilisez cette URL pour configurer ansible-galaxy afin de télécharger des collections dans cet espace de noms. Vous trouverez plus d'informations sur les configurations d'ansible-galaxy <1>ici</1><2> </2><3/>."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
-msgstr "<0>Red Hat travaille sur de nouvelles capacités de développement de contenu Ansible dans le contexte de <1>Ansible Lightspeed</1> <2/> pour aider d'autres automates à créer du contenu Ansible.</0>"
+#~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
+#~ msgstr "<0>Red Hat travaille sur de nouvelles capacités de développement de contenu Ansible dans le contexte de <1>Ansible Lightspeed</1> <2/> pour aider d'autres automates à créer du contenu Ansible.</0>"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
@@ -195,8 +195,8 @@ msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>ATTENTION</0> le chargement d'un nouveau jeton supprimera votre ancien jeton."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
-msgstr "<0>Vos rôles et collections peuvent être utilisés comme données d'entraînement pour un modèle d'apprentissage automatique qui fournit des recommandations de contenu d'automatisation Ansible.</0><1>Si vous avez des préoccupations, veuillez contacter l'équipe Ansible à l'adresse suivante <2>ansible-content-ai@redhat.com</2>.</1>"
+#~ msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
+#~ msgstr "<0>Vos rôles et collections peuvent être utilisés comme données d'entraînement pour un modèle d'apprentissage automatique qui fournit des recommandations de contenu d'automatisation Ansible.</0><1>Si vous avez des préoccupations, veuillez contacter l'équipe Ansible à l'adresse suivante <2>ansible-content-ai@redhat.com</2>.</1>"
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/not-found.tsx
@@ -371,8 +371,8 @@ msgstr "add-user-modal"
 #~ "\"{namespace}\" container namespace."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Additional details"
-msgstr "Détails supplémentaires"
+#~ msgid "Additional details"
+#~ msgstr "Détails supplémentaires"
 
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/namespace-list/namespace-list.tsx
@@ -384,8 +384,8 @@ msgid "All associated permissions under this role were removed."
 msgstr "Toutes les permissions associées à ce rôle ont été supprimées."
 
 #: src/containers/landing/landing-page.tsx
-msgid "All policies and guidelines"
-msgstr ""
+#~ msgid "All policies and guidelines"
+#~ msgstr ""
 
 #: src/components/import-modal/import-modal.tsx
 msgid "All Repos"
@@ -411,12 +411,12 @@ msgstr "Red Hat Ansible Automation Platform"
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Ansible Lightspeed settings"
-msgstr "Paramètres d'Ansible Lightspeed"
+#~ msgid "Ansible Lightspeed settings"
+#~ msgstr "Paramètres d'Ansible Lightspeed"
 
 #: src/containers/landing/landing-page.tsx
-msgid "AnsibleFest"
-msgstr ""
+#~ msgid "AnsibleFest"
+#~ msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
@@ -512,8 +512,8 @@ msgstr "Êtes-vous sûr de vouloir supprimer le référentiel <0>{name}</0>?<1/>
 #~ msgstr "Are you sure you want to opt the following legacy namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
-msgstr "Êtes-vous sûr de vouloir retirer l'espace de noms suivant d'Ansible Lightspeed ?"
+#~ msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
+#~ msgstr "Êtes-vous sûr de vouloir retirer l'espace de noms suivant d'Ansible Lightspeed ?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following legacy namespace out of Wisdom?"
@@ -524,8 +524,8 @@ msgstr "Êtes-vous sûr de vouloir retirer l'espace de noms suivant d'Ansible Li
 #~ msgstr "Are you sure you want to opt the following namespace in to Wisdom?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
-msgstr "Êtes-vous sûr de vouloir retirer l'espace de noms suivant d'Ansible Lightspeed ?"
+#~ msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
+#~ msgstr "Êtes-vous sûr de vouloir retirer l'espace de noms suivant d'Ansible Lightspeed ?"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Are you sure you want to opt the following namespace out of Wisdom?"
@@ -548,7 +548,11 @@ msgid "Available matching collections"
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Available matching legacy roles"
+#~ msgid "Available matching legacy roles"
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching roles"
 msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
@@ -624,7 +628,6 @@ msgstr "Certificat CA"
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
@@ -1036,16 +1039,16 @@ msgstr "Complété"
 #~ msgstr "Configure"
 
 #: src/containers/token/token-insights.tsx
-msgid "Connect Private Automation Hub"
-msgstr "Connect Private Automation Hub"
+#~ msgid "Connect Private Automation Hub"
+#~ msgstr "Connect Private Automation Hub"
 
 #: src/containers/token/token-insights.tsx
-msgid "Connect the ansible-galaxy client"
-msgstr "Connect the ansible-galaxy client"
+#~ msgid "Connect the ansible-galaxy client"
+#~ msgstr "Connect the ansible-galaxy client"
 
 #: src/containers/token/token-insights.tsx
-msgid "Connect to Hub"
-msgstr "Connect to Hub"
+#~ msgid "Connect to Hub"
+#~ msgstr "Connect to Hub"
 
 #: src/utilities/validateURLHelper.ts
 msgid "Consider using a secure URL (https://)."
@@ -1104,8 +1107,8 @@ msgstr "Contenu ajouté"
 #~ msgstr "Content count"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
-msgstr ""
+#~ msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+#~ msgstr ""
 
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
@@ -1174,8 +1177,8 @@ msgid "Count"
 msgstr "Nombre"
 
 #: src/containers/token/token-insights.tsx
-msgid "CRC public key"
-msgstr "CRC public key"
+#~ msgid "CRC public key"
+#~ msgstr "CRC public key"
 
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/group-modal.tsx
@@ -1221,8 +1224,8 @@ msgid "Create and update execution environments under existing container namespa
 msgstr "Créer et mettre à jour les environnements d'exécution sous les espaces de noms de conteneurs existants."
 
 #: src/components/headers/collection-header.tsx
-msgid "Create issue"
-msgstr "Create issue"
+#~ msgid "Create issue"
+#~ msgstr "Create issue"
 
 #: src/constants.tsx
 #: src/constants.tsx
@@ -1603,8 +1606,8 @@ msgid "Digest"
 msgstr "Digest"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Digital accessibility"
-msgstr ""
+#~ msgid "Digital accessibility"
+#~ msgstr ""
 
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Disabled"
@@ -1635,13 +1638,12 @@ msgstr "Site des docs"
 #: src/components/headers/collection-header.tsx
 #: src/containers/collection-detail/collection-docs.tsx
 #: src/loaders/standalone/menu.tsx
-#: src/loaders/standalone/menu.tsx
 msgid "Documentation"
 msgstr "Documentation"
 
 #: src/containers/token/token-insights.tsx
-msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
-msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+#~ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+#~ msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 
 #: src/components/my-imports/import-console.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -1649,7 +1651,6 @@ msgid "Done"
 msgstr "Terminé"
 
 #: src/components/collection-detail/collection-info.tsx
-#: src/containers/landing/landing-page.tsx
 msgid "Download"
 msgstr "Télécharger"
 
@@ -2038,8 +2039,8 @@ msgid "Expiration"
 msgstr "Expiration"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Extend the power of Ansible to your entire team."
-msgstr ""
+#~ msgid "Extend the power of Ansible to your entire team."
+#~ msgstr ""
 
 #: src/components/my-imports/import-console.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2085,8 +2086,8 @@ msgid "Failed to list distributions, removing only the repository."
 msgstr "N'a pas réussi à lister les distributions, ne supprimant que le référentiel."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to load Ansible Lightspeed information."
-msgstr "Échec du chargement des informations d'Ansible Lightspeed."
+#~ msgid "Failed to load Ansible Lightspeed information."
+#~ msgstr "Échec du chargement des informations d'Ansible Lightspeed."
 
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #~ msgid "Failed to load collection versions"
@@ -2121,16 +2122,16 @@ msgstr "Échec du chargement des référentiels."
 #~ msgstr "Failed to load Wisdom information."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt in to Ansible Lightspeed."
-msgstr "Échec de la connexion à Ansible Lightspeed."
+#~ msgid "Failed to opt in to Ansible Lightspeed."
+#~ msgstr "Échec de la connexion à Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt in to Wisdom."
 #~ msgstr "Failed to opt in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Failed to opt out of Ansible Lightspeed."
-msgstr "Échec de la désactivation d'Ansible Lightspeed."
+#~ msgid "Failed to opt out of Ansible Lightspeed."
+#~ msgstr "Échec de la désactivation d'Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
@@ -2186,8 +2187,8 @@ msgid "Failed to sync repository \"{name}\""
 msgstr "Échec de la synchronisation du référentiel \"{name}\""
 
 #: src/containers/landing/landing-page.tsx
-msgid "Featured"
-msgstr ""
+#~ msgid "Featured"
+#~ msgstr ""
 
 #: src/components/patternfly-wrappers/compound-filter.tsx
 #: src/components/patternfly-wrappers/compound-filter.tsx
@@ -2253,8 +2254,8 @@ msgid "Galaxy only"
 msgstr "Galaxy uniquement"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Get the trial"
-msgstr ""
+#~ msgid "Get the trial"
+#~ msgstr ""
 
 #: src/containers/repositories/repository-list.tsx
 #~ msgid "Get token"
@@ -2390,8 +2391,8 @@ msgstr "Les groupes apparaîtront une fois créés"
 #~ msgstr "Groups with access"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Help other Ansible users by sharing the awesome roles and collections you create."
-msgstr ""
+#~ msgid "Help other Ansible users by sharing the awesome roles and collections you create."
+#~ msgstr ""
 
 #: src/components/patternfly-wrappers/write-only-field.tsx
 msgid "hidden value"
@@ -2555,8 +2556,8 @@ msgid "It's safe to close this window. These tasks will finish in the background
 msgstr "Vous pouvez fermer cette fenêtre en toute sécurité. Ces tâches se termineront en arrière-plan."
 
 #: src/containers/landing/landing-page.tsx
-msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
-msgstr ""
+#~ msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
+#~ msgstr ""
 
 #: src/containers/signature-keys/list.tsx
 msgid "Key fingerprint"
@@ -2623,20 +2624,20 @@ msgstr "En savoir plus"
 #~ msgstr "Learn more about Ansible Wisdom."
 
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy"
-msgstr "Système hérité"
+#~ msgid "Legacy"
+#~ msgstr "Système hérité"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "L'espace de noms hérité <0>{name}</0> est intégré à Ansible Lightspeed."
+#~ msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "L'espace de noms hérité <0>{name}</0> est intégré à Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Legacy namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "L'espace de noms hérité <0>{name}</0> est exclu d'Ansible Lightspeed."
+#~ msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "L'espace de noms hérité <0>{name}</0> est exclu d'Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Legacy namespace <0>{name}</0> is opted out of Wisdom."
@@ -2644,17 +2645,17 @@ msgstr "L'espace de noms hérité <0>{name}</0> est exclu d'Ansible Lightspeed."
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Namespaces"
-msgstr "Mes espaces de noms hérités"
+#~ msgid "Legacy Namespaces"
+#~ msgstr "Mes espaces de noms hérités"
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Legacy roles"
-msgstr ""
+#~ msgid "Legacy roles"
+#~ msgstr ""
 
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Roles"
-msgstr "Rôles hérités"
+#~ msgid "Legacy Roles"
+#~ msgstr "Rôles hérités"
 
 #: src/components/collection-detail/collection-info.tsx
 msgid "License"
@@ -2678,19 +2679,25 @@ msgid "List of Collections"
 msgstr "Liste des collections"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "List of Legacy Namespaces"
-msgstr "Liste des espaces de nommage hérités"
+#~ msgid "List of Legacy Namespaces"
+#~ msgstr "Liste des espaces de nommage hérités"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
 msgid "List of Legacy Roles"
 msgstr "Liste des rôles hérités"
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "List of role namespaces"
+msgstr ""
+
+#: src/containers/legacy-roles/legacy-roles.tsx
+msgid "List of roles"
+msgstr ""
 
 #: src/containers/legacy-roles/legacy-role.tsx
 msgid "List of versions"
 msgstr "Liste des versions"
 
-#: src/containers/token/token-insights.tsx
 #: src/containers/token/token-standalone.tsx
 msgid "Load token"
 msgstr "Jeton de charge"
@@ -2751,16 +2758,16 @@ msgid "Manage tags"
 msgstr "Gérer les tags"
 
 #: src/containers/token/token-insights.tsx
-msgid "Manage tokens"
-msgstr "Manage tokens"
+#~ msgid "Manage tokens"
+#~ msgstr "Manage tokens"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "Les listes de manifestes ne sont pas actuellement prises en charge sur cet écran, veuillez utiliser l'onglet <0>Images</0> pour voir les détails des listes de manifestes."
 
 #: src/containers/landing/landing-page.tsx
-msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
-msgstr ""
+#~ msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
+#~ msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "Message"
@@ -2882,24 +2889,24 @@ msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Suppression réussie de l'espace de nommage \"{name}\"."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
-msgstr "L'espace de nommage <0>{name}</0> est intégré à Ansible Lightspeed."
+#~ msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+#~ msgstr "L'espace de nommage <0>{name}</0> est intégré à Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted in to Wisdom."
 #~ msgstr "Namespace <0>{name}</0> is opted in to Wisdom."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
-msgstr "L'espace de noms <0>{name}</0> est exclu d'Ansible Lightspeed."
+#~ msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+#~ msgstr "L'espace de noms <0>{name}</0> est exclu d'Ansible Lightspeed."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Namespace <0>{name}</0> is opted out of Wisdom."
 #~ msgstr "Namespace <0>{name}</0> is opted out of Wisdom."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-msgid "Namespace Header"
-msgstr "En-tête de l'espace de nommage"
+#~ msgid "Namespace Header"
+#~ msgstr "En-tête de l'espace de nommage"
 
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
@@ -2919,8 +2926,16 @@ msgstr "Les noms d'espace de nommage sont limités aux caractères alphanumériq
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/collection-detail/collection-content.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+#: src/containers/collection-detail/collection-detail.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/collection-detail/collection-import-log.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-list/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
-#: src/paths.ts
 msgid "Namespaces"
 msgstr "Espaces de noms"
 
@@ -2935,8 +2950,8 @@ msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "Namespaces will appear once created or roles are imported"
-msgstr "Les espaces de noms apparaîtront une fois créés ou bien les rôles seront importés"
+#~ msgid "Namespaces will appear once created or roles are imported"
+#~ msgstr "Les espaces de noms apparaîtront une fois créés ou bien les rôles seront importés"
 
 #: src/components/approval/approval-row.tsx
 msgid "Needs review"
@@ -3053,14 +3068,17 @@ msgid "No matching collections found."
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
-msgid "No matching legacy roles found."
+#~ msgid "No matching legacy roles found."
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching roles found."
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx
 msgid "No namespace selected."
 msgstr "Aucun espace de nom n'a été sélectionné."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "Pas encore d'espace de noms"
@@ -3113,6 +3131,10 @@ msgstr "Aucun résultat trouvé"
 #: src/components/empty-state/empty-state-filter.tsx
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "Aucun résultat ne correspond aux critères de filtrage. Essayez de modifier les paramètres de votre filtre."
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "No role namespaces yet"
+msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/legacy-roles/legacy-roles.tsx
@@ -3209,8 +3231,8 @@ msgid "of"
 msgstr "de"
 
 #: src/containers/token/token-insights.tsx
-msgid "Offline token"
-msgstr "Offline token"
+#~ msgid "Offline token"
+#~ msgstr "Offline token"
 
 #: src/actions/ansible-repository-sync.tsx
 msgid "Only perform the sync if no changes are reported by the remote server."
@@ -3222,8 +3244,8 @@ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt in to Ansible Lightspeed"
-msgstr "Se connecter à Ansible Lightspeed"
+#~ msgid "Opt in to Ansible Lightspeed"
+#~ msgstr "Se connecter à Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3232,8 +3254,8 @@ msgstr "Se connecter à Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "Opt out of Ansible Lightspeed"
-msgstr "Désactiver Ansible Lightspeed"
+#~ msgid "Opt out of Ansible Lightspeed"
+#~ msgstr "Désactiver Ansible Lightspeed"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3270,8 +3292,8 @@ msgstr "Tâche parentale"
 #~ msgstr "Partially signed"
 
 #: src/paths.ts
-msgid "Partners"
-msgstr "Partners"
+#~ msgid "Partners"
+#~ msgstr "Partners"
 
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/remote-form.tsx
@@ -3421,8 +3443,8 @@ msgid "Preview"
 msgstr "Prévisualisation"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Privacy statement"
-msgstr ""
+#~ msgid "Privacy statement"
+#~ msgstr ""
 
 #: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
@@ -3655,8 +3677,8 @@ msgid "Red Hat Certified"
 msgstr "Certifié Red Hat"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
-msgstr ""
+#~ msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
+#~ msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx
 msgid "Registries list could not be displayed."
@@ -3988,14 +4010,31 @@ msgstr "Rôle de l'en-tête"
 msgid "Role name"
 msgstr "Nom du rôle"
 
+#: src/containers/legacy-namespaces/legacy-namespace.tsx
+msgid "Role namespace header"
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Role Namespaces"
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "Role namespaces will appear once created or roles are imported"
+msgstr ""
+
 #: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/legacy-roles/legacy-role.tsx
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
+#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
 #: src/containers/role-management/role-list.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Roles"
 msgstr "Rôles"
@@ -4181,8 +4220,8 @@ msgid "Server error. Please come back later."
 msgstr "Erreur de serveur. Veuillez essayer plus tard."
 
 #: src/containers/token/token-insights.tsx
-msgid "Server URL"
-msgstr "Server URL"
+#~ msgid "Server URL"
+#~ msgstr "Server URL"
 
 #: src/containers/token/token-insights.tsx
 #~ msgid "Server URL could not be displayed."
@@ -4201,8 +4240,8 @@ msgid "Settings"
 msgstr "Paramètres"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Share"
-msgstr ""
+#~ msgid "Share"
+#~ msgstr ""
 
 #: src/components/repositories/remote-form.tsx
 msgid "Show advanced options"
@@ -4215,7 +4254,12 @@ msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
-msgid "Show all legacy roles"
+#~ msgid "Show all legacy roles"
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all roles"
 msgstr ""
 
 #: src/utilities/chip-group-props.ts
@@ -4371,7 +4415,6 @@ msgid "Sort results"
 msgstr "Trier les résultats"
 
 #: src/components/repositories/remote-form.tsx
-#: src/containers/token/token-insights.tsx
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -4514,7 +4557,6 @@ msgstr "Les super utilisateurs disposent de toutes les autorisations du système
 
 #: src/actions/ansible-repository-sync.tsx
 #: src/actions/ansible-repository-sync.tsx
-#: src/containers/search/search.tsx
 msgid "Sync"
 msgstr "Sync"
 
@@ -4654,21 +4696,21 @@ msgstr "Les tâches apparaîtront une fois créées."
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Terms of use"
-msgstr ""
+#~ msgid "Terms of use"
+#~ msgstr ""
 
 #: src/containers/landing/landing-page.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Terms of Use"
-msgstr "Conditions d'utilisation"
+#~ msgid "Terms of Use"
+#~ msgstr "Conditions d'utilisation"
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Text: {0}"
 msgstr "Texte : {0}"
 
 #: src/loaders/standalone/layout.tsx
-msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
-msgstr ""
+#~ msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+#~ msgstr ""
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
@@ -4723,12 +4765,12 @@ msgid "The file is not available for this version of {collectionName}"
 msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
-msgstr "L'espace de noms hérité suivant sera intégré à Ansible Lightspeed :"
+#~ msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "L'espace de noms hérité suivant sera intégré à Ansible Lightspeed :"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "The following namespace will be opted in to Ansible Lightspeed:"
-msgstr "L'espace de noms suivant sera intégré à Ansible Lightspeed :"
+#~ msgid "The following namespace will be opted in to Ansible Lightspeed:"
+#~ msgstr "L'espace de noms suivant sera intégré à Ansible Lightspeed :"
 
 #: src/components/rbac/preview-roles.tsx
 msgid "The following roles will be applied to group: <0>{0}</0>"
@@ -4763,8 +4805,8 @@ msgid "The selected roles will be added to this specific namespace."
 msgstr "Les rôles sélectionnés seront ajoutés à cet espace de nom spécifique."
 
 #: src/containers/token/token-insights.tsx
-msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
-msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
+#~ msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
+#~ msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
 #: src/utilities/validateURLHelper.ts
 msgid "The URL needs to be in 'http(s)://' format."
@@ -4906,8 +4948,8 @@ msgid "To download this collection, configure your client to connect to one of t
 msgstr "Pour télécharger cette collection, configurez votre client pour qu'il se connecte à l'un des dépôts suivants : <0>distributions</0>."
 
 #: src/containers/token/token-insights.tsx
-msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
-msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
+#~ msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
+#~ msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 
 #: src/components/repositories/remote-form.tsx
 msgid "Token"
@@ -4942,8 +4984,8 @@ msgid "true"
 msgstr "vrai"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Try Red Hat Ansible Automation Platform"
-msgstr ""
+#~ msgid "Try Red Hat Ansible Automation Platform"
+#~ msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -5072,24 +5114,24 @@ msgstr "Utiliser le modèle"
 #~ msgstr "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 
 #: src/containers/landing/landing-page.tsx
-msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
-msgstr ""
+#~ msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
+#~ msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 msgstr "Conformez-vous au format espace-nom/nom pour les conteneurs à espace-noms. Sinon, utiliser le format bibliothèque/nom."
 
 #: src/containers/token/token-insights.tsx
-msgid "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
-msgstr ""
+#~ msgid "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
+#~ msgstr ""
 
 #: src/containers/token/token-insights.tsx
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "Use this token to authenticate clients that need to download"
 
 #: src/containers/token/token-insights.tsx
-msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
-msgstr "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
+#~ msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
+#~ msgstr "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 
 #: src/containers/token/token-standalone.tsx
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
@@ -5100,8 +5142,8 @@ msgstr "Utilisez ce jeton pour authentifier le client <0>ansible-galaxy</0>."
 #~ msgstr "Use this URL to configure the API endpoints that clients need to"
 
 #: src/containers/token/token-insights.tsx
-msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
-msgstr ""
+#~ msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
+#~ msgstr ""
 
 #: src/containers/token/token-insights.tsx
 #~ msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
@@ -5112,8 +5154,8 @@ msgstr ""
 #~ msgstr "Use this URL to configure the authentication URLs that clients"
 
 #: src/containers/token/token-insights.tsx
-msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
-msgstr "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
+#~ msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
+#~ msgstr "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Useful links"
@@ -5348,16 +5390,16 @@ msgid "We couldn't find the page you're looking for!"
 msgstr "Nous n'avons pas trouvé la page que vous recherchez !"
 
 #: src/containers/token/token-insights.tsx
-msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
-msgstr "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
+#~ msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
+#~ msgstr "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 
 #: src/components/headers/collection-header.tsx
 msgid "Website"
 msgstr "Site web"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Welcome to Beta Galaxy"
-msgstr ""
+#~ msgid "Welcome to Beta Galaxy"
+#~ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
