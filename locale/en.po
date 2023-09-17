@@ -408,6 +408,10 @@ msgstr "Already the current version"
 msgid "Ansible Automation Platform"
 msgstr "Ansible Automation Platform"
 
+#: src/containers/landing/landing-page.tsx
+msgid "Ansible Lightspeed"
+msgstr "Ansible Lightspeed"
+
 #: src/components/legacy-namespace-list/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
@@ -416,8 +420,8 @@ msgid "Ansible Lightspeed settings"
 msgstr "Ansible Lightspeed settings"
 
 #: src/containers/landing/landing-page.tsx
-msgid "AnsibleFest"
-msgstr "AnsibleFest"
+#~ msgid "AnsibleFest"
+#~ msgstr "AnsibleFest"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
@@ -549,8 +553,12 @@ msgid "Available matching collections"
 msgstr "Available matching collections"
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Available matching legacy roles"
-msgstr "Available matching legacy roles"
+#~ msgid "Available matching legacy roles"
+#~ msgstr "Available matching legacy roles"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching roles"
+msgstr "Available matching roles"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Back"
@@ -2624,8 +2632,8 @@ msgstr "Learn more"
 #~ msgstr "Learn more about Ansible Wisdom."
 
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy"
-msgstr "Legacy"
+#~ msgid "Legacy"
+#~ msgstr "Legacy"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
@@ -2645,17 +2653,17 @@ msgstr "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Namespaces"
-msgstr "Legacy Namespaces"
+#~ msgid "Legacy Namespaces"
+#~ msgstr "Legacy Namespaces"
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Legacy roles"
-msgstr "Legacy roles"
+#~ msgid "Legacy roles"
+#~ msgstr "Legacy roles"
 
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Roles"
-msgstr "Legacy Roles"
+#~ msgid "Legacy Roles"
+#~ msgstr "Legacy Roles"
 
 #: src/components/collection-detail/collection-info.tsx
 msgid "License"
@@ -2679,13 +2687,20 @@ msgid "List of Collections"
 msgstr "List of Collections"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "List of Legacy Namespaces"
-msgstr "List of Legacy Namespaces"
+#~ msgid "List of Legacy Namespaces"
+#~ msgstr "List of Legacy Namespaces"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
 msgid "List of Legacy Roles"
 msgstr "List of Legacy Roles"
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "List of role namespaces"
+msgstr "List of role namespaces"
+
+#: src/containers/legacy-roles/legacy-roles.tsx
+msgid "List of roles"
+msgstr "List of roles"
 
 #: src/containers/legacy-roles/legacy-role.tsx
 msgid "List of versions"
@@ -2899,8 +2914,8 @@ msgstr "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
 #~ msgstr "Namespace <0>{name}</0> is opted out of Wisdom."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-msgid "Namespace Header"
-msgstr "Namespace Header"
+#~ msgid "Namespace Header"
+#~ msgstr "Namespace Header"
 
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
@@ -2936,8 +2951,8 @@ msgid "Namespaces will appear once created"
 msgstr "Namespaces will appear once created"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "Namespaces will appear once created or roles are imported"
-msgstr "Namespaces will appear once created or roles are imported"
+#~ msgid "Namespaces will appear once created or roles are imported"
+#~ msgstr "Namespaces will appear once created or roles are imported"
 
 #: src/components/approval/approval-row.tsx
 msgid "Needs review"
@@ -3054,14 +3069,17 @@ msgid "No matching collections found."
 msgstr "No matching collections found."
 
 #: src/containers/not-found/dispatch.tsx
-msgid "No matching legacy roles found."
-msgstr "No matching legacy roles found."
+#~ msgid "No matching legacy roles found."
+#~ msgstr "No matching legacy roles found."
+
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching roles found."
+msgstr "No matching roles found."
 
 #: src/components/my-imports/import-list.tsx
 msgid "No namespace selected."
 msgstr "No namespace selected."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "No namespaces yet"
@@ -3114,6 +3132,10 @@ msgstr "No results found"
 #: src/components/empty-state/empty-state-filter.tsx
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "No results match the filter criteria. Try changing your filter settings."
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "No role namespaces yet"
+msgstr "No role namespaces yet"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/legacy-roles/legacy-roles.tsx
@@ -3989,14 +4011,31 @@ msgstr "Role Header"
 msgid "Role name"
 msgstr "Role name"
 
+#: src/containers/legacy-namespaces/legacy-namespace.tsx
+msgid "Role namespace header"
+msgstr "Role namespace header"
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Role Namespaces"
+msgstr "Role Namespaces"
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "Role namespaces will appear once created or roles are imported"
+msgstr "Role namespaces will appear once created or roles are imported"
+
 #: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/legacy-roles/legacy-role.tsx
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
+#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
 #: src/containers/role-management/role-list.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Roles"
 msgstr "Roles"
@@ -4216,8 +4255,13 @@ msgstr "Show all collections"
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
-msgid "Show all legacy roles"
-msgstr "Show all legacy roles"
+#~ msgid "Show all legacy roles"
+#~ msgstr "Show all legacy roles"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all roles"
+msgstr "Show all roles"
 
 #: src/utilities/chip-group-props.ts
 msgid "Show Less"

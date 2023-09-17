@@ -407,6 +407,10 @@ msgstr "이미 현재 버전"
 msgid "Ansible Automation Platform"
 msgstr "Ansible Automation Platform"
 
+#: src/containers/landing/landing-page.tsx
+msgid "Ansible Lightspeed"
+msgstr ""
+
 #: src/components/legacy-namespace-list/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
@@ -415,8 +419,8 @@ msgid "Ansible Lightspeed settings"
 msgstr "Ansible Lightspeed 설정"
 
 #: src/containers/landing/landing-page.tsx
-msgid "AnsibleFest"
-msgstr ""
+#~ msgid "AnsibleFest"
+#~ msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
@@ -548,7 +552,11 @@ msgid "Available matching collections"
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Available matching legacy roles"
+#~ msgid "Available matching legacy roles"
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Available matching roles"
 msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
@@ -2623,8 +2631,8 @@ msgstr "더 알아보기"
 #~ msgstr "Learn more about Ansible Wisdom."
 
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy"
-msgstr "레거시"
+#~ msgid "Legacy"
+#~ msgstr "레거시"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
@@ -2644,17 +2652,17 @@ msgstr "레거시 네임스페이스 <0>{name}</0> 는 Ansible Lightspeed에서 
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Namespaces"
-msgstr "레거시 네임스페이스"
+#~ msgid "Legacy Namespaces"
+#~ msgstr "레거시 네임스페이스"
 
 #: src/containers/not-found/dispatch.tsx
-msgid "Legacy roles"
-msgstr ""
+#~ msgid "Legacy roles"
+#~ msgstr ""
 
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/loaders/standalone/menu.tsx
-msgid "Legacy Roles"
-msgstr "레거시 역할"
+#~ msgid "Legacy Roles"
+#~ msgstr "레거시 역할"
 
 #: src/components/collection-detail/collection-info.tsx
 msgid "License"
@@ -2678,13 +2686,20 @@ msgid "List of Collections"
 msgstr "컬렉션 목록"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "List of Legacy Namespaces"
-msgstr "레거시 네임스페이스 목록"
+#~ msgid "List of Legacy Namespaces"
+#~ msgstr "레거시 네임스페이스 목록"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
 msgid "List of Legacy Roles"
 msgstr "레거시 역할 목록"
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "List of role namespaces"
+msgstr ""
+
+#: src/containers/legacy-roles/legacy-roles.tsx
+msgid "List of roles"
+msgstr ""
 
 #: src/containers/legacy-roles/legacy-role.tsx
 msgid "List of versions"
@@ -2898,8 +2913,8 @@ msgstr "네임 스페이스 <0>{name}</0> 는 Ansible Lightspeed에서 선택 �
 #~ msgstr "Namespace <0>{name}</0> is opted out of Wisdom."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-msgid "Namespace Header"
-msgstr "네임스페이스 헤더"
+#~ msgid "Namespace Header"
+#~ msgstr "네임스페이스 헤더"
 
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
@@ -2935,8 +2950,8 @@ msgid "Namespaces will appear once created"
 msgstr "생성된 네임스페이스가 나타납니다"
 
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
-msgid "Namespaces will appear once created or roles are imported"
-msgstr "생성된 네임스페이스 또는 역할을 가져오면 네임스페이스가 나타납니다"
+#~ msgid "Namespaces will appear once created or roles are imported"
+#~ msgstr "생성된 네임스페이스 또는 역할을 가져오면 네임스페이스가 나타납니다"
 
 #: src/components/approval/approval-row.tsx
 msgid "Needs review"
@@ -3053,14 +3068,17 @@ msgid "No matching collections found."
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
-msgid "No matching legacy roles found."
+#~ msgid "No matching legacy roles found."
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "No matching roles found."
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx
 msgid "No namespace selected."
 msgstr "선택된 네임스페이스가 없습니다."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "아직 네임스페이스가 없음"
@@ -3113,6 +3131,10 @@ msgstr "결과를 찾을 수 없음"
 #: src/components/empty-state/empty-state-filter.tsx
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 변경하십시오."
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "No role namespaces yet"
+msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/legacy-roles/legacy-roles.tsx
@@ -3988,14 +4010,31 @@ msgstr "역할 헤더"
 msgid "Role name"
 msgstr "역할 이름"
 
+#: src/containers/legacy-namespaces/legacy-namespace.tsx
+msgid "Role namespace header"
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Role Namespaces"
+msgstr ""
+
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+msgid "Role namespaces will appear once created or roles are imported"
+msgstr ""
+
 #: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/legacy-roles/legacy-role.tsx
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
+#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
 #: src/containers/role-management/role-list.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Roles"
 msgstr "역할"
@@ -4215,7 +4254,12 @@ msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
-msgid "Show all legacy roles"
+#~ msgid "Show all legacy roles"
+#~ msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Show all roles"
 msgstr ""
 
 #: src/utilities/chip-group-props.ts
