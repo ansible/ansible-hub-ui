@@ -463,15 +463,15 @@ msgstr "Goedkeuring dashboard"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Approval failed."
-msgstr "Goedkeuring mislukt."
+#~ msgid "Approval failed."
+#~ msgstr "Goedkeuring mislukt."
 
 #: src/components/my-imports/import-console.tsx
 msgid "Approval status:"
 msgstr "Goedkeuringsstatus:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Approve"
 msgstr "Goedkeuring"
 
@@ -483,9 +483,9 @@ msgstr "Collecties van externe items goedkeuren, afwijzen en synchroniseren."
 msgid "approved"
 msgstr "goedgekeurd"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Approved"
@@ -598,9 +598,7 @@ msgstr "CA-certificaat"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -614,6 +612,7 @@ msgstr "CA-certificaat"
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/components/shared/multi-repo-modal.tsx
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
@@ -645,11 +644,14 @@ msgstr "Certificaat voor collectie \"{0} {1} v{2}\" is geüpload."
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr "Certificaat voor collectie \"{namespace} {name} v{version}\" is geüpload."
 
-#: src/components/approve-modal/approve-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Certificeringsstatus voor collectie \"{0} {1} v{2}\" is bijgewerkt."
+
+#: src/components/approval/approve-modal.tsx
+msgid "Certification status for collection \"{namespace} {name} v{version}\" has been successfully updated."
+msgstr ""
 
 #: src/components/cards/collection-card.tsx
 msgid "Certified"
@@ -872,7 +874,11 @@ msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "De afschrijving van collectie \"{name}\" is ongedaan gemaakt."
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {namespace}.{name} v{version} could not be copied."
 msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx
@@ -904,8 +910,8 @@ msgstr "De collectie heeft geen distributie toegewezen gekregen."
 #~ msgstr "Collection failed to be removed from those repositories: {0}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection has to be in rejected or staging repository."
-msgstr "Collectie moet in afgekeurde of stagingrepository staan."
+#~ msgid "Collection has to be in rejected or staging repository."
+#~ msgstr "Collectie moet in afgekeurde of stagingrepository staan."
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 msgid "Collection is not being used by any collection."
@@ -925,8 +931,8 @@ msgstr ""
 #~ msgstr "Collection Namespaces"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection not found in any repository."
-msgstr "Collectie niet gevonden in een repository."
+#~ msgid "Collection not found in any repository."
+#~ msgstr "Collectie niet gevonden in een repository."
 
 #: src/constants.tsx
 #~ msgid "Collection Remotes"
@@ -945,7 +951,6 @@ msgstr "Upload collectie geannuleerd"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -977,8 +982,8 @@ msgstr "Collectieversies verschijnen zodra de collectie is gewijzigd."
 #~ msgstr "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Collection with id {0} not found."
-msgstr "Collectie met ID {0} niet gevonden."
+#~ msgid "Collection with id {0} not found."
+#~ msgstr "Collectie met ID {0} niet gevonden."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
@@ -1560,10 +1565,9 @@ msgid "Deselect all ({0} items)"
 msgstr "Alles deselecteren ({0} items)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Deselect all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Deselect all ({itemsCount} items)"
+#~ msgstr ""
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "Pagina deselecteren ({0} items)"
@@ -2029,7 +2033,7 @@ msgstr "Kan tag \"{tag}\" niet {operation}."
 #~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 #~ msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 msgid "Failed to approve collection."
 msgstr "Kan collectie niet goedkeuren."
 
@@ -2085,9 +2089,7 @@ msgstr "Kan geen afstanden laden: {remotesError}"
 msgid "Failed to load repositories: {error}"
 msgstr "Kan externe items niet laden: {error}"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/import-modal/import-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "Kan repository's niet laden."
 
@@ -2110,6 +2112,10 @@ msgstr "Kan repository's niet laden."
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
 #~ msgstr "Failed to opt out of Wisdom."
+
+#: src/components/shared/multi-repo-modal.tsx
+msgid "Failed to query repositories."
+msgstr ""
 
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -2755,8 +2761,6 @@ msgid "My profile"
 msgstr "Mijn profiel"
 
 #: src/components/collection-detail/collection-content-list.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2898,7 +2902,7 @@ msgstr "Namespaces zullen verschijnen zodra ze zijn aangemaakt"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr "Namespaces verschijnen zodra ze zijn gemaakt of rollen zijn geïmporteerd"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs review"
 msgstr "Vereist herziening"
 
@@ -2908,7 +2912,7 @@ msgstr "Vereist herziening"
 msgid "Needs Review"
 msgstr "Vereist herziening"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs signature and review"
 msgstr "Moet worden bekeken en ondertekend"
 
@@ -3626,7 +3630,7 @@ msgstr "Status registersynchronisatie"
 msgid "Registry URL"
 msgstr "URL register"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Reject"
 msgstr "Weigeren"
 
@@ -3634,9 +3638,9 @@ msgstr "Weigeren"
 msgid "rejected"
 msgstr "afgewezen"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Rejected"
@@ -3801,14 +3805,13 @@ msgstr "Repository's verschijnen zodra ze zijn aangemaakt."
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
 msgstr "Repository"
 
-#: src/utilities/repositories.ts
+#: src/utilities/repository-remove-collection.ts
 msgid "Repository {repoName} not found."
 msgstr "Repository {repoName} niet gevonden."
 
@@ -3832,8 +3835,8 @@ msgid "Repository name"
 msgstr "Naam repository"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Repository name {originRepoName} not found."
-msgstr "Naam repository {originRepoName} niet gevonden."
+#~ msgid "Repository name {originRepoName} not found."
+#~ msgstr "Naam repository {originRepoName} niet gevonden."
 
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Repository URL"
@@ -4034,8 +4037,7 @@ msgstr "Zie de <0>detailpagina</0> voor taakbeheer voor de status van deze taak.
 #~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select"
 msgstr "Selecteren"
 
@@ -4066,8 +4068,8 @@ msgstr "Een tag selecteren"
 #~ msgstr "Alle ({0} items) selecteren"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Select all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Select all ({itemsCount} items)"
+#~ msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -4090,7 +4092,10 @@ msgstr "Groepen selecteren"
 msgid "Select namespace"
 msgstr "Namespace selecteren"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+msgid "Select page"
+msgstr ""
+
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "Pagina ({0} items) selecteren"
@@ -4100,8 +4105,7 @@ msgstr "Pagina ({0} items) selecteren"
 msgid "Select permissions"
 msgstr "Machtigingen selecteren"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select repositories"
 msgstr "Repository's selecteren"
 
@@ -4116,7 +4120,6 @@ msgstr "Rol(len) selecteren"
 msgid "Select users"
 msgstr "Gebruikers selecteren"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "Geselecteerd"
@@ -4197,8 +4200,8 @@ msgstr "Alle collecties ondertekenen"
 msgid "Sign all collections in {repository}"
 msgstr "Alle collecties ondertekenen in {repository}"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Sign and approve"
 msgstr "Ondertekenen en goedkeuren"
 
@@ -4258,7 +4261,7 @@ msgstr "ondertekend"
 msgid "Signed"
 msgstr "Ondertekend"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Signed and approved"
 msgstr "Ondertekend en goedgekeurd"
 
@@ -4270,7 +4273,7 @@ msgstr "Alleen ondertekend"
 msgid "Signed version(s)"
 msgstr "Ondertekende versie(s)"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "Ondertekeningdienst {signingServiceName} niet gevonden"
@@ -4337,7 +4340,11 @@ msgid "Start from scratch"
 msgstr "Vanaf nul beginnen"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repo}\"."
 msgstr ""
 
 #: src/actions/ansible-repository-collection-version-add.tsx
@@ -4636,6 +4643,10 @@ msgstr "De collectie '{name}' is afgeschreven."
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr "De afschrijving van de collectie '{name}' is ongedaan gemaakt."
 
+#: src/components/shared/multi-repo-modal.tsx
+msgid "The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly."
+msgstr ""
+
 #: src/components/delete-modal/delete-collection-modal.tsx
 msgid "The collection will be deleted only from repository {deleteFromRepo}."
 msgstr ""
@@ -4753,6 +4764,10 @@ msgstr "Er zijn geen importen geweest op deze namespace."
 #: src/containers/task-management/task_detail.tsx
 msgid "There is no progress message."
 msgstr "Er is geen voortgangsbericht."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "There must be only one repository with pipeline=rejected."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "There's no resource record"
@@ -4946,8 +4961,8 @@ msgstr "Collectie uploaden"
 msgid "Upload new version"
 msgstr "Nieuwe versie uploaden"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Upload signature"
 msgstr "Handtekening uploaden"
 
@@ -5186,7 +5201,7 @@ msgstr "Collecties weergeven"
 #~ msgid "View group"
 #~ msgstr "View group"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "View Import Logs"
 msgstr "Importlogs weergeven"
 

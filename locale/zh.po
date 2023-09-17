@@ -463,15 +463,15 @@ msgstr "批准仪表板"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Approval failed."
-msgstr "批准失败。"
+#~ msgid "Approval failed."
+#~ msgstr "批准失败。"
 
 #: src/components/my-imports/import-console.tsx
 msgid "Approval status:"
 msgstr "批准状态："
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Approve"
 msgstr "批准"
 
@@ -483,9 +483,9 @@ msgstr "从远程批准、拒绝和同步集合。"
 msgid "approved"
 msgstr "已批准"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Approved"
@@ -598,9 +598,7 @@ msgstr "CA 证书"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
-#: src/components/approve-modal/approve-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
@@ -614,6 +612,7 @@ msgstr "CA 证书"
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/components/shared/multi-repo-modal.tsx
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
@@ -645,11 +644,14 @@ msgstr "集合 \"{0} {1} v{2}\" 证书已被成功上传。"
 msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
 msgstr "集合 \"{namespace} {name} v{version}\" 证书已被成功上传。"
 
-#: src/components/approve-modal/approve-modal.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "集合 \"{0} {1} v{2}\" 的认证状态已被成功更新。"
+
+#: src/components/approval/approve-modal.tsx
+msgid "Certification status for collection \"{namespace} {name} v{version}\" has been successfully updated."
+msgstr ""
 
 #: src/components/cards/collection-card.tsx
 msgid "Certified"
@@ -872,7 +874,11 @@ msgid "Collection \"{name}\" has been successfully undeprecated."
 msgstr "集合 \"{name}\" 已成功取消弃用。"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgid "Collection {0}.{1} v{2} could not be copied."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Collection {namespace}.{name} v{version} could not be copied."
 msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx
@@ -904,8 +910,8 @@ msgstr "集合没有分配任何发行版。"
 #~ msgstr "Collection failed to be removed from those repositories: {0}"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection has to be in rejected or staging repository."
-msgstr "集合必须处于被拒绝或暂存存储库中。"
+#~ msgid "Collection has to be in rejected or staging repository."
+#~ msgstr "集合必须处于被拒绝或暂存存储库中。"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 msgid "Collection is not being used by any collection."
@@ -925,8 +931,8 @@ msgstr ""
 #~ msgstr "Collection Namespaces"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
-msgid "Collection not found in any repository."
-msgstr "在任何存储库中都未找到的集合。"
+#~ msgid "Collection not found in any repository."
+#~ msgstr "在任何存储库中都未找到的集合。"
 
 #: src/constants.tsx
 #~ msgid "Collection Remotes"
@@ -945,7 +951,6 @@ msgstr "集合上传已取消"
 #~ msgstr "Collection version {0} was not found in the system. You must upload it."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -977,8 +982,8 @@ msgstr "修改集合后会出现集合版本。"
 #~ msgstr "Collection was sucessfuly rejected from those repositories: {0}, but failed to be removed from those repositories: {1}"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Collection with id {0} not found."
-msgstr "未找到 ID 为 {0} 的集合。"
+#~ msgid "Collection with id {0} not found."
+#~ msgstr "未找到 ID 为 {0} 的集合。"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
@@ -1560,10 +1565,9 @@ msgid "Deselect all ({0} items)"
 msgstr "全部取消选择 ({0} 项目)"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Deselect all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Deselect all ({itemsCount} items)"
+#~ msgstr ""
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Deselect page ({0} items)"
 msgstr "取消选择页面 ({0} 项目)"
@@ -2029,7 +2033,7 @@ msgstr "{operation} tag \"{tag}\" 失败。"
 #~ msgid "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 #~ msgstr "Failed to add {namespace}.{name} v{version} to repository \"{repositoryName}\"."
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 msgid "Failed to approve collection."
 msgstr "批准集合失败。"
 
@@ -2085,9 +2089,7 @@ msgstr "加载远程失败：{remotesError}"
 msgid "Failed to load repositories: {error}"
 msgstr "加载软件仓库失败：{error}"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/import-modal/import-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "加载软件仓库失败。"
 
@@ -2110,6 +2112,10 @@ msgstr "加载软件仓库失败。"
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to opt out of Wisdom."
 #~ msgstr "Failed to opt out of Wisdom."
+
+#: src/components/shared/multi-repo-modal.tsx
+msgid "Failed to query repositories."
+msgstr ""
 
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
@@ -2755,8 +2761,6 @@ msgid "My profile"
 msgstr "我的配置集"
 
 #: src/components/collection-detail/collection-content-list.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2898,7 +2902,7 @@ msgstr "命名空间在创建后会出现"
 msgid "Namespaces will appear once created or roles are imported"
 msgstr "命名空间会在创建后或角色导入后出现"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs review"
 msgstr "需要审核"
 
@@ -2908,7 +2912,7 @@ msgstr "需要审核"
 msgid "Needs Review"
 msgstr "需要审核"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Needs signature and review"
 msgstr "需要签名并审核"
 
@@ -3626,7 +3630,7 @@ msgstr "注册表同步状态"
 msgid "Registry URL"
 msgstr "注册表 URL"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Reject"
 msgstr "拒绝"
 
@@ -3634,9 +3638,9 @@ msgstr "拒绝"
 msgid "rejected"
 msgstr "拒绝"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/ansible-repository/list.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Rejected"
@@ -3801,14 +3805,13 @@ msgstr "仓库在创建后会出现。"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Repository"
 msgstr "仓库"
 
-#: src/utilities/repositories.ts
+#: src/utilities/repository-remove-collection.ts
 msgid "Repository {repoName} not found."
 msgstr "未找到仓库 {repoName}。"
 
@@ -3832,8 +3835,8 @@ msgid "Repository name"
 msgstr "仓库名称"
 
 #: src/components/approve-modal/approve-modal.tsx
-msgid "Repository name {originRepoName} not found."
-msgstr "仓库名称 {originRepoName} 未找到。"
+#~ msgid "Repository name {originRepoName} not found."
+#~ msgstr "仓库名称 {originRepoName} 未找到。"
 
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Repository URL"
@@ -4034,8 +4037,7 @@ msgstr "有关此任务的状态，请参阅任务管理<0>详情页</0>。"
 #~ msgstr "See the task management <0>detail page</0>for the status of this task."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select"
 msgstr "选择"
 
@@ -4066,8 +4068,8 @@ msgstr "选择标签"
 #~ msgstr "选择所有（{0} 个项）"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Select all ({itemsCount} items)"
-msgstr ""
+#~ msgid "Select all ({itemsCount} items)"
+#~ msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Select collection version"
@@ -4090,7 +4092,10 @@ msgstr "选择组"
 msgid "Select namespace"
 msgstr "选择命名空间"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/repo-selector/multiple-repo-selector.tsx
+msgid "Select page"
+msgstr ""
+
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Select page ({0} items)"
 msgstr "选择页面（{0} 个项）"
@@ -4100,8 +4105,7 @@ msgstr "选择页面（{0} 个项）"
 msgid "Select permissions"
 msgstr "选择权限"
 
-#: src/components/approve-modal/approve-modal.tsx
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+#: src/components/shared/multi-repo-modal.tsx
 msgid "Select repositories"
 msgstr "选择软件仓库"
 
@@ -4116,7 +4120,6 @@ msgstr "选择角色"
 msgid "Select users"
 msgstr "选择用户"
 
-#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Selected"
 msgstr "已选择"
@@ -4197,8 +4200,8 @@ msgstr "签发所有集合"
 msgid "Sign all collections in {repository}"
 msgstr "签名 {repository} 中的所有集合"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Sign and approve"
 msgstr "签发并批准"
 
@@ -4258,7 +4261,7 @@ msgstr "已签名"
 msgid "Signed"
 msgstr "已签名"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "Signed and approved"
 msgstr "已签名并批准"
 
@@ -4270,7 +4273,7 @@ msgstr "仅包括签发的"
 msgid "Signed version(s)"
 msgstr "签名的版本"
 
-#: src/components/approve-modal/approve-modal.tsx
+#: src/components/approval/approve-modal.tsx
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Signing service {signingServiceName} not found"
 msgstr "签名服务 {signingServiceName} 未找到"
@@ -4337,7 +4340,11 @@ msgid "Start from scratch"
 msgstr "从头开始"
 
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
-msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgid "Started adding {0}.{1} v{2} from \"{3}\" to repository \"{repo}\"."
+#~ msgstr ""
+
+#: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repo}\"."
 msgstr ""
 
 #: src/actions/ansible-repository-collection-version-add.tsx
@@ -4636,6 +4643,10 @@ msgstr "集合 \"{name}\" 已成功弃用。"
 msgid "The collection \"{name}\" has been successfully undeprecated."
 msgstr "集合 \"{name}\" 已成功取消启用。"
 
+#: src/components/shared/multi-repo-modal.tsx
+msgid "The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly."
+msgstr ""
+
 #: src/components/delete-modal/delete-collection-modal.tsx
 msgid "The collection will be deleted only from repository {deleteFromRepo}."
 msgstr ""
@@ -4753,6 +4764,10 @@ msgstr "此命名空间中没有任何导入。"
 #: src/containers/task-management/task_detail.tsx
 msgid "There is no progress message."
 msgstr "没有进度消息。"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "There must be only one repository with pipeline=rejected."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "There's no resource record"
@@ -4946,8 +4961,8 @@ msgstr "上传集合"
 msgid "Upload new version"
 msgstr "上传新版本"
 
+#: src/components/approval/approval-row.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
-#: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Upload signature"
 msgstr "上传签名"
 
@@ -5186,7 +5201,7 @@ msgstr "查看集合"
 #~ msgid "View group"
 #~ msgstr "View group"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/components/approval/approval-row.tsx
 msgid "View Import Logs"
 msgstr "查看导入日志"
 
