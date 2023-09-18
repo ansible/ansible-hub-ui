@@ -54,6 +54,8 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
   <h2 className='pf-c-title'>{children}</h2>
 );
 
+const loading = [];
+
 export const MultiSearch = (props: RouteProps) => {
   const { featureFlags } = useContext();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
@@ -79,8 +81,10 @@ export const MultiSearch = (props: RouteProps) => {
       setRoles([]);
       setRoleNamespaces([]);
       setContainers([]);
+      return;
     }
 
+    setCollections(loading);
     CollectionVersionAPI.list({ keywords, is_highest: true })
       .then(({ data: { data } }) => setCollections(data || []))
       .catch(
@@ -90,6 +94,8 @@ export const MultiSearch = (props: RouteProps) => {
           addAlert,
         ),
       );
+
+    setNamespaces(loading);
     NamespaceAPI.list({ keywords })
       .then(({ data: { data } }) => setNamespaces(data || []))
       .catch(
@@ -101,6 +107,7 @@ export const MultiSearch = (props: RouteProps) => {
       );
 
     if (featureFlags.legacy_roles) {
+      setRoles(loading);
       LegacyRoleAPI.list({ keywords })
         .then(({ data: { results } }) => setRoles(results || []))
         .catch(
@@ -110,6 +117,8 @@ export const MultiSearch = (props: RouteProps) => {
             addAlert,
           ),
         );
+
+      setRoleNamespaces(loading);
       LegacyNamespaceAPI.list({ keywords })
         .then(({ data: { results } }) => setRoleNamespaces(results || []))
         .catch(
@@ -122,6 +131,7 @@ export const MultiSearch = (props: RouteProps) => {
     }
 
     if (featureFlags.execution_environments) {
+      setContainers(loading);
       ExecutionEnvironmentAPI.list({ keywords })
         .then(({ data: { data } }) => setContainers(data || []))
         .catch(
@@ -151,6 +161,40 @@ export const MultiSearch = (props: RouteProps) => {
   useEffect(() => {
     query();
   }, [keywords]);
+
+  const ResultSection = ({
+    children,
+    emptyStateTitle,
+    items,
+    showAllLink,
+    title,
+  }: {
+    children: ReactNode;
+    emptyStateTitle: string;
+    items;
+    showAllLink: ReactNode;
+    title: string;
+  }) => (
+    <>
+      <SectionSeparator />
+      <PageSection>
+        <SectionTitle>{title}</SectionTitle>
+
+        {items === loading ? (
+          <LoadingPageSpinner />
+        ) : !keywords ? (
+          <>{showAllLink}</>
+        ) : items.length === 0 ? (
+          <EmptyStateNoData title={emptyStateTitle} description={showAllLink} />
+        ) : (
+          <>
+            {children}
+            {showAllLink}
+          </>
+        )}
+      </PageSection>
+    </>
+  );
 
   return (
     <>
@@ -197,205 +241,146 @@ export const MultiSearch = (props: RouteProps) => {
             />
           </div>
         </PageSection>
-        <SectionSeparator />
-        <PageSection>
-          <SectionTitle>{t`Collections`}</SectionTitle>
 
-          {collections === null ? (
-            <LoadingPageSpinner />
-          ) : collections.length === 0 ? (
-            <EmptyStateNoData
-              title={t`No matching collections found.`}
-              description={
+        <ResultSection
+          items={collections}
+          title={t`Collections`}
+          emptyStateTitle={t`No matching collections found.`}
+          showAllLink={
+            <Link
+              to={formatPath(Paths.collections)}
+            >{t`Show all collections`}</Link>
+          }
+        >
+          <DataList aria-label={t`Available matching collections`}>
+            {collections.map((c, i) => (
+              <CollectionListItem
+                key={i}
+                collection={c}
+                displaySignatures={featureFlags.display_signatures}
+                showNamespace={true}
+              />
+            ))}
+          </DataList>
+        </ResultSection>
+
+        <ResultSection
+          items={namespaces}
+          title={t`Namespaces`}
+          emptyStateTitle={t`No matching namespaces found.`}
+          showAllLink={
+            <Link
+              to={formatPath(Paths.namespaces)}
+            >{t`Show all namespaces`}</Link>
+          }
+        >
+          <section className='card-layout'>
+            {namespaces.map((ns, i) => (
+              <div key={i} className='card-wrapper'>
+                <NamespaceCard
+                  namespaceURL={formatPath(Paths.namespaces, {
+                    namespace: ns.name,
+                  })}
+                  key={i}
+                  {...ns}
+                />
+              </div>
+            ))}
+          </section>
+        </ResultSection>
+
+        {featureFlags.legacy_roles ? (
+          <>
+            <ResultSection
+              items={roles}
+              title={t`Roles`}
+              emptyStateTitle={t`No matching roles found.`}
+              showAllLink={
                 <Link
-                  to={formatPath(Paths.collections)}
-                >{t`Show all collections`}</Link>
+                  to={formatPath(Paths.legacyRoles)}
+                >{t`Show all roles`}</Link>
               }
-            />
-          ) : (
-            <>
-              <DataList aria-label={t`Available matching collections`}>
-                {collections.map((c, i) => (
-                  <CollectionListItem
-                    key={i}
-                    collection={c}
-                    displaySignatures={featureFlags.display_signatures}
-                    showNamespace={true}
+            >
+              <DataList aria-label={t`Available matching roles`}>
+                {roles.map((r) => (
+                  <LegacyRoleListItem
+                    key={r.id}
+                    role={r}
+                    show_thumbnail={true}
                   />
                 ))}
               </DataList>
-              <Link
-                to={formatPath(Paths.collections)}
-              >{t`Show all collections`}</Link>
-            </>
-          )}
-        </PageSection>
-        <SectionSeparator />
-        <PageSection>
-          <SectionTitle>{t`Namespaces`}</SectionTitle>
+            </ResultSection>
 
-          {namespaces === null ? (
-            <LoadingPageSpinner />
-          ) : namespaces.length === 0 ? (
-            <EmptyStateNoData
-              title={t`No matching namespaces found.`}
-              description={
+            <ResultSection
+              items={roleNamespaces}
+              title={t`Role namespaces`}
+              emptyStateTitle={t`No matching role namespaces found.`}
+              showAllLink={
                 <Link
-                  to={formatPath(Paths.namespaces)}
-                >{t`Show all namespaces`}</Link>
+                  to={formatPath(Paths.legacyNamespaces)}
+                >{t`Show all role namespaces`}</Link>
               }
-            />
-          ) : (
-            <>
-              <section className='card-layout'>
-                {namespaces.map((ns, i) => (
-                  <div key={i} className='card-wrapper'>
-                    <NamespaceCard
-                      namespaceURL={formatPath(Paths.namespaces, {
-                        namespace: ns.name,
-                      })}
-                      key={i}
-                      {...ns}
-                    />
-                  </div>
+            >
+              <DataList aria-label={t`Available matching role namespaces`}>
+                {roleNamespaces.map((r) => (
+                  <LegacyNamespaceListItem key={r.id} namespace={r} />
                 ))}
-              </section>
-              <Link
-                to={formatPath(Paths.namespaces)}
-              >{t`Show all namespaces`}</Link>
-            </>
-          )}
-        </PageSection>
-        {featureFlags.legacy_roles ? (
-          <>
-            <SectionSeparator />
-            <PageSection>
-              <SectionTitle>{t`Roles`}</SectionTitle>
-
-              {roles === null ? (
-                <LoadingPageSpinner />
-              ) : roles.length === 0 ? (
-                <EmptyStateNoData
-                  title={t`No matching roles found.`}
-                  description={
-                    <Link
-                      to={formatPath(Paths.legacyRoles)}
-                    >{t`Show all roles`}</Link>
-                  }
-                />
-              ) : (
-                <>
-                  <DataList aria-label={t`Available matching roles`}>
-                    {roles.map((r) => (
-                      <LegacyRoleListItem
-                        key={r.id}
-                        role={r}
-                        show_thumbnail={true}
-                      />
-                    ))}
-                  </DataList>
-                  <Link
-                    to={formatPath(Paths.legacyRoles)}
-                  >{t`Show all roles`}</Link>
-                </>
-              )}
-            </PageSection>
-            <SectionSeparator />
-            <PageSection>
-              <SectionTitle>{t`Role Namespaces`}</SectionTitle>
-
-              {roleNamespaces === null ? (
-                <LoadingPageSpinner />
-              ) : roleNamespaces.length === 0 ? (
-                <EmptyStateNoData
-                  title={t`No matching role namespaces found.`}
-                  description={
-                    <Link
-                      to={formatPath(Paths.legacyNamespaces)}
-                    >{t`Show all role namespaces`}</Link>
-                  }
-                />
-              ) : (
-                <>
-                  <DataList aria-label={t`Available matching role namespaces`}>
-                    {roleNamespaces.map((r) => (
-                      <LegacyNamespaceListItem key={r.id} namespace={r} />
-                    ))}
-                  </DataList>
-                  <Link
-                    to={formatPath(Paths.legacyNamespaces)}
-                  >{t`Show all role namespaces`}</Link>
-                </>
-              )}
-            </PageSection>
+              </DataList>
+            </ResultSection>
           </>
         ) : null}
-        {featureFlags.execution_environments ? (
-          <>
-            <SectionSeparator />
-            <PageSection>
-              <SectionTitle>{t`Execution Environments`}</SectionTitle>
 
-              {containers === null ? (
-                <LoadingPageSpinner />
-              ) : containers.length === 0 ? (
-                <EmptyStateNoData
-                  title={t`No matching execution environments found.`}
-                  description={
+        {featureFlags.execution_environments ? (
+          <ResultSection
+            items={containers}
+            title={t`Execution Environments`}
+            emptyStateTitle={t`No matching execution environments found.`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.executionEnvironments)}
+              >{t`Show all execution environments`}</Link>
+            }
+          >
+            <DataList aria-label={t`Available matching execution environments`}>
+              {containers.map((item, index) => (
+                <tr
+                  data-cy={`ExecutionEnvironmentList-row-${item.name}`}
+                  key={index}
+                >
+                  <td>
                     <Link
-                      to={formatPath(Paths.executionEnvironments)}
-                    >{t`Show all execution environments`}</Link>
-                  }
-                />
-              ) : (
-                <>
-                  <DataList
-                    aria-label={t`Available matching execution environments`}
-                  >
-                    {containers.map((item, index) => (
-                      <tr
-                        data-cy={`ExecutionEnvironmentList-row-${item.name}`}
-                        key={index}
-                      >
-                        <td>
-                          <Link
-                            to={formatEEPath(Paths.executionEnvironmentDetail, {
-                              container: item.pulp.distribution.base_path,
-                            })}
-                          >
-                            {item.name}
-                          </Link>
-                        </td>
-                        {item.description ? (
-                          <td className={'pf-m-truncate'}>
-                            <Tooltip content={item.description}>
-                              {item.description}
-                            </Tooltip>
-                          </td>
-                        ) : (
-                          <td />
-                        )}
-                        <td>
-                          <DateComponent date={item.created_at} />
-                        </td>
-                        <td>
-                          <DateComponent date={item.updated_at} />
-                        </td>
-                        <td>
-                          <Label>
-                            {item.pulp.repository.remote ? t`Remote` : t`Local`}
-                          </Label>
-                        </td>
-                      </tr>
-                    ))}
-                  </DataList>
-                  <Link
-                    to={formatPath(Paths.executionEnvironments)}
-                  >{t`Show all execution environments`}</Link>
-                </>
-              )}
-            </PageSection>
-          </>
+                      to={formatEEPath(Paths.executionEnvironmentDetail, {
+                        container: item.pulp.distribution.base_path,
+                      })}
+                    >
+                      {item.name}
+                    </Link>
+                  </td>
+                  {item.description ? (
+                    <td className={'pf-m-truncate'}>
+                      <Tooltip content={item.description}>
+                        {item.description}
+                      </Tooltip>
+                    </td>
+                  ) : (
+                    <td />
+                  )}
+                  <td>
+                    <DateComponent date={item.created_at} />
+                  </td>
+                  <td>
+                    <DateComponent date={item.updated_at} />
+                  </td>
+                  <td>
+                    <Label>
+                      {item.pulp.repository.remote ? t`Remote` : t`Local`}
+                    </Label>
+                  </td>
+                </tr>
+              ))}
+            </DataList>
+          </ResultSection>
         ) : null}
       </Main>
     </>
