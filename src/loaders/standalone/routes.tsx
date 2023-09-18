@@ -35,6 +35,7 @@ import {
   LegacyRole,
   LegacyRoles,
   LoginPage,
+  MultiSearch,
   MyImports,
   MyNamespaces,
   NamespaceDetail,
@@ -296,6 +297,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: Search, path: Paths.collections },
       { component: LandingPage, path: Paths.landingPage },
       { component: Dispatch, path: Paths.dispatch },
+      { component: MultiSearch, path: Paths.search },
     ];
   }
 

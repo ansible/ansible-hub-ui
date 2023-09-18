@@ -38,6 +38,12 @@ const menuSection = (name, options = {}, items = []) => ({
 
 function standaloneMenu() {
   return [
+    menuItem(t`Search`, {
+      url: formatPath(Paths.search),
+      condition: ({ settings, user }) =>
+        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+        !user.is_anonymous,
+    }),
     menuSection(t`Collections`, {}, [
       menuItem(t`Collections`, {
         url: formatPath(Paths.collections),

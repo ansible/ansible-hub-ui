@@ -16,7 +16,7 @@ import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;
-  openModal: (namespace) => void;
+  openModal?: (namespace) => void;
 }
 
 export function LegacyNamespaceListItem({
@@ -70,7 +70,7 @@ export function LegacyNamespaceListItem({
     >{t`Ansible Lightspeed settings`}</DropdownItem>,
   );
 
-  if (showWisdom) {
+  if (showWisdom && openModal) {
     cells.push(
       <DataListCell key='menu' alignRight={true}>
         <div style={{ float: 'right' }}>
