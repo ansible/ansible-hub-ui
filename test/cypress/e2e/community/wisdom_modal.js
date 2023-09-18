@@ -1,7 +1,7 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 function communityLogin() {
-  cy.login(null, null, '/', 'Welcome to Beta Galaxy');
+  cy.login(null, null, '/', 'Welcome to Galaxy');
 }
 
 function clickWisdomSettings() {
