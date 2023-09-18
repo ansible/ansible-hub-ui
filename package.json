@@ -39,7 +39,7 @@
         "@babel/preset-env": "^7.22.15",
         "@babel/preset-react": "^7.22.5",
         "@babel/preset-typescript": "^7.22.15",
-        "@lingui/cli": "^4.4.2",
+        "@lingui/cli": "^4.5.0",
         "@lingui/macro": "^4.4.2",
         "@ls-lint/ls-lint": "^2.1.0",
         "@redhat-cloud-services/frontend-components-config": "^5.0.5",
