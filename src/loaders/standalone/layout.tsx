@@ -170,14 +170,14 @@ export const StandaloneLayout = ({
       {featureFlags?.ai_deny_index ? (
         <Banner>
           <Trans>
-            Thanks for trying out the new and improved Beta Galaxy, please share
-            your feedback on{' '}
+            Thanks for trying out the new and improved Galaxy, please share your
+            feedback on{' '}
             <a
-              href='https://github.com/ansible/galaxy_ng/discussions'
+              href='https://forum.ansible.com/'
               target='_blank'
               rel='noreferrer'
             >
-              github.com/ansible/galaxy_ng/discussions
+              forum.ansible.com
             </a>
             .
           </Trans>
