@@ -117,6 +117,7 @@ export { Details } from './shared/details';
 export { DownloadCount } from './shared/download-count';
 export { LoginLink } from './shared/login-link';
 export { MultiRepoModal } from './shared/multi-repo-modal';
+export { MultiSearchSearch } from './shared/multi-search-search';
 export { CollectionRatings, RoleRatings } from './shared/ratings';
 export { UIVersion } from './shared/ui-version';
 export {

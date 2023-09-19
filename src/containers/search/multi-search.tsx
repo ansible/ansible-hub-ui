@@ -1,13 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  DataList,
-  Label,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-  Tooltip,
-} from '@patternfly/react-core';
+import { DataList, Label, Tooltip } from '@patternfly/react-core';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -20,15 +12,14 @@ import {
 import {
   AlertList,
   AlertType,
-  AppliedFilters,
   BaseHeader,
   CollectionListItem,
-  CompoundFilter,
   EmptyStateNoData,
   LegacyNamespaceListItem,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Main,
+  MultiSearchSearch,
   NamespaceCard,
   closeAlert,
 } from 'src/components';
@@ -74,7 +65,6 @@ const loading = [];
 export const MultiSearch = (props: RouteProps) => {
   const { featureFlags } = useContext();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
-  const [inputText, setInputText] = useState<string>('');
   const [params, setParams] = useState({});
 
   const [collections, setCollections] = useState([]);
@@ -234,43 +224,10 @@ export const MultiSearch = (props: RouteProps) => {
         closeAlert={(i) => closeAlert(i, { alerts, setAlerts })}
       />
       <Main>
-        <PageSection>
-          <div className='hub-toolbar'>
-            <Toolbar>
-              <ToolbarContent>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <CompoundFilter
-                      inputText={inputText}
-                      onChange={setInputText}
-                      updateParams={(p) => updateParams(p)}
-                      params={params}
-                      filterConfig={[
-                        {
-                          id: 'keywords',
-                          title: t`Keywords`,
-                        },
-                      ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-              </ToolbarContent>
-            </Toolbar>
-          </div>
-          <div>
-            <AppliedFilters
-              updateParams={(p) => {
-                updateParams(p);
-                setInputText('');
-              }}
-              params={params}
-              ignoredParams={['page_size', 'page', 'sort', 'ordering']}
-              niceNames={{
-                keywords: t`Keywords`,
-              }}
-            />
-          </div>
-        </PageSection>
+        <MultiSearchSearch
+          params={params}
+          updateParams={(p) => updateParams(p)}
+        />
 
         {/* loading and non-empty lists go before not found */}
         <ResultsSection
