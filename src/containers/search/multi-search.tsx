@@ -24,7 +24,6 @@ import {
   BaseHeader,
   CollectionListItem,
   CompoundFilter,
-  DateComponent,
   EmptyStateNoData,
   LegacyNamespaceListItem,
   LegacyRoleListItem,
@@ -52,6 +51,22 @@ const SectionSeparator = () => <section>&nbsp;</section>;
 
 const SectionTitle = ({ children }: { children: ReactNode }) => (
   <h2 className='pf-c-title'>{children}</h2>
+);
+
+const Section = ({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title: string;
+}) => (
+  <>
+    <SectionSeparator />
+    <PageSection>
+      <SectionTitle>{title}</SectionTitle>
+      {children}
+    </PageSection>
+  </>
 );
 
 const loading = [];
@@ -84,8 +99,10 @@ export const MultiSearch = (props: RouteProps) => {
       return;
     }
 
+    const shared = { page_size: 10 };
+
     setCollections(loading);
-    CollectionVersionAPI.list({ keywords, is_highest: true })
+    CollectionVersionAPI.list({ ...shared, keywords, is_highest: true })
       .then(({ data: { data } }) => setCollections(data || []))
       .catch(
         handleHttpError(
@@ -96,7 +113,7 @@ export const MultiSearch = (props: RouteProps) => {
       );
 
     setNamespaces(loading);
-    NamespaceAPI.list({ keywords })
+    NamespaceAPI.list({ ...shared, keywords })
       .then(({ data: { data } }) => setNamespaces(data || []))
       .catch(
         handleHttpError(
@@ -108,7 +125,7 @@ export const MultiSearch = (props: RouteProps) => {
 
     if (featureFlags.legacy_roles) {
       setRoles(loading);
-      LegacyRoleAPI.list({ keywords })
+      LegacyRoleAPI.list({ ...shared, keywords })
         .then(({ data: { results } }) => setRoles(results || []))
         .catch(
           handleHttpError(
@@ -119,7 +136,7 @@ export const MultiSearch = (props: RouteProps) => {
         );
 
       setRoleNamespaces(loading);
-      LegacyNamespaceAPI.list({ keywords })
+      LegacyNamespaceAPI.list({ ...shared, keywords })
         .then(({ data: { results } }) => setRoleNamespaces(results || []))
         .catch(
           handleHttpError(
@@ -132,7 +149,7 @@ export const MultiSearch = (props: RouteProps) => {
 
     if (featureFlags.execution_environments) {
       setContainers(loading);
-      ExecutionEnvironmentAPI.list({ keywords })
+      ExecutionEnvironmentAPI.list({ ...shared, name__icontains: keywords })
         .then(({ data: { data } }) => setContainers(data || []))
         .catch(
           handleHttpError(
@@ -162,39 +179,52 @@ export const MultiSearch = (props: RouteProps) => {
     query();
   }, [keywords]);
 
-  const ResultSection = ({
+  const ResultsSection = ({
     children,
+    items,
+    showAllLink,
+    showMoreLink,
+    title,
+  }: {
+    children: ReactNode;
+    items;
+    showAllLink: ReactNode;
+    showMoreLink: ReactNode;
+    title: string;
+  }) =>
+    items === loading || !keywords || items.length ? (
+      <Section title={title}>
+        {items === loading ? (
+          <LoadingPageSpinner />
+        ) : !keywords ? (
+          showAllLink
+        ) : (
+          <>
+            {children}
+            {showMoreLink}
+            <br />
+            {showAllLink}
+          </>
+        )}
+      </Section>
+    ) : null;
+
+  const NotFoundSection = ({
     emptyStateTitle,
     items,
     showAllLink,
     title,
   }: {
-    children: ReactNode;
     emptyStateTitle: string;
     items;
     showAllLink: ReactNode;
     title: string;
-  }) => (
-    <>
-      <SectionSeparator />
-      <PageSection>
-        <SectionTitle>{title}</SectionTitle>
-
-        {items === loading ? (
-          <LoadingPageSpinner />
-        ) : !keywords ? (
-          <>{showAllLink}</>
-        ) : items.length === 0 ? (
-          <EmptyStateNoData title={emptyStateTitle} description={showAllLink} />
-        ) : (
-          <>
-            {children}
-            {showAllLink}
-          </>
-        )}
-      </PageSection>
-    </>
-  );
+  }) =>
+    keywords && items !== loading && !items.length ? (
+      <Section title={title}>
+        <EmptyStateNoData title={emptyStateTitle} description={showAllLink} />
+      </Section>
+    ) : null;
 
   return (
     <>
@@ -242,14 +272,19 @@ export const MultiSearch = (props: RouteProps) => {
           </div>
         </PageSection>
 
-        <ResultSection
+        {/* loading and non-empty lists go before not found */}
+        <ResultsSection
           items={collections}
           title={t`Collections`}
-          emptyStateTitle={t`No matching collections found.`}
           showAllLink={
             <Link
               to={formatPath(Paths.collections)}
             >{t`Show all collections`}</Link>
+          }
+          showMoreLink={
+            <Link
+              to={formatPath(Paths.collections, {}, { keywords })}
+            >{t`Show more collections`}</Link>
           }
         >
           <DataList aria-label={t`Available matching collections`}>
@@ -262,16 +297,20 @@ export const MultiSearch = (props: RouteProps) => {
               />
             ))}
           </DataList>
-        </ResultSection>
+        </ResultsSection>
 
-        <ResultSection
+        <ResultsSection
           items={namespaces}
           title={t`Namespaces`}
-          emptyStateTitle={t`No matching namespaces found.`}
           showAllLink={
             <Link
               to={formatPath(Paths.namespaces)}
             >{t`Show all namespaces`}</Link>
+          }
+          showMoreLink={
+            <Link
+              to={formatPath(Paths.namespaces, {}, { keywords })}
+            >{t`Show more namespaces`}</Link>
           }
         >
           <section className='card-layout'>
@@ -287,52 +326,160 @@ export const MultiSearch = (props: RouteProps) => {
               </div>
             ))}
           </section>
-        </ResultSection>
+        </ResultsSection>
 
         {featureFlags.legacy_roles ? (
-          <>
-            <ResultSection
-              items={roles}
-              title={t`Roles`}
-              emptyStateTitle={t`No matching roles found.`}
-              showAllLink={
-                <Link
-                  to={formatPath(Paths.legacyRoles)}
-                >{t`Show all roles`}</Link>
-              }
-            >
-              <DataList aria-label={t`Available matching roles`}>
-                {roles.map((r) => (
-                  <LegacyRoleListItem
-                    key={r.id}
-                    role={r}
-                    show_thumbnail={true}
-                  />
-                ))}
-              </DataList>
-            </ResultSection>
+          <ResultsSection
+            items={roles}
+            title={t`Roles`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.legacyRoles)}
+              >{t`Show all roles`}</Link>
+            }
+            showMoreLink={
+              <Link
+                to={formatPath(Paths.legacyRoles, {}, { keywords })}
+              >{t`Show more roles`}</Link>
+            }
+          >
+            <DataList aria-label={t`Available matching roles`}>
+              {roles.map((r) => (
+                <LegacyRoleListItem key={r.id} role={r} show_thumbnail={true} />
+              ))}
+            </DataList>
+          </ResultsSection>
+        ) : null}
 
-            <ResultSection
-              items={roleNamespaces}
-              title={t`Role namespaces`}
-              emptyStateTitle={t`No matching role namespaces found.`}
-              showAllLink={
-                <Link
-                  to={formatPath(Paths.legacyNamespaces)}
-                >{t`Show all role namespaces`}</Link>
-              }
-            >
-              <DataList aria-label={t`Available matching role namespaces`}>
-                {roleNamespaces.map((r) => (
-                  <LegacyNamespaceListItem key={r.id} namespace={r} />
-                ))}
-              </DataList>
-            </ResultSection>
-          </>
+        {featureFlags.legacy_roles ? (
+          <ResultsSection
+            items={roleNamespaces}
+            title={t`Role namespaces`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.legacyNamespaces)}
+              >{t`Show all role namespaces`}</Link>
+            }
+            showMoreLink={
+              <Link
+                to={formatPath(Paths.legacyNamespaces, {}, { keywords })}
+              >{t`Show more role namespaces`}</Link>
+            }
+          >
+            <DataList aria-label={t`Available matching role namespaces`}>
+              {roleNamespaces.map((r) => (
+                <LegacyNamespaceListItem key={r.id} namespace={r} />
+              ))}
+            </DataList>
+          </ResultsSection>
         ) : null}
 
         {featureFlags.execution_environments ? (
-          <ResultSection
+          <ResultsSection
+            items={containers}
+            title={t`Execution environments`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.executionEnvironments)}
+              >{t`Show all execution environments`}</Link>
+            }
+            showMoreLink={
+              <Link
+                to={formatPath(
+                  Paths.executionEnvironments,
+                  {},
+                  { name__icontains: keywords },
+                )}
+              >{t`Show more execution environments`}</Link>
+            }
+          >
+            <DataList aria-label={t`Available matching execution environments`}>
+              {containers.map((item, index) => (
+                <section className='card-layout' key={index}>
+                  <div className='card-wrapper'>
+                    <article className='pf-c-card hub-c-card-ns-container'>
+                      <div className='pf-c-card__title'>
+                        <Link
+                          to={formatEEPath(Paths.executionEnvironmentDetail, {
+                            container: item.pulp.distribution.base_path,
+                          })}
+                        >
+                          {item.name}
+                        </Link>
+                      </div>
+                      <div className='pf-c-card__body pf-m-truncate'>
+                        {item.description ? (
+                          <Tooltip content={item.description}>
+                            {item.description}
+                          </Tooltip>
+                        ) : null}
+                      </div>
+                      <div className='pf-c-card__footer'>
+                        <Label>
+                          {item.pulp.repository.remote ? t`Remote` : t`Local`}
+                        </Label>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+              ))}
+            </DataList>
+          </ResultsSection>
+        ) : null}
+
+        <SectionSeparator />
+        <hr />
+
+        <NotFoundSection
+          items={collections}
+          title={t`Collections`}
+          emptyStateTitle={t`No matching collections found.`}
+          showAllLink={
+            <Link
+              to={formatPath(Paths.collections)}
+            >{t`Show all collections`}</Link>
+          }
+        />
+
+        <NotFoundSection
+          items={namespaces}
+          title={t`Namespaces`}
+          emptyStateTitle={t`No matching namespaces found.`}
+          showAllLink={
+            <Link
+              to={formatPath(Paths.namespaces)}
+            >{t`Show all namespaces`}</Link>
+          }
+        />
+
+        {featureFlags.legacy_roles ? (
+          <NotFoundSection
+            items={roles}
+            title={t`Roles`}
+            emptyStateTitle={t`No matching roles found.`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.legacyRoles)}
+              >{t`Show all roles`}</Link>
+            }
+          />
+        ) : null}
+
+        {featureFlags.legacy_roles ? (
+          <NotFoundSection
+            items={roleNamespaces}
+            title={t`Role namespaces`}
+            emptyStateTitle={t`No matching role namespaces found.`}
+            showAllLink={
+              <Link
+                to={formatPath(Paths.legacyNamespaces)}
+              >{t`Show all role namespaces`}</Link>
+            }
+          />
+        ) : null}
+
+        {featureFlags.execution_environments ? (
+          <NotFoundSection
             items={containers}
             title={t`Execution Environments`}
             emptyStateTitle={t`No matching execution environments found.`}
@@ -341,46 +488,7 @@ export const MultiSearch = (props: RouteProps) => {
                 to={formatPath(Paths.executionEnvironments)}
               >{t`Show all execution environments`}</Link>
             }
-          >
-            <DataList aria-label={t`Available matching execution environments`}>
-              {containers.map((item, index) => (
-                <tr
-                  data-cy={`ExecutionEnvironmentList-row-${item.name}`}
-                  key={index}
-                >
-                  <td>
-                    <Link
-                      to={formatEEPath(Paths.executionEnvironmentDetail, {
-                        container: item.pulp.distribution.base_path,
-                      })}
-                    >
-                      {item.name}
-                    </Link>
-                  </td>
-                  {item.description ? (
-                    <td className={'pf-m-truncate'}>
-                      <Tooltip content={item.description}>
-                        {item.description}
-                      </Tooltip>
-                    </td>
-                  ) : (
-                    <td />
-                  )}
-                  <td>
-                    <DateComponent date={item.created_at} />
-                  </td>
-                  <td>
-                    <DateComponent date={item.updated_at} />
-                  </td>
-                  <td>
-                    <Label>
-                      {item.pulp.repository.remote ? t`Remote` : t`Local`}
-                    </Label>
-                  </td>
-                </tr>
-              ))}
-            </DataList>
-          </ResultSection>
+          />
         ) : null}
       </Main>
     </>
