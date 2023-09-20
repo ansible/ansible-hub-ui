@@ -2,6 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
+  Spinner,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
@@ -13,61 +14,110 @@ import { GroupType, RoleType } from 'src/api';
 import {
   DeleteModal,
   EmptyStateNoData,
+  EmptyStateXs,
   ExpandableRow,
-  GroupRolePermissions,
   ListItemActions,
   LoadingPageSpinner,
   PreviewRoles,
   RoleListTable,
+  RolePermissions,
   SelectGroup,
   SelectRoles,
+  SelectUser,
   SortTable,
   WizardModal,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
+interface UserType {
+  username: string;
+  object_roles: string[];
+}
+
 interface IProps {
+  // users
+  user?: UserType;
+  users: UserType[];
+  addUser?: (user, roles) => void;
+  removeUser?: (user) => void;
+  addUserRole?: (role, users) => void;
+  removeUserRole?: (role, user) => void;
+  showUserRemoveModal?: UserType;
+  showUserSelectWizard?: { user?: UserType; roles?: RoleType[] };
+
+  // groups
   group?: GroupType;
   groups: GroupType[];
-  name: string;
-  pulpObjectType: string;
-  selectRolesMessage: string;
-  urlPrefix: string;
-  canEditOwners: boolean;
   addGroup?: (group, roles) => void;
   removeGroup?: (group) => void;
   addRole?: (role, groups) => void;
   removeRole?: (role, group) => void;
   showGroupRemoveModal?: GroupType;
   showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
+
+  // roles
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
+
+  // parent
+  name: string;
+  pulpObjectType: string;
+  selectRolesMessage: string;
+  urlPrefix: string;
+  canEditOwners: boolean;
   updateProps: (prop) => void;
 }
 
+const SectionTitle = ({ title }: { title: string }) => (
+  <h2 className='pf-c-title'>{title}</h2>
+);
+const SectionSeparator = () => (
+  <div
+    style={{
+      backgroundColor: 'var(--pf-global--BackgroundColor--light-300)',
+      height: '16px',
+      margin: '16px -16px',
+    }}
+  />
+);
+
 export class AccessTab extends React.Component<IProps> {
   render() {
-    const { groups, group, canEditOwners } = this.props;
-    const { showGroupRemoveModal, showGroupSelectWizard } = this.props;
-    const loading = !groups;
-    const noData = groups?.length === 0;
+    const {
+      canEditOwners,
+      group,
+      groups,
+      showGroupRemoveModal,
+      showGroupSelectWizard,
+      showUserRemoveModal,
+      showUserSelectWizard,
+      user,
+      users,
+      updateProps,
+    } = this.props;
 
-    const buttonAdd = (
-      <Button
-        onClick={() =>
-          this.props.updateProps({
-            showGroupSelectWizard: {},
-          })
-        }
-      >
-        {t`Select a group`}
+    const loading = !groups && !users;
+    const noData = users?.length === 0 && groups?.length === 0;
+
+    const buttonAdd = (title, props) => (
+      <Button key={title} onClick={() => updateProps(props)}>
+        {title}
       </Button>
     );
+
+    const buttonUserAdd = buttonAdd(t`Select a user`, {
+      showUserSelectWizard: {},
+    });
+    const buttonGroupAdd = buttonAdd(t`Select a group`, {
+      showGroupSelectWizard: {},
+    });
 
     return loading ? (
       <LoadingPageSpinner />
     ) : (
       <>
+        {showUserRemoveModal ? this.renderUserRemoveModal() : null}
+        {showUserSelectWizard ? this.renderUserSelectWizard() : null}
         {showGroupRemoveModal ? this.renderGroupRemoveModal() : null}
         {showGroupSelectWizard ? this.renderGroupSelectWizard() : null}
 
@@ -76,23 +126,111 @@ export class AccessTab extends React.Component<IProps> {
             title={t`There are currently no owners assigned.`}
             description={
               canEditOwners
-                ? t`Please add an owner by using the button below.`
+                ? t`Please add an owner by using the buttons below.`
                 : ''
             }
-            button={canEditOwners ? buttonAdd : null}
+            button={
+              canEditOwners ? (
+                <>
+                  {buttonUserAdd} {buttonGroupAdd}
+                </>
+              ) : null
+            }
           />
-        ) : group ? (
-          this.renderRoles({ group })
+        ) : user || group ? (
+          this.renderRoles()
         ) : (
-          this.renderGroups({ buttonAdd, groups })
+          <>
+            {this.renderSection({
+              buttonAdd: buttonUserAdd,
+              canEditOwners,
+              emptyStateTitle: t`There are currently no users assigned.`,
+              emptyStateExtra: t`Except for members of groups below.`,
+              items: users,
+              renderItems: () =>
+                this.renderList({
+                  ariaLabel: t`User list`,
+                  canEditOwners,
+                  itemName: t`User`,
+                  buttonAdd: buttonUserAdd,
+                  items: users,
+                  renderItem: (item, index) => this.renderUserRow(item, index),
+                  sortField: 'username',
+                }),
+              title: t`Users`,
+            })}
+            <SectionSeparator />
+            {this.renderSection({
+              buttonAdd: buttonGroupAdd,
+              canEditOwners,
+              emptyStateTitle: t`There are currently no groups assigned.`,
+              items: groups,
+              renderItems: () =>
+                this.renderList({
+                  ariaLabel: t`Group list`,
+                  canEditOwners,
+                  itemName: t`Group`,
+                  buttonAdd: buttonGroupAdd,
+                  items: groups,
+                  renderItem: (item, index) => this.renderGroupRow(item, index),
+                  sortField: 'name',
+                }),
+              title: t`Groups`,
+            })}
+          </>
         )}
       </>
     );
   }
 
-  private renderGroups({ buttonAdd, groups }) {
-    const { canEditOwners } = this.props;
-    const sortedGroups = sortBy(groups, 'name');
+  private renderSection({
+    buttonAdd,
+    canEditOwners,
+    emptyStateTitle,
+    emptyStateExtra = '',
+    items,
+    renderItems,
+    title,
+  }) {
+    const loading = !items;
+    const noData = items?.length === 0;
+
+    return (
+      <>
+        <SectionTitle title={title} />
+        {loading ? (
+          <Spinner />
+        ) : noData ? (
+          <EmptyStateXs
+            title={emptyStateTitle}
+            description={
+              <>
+                {emptyStateExtra}
+                {emptyStateExtra && <br />}
+                {canEditOwners
+                  ? t`Please add an owner by using the button below.`
+                  : ''}
+              </>
+            }
+            button={canEditOwners ? buttonAdd : null}
+          />
+        ) : (
+          renderItems()
+        )}
+      </>
+    );
+  }
+
+  private renderList({
+    ariaLabel,
+    buttonAdd,
+    canEditOwners,
+    itemName,
+    items,
+    renderItem,
+    sortField,
+  }) {
+    const sorted = sortBy(items, sortField);
 
     return (
       <>
@@ -107,16 +245,16 @@ export class AccessTab extends React.Component<IProps> {
         )}
 
         <table
-          aria-label={t`Group list`}
+          aria-label={ariaLabel}
           className='hub-c-table-content pf-c-table'
         >
           <SortTable
             options={{
               headers: [
                 {
-                  title: t`Group`,
+                  title: itemName,
                   type: 'none',
-                  id: 'name',
+                  id: sortField,
                 },
                 {
                   title: '',
@@ -128,26 +266,63 @@ export class AccessTab extends React.Component<IProps> {
             params={{}}
             updateParams={() => null}
           />
-          <tbody>
-            {sortedGroups.map((group, i) => this.renderGroupRow(group, i))}
-          </tbody>
+          <tbody>{sorted.map(renderItem)}</tbody>
         </table>
       </>
     );
   }
 
-  private renderGroupRow(group, index: number) {
-    const { urlPrefix, canEditOwners } = this.props;
+  private renderUserRow(user, index: number) {
+    const { urlPrefix, canEditOwners, updateProps } = this.props;
 
     const dropdownItems = [
       canEditOwners && (
         <DropdownItem
           key='remove'
-          onClick={() => {
-            this.props.updateProps({
+          onClick={() =>
+            updateProps({
+              showUserRemoveModal: user,
+            })
+          }
+        >
+          <Trans>Remove user</Trans>
+        </DropdownItem>
+      ),
+    ];
+
+    return (
+      <tr data-cy={`AccessTab-row-user-${user.username}`} key={index}>
+        <td>
+          <Link
+            to={
+              urlPrefix +
+              '?' +
+              ParamHelper.getQueryString({
+                user: user.username,
+                tab: 'access',
+              })
+            }
+          >
+            {user.username}
+          </Link>
+        </td>
+        <ListItemActions kebabItems={dropdownItems} />
+      </tr>
+    );
+  }
+
+  private renderGroupRow(group, index: number) {
+    const { urlPrefix, canEditOwners, updateProps } = this.props;
+
+    const dropdownItems = [
+      canEditOwners && (
+        <DropdownItem
+          key='remove'
+          onClick={() =>
+            updateProps({
               showGroupRemoveModal: group,
-            });
-          }}
+            })
+          }
         >
           <Trans>Remove group</Trans>
         </DropdownItem>
@@ -155,14 +330,14 @@ export class AccessTab extends React.Component<IProps> {
     ];
 
     return (
-      <tr data-cy={`AccessTab-row-${group.name}`} key={index}>
+      <tr data-cy={`AccessTab-row-group-${group.name}`} key={index}>
         <td>
           <Link
             to={
               urlPrefix +
               '?' +
               ParamHelper.getQueryString({
-                group: group?.id || group?.name,
+                group: group.name,
                 tab: 'access',
               })
             }
@@ -175,20 +350,27 @@ export class AccessTab extends React.Component<IProps> {
     );
   }
 
-  private renderRoles({ group }) {
-    const { canEditOwners } = this.props;
-    const { showRoleRemoveModal, showRoleSelectWizard } = this.props;
-    const roles = group?.object_roles;
-    const sortedRoles = sortBy(roles);
+  private renderRoles() {
+    const {
+      canEditOwners,
+      group,
+      showRoleRemoveModal,
+      showRoleSelectWizard,
+      updateProps,
+      user,
+    } = this.props;
 
-    if (!group) {
+    if ((!user && !group) || (user && group)) {
       return null;
     }
+
+    const roles = (user || group).object_roles;
+    const sortedRoles = sortBy(roles);
 
     const buttonAdd = (
       <Button
         onClick={() =>
-          this.props.updateProps({
+          updateProps({
             showRoleSelectWizard: {},
           })
         }
@@ -199,8 +381,13 @@ export class AccessTab extends React.Component<IProps> {
 
     return (
       <>
-        {showRoleRemoveModal ? this.renderRoleRemoveModal(group) : null}
-        {showRoleSelectWizard ? this.renderRoleSelectWizard(group) : null}
+        {showRoleRemoveModal ? this.renderRoleRemoveModal() : null}
+        {showRoleSelectWizard ? this.renderRoleSelectWizard() : null}
+
+        <h3 className='pf-c-title'>
+          {user ? <Trans>User {user.username}</Trans> : null}
+          {group ? <Trans>Group {group.name}</Trans> : null}
+        </h3>
 
         {canEditOwners && (
           <div>
@@ -239,7 +426,7 @@ export class AccessTab extends React.Component<IProps> {
             <ExpandableRow
               key={i}
               rowIndex={i}
-              expandableRowContent={<GroupRolePermissions name={role} />}
+              expandableRowContent={<RolePermissions name={role} />}
               data-cy={`RoleListTable-ExpandableRow-row-${role}`}
             >
               <td>{role}</td>
@@ -248,9 +435,7 @@ export class AccessTab extends React.Component<IProps> {
                   canEditOwners && (
                     <DropdownItem
                       key='remove-role'
-                      onClick={() =>
-                        this.props.updateProps({ showRoleRemoveModal: role })
-                      }
+                      onClick={() => updateProps({ showRoleRemoveModal: role })}
                     >
                       {t`Remove role`}
                     </DropdownItem>
@@ -264,10 +449,38 @@ export class AccessTab extends React.Component<IProps> {
     );
   }
 
+  private renderUserRemoveModal() {
+    const { name, showUserRemoveModal: user } = this.props;
+    if (!user) {
+      return;
+    }
+
+    const username = user.username;
+
+    return (
+      <DeleteModal
+        cancelAction={() =>
+          this.props.updateProps({ showUserRemoveModal: null })
+        }
+        deleteAction={() => this.props.removeUser(user)}
+        title={t`Remove user ${username}?`}
+      >
+        <Trans>
+          You are about to remove <b>{username}</b> from <b>{name}</b>.
+          <br />
+          This will also remove all associated permissions.
+        </Trans>
+      </DeleteModal>
+    );
+  }
+
   private renderGroupRemoveModal() {
-    const group = this.props.showGroupRemoveModal as GroupType;
+    const { name, showGroupRemoveModal: group } = this.props;
+    if (!group) {
+      return;
+    }
+
     const groupname = group.name;
-    const name = this.props.name;
 
     return (
       <DeleteModal
@@ -286,22 +499,24 @@ export class AccessTab extends React.Component<IProps> {
     );
   }
 
-  private renderRoleRemoveModal(group) {
-    const groupname = group.name;
-    const name = this.props.name;
-    const role = this.props.showRoleRemoveModal;
+  private renderRoleRemoveModal() {
+    const { name, user, group, showRoleRemoveModal: role } = this.props;
+    const userOrGroupName = group?.name || user?.username;
 
     return (
       <DeleteModal
         cancelAction={() =>
           this.props.updateProps({ showRoleRemoveModal: null })
         }
-        deleteAction={() => this.props.removeRole(role, group)}
+        deleteAction={() => {
+          group && this.props.removeRole(role, group);
+          user && this.props.removeUserRole(role, user);
+        }}
         title={t`Remove role ${role}?`}
       >
         <Trans>
-          You are about to remove <b>{role}</b> from <b>{groupname}</b> for{' '}
-          <b>{name}</b>.
+          You are about to remove <b>{role}</b> from <b>{userOrGroupName}</b>{' '}
+          for <b>{name}</b>.
           <br />
           This will also remove all associated permissions.
         </Trans>
@@ -309,10 +524,89 @@ export class AccessTab extends React.Component<IProps> {
     );
   }
 
-  private renderGroupSelectWizard() {
-    const { groups, pulpObjectType, selectRolesMessage } = this.props;
+  private renderUserSelectWizard() {
     const {
+      users,
+      pulpObjectType,
+      selectRolesMessage,
+      showUserSelectWizard: { user, roles = [] },
+      updateProps,
+    } = this.props;
+
+    const hasUser = !!user;
+    const hasRoles = !!roles?.length;
+
+    // if we enable edit, find user in users, convert object_roles name to { role: name }
+    const assignedRoles = [];
+
+    const steps = [
+      {
+        id: 0,
+        name: t`Select a user`,
+        component: (
+          <SelectUser
+            assignedUsers={users}
+            selectedUser={user}
+            updateUser={(user) =>
+              updateProps({
+                showUserSelectWizard: { user, roles },
+              })
+            }
+          />
+        ),
+        backButtonText: t`Cancel`,
+        enableNext: hasUser,
+      },
+      {
+        id: 1,
+        name: t`Select role(s)`,
+        component: (
+          <SelectRoles
+            assignedRoles={assignedRoles}
+            selectedRoles={roles}
+            onRolesUpdate={(roles) =>
+              updateProps({
+                showUserSelectWizard: { user, roles },
+              })
+            }
+            message={selectRolesMessage}
+            pulpObjectType={pulpObjectType}
+          />
+        ),
+        canJumpTo: hasUser,
+        enableNext: hasUser && hasRoles,
+      },
+      {
+        id: 2,
+        name: t`Preview`,
+        component: <PreviewRoles user={user} selectedRoles={roles} />,
+        nextButtonText: t`Add`,
+        canJumpTo: hasUser && hasRoles,
+        isFinished: true,
+      },
+    ];
+
+    return (
+      <WizardModal
+        steps={steps}
+        title={t`Select a user`}
+        onClose={() =>
+          updateProps({
+            showUserSelectWizard: null,
+          })
+        }
+        onSave={() => this.props.addUser(user, roles)}
+      />
+    );
+  }
+
+  private renderGroupSelectWizard() {
+    const {
+      groups,
+      pulpObjectType,
+      selectRolesMessage,
       showGroupSelectWizard: { group, roles = [] },
+      updateProps,
     } = this.props;
 
     const hasGroup = !!group;
@@ -330,7 +624,7 @@ export class AccessTab extends React.Component<IProps> {
             assignedGroups={groups}
             selectedGroup={group}
             updateGroup={(group) =>
-              this.props.updateProps({
+              updateProps({
                 showGroupSelectWizard: { group, roles },
               })
             }
@@ -347,7 +641,7 @@ export class AccessTab extends React.Component<IProps> {
             assignedRoles={assignedRoles}
             selectedRoles={roles}
             onRolesUpdate={(roles) =>
-              this.props.updateProps({
+              updateProps({
                 showGroupSelectWizard: { group, roles },
               })
             }
@@ -373,7 +667,7 @@ export class AccessTab extends React.Component<IProps> {
         steps={steps}
         title={t`Select a group`}
         onClose={() =>
-          this.props.updateProps({
+          updateProps({
             showGroupSelectWizard: null,
           })
         }
@@ -382,16 +676,19 @@ export class AccessTab extends React.Component<IProps> {
     );
   }
 
-  private renderRoleSelectWizard(group) {
-    const { pulpObjectType } = this.props;
+  private renderRoleSelectWizard() {
     const {
+      group,
+      pulpObjectType,
       showRoleSelectWizard: { roles = [] },
+      updateProps,
+      user,
     } = this.props;
 
     const hasRoles = !!roles?.length;
 
     const assignedRoles =
-      group?.object_roles?.map((name) => ({ role: name })) || [];
+      (group || user || {}).object_roles?.map((name) => ({ role: name })) || [];
 
     const steps = [
       {
@@ -402,7 +699,7 @@ export class AccessTab extends React.Component<IProps> {
             assignedRoles={assignedRoles}
             selectedRoles={roles}
             onRolesUpdate={(roles) =>
-              this.props.updateProps({ showRoleSelectWizard: { roles } })
+              updateProps({ showRoleSelectWizard: { roles } })
             }
             pulpObjectType={pulpObjectType}
           />
@@ -413,7 +710,9 @@ export class AccessTab extends React.Component<IProps> {
       {
         id: 1,
         name: t`Preview`,
-        component: <PreviewRoles group={group} selectedRoles={roles} />,
+        component: (
+          <PreviewRoles user={user} group={group} selectedRoles={roles} />
+        ),
         nextButtonText: t`Add`,
         canJumpTo: hasRoles,
         isFinished: true,
@@ -425,11 +724,14 @@ export class AccessTab extends React.Component<IProps> {
         steps={steps}
         title={t`Select role(s)`}
         onClose={() =>
-          this.props.updateProps({
+          updateProps({
             showRoleSelectWizard: null,
           })
         }
-        onSave={() => this.props.addRole(group, roles)}
+        onSave={() => {
+          group && this.props.addRole(group, roles);
+          user && this.props.addUserRole(user, roles);
+        }}
       />
     );
   }

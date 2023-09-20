@@ -21,11 +21,11 @@ const tabs = [
 ];
 
 const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
-  breadcrumbs: ({ name, tab, params: { group } }) =>
+  breadcrumbs: ({ name, tab, params: { user, group } }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },
       { url: formatPath(Paths.ansibleRemoteDetail, { name }), name },
-      tab.id === 'access' && group
+      tab.id === 'access' && (group || user)
         ? {
             url: formatPath(
               Paths.ansibleRepositoryDetail,
@@ -35,9 +35,9 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
             name: tab.name,
           }
         : null,
-      tab.id === 'access' && group
-        ? { name: t`Group ${group}` }
-        : { name: tab.name },
+      tab.id === 'access' && group ? { name: t`Group ${group}` } : null,
+      tab.id === 'access' && user ? { name: t`User ${user}` } : null,
+      tab.id === 'access' && !user && !group ? { name: tab.name } : null,
     ].filter(Boolean),
   condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
@@ -78,6 +78,7 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
   tabs,
   tabUpdateParams: (p) => {
     delete p.group;
+    delete p.user;
     return p;
   },
 });

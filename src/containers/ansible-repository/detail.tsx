@@ -32,12 +32,12 @@ const tabs = [
 const AnsibleRepositoryDetail = PageWithTabs<
   AnsibleRepositoryType & { remote?: AnsibleRemoteType }
 >({
-  breadcrumbs: ({ name, tab, params: { repositoryVersion, group } }) =>
+  breadcrumbs: ({ name, tab, params: { repositoryVersion, user, group } }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
       { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-      (tab.id === 'repository-versions' && repositoryVersion) ||
-      (tab.id === 'access' && group)
+      (tab.id === 'access' && (group || user)) ||
+      (tab.id === 'repository-versions' && repositoryVersion)
         ? {
             url: formatPath(
               Paths.ansibleRepositoryDetail,
@@ -47,11 +47,15 @@ const AnsibleRepositoryDetail = PageWithTabs<
             name: tab.name,
           }
         : null,
+      tab.id === 'access' && group ? { name: t`Group ${group}` } : null,
+      tab.id === 'access' && user ? { name: t`User ${user}` } : null,
       tab.id === 'repository-versions' && repositoryVersion
         ? { name: t`Version ${repositoryVersion}` }
-        : tab.id === 'access' && group
-        ? { name: t`Group ${group}` }
-        : { name: tab.name },
+        : null,
+      (tab.id === 'access' && !user && !group) ||
+      (tab.id === 'repository-versions' && !repositoryVersion)
+        ? { name: tab.name }
+        : null,
     ].filter(Boolean),
   condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',
@@ -124,6 +128,7 @@ const AnsibleRepositoryDetail = PageWithTabs<
   tabUpdateParams: (p) => {
     delete p.repositoryVersion;
     delete p.group;
+    delete p.user;
     return p;
   },
 });

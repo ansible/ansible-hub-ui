@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { GroupAPI, GroupType } from 'src/api';
+import { UserAPI } from 'src/api';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -14,20 +14,24 @@ import {
 } from 'src/components';
 import { filterIsSet } from 'src/utilities';
 
-interface IProps {
-  assignedGroups: GroupType[];
-  selectedGroup?: GroupType;
-  updateGroup?: (group) => void;
+interface UserType {
+  username: string;
 }
 
-export const SelectGroup: React.FC<IProps> = ({
-  assignedGroups,
-  selectedGroup,
-  updateGroup,
+interface IProps {
+  assignedUsers: UserType[];
+  selectedUser?: UserType;
+  updateUser?: (user) => void;
+}
+
+export const SelectUser: React.FC<IProps> = ({
+  assignedUsers,
+  selectedUser,
+  updateUser,
 }) => {
   const [inputText, setInputText] = useState<string>('');
-  const [groups, setGroups] = useState<GroupType[]>([]);
-  const [groupsCount, setGroupsCount] = useState<number>(0);
+  const [users, setUsers] = useState<UserType[]>([]);
+  const [usersCount, setUsersCount] = useState<number>(0);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [localParams, setLocalParams] = useState({
@@ -36,14 +40,14 @@ export const SelectGroup: React.FC<IProps> = ({
   });
 
   useEffect(() => {
-    queryGroups();
+    queryUsers();
   }, [localParams]);
 
-  const queryGroups = () => {
+  const queryUsers = () => {
     setLoading(true);
-    GroupAPI.list(localParams).then(({ data }) => {
-      setGroups(data.data);
-      setGroupsCount(data.meta.count);
+    UserAPI.list(localParams).then(({ data }) => {
+      setUsers(data.data);
+      setUsersCount(data.meta.count);
       setLoading(false);
     });
   };
@@ -56,23 +60,23 @@ export const SelectGroup: React.FC<IProps> = ({
     );
   }
 
-  const isSelected = ({ name }) => selectedGroup?.name === name;
+  const isSelected = ({ username }) => selectedUser?.username === username;
 
-  const noData = groups.length === 0;
+  const noData = users.length === 0;
 
-  if (noData && !filterIsSet(localParams, ['name__icontains'])) {
+  if (noData && !filterIsSet(localParams, ['username__contains'])) {
     return (
       <div className='hub-custom-wizard-layout hub-no-data'>
         <EmptyStateNoData
-          title={t`No assignable groups.`}
-          description={t`There are currently no groups that can be assigned ownership.`}
+          title={t`No assignable users.`}
+          description={t`There are currently no users that can be assigned ownership.`}
         />
       </div>
     );
   }
 
-  const isAssigned = ({ name }) =>
-    assignedGroups.some((group) => group.name === name);
+  const isAssigned = ({ username }) =>
+    assignedUsers.some((user) => user.username === username);
 
   const tabHeader = {
     headers: [
@@ -82,9 +86,9 @@ export const SelectGroup: React.FC<IProps> = ({
         id: 'expander',
       },
       {
-        title: t`Group`,
+        title: t`User`,
         type: 'alpha',
-        id: 'name',
+        id: 'username',
       },
     ],
   };
@@ -108,22 +112,22 @@ export const SelectGroup: React.FC<IProps> = ({
             }}
             direction={{ default: 'column' }}
           >
-            {selectedGroup ? (
+            {selectedUser ? (
               <FlexItem>
                 <Flex>
                   <FlexItem>
                     <strong>
-                      <Trans>Selected group</Trans>
+                      <Trans>Selected user</Trans>
                     </strong>
                   </FlexItem>
 
                   <FlexItem flex={{ default: 'flex_1' }}>
                     <Flex>
                       <FlexItem
-                        key={selectedGroup.name}
+                        key={selectedUser.username}
                         className='hub-permission'
                       >
-                        <Label>{selectedGroup.name}</Label>
+                        <Label>{selectedUser.username}</Label>
                       </FlexItem>
                     </Flex>
                   </FlexItem>
@@ -140,7 +144,7 @@ export const SelectGroup: React.FC<IProps> = ({
                   updateParams={(p) => setLocalParams(p)}
                   filterConfig={[
                     {
-                      id: 'name__icontains',
+                      id: 'username__contains',
                       title: t`Name`,
                     },
                   ]}
@@ -153,14 +157,14 @@ export const SelectGroup: React.FC<IProps> = ({
                   setInputText('');
                 }}
                 params={localParams}
-                niceNames={{ name__icontains: t`Name` }}
+                niceNames={{ username__contains: t`Name` }}
                 ignoredParams={['sort', 'page_size', 'page']}
                 style={{ marginTop: '8px' }}
               />
             </FlexItem>
 
             <FlexItem style={{ flexGrow: 1 }}>
-              {noData && filterIsSet(localParams, ['name__icontains']) ? (
+              {noData && filterIsSet(localParams, ['username__contains']) ? (
                 <div className='hub-no-filter-data'>
                   <EmptyStateFilter />
                 </div>
@@ -174,16 +178,16 @@ export const SelectGroup: React.FC<IProps> = ({
                     }}
                     tableHeader={tabHeader}
                   >
-                    {groups.map((group, i) => (
+                    {users.map((user, i) => (
                       <RadioRow
                         rowIndex={i}
-                        key={group.name}
-                        isSelected={isSelected(group)}
-                        onSelect={() => updateGroup(group)}
-                        isDisabled={isAssigned(group)}
-                        data-cy={`GroupListTable-CheckboxRow-row-${group.name}`}
+                        key={user.username}
+                        isSelected={isSelected(user)}
+                        onSelect={() => updateUser(user)}
+                        isDisabled={isAssigned(user)}
+                        data-cy={`UserListTable-CheckboxRow-row-${user.username}`}
                       >
-                        <td>{group.name}</td>
+                        <td>{user.username}</td>
                       </RadioRow>
                     ))}
                   </RoleListTable>
@@ -198,7 +202,7 @@ export const SelectGroup: React.FC<IProps> = ({
             <Pagination
               params={localParams}
               updateParams={(p) => setLocalParams(p)}
-              count={groupsCount}
+              count={usersCount}
             />
           </FlexItem>
         )}

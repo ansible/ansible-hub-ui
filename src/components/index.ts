@@ -87,12 +87,12 @@ export { AccessTab } from './rbac/access-tab';
 export { DeleteGroupModal } from './rbac/delete-group-modal';
 export { DeleteUserModal } from './rbac/delete-user-modal';
 export { GroupModal } from './rbac/group-modal';
-export { GroupRolePermissions } from './rbac/group-role-permissions';
 export { PermissionCategories } from './rbac/permission-categories';
 export { PermissionChipSelector } from './rbac/permission-chip-selector';
 export { PreviewRoles } from './rbac/preview-roles';
 export { RoleForm } from './rbac/role-form';
 export { RoleHeader } from './rbac/role-header';
+export { RolePermissions } from './rbac/role-permissions';
 export {
   CheckboxRow,
   ExpandableRow,
@@ -101,6 +101,7 @@ export {
 } from './rbac/role-list-table';
 export { SelectGroup } from './rbac/select-group';
 export { SelectRoles } from './rbac/select-roles';
+export { SelectUser } from './rbac/select-user';
 export { UserForm } from './rbac/user-form';
 export { UserFormPage } from './rbac/user-form-page';
 export { RenderPluginDoc } from './render-plugin-doc/render-plugin-doc';
