@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export function ProviderLink({ name, url }: IProps) {
-  return (
+  return url ? (
     <TextContent>
       <Text component={TextVariants.small}>
         <Trans>
@@ -17,5 +17,5 @@ export function ProviderLink({ name, url }: IProps) {
         </Trans>
       </Text>
     </TextContent>
-  );
+  ) : null;
 }

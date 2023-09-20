@@ -31,6 +31,7 @@ import {
   LoadingPageWithHeader,
   Logo,
   Main,
+  RoleRatings,
   Tag,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -310,6 +311,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
           </a>
         </div>
         <div className='hub-entry'>
+          <RoleRatings namespace={namespace.name} name={role.name} />
           <DownloadCount item={role} />
         </div>
       </DataListCell>,

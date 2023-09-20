@@ -36,6 +36,7 @@ import {
   BaseHeader,
   BreadcrumbType,
   Breadcrumbs,
+  CollectionRatings,
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
   DownloadCount,
@@ -545,6 +546,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 ) : null}
               </div>
               <div style={{ alignSelf: 'center' }}>
+                <CollectionRatings
+                  namespace={collection_version.namespace}
+                  name={collection_version.name}
+                />
                 <DownloadCount item={actuallyCollection} />
               </div>
             </div>
