@@ -4,3 +4,6 @@ contact_links:
 - name: 📝 Issue or 🐛 Bug Report
   url: https://issues.redhat.com/projects/AAH/issues
   about: Please open issues and bug reports on our Jira tracker.
+- name: 💬 Discussion topic
+  url: https://forum.ansible.com
+  about: The Ansible Community forum is the place to discuss anything related to Ansible
