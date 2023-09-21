@@ -15,6 +15,8 @@ import { LegacyRoleDetailType } from 'src/api';
 import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps } from 'src/utilities';
+import { getProviderInfo } from 'src/utilities/legacy-namespace';
+import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -56,6 +58,9 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
       release_name = '';
     }
 
+    const provider = getProviderInfo(role);
+    console.log('PROVIDER', provider);
+
     const cells = [];
 
     if (show_thumbnail !== false) {
@@ -78,6 +83,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
           <Link to={role_url}>
             {namespace.name}.{role.name}
           </Link>
+          {/*
           <TextContent>
             <Text component={TextVariants.small}>
               <Trans>
@@ -85,6 +91,8 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
               </Trans>
             </Text>
           </TextContent>
+          */}
+          <ProviderLink id={provider.id} name={provider.name} url={provider.url}>{provider.name}</ProviderLink>
         </div>
         <div className='hub-entry'>{role.description}</div>
         <div className='hub-entry'>

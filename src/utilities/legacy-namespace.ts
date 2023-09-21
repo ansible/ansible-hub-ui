@@ -1,6 +1,18 @@
-export function getProviderInfo(legacynamespace) {
+export function getProviderInfo(data) {
 
-    const provider = legacynamespace.summary_fields.provider_namespaces[0];
+    console.log('DATA', data);
+
+    let provider = null;
+
+    if (data.summary_fields.hasOwnProperty('provider_namespace')) {
+        // roll summary
+        provider = data.summary_fields.provider_namespace;
+    } else if (data.summary_fields.hasOwnProperty('provider_namespaces')) {
+        // legacy namespace summary
+        provider = data.summary_fields.provider_namespaces[0];
+    }
+
+    console.log('FINAL PROVIDER', provider);
 
     if (provider === null || provider === undefined) {  
         return {
