@@ -12,8 +12,8 @@ import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import './legacy-namespace-item.scss';
 import { getProviderInfo } from 'src/utilities/legacy-namespace';
+import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;

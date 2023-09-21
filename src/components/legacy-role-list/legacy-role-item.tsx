@@ -13,10 +13,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api';
 import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
+import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps } from 'src/utilities';
 import { getProviderInfo } from 'src/utilities/legacy-namespace';
-import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -92,7 +92,13 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
             </Text>
           </TextContent>
           */}
-          <ProviderLink id={provider.id} name={provider.name} url={provider.url}>{provider.name}</ProviderLink>
+          <ProviderLink
+            id={provider.id}
+            name={provider.name}
+            url={provider.url}
+          >
+            {provider.name}
+          </ProviderLink>
         </div>
         <div className='hub-entry'>{role.description}</div>
         <div className='hub-entry'>
