@@ -5,9 +5,6 @@ import {
   DataListItemCells,
   DataListItemRow,
   LabelGroup,
-  Text,
-  TextContent,
-  TextVariants,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -31,9 +28,6 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
     const role_url = formatPath(Paths.legacyRole, {
       username: role.github_user,
       name: role.name,
-    });
-    const namespace_url = formatPath(Paths.legacyNamespace, {
-      namespaceid: namespace.id,
     });
 
     let release_date = null;
@@ -83,15 +77,6 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
           <Link to={role_url}>
             {namespace.name}.{role.name}
           </Link>
-          {/*
-          <TextContent>
-            <Text component={TextVariants.small}>
-              <Trans>
-                Provided by <Link to={namespace_url}>{namespace.name}</Link>
-              </Trans>
-            </Text>
-          </TextContent>
-          */}
           <ProviderLink
             id={provider.id}
             name={provider.name}

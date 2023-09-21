@@ -12,7 +12,6 @@ import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { getProviderInfo } from 'src/utilities/legacy-namespace';
 import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
@@ -26,8 +25,6 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
     const namespace_url = formatPath(Paths.legacyNamespace, {
       namespaceid: namespace.id,
     });
-
-    const provider_details = getProviderInfo(namespace);
 
     const cells = [];
 

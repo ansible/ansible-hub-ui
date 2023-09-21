@@ -15,7 +15,7 @@ export class ProviderLink extends React.Component<IProps> {
   }
 
   render() {
-    const { id, name, url } = this.props;
+    const { name, url } = this.props;
 
     return (
       <TextContent>
