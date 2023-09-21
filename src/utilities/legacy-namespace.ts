@@ -1,15 +1,21 @@
 export function getProviderInfo(data) {
+  const summary_fields = data.summary_fields;
   let provider = null;
 
-  if (data.summary_fields.hasOwnProperty('provider_namespace')) {
-    // role summary
-    provider = data.summary_fields.provider_namespace;
-  } else if (data.summary_fields.hasOwnProperty('provider_namespaces')) {
-    // legacy namespace summary
-    provider = data.summary_fields.provider_namespaces[0];
+  if (summary_fields) {
+    if ('provider_namespace' in summary_fields) {
+      // role summary
+      provider = data.summary_fields.provider_namespace;
+    } else if (
+      'provider_namespaces' in summary_fields &&
+      summary_fields.provider_namespaces.length > 0
+    ) {
+      // legacy namespace summary
+      provider = data.summary_fields.provider_namespaces[0];
+    }
   }
 
-  if (provider === null || provider === undefined) {
+  if (!provider) {
     return {
       id: null,
       name: null,
@@ -18,8 +24,8 @@ export function getProviderInfo(data) {
   }
 
   return {
-    id: provider.id,
-    name: provider.name,
-    url: `/namespaces/${provider.name}`,
+    id: provider.id || null,
+    name: provider.name || null,
+    url: provider.name ? `/namespaces/${provider.name}` : null,
   };
 }
