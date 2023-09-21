@@ -246,7 +246,6 @@ class LegacyNamespace extends React.Component<
     });
 
     const provider = getProviderInfo(this.state.namespace);
-    console.log('containers.legacy-namespaces.legacy-namespace.LegacyNamespace', provider);
 
     if (this.state.namespace !== undefined) {
       infocells.push(

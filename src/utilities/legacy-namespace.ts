@@ -5,7 +5,7 @@ export function getProviderInfo(data) {
     let provider = null;
 
     if (data.summary_fields.hasOwnProperty('provider_namespace')) {
-        // roll summary
+        // role summary
         provider = data.summary_fields.provider_namespace;
     } else if (data.summary_fields.hasOwnProperty('provider_namespaces')) {
         // legacy namespace summary

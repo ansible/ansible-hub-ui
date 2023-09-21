@@ -28,7 +28,6 @@ export class LegacyNamespaceListItem extends React.Component<LegacyNamespaceProp
     });
 
     const provider_details = getProviderInfo(namespace);
-    console.log('components.legacy-namespace-list.legacy-namespace-item.LegacyNamespaceListItem', provider_details);
 
     const cells = [];
 
