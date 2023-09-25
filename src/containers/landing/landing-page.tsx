@@ -47,7 +47,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        <BaseHeader title={t`Welcome to Beta Galaxy`} />
+        <BaseHeader title={t`Welcome to Galaxy`} />
         <Main>
           <div
             style={{

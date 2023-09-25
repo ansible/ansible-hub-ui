@@ -34,7 +34,7 @@ describe('view-only mode - with download', () => {
 
   it('can load Dashboard & Collections', () => {
     cy.visit(uiPrefix);
-    cy.assertTitle('Welcome to Beta Galaxy');
+    cy.assertTitle('Welcome to Galaxy');
 
     cy.visit(`${uiPrefix}collections`);
     cy.assertTitle('Collections');
