@@ -331,7 +331,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 namespace: ns.name,
               })}
               key={i}
-              {...ns}
+              namespace={ns}
             />
           </div>
         ))}

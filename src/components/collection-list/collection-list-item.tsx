@@ -24,7 +24,11 @@ import {
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
+import {
+  chipGroupProps,
+  convertContentSummaryCounts,
+  namespaceTitle,
+} from 'src/utilities';
 import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
@@ -54,13 +58,15 @@ export const CollectionListItem = ({
   const { featureFlags } = useContext();
   const cells = [];
 
-  const company = namespace?.company || collection_version.namespace;
+  const nsTitle = namespaceTitle(
+    namespace || { name: collection_version.namespace },
+  );
 
   if (showNamespace) {
     cells.push(
       <DataListCell isFilled={false} alignRight={false} key='ns'>
         <Logo
-          alt={t`${company} logo`}
+          alt={t`${nsTitle} logo`}
           fallbackToDefault
           image={namespace?.avatar_url}
           size='130px'
@@ -97,7 +103,7 @@ export const CollectionListItem = ({
                     namespace: collection_version.namespace,
                   })}
                 >
-                  {company}
+                  {nsTitle}
                 </Link>
               </Trans>
             </Text>
