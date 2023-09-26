@@ -13,7 +13,7 @@ import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
 import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import { Paths, formatPath } from 'src/paths';
 import { chipGroupProps } from 'src/utilities';
-import { getProviderInfo } from 'src/utilities/legacy-namespace';
+import { getProviderInfo } from 'src/utilities';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {

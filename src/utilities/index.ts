@@ -34,3 +34,4 @@ export {
   isFieldSet,
   isWriteOnly,
 } from './write-only-fields';
+export { getProviderInfo } from './legacy-namespace';
