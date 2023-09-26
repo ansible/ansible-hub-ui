@@ -28,6 +28,8 @@ export function getProviderInfo(data) {
   return {
     id: provider.id || null,
     name: provider.name || null,
-    url: provider.name ? formatPath(Paths.namespaceDetail, { namespace: provider.name }) : null
+    url: provider.name
+      ? formatPath(Paths.namespaceDetail, { namespace: provider.name })
+      : null,
   };
 }
