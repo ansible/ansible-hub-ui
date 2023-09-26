@@ -843,10 +843,13 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             user: this.filterUser(this.state.params.user, namespace.users),
             namespace: {
               ...namespace,
-              users: namespace.users.map(({ name, object_roles }) => ({
-                username: name,
-                object_roles,
-              })),
+              // transform to use username, don't break when missing
+              users: namespace.users
+                ? namespace.users.map(({ name, object_roles }) => ({
+                    username: name,
+                    object_roles,
+                  }))
+                : [],
             },
             showControls: !!myNamespace,
             unfilteredCount,
