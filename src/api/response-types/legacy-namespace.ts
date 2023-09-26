@@ -3,6 +3,7 @@ export class LegacyNamespaceListType {
   url: string;
   summary_fields: {
     owners?: { username: string }[];
+    provider_namespaces?: { id: number; name: string; pulp_href: string }[];
   };
   created: string;
   modified: string;
@@ -17,6 +18,7 @@ export class LegacyNamespaceDetailType {
   url: string;
   summary_fields: {
     owners?: { username: string }[];
+    provider_namespaces?: { id: number; name: string; pulp_href: string }[];
   };
   created: string;
   modified: string;

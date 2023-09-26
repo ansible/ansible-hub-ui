@@ -28,9 +28,11 @@ import {
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
+import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
+import { getProviderInfo } from 'src/utilities/legacy-namespace';
 import './legacy-namespace.scss';
 
 interface LegacyNamespaceRolesProps {
@@ -242,6 +244,8 @@ class LegacyNamespace extends React.Component<
       namespaceid: this.state.namespace.id,
     });
 
+    const provider = getProviderInfo(this.state.namespace);
+
     if (this.state.namespace !== undefined) {
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns-logo'>
@@ -254,6 +258,13 @@ class LegacyNamespace extends React.Component<
             width='90px'
           />
           <Link to={namespace_url}>{this.state.namespace.name}</Link>
+          <ProviderLink
+            id={provider.id}
+            name={provider.name}
+            url={provider.url}
+          >
+            {provider.name}
+          </ProviderLink>
         </DataListCell>,
       );
 
