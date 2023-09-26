@@ -10,10 +10,6 @@ interface IProps {
 }
 
 export class ProviderLink extends React.Component<IProps> {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { name, url } = this.props;
 
