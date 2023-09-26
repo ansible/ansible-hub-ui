@@ -1,3 +1,5 @@
+import { Paths, formatPath } from 'src/paths';
+
 export function getProviderInfo(data) {
   const summary_fields = data.summary_fields;
   let provider = null;
@@ -26,6 +28,6 @@ export function getProviderInfo(data) {
   return {
     id: provider.id || null,
     name: provider.name || null,
-    url: provider.name ? `/namespaces/${provider.name}` : null,
+    url: provider.name ? formatPath(Paths.namespaceDetail, { namespace: provider.name })`,
   };
 }
