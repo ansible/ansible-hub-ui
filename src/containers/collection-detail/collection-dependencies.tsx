@@ -258,7 +258,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           });
         })
         .catch(({ response, message }) => {
-          // console.log(response, message);
           if (message !== 'request-canceled') {
             const { status, statusText } = response;
             this.setState({

@@ -167,7 +167,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
 
         <DataList aria-label={t`List of versions`}>
           {this.state.role_versions.reverse().map((rversion) => (
-            <DataListItem key={rversion.name} aria-labelledby='compact-item2'>
+            <DataListItem key={rversion.name}>
               <LegacyRoleVersion role_version={rversion} />
             </DataListItem>
           ))}
@@ -268,94 +268,85 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
       release_name = '';
     }
 
-    const header_cells = [];
-    if (this.state.role !== undefined && this.state.role !== null) {
-      header_cells.push(
-        <DataListCell isFilled={false} alignRight={false} key='ns'>
-          <Logo
-            alt={t`${role.github_user} logo`}
-            fallbackToDefault
-            image={role.summary_fields.namespace.avatar_url}
-            size='70px'
-            unlockWidth
-            width='97px'
-          />
-          <Link to={namespace_url}>{namespace.name}</Link>
-        </DataListCell>,
-      );
-
-      header_cells.push(
-        <DataListCell key='content'>
-          <div>
-            <TextContent>
-              <Text component={TextVariants.h1}>
-                {namespace.name}.{this.state.role.name}
-              </Text>
-            </TextContent>
-          </div>
-          <div className='hub-entry'>{this.state.role.description}</div>
-          <div className='hub-entry'>
-            <LabelGroup {...chipGroupProps()}>
-              {this.state.role.summary_fields.tags.map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </LabelGroup>
-          </div>
-        </DataListCell>,
-      );
-
-      header_cells.push(
-        <DataListCell isFilled={false} alignRight key='version'>
-          <div className='hub-right-col hub-entry'>
-            <Trans>
-              Updated <DateComponent date={release_date} />
-            </Trans>
-          </div>
-          {release_name && <div className='hub-entry'>{release_name}</div>}
-          <div className='hub-entry'>
-            <a href={repository}>
-              Github Repository <ExternalLinkAltIcon />
-            </a>
-          </div>
-          <div className='hub-entry'>
-            <DownloadCount item={role} />
-          </div>
-        </DataListCell>,
-      );
-    }
+    const header_cells = [
+      <DataListCell isFilled={false} alignRight={false} key='ns'>
+        <Logo
+          alt={t`${role.github_user} logo`}
+          fallbackToDefault
+          image={role.summary_fields.namespace.avatar_url}
+          size='70px'
+          unlockWidth
+          width='97px'
+        />
+        <Link to={namespace_url}>{namespace.name}</Link>
+      </DataListCell>,
+      <DataListCell key='content'>
+        <div>
+          <TextContent>
+            <Text component={TextVariants.h1}>
+              {namespace.name}.{role.name}
+            </Text>
+          </TextContent>
+        </div>
+        <div className='hub-entry'>{role.description}</div>
+        <div className='hub-entry'>
+          <LabelGroup {...chipGroupProps()}>
+            {role.summary_fields.tags.map((tag, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ))}
+          </LabelGroup>
+        </div>
+      </DataListCell>,
+      <DataListCell isFilled={false} alignRight key='version'>
+        <div className='hub-right-col hub-entry'>
+          <Trans>
+            Updated <DateComponent date={release_date} />
+          </Trans>
+        </div>
+        {release_name && <div className='hub-entry'>{release_name}</div>}
+        <div className='hub-entry'>
+          <a href={repository}>
+            Github Repository <ExternalLinkAltIcon />
+          </a>
+        </div>
+        <div className='hub-entry'>
+          <DownloadCount item={role} />
+        </div>
+      </DataListCell>,
+    ];
 
     const table = {
-      install: { title: 'Install' },
-      documentation: { title: 'Documentation' },
-      versions: { title: 'Versions' },
+      install: { title: t`Install` },
+      documentation: { title: t`Documentation` },
+      versions: { title: t`Versions` },
     };
 
     const renderContent = () => {
       if (this.state.activeItem == 'install') {
         return (
           <LegacyRoleInstall
-            role={this.state.role}
+            role={role}
             github_user={this.state.github_user}
             name={this.state.name}
-            id={this.state.role.id}
+            id={role.id}
           />
         );
       } else if (this.state.activeItem === 'documentation') {
         return (
           <LegacyRoleDocs
-            role={this.state.role}
+            role={role}
             github_user={this.state.github_user}
             name={this.state.name}
-            id={this.state.role.id}
+            id={role.id}
           />
         );
       } else if (this.state.activeItem === 'versions') {
         return (
           <LegacyRoleVersions
-            role={this.state.role}
+            role={role}
             github_user={this.state.github_user}
             name={this.state.name}
-            id={this.state.role.id}
+            id={role.id}
           />
         );
       } else {
@@ -365,7 +356,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
 
     const breadcrumbs = [
       {
-        name: 'Legacy Roles',
+        name: t`Roles`,
         url: formatPath(Paths.legacyRoles),
       },
       {
@@ -382,7 +373,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <DataList aria-label={t`Role Header`}>
           <DataListItem data-cy='LegacyRoleListItem'>
             {/* This renders a bit too small ...? */}
@@ -418,7 +409,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         <Main>
           <section className='body'>{renderContent()}</section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 }

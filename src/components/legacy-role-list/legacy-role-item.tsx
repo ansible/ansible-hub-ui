@@ -9,11 +9,15 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api';
-import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
-import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
+import {
+  DateComponent,
+  DownloadCount,
+  Logo,
+  ProviderLink,
+  Tag,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { chipGroupProps } from 'src/utilities';
-import { getProviderInfo } from 'src/utilities';
+import { chipGroupProps, getProviderInfo } from 'src/utilities';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -21,101 +25,77 @@ interface LegacyRoleProps {
   show_thumbnail: boolean;
 }
 
-export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
-  render() {
-    const { role, show_thumbnail } = this.props;
-    const namespace = role.summary_fields.namespace;
-    const role_url = formatPath(Paths.legacyRole, {
-      username: role.github_user,
-      name: role.name,
-    });
+export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
+  const {
+    description,
+    github_user,
+    modified,
+    name,
+    summary_fields: { namespace, versions, tags },
+  } = role;
+  const latest = versions[0];
 
-    let release_date = null;
-    let release_name = null;
-    const lv = role.summary_fields.versions[0];
-    if (lv !== undefined && lv !== null) {
-      release_date = lv.release_date;
-      release_name = lv.name;
-    }
-    if (
-      release_date === undefined ||
-      release_date === null ||
-      release_date === ''
-    ) {
-      release_date = role.modified;
-    }
-    if (
-      release_name === undefined ||
-      release_name === null ||
-      release_name === ''
-    ) {
-      release_name = '';
-    }
+  const role_url = formatPath(Paths.legacyRole, {
+    username: github_user,
+    name,
+  });
+  const release_date = latest?.release_date || modified;
+  const release_name = latest?.name || '';
+  const provider = getProviderInfo(role);
+  const cells = [];
 
-    const provider = getProviderInfo(role);
-    console.log('PROVIDER', provider);
-
-    const cells = [];
-
-    if (show_thumbnail !== false) {
-      cells.push(
-        <DataListCell isFilled={false} alignRight={false} key='ns'>
-          <Logo
-            alt={t`${role.github_user} logo`}
-            image={role.summary_fields.namespace.avatar_url}
-            size='70px'
-            unlockWidth
-            width='97px'
-          />
-        </DataListCell>,
-      );
-    }
-
+  if (show_thumbnail !== false) {
     cells.push(
-      <DataListCell key='content'>
-        <div>
-          <Link to={role_url}>
-            {namespace.name}.{role.name}
-          </Link>
-          <ProviderLink
-            id={provider.id}
-            name={provider.name}
-            url={provider.url}
-          >
-            {provider.name}
-          </ProviderLink>
-        </div>
-        <div className='hub-entry'>{role.description}</div>
-        <div className='hub-entry'>
-          <LabelGroup {...chipGroupProps()}>
-            {role.summary_fields.tags.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
-          </LabelGroup>
-        </div>
+      <DataListCell isFilled={false} alignRight={false} key='ns'>
+        <Logo
+          alt={t`${github_user} logo`}
+          image={namespace.avatar_url}
+          size='70px'
+          unlockWidth
+          width='97px'
+        />
       </DataListCell>,
-    );
-
-    cells.push(
-      <DataListCell isFilled={false} alignRight key='stats'>
-        <div className='hub-right-col hub-entry'>
-          <Trans>
-            Updated <DateComponent date={release_date} />
-          </Trans>
-        </div>
-        <div className='hub-entry'>{release_name}</div>
-        <div className='hub-entry'>
-          <DownloadCount item={role} />
-        </div>
-      </DataListCell>,
-    );
-
-    return (
-      <DataListItem data-cy='LegacyRoleListItem'>
-        <DataListItemRow>
-          <DataListItemCells dataListCells={cells} />
-        </DataListItemRow>
-      </DataListItem>
     );
   }
+
+  cells.push(
+    <DataListCell key='content'>
+      <div>
+        <Link to={role_url}>
+          {namespace.name}.{name}
+        </Link>
+        <ProviderLink {...provider} />
+      </div>
+      <div className='hub-entry'>{description}</div>
+      <div className='hub-entry'>
+        <LabelGroup {...chipGroupProps()}>
+          {tags.map((tag, index) => (
+            <Tag key={index}>{tag}</Tag>
+          ))}
+        </LabelGroup>
+      </div>
+    </DataListCell>,
+  );
+
+  cells.push(
+    <DataListCell isFilled={false} alignRight key='stats'>
+      <div className='hub-right-col hub-entry'>
+        <Trans>
+          Updated <DateComponent date={release_date} />
+        </Trans>
+      </div>
+      <div className='hub-entry'>{release_name}</div>
+      <div className='hub-entry'>
+        <DownloadCount item={role} />
+      </div>
+    </DataListCell>,
+  );
+
+  return (
+    <DataListItem data-cy='LegacyRoleListItem'>
+      <DataListItemRow>
+        <DataListItemCells dataListCells={cells} />
+      </DataListItemRow>
+    </DataListItem>
+  );
 }

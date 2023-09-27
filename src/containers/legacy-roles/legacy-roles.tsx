@@ -142,7 +142,6 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
 
               <Pagination
                 params={this.state.params}
-                //updateParams={(p) => this.updateParams(p)}
                 updateParams={this.updateParams}
                 count={this.state.count}
               />
@@ -160,7 +159,6 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
 
               <Pagination
                 params={this.state.params}
-                //updateParams={(p) => this.updateParams(p)}
                 updateParams={this.updateParams}
                 count={this.state.count}
               />
