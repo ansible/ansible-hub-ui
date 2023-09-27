@@ -953,9 +953,12 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { hasPermission } = this.context;
+    const { hasPermission, hasObjectPermission } = this.context;
     const { showControls } = this.state;
-    const { display_repositories } = this.context.featureFlags;
+    const { display_repositories, ai_deny_index } = this.context.featureFlags;
+    const canDeleteCommunityCollection =
+      ai_deny_index &&
+      hasObjectPermission('galaxy.change_namespace', this.state.namespace);
 
     if (!showControls) {
       return;
@@ -979,7 +982,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection: hasPermission('ansible.delete_collection'),
+              canDeleteCollection:
+                hasPermission('ansible.delete_collection') ||
+                canDeleteCommunityCollection,
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -992,7 +997,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               display_repositories: display_repositories,
             }),
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection: hasPermission('ansible.delete_collection'),
+              canDeleteCollection:
+                hasPermission('ansible.delete_collection') ||
+                canDeleteCommunityCollection,
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
