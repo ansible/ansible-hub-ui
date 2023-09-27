@@ -1,5 +1,8 @@
 const webpackBase = require('./webpack.base.config');
 
+const collectionRatings = require('../static/scores/collection.json');
+const roleRatings = require('../static/scores/role.json');
+
 // Used for getting the correct host when running in a container
 const proxyHost = process.env.API_PROXY_HOST || 'localhost';
 const proxyPort = process.env.API_PROXY_PORT || '5001';
@@ -47,5 +50,17 @@ module.exports = webpackBase({
     '/login/': `http://${proxyHost}:${proxyPort}`,
     '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
     '/static/rest_framework/': `http://${proxyHost}:${proxyPort}`,
+    '/static/scores/': {
+      bypass: function (req, res) {
+        if (req.url === '/static/scores/collection.json') {
+          res.send(collectionRatings);
+          return false;
+        }
+        if (req.url === '/static/scores/role.json') {
+          res.send(roleRatings);
+          return false;
+        }
+      },
+    },
   },
 });
