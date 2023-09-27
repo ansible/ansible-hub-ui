@@ -11,30 +11,31 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'src/components';
+import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
 
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
 interface IProps {
-  avatar_url: string;
-  name: string;
-  company: string;
+  namespace: {
+    avatar_url: string;
+    name: string;
+    company: string;
+  };
   namespaceURL?: string;
 }
 
-export const NamespaceCard = ({
-  avatar_url,
-  name,
-  company,
-  namespaceURL,
-}: IProps) => {
+export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
+  const { avatar_url, name } = namespace;
+  const title = namespaceTitle(namespace);
+
   const MAX_DESCRIPTION_LENGTH = 26;
   return (
     <Card className='hub-c-card-ns-container'>
       <CardHeader>
         <CardHeaderMain>
           <Logo
-            alt={t`${company} logo`}
+            alt={t`${title} logo`}
             fallbackToDefault
             image={avatar_url}
             size='40px'
@@ -42,14 +43,14 @@ export const NamespaceCard = ({
           />
         </CardHeaderMain>
       </CardHeader>
-      <Tooltip content={company || name}>
-        <CardTitle>
-          {getDescription(company || name, MAX_DESCRIPTION_LENGTH)}
-        </CardTitle>
+      <Tooltip content={title}>
+        <CardTitle>{getDescription(title, MAX_DESCRIPTION_LENGTH)}</CardTitle>
       </Tooltip>
-      <Tooltip content={name}>
-        <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>
-      </Tooltip>
+      {title !== name ? (
+        <Tooltip content={name}>
+          <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>
+        </Tooltip>
+      ) : null}
 
       {namespaceURL && (
         <CardFooter>

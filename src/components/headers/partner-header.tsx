@@ -10,6 +10,7 @@ import {
   Tabs,
   TabsType,
 } from 'src/components';
+import { namespaceTitle } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
@@ -34,15 +35,15 @@ export class PartnerHeader extends React.Component<IProps> {
       updateParams,
     } = this.props;
 
-    const company = namespace.company || namespace.name;
+    const title = namespaceTitle(namespace);
 
     return (
       <BaseHeader
-        title={company}
+        title={title}
         logo={
           namespace.avatar_url && (
             <Logo
-              alt={t`${company} logo`}
+              alt={t`${title} logo`}
               className='image'
               fallbackToDefault
               image={namespace.avatar_url}

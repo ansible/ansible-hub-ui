@@ -58,7 +58,7 @@ export class NamespaceForm extends React.Component<IProps> {
             </FormGroup>
           </div>
           <div className='card'>
-            <NamespaceCard {...namespace} />
+            <NamespaceCard namespace={namespace} />
           </div>
         </div>
 

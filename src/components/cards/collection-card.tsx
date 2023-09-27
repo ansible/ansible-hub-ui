@@ -18,7 +18,7 @@ import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts } from 'src/utilities';
+import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
   className?: string;
@@ -40,14 +40,16 @@ export const CollectionCard = ({
   const { featureFlags } = useContext();
   const MAX_DESCRIPTION_LENGTH = 60;
 
-  const company = namespace?.company || collection_version.namespace;
+  const nsTitle = namespaceTitle(
+    namespace || { name: collection_version.namespace },
+  );
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
     <Card className={cx('hub-c-card-collection-container ', className)}>
       <CardHeader className='logo-row'>
         <Logo
-          alt={t`${company} logo`}
+          alt={t`${nsTitle} logo`}
           fallbackToDefault
           image={namespace?.avatar_url}
           size='40px'
@@ -103,7 +105,7 @@ export const CollectionCard = ({
                     namespace: collection_version.namespace,
                   })}
                 >
-                  {company}
+                  {nsTitle}
                 </Link>
               </Trans>
             </Text>

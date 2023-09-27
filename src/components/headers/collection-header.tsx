@@ -59,6 +59,7 @@ import {
   ParamHelper,
   canSignNamespace,
   errorMessage,
+  namespaceTitle,
   parsePulpIDFromURL,
   repositoryRemoveCollection,
   waitForTask,
@@ -226,7 +227,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const { collection_version, namespace_metadata: namespace } = collection;
     const { name: collectionName, version } = collection_version;
 
-    const company = namespace?.company || collection_version.namespace;
+    const nsTitle = namespaceTitle(
+      namespace || { name: collection_version.namespace },
+    );
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -466,7 +469,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           logo={
             namespace?.avatar_url && (
               <Logo
-                alt={t`${company} logo`}
+                alt={t`${nsTitle} logo`}
                 className='image'
                 fallbackToDefault
                 image={namespace.avatar_url}
