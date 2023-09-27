@@ -24,15 +24,14 @@ import {
   LoadingPageSpinner,
   Logo,
   Pagination,
+  ProviderLink,
   StatefulDropdown,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
-import { ProviderLink } from 'src/components/legacy-namespace-list/legacy-namespace-provider';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { getProviderInfo } from 'src/utilities/legacy-namespace';
+import { RouteProps, getProviderInfo, withRouter } from 'src/utilities';
 import './legacy-namespace.scss';
 
 interface LegacyNamespaceRolesProps {
@@ -258,13 +257,7 @@ class LegacyNamespace extends React.Component<
             width='90px'
           />
           <Link to={namespace_url}>{this.state.namespace.name}</Link>
-          <ProviderLink
-            id={provider.id}
-            name={provider.name}
-            url={provider.url}
-          >
-            {provider.name}
-          </ProviderLink>
+          <ProviderLink {...provider} />
         </DataListCell>,
       );
 

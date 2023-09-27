@@ -35,6 +35,7 @@ export { PartnerHeader } from './headers/partner-header';
 export { HelperText } from './helper-text/helper-text';
 export { ImportModal } from './import-modal/import-modal';
 export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespace-item';
+export { ProviderLink } from './legacy-namespace-list/provider-link';
 export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
