@@ -385,7 +385,9 @@ class Search extends React.Component<RouteProps, IState> {
 
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        canDeleteCollection:
+          hasPermission('ansible.delete_collection') ||
+          canDeleteCommunityCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -398,7 +400,9 @@ class Search extends React.Component<RouteProps, IState> {
         display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        canDeleteCollection:
+          hasPermission('ansible.delete_collection') ||
+          canDeleteCommunityCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
