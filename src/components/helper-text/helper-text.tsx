@@ -8,6 +8,7 @@ interface IProps {
   /** Value to display in the tag */
   content: React.ReactNode;
   header?: React.ReactNode;
+  hasAutoWidth?: boolean;
 }
 
 export class HelperText extends React.Component<IProps> {
@@ -18,6 +19,7 @@ export class HelperText extends React.Component<IProps> {
         position={PopoverPosition.top}
         bodyContent={this.props.content}
         headerContent={this.props.header}
+        hasAutoWidth={this.props.hasAutoWidth}
       >
         <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
           <OutlinedQuestionCircleIcon />
