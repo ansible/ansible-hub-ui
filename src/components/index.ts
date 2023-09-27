@@ -25,6 +25,7 @@ export { EmptyStateCustom } from './empty-state/empty-state-custom';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
 export { EmptyStateUnauthorized } from './empty-state/empty-state-unauthorized';
+export { EmptyStateXs } from './empty-state/empty-state-xs';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
 export { PublishToControllerModal } from './execution-environment/publish-to-controller-modal';
 export { RepositoryForm } from './execution-environment/repository-form';

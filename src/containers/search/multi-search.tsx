@@ -14,7 +14,7 @@ import {
   AlertType,
   BaseHeader,
   CollectionListItem,
-  EmptyStateNoData,
+  EmptyStateXs,
   LegacyNamespaceListItem,
   LegacyRoleListItem,
   LoadingPageSpinner,
@@ -212,7 +212,7 @@ export const MultiSearch = (props: RouteProps) => {
   }) =>
     keywords && items !== loading && !items.length ? (
       <Section title={title}>
-        <EmptyStateNoData title={emptyStateTitle} description={showAllLink} />
+        <EmptyStateXs title={emptyStateTitle} description={showAllLink} />
       </Section>
     ) : null;
 

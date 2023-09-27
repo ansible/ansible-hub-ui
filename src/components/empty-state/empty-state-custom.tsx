@@ -27,7 +27,7 @@ export const EmptyStateCustom = ({
 }: IProps) => {
   return (
     <EmptyState variant={EmptyStateVariant[variant]} data-cy='EmptyState'>
-      <EmptyStateIcon icon={icon} />
+      {icon ? <EmptyStateIcon icon={icon} /> : null}
       <Title headingLevel='h4' size='lg'>
         {title}
       </Title>
