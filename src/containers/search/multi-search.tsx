@@ -20,7 +20,6 @@ import {
   LoadingPageSpinner,
   Main,
   MultiSearchSearch,
-  NamespaceCard,
   NamespaceListItem,
   closeAlert,
 } from 'src/components';
