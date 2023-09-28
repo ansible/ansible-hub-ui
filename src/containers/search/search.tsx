@@ -375,11 +375,21 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
-    const { display_repositories } = this.context.featureFlags;
+    const hasObjectPermission = (permission, namespace) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
+    const { display_repositories, ai_deny_index } = this.context.featureFlags;
+    const canDeleteCommunityCollection =
+      ai_deny_index &&
+      hasObjectPermission(
+        'galaxy.change_namespace',
+        collection.collection_version.namespace,
+      );
 
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        canDeleteCollection:
+          hasPermission('ansible.delete_collection') ||
+          canDeleteCommunityCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -392,7 +402,9 @@ class Search extends React.Component<RouteProps, IState> {
         display_repositories: display_repositories,
       }),
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
+        canDeleteCollection:
+          hasPermission('ansible.delete_collection') ||
+          canDeleteCommunityCollection,
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
