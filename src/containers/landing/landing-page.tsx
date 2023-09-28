@@ -7,6 +7,7 @@ import {
   BaseHeader,
   LandingPageCard,
   Main,
+  MultiSearchSearch,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -49,6 +50,13 @@ export class LandingPage extends React.Component<RouteProps, IState> {
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Welcome to Galaxy`} />
         <Main>
+          <MultiSearchSearch
+            updateParams={({ keywords }) =>
+              this.props.navigate(formatPath(Paths.search, {}, { keywords }))
+            }
+            style={{ marginBottom: '16px' }}
+          />
+
           <div
             style={{
               display: 'flex',
