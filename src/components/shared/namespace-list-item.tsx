@@ -17,7 +17,7 @@ export function NamespaceListItem({
   namespace: { avatar_url: string; company: string; name: string };
 }) {
   const { avatar_url, name } = namespace;
-  const namespace_url = formatPath(Paths.namespaces, {
+  const namespace_url = formatPath(Paths.namespaceDetail, {
     namespace: name,
   });
   const title = namespaceTitle(namespace);
