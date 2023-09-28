@@ -21,6 +21,7 @@ import {
   Main,
   MultiSearchSearch,
   NamespaceCard,
+  NamespaceListItem,
   closeAlert,
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
@@ -270,19 +271,11 @@ export const MultiSearch = (props: RouteProps) => {
             >{t`Show more namespaces`}</Link>
           }
         >
-          <section className='card-layout'>
+          <DataList aria-label={t`Available matching namespaces`}>
             {namespaces.map((ns, i) => (
-              <div key={i} className='card-wrapper'>
-                <NamespaceCard
-                  namespaceURL={formatPath(Paths.namespaces, {
-                    namespace: ns.name,
-                  })}
-                  key={i}
-                  {...ns}
-                />
-              </div>
+              <NamespaceListItem key={i} namespace={ns} />
             ))}
-          </section>
+          </DataList>
         </ResultsSection>
 
         {featureFlags.legacy_roles ? (

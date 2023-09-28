@@ -119,6 +119,7 @@ export { DownloadCount } from './shared/download-count';
 export { LoginLink } from './shared/login-link';
 export { MultiRepoModal } from './shared/multi-repo-modal';
 export { MultiSearchSearch } from './shared/multi-search-search';
+export { NamespaceListItem } from './shared/namespace-list-item';
 export { CollectionRatings, RoleRatings } from './shared/ratings';
 export { UIVersion } from './shared/ui-version';
 export {
