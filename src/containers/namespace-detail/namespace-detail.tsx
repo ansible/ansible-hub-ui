@@ -953,7 +953,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { hasPermission, hasObjectPermission } = this.context;
+    const { hasPermission } = this.context;
+    const hasObjectPermission = (permission, namespace) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { showControls } = this.state;
     const { display_repositories, ai_deny_index } = this.context.featureFlags;
     const canDeleteCommunityCollection =

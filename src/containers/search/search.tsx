@@ -374,7 +374,9 @@ class Search extends React.Component<RouteProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const { hasPermission, hasObjectPermission } = this.context;
+    const { hasPermission } = this.context;
+    const hasObjectPermission = (permission, namespace) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { display_repositories, ai_deny_index } = this.context.featureFlags;
     const canDeleteCommunityCollection =
       ai_deny_index &&

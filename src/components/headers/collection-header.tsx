@@ -240,7 +240,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }
 
     const canSign = canSignNamespace(this.context, this.state.namespace);
-    const { hasPermission, hasObjectPermission } = this.context;
+    const { hasPermission } = this.context;
+    const hasObjectPermission = (permission, namespace) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
 
     const canDeleteCommunityCollection =
       ai_deny_index &&
