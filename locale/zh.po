@@ -33,7 +33,6 @@ msgstr "（上传）"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/legacy-roles/legacy-role.tsx
 msgid "{0} logo"
 msgstr "{0} 标志"
@@ -63,8 +62,8 @@ msgstr "{collectionName}的版本。"
 #: src/components/collection-list/collection-list-item.tsx
 #: src/components/headers/collection-header.tsx
 #: src/components/headers/partner-header.tsx
-msgid "{company} logo"
-msgstr "{company} 标志"
+#~ msgid "{company} logo"
+#~ msgstr "{company} 标志"
 
 #: src/components/numeric-label/numeric-label.tsx
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
@@ -90,6 +89,10 @@ msgstr "{count} 更多"
 msgid "{downloadCount} Downloads"
 msgstr ""
 
+#: src/components/legacy-role-list/legacy-role-item.tsx
+msgid "{github_user} logo"
+msgstr ""
+
 #: src/utilities/get_human_size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
@@ -102,6 +105,12 @@ msgstr "{name} 将被取消。"
 msgid "{name} will stop running."
 msgstr "{name} 将停止运行。"
 
+#: src/components/cards/collection-card.tsx
+#: src/components/collection-list/collection-list-item.tsx
+#: src/components/headers/collection-header.tsx
+msgid "{nsTitle} logo"
+msgstr ""
+
 #: src/components/rbac/role-header.tsx
 msgid "{subTitle}"
 msgstr "{subTitle}"
@@ -109,6 +118,12 @@ msgstr "{subTitle}"
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "{title} content"
 msgstr "{title} 内容"
+
+#: src/components/cards/namespace-card.tsx
+#: src/components/headers/partner-header.tsx
+#: src/components/shared/namespace-list-item.tsx
+msgid "{title} logo"
+msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "{title} steps"
@@ -548,14 +563,28 @@ msgid "Authentication provider"
 msgstr "身份验证供应商"
 
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Available matching collections"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching execution environments"
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "Available matching legacy roles"
 #~ msgstr ""
 
+#: src/containers/search/multi-search.tsx
+msgid "Available matching namespaces"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching role namespaces"
+msgstr ""
+
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Available matching roles"
 msgstr ""
 
@@ -572,6 +601,10 @@ msgstr "基本路径"
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Base version"
 msgstr "基本版本"
+
+#: src/components/shared/ratings.tsx
+msgid "Based on {0} surveys."
+msgstr ""
 
 #: src/components/patternfly-wrappers/fileupload.tsx
 msgid "Browse..."
@@ -1004,6 +1037,8 @@ msgstr "修改集合后会出现集合版本。"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/containers/search/search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -1028,6 +1063,10 @@ msgstr "社区"
 #: src/containers/collection-detail/collection-docs.tsx
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "社区集合没有文档或内容计数，但所有内容都会被同步"
+
+#: src/components/shared/ratings.tsx
+msgid "Community score"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
@@ -1642,6 +1681,7 @@ msgstr "文档站点"
 
 #: src/components/headers/collection-header.tsx
 #: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
@@ -1650,6 +1690,10 @@ msgstr "文档"
 #: src/containers/token/token-insights.tsx
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+
+#: src/components/shared/ratings.tsx
+msgid "Does what it promises"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -1722,6 +1766,10 @@ msgstr "拖放文件或上传文件。"
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx
 msgid "Dropdown"
 msgstr "下拉菜单"
+
+#: src/components/shared/ratings.tsx
+msgid "Ease of use"
+msgstr ""
 
 #: src/actions/ansible-remote-edit.tsx
 #: src/actions/ansible-repository-edit.tsx
@@ -2033,9 +2081,14 @@ msgstr "执行环境 \"{selectedItem}\" 已成功删除。"
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
+#: src/containers/search/multi-search.tsx
+msgid "Execution environments"
+msgstr ""
+
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Execution Environments"
@@ -2171,6 +2224,26 @@ msgstr "获取用户数据失败。"
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
 msgstr "将软件仓库 \"{repositoryName}\" 恢复到版本 \"{number}\" 失败"
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search collections ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search execution environments ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search namespaces ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search role namespaces ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search roles ({keywords})"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Failed to sign all collections."
@@ -2507,6 +2580,7 @@ msgstr "为执行环境 \"{name}\" 执行索引已开始。"
 
 #: src/components/collection-detail/collection-info.tsx
 #: src/components/headers/collection-header.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 msgid "Install"
 msgstr "安装"
 
@@ -2578,6 +2652,8 @@ msgstr "关键字"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/shared/multi-search-search.tsx
+#: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 msgid "Keywords"
 msgstr "关键字"
@@ -2715,6 +2791,7 @@ msgid "Loading distribution..."
 msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Local"
 msgstr "本地"
 
@@ -2934,6 +3011,8 @@ msgstr "命名空间名称限制为字母数字字符和下划线，长度最少
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/paths.ts
 msgid "Namespaces"
@@ -3064,14 +3143,28 @@ msgid "No managed collections yet"
 msgstr "还没有受管集合"
 
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "No matching collections found."
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching execution environments found."
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "No matching legacy roles found."
 #~ msgstr ""
 
+#: src/containers/search/multi-search.tsx
+msgid "No matching namespaces found."
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching role namespaces found."
+msgstr ""
+
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "No matching roles found."
 msgstr ""
 
@@ -3469,13 +3562,22 @@ msgstr "无法删除受保护的仓库。"
 #~ msgstr "Provided by {company}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx
-msgid "Provided by <0>{0}</0>"
-msgstr "由 <0>{0}</0> 提供"
+#~ msgid "Provided by <0>{0}</0>"
+#~ msgstr "由 <0>{0}</0> 提供"
 
 #: src/components/cards/collection-card.tsx
 #: src/components/collection-list/collection-list-item.tsx
-msgid "Provided by <0>{company}</0>"
-msgstr "由 <0>{company}</0> 提供"
+#~ msgid "Provided by <0>{company}</0>"
+#~ msgstr "由 <0>{company}</0> 提供"
+
+#: src/components/legacy-namespace-list/provider-link.tsx
+msgid "Provided by <0>{name}</0>"
+msgstr ""
+
+#: src/components/cards/collection-card.tsx
+#: src/components/collection-list/collection-list-item.tsx
+msgid "Provided by <0>{nsTitle}</0>"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx
 msgid "Proxy password"
@@ -3652,6 +3754,14 @@ msgstr "推送和更改执行环境。"
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "推送、删除和更改执行环境。创建、删除和更改远程 registry。"
 
+#: src/components/shared/ratings.tsx
+msgid "Quality of docs"
+msgstr ""
+
+#: src/components/shared/ratings.tsx
+msgid "Quality score"
+msgstr ""
+
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Rate limit"
 msgstr "速率限制"
@@ -3667,6 +3777,10 @@ msgstr "Raw Markdown"
 #: src/components/collection-detail/table-of-contents.tsx
 msgid "Readme"
 msgstr "Readme"
+
+#: src/components/shared/ratings.tsx
+msgid "Ready for production"
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Reason: task {0}"
@@ -3733,6 +3847,7 @@ msgstr "发布的 <0/>"
 #: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Remote"
 msgstr "远程"
 
@@ -4014,6 +4129,11 @@ msgstr "角色名称"
 msgid "Role namespace header"
 msgstr ""
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Role namespaces"
+msgstr ""
+
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Role Namespaces"
@@ -4028,11 +4148,14 @@ msgstr ""
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
+#: src/containers/legacy-roles/legacy-role.tsx
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
 #: src/containers/role-management/role-list.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -4090,6 +4213,11 @@ msgstr "保存对用户 \"{username}\" 的更改。"
 #: src/components/my-imports/import-console.tsx
 msgid "Scroll to end"
 msgstr "滚动至末尾"
+
+#: src/containers/search/multi-search.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Search"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx
 #~ msgid "Search all {0}"
@@ -4249,7 +4377,14 @@ msgstr "显示高级选项"
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Show all collections"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all execution environments"
 msgstr ""
 
 #: src/containers/not-found/dispatch.tsx
@@ -4257,14 +4392,46 @@ msgstr ""
 #~ msgid "Show all legacy roles"
 #~ msgstr ""
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all namespaces"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all role namespaces"
+msgstr ""
+
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Show all roles"
 msgstr ""
 
 #: src/utilities/chip-group-props.ts
 msgid "Show Less"
 msgstr "显示更少"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more collections"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more execution environments"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more namespaces"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more role namespaces"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more roles"
+msgstr ""
 
 #: src/components/collection-detail/download-signature-grid-item.tsx
 msgid "Show the signature"
@@ -4711,7 +4878,11 @@ msgid "Text: {0}"
 msgstr "文本：{0}"
 
 #: src/loaders/standalone/layout.tsx
-msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+#~ msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+#~ msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
 msgstr ""
 
 #: src/loaders/insights/loader.tsx
@@ -4919,6 +5090,10 @@ msgstr "此字段必须以 \"galaxy.\" 开头。"
 #: src/components/rbac/delete-group-modal.tsx
 msgid "This group can include users"
 msgstr "这个组可以包括用户"
+
+#: src/components/shared/ratings.tsx
+msgid "This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy."
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "This tag already exists on another image. Do you want to move it to this image?"
@@ -5285,6 +5460,7 @@ msgid "Version:"
 msgstr "版本："
 
 #: src/containers/ansible-repository/detail.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 msgid "Versions"
 msgstr "版本"
 
@@ -5400,7 +5576,11 @@ msgid "Website"
 msgstr "网站"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Welcome to Beta Galaxy"
+#~ msgid "Welcome to Beta Galaxy"
+#~ msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Welcome to Galaxy"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -5408,6 +5588,10 @@ msgstr ""
 #: src/containers/namespace-detail/namespace-detail.tsx
 #~ msgid "Wisdom settings"
 #~ msgstr "Wisdom settings"
+
+#: src/components/shared/ratings.tsx
+msgid "Works without change"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx
 #: src/containers/ansible-remote/tab-details.tsx

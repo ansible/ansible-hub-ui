@@ -34,7 +34,6 @@ msgstr "(uploaded)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/legacy-roles/legacy-role.tsx
 msgid "{0} logo"
 msgstr "{0} logo"
@@ -64,8 +63,8 @@ msgstr "{collectionName}'s versions."
 #: src/components/collection-list/collection-list-item.tsx
 #: src/components/headers/collection-header.tsx
 #: src/components/headers/partner-header.tsx
-msgid "{company} logo"
-msgstr "{company} logo"
+#~ msgid "{company} logo"
+#~ msgstr "{company} logo"
 
 #: src/components/numeric-label/numeric-label.tsx
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
@@ -91,6 +90,10 @@ msgstr "{count} more"
 msgid "{downloadCount} Downloads"
 msgstr "{downloadCount} Downloads"
 
+#: src/components/legacy-role-list/legacy-role-item.tsx
+msgid "{github_user} logo"
+msgstr "{github_user} logo"
+
 #: src/utilities/get_human_size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
@@ -103,6 +106,12 @@ msgstr "{name} will be cancelled."
 msgid "{name} will stop running."
 msgstr "{name} will stop running."
 
+#: src/components/cards/collection-card.tsx
+#: src/components/collection-list/collection-list-item.tsx
+#: src/components/headers/collection-header.tsx
+msgid "{nsTitle} logo"
+msgstr "{nsTitle} logo"
+
 #: src/components/rbac/role-header.tsx
 msgid "{subTitle}"
 msgstr "{subTitle}"
@@ -110,6 +119,12 @@ msgstr "{subTitle}"
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "{title} content"
 msgstr "{title} content"
+
+#: src/components/cards/namespace-card.tsx
+#: src/components/headers/partner-header.tsx
+#: src/components/shared/namespace-list-item.tsx
+msgid "{title} logo"
+msgstr "{title} logo"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "{title} steps"
@@ -549,14 +564,28 @@ msgid "Authentication provider"
 msgstr "Authentication provider"
 
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Available matching collections"
 msgstr "Available matching collections"
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching execution environments"
+msgstr "Available matching execution environments"
 
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "Available matching legacy roles"
 #~ msgstr "Available matching legacy roles"
 
+#: src/containers/search/multi-search.tsx
+msgid "Available matching namespaces"
+msgstr "Available matching namespaces"
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching role namespaces"
+msgstr "Available matching role namespaces"
+
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Available matching roles"
 msgstr "Available matching roles"
 
@@ -573,6 +602,10 @@ msgstr "Base path"
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Base version"
 msgstr "Base version"
+
+#: src/components/shared/ratings.tsx
+msgid "Based on {0} surveys."
+msgstr "Based on {0} surveys."
 
 #: src/components/patternfly-wrappers/fileupload.tsx
 msgid "Browse..."
@@ -1005,6 +1038,8 @@ msgstr "Collection versions will appear once the collection is modified."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/containers/search/search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -1029,6 +1064,10 @@ msgstr "Community"
 #: src/containers/collection-detail/collection-docs.tsx
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Community collections do not have docs nor content counts, but all content gets synchronized"
+
+#: src/components/shared/ratings.tsx
+msgid "Community score"
+msgstr "Community score"
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
@@ -1643,6 +1682,7 @@ msgstr "Docs site"
 
 #: src/components/headers/collection-header.tsx
 #: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
@@ -1651,6 +1691,10 @@ msgstr "Documentation"
 #: src/containers/token/token-insights.tsx
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+
+#: src/components/shared/ratings.tsx
+msgid "Does what it promises"
+msgstr "Does what it promises"
 
 #: src/components/my-imports/import-console.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -1723,6 +1767,10 @@ msgstr "Drag and drop a file or upload one."
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx
 msgid "Dropdown"
 msgstr "Dropdown"
+
+#: src/components/shared/ratings.tsx
+msgid "Ease of use"
+msgstr "Ease of use"
 
 #: src/actions/ansible-remote-edit.tsx
 #: src/actions/ansible-repository-edit.tsx
@@ -2034,9 +2082,14 @@ msgstr "Execution environment \"{selectedItem}\" has been successfully deleted."
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
+#: src/containers/search/multi-search.tsx
+msgid "Execution environments"
+msgstr "Execution environments"
+
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Execution Environments"
@@ -2172,6 +2225,26 @@ msgstr "Failed to retrieve user data."
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
 msgstr "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search collections ({keywords})"
+msgstr "Failed to search collections ({keywords})"
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search execution environments ({keywords})"
+msgstr "Failed to search execution environments ({keywords})"
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search namespaces ({keywords})"
+msgstr "Failed to search namespaces ({keywords})"
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search role namespaces ({keywords})"
+msgstr "Failed to search role namespaces ({keywords})"
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search roles ({keywords})"
+msgstr "Failed to search roles ({keywords})"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Failed to sign all collections."
@@ -2508,6 +2581,7 @@ msgstr "Indexing started for execution environment \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx
 #: src/components/headers/collection-header.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 msgid "Install"
 msgstr "Install"
 
@@ -2579,6 +2653,8 @@ msgstr "keywords"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/shared/multi-search-search.tsx
+#: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 msgid "Keywords"
 msgstr "Keywords"
@@ -2716,6 +2792,7 @@ msgid "Loading distribution..."
 msgstr "Loading distribution..."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Local"
 msgstr "Local"
 
@@ -2935,6 +3012,8 @@ msgstr "Namespace names are limited to alphanumeric characters and underscores, 
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/paths.ts
 msgid "Namespaces"
@@ -3065,14 +3144,28 @@ msgid "No managed collections yet"
 msgstr "No managed collections yet"
 
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "No matching collections found."
 msgstr "No matching collections found."
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching execution environments found."
+msgstr "No matching execution environments found."
 
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "No matching legacy roles found."
 #~ msgstr "No matching legacy roles found."
 
+#: src/containers/search/multi-search.tsx
+msgid "No matching namespaces found."
+msgstr "No matching namespaces found."
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching role namespaces found."
+msgstr "No matching role namespaces found."
+
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
 msgid "No matching roles found."
 msgstr "No matching roles found."
 
@@ -3470,13 +3563,22 @@ msgstr "Protected repositories cannot be deleted."
 #~ msgstr "Provided by {company}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx
-msgid "Provided by <0>{0}</0>"
-msgstr "Provided by <0>{0}</0>"
+#~ msgid "Provided by <0>{0}</0>"
+#~ msgstr "Provided by <0>{0}</0>"
 
 #: src/components/cards/collection-card.tsx
 #: src/components/collection-list/collection-list-item.tsx
-msgid "Provided by <0>{company}</0>"
-msgstr "Provided by <0>{company}</0>"
+#~ msgid "Provided by <0>{company}</0>"
+#~ msgstr "Provided by <0>{company}</0>"
+
+#: src/components/legacy-namespace-list/provider-link.tsx
+msgid "Provided by <0>{name}</0>"
+msgstr "Provided by <0>{name}</0>"
+
+#: src/components/cards/collection-card.tsx
+#: src/components/collection-list/collection-list-item.tsx
+msgid "Provided by <0>{nsTitle}</0>"
+msgstr "Provided by <0>{nsTitle}</0>"
 
 #: src/components/repositories/remote-form.tsx
 msgid "Proxy password"
@@ -3653,6 +3755,14 @@ msgstr "Push, and change execution environments."
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "Push, delete, and change execution environments. Create, delete and change remote registries."
 
+#: src/components/shared/ratings.tsx
+msgid "Quality of docs"
+msgstr "Quality of docs"
+
+#: src/components/shared/ratings.tsx
+msgid "Quality score"
+msgstr "Quality score"
+
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Rate limit"
 msgstr "Rate limit"
@@ -3668,6 +3778,10 @@ msgstr "Raw Markdown"
 #: src/components/collection-detail/table-of-contents.tsx
 msgid "Readme"
 msgstr "Readme"
+
+#: src/components/shared/ratings.tsx
+msgid "Ready for production"
+msgstr "Ready for production"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Reason: task {0}"
@@ -3734,6 +3848,7 @@ msgstr "Released <0/>"
 #: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Remote"
 msgstr "Remote"
 
@@ -4015,6 +4130,11 @@ msgstr "Role name"
 msgid "Role namespace header"
 msgstr "Role namespace header"
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Role namespaces"
+msgstr "Role namespaces"
+
 #: src/containers/legacy-namespaces/legacy-namespaces.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Role Namespaces"
@@ -4029,11 +4149,14 @@ msgstr "Role namespaces will appear once created or roles are imported"
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
+#: src/containers/legacy-roles/legacy-role.tsx
 #: src/containers/legacy-roles/legacy-roles.tsx
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
 #: src/containers/role-management/role-list.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
@@ -4091,6 +4214,11 @@ msgstr "Saved changes to user \"{username}\"."
 #: src/components/my-imports/import-console.tsx
 msgid "Scroll to end"
 msgstr "Scroll to end"
+
+#: src/containers/search/multi-search.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Search"
+msgstr "Search"
 
 #: src/containers/namespace-list/namespace-list.tsx
 #~ msgid "Search all {0}"
@@ -4250,22 +4378,61 @@ msgstr "Show advanced options"
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Show all collections"
 msgstr "Show all collections"
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all execution environments"
+msgstr "Show all execution environments"
 
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "Show all legacy roles"
 #~ msgstr "Show all legacy roles"
 
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all namespaces"
+msgstr "Show all namespaces"
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all role namespaces"
+msgstr "Show all role namespaces"
+
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
 msgid "Show all roles"
 msgstr "Show all roles"
 
 #: src/utilities/chip-group-props.ts
 msgid "Show Less"
 msgstr "Show Less"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more collections"
+msgstr "Show more collections"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more execution environments"
+msgstr "Show more execution environments"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more namespaces"
+msgstr "Show more namespaces"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more role namespaces"
+msgstr "Show more role namespaces"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more roles"
+msgstr "Show more roles"
 
 #: src/components/collection-detail/download-signature-grid-item.tsx
 msgid "Show the signature"
@@ -4712,8 +4879,12 @@ msgid "Text: {0}"
 msgstr "Text: {0}"
 
 #: src/loaders/standalone/layout.tsx
-msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
-msgstr "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+#~ msgid "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+#~ msgstr "Thanks for trying out the new and improved Beta Galaxy, please share your feedback on <0>github.com/ansible/galaxy_ng/discussions</0>."
+
+#: src/loaders/standalone/layout.tsx
+msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
+msgstr "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
@@ -4920,6 +5091,10 @@ msgstr "This field must start with 'galaxy.'."
 #: src/components/rbac/delete-group-modal.tsx
 msgid "This group can include users"
 msgstr "This group can include users"
+
+#: src/components/shared/ratings.tsx
+msgid "This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy."
+msgstr "This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "This tag already exists on another image. Do you want to move it to this image?"
@@ -5286,6 +5461,7 @@ msgid "Version:"
 msgstr "Version:"
 
 #: src/containers/ansible-repository/detail.tsx
+#: src/containers/legacy-roles/legacy-role.tsx
 msgid "Versions"
 msgstr "Versions"
 
@@ -5401,14 +5577,22 @@ msgid "Website"
 msgstr "Website"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Welcome to Beta Galaxy"
-msgstr "Welcome to Beta Galaxy"
+#~ msgid "Welcome to Beta Galaxy"
+#~ msgstr "Welcome to Beta Galaxy"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Welcome to Galaxy"
+msgstr "Welcome to Galaxy"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #~ msgid "Wisdom settings"
 #~ msgstr "Wisdom settings"
+
+#: src/components/shared/ratings.tsx
+msgid "Works without change"
+msgstr "Works without change"
 
 #: src/components/repositories/remote-form.tsx
 #: src/containers/ansible-remote/tab-details.tsx
