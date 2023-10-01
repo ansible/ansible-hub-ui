@@ -10,7 +10,7 @@
         "@patternfly/patternfly": "^4.224.5",
         "@patternfly/react-core": "^4.276.8",
         "@patternfly/react-table": "^4.113.4",
-        "@types/node": "^16.18.13",
+        "@types/node": "^16.18.55",
         "@types/react": "^16.14.24",
         "@types/react-dom": "^16.9.14",
         "@types/react-router-dom": "^5.3.3",
