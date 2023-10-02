@@ -78,13 +78,8 @@ List of all workflows:
 List by branches:
 
 - `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
-- `prod-beta`: `deploy-cloud`
-- `prod-stable`: `deploy-cloud`
-- `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
-- `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
-- `stable-4.6`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
-- `stable-4.7`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
-- `stable-4.8`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `prod-beta`, `prod-stable`: `deploy-cloud`
+- `stable-4.5`, `stable-4.6`, `stable-4.7`, `stable-4.8`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
 ### Version mapping
 
@@ -93,13 +88,12 @@ To map between the two:
 
 |AAP version|AAH version|notes|
 |-|-|-|
-|1.2|4.2||
-|2.0|4.3|obsolete|
-|2.1|4.4|obsolete|
 |2.2|4.5||
 |2.3|4.6||
 |2.4|4.7||
 |2.4|4.8|django 4, still part of 2.4|
+
+[Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
 
 ## Patternfly
 
