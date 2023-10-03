@@ -20,6 +20,7 @@ import {
 } from 'src/api';
 import {
   AboutModalWindow,
+  LanguageSwitcher,
   LoginLink,
   SmallLogo,
   StatefulDropdown,
@@ -127,6 +128,7 @@ export const StandaloneLayout = ({
       )}
       headerTools={
         <PageHeaderTools>
+          <LanguageSwitcher />
           {!user || user.is_anonymous ? (
             <LoginLink next={location.pathname} />
           ) : (
