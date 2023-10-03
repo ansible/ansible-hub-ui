@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { Alert } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -69,14 +70,21 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               title={t`Download`}
               body={
                 <React.Fragment>
+                  <Alert
+                    isInline
+                    variant='warning'
+                    title={t`To be able to download content from galaxy it is required to have ansible-core>=2.13.9`}
+                  >
+                    {t`Please, check it running the command:`}{' '}
+                    <code>ansible --version</code>
+                  </Alert>
+                  <br />
                   <p>{t`Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.`}</p>
                   <br />
-
                   <p>
                     {t`Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`}{' '}
                   </p>
                   <br />
-
                   <p>
                     <Trans>
                       Use the{' '}
