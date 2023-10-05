@@ -32,6 +32,7 @@ export class Constants {
     'rejected',
   ];
 
+  // FIXME: replace with API call or free form input
   static COLLECTION_FILTER_TAGS = [
     'application',
     'cloud',

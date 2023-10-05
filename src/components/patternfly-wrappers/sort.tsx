@@ -6,9 +6,8 @@ import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amou
 import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
 import React from 'react';
 import { ParamHelper } from 'src/utilities';
-import './sort.scss';
 
-class SortFieldType {
+export class SortFieldType {
   id: string;
   title: string;
   type: 'numeric' | 'alpha';
@@ -136,7 +135,7 @@ export class Sort extends React.Component<IProps, IState> {
     }
 
     return (
-      <div className='hub-sort-wrapper'>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         {options.length > 1 ? (
           <Select
             variant={SelectVariant.single}
@@ -154,15 +153,17 @@ export class Sort extends React.Component<IProps, IState> {
 
         {this.getIsDescending(params) ? (
           <IconDesc
-            className='clickable asc-button'
-            size='md'
+            className='clickable'
             onClick={() => this.setDescending()}
+            size='md'
+            style={{ marginLeft: '5px' }}
           />
         ) : (
           <IconAsc
-            className='clickable asc-button'
-            size='md'
+            className='clickable'
             onClick={() => this.setDescending()}
+            size='md'
+            style={{ marginLeft: '5px' }}
           />
         )}
       </div>

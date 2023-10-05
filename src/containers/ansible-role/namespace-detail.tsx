@@ -19,7 +19,9 @@ import {
   AlertList,
   AlertType,
   BaseHeader,
+  EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Logo,
@@ -29,28 +31,36 @@ import {
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
+import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, getProviderInfo, withRouter } from 'src/utilities';
-import './namespace.scss';
+import {
+  ParamHelper,
+  RouteProps,
+  filterIsSet,
+  getProviderInfo,
+  handleHttpError,
+  withRouter,
+} from 'src/utilities';
 
 interface NamespaceRolesProps {
+  addAlert: (alert: AlertType) => void;
+  location: RouteProps['location'];
   namespace: LegacyNamespaceListType;
+  navigate: RouteProps['navigate'];
 }
 
 interface NamespaceRolesState {
-  loading: boolean;
   count: number;
-  namespace: LegacyNamespaceListType;
-  roles: LegacyRoleListType[];
+  loading: boolean;
   params: {
+    keywords?: string;
     page?: number;
     page_size?: number;
-    order_by?: string;
-    keywords?: string;
+    sort?: string;
     tags?: string[];
-    view_type?: string;
   };
+  roles: LegacyRoleListType[];
 }
 
 class NamespaceRoles extends React.Component<
@@ -62,74 +72,94 @@ class NamespaceRoles extends React.Component<
 
   constructor(props) {
     super(props);
+
+    const params = ParamHelper.parseParamString(props.location.search, [
+      'page',
+      'page_size',
+    ]);
+
     this.state = {
-      loading: true,
       count: 0,
-      namespace: props.namespace,
-      roles: null,
+      loading: true,
       params: {
         page: 1,
         page_size: 10,
-        order_by: 'created',
+        sort: '-created',
+        ...params,
       },
+      roles: [],
     };
   }
 
   componentDidMount() {
-    const namespace = this.state.namespace;
-    const thisQS = window.location.search;
-    const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page'), 10) || 1;
-    const page_size = parseInt(urlParams.get('page_size'), 10) || 10;
-    const order_by = urlParams.get('order_by') || 'created';
-
-    LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      github_user: namespace.name,
-    }).then((response) => {
-      this.setState(() => ({
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-        },
-        count: response.data.count,
-        namespace: namespace,
-        roles: response.data.results,
-      }));
-    });
+    this.query(this.state.params);
   }
 
-  updateParams = (p) => {
-    const { page, page_size, order_by } = p;
-    const namespace = this.state.namespace;
+  query(params) {
+    const { addAlert, namespace } = this.props;
 
+    this.setState({ loading: true });
     LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
+      ...params,
       github_user: namespace.name,
-    }).then((response) => {
-      this.setState(() => ({
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-        },
-        count: response.data.count,
-        namespace: namespace,
-        roles: response.data.results,
-      }));
-    });
-  };
+    })
+      .then(({ data: { count, results } }) =>
+        this.setState({
+          count,
+          loading: false,
+          roles: results,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load roles`,
+          () => this.setState({ loading: false }),
+          addAlert,
+        ),
+      );
+  }
+
+  private get updateParams() {
+    return ParamHelper.updateParamsMixin();
+  }
 
   render() {
-    const { loading, roles } = this.state;
-    const noData = roles === null || roles.length === 0;
+    const updateParams = (params) =>
+      this.updateParams(params, () => this.query(params));
+
+    const filterConfig = [
+      {
+        id: 'keywords',
+        title: t`Keywords`,
+      },
+      {
+        id: 'tags',
+        title: t`Tags`,
+      },
+    ];
+
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+      {
+        title: t`Download count`,
+        id: 'download_count',
+        type: 'numeric' as const,
+      },
+      {
+        title: t`Created`,
+        id: 'created',
+        type: 'numeric' as const,
+      },
+    ];
+
+    const { count, loading, params, roles } = this.state;
+
+    const noData =
+      count === 0 &&
+      !filterIsSet(
+        params,
+        filterConfig.map(({ id }) => id),
+      );
 
     return (
       <div>
@@ -142,21 +172,36 @@ class NamespaceRoles extends React.Component<
           />
         ) : (
           <div>
-            <DataList aria-label={t`List of Legacy Roles`}>
-              {this.state.roles.map((lrole, ix) => (
-                <LegacyRoleListItem
-                  key={ix}
-                  role={lrole}
-                  show_thumbnail={false}
-                />
-              ))}
-            </DataList>
-
-            <Pagination
-              params={this.state.params}
-              updateParams={this.updateParams}
-              count={this.state.count}
+            <HubListToolbar
+              count={count}
+              filterConfig={filterConfig}
+              ignoredParams={['page', 'page_size', 'sort']}
+              params={params}
+              sortOptions={sortOptions}
+              updateParams={updateParams}
             />
+            {!count ? (
+              <EmptyStateFilter />
+            ) : (
+              <div>
+                <DataList aria-label={t`List of roles`}>
+                  {roles &&
+                    roles.map((lrole) => (
+                      <LegacyRoleListItem
+                        key={lrole.id}
+                        role={lrole}
+                        show_thumbnail={false}
+                      />
+                    ))}
+                </DataList>
+
+                <Pagination
+                  count={count}
+                  params={params}
+                  updateParams={updateParams}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -165,21 +210,10 @@ class NamespaceRoles extends React.Component<
 }
 
 interface RoleNamespaceState {
-  loading: boolean;
-  namespaceid: number;
-  namespace: LegacyNamespaceListType;
-  itemCount: number;
-  params: {
-    page?: number;
-    page_size?: number;
-    keywords?: string;
-    tags?: string[];
-    view_type?: string;
-  };
-  updateParams: (params) => void;
-  ignoredParams: string[];
-  isOpenWisdomModal: boolean;
   alerts: AlertType[];
+  isOpenWisdomModal: boolean;
+  loading: boolean;
+  namespace: LegacyNamespaceListType;
 }
 
 class AnsibleRoleNamespaceDetail extends React.Component<
@@ -192,15 +226,12 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 
   constructor(props) {
     super(props);
-    const namespaceid = props.routeParams.namespaceid;
+
     this.state = {
-      ...props,
-      loading: true,
-      namespaceid: namespaceid,
-      namespace: null,
-      roles: null,
-      isOpenWisdomModal: false,
       alerts: [],
+      isOpenWisdomModal: false,
+      loading: true,
+      namespace: null,
     };
   }
 
@@ -215,100 +246,101 @@ class AnsibleRoleNamespaceDetail extends React.Component<
   }
 
   componentDidMount() {
-    LegacyNamespaceAPI.get('namespaces/' + this.state.namespaceid).then(
-      (response) => {
-        // set the user
-        this.setState(() => ({
+    const namespaceid = this.props.routeParams.namespaceid;
+    LegacyNamespaceAPI.get(namespaceid)
+      .then((response) =>
+        this.setState({
           loading: false,
           namespace: response.data,
-        }));
-      },
-    );
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load role namespace`,
+          () => this.setState({ loading: false }),
+          (alert) => this.addAlert(alert),
+        ),
+      );
   }
 
   render() {
-    if (this.state.loading === true) {
+    const { alerts, isOpenWisdomModal, loading, namespace } = this.state;
+    const {
+      featureFlags: { ai_deny_index },
+      user,
+    } = this.context;
+    const { location, navigate } = this.props;
+
+    if (loading) {
       return <LoadingPageSpinner />;
     }
 
-    const { ai_deny_index } = this.context.featureFlags;
-
-    const infocells = [];
+    if (!namespace) {
+      return (
+        <>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <NotFound />
+        </>
+      );
+    }
 
     const namespace_url = formatPath(Paths.legacyNamespace, {
-      namespaceid: this.state.namespace.id,
+      namespaceid: namespace.id,
     });
 
-    const provider = getProviderInfo(this.state.namespace);
+    const provider = getProviderInfo(namespace);
 
-    if (this.state.namespace !== undefined) {
-      infocells.push(
-        <DataListCell isFilled={false} alignRight={false} key='ns-logo'>
-          <Logo
-            alt='avatar url'
-            fallbackToDefault
-            image={this.state.namespace.avatar_url}
-            size='90px'
-            unlockWidth
-            width='90px'
-          />
-          <Link to={namespace_url}>{this.state.namespace.name}</Link>
-          <ProviderLink {...provider} />
-        </DataListCell>,
-      );
+    const userOwnsLegacyNamespace = namespace.summary_fields?.owners?.filter(
+      (n) => n.username == user.username,
+    ).length;
 
-      infocells.push(
-        <DataListCell isFilled={false} alignRight={false} key='ns-name'>
-          <BaseHeader title={this.state.namespace.name} />
-        </DataListCell>,
-      );
+    const dropdownItems = [
+      ai_deny_index && (user.is_superuser || userOwnsLegacyNamespace) && (
+        <DropdownItem
+          onClick={() => this.setState({ isOpenWisdomModal: true })}
+        >{t`Ansible Lightspeed settings`}</DropdownItem>
+      ),
+    ].filter(Boolean);
 
-      const summary_fields = this.state.namespace.summary_fields;
-      const userOwnsLegacyNamespace = summary_fields?.owners?.filter(
-        (n) => n.username == this.context.user.username,
-      ).length;
-
-      const dropdownItems = [];
-      if (
-        ai_deny_index &&
-        (this.context.user.is_superuser || userOwnsLegacyNamespace)
-      ) {
-        dropdownItems.push(
-          <DropdownItem
-            onClick={() => this.setState({ isOpenWisdomModal: true })}
-          >{t`Ansible Lightspeed settings`}</DropdownItem>,
-        );
-      }
-
-      if (dropdownItems.length) {
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={true} key='kebab'>
-            <div data-cy='ns-kebab-toggle' className='hub-kebab-toggle'>
-              <StatefulDropdown items={dropdownItems} />
-            </div>
-          </DataListCell>,
-        );
-      }
-    }
+    const infocells = [
+      <DataListCell isFilled={false} alignRight={false} key='ns-logo'>
+        <Logo
+          alt='avatar url'
+          fallbackToDefault
+          image={namespace.avatar_url}
+          size='90px'
+          unlockWidth
+          width='90px'
+        />
+        <Link to={namespace_url}>{namespace.name}</Link>
+        <ProviderLink {...provider} />
+      </DataListCell>,
+      <DataListCell isFilled={false} alignRight={false} key='ns-name'>
+        <BaseHeader title={namespace.name} />
+      </DataListCell>,
+      dropdownItems.length && (
+        <DataListCell isFilled={false} alignRight={true} key='kebab'>
+          <div style={{ marginTop: '70px' }}>
+            <StatefulDropdown items={dropdownItems} />
+          </div>
+        </DataListCell>
+      ),
+    ].filter(Boolean);
 
     return (
       <>
-        {this.state.isOpenWisdomModal && (
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+
+        {isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ isOpenWisdomModal: false })}
             scope={'legacy_namespace'}
-            reference={this.state.namespace.name}
+            reference={namespace.name}
           />
         )}
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
-        <DataList
-          aria-label={t`Role namespace header`}
-          className='hub-legacy-namespace-page'
-        >
+
+        <DataList aria-label={t`Role namespace header`}>
           <DataListItem>
             <DataListItemRow>
               <DataListItemCells dataListCells={infocells} />
@@ -316,7 +348,12 @@ class AnsibleRoleNamespaceDetail extends React.Component<
           </DataListItem>
         </DataList>
 
-        <NamespaceRoles namespace={this.state.namespace} />
+        <NamespaceRoles
+          addAlert={(alert) => this.addAlert(alert)}
+          namespace={namespace}
+          location={location}
+          navigate={navigate}
+        />
       </>
     );
   }
