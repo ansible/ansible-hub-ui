@@ -85,7 +85,7 @@ export const CollectionInfo = ({
               <div>
                 <Trans>
                   <b>Note:</b> Installing collections with ansible-galaxy is
-                  only supported in ansible 2.9+
+                  only supported in ansible-core&gt;=2.13.9
                 </Trans>
               </div>
             </SplitItem>
