@@ -170,8 +170,12 @@ msgstr "<0>{name}</0>이/가 영구적으로 삭제됩니다."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
 #: src/components/collection-detail/collection-info.tsx
-msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다"
+#~ msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+#~ msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다"
+
+#: src/components/collection-detail/collection-info.tsx
+msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible-core>=2.13.9"
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
@@ -3516,6 +3520,10 @@ msgstr "업로드할 서명 파일을 선택하십시오."
 msgid "Please select no more than one file."
 msgstr "하나 이상의 파일을 선택하지 마십시오."
 
+#: src/containers/landing/landing-page.tsx
+msgid "Please, check it running the command:"
+msgstr ""
+
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Please, provide the namespace name"
 msgstr "네임 스페이스 이름을 입력하십시오"
@@ -5119,6 +5127,10 @@ msgstr "이렇게 하면 그룹에서 이 역할과 연결된 모든 권한이 �
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "TLS validation"
 msgstr "TLS 인증"
+
+#: src/containers/landing/landing-page.tsx
+msgid "To be able to download content from galaxy it is required to have ansible-core>=2.13.9"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx
 msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."

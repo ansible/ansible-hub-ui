@@ -171,8 +171,12 @@ msgstr "<0>{name}</0> will be permanently deleted."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
 #: src/components/collection-detail/collection-info.tsx
-msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+#~ msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+#~ msgstr "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+
+#: src/components/collection-detail/collection-info.tsx
+msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible-core>=2.13.9"
+msgstr "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible-core>=2.13.9"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
@@ -3517,6 +3521,10 @@ msgstr "Please select a signature file to upload."
 msgid "Please select no more than one file."
 msgstr "Please select no more than one file."
 
+#: src/containers/landing/landing-page.tsx
+msgid "Please, check it running the command:"
+msgstr "Please, check it running the command:"
+
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Please, provide the namespace name"
 msgstr "Please, provide the namespace name"
@@ -5120,6 +5128,10 @@ msgstr "This will revoke all permissions associated with this role from the grou
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "TLS validation"
 msgstr "TLS validation"
+
+#: src/containers/landing/landing-page.tsx
+msgid "To be able to download content from galaxy it is required to have ansible-core>=2.13.9"
+msgstr "To be able to download content from galaxy it is required to have ansible-core>=2.13.9"
 
 #: src/components/collection-detail/collection-info.tsx
 msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
