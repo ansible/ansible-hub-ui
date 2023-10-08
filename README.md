@@ -43,11 +43,11 @@ The app will run on http://localhost:8002/preview/ansible/automation-hub (and ht
 
 ## Deploying
 
-We're using Github Actions for deployment.
+We're using GitHub Actions for deployment.
 
 ### How it works
 
-The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
+The GitHub Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
 
 - any push to the `master` branch will deploy to `ansible-hub-ui-build` `qa-beta` branch
 - any push to the `master` branch will ALSO deploy to `ansible-hub-ui-build` `qa-stable` branch when `.cloud-stage-cron.enabled` exists
