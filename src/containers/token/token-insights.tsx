@@ -127,7 +127,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
             <Trans>
               To revoke a token or see all of your tokens, visit the{' '}
               <a
-                href='https://sso.redhat.com/auth/realms/redhat-external/account'
+                href='https://sso.redhat.com/auth/realms/redhat-external/account/#/applications'
                 target='_blank'
                 rel='noreferrer'
               >
