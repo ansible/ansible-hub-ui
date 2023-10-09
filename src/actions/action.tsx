@@ -1,21 +1,15 @@
 import { MessageDescriptor, i18n } from '@lingui/core';
 import { Button, DropdownItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Tooltip } from 'src/components';
 import { type PermissionContextType } from 'src/permissions';
 
-type ModalType = ({
-  addAlert,
-  listQuery,
-  query,
-  setState,
-  state,
-}) => React.ReactNode;
+type ModalType = ({ addAlert, listQuery, query, setState, state }) => ReactNode;
 
 interface ActionParams {
   buttonVariant?: 'primary' | 'secondary';
   condition?: PermissionContextType;
-  disabled?: (item, actionContext) => string | null;
+  disabled?: (item, actionContext) => string | ReactNode | null;
   modal?: ModalType;
   onClick: (item, actionContext) => void;
   title: MessageDescriptor;
@@ -23,9 +17,9 @@ interface ActionParams {
 }
 
 export class ActionType {
-  button: (item, actionContext) => React.ReactNode | null;
-  disabled: (item, actionContext) => string | null;
-  dropdownItem: (item, actionContext) => React.ReactNode | null;
+  button: (item, actionContext) => ReactNode | null;
+  disabled: (item, actionContext) => string | ReactNode | null;
+  dropdownItem: (item, actionContext) => ReactNode | null;
   modal?: ModalType;
   title: string;
   visible: (item, actionContext) => boolean;
