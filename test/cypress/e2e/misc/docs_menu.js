@@ -7,7 +7,7 @@ describe('Documentation dropdown', () => {
   });
 
   it('user can open docs dropdown menu', () => {
-    cy.get('[aria-label="docs-dropdown"]').click();
+    cy.get('[data-cy="docs-dropdown"]').click();
 
     cy.get('.pf-c-dropdown__menu')
       .contains('Customer Support')
@@ -23,7 +23,7 @@ describe('Documentation dropdown', () => {
   });
 
   it('user can toggle about modal', () => {
-    cy.get('[aria-label="docs-dropdown"]').click();
+    cy.get('[data-cy="docs-dropdown"]').click();
     cy.get('.pf-c-dropdown__menu').contains('About').click();
     cy.get('.pf-c-about-modal-box').should('be.visible');
     cy.get('h1').contains('Galaxy NG');

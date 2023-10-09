@@ -27,6 +27,7 @@ interface IProps {
   isPlain?: boolean;
 
   ariaLabel?: string;
+  'data-cy'?: string;
 }
 
 export const StatefulDropdown = ({
@@ -37,6 +38,7 @@ export const StatefulDropdown = ({
   defaultText,
   isPlain = true,
   ariaLabel,
+  'data-cy': dataCy,
 }: IProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>(undefined);
@@ -54,6 +56,7 @@ export const StatefulDropdown = ({
       position={position || DropdownPosition.right}
       autoFocus={false}
       aria-label={ariaLabel}
+      data-cy={dataCy}
     />
   );
 };

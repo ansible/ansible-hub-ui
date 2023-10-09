@@ -12,7 +12,7 @@ describe('My Profile Tests', () => {
   beforeEach(() => {
     cy.login();
     // open the dropdown labeled with the username and then...
-    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('[data-cy="user-dropdown"] button').click();
     // a little hacky, but basically
     // just click the one link that says 'My profile'.
     cy.get('a').contains('My profile').click();
@@ -44,7 +44,7 @@ describe('My Profile Tests', () => {
   it('user cannot set superusers rights', () => {
     cy.login(username, password);
 
-    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('[data-cy="user-dropdown"] button').click();
     cy.get('a').contains('My profile').click();
 
     cy.get('.pf-c-switch__input').should('be.disabled');
@@ -53,7 +53,7 @@ describe('My Profile Tests', () => {
   it('email must be email', () => {
     cy.login(username, password);
 
-    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('[data-cy="user-dropdown"] button').click();
     cy.get('a').contains('My profile').click();
     cy.get('button:contains("Edit")').click();
 
@@ -71,7 +71,7 @@ describe('My Profile Tests', () => {
   it('password validations', () => {
     cy.login(username, password);
 
-    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('[data-cy="user-dropdown"] button').click();
     cy.get('a').contains('My profile').click();
     cy.get('button:contains("Edit")').click();
 

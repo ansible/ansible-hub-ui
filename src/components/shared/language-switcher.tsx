@@ -10,6 +10,7 @@ export function LanguageSwitcher(_props) {
   return (
     <StatefulDropdown
       ariaLabel={t`Select language`}
+      data-cy='language-dropdown'
       defaultText={currentLanguage}
       toggleType='icon'
       items={[

@@ -129,23 +129,25 @@ export const StandaloneLayout = ({
       headerTools={
         <PageHeaderTools>
           <LanguageSwitcher />
+          {user ? (
+            <StatefulDropdown
+              ariaLabel={t`Docs dropdown`}
+              data-cy='docs-dropdown'
+              defaultText={<QuestionCircleIcon />}
+              items={docsDropdownItems}
+              toggleType='icon'
+            />
+          ) : null}
           {!user || user.is_anonymous ? (
             <LoginLink next={location.pathname} />
           ) : (
-            <div>
-              <StatefulDropdown
-                ariaLabel={'docs-dropdown'}
-                defaultText={<QuestionCircleIcon />}
-                items={docsDropdownItems}
-                toggleType='icon'
-              />
-              <StatefulDropdown
-                ariaLabel={'user-dropdown'}
-                defaultText={userName}
-                items={userDropdownItems}
-                toggleType='dropdown'
-              />
-            </div>
+            <StatefulDropdown
+              ariaLabel={t`User dropdown`}
+              data-cy='user-dropdown'
+              defaultText={userName}
+              items={userDropdownItems}
+              toggleType='dropdown'
+            />
           )}
         </PageHeaderTools>
       }
