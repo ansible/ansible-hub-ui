@@ -307,7 +307,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         {release_name && <div className='hub-entry'>{release_name}</div>}
         <div className='hub-entry'>
           <a href={repository}>
-            Github Repository <ExternalLinkAltIcon />
+            GitHub Repository <ExternalLinkAltIcon />
           </a>
         </div>
         <div className='hub-entry'>
