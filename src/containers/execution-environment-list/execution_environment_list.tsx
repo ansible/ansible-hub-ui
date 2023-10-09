@@ -8,7 +8,6 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -27,6 +26,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  ExternalLink,
   ListItemActions,
   LoadingPageSpinner,
   Main,
@@ -132,13 +132,11 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const pushImagesButton = (
-      <Button
-        variant='link'
-        onClick={() => window.open(UI_DOCS_URL, '_blank')}
+      <ExternalLink
+        href={UI_DOCS_URL}
         data-cy='push-images-button'
-      >
-        <Trans>Push container images</Trans> <ExternalLinkAltIcon />
-      </Button>
+        title={t`Push container images`}
+      />
     );
     const addRemoteButton = hasPermission(
       'container.add_containernamespace',

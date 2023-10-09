@@ -8,7 +8,6 @@ import {
   PageHeaderTools,
   PageSidebar,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -20,6 +19,7 @@ import {
 } from 'src/api';
 import {
   AboutModalWindow,
+  ExternalLink,
   LanguageSwitcher,
   LoginLink,
   SmallLogo,
@@ -89,22 +89,24 @@ export const StandaloneLayout = ({
     docsDropdownItems = [
       <DropdownItem
         key='customer_support'
-        href='https://access.redhat.com/support'
-        target='_blank'
-      >
-        <Trans>
-          Customer Support <ExternalLinkAltIcon />
-        </Trans>
-      </DropdownItem>,
+        component={
+          <ExternalLink
+            href='https://access.redhat.com/support'
+            title={t`Customer Support`}
+            variant='menu'
+          />
+        }
+      />,
       <DropdownItem
         key='training'
-        href='https://www.ansible.com/resources/webinars-training'
-        target='_blank'
-      >
-        <Trans>
-          Training <ExternalLinkAltIcon />
-        </Trans>
-      </DropdownItem>,
+        component={
+          <ExternalLink
+            href='https://www.ansible.com/resources/webinars-training'
+            title={t`Training`}
+            variant='menu'
+          />
+        }
+      />,
       <DropdownItem key='about' onClick={() => setAboutModalVisible(true)}>
         {t`About`}
       </DropdownItem>,
@@ -173,13 +175,9 @@ export const StandaloneLayout = ({
           <Trans>
             Thanks for trying out the new and improved Galaxy, please share your
             feedback on{' '}
-            <a
-              href='https://forum.ansible.com/'
-              target='_blank'
-              rel='noreferrer'
-            >
+            <ExternalLink href='https://forum.ansible.com/'>
               forum.ansible.com
-            </a>
+            </ExternalLink>
             .
           </Trans>
         </Banner>

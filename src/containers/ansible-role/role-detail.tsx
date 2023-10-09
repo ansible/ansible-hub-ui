@@ -13,7 +13,7 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
+import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -29,6 +29,7 @@ import {
   ClipboardCopy,
   DateComponent,
   DownloadCount,
+  ExternalLink,
   LabelGroup,
   LoadingPageWithHeader,
   Logo,
@@ -122,11 +123,13 @@ class RoleVersion extends React.Component<RoleVersionProps> {
 
         {/* Release tarballs hosted on github */}
         <DataListCell alignRight>
-          <a
+          <ExternalLink
             href={this.props.role_version.download_url}
-            target='_blank'
-            rel='noreferrer'
-          />
+            variant='download'
+          >
+            <DownloadIcon />{' '}
+            {t`Download ${this.props.role_version.name} tarball`}
+          </ExternalLink>
         </DataListCell>
       </DataListItemRow>
     );
@@ -318,9 +321,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         </div>
         {release_name && <div className='hub-entry'>{release_name}</div>}
         <div className='hub-entry'>
-          <a href={repository} rel='noreferrer noopener' target='_blank'>
-            GitHub Repository <ExternalLinkAltIcon />
-          </a>
+          <ExternalLink href={repository} title={t`GitHub Repository`} />
         </div>
         <div className='hub-entry'>
           <RoleRatings namespace={namespace.name} name={role.name} />

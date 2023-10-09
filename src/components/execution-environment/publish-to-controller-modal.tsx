@@ -12,7 +12,6 @@ import {
   ListItem,
   Modal,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React, { useEffect, useState } from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
@@ -23,6 +22,7 @@ import {
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  ExternalLink,
   LoadingPageSpinner,
   Pagination,
   ShaLabel,
@@ -181,7 +181,6 @@ export const PublishToControllerModal = (props: IProps) => {
 
   function renderControllers() {
     const { image, isOpen } = props;
-    const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     if (!isOpen || !controllers) {
       return null;
@@ -211,24 +210,15 @@ export const PublishToControllerModal = (props: IProps) => {
 
           return (
             <ListItem style={{ paddingTop: '8px' }} key={host}>
-              <a href={href} target='_blank' rel='noreferrer'>
-                {host}
-              </a>{' '}
-              {unsafeLinksSupported && (
-                <small>
-                  <ExternalLinkAltIcon />
-                </small>
-              )}
-              {!unsafeLinksSupported && (
-                <ClipboardCopyButton
-                  variant={'plain'}
-                  id={href}
-                  textId={t`Copy to clipboard`}
-                  onClick={() => navigator.clipboard.writeText(href)}
-                >
-                  {t`Copy to clipboard`}
-                </ClipboardCopyButton>
-              )}
+              <ExternalLink href={href} title={host} />
+              <ClipboardCopyButton
+                variant={'plain'}
+                id={href}
+                textId={t`Copy to clipboard`}
+                onClick={() => navigator.clipboard.writeText(href)}
+              >
+                {t`Copy to clipboard`}
+              </ClipboardCopyButton>
             </ListItem>
           );
         })}
@@ -247,19 +237,11 @@ export const PublishToControllerModal = (props: IProps) => {
   const notListedMessage = (
     <>
       {t`If the Controller is not listed in the table, check settings.py.`}{' '}
-      {docsLink && (
-        <>
-          <a href={docsLink} target='_blank' rel='noreferrer'>
-            {t`Learn more`}
-          </a>{' '}
-          <ExternalLinkAltIcon />
-        </>
-      )}
+      {docsLink && <ExternalLink href={docsLink} title={t`Learn more`} />}
     </>
   );
 
   const Spacer = () => <div style={{ paddingTop: '24px' }} />;
-  const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
   return (
     <Modal
@@ -341,13 +323,6 @@ export const PublishToControllerModal = (props: IProps) => {
             Log in (if necessary) and follow the steps to complete the
             configuration.
           </Trans>
-          <br />
-          {!unsafeLinksSupported && (
-            <Trans>
-              <b>Note:</b> The following links may be blocked by your browser.
-              Copy and paste the external link manually.
-            </Trans>
-          )}
           <Spacer />
 
           <Flex>

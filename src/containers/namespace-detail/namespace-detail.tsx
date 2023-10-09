@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Checkbox, DropdownItem, Text } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, Navigate } from 'react-router-dom';
@@ -25,6 +24,7 @@ import {
   DeleteCollectionModal,
   DeleteModal,
   EmptyStateNoData,
+  ExternalLink,
   ImportModal,
   LoadingPageWithHeader,
   Main,
@@ -467,15 +467,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                     <b>Note:</b> Use this URL to configure ansible-galaxy to
                     upload collections to this namespace. More information on
                     ansible-galaxy configurations can be found{' '}
-                    <a
-                      href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
+                    <ExternalLink href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'>
                       here
-                    </a>
-                    <span>&nbsp;</span>
-                    <ExternalLinkAltIcon />.
+                    </ExternalLink>
+                    .
                   </Trans>
                 </div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>

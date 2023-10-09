@@ -3,36 +3,49 @@ import React, { ReactNode } from 'react';
 
 interface IProps {
   children?: ReactNode;
-  className?: string;
-  externalLinkIconStyle?: Record<string, string>;
+  'data-cy'?: string;
   href: string;
   title?: string;
+  variant?: 'default' | 'download' | 'menu' | 'nav';
 }
+
+// variants:
+// download - no external link icon (role download)
+// menu - top nav question mark menu (Customer Support, Training)
+// nav - left side nav (Documentation, Terms of Use)
+// default - everywhere else
 
 export const ExternalLink = ({
   children,
-  className,
-  externalLinkIconStyle,
+  'data-cy': dataCy,
   href,
   title,
+  variant = 'default',
 }: IProps) => {
-  if (!href || !title) {
+  if (!href || (!title && !children)) {
     return null;
   }
 
+  const iconStyle: Record<string, string> = {
+    nav: { position: 'absolute', right: '32px', top: '22px' },
+    download: { display: 'none' },
+  }[variant];
+  const className = {
+    nav: 'pf-c-nav__link',
+    menu: 'pf-c-dropdown__menu-item',
+  }[variant];
+
   return (
-    <>
-      <a
-        className={className}
-        href={href}
-        rel='noreferrer noopener'
-        target='_blank'
-      >
-        {title || children}
-      </a>{' '}
-      <small style={{ display: 'inline' }}>
-        <ExternalLinkAltIcon style={externalLinkIconStyle || {}} />
-      </small>
-    </>
+    <a
+      className={className}
+      data-cy={dataCy}
+      href={href}
+      rel='nofollow noopener noreferrer'
+      target='_blank'
+    >
+      {title}
+      {children}{' '}
+      <ExternalLinkAltIcon style={{ fontSize: 'smaller', ...iconStyle }} />
+    </a>
   );
 };
