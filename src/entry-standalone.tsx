@@ -8,6 +8,7 @@ import App from './loaders/standalone/loader';
 
 // Entrypoint for compiling the app to run in standalone mode
 
+const searchParams = new URLSearchParams(window.location.search);
 if (!window.location.pathname.startsWith(UI_BASE_PATH)) {
   // react-router v6 won't redirect to base path by default
   // also support old-galaxy /namespace/name/ urls
@@ -20,6 +21,16 @@ if (!window.location.pathname.startsWith(UI_BASE_PATH)) {
     : UI_BASE_PATH;
 
   window.history.pushState(null, null, newPath);
+} else if (searchParams.has('lang') || searchParams.has('pseudolocalization')) {
+  // delete lang after src/l10n uses it
+  searchParams.delete('lang');
+  searchParams.delete('pseudolocalization');
+  window.history.pushState(
+    null,
+    null,
+    window.location.pathname +
+      (searchParams.toString() ? '?' + searchParams.toString() : ''),
+  );
 }
 
 ReactDOM.render(
