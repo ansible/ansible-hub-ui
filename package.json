@@ -9,7 +9,7 @@
         "@lingui/react": "^4.5.0",
         "@patternfly/patternfly": "^4.224.5",
         "@patternfly/react-code-editor": "^4.82.120",
-        "@patternfly/react-core": "^4.277.0",
+        "@patternfly/react-core": "^4.278.0",
         "@patternfly/react-table": "^4.113.5",
         "@redhat-cloud-services/frontend-components": "^3.11.5",
         "@types/node": "^16.18.41",
