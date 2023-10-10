@@ -19,7 +19,7 @@ const manualLogin = (username, password) => {
 const manualLogout = () => {
   cy.intercept('GET', `${apiPrefix}_ui/v1/feature-flags/`).as('feature-flags');
 
-  cy.get('[aria-label="user-dropdown"] button').click();
+  cy.get('[data-cy="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
 
   cy.wait('@feature-flags');
