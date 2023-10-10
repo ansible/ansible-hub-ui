@@ -12,7 +12,6 @@ import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Logo from 'src/../static/images/logo_large.svg';
 import {
   ActiveUserAPI,
   FeatureFlagsType,
@@ -55,11 +54,9 @@ export const StandaloneLayout = ({
   let userName: string;
 
   if (user) {
-    if (user.first_name || user.last_name) {
-      userName = user.first_name + ' ' + user.last_name;
-    } else {
-      userName = user.username;
-    }
+    userName =
+      [user.first_name, user.last_name].filter(Boolean).join(' ') ||
+      user.username;
 
     userDropdownItems = [
       <DropdownItem isDisabled key='username'>
@@ -111,11 +108,7 @@ export const StandaloneLayout = ({
     aboutModal = (
       <AboutModalWindow
         isOpen={aboutModalVisible}
-        trademark=''
-        brandImageSrc={Logo}
         onClose={() => setAboutModalVisible(false)}
-        brandImageAlt={t`Galaxy Logo`}
-        productName={APPLICATION_NAME}
         user={user}
         userName={userName}
       />
