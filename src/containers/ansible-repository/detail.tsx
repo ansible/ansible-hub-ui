@@ -6,7 +6,12 @@ import {
   ansibleRepositoryEditAction,
   ansibleRepositorySyncAction,
 } from 'src/actions';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import {
+  AnsibleRemoteAPI,
+  AnsibleRemoteType,
+  AnsibleRepositoryAPI,
+  AnsibleRepositoryType,
+} from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
@@ -24,7 +29,9 @@ const tabs = [
   { id: 'repository-versions', name: msg`Versions` },
 ];
 
-const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
+const AnsibleRepositoryDetail = PageWithTabs<
+  AnsibleRepositoryType & { remote?: AnsibleRemoteType }
+>({
   breadcrumbs: ({ name, tab, params: { repositoryVersion, group } }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
@@ -89,10 +96,16 @@ const AnsibleRepositoryDetail = PageWithTabs<AnsibleRepositoryType>({
           )
             .then(({ data: { permissions } }) => permissions)
             .catch(err([])),
-        ]).then(([distroBasePath, my_permissions]) => ({
+          repository.remote
+            ? AnsibleRemoteAPI.get(parsePulpIDFromURL(repository.remote))
+                .then(({ data }) => data)
+                .catch(() => null)
+            : null,
+        ]).then(([distroBasePath, my_permissions, remote]) => ({
           ...repository,
           distroBasePath,
           my_permissions,
+          remote,
         }));
       });
   },

@@ -1,9 +1,9 @@
 import { Tooltip as PFTooltip } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
-  children: React.ReactNode;
-  content: string;
+  children: ReactNode;
+  content: string | ReactNode;
 }
 
 export const Tooltip = ({ content, children }: IProps) => (
