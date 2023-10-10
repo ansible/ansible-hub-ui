@@ -77,7 +77,11 @@ export const StandaloneLayout = ({
       <DropdownItem
         key='logout'
         aria-label={'logout'}
-        onClick={() => ActiveUserAPI.logout().then(() => setUser(null))}
+        onClick={() =>
+          ActiveUserAPI.logout()
+            .then(() => ActiveUserAPI.getUser().catch(() => null))
+            .then((user) => setUser(user))
+        }
       >
         {t`Logout`}
       </DropdownItem>,
