@@ -34,6 +34,12 @@ const defaultConfigs = [
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
+  {
+    name: 'UI_DOCS_URL',
+    default:
+      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+    scope: 'global',
+  },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time

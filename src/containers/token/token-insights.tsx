@@ -73,11 +73,7 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               <Trans>
                 Documentation on how to configure the{' '}
                 <code>ansible-galaxy</code> client can be found{' '}
-                <a
-                  href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
+                <a href={UI_DOCS_URL} target='_blank' rel='noreferrer'>
                   here
                 </a>
                 . Use the following parameters to configure the client.
