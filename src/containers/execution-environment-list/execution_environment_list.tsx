@@ -134,12 +134,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
     const pushImagesButton = (
       <Button
         variant='link'
-        onClick={() =>
-          window.open(
-            'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4/html-single/managing_containers_in_private_automation_hub/index',
-            '_blank',
-          )
-        }
+        onClick={() => window.open(UI_DOCS_URL, '_blank')}
         data-cy='push-images-button'
       >
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
