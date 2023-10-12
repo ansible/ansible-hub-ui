@@ -112,7 +112,7 @@ function standaloneMenu() {
         !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
-      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4',
+      url: UI_DOCS_URL,
       external: true,
       condition: ({ settings, user }) =>
         settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
