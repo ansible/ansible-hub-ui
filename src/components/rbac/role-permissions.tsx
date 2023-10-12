@@ -7,7 +7,7 @@ interface IProps {
   name: string;
 }
 
-export const GroupRolePermissions = ({ name }: IProps) => {
+export const RolePermissions = ({ name }: IProps) => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {

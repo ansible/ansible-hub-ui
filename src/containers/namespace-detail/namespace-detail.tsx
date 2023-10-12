@@ -59,6 +59,11 @@ import {
 } from 'src/utilities';
 import './namespace-detail.scss';
 
+interface UserType {
+  username: string;
+  object_roles: string[];
+}
+
 interface IState {
   alerts: AlertType[];
   canSign: boolean;
@@ -68,6 +73,7 @@ interface IState {
   deleteCollection: CollectionVersionSearch;
   filteredCount: number;
   group: GroupType;
+  user: UserType;
   isDeletionPending: boolean;
   isNamespacePending: boolean;
   isOpenNamespaceModal: boolean;
@@ -75,16 +81,20 @@ interface IState {
   isOpenWisdomModal: boolean;
   namespace: NamespaceType;
   params: {
-    group?: number;
+    group?: string;
     keywords?: string;
     namespace?: string;
     page?: number;
     page_size?: number;
+    repository_name?: string;
     sort?: string;
     tab?: string;
+    user?: string;
   };
   redirect: string;
   showControls: boolean;
+  showUserRemoveModal?: UserType;
+  showUserSelectWizard?: { user?: UserType; roles?: RoleType[] };
   showGroupRemoveModal?: GroupType;
   showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
   showImportModal: boolean;
@@ -96,7 +106,7 @@ interface IState {
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
-  nonAPIParams = ['tab', 'group'];
+  nonAPIParams = ['tab', 'group', 'user'];
 
   // namespace is a positional url argument, so don't include it in the
   // query params
@@ -107,11 +117,11 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',
       'page_size',
-    ]);
+    ]) as IState['params'];
 
-    params['namespace'] = props.routeParams.namespace;
-    if (props.routeParams.repo && !params['repository_name']) {
-      params['repository_name'] = props.routeParams.repo;
+    params.namespace = props.routeParams.namespace;
+    if (props.routeParams.repo && !params.repository_name) {
+      params.repository_name = props.routeParams.repo;
     }
 
     this.state = {
@@ -123,6 +133,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       deleteCollection: null,
       filteredCount: 0,
       group: null,
+      user: null,
       isDeletionPending: false,
       isNamespacePending: false,
       isOpenNamespaceModal: false,
@@ -154,44 +165,58 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const params = ParamHelper.parseParamString(this.props.location.search, [
       'page',
       'page_size',
-    ]);
+    ]) as IState['params'];
 
     if (prevProps.location.search !== this.props.location.search) {
-      params['namespace'] = this.props.routeParams.namespace;
+      params.namespace = this.props.routeParams.namespace;
 
       this.setState({
         params,
-        group: this.filterGroup(params['group'], this.state.namespace.groups),
+        group: this.filterGroup(params.group, this.state.namespace.groups),
+        user: this.filterUser(params.user, this.state.namespace.users),
       });
     }
 
     if (
       prevProps.routeParams.repo !== this.props.routeParams.repo &&
       this.props.routeParams.repo &&
-      (!params['repository_name'] ||
-        params['repository_name'] === prevProps.routeParams.repo)
+      (!params.repository_name ||
+        params.repository_name === prevProps.routeParams.repo)
     ) {
-      params['repository_name'] = this.props.routeParams.repo;
+      params.repository_name = this.props.routeParams.repo;
       this.setState({ params });
     }
   }
 
-  filterGroup(groupId, groups) {
-    return groupId ? groups.find(({ id }) => Number(groupId) === id) : null;
+  filterUser(username, users) {
+    return username
+      ? users.find((u) => u.name === username || u.username === username)
+      : null;
   }
 
-  private updateGroups({ groups, alertSuccess, alertFailure, stateUpdate }) {
+  filterGroup(name, groups) {
+    return name ? groups.find((g) => g.name === name) : null;
+  }
+
+  private updateRoles({
+    users = null,
+    groups = null,
+    alertSuccess,
+    alertFailure,
+    stateUpdate,
+  }) {
     const { name } = this.state.namespace;
     MyNamespaceAPI.update(name, {
       ...this.state.namespace,
-      groups,
+      users: users || this.state.namespace.users,
+      groups: groups || this.state.namespace.groups,
     })
       .then(() => {
         this.addAlert({
           title: alertSuccess,
           variant: 'success',
         });
-        this.load(); // ensure reload() sets groups: null to trigger loading spinner
+        this.load(); // ensure reload() sets users/groups: null to trigger loading spinner
       })
       .catch(({ response: { status, statusText } }) => {
         this.addAlert({
@@ -241,7 +266,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       { id: 'access', name: t`Access` },
     ].filter(Boolean);
 
-    const tab = params['tab'] || 'collections';
+    const tab = params.tab || 'collections';
+    const { user, group } = params;
 
     const breadcrumbs = [
       namespaceBreadcrumb(),
@@ -254,23 +280,19 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               })
             : null,
       },
-      tab === 'access'
+      tab === 'access' && (group || user)
         ? {
+            url: formatPath(
+              Paths.namespaceDetail,
+              { namespace: namespace.name },
+              { tab },
+            ),
             name: t`Access`,
-            url: params.group
-              ? formatPath(
-                  Paths.namespaceDetail,
-                  {
-                    namespace: namespace.name,
-                  },
-                  { tab: 'access' },
-                )
-              : null,
           }
         : null,
-      tab === 'access' && params.group
-        ? { name: t`Group ${params.group}` }
-        : null,
+      tab === 'access' && group ? { name: t`Group ${group}` } : null,
+      tab === 'access' && user ? { name: t`User ${user}` } : null,
+      tab === 'access' && !user && !group ? { name: t`Access` } : null,
     ].filter(Boolean);
 
     const repositoryUrl = getRepoURL('published');
@@ -294,6 +316,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       'sort',
       'tab',
       'group',
+      'user',
       'view_type',
     ];
 
@@ -304,17 +327,18 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         'galaxy.change_namespace',
       ) || hasPermission('galaxy.change_namespace');
 
-    // remove ?group (access tab) when switching tabs
+    // remove ?user/group (access tab) when switching tabs
     const tabParams = { ...params };
     delete tabParams.group;
+    delete tabParams.user;
 
-    const repository = params['repository_name'] || null;
+    const repository = params.repository_name || null;
     const deleteFromRepo = this.state.deleteAll
       ? null
       : deleteCollection?.repository?.name;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <ImportModal
           isOpen={showImportModal}
@@ -485,88 +509,154 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           ) : null}
           {tab === 'resources' ? this.renderResources(namespace) : null}
           {tab === 'access' ? (
-            <AccessTab
-              showGroupRemoveModal={this.state.showGroupRemoveModal}
-              showGroupSelectWizard={this.state.showGroupSelectWizard}
-              showRoleRemoveModal={this.state.showRoleRemoveModal}
-              showRoleSelectWizard={this.state.showRoleSelectWizard}
-              canEditOwners={canEditOwners}
-              group={this.state.group}
-              groups={namespace.groups}
-              name={namespace.name}
-              pulpObjectType='pulp_ansible/namespaces'
-              selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
-              updateProps={(prop) => {
-                this.setState(prop);
-              }}
-              addGroup={(group, roles) => {
-                const { groups, name } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: roles.map(({ name }) => name),
-                };
-                const newGroups = [...groups, newGroup];
+            <section className='body'>
+              <AccessTab
+                showUserRemoveModal={this.state.showUserRemoveModal}
+                showUserSelectWizard={this.state.showUserSelectWizard}
+                showGroupRemoveModal={this.state.showGroupRemoveModal}
+                showGroupSelectWizard={this.state.showGroupSelectWizard}
+                showRoleRemoveModal={this.state.showRoleRemoveModal}
+                showRoleSelectWizard={this.state.showRoleSelectWizard}
+                canEditOwners={canEditOwners}
+                group={this.state.group}
+                groups={namespace.groups}
+                user={this.state.user}
+                users={namespace.users}
+                name={namespace.name}
+                pulpObjectType='pulp_ansible/namespaces'
+                selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
+                updateProps={(prop) => {
+                  this.setState(prop);
+                }}
+                addUser={(user, roles) => {
+                  const { users, name } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: roles.map(({ name }) => name),
+                  };
+                  const newUsers = [...users, newUser];
 
-                this.updateGroups({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
-                  alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
-                  stateUpdate: { showGroupSelectWizard: null },
-                });
-              }}
-              removeGroup={(group) => {
-                const { name, groups } = namespace;
-                const newGroups = groups.filter((g) => g !== group);
-                this.updateGroups({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
-                  alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
-                  stateUpdate: { showGroupRemoveModal: null },
-                });
-              }}
-              addRole={(group, roles) => {
-                const { name, groups } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: [
-                    ...group.object_roles,
-                    ...roles.map(({ name }) => name),
-                  ],
-                };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
+                    alertFailure: t`User "${user.username}" could not be added to "${name}".`,
+                    stateUpdate: { showUserSelectWizard: null },
+                  });
+                }}
+                removeUser={(user) => {
+                  const { name, users } = namespace;
+                  const newUsers = users.filter((u) => u !== user);
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
+                    alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
+                    stateUpdate: { showUserRemoveModal: null },
+                  });
+                }}
+                addGroup={(group, roles) => {
+                  const { groups, name } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: roles.map(({ name }) => name),
+                  };
+                  const newGroups = [...groups, newGroup];
 
-                this.updateGroups({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleSelectWizard: null },
-                });
-              }}
-              removeRole={(role, group) => {
-                const { name, groups } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: group.object_roles.filter(
-                    (name) => name !== role,
-                  ),
-                };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
+                    alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
+                    stateUpdate: { showGroupSelectWizard: null },
+                  });
+                }}
+                removeGroup={(group) => {
+                  const { name, groups } = namespace;
+                  const newGroups = groups.filter((g) => g !== group);
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
+                    alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
+                    stateUpdate: { showGroupRemoveModal: null },
+                  });
+                }}
+                addUserRole={(user, roles) => {
+                  const { name, users } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: [
+                      ...user.object_roles,
+                      ...roles.map(({ name }) => name),
+                    ],
+                  };
+                  const newUsers = users.map((u) => (u === user ? newUser : u));
 
-                this.updateGroups({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleRemoveModal: null },
-                });
-              }}
-              urlPrefix={formatPath(Paths.namespaceDetail, {
-                namespace: namespace.name,
-              })}
-            />
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+                    alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleSelectWizard: null },
+                  });
+                }}
+                removeUserRole={(role, user) => {
+                  const { name, users } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: user.object_roles.filter(
+                      (name) => name !== role,
+                    ),
+                  };
+                  const newUsers = users.map((u) => (u === user ? newUser : u));
+
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+                    alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleRemoveModal: null },
+                  });
+                }}
+                addRole={(group, roles) => {
+                  const { name, groups } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: [
+                      ...group.object_roles,
+                      ...roles.map(({ name }) => name),
+                    ],
+                  };
+                  const newGroups = groups.map((g) =>
+                    g === group ? newGroup : g,
+                  );
+
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                    alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleSelectWizard: null },
+                  });
+                }}
+                removeRole={(role, group) => {
+                  const { name, groups } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: group.object_roles.filter(
+                      (name) => name !== role,
+                    ),
+                  };
+                  const newGroups = groups.map((g) =>
+                    g === group ? newGroup : g,
+                  );
+
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                    alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleRemoveModal: null },
+                  });
+                }}
+                urlPrefix={formatPath(Paths.namespaceDetail, {
+                  namespace: namespace.name,
+                })}
+              />
+            </section>
           ) : null}
         </Main>
         {canSign && (
@@ -577,7 +667,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             onCancel={() => this.setState({ isOpenSignModal: false })}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -753,11 +843,18 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         ]) => {
           this.setState({
             canSign: canSignNamespace(this.context, myNamespace?.data),
-            group: this.filterGroup(
-              this.state.params['group'],
-              namespace['groups'],
-            ),
-            namespace,
+            group: this.filterGroup(this.state.params.group, namespace.groups),
+            user: this.filterUser(this.state.params.user, namespace.users),
+            namespace: {
+              ...namespace,
+              // transform to use username, don't break when missing
+              users: namespace.users
+                ? namespace.users.map(({ name, object_roles }) => ({
+                    username: name,
+                    object_roles,
+                  }))
+                : [],
+            },
             showControls: !!myNamespace,
             unfilteredCount,
           });
@@ -777,11 +874,11 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
-    const repository = this.state.params['repository_name'] || null;
+    const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
       <DropdownItem
-        key='1'
+        key='edit'
         component={
           <Link
             to={formatPath(Paths.editNamespace, {
@@ -792,31 +889,30 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           </Link>
         }
       />,
-      hasPermission('galaxy.delete_namespace') && (
-        <React.Fragment key={'2'}>
-          {unfilteredCount === 0 ? (
-            <DropdownItem
-              onClick={() => this.setState({ isOpenNamespaceModal: true })}
-            >{t`Delete namespace`}</DropdownItem>
-          ) : (
-            <Tooltip
-              isVisible={false}
-              content={
-                <Trans>
-                  Cannot delete namespace until <br />
-                  collections&apos; dependencies have <br />
-                  been deleted
-                </Trans>
-              }
-              position='left'
-            >
-              <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
-            </Tooltip>
-          )}
-        </React.Fragment>
-      ),
+      hasPermission('galaxy.delete_namespace') &&
+        (unfilteredCount === 0 ? (
+          <DropdownItem
+            key='delete'
+            onClick={() => this.setState({ isOpenNamespaceModal: true })}
+          >{t`Delete namespace`}</DropdownItem>
+        ) : (
+          <Tooltip
+            key='delete'
+            isVisible={false}
+            content={
+              <Trans>
+                Cannot delete namespace until <br />
+                collections&apos; dependencies have <br />
+                been deleted
+              </Trans>
+            }
+            position='left'
+          >
+            <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
+          </Tooltip>
+        )),
       <DropdownItem
-        key='3'
+        key='imports'
         component={
           <Link
             to={formatPath(

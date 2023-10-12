@@ -124,13 +124,13 @@ function testAccessTab({
     .parent('.pf-c-alert')
     .find('button')
     .click();
-  cy.get('tr[data-cy="AccessTab-row-access_group"]');
+  cy.get('tr[data-cy="AccessTab-row-group-access_group"]');
 
   // group list view, try modal, open group
   cy.get('button').contains('Select a group').click();
   cy.get('.pf-c-wizard__footer-cancel').click();
 
-  cy.get('tr[data-cy="AccessTab-row-access_group"] a').click();
+  cy.get('tr[data-cy="AccessTab-row-group-access_group"] a').click();
 
   // role list view, use modal
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
@@ -179,7 +179,7 @@ function testAccessTab({
 
   // list view, delete, see empty
   cy.get(
-    'tr[data-cy="AccessTab-row-access_group"] [data-cy=kebab-toggle] button',
+    'tr[data-cy="AccessTab-row-group-access_group"] [data-cy=kebab-toggle] button',
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
   cy.get('.pf-c-modal-box__body b').contains('access_group');

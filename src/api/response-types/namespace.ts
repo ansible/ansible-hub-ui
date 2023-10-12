@@ -17,6 +17,7 @@ export class NamespaceListType {
 
 export class NamespaceType extends NamespaceListType {
   groups: GroupObjectPermissionType[];
+  users: { username: string; object_roles: string[] }[];
   resources: string;
   owners: string[];
   links: NamespaceLinkType[];

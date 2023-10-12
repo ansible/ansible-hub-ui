@@ -6,11 +6,17 @@ import {
   GroupAPI,
   GroupType,
   RoleType,
+  UserAPI,
 } from 'src/api';
 import { AccessTab } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canEditAnsibleRepositoryAccess } from 'src/permissions';
-import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
+import { assignRoles, errorMessage, parsePulpIDFromURL } from 'src/utilities';
+
+interface UserType {
+  username: string;
+  object_roles: string[];
+}
 
 interface TabProps {
   item: AnsibleRepositoryType;
@@ -36,8 +42,16 @@ export const RepositoryAccessTab = ({
   const id = item?.pulp_href && parsePulpIDFromURL(item.pulp_href);
   const [name, setName] = useState<string>(item?.name);
   const [groups, setGroups] = useState<GroupType[]>(null); // loading
+  const [users, setUsers] = useState<UserType[]>(null); // loading
   const [canEditOwners, setCanEditOwners] = useState<boolean>(false);
   const [selectedGroup, setSelectedGroup] = useState<GroupType>(null);
+  const [selectedUser, setSelectedUser] = useState<UserType>(null);
+  const [showUserRemoveModal, setShowUserRemoveModal] =
+    useState<UserType>(null);
+  const [showUserSelectWizard, setShowUserSelectWizard] = useState<{
+    user?: UserType;
+    roles?: RoleType[];
+  }>(null);
   const [showGroupRemoveModal, setShowGroupRemoveModal] =
     useState<GroupType>(null);
   const [showGroupSelectWizard, setShowGroupSelectWizard] = useState<{
@@ -50,7 +64,9 @@ export const RepositoryAccessTab = ({
   }>(null);
 
   const query = () => {
+    setUsers(null);
     setGroups(null);
+
     AnsibleRepositoryAPI.myPermissions(id)
       .then(({ data: { permissions } }) => {
         setCanEditOwners(
@@ -62,39 +78,28 @@ export const RepositoryAccessTab = ({
             featureFlags,
           }),
         );
-        AnsibleRepositoryAPI.listRoles(id)
+        // TODO handle pagination
+        AnsibleRepositoryAPI.listRoles(id, { page_size: 100 })
           .then(({ data: { roles } }) => {
-            const groupRoles = [];
-            for (const { groups, role } of roles) {
-              for (const name of groups) {
-                const groupIndex = groupRoles.findIndex((g) => g.name === name);
-                if (groupIndex == -1) {
-                  groupRoles.push({ name, object_roles: [role] });
-                } else {
-                  groupRoles[groupIndex].object_roles.push(role);
-                }
-              }
-            }
+            const { users, groups } = assignRoles(roles);
 
             setName(name);
-            setGroups(groupRoles);
+            setUsers(users as UserType[]);
+            setGroups(groups as GroupType[]);
           })
           .catch(() => {
+            setUsers([]);
             setGroups([]);
           });
       })
       .catch(() => {
+        setUsers([]);
         setGroups([]);
         setCanEditOwners(false);
       });
   };
 
-  const updateGroupRoles = ({
-    roles,
-    alertSuccess,
-    alertFailure,
-    stateUpdate,
-  }) => {
+  const updateRoles = ({ roles, alertSuccess, alertFailure, stateUpdate }) => {
     Promise.all(roles)
       .then(() => {
         addAlert({
@@ -115,6 +120,36 @@ export const RepositoryAccessTab = ({
       });
   };
 
+  const addUser = (user, roles) => {
+    const rolePromises = roles.map((role) =>
+      AnsibleRepositoryAPI.addRole(id, {
+        role: role.name,
+        users: [user.username],
+      }),
+    );
+    updateRoles({
+      roles: rolePromises,
+      alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
+      alertFailure: t`User "${user.username}" could not be added to "${name}".`,
+      stateUpdate: { showUserSelectWizard: null },
+    });
+  };
+
+  const removeUser = (user) => {
+    const roles = user.object_roles.map((role) =>
+      AnsibleRepositoryAPI.removeRole(id, {
+        role,
+        users: [user.username],
+      }),
+    );
+    updateRoles({
+      roles,
+      alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
+      alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
+      stateUpdate: { showUserRemoveModal: null },
+    });
+  };
+
   const addGroup = (group, roles) => {
     const rolePromises = roles.map((role) =>
       AnsibleRepositoryAPI.addRole(id, {
@@ -122,7 +157,7 @@ export const RepositoryAccessTab = ({
         groups: [group.name],
       }),
     );
-    updateGroupRoles({
+    updateRoles({
       roles: rolePromises,
       alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
       alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
@@ -137,13 +172,42 @@ export const RepositoryAccessTab = ({
         groups: [group.name],
       }),
     );
-    updateGroupRoles({
+    updateRoles({
       roles,
       alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
       alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
       stateUpdate: { showGroupRemoveModal: null },
     });
   };
+
+  const addUserRole = (user, roles) => {
+    const rolePromises = roles.map((role) =>
+      AnsibleRepositoryAPI.addRole(id, {
+        role: role.name,
+        users: [user.username],
+      }),
+    );
+    updateRoles({
+      roles: rolePromises,
+      alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+      alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+      stateUpdate: { showRoleSelectWizard: null },
+    });
+  };
+
+  const removeUserRole = (role, user) => {
+    const removedRole = AnsibleRepositoryAPI.removeRole(id, {
+      role,
+      users: [user.username],
+    });
+    updateRoles({
+      roles: [removedRole],
+      alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+      alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+      stateUpdate: { showRoleRemoveModal: null },
+    });
+  };
+
   const addRole = (group, roles) => {
     const rolePromises = roles.map((role) =>
       AnsibleRepositoryAPI.addRole(id, {
@@ -151,19 +215,20 @@ export const RepositoryAccessTab = ({
         groups: [group.name],
       }),
     );
-    updateGroupRoles({
+    updateRoles({
       roles: rolePromises,
       alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
       alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
       stateUpdate: { showRoleSelectWizard: null },
     });
   };
+
   const removeRole = (role, group) => {
     const removedRole = AnsibleRepositoryAPI.removeRole(id, {
       role,
       groups: [group.name],
     });
-    updateGroupRoles({
+    updateRoles({
       roles: [removedRole],
       alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
       alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
@@ -174,6 +239,12 @@ export const RepositoryAccessTab = ({
   const updateProps = (props) => {
     Object.entries(props).forEach(([k, v]) => {
       switch (k) {
+        case 'showUserRemoveModal':
+          setShowUserRemoveModal(v as UserType);
+          break;
+        case 'showUserSelectWizard':
+          setShowUserSelectWizard(v as { user?: UserType; roles?: RoleType[] });
+          break;
         case 'showGroupRemoveModal':
           setShowGroupRemoveModal(v as GroupType);
           break;
@@ -195,6 +266,22 @@ export const RepositoryAccessTab = ({
   };
 
   useEffect(query, [item.pulp_href]);
+
+  useEffect(() => {
+    if (!users) {
+      return;
+    }
+
+    if (!params?.user) {
+      setSelectedUser(null);
+      return;
+    }
+
+    UserAPI.list({ username: params.user }).then(({ data: { data } }) => {
+      setSelectedUser(users.find((u) => u.username === data[0].username));
+    });
+  }, [params?.user, users]);
+
   useEffect(() => {
     if (!groups) {
       return;
@@ -214,6 +301,8 @@ export const RepositoryAccessTab = ({
     <AccessTab
       addGroup={addGroup}
       addRole={addRole}
+      addUser={addUser}
+      addUserRole={addUserRole}
       canEditOwners={canEditOwners}
       group={selectedGroup}
       groups={groups}
@@ -221,12 +310,18 @@ export const RepositoryAccessTab = ({
       pulpObjectType='repositories/ansible/ansible'
       removeGroup={removeGroup}
       removeRole={removeRole}
+      removeUser={removeUser}
+      removeUserRole={removeUserRole}
       selectRolesMessage={t`The selected roles will be added to this specific Ansible repository.`}
       showGroupRemoveModal={showGroupRemoveModal}
       showGroupSelectWizard={showGroupSelectWizard}
       showRoleRemoveModal={showRoleRemoveModal}
       showRoleSelectWizard={showRoleSelectWizard}
+      showUserRemoveModal={showUserRemoveModal}
+      showUserSelectWizard={showUserSelectWizard}
       updateProps={updateProps}
+      user={selectedUser}
+      users={users}
       urlPrefix={formatPath(Paths.ansibleRepositoryDetail, {
         name,
       })}

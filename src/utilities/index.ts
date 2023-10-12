@@ -1,3 +1,4 @@
+export { assignRoles } from './assign-roles';
 export { canSignEE, canSignNamespace } from './can-sign';
 export { chipGroupProps } from './chip-group-props';
 export { convertContentSummaryCounts } from './content-summary';
