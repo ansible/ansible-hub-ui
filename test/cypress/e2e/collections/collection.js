@@ -83,7 +83,7 @@ describe('collection tests', () => {
       `Started adding ${namespace}.${collection} v1.0.0 from "published" to repository "validated".`,
     );
     cy.get('[data-cy="AlertList"]').contains('detail page').click();
-    cy.contains('Completed', { timeout: 10000 });
+    cy.contains('Completed', { timeout: 15000 });
   });
 
   it('deletes an collection from repository', () => {

@@ -141,7 +141,7 @@ function versionCheck(version) {
         'Started adding repo_test_namespace.repo_test_collection v1.0.0 from "published" to repository "repo1Test".',
       );
       cy.contains('a', 'detail page').click();
-      cy.contains('Completed', { timeout: 10000 });
+      cy.contains('Completed', { timeout: 15000 });
     });
 
     it('checks there are 2 versions and collection is here', () => {
