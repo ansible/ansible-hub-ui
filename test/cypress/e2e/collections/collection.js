@@ -82,8 +82,9 @@ describe('collection tests', () => {
     cy.get('[data-cy="AlertList"]').contains(
       `Started adding ${namespace}.${collection} v1.0.0 from "published" to repository "validated".`,
     );
+    cy.galaxykit('task wait all');
     cy.get('[data-cy="AlertList"]').contains('detail page').click();
-    cy.contains('Completed', { timeout: 10000 });
+    cy.contains('Completed');
   });
 
   it('deletes an collection from repository', () => {
