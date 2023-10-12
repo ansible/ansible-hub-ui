@@ -131,160 +131,162 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
       this.state;
 
     return (
-      <AccessTab
-        canEditOwners={canEditOwners}
-        group={selectedGroup}
-        groups={groups}
-        name={name}
-        pulpObjectType='pulp_container/namespaces'
-        selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
-        showGroupRemoveModal={this.state.showGroupRemoveModal}
-        showGroupSelectWizard={this.state.showGroupSelectWizard}
-        showRoleRemoveModal={this.state.showRoleRemoveModal}
-        showRoleSelectWizard={this.state.showRoleSelectWizard}
-        showUserRemoveModal={this.state.showUserRemoveModal}
-        showUserSelectWizard={this.state.showUserSelectWizard}
-        updateProps={(prop) => {
-          this.setState(prop);
-        }}
-        urlPrefix={formatEEPath(Paths.executionEnvironmentDetailAccess, {
-          container: name,
-        })}
-        user={selectedUser}
-        users={users}
-        addUser={(user, roles) => {
-          const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                users: [user.username],
-              },
-            ),
-          );
-          this.updateRoles({
-            roles: rolePromises,
-            alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
-            alertFailure: t`User "${user.username}" could not be added to "${name}".`,
-            stateUpdate: { showUserSelectWizard: null },
-          });
-        }}
-        removeUser={(user) => {
-          const roles = user.object_roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.removeRole(
+      <section className='body'>
+        <AccessTab
+          canEditOwners={canEditOwners}
+          group={selectedGroup}
+          groups={groups}
+          name={name}
+          pulpObjectType='pulp_container/namespaces'
+          selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
+          showGroupRemoveModal={this.state.showGroupRemoveModal}
+          showGroupSelectWizard={this.state.showGroupSelectWizard}
+          showRoleRemoveModal={this.state.showRoleRemoveModal}
+          showRoleSelectWizard={this.state.showRoleSelectWizard}
+          showUserRemoveModal={this.state.showUserRemoveModal}
+          showUserSelectWizard={this.state.showUserSelectWizard}
+          updateProps={(prop) => {
+            this.setState(prop);
+          }}
+          urlPrefix={formatEEPath(Paths.executionEnvironmentDetailAccess, {
+            container: name,
+          })}
+          user={selectedUser}
+          users={users}
+          addUser={(user, roles) => {
+            const rolePromises = roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.addRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role: role.name,
+                  users: [user.username],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles: rolePromises,
+              alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
+              alertFailure: t`User "${user.username}" could not be added to "${name}".`,
+              stateUpdate: { showUserSelectWizard: null },
+            });
+          }}
+          removeUser={(user) => {
+            const roles = user.object_roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.removeRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role,
+                  users: [user.username],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles,
+              alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
+              alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
+              stateUpdate: { showUserRemoveModal: null },
+            });
+          }}
+          addGroup={(group, roles) => {
+            const rolePromises = roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.addRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role: role.name,
+                  groups: [group.name],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles: rolePromises,
+              alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
+              alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
+              stateUpdate: { showGroupSelectWizard: null },
+            });
+          }}
+          removeGroup={(group) => {
+            const roles = group.object_roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.removeRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role,
+                  groups: [group.name],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles,
+              alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
+              alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
+              stateUpdate: { showGroupRemoveModal: null },
+            });
+          }}
+          addUserRole={(user, roles) => {
+            const rolePromises = roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.addRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role: role.name,
+                  users: [user.username],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles: rolePromises,
+              alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+              alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+              stateUpdate: { showRoleSelectWizard: null },
+            });
+          }}
+          removeUserRole={(role, user) => {
+            const removedRole = ExecutionEnvironmentNamespaceAPI.removeRole(
               this.props.containerRepository.namespace.id,
               {
                 role,
                 users: [user.username],
               },
-            ),
-          );
-          this.updateRoles({
-            roles,
-            alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
-            alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
-            stateUpdate: { showUserRemoveModal: null },
-          });
-        }}
-        addGroup={(group, roles) => {
-          const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                groups: [group.name],
-              },
-            ),
-          );
-          this.updateRoles({
-            roles: rolePromises,
-            alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
-            alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
-            stateUpdate: { showGroupSelectWizard: null },
-          });
-        }}
-        removeGroup={(group) => {
-          const roles = group.object_roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.removeRole(
+            );
+            this.updateRoles({
+              roles: [removedRole],
+              alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+              alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+              stateUpdate: { showRoleRemoveModal: null },
+            });
+          }}
+          addRole={(group, roles) => {
+            const rolePromises = roles.map((role) =>
+              ExecutionEnvironmentNamespaceAPI.addRole(
+                this.props.containerRepository.namespace.id,
+                {
+                  role: role.name,
+                  groups: [group.name],
+                },
+              ),
+            );
+            this.updateRoles({
+              roles: rolePromises,
+              alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+              alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+              stateUpdate: { showRoleSelectWizard: null },
+            });
+          }}
+          removeRole={(role, group) => {
+            const removedRole = ExecutionEnvironmentNamespaceAPI.removeRole(
               this.props.containerRepository.namespace.id,
               {
                 role,
                 groups: [group.name],
               },
-            ),
-          );
-          this.updateRoles({
-            roles,
-            alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
-            alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
-            stateUpdate: { showGroupRemoveModal: null },
-          });
-        }}
-        addUserRole={(user, roles) => {
-          const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                users: [user.username],
-              },
-            ),
-          );
-          this.updateRoles({
-            roles: rolePromises,
-            alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
-            alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
-            stateUpdate: { showRoleSelectWizard: null },
-          });
-        }}
-        removeUserRole={(role, user) => {
-          const removedRole = ExecutionEnvironmentNamespaceAPI.removeRole(
-            this.props.containerRepository.namespace.id,
-            {
-              role,
-              users: [user.username],
-            },
-          );
-          this.updateRoles({
-            roles: [removedRole],
-            alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
-            alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
-            stateUpdate: { showRoleRemoveModal: null },
-          });
-        }}
-        addRole={(group, roles) => {
-          const rolePromises = roles.map((role) =>
-            ExecutionEnvironmentNamespaceAPI.addRole(
-              this.props.containerRepository.namespace.id,
-              {
-                role: role.name,
-                groups: [group.name],
-              },
-            ),
-          );
-          this.updateRoles({
-            roles: rolePromises,
-            alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-            alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-            stateUpdate: { showRoleSelectWizard: null },
-          });
-        }}
-        removeRole={(role, group) => {
-          const removedRole = ExecutionEnvironmentNamespaceAPI.removeRole(
-            this.props.containerRepository.namespace.id,
-            {
-              role,
-              groups: [group.name],
-            },
-          );
-          this.updateRoles({
-            roles: [removedRole],
-            alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-            alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-            stateUpdate: { showRoleRemoveModal: null },
-          });
-        }}
-      />
+            );
+            this.updateRoles({
+              roles: [removedRole],
+              alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+              alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+              stateUpdate: { showRoleRemoveModal: null },
+            });
+          }}
+        />
+      </section>
     );
   }
 

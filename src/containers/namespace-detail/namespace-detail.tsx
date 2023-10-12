@@ -189,7 +189,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   filterUser(username, users) {
-    return username ? users.find((u) => u.username === username) : null;
+    return username
+      ? users.find((u) => u.name === username || u.username === username)
+      : null;
   }
 
   filterGroup(name, groups) {
@@ -507,152 +509,154 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           ) : null}
           {tab === 'resources' ? this.renderResources(namespace) : null}
           {tab === 'access' ? (
-            <AccessTab
-              showUserRemoveModal={this.state.showUserRemoveModal}
-              showUserSelectWizard={this.state.showUserSelectWizard}
-              showGroupRemoveModal={this.state.showGroupRemoveModal}
-              showGroupSelectWizard={this.state.showGroupSelectWizard}
-              showRoleRemoveModal={this.state.showRoleRemoveModal}
-              showRoleSelectWizard={this.state.showRoleSelectWizard}
-              canEditOwners={canEditOwners}
-              group={this.state.group}
-              groups={namespace.groups}
-              user={this.state.user}
-              users={namespace.users}
-              name={namespace.name}
-              pulpObjectType='pulp_ansible/namespaces'
-              selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
-              updateProps={(prop) => {
-                this.setState(prop);
-              }}
-              addUser={(user, roles) => {
-                const { users, name } = namespace;
-                const newUser = {
-                  ...user,
-                  object_roles: roles.map(({ name }) => name),
-                };
-                const newUsers = [...users, newUser];
+            <section className='body'>
+              <AccessTab
+                showUserRemoveModal={this.state.showUserRemoveModal}
+                showUserSelectWizard={this.state.showUserSelectWizard}
+                showGroupRemoveModal={this.state.showGroupRemoveModal}
+                showGroupSelectWizard={this.state.showGroupSelectWizard}
+                showRoleRemoveModal={this.state.showRoleRemoveModal}
+                showRoleSelectWizard={this.state.showRoleSelectWizard}
+                canEditOwners={canEditOwners}
+                group={this.state.group}
+                groups={namespace.groups}
+                user={this.state.user}
+                users={namespace.users}
+                name={namespace.name}
+                pulpObjectType='pulp_ansible/namespaces'
+                selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
+                updateProps={(prop) => {
+                  this.setState(prop);
+                }}
+                addUser={(user, roles) => {
+                  const { users, name } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: roles.map(({ name }) => name),
+                  };
+                  const newUsers = [...users, newUser];
 
-                this.updateRoles({
-                  users: newUsers,
-                  alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
-                  alertFailure: t`User "${user.username}" could not be added to "${name}".`,
-                  stateUpdate: { showUserSelectWizard: null },
-                });
-              }}
-              removeUser={(user) => {
-                const { name, users } = namespace;
-                const newUsers = users.filter((u) => u !== user);
-                this.updateRoles({
-                  users: newUsers,
-                  alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
-                  alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
-                  stateUpdate: { showUserRemoveModal: null },
-                });
-              }}
-              addGroup={(group, roles) => {
-                const { groups, name } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: roles.map(({ name }) => name),
-                };
-                const newGroups = [...groups, newGroup];
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" has been successfully added to "${name}".`,
+                    alertFailure: t`User "${user.username}" could not be added to "${name}".`,
+                    stateUpdate: { showUserSelectWizard: null },
+                  });
+                }}
+                removeUser={(user) => {
+                  const { name, users } = namespace;
+                  const newUsers = users.filter((u) => u !== user);
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" has been successfully removed from "${name}".`,
+                    alertFailure: t`User "${user.username}" could not be removed from "${name}".`,
+                    stateUpdate: { showUserRemoveModal: null },
+                  });
+                }}
+                addGroup={(group, roles) => {
+                  const { groups, name } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: roles.map(({ name }) => name),
+                  };
+                  const newGroups = [...groups, newGroup];
 
-                this.updateRoles({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
-                  alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
-                  stateUpdate: { showGroupSelectWizard: null },
-                });
-              }}
-              removeGroup={(group) => {
-                const { name, groups } = namespace;
-                const newGroups = groups.filter((g) => g !== group);
-                this.updateRoles({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
-                  alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
-                  stateUpdate: { showGroupRemoveModal: null },
-                });
-              }}
-              addUserRole={(user, roles) => {
-                const { name, users } = namespace;
-                const newUser = {
-                  ...user,
-                  object_roles: [
-                    ...user.object_roles,
-                    ...roles.map(({ name }) => name),
-                  ],
-                };
-                const newUsers = users.map((u) => (u === user ? newUser : u));
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
+                    alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
+                    stateUpdate: { showGroupSelectWizard: null },
+                  });
+                }}
+                removeGroup={(group) => {
+                  const { name, groups } = namespace;
+                  const newGroups = groups.filter((g) => g !== group);
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
+                    alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
+                    stateUpdate: { showGroupRemoveModal: null },
+                  });
+                }}
+                addUserRole={(user, roles) => {
+                  const { name, users } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: [
+                      ...user.object_roles,
+                      ...roles.map(({ name }) => name),
+                    ],
+                  };
+                  const newUsers = users.map((u) => (u === user ? newUser : u));
 
-                this.updateRoles({
-                  users: newUsers,
-                  alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
-                  alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleSelectWizard: null },
-                });
-              }}
-              removeUserRole={(role, user) => {
-                const { name, users } = namespace;
-                const newUser = {
-                  ...user,
-                  object_roles: user.object_roles.filter(
-                    (name) => name !== role,
-                  ),
-                };
-                const newUsers = users.map((u) => (u === user ? newUser : u));
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+                    alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleSelectWizard: null },
+                  });
+                }}
+                removeUserRole={(role, user) => {
+                  const { name, users } = namespace;
+                  const newUser = {
+                    ...user,
+                    object_roles: user.object_roles.filter(
+                      (name) => name !== role,
+                    ),
+                  };
+                  const newUsers = users.map((u) => (u === user ? newUser : u));
 
-                this.updateRoles({
-                  users: newUsers,
-                  alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
-                  alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleRemoveModal: null },
-                });
-              }}
-              addRole={(group, roles) => {
-                const { name, groups } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: [
-                    ...group.object_roles,
-                    ...roles.map(({ name }) => name),
-                  ],
-                };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                  this.updateRoles({
+                    users: newUsers,
+                    alertSuccess: t`User "${user.username}" roles successfully updated in "${name}".`,
+                    alertFailure: t`User "${user.username}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleRemoveModal: null },
+                  });
+                }}
+                addRole={(group, roles) => {
+                  const { name, groups } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: [
+                      ...group.object_roles,
+                      ...roles.map(({ name }) => name),
+                    ],
+                  };
+                  const newGroups = groups.map((g) =>
+                    g === group ? newGroup : g,
+                  );
 
-                this.updateRoles({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleSelectWizard: null },
-                });
-              }}
-              removeRole={(role, group) => {
-                const { name, groups } = namespace;
-                const newGroup = {
-                  ...group,
-                  object_roles: group.object_roles.filter(
-                    (name) => name !== role,
-                  ),
-                };
-                const newGroups = groups.map((g) =>
-                  g === group ? newGroup : g,
-                );
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                    alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleSelectWizard: null },
+                  });
+                }}
+                removeRole={(role, group) => {
+                  const { name, groups } = namespace;
+                  const newGroup = {
+                    ...group,
+                    object_roles: group.object_roles.filter(
+                      (name) => name !== role,
+                    ),
+                  };
+                  const newGroups = groups.map((g) =>
+                    g === group ? newGroup : g,
+                  );
 
-                this.updateRoles({
-                  groups: newGroups,
-                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-                  stateUpdate: { showRoleRemoveModal: null },
-                });
-              }}
-              urlPrefix={formatPath(Paths.namespaceDetail, {
-                namespace: namespace.name,
-              })}
-            />
+                  this.updateRoles({
+                    groups: newGroups,
+                    alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                    alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                    stateUpdate: { showRoleRemoveModal: null },
+                  });
+                }}
+                urlPrefix={formatPath(Paths.namespaceDetail, {
+                  namespace: namespace.name,
+                })}
+              />
+            </section>
           ) : null}
         </Main>
         {canSign && (
