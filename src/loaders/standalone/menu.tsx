@@ -120,7 +120,7 @@ function standaloneMenu() {
         !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
-      url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+      url: UI_DOCS_URL,
       external: true,
       condition: ({ featureFlags, settings, user }) =>
         !featureFlags.ai_deny_index &&

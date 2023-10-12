@@ -14,6 +14,7 @@ declare var PULP_API_BASE_PATH;
 declare var UI_BASE_PATH;
 declare var UI_COMMIT_HASH;
 declare var UI_EXTERNAL_LOGIN_URI;
+declare var UI_DOCS_URL;
 
 // when DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE only
 interface Window {
