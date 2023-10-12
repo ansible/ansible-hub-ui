@@ -140,8 +140,9 @@ function versionCheck(version) {
       cy.contains(
         'Started adding repo_test_namespace.repo_test_collection v1.0.0 from "published" to repository "repo1Test".',
       );
+      cy.galaxykit('task wait all');
       cy.contains('a', 'detail page').click();
-      cy.contains('Completed', { timeout: 10000 });
+      cy.contains('Completed');
     });
 
     it('checks there are 2 versions and collection is here', () => {
