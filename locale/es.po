@@ -5412,6 +5412,10 @@ msgstr "Página web"
 msgid "YAML requirements"
 msgstr "Requisitos de YAML"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+msgstr ""
+
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/containers/ansible-repository/list.tsx
