@@ -85,6 +85,14 @@ msgstr "{count, plural, one {Role} other {Roles}}"
 msgid "{count} more"
 msgstr "{count} más"
 
+#: src/components/shared/language-switcher.tsx
+msgid "{currentLanguage} (browser default)"
+msgstr ""
+
+#: src/components/shared/language-switcher.tsx
+msgid "{currentLanguage} (current)"
+msgstr ""
+
 #: src/components/shared/download-count.tsx
 msgid "{downloadCount} Downloads"
 msgstr ""
@@ -246,6 +254,7 @@ msgstr "Acerca de"
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Access"
 msgstr "Acceso"
 
@@ -268,6 +277,7 @@ msgstr "Actividad"
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
+#: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/containers/ansible-remote/edit.tsx
@@ -658,6 +668,7 @@ msgstr "Certificado de CA"
 #: src/components/import-modal/import-modal.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/group-modal.tsx
@@ -1679,6 +1690,10 @@ msgstr "Distribución"
 msgid "Distributions"
 msgstr "Distribuciones"
 
+#: src/loaders/standalone/layout.tsx
+msgid "Docs dropdown"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx
 msgid "Docs site"
 msgstr "Sitio de Docs"
@@ -2053,6 +2068,10 @@ msgstr "Error al guardar el registro."
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
+#: src/components/rbac/access-tab.tsx
+msgid "Except for members of groups below."
+msgstr ""
+
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 msgid "Execution Environment"
 msgstr "Entorno de ejecución"
@@ -2329,7 +2348,11 @@ msgstr "Registros de seguimiento"
 msgid "Force a sync to happen."
 msgstr ""
 
-#: src/loaders/standalone/layout.tsx
+#: src/components/about-modal/about-modal.tsx
+msgid "Galaxy Importer"
+msgstr ""
+
+#: src/components/about-modal/about-modal.tsx
 msgid "Galaxy Logo"
 msgstr "Logotipo de Galaxy"
 
@@ -2424,12 +2447,13 @@ msgstr "No se pudo eliminar el grupo \"{group}\"."
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "El grupo \"{group}\" se eliminó correctamente."
 
-#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/components/rbac/access-tab.tsx
 msgid "Group {0}"
 msgstr "Grupo {0}"
 
 #: src/containers/ansible-remote/detail.tsx
 #: src/containers/ansible-repository/detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group {group}"
 msgstr "Grupo {group}"
 
@@ -2452,6 +2476,7 @@ msgstr "Lista de grupos"
 msgid "Group name"
 msgstr "Nombre del grupo"
 
+#: src/components/rbac/access-tab.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -2913,6 +2938,8 @@ msgstr "Mi perfil"
 #: src/components/rbac/select-group.tsx
 #: src/components/rbac/select-roles.tsx
 #: src/components/rbac/select-roles.tsx
+#: src/components/rbac/select-user.tsx
+#: src/components/rbac/select-user.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
@@ -3083,6 +3110,10 @@ msgstr "No hay grupos asignables."
 #: src/components/rbac/select-roles.tsx
 msgid "No assignable roles."
 msgstr "No hay roles asignables."
+
+#: src/components/rbac/select-user.tsx
+msgid "No assignable users."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 msgid "No child task"
@@ -3492,6 +3523,10 @@ msgstr "Agregue un rol con el siguiente botón."
 msgid "Please add an owner by using the button below."
 msgstr "Agregue un propietario con el siguiente botón."
 
+#: src/components/rbac/access-tab.tsx
+msgid "Please add an owner by using the buttons below."
+msgstr ""
+
 #: src/components/rbac/owners-tab.tsx
 #~ msgid "Please contact the server administrator for elevated permissions."
 #~ msgstr "Please contact the server administrator for elevated permissions."
@@ -3537,6 +3572,7 @@ msgid "popover example"
 msgstr "ejemplo de ventana emergente"
 
 #: src/components/markdown-editor/markdown-editor.tsx
+#: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
@@ -3650,6 +3686,10 @@ msgstr "Pulp Ansible: Los roles se sincronizan"
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: Actualización de la colección remota"
 
+#: src/components/about-modal/about-modal.tsx
+msgid "Pulp Container Version"
+msgstr ""
+
 #: src/constants.tsx
 msgid "Pulp container: Build image from containerfile"
 msgstr "Contenedor de Pulp: Construir la imagen desde el archivo de contenedor"
@@ -3677,6 +3717,10 @@ msgstr "Contenedor de Pulp: Las tareas se sincronizan"
 #: src/constants.tsx
 msgid "Pulp container: Untage image"
 msgstr "Contenedor de Pulp: Imagen de untaje"
+
+#: src/components/about-modal/about-modal.tsx
+msgid "Pulp Core Version"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Pulp type"
@@ -3953,6 +3997,14 @@ msgstr "Eliminar rol"
 msgid "Remove role {role}?"
 msgstr "¿Eliminar el rol {role}?"
 
+#: src/components/rbac/access-tab.tsx
+msgid "Remove user"
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx
+msgid "Remove user {username}?"
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx
 msgid "Remove user from group?"
 msgstr "¿Eliminar al usuario del grupo?"
@@ -4054,6 +4106,10 @@ msgstr "Requiere permisos de súper usuario para su edición."
 #: src/containers/task-management/task_detail.tsx
 msgid "Reserve resources"
 msgstr "Recursos de reserva"
+
+#: src/components/shared/language-switcher.tsx
+msgid "Reset to browser defaults"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Resources"
@@ -4282,6 +4338,12 @@ msgstr "Seleccionar un remoto"
 msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
+#: src/components/rbac/access-tab.tsx
+#: src/components/rbac/access-tab.tsx
+#: src/components/rbac/access-tab.tsx
+msgid "Select a user"
+msgstr ""
+
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #~ msgid "Select all ({0} items)"
 #~ msgstr "Seleccionar todo ({0} elementos)"
@@ -4307,6 +4369,10 @@ msgstr "Seleccionar grupos"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
+#: src/components/shared/language-switcher.tsx
+msgid "Select language"
+msgstr ""
+
 #: src/components/my-imports/import-list.tsx
 msgid "Select namespace"
 msgstr "Seleccione el espacio de nombres"
@@ -4331,6 +4397,7 @@ msgstr "Seleccionar repositorios"
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
+#: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 msgid "Select role(s)"
 msgstr "Seleccionar rol(es)"
@@ -4350,6 +4417,10 @@ msgstr "Grupo seleccionado"
 #: src/components/rbac/select-roles.tsx
 msgid "Selected roles"
 msgstr "Roles seleccionados"
+
+#: src/components/rbac/select-user.tsx
+msgid "Selected user"
+msgstr ""
 
 #: src/containers/login/login.tsx
 msgid "Server error. Please come back later."
@@ -4957,6 +5028,10 @@ msgstr "El siguiente espacio de nombres se integrará en Ansible Lightspeed:"
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "Los siguientes roles se aplicarán al grupo: <0>{0}</0>"
 
+#: src/components/rbac/preview-roles.tsx
+msgid "The following roles will be applied to user: <0>{0}</0>"
+msgstr ""
+
 #: src/components/repositories/remote-form.tsx
 msgid "The password to be used for authentication when syncing."
 msgstr "Contraseña que se utilizará para la autenticación al sincronizar."
@@ -5005,9 +5080,17 @@ msgstr "El nombre de usuario que se utilizará para la autenticación al sincron
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "El nombre de usuario que se utilizará para la autenticación al sincronizar. No es necesario cuando se utiliza un token."
 
+#: src/components/rbac/access-tab.tsx
+msgid "There are currently no groups assigned."
+msgstr ""
+
 #: src/components/rbac/select-group.tsx
-msgid "There are currently no groups that can be assigned to this namespace."
-msgstr "Actualmente no hay grupos que puedan asignarse a este espacio de nombres."
+msgid "There are currently no groups that can be assigned ownership."
+msgstr ""
+
+#: src/components/rbac/select-group.tsx
+#~ msgid "There are currently no groups that can be assigned to this namespace."
+#~ msgstr "Actualmente no hay grupos que puedan asignarse a este espacio de nombres."
 
 #: src/components/rbac/access-tab.tsx
 msgid "There are currently no owners assigned."
@@ -5024,6 +5107,14 @@ msgstr "Actualmente no hay roles asignados a este grupo."
 #: src/components/rbac/select-roles.tsx
 msgid "There are currently no roles that can be assigned to this group."
 msgstr "Actualmente no hay roles que puedan asignarse a este grupo."
+
+#: src/components/rbac/access-tab.tsx
+msgid "There are currently no users assigned."
+msgstr ""
+
+#: src/components/rbac/select-user.tsx
+msgid "There are currently no users that can be assigned ownership."
+msgstr ""
 
 #: src/actions/ansible-repository-copy.tsx
 #: src/actions/ansible-repository-copy.tsx
@@ -5350,6 +5441,18 @@ msgstr "Use this URL to configure the authentication URLs that clients need to d
 msgid "Useful links"
 msgstr "Enlaces útiles"
 
+#: src/components/rbac/access-tab.tsx
+#: src/components/rbac/select-user.tsx
+msgid "User"
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" could not be added to \"{name}\"."
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx
 msgid "User \"{0}\" could not be added to group \"{1}\"."
 msgstr "El usuario \"{0}\" no se pudo agregar al grupo \"{1}\"."
@@ -5359,9 +5462,23 @@ msgstr "El usuario \"{0}\" no se pudo agregar al grupo \"{1}\"."
 msgid "User \"{0}\" could not be deleted."
 msgstr "No se pudo eliminar el usuario \"{0}\"."
 
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" could not be removed from \"{name}\"."
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "El usuario \"{0}\" no se pudo eliminar del grupo \"{name}\"."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" has been successfully added to \"{name}\"."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx
 msgid "User \"{0}\" has been successfully added to group \"{1}\"."
@@ -5371,6 +5488,13 @@ msgstr "El usuario \"{0}\" se agregó correctamente al grupo \"{1}\"."
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "El usuario \"{0}\" se eliminó correctamente."
 
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" has been successfully removed from \"{name}\"."
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr "El usuario \"{0}\" se eliminó correctamente del grupo \"{name}\"."
@@ -5378,6 +5502,38 @@ msgstr "El usuario \"{0}\" se eliminó correctamente del grupo \"{name}\"."
 #: src/containers/group-management/group-detail.tsx
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 #~ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" roles could not be update in \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" roles successfully updated in \"{name}\"."
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx
+msgid "User {0}"
+msgstr ""
+
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User {user}"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx
 msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
@@ -5395,10 +5551,15 @@ msgstr "Acceso de los usuarios"
 msgid "User details"
 msgstr "Detalles del usuario"
 
+#: src/loaders/standalone/layout.tsx
+msgid "User dropdown"
+msgstr ""
+
 #: src/components/about-modal/about-modal.tsx
 msgid "User Groups"
 msgstr "Grupos de usuarios"
 
+#: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/user-management/user-list.tsx
 msgid "User list"
@@ -5424,6 +5585,7 @@ msgstr "Usuario"
 msgid "Username: {0}"
 msgstr "Nombre de usuario: {0}"
 
+#: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/user-management/user-create.tsx
 #: src/containers/user-management/user-detail.tsx
@@ -5610,6 +5772,10 @@ msgstr ""
 msgid "YAML requirements"
 msgstr "Requisitos de YAML"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+msgstr ""
+
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/containers/ansible-repository/list.tsx
@@ -5631,8 +5797,16 @@ msgid "You are about to remove <0>{groupname}</0> from <1>{name}</1>.<2/>This wi
 msgstr "Está a punto de eliminar <0>{groupname}</0> de <1>{name}</1>.<2/>Esto también eliminará todos los permisos asociados."
 
 #: src/components/rbac/access-tab.tsx
-msgid "You are about to remove <0>{role}</0> from <1>{groupname}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
-msgstr "Está a punto de eliminar <0>{role}</0> de <1>{groupname}</1> para <2>{name}</2>.<3/>Esto también eliminará todos los permisos asociados."
+#~ msgid "You are about to remove <0>{role}</0> from <1>{groupname}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
+#~ msgstr "Está a punto de eliminar <0>{role}</0> de <1>{groupname}</1> para <2>{name}</2>.<3/>Esto también eliminará todos los permisos asociados."
+
+#: src/components/rbac/access-tab.tsx
+msgid "You are about to remove <0>{role}</0> from <1>{userOrGroupName}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
+msgstr ""
+
+#: src/components/rbac/access-tab.tsx
+msgid "You are about to remove <0>{username}</0> from <1>{name}</1>.<2/>This will also remove all associated permissions."
+msgstr ""
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 #~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
