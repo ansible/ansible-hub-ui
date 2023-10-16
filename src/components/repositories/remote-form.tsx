@@ -2,6 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { CodeEditor, Language } from '@patternfly/react-code-editor';
 import {
   ActionGroup,
+  Alert,
   Button,
   Checkbox,
   ExpandableSection,
@@ -16,7 +17,7 @@ import {
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -113,6 +114,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
     const requiredFields = ['name', 'url'];
     let disabledFields = allowEditName ? [] : ['name'];
 
+    const isCommunityRemote =
+      remoteType === 'ansible-remote' &&
+      remote?.url === 'https://galaxy.ansible.com/api/';
+
     switch (remoteType) {
       case 'ansible-remote':
         // require only name, url; nothing disabled
@@ -147,14 +152,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (showMain) {
       return (
         <>
-          {this.renderForm(
-            requiredFields,
-            disabledFields,
-            <ActionGroup key='actions'>
-              {save}
-              {cancel}
-            </ActionGroup>,
-          )}
+          {this.renderForm(requiredFields, disabledFields, {
+            extra: (
+              <ActionGroup key='actions'>
+                {save}
+                {cancel}
+              </ActionGroup>
+            ),
+            isCommunityRemote,
+          })}
         </>
       );
     }
@@ -167,12 +173,19 @@ export class RemoteForm extends React.Component<IProps, IState> {
         onClose={() => closeModal()}
         actions={[save, cancel]}
       >
-        {this.renderForm(requiredFields, disabledFields)}
+        {this.renderForm(requiredFields, disabledFields, { isCommunityRemote })}
       </Modal>
     );
   }
 
-  private renderForm(requiredFields, disabledFields, extra?) {
+  private renderForm(
+    requiredFields,
+    disabledFields,
+    {
+      extra,
+      isCommunityRemote,
+    }: { extra?: ReactNode; isCommunityRemote: boolean },
+  ) {
     const { errorMessages, remote, remoteType } = this.props;
     const { filenames } = this.state;
     const { collection_signing } = this.context.featureFlags;
@@ -266,6 +279,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
             name={t`Signed only`}
             label={t`Download only signed collections`}
           >
+            {isCommunityRemote && this.props.remote.signed_only ? (
+              <Alert
+                isInline
+                variant='warning'
+                title={t`Community content will never be synced if this setting is enabled`}
+              />
+            ) : null}
             <Switch
               id='signed_only'
               isChecked={!!remote.signed_only}
@@ -343,6 +363,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('requirements_file' in errorMessages))}
             helperTextInvalid={errorMessages['requirements_file']}
           >
+            {isCommunityRemote && !this.props.remote.requirements_file ? (
+              <Alert
+                isInline
+                variant='warning'
+                title={t`YAML requirements are required to sync from Galaxy`}
+              />
+            ) : null}
             <Flex>
               <FlexItem grow={{ default: 'grow' }}>
                 <FileUpload
