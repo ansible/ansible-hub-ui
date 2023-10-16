@@ -134,21 +134,29 @@ export const ansibleRepositorySyncAction = Action({
       return t`Sync task is already queued.`;
     }
 
-    // only available on detail screen; list will have remote: string, so no .url
-    if (
-      remote &&
-      remote.url === 'https://galaxy.ansible.com/api/' &&
-      !remote.requirements_file
-    ) {
+    // Remote checks only available on detail screen; list will have remote: string, so no .url
+    if (remote && remote.url === 'https://galaxy.ansible.com/api/') {
       const name = remote.name;
       const url = formatPath(Paths.ansibleRemoteEdit, { name });
 
-      return (
-        <Trans>
-          YAML requirements are required to sync from Galaxy - you can{' '}
-          <Link to={url}>edit the {name} remote</Link> to add requirements.
-        </Trans>
-      );
+      if (!remote.requirements_file) {
+        return (
+          <Trans>
+            YAML requirements are required to sync from Galaxy. You can{' '}
+            <Link to={url}>edit the {name} remote</Link> to add requirements.
+          </Trans>
+        );
+      }
+
+      if (remote.signed_only) {
+        return (
+          <Trans>
+            Community content will never be synced if the remote is set to only
+            sync signed content. You can{' '}
+            <Link to={url}>edit the {name} remote</Link> to change it.
+          </Trans>
+        );
+      }
     }
 
     return null;
