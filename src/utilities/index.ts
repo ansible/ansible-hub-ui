@@ -10,6 +10,7 @@ export { getContainersURL, getRepoURL } from './get-repo-url';
 export { getHumanSize } from './get_human_size';
 export { hasPermission } from './has-permission';
 export { lastSyncStatus, lastSynced } from './last-sync-task';
+export { getProviderInfo } from './legacy-namespace';
 export {
   ErrorMessagesType,
   alertErrorsWithoutFields,
@@ -36,4 +37,3 @@ export {
   isFieldSet,
   isWriteOnly,
 } from './write-only-fields';
-export { getProviderInfo } from './legacy-namespace';

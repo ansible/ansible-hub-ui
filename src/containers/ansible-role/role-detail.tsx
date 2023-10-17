@@ -34,7 +34,6 @@ import {
   RoleRatings,
   Tag,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, chipGroupProps, withRouter } from 'src/utilities';
 
@@ -49,7 +48,7 @@ interface RoleMetaReadme {
   readme_html: string;
 }
 
-class LegacyRoleInstall extends React.Component<RoleMeta, RoleMeta> {
+class RoleInstall extends React.Component<RoleMeta> {
   render() {
     const installCMD = `ansible-galaxy role install ${this.props.github_user}.${this.props.name}`;
     return (
@@ -65,7 +64,7 @@ class LegacyRoleInstall extends React.Component<RoleMeta, RoleMeta> {
   }
 }
 
-class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
+class RoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,14 +93,11 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
   }
 }
 
-interface RoleVersionIProps {
+interface RoleVersionProps {
   role_version: LegacyRoleVersionDetailType;
 }
 
-class LegacyRoleVersion extends React.Component<
-  RoleVersionIProps,
-  RoleVersionIProps
-> {
+class RoleVersion extends React.Component<RoleVersionProps> {
   render() {
     return (
       <DataListItemRow>
@@ -128,12 +124,12 @@ class LegacyRoleVersion extends React.Component<
   }
 }
 
-interface RoleVersionsIProps {
+interface RoleVersionsState {
   role_versions: LegacyRoleVersionDetailType[];
   loading: boolean;
 }
 
-class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
+class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -169,7 +165,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
         <DataList aria-label={t`List of versions`}>
           {this.state.role_versions.reverse().map((rversion) => (
             <DataListItem key={rversion.name}>
-              <LegacyRoleVersion role_version={rversion} />
+              <RoleVersion role_version={rversion} />
             </DataListItem>
           ))}
         </DataList>
@@ -178,7 +174,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
   }
 }
 
-interface IProps {
+interface RoleState {
   role: LegacyRoleDetailType;
   github_user: string;
   name: string;
@@ -186,7 +182,7 @@ interface IProps {
   activeItem: string;
 }
 
-class LegacyRole extends React.Component<RouteProps, IProps> {
+class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
     const roleUser = props.routeParams.username;
@@ -326,7 +322,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
     const renderContent = () => {
       if (this.state.activeItem == 'install') {
         return (
-          <LegacyRoleInstall
+          <RoleInstall
             role={role}
             github_user={this.state.github_user}
             name={this.state.name}
@@ -335,7 +331,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         );
       } else if (this.state.activeItem === 'documentation') {
         return (
-          <LegacyRoleDocs
+          <RoleDocs
             role={role}
             github_user={this.state.github_user}
             name={this.state.name}
@@ -344,7 +340,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
         );
       } else if (this.state.activeItem === 'versions') {
         return (
-          <LegacyRoleVersions
+          <RoleVersions
             role={role}
             github_user={this.state.github_user}
             name={this.state.name}
@@ -416,6 +412,4 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
   }
 }
 
-export default withRouter(LegacyRole);
-
-LegacyRole.contextType = AppContext;
+export default withRouter(AnsibleRoleDetail);

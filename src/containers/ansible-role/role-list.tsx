@@ -10,12 +10,10 @@ import {
   LoadingPageSpinner,
   Pagination,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 
-interface IProps {
+interface RolesState {
   legacyroles: LegacyRoleListType[];
-  mounted: boolean;
   loading: boolean;
   count: number;
   params: {
@@ -30,7 +28,7 @@ interface IProps {
   ignoredParams: string[];
 }
 
-class LegacyRoles extends React.Component<RouteProps, IProps> {
+class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
   // This is the main roles page
 
   constructor(props) {
@@ -44,7 +42,6 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
         keywords: null,
       },
       loading: true,
-      mounted: false,
       count: 0,
       legacyroles: [],
     };
@@ -73,7 +70,6 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
         keywords: keywords,
       }).then((response) => {
         this.setState(() => ({
-          mounted: true,
           loading: false,
           params: {
             page: page,
@@ -124,52 +120,48 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
     return (
       <div>
         <BaseHeader title={t`Roles`} />
-        <React.Fragment>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : noData ? (
-            <EmptyStateNoData
-              title={t`No roles yet`}
-              description={t`Roles will appear once imported`}
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : noData ? (
+          <EmptyStateNoData
+            title={t`No roles yet`}
+            description={t`Roles will appear once imported`}
+          />
+        ) : (
+          <div>
+            <CollectionFilter
+              ignoredParams={ignoredParams}
+              params={cleanParams}
+              updateParams={this.updateParams}
             />
-          ) : (
-            <div>
-              <CollectionFilter
-                ignoredParams={ignoredParams}
-                params={cleanParams}
-                updateParams={this.updateParams}
-              />
 
-              <Pagination
-                params={this.state.params}
-                updateParams={this.updateParams}
-                count={this.state.count}
-              />
+            <Pagination
+              params={this.state.params}
+              updateParams={this.updateParams}
+              count={this.state.count}
+            />
 
-              <DataList aria-label={t`List of roles`}>
-                {this.state.legacyroles &&
-                  this.state.legacyroles.map((lrole) => (
-                    <LegacyRoleListItem
-                      key={lrole.github_user + lrole.name + lrole.id}
-                      role={lrole}
-                      show_thumbnail={true}
-                    />
-                  ))}
-              </DataList>
+            <DataList aria-label={t`List of roles`}>
+              {this.state.legacyroles &&
+                this.state.legacyroles.map((lrole) => (
+                  <LegacyRoleListItem
+                    key={lrole.github_user + lrole.name + lrole.id}
+                    role={lrole}
+                    show_thumbnail={true}
+                  />
+                ))}
+            </DataList>
 
-              <Pagination
-                params={this.state.params}
-                updateParams={this.updateParams}
-                count={this.state.count}
-              />
-            </div>
-          )}
-        </React.Fragment>
+            <Pagination
+              params={this.state.params}
+              updateParams={this.updateParams}
+              count={this.state.count}
+            />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default withRouter(LegacyRoles);
-
-LegacyRoles.contextType = AppContext;
+export default withRouter(AnsibleRoleList);

@@ -32,14 +32,13 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, getProviderInfo, withRouter } from 'src/utilities';
-import './legacy-namespace.scss';
+import './namespace.scss';
 
-interface LegacyNamespaceRolesProps {
+interface NamespaceRolesProps {
   namespace: LegacyNamespaceListType;
 }
 
-interface LegacyNamespaceRolesState {
-  mounted: boolean;
+interface NamespaceRolesState {
   loading: boolean;
   count: number;
   namespace: LegacyNamespaceListType;
@@ -54,9 +53,9 @@ interface LegacyNamespaceRolesState {
   };
 }
 
-class LegacyNamespaceRoles extends React.Component<
-  LegacyNamespaceRolesProps,
-  LegacyNamespaceRolesState
+class NamespaceRoles extends React.Component<
+  NamespaceRolesProps,
+  NamespaceRolesState
 > {
   // This is the list of roles that is shown on
   // the legacy namespace details page.
@@ -64,7 +63,6 @@ class LegacyNamespaceRoles extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      mounted: false,
       loading: true,
       count: 0,
       namespace: props.namespace,
@@ -92,7 +90,6 @@ class LegacyNamespaceRoles extends React.Component<
       github_user: namespace.name,
     }).then((response) => {
       this.setState(() => ({
-        mounted: true,
         loading: false,
         params: {
           page: page,
@@ -117,7 +114,6 @@ class LegacyNamespaceRoles extends React.Component<
       github_user: namespace.name,
     }).then((response) => {
       this.setState(() => ({
-        mounted: true,
         loading: false,
         params: {
           page: page,
@@ -137,40 +133,38 @@ class LegacyNamespaceRoles extends React.Component<
 
     return (
       <div>
-        <React.Fragment>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : noData ? (
-            <EmptyStateNoData
-              title={t`No roles yet`}
-              description={t`Roles will appear once imported`}
-            />
-          ) : (
-            <div>
-              <DataList aria-label={t`List of Legacy Roles`}>
-                {this.state.roles.map((lrole, ix) => (
-                  <LegacyRoleListItem
-                    key={ix}
-                    role={lrole}
-                    show_thumbnail={false}
-                  />
-                ))}
-              </DataList>
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : noData ? (
+          <EmptyStateNoData
+            title={t`No roles yet`}
+            description={t`Roles will appear once imported`}
+          />
+        ) : (
+          <div>
+            <DataList aria-label={t`List of Legacy Roles`}>
+              {this.state.roles.map((lrole, ix) => (
+                <LegacyRoleListItem
+                  key={ix}
+                  role={lrole}
+                  show_thumbnail={false}
+                />
+              ))}
+            </DataList>
 
-              <Pagination
-                params={this.state.params}
-                updateParams={this.updateParams}
-                count={this.state.count}
-              />
-            </div>
-          )}
-        </React.Fragment>
+            <Pagination
+              params={this.state.params}
+              updateParams={this.updateParams}
+              count={this.state.count}
+            />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-interface LegacyNamespaceProps {
+interface RoleNamespaceState {
   loading: boolean;
   namespaceid: number;
   namespace: LegacyNamespaceListType;
@@ -188,10 +182,12 @@ interface LegacyNamespaceProps {
   alerts: AlertType[];
 }
 
-class LegacyNamespace extends React.Component<
+class AnsibleRoleNamespaceDetail extends React.Component<
   RouteProps,
-  LegacyNamespaceProps
+  RoleNamespaceState
 > {
+  static contextType = AppContext;
+
   // This is the details page for a legacy namespace
 
   constructor(props) {
@@ -296,7 +292,7 @@ class LegacyNamespace extends React.Component<
     }
 
     return (
-      <React.Fragment>
+      <>
         {this.state.isOpenWisdomModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
@@ -313,19 +309,17 @@ class LegacyNamespace extends React.Component<
           aria-label={t`Role namespace header`}
           className='hub-legacy-namespace-page'
         >
-          <DataListItem data-cy='LegacyNamespace'>
+          <DataListItem>
             <DataListItemRow>
               <DataListItemCells dataListCells={infocells} />
             </DataListItemRow>
           </DataListItem>
         </DataList>
 
-        <LegacyNamespaceRoles namespace={this.state.namespace} />
-      </React.Fragment>
+        <NamespaceRoles namespace={this.state.namespace} />
+      </>
     );
   }
 }
 
-export default withRouter(LegacyNamespace);
-
-LegacyNamespace.contextType = AppContext;
+export default withRouter(AnsibleRoleNamespaceDetail);

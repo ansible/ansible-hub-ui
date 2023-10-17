@@ -14,13 +14,11 @@ import {
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 
-interface LegacyNamespacesProps {
+interface RoleNamespacesState {
   legacynamespaces: LegacyNamespaceListType[];
   loading: boolean;
-  mounted: boolean;
   count: number;
   params: {
     page?: number;
@@ -35,9 +33,9 @@ interface LegacyNamespacesProps {
   alerts: AlertType[];
 }
 
-class LegacyNamespaces extends React.Component<
+class AnsibleRoleNamespaceList extends React.Component<
   RouteProps,
-  LegacyNamespacesProps
+  RoleNamespacesState
 > {
   constructor(props) {
     super(props);
@@ -50,7 +48,6 @@ class LegacyNamespaces extends React.Component<
         keywords: null,
       },
       loading: true,
-      mounted: false,
       count: 0,
       legacynamespaces: [],
       isOpenWisdomModal: false,
@@ -80,7 +77,6 @@ class LegacyNamespaces extends React.Component<
         keywords: keywords,
       }).then((response) => {
         this.setState(() => ({
-          mounted: true,
           loading: false,
           params: {
             page: page,
@@ -151,52 +147,48 @@ class LegacyNamespaces extends React.Component<
           />
         )}
         <BaseHeader title={t`Role Namespaces`} />
-        <React.Fragment>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : noData ? (
-            <EmptyStateNoData
-              title={t`No role namespaces yet`}
-              description={t`Role namespaces will appear once created or roles are imported`}
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : noData ? (
+          <EmptyStateNoData
+            title={t`No role namespaces yet`}
+            description={t`Role namespaces will appear once created or roles are imported`}
+          />
+        ) : (
+          <div>
+            <CollectionFilter
+              ignoredParams={ignoredParams}
+              params={cleanParams}
+              updateParams={this.updateParams}
             />
-          ) : (
-            <div>
-              <CollectionFilter
-                ignoredParams={ignoredParams}
-                params={cleanParams}
-                updateParams={this.updateParams}
-              />
 
-              <Pagination
-                params={this.state.params}
-                updateParams={this.updateParams}
-                count={this.state.count}
-              />
+            <Pagination
+              params={this.state.params}
+              updateParams={this.updateParams}
+              count={this.state.count}
+            />
 
-              <DataList aria-label={t`List of role namespaces`}>
-                {this.state.legacynamespaces &&
-                  this.state.legacynamespaces.map((lnamespace) => (
-                    <LegacyNamespaceListItem
-                      key={lnamespace.id}
-                      namespace={lnamespace}
-                      openModal={(namespace) => this.openModal(namespace)}
-                    />
-                  ))}
-              </DataList>
+            <DataList aria-label={t`List of role namespaces`}>
+              {this.state.legacynamespaces &&
+                this.state.legacynamespaces.map((lnamespace) => (
+                  <LegacyNamespaceListItem
+                    key={lnamespace.id}
+                    namespace={lnamespace}
+                    openModal={(namespace) => this.openModal(namespace)}
+                  />
+                ))}
+            </DataList>
 
-              <Pagination
-                params={this.state.params}
-                updateParams={this.updateParams}
-                count={this.state.count}
-              />
-            </div>
-          )}
-        </React.Fragment>
+            <Pagination
+              params={this.state.params}
+              updateParams={this.updateParams}
+              count={this.state.count}
+            />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default withRouter(LegacyNamespaces);
-
-LegacyNamespaces.contextType = AppContext;
+export default withRouter(AnsibleRoleNamespaceList);

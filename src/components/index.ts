@@ -92,13 +92,13 @@ export { PermissionChipSelector } from './rbac/permission-chip-selector';
 export { PreviewRoles } from './rbac/preview-roles';
 export { RoleForm } from './rbac/role-form';
 export { RoleHeader } from './rbac/role-header';
-export { RolePermissions } from './rbac/role-permissions';
 export {
   CheckboxRow,
   ExpandableRow,
   RadioRow,
   RoleListTable,
 } from './rbac/role-list-table';
+export { RolePermissions } from './rbac/role-permissions';
 export { SelectGroup } from './rbac/select-group';
 export { SelectRoles } from './rbac/select-roles';
 export { SelectUser } from './rbac/select-user';
