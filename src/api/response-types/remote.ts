@@ -33,6 +33,7 @@ export class RemoteType {
   client_key?: string;
   client_cert?: string;
   ca_cert?: string;
+  sync_dependencies?: boolean;
 
   write_only_fields: WriteOnlyFieldType[];
 
