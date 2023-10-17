@@ -2329,7 +2329,11 @@ msgstr "Registros de seguimiento"
 msgid "Force a sync to happen."
 msgstr ""
 
-#: src/loaders/standalone/layout.tsx
+#: src/components/about-modal/about-modal.tsx
+msgid "Galaxy Importer"
+msgstr ""
+
+#: src/components/about-modal/about-modal.tsx
 msgid "Galaxy Logo"
 msgstr "Logotipo de Galaxy"
 
@@ -3650,6 +3654,10 @@ msgstr "Pulp Ansible: Los roles se sincronizan"
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: Actualización de la colección remota"
 
+#: src/components/about-modal/about-modal.tsx
+msgid "Pulp Container Version"
+msgstr ""
+
 #: src/constants.tsx
 msgid "Pulp container: Build image from containerfile"
 msgstr "Contenedor de Pulp: Construir la imagen desde el archivo de contenedor"
@@ -3677,6 +3685,10 @@ msgstr "Contenedor de Pulp: Las tareas se sincronizan"
 #: src/constants.tsx
 msgid "Pulp container: Untage image"
 msgstr "Contenedor de Pulp: Imagen de untaje"
+
+#: src/components/about-modal/about-modal.tsx
+msgid "Pulp Core Version"
+msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Pulp type"
@@ -5609,6 +5621,10 @@ msgstr ""
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "YAML requirements"
 msgstr "Requisitos de YAML"
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
