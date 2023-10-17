@@ -88,7 +88,8 @@ const AddCollectionVersionModal = ({
     setAlerts([...alerts, alert]);
   };
 
-  const query = ({ params }) => {
+  // @ts-expect-error: TS2525: Initializer provides no value for this binding element and the binding element has no default value.
+  const query = ({ params } = {}) => {
     const newParams = { ...params };
     newParams.ordering = newParams.sort;
     delete newParams.sort;
