@@ -11,6 +11,7 @@ export class AnsibleRemoteType {
   tls_validation: boolean;
   url: string;
   signed_only: boolean;
+  sync_dependencies?: boolean;
 
   // connect_timeout
   // headers
@@ -21,7 +22,6 @@ export class AnsibleRemoteType {
   // pulp_last_updated
   // sock_connect_timeout
   // sock_read_timeout
-  // sync_dependencies
   // total_timeout
 
   hidden_fields: {
