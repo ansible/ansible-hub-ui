@@ -74,7 +74,6 @@
         "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
         "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
-        "deploy": "npm-run-all build-insights test-prettier lint:ts",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
         "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
         "find-unused-exports": "npx find-unused-exports --module-glob 'src/**/*.{js,ts,jsx,tsx}' --resolve-file-extensions 'tsx,ts,jsx,js' --resolve-index-files",
@@ -103,7 +102,6 @@
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
         "test-run": "test/scripts/ctn-run.sh"
     },
     "insights": {
