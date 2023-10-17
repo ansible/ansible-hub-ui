@@ -129,6 +129,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           'token',
           'requirements_file',
           'signed_only',
+          'sync_dependencies',
         ]);
         break;
     }
@@ -276,7 +277,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
         {!disabledFields.includes('signed_only') && collection_signing ? (
           <FormGroup
             fieldId={'signed_only'}
-            name={t`Signed only`}
             label={t`Download only signed collections`}
           >
             {isCommunityRemote && this.props.remote.signed_only ? (
@@ -290,6 +290,21 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='signed_only'
               isChecked={!!remote.signed_only}
               onChange={(value) => this.updateRemote(value, 'signed_only')}
+            />
+          </FormGroup>
+        ) : null}
+
+        {!disabledFields.includes('sync_dependencies') ? (
+          <FormGroup
+            fieldId={'sync_dependencies'}
+            label={t`Include all dependencies when syncing a collection.`}
+          >
+            <Switch
+              id='sync_dependencies'
+              isChecked={!!remote.sync_dependencies}
+              onChange={(value) =>
+                this.updateRemote(value, 'sync_dependencies')
+              }
             />
           </FormGroup>
         ) : null}
