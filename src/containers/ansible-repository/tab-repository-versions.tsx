@@ -51,7 +51,8 @@ const VersionContent = ({
   }
 
   const API = AnyAPI(href);
-  const query = ({ params }) => API.list(params);
+  // @ts-expect-error: TS2525: Initializer provides no value for this binding element and the binding element has no default value.
+  const query = ({ params } = {}) => API.list(params);
   const renderTableRow = ({
     manifest: {
       collection_info: { namespace, name, version },
