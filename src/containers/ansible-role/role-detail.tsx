@@ -186,7 +186,9 @@ interface IProps {
   activeItem: string;
 }
 
-class LegacyRole extends React.Component<RouteProps, IProps> {
+class AnsibleRoleDetail extends React.Component<RouteProps, IProps> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     const roleUser = props.routeParams.username;
@@ -416,6 +418,4 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
   }
 }
 
-export default withRouter(LegacyRole);
-
-LegacyRole.contextType = AppContext;
+export default withRouter(AnsibleRoleDetail);

@@ -1,37 +1,44 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import React from 'react';
-import { LegacyRoleAPI, LegacyRoleListType } from 'src/api';
+import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
 import {
+  AlertList,
+  AlertType,
   BaseHeader,
   CollectionFilter,
   EmptyStateNoData,
-  LegacyRoleListItem,
+  LegacyNamespaceListItem,
   LoadingPageSpinner,
   Pagination,
+  WisdomModal,
+  closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 
-interface IProps {
-  legacyroles: LegacyRoleListType[];
-  mounted: boolean;
+interface LegacyNamespacesProps {
+  legacynamespaces: LegacyNamespaceListType[];
   loading: boolean;
   count: number;
   params: {
     page?: number;
     page_size?: number;
-    keywords?: string;
-    tags?: string[];
-    view_type?: string;
     order_by?: string;
+    keywords?: string;
   };
   updateParams: (params) => void;
   ignoredParams: string[];
+  isOpenWisdomModal: boolean;
+  wisdomReference: string;
+  alerts: AlertType[];
 }
 
-class LegacyRoles extends React.Component<RouteProps, IProps> {
-  // This is the main roles page
+class AnsibleRoleNamespaceList extends React.Component<
+  RouteProps,
+  LegacyNamespacesProps
+> {
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -40,13 +47,15 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
       params: {
         page: 1,
         page_size: 10,
-        order_by: 'created',
+        order_by: 'name',
         keywords: null,
       },
       loading: true,
-      mounted: false,
       count: 0,
-      legacyroles: [],
+      legacynamespaces: [],
+      isOpenWisdomModal: false,
+      wisdomReference: null,
+      alerts: [],
     };
   }
 
@@ -56,51 +65,60 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
     this.updateParams({
       page: parseInt(urlParams.get('page'), 10) || 1,
       page_size: parseInt(urlParams.get('page_size'), 10) || 10,
-      order_by: urlParams.get('order_by') || 'created',
-      keywords: urlParams.get('keywords'),
-      tags: urlParams.get('tags'),
+      order_by: urlParams.get('order_by') || 'name',
+      keywords: urlParams.get('keywords') || null,
     });
   }
 
   updateParams = (p) => {
-    const { page, page_size, order_by, keywords, tags } = p;
+    const { page, page_size, order_by, keywords } = p;
     this.setState({ loading: true }, () => {
-      LegacyRoleAPI.list({
+      LegacyNamespaceAPI.list({
         page: page,
         page_size: page_size,
         order_by: order_by,
-        tags: tags,
         keywords: keywords,
       }).then((response) => {
         this.setState(() => ({
-          mounted: true,
           loading: false,
           params: {
             page: page,
             page_size: page_size,
             order_by: order_by,
             keywords: keywords,
-            tags: tags,
           },
           count: response.data.count,
-          legacyroles: response.data.results,
+          legacynamespaces: response.data.results,
         }));
       });
     });
   };
 
-  render() {
-    const { loading, legacyroles } = this.state;
+  openModal(namespace) {
+    this.setState({ isOpenWisdomModal: true, wisdomReference: namespace.name });
+  }
 
-    // prevent these params from showing up in the filter widget
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  render() {
     const ignoredParams = [
-      'order_by',
       'namespace',
       'repository__name',
       'page',
       'page_size',
       'sort',
+      'tag',
+      'tags',
       'view_type',
+      'order_by',
     ];
 
     // do not pass null'ish params to the filter widget
@@ -114,23 +132,31 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
       }
     }
 
-    // this seems tricky to get right ...
-    const noData =
-      !loading &&
-      cleanParams['keywords'] === undefined &&
-      cleanParams['tag'] == undefined &&
-      legacyroles.length == 0;
+    const { loading, legacynamespaces } = this.state;
+    const noData = legacynamespaces.length === 0;
 
     return (
       <div>
-        <BaseHeader title={t`Roles`} />
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
+        {this.state.isOpenWisdomModal && (
+          <WisdomModal
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() => this.setState({ isOpenWisdomModal: false })}
+            scope={'legacy_namespace'}
+            reference={this.state.wisdomReference}
+          />
+        )}
+        <BaseHeader title={t`Role Namespaces`} />
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
           ) : noData ? (
             <EmptyStateNoData
-              title={t`No roles yet`}
-              description={t`Roles will appear once imported`}
+              title={t`No role namespaces yet`}
+              description={t`Role namespaces will appear once created or roles are imported`}
             />
           ) : (
             <div>
@@ -146,13 +172,13 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
                 count={this.state.count}
               />
 
-              <DataList aria-label={t`List of roles`}>
-                {this.state.legacyroles &&
-                  this.state.legacyroles.map((lrole) => (
-                    <LegacyRoleListItem
-                      key={lrole.github_user + lrole.name + lrole.id}
-                      role={lrole}
-                      show_thumbnail={true}
+              <DataList aria-label={t`List of role namespaces`}>
+                {this.state.legacynamespaces &&
+                  this.state.legacynamespaces.map((lnamespace) => (
+                    <LegacyNamespaceListItem
+                      key={lnamespace.id}
+                      namespace={lnamespace}
+                      openModal={(namespace) => this.openModal(namespace)}
                     />
                   ))}
               </DataList>
@@ -170,6 +196,4 @@ class LegacyRoles extends React.Component<RouteProps, IProps> {
   }
 }
 
-export default withRouter(LegacyRoles);
-
-LegacyRoles.contextType = AppContext;
+export default withRouter(AnsibleRoleNamespaceList);

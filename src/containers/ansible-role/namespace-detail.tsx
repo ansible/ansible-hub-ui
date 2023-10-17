@@ -32,14 +32,13 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, getProviderInfo, withRouter } from 'src/utilities';
-import './legacy-namespace.scss';
+import './namespace.scss';
 
 interface LegacyNamespaceRolesProps {
   namespace: LegacyNamespaceListType;
 }
 
 interface LegacyNamespaceRolesState {
-  mounted: boolean;
   loading: boolean;
   count: number;
   namespace: LegacyNamespaceListType;
@@ -64,7 +63,6 @@ class LegacyNamespaceRoles extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      mounted: false,
       loading: true,
       count: 0,
       namespace: props.namespace,
@@ -92,7 +90,6 @@ class LegacyNamespaceRoles extends React.Component<
       github_user: namespace.name,
     }).then((response) => {
       this.setState(() => ({
-        mounted: true,
         loading: false,
         params: {
           page: page,
@@ -117,7 +114,6 @@ class LegacyNamespaceRoles extends React.Component<
       github_user: namespace.name,
     }).then((response) => {
       this.setState(() => ({
-        mounted: true,
         loading: false,
         params: {
           page: page,
@@ -188,10 +184,12 @@ interface LegacyNamespaceProps {
   alerts: AlertType[];
 }
 
-class LegacyNamespace extends React.Component<
+class AnsibleRoleNamespaceDetail extends React.Component<
   RouteProps,
   LegacyNamespaceProps
 > {
+  static contextType = AppContext;
+
   // This is the details page for a legacy namespace
 
   constructor(props) {
@@ -313,7 +311,7 @@ class LegacyNamespace extends React.Component<
           aria-label={t`Role namespace header`}
           className='hub-legacy-namespace-page'
         >
-          <DataListItem data-cy='LegacyNamespace'>
+          <DataListItem>
             <DataListItemRow>
               <DataListItemCells dataListCells={infocells} />
             </DataListItemRow>
@@ -326,6 +324,4 @@ class LegacyNamespace extends React.Component<
   }
 }
 
-export default withRouter(LegacyNamespace);
-
-LegacyNamespace.contextType = AppContext;
+export default withRouter(AnsibleRoleNamespaceDetail);

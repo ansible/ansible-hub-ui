@@ -9,6 +9,10 @@ import {
   AnsibleRepositoryDetail,
   AnsibleRepositoryEdit,
   AnsibleRepositoryList,
+  AnsibleRoleDetail,
+  AnsibleRoleList,
+  AnsibleRoleNamespaceDetail,
+  AnsibleRoleNamespaceList,
   CertificationDashboard,
   CollectionContent,
   CollectionDependencies,
@@ -30,10 +34,6 @@ import {
   GroupDetail,
   GroupList,
   LandingPage,
-  LegacyNamespace,
-  LegacyNamespaces,
-  LegacyRole,
-  LegacyRoles,
   LoginPage,
   MultiSearch,
   MyImports,
@@ -212,15 +212,21 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       },
 
       // roles ...
-      { component: LegacyNamespace, path: Paths.legacyNamespace },
-      { component: LegacyNamespaces, path: Paths.legacyNamespaces },
-      { component: LegacyRole, path: Paths.legacyRole },
-      { component: LegacyRoles, path: Paths.legacyRoles },
+      { component: AnsibleRoleNamespaceDetail, path: Paths.legacyNamespace },
+      { component: AnsibleRoleNamespaceList, path: Paths.legacyNamespaces },
+      { component: AnsibleRoleDetail, path: Paths.legacyRole },
+      { component: AnsibleRoleList, path: Paths.legacyRoles },
       // ... but still support legacy urls
-      { component: LegacyNamespace, path: Paths.compatLegacyNamespace },
-      { component: LegacyNamespaces, path: Paths.compatLegacyNamespaces },
-      { component: LegacyRole, path: Paths.compatLegacyRole },
-      { component: LegacyRoles, path: Paths.compatLegacyRoles },
+      {
+        component: AnsibleRoleNamespaceDetail,
+        path: Paths.compatLegacyNamespace,
+      },
+      {
+        component: AnsibleRoleNamespaceList,
+        path: Paths.compatLegacyNamespaces,
+      },
+      { component: AnsibleRoleDetail, path: Paths.compatLegacyRole },
+      { component: AnsibleRoleList, path: Paths.compatLegacyRoles },
 
       {
         component: TaskListView,
