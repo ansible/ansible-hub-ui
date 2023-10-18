@@ -6,31 +6,34 @@ import {
   AlertList,
   AlertType,
   BaseHeader,
-  CollectionFilter,
+  EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   LegacyNamespaceListItem,
   LoadingPageSpinner,
   Pagination,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
-import { RouteProps, withRouter } from 'src/utilities';
+import {
+  ParamHelper,
+  RouteProps,
+  filterIsSet,
+  handleHttpError,
+  withRouter,
+} from 'src/utilities';
 
 interface RoleNamespacesState {
-  legacynamespaces: LegacyNamespaceListType[];
-  loading: boolean;
+  alerts: AlertType[];
   count: number;
+  lightspeedModal?: string;
+  loading: boolean;
   params: {
     page?: number;
     page_size?: number;
-    order_by?: string;
-    keywords?: string;
+    sort?: string;
   };
-  updateParams: (params) => void;
-  ignoredParams: string[];
-  isOpenWisdomModal: boolean;
-  wisdomReference: string;
-  alerts: AlertType[];
+  roleNamespaces: LegacyNamespaceListType[];
 }
 
 class AnsibleRoleNamespaceList extends React.Component<
@@ -39,60 +42,52 @@ class AnsibleRoleNamespaceList extends React.Component<
 > {
   constructor(props) {
     super(props);
+
+    const params = ParamHelper.parseParamString(props.location.search, [
+      'page',
+      'page_size',
+    ]);
+
     this.state = {
-      ...props,
+      alerts: [],
+      count: 0,
+      lightspeedModal: null,
+      loading: true,
       params: {
         page: 1,
         page_size: 10,
-        order_by: 'name',
-        keywords: null,
+        sort: '-created',
+        ...params,
       },
-      loading: true,
-      count: 0,
-      legacynamespaces: [],
-      isOpenWisdomModal: false,
-      wisdomReference: null,
-      alerts: [],
+      roleNamespaces: [],
     };
   }
 
   componentDidMount() {
-    const thisQS = window.location.search;
-    const urlParams = new URLSearchParams(thisQS);
-    this.updateParams({
-      page: parseInt(urlParams.get('page'), 10) || 1,
-      page_size: parseInt(urlParams.get('page_size'), 10) || 10,
-      order_by: urlParams.get('order_by') || 'name',
-      keywords: urlParams.get('keywords') || null,
-    });
+    this.query(this.state.params);
   }
 
-  updateParams = (p) => {
-    const { page, page_size, order_by, keywords } = p;
-    this.setState({ loading: true }, () => {
-      LegacyNamespaceAPI.list({
-        page: page,
-        page_size: page_size,
-        order_by: order_by,
-        keywords: keywords,
-      }).then((response) => {
-        this.setState(() => ({
+  query(params) {
+    this.setState({ loading: true });
+    LegacyNamespaceAPI.list(params)
+      .then(({ data: { count, results } }) =>
+        this.setState({
+          count,
           loading: false,
-          params: {
-            page: page,
-            page_size: page_size,
-            order_by: order_by,
-            keywords: keywords,
-          },
-          count: response.data.count,
-          legacynamespaces: response.data.results,
-        }));
-      });
-    });
-  };
+          roleNamespaces: results,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load role namespaces`,
+          () => this.setState({ loading: false }),
+          (alert) => this.addAlert(alert),
+        ),
+      );
+  }
 
-  openModal(namespace) {
-    this.setState({ isOpenWisdomModal: true, wisdomReference: namespace.name });
+  private get updateParams() {
+    return ParamHelper.updateParamsMixin();
   }
 
   private addAlert(alert: AlertType) {
@@ -106,44 +101,44 @@ class AnsibleRoleNamespaceList extends React.Component<
   }
 
   render() {
-    const ignoredParams = [
-      'namespace',
-      'repository__name',
-      'page',
-      'page_size',
-      'sort',
-      'tag',
-      'tags',
-      'view_type',
-      'order_by',
+    const updateParams = (params) =>
+      this.updateParams(params, () => this.query(params));
+
+    const filterConfig = [
+      {
+        id: 'keywords',
+        title: t`Keywords`,
+      },
     ];
 
-    // do not pass null'ish params to the filter widget
-    const cleanParams = {};
-    for (const [key, value] of Object.entries(this.state.params)) {
-      if (ignoredParams.includes(key)) {
-        continue;
-      }
-      if (value !== undefined && value !== null && value !== '') {
-        cleanParams[key] = value;
-      }
-    }
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+      {
+        title: t`Created`,
+        id: 'created',
+        type: 'numeric' as const,
+      },
+    ];
 
-    const { loading, legacynamespaces } = this.state;
-    const noData = legacynamespaces.length === 0;
+    const { alerts, count, lightspeedModal, loading, params, roleNamespaces } =
+      this.state;
+
+    const noData =
+      count === 0 &&
+      !filterIsSet(
+        params,
+        filterConfig.map(({ id }) => id),
+      );
 
     return (
       <div>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
-        {this.state.isOpenWisdomModal && (
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        {lightspeedModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
+            closeAction={() => this.setState({ lightspeedModal: null })}
+            reference={lightspeedModal}
             scope={'legacy_namespace'}
-            reference={this.state.wisdomReference}
           />
         )}
         <BaseHeader title={t`Role Namespaces`} />
@@ -156,34 +151,39 @@ class AnsibleRoleNamespaceList extends React.Component<
           />
         ) : (
           <div>
-            <CollectionFilter
-              ignoredParams={ignoredParams}
-              params={cleanParams}
-              updateParams={this.updateParams}
+            <HubListToolbar
+              count={count}
+              filterConfig={filterConfig}
+              ignoredParams={['page', 'page_size', 'sort']}
+              params={params}
+              sortOptions={sortOptions}
+              updateParams={updateParams}
             />
 
-            <Pagination
-              params={this.state.params}
-              updateParams={this.updateParams}
-              count={this.state.count}
-            />
+            {!count ? (
+              <EmptyStateFilter />
+            ) : (
+              <>
+                <DataList aria-label={t`List of role namespaces`}>
+                  {roleNamespaces &&
+                    roleNamespaces.map((lnamespace) => (
+                      <LegacyNamespaceListItem
+                        key={lnamespace.id}
+                        namespace={lnamespace}
+                        openModal={(namespace) =>
+                          this.setState({ lightspeedModal: namespace.name })
+                        }
+                      />
+                    ))}
+                </DataList>
 
-            <DataList aria-label={t`List of role namespaces`}>
-              {this.state.legacynamespaces &&
-                this.state.legacynamespaces.map((lnamespace) => (
-                  <LegacyNamespaceListItem
-                    key={lnamespace.id}
-                    namespace={lnamespace}
-                    openModal={(namespace) => this.openModal(namespace)}
-                  />
-                ))}
-            </DataList>
-
-            <Pagination
-              params={this.state.params}
-              updateParams={this.updateParams}
-              count={this.state.count}
-            />
+                <Pagination
+                  count={count}
+                  params={params}
+                  updateParams={updateParams}
+                />
+              </>
+            )}
           </div>
         )}
       </div>

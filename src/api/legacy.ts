@@ -1,31 +1,24 @@
 import { BaseAPI } from './base';
-import { LegacyRoleDetailType } from './response-types/legacy-role';
 
 export class LegacyAPI extends BaseAPI {
-  API_VERSION = 'v1';
-
-  cachedLegacyRole: LegacyRoleDetailType;
+  sortParam = 'order_by';
 
   constructor() {
     super(API_HOST + API_BASE_PATH);
   }
 
   public mapPageToOffset(p) {
-    // override BaseAPI's function to persist page, page_size, etc ...
+    // override BaseAPI's function to persist page & page_size
     return p;
   }
 
-  get(apiPath: string) {
-    const fullPath = 'v1/' + apiPath;
-    if (fullPath.includes('?')) {
-      return this.http.get(this.getPath(fullPath));
-    } else {
-      return this.http.get(this.getPath(fullPath) + '/');
+  list(params?, apiPath?) {
+    const newParams = { ...params };
+    if (newParams['sort'] && this.sortParam !== 'sort') {
+      newParams[this.sortParam] = newParams['sort'];
+      delete newParams['sort'];
     }
-  }
 
-  getApiPath(url: string) {
-    const newUrl = `/${this.API_VERSION}/${url}`;
-    return newUrl;
+    return super.list(newParams, apiPath);
   }
 }

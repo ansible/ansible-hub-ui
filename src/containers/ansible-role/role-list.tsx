@@ -3,122 +3,142 @@ import { DataList } from '@patternfly/react-core';
 import React from 'react';
 import { LegacyRoleAPI, LegacyRoleListType } from 'src/api';
 import {
+  AlertList,
+  AlertType,
   BaseHeader,
-  CollectionFilter,
+  EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Pagination,
+  closeAlertMixin,
 } from 'src/components';
-import { RouteProps, withRouter } from 'src/utilities';
+import {
+  ParamHelper,
+  RouteProps,
+  filterIsSet,
+  handleHttpError,
+  withRouter,
+} from 'src/utilities';
 
 interface RolesState {
-  legacyroles: LegacyRoleListType[];
-  loading: boolean;
+  alerts: AlertType[];
   count: number;
+  loading: boolean;
   params: {
     page?: number;
     page_size?: number;
-    keywords?: string;
-    tags?: string[];
-    view_type?: string;
-    order_by?: string;
+    sort?: string;
   };
-  updateParams: (params) => void;
-  ignoredParams: string[];
+  roles: LegacyRoleListType[];
 }
 
 class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
-  // This is the main roles page
-
   constructor(props) {
     super(props);
+
+    const params = ParamHelper.parseParamString(props.location.search, [
+      'page',
+      'page_size',
+    ]);
+
     this.state = {
-      ...props,
+      alerts: [],
+      count: 0,
+      loading: true,
       params: {
         page: 1,
         page_size: 10,
-        order_by: 'created',
-        keywords: null,
+        sort: '-created',
+        ...params,
       },
-      loading: true,
-      count: 0,
-      legacyroles: [],
+      roles: [],
     };
   }
 
   componentDidMount() {
-    const thisQS = window.location.search;
-    const urlParams = new URLSearchParams(thisQS);
-    this.updateParams({
-      page: parseInt(urlParams.get('page'), 10) || 1,
-      page_size: parseInt(urlParams.get('page_size'), 10) || 10,
-      order_by: urlParams.get('order_by') || 'created',
-      keywords: urlParams.get('keywords'),
-      tags: urlParams.get('tags'),
+    this.query(this.state.params);
+  }
+
+  query(params) {
+    this.setState({ loading: true });
+    LegacyRoleAPI.list(params)
+      .then(({ data: { count, results } }) =>
+        this.setState({
+          count,
+          loading: false,
+          roles: results,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load roles`,
+          () => this.setState({ loading: false }),
+          (alert) => this.addAlert(alert),
+        ),
+      );
+  }
+
+  private get updateParams() {
+    return ParamHelper.updateParamsMixin();
+  }
+
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
     });
   }
 
-  updateParams = (p) => {
-    const { page, page_size, order_by, keywords, tags } = p;
-    this.setState({ loading: true }, () => {
-      LegacyRoleAPI.list({
-        page: page,
-        page_size: page_size,
-        order_by: order_by,
-        tags: tags,
-        keywords: keywords,
-      }).then((response) => {
-        this.setState(() => ({
-          loading: false,
-          params: {
-            page: page,
-            page_size: page_size,
-            order_by: order_by,
-            keywords: keywords,
-            tags: tags,
-          },
-          count: response.data.count,
-          legacyroles: response.data.results,
-        }));
-      });
-    });
-  };
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 
   render() {
-    const { loading, legacyroles } = this.state;
+    const updateParams = (params) =>
+      this.updateParams(params, () => this.query(params));
 
-    // prevent these params from showing up in the filter widget
-    const ignoredParams = [
-      'order_by',
-      'namespace',
-      'repository__name',
-      'page',
-      'page_size',
-      'sort',
-      'view_type',
+    const filterConfig = [
+      {
+        id: 'keywords',
+        title: t`Keywords`,
+      },
+      {
+        id: 'namespace',
+        title: t`Namespace`,
+      },
+      {
+        id: 'tags',
+        title: t`Tags`,
+      },
     ];
 
-    // do not pass null'ish params to the filter widget
-    const cleanParams = {};
-    for (const [key, value] of Object.entries(this.state.params)) {
-      if (ignoredParams.includes(key)) {
-        continue;
-      }
-      if (value !== undefined && value !== null && value !== '') {
-        cleanParams[key] = value;
-      }
-    }
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+      {
+        title: t`Download count`,
+        id: 'download_count',
+        type: 'numeric' as const,
+      },
+      {
+        title: t`Created`,
+        id: 'created',
+        type: 'numeric' as const,
+      },
+    ];
 
-    // this seems tricky to get right ...
+    const { alerts, count, loading, params, roles } = this.state;
+
     const noData =
-      !loading &&
-      cleanParams['keywords'] === undefined &&
-      cleanParams['tag'] == undefined &&
-      legacyroles.length == 0;
+      count === 0 &&
+      !filterIsSet(
+        params,
+        filterConfig.map(({ id }) => id),
+      );
 
     return (
       <div>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Roles`} />
         {loading ? (
           <LoadingPageSpinner />
@@ -129,34 +149,37 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
           />
         ) : (
           <div>
-            <CollectionFilter
-              ignoredParams={ignoredParams}
-              params={cleanParams}
-              updateParams={this.updateParams}
+            <HubListToolbar
+              count={count}
+              filterConfig={filterConfig}
+              ignoredParams={['page', 'page_size', 'sort']}
+              params={params}
+              sortOptions={sortOptions}
+              updateParams={updateParams}
             />
 
-            <Pagination
-              params={this.state.params}
-              updateParams={this.updateParams}
-              count={this.state.count}
-            />
+            {!count ? (
+              <EmptyStateFilter />
+            ) : (
+              <>
+                <DataList aria-label={t`List of roles`}>
+                  {roles &&
+                    roles.map((lrole) => (
+                      <LegacyRoleListItem
+                        key={lrole.id}
+                        role={lrole}
+                        show_thumbnail={true}
+                      />
+                    ))}
+                </DataList>
 
-            <DataList aria-label={t`List of roles`}>
-              {this.state.legacyroles &&
-                this.state.legacyroles.map((lrole) => (
-                  <LegacyRoleListItem
-                    key={lrole.github_user + lrole.name + lrole.id}
-                    role={lrole}
-                    show_thumbnail={true}
-                  />
-                ))}
-            </DataList>
-
-            <Pagination
-              params={this.state.params}
-              updateParams={this.updateParams}
-              count={this.state.count}
-            />
+                <Pagination
+                  count={count}
+                  params={params}
+                  updateParams={updateParams}
+                />
+              </>
+            )}
           </div>
         )}
       </div>

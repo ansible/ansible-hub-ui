@@ -24,6 +24,8 @@ import {
 } from 'src/api';
 import { EmptyStateNoData } from 'src/components';
 import {
+  AlertList,
+  AlertType,
   Breadcrumbs,
   ClipboardCopy,
   DateComponent,
@@ -33,15 +35,22 @@ import {
   Main,
   RoleRatings,
   Tag,
+  closeAlertMixin,
 } from 'src/components';
+import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, chipGroupProps, withRouter } from 'src/utilities';
+import {
+  RouteProps,
+  chipGroupProps,
+  handleHttpError,
+  withRouter,
+} from 'src/utilities';
 
 interface RoleMeta {
-  role: LegacyRoleDetailType;
+  addAlert: (alert: AlertType) => void;
   github_user: string;
   name: string;
-  id: number;
+  role: LegacyRoleDetailType;
 }
 
 interface RoleMetaReadme {
@@ -73,17 +82,24 @@ class RoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
   }
 
   componentDidMount() {
-    const url = 'roles/' + this.props.role.id + '/content';
-    LegacyRoleAPI.get(url).then((response) => {
-      this.setState(() => ({
-        readme_html: response.data.readme_html,
-      }));
-    });
+    LegacyRoleAPI.getContent(this.props.role.id)
+      .then(({ data: { readme_html } }) =>
+        this.setState({
+          readme_html,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load role content`,
+          () => null,
+          this.props.addAlert,
+        ),
+      );
   }
 
   render() {
     return (
-      <div className='legacy-role-readme-container'>
+      <div>
         <div
           className='pf-c-content'
           dangerouslySetInnerHTML={{ __html: this.state.readme_html }}
@@ -139,18 +155,25 @@ class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
   }
 
   componentDidMount() {
-    const url = 'roles/' + this.props.role.id + '/versions';
-    LegacyRoleAPI.get(url).then((response) => {
-      this.setState(() => ({
-        role_versions: response.data.results,
-        loading: false,
-      }));
-    });
+    LegacyRoleAPI.getVersions(this.props.role.id)
+      .then(({ data: { results } }) =>
+        this.setState({
+          role_versions: results,
+          loading: false,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to load role versions`,
+          () => this.setState({ loading: false }),
+          this.props.addAlert,
+        ),
+      );
   }
 
   render() {
     return (
-      <div id='versions-div'>
+      <div>
         {!this.state.loading &&
         this.state.role_versions &&
         this.state.role_versions.length == 0 ? (
@@ -158,9 +181,7 @@ class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
             title={t`No versions`}
             description={t`The role is versionless and will always install from the head/main/master branch.`}
           />
-        ) : (
-          ''
-        )}
+        ) : null}
 
         <DataList aria-label={t`List of versions`}>
           {this.state.role_versions.reverse().map((rversion) => (
@@ -175,69 +196,77 @@ class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
 }
 
 interface RoleState {
-  role: LegacyRoleDetailType;
-  github_user: string;
-  name: string;
-  id: number;
   activeItem: string;
+  alerts: AlertType[];
+  github_user: string;
+  loading: boolean;
+  name: string;
+  role: LegacyRoleDetailType;
 }
 
 class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
-    const roleUser = props.routeParams.username;
-    const roleName = props.routeParams.name;
-    this.state = {
-      id: null,
-      role: null,
-      github_user: roleUser,
-      name: roleName,
-      activeItem: 'install',
-    };
 
-    this.onSelect = (result) => {
-      this.setState({
-        activeItem: result.itemId,
-      });
+    const { username, name } = props.routeParams;
+    this.state = {
+      activeItem: 'install',
+      alerts: [],
+      github_user: username,
+      loading: true,
+      name,
+      role: null,
     };
   }
 
   componentDidMount() {
-    const url =
-      'roles/?github_user=' +
-      this.state.github_user +
-      '&name=' +
-      this.state.name;
+    LegacyRoleAPI.list({
+      github_user: this.state.github_user,
+      name: this.state.name,
+      page_size: 1,
+    })
+      .then(({ data: { results } }) =>
+        this.setState({ role: results[0], loading: false }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to find role`,
+          () => this.setState({ loading: false }),
+          (alert) => this.addAlert(alert),
+        ),
+      );
+  }
 
-    LegacyRoleAPI.get(url).then((response) => {
-      const github_user = this.state.github_user;
-      const name = this.state.name;
-      const activeItem = this.state.activeItem;
-      const role = response.data.results[0];
-      this.setState(() => ({
-        id: role.id,
-        role: role,
-        github_user: github_user,
-        name: name,
-        activeItem: activeItem,
-      }));
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
     });
   }
 
-  onSelect(e) {
-    this.setState(() => ({
-      activeItem: e.itemId,
-    }));
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 
   render() {
-    const { role } = this.state;
-    if (!role) {
+    const { activeItem, alerts, github_user, loading, name, role } = this.state;
+    if (loading) {
       return <LoadingPageWithHeader />;
     }
 
+    if (!role) {
+      return (
+        <>
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <NotFound />
+        </>
+      );
+    }
+
     const repository =
-      'https://github.com/' + role.github_user + '/' + role.github_repo;
+      'https://github.com/' +
+      encodeURIComponent(role.github_user) +
+      '/' +
+      encodeURIComponent(role.github_repo);
     const namespace = role.summary_fields.namespace;
     const namespace_url = formatPath(Paths.legacyNamespace, {
       namespaceid: namespace.id,
@@ -250,18 +279,10 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       release_date = lv.release_date;
       release_name = lv.name;
     }
-    if (
-      release_date === undefined ||
-      release_date === null ||
-      release_date === ''
-    ) {
+    if (!release_date) {
       release_date = role.modified;
     }
-    if (
-      release_name === undefined ||
-      release_name === null ||
-      release_name === ''
-    ) {
+    if (!release_name) {
       release_name = '';
     }
 
@@ -302,7 +323,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         </div>
         {release_name && <div className='hub-entry'>{release_name}</div>}
         <div className='hub-entry'>
-          <a href={repository}>
+          <a href={repository} rel='noreferrer noopener' target='_blank'>
             GitHub Repository <ExternalLinkAltIcon />
           </a>
         </div>
@@ -319,32 +340,34 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       versions: { title: t`Versions` },
     };
 
+    const addAlert = (alert) => this.addAlert(alert);
+
     const renderContent = () => {
-      if (this.state.activeItem == 'install') {
+      if (activeItem == 'install') {
         return (
           <RoleInstall
+            addAlert={addAlert}
+            github_user={github_user}
+            name={name}
             role={role}
-            github_user={this.state.github_user}
-            name={this.state.name}
-            id={role.id}
           />
         );
-      } else if (this.state.activeItem === 'documentation') {
+      } else if (activeItem === 'documentation') {
         return (
           <RoleDocs
+            addAlert={addAlert}
+            github_user={github_user}
+            name={name}
             role={role}
-            github_user={this.state.github_user}
-            name={this.state.name}
-            id={role.id}
           />
         );
-      } else if (this.state.activeItem === 'versions') {
+      } else if (activeItem === 'versions') {
         return (
           <RoleVersions
+            addAlert={addAlert}
+            github_user={github_user}
+            name={name}
             role={role}
-            github_user={this.state.github_user}
-            name={this.state.name}
-            id={role.id}
           />
         );
       } else {
@@ -358,20 +381,27 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         url: formatPath(Paths.legacyRoles),
       },
       {
-        name: this.state.github_user,
+        name: github_user,
         url: formatPath(Paths.legacyNamespace, { namespaceid: namespace.id }),
       },
       {
-        name: this.state.name,
+        name,
         url: formatPath(Paths.legacyRole, {
-          username: this.state.github_user,
-          name: this.state.name,
+          username: github_user,
+          name,
         }),
       },
     ];
 
+    const onSelect = (result) =>
+      this.setState({
+        activeItem: result.itemId,
+      });
+
     return (
       <>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+
         <DataList aria-label={t`Role Header`}>
           <DataListItem data-cy='LegacyRoleListItem'>
             {/* This renders a bit too small ...? */}
@@ -386,12 +416,12 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         </DataList>
 
         <Panel isScrollable>
-          <Nav theme='light' variant='tertiary' onSelect={this.onSelect}>
+          <Nav theme='light' variant='tertiary' onSelect={onSelect}>
             <NavList>
               {Object.keys(table).map((key) => {
                 return (
                   <NavItem
-                    isActive={this.state.activeItem === key}
+                    isActive={activeItem === key}
                     title={table[key].title}
                     key={key}
                     itemId={key}
