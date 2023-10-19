@@ -37,7 +37,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
   const latest = versions[0];
 
   const role_url = formatPath(Paths.legacyRole, {
-    username: github_user,
+    username: namespace.name,
     name,
   });
   const release_date = latest?.release_date || modified;
