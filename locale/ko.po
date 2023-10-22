@@ -1012,6 +1012,14 @@ msgstr "커뮤니티"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "커뮤니티 컬렉션에는 문서 또는 컨텐츠 수가 없지만 모든 콘텐츠가 동기화됩니다"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr ""
+
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
 msgstr "회사 이름"
@@ -2441,6 +2449,10 @@ msgstr "가져오기"
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "In order to retain all versions, leave this field blank."
 msgstr "모든 버전을 유지하려면 이 필드를 비워 둡니다."
+
+#: src/components/repositories/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
@@ -4266,8 +4278,8 @@ msgid "Signed and approved"
 msgstr "서명 및 승인됨"
 
 #: src/components/repositories/remote-form.tsx
-msgid "Signed only"
-msgstr "서명된 항목만 포함"
+#~ msgid "Signed only"
+#~ msgstr "서명된 항목만 포함"
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 msgid "Signed version(s)"
@@ -5291,8 +5303,16 @@ msgstr "웹 사이트"
 msgid "YAML requirements"
 msgstr "YAML 요구 사항"
 
+#: src/components/repositories/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr ""
+
 #: src/actions/ansible-repository-sync.tsx
-msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
 msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx
