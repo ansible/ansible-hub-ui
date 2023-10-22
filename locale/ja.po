@@ -33,7 +33,7 @@ msgstr "(アップロード済み)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} ロゴ"
 
@@ -442,7 +442,7 @@ msgstr ""
 
 #: src/components/legacy-namespace-list/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Ansible Lightspeed settings"
 msgstr "Ansible Lightspeed の設定"
@@ -1079,6 +1079,14 @@ msgstr "コミュニティー"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "コミュニティーコレクションにはドキュメントやコンテンツ数はありませんが、すべてのコンテンツが同期されます"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr ""
+
 #: src/components/shared/ratings.tsx
 msgid "Community score"
 msgstr ""
@@ -1304,6 +1312,9 @@ msgstr "新規ユーザーの作成"
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "コレクションの名前空間を作成、削除、および変更します。コレクションをアップロードおよび削除します。リモートからのコレクションを同期します。コレクションを承認および拒否します。"
 
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #: src/containers/execution-environment/registry-list.tsx
@@ -1699,8 +1710,8 @@ msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
 #: src/components/headers/collection-header.tsx
+#: src/containers/ansible-role/role-detail.tsx
 #: src/containers/collection-detail/collection-docs.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
@@ -1744,6 +1755,11 @@ msgstr "クライアント認定ファイルのダウンロード"
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Download concurrency"
 msgstr "同時実行のダウンロード"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Download count"
+msgstr ""
 
 #: src/components/shared/download-count.tsx
 msgid "Download count is the sum of all versions' download counts"
@@ -2164,6 +2180,10 @@ msgstr "リポジトリー {name} が見つかりませんでした"
 msgid "Failed to find repository version"
 msgstr "リポジトリーのバージョンが見つかりませんでした"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to find role"
+msgstr ""
+
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "ディストリビューションの一覧表示に失敗し、リポジトリーのみを削除します。"
@@ -2199,6 +2219,27 @@ msgstr "リポジトリーの読み込みに失敗しました: {error}"
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "リポジトリーの読み込みに失敗しました。"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role content"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Failed to load role namespace"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Failed to load role namespaces"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role versions"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Failed to load roles"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to load Wisdom information."
@@ -2587,6 +2628,10 @@ msgstr "インポート"
 msgid "In order to retain all versions, leave this field blank."
 msgstr "すべてのバージョンを保持するには、このフィールドを空白のままにします。"
 
+#: src/components/repositories/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
 msgstr "実行環境のインデックス作成"
@@ -2609,7 +2654,7 @@ msgstr "実行環境 \"{name}\" のインデックス化が開始されました
 
 #: src/components/collection-detail/collection-info.tsx
 #: src/components/headers/collection-header.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Install"
 msgstr "インストール"
 
@@ -2621,7 +2666,7 @@ msgstr "インストール"
 msgid "Installation"
 msgstr "インストール"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Installation:"
 msgstr "インストール:"
 
@@ -2684,6 +2729,9 @@ msgstr "キーワード"
 #: src/components/shared/multi-search-search.tsx
 #: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Keywords"
 msgstr "キーワード"
 
@@ -2795,18 +2843,19 @@ msgstr "コレクションの一覧"
 #~ msgstr "レガシー名前空間のリスト"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-msgid "List of Legacy Roles"
-msgstr "レガシーロールのリスト"
+#~ msgid "List of Legacy Roles"
+#~ msgstr "レガシーロールのリスト"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "List of role namespaces"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "List of roles"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "List of versions"
 msgstr "バージョンのリスト"
 
@@ -2944,6 +2993,9 @@ msgstr "自分のプロファイル"
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
@@ -2990,6 +3042,7 @@ msgstr "名前を空白にすることはできません。"
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -3260,12 +3313,12 @@ msgstr "結果が見つかりません"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "絞り込みの基準と一致する結果がありません。フィルター設定を変更してみてください。"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "No role namespaces yet"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "No roles yet"
 msgstr "ロールはまだありません"
 
@@ -3302,7 +3355,7 @@ msgstr "まだユーザーはありません"
 msgid "No version of {fqn} exists that matches {version_range}."
 msgstr "{version_range} に一致する {fqn} のバージョンはありません。"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "No versions"
 msgstr "バージョンなし"
 
@@ -3891,7 +3944,7 @@ msgstr "拒否"
 #~ msgid "released {0}"
 #~ msgstr "released {0}"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Released <0/>"
 msgstr "<0/> のリリース済み"
 
@@ -4178,7 +4231,7 @@ msgstr "ロール {0} をグループ {1} に割り当てられませんでし�
 msgid "Role {0} has been successfully added to {1}."
 msgstr "ロール {0} は {1} に正常に追加されました。"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Role Header"
 msgstr "ロールヘッダー"
 
@@ -4189,7 +4242,7 @@ msgstr "ロールヘッダー"
 msgid "Role name"
 msgstr "ロール名"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
 msgid "Role namespace header"
 msgstr ""
 
@@ -4198,12 +4251,12 @@ msgstr ""
 msgid "Role namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Role Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "Role namespaces will appear once created or roles are imported"
 msgstr ""
 
@@ -4212,8 +4265,8 @@ msgstr ""
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
-#: src/containers/legacy-roles/legacy-role.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/role-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
@@ -4234,8 +4287,8 @@ msgstr ""
 msgid "Roles list could not be displayed."
 msgstr "ロールリストを表示できませんでした。"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Roles will appear once imported"
 msgstr "インポートするとロールが表示されます"
 
@@ -4604,8 +4657,8 @@ msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
 #: src/components/repositories/remote-form.tsx
-msgid "Signed only"
-msgstr "署名済みのみ"
+#~ msgid "Signed only"
+#~ msgstr "署名済みのみ"
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 msgid "Signed version(s)"
@@ -4866,6 +4919,8 @@ msgstr "タグ"
 #~ msgstr "tags"
 
 #: src/components/collection-list/collection-filter.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Tags"
 msgstr "タグ"
 
@@ -5040,7 +5095,7 @@ msgstr "同期時に認証に使用するパスワード。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "The role is versionless and will always install from the head/main/master branch."
 msgstr "ロールはバージョンレスで、常に head/main/master ブランチからインストールされます。"
 
@@ -5317,7 +5372,7 @@ msgstr "{0} を更新"
 
 #: src/components/collection-list/collection-list-item.tsx
 #: src/components/legacy-role-list/legacy-role-item.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
 msgstr "<0/> に更新"
 
@@ -5634,7 +5689,7 @@ msgid "Version:"
 msgstr "バージョン:"
 
 #: src/containers/ansible-repository/detail.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Versions"
 msgstr "バージョン"
 
@@ -5772,8 +5827,16 @@ msgstr ""
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
+#: src/components/repositories/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr ""
+
 #: src/actions/ansible-repository-sync.tsx
-msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
 msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx

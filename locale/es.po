@@ -33,7 +33,7 @@ msgstr "(cargado)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} Logotipo"
 
@@ -442,7 +442,7 @@ msgstr ""
 
 #: src/components/legacy-namespace-list/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Ansible Lightspeed settings"
 msgstr "Configuración de Ansible Lightspeed"
@@ -1079,6 +1079,14 @@ msgstr "Comunidad"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Las colecciones de la comunidad no tienen documentos ni recuentos de contenido, sino que se sincroniza todo el contenido"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr ""
+
 #: src/components/shared/ratings.tsx
 msgid "Community score"
 msgstr ""
@@ -1304,6 +1312,9 @@ msgstr "Crear nuevo usuario"
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "Crear, eliminar y modificar los espacios de nombres de las colecciones. Cargar y eliminar colecciones. Sincronizar colecciones desde mandos a distancia. Aprobar y rechazar colecciones."
 
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #: src/containers/execution-environment/registry-list.tsx
@@ -1699,8 +1710,8 @@ msgid "Docs site"
 msgstr "Sitio de Docs"
 
 #: src/components/headers/collection-header.tsx
+#: src/containers/ansible-role/role-detail.tsx
 #: src/containers/collection-detail/collection-docs.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
@@ -1744,6 +1755,11 @@ msgstr "Descargar el archivo de certificación del cliente"
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Download concurrency"
 msgstr "Descargar la concurrencia"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Download count"
+msgstr ""
 
 #: src/components/shared/download-count.tsx
 msgid "Download count is the sum of all versions' download counts"
@@ -2164,6 +2180,10 @@ msgstr "No se ha encontrado el repositorio {name}"
 msgid "Failed to find repository version"
 msgstr "Error al encontrar la versión del repositorio"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to find role"
+msgstr ""
+
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "Fallo al listar distribuciones, eliminando solo el repositorio."
@@ -2199,6 +2219,27 @@ msgstr "Error al cargar repositorios: {error}"
 #: src/components/repo-selector/multiple-repo-selector.tsx
 msgid "Failed to load repositories."
 msgstr "Error al cargar repositorios."
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role content"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Failed to load role namespace"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Failed to load role namespaces"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role versions"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Failed to load roles"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Failed to load Wisdom information."
@@ -2587,6 +2628,10 @@ msgstr "Importaciones"
 msgid "In order to retain all versions, leave this field blank."
 msgstr "Para conservar todas las versiones, deje este campo en blanco."
 
+#: src/components/repositories/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
 msgstr "Entornos de ejecución de índices"
@@ -2609,7 +2654,7 @@ msgstr "Se inició la indexación para el entorno de ejecución \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx
 #: src/components/headers/collection-header.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Install"
 msgstr "Instalar"
 
@@ -2621,7 +2666,7 @@ msgstr "Instalar"
 msgid "Installation"
 msgstr "Instalación"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Installation:"
 msgstr "Instalación:"
 
@@ -2684,6 +2729,9 @@ msgstr "palabras clave"
 #: src/components/shared/multi-search-search.tsx
 #: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Keywords"
 msgstr "Palabras clave"
 
@@ -2795,18 +2843,19 @@ msgstr "Lista de colecciones"
 #~ msgstr "Lista de espacios de nombres heredados"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx
-msgid "List of Legacy Roles"
-msgstr "Lista de roles heredados"
+#~ msgid "List of Legacy Roles"
+#~ msgstr "Lista de roles heredados"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "List of role namespaces"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "List of roles"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "List of versions"
 msgstr "Lista de versiones"
 
@@ -2944,6 +2993,9 @@ msgstr "Mi perfil"
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
@@ -2990,6 +3042,7 @@ msgstr "El nombre no debe estar vacío."
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -3260,12 +3313,12 @@ msgstr "No se encontraron resultados"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "Ningún resultado coincide con los criterios de filtrado. Pruebe cambiar la configuración del filtro."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "No role namespaces yet"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "No roles yet"
 msgstr "No hay roles todavía"
 
@@ -3302,7 +3355,7 @@ msgstr "No existe ningún usuario"
 msgid "No version of {fqn} exists that matches {version_range}."
 msgstr "No existe ninguna versión de {fqn} que coincida con {version_range}."
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "No versions"
 msgstr "No hay versiones"
 
@@ -3891,7 +3944,7 @@ msgstr "Rechazado"
 #~ msgid "released {0}"
 #~ msgstr "released {0}"
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Released <0/>"
 msgstr "Lanzado <0/>"
 
@@ -4178,7 +4231,7 @@ msgstr "El rol {0} no se pudo asignar al grupo {1}."
 msgid "Role {0} has been successfully added to {1}."
 msgstr "El rol {0} se agregó correctamente a {1}."
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Role Header"
 msgstr "Encabezado del rol"
 
@@ -4189,7 +4242,7 @@ msgstr "Encabezado del rol"
 msgid "Role name"
 msgstr "Nombre del rol"
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
 msgid "Role namespace header"
 msgstr ""
 
@@ -4198,12 +4251,12 @@ msgstr ""
 msgid "Role namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Role Namespaces"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 msgid "Role namespaces will appear once created or roles are imported"
 msgstr ""
 
@@ -4212,8 +4265,8 @@ msgstr ""
 #~ msgid "role.github_user logo"
 #~ msgstr "role.github_user logo"
 
-#: src/containers/legacy-roles/legacy-role.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/role-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/role-management/role-create.tsx
 #: src/containers/role-management/role-edit.tsx
@@ -4234,8 +4287,8 @@ msgstr ""
 msgid "Roles list could not be displayed."
 msgstr "No se pudo mostrar la lista de roles."
 
-#: src/containers/legacy-namespaces/legacy-namespace.tsx
-#: src/containers/legacy-roles/legacy-roles.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Roles will appear once imported"
 msgstr "Los roles aparecerán una vez sean importados"
 
@@ -4604,8 +4657,8 @@ msgid "Signed and approved"
 msgstr "Firmado y aprobado"
 
 #: src/components/repositories/remote-form.tsx
-msgid "Signed only"
-msgstr "Solo firmado"
+#~ msgid "Signed only"
+#~ msgstr "Solo firmado"
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 msgid "Signed version(s)"
@@ -4866,6 +4919,8 @@ msgstr "Etiqueta"
 #~ msgstr "tags"
 
 #: src/components/collection-list/collection-filter.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
 msgid "Tags"
 msgstr "Etiquetas"
 
@@ -5040,7 +5095,7 @@ msgstr "Contraseña que se utilizará para la autenticación al sincronizar."
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Esto no es necesario cuando se utiliza un token."
 
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "The role is versionless and will always install from the head/main/master branch."
 msgstr "El rol no tiene versiones y siempre se instalará desde la rama head/main/master."
 
@@ -5317,7 +5372,7 @@ msgstr "se actualizó {0}"
 
 #: src/components/collection-list/collection-list-item.tsx
 #: src/components/legacy-role-list/legacy-role-item.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
 msgstr "Actualizado <0/>"
 
@@ -5634,7 +5689,7 @@ msgid "Version:"
 msgstr "Versión:"
 
 #: src/containers/ansible-repository/detail.tsx
-#: src/containers/legacy-roles/legacy-role.tsx
+#: src/containers/ansible-role/role-detail.tsx
 msgid "Versions"
 msgstr "Versiones"
 
@@ -5772,8 +5827,16 @@ msgstr ""
 msgid "YAML requirements"
 msgstr "Requisitos de YAML"
 
+#: src/components/repositories/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr ""
+
 #: src/actions/ansible-repository-sync.tsx
-msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
 msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx
