@@ -1024,6 +1024,14 @@ msgstr "コミュニティー"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "コミュニティーコレクションにはドキュメントやコンテンツ数はありませんが、すべてのコンテンツが同期されます"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr ""
+
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
 msgstr "会社名"
@@ -2477,6 +2485,10 @@ msgstr "インポート"
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "In order to retain all versions, leave this field blank."
 msgstr "すべてのバージョンを保持するには、このフィールドを空白のままにします。"
+
+#: src/components/repositories/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
@@ -4358,8 +4370,8 @@ msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
 #: src/components/repositories/remote-form.tsx
-msgid "Signed only"
-msgstr "署名済みのみ"
+#~ msgid "Signed only"
+#~ msgstr "署名済みのみ"
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 msgid "Signed version(s)"
@@ -5412,8 +5424,16 @@ msgstr "Web サイト"
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
+#: src/components/repositories/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr ""
+
 #: src/actions/ansible-repository-sync.tsx
-msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
 msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx

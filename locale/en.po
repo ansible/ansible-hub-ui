@@ -1025,6 +1025,14 @@ msgstr "Community"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Community collections do not have docs nor content counts, but all content gets synchronized"
 
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+
+#: src/components/repositories/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr "Community content will never be synced if this setting is enabled"
+
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
 msgstr "Company name"
@@ -2478,6 +2486,10 @@ msgstr "Imports"
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "In order to retain all versions, leave this field blank."
 msgstr "In order to retain all versions, leave this field blank."
+
+#: src/components/repositories/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr "Include all dependencies when syncing a collection."
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
@@ -4359,8 +4371,8 @@ msgid "Signed and approved"
 msgstr "Signed and approved"
 
 #: src/components/repositories/remote-form.tsx
-msgid "Signed only"
-msgstr "Signed only"
+#~ msgid "Signed only"
+#~ msgstr "Signed only"
 
 #: src/components/signing/sign-all-certificates-modal.tsx
 msgid "Signed version(s)"
@@ -5413,9 +5425,17 @@ msgstr "Website"
 msgid "YAML requirements"
 msgstr "YAML requirements"
 
+#: src/components/repositories/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr "YAML requirements are required to sync from Galaxy"
+
 #: src/actions/ansible-repository-sync.tsx
-msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
-msgstr "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgid "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+#~ msgstr "YAML requirements are required to sync from Galaxy - you can <0>edit the {name} remote</0> to add requirements."
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
+msgstr "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
 
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
