@@ -34,7 +34,8 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
     name,
     summary_fields: { namespace, versions, tags },
   } = role;
-  const latest = versions[0];
+  // assume versions are sorted oldest to newest ...
+  const latest = versions[versions.length - 1];
 
   const role_url = formatPath(Paths.legacyRole, {
     username: namespace.name,
