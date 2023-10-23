@@ -5,11 +5,11 @@ export class API extends LegacyAPI {
   sortParam = 'order_by';
 
   getContent(id) {
-    return super.get(id + '/content/');
+    return super.get(id + '/content');
   }
 
   getVersions(id) {
-    return super.get(id + '/versions/');
+    return super.get(id + '/versions');
   }
 
   // list(params?)
