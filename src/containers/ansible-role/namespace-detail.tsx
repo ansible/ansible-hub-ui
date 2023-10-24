@@ -102,7 +102,7 @@ class NamespaceRoles extends React.Component<
     this.setState({ loading: true });
     LegacyRoleAPI.list({
       ...params,
-      github_user: namespace.name,
+      namespace: namespace.name,
     })
       .then(({ data: { count, results } }) =>
         this.setState({

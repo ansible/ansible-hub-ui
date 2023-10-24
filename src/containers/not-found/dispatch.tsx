@@ -52,7 +52,7 @@ export const Dispatch = ({ location, navigate }: RouteProps) => {
 
     if (featureFlags.legacy_roles) {
       wait.push(
-        LegacyRoleAPI.list({ github_user: namespace, name })
+        LegacyRoleAPI.list({ name, namespace })
           .then(({ data: { results } }) => results || [])
           .catch(() => [])
           .then((r) => (setRoles(r), r)),
