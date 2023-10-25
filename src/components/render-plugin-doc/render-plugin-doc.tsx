@@ -644,47 +644,75 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private renderChoices(option) {
-    let choices, defaul;
+  private renderLegend(legend) {
+    if (!legend) {
+      return null;
+    }
 
-    if (option['type'] === 'bool') {
-      choices = ['true', 'false'];
-      if (option['default'] === true) {
-        defaul = 'true';
-      } else if (option['default'] === false) {
-        defaul = 'false';
-      }
-    } else {
-      choices = option['choices'] || [];
-      defaul = option['default'];
+    if (!Array.isArray(legend)) {
+      legend = [legend];
     }
 
     return (
-      <React.Fragment>
+      <>
+        {' - '}
+        {legend.map((d) => (
+          <p>{this.applyDocFormatters(d)}</p>
+        ))}
+      </>
+    );
+  }
+
+  private renderChoices(option) {
+    let choices,
+      defaultChoice,
+      legends = {};
+
+    if (option['type'] === 'bool') {
+      choices = ['true', 'false'];
+
+      if (option['default'] === true) {
+        defaultChoice = 'true';
+      } else if (option['default'] === false) {
+        defaultChoice = 'false';
+      }
+    } else {
+      choices = option['choices'] || [];
+      defaultChoice = option['default'];
+    }
+
+    if (typeof choices === 'object' && !Array.isArray(choices)) {
+      legends = choices;
+      choices = Object.keys(choices);
+    }
+
+    return (
+      <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
           <div>
             <span className='option-name'>Choices: </span>
             <ul>
               {choices.map((c, i) => (
                 <li key={i}>
-                  {c === defaul ? (
+                  {c === defaultChoice ? (
                     <span className='blue'>{c} &nbsp;&larr;</span>
                   ) : (
                     c
                   )}
+                  {this.renderLegend(legends[c])}
                 </li>
               ))}
             </ul>
           </div>
         ) : null}
 
-        {defaul && !choices.includes(defaul) ? (
+        {defaultChoice && !choices.includes(defaultChoice) ? (
           <span>
             <span className='option-name'>Default: </span>
-            <span className='blue'>{defaul}</span>
+            <span className='blue'>{defaultChoice}</span>
           </span>
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 
