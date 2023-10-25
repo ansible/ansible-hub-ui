@@ -52,134 +52,134 @@ class TokenInsights extends React.Component<RouteProps, IState> {
     }" --fail --silent --show-error --output /dev/null`;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Connect to Hub`} />
         <Main>
-          <section className='body pf-c-content'>
-            <h2>{t`Connect Private Automation Hub`}</h2>
-            <p>
-              <Trans>
-                Use the Server URL below to sync certified collections to the
-                Red Hat Certified repository in your private Automation Hub. If
-                you wish to sync validated content, you can add a remote with a
-                server url pointed to the validated repo.
-              </Trans>
-            </p>
-          </section>
-          <section className='body pf-c-content'>
-            <h2>{t`Connect the ansible-galaxy client`}</h2>
-            <p>
-              <Trans>
-                Documentation on how to configure the{' '}
-                <code>ansible-galaxy</code> client can be found{' '}
-                <a href={UI_DOCS_URL} target='_blank' rel='noreferrer'>
-                  here
-                </a>
-                . Use the following parameters to configure the client.
-              </Trans>
-            </p>
-          </section>
-          <section className='body pf-c-content'>
-            <h2>{t`Offline token`}</h2>
-            <p>
-              <Trans>
-                Use this token to authenticate clients that need to download
-                content from Automation Hub. This is a secret token used to
-                protect your content. Store your API token in a secure location.
-              </Trans>
-            </p>
-            {tokenData ? (
-              <div>
-                <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
-              </div>
-            ) : (
-              <div>
-                <Button
-                  onClick={() => this.loadToken()}
-                >{t`Load token`}</Button>
-              </div>
-            )}
-            <div
-              className='pf-c-content'
-              style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
-            >
-              <span>
+          <section className='pf-c-content'>
+            <section className='body'>
+              <h2>{t`Connect Private Automation Hub`}</h2>
+              <p>
                 <Trans>
-                  The token will expire after 30 days of inactivity. Run the
-                  command below periodically to prevent your token from
-                  expiring.
+                  Use the Server URL below to sync certified collections to the
+                  Red Hat Certified repository in your private Automation Hub.
+                  If you wish to sync validated content, you can add a remote
+                  with a server url pointed to the validated repo.
                 </Trans>
-              </span>
-              <ClipboardCopy
-                isCode
-                isReadOnly
-                variant={ClipboardCopyVariant.expansion}
-              >
-                {renewTokenCmd}
-              </ClipboardCopy>
-            </div>
-            <h2>{t`Manage tokens`}</h2>
-            <Trans>
-              To revoke a token or see all of your tokens, visit the{' '}
-              <a
-                href='https://sso.redhat.com/auth/realms/redhat-external/account/#/applications'
-                target='_blank'
-                rel='noreferrer'
-              >
-                offline API token management
-              </a>{' '}
-              page.
-            </Trans>
-          </section>
-          <section className='body pf-c-content'>
-            <h2>{t`Server URL`}</h2>
-            <p>
+              </p>
+            </section>
+            <section className='body'>
+              <h2>{t`Connect the ansible-galaxy client`}</h2>
+              <p>
+                <Trans>
+                  Documentation on how to configure the{' '}
+                  <code>ansible-galaxy</code> client can be found{' '}
+                  <a href={UI_DOCS_URL} target='_blank' rel='noreferrer'>
+                    here
+                  </a>
+                  . Use the following parameters to configure the client.
+                </Trans>
+              </p>
+            </section>
+            <section className='body'>
+              <h2>{t`Offline token`}</h2>
+              <p>
+                <Trans>
+                  Use this token to authenticate clients that need to download
+                  content from Automation Hub. This is a secret token used to
+                  protect your content. Store your API token in a secure
+                  location.
+                </Trans>
+              </p>
+              {tokenData ? (
+                <div>
+                  <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    onClick={() => this.loadToken()}
+                  >{t`Load token`}</Button>
+                </div>
+              )}
+              <div style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+                <span>
+                  <Trans>
+                    The token will expire after 30 days of inactivity. Run the
+                    command below periodically to prevent your token from
+                    expiring.
+                  </Trans>
+                </span>
+                <ClipboardCopy
+                  isCode
+                  isReadOnly
+                  variant={ClipboardCopyVariant.expansion}
+                >
+                  {renewTokenCmd}
+                </ClipboardCopy>
+              </div>
+              <h2>{t`Manage tokens`}</h2>
               <Trans>
-                Use this URL to configure the API endpoints that clients need to
-                download certified content from Automation Hub. Synclists are
-                deprecated in AAP 2.4 and will be removed in a future release,
-                instead use client-side requirements.yml, see AAP 2.4
-                documentation.
-              </Trans>
-            </p>
-            <ClipboardCopy isReadOnly>
-              {getRepoURL('published', true)}
-            </ClipboardCopy>
-          </section>
-          <section className='body pf-c-content'>
-            <h2>{t`SSO URL`}</h2>
-            <p>
-              <Trans>
-                Use this URL to configure the authentication URLs that clients
-                need to download content from Automation Hub.
-              </Trans>
-            </p>
-            <ClipboardCopy isReadOnly>
-              https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-            </ClipboardCopy>
-          </section>
-          <section className='body pf-c-content'>
-            <h2>{t`CRC public key`}</h2>
-            <p>
-              <Trans>
-                We use a number of keys to sign our software packages. The
-                necessary public keys are included in the relevant products and
-                are used to automatically verify software updates. You can also
-                verify the packages manually using the keys on this page. More
-                information can be found{' '}
+                To revoke a token or see all of your tokens, visit the{' '}
                 <a
-                  href='https://access.redhat.com/security/team/key'
+                  href='https://sso.redhat.com/auth/realms/redhat-external/account/#/applications'
                   target='_blank'
                   rel='noreferrer'
                 >
-                  here.
-                </a>
+                  offline API token management
+                </a>{' '}
+                page.
               </Trans>
-            </p>
+            </section>
+            <section className='body'>
+              <h2>{t`Server URL`}</h2>
+              <p>
+                <Trans>
+                  Use this URL to configure the API endpoints that clients need
+                  to download certified content from Automation Hub. Synclists
+                  are deprecated in AAP 2.4 and will be removed in a future
+                  release, instead use client-side requirements.yml, see AAP 2.4
+                  documentation.
+                </Trans>
+              </p>
+              <ClipboardCopy isReadOnly>
+                {getRepoURL('published', true)}
+              </ClipboardCopy>
+            </section>
+            <section className='body'>
+              <h2>{t`SSO URL`}</h2>
+              <p>
+                <Trans>
+                  Use this URL to configure the authentication URLs that clients
+                  need to download content from Automation Hub.
+                </Trans>
+              </p>
+              <ClipboardCopy isReadOnly>
+                https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+              </ClipboardCopy>
+            </section>
+            <section className='body'>
+              <h2>{t`CRC public key`}</h2>
+              <p>
+                <Trans>
+                  We use a number of keys to sign our software packages. The
+                  necessary public keys are included in the relevant products
+                  and are used to automatically verify software updates. You can
+                  also verify the packages manually using the keys on this page.
+                  More information can be found{' '}
+                  <a
+                    href='https://access.redhat.com/security/team/key'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    here.
+                  </a>
+                </Trans>
+              </p>
+            </section>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
