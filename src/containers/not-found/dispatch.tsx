@@ -28,10 +28,10 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
   <h2 className='pf-c-title'>{children}</h2>
 );
 
-export const Dispatch = (props: RouteProps) => {
+export const Dispatch = ({ location, navigate }: RouteProps) => {
   const { featureFlags } = useContext();
 
-  const { pathname } = ParamHelper.parseParamString(props.location.search) as {
+  const { pathname } = ParamHelper.parseParamString(location.search) as {
     pathname: string;
   };
 
@@ -41,15 +41,56 @@ export const Dispatch = (props: RouteProps) => {
   const [roles, setRoles] = useState(null);
 
   useEffect(() => {
-    CollectionVersionAPI.list({ namespace, name, is_highest: true })
-      .then(({ data: { data } }) => setCollections(data || []))
-      .catch(() => setCollections([]));
+    const wait = [];
+
+    wait.push(
+      CollectionVersionAPI.list({ namespace, name, is_highest: true })
+        .then(({ data: { data } }) => data || [])
+        .catch(() => [])
+        .then((c) => (setCollections(c), c)),
+    );
 
     if (featureFlags.legacy_roles) {
-      LegacyRoleAPI.list({ github_user: namespace, name })
-        .then(({ data: { results } }) => setRoles(results || []))
-        .catch(() => setRoles([]));
+      wait.push(
+        LegacyRoleAPI.list({ github_user: namespace, name })
+          .then(({ data: { results } }) => results || [])
+          .catch(() => [])
+          .then((r) => (setRoles(r), r)),
+      );
     }
+
+    Promise.all(wait).then(([collections, roles]) => {
+      if (collections.length === 1 && !roles?.length) {
+        const {
+          collection_version: { name: collection, namespace },
+          repository: { name: repo },
+        } = collections[0];
+
+        navigate(
+          formatPath(Paths.collectionByRepo, {
+            collection,
+            namespace,
+            repo,
+          }),
+        );
+      }
+
+      if (roles.length === 1 && !collections.length) {
+        const {
+          name,
+          summary_fields: {
+            namespace: { name: username },
+          },
+        } = roles[0];
+
+        navigate(
+          formatPath(Paths.legacyRole, {
+            username,
+            name,
+          }),
+        );
+      }
+    });
   }, [pathname]);
 
   return (
