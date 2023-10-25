@@ -175,7 +175,8 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               <p>
                 <Trans>
                   Use this URL to configure the API endpoints that clients need
-                  to download certified content from Automation Hub.{' '}
+                  to download <strong>certified</strong> content from Automation
+                  Hub.{' '}
                 </Trans>
               </p>
               <ClipboardCopy isReadOnly>
@@ -183,8 +184,18 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               </ClipboardCopy>
               <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
                 <Trans>
+                  Use this URL for <strong>validated</strong> content from
+                  Automation Hub.{' '}
+                </Trans>
+              </p>
+              <ClipboardCopy isReadOnly>
+                {getRepoURL('validated')}
+              </ClipboardCopy>
+              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+                <Trans>
                   Synclists are deprecated in AAP 2.4 and will be removed in a
-                  future release, use client-side requirements.yml instead.
+                  future release, use client-side <code>requirements.yml</code>{' '}
+                  instead.
                   <br />
                   If you&apos;re using sync toggles with AAP 2.3 or older, you
                   will need to use a different URL:
