@@ -273,11 +273,10 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
     });
     let release_date = null;
     let release_name = null;
-    const ix = role.summary_fields.versions.length - 1;
-    const lv = role.summary_fields.versions[ix];
-    if (lv !== undefined && lv !== null) {
-      release_date = lv.release_date;
-      release_name = lv.name;
+    const last_version = role.summary_fields.versions[0];
+    if (last_version) {
+      release_date = last_version.release_date;
+      release_name = last_version.name;
     }
     if (!release_date) {
       release_date = role.modified;
