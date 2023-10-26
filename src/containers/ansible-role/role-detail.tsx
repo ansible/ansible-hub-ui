@@ -117,9 +117,7 @@ class RoleVersion extends React.Component<RoleVersionProps> {
   render() {
     return (
       <DataListItemRow>
-        <DataListCell alignRight>
-          {this.props.role_version.version}
-        </DataListCell>
+        <DataListCell alignRight>{this.props.role_version.name}</DataListCell>
 
         <DataListCell alignRight>
           <Trans>
