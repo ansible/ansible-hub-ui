@@ -20,10 +20,6 @@ export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   className?: string;
   /** Flag for having the label group default to expanded */
   defaultIsOpen?: boolean;
-  /** Customizable "Show Less" text string */
-  expandedText?: string;
-  /** Customizeable template string. Use variable "${remaining}" for the overflow label count. */
-  collapsedText?: string;
   /** Category name text for the label group category.  If this prop is supplied the label group with have a label and category styling applied */
   categoryName?: string;
   /** Aria label for label group that does not have a category name */
@@ -87,7 +83,6 @@ export class LabelGroup extends React.Component<
   private headingRef = React.createRef<HTMLSpanElement>();
 
   static defaultProps: LabelGroupProps = {
-    ...chipGroupProps(),
     categoryName: '',
     defaultIsOpen: false,
     numLabels: 3,
@@ -165,8 +160,6 @@ export class LabelGroup extends React.Component<
       'aria-label': ariaLabel,
       onClick,
       numLabels,
-      expandedText,
-      collapsedText,
       /* eslint-disable @typescript-eslint/no-unused-vars */
       defaultIsOpen,
       tooltipPosition,
@@ -178,6 +171,8 @@ export class LabelGroup extends React.Component<
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
     } = this.props;
+    const { collapsedText, expandedText } = chipGroupProps();
+
     const { isOpen } = this.state;
     const renderedChildren = React.Children.toArray(children);
     const numChildren = renderedChildren.length;
