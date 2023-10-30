@@ -113,7 +113,10 @@ export class LabelGroup extends React.Component<
     });
   }
 
-  toggleCollapse = () => {
+  toggleCollapse = (e) => {
+    // Label isOverflowLabel renders a button, but not button type=button, breaks forms
+    e.preventDefault();
+
     this.setState((prevState) => ({
       isOpen: !prevState.isOpen,
       isTooltipVisible: Boolean(

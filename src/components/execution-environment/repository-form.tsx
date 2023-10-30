@@ -5,7 +5,6 @@ import {
   FormGroup,
   InputGroup,
   Label,
-  LabelGroup,
   Modal,
   Spinner,
   TextArea,
@@ -23,6 +22,7 @@ import {
   AlertList,
   AlertType,
   HelperText,
+  LabelGroup,
   closeAlertMixin,
 } from 'src/components';
 import {
@@ -388,7 +388,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       this.setState({ formErrors: { ...this.state.formErrors, name: null } });
       return;
     } else {
-      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`;
+      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and zero or one "/".`;
       this.setState({ formErrors: { ...this.state.formErrors, name: error } });
     }
   }
@@ -420,7 +420,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
   private addTags(tags, key: 'includeTags' | 'excludeTags') {
     const current = new Set(this.state[key]);
-    tags.split(/\s+|\s*,\s*/).forEach((tag) => current.add(tag));
+    tags.split(/\s+|\s*,\s*/).forEach((tag) => tag && current.add(tag));
 
     this.setState({
       [key]: Array.from(current.values()),
