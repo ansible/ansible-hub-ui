@@ -4,7 +4,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  LabelGroup,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -12,13 +11,14 @@ import { LegacyRoleDetailType } from 'src/api';
 import {
   DateComponent,
   DownloadCount,
+  LabelGroup,
   Logo,
   ProviderLink,
   RoleRatings,
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { chipGroupProps, getProviderInfo } from 'src/utilities';
+import { getProviderInfo } from 'src/utilities';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -69,7 +69,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
       </div>
       <div className='hub-entry'>{description}</div>
       <div className='hub-entry'>
-        <LabelGroup {...chipGroupProps()}>
+        <LabelGroup>
           {tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}

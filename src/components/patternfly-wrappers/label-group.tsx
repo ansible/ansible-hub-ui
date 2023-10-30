@@ -11,6 +11,7 @@ import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
 import React from 'react';
+import { chipGroupProps } from 'src/utilities';
 
 export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   /** Content rendered inside the label group. Should be <Label> elements. */
@@ -86,8 +87,7 @@ export class LabelGroup extends React.Component<
   private headingRef = React.createRef<HTMLSpanElement>();
 
   static defaultProps: LabelGroupProps = {
-    expandedText: 'Show Less',
-    collapsedText: '${remaining} more',
+    ...chipGroupProps(),
     categoryName: '',
     defaultIsOpen: false,
     numLabels: 3,
