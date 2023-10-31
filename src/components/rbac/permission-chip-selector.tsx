@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
 import {
   Label,
-  LabelGroup,
   Select,
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
 import React from 'react';
+import { LabelGroup } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
 
@@ -50,7 +50,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       }));
 
       return (
-        <LabelGroup {...chipGroupProps()}>
+        <LabelGroup>
           {items.length ? null : (
             <Label key='placeholder'>{t`No permission`}</Label>
           )}
