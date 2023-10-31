@@ -4,7 +4,6 @@ import {
   ButtonVariant,
   DropdownItem,
   Label,
-  LabelGroup,
   Spinner,
 } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
@@ -14,7 +13,7 @@ import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/excl
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionAPI, CollectionVersionSearch } from 'src/api';
-import { DateComponent, ListItemActions } from 'src/components';
+import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
 import { IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 

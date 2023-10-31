@@ -5,7 +5,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  LabelGroup,
   Nav,
   NavItem,
   NavList,
@@ -28,6 +27,7 @@ import {
   ClipboardCopy,
   DateComponent,
   DownloadCount,
+  LabelGroup,
   LoadingPageWithHeader,
   Logo,
   Main,
@@ -35,7 +35,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, chipGroupProps, withRouter } from 'src/utilities';
+import { RouteProps, withRouter } from 'src/utilities';
 
 interface RoleMeta {
   role: LegacyRoleDetailType;
@@ -295,7 +295,7 @@ class LegacyRole extends React.Component<RouteProps, IProps> {
           </div>
           <div className='hub-entry'>{this.state.role.description}</div>
           <div className='hub-entry'>
-            <LabelGroup {...chipGroupProps()}>
+            <LabelGroup>
               {this.state.role.summary_fields.tags.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}
