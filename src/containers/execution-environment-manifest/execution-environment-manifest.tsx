@@ -11,7 +11,6 @@ import {
   DataListItemRow,
   Flex,
   FlexItem,
-  LabelGroup,
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
@@ -21,18 +20,14 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
+  LabelGroup,
   LoadingPageWithHeader,
   Main,
   ShaLabel,
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import {
-  RouteProps,
-  chipGroupProps,
-  getHumanSize,
-  withRouter,
-} from 'src/utilities';
+import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
 import { withContainerParamFix } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
@@ -136,7 +131,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
             </ClipboardCopyButton>
           </div>
 
-          <LabelGroup {...chipGroupProps()} numLabels={6}>
+          <LabelGroup numLabels={6}>
             {labels.map((label) => (
               <TagLabel tag={label} key={label} />
             ))}

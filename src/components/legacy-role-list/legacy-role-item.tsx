@@ -4,17 +4,21 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  LabelGroup,
   Text,
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyRoleDetailType } from 'src/api';
-import { DateComponent, DownloadCount, Logo, Tag } from 'src/components';
+import {
+  DateComponent,
+  DownloadCount,
+  LabelGroup,
+  Logo,
+  Tag,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { chipGroupProps } from 'src/utilities';
 import './legacy-role-item.scss';
 
 interface LegacyRoleProps {
@@ -67,7 +71,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
             size='70px'
             unlockWidth
             width='97px'
-          ></Logo>
+          />
         </DataListCell>,
       );
     }
@@ -88,7 +92,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
         </div>
         <div className='hub-entry'>{role.description}</div>
         <div className='hub-entry'>
-          <LabelGroup {...chipGroupProps()}>
+          <LabelGroup>
             {role.summary_fields.tags.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
             ))}
