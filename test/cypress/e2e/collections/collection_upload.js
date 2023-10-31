@@ -49,7 +49,7 @@ describe('Collection Upload Tests', () => {
     );
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
-    cy.contains('New version of testcollection');
+    cy.contains('New version of testspace.testcollection');
 
     cy.visit(
       `${uiPrefix}collections?page_size=10&view_type=card&keywords=testcollection`,
@@ -57,7 +57,7 @@ describe('Collection Upload Tests', () => {
     cy.contains('testcollection');
     cy.get('button[aria-label="Actions"]').click();
     cy.contains('Upload new version').click();
-    cy.contains('New version of testcollection');
+    cy.contains('New version of testspace.testcollection');
   });
 
   it('should see upload new collection version in collection detail when user does have permissions', () => {
@@ -66,7 +66,7 @@ describe('Collection Upload Tests', () => {
     cy.contains('testcollection');
     cy.get('[data-cy="kebab-toggle"] button[aria-label="Actions"]').click();
     cy.contains('Upload new version').click();
-    cy.contains('New version of testcollection');
+    cy.contains('New version of testspace.testcollection');
   });
 
   it('user should not be able to upload new collection without permissions', () => {
