@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
-import { Label, LabelGroup } from '@patternfly/react-core';
+import { Label } from '@patternfly/react-core';
 import React from 'react';
+import { LabelGroup } from 'src/components';
 
 export const PulpLabels = ({ labels }: { labels: Record<string, string> }) => {
   if (!labels || !Object.keys(labels).length) {

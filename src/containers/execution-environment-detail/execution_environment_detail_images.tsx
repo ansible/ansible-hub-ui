@@ -3,7 +3,6 @@ import {
   Button,
   Checkbox,
   DropdownItem,
-  LabelGroup,
   Text,
   Toolbar,
   ToolbarContent,
@@ -23,6 +22,7 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  LabelGroup,
   ListItemActions,
   LoadingPageSpinner,
   Pagination,
@@ -36,7 +36,6 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
-  chipGroupProps,
   errorMessage,
   filterIsSet,
   getContainersURL,
@@ -436,10 +435,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ) : null}
           </td>
           <td>
-            <LabelGroup
-              {...chipGroupProps()}
-              className={'hub-c-label-group-tags-column'}
-            >
+            <LabelGroup className={'hub-c-label-group-tags-column'}>
               {image.tags
                 .sort()
                 .map((tag) =>

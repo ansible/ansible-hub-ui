@@ -3,7 +3,6 @@ import {
   Button,
   DropdownItem,
   Label,
-  LabelGroup,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -25,6 +24,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  LabelGroup,
   ListItemActions,
   LoadingPageSpinner,
   Main,
@@ -37,7 +37,6 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RouteProps,
-  chipGroupProps,
   errorMessage,
   filterIsSet,
   withRouter,
@@ -358,7 +357,7 @@ class UserList extends React.Component<RouteProps, IState> {
         <td>{user.last_name}</td>
         <td>{user.email}</td>
         <td>
-          <LabelGroup {...chipGroupProps()}>
+          <LabelGroup>
             {user.groups.map((g) => (
               <Label key={g.id}>{g.name}</Label>
             ))}

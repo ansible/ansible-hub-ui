@@ -7,23 +7,23 @@ import {
   Flex,
   FlexItem,
   Label,
-  LabelGroup,
   Text,
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
   DateComponent,
   DeprecatedTag,
+  LabelGroup,
   Logo,
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { chipGroupProps, convertContentSummaryCounts } from 'src/utilities';
+import { convertContentSummaryCounts } from 'src/utilities';
 import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
@@ -111,7 +111,7 @@ export const CollectionListItem = ({
         ))}
       </div>
       <div className='hub-entry pf-l-flex pf-m-wrap'>
-        <LabelGroup {...chipGroupProps()}>
+        <LabelGroup>
           {collection_version.tags.map((tag, index) => (
             <Tag key={index}>{tag.name}</Tag>
           ))}
@@ -134,7 +134,7 @@ export const CollectionListItem = ({
           {uploadButton || dropdownMenu ? (
             <FlexItem>
               {uploadButton}
-              {dropdownMenu || <span className='hidden-menu-space'></span>}
+              {dropdownMenu || <span className='hidden-menu-space' />}
             </FlexItem>
           ) : null}
           <FlexItem>

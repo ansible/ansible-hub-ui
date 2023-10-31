@@ -5,7 +5,6 @@ import {
   FormGroup,
   InputGroup,
   Label,
-  LabelGroup,
   Modal,
   Spinner,
   TextArea,
@@ -23,12 +22,12 @@ import {
   AlertList,
   AlertType,
   HelperText,
+  LabelGroup,
   closeAlertMixin,
 } from 'src/components';
 import {
   ErrorMessagesType,
   alertErrorsWithoutFields,
-  chipGroupProps,
   errorMessage,
   isFieldValid,
   isFormValid,
@@ -292,11 +291,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently included tags`}
               >
-                <LabelGroup
-                  {...chipGroupProps()}
-                  id='remove-tag'
-                  defaultIsOpen={true}
-                >
+                <LabelGroup id='remove-tag' defaultIsOpen={true}>
                   {includeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -339,11 +334,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently excluded tags`}
               >
-                <LabelGroup
-                  {...chipGroupProps()}
-                  id='remove-tag'
-                  defaultIsOpen={true}
-                >
+                <LabelGroup id='remove-tag' defaultIsOpen={true}>
                   {excludeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -388,7 +379,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       this.setState({ formErrors: { ...this.state.formErrors, name: null } });
       return;
     } else {
-      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`;
+      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and zero or one "/".`;
       this.setState({ formErrors: { ...this.state.formErrors, name: error } });
     }
   }
@@ -420,7 +411,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
   private addTags(tags, key: 'includeTags' | 'excludeTags') {
     const current = new Set(this.state[key]);
-    tags.split(/\s+|\s*,\s*/).forEach((tag) => current.add(tag));
+    tags.split(/\s+|\s*,\s*/).forEach((tag) => tag && current.add(tag));
 
     this.setState({
       [key]: Array.from(current.values()),
