@@ -1,5 +1,12 @@
 import { t } from '@lingui/macro';
-import { Button, Modal, Radio } from '@patternfly/react-core';
+import {
+  Button,
+  Flex,
+  FlexItem,
+  Label,
+  Modal,
+  Radio,
+} from '@patternfly/react-core';
 import FolderOpenIcon from '@patternfly/react-icons/dist/esm/icons/folder-open-icon';
 import SpinnerIcon from '@patternfly/react-icons/dist/esm/icons/spinner-icon';
 import axios from 'axios';
@@ -15,9 +22,11 @@ import {
 import {
   AlertList,
   AlertType,
+  LabelGroup,
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
 import { repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 
@@ -45,9 +54,12 @@ interface IState {
   alerts: AlertType[];
   selectedRepos: AnsibleRepositoryType[]; // 0 or 1 repos
   onlyStaging: boolean;
+  hideSelector: boolean;
 }
 
 export class ImportModal extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   acceptedFileTypes = ['application/x-gzip', 'application/gzip'];
   cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
   COLLECTION_NAME_REGEX = /[0-9a-z_]+-[0-9a-z_]+-[0-9A-Za-z.+-]+/;
@@ -65,6 +77,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       alerts: [],
       selectedRepos: [],
       onlyStaging: true,
+      hideSelector: false,
     };
   }
 
@@ -72,11 +85,11 @@ export class ImportModal extends React.Component<IProps, IState> {
     this.loadAllRepos();
   }
 
-  private async loadAllRepos() {
+  private loadAllRepos() {
     const { onlyStaging } = this.state;
 
-    const staging = onlyStaging
-      ? await AnsibleRepositoryAPI.list({
+    const stagingByName = onlyStaging
+      ? AnsibleRepositoryAPI.list({
           name: 'staging',
           page_size: 1,
           pulp_label_select: 'pipeline=staging',
@@ -85,18 +98,32 @@ export class ImportModal extends React.Component<IProps, IState> {
           .catch(() => null)
       : null;
 
-    return AnsibleRepositoryAPI.list({
+    const byPipeline = AnsibleRepositoryAPI.list({
       pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
       page_size: 1,
-    })
-      .then(({ data: { count, results } }) =>
-        this.setState({
-          selectedRepos: onlyStaging
+    });
+
+    return Promise.all([byPipeline, stagingByName])
+      .then(
+        ([
+          {
+            data: { count, results },
+          },
+          staging,
+        ]) => {
+          // only staging: preselect "staging", or first repo if not found
+          // all repos: preselect first repo only if there are no other choices
+          const selectedRepos = onlyStaging
             ? [staging || results[0]].filter(Boolean)
             : count === 1
             ? [results[0]]
-            : [],
-        }),
+            : [];
+
+          this.setState({
+            selectedRepos,
+            hideSelector: selectedRepos.length && count < 2,
+          });
+        },
       )
       .catch((error) =>
         this.addAlert(t`Error loading repositories.`, 'danger', error?.message),
@@ -126,15 +153,18 @@ export class ImportModal extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { isOpen, collection } = this.props;
+    const { collection, namespace, isOpen } = this.props;
     const {
-      errors,
       errorVariant,
+      errors,
       file,
+      hideSelector,
       onlyStaging,
+      selectedRepos,
       uploadProgress,
       uploadStatus,
     } = this.state;
+    const { featureFlags } = this.context;
 
     const skipError = () => {
       if (errorVariant === 'skippable') {
@@ -146,7 +176,9 @@ export class ImportModal extends React.Component<IProps, IState> {
       <Modal
         variant={'large'}
         title={
-          collection ? t`New version of ${collection.name}` : t`New collection`
+          collection
+            ? t`New version of ${namespace}.${collection.name}`
+            : t`New collection`
         }
         isOpen={isOpen}
         onClose={() => this.handleClose()}
@@ -210,37 +242,54 @@ export class ImportModal extends React.Component<IProps, IState> {
           ) : null}
         </div>
 
-        <>
-          <br />
-          <Radio
-            isChecked={this.state.onlyStaging}
-            name='radio-1'
-            onChange={(val) => {
-              this.setState({ onlyStaging: val }, () => this.loadAllRepos());
-            }}
-            label={t`Staging Repos`}
-            id='radio-staging'
-          ></Radio>
-          <Radio
-            isChecked={!this.state.onlyStaging}
-            name='radio-2'
-            onChange={(val) => {
-              this.setState({ onlyStaging: !val }, () => this.loadAllRepos());
-            }}
-            label={t`All Repos`}
-            id='radio-all'
-          ></Radio>
-          {!this.state.onlyStaging && (
-            <>{t`Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions.`}</>
-          )}
+        <div style={{ lineHeight: '1em' }}>&nbsp;</div>
 
+        {featureFlags.display_repositories ? (
+          <>
+            <Radio
+              id='radio-staging'
+              isChecked={onlyStaging}
+              label={t`Staging Repos`}
+              name='radio-staging'
+              onChange={() =>
+                this.setState({ onlyStaging: true }, () => this.loadAllRepos())
+              }
+            />
+            <Radio
+              id='radio-all'
+              isChecked={!onlyStaging}
+              label={t`All Repos`}
+              name='radio-all'
+              onChange={() =>
+                this.setState({ onlyStaging: false }, () => this.loadAllRepos())
+              }
+            />
+          </>
+        ) : null}
+
+        {!onlyStaging && (
+          <>{t`Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions.`}</>
+        )}
+
+        {hideSelector ? (
+          <Flex>
+            <FlexItem>
+              <b>{t`Repository`}</b>
+            </FlexItem>
+            <FlexItem>
+              <LabelGroup>
+                <Label>{selectedRepos[0].name}</Label>
+              </LabelGroup>
+            </FlexItem>
+          </Flex>
+        ) : (
           <MultipleRepoSelector
             addAlert={(a) => this.addAlertObj(a)}
             params={{
               pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
             }}
             singleSelectionOnly={true}
-            selectedRepos={this.state.selectedRepos}
+            selectedRepos={selectedRepos}
             setSelectedRepos={(selectedRepos) =>
               this.setState({
                 selectedRepos,
@@ -249,7 +298,7 @@ export class ImportModal extends React.Component<IProps, IState> {
               })
             }
           />
-        </>
+        )}
       </Modal>
     );
   }
