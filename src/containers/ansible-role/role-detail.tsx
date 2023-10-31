@@ -5,7 +5,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  LabelGroup,
   Nav,
   NavItem,
   NavList,
@@ -30,6 +29,7 @@ import {
   ClipboardCopy,
   DateComponent,
   DownloadCount,
+  LabelGroup,
   LoadingPageWithHeader,
   Logo,
   Main,
@@ -39,12 +39,7 @@ import {
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
-import {
-  RouteProps,
-  chipGroupProps,
-  handleHttpError,
-  withRouter,
-} from 'src/utilities';
+import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
 interface RoleMeta {
   addAlert: (alert: AlertType) => void;
@@ -305,7 +300,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         </div>
         <div className='hub-entry'>{role.description}</div>
         <div className='hub-entry'>
-          <LabelGroup {...chipGroupProps()}>
+          <LabelGroup>
             {role.summary_fields.tags.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
             ))}
