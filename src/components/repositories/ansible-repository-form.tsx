@@ -125,7 +125,8 @@ export const AnsibleRepositoryForm = ({
   useEffect(() => loadRemotes(), []);
 
   useEffect(() => {
-    if (!repository) {
+    // create
+    if (!repository || !repository.name) {
       onDistributionsLoad(null);
       return;
     }
