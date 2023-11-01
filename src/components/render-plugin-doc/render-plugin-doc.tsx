@@ -653,6 +653,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       legend = [legend];
     }
 
+    // TODO look more like in https://docs.ansible.com/ansible/devel/collections/ansible/builtin/config_lookup.html#parameter-on_missing
     return (
       <>
         {' - '}
@@ -685,6 +686,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       legends = choices;
       choices = Object.keys(choices);
     }
+
+    // DEBUG, http://localhost:8002/ui/repo/published/arista/eos/content/module/eos_acl_interfaces/
+    legends = { merged: 'foo', replaced: ['foo', 'bar'] };
 
     return (
       <>
