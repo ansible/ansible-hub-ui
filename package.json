@@ -115,10 +115,5 @@
     "engines": {
         "node": ">=16",
         "npm": ">=8"
-    },
-    "overrides": {
-        "@redhat-cloud-services/frontend-components": {
-            "cypress": "himdel/npm-empty"
-        }
     }
 }
