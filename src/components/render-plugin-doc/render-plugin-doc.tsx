@@ -1,5 +1,6 @@
+import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -29,6 +30,18 @@ interface IProps {
     section: string,
   ) => React.ReactElement;
   renderWarning: (text: string) => React.ReactElement;
+}
+
+function Choice({ children }: { children: ReactNode }) {
+  return <pre style={{ display: 'inline-block' }}>{children}</pre>;
+}
+
+function Legend({ children }: { children: ReactNode }) {
+  return (
+    <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+      {children}
+    </div>
+  );
 }
 
 export class RenderPluginDoc extends React.Component<IProps, IState> {
@@ -653,13 +666,17 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       legend = [legend];
     }
 
-    // TODO look more like in https://docs.ansible.com/ansible/devel/collections/ansible/builtin/config_lookup.html#parameter-on_missing
     return (
       <>
-        {' - '}
-        {legend.map((d) => (
-          <p>{this.applyDocFormatters(d)}</p>
-        ))}
+        {': '}
+        <Legend>
+          {legend.map((d, i) => (
+            <>
+              {i ? <br /> : null}
+              {this.applyDocFormatters(d)}
+            </>
+          ))}
+        </Legend>
       </>
     );
   }
@@ -687,21 +704,22 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       choices = Object.keys(choices);
     }
 
-    // DEBUG, http://localhost:8002/ui/repo/published/arista/eos/content/module/eos_acl_interfaces/
-    legends = { merged: 'foo', replaced: ['foo', 'bar'] };
-
     return (
       <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
           <div>
-            <span className='option-name'>Choices: </span>
+            <span className='option-name'>
+              <Trans>Choices: </Trans>
+            </span>
             <ul>
               {choices.map((c, i) => (
                 <li key={i}>
                   {c === defaultChoice ? (
-                    <span className='blue'>{c} &nbsp;&larr;</span>
+                    <span className='blue' title={t`default`}>
+                      <Choice>{c}</Choice> &nbsp;&larr;
+                    </span>
                   ) : (
-                    c
+                    <Choice>{c}</Choice>
                   )}
                   {this.renderLegend(legends[c])}
                 </li>
@@ -712,7 +730,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
         {defaultChoice && !choices.includes(defaultChoice) ? (
           <span>
-            <span className='option-name'>Default: </span>
+            <span className='option-name'>
+              <Trans>Default: </Trans>
+            </span>
             <span className='blue'>{defaultChoice}</span>
           </span>
         ) : null}
