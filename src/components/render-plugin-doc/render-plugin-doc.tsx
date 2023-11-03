@@ -728,7 +728,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
           </div>
         ) : null}
 
-        {defaultChoice && !choices.includes(defaultChoice) ? (
+        {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
           <span>
             <span className='option-name'>
               <Trans>Default: </Trans>
