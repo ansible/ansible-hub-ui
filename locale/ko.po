@@ -1063,8 +1063,12 @@ msgid "Container must be synchronized with remote repository first."
 msgstr "먼저 컨테이너를 원격 리포지토리와 동기화해야 합니다."
 
 #: src/components/execution-environment/repository-form.tsx
-msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
-msgstr "컨테이너 이름에는 영숫자 문자 \".\", \"_\", \"-\" 및 최대 하나의 \"/\"만 포함할 수 있습니다."
+#~ msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+#~ msgstr "컨테이너 이름에는 영숫자 문자 \".\", \"_\", \"-\" 및 최대 하나의 \"/\"만 포함할 수 있습니다."
+
+#: src/components/execution-environment/repository-form.tsx
+msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and zero or one \"/\"."
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx
 msgid "Container namespace"
@@ -2937,8 +2941,12 @@ msgid "New collection"
 msgstr "새 컬렉션"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "New version of {0}"
-msgstr "{0}의 새로운 버전"
+#~ msgid "New version of {0}"
+#~ msgstr "{0}의 새로운 버전"
+
+#: src/components/import-modal/import-modal.tsx
+msgid "New version of {namespace}.{0}"
+msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Next"
@@ -3817,6 +3825,7 @@ msgstr "생성된 리포지토리가 나타납니다."
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/import-modal/import-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
