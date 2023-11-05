@@ -149,7 +149,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             ></TableOfContents>
 
             <div
-              className='body hub-docs-content pf-c-content'
+              className='body hub-docs-content pf-c-content hub-content-alert-fix'
               ref={this.docsRef}
             >
               {displayHTML || pluginData ? (
