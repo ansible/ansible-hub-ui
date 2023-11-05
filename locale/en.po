@@ -820,6 +820,10 @@ msgstr "Checking for affected users... <0/>"
 msgid "Child tasks"
 msgstr "Child tasks"
 
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Choices:"
+msgstr "Choices:"
+
 #: src/components/patternfly-wrappers/fileupload.tsx
 #: src/components/patternfly-wrappers/write-only-field.tsx
 msgid "Clear"
@@ -1135,8 +1139,12 @@ msgid "Container must be synchronized with remote repository first."
 msgstr "Container must be synchronized with remote repository first."
 
 #: src/components/execution-environment/repository-form.tsx
-msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
-msgstr "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+#~ msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+#~ msgstr "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+
+#: src/components/execution-environment/repository-form.tsx
+msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and zero or one \"/\"."
+msgstr "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and zero or one \"/\"."
 
 #: src/components/execution-environment/repository-form.tsx
 msgid "Container namespace"
@@ -1388,6 +1396,14 @@ msgstr "Date"
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Date created"
 msgstr "Date created"
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "default"
+msgstr "default"
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Default:"
+msgstr "Default:"
 
 #: src/actions/ansible-remote-delete.tsx
 #: src/actions/ansible-repository-delete.tsx
@@ -3140,8 +3156,12 @@ msgid "New collection"
 msgstr "New collection"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "New version of {0}"
-msgstr "New version of {0}"
+#~ msgid "New version of {0}"
+#~ msgstr "New version of {0}"
+
+#: src/components/import-modal/import-modal.tsx
+msgid "New version of {namespace}.{0}"
+msgstr "New version of {namespace}.{0}"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Next"
@@ -4100,6 +4120,7 @@ msgstr "Repositories will appear once created."
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/import-modal/import-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -4485,8 +4506,8 @@ msgid "Server URL"
 msgstr "Server URL"
 
 #: src/containers/token/token-insights.tsx
-#~ msgid "Server URL could not be displayed."
-#~ msgstr "Server URL could not be displayed."
+msgid "Server URL could not be displayed."
+msgstr "Server URL could not be displayed."
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Server version"
@@ -4907,6 +4928,14 @@ msgstr "Sync task is already queued."
 #: src/actions/ansible-repository-sync.tsx
 msgid "Sync will only add missing content"
 msgstr "Sync will only add missing content"
+
+#: src/containers/token/token-insights.tsx
+msgid "Synclist distribution was not found."
+msgstr "Synclist distribution was not found."
+
+#: src/containers/token/token-insights.tsx
+msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
+msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/execution-environment/publish-to-controller-modal.tsx
@@ -5474,12 +5503,20 @@ msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "Use this token to authenticate the <0>ansible-galaxy</0> client."
 
 #: src/containers/token/token-insights.tsx
+msgid "Use this URL for <0>validated</0> content from Automation Hub."
+msgstr "Use this URL for <0>validated</0> content from Automation Hub."
+
+#: src/containers/token/token-insights.tsx
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "Use this URL to configure the API endpoints that clients need to"
 
 #: src/containers/token/token-insights.tsx
-msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
-msgstr "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
+msgid "Use this URL to configure the API endpoints that clients need to download <0>certified</0> content from Automation Hub."
+msgstr "Use this URL to configure the API endpoints that clients need to download <0>certified</0> content from Automation Hub."
+
+#: src/containers/token/token-insights.tsx
+#~ msgid "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
+#~ msgstr "Use this URL to configure the API endpoints that clients need to download certified content from Automation Hub. Synclists are deprecated in AAP 2.4 and will be removed in a future release, instead use client-side requirements.yml, see AAP 2.4 documentation."
 
 #: src/containers/token/token-insights.tsx
 #~ msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
