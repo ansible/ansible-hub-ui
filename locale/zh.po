@@ -1075,8 +1075,12 @@ msgid "Container must be synchronized with remote repository first."
 msgstr "容器必须首先与远程仓库同步。"
 
 #: src/components/execution-environment/repository-form.tsx
-msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
-msgstr "容器名称只能包含字母数字，\".\"、\"_\"、\"-\"，以及最多一个 \"/\"。"
+#~ msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+#~ msgstr "容器名称只能包含字母数字，\".\"、\"_\"、\"-\"，以及最多一个 \"/\"。"
+
+#: src/components/execution-environment/repository-form.tsx
+msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and zero or one \"/\"."
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx
 msgid "Container namespace"
@@ -2988,8 +2992,12 @@ msgid "New collection"
 msgstr "新集合"
 
 #: src/components/import-modal/import-modal.tsx
-msgid "New version of {0}"
-msgstr "{0} 的新版本"
+#~ msgid "New version of {0}"
+#~ msgstr "{0} 的新版本"
+
+#: src/components/import-modal/import-modal.tsx
+msgid "New version of {namespace}.{0}"
+msgstr ""
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx
 msgid "Next"
@@ -3883,6 +3891,7 @@ msgstr "仓库在创建后会出现。"
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/components/collection-list/collection-filter.tsx
 #: src/components/collection-list/collection-filter.tsx
+#: src/components/import-modal/import-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
