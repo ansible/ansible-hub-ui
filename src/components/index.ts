@@ -61,12 +61,6 @@ export {
 } from './page/list-page';
 export { Page } from './page/page';
 export { PageWithTabs } from './page/page-with-tabs';
-export {
-  AlertList,
-  AlertType,
-  closeAlert,
-  closeAlertMixin,
-} from './patternfly-wrappers/alert-list';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';
 export { BreadcrumbType, Breadcrumbs } from './patternfly-wrappers/breadcrumbs';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
@@ -116,6 +110,12 @@ export { LazyRepositories } from './repositories/lazy-repositories';
 export { PulpLabels } from './repositories/pulp-labels';
 export { RemoteForm } from './repositories/remote-form';
 export { ShaLabel } from './sha-label/sha-label';
+export {
+  AlertList,
+  AlertType,
+  closeAlert,
+  closeAlertMixin,
+} from './shared/alert-list';
 export { CopyURL } from './shared/copy-url';
 export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
