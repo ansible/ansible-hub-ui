@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
-import { ClipboardCopy } from '@patternfly/react-core';
 import React from 'react';
+import { ClipboardCopy } from 'src/components';
 
 export const CopyURL = ({
   url,
@@ -14,12 +14,7 @@ export const CopyURL = ({
   }
 
   return url ? (
-    <ClipboardCopy
-      hoverTip={t`Copy`}
-      clickTip={t`Copied`}
-      variant='inline-compact'
-      isCode
-    >
+    <ClipboardCopy variant='inline-compact' isCode>
       {url}
     </ClipboardCopy>
   ) : (

@@ -74,7 +74,6 @@ export {
   CompoundFilter,
   FilterOption,
 } from './patternfly-wrappers/compound-filter';
-export { CopyURL } from './patternfly-wrappers/copy-url';
 export { FileUpload } from './patternfly-wrappers/file-upload';
 export { LabelGroup } from './patternfly-wrappers/label-group';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
@@ -117,6 +116,7 @@ export { LazyRepositories } from './repositories/lazy-repositories';
 export { PulpLabels } from './repositories/pulp-labels';
 export { RemoteForm } from './repositories/remote-form';
 export { ShaLabel } from './sha-label/sha-label';
+export { CopyURL } from './shared/copy-url';
 export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';

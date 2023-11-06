@@ -4,9 +4,10 @@ import React from 'react';
 
 interface IProps {
   children: string;
-  [key: string]: string | number | boolean;
+  [key: string]: string | boolean;
 }
 
+// wraps ClipboardCopy for localization
 export const ClipboardCopy = ({ children, ...props }: IProps) => (
   <PFClipboardCopy
     hoverTip={t`Copy to clipboard`}
