@@ -1,5 +1,6 @@
+import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -29,6 +30,18 @@ interface IProps {
     section: string,
   ) => React.ReactElement;
   renderWarning: (text: string) => React.ReactElement;
+}
+
+function Choice({ children }: { children: ReactNode }) {
+  return <pre style={{ display: 'inline-block' }}>{children}</pre>;
+}
+
+function Legend({ children }: { children: ReactNode }) {
+  return (
+    <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+      {children}
+    </div>
+  );
 }
 
 export class RenderPluginDoc extends React.Component<IProps, IState> {
@@ -644,47 +657,86 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private renderChoices(option) {
-    let choices, defaul;
+  private renderLegend(legend) {
+    if (!legend) {
+      return null;
+    }
 
-    if (option['type'] === 'bool') {
-      choices = ['true', 'false'];
-      if (option['default'] === true) {
-        defaul = 'true';
-      } else if (option['default'] === false) {
-        defaul = 'false';
-      }
-    } else {
-      choices = option['choices'] || [];
-      defaul = option['default'];
+    if (!Array.isArray(legend)) {
+      legend = [legend];
     }
 
     return (
-      <React.Fragment>
+      <>
+        {': '}
+        <Legend>
+          {legend.map((d, i) => (
+            <>
+              {i ? <br /> : null}
+              {this.applyDocFormatters(d)}
+            </>
+          ))}
+        </Legend>
+      </>
+    );
+  }
+
+  private renderChoices(option) {
+    let choices,
+      defaultChoice,
+      legends = {};
+
+    if (option['type'] === 'bool') {
+      choices = ['true', 'false'];
+
+      if (option['default'] === true) {
+        defaultChoice = 'true';
+      } else if (option['default'] === false) {
+        defaultChoice = 'false';
+      }
+    } else {
+      choices = option['choices'] || [];
+      defaultChoice = option['default'];
+    }
+
+    if (typeof choices === 'object' && !Array.isArray(choices)) {
+      legends = choices;
+      choices = Object.keys(choices);
+    }
+
+    return (
+      <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
           <div>
-            <span className='option-name'>Choices: </span>
+            <span className='option-name'>
+              <Trans>Choices: </Trans>
+            </span>
             <ul>
               {choices.map((c, i) => (
                 <li key={i}>
-                  {c === defaul ? (
-                    <span className='blue'>{c} &nbsp;&larr;</span>
+                  {c === defaultChoice ? (
+                    <span className='blue' title={t`default`}>
+                      <Choice>{c}</Choice> &nbsp;&larr;
+                    </span>
                   ) : (
-                    c
+                    <Choice>{c}</Choice>
                   )}
+                  {this.renderLegend(legends[c])}
                 </li>
               ))}
             </ul>
           </div>
         ) : null}
 
-        {defaul && !choices.includes(defaul) ? (
+        {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
           <span>
-            <span className='option-name'>Default: </span>
-            <span className='blue'>{defaul}</span>
+            <span className='option-name'>
+              <Trans>Default: </Trans>
+            </span>
+            <span className='blue'>{defaultChoice}</span>
           </span>
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 
