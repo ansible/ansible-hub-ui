@@ -3,7 +3,7 @@ import {
   AlertActionCloseButton,
   AlertProps,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Constants } from 'src/constants';
 
 interface IProps {
@@ -17,8 +17,8 @@ interface IProps {
 export class AlertType {
   id?: string;
   variant: AlertProps['variant'];
-  title: string | JSX.Element;
-  description?: string | JSX.Element;
+  title: string | ReactNode;
+  description?: string | ReactNode;
 }
 
 export const AlertList = ({ alerts, closeAlert }: IProps) => (
