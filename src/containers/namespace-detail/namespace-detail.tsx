@@ -1,7 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Alert,
-  AlertActionCloseButton,
   Button,
   Checkbox,
   DropdownItem,
@@ -57,7 +55,6 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import './namespace-detail.scss';
 
 interface UserType {
   username: string;
@@ -102,7 +99,6 @@ interface IState {
   showRoleSelectWizard?: { roles?: RoleType[] };
   unfilteredCount: number;
   updateCollection: CollectionVersionSearch;
-  warning: string;
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
@@ -150,7 +146,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showRoleSelectWizard: null,
       unfilteredCount: 0,
       updateCollection: null,
-      warning: '',
     };
   }
 
@@ -248,7 +243,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showControls,
       showImportModal,
       updateCollection,
-      warning,
     } = this.state;
 
     if (redirect) {
@@ -387,19 +381,17 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             title={t`Delete namespace?`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
-            <>
-              <Text className='delete-namespace-modal-message'>
-                <Trans>
-                  Deleting <b>{namespace.name}</b> and its data will be lost.
-                </Trans>
-              </Text>
-              <Checkbox
-                isChecked={confirmDelete}
-                onChange={(val) => this.setState({ confirmDelete: val })}
-                label={t`I understand that this action cannot be undone.`}
-                id='delete_confirm'
-              />
-            </>
+            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+              <Trans>
+                Deleting <b>{namespace.name}</b> and its data will be lost.
+              </Trans>
+            </Text>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(val) => this.setState({ confirmDelete: val })}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
           </DeleteModal>
         )}
         {isOpenWisdomModal && (
@@ -410,18 +402,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             reference={this.state.namespace.name}
           />
         )}
-        {warning ? (
-          <Alert
-            className='hub-c-alert-namespace'
-            variant='warning'
-            title={warning}
-            actionClose={
-              <AlertActionCloseButton
-                onClose={() => this.setState({ warning: '' })}
-              />
-            }
-          />
-        ) : null}
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={breadcrumbs}
@@ -685,14 +665,9 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         });
         break;
       case 'deprecate':
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'info',
-              title: t`Deprecation status update starting for collection "${name}".`,
-            },
-          ],
+        this.addAlert({
+          variant: 'info',
+          title: t`Deprecation status update starting for collection "${name}".`,
         });
         CollectionAPI.setDeprecation(collection)
           .then((result) => {
@@ -701,21 +676,17 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               const title = collection.is_deprecated
                 ? t`Collection "${name}" has been successfully undeprecated.`
                 : t`Collection "${name}" has been successfully deprecated.`;
-              this.setState({
-                alerts: [
-                  ...this.state.alerts,
-                  {
-                    title: title,
-                    variant: 'success',
-                  },
-                ],
+              this.addAlert({
+                title,
+                variant: 'success',
               });
               return this.loadCollections();
             });
           })
           .catch(() => {
-            this.setState({
-              warning: t`API Error: Failed to set deprecation.`,
+            this.addAlert({
+              title: t`API Error: Failed to set deprecation.`,
+              variant: 'warning',
             });
           });
         break;
@@ -744,15 +715,12 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     })
       .then((result) => {
         // FIXME: use taskAlert
+        this.addAlert({
+          id: 'loading-signing',
+          variant: 'success',
+          title: t`Signing started for all collections in namespace "${namespace.name}".`,
+        });
         this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              id: 'loading-signing',
-              variant: 'success',
-              title: t`Signing started for all collections in namespace "${namespace.name}".`,
-            },
-          ],
           isOpenSignModal: false,
         });
 
@@ -761,9 +729,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             this.loadCollections();
           })
           .catch((error) => {
-            this.setState({
-              alerts: [...this.state.alerts, errorAlert(error)],
-            });
+            this.addAlert(errorAlert(error));
           })
           .finally(() => {
             this.setState({
@@ -775,8 +741,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       })
       .catch((error) => {
         // The request failed in the first place
+        this.addAlert(errorAlert(error.response.status));
         this.setState({
-          alerts: [...this.state.alerts, errorAlert(error.response.status)],
           isOpenSignModal: false,
         });
       });
@@ -870,6 +836,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderPageControls() {
+    if (this.state.showControls) {
+      return null;
+    }
+
     const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
@@ -955,11 +925,12 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         </DropdownItem>
       ),
     ].filter(Boolean);
-    if (!this.state.showControls) {
-      return <div className='hub-namespace-page-controls' />;
-    }
+
     return (
-      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
+      <div
+        style={{ display: 'flex', alignItems: 'center' }}
+        data-cy='kebab-toggle'
+      >
         {' '}
         {collections.length !== 0 && (
           <Button
@@ -976,10 +947,14 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private toggleImportModal(isOpen: boolean, warning?: string) {
-    const newState = { showImportModal: isOpen };
     if (warning) {
-      newState['warning'] = warning;
+      this.addAlert({
+        title: warning,
+        variant: 'warning',
+      });
     }
+
+    const newState = { showImportModal: isOpen };
 
     if (!isOpen) {
       newState['updateCollection'] = null;
@@ -992,6 +967,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const {
       namespace: { name },
     } = this.state;
+
     this.setState({ isNamespacePending: true }, () =>
       NamespaceAPI.delete(name)
         .then(() => {
@@ -1018,15 +994,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               isNamespacePending: false,
             },
             () => {
-              this.setState({
-                alerts: [
-                  ...this.state.alerts,
-                  {
-                    variant: 'danger',
-                    title: t`Namespace "${name}" could not be deleted.`,
-                    description: errorMessage(status, statusText),
-                  },
-                ],
+              this.addAlert({
+                variant: 'danger',
+                title: t`Namespace "${name}" could not be deleted.`,
+                description: errorMessage(status, statusText),
               });
             },
           );
