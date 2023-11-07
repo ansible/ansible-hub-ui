@@ -1,11 +1,12 @@
 import { Trans, t } from '@lingui/macro';
-import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import {
   CollectionAPI,
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
+import { Tooltip } from 'src/components';
 import { errorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { repositoryRemoveCollection } from './repository-remove-collection';

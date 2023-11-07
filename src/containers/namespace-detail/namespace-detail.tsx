@@ -1,11 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  Checkbox,
-  DropdownItem,
-  Text,
-  Tooltip,
-} from '@patternfly/react-core';
+import { Button, Checkbox, DropdownItem, Text } from '@patternfly/react-core';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -38,6 +32,7 @@ import {
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
+  Tooltip,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';

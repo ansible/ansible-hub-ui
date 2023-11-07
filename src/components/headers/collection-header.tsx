@@ -225,7 +225,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const versionBadge = ({ pulp_created, version }) =>
       [
-        <Trans>
+        <Trans key={pulp_created}>
           updated <DateComponent date={pulp_created} />
         </Trans>,
         display_signatures ? (is_signed ? t`(signed)` : t`(unsigned)`) : '',

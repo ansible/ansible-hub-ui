@@ -2,11 +2,11 @@ import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
-  FileUpload,
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
 import React, { useState } from 'react';
+import { FileUpload } from 'src/components';
 
 interface Props {
   isOpen: boolean;
@@ -53,12 +53,10 @@ export const UploadSingCertificateModal: React.FC<Props> = ({
     >
       <p>{t`Please select a signature file to upload.`}</p>
       <FileUpload
-        id='certificate-file'
         filename={filename}
-        filenamePlaceholder={t`Drag and drop a file or upload one.`}
-        browseButtonText={t`Select file`}
-        onFileInputChange={handleFileInputChange}
+        id='certificate-file'
         onClearClick={() => setFilename('')}
+        onFileInputChange={handleFileInputChange}
       />
     </Modal>
   );
