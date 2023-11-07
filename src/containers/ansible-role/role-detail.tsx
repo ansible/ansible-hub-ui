@@ -13,8 +13,10 @@ import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  LegacyImportAPI,
   LegacyRoleAPI,
   LegacyRoleDetailType,
+  LegacyRoleImportDetailType,
   LegacyRoleVersionDetailType,
 } from 'src/api';
 import { EmptyStateNoData } from 'src/components';
@@ -27,6 +29,7 @@ import {
   DateComponent,
   DownloadCount,
   ExternalLink,
+  ImportConsole,
   LabelGroup,
   LoadingPageWithHeader,
   Logo,
@@ -210,6 +213,84 @@ class RoleVersions extends React.Component<
   }
 }
 
+interface RoleImportDetailProps {
+  addAlert: (alert: AlertType) => void;
+  role: LegacyRoleDetailType;
+}
+
+interface RoleImportDetailState {
+  loading: boolean;
+  results: LegacyRoleImportDetailType[];
+}
+
+class RoleImportLog extends React.Component<
+  RoleImportDetailProps,
+  RoleImportDetailState
+> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //role: null,
+      //addAlert: null,
+      loading: true,
+      results: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true, results: [] });
+
+    LegacyImportAPI.getLastSuccessfulRoleImport(this.props.role.id)
+      .then(({ data: { results } }) =>
+        this.setState({
+          results: results,
+          loading: false,
+        }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to get import log`,
+          () => this.setState({ loading: false, results: null }),
+          this.props.addAlert,
+        ),
+      );
+  }
+
+  setFollowMessages() {}
+
+  render() {
+    const lastImport = this.state.results[0];
+
+    return (
+      <>
+        {!this.state.loading &&
+        this.state.results &&
+        this.state.results.length == 0 ? (
+          <EmptyStateNoData
+            title={t`No import logs for role id ${this.props.role.id}`}
+            description={t`No import logs were found for the role.`}
+          />
+        ) : null}
+
+        {lastImport && (
+          <>
+            <div>{lastImport.role_id}</div>
+            <ImportConsole
+              loading={this.state.loading}
+              empty={false}
+              role={this.props.role}
+              task={lastImport}
+              selectedImport={lastImport}
+              followMessages={true}
+              setFollowMessages={this.setFollowMessages}
+            />
+          </>
+        )}
+      </>
+    );
+  }
+}
+
 interface RoleState {
   activeItem: string;
   alerts: AlertType[];
@@ -307,6 +388,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       install: t`Install`,
       documentation: t`Documentation`,
       versions: t`Versions`,
+      import_log: t`Import log`,
     };
 
     const addAlert = (alert) => this.addAlert(alert);
@@ -340,6 +422,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
             role={role}
           />
         );
+      } else if (activeItem === 'import_log') {
+        return <RoleImportLog addAlert={addAlert} role={role} />;
       } else {
         return <div />;
       }

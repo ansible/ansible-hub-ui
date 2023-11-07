@@ -53,6 +53,7 @@ export {
 } from './response-types/execution-environment';
 export { FeatureFlagsType } from './response-types/feature-flags';
 export { ImportDetailType, ImportListType } from './response-types/import';
+export { LegacyRoleImportDetailType } from './response-types/legacy-import';
 export {
   LegacyNamespaceDetailType,
   LegacyNamespaceListType,
