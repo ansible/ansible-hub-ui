@@ -863,7 +863,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         ) : (
           <Tooltip
             key='delete'
-            isVisible={false}
             content={
               <Trans>
                 Cannot delete namespace until <br />
