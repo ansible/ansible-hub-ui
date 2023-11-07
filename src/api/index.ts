@@ -20,6 +20,7 @@ export { GroupAPI } from './group';
 export { GroupRoleAPI } from './group-role';
 export { ImportAPI } from './import';
 export { LegacyNamespaceAPI } from './legacy-namespace';
+export { LegacyImportAPI } from './legacy-import';
 export { LegacyRoleAPI } from './legacy-role';
 export { MyDistributionAPI } from './my-distribution';
 export { MyNamespaceAPI } from './my-namespace';
@@ -62,6 +63,9 @@ export {
   LegacyRoleListType,
   LegacyRoleVersionDetailType,
 } from './response-types/legacy-role';
+export {
+  LegacyRoleImportDetailType,
+} from './response-types/legacy-import';
 export {
   NamespaceLinkType,
   NamespaceListType,
