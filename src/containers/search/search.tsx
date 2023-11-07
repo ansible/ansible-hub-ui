@@ -19,6 +19,7 @@ import {
   CollectionCard,
   CollectionFilter,
   CollectionListItem,
+  CollectionNextPageCard,
   DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -45,7 +46,7 @@ import './search.scss';
 
 interface IState {
   collections: CollectionVersionSearch[];
-  numberOfResults: number;
+  count: number;
   params: {
     page?: number;
     page_size?: number;
@@ -94,7 +95,7 @@ class Search extends React.Component<RouteProps, IState> {
     this.state = {
       collections: [],
       params: params,
-      numberOfResults: 0,
+      count: 0,
       loading: true,
       synclist: undefined,
       alerts: [],
@@ -140,7 +141,7 @@ class Search extends React.Component<RouteProps, IState> {
       loading,
       collections,
       params,
-      numberOfResults,
+      count,
       showImportModal,
       updateCollection,
       deleteCollection,
@@ -246,7 +247,7 @@ class Search extends React.Component<RouteProps, IState> {
                   <Pagination
                     params={params}
                     updateParams={updateParams}
-                    count={numberOfResults}
+                    count={count}
                     perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                     isTop
                   />
@@ -265,16 +266,18 @@ class Search extends React.Component<RouteProps, IState> {
         ) : (
           <React.Fragment>
             <section className='collection-container'>
-              {this.renderCollections(collections, params, updateParams)}
+              {this.renderCollections(collections, {
+                count,
+                params,
+                updateParams,
+              })}
             </section>
             <section className='footer'>
               <Pagination
                 params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
+                updateParams={updateParams}
                 perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                count={numberOfResults}
+                count={count}
               />
             </section>
           </React.Fragment>
@@ -292,7 +295,7 @@ class Search extends React.Component<RouteProps, IState> {
     this.setState({ showImportModal: isOpen });
   }
 
-  private renderCollections(collections, params, updateParams) {
+  private renderCollections(collections, { count, params, updateParams }) {
     if (collections.length === 0) {
       return (
         <EmptyStateFilter
@@ -306,20 +309,24 @@ class Search extends React.Component<RouteProps, IState> {
         />
       );
     }
+
     if (params.view_type === 'list') {
       return this.renderList(collections);
     } else {
-      return this.renderCards(collections);
+      return this.renderCards(collections, {
+        count,
+        params,
+        updateParams,
+      });
     }
   }
 
-  private renderCards(collections) {
+  private renderCards(collections, { count, params, updateParams }) {
     return (
       <div className='hub-cards'>
         {collections.map((c, i) => {
           return (
             <CollectionCard
-              className='card'
               key={i}
               {...c}
               footer={this.renderSyncToogle(
@@ -331,6 +338,13 @@ class Search extends React.Component<RouteProps, IState> {
             />
           );
         })}
+        {count > params.page_size * (params.page ?? 1) ? (
+          <CollectionNextPageCard
+            onClick={() =>
+              updateParams({ ...params, page: (params.page ?? 1) + 1 })
+            }
+          />
+        ) : null}
       </div>
     );
   }
@@ -590,7 +604,7 @@ class Search extends React.Component<RouteProps, IState> {
       }).then((result) => {
         this.setState({
           collections: result.data.data,
-          numberOfResults: result.data.meta.count,
+          count: result.data.meta.count,
           loading: false,
         });
       });
