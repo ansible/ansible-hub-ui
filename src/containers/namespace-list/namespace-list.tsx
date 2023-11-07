@@ -22,6 +22,7 @@ import {
   LoadingPageWithHeader,
   NamespaceCard,
   NamespaceModal,
+  NamespaceNextPageCard,
   Pagination,
   Sort,
   closeAlertMixin,
@@ -160,6 +161,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
     // Namespaces or Partners
     const title = namespaceBreadcrumb().name;
 
+    const updateParams = (p) =>
+      this.updateParams(p, () => this.loadNamespaces());
+
     return (
       <div className='hub-namespace-page'>
         <NamespaceModal
@@ -208,19 +212,17 @@ export class NamespaceList extends React.Component<IProps, IState> {
                       <CompoundFilter
                         inputText={inputText}
                         onChange={(text) => this.setState({ inputText: text })}
-                        updateParams={(p) =>
-                          this.updateParams(p, () => this.loadNamespaces())
-                        }
                         params={params}
+                        updateParams={updateParams}
                         filterConfig={[{ id: 'keywords', title: t`keywords` }]}
                       />
                       <AppliedFilters
                         style={{ marginTop: '16px' }}
+                        params={params}
                         updateParams={(p) => {
-                          this.updateParams(p, () => this.loadNamespaces());
+                          updateParams(p);
                           this.setState({ inputText: '' });
                         }}
-                        params={params}
                         ignoredParams={['page_size', 'page', 'sort']}
                         niceNames={{ keywords: t`keywords` }}
                       />
@@ -233,9 +235,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                           { title: t`Name`, id: 'name', type: 'alpha' },
                         ]}
                         params={params}
-                        updateParams={(p) =>
-                          this.updateParams(p, () => this.loadNamespaces())
-                        }
+                        updateParams={updateParams}
                       />
                     </ToolbarItem>
                     {hasPermission('galaxy.add_namespace') && (
@@ -254,9 +254,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               <div>
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.loadNamespaces())
-                  }
+                  updateParams={updateParams}
                   count={itemCount}
                   isCompact
                   perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
@@ -265,14 +263,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           )}
         </BaseHeader>
-        <section className='card-area'>{this.renderBody()}</section>
+        <section className='card-area'>
+          {this.renderBody({ updateParams })}
+        </section>
         {noData || loading ? null : (
           <section className='footer'>
             <Pagination
               params={params}
-              updateParams={(p) =>
-                this.updateParams(p, () => this.loadNamespaces())
-              }
+              updateParams={updateParams}
               perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
               count={itemCount}
             />
@@ -282,8 +280,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
     );
   }
 
-  private renderBody() {
-    const { namespaces, loading } = this.state;
+  private renderBody({ updateParams }) {
+    const { itemCount, loading, namespaces, params } = this.state;
     const { namespacePath, filterOwner } = this.props;
     const { hasPermission } = this.context;
 
@@ -335,6 +333,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
             />
           </div>
         ))}
+        {itemCount > params.page_size * (params.page ?? 1) ? (
+          <div className='card-wrapper'>
+            <NamespaceNextPageCard
+              onClick={() =>
+                updateParams({ ...params, page: (params.page ?? 1) + 1 })
+              }
+            />
+          </div>
+        ) : null}
       </section>
     );
   }

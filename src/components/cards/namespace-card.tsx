@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -8,9 +9,11 @@ import {
   CardTitle,
   Tooltip,
 } from '@patternfly/react-core';
+import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'src/components';
+import { Constants } from 'src/constants';
 import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
 
@@ -25,11 +28,36 @@ interface IProps {
   namespaceURL?: string;
 }
 
+export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <Card className='hub-c-card-ns-container'>
+      <div
+        style={{
+          display: 'flex',
+          height:
+            DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+              ? '216px'
+              : '168px',
+          justifyContent: 'center',
+        }}
+      >
+        <Button variant='link' onClick={onClick}>
+          {t`View more`}
+          <br />
+          <br />
+          <ArrowRightIcon />
+        </Button>
+      </div>
+    </Card>
+  );
+};
+
 export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
   const { avatar_url, name } = namespace;
   const title = namespaceTitle(namespace);
 
   const MAX_DESCRIPTION_LENGTH = 26;
+
   return (
     <Card className='hub-c-card-ns-container'>
       <CardHeader>
