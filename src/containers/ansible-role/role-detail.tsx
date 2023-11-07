@@ -201,7 +201,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
 
-    const { username: namespace, name } = props.routeParams;
+    const { namespace, name } = props.routeParams;
     this.state = {
       activeItem: 'install',
       alerts: [],
@@ -243,14 +243,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   }
 
   render() {
-    const {
-      activeItem,
-      alerts,
-      loading,
-      name,
-      namespace: namespaceName,
-      role,
-    } = this.state;
+    const { activeItem, alerts, loading, name, role } = this.state;
+
     if (loading) {
       return <LoadingPageWithHeader />;
     }
@@ -270,7 +264,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       '/' +
       encodeURIComponent(role.github_repo);
     const namespace = role.summary_fields.namespace;
-    const namespace_url = formatPath(Paths.legacyNamespace, {
+    const namespace_url = formatPath(Paths.standaloneNamespace, {
       namespaceid: namespace.id,
     });
     let release_date = null;
@@ -379,16 +373,18 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
     const breadcrumbs = [
       {
         name: t`Roles`,
-        url: formatPath(Paths.legacyRoles),
+        url: formatPath(Paths.standaloneRoles),
       },
       {
         name: namespace.name,
-        url: formatPath(Paths.legacyNamespace, { namespaceid: namespace.id }),
+        url: formatPath(Paths.standaloneNamespace, {
+          namespaceid: namespace.id,
+        }),
       },
       {
         name,
-        url: formatPath(Paths.legacyRole, {
-          username: namespace.name,
+        url: formatPath(Paths.standaloneRole, {
+          namespace: namespace.name,
           name,
         }),
       },

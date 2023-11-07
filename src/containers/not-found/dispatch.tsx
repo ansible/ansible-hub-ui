@@ -79,13 +79,13 @@ export const Dispatch = ({ location, navigate }: RouteProps) => {
         const {
           name,
           summary_fields: {
-            namespace: { name: username },
+            namespace: { name: namespace },
           },
         } = roles[0];
 
         navigate(
-          formatPath(Paths.legacyRole, {
-            username,
+          formatPath(Paths.standaloneRole, {
+            namespace,
             name,
           }),
         );
@@ -161,7 +161,7 @@ export const Dispatch = ({ location, navigate }: RouteProps) => {
                   title={t`No matching roles found.`}
                   description={
                     <Link
-                      to={formatPath(Paths.legacyRoles)}
+                      to={formatPath(Paths.standaloneRoles)}
                     >{t`Show all roles`}</Link>
                   }
                 />
@@ -177,7 +177,7 @@ export const Dispatch = ({ location, navigate }: RouteProps) => {
                     ))}
                   </DataList>
                   <Link
-                    to={formatPath(Paths.legacyRoles)}
+                    to={formatPath(Paths.standaloneRoles)}
                   >{t`Show all roles`}</Link>
                 </>
               )}
