@@ -68,6 +68,7 @@ interface LabelGroupState {
   isTooltipVisible: boolean;
 }
 
+// replaces LabelGroup for localization (chipGroupProps) and to fix button without type when rendering "show more" in forms
 export class LabelGroup extends React.Component<
   LabelGroupProps,
   LabelGroupState

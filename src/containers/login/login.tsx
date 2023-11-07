@@ -44,20 +44,7 @@ class LoginPage extends React.Component<RouteProps, IState> {
         {this.state.errorMessage}
       </span>
     );
-    const loginForm = (
-      <LoginForm
-        showHelperText={!!this.state.errorMessage}
-        helperText={helperText}
-        usernameLabel={t`Username`}
-        usernameValue={this.state.usernameValue}
-        onChangeUsername={this.handleUsernameChange}
-        passwordLabel={t`Password`}
-        passwordValue={this.state.passwordValue}
-        onChangePassword={this.handlePasswordChange}
-        onLoginButtonClick={this.onLoginButtonClick}
-        loginButtonLabel={t`Log In`}
-      />
-    );
+
     return (
       <PFLoginPage
         style={{
@@ -66,7 +53,15 @@ class LoginPage extends React.Component<RouteProps, IState> {
         loginTitle={t`Log in to your account`}
         brandImgSrc={Logo}
       >
-        {loginForm}
+        <LoginForm
+          helperText={helperText}
+          onChangePassword={this.handlePasswordChange}
+          onChangeUsername={this.handleUsernameChange}
+          onLoginButtonClick={this.onLoginButtonClick}
+          passwordValue={this.state.passwordValue}
+          showHelperText={!!this.state.errorMessage}
+          usernameValue={this.state.usernameValue}
+        />
       </PFLoginPage>
     );
   }

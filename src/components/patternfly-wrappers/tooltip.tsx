@@ -6,6 +6,7 @@ interface IProps {
   content: string | ReactNode;
 }
 
+// wraps Tooltip to add a span wrap so that disabled elements still get tooltips
 export const Tooltip = ({ content, children }: IProps) => (
   <PFTooltip content={content}>
     <span>{children}</span>

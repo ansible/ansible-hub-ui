@@ -5,6 +5,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 
+// wraps FileUpload for localization
 export const FileUpload = (props: FileUploadProps) => (
   <PFFileUpload
     browseButtonText={t`Browse...`}

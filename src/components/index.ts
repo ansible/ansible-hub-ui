@@ -61,25 +61,13 @@ export {
 } from './page/list-page';
 export { Page } from './page/page';
 export { PageWithTabs } from './page/page-with-tabs';
-export { AppliedFilters } from './patternfly-wrappers/applied-filters';
-export { BreadcrumbType, Breadcrumbs } from './patternfly-wrappers/breadcrumbs';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
-export {
-  CompoundFilter,
-  FilterOption,
-} from './patternfly-wrappers/compound-filter';
 export { FileUpload } from './patternfly-wrappers/file-upload';
 export { LabelGroup } from './patternfly-wrappers/label-group';
-export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoginForm } from './patternfly-wrappers/login-form';
-export { Main } from './patternfly-wrappers/main';
 export { Pagination } from './patternfly-wrappers/pagination';
-export { Sort, SortFieldType } from './patternfly-wrappers/sort';
-export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
 export { Tabs, TabsType } from './patternfly-wrappers/tabs';
 export { Tooltip } from './patternfly-wrappers/tooltip';
-export { WizardModal } from './patternfly-wrappers/wizard-modal';
-export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { AccessTab } from './rbac/access-tab';
 export { DeleteGroupModal } from './rbac/delete-group-modal';
 export { DeleteUserModal } from './rbac/delete-user-modal';
@@ -116,6 +104,9 @@ export {
   closeAlert,
   closeAlertMixin,
 } from './shared/alert-list';
+export { AppliedFilters } from './shared/applied-filters';
+export { BreadcrumbType, Breadcrumbs } from './shared/breadcrumbs';
+export { CompoundFilter, FilterOption } from './shared/compound-filter';
 export { CopyURL } from './shared/copy-url';
 export { DataForm } from './shared/data-form';
 export { DetailList } from './shared/detail-list';
@@ -124,12 +115,18 @@ export { DownloadCount } from './shared/download-count';
 export { ExternalLink } from './shared/external-link';
 export { HubListToolbar } from './shared/hub-list-toolbar';
 export { LanguageSwitcher } from './shared/language-switcher';
+export { LinkTabs } from './shared/link-tabs';
 export { LoginLink } from './shared/login-link';
+export { Main } from './shared/main';
 export { MultiRepoModal } from './shared/multi-repo-modal';
 export { MultiSearchSearch } from './shared/multi-search-search';
 export { NamespaceListItem } from './shared/namespace-list-item';
 export { CollectionRatings, RoleRatings } from './shared/ratings';
+export { Sort, SortFieldType } from './shared/sort';
+export { StatefulDropdown } from './shared/stateful-dropdown';
 export { UIVersion } from './shared/ui-version';
+export { WizardModal } from './shared/wizard-modal';
+export { WriteOnlyField } from './shared/write-only-field';
 export {
   SignAllCertificatesModal,
   SignSingleCertificateModal,
