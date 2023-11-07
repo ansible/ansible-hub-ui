@@ -831,7 +831,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderPageControls() {
-    if (this.state.showControls) {
+    if (!this.state.showControls) {
       return null;
     }
 
