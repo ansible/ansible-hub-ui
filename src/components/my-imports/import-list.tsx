@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Pagination, Toolbar } from '@patternfly/react-core';
+import { Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
 import React from 'react';
 import {
@@ -16,8 +16,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   LoadingPageSpinner,
+  Pagination,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './my-imports.scss';
 
@@ -129,16 +129,10 @@ export class ImportList extends React.Component<IProps, IState> {
         </div>
         {this.props.params.namespace && (
           <Pagination
-            itemCount={numberOfResults}
-            perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-            page={params.page || 1}
-            onSetPage={(_, p) =>
-              updateParams(ParamHelper.setParam(params, 'page', p))
-            }
-            onPerPageSelect={(_, p) => {
-              updateParams({ ...params, page: 1, page_size: p });
-            }}
-            isCompact={true}
+            count={numberOfResults}
+            isCompact
+            params={params}
+            updateParams={updateParams}
           />
         )}
       </div>
