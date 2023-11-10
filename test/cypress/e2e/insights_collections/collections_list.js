@@ -71,8 +71,8 @@ describe('Collections list Tests', () => {
   });
 
   it('paging is working', () => {
-    // this page cant sort items, so we can only count them, there should be 11 items that we inserted
-    cy.get('.collection-container').get('article').should('have.length', 10);
+    // there should be 11 items in db, 10 per page + 1 view more
+    cy.get('.collection-container').get('article').should('have.length', 11);
 
     cy.get('.hub-cards').get('[aria-label="Go to next page"]:first').click();
     cy.get('.collection-container').get('article').should('have.length', 1);
