@@ -4,7 +4,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -21,22 +21,59 @@ interface IProps {
   ignoredParams: string[];
   params: ParamType;
   sortOptions?: SortFieldType[];
+  typeaheads?: Record<
+    string,
+    (inputText: string) => Promise<{ id: string; title: string }[]>
+  >;
   updateParams: (p) => void;
+}
+
+function useTypeaheads(typeaheads, { inputText, selectedFilter }) {
+  const [options, setOptions] = useState({});
+  const loader = typeaheads[selectedFilter];
+  const setter = (value) =>
+    setOptions((options) => ({ ...options, [selectedFilter]: value }));
+
+  useEffect(() => {
+    if (selectedFilter && loader) {
+      loader('').then(setter);
+    }
+  }, [selectedFilter]);
+
+  useEffect(() => {
+    if (inputText && loader) {
+      loader(inputText).then(setter);
+    }
+  }, [inputText]);
+
+  return options;
 }
 
 // FIXME: missing Buttons & CardListSwitcher to be usable everywhere
 export function HubListToolbar({
+  count,
+  filterConfig,
   ignoredParams,
   params,
-  updateParams,
-  filterConfig,
   sortOptions,
-  count,
+  typeaheads,
+  updateParams,
 }: IProps) {
   const [inputText, setInputText] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const typeaheadOptions = useTypeaheads(typeaheads || {}, {
+    inputText,
+    selectedFilter,
+  });
 
   const niceNames = Object.fromEntries(
     filterConfig.map(({ id, title }) => [id, title]),
+  );
+
+  const filterWithOptions = filterConfig.map((item) =>
+    item.inputType !== 'typeahead'
+      ? item
+      : { ...item, options: item.options || typeaheadOptions[item.id] || [] },
   );
 
   return (
@@ -51,10 +88,11 @@ export function HubListToolbar({
         >
           <ToolbarItem>
             <CompoundFilter
-              filterConfig={filterConfig}
+              filterConfig={filterWithOptions}
               inputText={inputText}
               onChange={setInputText}
               params={params}
+              selectFilter={setSelectedFilter}
               updateParams={updateParams}
             />
           </ToolbarItem>

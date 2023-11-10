@@ -7,9 +7,8 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { AnsibleRepositoryAPI } from 'src/api';
+import { AnsibleRepositoryAPI, TagAPI } from 'src/api';
 import { AppliedFilters, CompoundFilter } from 'src/components';
-import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
 import './collection-filter.scss';
 
@@ -28,26 +27,50 @@ interface IProps {
 
 export const CollectionFilter = (props: IProps) => {
   const context = useContext();
+  const { ignoredParams, params, updateParams } = props;
+  const { display_signatures, display_repositories } = context.featureFlags;
+  const displayTags = ignoredParams.includes('tags') === false;
+  const displayRepos =
+    ignoredParams.includes('repository_name') === false && display_repositories;
+  const displayNamespaces = ignoredParams.includes('namespace') === false;
+
   const [repositories, setRepositories] = useState([]);
   const [inputText, setInputText] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const loadRepos = () => {
     AnsibleRepositoryAPI.list({
       name__icontains: inputText,
       pulp_label_select: '!hide_from_search',
-    }).then((res) => {
-      const repos = res.data.results.map(({ name }) => ({
-        id: name,
-        title: name,
-      }));
-      setRepositories(repos);
-    });
+    }).then(({ data: { results } }) =>
+      setRepositories(
+        results.map(({ name }) => ({
+          id: name,
+          title: name,
+        })),
+      ),
+    );
+  };
+
+  const loadTags = () => {
+    TagAPI.listCollections({ name__icontains: inputText, sort: '-count' }).then(
+      ({ data: { data } }) =>
+        setTags(
+          data.map(({ name, count }) => ({
+            id: name,
+            title: count === undefined ? name : t`${name} (${count})`,
+          })),
+        ),
+    );
   };
 
   useEffect(() => {
     if (selectedFilter === 'repository_name') {
       loadRepos();
+    }
+    if (selectedFilter === 'tags' && displayTags) {
+      loadTags();
     }
   }, [selectedFilter]);
 
@@ -65,12 +88,11 @@ export const CollectionFilter = (props: IProps) => {
     }
   }, [inputText]);
 
-  const { ignoredParams, params, updateParams } = props;
-  const { display_signatures, display_repositories } = context.featureFlags;
-  const displayTags = ignoredParams.includes('tags') === false;
-  const displayRepos =
-    ignoredParams.includes('repository_name') === false && display_repositories;
-  const displayNamespaces = ignoredParams.includes('namespace') === false;
+  useEffect(() => {
+    if (inputText != '' && selectedFilter === 'tags' && displayTags) {
+      loadTags();
+    }
+  }, [inputText]);
 
   const filterConfig = [
     {
@@ -90,11 +112,8 @@ export const CollectionFilter = (props: IProps) => {
     displayTags && {
       id: 'tags',
       title: t`Tag`,
-      inputType: 'multiple' as const,
-      options: Constants.COLLECTION_FILTER_TAGS.map((tag) => ({
-        id: tag,
-        title: tag,
-      })),
+      inputType: 'typeahead' as const,
+      options: tags,
     },
     display_signatures && {
       id: 'is_signed',
@@ -118,9 +137,7 @@ export const CollectionFilter = (props: IProps) => {
               updateParams={updateParams}
               params={params}
               filterConfig={filterConfig}
-              selectFilter={(selected) => {
-                setSelectedFilter(selected);
-              }}
+              selectFilter={setSelectedFilter}
             />
             <ToolbarItem>
               <AppliedFilters

@@ -14,6 +14,7 @@ import {
   LegacyNamespaceListType,
   LegacyRoleAPI,
   LegacyRoleListType,
+  TagAPI,
 } from 'src/api';
 import {
   AlertList,
@@ -119,11 +120,24 @@ class NamespaceRoles extends React.Component<
       );
   }
 
+  loadTags(inputText) {
+    return TagAPI.listRoles({ name__icontains: inputText, sort: '-count' })
+      .then(({ data: { data } }) =>
+        data.map(({ name, count }) => ({
+          id: name,
+          title: count === undefined ? name : t`${name} (${count})`,
+        })),
+      )
+      .catch(() => []);
+  }
+
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
 
   render() {
+    const { count, loading, params, roles } = this.state;
+
     const updateParams = (params) =>
       this.updateParams(params, () => this.query(params));
 
@@ -135,6 +149,8 @@ class NamespaceRoles extends React.Component<
       {
         id: 'tags',
         title: t`Tags`,
+        inputType: 'typeahead' as const,
+        // options handled by `typeaheads`
       },
     ];
 
@@ -151,8 +167,6 @@ class NamespaceRoles extends React.Component<
         type: 'numeric' as const,
       },
     ];
-
-    const { count, loading, params, roles } = this.state;
 
     const noData =
       count === 0 &&
@@ -178,6 +192,7 @@ class NamespaceRoles extends React.Component<
               ignoredParams={['page', 'page_size', 'sort']}
               params={params}
               sortOptions={sortOptions}
+              typeaheads={{ tags: this.loadTags }}
               updateParams={updateParams}
             />
             {!count ? (
