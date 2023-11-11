@@ -23,6 +23,7 @@ import {
   DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   ImportModal,
   LoadingPageSpinner,
   Pagination,
@@ -165,6 +166,14 @@ class Search extends React.Component<RouteProps, IState> {
       ? null
       : deleteCollection?.repository?.name;
 
+    const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
+
+    // TODO
+    const filterConfig = [{ id: 'keywords', title: t`keywords` }];
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+    ];
+
     return (
       <div className='search-page'>
         <AlertList
@@ -218,7 +227,7 @@ class Search extends React.Component<RouteProps, IState> {
             <div>
               <div className='hub-toolbar hub-toolbar-left'>
                 <CollectionFilter
-                  ignoredParams={['page', 'page_size', 'sort', 'view_type']}
+                  ignoredParams={ignoredParams}
                   params={params}
                   updateParams={updateParams}
                 />
@@ -255,6 +264,14 @@ class Search extends React.Component<RouteProps, IState> {
             </div>
           )}
         </BaseHeader>
+        <HubListToolbar
+          count={count}
+          filterConfig={filterConfig}
+          ignoredParams={ignoredParams}
+          params={params}
+          sortOptions={sortOptions}
+          updateParams={updateParams}
+        />
         {loading ? (
           <LoadingPageSpinner />
         ) : noData ? (
@@ -263,7 +280,7 @@ class Search extends React.Component<RouteProps, IState> {
             description={t`Collections will appear once uploaded`}
           />
         ) : (
-          <React.Fragment>
+          <>
             <section className='collection-container'>
               {this.renderCollections(collections, {
                 count,
@@ -278,7 +295,7 @@ class Search extends React.Component<RouteProps, IState> {
                 count={count}
               />
             </section>
-          </React.Fragment>
+          </>
         )}
       </div>
     );

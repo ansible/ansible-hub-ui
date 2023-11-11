@@ -25,6 +25,7 @@ import {
   DeleteModal,
   EmptyStateNoData,
   ExternalLink,
+  HubListToolbar,
   ImportModal,
   LoadingPageWithHeader,
   Main,
@@ -326,6 +327,12 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       ? null
       : deleteCollection?.repository?.name;
 
+    // TODO
+    const filterConfig = [{ id: 'keywords', title: t`keywords` }];
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+    ];
+
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -427,6 +434,16 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             ) : null
           }
         />
+        {tab === 'collections' ? (
+          <HubListToolbar
+            count={filteredCount}
+            filterConfig={filterConfig}
+            ignoredParams={ignoredParams}
+            params={params}
+            sortOptions={sortOptions}
+            updateParams={updateParams}
+          />
+        ) : null}
         <Main>
           {tab === 'collections' ? (
             noData ? (
