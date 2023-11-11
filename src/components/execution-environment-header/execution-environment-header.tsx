@@ -1,8 +1,13 @@
 import { Trans, t } from '@lingui/macro';
-import { Tooltip } from '@patternfly/react-core';
 import React from 'react';
 import { ContainerRepositoryType } from 'src/api';
-import { BaseHeader, Breadcrumbs, SignatureBadge, Tabs } from 'src/components';
+import {
+  BaseHeader,
+  Breadcrumbs,
+  SignatureBadge,
+  Tabs,
+  Tooltip,
+} from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 

@@ -7,12 +7,11 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
-  Tooltip,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Logo } from 'src/components';
+import { Logo, Tooltip } from 'src/components';
 import { Constants } from 'src/constants';
 import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
@@ -71,11 +70,11 @@ export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
           />
         </CardHeaderMain>
       </CardHeader>
-      <Tooltip content={title}>
+      <Tooltip content={title} noSpan>
         <CardTitle>{getDescription(title, MAX_DESCRIPTION_LENGTH)}</CardTitle>
       </Tooltip>
       {title !== name ? (
-        <Tooltip content={name}>
+        <Tooltip content={name} noSpan>
           <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>
         </Tooltip>
       ) : null}
@@ -89,6 +88,7 @@ export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
   );
 };
 
+// FIXME: pf-m-truncate / hub-m-truncated
 function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
   if (!d) {
     return '';

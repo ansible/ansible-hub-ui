@@ -9,13 +9,17 @@ import {
   Text,
   TextContent,
   TextVariants,
-  Tooltip,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
-import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
+import {
+  CollectionNumericLabel,
+  Logo,
+  SignatureBadge,
+  Tooltip,
+} from 'src/components';
 import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';

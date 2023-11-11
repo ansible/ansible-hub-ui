@@ -51,7 +51,10 @@ describe('Delete a namespace', () => {
     ).as('namespaces');
     cy.menuGo('Collections > Namespaces');
     cy.wait('@namespaces');
-    cy.contains('ansible').parent().contains('View collections').click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
     cy.contains('Delete namespace')
       .invoke('attr', 'aria-disabled')

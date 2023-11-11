@@ -15,7 +15,6 @@ import {
   Text,
 } from '@patternfly/react-core';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
-import * as moment from 'moment';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -203,8 +202,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       { key: 'origin_repository', name: t`Repo` },
     ];
 
-    const latestVersion = collection.collection_version.pulp_created;
-
     const {
       display_signatures,
       can_upload_signatures,
@@ -212,24 +209,30 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       ai_deny_index,
     } = this.context.featureFlags;
 
-    const signedString = () => {
-      if (!display_signatures) {
-        return '';
-      }
+    const {
+      collection_version,
+      is_signed,
+      namespace_metadata: namespace,
+    } = collection;
 
-      return collection.is_signed ? t`(signed)` : t`(unsigned)`;
-    };
+    const {
+      name: collectionName,
+      pulp_created: lastUpdated,
+      version,
+    } = collection_version;
 
-    const isLatestVersion = (v) => {
-      return `${moment(v.pulp_created).fromNow()} ${signedString()}
-      ${
-        v.version === collections[0].collection_version.version
-          ? t`(latest)`
-          : ''
-      }`;
-    };
-    const { collection_version, namespace_metadata: namespace } = collection;
-    const { name: collectionName, version } = collection_version;
+    const latestVersion = collections[0].collection_version.version;
+
+    const versionBadge = ({ pulp_created, version }) =>
+      [
+        <Trans key={pulp_created}>
+          updated <DateComponent date={pulp_created} />
+        </Trans>,
+        display_signatures ? (is_signed ? t`(signed)` : t`(unsigned)`) : '',
+        version === latestVersion ? t`(latest)` : '',
+      ]
+        .filter(Boolean)
+        .map((b, i) => (i ? <> {b}</> : b)); // join with spaces
 
     const nsTitle = namespaceTitle(
       namespace || { name: collection_version.namespace },
@@ -432,7 +435,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   >
                     v{collection_version.version}
                   </Button>{' '}
-                  {t`updated ${isLatestVersion(collection_version)}`}
+                  {versionBadge(collection_version)}
                 </ListItem>
               ))
             ) : (
@@ -544,24 +547,22 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                             )
                           }
                         >
-                          <Trans>
-                            {v.version} updated {isLatestVersion(v)}
-                          </Trans>
+                          {v.version} {versionBadge(v)}
                         </SelectOption>
                       ))}
                   </Select>
                 </div>
-                {latestVersion ? (
+                {lastUpdated ? (
                   <span className='last-updated'>
                     <Trans>
-                      Last updated <DateComponent date={latestVersion} />
+                      Last updated <DateComponent date={lastUpdated} />
                     </Trans>
                   </span>
                 ) : null}
                 {display_signatures ? (
                   <SignatureBadge
                     isCompact
-                    signState={collection.is_signed ? 'signed' : 'unsigned'}
+                    signState={is_signed ? 'signed' : 'unsigned'}
                   />
                 ) : null}
               </div>

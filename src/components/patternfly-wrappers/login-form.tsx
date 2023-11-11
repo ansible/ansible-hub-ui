@@ -2,6 +2,7 @@
 // packages/react-core/src/components/LoginPage/LoginForm.tsx
 // w/ fixed imports, prettier
 // and added autocomplete="off" for username & password
+import { t } from '@lingui/macro';
 import {
   ActionGroup,
   Button,
@@ -76,24 +77,25 @@ export interface LoginFormProps
   ) => void;
 }
 
+// replaces LoginForm for localization and to add autoComplete=off to inputs
 export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
   noAutoFocus = false,
   className = '',
   showHelperText = false,
   helperText = null,
   helperTextIcon = null,
-  usernameLabel = 'Username',
+  usernameLabel = t`Username`,
   usernameValue = '',
   onChangeUsername = () => undefined,
   isValidUsername = true,
-  passwordLabel = 'Password',
+  passwordLabel = t`Password`,
   passwordValue = '',
   onChangePassword = () => undefined,
   isShowPasswordEnabled = false,
-  hidePasswordAriaLabel = 'Hide password',
-  showPasswordAriaLabel = 'Show password',
+  hidePasswordAriaLabel = t`Hide password`,
+  showPasswordAriaLabel = t`Show password`,
   isValidPassword = true,
-  loginButtonLabel = 'Log In',
+  loginButtonLabel = t`Log In`,
   isLoginButtonDisabled = false,
   onLoginButtonClick = () => undefined,
   rememberMeLabel = '',

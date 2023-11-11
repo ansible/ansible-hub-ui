@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Spinner, Tooltip } from '@patternfly/react-core';
+import { Spinner } from '@patternfly/react-core';
 import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import {
   ImportListType,
   PulpStatus,
 } from 'src/api';
-import { StatusIndicator } from 'src/components';
+import { StatusIndicator, Tooltip } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import './my-imports.scss';
 

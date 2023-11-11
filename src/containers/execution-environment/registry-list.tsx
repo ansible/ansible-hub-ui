@@ -6,7 +6,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Tooltip,
 } from '@patternfly/react-core';
 import React from 'react';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
@@ -28,6 +27,7 @@ import {
   Pagination,
   RemoteForm,
   SortTable,
+  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
