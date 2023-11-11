@@ -1,6 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Badge,
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -10,7 +11,7 @@ import {
   TextVariants,
   Tooltip,
 } from '@patternfly/react-core';
-import cx from 'classnames';
+import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
@@ -21,18 +22,41 @@ import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
-  className?: string;
   displaySignatures: boolean;
   footer?: React.ReactNode;
   menu?: React.ReactNode;
 }
+
+export const CollectionNextPageCard = ({
+  onClick,
+}: {
+  onClick: () => void;
+}) => {
+  return (
+    <Card className='hub-c-card-collection-container card'>
+      <div
+        style={{
+          display: 'flex',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <Button variant='link' onClick={onClick}>
+          {t`View more`}
+          <br />
+          <br />
+          <ArrowRightIcon />
+        </Button>
+      </div>
+    </Card>
+  );
+};
 
 export const CollectionCard = ({
   collection_version,
   namespace_metadata: namespace,
   repository,
   is_signed,
-  className,
   displaySignatures,
   menu,
   footer,
@@ -46,7 +70,7 @@ export const CollectionCard = ({
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
-    <Card className={cx('hub-c-card-collection-container ', className)}>
+    <Card className='hub-c-card-collection-container card'>
       <CardHeader className='logo-row'>
         <Logo
           alt={t`${nsTitle} logo`}
