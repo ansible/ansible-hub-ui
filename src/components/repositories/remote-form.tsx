@@ -201,10 +201,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
       ];
 
     const docsAnsibleLink = (
-      <ExternalLink
-        href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
-        title='requirements.yml'
-      />
+      <ExternalLink href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'>
+        requirements.yml
+      </ExternalLink>
     );
 
     const yamlTemplate = [

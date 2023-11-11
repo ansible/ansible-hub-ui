@@ -2,10 +2,9 @@ import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external
 import React, { ReactNode } from 'react';
 
 interface IProps {
-  children?: ReactNode;
+  children: ReactNode;
   'data-cy'?: string;
   href: string;
-  title?: string;
   variant?: 'default' | 'download' | 'menu' | 'nav';
 }
 
@@ -19,10 +18,9 @@ export const ExternalLink = ({
   children,
   'data-cy': dataCy,
   href,
-  title,
   variant = 'default',
 }: IProps) => {
-  if (!href || (!title && !children)) {
+  if (!href || !children) {
     return null;
   }
 
@@ -43,7 +41,6 @@ export const ExternalLink = ({
       rel='nofollow noopener noreferrer'
       target='_blank'
     >
-      {title}
       {children}{' '}
       <ExternalLinkAltIcon style={{ fontSize: 'smaller', ...iconStyle }} />
     </a>
