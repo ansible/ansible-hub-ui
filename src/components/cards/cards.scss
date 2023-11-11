@@ -68,3 +68,13 @@
 .hidden-menu-space {
   margin-right: 8px;
 }
+
+.hub-card-layout {
+  display: flex;
+  flex-wrap: wrap;
+
+  .card-wrapper {
+    margin-right: 24px;
+    margin-bottom: 24px;
+  }
+}
