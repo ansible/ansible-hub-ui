@@ -88,6 +88,7 @@ export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
   );
 };
 
+// FIXME: pf-m-truncate / hub-m-truncated
 function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
   if (!d) {
     return '';
