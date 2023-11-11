@@ -342,34 +342,40 @@ export const MultiSearch = (props: RouteProps) => {
               >{t`Show more execution environments`}</Link>
             }
           >
-            <DataList aria-label={t`Available matching execution environments`}>
+            <DataList
+              aria-label={t`Available matching execution environments`}
+              className='hub-card-layout'
+              style={{ paddingTop: '8px' }}
+            >
               {containers.map((item, index) => (
-                <section className='card-layout' key={index}>
-                  <div className='card-wrapper'>
-                    <article className='pf-c-card hub-c-card-ns-container'>
-                      <div className='pf-c-card__title'>
-                        <Link
-                          to={formatEEPath(Paths.executionEnvironmentDetail, {
-                            container: item.pulp.distribution.base_path,
-                          })}
-                        >
-                          {item.name}
-                        </Link>
-                      </div>
-                      <div className='pf-c-card__body pf-m-truncate'>
-                        {item.description ? (
-                          <Tooltip content={item.description}>
-                            {item.description}
-                          </Tooltip>
-                        ) : null}
-                      </div>
-                      <div className='pf-c-card__footer'>
-                        <Label>
-                          {item.pulp.repository.remote ? t`Remote` : t`Local`}
-                        </Label>
-                      </div>
-                    </article>
-                  </div>
+                <section
+                  key={index}
+                  className='card-wrapper'
+                  style={{ width: '300px' }}
+                >
+                  <article className='pf-c-card'>
+                    <div className='pf-c-card__title'>
+                      <Link
+                        to={formatEEPath(Paths.executionEnvironmentDetail, {
+                          container: item.pulp.distribution.base_path,
+                        })}
+                      >
+                        {item.name}
+                      </Link>
+                    </div>
+                    <div className='pf-c-card__body pf-m-truncate'>
+                      {item.description ? (
+                        <Tooltip content={item.description}>
+                          {item.description}
+                        </Tooltip>
+                      ) : null}
+                    </div>
+                    <div className='pf-c-card__footer'>
+                      <Label>
+                        {item.pulp.repository.remote ? t`Remote` : t`Local`}
+                      </Label>
+                    </div>
+                  </article>
                 </section>
               ))}
             </DataList>

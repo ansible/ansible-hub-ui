@@ -321,7 +321,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     return (
-      <section className='card-layout'>
+      <section className='hub-card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
             <NamespaceCard
