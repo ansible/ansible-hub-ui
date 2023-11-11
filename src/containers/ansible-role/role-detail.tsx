@@ -41,18 +41,18 @@ import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
-interface RoleMeta {
+interface RoleMetaProps {
   addAlert: (alert: AlertType) => void;
   name: string;
   namespace: string;
   role: LegacyRoleDetailType;
 }
 
-interface RoleMetaReadme {
+interface RoleMetaReadmeState {
   readme_html: string;
 }
 
-class RoleInstall extends React.Component<RoleMeta> {
+class RoleInstall extends React.Component<RoleMetaProps> {
   render() {
     const installCMD = `ansible-galaxy role install ${this.props.namespace}.${this.props.name}`;
     return (
@@ -68,7 +68,7 @@ class RoleInstall extends React.Component<RoleMeta> {
   }
 }
 
-class RoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
+class RoleDocs extends React.Component<RoleMetaProps, RoleMetaReadmeState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,7 +138,7 @@ interface RoleVersionsState {
   loading: boolean;
 }
 
-class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
+class RoleVersions extends React.Component<RoleMetaProps, RoleVersionsState> {
   constructor(props) {
     super(props);
     this.state = {
