@@ -5,6 +5,7 @@ import {
   CollectionVersionSearch,
   ImportDetailType,
   ImportListType,
+  LegacyRoleImportDetailType,
   PulpStatus,
 } from 'src/api';
 import { StatusIndicator, Tooltip } from 'src/components';
@@ -16,9 +17,18 @@ interface IProps {
   empty?: boolean;
   followMessages?: boolean;
   loading: boolean;
-  selectedImport: ImportListType;
+  roleImport?: LegacyRoleImportDetailType;
+  selectedImport?: ImportListType;
   setFollowMessages?: (follow: boolean) => void;
-  task: ImportDetailType;
+  task?: ImportDetailType;
+}
+
+function legacyStatusToPulpStatus(v1status: string): PulpStatus {
+  return (
+    {
+      SUCCESS: PulpStatus.completed,
+    }[v1status] || PulpStatus[v1status.toLowerCase() as PulpStatus]
+  );
 }
 
 export function ImportConsole({
@@ -27,16 +37,20 @@ export function ImportConsole({
   empty,
   followMessages,
   loading,
+  roleImport,
   selectedImport,
   setFollowMessages,
   task,
 }: IProps) {
   const lastImport = useRef<HTMLDivElement>(null);
 
-  const inProgress = !selectedImport
-    ? true
-    : selectedImport.state === PulpStatus.running ||
-      selectedImport.state === PulpStatus.waiting;
+  const state =
+    selectedImport?.state ||
+    task?.state ||
+    (roleImport?.state && legacyStatusToPulpStatus(roleImport.state)) ||
+    null;
+
+  const inProgress = [PulpStatus.running, PulpStatus.waiting].includes(state);
 
   const scrollToBottom = () =>
     window.requestAnimationFrame(
@@ -59,39 +73,44 @@ export function ImportConsole({
   }, [followMessages, inProgress]);
 
   const collectionPipeline = collection?.repository?.pulp_labels?.pipeline;
+  const error = task?.error || roleImport?.error;
 
   const title =
-    !selectedImport || empty ? null : (
+    empty || (!selectedImport && !roleImport) ? null : (
       <div>
         <div className='title-bar'>
           <div>
             <span className='data-title'>{t`Status:`}</span>{' '}
-            <StatusIndicator type='secondary' status={selectedImport.state} />
+            <StatusIndicator type='secondary' status={state} />
           </div>
-          <div>
-            <span className='data-title'>{t`Approval status:`}</span>{' '}
-            {!collection
-              ? t`waiting for import to finish`
-              : {
-                  rejected: t`rejected`,
-                  staging: t`waiting for approval`,
-                  approved: t`approved`,
-                }[collectionPipeline] || t`could not be determined yet`}
-          </div>
-          <div>
-            <span className='data-title'>{t`Version:`}</span>{' '}
-            {selectedImport.version}
-          </div>
+          {selectedImport ? (
+            <>
+              <div>
+                <span className='data-title'>{t`Approval status:`}</span>{' '}
+                {!collection
+                  ? t`waiting for import to finish`
+                  : {
+                      rejected: t`rejected`,
+                      staging: t`waiting for approval`,
+                      approved: t`approved`,
+                    }[collectionPipeline] || t`could not be determined yet`}
+              </div>
+              <div>
+                <span className='data-title'>{t`Version:`}</span>{' '}
+                {selectedImport.version}
+              </div>
+            </>
+          ) : null}
 
-          {task && task.error ? (
+          {error?.code || error?.description || error?.traceback ? (
             <div>
               <span className='data-title'>{t`Error message:`}</span>{' '}
-              {task.error.code}
+              {error.code}
               <pre>
-                <code>{task.error.description}</code>
+                <code>{error.description}</code>
               </pre>
               <pre>
-                <code>{task.error.traceback}</code>
+                <code>{error.traceback}</code>
               </pre>
             </div>
           ) : null}
@@ -116,6 +135,17 @@ export function ImportConsole({
     </div>
   );
 
+  const messages = task
+    ? task.messages
+    : roleImport
+      ? roleImport.summary_fields.task_messages.map(
+          ({ message_type: level, message_text: message }) => ({
+            level,
+            message,
+          }),
+        )
+      : [];
+
   return (
     <div className='hub-import-console' data-cy={'ImportConsole'}>
       {title}
@@ -135,22 +165,22 @@ export function ImportConsole({
           </Tooltip>
         </div>
 
-        {task.messages.map(renderMessage)}
+        {messages.map(renderMessage)}
 
-        {task.messages.length === 0 ? (
+        {messages.length === 0 ? (
           <div className='message'>
             <span className='error'>{t`No task messages available`}</span>
           </div>
         ) : null}
 
-        {task.state === PulpStatus.completed && (
+        {state === PulpStatus.completed && (
           <div className='message'>
             <br />
             <span className='success'>{t`Done`}</span>
           </div>
         )}
 
-        {task.state === PulpStatus.failed && (
+        {state === PulpStatus.failed && (
           <div className='message'>
             <br />
             <span className='failed'>{t`Failed`}</span>

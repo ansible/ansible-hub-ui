@@ -219,8 +219,8 @@ interface RoleImportDetailProps {
 }
 
 interface RoleImportDetailState {
+  lastImport: LegacyRoleImportDetailType;
   loading: boolean;
-  results: LegacyRoleImportDetailType[];
 }
 
 class RoleImportLog extends React.Component<
@@ -230,61 +230,57 @@ class RoleImportLog extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      //role: null,
-      //addAlert: null,
       loading: true,
-      results: [],
+      lastImport: null,
     };
   }
 
   componentDidMount() {
-    this.setState({ loading: true, results: [] });
+    const { addAlert, role } = this.props;
+    this.setState({ loading: true, lastImport: null });
 
-    LegacyImportAPI.getLastSuccessfulRoleImport(this.props.role.id)
-      .then(({ data: { results } }) =>
-        this.setState({
-          results: results,
-          loading: false,
-        }),
+    LegacyImportAPI.list({
+      detail: true,
+      limit: 1,
+      role_id: role.id,
+      sort: '-created',
+      state: 'SUCCESS',
+    })
+      .then(
+        ({
+          data: {
+            results: [lastImport],
+          },
+        }) =>
+          this.setState({
+            lastImport,
+            loading: false,
+          }),
       )
       .catch(
         handleHttpError(
           t`Failed to get import log`,
-          () => this.setState({ loading: false, results: null }),
-          this.props.addAlert,
+          () => this.setState({ loading: false, lastImport: null }),
+          addAlert,
         ),
       );
   }
 
-  setFollowMessages() {}
-
   render() {
-    const lastImport = this.state.results[0];
+    const { role } = this.props;
+    const { lastImport, loading } = this.state;
 
     return (
       <>
-        {!this.state.loading &&
-        this.state.results &&
-        this.state.results.length == 0 ? (
+        {!loading && !lastImport ? (
           <EmptyStateNoData
-            title={t`No import logs for role id ${this.props.role.id}`}
+            title={t`No import logs for role id ${role.id}`}
             description={t`No import logs were found for the role.`}
           />
         ) : null}
 
         {lastImport && (
-          <>
-            <div>{lastImport.role_id}</div>
-            <ImportConsole
-              loading={this.state.loading}
-              empty={false}
-              role={this.props.role}
-              task={lastImport}
-              selectedImport={lastImport}
-              followMessages={true}
-              setFollowMessages={this.setFollowMessages}
-            />
-          </>
+          <ImportConsole loading={loading} roleImport={lastImport} />
         )}
       </>
     );
