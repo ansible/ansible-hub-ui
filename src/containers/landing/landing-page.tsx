@@ -168,10 +168,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <p>{t`Try Red Hat Ansible Automation Platform`}</p>
                   <br />
                   <p>
-                    <ExternalLink
-                      href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'
-                      title={t`Get the trial`}
-                    />
+                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
                   </p>
                 </>
               }
@@ -181,28 +178,16 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               body={
                 <List variant={ListVariant.inline}>
                   <ListItem>
-                    <ExternalLink
-                      href='https://www.redhat.com/en/about/privacy-policy'
-                      title={t`Privacy statement`}
-                    />
+                    <ExternalLink href='https://www.redhat.com/en/about/privacy-policy'>{t`Privacy statement`}</ExternalLink>
                   </ListItem>
                   <ListItem>
-                    <ExternalLink
-                      href='https://www.redhat.com/en/about/terms-use'
-                      title={t`Terms of use`}
-                    />
+                    <ExternalLink href='https://www.redhat.com/en/about/terms-use'>{t`Terms of use`}</ExternalLink>
                   </ListItem>
                   <ListItem>
-                    <ExternalLink
-                      href='https://www.redhat.com/en/about/all-policies-guidelines'
-                      title={t`All policies and guidelines`}
-                    />
+                    <ExternalLink href='https://www.redhat.com/en/about/all-policies-guidelines'>{t`All policies and guidelines`}</ExternalLink>
                   </ListItem>
                   <ListItem>
-                    <ExternalLink
-                      href='https://www.redhat.com/en/about/digital-accessibility'
-                      title={t`Digital accessibility`}
-                    />
+                    <ExternalLink href='https://www.redhat.com/en/about/digital-accessibility'>{t`Digital accessibility`}</ExternalLink>
                   </ListItem>
                 </List>
               }

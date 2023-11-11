@@ -579,7 +579,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <Flex>
               {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
                 <FlexItem>
-                  <ExternalLink href={issueUrl} title={t`Create issue`} />
+                  <ExternalLink href={issueUrl}>{t`Create issue`}</ExternalLink>
                 </FlexItem>
               ) : null}
               {dropdownItems.length > 0 ? (
@@ -612,7 +612,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
                 return (
                   <div className='link' key={link.key}>
-                    <ExternalLink href={url} title={link.name} />
+                    <ExternalLink href={url}>{link.name}</ExternalLink>
                   </div>
                 );
               })}

@@ -321,7 +321,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         </div>
         {release_name && <div className='hub-entry'>{release_name}</div>}
         <div className='hub-entry'>
-          <ExternalLink href={repository} title={t`GitHub Repository`} />
+          <ExternalLink href={repository}>{t`GitHub Repository`}</ExternalLink>
         </div>
         <div className='hub-entry'>
           <RoleRatings namespace={namespace.name} name={role.name} />

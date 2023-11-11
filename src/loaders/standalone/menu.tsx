@@ -205,9 +205,10 @@ function MenuItem({ item, context }) {
         <ExternalLink
           data-cy={`hub-menu-item-${item.name}`}
           href={item.url}
-          title={item.name}
           variant='nav'
-        />
+        >
+          {item.name}
+        </ExternalLink>
       ) : item.url ? (
         <Link to={item.url} data-cy={`hub-menu-item-${item.name}`}>
           {item.name}

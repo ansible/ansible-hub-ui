@@ -210,7 +210,7 @@ export const PublishToControllerModal = (props: IProps) => {
 
           return (
             <ListItem style={{ paddingTop: '8px' }} key={host}>
-              <ExternalLink href={href} title={host} />
+              <ExternalLink href={href}>{host}</ExternalLink>
               <ClipboardCopyButton
                 variant={'plain'}
                 id={href}
@@ -237,7 +237,7 @@ export const PublishToControllerModal = (props: IProps) => {
   const notListedMessage = (
     <>
       {t`If the Controller is not listed in the table, check settings.py.`}{' '}
-      {docsLink && <ExternalLink href={docsLink} title={t`Learn more`} />}
+      {docsLink && <ExternalLink href={docsLink}>{t`Learn more`}</ExternalLink>}
     </>
   );
 

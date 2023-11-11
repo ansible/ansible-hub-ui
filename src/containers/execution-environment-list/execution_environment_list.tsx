@@ -135,8 +135,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       <ExternalLink
         href={UI_DOCS_URL}
         data-cy='push-images-button'
-        title={t`Push container images`}
-      />
+      >{t`Push container images`}</ExternalLink>
     );
     const addRemoteButton = hasPermission(
       'container.add_containernamespace',

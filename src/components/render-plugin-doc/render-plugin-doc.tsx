@@ -283,7 +283,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
   }
 
   private formatPartURL(part: dom.URLPart): React.ReactNode {
-    return <ExternalLink href={part.url} title={part.url} />;
+    return <ExternalLink href={part.url}>{part.url}</ExternalLink>;
   }
 
   private formatPartText(part: dom.TextPart): React.ReactNode {

@@ -92,9 +92,8 @@ export const StandaloneLayout = ({
         component={
           <ExternalLink
             href='https://access.redhat.com/support'
-            title={t`Customer Support`}
             variant='menu'
-          />
+          >{t`Customer Support`}</ExternalLink>
         }
       />,
       <DropdownItem
@@ -102,9 +101,8 @@ export const StandaloneLayout = ({
         component={
           <ExternalLink
             href='https://www.ansible.com/resources/webinars-training'
-            title={t`Training`}
             variant='menu'
-          />
+          >{t`Training`}</ExternalLink>
         }
       />,
       <DropdownItem key='about' onClick={() => setAboutModalVisible(true)}>

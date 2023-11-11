@@ -92,8 +92,9 @@ export const AboutModalWindow = ({
             ) : (
               <ExternalLink
                 href={`https://github.com/ansible/galaxy_ng/releases/tag/${galaxy_ng_version}`}
-                title={galaxy_ng_version}
-              />
+              >
+                {galaxy_ng_version}
+              </ExternalLink>
             )}
             {galaxy_ng_commit ? (
               <>
@@ -101,8 +102,9 @@ export const AboutModalWindow = ({
                 {galaxy_ng_sha ? (
                   <ExternalLink
                     href={`https://github.com/ansible/galaxy_ng/commit/${galaxy_ng_sha}`}
-                    title={galaxy_ng_commit}
-                  />
+                  >
+                    {galaxy_ng_commit}
+                  </ExternalLink>
                 ) : (
                   galaxy_ng_commit
                 )}
@@ -114,32 +116,36 @@ export const AboutModalWindow = ({
           <Value>
             <ExternalLink
               href={`https://github.com/pulp/pulp_ansible/releases/tag/${pulp_ansible_version}`}
-              title={pulp_ansible_version}
-            />
+            >
+              {pulp_ansible_version}
+            </ExternalLink>
           </Value>
 
           <Label>{t`Pulp Container Version`}</Label>
           <Value>
             <ExternalLink
               href={`https://github.com/pulp/pulp_container/releases/tag/${pulp_container_version}`}
-              title={pulp_container_version}
-            />
+            >
+              {pulp_container_version}
+            </ExternalLink>
           </Value>
 
           <Label>{t`Pulp Core Version`}</Label>
           <Value>
             <ExternalLink
               href={`https://github.com/pulp/pulpcore/releases/tag/${pulp_core_version}`}
-              title={pulp_core_version}
-            />
+            >
+              {pulp_core_version}
+            </ExternalLink>
           </Value>
 
           <Label>{t`Galaxy Importer`}</Label>
           <Value>
             <ExternalLink
               href={`https://github.com/ansible/galaxy-importer/releases/tag/v${galaxy_importer_version}`}
-              title={galaxy_importer_version}
-            />
+            >
+              {galaxy_importer_version}
+            </ExternalLink>
           </Value>
 
           {aap_version && (
@@ -153,8 +159,9 @@ export const AboutModalWindow = ({
           <Value>
             <ExternalLink
               href={`https://github.com/ansible/ansible-hub-ui/commit/${ui_sha}`}
-              title={ui_sha}
-            />
+            >
+              {ui_sha}
+            </ExternalLink>
           </Value>
 
           <Label>{t`Username`}</Label>

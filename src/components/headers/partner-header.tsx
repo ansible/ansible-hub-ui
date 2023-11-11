@@ -71,7 +71,7 @@ export class PartnerHeader extends React.Component<IProps> {
               {namespace.links.map((x, i) => {
                 return (
                   <div className='link' key={i}>
-                    <ExternalLink href={x.url} title={x.name} />
+                    <ExternalLink href={x.url}>{x.name}</ExternalLink>
                   </div>
                 );
               })}

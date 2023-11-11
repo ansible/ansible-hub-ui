@@ -213,7 +213,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     params,
   ) {
     if (!!href && href.startsWith('http')) {
-      return <ExternalLink href={href} title={name} />;
+      return <ExternalLink href={href}>{name}</ExternalLink>;
     } else if (href) {
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
