@@ -1,22 +1,15 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
 import {
   AlertList,
   AlertType,
-  AppliedFilters,
   BaseHeader,
-  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
@@ -24,10 +17,8 @@ import {
   NamespaceModal,
   NamespaceNextPageCard,
   Pagination,
-  Sort,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
@@ -54,7 +45,6 @@ interface IState {
   isModalOpen: boolean;
   loading: boolean;
   redirect?: string;
-  inputText: string;
 }
 
 interface IProps extends RouteProps {
@@ -89,7 +79,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
-      inputText: params['keywords'] || '',
     };
   }
 
@@ -144,8 +133,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Navigate to={this.state.redirect} />;
     }
 
-    const { alerts, namespaces, params, itemCount, loading, inputText } =
-      this.state;
+    const { alerts, namespaces, params, itemCount, loading } = this.state;
     const { filterOwner } = this.props;
     const { hasPermission } = this.context;
 
@@ -163,6 +151,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const updateParams = (p) =>
       this.updateParams(p, () => this.loadNamespaces());
+
+    const filterConfig = [{ id: 'keywords', title: t`keywords` }];
+    const sortOptions = [
+      { title: t`Name`, id: 'name', type: 'alpha' as const },
+    ];
+    const buttons = [
+      hasPermission('galaxy.add_namespace') ? (
+        <Button variant='primary' onClick={this.handleModalToggle}>
+          {t`Create`}
+        </Button>
+      ) : null,
+    ];
 
     return (
       <div className='hub-namespace-page'>
@@ -203,66 +203,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
               </div>
             </div>
           )}
-          {noData ? null : (
-            <div className='hub-toolbar hub-toolbar-left'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup style={{ marginLeft: 0 }}>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        inputText={inputText}
-                        onChange={(text) => this.setState({ inputText: text })}
-                        params={params}
-                        updateParams={updateParams}
-                        filterConfig={[{ id: 'keywords', title: t`keywords` }]}
-                      />
-                      <AppliedFilters
-                        style={{ marginTop: '16px' }}
-                        params={params}
-                        updateParams={(p) => {
-                          updateParams(p);
-                          this.setState({ inputText: '' });
-                        }}
-                        ignoredParams={['page_size', 'page', 'sort']}
-                        niceNames={{ keywords: t`keywords` }}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  <ToolbarGroup style={{ alignSelf: 'start' }}>
-                    <ToolbarItem>
-                      <Sort
-                        options={[
-                          { title: t`Name`, id: 'name', type: 'alpha' },
-                        ]}
-                        params={params}
-                        updateParams={updateParams}
-                      />
-                    </ToolbarItem>
-                    {hasPermission('galaxy.add_namespace') && (
-                      <ToolbarItem key='create-button'>
-                        <Button
-                          variant='primary'
-                          onClick={this.handleModalToggle}
-                        >
-                          {t`Create`}
-                        </Button>
-                      </ToolbarItem>
-                    )}
-                  </ToolbarGroup>
-                </ToolbarContent>
-              </Toolbar>
-              <div>
-                <Pagination
-                  params={params}
-                  updateParams={updateParams}
-                  count={itemCount}
-                  isCompact
-                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                />
-              </div>
-            </div>
-          )}
         </BaseHeader>
+        {noData ? null : (
+          <HubListToolbar
+            buttons={buttons}
+            count={itemCount}
+            filterConfig={filterConfig}
+            ignoredParams={['page', 'page_size', 'sort']}
+            params={params}
+            sortOptions={sortOptions}
+            updateParams={updateParams}
+          />
+        )}
         <section className='card-area'>
           {this.renderBody({ updateParams })}
         </section>
@@ -271,7 +223,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <Pagination
               params={params}
               updateParams={updateParams}
-              perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
               count={itemCount}
             />
           </section>
