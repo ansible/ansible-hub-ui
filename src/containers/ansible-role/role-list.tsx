@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { DataList } from '@patternfly/react-core';
+import { Button, DataList } from '@patternfly/react-core';
 import React from 'react';
 import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
 import {
@@ -14,6 +14,8 @@ import {
   Pagination,
   closeAlertMixin,
 } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RouteProps,
@@ -35,6 +37,8 @@ interface RolesState {
 }
 
 class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -58,6 +62,9 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
   }
 
   componentDidMount() {
+    this.setState({ alerts: this.context.alerts || [] });
+    this.context.setAlerts([]);
+
     this.query(this.state.params);
   }
 
@@ -163,6 +170,14 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
         ) : (
           <div>
             <HubListToolbar
+              buttons={[
+                <Button
+                  key='import'
+                  onClick={() =>
+                    this.props.navigate(formatPath(Paths.standaloneRoleImport))
+                  }
+                >{t`Import role`}</Button>,
+              ]}
               count={count}
               filterConfig={filterConfig}
               ignoredParams={['page', 'page_size', 'sort']}
@@ -182,7 +197,7 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
                       <LegacyRoleListItem
                         key={lrole.id}
                         role={lrole}
-                        show_thumbnail={true}
+                        show_thumbnail
                       />
                     ))}
                 </DataList>

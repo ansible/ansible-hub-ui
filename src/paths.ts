@@ -112,6 +112,7 @@ export enum Paths {
   logout = '/logout',
   landingPage = '/',
   standaloneRole = '/standalone/roles/:namespace/:name/:tab?',
+  standaloneRoleImport = '/standalone/roles/import',
   standaloneRoles = '/standalone/roles',
   standaloneNamespace = '/standalone/namespaces/:namespaceid',
   standaloneNamespaces = '/standalone/namespaces',
