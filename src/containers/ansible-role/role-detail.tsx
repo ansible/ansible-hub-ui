@@ -41,20 +41,20 @@ import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
-interface RoleMeta {
+interface RoleMetaProps {
   addAlert: (alert: AlertType) => void;
-  github_user: string;
   name: string;
+  namespace: string;
   role: LegacyRoleDetailType;
 }
 
-interface RoleMetaReadme {
+interface RoleMetaReadmeState {
   readme_html: string;
 }
 
-class RoleInstall extends React.Component<RoleMeta> {
+class RoleInstall extends React.Component<RoleMetaProps> {
   render() {
-    const installCMD = `ansible-galaxy role install ${this.props.github_user}.${this.props.name}`;
+    const installCMD = `ansible-galaxy role install ${this.props.namespace}.${this.props.name}`;
     return (
       <>
         <h1>
@@ -68,7 +68,7 @@ class RoleInstall extends React.Component<RoleMeta> {
   }
 }
 
-class RoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
+class RoleDocs extends React.Component<RoleMetaProps, RoleMetaReadmeState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,7 +138,7 @@ interface RoleVersionsState {
   loading: boolean;
 }
 
-class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
+class RoleVersions extends React.Component<RoleMetaProps, RoleVersionsState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -191,9 +191,9 @@ class RoleVersions extends React.Component<RoleMeta, RoleVersionsState> {
 interface RoleState {
   activeItem: string;
   alerts: AlertType[];
-  github_user: string;
   loading: boolean;
   name: string;
+  namespace: string;
   role: LegacyRoleDetailType;
 }
 
@@ -201,21 +201,23 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
 
-    const { username, name } = props.routeParams;
+    const { namespace, name } = props.routeParams;
     this.state = {
       activeItem: 'install',
       alerts: [],
-      github_user: username,
       loading: true,
       name,
+      namespace,
       role: null,
     };
   }
 
   componentDidMount() {
+    const { name, namespace } = this.state;
+
     LegacyRoleAPI.list({
-      github_user: this.state.github_user,
-      name: this.state.name,
+      name,
+      namespace,
       page_size: 1,
     })
       .then(({ data: { results } }) =>
@@ -241,7 +243,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   }
 
   render() {
-    const { activeItem, alerts, github_user, loading, name, role } = this.state;
+    const { activeItem, alerts, loading, name, role } = this.state;
+
     if (loading) {
       return <LoadingPageWithHeader />;
     }
@@ -261,7 +264,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       '/' +
       encodeURIComponent(role.github_repo);
     const namespace = role.summary_fields.namespace;
-    const namespace_url = formatPath(Paths.legacyNamespace, {
+    const namespace_url = formatPath(Paths.standaloneNamespace, {
       namespaceid: namespace.id,
     });
     let release_date = null;
@@ -281,7 +284,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
     const header_cells = [
       <DataListCell isFilled={false} alignRight={false} key='ns'>
         <Logo
-          alt={t`${role.github_user} logo`}
+          alt={t`${namespace.name} logo`}
           fallbackToDefault
           image={role.summary_fields.namespace.avatar_url}
           size='70px'
@@ -339,8 +342,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         return (
           <RoleInstall
             addAlert={addAlert}
-            github_user={github_user}
             name={name}
+            namespace={namespace.name}
             role={role}
           />
         );
@@ -348,8 +351,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         return (
           <RoleDocs
             addAlert={addAlert}
-            github_user={github_user}
             name={name}
+            namespace={namespace.name}
             role={role}
           />
         );
@@ -357,8 +360,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         return (
           <RoleVersions
             addAlert={addAlert}
-            github_user={github_user}
             name={name}
+            namespace={namespace.name}
             role={role}
           />
         );
@@ -370,16 +373,18 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
     const breadcrumbs = [
       {
         name: t`Roles`,
-        url: formatPath(Paths.legacyRoles),
+        url: formatPath(Paths.standaloneRoles),
       },
       {
-        name: github_user,
-        url: formatPath(Paths.legacyNamespace, { namespaceid: namespace.id }),
+        name: namespace.name,
+        url: formatPath(Paths.standaloneNamespace, {
+          namespaceid: namespace.id,
+        }),
       },
       {
         name,
-        url: formatPath(Paths.legacyRole, {
-          username: github_user,
+        url: formatPath(Paths.standaloneRole, {
+          namespace: namespace.name,
           name,
         }),
       },

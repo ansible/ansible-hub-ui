@@ -29,7 +29,7 @@ export function LegacyNamespaceListItem({
   } = useContext();
   const { id, avatar_url, name, summary_fields } = namespace;
 
-  const namespace_url = formatPath(Paths.legacyNamespace, {
+  const namespace_url = formatPath(Paths.standaloneNamespace, {
     namespaceid: id,
   });
 

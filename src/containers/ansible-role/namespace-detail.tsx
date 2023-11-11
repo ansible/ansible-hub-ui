@@ -102,7 +102,7 @@ class NamespaceRoles extends React.Component<
     this.setState({ loading: true });
     LegacyRoleAPI.list({
       ...params,
-      github_user: namespace.name,
+      namespace: namespace.name,
     })
       .then(({ data: { count, results } }) =>
         this.setState({
@@ -237,7 +237,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 > {
   static contextType = AppContext;
 
-  // This is the details page for a legacy namespace
+  // This is the details page for a standalone namespace
 
   constructor(props) {
     super(props);
@@ -261,8 +261,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
   }
 
   componentDidMount() {
-    const namespaceid = this.props.routeParams.namespaceid;
-    LegacyNamespaceAPI.get(namespaceid)
+    LegacyNamespaceAPI.get(this.props.routeParams.namespaceid)
       .then((response) =>
         this.setState({
           loading: false,
@@ -299,7 +298,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
       );
     }
 
-    const namespace_url = formatPath(Paths.legacyNamespace, {
+    const namespace_url = formatPath(Paths.standaloneNamespace, {
       namespaceid: namespace.id,
     });
 

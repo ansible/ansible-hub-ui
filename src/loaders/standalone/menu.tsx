@@ -99,11 +99,11 @@ function standaloneMenu() {
       },
       [
         menuItem(t`Roles`, {
-          url: formatPath(Paths.legacyRoles),
+          url: formatPath(Paths.standaloneRoles),
           alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Role Namespaces`, {
-          url: formatPath(Paths.legacyNamespaces),
+          url: formatPath(Paths.standaloneNamespaces),
           alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],

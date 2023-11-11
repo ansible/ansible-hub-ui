@@ -283,12 +283,12 @@ export const MultiSearch = (props: RouteProps) => {
             title={t`Roles`}
             showAllLink={
               <Link
-                to={formatPath(Paths.legacyRoles)}
+                to={formatPath(Paths.standaloneRoles)}
               >{t`Show all roles`}</Link>
             }
             showMoreLink={
               <Link
-                to={formatPath(Paths.legacyRoles, {}, { keywords })}
+                to={formatPath(Paths.standaloneRoles, {}, { keywords })}
               >{t`Show more roles`}</Link>
             }
           >
@@ -306,12 +306,12 @@ export const MultiSearch = (props: RouteProps) => {
             title={t`Role namespaces`}
             showAllLink={
               <Link
-                to={formatPath(Paths.legacyNamespaces)}
+                to={formatPath(Paths.standaloneNamespaces)}
               >{t`Show all role namespaces`}</Link>
             }
             showMoreLink={
               <Link
-                to={formatPath(Paths.legacyNamespaces, {}, { keywords })}
+                to={formatPath(Paths.standaloneNamespaces, {}, { keywords })}
               >{t`Show more role namespaces`}</Link>
             }
           >
@@ -408,7 +408,7 @@ export const MultiSearch = (props: RouteProps) => {
             emptyStateTitle={t`No matching roles found.`}
             showAllLink={
               <Link
-                to={formatPath(Paths.legacyRoles)}
+                to={formatPath(Paths.standaloneRoles)}
               >{t`Show all roles`}</Link>
             }
           />
@@ -421,7 +421,7 @@ export const MultiSearch = (props: RouteProps) => {
             emptyStateTitle={t`No matching role namespaces found.`}
             showAllLink={
               <Link
-                to={formatPath(Paths.legacyNamespaces)}
+                to={formatPath(Paths.standaloneNamespaces)}
               >{t`Show all role namespaces`}</Link>
             }
           />

@@ -212,10 +212,13 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       },
 
       // roles ...
-      { component: AnsibleRoleNamespaceDetail, path: Paths.legacyNamespace },
-      { component: AnsibleRoleNamespaceList, path: Paths.legacyNamespaces },
-      { component: AnsibleRoleDetail, path: Paths.legacyRole },
-      { component: AnsibleRoleList, path: Paths.legacyRoles },
+      {
+        component: AnsibleRoleNamespaceDetail,
+        path: Paths.standaloneNamespace,
+      },
+      { component: AnsibleRoleNamespaceList, path: Paths.standaloneNamespaces },
+      { component: AnsibleRoleDetail, path: Paths.standaloneRole },
+      { component: AnsibleRoleList, path: Paths.standaloneRoles },
       // ... but still support legacy urls
       {
         component: AnsibleRoleNamespaceDetail,

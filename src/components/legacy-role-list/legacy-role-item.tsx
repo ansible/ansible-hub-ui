@@ -29,15 +29,14 @@ interface LegacyRoleProps {
 export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
   const {
     description,
-    github_user,
     modified,
     name,
     summary_fields: { namespace, versions, tags },
   } = role;
   const latest = versions[0];
 
-  const role_url = formatPath(Paths.legacyRole, {
-    username: namespace.name,
+  const role_url = formatPath(Paths.standaloneRole, {
+    namespace: namespace.name,
     name,
   });
   const release_date = latest?.release_date || modified;
@@ -49,7 +48,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
     cells.push(
       <DataListCell isFilled={false} alignRight={false} key='ns'>
         <Logo
-          alt={t`${github_user} logo`}
+          alt={t`${namespace.name} logo`}
           image={namespace.avatar_url}
           size='70px'
           unlockWidth
