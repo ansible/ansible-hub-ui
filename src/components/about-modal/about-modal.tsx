@@ -164,6 +164,9 @@ export const AboutModalWindow = ({
               title={user.username}
             >
               {userName}
+              {user?.username && user.username !== userName ? (
+                <> ({user.username})</>
+              ) : null}
             </Link>
           </Value>
 
