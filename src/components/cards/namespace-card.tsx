@@ -70,11 +70,11 @@ export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
           />
         </CardHeaderMain>
       </CardHeader>
-      <Tooltip content={title}>
+      <Tooltip content={title} noSpan>
         <CardTitle>{getDescription(title, MAX_DESCRIPTION_LENGTH)}</CardTitle>
       </Tooltip>
       {title !== name ? (
-        <Tooltip content={name}>
+        <Tooltip content={name} noSpan>
           <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>
         </Tooltip>
       ) : null}
