@@ -33,6 +33,7 @@ msgstr "(cargado)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
+#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} Logotipo"
@@ -42,8 +43,8 @@ msgstr "{0} Logotipo"
 #~ msgstr "{0} released {1}"
 
 #: src/components/headers/collection-header.tsx
-msgid "{0} updated {1}"
-msgstr "{0} actualizó {1}"
+#~ msgid "{0} updated {1}"
+#~ msgstr "{0} actualizó {1}"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "{0} was added"
@@ -98,12 +99,18 @@ msgid "{downloadCount} Downloads"
 msgstr ""
 
 #: src/components/legacy-role-list/legacy-role-item.tsx
-msgid "{github_user} logo"
-msgstr ""
+#~ msgid "{github_user} logo"
+#~ msgstr ""
 
 #: src/utilities/get_human_size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
+
+#: src/components/collection-list/collection-filter.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "{name} ({count})"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx
 msgid "{name} will be cancelled."
@@ -123,7 +130,7 @@ msgstr ""
 msgid "{subTitle}"
 msgstr "{subTitle}"
 
-#: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 msgid "{title} content"
 msgstr "{title} contenido"
 
@@ -133,7 +140,7 @@ msgstr "{title} contenido"
 msgid "{title} logo"
 msgstr ""
 
-#: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 msgid "{title} steps"
 msgstr "{title} pasos"
 
@@ -186,24 +193,28 @@ msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported
 msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
-msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
-msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces. Copie y pegue el enlace externo manualmente."
+#~ msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
+#~ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces. Copie y pegue el enlace externo manualmente."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #~ msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the link manually."
 #~ msgstr "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the link manually."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
-#~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
-#~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
+msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
+msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
-msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
+#~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
+#~ msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
-msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
-msgstr "<0>Red Hat está trabajando en nuevas e interesantes capacidades de desarrollo de contenidos de Ansible en el contexto de <1>Ansible Lightspeed</1> <2/> para ayudar a otros automatizadores a crear contenido de Ansible.</0>"
+#~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> <2/> to help other automators build Ansible content.</0>"
+#~ msgstr "<0>Red Hat está trabajando en nuevas e interesantes capacidades de desarrollo de contenidos de Ansible en el contexto de <1>Ansible Lightspeed</1> <2/> para ayudar a otros automatizadores a crear contenido de Ansible.</0>"
+
+#: src/components/wisdom-modal/wisdom-modal.tsx
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> to help other automators build Ansible content.</0>"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
@@ -602,7 +613,7 @@ msgstr ""
 msgid "Available matching roles"
 msgstr ""
 
-#: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 msgid "Back"
 msgstr "Volver"
 
@@ -621,8 +632,8 @@ msgid "Based on {0} surveys."
 msgstr ""
 
 #: src/components/patternfly-wrappers/fileupload.tsx
-msgid "Browse..."
-msgstr "Navegar..."
+#~ msgid "Browse..."
+#~ msgstr "Navegar..."
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Browser OS"
@@ -667,7 +678,6 @@ msgstr "Certificado de CA"
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/import-modal/import-modal.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
-#: src/components/patternfly-wrappers/wizard-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
@@ -677,6 +687,7 @@ msgstr "Certificado de CA"
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/remote-form.tsx
 #: src/components/shared/multi-repo-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 #: src/components/signing/sign-all-certificates-modal.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
@@ -823,13 +834,13 @@ msgstr "Tareas para niños"
 msgid "Choices:"
 msgstr ""
 
-#: src/components/patternfly-wrappers/fileupload.tsx
-#: src/components/patternfly-wrappers/write-only-field.tsx
+#: src/components/patternfly-wrappers/file-upload.tsx
+#: src/components/shared/write-only-field.tsx
 msgid "Clear"
 msgstr "Borrar"
 
 #: src/components/empty-state/empty-state-filter.tsx
-#: src/components/patternfly-wrappers/applied-filters.tsx
+#: src/components/shared/applied-filters.tsx
 msgid "Clear all filters"
 msgstr "Borrar todos los filtros"
 
@@ -857,7 +868,7 @@ msgstr "Clave de cliente"
 
 #: src/actions/ansible-repository-sync.tsx
 #: src/components/execution-environment/publish-to-controller-modal.tsx
-#: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 msgid "Close"
 msgstr "Cerrar"
 
@@ -1211,12 +1222,12 @@ msgid "Controllers list could not be displayed."
 msgstr "No se pudo mostrar la lista de controladores."
 
 #: src/components/patternfly-wrappers/copy-url.tsx
-msgid "Copied"
-msgstr "Copiado"
+#~ msgid "Copied"
+#~ msgstr "Copiado"
 
 #: src/components/patternfly-wrappers/copy-url.tsx
-msgid "Copy"
-msgstr "Copiar"
+#~ msgid "Copy"
+#~ msgstr "Copiar"
 
 #: src/actions/ansible-repository-copy.tsx
 msgid "Copy CLI configuration"
@@ -1385,8 +1396,12 @@ msgid "Custom permissions"
 msgstr "Permisos personalizados"
 
 #: src/loaders/standalone/layout.tsx
-msgid "Customer Support <0/>"
-msgstr "Asistencia al cliente <0/>"
+msgid "Customer Support"
+msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+#~ msgid "Customer Support <0/>"
+#~ msgstr "Asistencia al cliente <0/>"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "Date"
@@ -1751,6 +1766,10 @@ msgstr "Finalizado"
 msgid "Download"
 msgstr "Descargar"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Download {0} tarball"
+msgstr ""
+
 #: src/actions/ansible-remote-download-ca.tsx
 msgid "Download CA certificate"
 msgstr "Descargar certificado CA"
@@ -1802,19 +1821,23 @@ msgid "Download tarball"
 msgstr "Descargar el tarball"
 
 #: src/components/patternfly-wrappers/fileupload.tsx
-msgid "Drag a file here or browse to upload"
-msgstr "Arrastre un archivo aquí o navegue para cargarlo"
+#~ msgid "Drag a file here or browse to upload"
+#~ msgstr "Arrastre un archivo aquí o navegue para cargarlo"
+
+#: src/components/patternfly-wrappers/file-upload.tsx
+msgid "Drag and drop a file or upload one"
+msgstr ""
 
 #: src/components/signing/upload-sign-certificate-modal.tsx
-msgid "Drag and drop a file or upload one."
-msgstr "Arrastre y suelte un archivo o suba uno."
+#~ msgid "Drag and drop a file or upload one."
+#~ msgstr "Arrastre y suelte un archivo o suba uno."
 
 #: src/components/signing/upload-sign-certificate-modal.tsx
 #~ msgid "Drag and drop a file or upload one'"
 #~ msgstr "Drag and drop a file or upload one'"
 
-#: src/components/patternfly-wrappers/stateful-dropdown.tsx
-#: src/components/patternfly-wrappers/stateful-dropdown.tsx
+#: src/components/shared/stateful-dropdown.tsx
+#: src/components/shared/stateful-dropdown.tsx
 msgid "Dropdown"
 msgstr "Desplegable"
 
@@ -2350,10 +2373,10 @@ msgstr "Error al sincronizar el repositorio \"{name}\""
 msgid "Featured"
 msgstr ""
 
-#: src/components/patternfly-wrappers/compound-filter.tsx
-#: src/components/patternfly-wrappers/compound-filter.tsx
-#: src/components/patternfly-wrappers/compound-filter.tsx
-#: src/components/patternfly-wrappers/compound-filter.tsx
+#: src/components/shared/compound-filter.tsx
+#: src/components/shared/compound-filter.tsx
+#: src/components/shared/compound-filter.tsx
+#: src/components/shared/compound-filter.tsx
 msgid "Filter by {0}"
 msgstr "Filtrar por {0}"
 
@@ -2424,6 +2447,10 @@ msgstr ""
 #: src/containers/repositories/repository-list.tsx
 #~ msgid "Get token"
 #~ msgstr "Get token"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "GitHub Repository"
+msgstr ""
 
 #: src/utilities/wait-for-task.ts
 msgid "Giving up waiting for task after 10 attempts."
@@ -2560,7 +2587,7 @@ msgstr "Los grupos aparecerán una vez creados"
 msgid "Help other Ansible users by sharing the awesome roles and collections you create."
 msgstr ""
 
-#: src/components/patternfly-wrappers/write-only-field.tsx
+#: src/components/shared/write-only-field.tsx
 msgid "hidden value"
 msgstr "valor oculto"
 
@@ -2571,6 +2598,10 @@ msgstr "Ocultar las opciones avanzadas"
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "Hide from search"
 msgstr "Ocultar de la búsqueda"
+
+#: src/components/patternfly-wrappers/login-form.tsx
+msgid "Hide password"
+msgstr ""
 
 #: src/components/collection-detail/download-signature-grid-item.tsx
 msgid "Hide the signature"
@@ -2735,7 +2766,6 @@ msgid "Key fingerprint"
 msgstr "Huella digital de la clave"
 
 #: src/containers/namespace-list/namespace-list.tsx
-#: src/containers/namespace-list/namespace-list.tsx
 msgid "keywords"
 msgstr "palabras clave"
 
@@ -2889,7 +2919,7 @@ msgstr ""
 msgid "Local"
 msgstr "Local"
 
-#: src/containers/login/login.tsx
+#: src/components/patternfly-wrappers/login-form.tsx
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -3162,7 +3192,7 @@ msgstr "Nueva colección"
 msgid "New version of {namespace}.{0}"
 msgstr ""
 
-#: src/components/patternfly-wrappers/wizard-modal.tsx
+#: src/components/shared/wizard-modal.tsx
 msgid "Next"
 msgstr "Siguiente"
 
@@ -3379,10 +3409,10 @@ msgstr "No existe ninguna versión de {fqn} que coincida con {version_range}."
 msgid "No versions"
 msgstr "No hay versiones"
 
-#: src/components/patternfly-wrappers/copy-url.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/pulp-labels.tsx
+#: src/components/shared/copy-url.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -3496,9 +3526,9 @@ msgstr "Tarea principal"
 msgid "Partners"
 msgstr "Partners"
 
+#: src/components/patternfly-wrappers/login-form.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/remote-form.tsx
-#: src/containers/login/login.tsx
 msgid "Password"
 msgstr "Contraseña"
 
@@ -4431,7 +4461,6 @@ msgid "Select collection version"
 msgstr "Seleccione la versión de la colección"
 
 #: src/components/import-modal/import-modal.tsx
-#: src/components/signing/upload-sign-certificate-modal.tsx
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
@@ -4586,6 +4615,10 @@ msgstr ""
 msgid "Show more roles"
 msgstr ""
 
+#: src/components/patternfly-wrappers/login-form.tsx
+msgid "Show password"
+msgstr ""
+
 #: src/components/collection-detail/download-signature-grid-item.tsx
 msgid "Show the signature"
 msgstr "Mostrar la firma"
@@ -4730,7 +4763,7 @@ msgstr "Tamaño"
 msgid "Size: {size}"
 msgstr "Tamaño: {size}"
 
-#: src/components/patternfly-wrappers/sort.tsx
+#: src/components/shared/sort.tsx
 msgid "Sort results"
 msgstr "Ordenar resultados"
 
@@ -5340,8 +5373,12 @@ msgid "Traceback"
 msgstr "Traceback"
 
 #: src/loaders/standalone/layout.tsx
-msgid "Training <0/>"
-msgstr "Formación <0/>"
+msgid "Training"
+msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+#~ msgid "Training <0/>"
+#~ msgstr "Formación <0/>"
 
 #: src/containers/role-management/role-list.tsx
 msgid "true"
@@ -5396,8 +5433,12 @@ msgid "Update started for repository {0}"
 msgstr "Se ha iniciado la actualización del repositorio {0}"
 
 #: src/components/headers/collection-header.tsx
-msgid "updated {0}"
-msgstr "se actualizó {0}"
+#~ msgid "updated {0}"
+#~ msgstr "se actualizó {0}"
+
+#: src/components/headers/collection-header.tsx
+msgid "updated <0/>"
+msgstr ""
 
 #: src/components/collection-list/collection-list-item.tsx
 #: src/components/legacy-role-list/legacy-role-item.tsx
@@ -5406,6 +5447,7 @@ msgid "Updated <0/>"
 msgstr "Actualizado <0/>"
 
 #: src/components/import-modal/import-modal.tsx
+#: src/components/patternfly-wrappers/file-upload.tsx
 #: src/components/signing/upload-sign-certificate-modal.tsx
 msgid "Upload"
 msgstr "Subir"
@@ -5662,11 +5704,11 @@ msgid "User type"
 msgstr "Tipo de usuario"
 
 #: src/components/about-modal/about-modal.tsx
+#: src/components/patternfly-wrappers/login-form.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/repositories/remote-form.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
-#: src/containers/login/login.tsx
 #: src/containers/user-management/user-list.tsx
 #: src/containers/user-management/user-list.tsx
 #: src/containers/user-management/user-list.tsx
@@ -5766,6 +5808,8 @@ msgstr "Ver colecciones"
 msgid "View Import Logs"
 msgstr "Ver los registros de importación"
 
+#: src/components/cards/collection-card.tsx
+#: src/components/cards/namespace-card.tsx
 #: src/components/headers/collection-header.tsx
 msgid "View more"
 msgstr "Ver más"
