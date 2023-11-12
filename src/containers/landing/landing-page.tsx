@@ -1,11 +1,12 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert } from '@patternfly/react-core';
+import { Alert, List, ListItem, ListVariant } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlertList,
   AlertType,
   BaseHeader,
+  ExternalLink,
   LandingPageCard,
   Main,
   MultiSearchSearch,
@@ -47,7 +48,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Welcome to Galaxy`} />
         <Main>
@@ -69,7 +70,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
             <LandingPageCard
               title={t`Download`}
               body={
-                <React.Fragment>
+                <>
                   <Alert
                     isInline
                     variant='warning'
@@ -93,23 +94,19 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       </Link>
                       to find content for your project, then download them onto
                       your Ansible host using{' '}
-                      <a
-                        href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'
-                        target='_blank'
-                        rel='noreferrer'
-                      >
+                      <ExternalLink href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'>
                         ansible-galaxy
-                      </a>
+                      </ExternalLink>
                       , the command line tool that comes bundled with Ansible.
                     </Trans>
                   </p>
-                </React.Fragment>
+                </>
               }
             />
             <LandingPageCard
               title={t`Share`}
               body={
-                <React.Fragment>
+                <>
                   <p>{t`Help other Ansible users by sharing the awesome roles and collections you create.`}</p>
                   <br />
                   <p>{t`Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community.`}</p>
@@ -119,13 +116,9 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                     <Trans>
                       Red Hat is working on exciting new Ansible content
                       development capabilities within the context of{' '}
-                      <a
-                        href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
+                      <ExternalLink href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'>
                         Ansible Lightspeed
-                      </a>{' '}
+                      </ExternalLink>{' '}
                       to help other automators build Ansible content. Your roles
                       and collections may be used as training data for a machine
                       learning model that provides Ansible automation content
@@ -136,29 +129,25 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                       </a>
                     </Trans>
                   </p>
-                </React.Fragment>
+                </>
               }
             />
             <LandingPageCard
               title={t`Featured`}
               body={
-                <React.Fragment>
+                <>
                   <b>
                     <p>{t`Ansible Lightspeed`}</p>
                   </b>
                   <br />
                   <p>
-                    <a
-                      href='https://redhat.com/ansible-lightspeed'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
+                    <ExternalLink href='https://redhat.com/ansible-lightspeed'>
                       <img
                         width='100%'
                         alt='Generative Ai, The Ansible way. Try Ansible Lightspeed with IBM watsonx Code Assistant'
                         src='/static/images/LightspeedGalaxyAd1.png'
                       />
-                    </a>
+                    </ExternalLink>
                   </p>
                   <hr
                     style={{
@@ -179,59 +168,33 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <p>{t`Try Red Hat Ansible Automation Platform`}</p>
                   <br />
                   <p>
-                    <a
-                      href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'
-                      target='_blank'
-                      rel='noreferrer'
-                    >{t`Get the trial`}</a>
+                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
                   </p>
-                </React.Fragment>
+                </>
               }
             />
             <LandingPageCard
               title={t`Terms of Use`}
               body={
-                <React.Fragment>
-                  <div className='footer-parent-links'>
-                    <span>
-                      <a
-                        className='footer-link'
-                        href='https://www.redhat.com/en/about/privacy-policy'
-                        target='_blank'
-                        rel='noreferrer'
-                      >{t`Privacy statement`}</a>
-                    </span>
-                    <span>
-                      <a
-                        className='footer-link'
-                        href='https://www.redhat.com/en/about/terms-use'
-                        target='_blank'
-                        rel='noreferrer'
-                      >{t`Terms of use`}</a>
-                    </span>
-                    <span>
-                      <a
-                        className='footer-link'
-                        href='https://www.redhat.com/en/about/all-policies-guidelines'
-                        target='_blank'
-                        rel='noreferrer'
-                      >{t`All policies and guidelines`}</a>
-                    </span>
-                    <span>
-                      <a
-                        className='footer-link'
-                        href='https://www.redhat.com/en/about/digital-accessibility'
-                        target='_blank'
-                        rel='noreferrer'
-                      >{t`Digital accessibility`}</a>
-                    </span>
-                  </div>
-                </React.Fragment>
+                <List variant={ListVariant.inline}>
+                  <ListItem>
+                    <ExternalLink href='https://www.redhat.com/en/about/privacy-policy'>{t`Privacy statement`}</ExternalLink>
+                  </ListItem>
+                  <ListItem>
+                    <ExternalLink href='https://www.redhat.com/en/about/terms-use'>{t`Terms of use`}</ExternalLink>
+                  </ListItem>
+                  <ListItem>
+                    <ExternalLink href='https://www.redhat.com/en/about/all-policies-guidelines'>{t`All policies and guidelines`}</ExternalLink>
+                  </ListItem>
+                  <ListItem>
+                    <ExternalLink href='https://www.redhat.com/en/about/digital-accessibility'>{t`Digital accessibility`}</ExternalLink>
+                  </ListItem>
+                </List>
               }
             />
           </div>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

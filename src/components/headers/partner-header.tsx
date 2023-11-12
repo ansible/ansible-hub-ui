@@ -1,11 +1,11 @@
 import { t } from '@lingui/macro';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import { NamespaceType } from 'src/api';
 import {
   BaseHeader,
   BreadcrumbType,
   Breadcrumbs,
+  ExternalLink,
   Logo,
   Tabs,
   TabsType,
@@ -68,15 +68,10 @@ export class PartnerHeader extends React.Component<IProps> {
           </div>
           {namespace.links.length > 0 ? (
             <div className='links'>
-              <div>
-                <ExternalLinkAltIcon />
-              </div>
               {namespace.links.map((x, i) => {
                 return (
                   <div className='link' key={i}>
-                    <a href={x.url} target='blank'>
-                      {x.name}
-                    </a>
+                    <ExternalLink href={x.url}>{x.name}</ExternalLink>
                   </div>
                 );
               })}

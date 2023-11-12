@@ -7,6 +7,7 @@ import {
   AlertType,
   BaseHeader,
   ClipboardCopy,
+  ExternalLink,
   Main,
   closeAlertMixin,
 } from 'src/components';
@@ -113,10 +114,8 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                 <Trans>
                   Documentation on how to configure the{' '}
                   <code>ansible-galaxy</code> client can be found{' '}
-                  <a href={UI_DOCS_URL} target='_blank' rel='noreferrer'>
-                    here
-                  </a>
-                  . Use the following parameters to configure the client.
+                  <ExternalLink href={UI_DOCS_URL}>here</ExternalLink>. Use the
+                  following parameters to configure the client.
                 </Trans>
               </p>
             </section>
@@ -160,13 +159,9 @@ class TokenInsights extends React.Component<RouteProps, IState> {
               <h2>{t`Manage tokens`}</h2>
               <Trans>
                 To revoke a token or see all of your tokens, visit the{' '}
-                <a
-                  href='https://sso.redhat.com/auth/realms/redhat-external/account/#/applications'
-                  target='_blank'
-                  rel='noreferrer'
-                >
+                <ExternalLink href='https://sso.redhat.com/auth/realms/redhat-external/account/#/applications'>
                   offline API token management
-                </a>{' '}
+                </ExternalLink>{' '}
                 page.
               </Trans>
             </section>
@@ -235,13 +230,9 @@ class TokenInsights extends React.Component<RouteProps, IState> {
                   and are used to automatically verify software updates. You can
                   also verify the packages manually using the keys on this page.
                   More information can be found{' '}
-                  <a
-                    href='https://access.redhat.com/security/team/key'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
+                  <ExternalLink href='https://access.redhat.com/security/team/key'>
                     here.
-                  </a>
+                  </ExternalLink>
                 </Trans>
               </p>
             </section>

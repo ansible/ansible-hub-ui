@@ -14,7 +14,6 @@ import {
   Spinner,
   Text,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -39,6 +38,7 @@ import {
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
   DownloadCount,
+  ExternalLink,
   ImportModal,
   LinkTabs,
   Logo,
@@ -579,10 +579,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <Flex>
               {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
                 <FlexItem>
-                  <a href={issueUrl} target='_blank' rel='noreferrer'>
-                    {t`Create issue`}
-                  </a>{' '}
-                  <ExternalLinkAltIcon />
+                  <ExternalLink href={issueUrl}>{t`Create issue`}</ExternalLink>
                 </FlexItem>
               ) : null}
               {dropdownItems.length > 0 ? (
@@ -607,9 +604,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
-              <div>
-                <ExternalLinkAltIcon />
-              </div>
               {urlKeys.map((link) => {
                 const url = content[link.key];
                 if (!url) {
@@ -618,9 +612,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
                 return (
                   <div className='link' key={link.key}>
-                    <a href={url} target='_blank' rel='noreferrer'>
-                      {link.name}
-                    </a>
+                    <ExternalLink href={url}>{link.name}</ExternalLink>
                   </div>
                 );
               })}

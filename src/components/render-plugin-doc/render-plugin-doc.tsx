@@ -7,6 +7,7 @@ import {
   PluginOption,
   ReturnedValue,
 } from 'src/api';
+import { ExternalLink } from 'src/components';
 import './render-plugin-doc.scss';
 
 // Documentation for module doc string spec
@@ -282,11 +283,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
   }
 
   private formatPartURL(part: dom.URLPart): React.ReactNode {
-    return (
-      <a href={part.url} target='_blank' rel='noreferrer'>
-        {part.url}
-      </a>
-    );
+    return <ExternalLink href={part.url}>{part.url}</ExternalLink>;
   }
 
   private formatPartText(part: dom.TextPart): React.ReactNode {

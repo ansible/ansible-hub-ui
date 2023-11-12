@@ -7,10 +7,10 @@ import {
   NavItem,
   NavList,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ExternalLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
   canViewAnsibleRemotes,
@@ -202,17 +202,13 @@ function MenuItem({ item, context }) {
       }}
     >
       {item.url && item.external ? (
-        <a
-          href={item.url}
-          target='_blank'
-          rel='noreferrer'
+        <ExternalLink
           data-cy={`hub-menu-item-${item.name}`}
+          href={item.url}
+          variant='nav'
         >
           {item.name}
-          <ExternalLinkAltIcon
-            style={{ position: 'absolute', right: '32px' }}
-          />
-        </a>
+        </ExternalLink>
       ) : item.url ? (
         <Link to={item.url} data-cy={`hub-menu-item-${item.name}`}>
           {item.name}

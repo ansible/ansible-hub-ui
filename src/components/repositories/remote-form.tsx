@@ -19,7 +19,12 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React, { ReactNode } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
-import { FileUpload, HelperText, WriteOnlyField } from 'src/components';
+import {
+  ExternalLink,
+  FileUpload,
+  HelperText,
+  WriteOnlyField,
+} from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
@@ -196,13 +201,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
       ];
 
     const docsAnsibleLink = (
-      <a
-        target='_blank'
-        href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
-        rel='noreferrer'
-      >
+      <ExternalLink href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'>
         requirements.yml
-      </a>
+      </ExternalLink>
     );
 
     const yamlTemplate = [

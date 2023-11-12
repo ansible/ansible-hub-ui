@@ -6,10 +6,9 @@ import {
   Modal,
   Spinner,
 } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import React, { useEffect, useState } from 'react';
 import { WisdomDenyIndexAPI } from 'src/api';
-import { AlertList, AlertType, closeAlert } from 'src/components';
+import { AlertList, AlertType, ExternalLink, closeAlert } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
@@ -206,15 +205,10 @@ export const WisdomModal = (props: IProps) => {
               <p>
                 Red Hat is working on exciting new Ansible content development
                 capabilities within the context of{' '}
-                <a
-                  href='https://www.redhat.com/en/engage/project-wisdom'
-                  target='_blank'
-                  rel='noreferrer'
-                >
+                <ExternalLink href='https://www.redhat.com/en/engage/project-wisdom'>
                   Ansible Lightspeed
-                </a>{' '}
-                <ExternalLinkAltIcon /> to help other automators build Ansible
-                content.
+                </ExternalLink>{' '}
+                to help other automators build Ansible content.
               </p>
             </Trans>
             <br />
