@@ -2,6 +2,7 @@ import { HubAPI } from './hub';
 
 export class API extends HubAPI {
   apiPath = 'v3/plugin/ansible/search/collection-versions/';
+  sortParam = 'order_by';
 
   move(
     namespace: string,

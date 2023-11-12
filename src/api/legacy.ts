@@ -11,14 +11,4 @@ export class LegacyAPI extends BaseAPI {
     // override BaseAPI's function to persist page & page_size
     return p;
   }
-
-  list(params?, apiPath?) {
-    const newParams = { ...params };
-    if (newParams['sort'] && this.sortParam !== 'sort') {
-      newParams[this.sortParam] = newParams['sort'];
-      delete newParams['sort'];
-    }
-
-    return super.list(newParams, apiPath);
-  }
 }

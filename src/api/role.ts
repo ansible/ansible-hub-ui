@@ -2,7 +2,6 @@ import { PulpAPI } from './pulp';
 
 export class API extends PulpAPI {
   apiPath = 'roles/';
-  useOrdering = true;
 
   updatePermissions(id, data: unknown) {
     return this.http.patch(this.apiPath + id, data);

@@ -2,7 +2,6 @@ import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
   apiPath = 'repositories/ansible/ansible/';
-  useOrdering = true;
 
   // list(params?)
 
