@@ -767,6 +767,10 @@ msgstr "Checking for affected users... <0/>"
 msgid "Child tasks"
 msgstr "Child tasks"
 
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Choices:"
+msgstr "Choices:"
+
 #: src/components/patternfly-wrappers/fileupload.tsx
 #: src/components/patternfly-wrappers/write-only-field.tsx
 msgid "Clear"
@@ -1330,6 +1334,14 @@ msgstr "Date"
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Date created"
 msgstr "Date created"
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "default"
+msgstr "default"
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Default:"
+msgstr "Default:"
 
 #: src/actions/ansible-remote-delete.tsx
 #: src/actions/ansible-repository-delete.tsx
