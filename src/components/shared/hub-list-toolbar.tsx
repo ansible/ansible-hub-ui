@@ -4,7 +4,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -16,6 +16,7 @@ import {
 import { ParamType } from 'src/utilities';
 
 interface IProps {
+  buttons?: ReactNode[];
   count?: number;
   filterConfig: FilterOption[];
   ignoredParams: string[];
@@ -49,8 +50,9 @@ function useTypeaheads(typeaheads, { inputText, selectedFilter }) {
   return options;
 }
 
-// FIXME: missing Buttons & CardListSwitcher to be usable everywhere
+// FIXME: missing CardListSwitcher to be usable everywhere
 export function HubListToolbar({
+  buttons,
   count,
   filterConfig,
   ignoredParams,
@@ -76,8 +78,14 @@ export function HubListToolbar({
       : { ...item, options: item.options || typeaheadOptions[item.id] || [] },
   );
 
+  const renderedButtons = buttons?.length
+    ? buttons.map((button, i) =>
+        button ? <ToolbarItem key={`button${i}`}>{button}</ToolbarItem> : null,
+      )
+    : null;
+
   return (
-    <Toolbar>
+    <Toolbar style={{ paddingLeft: '8px' }}>
       <ToolbarContent>
         <ToolbarGroup
           style={{
@@ -107,14 +115,19 @@ export function HubListToolbar({
           </ToolbarItem>
         </ToolbarGroup>
         {sortOptions ? (
-          <ToolbarItem style={{ alignSelf: 'start' }}>
-            <Sort
-              options={sortOptions}
-              params={params}
-              updateParams={updateParams}
-            />
-          </ToolbarItem>
-        ) : null}
+          <ToolbarGroup style={{ alignSelf: 'start' }}>
+            <ToolbarItem>
+              <Sort
+                options={sortOptions}
+                params={params}
+                updateParams={updateParams}
+              />
+            </ToolbarItem>
+            {renderedButtons}
+          </ToolbarGroup>
+        ) : (
+          renderedButtons
+        )}
         <ToolbarItem
           alignment={{ default: 'alignRight' }}
           style={{ alignSelf: 'start' }}

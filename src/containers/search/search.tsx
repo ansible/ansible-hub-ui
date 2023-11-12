@@ -81,7 +81,7 @@ class Search extends React.Component<RouteProps, IState> {
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
+      params['page_size'] = Constants.DEFAULT_PAGE_SIZE;
     }
 
     // Load view type from local storage if it's not set. This allows a
@@ -248,7 +248,6 @@ class Search extends React.Component<RouteProps, IState> {
                     params={params}
                     updateParams={updateParams}
                     count={count}
-                    perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                     isTop
                   />
                 </div>
@@ -276,7 +275,6 @@ class Search extends React.Component<RouteProps, IState> {
               <Pagination
                 params={params}
                 updateParams={updateParams}
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                 count={count}
               />
             </section>

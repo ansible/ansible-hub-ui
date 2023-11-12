@@ -25,9 +25,6 @@ interface IProps {
 
   /** Applies styling to make pagination compact */
   isCompact?: boolean;
-
-  /** Options for the number of items that can be displayed per page */
-  perPageOptions?: number[];
 }
 
 // AAP-3737 - support both "1 - 2 of 3" and "3 的 1 - 2"
@@ -56,44 +53,45 @@ export const Pagination = ({
   params,
   updateParams,
   isTop,
-  perPageOptions,
   isCompact,
 }: IProps) => {
-  const extraProps = {};
-  if (!isTop) {
-    extraProps['widgetId'] = 'pagination-options-menu-bottom';
-    extraProps['variant'] = PaginationVariant.bottom;
-  }
+  const extraProps = isTop
+    ? {}
+    : {
+        widgetId: 'pagination-options-menu-bottom',
+        variant: PaginationVariant.bottom,
+      };
 
-  return (
-    <PaginationPF
-      itemCount={count}
-      perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-      page={params.page || 1}
-      onSetPage={(_, p) =>
-        updateParams(ParamHelper.setParam(params, 'page', p))
-      }
-      onPerPageSelect={(_, p) => {
-        updateParams({ ...params, page: 1, page_size: p });
-      }}
-      {...extraProps}
-      isCompact={isTop || isCompact}
-      perPageOptions={mapPerPageOptions(
-        perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
-      )}
-      titles={{
-        ofWord: t`of`,
-        perPageSuffix: t`per page`,
-        items: null,
-      }}
-      toggleTemplate={(props) => <ToggleTemplate {...props} />}
-    />
-  );
-};
+  const onSetPage = (_, p) =>
+    updateParams(ParamHelper.setParam(params, 'page', p));
 
-function mapPerPageOptions(options) {
-  return options.map((option) => ({
+  const onPerPageSelect = (_, p) => {
+    updateParams({ ...params, page: 1, page_size: p });
+  };
+
+  const perPageOptions = Constants.DEFAULT_PAGINATION_OPTIONS.map((option) => ({
     title: String(option),
     value: option,
   }));
-}
+
+  const titles = {
+    ofWord: t`of`,
+    perPageSuffix: t`per page`,
+    items: null,
+  };
+
+  return (
+    <PaginationPF
+      isCompact={isTop || isCompact}
+      itemCount={count}
+      onPerPageSelect={onPerPageSelect}
+      onSetPage={onSetPage}
+      page={params.page || 1}
+      perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+      perPageOptions={perPageOptions}
+      titles={titles}
+      toggleTemplate={(props) => <ToggleTemplate {...props} />}
+      {...extraProps}
+    />
+  );
+};
