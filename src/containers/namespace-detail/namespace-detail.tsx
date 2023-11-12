@@ -19,7 +19,6 @@ import {
   AlertList,
   AlertType,
   ClipboardCopy,
-  CollectionFilter,
   CollectionList,
   DeleteCollectionModal,
   DeleteModal,
@@ -29,13 +28,13 @@ import {
   ImportModal,
   LoadingPageWithHeader,
   Main,
-  Pagination,
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
   Tooltip,
   WisdomModal,
   closeAlertMixin,
+  collectionFilter,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
@@ -327,11 +326,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       ? null
       : deleteCollection?.repository?.name;
 
-    // TODO
-    const sortOptions = [
-      { title: t`Name`, id: 'name', type: 'alpha' as const },
-    ];
-
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -410,37 +404,14 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           params={tabParams}
           updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
-          filters={
-            tab === 'collections' ? (
-              <div>
-                <div className='hub-toolbar hub-toolbar-left'>
-                  <CollectionFilter
-                    ignoredParams={ignoredParams}
-                    params={params}
-                    updateParams={updateParams}
-                  />
-
-                  <div className='hub-pagination-container'>
-                    <Pagination
-                      params={params}
-                      updateParams={updateParams}
-                      count={filteredCount}
-                      isTop
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : null
-          }
         />
         {tab === 'collections' ? (
           <HubListToolbar
             count={filteredCount}
             ignoredParams={ignoredParams}
             params={params}
-            sortOptions={sortOptions}
             updateParams={updateParams}
-            {...CollectionFilter.CF({
+            {...collectionFilter({
               featureFlags: this.context.featureFlags,
               ignoredParams,
             })}
