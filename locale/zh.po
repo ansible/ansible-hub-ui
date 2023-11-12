@@ -754,6 +754,10 @@ msgstr "检查受影响的用户... <0/>"
 msgid "Child tasks"
 msgstr "子任务"
 
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Choices:"
+msgstr ""
+
 #: src/components/patternfly-wrappers/fileupload.tsx
 #: src/components/patternfly-wrappers/write-only-field.tsx
 msgid "Clear"
@@ -1313,6 +1317,14 @@ msgstr "日期"
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Date created"
 msgstr "创建日期"
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "default"
+msgstr ""
+
+#: src/components/render-plugin-doc/render-plugin-doc.tsx
+msgid "Default:"
+msgstr ""
 
 #: src/actions/ansible-remote-delete.tsx
 #: src/actions/ansible-repository-delete.tsx
