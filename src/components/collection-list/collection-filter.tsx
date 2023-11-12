@@ -25,7 +25,74 @@ interface IProps {
   updateParams: (p) => void;
 }
 
-export const CollectionFilter = (props: IProps) => {
+const _loadRepos = (inputText) =>
+  AnsibleRepositoryAPI.list({
+    name__icontains: inputText,
+    pulp_label_select: '!hide_from_search',
+  }).then(({ data: { results } }) =>
+    results.map(({ name }) => ({
+      id: name,
+      title: name,
+    })),
+  );
+
+const _loadTags = (inputText) =>
+  TagAPI.listCollections({ name__icontains: inputText, sort: '-count' }).then(
+    ({ data: { data } }) =>
+      data.map(({ name, count }) => ({
+        id: name,
+        title: count === undefined ? name : t`${name} (${count})`,
+      })),
+  );
+
+CollectionFilter.CF = ({
+  featureFlags: { display_signatures, display_repositories },
+  ignoredParams: i,
+}) => {
+  const displayNamespaces = !i.includes('namespace');
+  const displayRepos = display_repositories && !i.includes('repository_name');
+  const displayTags = !i.includes('tags');
+
+  const filterConfig = [
+    {
+      id: 'keywords',
+      title: t`Keywords`,
+    },
+    displayRepos && {
+      id: 'repository_name',
+      title: t`Repository`,
+      inputType: 'typeahead' as const,
+    },
+    displayNamespaces && {
+      id: 'namespace',
+      title: t`Namespace`,
+    },
+    displayTags && {
+      id: 'tags',
+      title: t`Tag`,
+      inputType: 'typeahead' as const,
+    },
+    display_signatures && {
+      id: 'is_signed',
+      title: t`Sign state`,
+      inputType: 'select' as const,
+      options: [
+        { id: 'true', title: t`Signed` },
+        { id: 'false', title: t`Unsigned` },
+      ],
+    },
+  ].filter(Boolean);
+
+  return {
+    filterConfig,
+    typeaheads: {
+      repository_name: _loadRepos,
+      tags: _loadTags,
+    },
+  };
+};
+
+export function CollectionFilter(props: IProps) {
   const context = useContext();
   const { ignoredParams, params, updateParams } = props;
   const { display_signatures, display_repositories } = context.featureFlags;
@@ -39,31 +106,8 @@ export const CollectionFilter = (props: IProps) => {
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [tags, setTags] = useState([]);
 
-  const loadRepos = () => {
-    AnsibleRepositoryAPI.list({
-      name__icontains: inputText,
-      pulp_label_select: '!hide_from_search',
-    }).then(({ data: { results } }) =>
-      setRepositories(
-        results.map(({ name }) => ({
-          id: name,
-          title: name,
-        })),
-      ),
-    );
-  };
-
-  const loadTags = () => {
-    TagAPI.listCollections({ name__icontains: inputText, sort: '-count' }).then(
-      ({ data: { data } }) =>
-        setTags(
-          data.map(({ name, count }) => ({
-            id: name,
-            title: count === undefined ? name : t`${name} (${count})`,
-          })),
-        ),
-    );
-  };
+  const loadRepos = () => _loadRepos(inputText).then(setRepositories);
+  const loadTags = () => _loadTags(inputText).then(setTags);
 
   useEffect(() => {
     if (selectedFilter === 'repository_name') {
@@ -165,4 +209,4 @@ export const CollectionFilter = (props: IProps) => {
       </ToolbarContent>
     </Toolbar>
   );
-};
+}

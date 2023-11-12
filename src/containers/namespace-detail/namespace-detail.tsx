@@ -328,7 +328,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       : deleteCollection?.repository?.name;
 
     // TODO
-    const filterConfig = [{ id: 'keywords', title: t`keywords` }];
     const sortOptions = [
       { title: t`Name`, id: 'name', type: 'alpha' as const },
     ];
@@ -437,11 +436,14 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         {tab === 'collections' ? (
           <HubListToolbar
             count={filteredCount}
-            filterConfig={filterConfig}
             ignoredParams={ignoredParams}
             params={params}
             sortOptions={sortOptions}
             updateParams={updateParams}
+            {...CollectionFilter.CF({
+              featureFlags: this.context.featureFlags,
+              ignoredParams,
+            })}
           />
         ) : null}
         <Main>

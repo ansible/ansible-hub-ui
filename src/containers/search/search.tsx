@@ -169,7 +169,6 @@ class Search extends React.Component<RouteProps, IState> {
     const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
 
     // TODO
-    const filterConfig = [{ id: 'keywords', title: t`keywords` }];
     const sortOptions = [
       { title: t`Name`, id: 'name', type: 'alpha' as const },
     ];
@@ -266,11 +265,14 @@ class Search extends React.Component<RouteProps, IState> {
         </BaseHeader>
         <HubListToolbar
           count={count}
-          filterConfig={filterConfig}
           ignoredParams={ignoredParams}
           params={params}
           sortOptions={sortOptions}
           updateParams={updateParams}
+          {...CollectionFilter.CF({
+            featureFlags: this.context.featureFlags,
+            ignoredParams,
+          })}
         />
         {loading ? (
           <LoadingPageSpinner />
