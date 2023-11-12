@@ -7,6 +7,7 @@ import {
 import React, { ReactNode, useEffect, useState } from 'react';
 import {
   AppliedFilters,
+  CardListSwitcher,
   CompoundFilter,
   FilterOption,
   Pagination,
@@ -22,6 +23,7 @@ interface IProps {
   ignoredParams: string[];
   params: ParamType;
   sortOptions?: SortFieldType[];
+  switcher?: string;
   typeaheads?: Record<
     string,
     (inputText: string) => Promise<{ id: string; title: string }[]>
@@ -50,7 +52,6 @@ function useTypeaheads(typeaheads, { inputText, selectedFilter }) {
   return options;
 }
 
-// FIXME: missing CardListSwitcher to be usable everywhere
 export function HubListToolbar({
   buttons,
   count,
@@ -58,6 +59,7 @@ export function HubListToolbar({
   ignoredParams,
   params,
   sortOptions,
+  switcher,
   typeaheads,
   updateParams,
 }: IProps) {
@@ -128,17 +130,31 @@ export function HubListToolbar({
         ) : (
           renderedButtons
         )}
-        <ToolbarItem
+        <ToolbarGroup
           alignment={{ default: 'alignRight' }}
           style={{ alignSelf: 'start' }}
         >
-          <Pagination
-            params={params}
-            updateParams={updateParams}
-            count={count}
-            isTop
-          />
-        </ToolbarItem>
+          {switcher ? (
+            <ToolbarItem>
+              <CardListSwitcher
+                size='sm'
+                params={params}
+                updateParams={(p) => {
+                  window.localStorage.setItem(switcher, p.view_type);
+                  updateParams(p);
+                }}
+              />
+            </ToolbarItem>
+          ) : null}
+          <ToolbarItem>
+            <Pagination
+              params={params}
+              updateParams={updateParams}
+              count={count}
+              isTop
+            />
+          </ToolbarItem>
+        </ToolbarGroup>
       </ToolbarContent>
     </Toolbar>
   );

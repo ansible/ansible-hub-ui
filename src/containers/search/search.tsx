@@ -268,6 +268,7 @@ class Search extends React.Component<RouteProps, IState> {
           ignoredParams={ignoredParams}
           params={params}
           sortOptions={sortOptions}
+          switcher={Constants.SEARCH_VIEW_TYPE_LOCAL_KEY}
           updateParams={updateParams}
           {...CollectionFilter.CF({
             featureFlags: this.context.featureFlags,
