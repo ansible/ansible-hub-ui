@@ -10,4 +10,6 @@ RUN npm ci && \
 
 FROM registry.access.redhat.com/ubi8/nginx-120:latest
 COPY --from=0 /workspace/dist ${NGINX_APP_ROOT}/src
+COPY community/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY community/nginx/nginx.d/ /opt/app-root/etc/nginx.d/
 CMD ["nginx", "-g", "daemon off;"]
