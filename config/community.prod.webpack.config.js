@@ -7,6 +7,7 @@ module.exports = webpackBase({
   API_BASE_PATH: '/api/',
   UI_BASE_PATH: '/ui/',
   DEPLOYMENT_MODE: 'standalone',
+  IS_COMMUNITY: true,
   NAMESPACE_TERM: 'namespaces',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,

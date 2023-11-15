@@ -27,6 +27,7 @@ module.exports = webpackBase({
   // Determines if the app should be compiled to run on insights or on
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'insights',
+  IS_INSIGHTS: true,
 
   // Determines the title of the "namespaces" page
   NAMESPACE_TERM: 'partners',

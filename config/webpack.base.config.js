@@ -40,6 +40,8 @@ const defaultConfigs = [
       'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
     scope: 'global',
   },
+  { name: 'IS_INSIGHTS', default: false, scope: 'global' },
+  { name: 'IS_COMMUNITY', default: false, scope: 'global' },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time
