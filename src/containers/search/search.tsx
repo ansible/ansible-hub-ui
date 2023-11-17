@@ -389,9 +389,9 @@ class Search extends React.Component<RouteProps, IState> {
     const { hasPermission } = this.context;
     const hasObjectPermission = (permission, namespace) =>
       namespace?.related_fields?.my_permissions?.includes?.(permission);
-    const { display_repositories, ai_deny_index } = this.context.featureFlags;
+    const { display_repositories } = this.context.featureFlags;
     const canDeleteCommunityCollection =
-      ai_deny_index &&
+      IS_COMMUNITY &&
       hasObjectPermission(
         'galaxy.change_namespace',
         collection.collection_version.namespace,

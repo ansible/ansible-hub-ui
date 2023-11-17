@@ -12,7 +12,6 @@ import {
   MultiSearchSearch,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import './landing-page.scss';
@@ -33,8 +32,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { ai_deny_index } = this.context.featureFlags;
-    if (!ai_deny_index) {
+    if (!IS_COMMUNITY) {
       this.setState({ redirect: true });
     }
   }
@@ -210,5 +208,3 @@ export class LandingPage extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(LandingPage);
-
-LandingPage.contextType = AppContext;

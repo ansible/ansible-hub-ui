@@ -202,12 +202,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       { key: 'origin_repository', name: t`Repo` },
     ];
 
-    const {
-      display_signatures,
-      can_upload_signatures,
-      display_repositories,
-      ai_deny_index,
-    } = this.context.featureFlags;
+    const { can_upload_signatures, display_signatures, display_repositories } =
+      this.context.featureFlags;
 
     const {
       collection_version,
@@ -248,7 +244,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       namespace?.related_fields?.my_permissions?.includes?.(permission);
 
     const canDeleteCommunityCollection =
-      ai_deny_index &&
+      IS_COMMUNITY &&
       hasObjectPermission('galaxy.change_namespace', this.state.namespace);
 
     const dropdownItems = [

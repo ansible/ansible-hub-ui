@@ -168,7 +168,7 @@ export const StandaloneLayout = ({
 
   return (
     <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-      {featureFlags?.ai_deny_index ? (
+      {IS_COMMUNITY ? (
         <Banner>
           <Trans>
             Thanks for trying out the new and improved Galaxy, please share your
