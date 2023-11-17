@@ -25,6 +25,8 @@ module.exports = webpackBase({
   // Determines if the app should be compiled to run on insights or on
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'standalone',
+  // dev-mode only, support `IS_COMMUNITY=1 npm run start-standalone` in addition to `npm run start-community`
+  IS_COMMUNITY: !!process.env.IS_COMMUNITY,
 
   NAMESPACE_TERM: 'namespaces',
 
