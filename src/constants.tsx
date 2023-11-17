@@ -6,13 +6,7 @@ export class Constants {
   static readonly DEFAULT_PAGE_SIZE = 10;
   static readonly DEFAULT_PAGINATION_OPTIONS = [10, 20, 50, 100];
 
-  static readonly INSIGHTS_DEPLOYMENT_MODE = 'insights';
-  static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
-
-  static CERTIFIED_REPO =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'published'
-      : 'rh-certified';
+  static CERTIFIED_REPO = IS_INSIGHTS ? 'published' : 'rh-certified';
 
   static USER_GROUP_MGMT_PERMISSIONS = [
     'galaxy.delete_user',

@@ -573,7 +573,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           pageControls={
             <Flex>
-              {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
+              {IS_INSIGHTS ? (
                 <FlexItem>
                   <ExternalLink href={issueUrl}>{t`Create issue`}</ExternalLink>
                 </FlexItem>

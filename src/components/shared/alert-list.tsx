@@ -4,7 +4,6 @@ import {
   AlertProps,
 } from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
-import { Constants } from 'src/constants';
 
 interface IProps {
   /** List of alerts to display */
@@ -26,10 +25,9 @@ export const AlertList = ({ alerts, closeAlert }: IProps) => (
     style={{
       position: 'fixed',
       right: '5px',
-      top:
-        DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-          ? '124px' // 70 + 50 + 4
-          : '80px', // 76 + 4
+      top: IS_INSIGHTS
+        ? '124px' // 70 + 50 + 4
+        : '80px', // 76 + 4
       zIndex: 300,
       display: 'flex',
       flexDirection: 'column',

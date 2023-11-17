@@ -1,4 +1,3 @@
-import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 import { UserType } from './response-types/user';
 
@@ -17,7 +16,7 @@ class API extends HubAPI {
   // page to refresh before loading the token that can't be done witha single
   // API request.
   getToken(): Promise<{ data: { token: string } }> {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+    if (IS_INSIGHTS) {
       return Promise.reject(
         'Use window.insights.chrome.auth to get tokens for insights deployments',
       );
