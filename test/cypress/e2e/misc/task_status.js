@@ -1,4 +1,5 @@
-const pulpPrefix = Cypress.env('pulpPrefix');
+const apiPrefix = Cypress.env('apiPrefix');
+const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('test status filter label on list view', () => {

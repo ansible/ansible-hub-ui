@@ -38,7 +38,6 @@ The tests need to know details about the instance of Automation Hub that it's ru
 
     {
         "apiPrefix": "<api root>",
-        "pulpPrefix": "<pulp api root>",
         "uiPrefix": "<ui base path>",
         "username": "<your username here>",
         "password": "<your password here>",

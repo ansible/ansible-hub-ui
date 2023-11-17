@@ -1,7 +1,8 @@
 import { range } from 'lodash';
 
-const uiPrefix = Cypress.env('uiPrefix');
 const apiPrefix = Cypress.env('apiPrefix');
+const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
+const uiPrefix = Cypress.env('uiPrefix');
 
 function openModal(menu) {
   cy.visit(`${uiPrefix}approval-dashboard`);
@@ -68,30 +69,24 @@ describe('Approval Dashboard process with multiple repos', () => {
 
     cy.galaxykit('-i task wait all');
 
-    cy.request(apiPrefix + 'pulp/api/v3/repositories/ansible/ansible/').then(
-      (data) => {
-        const list = data.body.results;
-        list.forEach((repo) => {
-          if (
-            repo.pulp_labels?.pipeline == 'approved' &&
-            repo.name != 'published'
-          ) {
-            cy.log('deleting repository' + repo.name);
-            cy.galaxykit('-i repository delete', repo.name);
-          }
-        });
-        cy.galaxykit('-i task wait all');
-        range(1, max).forEach((i) => {
-          cy.galaxykit(
-            `-i repository create`,
-            'repo' + i,
-            '--pipeline=approved',
-          );
-          cy.galaxykit('-i distribution create', 'repo' + i);
-        });
-        cy.galaxykit('-i task wait all');
-      },
-    );
+    cy.request(`${pulpPrefix}repositories/ansible/ansible/`).then((data) => {
+      const list = data.body.results;
+      list.forEach((repo) => {
+        if (
+          repo.pulp_labels?.pipeline == 'approved' &&
+          repo.name != 'published'
+        ) {
+          cy.log('deleting repository' + repo.name);
+          cy.galaxykit('-i repository delete', repo.name);
+        }
+      });
+      cy.galaxykit('-i task wait all');
+      range(1, max).forEach((i) => {
+        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
+        cy.galaxykit('-i distribution create', 'repo' + i);
+      });
+      cy.galaxykit('-i task wait all');
+    });
 
     // prepare another staging
     cy.galaxykit('-i distribution delete', 'staging2');
