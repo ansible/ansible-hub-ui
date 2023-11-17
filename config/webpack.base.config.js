@@ -22,35 +22,32 @@ const gitCommit =
   process.env.HUB_UI_VERSION ||
   execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
 
+const docsURL =
+  'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/';
+
 // Default user defined settings
 const defaultConfigs = [
   // Global scope means that the variable will be available to the app itself
   // as a constant after it is compiled
-  { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
-  { name: 'UI_BASE_PATH', default: '', scope: 'global' },
-  { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
+  { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
-  { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
-  { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
-  {
-    name: 'UI_DOCS_URL',
-    default:
-      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-    scope: 'global',
-  },
-  { name: 'IS_INSIGHTS', default: false, scope: 'global' },
   { name: 'IS_COMMUNITY', default: false, scope: 'global' },
+  { name: 'IS_INSIGHTS', default: false, scope: 'global' },
+  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
+  { name: 'UI_BASE_PATH', default: '', scope: 'global' },
+  { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
+  { name: 'UI_DOCS_URL', default: docsURL, scope: 'global' },
+  { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
 
-  // Webpack scope means the variable will only be available to webpack at
-  // build time
-  { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
+  // Webpack scope: only available in customConfigs here, not exposed to the UI
+  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
+  { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
+  { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
-  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
 const insightsMockAPIs = ({ app }) => {
