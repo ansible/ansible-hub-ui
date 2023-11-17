@@ -28,6 +28,8 @@ const renderTab = ({ link, title, active = false }) => (
 // We're not using the Tab react component because they don't support links.
 export const LinkTabs = ({ tabs }: IProps) => (
   <div className='pf-c-tabs'>
-    <ul className='pf-c-tabs__list'>{tabs.map((tab) => renderTab(tab))}</ul>
+    <ul className='pf-c-tabs__list'>
+      {tabs.filter(Boolean).map((tab) => renderTab(tab))}
+    </ul>
   </div>
 );
