@@ -12,7 +12,6 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-i
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo, Tooltip } from 'src/components';
-import { Constants } from 'src/constants';
 import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
 
@@ -33,10 +32,7 @@ export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
       <div
         style={{
           display: 'flex',
-          height:
-            DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-              ? '216px'
-              : '168px',
+          height: IS_INSIGHTS ? '216px' : '168px',
           justifyContent: 'center',
         }}
       >

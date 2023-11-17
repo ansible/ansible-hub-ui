@@ -122,16 +122,16 @@ function standaloneMenu() {
     menuItem(t`Documentation`, {
       url: UI_DOCS_URL,
       external: true,
-      condition: ({ featureFlags, settings, user }) =>
-        !featureFlags.ai_deny_index &&
+      condition: ({ settings, user }) =>
+        !IS_COMMUNITY &&
         (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous),
     }),
     menuItem(t`Documentation`, {
       url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
       external: true,
-      condition: ({ featureFlags, settings, user }) =>
-        featureFlags.ai_deny_index &&
+      condition: ({ settings, user }) =>
+        IS_COMMUNITY &&
         (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous),
     }),

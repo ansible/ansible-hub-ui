@@ -26,6 +26,7 @@ module.exports = webpackBase({
   // Determines if the app should be compiled to run on insights or on
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'standalone',
+  IS_COMMUNITY: true,
 
   NAMESPACE_TERM: 'namespaces',
 

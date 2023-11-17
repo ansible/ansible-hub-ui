@@ -8,7 +8,8 @@ declare module '*.svg';
 declare var API_BASE_PATH;
 declare var API_HOST;
 declare var APPLICATION_NAME;
-declare var DEPLOYMENT_MODE;
+declare var IS_COMMUNITY: boolean;
+declare var IS_INSIGHTS: boolean;
 declare var NAMESPACE_TERM;
 declare var PULP_API_BASE_PATH;
 declare var UI_BASE_PATH;
@@ -16,7 +17,7 @@ declare var UI_COMMIT_HASH;
 declare var UI_DOCS_URL;
 declare var UI_EXTERNAL_LOGIN_URI;
 
-// when DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE only
+// when IS_INSIGHTS only
 interface Window {
   insights: {
     chrome: {
