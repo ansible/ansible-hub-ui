@@ -30,15 +30,10 @@ export class API extends HubAPI {
     return super.get(id, 'pulp/api/v3/content/ansible/collection_versions/');
   }
 
-  getUsedDependenciesByCollection(
-    namespace,
-    collection,
-    params = {},
-    cancelToken = undefined,
-  ) {
+  getUsedDependenciesByCollection(namespace, collection, params = {}) {
     return this.http.get(
       this.apiPath + `?dependency=${namespace}.${collection}`,
-      { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
+      { params: this.mapPageToOffset(params) },
     );
   }
 

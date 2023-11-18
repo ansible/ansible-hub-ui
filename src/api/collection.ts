@@ -144,15 +144,10 @@ export class API extends HubAPI {
     );
   }
 
-  getUsedDependenciesByCollection(
-    namespace,
-    collection,
-    params = {},
-    cancelToken = undefined,
-  ) {
+  getUsedDependenciesByCollection(namespace, collection, params = {}) {
     return this.http.get(
       `_ui/v1/collection-versions/?dependency=${namespace}.${collection}`,
-      { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
+      { params: this.mapPageToOffset(params) },
     );
   }
 
