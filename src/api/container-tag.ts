@@ -4,14 +4,14 @@ class API extends PulpAPI {
   apiPath = 'repositories/container/container-push/';
 
   tag(repositoryID: string, tag: string, digest: string) {
-    return this.http.post(`${this.apiPath}${repositoryID}/tag/`, {
+    return this.http.post(this.apiPath + `${repositoryID}/tag/`, {
       digest: digest,
       tag: tag,
     });
   }
 
   untag(repositoryID: string, tag: string) {
-    return this.http.post(`${this.apiPath}${repositoryID}/untag/`, {
+    return this.http.post(this.apiPath + `${repositoryID}/untag/`, {
       tag: tag,
     });
   }

@@ -37,7 +37,7 @@ export class API extends HubAPI {
     cancelToken = undefined,
   ) {
     return this.http.get(
-      `${this.apiPath}?dependency=${namespace}.${collection}`,
+      this.apiPath + `?dependency=${namespace}.${collection}`,
       { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
     );
   }
