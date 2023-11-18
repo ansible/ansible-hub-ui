@@ -4,14 +4,20 @@ import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
 
 export class BaseAPI {
+  apiBase: string; // API_BASE_PATH or PULP_API_BASE_PATH
   apiPath: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   http: any;
-  sortParam = 'sort'; // translate ?sort into sortParam in list()
+  sortParam: string; // translate ?sort into sortParam in list()
 
-  constructor(apiBaseUrl) {
+  // a request URL is created from:
+  // * API_HOST - optional, for use with different hostname
+  // * apiBase - set by HubAPI, LegacyAPI & PulpAPI
+  // * apiPath - set by leaf API classes
+  // any extra id or params added by custom methods
+  constructor() {
     this.http = axios.create({
-      baseURL: apiBaseUrl,
+      baseURL: API_HOST + this.apiBase,
       paramsSerializer: {
         serialize: (params) => ParamHelper.getQueryString(params),
       },
@@ -55,7 +61,9 @@ export class BaseAPI {
 
   list(params?: object, apiPath?: string) {
     return this.http.get(this.getPath(apiPath), {
-      params: this.mapSort(this.mapPageToOffset(params)),
+      params: this.mapSort(
+        this.mapPageToOffset ? this.mapPageToOffset(params) : params,
+      ),
     });
   }
 
@@ -79,8 +87,8 @@ export class BaseAPI {
     return this.http.patch(this.getPath(apiPath) + id + '/', data);
   }
 
-  getPath(apiPath?: string) {
-    return apiPath || this.apiPath;
+  private getPath(apiPath?: string) {
+    return apiPath || this.apiPath || '';
   }
 
   private async authHandler(request) {

@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('imports/collections/');
+  apiPath = '_ui/v1/imports/collections/';
 
   get(id, path?) {
     // call this to generate more task messages

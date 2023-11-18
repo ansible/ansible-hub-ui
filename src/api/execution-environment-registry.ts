@@ -32,7 +32,7 @@ function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {
 }
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('execution-environments/registries/');
+  apiPath = '_ui/v1/execution-environments/registries/';
 
   // list(params?)
   // create(data)

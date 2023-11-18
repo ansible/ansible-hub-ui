@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('ai_deny_index/');
+  apiPath = '_ui/v1/ai_deny_index/';
 
   isInDenyIndex(scope, reference) {
     return this.http
