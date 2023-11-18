@@ -105,10 +105,43 @@ export const StandaloneLayout = ({
           >{t`Training`}</ExternalLink>
         }
       />,
+      IS_COMMUNITY && (
+        <DropdownItem
+          key='forum'
+          component={
+            <ExternalLink
+              href='https://forum.ansible.com'
+              variant='menu'
+            >{t`Ansible Community Forum`}</ExternalLink>
+          }
+        />
+      ),
+      IS_COMMUNITY && (
+        <DropdownItem
+          key='communication'
+          component={
+            <ExternalLink
+              href='https://docs.ansible.com/ansible/latest/community/communication.html'
+              variant='menu'
+            >{t`Communicating with the Ansible community`}</ExternalLink>
+          }
+        />
+      ),
+      IS_COMMUNITY && (
+        <DropdownItem
+          key='communication'
+          component={
+            <ExternalLink
+              href='https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/'
+              variant='menu'
+            >{t`Community User Guide`}</ExternalLink>
+          }
+        />
+      ),
       <DropdownItem key='about' onClick={() => setAboutModalVisible(true)}>
         {t`About`}
       </DropdownItem>,
-    ];
+    ].filter(Boolean);
 
     aboutModal = (
       <AboutModalWindow
