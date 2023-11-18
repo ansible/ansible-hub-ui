@@ -12,9 +12,10 @@ class API extends HubAPI {
   }
 
   images(name, params) {
-    return this.http.get(this.apiPath + `${name}/_content/images/`, {
-      params: this.mapPageToOffset(params),
-    });
+    return this.http.get(
+      this.apiPath + `${name}/_content/images/`,
+      this.mapParams(params),
+    );
   }
 
   image(name, digest) {
@@ -22,9 +23,10 @@ class API extends HubAPI {
   }
 
   tags(name, params) {
-    return this.http.get(this.apiPath + `${name}/_content/tags/`, {
-      params: this.mapPageToOffset(params),
-    });
+    return this.http.get(
+      this.apiPath + `${name}/_content/tags/`,
+      this.mapParams(params),
+    );
   }
 
   deleteImage(name, manifest) {

@@ -33,7 +33,7 @@ export class API extends HubAPI {
   getUsedDependenciesByCollection(namespace, collection, params = {}) {
     return this.http.get(
       this.apiPath + `?dependency=${namespace}.${collection}`,
-      { params: this.mapPageToOffset(params) },
+      this.mapParams(params),
     );
   }
 

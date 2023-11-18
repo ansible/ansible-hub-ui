@@ -47,6 +47,14 @@ export class BaseAPI {
     return params;
   }
 
+  public mapParams(params) {
+    return {
+      params: this.mapSort(
+        this.mapPageToOffset ? this.mapPageToOffset(params) : params,
+      ),
+    };
+  }
+
   // The api uses sort/ordering/order_by for sort
   // the UI uses sort and maps to whatever the api expects
   // (set sortParam)
@@ -60,11 +68,7 @@ export class BaseAPI {
   }
 
   list(params?: object, apiPath?: string) {
-    return this.http.get(this.getPath(apiPath), {
-      params: this.mapSort(
-        this.mapPageToOffset ? this.mapPageToOffset(params) : params,
-      ),
-    });
+    return this.http.get(this.getPath(apiPath), this.mapParams(params));
   }
 
   get(id: string, apiPath?: string) {

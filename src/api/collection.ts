@@ -147,7 +147,7 @@ export class API extends HubAPI {
   getUsedDependenciesByCollection(namespace, collection, params = {}) {
     return this.http.get(
       `_ui/v1/collection-versions/?dependency=${namespace}.${collection}`,
-      { params: this.mapPageToOffset(params) },
+      this.mapParams(params),
     );
   }
 
