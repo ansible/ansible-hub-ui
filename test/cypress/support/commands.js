@@ -324,10 +324,9 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
   ];
 
   cy.login();
-  cy.intercept(
-    'GET',
-    `${pulpPrefix}repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`,
-  ).as('data');
+  cy.intercept('GET', `${pulpPrefix}repositories/ansible/ansible/?*`).as(
+    'data',
+  );
 
   cy.visit(`${uiPrefix}ansible/repositories/?page_size=100`);
   cy.wait('@data').then((res) => {

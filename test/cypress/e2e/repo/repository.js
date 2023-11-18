@@ -107,7 +107,7 @@ function versionCheck(version) {
       );
 
       if (withRemote) {
-        // try to sync it
+        // try to sync it, expect failure
         cy.contains('button', 'Sync').click();
         cy.get('.pf-c-modal-box__footer .pf-m-primary')
           .contains('Sync')
@@ -115,7 +115,7 @@ function versionCheck(version) {
 
         cy.contains('Sync started for repository "repo1Test".');
         cy.contains('a', 'detail page').click();
-        cy.contains('Failed', { timeout: 10000 });
+        cy.get('.pf-c-label__content').contains('Failed', { timeout: 15000 });
       }
     });
 
