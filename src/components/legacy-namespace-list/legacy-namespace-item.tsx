@@ -16,12 +16,14 @@ import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;
-  openModal?: (namespace) => void;
+  openEditModal?: (namespace) => void;
+  openWisdomModal?: (namespace) => void;
 }
 
 export function LegacyNamespaceListItem({
   namespace,
-  openModal,
+  openEditModal,
+  openWisdomModal,
 }: LegacyNamespaceProps) {
   const {
     featureFlags: { ai_deny_index },
@@ -59,18 +61,22 @@ export function LegacyNamespaceListItem({
   const userOwnsLegacyNamespace = !!summary_fields.owners.find(
     (n) => n.username == username,
   );
-
   const showWisdom = ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
 
-  const dropdownItems = [];
+  const dropdownItems = [
+    showWisdom && openWisdomModal && (
+      <DropdownItem
+        onClick={() => openWisdomModal(namespace)}
+      >{t`Ansible Lightspeed settings`}</DropdownItem>
+    ),
+    is_superuser && openEditModal && (
+      <DropdownItem
+        onClick={() => openEditModal(namespace)}
+      >{t`Change provider namespace`}</DropdownItem>
+    ),
+  ].filter(Boolean);
 
-  dropdownItems.push(
-    <DropdownItem
-      onClick={() => openModal(namespace)}
-    >{t`Ansible Lightspeed settings`}</DropdownItem>,
-  );
-
-  if (showWisdom && openModal) {
+  if (dropdownItems.length) {
     cells.push(
       <DataListCell key='menu' alignRight={true}>
         <div style={{ float: 'right' }}>

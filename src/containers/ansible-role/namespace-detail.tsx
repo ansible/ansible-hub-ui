@@ -28,6 +28,7 @@ import {
   Logo,
   Pagination,
   ProviderLink,
+  RoleNamespaceEditModal,
   StatefulDropdown,
   WisdomModal,
   closeAlertMixin,
@@ -226,7 +227,8 @@ class NamespaceRoles extends React.Component<
 
 interface RoleNamespaceState {
   alerts: AlertType[];
-  isOpenWisdomModal: boolean;
+  editModal: boolean;
+  lightspeedModal: boolean;
   loading: boolean;
   namespace: LegacyNamespaceListType;
 }
@@ -244,7 +246,8 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 
     this.state = {
       alerts: [],
-      isOpenWisdomModal: false,
+      editModal: false,
+      lightspeedModal: false,
       loading: true,
       namespace: null,
     };
@@ -278,10 +281,11 @@ class AnsibleRoleNamespaceDetail extends React.Component<
   }
 
   render() {
-    const { alerts, isOpenWisdomModal, loading, namespace } = this.state;
+    const { alerts, editModal, lightspeedModal, loading, namespace } =
+      this.state;
     const {
       featureFlags: { ai_deny_index },
-      user,
+      user: { is_superuser, username },
     } = this.context;
     const { location, navigate } = this.props;
 
@@ -304,15 +308,22 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 
     const provider = getProviderInfo(namespace);
 
-    const userOwnsLegacyNamespace = namespace.summary_fields?.owners?.filter(
-      (n) => n.username == user.username,
-    ).length;
+    const userOwnsLegacyNamespace = !!namespace.summary_fields?.owners?.find(
+      (n) => n.username == username,
+    );
+    const showWisdom =
+      ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
 
     const dropdownItems = [
-      ai_deny_index && (user.is_superuser || userOwnsLegacyNamespace) && (
+      showWisdom && (
         <DropdownItem
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
+          onClick={() => this.setState({ lightspeedModal: true })}
         >{t`Ansible Lightspeed settings`}</DropdownItem>
+      ),
+      is_superuser && (
+        <DropdownItem
+          onClick={() => this.setState({ editModal: true })}
+        >{t`Change provider namespace`}</DropdownItem>
       ),
     ].filter(Boolean);
 
@@ -345,12 +356,19 @@ class AnsibleRoleNamespaceDetail extends React.Component<
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
 
-        {isOpenWisdomModal && (
+        {lightspeedModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'legacy_namespace'}
+            closeAction={() => this.setState({ lightspeedModal: false })}
             reference={namespace.name}
+            scope={'legacy_namespace'}
+          />
+        )}
+        {editModal && (
+          <RoleNamespaceEditModal
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() => this.setState({ editModal: false })}
+            namespace={namespace.name}
           />
         )}
 
