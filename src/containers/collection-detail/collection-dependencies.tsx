@@ -115,7 +115,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     const noDependencies = !Object.keys(version.dependencies).length;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           activeTab='dependencies'
@@ -129,9 +129,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           reload={() => this.loadData(true)}
           repo={repository.name}
           updateParams={(p) => {
-            this.updateParams(this.combineParams(this.state.params, p), () =>
-              this.loadData(true),
-            );
+            this.updateParams(p, () => this.loadData(true));
           }}
         />
         <Main>
@@ -160,15 +158,12 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
               params={dependenciesParams}
               usedByDependenciesLoading={usedByDependenciesLoading}
               updateParams={(p) =>
-                this.updateParams(
-                  this.combineParams(this.state.params, p),
-                  () => this.loadUsedByDependencies(),
-                )
+                this.updateParams(p, () => this.loadUsedByDependencies())
               }
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -296,10 +291,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   get updateParams() {
     return ParamHelper.updateParamsMixin();
-  }
-
-  private combineParams(...params) {
-    return params.reduce((acc, cur) => ({ ...acc, ...cur }));
   }
 
   get closeAlert() {
