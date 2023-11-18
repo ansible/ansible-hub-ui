@@ -9,6 +9,7 @@ export class BaseAPI {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   http: any;
   sortParam: string; // translate ?sort into sortParam in list()
+  mapPageToOffset: boolean;
 
   // a request URL is created from:
   // * API_HOST - optional, for use with different hostname
@@ -26,45 +27,35 @@ export class BaseAPI {
     this.http.interceptors.request.use((request) => this.authHandler(request));
   }
 
-  // The api uses offset/limit OR page/page_size for pagination
-  // the UI uses page/page size and maps to whatever the api expects
-  // (override mapPageToOffset for page)
-  public mapPageToOffset(p) {
-    // Need to copy the object to make sure we aren't accidentally
-    // setting page state
-    const params = { ...p };
-
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
-    const page = parseInt(params['page']) || 1;
-
-    delete params['page'];
-    delete params['page_size'];
-
-    params['offset'] = page * pageSize - pageSize;
-    params['limit'] = pageSize;
-
-    return params;
-  }
-
   public mapParams(params) {
-    return {
-      params: this.mapSort(
-        this.mapPageToOffset ? this.mapPageToOffset(params) : params,
-      ),
-    };
-  }
-
-  // The api uses sort/ordering/order_by for sort
-  // the UI uses sort and maps to whatever the api expects
-  // (set sortParam)
-  public mapSort(params) {
     const newParams = { ...params };
-    if (newParams['sort'] && this.sortParam !== 'sort') {
+
+    if (this.mapPageToOffset) {
+      // The api uses offset/limit OR page/page_size for pagination
+      // the UI uses page/page size and maps to whatever the api expects
+
+      const pageSize =
+        parseInt(newParams['page_size'], 10) || Constants.DEFAULT_PAGE_SIZE;
+      const page = parseInt(newParams['page'], 10) || 1;
+
+      delete newParams['page'];
+      delete newParams['page_size'];
+
+      newParams['offset'] = page * pageSize - pageSize;
+      newParams['limit'] = pageSize;
+    }
+
+    if (this.sortParam && newParams['sort'] && this.sortParam !== 'sort') {
+      // The api uses sort/ordering/order_by for sort
+      // the UI uses sort and maps to whatever the api expects
+
       newParams[this.sortParam] = newParams['sort'];
       delete newParams['sort'];
     }
-    return newParams;
+
+    return {
+      params: newParams,
+    };
   }
 
   list(params?: object, apiPath?: string) {
