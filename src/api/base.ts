@@ -4,7 +4,6 @@ import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
 
 export class BaseAPI {
-  apiBase: string; // API_BASE_PATH or PULP_API_BASE_PATH
   apiPath: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   http: any;
@@ -13,12 +12,12 @@ export class BaseAPI {
 
   // a request URL is created from:
   // * API_HOST - optional, for use with different hostname
-  // * apiBase - set by HubAPI, LegacyAPI & PulpAPI
+  // * apiBaseUrl - api/pulp prefix, ends in trailing slash
   // * apiPath - set by leaf API classes
   // any extra id or params added by custom methods
-  constructor() {
+  constructor(apiBaseUrl) {
     this.http = axios.create({
-      baseURL: API_HOST + this.apiBase,
+      baseURL: API_HOST + apiBaseUrl,
       paramsSerializer: {
         serialize: (params) => ParamHelper.getQueryString(params),
       },
