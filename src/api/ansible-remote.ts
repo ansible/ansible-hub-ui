@@ -30,7 +30,6 @@ function smartUpdate(
 
 class API extends PulpAPI {
   apiPath = 'remotes/ansible/collection/';
-  useOrdering = true;
 
   // create(data)
   // delete(uuid)

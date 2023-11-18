@@ -2,6 +2,7 @@ import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
   apiPath = 'pulp_container/namespaces/';
+  sortParam = 'sort';
 
   listRoles(id, params?) {
     return super.list(params, this.apiPath + id + '/list_roles/');

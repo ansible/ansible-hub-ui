@@ -2,7 +2,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 function versionCheck(version) {
   cy.login();
-  cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+  cy.visit(`${uiPrefix}ansible/repositories/repo1Test/`);
   cy.contains('button', 'Versions').click();
   cy.get(
     '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
@@ -39,7 +39,7 @@ function versionCheck(version) {
         `-i collection move repo_test_namespace repo_test_collection`,
       );
 
-      cy.visit(uiPrefix + 'ansible/repositories');
+      cy.visit(`${uiPrefix}ansible/repositories/`);
       cy.contains('Repositories');
       cy.contains('button', 'Add repository').click();
       cy.contains('Add new repository');
@@ -62,7 +62,7 @@ function versionCheck(version) {
       ).click();
 
       // check if created correctly
-      cy.visit(uiPrefix + 'ansible/repositories/');
+      cy.visit(`${uiPrefix}ansible/repositories/`);
       cy.contains('Repositories');
       cy.contains('repo1Test');
       cy.contains('a', 'repo1Test').click();
@@ -100,14 +100,14 @@ function versionCheck(version) {
       ).click();
 
       // check if edited correctly
-      cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+      cy.visit(`${uiPrefix}ansible/repositories/repo1Test/`);
       cy.contains(
         '[data-cy="PageWithTabs-AnsibleRepositoryDetail-details"]',
         '5',
       );
 
       if (withRemote) {
-        // try to sync it
+        // try to sync it, expect failure
         cy.contains('button', 'Sync').click();
         cy.get('.pf-c-modal-box__footer .pf-m-primary')
           .contains('Sync')
@@ -115,7 +115,7 @@ function versionCheck(version) {
 
         cy.contains('Sync started for repository "repo1Test".');
         cy.contains('a', 'detail page').click();
-        cy.contains('Failed', { timeout: 10000 });
+        cy.get('.pf-c-label__content').contains('Failed', { timeout: 15000 });
       }
     });
 
@@ -125,7 +125,7 @@ function versionCheck(version) {
 
     it('adds collections', () => {
       cy.login();
-      cy.visit(uiPrefix + 'ansible/repositories/repo1Test/');
+      cy.visit(`${uiPrefix}ansible/repositories/repo1Test/`);
       cy.contains('button', 'Collection versions').click();
       cy.contains('button', 'Add collection').click();
       cy.contains('Select a collection');
@@ -160,7 +160,7 @@ function versionCheck(version) {
     it('removes collections', () => {
       cy.login();
       cy.visit(
-        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+        `${uiPrefix}ansible/repositories/repo1Test/?tab=collection-versions`,
       );
       cy.contains('repo_test_collection');
       cy.get('[aria-label="Actions"]').click();
@@ -173,7 +173,7 @@ function versionCheck(version) {
     it('checks if collection was removed', () => {
       cy.login();
       cy.visit(
-        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+        `${uiPrefix}ansible/repositories/repo1Test/?tab=collection-versions`,
       );
       cy.contains('repo_test_collection').should('not.exist');
       cy.contains('No collection versions yet');
@@ -193,7 +193,7 @@ function versionCheck(version) {
     it('checks if collection is added again', () => {
       cy.login();
       cy.visit(
-        uiPrefix + 'ansible/repositories/repo1Test/?tab=collection-versions',
+        `${uiPrefix}ansible/repositories/repo1Test/?tab=collection-versions`,
       );
       cy.contains('repo_test_collection');
       cy.contains('No collection versions yet').should('not.exist');

@@ -1,5 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
-const pulpPrefix = Cypress.env('pulpPrefix');
+const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 
 function createGroupManually(name) {
   cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');

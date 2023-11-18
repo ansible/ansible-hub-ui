@@ -1,14 +1,12 @@
-const pulpPrefix = Cypress.env('pulpPrefix');
+const apiPrefix = Cypress.env('apiPrefix');
+const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('test status filter label on list view', () => {
   before(() => {
     cy.login();
     cy.visit(`${uiPrefix}tasks`);
-    cy.intercept(
-      'GET',
-      `${pulpPrefix}tasks/?ordering=-pulp_created&offset=0&limit=10`,
-    ).as('tasks');
+    cy.intercept('GET', `${pulpPrefix}tasks/?*`).as('tasks');
 
     cy.wait('@tasks');
   });

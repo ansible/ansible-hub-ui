@@ -3,6 +3,7 @@ import { range } from 'lodash';
 import shell from 'shell-escape-tag';
 
 const apiPrefix = Cypress.env('apiPrefix');
+const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
 
 Cypress.Commands.add('containsnear', {}, (...args) => {
@@ -321,12 +322,13 @@ Cypress.Commands.add('deleteRepositories', {}, () => {
     'rejected',
     'staging',
   ];
-  cy.login();
-  const path = `${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?ordering=-pulp_created&offset=0&limit=100`;
-  cy.intercept('GET', path).as('data');
-  const visitUrl = `${uiPrefix}ansible/repositories/?page_size=100`;
-  cy.visit(visitUrl);
 
+  cy.login();
+  cy.intercept('GET', `${pulpPrefix}repositories/ansible/ansible/?*`).as(
+    'data',
+  );
+
+  cy.visit(`${uiPrefix}ansible/repositories/?page_size=100`);
   cy.wait('@data').then((res) => {
     res.response.body.results.forEach((res) => {
       if (!initRepos.includes(res.name)) {

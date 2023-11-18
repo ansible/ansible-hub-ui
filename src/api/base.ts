@@ -7,6 +7,7 @@ export class BaseAPI {
   apiPath: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   http: any;
+  sortParam = 'sort'; // translate ?sort into sortParam in list()
 
   constructor(apiBaseUrl) {
     this.http = axios.create({
@@ -19,6 +20,9 @@ export class BaseAPI {
     this.http.interceptors.request.use((request) => this.authHandler(request));
   }
 
+  // The api uses offset/limit OR page/page_size for pagination
+  // the UI uses page/page size and maps to whatever the api expects
+  // (override mapPageToOffset for page)
   public mapPageToOffset(p) {
     // Need to copy the object to make sure we aren't accidentally
     // setting page state
@@ -37,13 +41,21 @@ export class BaseAPI {
     return params;
   }
 
-  list(params?: object, apiPath?: string) {
-    // The api uses offset/limit for pagination. I think this is confusing
-    // for params on the front end, so we're going to use page/page size
-    // for the URL params and just map it to whatever the api expects.
+  // The api uses sort/ordering/order_by for sort
+  // the UI uses sort and maps to whatever the api expects
+  // (set sortParam)
+  public mapSort(params) {
+    const newParams = { ...params };
+    if (newParams['sort'] && this.sortParam !== 'sort') {
+      newParams[this.sortParam] = newParams['sort'];
+      delete newParams['sort'];
+    }
+    return newParams;
+  }
 
+  list(params?: object, apiPath?: string) {
     return this.http.get(this.getPath(apiPath), {
-      params: this.mapPageToOffset(params),
+      params: this.mapSort(this.mapPageToOffset(params)),
     });
   }
 
