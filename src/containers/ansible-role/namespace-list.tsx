@@ -27,7 +27,7 @@ import {
 interface RoleNamespacesState {
   alerts: AlertType[];
   count: number;
-  editModal?: string;
+  editModal?: LegacyNamespaceListType;
   lightspeedModal?: string;
   loading: boolean;
   params: {
@@ -151,7 +151,7 @@ class AnsibleRoleNamespaceList extends React.Component<
             scope={'legacy_namespace'}
           />
         )}
-        {lightspeedModal && (
+        {editModal && (
           <RoleNamespaceEditModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ editModal: null })}
@@ -187,8 +187,8 @@ class AnsibleRoleNamespaceList extends React.Component<
                       <LegacyNamespaceListItem
                         key={lnamespace.id}
                         namespace={lnamespace}
-                        openEditModal={({ name }) =>
-                          this.setState({ editModal: name })
+                        openEditModal={(namespace) =>
+                          this.setState({ editModal: namespace })
                         }
                         openWisdomModal={({ name }) =>
                           this.setState({ lightspeedModal: name })

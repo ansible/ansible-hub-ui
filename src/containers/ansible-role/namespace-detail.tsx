@@ -368,7 +368,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
           <RoleNamespaceEditModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ editModal: false })}
-            namespace={namespace.name}
+            namespace={namespace}
           />
         )}
 
