@@ -3,13 +3,11 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DropdownItem,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import './legacy-namespace-item.scss';
 

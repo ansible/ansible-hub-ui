@@ -5,7 +5,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DropdownItem,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
