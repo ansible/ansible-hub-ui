@@ -44,7 +44,7 @@ export const CollectionInfo = ({
   addAlert,
 }: IProps) => {
   const downloadLinkRef = React.useRef<HTMLAnchorElement>(null);
-  const context = useContext();
+  const { user, settings } = useContext();
 
   let installCommand = `ansible-galaxy collection install ${collection_version.namespace}.${collection_version.name}`;
 
@@ -94,9 +94,8 @@ export const CollectionInfo = ({
         <GridItem>
           <Split hasGutter={true}>
             <SplitItem className='install-title'>{t`Download`}</SplitItem>
-            {context.user.is_anonymous &&
-            !context.settings
-              .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
+            {user.is_anonymous &&
+            !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
               <Alert
                 className={'hub-collection-download-alert'}
                 isInline
@@ -110,22 +109,24 @@ export const CollectionInfo = ({
               />
             ) : (
               <SplitItem isFilled>
-                <div>
-                  <Trans>
-                    To download this collection, configure your client to
-                    connect to one of this repositories{' '}
-                    <Link
-                      to={formatPath(Paths.collectionDistributionsByRepo, {
-                        repo: repository.name,
-                        namespace: collection_version.namespace,
-                        collection: collection_version.name,
-                      })}
-                    >
-                      distributions
-                    </Link>
-                    .
-                  </Trans>
-                </div>
+                {!IS_COMMUNITY ? (
+                  <div>
+                    <Trans>
+                      To download this collection, configure your client to
+                      connect to one of the{' '}
+                      <Link
+                        to={formatPath(Paths.collectionDistributionsByRepo, {
+                          repo: repository.name,
+                          namespace: collection_version.namespace,
+                          collection: collection_version.name,
+                        })}
+                      >
+                        distributions
+                      </Link>{' '}
+                      of this repository.
+                    </Trans>
+                  </div>
+                ) : null}
                 <a ref={downloadLinkRef} style={{ display: 'none' }} />
                 <Button
                   className='download-button'
