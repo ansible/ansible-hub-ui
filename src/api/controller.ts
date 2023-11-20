@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('controllers/');
+  apiPath = '_ui/v1/controllers/';
 
   // list(params?)
 }

@@ -1,14 +1,14 @@
 import { HubAPI } from './hub';
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('tags/');
+  apiPath = '_ui/v1/tags/';
 
   listCollections(params) {
-    return this.list(params, this.getPath() + 'collections/');
+    return this.list(params, this.apiPath + 'collections/');
   }
 
   listRoles(params) {
-    return this.list(params, this.getPath() + 'roles/');
+    return this.list(params, this.apiPath + 'roles/');
   }
 }
 

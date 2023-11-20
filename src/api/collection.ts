@@ -33,7 +33,7 @@ function filterListItem(item: CollectionListType) {
 }
 
 export class API extends HubAPI {
-  apiPath = this.getUIPath('repo/');
+  apiPath = '_ui/v1/repo/';
   cachedCollection: CollectionDetailType;
 
   list(params?, repo?: string) {
@@ -144,17 +144,10 @@ export class API extends HubAPI {
     );
   }
 
-  getUsedDependenciesByCollection(
-    namespace,
-    collection,
-    params = {},
-    cancelToken = undefined,
-  ) {
+  getUsedDependenciesByCollection(namespace, collection, params = {}) {
     return this.http.get(
-      this.getUIPath(
-        `collection-versions/?dependency=${namespace}.${collection}`,
-      ),
-      { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
+      `_ui/v1/collection-versions/?dependency=${namespace}.${collection}`,
+      this.mapParams(params),
     );
   }
 
