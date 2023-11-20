@@ -1,19 +1,13 @@
 import { t } from '@lingui/macro';
-import {
-  SearchInput,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionUsedByDependencies } from 'src/api';
 import {
   EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   LoadingPageSpinner,
   Pagination,
-  Sort,
 } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 import { Paths, formatPath } from 'src/paths';
@@ -40,8 +34,6 @@ export const CollectionUsedbyDependenciesList = ({
   updateParams,
   usedByDependenciesLoading,
 }: IProps) => {
-  const ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
-
   if (!itemCount && !filterIsSet(params, ['name__icontains'])) {
     return (
       <EmptyStateNoData
@@ -51,50 +43,29 @@ export const CollectionUsedbyDependenciesList = ({
     );
   }
 
+  const ignoredParams = ['page_size', 'page', 'sort'];
+
+  const filterConfig = [
+    {
+      id: 'name__icontains',
+      title: t`Name`,
+    },
+  ];
+
+  const sortOptions = [
+    { title: t`Collection`, id: 'collection', type: 'alpha' as const },
+  ];
+
   return (
     <>
-      <div className='hub-toolbar'>
-        <Toolbar>
-          <ToolbarGroup>
-            <ToolbarItem>
-              <SearchInput
-                value={params.name__icontains || ''}
-                onChange={(_e, val) =>
-                  updateParams(
-                    ParamHelper.setParam(params, 'name__icontains', val),
-                  )
-                }
-                onClear={() =>
-                  updateParams(
-                    ParamHelper.setParam(params, 'name__icontains', ''),
-                  )
-                }
-                aria-label='filter-collection-name'
-                placeholder={t`Filter by name`}
-              />
-            </ToolbarItem>
-            <ToolbarItem>
-              <Sort
-                options={[
-                  { title: t`Collection`, id: 'collection', type: 'alpha' },
-                ]}
-                params={params}
-                updateParams={({ sort }) =>
-                  updateParams(ParamHelper.setParam(params, 'sort', sort))
-                }
-              />
-            </ToolbarItem>
-          </ToolbarGroup>
-        </Toolbar>
-        {!!itemCount && (
-          <Pagination
-            params={params}
-            updateParams={(p) => updateParams(p)}
-            count={itemCount}
-            isTop
-          />
-        )}
-      </div>
+      <HubListToolbar
+        count={itemCount}
+        filterConfig={filterConfig}
+        ignoredParams={ignoredParams}
+        params={params}
+        sortOptions={sortOptions}
+        updateParams={updateParams}
+      />
 
       {usedByDependenciesLoading ? (
         <LoadingPageSpinner />
@@ -118,10 +89,10 @@ export const CollectionUsedbyDependenciesList = ({
                                 namespace,
                                 repo: repository_list[0],
                               },
-                              ParamHelper.getReduced(
-                                { version },
-                                ignoredParams,
-                              ),
+                              ParamHelper.getReduced({ version }, [
+                                ...ignoredParams,
+                                'name__icontains',
+                              ]),
                             )}
                           >
                             {namespace + '.' + name} v{version}

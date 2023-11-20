@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('execution-environments/remotes/');
+  apiPath = '_ui/v1/execution-environments/remotes/';
 
   // list(params?)
   // create(data)

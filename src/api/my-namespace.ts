@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('my-namespaces/');
+  apiPath = '_ui/v1/my-namespaces/';
 
   get(id: string, params = {}) {
     return this.http.get(this.apiPath + id + '/', { params });

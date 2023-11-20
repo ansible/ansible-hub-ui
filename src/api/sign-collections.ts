@@ -20,7 +20,7 @@ interface SignCollectionVersion extends SignCollection {
 type SignProps = SignNamespace | SignCollection | SignCollectionVersion;
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('collection_signing/');
+  apiPath = '_ui/v1/collection_signing/';
 
   async sign({ repository, repository_name: name, ...args }: SignProps) {
     const distroBasePath = await repositoryBasePath(
