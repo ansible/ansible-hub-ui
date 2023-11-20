@@ -21,6 +21,7 @@ jobs:
     env:
       # base of a PR, or pushed-to branch outside PRs, or master
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
+      DOCKER_DEFAULT_PLATFORM: linux/amd64
 
     strategy:
       fail-fast: false
