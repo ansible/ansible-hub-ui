@@ -15,9 +15,6 @@ interface IProps {
 export const RepoSelector = ({ selectedRepo }: IProps) => {
   const { featureFlags } = useContext();
 
-  if (IS_INSIGHTS) {
-    return null;
-  }
   if (!featureFlags.display_repositories) {
     return null;
   }

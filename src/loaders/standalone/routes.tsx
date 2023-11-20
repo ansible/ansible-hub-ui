@@ -33,7 +33,6 @@ import {
   ExecutionEnvironmentRegistryList,
   GroupDetail,
   GroupList,
-  LandingPage,
   LoginPage,
   MultiSearch,
   MyImports,
@@ -210,8 +209,6 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
         path: Paths.executionEnvironmentsRegistries,
         isDisabled: isContainerDisabled,
       },
-
-      // roles ...
       {
         component: AnsibleRoleNamespaceDetail,
         path: Paths.standaloneNamespace,
@@ -219,18 +216,6 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: AnsibleRoleNamespaceList, path: Paths.standaloneNamespaces },
       { component: AnsibleRoleDetail, path: Paths.standaloneRole },
       { component: AnsibleRoleList, path: Paths.standaloneRoles },
-      // ... but still support legacy urls
-      {
-        component: AnsibleRoleNamespaceDetail,
-        path: Paths.compatLegacyNamespace,
-      },
-      {
-        component: AnsibleRoleNamespaceList,
-        path: Paths.compatLegacyNamespaces,
-      },
-      { component: AnsibleRoleDetail, path: Paths.compatLegacyRole },
-      { component: AnsibleRoleList, path: Paths.compatLegacyRoles },
-
       {
         component: TaskListView,
         path: Paths.taskList,
@@ -274,7 +259,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: CertificationDashboard, path: Paths.approvalDashboard },
       { component: NotFound, path: Paths.notFound },
       { component: TokenStandalone, path: Paths.token },
-      { component: Partners, path: Paths[NAMESPACE_TERM] },
+      { component: Partners, path: Paths.namespaces },
       { component: EditNamespace, path: Paths.editNamespace },
       { component: NamespaceDetail, path: Paths.myCollections },
       { component: NamespaceDetail, path: Paths.myCollectionsByRepo },
@@ -304,7 +289,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: MyImports, path: Paths.myImports },
       { component: NamespaceDetail, path: Paths.namespace },
       { component: Search, path: Paths.collections },
-      { component: LandingPage, path: Paths.landingPage },
+      { component: Search, path: Paths.landingPage },
       { component: Dispatch, path: Paths.dispatch },
       { component: MultiSearch, path: Paths.search },
     ];

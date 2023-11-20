@@ -1,15 +1,7 @@
-import { t } from '@lingui/macro';
 import { ParamHelper, ParamType } from 'src/utilities';
 
 export function formatPath(path: Paths, data = {}, params?: ParamType) {
-  // insights router has basename="/", "/beta/" or "/preview/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
-  let url = IS_INSIGHTS
-    ? UI_BASE_PATH.replace('/preview/', '/')
-        .replace('/beta/', '/')
-        .replace(/\/$/, '')
-    : '';
-  url += (path as string) + '/';
-  url = url.replaceAll('//', '/');
+  let url = (path as string) + '/';
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k, encodeURIComponent(data[k]));
@@ -110,7 +102,6 @@ export enum Paths {
   namespaceByRepo = '/repo/:repo/:namespace',
   namespace = '/:namespace',
   namespaceDetail = '/namespaces/:namespace',
-  partners = '/partners',
   namespaces = '/namespaces',
   notFound = '/not-found',
   token = '/token',
@@ -123,16 +114,4 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
-
-  // for compatibility with old beta routes, remove later
-  compatLegacyRole = '/legacy/roles/:namespace/:name',
-  compatLegacyRoles = '/legacy/roles',
-  compatLegacyNamespace = '/legacy/namespaces/:namespaceid',
-  compatLegacyNamespaces = '/legacy/namespaces',
 }
-
-export const namespaceBreadcrumb = () =>
-  ({
-    namespaces: { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
-    partners: { name: t`Partners`, url: formatPath(Paths.partners) },
-  })[NAMESPACE_TERM];

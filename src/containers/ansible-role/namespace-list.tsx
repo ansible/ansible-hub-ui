@@ -12,7 +12,6 @@ import {
   LegacyNamespaceListItem,
   LoadingPageSpinner,
   Pagination,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import {
@@ -133,14 +132,6 @@ class AnsibleRoleNamespaceList extends React.Component<
     return (
       <div>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        {lightspeedModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ lightspeedModal: null })}
-            reference={lightspeedModal}
-            scope={'legacy_namespace'}
-          />
-        )}
         <BaseHeader title={t`Role Namespaces`} />
         {loading ? (
           <LoadingPageSpinner />
@@ -170,9 +161,6 @@ class AnsibleRoleNamespaceList extends React.Component<
                       <LegacyNamespaceListItem
                         key={lnamespace.id}
                         namespace={lnamespace}
-                        openModal={(namespace) =>
-                          this.setState({ lightspeedModal: namespace.name })
-                        }
                       />
                     ))}
                 </DataList>

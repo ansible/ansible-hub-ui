@@ -20,7 +20,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RouteProps,
@@ -146,9 +146,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader />;
     }
 
-    // Namespaces or Partners
-    const title = namespaceBreadcrumb().name;
-
     const updateParams = (p) =>
       this.updateParams(p, () => this.loadNamespaces());
 
@@ -182,7 +179,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         />
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        <BaseHeader title={title}>
+        <BaseHeader title={t`Namespaces`}>
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
@@ -190,7 +187,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: formatPath(Paths[NAMESPACE_TERM]),
+                      link: formatPath(Paths.namespaces),
                       active: !filterOwner,
                     },
                     {

@@ -1,9 +1,3 @@
-export function namespaceTitle({
-  name,
-  company,
-}: {
-  name: string;
-  company?: string;
-}): string {
-  return IS_INSIGHTS ? company || name : name;
+export function namespaceTitle({ name }: { name: string }): string {
+  return name;
 }
