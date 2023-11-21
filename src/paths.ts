@@ -2,6 +2,7 @@ import { ParamHelper, ParamType } from 'src/utilities';
 
 export function formatPath(path: Paths, data = {}, params?: ParamType) {
   let url = (path as string) + '/';
+  url = url.replaceAll('//', '/');
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k, encodeURIComponent(data[k]));

@@ -21,7 +21,6 @@ export { GroupRoleAPI } from './group-role';
 export { ImportAPI } from './import';
 export { LegacyNamespaceAPI } from './legacy-namespace';
 export { LegacyRoleAPI } from './legacy-role';
-export { MyDistributionAPI } from './my-distribution';
 export { MyNamespaceAPI } from './my-namespace';
 export { NamespaceAPI } from './namespace';
 export { PulpAPI } from './pulp';

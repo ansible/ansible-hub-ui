@@ -169,14 +169,6 @@ jobs:
       run: |
         galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Ensure galaxykit can connect to API (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        galaxykit -s http://localhost:8002/api/automation-hub/ \
-          -u admin -p admin \
-          --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
-          collection list
-
     - name: "Check initial feature flags (standalone)"
       run: |
         curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
