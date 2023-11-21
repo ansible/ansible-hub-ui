@@ -42,6 +42,12 @@ import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
+const DownloadLink = ({ href, text }: { href: string; text: string }) => (
+  <ExternalLink href={href} variant='download'>
+    <DownloadIcon /> {text}
+  </ExternalLink>
+);
+
 interface RoleMetaProps {
   addAlert: (alert: AlertType) => void;
   name: string;
@@ -123,13 +129,10 @@ class RoleVersion extends React.Component<RoleVersionProps> {
 
         {/* Release tarballs hosted on github */}
         <DataListCell alignRight>
-          <ExternalLink
+          <DownloadLink
             href={this.props.role_version.download_url}
-            variant='download'
-          >
-            <DownloadIcon />{' '}
-            {t`Download ${this.props.role_version.name} tarball`}
-          </ExternalLink>
+            text={t`Download ${this.props.role_version.name} tarball`}
+          />
         </DataListCell>
       </DataListItemRow>
     );
@@ -141,7 +144,14 @@ interface RoleVersionsState {
   loading: boolean;
 }
 
-class RoleVersions extends React.Component<RoleMetaProps, RoleVersionsState> {
+interface RoleVersionsProps extends RoleMetaProps {
+  repository: string;
+}
+
+class RoleVersions extends React.Component<
+  RoleVersionsProps,
+  RoleVersionsState
+> {
   constructor(props) {
     super(props);
     this.state = {
@@ -168,19 +178,31 @@ class RoleVersions extends React.Component<RoleMetaProps, RoleVersionsState> {
   }
 
   render() {
+    const {
+      repository,
+      role: { github_branch },
+    } = this.props;
+    const { loading, role_versions } = this.state;
+
     return (
       <div>
-        {!this.state.loading &&
-        this.state.role_versions &&
-        this.state.role_versions.length == 0 ? (
+        {!loading && role_versions && role_versions.length == 0 ? (
           <EmptyStateNoData
             title={t`No versions`}
-            description={t`The role is versionless and will always install from the head/main/master branch.`}
+            description={t`The role is versionless and will always install from the ${github_branch} branch.`}
+            button={
+              <DownloadLink
+                href={`${repository}/archive/${encodeURIComponent(
+                  github_branch,
+                )}.zip`}
+                text={t`Download latest tarball`}
+              />
+            }
           />
         ) : null}
 
         <DataList aria-label={t`List of versions`}>
-          {this.state.role_versions.reverse().map((rversion) => (
+          {role_versions.reverse().map((rversion) => (
             <DataListItem key={rversion.name}>
               <RoleVersion role_version={rversion} />
             </DataListItem>
@@ -363,6 +385,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
             addAlert={addAlert}
             name={name}
             namespace={namespace.name}
+            repository={repository}
             role={role}
           />
         );
