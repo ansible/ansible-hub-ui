@@ -144,8 +144,8 @@ export const AnsibleRepositoryForm = ({
     hideFromSearch && pipeline === 'staging'
       ? 'staging'
       : pipeline === 'approved'
-      ? 'approved'
-      : 'none',
+        ? 'approved'
+        : 'none',
   );
 
   const [selectOpen, setSelectOpen] = useState(false);
