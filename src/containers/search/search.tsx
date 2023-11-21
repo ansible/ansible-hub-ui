@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
+import { Button, DataList, Switch } from '@patternfly/react-core';
 import cx from 'classnames';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
   AlertType,
   BaseHeader,
   CollectionCard,
+  CollectionDropdown,
   CollectionListItem,
   CollectionNextPageCard,
   DeleteCollectionModal,
@@ -361,66 +362,43 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
-    const hasObjectPermission = (permission, namespace) =>
-      namespace?.related_fields?.my_permissions?.includes?.(permission);
-    const { display_repositories } = this.context.featureFlags;
-
-    const canDeleteCollection =
-      hasPermission('ansible.delete_collection') ||
-      (IS_COMMUNITY &&
-        hasObjectPermission(
-          'galaxy.change_namespace',
-          collection.collection_version.namespace,
-        ));
     const canUpload = hasPermission('galaxy.upload_to_namespace');
-    const canDeprecate = canUpload;
 
-    const menuItems = [
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection,
-        noDependencies: null,
-        onClick: () =>
+    const dropdownMenu = (
+      <CollectionDropdown
+        collection={collection}
+        onDelete={() =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
             addAlert: (alert) => this.addAlert(alert),
             setState: (state) => this.setState(state),
             collection,
             deleteAll: true,
-          }),
-        deleteAll: true,
-        display_repositories: display_repositories,
-      }),
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection,
-        noDependencies: null,
-        onClick: () =>
+          })
+        }
+        onDeprecate={() => this.handleControlClick(collection)}
+        onRemove={() =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
             addAlert: (alert) => this.addAlert(alert),
             setState: (state) => this.setState(state),
             collection,
             deleteAll: false,
-          }),
-        deleteAll: false,
-        display_repositories: display_repositories,
-      }),
-      canDeprecate && (
-        <DropdownItem
-          onClick={() => this.handleControlClick(collection)}
-          key='deprecate'
-        >
-          {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-        </DropdownItem>
-      ),
-      !list && canUpload && (
-        <DropdownItem
-          onClick={() => this.checkUploadPrivilleges(collection)}
-          key='upload new version'
-        >
-          {t`Upload new version`}
-        </DropdownItem>
-      ),
-    ].filter(Boolean);
-
-    const displayMenu = menuItems.length > 0;
+          })
+        }
+        onUploadVersion={
+          list ? null : () => this.checkUploadPrivilleges(collection)
+        }
+        wrapper={
+          list
+            ? null
+            : ({ any, children }) =>
+                any ? (
+                  <span>{children}</span>
+                ) : (
+                  <span className='hidden-menu-space' />
+                )
+        }
+      />
+    );
 
     if (list) {
       return {
@@ -432,19 +410,11 @@ class Search extends React.Component<RouteProps, IState> {
             {t`Upload new version`}
           </Button>
         ) : null,
-        dropdownMenu: displayMenu ? (
-          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-        ) : null,
+        dropdownMenu,
       };
     }
 
-    return (
-      <span className={cx(!displayMenu && 'hidden-menu-space')}>
-        {displayMenu && (
-          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-        )}
-      </span>
-    );
+    return dropdownMenu;
   }
 
   private renderSyncToogle(name: string, namespace: string): React.ReactNode {

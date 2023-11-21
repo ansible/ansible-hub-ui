@@ -6,7 +6,6 @@ import {
   CollectionVersionAPI,
   CollectionVersionSearch,
 } from 'src/api';
-import { Tooltip } from 'src/components';
 import { errorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { repositoryRemoveCollection } from './repository-remove-collection';
@@ -25,53 +24,6 @@ export class DeleteCollectionUtils {
           description: errorMessage(status, statusText),
         });
       });
-  }
-
-  public static deleteMenuOption({
-    canDeleteCollection,
-    noDependencies,
-    onClick,
-    deleteAll,
-    display_repositories,
-  }) {
-    if (!canDeleteCollection) {
-      return null;
-    }
-
-    if (!display_repositories && !deleteAll) {
-      // cant display delete from repository when repositories are turned off
-      return null;
-    }
-
-    const caption = deleteAll
-      ? t`Delete entire collection from system`
-      : t`Delete collection from repository`;
-
-    const key = deleteAll ? 'delete-collection' : 'remove-collection';
-
-    if (noDependencies === false) {
-      return (
-        <Tooltip
-          key={key}
-          position='left'
-          content={
-            <Trans>
-              Cannot delete until collections <br />
-              that depend on this collection <br />
-              have been deleted.
-            </Trans>
-          }
-        >
-          <DropdownItem isDisabled>{caption}</DropdownItem>
-        </Tooltip>
-      );
-    }
-
-    return (
-      <DropdownItem data-cy={key} key={key} onClick={onClick}>
-        {caption}
-      </DropdownItem>
-    );
   }
 
   public static tryOpenDeleteModalWithConfirm({

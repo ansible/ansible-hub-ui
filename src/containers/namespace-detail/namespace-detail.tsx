@@ -19,6 +19,7 @@ import {
   AlertList,
   AlertType,
   ClipboardCopy,
+  CollectionDropdown,
   CollectionList,
   DeleteCollectionModal,
   DeleteModal,
@@ -999,18 +1000,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { hasPermission } = this.context;
-    const hasObjectPermission = (permission, namespace) =>
-      namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { showControls } = this.state;
-    const { display_repositories } = this.context.featureFlags;
+    const { hasPermission } = this.context;
 
-    const canDeleteCollection =
-      hasPermission('ansible.delete_collection') ||
-      (IS_COMMUNITY &&
-        hasObjectPermission('galaxy.change_namespace', this.state.namespace));
     const canUpload = hasPermission('galaxy.upload_to_namespace');
-    const canDeprecate = canUpload;
 
     if (!showControls) {
       return;
@@ -1031,49 +1024,30 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         </Button>
       ),
       dropdownMenu: (
-        <StatefulDropdown
-          items={[
-            DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection,
-              noDependencies: null,
-              onClick: () =>
-                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-                  addAlert: (alert) => this.addAlert(alert),
-                  setState: (state) => this.setState(state),
-                  collection,
-                  deleteAll: true,
-                }),
+        <CollectionDropdown
+          collection={collection}
+          onDelete={() =>
+            DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+              addAlert: (alert) => this.addAlert(alert),
+              setState: (state) => this.setState(state),
+              collection,
               deleteAll: true,
-              display_repositories: display_repositories,
-            }),
-            DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection,
-              noDependencies: null,
-              onClick: () =>
-                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-                  addAlert: (alert) => this.addAlert(alert),
-                  setState: (state) => this.setState(state),
-                  collection,
-                  deleteAll: false,
-                }),
+            })
+          }
+          onDeprecate={() =>
+            this.handleCollectionAction(
+              collection.collection_version.pulp_href,
+              'deprecate',
+            )
+          }
+          onRemove={() =>
+            DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+              addAlert: (alert) => this.addAlert(alert),
+              setState: (state) => this.setState(state),
+              collection,
               deleteAll: false,
-              display_repositories: display_repositories,
-            }),
-            canDeprecate && (
-              <DropdownItem
-                onClick={() =>
-                  this.handleCollectionAction(
-                    collection.collection_version.pulp_href,
-                    'deprecate',
-                  )
-                }
-                key='deprecate'
-              >
-                {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-              </DropdownItem>
-            ),
-          ].filter(Boolean)}
-          ariaLabel='collection-kebab'
+            })
+          }
         />
       ),
     };

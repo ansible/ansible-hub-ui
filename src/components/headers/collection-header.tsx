@@ -506,9 +506,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 }}
                 onUploadVersion={() => this.checkUploadPrivilleges(collection)}
                 version={version}
-                wrapper={({ children }) => (
-                  <FlexItem data-cy='kebab-toggle'>{children}</FlexItem>
-                )}
+                wrapper={({ any, children }) =>
+                  any ? (
+                    <FlexItem data-cy='kebab-toggle'>{children}</FlexItem>
+                  ) : null
+                }
               />
             </Flex>
           }
