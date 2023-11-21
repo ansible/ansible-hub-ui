@@ -48,7 +48,7 @@
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-macros": "^3.1.0",
         "css-loader": "^6.8.1",
-        "eslint": "^8.53.0",
+        "eslint": "^8.54.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-react": "^7.33.2",
         "html-webpack-plugin": "^5.5.3",
