@@ -13,10 +13,10 @@ import { repositoryRemoveCollection } from './repository-remove-collection';
 import { waitForTask } from './wait-for-task';
 
 export class DeleteCollectionUtils {
-  public static getUsedbyDependencies(collection: CollectionVersionSearch) {
+  public static countUsedbyDependencies(collection: CollectionVersionSearch) {
     const { name, namespace } = collection.collection_version;
     return CollectionVersionAPI.getUsedDependenciesByCollection(namespace, name)
-      .then(({ data }) => data.data.length === 0)
+      .then(({ data }) => data.data.length)
       .catch((err) => {
         const { status, statusText } = err.response;
         return Promise.reject({
@@ -80,12 +80,12 @@ export class DeleteCollectionUtils {
     collection,
     deleteAll,
   }) {
-    DeleteCollectionUtils.getUsedbyDependencies(collection)
-      .then((noDependencies) =>
+    DeleteCollectionUtils.countUsedbyDependencies(collection)
+      .then((count) =>
         DeleteCollectionUtils.openDeleteModalWithConfirm({
           addAlert,
           setState,
-          noDependencies,
+          noDependencies: !count,
           collection,
           deleteAll,
         }),
