@@ -12,6 +12,33 @@ updates:
 
   - package-ecosystem: 'npm'
     directory: '/'
+    target-branch: 'stable-4.9'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[stable-4.9] '
+    ignore:
+      - dependency-name: '@lingui/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@patternfly/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: 'npm'
+    directory: '/test'
+    target-branch: 'stable-4.9'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+      prefix: '[stable-4.9] '
+
+  - package-ecosystem: 'npm'
+    directory: '/'
     target-branch: 'stable-4.8'
     schedule:
       interval: 'weekly'
@@ -107,6 +134,14 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: 'stable-4.9'
+    commit-message:
+      prefix: '[stable-4.9] '
+    schedule:
+      interval: "weekly"
 
   - package-ecosystem: 'github-actions'
     directory: '/'
