@@ -186,8 +186,8 @@ export const WisdomModal = (props: IProps) => {
         loading
           ? t`Ansible Lightspeed settings`
           : isInDenyIndex
-          ? t`Opt in to Ansible Lightspeed`
-          : t`Opt out of Ansible Lightspeed`
+            ? t`Opt in to Ansible Lightspeed`
+            : t`Opt out of Ansible Lightspeed`
       }
       variant='small'
       titleIconVariant={isInDenyIndex ? null : 'warning'}
