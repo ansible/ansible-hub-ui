@@ -1000,7 +1000,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { showControls } = this.state;
+    const { namespace, showControls } = this.state;
     const { hasPermission } = this.context;
 
     const canUpload = hasPermission('galaxy.upload_to_namespace');
@@ -1026,6 +1026,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       dropdownMenu: (
         <CollectionDropdown
           collection={collection}
+          namespace={namespace}
           onDelete={() =>
             DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
               addAlert: (alert) => this.addAlert(alert),

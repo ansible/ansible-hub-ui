@@ -46,7 +46,6 @@ import {
   RepoSelector,
   SignAllCertificatesModal,
   SignSingleCertificateModal,
-  StatefulDropdown,
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';

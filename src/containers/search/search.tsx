@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import cx from 'classnames';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -26,7 +25,6 @@ import {
   ImportModal,
   LoadingPageSpinner,
   Pagination,
-  StatefulDropdown,
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';

@@ -42,10 +42,9 @@ export const CollectionDropdown = ({
       can_create_signatures,
       can_upload_signatures,
       display_repositories,
-      display_signatures,
     },
     hasPermission,
-    user: { is_superuser },
+    user: { is_anonymous, is_superuser },
   } = useContext();
 
   const hasObjectPermission = (permission) =>
@@ -56,7 +55,7 @@ export const CollectionDropdown = ({
     hasObjectPermission(permission) ||
     is_superuser;
 
-  const canCopy = display_repositories;
+  const canCopy = display_repositories && !is_anonymous;
   const canDelete =
     hasPerm('ansible.delete_collection') || hasPerm('galaxy.change_namespace');
   const canDeprecate = hasPerm('galaxy.change_namespace');

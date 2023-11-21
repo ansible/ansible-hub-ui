@@ -1,5 +1,4 @@
 import { Trans, t } from '@lingui/macro';
-import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import {
   CollectionAPI,
