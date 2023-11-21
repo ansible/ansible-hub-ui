@@ -79,7 +79,7 @@ List by branches:
 
 - `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `prod-beta`, `prod-stable`: `deploy-cloud`
-- `stable-4.5`, `stable-4.6`, `stable-4.7`, `stable-4.8`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-4.5`, `stable-4.6`, `stable-4.7`, `stable-4.8`, `stable-4.9`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
 ### Version mapping
 
@@ -92,6 +92,7 @@ To map between the two:
 |2.3|4.6||
 |2.4|4.7||
 |2.4|4.8|django 4, still part of 2.4|
+|2.4|4.9||
 
 [Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
 
