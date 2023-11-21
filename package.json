@@ -38,7 +38,7 @@
         "@babel/plugin-transform-runtime": "^7.23.2",
         "@babel/preset-env": "^7.23.2",
         "@babel/preset-react": "^7.23.3",
-        "@babel/preset-typescript": "^7.23.2",
+        "@babel/preset-typescript": "^7.23.3",
         "@lingui/cli": "^4.5.0",
         "@lingui/macro": "^4.5.0",
         "@ls-lint/ls-lint": "^2.2.2",
