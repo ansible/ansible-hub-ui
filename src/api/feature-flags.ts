@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('feature-flags/');
+  apiPath = '_ui/v1/feature-flags/';
 
   get() {
     return this.http.get(this.apiPath);

@@ -39,7 +39,6 @@ interface IState extends IBaseCollectionState {
 
 class CollectionDependencies extends React.Component<RouteProps, IState> {
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
-  private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
 
   constructor(props) {
     super(props);
@@ -116,7 +115,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     const noDependencies = !Object.keys(version.dependencies).length;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           activeTab='dependencies'
@@ -130,9 +129,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
           reload={() => this.loadData(true)}
           repo={repository.name}
           updateParams={(p) => {
-            this.updateParams(this.combineParams(this.state.params, p), () =>
-              this.loadData(true),
-            );
+            this.updateParams(p, () => this.loadData(true));
           }}
         />
         <Main>
@@ -161,15 +158,12 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
               params={dependenciesParams}
               usedByDependenciesLoading={usedByDependenciesLoading}
               updateParams={(p) =>
-                this.updateParams(
-                  this.combineParams(this.state.params, p),
-                  () => this.loadUsedByDependencies(),
-                )
+                this.updateParams(p, () => this.loadUsedByDependencies())
               }
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -234,21 +228,14 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   private loadUsedByDependencies() {
     this.setState({ usedByDependenciesLoading: true }, () => {
-      if (this.cancelToken) {
-        this.cancelToken.cancel('request-canceled');
-      }
-
-      this.cancelToken = CollectionAPI.getCancelToken();
-
       const { name, namespace } = this.state.collection.collection_version;
 
-      // We have to use CollectionAPI here for used by dependencies
+      // FIXME: We have to use CollectionAPI here for used by dependencies
       // because cross repo collection search doesn't allow `name__icontains` filter
       CollectionAPI.getUsedDependenciesByCollection(
         namespace,
         name,
         ParamHelper.getReduced(this.state.params, ['version']),
-        this.cancelToken,
       )
         .then(({ data }) => {
           this.setState({
@@ -257,24 +244,19 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
             usedByDependenciesLoading: false,
           });
         })
-        .catch(({ response, message }) => {
-          if (message !== 'request-canceled') {
-            const { status, statusText } = response;
-            this.setState({
-              usedByDependenciesLoading: false,
-              alerts: [
-                ...this.state.alerts,
-                {
-                  variant: 'danger',
-                  title: t`Dependent collections could not be displayed.`,
-                  description: errorMessage(status, statusText),
-                },
-              ],
-            });
-          }
-        })
-        .finally(() => {
-          this.cancelToken = undefined;
+        .catch(({ response }) => {
+          const { status, statusText } = response;
+          this.setState({
+            usedByDependenciesLoading: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Dependent collections could not be displayed.`,
+                description: errorMessage(status, statusText),
+              },
+            ],
+          });
         });
     });
   }
@@ -309,10 +291,6 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
   get updateParams() {
     return ParamHelper.updateParamsMixin();
-  }
-
-  private combineParams(...params) {
-    return params.reduce((acc, cur) => ({ ...acc, ...cur }));
   }
 
   get closeAlert() {

@@ -1,7 +1,7 @@
 import { HubAPI } from './hub';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('groups/');
+  apiPath = '_ui/v1/groups/';
 }
 
 export const GroupAPI = new API();
