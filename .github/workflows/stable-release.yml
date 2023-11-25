@@ -28,10 +28,10 @@ jobs:
         RELEASE_TAG=`sed 's/^refs\/tags\///' <<< $GITHUB_REF`
         echo "RELEASE_TAG=${RELEASE_TAG}" >> $GITHUB_ENV
 
-    - name: "Install node 16"
+    - name: "Install node 18"
       uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '18'
 
     - name: "Cache ~/.npm"
       uses: actions/cache@v3

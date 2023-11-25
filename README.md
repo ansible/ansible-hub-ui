@@ -16,7 +16,7 @@ Standalone mode only requires a running instance of the galaxy API for the UI to
 
 1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the setup instructions
 2. Start the API with `COMPOSE_PROFILE=standalone` (compose) or `COMPOSE_PROFILE=galaxy_ng/base` (oci-env)
-3. Install node. Node v16+ is known to work. Older versions may work as well.
+3. Install node. Node v18+ is known to work. Older versions may work as well.
 4. `npm install` in the UI
 5. `npm run start-standalone`
 
