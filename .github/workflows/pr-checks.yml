@@ -33,10 +33,10 @@ jobs:
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v4
 
-    - name: "Install node 16"
+    - name: "Install node 18"
       uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '18'
         cache: 'npm'
 
     - name: "Checks"
@@ -108,10 +108,10 @@ jobs:
       with:
         path: 'pr'
 
-    - name: "Install node 16"
+    - name: "Install node 18"
       uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '18'
         cache: 'npm'
         cache-dependency-path: |
           base/package-lock.json
