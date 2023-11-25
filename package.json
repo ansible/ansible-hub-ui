@@ -10,7 +10,7 @@
         "@patternfly/patternfly": "^4.224.5",
         "@patternfly/react-core": "^4.278.0",
         "@patternfly/react-table": "^4.113.5",
-        "@types/node": "^16.18.60",
+        "@types/node": "^18.18.13",
         "@types/react": "^16.14.26",
         "@types/react-dom": "^16.9.15",
         "@types/react-router-dom": "^5.3.3",
@@ -89,7 +89,7 @@
         "appname": "automation-hub"
     },
     "engines": {
-        "node": ">=16",
-        "npm": ">=8"
+        "node": ">=18",
+        "npm": ">=9"
     }
 }
