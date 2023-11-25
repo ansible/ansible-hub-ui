@@ -66,7 +66,7 @@ export type Query<T> = (o: {
 export type RenderTableRow<T> = (
   item: T,
   index: number,
-  { addAlert, setState = null },
+  { addAlert, setState }: { addAlert; setState? },
   listItemActions?,
 ) => React.ReactNode;
 
