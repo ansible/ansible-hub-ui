@@ -50,8 +50,8 @@ const AnsibleRepositoryDetail = PageWithTabs<
       tab.id === 'repository-versions' && repositoryVersion
         ? { name: t`Version ${repositoryVersion}` }
         : tab.id === 'access' && group
-        ? { name: t`Group ${group}` }
-        : { name: tab.name },
+          ? { name: t`Group ${group}` }
+          : { name: tab.name },
     ].filter(Boolean),
   condition: canViewAnsibleRepositories,
   displayName: 'AnsibleRepositoryDetail',

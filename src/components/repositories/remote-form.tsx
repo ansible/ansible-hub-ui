@@ -866,8 +866,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
       value = Number.isInteger(value)
         ? value
         : Number.isNaN(parseInt(value, 10))
-        ? null
-        : parseInt(value, 10);
+          ? null
+          : parseInt(value, 10);
     }
 
     this.props.updateRemote({ ...remote, [field]: value });
