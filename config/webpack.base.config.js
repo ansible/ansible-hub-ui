@@ -234,31 +234,6 @@ module.exports = (inputConfigs) => {
     );
   }
 
-  if (customConfigs.DEPLOYMENT_MODE === 'insights') {
-    /**
-     * Generates remote containers for chrome 2
-     */
-    plugins.push(
-      require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-        {
-          root: resolve(__dirname, '../'),
-          exposes: {
-            './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
-          },
-          shared: [
-            {
-              'react-router-dom': { singleton: true, requiredVersion: '*' },
-            },
-          ],
-          ...(!isBuild && {
-            // fixes "Shared module is not available for eager consumption"
-            exclude: ['@patternfly/react-core'],
-          }),
-        },
-      ),
-    );
-  }
-
   // @patternfly/react-code-editor
   plugins.push(
     new MonacoWebpackPlugin({

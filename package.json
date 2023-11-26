@@ -22,6 +22,7 @@
         "detect-browser": "^5.3.0",
         "file-saver": "^2.0.5",
         "js-cookie": "^3.0.5",
+        "lodash": "^4.17.21",
         "moment": "^2.29.4",
         "monaco-editor": "^0.34.1",
         "monaco-yaml": "^4.0.4",
@@ -44,6 +45,7 @@
         "@ls-lint/ls-lint": "^2.2.2",
         "@redhat-cloud-services/frontend-components-config": "^6.0.5",
         "@redhat-cloud-services/frontend-components-config-utilities": "^3.0.4",
+        "@redhat-cloud-services/tsc-transform-imports": "^1.0.4",
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
         "@typescript-eslint/eslint-plugin": "^6.12.0",
         "@typescript-eslint/parser": "^6.12.0",
@@ -67,13 +69,15 @@
         "stylelint": "^15.11.0",
         "stylelint-config-standard-scss": "^11.1.0",
         "stylelint-scss": "^5.3.1",
+        "ts-patch": "^3.0.2",
         "typescript": "^5.3.2",
         "webpack": "^5.89.0",
+        "webpack-bundle-analyzer": "^4.10.1",
         "webpack-cli": "^5.1.4"
     },
     "scripts": {
         "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
-        "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
+        "build-insights": "NODE_ENV=production fec build config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
         "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
@@ -98,12 +102,13 @@
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
         "sort-exports": "perl -i -pe 's/^export/import/' src/**/index.ts ; npm run prettier ; perl -i -pe 's/^import/export/' src/**/index.ts",
         "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
-        "start-insights": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
+        "start-insights": "NODE_ENV=development fec dev config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
-        "test-run": "test/scripts/ctn-run.sh"
+        "test-run": "test/scripts/ctn-run.sh",
+        "postinstall": "ts-patch install"
     },
     "insights": {
         "appname": "automation-hub"

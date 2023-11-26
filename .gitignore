@@ -32,3 +32,6 @@ test/cypress/fixtures/example.json
 
 # pycache files
 *pyc
+
+# fec cache
+.cache/
