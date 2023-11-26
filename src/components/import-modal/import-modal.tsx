@@ -115,8 +115,8 @@ export class ImportModal extends React.Component<IProps, IState> {
           const selectedRepos = onlyStaging
             ? [staging || results[0]].filter(Boolean)
             : count === 1
-            ? [results[0]]
-            : [];
+              ? [results[0]]
+              : [];
 
           this.setState({
             selectedRepos,
