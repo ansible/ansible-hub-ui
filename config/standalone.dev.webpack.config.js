@@ -25,9 +25,6 @@ module.exports = webpackBase({
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 
-  // Enables webpack debug mode. Options: true, false
-  UI_DEBUG: true,
-
   // Login URI to allow stand alone with and without keycloak
   UI_EXTERNAL_LOGIN_URI: uiExternalLoginURI,
 
