@@ -2381,8 +2381,8 @@ msgid "Filter by {0}"
 msgstr "{0} 別にフィルター"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
-msgid "Filter by name"
-msgstr "名前による絞り込み"
+#~ msgid "Filter by name"
+#~ msgstr "名前による絞り込み"
 
 #: src/components/repo-selector/repo-selector.tsx
 #~ msgid "Filter by repository"
@@ -3020,6 +3020,7 @@ msgstr "自分の名前空間"
 msgid "My profile"
 msgstr "自分のプロファイル"
 
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx

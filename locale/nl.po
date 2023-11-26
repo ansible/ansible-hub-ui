@@ -2381,8 +2381,8 @@ msgid "Filter by {0}"
 msgstr "Filteren op {0}"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
-msgid "Filter by name"
-msgstr "Op naam filteren"
+#~ msgid "Filter by name"
+#~ msgstr "Op naam filteren"
 
 #: src/components/repo-selector/repo-selector.tsx
 #~ msgid "Filter by repository"
@@ -3020,6 +3020,7 @@ msgstr "Mijn namespaces"
 msgid "My profile"
 msgstr "Mijn profiel"
 
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx

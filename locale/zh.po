@@ -2381,8 +2381,8 @@ msgid "Filter by {0}"
 msgstr "按 {0} 过滤"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
-msgid "Filter by name"
-msgstr "按名称过滤"
+#~ msgid "Filter by name"
+#~ msgstr "按名称过滤"
 
 #: src/components/repo-selector/repo-selector.tsx
 #~ msgid "Filter by repository"
@@ -3020,6 +3020,7 @@ msgstr "我的命名空间"
 msgid "My profile"
 msgstr "我的配置集"
 
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
