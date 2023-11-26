@@ -86,8 +86,8 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
           !isDisabled && !isViewOnly
             ? t`Select permissions`
             : selectedPermissions.length === 0
-            ? t`No permission`
-            : ''
+              ? t`No permission`
+              : ''
         }
         isDisabled={!!isDisabled}
       >
