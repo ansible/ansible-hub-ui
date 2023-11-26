@@ -17,7 +17,7 @@ updates:
       interval: 'weekly'
     commit-message:
       prefix: '[stable-4.9] '
-    ignore: &npmIgnore
+    ignore:
       - dependency-name: '@lingui/*'
         update-types: ['version-update:semver-major']
       - dependency-name: '@patternfly/*'
@@ -44,7 +44,17 @@ updates:
       interval: 'weekly'
     commit-message:
       prefix: '[stable-4.8] '
-    ignore: *npmIgnore
+    ignore:
+      - dependency-name: '@lingui/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@patternfly/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'npm'
     directory: '/test'
@@ -61,7 +71,17 @@ updates:
       interval: 'monthly'
     commit-message:
       prefix: '[stable-4.7] '
-    ignore: *npmIgnore
+    ignore:
+      - dependency-name: '@lingui/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@patternfly/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'npm'
     directory: '/test'
@@ -78,7 +98,17 @@ updates:
       interval: 'monthly'
     commit-message:
       prefix: '[stable-4.6] '
-    ignore: *npmIgnore
+    ignore:
+      - dependency-name: '@lingui/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@patternfly/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'github-actions'
     # Workflow files stored in the default location of `.github/workflows`
