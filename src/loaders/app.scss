@@ -58,3 +58,12 @@ body,
     padding-left: 0;
   }
 }
+
+// inline alert inside pf-c-content has big title and extra margin
+.hub-content-alert-fix {
+  .pf-c-alert__title {
+    margin: 0;
+    font-size: var(--pf-c-alert__title--FontSize);
+    font-weight: var(--pf-c-alert__title--FontWeight);
+  }
+}
