@@ -447,6 +447,10 @@ msgstr "Al de huidige versie"
 msgid "Ansible Automation Platform"
 msgstr "Automatiseringsplatform voor Ansible"
 
+#: src/loaders/standalone/layout.tsx
+msgid "Ansible Community Forum"
+msgstr ""
+
 #: src/containers/landing/landing-page.tsx
 msgid "Ansible Lightspeed"
 msgstr ""
@@ -1085,6 +1089,10 @@ msgstr "Collecties zullen verschijnen zodra geüpload"
 msgid "Command"
 msgstr "Opdracht"
 
+#: src/loaders/standalone/layout.tsx
+msgid "Communicating with the Ansible community"
+msgstr ""
+
 #: src/components/repo-selector/repo-selector.tsx
 msgid "Community"
 msgstr "Gemeenschap"
@@ -1104,6 +1112,10 @@ msgstr ""
 
 #: src/components/shared/ratings.tsx
 msgid "Community score"
+msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+msgid "Community User Guide"
 msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx
@@ -1804,6 +1816,10 @@ msgstr ""
 msgid "Download key"
 msgstr "Sleutel downloaden"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Download latest tarball"
+msgstr ""
+
 #: src/components/repositories/remote-form.tsx
 msgid "Download only signed collections"
 msgstr "Alleen ondertekende collecties downloaden"
@@ -2381,8 +2397,8 @@ msgid "Filter by {0}"
 msgstr "Filteren op {0}"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
-msgid "Filter by name"
-msgstr "Op naam filteren"
+#~ msgid "Filter by name"
+#~ msgstr "Op naam filteren"
 
 #: src/components/repo-selector/repo-selector.tsx
 #~ msgid "Filter by repository"
@@ -3020,6 +3036,7 @@ msgstr "Mijn namespaces"
 msgid "My profile"
 msgstr "Mijn profiel"
 
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
@@ -5158,8 +5175,12 @@ msgid "The password to be used for authentication when syncing. This is not requ
 msgstr "Het wachtwoord dat moet worden gebruikt voor authenticatie bij het synchroniseren. Dit is niet nodig bij gebruik van een token."
 
 #: src/containers/ansible-role/role-detail.tsx
-msgid "The role is versionless and will always install from the head/main/master branch."
-msgstr "De rol is versievrij en wordt altijd geïnstalleerd vanaf de hoofd/main/master vertakking."
+msgid "The role is versionless and will always install from the {github_branch} branch."
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+#~ msgid "The role is versionless and will always install from the head/main/master branch."
+#~ msgstr "De rol is versievrij en wordt altijd geïnstalleerd vanaf de hoofd/main/master vertakking."
 
 #: src/containers/ansible-remote/tab-access.tsx
 msgid "The selected roles will be added to this specific Ansible remote."
@@ -5341,8 +5362,12 @@ msgid "To be able to download content from galaxy it is required to have ansible
 msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx
-msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
-msgstr "Om deze collectie te downloaden, configureert u uw client om verbinding te maken met een van de <0>distributies</0> van deze repository."
+msgid "To download this collection, configure your client to connect to one of the <0>distributions</0> of this repository."
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx
+#~ msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
+#~ msgstr "Om deze collectie te downloaden, configureert u uw client om verbinding te maken met een van de <0>distributies</0> van deze repository."
 
 #: src/containers/token/token-insights.tsx
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."

@@ -448,6 +448,10 @@ msgstr "Already the current version"
 msgid "Ansible Automation Platform"
 msgstr "Ansible Automation Platform"
 
+#: src/loaders/standalone/layout.tsx
+msgid "Ansible Community Forum"
+msgstr "Ansible Community Forum"
+
 #: src/containers/landing/landing-page.tsx
 msgid "Ansible Lightspeed"
 msgstr "Ansible Lightspeed"
@@ -1086,6 +1090,10 @@ msgstr "Collections will appear once uploaded"
 msgid "Command"
 msgstr "Command"
 
+#: src/loaders/standalone/layout.tsx
+msgid "Communicating with the Ansible community"
+msgstr "Communicating with the Ansible community"
+
 #: src/components/repo-selector/repo-selector.tsx
 msgid "Community"
 msgstr "Community"
@@ -1106,6 +1114,10 @@ msgstr "Community content will never be synced if this setting is enabled"
 #: src/components/shared/ratings.tsx
 msgid "Community score"
 msgstr "Community score"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Community User Guide"
+msgstr "Community User Guide"
 
 #: src/components/namespace-form/namespace-form.tsx
 msgid "Company name"
@@ -1805,6 +1817,10 @@ msgstr "Download count is the sum of all versions' download counts"
 msgid "Download key"
 msgstr "Download key"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Download latest tarball"
+msgstr "Download latest tarball"
+
 #: src/components/repositories/remote-form.tsx
 msgid "Download only signed collections"
 msgstr "Download only signed collections"
@@ -2382,8 +2398,8 @@ msgid "Filter by {0}"
 msgstr "Filter by {0}"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
-msgid "Filter by name"
-msgstr "Filter by name"
+#~ msgid "Filter by name"
+#~ msgstr "Filter by name"
 
 #: src/components/repo-selector/repo-selector.tsx
 #~ msgid "Filter by repository"
@@ -3021,6 +3037,7 @@ msgstr "My namespaces"
 msgid "My profile"
 msgstr "My profile"
 
+#: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
@@ -5159,8 +5176,12 @@ msgid "The password to be used for authentication when syncing. This is not requ
 msgstr "The password to be used for authentication when syncing. This is not required when using a token."
 
 #: src/containers/ansible-role/role-detail.tsx
-msgid "The role is versionless and will always install from the head/main/master branch."
-msgstr "The role is versionless and will always install from the head/main/master branch."
+msgid "The role is versionless and will always install from the {github_branch} branch."
+msgstr "The role is versionless and will always install from the {github_branch} branch."
+
+#: src/containers/ansible-role/role-detail.tsx
+#~ msgid "The role is versionless and will always install from the head/main/master branch."
+#~ msgstr "The role is versionless and will always install from the head/main/master branch."
 
 #: src/containers/ansible-remote/tab-access.tsx
 msgid "The selected roles will be added to this specific Ansible remote."
@@ -5342,8 +5363,12 @@ msgid "To be able to download content from galaxy it is required to have ansible
 msgstr "To be able to download content from galaxy it is required to have ansible-core>=2.13.9"
 
 #: src/components/collection-detail/collection-info.tsx
-msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
-msgstr "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
+msgid "To download this collection, configure your client to connect to one of the <0>distributions</0> of this repository."
+msgstr "To download this collection, configure your client to connect to one of the <0>distributions</0> of this repository."
+
+#: src/components/collection-detail/collection-info.tsx
+#~ msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
+#~ msgstr "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
 
 #: src/containers/token/token-insights.tsx
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
