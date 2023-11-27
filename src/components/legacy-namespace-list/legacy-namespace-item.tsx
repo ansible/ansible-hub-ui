@@ -1,33 +1,22 @@
-import { t } from '@lingui/macro';
 import {
   DataListCell,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DropdownItem,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LegacyNamespaceDetailType } from 'src/api';
-import { Logo, StatefulDropdown } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { Logo } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;
-  openModal?: (namespace) => void;
 }
 
-export function LegacyNamespaceListItem({
-  namespace,
-  openModal,
-}: LegacyNamespaceProps) {
-  const {
-    featureFlags: { ai_deny_index },
-    user: { username, is_superuser },
-  } = useContext();
-  const { id, avatar_url, name, summary_fields } = namespace;
+export function LegacyNamespaceListItem({ namespace }: LegacyNamespaceProps) {
+  const { id, avatar_url, name } = namespace;
 
   const namespace_url = formatPath(Paths.standaloneNamespace, {
     namespaceid: id,
@@ -55,30 +44,6 @@ export function LegacyNamespaceListItem({
       </div>
     </DataListCell>,
   );
-
-  const userOwnsLegacyNamespace = !!summary_fields.owners.find(
-    (n) => n.username == username,
-  );
-
-  const showWisdom = ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
-
-  const dropdownItems = [];
-
-  dropdownItems.push(
-    <DropdownItem
-      onClick={() => openModal(namespace)}
-    >{t`Ansible Lightspeed settings`}</DropdownItem>,
-  );
-
-  if (showWisdom && openModal) {
-    cells.push(
-      <DataListCell key='menu' alignRight={true}>
-        <div style={{ float: 'right' }}>
-          <StatefulDropdown items={dropdownItems} />
-        </div>
-      </DataListCell>,
-    );
-  }
 
   return (
     <DataListItem data-cy='LegacyNamespaceListItem'>

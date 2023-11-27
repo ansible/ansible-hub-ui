@@ -7,7 +7,6 @@ export class FeatureFlagsType {
   external_authentication: boolean;
 
   // community mode
-  ai_deny_index: boolean;
   display_repositories: boolean;
   legacy_roles: boolean;
 

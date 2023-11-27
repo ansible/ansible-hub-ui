@@ -33,11 +33,10 @@ import {
   SignAllCertificatesModal,
   StatefulDropdown,
   Tooltip,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
@@ -70,7 +69,6 @@ interface IState {
   isNamespacePending: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
-  isOpenWisdomModal: boolean;
   namespace: NamespaceType;
   params: {
     group?: string;
@@ -129,7 +127,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       isNamespacePending: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
-      isOpenWisdomModal: false,
       namespace: null,
       params,
       redirect: null,
@@ -231,7 +228,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       isDeletionPending,
       isNamespacePending,
       isOpenNamespaceModal,
-      isOpenWisdomModal,
       namespace,
       params,
       redirect,
@@ -259,7 +255,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { user, group } = params;
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         name: namespace.name,
         url:
@@ -388,14 +384,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               id='delete_confirm'
             />
           </DeleteModal>
-        )}
-        {isOpenWisdomModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'namespace'}
-            reference={this.state.namespace.name}
-          />
         )}
         <PartnerHeader
           namespace={namespace}
@@ -832,7 +820,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
     const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
-    const { ai_deny_index } = this.context.featureFlags;
     const { hasPermission } = this.context;
     const repository = this.state.params.repository_name || null;
 
@@ -905,14 +892,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             {t`Sign all collections`}
           </DropdownItem>
         )),
-      ai_deny_index && (
-        <DropdownItem
-          key='wisdom-settings'
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
-        >
-          {t`Ansible Lightspeed settings`}
-        </DropdownItem>
-      ),
     ].filter(Boolean);
 
     return (
@@ -961,7 +940,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: namespaceBreadcrumb().url,
+            redirect: formatPath(Paths.namespaces),
             confirmDelete: false,
             isNamespacePending: false,
           });
@@ -1010,13 +989,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { hasPermission } = this.context;
-    const hasObjectPermission = (permission, namespace) =>
-      namespace?.related_fields?.my_permissions?.includes?.(permission);
     const { showControls } = this.state;
     const { display_repositories } = this.context.featureFlags;
-    const canDeleteCommunityCollection =
-      IS_COMMUNITY &&
-      hasObjectPermission('galaxy.change_namespace', this.state.namespace);
 
     if (!showControls) {
       return;
@@ -1040,9 +1014,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
@@ -1055,9 +1027,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
               display_repositories: display_repositories,
             }),
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({

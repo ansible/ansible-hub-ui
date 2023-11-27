@@ -54,7 +54,6 @@
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-react": "^7.33.2",
         "html-webpack-plugin": "^5.5.3",
-        "husky": "^4.3.0",
         "monaco-editor-webpack-plugin": "^7.1.0",
         "npm-run-all": "^4.1.5",
         "postcss": "^8.4.31",
@@ -71,8 +70,6 @@
         "webpack-cli": "^5.1.4"
     },
     "scripts": {
-        "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
-        "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
         "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
@@ -96,8 +93,6 @@
         "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
         "sort-exports": "perl -i -pe 's/^export/import/' src/**/index.ts ; npm run prettier ; perl -i -pe 's/^import/export/' src/**/index.ts",
-        "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
-        "start-insights": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
@@ -106,11 +101,6 @@
     },
     "insights": {
         "appname": "automation-hub"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run prettier"
-        }
     },
     "engines": {
         "node": ">=16",

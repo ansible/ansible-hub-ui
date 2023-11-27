@@ -5,7 +5,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DropdownItem,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -28,8 +27,6 @@ import {
   Logo,
   Pagination,
   ProviderLink,
-  StatefulDropdown,
-  WisdomModal,
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
@@ -226,7 +223,6 @@ class NamespaceRoles extends React.Component<
 
 interface RoleNamespaceState {
   alerts: AlertType[];
-  isOpenWisdomModal: boolean;
   loading: boolean;
   namespace: LegacyNamespaceListType;
 }
@@ -244,7 +240,6 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 
     this.state = {
       alerts: [],
-      isOpenWisdomModal: false,
       loading: true,
       namespace: null,
     };
@@ -278,11 +273,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
   }
 
   render() {
-    const { alerts, isOpenWisdomModal, loading, namespace } = this.state;
-    const {
-      featureFlags: { ai_deny_index },
-      user,
-    } = this.context;
+    const { alerts, loading, namespace } = this.state;
     const { location, navigate } = this.props;
 
     if (loading) {
@@ -304,18 +295,6 @@ class AnsibleRoleNamespaceDetail extends React.Component<
 
     const provider = getProviderInfo(namespace);
 
-    const userOwnsLegacyNamespace = namespace.summary_fields?.owners?.filter(
-      (n) => n.username == user.username,
-    ).length;
-
-    const dropdownItems = [
-      ai_deny_index && (user.is_superuser || userOwnsLegacyNamespace) && (
-        <DropdownItem
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
-        >{t`Ansible Lightspeed settings`}</DropdownItem>
-      ),
-    ].filter(Boolean);
-
     const infocells = [
       <DataListCell isFilled={false} alignRight={false} key='ns-logo'>
         <Logo
@@ -332,27 +311,11 @@ class AnsibleRoleNamespaceDetail extends React.Component<
       <DataListCell isFilled={false} alignRight={false} key='ns-name'>
         <BaseHeader title={namespace.name} />
       </DataListCell>,
-      dropdownItems.length && (
-        <DataListCell isFilled={false} alignRight={true} key='kebab'>
-          <div style={{ marginTop: '70px' }}>
-            <StatefulDropdown items={dropdownItems} />
-          </div>
-        </DataListCell>
-      ),
     ].filter(Boolean);
 
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-
-        {isOpenWisdomModal && (
-          <WisdomModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
-            scope={'legacy_namespace'}
-            reference={namespace.name}
-          />
-        )}
 
         <DataList aria-label={t`Role namespace header`}>
           <DataListItem>

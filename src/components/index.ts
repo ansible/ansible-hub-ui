@@ -6,7 +6,6 @@ export {
   CollectionCard,
   CollectionNextPageCard,
 } from './cards/collection-card';
-export { LandingPageCard } from './cards/landing-page-card';
 export { NamespaceCard, NamespaceNextPageCard } from './cards/namespace-card';
 export { CollectionDependenciesList } from './collection-dependencies-list/collection-dependencies-list';
 export { CollectionUsedbyDependenciesList } from './collection-dependencies-list/collection-usedby-dependencies-list';
@@ -139,4 +138,3 @@ export { TagLabel } from './tag-label/tag-label';
 export { DeprecatedTag } from './tags/deprecated-tag';
 export { Tag } from './tags/tag';
 export { APISearchTypeAhead } from './typeahead/typeahead';
-export { WisdomModal } from './wisdom-modal/wisdom-modal';

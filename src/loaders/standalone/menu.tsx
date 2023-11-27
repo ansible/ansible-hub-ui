@@ -53,7 +53,7 @@ function standaloneMenu() {
         alternativeUrls: [formatPath(Paths.searchByRepo)],
       }),
       menuItem(t`Namespaces`, {
-        url: formatPath(Paths[NAMESPACE_TERM]),
+        url: formatPath(Paths.namespaces),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
@@ -100,11 +100,11 @@ function standaloneMenu() {
       [
         menuItem(t`Roles`, {
           url: formatPath(Paths.standaloneRoles),
-          alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
+          // alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.standaloneNamespaces),
-          alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
+          // alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],
     ),
@@ -123,22 +123,8 @@ function standaloneMenu() {
       url: UI_DOCS_URL,
       external: true,
       condition: ({ settings, user }) =>
-        !IS_COMMUNITY &&
-        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous),
-    }),
-    menuItem(t`Documentation`, {
-      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
-      external: true,
-      condition: ({ settings, user }) =>
-        IS_COMMUNITY &&
-        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous),
-    }),
-    menuItem(t`Terms of Use`, {
-      url: 'https://www.redhat.com/en/about/terms-use',
-      external: true,
-      condition: ({ featureFlags }) => featureFlags.legacy_roles,
+        settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+        !user.is_anonymous,
     }),
     menuSection(t`User Access`, {}, [
       menuItem(t`Users`, {

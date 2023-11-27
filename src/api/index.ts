@@ -21,9 +21,7 @@ export { GroupRoleAPI } from './group-role';
 export { ImportAPI } from './import';
 export { LegacyNamespaceAPI } from './legacy-namespace';
 export { LegacyRoleAPI } from './legacy-role';
-export { MyDistributionAPI } from './my-distribution';
 export { MyNamespaceAPI } from './my-namespace';
-export { MySyncListAPI } from './my-synclist';
 export { NamespaceAPI } from './namespace';
 export { PulpAPI } from './pulp';
 export { AnsibleRemoteType } from './response-types/ansible-remote';
@@ -72,7 +70,6 @@ export { PulpStatus } from './response-types/pulp';
 export { RemoteType } from './response-types/remote';
 export { GroupRoleType, RoleType } from './response-types/role';
 export { SettingsType } from './response-types/settings';
-export { SyncListType } from './response-types/synclists';
 export { TaskType } from './response-types/task';
 export {
   GroupType,
@@ -89,4 +86,3 @@ export { TagAPI } from './tag';
 export { TaskAPI } from './task';
 export { TaskManagementAPI } from './task-management';
 export { UserAPI } from './user';
-export { WisdomDenyIndexAPI } from './wisdom-deny-index';

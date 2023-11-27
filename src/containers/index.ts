@@ -25,7 +25,6 @@ export { default as ExecutionEnvironmentManifest } from './execution-environment
 export { default as ExecutionEnvironmentRegistryList } from './execution-environment/registry-list';
 export { default as GroupDetail } from './group-management/group-detail';
 export { default as GroupList } from './group-management/group-list';
-export { default as LandingPage } from './landing/landing-page';
 export { default as LoginPage } from './login/login';
 export { default as MyImports } from './my-imports/my-imports';
 export { default as NamespaceDetail } from './namespace-detail/namespace-detail';
