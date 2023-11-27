@@ -12,7 +12,7 @@
         "@patternfly/react-core": "^4.278.1",
         "@patternfly/react-table": "^4.113.6",
         "@redhat-cloud-services/frontend-components": "^3.11.5",
-        "@types/node": "^16.18.61",
+        "@types/node": "^18.18.13",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.2",
         "antsibull-docs": "^1.0.0",
@@ -103,7 +103,7 @@
         "appname": "automation-hub"
     },
     "engines": {
-        "node": ">=16",
-        "npm": ">=8"
+        "node": ">=18",
+        "npm": ">=9"
     }
 }
