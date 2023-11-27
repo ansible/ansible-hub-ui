@@ -1,7 +1,7 @@
 # WARNING
 # This Dockerfile is intended for development purposes only. Do not use it for production deployments
 
-FROM node:16-alpine
+FROM node:18-alpine
 WORKDIR /hub/
 
 RUN mkdir -p /hub/app/ && \
