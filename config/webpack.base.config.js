@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { execSync } = require('node:child_process');
 const webpack = require('webpack');
 
@@ -139,10 +138,6 @@ module.exports = (inputConfigs) => {
         applicationName: customConfigs.APPLICATION_NAME,
         favicon: 'static/images/favicon.ico',
         template: resolve(__dirname, '../src/index.html'),
-      }),
-      // @patternfly/react-code-editor
-      new MonacoWebpackPlugin({
-        languages: ['yaml'],
       }),
     ].filter(Boolean),
     resolve: {
