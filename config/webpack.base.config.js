@@ -56,15 +56,36 @@ module.exports = (inputConfigs) => {
   );
 
   return {
-    mode: isBuild ? 'production' : 'development',
     devtool: 'source-map',
+
+    ...(isBuild
+      ? {}
+      : {
+          devServer: {
+            allowedHosts: 'all',
+            client: { overlay: false },
+            devMiddleware: { writeToDisk: true },
+            historyApiFallback: true,
+            host: '0.0.0.0',
+            hot: false,
+            https: customConfigs.UI_USE_HTTPS,
+            liveReload: true,
+            magicHtml: false,
+            onListening: (server) =>
+              console.log(
+                'App should run on:',
+                `${server.options.https ? 'https' : 'http'}://localhost:${
+                  server.options.port
+                }`,
+              ),
+            port: customConfigs.UI_PORT,
+            proxy: customConfigs.WEBPACK_PROXY,
+            static: { directory: resolve(__dirname, '../dist') },
+          },
+        }),
+
     entry: { App: resolve(__dirname, '../src/entry-standalone.tsx') },
-    output: {
-      filename: 'js/[name].[fullhash].js',
-      path: resolve(__dirname, '../dist'),
-      publicPath: customConfigs.WEBPACK_PUBLIC_PATH ?? '/',
-      chunkFilename: 'js/[name].[fullhash].js',
-    },
+    mode: isBuild ? 'production' : 'development',
     module: {
       rules: [
         {
@@ -87,41 +108,11 @@ module.exports = (inputConfigs) => {
         { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
       ],
     },
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      alias: {
-        // imports relative to repo root
-        src: resolve(__dirname, '../src'),
-      },
-    },
-    ...(isBuild
-      ? {}
-      : {
-          devServer: {
-            static: { directory: resolve(__dirname, '../dist') },
-            port: customConfigs.UI_PORT,
-            https: customConfigs.UI_USE_HTTPS,
-            host: '0.0.0.0',
-            hot: false,
-            liveReload: true,
-            allowedHosts: 'all',
-            historyApiFallback: true,
-            devMiddleware: { writeToDisk: true },
-            client: { overlay: false },
-            magicHtml: false,
-            proxy: customConfigs.WEBPACK_PROXY,
-            onListening: (server) =>
-              console.log(
-                'App should run on:',
-                `${server.options.https ? 'https' : 'http'}://localhost:${
-                  server.options.port
-                }`,
-              ),
-          },
-        }),
-    watchOptions: {
-      // ignore editor files when watching
-      ignored: ['**/.*.sw[po]'],
+    output: {
+      filename: 'js/[name].[fullhash].js',
+      path: resolve(__dirname, '../dist'),
+      publicPath: customConfigs.WEBPACK_PUBLIC_PATH ?? '/',
+      chunkFilename: 'js/[name].[fullhash].js',
     },
     plugins: [
       // sourcemaps
@@ -149,5 +140,16 @@ module.exports = (inputConfigs) => {
         template: resolve(__dirname, '../src/index.html'),
       }),
     ].filter(Boolean),
+    resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+        // imports relative to repo root
+        src: resolve(__dirname, '../src'),
+      },
+    },
+    watchOptions: {
+      // ignore editor files when watching
+      ignored: ['**/.*.sw[po]'],
+    },
   };
 };
