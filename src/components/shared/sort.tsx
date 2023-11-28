@@ -156,14 +156,14 @@ export class Sort extends React.Component<IProps, IState> {
             className='clickable'
             onClick={() => this.setDescending()}
             size='md'
-            style={{ marginLeft: '5px' }}
+            style={{ margin: '6px 0 6px 5px' }}
           />
         ) : (
           <IconAsc
             className='clickable'
             onClick={() => this.setDescending()}
             size='md'
-            style={{ marginLeft: '5px' }}
+            style={{ margin: '5px 0 7px 5px' }}
           />
         )}
       </div>
