@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import { AnsibleRepositoryAPI, TagAPI } from 'src/api';
-import './collection-filter.scss';
 
 const loadRepos = (inputText) =>
   AnsibleRepositoryAPI.list({
