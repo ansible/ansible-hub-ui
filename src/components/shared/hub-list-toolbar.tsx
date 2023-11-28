@@ -87,7 +87,7 @@ export function HubListToolbar({
     : null;
 
   return (
-    <Toolbar style={{ paddingLeft: '8px' }}>
+    <Toolbar style={{ paddingLeft: '8px' }} data-cy='hub-list-toolbar'>
       <ToolbarContent>
         <ToolbarGroup
           style={{
