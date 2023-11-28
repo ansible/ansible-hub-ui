@@ -1,16 +1,18 @@
-const { resolve } = require('path'); // node:path
-const config = require('@redhat-cloud-services/frontend-components-config');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { resolve } = require('node:path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const { execSync } = require('child_process'); // node:child_process
-
-const isBuild = process.env.NODE_ENV === 'production';
+const { execSync } = require('node:child_process');
+const webpack = require('webpack');
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
 // a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
+
+const isBuild = process.env.NODE_ENV === 'production';
 
 // only run git when HUB_UI_VERSION is NOT provided
 const gitCommit =
@@ -33,7 +35,6 @@ const defaultConfigs = [
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
 
   // Webpack scope: only available in customConfigs here, not exposed to the UI
-  { name: 'UI_DEBUG', default: false, scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
@@ -45,51 +46,52 @@ module.exports = (inputConfigs) => {
   const globals = {};
 
   defaultConfigs.forEach((item) => {
-    // == will match null and undefined, but not false
-    if (inputConfigs[item.name] == null) {
-      customConfigs[item.name] = item.default;
-    } else {
-      customConfigs[item.name] = inputConfigs[item.name];
-    }
-    if (item.scope === 'global') {
-      globals[item.name] = JSON.stringify(
-        inputConfigs[item.name] || item.default,
-      );
-    }
+    customConfigs[item.name] = inputConfigs[item.name] ?? item.default;
   });
+
+  defaultConfigs
+    .filter(({ scope }) => scope === 'global')
+    .forEach((item) => {
+      globals[item.name] = JSON.stringify(customConfigs[item.name]);
+    });
 
   // 4.6+: pulp APIs live under API_BASE_PATH now, ignore previous overrides
   globals.PULP_API_BASE_PATH = JSON.stringify(
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
-  const { config: webpackConfig, plugins } = config({
-    rootFolder: resolve(__dirname, '../'),
-    definePlugin: globals,
-    debug: customConfigs.UI_DEBUG,
-    https: customConfigs.UI_USE_HTTPS,
-
-    // defines port for dev server
-    port: customConfigs.UI_PORT,
-
-    // frontend-components-config 4.5.0+: don't remove patternfly from builds
-    bundlePfModules: true,
-
-    // frontend-components-config 4.6.25-29+: ensure hashed filenames
-    useFileHash: true,
-  });
-
-  // Override sections of the webpack config to work with TypeScript
-  const newWebpackConfig = {
-    ...webpackConfig,
-
-    // override from empty
+  return {
     devtool: 'source-map',
 
-    module: {
-      ...webpackConfig.module,
+    ...(isBuild
+      ? {}
+      : {
+          devServer: {
+            allowedHosts: 'all',
+            client: { overlay: false },
+            devMiddleware: { writeToDisk: true },
+            historyApiFallback: true,
+            host: '0.0.0.0',
+            hot: false,
+            https: customConfigs.UI_USE_HTTPS,
+            liveReload: true,
+            magicHtml: false,
+            onListening: (server) =>
+              console.log(
+                'App should run on:',
+                `${server.options.https ? 'https' : 'http'}://localhost:${
+                  server.options.port
+                }`,
+              ),
+            port: customConfigs.UI_PORT,
+            proxy: customConfigs.WEBPACK_PROXY,
+            static: { directory: resolve(__dirname, '../dist') },
+          },
+        }),
 
-      // override to drop ts-loader
+    entry: { App: resolve(__dirname, '../src/entry-standalone.tsx') },
+    mode: isBuild ? 'production' : 'development',
+    module: {
       rules: [
         {
           test: /src\/.*\.(js|jsx|ts|tsx)$/,
@@ -108,64 +110,55 @@ module.exports = (inputConfigs) => {
           type: 'asset/resource',
           generator: { filename: 'fonts/[name][ext][query]' },
         },
+        { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
       ],
     },
-
+    output: {
+      filename: 'js/[name].[fullhash].js',
+      path: resolve(__dirname, '../dist'),
+      publicPath: customConfigs.WEBPACK_PUBLIC_PATH ?? '/',
+      chunkFilename: 'js/[name].[fullhash].js',
+    },
+    plugins: [
+      // sourcemaps
+      new webpack.SourceMapDevToolPlugin({
+        exclude: /node_modules/,
+        filename: 'sourcemaps/[name].[contenthash].js.map',
+      }),
+      // extract css in prod
+      isBuild &&
+        new MiniCssExtractPlugin({
+          filename: 'css/[name].[contenthash].css',
+        }),
+      // clean dist/
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ['**/*', '!index.html'],
+      }),
+      // define global vars
+      new webpack.DefinePlugin(globals),
+      // typescript check
+      new ForkTsCheckerWebpackPlugin(),
+      // inject src/index.html
+      new HtmlWebpackPlugin({
+        applicationName: customConfigs.APPLICATION_NAME,
+        favicon: 'static/images/favicon.ico',
+        template: resolve(__dirname, '../src/index.html'),
+      }),
+      // @patternfly/react-code-editor
+      new MonacoWebpackPlugin({
+        languages: ['yaml'],
+      }),
+    ].filter(Boolean),
     resolve: {
-      ...webpackConfig.resolve,
-
-      // override to support jsx, drop scss
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
-        ...webpackConfig.resolve.alias,
-
         // imports relative to repo root
         src: resolve(__dirname, '../src'),
       },
     },
-
-    // ignore editor files when watching
     watchOptions: {
+      // ignore editor files when watching
       ignored: ['**/.*.sw[po]'],
     },
-  };
-
-  if (customConfigs.WEBPACK_PROXY) {
-    newWebpackConfig.devServer.proxy = customConfigs.WEBPACK_PROXY;
-  }
-
-  if (customConfigs.WEBPACK_PUBLIC_PATH) {
-    console.log(`New output.publicPath: ${customConfigs.WEBPACK_PUBLIC_PATH}`);
-    newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
-  }
-
-  console.log('Overriding configs for standalone mode.');
-
-  const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-  console.log(`New entry.App: ${newEntry}`);
-  newWebpackConfig.entry.App = newEntry;
-
-  // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
-
-  // keep HtmlWebpackPlugin for standalone, inject src/index.html
-  plugins.push(
-    new HtmlWebpackPlugin({
-      applicationName: customConfigs.APPLICATION_NAME,
-      favicon: 'static/images/favicon.ico',
-      template: resolve(__dirname, '../src/index.html'),
-    }),
-  );
-
-  // @patternfly/react-code-editor
-  plugins.push(
-    new MonacoWebpackPlugin({
-      languages: ['yaml'],
-    }),
-  );
-
-  return {
-    ...newWebpackConfig,
-    plugins,
   };
 };
