@@ -59,8 +59,12 @@ export const collectionFilter = ({
     },
   ].filter(Boolean);
 
-  // TODO name, date & download counts?
-  const sortOptions = [{ title: t`Name`, id: 'name', type: 'alpha' as const }];
+  const sortOptions = [
+    { title: t`Name`, id: 'name', type: 'alpha' as const },
+    { title: t`Namespace`, id: 'namespace', type: 'alpha' as const },
+    { title: t`Last Modified`, id: 'pulp_created', type: 'numeric' as const },
+    { title: t`Version`, id: 'version', type: 'numeric' as const },
+  ];
 
   return {
     filterConfig,
