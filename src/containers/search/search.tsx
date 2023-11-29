@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
@@ -362,26 +362,37 @@ class Search extends React.Component<RouteProps, IState> {
     const { hasPermission } = this.context;
     const canUpload = hasPermission('galaxy.upload_to_namespace');
 
+    const deleteFn = (deleteAll) => () =>
+      DeleteCollectionUtils.countUsedbyDependencies(collection)
+        .then((count) => {
+          if (count) {
+            this.addAlert({
+              title: (
+                <Trans>
+                  Cannot delete until collections <br />
+                  that depend on this collection <br />
+                  have been deleted.
+                </Trans>
+              ),
+              variant: 'warning',
+            });
+            return;
+          }
+
+          this.setState({
+            deleteCollection: collection,
+            confirmDelete: false,
+            deleteAll,
+          });
+        })
+        .catch((alert) => this.addAlert(alert));
+
     const dropdownMenu = (
       <CollectionDropdown
         collection={collection}
-        onDelete={() =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-            addAlert: (alert) => this.addAlert(alert),
-            setState: (state) => this.setState(state),
-            collection,
-            deleteAll: true,
-          })
-        }
+        onDelete={deleteFn(true)}
         onDeprecate={() => this.handleControlClick(collection)}
-        onRemove={() =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-            addAlert: (alert) => this.addAlert(alert),
-            setState: (state) => this.setState(state),
-            collection,
-            deleteAll: false,
-          })
-        }
+        onRemove={deleteFn(false)}
         onUploadVersion={
           list ? null : () => this.checkUploadPrivilleges(collection)
         }

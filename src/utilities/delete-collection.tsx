@@ -25,52 +25,6 @@ export class DeleteCollectionUtils {
       });
   }
 
-  public static tryOpenDeleteModalWithConfirm({
-    addAlert,
-    setState,
-    collection,
-    deleteAll,
-  }) {
-    DeleteCollectionUtils.countUsedbyDependencies(collection)
-      .then((count) =>
-        DeleteCollectionUtils.openDeleteModalWithConfirm({
-          addAlert,
-          setState,
-          noDependencies: !count,
-          collection,
-          deleteAll,
-        }),
-      )
-      .catch((alert) => addAlert(alert));
-  }
-
-  private static openDeleteModalWithConfirm({
-    addAlert,
-    setState,
-    noDependencies,
-    collection,
-    deleteAll,
-  }) {
-    if (noDependencies) {
-      setState({
-        deleteCollection: collection,
-        confirmDelete: false,
-        deleteAll: deleteAll,
-      });
-    } else {
-      addAlert({
-        title: (
-          <Trans>
-            Cannot delete until collections <br />
-            that depend on this collection <br />
-            have been deleted.
-          </Trans>
-        ),
-        variant: 'warning',
-      });
-    }
-  }
-
   public static deleteCollection({
     collection,
     setState,
