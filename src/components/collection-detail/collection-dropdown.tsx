@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { t } from '@lingui/macro';
 import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
@@ -73,13 +72,19 @@ export const CollectionDropdown = ({
     wrapper || (({ any, children }) => (any ? <>{children}</> : null));
 
   const DeleteWrapper = ({
+    addAlert,
     caption,
+    collection,
     'data-cy': dataCy,
-    onClick: { addAlert, collection, openModal, skipCheck },
+    openModal,
+    skipCheck,
   }: {
+    addAlert?;
     caption: string;
+    collection?;
     'data-cy'?: string;
-    onClick;
+    openModal;
+    skipCheck?;
   }) =>
     deletionBlocked ? (
       <DropdownItem
@@ -119,14 +124,14 @@ export const CollectionDropdown = ({
         caption={t`Delete collection from system`}
         data-cy='delete-collection'
         key='delete-collection'
-        onClick={onDelete}
+        {...onDelete}
       />
     ),
     canRemove && onRemove && (
       <DeleteWrapper
         caption={t`Remove collection from repository`}
         key='remove-collection'
-        onClick={onRemove}
+        {...onRemove}
       />
     ),
     canDelete && onDeleteVersion && (
