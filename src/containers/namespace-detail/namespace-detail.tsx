@@ -32,7 +32,6 @@ import {
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
-  Tooltip,
   WisdomModal,
   closeAlertMixin,
   collectionFilter,
@@ -847,19 +846,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             onClick={() => this.setState({ isOpenNamespaceModal: true })}
           >{t`Delete namespace`}</DropdownItem>
         ) : (
-          <Tooltip
-            key='delete'
-            content={
-              <Trans>
-                Cannot delete namespace until <br />
-                collections&apos; dependencies have <br />
-                been deleted
-              </Trans>
-            }
-            position='left'
-          >
-            <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
-          </Tooltip>
+          <DropdownItem
+            isDisabled
+            description={t`Cannot delete non-empty namespace`}
+          >{t`Delete namespace`}</DropdownItem>
         )),
       <DropdownItem
         key='imports'

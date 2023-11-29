@@ -1,7 +1,7 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
-import { StatefulDropdown, Tooltip } from 'src/components';
+import { StatefulDropdown } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 
 interface IProps {
@@ -80,18 +80,12 @@ export const CollectionDropdown = ({
     onClick;
   }) =>
     deletionBlocked ? (
-      <Tooltip
-        position='left'
-        content={
-          <Trans>
-            Cannot delete until collections <br />
-            that depend on this collection <br />
-            have been deleted.
-          </Trans>
-        }
+      <DropdownItem
+        isDisabled
+        description={t`Cannot delete until collections that depend on this have been deleted.`}
       >
-        <DropdownItem isDisabled>{caption}</DropdownItem>
-      </Tooltip>
+        {caption}
+      </DropdownItem>
     ) : (
       <DropdownItem data-cy={dataCy} onClick={onClick}>
         {caption}
