@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { t } from '@lingui/macro';
 import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { StatefulDropdown } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
+import { DeleteCollectionUtils } from 'src/utilities';
 
 interface IProps {
   collection;
@@ -73,7 +75,7 @@ export const CollectionDropdown = ({
   const DeleteWrapper = ({
     caption,
     'data-cy': dataCy,
-    onClick,
+    onClick: { addAlert, collection, openModal, skipCheck },
   }: {
     caption: string;
     'data-cy'?: string;
@@ -82,12 +84,31 @@ export const CollectionDropdown = ({
     deletionBlocked ? (
       <DropdownItem
         isDisabled
-        description={t`Cannot delete until collections that depend on this have been deleted.`}
+        description={t`Cannot delete until collections that depend on this collection have been deleted.`}
       >
         {caption}
       </DropdownItem>
     ) : (
-      <DropdownItem data-cy={dataCy} onClick={onClick}>
+      <DropdownItem
+        data-cy={dataCy}
+        onClick={() =>
+          skipCheck
+            ? openModal()
+            : DeleteCollectionUtils.countUsedbyDependencies(collection)
+                .then((count) => {
+                  if (count) {
+                    addAlert({
+                      title: t`Cannot delete until collections that depend on this collection have been deleted.`,
+                      variant: 'warning',
+                    });
+                    return;
+                  }
+
+                  openModal();
+                })
+                .catch(addAlert)
+        }
+      >
         {caption}
       </DropdownItem>
     );

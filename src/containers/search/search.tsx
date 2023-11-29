@@ -1,4 +1,4 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
@@ -362,30 +362,16 @@ class Search extends React.Component<RouteProps, IState> {
     const { hasPermission } = this.context;
     const canUpload = hasPermission('galaxy.upload_to_namespace');
 
-    const deleteFn = (deleteAll) => () =>
-      DeleteCollectionUtils.countUsedbyDependencies(collection)
-        .then((count) => {
-          if (count) {
-            this.addAlert({
-              title: (
-                <Trans>
-                  Cannot delete until collections <br />
-                  that depend on this collection <br />
-                  have been deleted.
-                </Trans>
-              ),
-              variant: 'warning',
-            });
-            return;
-          }
-
-          this.setState({
-            deleteCollection: collection,
-            confirmDelete: false,
-            deleteAll,
-          });
-        })
-        .catch((alert) => this.addAlert(alert));
+    const deleteFn = (deleteAll) => ({
+      addAlert: (alert) => this.addAlert(alert),
+      collection,
+      openModal: () =>
+        this.setState({
+          deleteCollection: collection,
+          confirmDelete: false,
+          deleteAll,
+        }),
+    });
 
     const dropdownMenu = (
       <CollectionDropdown

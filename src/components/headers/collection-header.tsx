@@ -250,6 +250,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const deleteFromRepo = deleteAll ? null : collection.repository.name;
 
+    const deleteFn = (deleteAll) => ({
+      openModal: () => this.openDeleteModalWithConfirm(null, deleteAll),
+      skipCheck: true, // already handled by deletionBlocked
+    });
+
     return (
       <>
         {showImportModal && (
@@ -483,12 +488,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 deletionBlocked={deletionBlocked}
                 namespace={namespace}
                 onCopyVersion={() => this.copyToRepository(collection)}
-                onDelete={() => this.openDeleteModalWithConfirm(null, true)}
+                onDelete={deleteFn(true)}
                 onDeleteVersion={() =>
                   this.openDeleteModalWithConfirm(version, true)
                 }
                 onDeprecate={() => this.deprecate(collection)}
-                onRemove={() => this.openDeleteModalWithConfirm(null, false)}
+                onRemove={deleteFn(false)}
                 onRemoveVersion={() =>
                   this.openDeleteModalWithConfirm(version, false)
                 }
