@@ -485,6 +485,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ) : null}
               <CollectionDropdown
                 collection={collection}
+                data-cy='kebab-toggle'
                 deletionBlocked={deletionBlocked}
                 namespace={namespace}
                 onCopyVersion={() => this.copyToRepository(collection)}
@@ -511,9 +512,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 onUploadVersion={() => this.checkUploadPrivilleges(collection)}
                 version={version}
                 wrapper={({ any, children }) =>
-                  any ? (
-                    <FlexItem data-cy='kebab-toggle'>{children}</FlexItem>
-                  ) : null
+                  any ? <FlexItem>{children}</FlexItem> : null
                 }
               />
             </Flex>

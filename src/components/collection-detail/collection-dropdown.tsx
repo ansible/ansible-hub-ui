@@ -7,6 +7,7 @@ import { DeleteCollectionUtils } from 'src/utilities';
 
 interface IProps {
   collection;
+  'data-cy'?: string;
   deletionBlocked?: boolean;
   namespace?;
   onCopyVersion?;
@@ -24,6 +25,7 @@ interface IProps {
 
 export const CollectionDropdown = ({
   collection,
+  'data-cy': dataCy,
   deletionBlocked,
   namespace,
   onCopyVersion,
@@ -181,7 +183,7 @@ export const CollectionDropdown = ({
 
   return (
     <Wrapper any={dropdownItems.length}>
-      <StatefulDropdown items={dropdownItems} />
+      <StatefulDropdown data-cy={dataCy} items={dropdownItems} />
     </Wrapper>
   );
 };

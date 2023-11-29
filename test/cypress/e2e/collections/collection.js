@@ -22,7 +22,7 @@ describe('collection tests', () => {
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
-    cy.get('[data-cy=kebab-toggle]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.get('[data-cy=delete-collection]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
@@ -41,7 +41,7 @@ describe('collection tests', () => {
     cy.get(
       `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
     ).click();
-    cy.get('[data-cy=kebab-toggle]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.get('[data-cy=delete-collection-version]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
@@ -62,7 +62,7 @@ describe('collection tests', () => {
     cy.galaxykit('task wait all');
     cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
 
-    cy.get('[data-cy="kebab-toggle"]').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
     cy.get(
       '[data-cy="copy-collection-version-to-repository-dropdown"]',
     ).click();
@@ -107,7 +107,7 @@ describe('collection tests', () => {
     cy.get('.collection-container [aria-label="Actions"]:first').click({
       force: true,
     });
-    cy.contains('Delete collection from repository').click();
+    cy.contains('Remove collection from repository').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains(
@@ -156,8 +156,8 @@ describe('collection tests', () => {
       `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
     );
 
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]:first').click();
-    cy.contains('Delete version 1.0.0 from repository').click();
+    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.contains('Remove version 1.0.0 from repository').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.contains(
