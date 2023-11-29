@@ -63,7 +63,7 @@ const Section = ({
 
 const loading = [];
 
-export const MultiSearch = (props: RouteProps) => {
+const MultiSearch = (props: RouteProps) => {
   const { featureFlags } = useContext();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [params, setParams] = useState({});

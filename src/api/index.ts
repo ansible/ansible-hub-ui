@@ -31,7 +31,6 @@ export {
 } from './response-types/ansible-repository';
 export {
   CollectionDetailType,
-  CollectionListType,
   CollectionUploadType,
   CollectionUsedByDependencies,
   CollectionVersion,
