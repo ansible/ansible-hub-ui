@@ -28,7 +28,7 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
   <h2 className='pf-c-title'>{children}</h2>
 );
 
-export const Dispatch = ({ location, navigate }: RouteProps) => {
+const Dispatch = ({ location, navigate }: RouteProps) => {
   const { featureFlags } = useContext();
 
   const { pathname } = ParamHelper.parseParamString(location.search) as {

@@ -59,14 +59,7 @@ body,
   align-items: center;
 }
 
-// collections and namespaces - align with cards/lists, instead of table columns
-.hub-toolbar-left {
-  .pf-c-toolbar__content {
-    padding-left: 0;
-  }
-}
-
-// token-insights: inline alert inside pf-c-content has big title and extra margin
+// inline alert inside pf-c-content has big title and extra margin
 .hub-content-alert-fix {
   .pf-c-alert__title {
     margin: 0;
