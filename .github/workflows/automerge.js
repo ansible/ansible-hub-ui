@@ -30,7 +30,7 @@ if (prTitle.includes('patternfly')) {
 
 if (prTitle.includes('@types/node')) {
   console.log('Checking for @types/node version.');
-  const pattern = /from 16[.]\d+[.]\d+ to 16[.]\d+[.]\d+/;
+  const pattern = /from (\d+)\.\d+\.\d+ to \1\.\d+\.\d+/;
   if (pattern.test(prTitle)) {
     console.log('Version does match the pattern ' + pattern);
   } else {

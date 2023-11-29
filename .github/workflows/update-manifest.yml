@@ -28,10 +28,10 @@ jobs:
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v4
 
-    - name: "Install node 16"
+    - name: "Install node 18"
       uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '18'
 
     - name: "Run update_manifest.sh"
       run: .travis/update_manifest.sh
