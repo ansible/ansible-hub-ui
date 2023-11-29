@@ -19,21 +19,21 @@ import {
   AlertList,
   AlertType,
   ClipboardCopy,
-  CollectionFilter,
   CollectionList,
   DeleteCollectionModal,
   DeleteModal,
   EmptyStateNoData,
   ExternalLink,
+  HubListToolbar,
   ImportModal,
   LoadingPageWithHeader,
   Main,
-  Pagination,
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
   Tooltip,
   closeAlertMixin,
+  collectionFilter,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -392,29 +392,19 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           params={tabParams}
           updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
-          filters={
-            tab === 'collections' ? (
-              <div>
-                <div className='hub-toolbar hub-toolbar-left'>
-                  <CollectionFilter
-                    ignoredParams={ignoredParams}
-                    params={params}
-                    updateParams={updateParams}
-                  />
-
-                  <div className='hub-pagination-container'>
-                    <Pagination
-                      params={params}
-                      updateParams={updateParams}
-                      count={filteredCount}
-                      isTop
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : null
-          }
         />
+        {tab === 'collections' ? (
+          <HubListToolbar
+            count={filteredCount}
+            ignoredParams={ignoredParams}
+            params={params}
+            updateParams={updateParams}
+            {...collectionFilter({
+              featureFlags: this.context.featureFlags,
+              ignoredParams,
+            })}
+          />
+        ) : null}
         <Main>
           {tab === 'collections' ? (
             noData ? (

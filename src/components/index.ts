@@ -12,7 +12,7 @@ export { CollectionUsedbyDependenciesList } from './collection-dependencies-list
 export { CollectionContentList } from './collection-detail/collection-content-list';
 export { CollectionInfo } from './collection-detail/collection-info';
 export { TableOfContents } from './collection-detail/table-of-contents';
-export { CollectionFilter } from './collection-list/collection-filter';
+export { collectionFilter } from './collection-list/collection-filter';
 export { CollectionList } from './collection-list/collection-list';
 export { CollectionListItem } from './collection-list/collection-list-item';
 export { ConfirmModal } from './confirm-modal/confirm-modal';

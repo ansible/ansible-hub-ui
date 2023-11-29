@@ -13,19 +13,19 @@ import {
   AlertList,
   AlertType,
   BaseHeader,
-  CardListSwitcher,
   CollectionCard,
-  CollectionFilter,
   CollectionListItem,
   CollectionNextPageCard,
   DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubListToolbar,
   ImportModal,
   LoadingPageSpinner,
   Pagination,
   StatefulDropdown,
   closeAlertMixin,
+  collectionFilter,
 } from 'src/components';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -157,6 +157,8 @@ class Search extends React.Component<RouteProps, IState> {
       ? null
       : deleteCollection?.repository?.name;
 
+    const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
+
     return (
       <div className='search-page'>
         <AlertList
@@ -205,48 +207,20 @@ class Search extends React.Component<RouteProps, IState> {
             namespace={updateCollection.collection_version.namespace}
           />
         )}
-        <BaseHeader className='hub-header-bordered' title={t`Collections`}>
-          {!noData && (
-            <div>
-              <div className='hub-toolbar hub-toolbar-left'>
-                <CollectionFilter
-                  ignoredParams={['page', 'page_size', 'sort', 'view_type']}
-                  params={params}
-                  updateParams={updateParams}
-                />
-
-                <div className='hub-pagination-container'>
-                  <div className='card-list-switcher'>
-                    <CardListSwitcher
-                      size='sm'
-                      params={params}
-                      updateParams={(p) =>
-                        this.updateParams(p, () =>
-                          // Note, we have to use this.state.params instead
-                          // of params in the callback because the callback
-                          // executes before the page can re-run render
-                          // which means params doesn't contain the most
-                          // up to date state
-                          localStorage.setItem(
-                            Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                            this.state.params.view_type,
-                          ),
-                        )
-                      }
-                    />
-                  </div>
-
-                  <Pagination
-                    params={params}
-                    updateParams={updateParams}
-                    count={count}
-                    isTop
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-        </BaseHeader>
+        <BaseHeader className='hub-header-bordered' title={t`Collections`} />
+        {!noData && (
+          <HubListToolbar
+            count={count}
+            ignoredParams={ignoredParams}
+            params={params}
+            switcher={Constants.SEARCH_VIEW_TYPE_LOCAL_KEY}
+            updateParams={updateParams}
+            {...collectionFilter({
+              featureFlags: this.context.featureFlags,
+              ignoredParams,
+            })}
+          />
+        )}
         {loading ? (
           <LoadingPageSpinner />
         ) : noData ? (
@@ -255,7 +229,7 @@ class Search extends React.Component<RouteProps, IState> {
             description={t`Collections will appear once uploaded`}
           />
         ) : (
-          <React.Fragment>
+          <>
             <section className='collection-container'>
               {this.renderCollections(collections, {
                 count,
@@ -270,7 +244,7 @@ class Search extends React.Component<RouteProps, IState> {
                 count={count}
               />
             </section>
-          </React.Fragment>
+          </>
         )}
       </div>
     );

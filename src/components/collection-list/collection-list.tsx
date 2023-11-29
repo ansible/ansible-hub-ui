@@ -11,38 +11,36 @@ import { ParamHelper } from 'src/utilities';
 import './list.scss';
 
 interface IProps {
-  collections: CollectionVersionSearch[];
-  displaySignatures: boolean;
-  params: {
-    sort?: string;
-    page?: number;
-    page_size?: number;
-  };
-  updateParams: (params) => void;
-  itemCount: number;
-  ignoredParams: string[];
   collectionControls: (collection) => {
     dropdownMenu?: React.ReactNode | null;
     uploadButton?: React.ReactNode | null;
   };
+  collections: CollectionVersionSearch[];
+  displaySignatures: boolean;
+  ignoredParams: string[];
+  itemCount: number;
+  params: {
+    page?: number;
+    page_size?: number;
+    sort?: string;
+  };
+  updateParams: (params) => void;
 }
 
 // only used in namespace detail, collections uses individual items
-export const CollectionList = (props: IProps) => {
-  const {
-    collections,
-    collectionControls,
-    displaySignatures,
-    params,
-    updateParams,
-    ignoredParams,
-    itemCount,
-  } = props;
-
+export const CollectionList = ({
+  collectionControls,
+  collections,
+  displaySignatures,
+  ignoredParams,
+  itemCount,
+  params,
+  updateParams,
+}: IProps) => {
   return (
-    <React.Fragment>
+    <>
       <DataList aria-label={t`List of Collections`}>
-        {collections.length > 0 ? (
+        {collections.length ? (
           collections.map((c, i) => (
             <CollectionListItem
               key={i}
@@ -65,10 +63,10 @@ export const CollectionList = (props: IProps) => {
         )}
       </DataList>
       <Pagination
-        params={params}
-        updateParams={(p) => updateParams(p)}
         count={itemCount}
+        params={params}
+        updateParams={updateParams}
       />
-    </React.Fragment>
+    </>
   );
 };
