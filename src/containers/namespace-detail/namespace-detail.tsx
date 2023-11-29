@@ -220,6 +220,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       });
   }
 
+  hasPerm(permission) {
+    const { namespace } = this.state;
+    const {
+      hasPermission,
+      user: { is_superuser },
+    } = this.context;
+
+    const hasObjectPermission = (permission) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
+
+    return (
+      hasPermission(permission) ||
+      hasObjectPermission(permission) ||
+      is_superuser
+    );
+  }
+
   render() {
     const {
       alerts,
@@ -309,12 +326,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       'view_type',
     ];
 
-    const { hasPermission } = this.context;
-
-    const canEditOwners =
-      this.state.namespace.related_fields.my_permissions?.includes(
-        'galaxy.change_namespace',
-      ) || hasPermission('galaxy.change_namespace');
+    const canEditOwners = this.hasPerm('galaxy.change_namespace');
 
     // remove ?user/group (access tab) when switching tabs
     const tabParams = { ...params };
@@ -823,7 +835,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
-    const { hasPermission } = this.context;
     const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
@@ -839,7 +850,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           </Link>
         }
       />,
-      hasPermission('galaxy.delete_namespace') &&
+      this.hasPerm('galaxy.delete_namespace') &&
         (unfilteredCount === 0 ? (
           <DropdownItem
             key='delete'
@@ -991,9 +1002,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
     const { namespace, showControls } = this.state;
-    const { hasPermission } = this.context;
 
-    const canUpload = hasPermission('galaxy.upload_to_namespace');
+    const canUpload = this.hasPerm('galaxy.upload_to_namespace');
 
     if (!showControls) {
       return;
