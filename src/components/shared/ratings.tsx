@@ -10,6 +10,10 @@ interface IProps {
 const cache = { collection: null, role: null };
 
 const loadScore = (type, namespace, name, callback) => () => {
+  if (!IS_COMMUNITY) {
+    return;
+  }
+
   const setScores = (data) => {
     if (namespace && name && callback) {
       callback(data?.[namespace]?.[name]);
