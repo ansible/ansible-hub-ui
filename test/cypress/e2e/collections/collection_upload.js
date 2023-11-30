@@ -64,7 +64,7 @@ describe('Collection Upload Tests', () => {
     cy.login();
     cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
     cy.contains('testcollection');
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.contains('Upload new version').click();
     cy.contains('New version of testspace.testcollection');
   });

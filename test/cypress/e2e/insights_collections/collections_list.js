@@ -20,7 +20,7 @@ describe('Collections list Tests', () => {
   function undeprecate() {
     cy.visit(`${uiPrefix}repo/published/my_namespace/my_collection0`);
     cy.contains('This collection has been deprecated.');
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.contains('Undeprecate').click();
     cy.contains('This collection has been deprecated.', {
       timeout: 10000,

@@ -17,7 +17,7 @@ describe('collection tests', () => {
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.get('[data-cy=delete-collection]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
@@ -36,7 +36,7 @@ describe('collection tests', () => {
     cy.get(
       `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
     ).click();
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.get('[data-cy=delete-collection-version]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();

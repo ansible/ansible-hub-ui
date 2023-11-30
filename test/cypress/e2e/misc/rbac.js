@@ -287,7 +287,7 @@ describe('RBAC test for user with permissions', () => {
     cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
 
     // can Delete collection
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.contains('Delete collection from system');
   });
 

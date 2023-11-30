@@ -40,6 +40,11 @@ Cypress.Commands.add('assertTitle', {}, (title) => {
   cy.contains('.pf-c-title', title);
 });
 
+Cypress.Commands.add('openHeaderKebab', {}, () => {
+  cy.scrollTo(0, 0);
+  cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+});
+
 Cypress.Commands.add(
   'createUser',
   {},
