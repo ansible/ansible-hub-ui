@@ -87,14 +87,14 @@ const SyncModal = ({
         label={t`Optimize`}
         labelIcon={
           <HelperText
-            content={t`Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option.`}
+            content={t`Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option.`}
           />
         }
       >
         <Switch
           isChecked={syncParams.optimize}
           onChange={(optimize) => setSyncParams({ ...syncParams, optimize })}
-          label={t`Only perform the sync if no changes are reported by the remote server.`}
+          label={t`Only perform the sync if changes are reported by the remote server.`}
           labelOff={t`Force a sync to happen.`}
         />
       </FormGroup>
