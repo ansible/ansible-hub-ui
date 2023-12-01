@@ -27,8 +27,7 @@ describe('signing versions - auto sign on approval', () => {
     // Sign the first collection
     cy.get('[data-cy="approve-button"]').first().click();
 
-    // TODO: Maybe we can wait on some specific event?
-    cy.wait(10000);
+    cy.galaxykit('task wait all');
 
     // Go and check if it is signed in the collections
     cy.visit(`${uiPrefix}collections`);

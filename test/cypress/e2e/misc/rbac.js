@@ -132,7 +132,6 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Sync from registry').should('not.exist');
   });
 
-  // TODO Create test for change/delete task without permission
   it("should let view task when user doesn't have permission", () => {
     cy.visit(`${uiPrefix}tasks`);
     cy.get('[aria-label="Task list"] tr td a').first().click();
@@ -367,7 +366,6 @@ describe('RBAC test for user with permissions', () => {
     );
   });
 
-  // TODO Create test for change/delete task with permission
   it('should let view task when user has permission', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_task_management');
     cy.login(userName, userPassword);
