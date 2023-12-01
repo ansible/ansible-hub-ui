@@ -38,8 +38,7 @@ describe('Collection Upload Tests', () => {
     cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
     cy.contains('testcollection');
     cy.openHeaderKebab();
-    cy.contains('Upload new version').click();
-    cy.contains("You don't have rights to do this operation.");
+    cy.contains('Upload new version').should('not.exist');
   });
 
   it('should see upload new collection version in collection list when user does have permissions', () => {
