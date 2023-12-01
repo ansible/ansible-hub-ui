@@ -1,10 +1,6 @@
 // This tests the filter on user page. Should apply partial matchMedia.
 
 describe('Search for users', () => {
-  before(() => {
-    cy.deleteTestUsers();
-  });
-
   beforeEach(() => {
     cy.login();
     cy.menuGo('User Access > Users');

@@ -20,8 +20,6 @@ function versionCheck(version) {
     it('creates, edit and sync repository', () => {
       cy.login();
 
-      cy.deleteRepositories();
-
       if (withRemote) {
         cy.galaxykit(
           '-i remote create',
@@ -31,7 +29,6 @@ function versionCheck(version) {
       }
       cy.galaxykit('-i namespace create repo_test_namespace');
 
-      cy.deleteNamespacesAndCollections();
       cy.galaxykit(
         `-i collection upload repo_test_namespace repo_test_collection`,
       );

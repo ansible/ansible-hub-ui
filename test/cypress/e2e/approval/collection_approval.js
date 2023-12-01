@@ -4,7 +4,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('tests the approval list screen ', () => {
   beforeEach(() => {
     cy.login();
-    cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
     cy.galaxykit('-i collection upload ansible network');
     cy.visit(`${uiPrefix}approval-dashboard`);

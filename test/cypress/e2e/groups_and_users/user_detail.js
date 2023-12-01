@@ -7,17 +7,9 @@ describe('user detail tests all fields, editing, and deleting', () => {
   const selectInput = (id) => cy.get(`input[id=${id}]`).click().clear();
 
   before(() => {
-    cy.deleteTestUsers();
-    cy.deleteTestGroups();
-
     cy.galaxykit('group create', `alphaGroup${num}`);
     cy.galaxykit('user create', 'testUser', 'testUserpassword');
     cy.galaxykit('user group add', 'testUser', `alphaGroup${num}`);
-  });
-
-  after(() => {
-    cy.deleteTestUsers();
-    cy.deleteTestGroups();
   });
 
   beforeEach(() => {

@@ -3,14 +3,9 @@ const apiPrefix = Cypress.env('apiPrefix');
 
 describe('Namespace detail screen', () => {
   before(() => {
-    cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace_detail_test');
     cy.galaxykit('-i collection upload namespace_detail_test collection1');
     cy.galaxykit('-i collection upload namespace_detail_test collection2');
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {

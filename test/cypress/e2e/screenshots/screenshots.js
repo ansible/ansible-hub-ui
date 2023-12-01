@@ -4,8 +4,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('screenshots', () => {
   before(() => {
-    cy.deleteNamespacesAndCollections();
-
     // insert test data
     cy.galaxykit('namespace create my_namespace');
     range(5).forEach((i) => {
@@ -15,10 +13,6 @@ describe('screenshots', () => {
 
   beforeEach(() => {
     cy.login();
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
   });
 
   it('takes screenshots', () => {

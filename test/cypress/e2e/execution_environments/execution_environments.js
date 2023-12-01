@@ -4,9 +4,6 @@ describe('execution environments', () => {
   before(() => {
     cy.login();
 
-    cy.deleteRegistries();
-    cy.deleteContainers();
-
     cy.galaxykit(
       'registry create',
       `docker${num}`,

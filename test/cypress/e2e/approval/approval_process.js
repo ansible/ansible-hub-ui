@@ -2,14 +2,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 const apiPrefix = Cypress.env('apiPrefix');
 
 describe('Approval Dashboard process', () => {
-  before(() => {
-    cy.deleteNamespacesAndCollections();
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
-  });
-
   beforeEach(() => {
     cy.login();
   });
@@ -49,7 +41,6 @@ describe('Approval Dashboard process', () => {
   });
 
   it('collection should be uploaded into different repo', () => {
-    cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i repository create staging2 --pipeline staging');
     cy.galaxykit('-i distribution create staging2');
     cy.login();

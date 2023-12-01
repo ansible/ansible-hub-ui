@@ -5,8 +5,6 @@ describe('Execution Environments - Use in Controller', () => {
 
   before(() => {
     cy.login();
-    cy.deleteRegistries();
-    cy.deleteContainers();
     cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
 
     cy.addRemoteContainer({

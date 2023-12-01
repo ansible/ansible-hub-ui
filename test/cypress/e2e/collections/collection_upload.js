@@ -6,11 +6,7 @@ describe('Collection Upload Tests', () => {
   const userPassword = 'I am a complicated passw0rd';
 
   before(() => {
-    cy.deleteNamespacesAndCollections();
-
     cy.login();
-    cy.deleteTestGroups();
-    cy.deleteTestUsers();
     cy.createUser(userName, userPassword);
     cy.galaxykit('-i collection upload testspace testcollection');
   });

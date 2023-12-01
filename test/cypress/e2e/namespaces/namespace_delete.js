@@ -2,10 +2,6 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Delete a namespace', () => {
-  before(() => {
-    cy.deleteNamespacesAndCollections();
-  });
-
   beforeEach(() => {
     cy.login();
   });

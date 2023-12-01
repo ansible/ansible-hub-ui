@@ -32,8 +32,6 @@ describe('Login helpers', () => {
   const password = 'n0permissi0n';
 
   before(() => {
-    cy.deleteTestUsers();
-
     cy.galaxykit('user create', username, password);
   });
 

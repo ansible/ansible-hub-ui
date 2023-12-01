@@ -33,12 +33,6 @@ describe('RBAC test for user without permissions', () => {
 
   after(() => {
     cy.login();
-
-    cy.deleteTestGroups();
-    cy.deleteTestUsers();
-    cy.deleteRegistries();
-    cy.deleteContainers();
-    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {
@@ -245,12 +239,6 @@ describe('RBAC test for user with permissions', () => {
 
   after(() => {
     cy.login();
-
-    cy.deleteTestGroups();
-    cy.deleteTestUsers();
-    cy.deleteRegistries();
-    cy.deleteContainers();
-    cy.deleteNamespacesAndCollections();
 
     allPerms.forEach(({ group }) => {
       cy.galaxykit('-i role delete', group);

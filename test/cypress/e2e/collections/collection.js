@@ -2,16 +2,6 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('collection tests', () => {
-  before(() => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteRepositories();
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteRepositories();
-  });
-
   beforeEach(() => {
     cy.login();
   });
@@ -54,7 +44,6 @@ describe('collection tests', () => {
   });
 
   it('should copy collection version to validated repository', () => {
-    cy.deleteNamespacesAndCollections();
     const rand = Math.floor(Math.random() * 9999999);
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
@@ -88,8 +77,6 @@ describe('collection tests', () => {
   });
 
   it('deletes an collection from repository', () => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteRepositories();
     cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
@@ -120,14 +107,9 @@ describe('collection tests', () => {
     cy.contains('[data-cy="CollectionListItem"]', 'published').should(
       'not.exist',
     );
-
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
   });
 
   it('deletes an collection version from repository', () => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteRepositories();
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
 
@@ -179,8 +161,5 @@ describe('collection tests', () => {
     cy.contains(`We couldn't find the page you're looking for!`).should(
       'not.exist',
     );
-
-    cy.deleteAllCollections();
-    cy.deleteRepositories();
   });
 });

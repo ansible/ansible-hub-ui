@@ -43,8 +43,6 @@ describe('Collections list Tests', () => {
   }
 
   before(() => {
-    cy.deleteNamespacesAndCollections();
-
     cy.galaxykit('namespace create my_namespace');
     // insert test data
     range(11).forEach((i) => {
@@ -54,7 +52,6 @@ describe('Collections list Tests', () => {
 
   after(() => {
     cy.galaxykit('task wait all');
-    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {

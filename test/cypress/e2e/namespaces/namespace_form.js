@@ -17,10 +17,6 @@ describe('A namespace form', () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
 
-  before(() => {
-    cy.deleteNamespacesAndCollections();
-  });
-
   beforeEach(() => {
     cy.login();
     createNamespace();

@@ -20,8 +20,6 @@ describe('Hub Menu Tests', () => {
   ];
 
   before(() => {
-    cy.deleteTestUsers();
-
     cy.galaxykit('user create', username, password);
   });
 

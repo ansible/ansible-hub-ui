@@ -48,13 +48,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   before(() => {
     cy.login();
-    cy.deleteNamespacesAndCollections();
     createData();
     loadData();
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {

@@ -4,8 +4,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repository', () => {
   before(() => {
-    cy.deleteRepositories();
-
     range(5).forEach((i) => {
       cy.galaxykit('repository create repoListTest' + i);
     });

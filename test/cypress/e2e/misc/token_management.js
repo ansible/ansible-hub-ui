@@ -2,10 +2,6 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Token Management Tests', () => {
-  before(() => {
-    cy.deleteTestUsers();
-  });
-
   beforeEach(() => {
     cy.visit(uiPrefix);
     cy.login();

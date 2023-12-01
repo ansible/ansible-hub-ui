@@ -8,7 +8,6 @@ describe('Imports filter test', () => {
 
   before(() => {
     cy.login();
-    cy.deleteNamespacesAndCollections();
 
     // insert test data
     cy.galaxykit('namespace create', 'test_namespace');
@@ -18,10 +17,6 @@ describe('Imports filter test', () => {
     cy.galaxykit('collection upload filter_test_namespace my_collection1');
     cy.galaxykit('collection upload filter_test_namespace my_collection2');
     cy.galaxykit('collection upload filter_test_namespace different_name');
-  });
-
-  after(() => {
-    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {

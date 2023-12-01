@@ -4,9 +4,6 @@ describe('Namespace Access tab', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
-    cy.deleteNamespacesAndCollections();
-    cy.deleteTestGroups();
-
     cy.galaxykit(`-i namespace create rbac_access_${num}`);
     cy.galaxykit('-i group create', `access_group`);
   });
@@ -34,9 +31,6 @@ describe('Execution Environment Access tab', () => {
 
   before(() => {
     cy.login();
-    cy.deleteRegistries();
-    cy.deleteContainers();
-    cy.deleteTestGroups();
 
     cy.galaxykit(
       'registry create',

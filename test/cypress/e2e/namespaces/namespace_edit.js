@@ -40,7 +40,6 @@ describe('Edit a namespace', () => {
   };
 
   before(() => {
-    cy.deleteTestGroups();
     cy.galaxykit('-i group create', 'namespace-owner-autocomplete');
   });
 

@@ -6,11 +6,6 @@ describe('User list tests for sorting, paging and filtering', () => {
   let items = [];
 
   before(() => {
-    cy.deleteTestUsers();
-    cy.deleteTestUsers();
-    cy.deleteTestUsers();
-    cy.deleteTestUsers();
-
     range(20).forEach((i) => {
       let item = { name: 'user_test' + i };
       items.push(item);

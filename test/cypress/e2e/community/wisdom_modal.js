@@ -30,7 +30,6 @@ function optOut() {
 
 describe('Ansible Lightspeed Modal Test', () => {
   before(() => {
-    cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'testns1');
   });
 
@@ -51,7 +50,6 @@ describe('Ansible Lightspeed Modal Test', () => {
     optOut();
 
     // namespace was removed from wisdom, now delete it and it should be in wisdom again after recreation
-    cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'testns1');
     cy.visit(`${uiPrefix}namespaces/testns1`);
 

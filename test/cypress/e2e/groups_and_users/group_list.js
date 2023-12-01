@@ -6,11 +6,6 @@ describe('Group list tests for sorting, paging and filtering', () => {
   let items = [];
 
   before(() => {
-    cy.deleteTestGroups();
-    cy.deleteTestGroups();
-    cy.deleteTestGroups();
-    cy.deleteTestGroups();
-
     range(21).forEach((i) => {
       let item = { name: 'group_test' + i };
       items.push(item);
