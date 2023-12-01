@@ -1,4 +1,3 @@
-const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Approval Dashboard list tests for sorting, paging and filtering', () => {

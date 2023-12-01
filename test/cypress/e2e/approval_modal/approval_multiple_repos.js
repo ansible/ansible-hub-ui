@@ -1,5 +1,3 @@
-const apiPrefix = Cypress.env('apiPrefix');
-const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
 
 function openModal(menu) {
