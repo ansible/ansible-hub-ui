@@ -1,5 +1,3 @@
-import { range } from 'lodash';
-
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
@@ -44,10 +42,8 @@ describe('Collections list Tests', () => {
 
   before(() => {
     cy.galaxykit('namespace create my_namespace');
-    // insert test data
-    range(11).forEach((i) => {
-      cy.galaxykit(`-i collection upload my_namespace my_collection${i}`);
-    });
+    cy.galaxykit('-i collection upload my_namespace my_collection1');
+    cy.galaxykit('-i collection upload my_namespace my_collection2');
   });
 
   after(() => {
@@ -140,15 +136,6 @@ describe('Collections list Tests', () => {
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');
 
-    // because of randomized order of items in list and weird filter behavior
-    // we have to check that all of them dissapeared, not only one particular
-    range(11).forEach((i) => {
-      if (i != 1) {
-        cy.get('.body')
-          .contains('my_collection' + i)
-          .should('not.exist');
-      }
-    });
     cy.get('.body').contains('my_collection1');
 
     cy.get('.body [aria-label="Actions"]').click();

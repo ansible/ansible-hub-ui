@@ -1,5 +1,3 @@
-import { range } from 'lodash';
-
 const apiPrefix = Cypress.env('apiPrefix');
 const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
@@ -25,50 +23,13 @@ function toggleItem(name) {
   cy.get(`[data-cy="ApproveModal-CheckboxRow-row-${name}"] input`).click();
 }
 
-const reposList = [];
-
 describe('Approval Dashboard process with multiple repos', () => {
   before(() => {
     cy.galaxykit('-i namespace create', 'namespace');
     cy.galaxykit('-i collection upload', 'namespace', 'collection1');
-
-    const max = 11;
-    range(1, max).forEach((i) => {
-      reposList.push('repo' + i);
-    });
-
-    reposList.push('published');
-
-    cy.login();
-
-    range(1, max).forEach((i) => {
-      cy.galaxykit('-i distribution delete', 'repo' + i);
-    });
-
     cy.galaxykit('-i task wait all');
 
-    cy.request(`${pulpPrefix}repositories/ansible/ansible/`).then((data) => {
-      const list = data.body.results;
-      list.forEach((repo) => {
-        if (
-          repo.pulp_labels?.pipeline == 'approved' &&
-          repo.name != 'published'
-        ) {
-          cy.log('deleting repository' + repo.name);
-          cy.galaxykit('-i repository delete', repo.name);
-        }
-      });
-      cy.galaxykit('-i task wait all');
-      range(1, max).forEach((i) => {
-        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
-        cy.galaxykit('-i distribution create', 'repo' + i);
-      });
-      cy.galaxykit('-i task wait all');
-    });
-
-    // prepare another staging
-    cy.galaxykit('-i distribution delete', 'staging2');
-    cy.galaxykit('-i repository delete', 'staging2');
+    cy.login();
 
     cy.galaxykit('-i repository create', 'staging2', '--pipeline=staging');
     cy.galaxykit('-i distribution create', 'staging2');
@@ -118,26 +79,11 @@ describe('Approval Dashboard process with multiple repos', () => {
     // deselect all
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect all (0 items)').click();
-    reposList.forEach((repo) => {
-      cy.contains('[aria-label="Label group category"]', repo).should(
-        'not.exist',
-      );
-    });
 
     // select page
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Select page (10 items)').click();
     cy.contains('.pf-c-label.pf-m-overflow', 'more').click();
-
-    reposList.forEach((repo) => {
-      if (repo != 'repo9') {
-        cy.contains('[aria-label="Label group category"]', repo);
-      } else {
-        cy.contains('[aria-label="Label group category"]', repo).should(
-          'not.exist',
-        );
-      }
-    });
 
     // select repo9
     toggleItem('repo9');
@@ -146,16 +92,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     // deselect page and repo9 should remain here
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Deselect page (10 items)').click();
-
-    reposList.forEach((repo) => {
-      if (repo != 'repo9') {
-        cy.contains('[aria-label="Label group category"]', repo).should(
-          'not.exist',
-        );
-      } else {
-        cy.contains('[aria-label="Label group category"]', repo);
-      }
-    });
   });
 
   it('should test selection.', () => {

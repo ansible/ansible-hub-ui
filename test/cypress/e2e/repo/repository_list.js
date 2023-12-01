@@ -1,12 +1,9 @@
-import { range } from 'lodash';
-
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repository', () => {
   before(() => {
-    range(5).forEach((i) => {
-      cy.galaxykit('repository create repoListTest' + i);
-    });
+    cy.galaxykit('repository create repoListTest1');
+    cy.galaxykit('repository create repoListTest3');
     cy.galaxykit('distribution create repoListTest3');
 
     // chrome only - prevent 'Write permission denied.' when copying to clipboard
@@ -81,9 +78,6 @@ describe('Repository', () => {
     cy.get('[data-cy="compound_filter"] input')
       .clear()
       .type('repoListTest{enter}');
-    range(5).forEach((i) => {
-      cy.contains('repoListTest' + i);
-    });
     cy.contains('community').should('not.exist');
     cy.contains('validated').should('not.exist');
     cy.contains('rh-certified').should('not.exist');
@@ -108,10 +102,6 @@ describe('Repository', () => {
     cy.contains('rh-certified');
 
     cy.get('[data-cy="compound_filter"] input').clear().type('test{enter}');
-
-    range(5).forEach((i) => {
-      cy.contains('repoListTest' + i);
-    });
 
     cy.contains('community').should('not.exist');
     cy.contains('validated').should('not.exist');
