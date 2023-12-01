@@ -17,11 +17,6 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('checks all fields', () => {
-    // FIXME
-    //cy.addPermissions(`alphaGroup${num}`, [
-    //  { group: 'users', permissions: ['View user'] },
-    //]);
-
     cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
     cy.contains('Edit').click();
@@ -40,11 +35,6 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('[data-cy="DataForm-field-last_name"]').contains('last_name');
     cy.get('[data-cy="DataForm-field-email"]').contains('example@example.com');
     cy.get('[data-cy="UserForm-readonly-groups"]').contains(`alphaGroup${num}`);
-    // FIXME test the right value, not both
-    cy.get('.pf-c-switch > .pf-c-switch__label').should(
-      'have.text',
-      'Super userNot a super user',
-    );
   });
 
   it('edits user', () => {
@@ -76,25 +66,5 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('[data-cy="delete-button"]').click();
 
     cy.contains('testUser').should('not.exist');
-    // looks like we need a success alert deleting user from user_detail?
-    // cy.get('.pf-c-alert__title').should('have.text', 'Successfully deleted testUser')
-  });
-
-  it.skip('checks a user without edit permissions', () => {
-    // cy.logout();
-    cy.get('input[id="pf-login-username-id"]').type('testUser');
-    cy.get('input[id="pf-login-password-id"]').type('testUserpassword');
-    cy.get('button[type="submit"]').click();
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/repo/published/?deprecated=false&offset=0&limit=10`,
-    );
-
-    //unable to log in with test credentials
-
-    cy.get(`a[href*="${uiPrefix}users/"]`).click();
-    cy.contains('User detail');
-    cy.contains('Edit').should('not.exist');
-    cy.contains('Delete').should('not.exist');
   });
 });

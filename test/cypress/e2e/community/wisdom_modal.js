@@ -1,9 +1,5 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
-function communityLogin() {
-  cy.login(null, null, '/', 'Welcome to Galaxy');
-}
-
 function clickWisdomSettings() {
   cy.get('[data-cy="kebab-toggle"] button[aria-label="Actions"]').click({
     force: true,
@@ -34,26 +30,10 @@ describe('Ansible Lightspeed Modal Test', () => {
   });
 
   it('can opt in or opt out of namespace.', () => {
-    communityLogin();
+    cy.login(null, null, '/', 'Welcome to Galaxy');
     cy.visit(`${uiPrefix}namespaces/testns1`);
     optOut();
     optIn();
-    clickWisdomSettings();
-    cy.contains('button', 'Opt out of Ansible Lightspeed');
-  });
-
-  // We will unskip this test after this functionality is implemented on the backend (AAH-2166)
-  it.skip('does remove namespace from deny list when namespace deleted.', () => {
-    communityLogin();
-    cy.visit(`${uiPrefix}repo/published/testns1`);
-
-    optOut();
-
-    // namespace was removed from wisdom, now delete it and it should be in wisdom again after recreation
-    cy.galaxykit('-i namespace create', 'testns1');
-    cy.visit(`${uiPrefix}namespaces/testns1`);
-
-    // it should be again in wisdom
     clickWisdomSettings();
     cy.contains('button', 'Opt out of Ansible Lightspeed');
   });
