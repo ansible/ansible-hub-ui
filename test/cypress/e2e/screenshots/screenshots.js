@@ -26,7 +26,7 @@ describe('screenshots', () => {
       const filename = path.replaceAll('/', '__').replace(/^__$/, 'root');
 
       cy.visit(`${uiPrefix}${path}`.replace('//', '/'));
-      cy.wait(4000);
+      cy.wait(3000);
       cy.screenshot(filename, options);
       cy.wait(1000);
     };

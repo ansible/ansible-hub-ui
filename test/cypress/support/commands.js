@@ -41,7 +41,7 @@ Cypress.Commands.add('assertTitle', {}, (title) => {
 });
 
 Cypress.Commands.add('openHeaderKebab', {}, () => {
-  cy.wait(500);
+  cy.wait(500); // the collection detaill displays the kebab before all apis are loaded, repaints after.. just wait
   cy.scrollTo(0, 0, { ensureScrollable: false });
   cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
 });
