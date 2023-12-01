@@ -55,10 +55,6 @@ jobs:
             BACKEND_FLAVOR=community
             echo "community"
             ;;
-          insights*)
-            BACKEND_FLAVOR=insights
-            echo "insights"
-            ;;
           *)
             BACKEND_FLAVOR=standalone
             echo "standalone"
@@ -192,23 +188,6 @@ jobs:
           --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
           --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
 
-    - name: "Run insights UI"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      working-directory: 'ansible-hub-ui'
-      run: |
-        # pre-pull containers (and check for version changes)
-        FROM=node_modules/@redhat-cloud-services/frontend-components-config-utilities/standalone/services/
-        grep postgres:9.6 "$FROM"/rbac.js
-        docker pull postgres:9.6
-        grep redis:5.0.4 "$FROM"/rbac.js
-        docker pull redis:5.0.4
-        grep quay.io/cloudservices/rbac "$FROM"/rbac.js
-        docker pull quay.io/cloudservices/rbac
-        grep jboss/keycloak "$FROM"/default/chrome.js
-        docker pull jboss/keycloak
-
-        npm run start-insights &
-
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
       run: |
@@ -236,14 +215,6 @@ jobs:
         echo 'expecting /js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure insights is served"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        echo waiting for containers to start
-        sleep 30
-        curl http://localhost:8002/preview/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
-        sleep 30
-
     - name: "Ensure galaxykit can connect to API (community)"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
@@ -254,14 +225,6 @@ jobs:
       run: |
         galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Ensure galaxykit can connect to API (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        galaxykit -s http://localhost:8002/api/automation-hub/ \
-          -u admin -p admin \
-          --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
-          collection list
-
     - name: "Check initial feature flags (community)"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
       run: |
@@ -271,11 +234,6 @@ jobs:
       if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
       run: |
         curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
-
-    - name: "Check initial feature flags (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
 
     - name: "Check component versions & settings (community)"
       if: ${{ env.BACKEND_FLAVOR == 'community' }}
@@ -290,15 +248,6 @@ jobs:
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
-
-    - name: "Check component versions & settings (insights)"
-      if: ${{ env.BACKEND_FLAVOR == 'insights' }}
-      run: |
-        BEARER=`curl -s -H "Content-Type: application/x-www-form-urlencoded" \
-          -d "client_id=cloud-services&username=admin&password=admin&grant_type=password" \
-          http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token | jq -r .access_token`
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/ | jq
-        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/_ui/v1/settings/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
