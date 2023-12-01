@@ -1037,6 +1037,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       dropdownMenu: (
         <CollectionDropdown
           collection={collection}
+          data-cy='collection-kebab'
           namespace={namespace}
           onDelete={deleteFn(true)}
           onDeprecate={() =>

@@ -376,6 +376,7 @@ class Search extends React.Component<RouteProps, IState> {
     const dropdownMenu = (
       <CollectionDropdown
         collection={collection}
+        data-cy='collection-kebab'
         onDelete={deleteFn(true)}
         onDeprecate={() => this.handleControlClick(collection)}
         onRemove={deleteFn(false)}
