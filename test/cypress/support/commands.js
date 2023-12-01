@@ -41,7 +41,7 @@ Cypress.Commands.add('assertTitle', {}, (title) => {
 });
 
 Cypress.Commands.add('openHeaderKebab', {}, () => {
-  cy.scrollTo(0, 0);
+  cy.scrollTo(0, 0, { ensureScrollable: false });
   cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
 });
 
