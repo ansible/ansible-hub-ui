@@ -3267,12 +3267,20 @@ msgstr "的"
 #~ msgstr "Offline token"
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server."
+msgid "Only perform the sync if changes are reported by the remote server."
 msgstr ""
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgid "Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option."
 msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+#~ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
