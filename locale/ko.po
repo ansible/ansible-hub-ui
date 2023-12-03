@@ -106,7 +106,7 @@ msgstr ""
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
 msgid "{name} ({count})"
@@ -2786,8 +2786,7 @@ msgid "keywords"
 msgstr "키워드"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/shared/multi-search-search.tsx
 #: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -2806,6 +2805,10 @@ msgstr "레이블"
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
+
+#: src/components/collection-list/collection-filter.ts
+msgid "Last Modified"
+msgstr ""
 
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -3038,6 +3041,7 @@ msgstr "내 프로필"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -3101,8 +3105,8 @@ msgstr "이름은 비워 둘 수 없습니다."
 #~ msgstr "namespace"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
+#: src/components/collection-list/collection-filter.ts
 #: src/components/my-imports/import-list.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-role/role-list.tsx
@@ -3483,12 +3487,20 @@ msgid "Offline token"
 msgstr "Offline token"
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server."
+msgid "Only perform the sync if changes are reported by the remote server."
 msgstr ""
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgid "Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option."
 msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server."
+#~ msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+#~ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4164,8 +4176,7 @@ msgstr "생성된 리포지토리가 나타납니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/import-modal/import-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
@@ -4675,8 +4686,7 @@ msgstr "전체 컬렉션에 서명"
 #~ msgid "sign state"
 #~ msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 msgid "Sign state"
 msgstr "서명 상태"
 
@@ -4715,10 +4725,10 @@ msgid "Signatures could not be loaded."
 msgstr "서명을 로드할 수 없습니다."
 
 #: src/components/collection-list/collection-filter.tsx
-msgid "signed"
-msgstr "서명됨"
+#~ msgid "signed"
+#~ msgstr "서명됨"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/signing/signature-badge.tsx
 msgid "Signed"
 msgstr "서명됨"
@@ -4986,7 +4996,7 @@ msgstr ""
 msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 msgstr ""
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -4997,7 +5007,6 @@ msgstr "태그"
 #~ msgid "tags"
 #~ msgstr "tags"
 
-#: src/components/collection-list/collection-filter.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
 msgid "Tags"
@@ -5433,10 +5442,10 @@ msgid "unknown"
 msgstr ""
 
 #: src/components/collection-list/collection-filter.tsx
-msgid "unsigned"
-msgstr "서명되지 않음"
+#~ msgid "unsigned"
+#~ msgstr "서명되지 않음"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/signing/signature-badge.tsx
 msgid "Unsigned"
 msgstr "서명되지 않음"
@@ -5774,6 +5783,7 @@ msgstr "사용자가 생성되면 나타납니다"
 msgid "Validated"
 msgstr "검증됨"
 
+#: src/components/collection-list/collection-filter.ts
 #: src/components/headers/collection-header.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Version"

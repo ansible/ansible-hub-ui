@@ -107,7 +107,7 @@ msgstr "{downloadCount} Downloads"
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
 msgid "{name} ({count})"
@@ -2787,8 +2787,7 @@ msgid "keywords"
 msgstr "keywords"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/shared/multi-search-search.tsx
 #: src/components/shared/multi-search-search.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
@@ -2807,6 +2806,10 @@ msgstr "Labels"
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Last modified"
 msgstr "Last modified"
+
+#: src/components/collection-list/collection-filter.ts
+msgid "Last Modified"
+msgstr "Last Modified"
 
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -3039,6 +3042,7 @@ msgstr "My profile"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/my-imports/import-list.tsx
@@ -3102,8 +3106,8 @@ msgstr "Name must not be empty."
 #~ msgstr "namespace"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
+#: src/components/collection-list/collection-filter.ts
 #: src/components/my-imports/import-list.tsx
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-role/role-list.tsx
@@ -3484,12 +3488,20 @@ msgid "Offline token"
 msgstr "Offline token"
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server."
-msgstr "Only perform the sync if no changes are reported by the remote server."
+msgid "Only perform the sync if changes are reported by the remote server."
+msgstr "Only perform the sync if changes are reported by the remote server."
 
 #: src/actions/ansible-repository-sync.tsx
-msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
-msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgid "Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr "Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option."
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server."
+#~ msgstr "Only perform the sync if no changes are reported by the remote server."
+
+#: src/actions/ansible-repository-sync.tsx
+#~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+#~ msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4165,8 +4177,7 @@ msgstr "Repositories will appear once created."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-collection-version-add.tsx
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/import-modal/import-modal.tsx
 #: src/components/repo-selector/multiple-repo-selector.tsx
 #: src/components/repo-selector/repo-selector.tsx
@@ -4676,8 +4687,7 @@ msgstr "Sign entire collection"
 #~ msgid "sign state"
 #~ msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 msgid "Sign state"
 msgstr "Sign state"
 
@@ -4716,10 +4726,10 @@ msgid "Signatures could not be loaded."
 msgstr "Signatures could not be loaded."
 
 #: src/components/collection-list/collection-filter.tsx
-msgid "signed"
-msgstr "signed"
+#~ msgid "signed"
+#~ msgstr "signed"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/signing/signature-badge.tsx
 msgid "Signed"
 msgstr "Signed"
@@ -4987,7 +4997,7 @@ msgstr "Synclist distribution was not found."
 msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -4998,7 +5008,6 @@ msgstr "Tag"
 #~ msgid "tags"
 #~ msgstr "tags"
 
-#: src/components/collection-list/collection-filter.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
 msgid "Tags"
@@ -5434,10 +5443,10 @@ msgid "unknown"
 msgstr "unknown"
 
 #: src/components/collection-list/collection-filter.tsx
-msgid "unsigned"
-msgstr "unsigned"
+#~ msgid "unsigned"
+#~ msgstr "unsigned"
 
-#: src/components/collection-list/collection-filter.tsx
+#: src/components/collection-list/collection-filter.ts
 #: src/components/signing/signature-badge.tsx
 msgid "Unsigned"
 msgstr "Unsigned"
@@ -5775,6 +5784,7 @@ msgstr "Users will appear once created"
 msgid "Validated"
 msgstr "Validated"
 
+#: src/components/collection-list/collection-filter.ts
 #: src/components/headers/collection-header.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Version"
