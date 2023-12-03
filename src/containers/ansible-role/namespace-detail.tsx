@@ -1,12 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  DataList,
-  DataListCell,
-  DataListItem,
-  DataListItemCells,
-  DataListItemRow,
-  DropdownItem,
-} from '@patternfly/react-core';
+import { DataList, DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -316,34 +309,33 @@ class AnsibleRoleNamespaceDetail extends React.Component<
       ),
     ].filter(Boolean);
 
-    const infocells = [
-      <DataListCell isFilled={false} alignRight={false} key='ns-logo'>
-        <Logo
-          alt='avatar url'
-          fallbackToDefault
-          image={namespace.avatar_url}
-          size='90px'
-          unlockWidth
-          width='90px'
-        />
-        <Link to={namespace_url}>{namespace.name}</Link>
-        <ProviderLink {...provider} />
-      </DataListCell>,
-      <DataListCell isFilled={false} alignRight={false} key='ns-name'>
-        <BaseHeader title={namespace.name} />
-      </DataListCell>,
-      dropdownItems.length && (
-        <DataListCell isFilled={false} alignRight={true} key='kebab'>
-          <div style={{ marginTop: '70px' }}>
-            <StatefulDropdown items={dropdownItems} />
-          </div>
-        </DataListCell>
-      ),
-    ].filter(Boolean);
-
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <BaseHeader
+          logo={
+            <span>
+              <Logo
+                alt='avatar url'
+                fallbackToDefault
+                image={namespace.avatar_url}
+                size='90px'
+                unlockWidth
+                width='90px'
+              />
+              <Link to={namespace_url}>{namespace.name}</Link>
+              <ProviderLink {...provider} />
+            </span>
+          }
+          title={namespace.name}
+          pageControls={
+            dropdownItems.length && (
+              <div style={{ marginTop: '70px' }}>
+                <StatefulDropdown items={dropdownItems} />
+              </div>
+            )
+          }
+        />
 
         {isOpenWisdomModal && (
           <WisdomModal
@@ -353,14 +345,6 @@ class AnsibleRoleNamespaceDetail extends React.Component<
             reference={namespace.name}
           />
         )}
-
-        <DataList aria-label={t`Role namespace header`}>
-          <DataListItem>
-            <DataListItemRow>
-              <DataListItemCells dataListCells={infocells} />
-            </DataListItemRow>
-          </DataListItem>
-        </DataList>
 
         <NamespaceRoles
           addAlert={(alert) => this.addAlert(alert)}

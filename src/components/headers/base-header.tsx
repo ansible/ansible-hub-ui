@@ -1,18 +1,19 @@
 import { Title } from '@patternfly/react-core';
 import cx from 'classnames';
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import './header.scss';
 
 interface IProps {
-  title: string;
-  logo?: React.ReactNode;
-  breadcrumbs?: React.ReactNode;
-  pageControls?: React.ReactNode;
-  children?: React.ReactNode;
+  breadcrumbs?: ReactNode;
+  children?: ReactNode;
   className?: string;
-  contextSelector?: React.ReactNode;
-  versionControl?: React.ReactNode;
-  status?: React.ReactNode;
+  contextSelector?: ReactNode;
+  logo?: ReactNode;
+  pageControls?: ReactNode;
+  status?: ReactNode;
+  subTitle?: ReactNode;
+  title: string;
+  versionControl?: ReactNode;
 }
 
 export const BaseHeader = ({
@@ -25,6 +26,7 @@ export const BaseHeader = ({
   contextSelector,
   versionControl,
   status,
+  subTitle,
 }: IProps) => {
   useEffect(() => {
     document.title = title
@@ -46,6 +48,7 @@ export const BaseHeader = ({
               {title}
               {status}
             </Title>
+            {subTitle}
           </div>
         </div>
         {pageControls || null}
