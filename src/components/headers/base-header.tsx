@@ -1,6 +1,6 @@
 import { Title } from '@patternfly/react-core';
 import cx from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './header.scss';
 
 interface IProps {
@@ -15,48 +15,48 @@ interface IProps {
   status?: React.ReactNode;
 }
 
-export class BaseHeader extends React.Component<IProps> {
-  render() {
-    const {
-      title,
-      logo,
-      pageControls,
-      children,
-      breadcrumbs,
-      className,
-      contextSelector,
-      versionControl,
-      status,
-    } = this.props;
+export const BaseHeader = ({
+  title,
+  logo,
+  pageControls,
+  children,
+  breadcrumbs,
+  className,
+  contextSelector,
+  versionControl,
+  status,
+}: IProps) => {
+  useEffect(() => {
+    document.title = title
+      ? `${APPLICATION_NAME} - ${title}`
+      : APPLICATION_NAME;
+  }, [title]);
 
-    return (
-      <div className={cx('background', className)}>
-        {contextSelector || null}
-        {breadcrumbs && (
-          <div className='breadcrumb-container'>{breadcrumbs}</div>
-        )}
-        {!breadcrumbs && !contextSelector && <div className='placeholder' />}
+  return (
+    <div className={cx('background', className)}>
+      {contextSelector || null}
+      {breadcrumbs && <div className='breadcrumb-container'>{breadcrumbs}</div>}
+      {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
-        <div className='column-section'>
-          <div className='title-box'>
-            {logo}
-            <div>
-              <Title headingLevel='h1' size='2xl'>
-                {title}
-                {status}
-              </Title>
-            </div>
+      <div className='column-section'>
+        <div className='title-box'>
+          {logo}
+          <div>
+            <Title headingLevel='h1' size='2xl'>
+              {title}
+              {status}
+            </Title>
           </div>
-          {pageControls || null}
         </div>
-        {versionControl || null}
-
-        {children ? (
-          <div className='hub-header-bottom'>{children}</div>
-        ) : (
-          <div className='placeholder' />
-        )}
+        {pageControls || null}
       </div>
-    );
-  }
-}
+      {versionControl || null}
+
+      {children ? (
+        <div className='hub-header-bottom'>{children}</div>
+      ) : (
+        <div className='placeholder' />
+      )}
+    </div>
+  );
+};
