@@ -1,4 +1,8 @@
 export { AboutModalWindow } from './about-modal/about-modal';
+export { LegacyNamespaceListItem } from './ansible-role/legacy-namespace-item';
+export { LegacyRoleListItem } from './ansible-role/legacy-role-item';
+export { ProviderLink } from './ansible-role/provider-link';
+export { RoleNamespaceEditModal } from './ansible-role/role-namespace-edit-modal';
 export { ApprovalRow } from './approval/approval-row';
 export { ApproveModal } from './approval/approve-modal';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
@@ -38,9 +42,6 @@ export { CollectionHeader } from './headers/collection-header';
 export { PartnerHeader } from './headers/partner-header';
 export { HelperText } from './helper-text/helper-text';
 export { ImportModal } from './import-modal/import-modal';
-export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespace-item';
-export { ProviderLink } from './legacy-namespace-list/provider-link';
-export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';

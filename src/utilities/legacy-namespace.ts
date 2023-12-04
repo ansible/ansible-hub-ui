@@ -12,7 +12,7 @@ export function getProviderInfo(data) {
       'provider_namespaces' in summary_fields &&
       summary_fields.provider_namespaces.length > 0
     ) {
-      // legacy namespace summary
+      // role namespace summary
       provider = data.summary_fields.provider_namespaces[0];
     }
   }

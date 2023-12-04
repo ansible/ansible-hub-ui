@@ -12,6 +12,7 @@ import {
   LegacyNamespaceListItem,
   LoadingPageSpinner,
   Pagination,
+  RoleNamespaceEditModal,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
@@ -26,6 +27,7 @@ import {
 interface RoleNamespacesState {
   alerts: AlertType[];
   count: number;
+  editModal?: LegacyNamespaceListType;
   lightspeedModal?: string;
   loading: boolean;
   params: {
@@ -51,6 +53,7 @@ class AnsibleRoleNamespaceList extends React.Component<
     this.state = {
       alerts: [],
       count: 0,
+      editModal: null,
       lightspeedModal: null,
       loading: true,
       params: {
@@ -120,8 +123,15 @@ class AnsibleRoleNamespaceList extends React.Component<
       },
     ];
 
-    const { alerts, count, lightspeedModal, loading, params, roleNamespaces } =
-      this.state;
+    const {
+      alerts,
+      count,
+      editModal,
+      lightspeedModal,
+      loading,
+      params,
+      roleNamespaces,
+    } = this.state;
 
     const noData =
       count === 0 &&
@@ -139,6 +149,13 @@ class AnsibleRoleNamespaceList extends React.Component<
             closeAction={() => this.setState({ lightspeedModal: null })}
             reference={lightspeedModal}
             scope={'legacy_namespace'}
+          />
+        )}
+        {editModal && (
+          <RoleNamespaceEditModal
+            addAlert={(alert) => this.addAlert(alert)}
+            closeAction={() => this.setState({ editModal: null })}
+            namespace={editModal}
           />
         )}
         <BaseHeader title={t`Role Namespaces`} />
@@ -170,8 +187,11 @@ class AnsibleRoleNamespaceList extends React.Component<
                       <LegacyNamespaceListItem
                         key={lnamespace.id}
                         namespace={lnamespace}
-                        openModal={(namespace) =>
-                          this.setState({ lightspeedModal: namespace.name })
+                        openEditModal={(namespace) =>
+                          this.setState({ editModal: namespace })
+                        }
+                        openWisdomModal={({ name }) =>
+                          this.setState({ lightspeedModal: name })
                         }
                       />
                     ))}
