@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, DataList, DropdownItem } from '@patternfly/react-core';
-import cx from 'classnames';
+import { Button, DataList } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -14,6 +13,7 @@ import {
   AlertType,
   BaseHeader,
   CollectionCard,
+  CollectionDropdown,
   CollectionListItem,
   CollectionNextPageCard,
   DeleteCollectionModal,
@@ -23,7 +23,6 @@ import {
   ImportModal,
   LoadingPageSpinner,
   Pagination,
-  StatefulDropdown,
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';
@@ -349,58 +348,45 @@ class Search extends React.Component<RouteProps, IState> {
 
   private renderMenu(list, collection) {
     const { hasPermission } = this.context;
-    const { display_repositories } = this.context.featureFlags;
+    const canUpload = hasPermission('galaxy.upload_to_namespace');
 
-    const menuItems = [
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
-        noDependencies: null,
-        onClick: () =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-            addAlert: (alert) => this.addAlert(alert),
-            setState: (state) => this.setState(state),
-            collection,
-            deleteAll: true,
-          }),
-        deleteAll: true,
-        display_repositories: display_repositories,
-      }),
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
-        noDependencies: null,
-        onClick: () =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-            addAlert: (alert) => this.addAlert(alert),
-            setState: (state) => this.setState(state),
-            collection,
-            deleteAll: false,
-          }),
-        deleteAll: false,
-        display_repositories: display_repositories,
-      }),
-      hasPermission('galaxy.upload_to_namespace') && (
-        <DropdownItem
-          onClick={() => this.handleControlClick(collection)}
-          key='deprecate'
-        >
-          {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-        </DropdownItem>
-      ),
-      !list && hasPermission('galaxy.upload_to_namespace') && (
-        <DropdownItem
-          onClick={() => this.checkUploadPrivilleges(collection)}
-          key='upload new version'
-        >
-          {t`Upload new version`}
-        </DropdownItem>
-      ),
-    ].filter(Boolean);
+    const deleteFn = (deleteAll) => ({
+      addAlert: (alert) => this.addAlert(alert),
+      collection,
+      openModal: () =>
+        this.setState({
+          deleteCollection: collection,
+          confirmDelete: false,
+          deleteAll,
+        }),
+    });
 
-    const displayMenu = menuItems.length > 0;
+    const dropdownMenu = (
+      <CollectionDropdown
+        collection={collection}
+        data-cy='collection-kebab'
+        onDelete={deleteFn(true)}
+        onDeprecate={() => this.handleControlClick(collection)}
+        onRemove={deleteFn(false)}
+        onUploadVersion={
+          list ? null : () => this.checkUploadPrivilleges(collection)
+        }
+        wrapper={
+          list
+            ? null
+            : ({ any, children }) =>
+                any ? (
+                  <span>{children}</span>
+                ) : (
+                  <span className='hidden-menu-space' />
+                )
+        }
+      />
+    );
 
     if (list) {
       return {
-        uploadButton: hasPermission('galaxy.upload_to_namespace') ? (
+        uploadButton: canUpload ? (
           <Button
             onClick={() => this.checkUploadPrivilleges(collection)}
             variant='secondary'
@@ -408,19 +394,11 @@ class Search extends React.Component<RouteProps, IState> {
             {t`Upload new version`}
           </Button>
         ) : null,
-        dropdownMenu: displayMenu ? (
-          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-        ) : null,
+        dropdownMenu,
       };
     }
 
-    return (
-      <span className={cx(!displayMenu && 'hidden-menu-space')}>
-        {displayMenu && (
-          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-        )}
-      </span>
-    );
+    return dropdownMenu;
   }
 
   private checkUploadPrivilleges(collection) {

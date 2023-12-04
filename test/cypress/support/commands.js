@@ -40,6 +40,12 @@ Cypress.Commands.add('assertTitle', {}, (title) => {
   cy.contains('.pf-c-title', title);
 });
 
+Cypress.Commands.add('openHeaderKebab', {}, () => {
+  cy.wait(500); // the collection detaill displays the kebab before all apis are loaded, repaints after.. just wait
+  cy.scrollTo(0, 0, { ensureScrollable: false });
+  cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+});
+
 Cypress.Commands.add(
   'createUser',
   {},

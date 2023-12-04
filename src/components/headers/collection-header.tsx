@@ -2,7 +2,6 @@ import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Button,
-  DropdownItem,
   Flex,
   FlexItem,
   List,
@@ -34,6 +33,7 @@ import {
   BaseHeader,
   BreadcrumbType,
   Breadcrumbs,
+  CollectionDropdown,
   CollectionRatings,
   CopyCollectionToRepositoryModal,
   DeleteCollectionModal,
@@ -46,7 +46,6 @@ import {
   RepoSelector,
   SignAllCertificatesModal,
   SignSingleCertificateModal,
-  StatefulDropdown,
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
@@ -67,47 +66,47 @@ import { DateComponent } from '../date-component/date-component';
 import { SignatureBadge } from '../signing';
 
 interface IProps {
+  activeTab: string;
+  actuallyCollection: CollectionDetailType;
+  breadcrumbs: BreadcrumbType[];
+  className?: string;
+  collection: CollectionVersionSearch;
   collections: CollectionVersionSearch[];
   collectionsCount: number;
-  collection: CollectionVersionSearch;
-  actuallyCollection: CollectionDetailType;
   content: CollectionVersionContentType;
   params: {
     version?: string;
     latestVersion?: string;
   };
-  updateParams: (params) => void;
-  breadcrumbs: BreadcrumbType[];
-  activeTab: string;
-  className?: string;
-  repo?: string;
   reload: () => void;
+  repo?: string;
+  updateParams: (params) => void;
 }
 
 interface IState {
-  isOpenVersionsSelect: boolean;
-  isOpenVersionsModal: boolean;
-  isOpenSignModal: boolean;
+  alerts: AlertType[];
+  collectionVersion: string | null;
+  confirmDelete: boolean;
+  copyCollectionToRepositoryModal: CollectionVersionSearch;
+  deleteAll: boolean;
+  deleteCollection: CollectionVersionSearch;
+  deletionBlocked: boolean;
+  isDeletionPending: boolean;
   isOpenSignAllModal: boolean;
+  isOpenSignModal: boolean;
+  isOpenVersionsModal: boolean;
+  isOpenVersionsSelect: boolean;
   modalCollections: CollectionVersionSearch[];
   modalPagination: {
     page: number;
     page_size: number;
   };
-  deleteCollection: CollectionVersionSearch;
-  collectionVersion: string | null;
-  confirmDelete: boolean;
-  alerts: AlertType[];
+  namespace: NamespaceType;
   redirect: string;
-  noDependencies: boolean;
-  isDeletionPending: boolean;
-  updateCollection: CollectionVersionSearch;
   showImportModal: boolean;
+  updateCollection: CollectionVersionSearch;
   uploadCertificateModalOpen: boolean;
   versionToUploadCertificate: CollectionVersionSearch;
-  namespace: NamespaceType;
-  copyCollectionToRepositoryModal: CollectionVersionSearch;
-  deleteAll: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -118,36 +117,36 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      isOpenVersionsSelect: false,
-      isOpenVersionsModal: false,
-      isOpenSignModal: false,
+      alerts: [],
+      collectionVersion: null,
+      confirmDelete: false,
+      copyCollectionToRepositoryModal: null,
+      deleteAll: false,
+      deleteCollection: null,
+      deletionBlocked: true,
+      isDeletionPending: false,
       isOpenSignAllModal: false,
+      isOpenSignModal: false,
+      isOpenVersionsModal: false,
+      isOpenVersionsSelect: false,
       modalCollections: null,
       modalPagination: {
         page: 1,
         page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
       },
-      deleteCollection: null,
-      deleteAll: false,
-      collectionVersion: null,
-      confirmDelete: false,
-      alerts: [],
+      namespace: null,
       redirect: null,
-      noDependencies: false,
-      isDeletionPending: false,
-      updateCollection: null,
       showImportModal: false,
+      updateCollection: null,
       uploadCertificateModalOpen: false,
       versionToUploadCertificate: undefined,
-      namespace: null,
-      copyCollectionToRepositoryModal: null,
     };
   }
 
   componentDidMount() {
     const { collection } = this.props;
-    DeleteCollectionUtils.getUsedbyDependencies(collection)
-      .then((noDependencies) => this.setState({ noDependencies }))
+    DeleteCollectionUtils.countUsedbyDependencies(collection)
+      .then((count) => this.setState({ deletionBlocked: !!count }))
       .catch((alert) => this.addAlert(alert));
 
     NamespaceAPI.get(collection.collection_version.namespace, {
@@ -180,20 +179,30 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     } = this.props;
 
     const {
-      modalCollections,
-      modalPagination,
+      alerts,
+      collectionVersion,
+      confirmDelete,
+      copyCollectionToRepositoryModal,
+      deleteAll,
+      deleteCollection,
+      deletionBlocked,
+      isDeletionPending,
+      isOpenSignAllModal,
+      isOpenSignModal,
       isOpenVersionsModal,
       isOpenVersionsSelect,
+      modalCollections,
+      modalPagination,
+      namespace,
       redirect,
-      noDependencies,
-      collectionVersion,
-      deleteCollection,
-      confirmDelete,
-      isDeletionPending,
       showImportModal,
       updateCollection,
-      copyCollectionToRepositoryModal,
+      uploadCertificateModalOpen,
     } = this.state;
+
+    const {
+      featureFlags: { can_upload_signatures, display_signatures },
+    } = this.context;
 
     const urlKeys = [
       { key: 'documentation', name: t`Docs site` },
@@ -202,14 +211,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       { key: 'origin_repository', name: t`Repo` },
     ];
 
-    const { can_upload_signatures, display_signatures, display_repositories } =
-      this.context.featureFlags;
-
-    const {
-      collection_version,
-      is_signed,
-      namespace_metadata: namespace,
-    } = collection;
+    const { collection_version, is_signed, namespace_metadata } = collection;
 
     const {
       name: collectionName,
@@ -231,7 +233,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         .map((b, i) => (i ? <> {b}</> : b)); // join with spaces
 
     const nsTitle = namespaceTitle(
-      namespace || { name: collection_version.namespace },
+      namespace_metadata || { name: collection_version.namespace },
     );
 
     if (redirect) {
@@ -239,100 +241,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }
 
     const canSign = canSignNamespace(this.context, this.state.namespace);
-    const { hasPermission } = this.context;
 
-    const dropdownItems = [
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
-        noDependencies,
-        onClick: () => this.openDeleteModalWithConfirm(null, true),
-        deleteAll: true,
-        display_repositories: display_repositories,
-      }),
-      DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('ansible.delete_collection'),
-        noDependencies,
-        onClick: () => this.openDeleteModalWithConfirm(null, false),
-        deleteAll: false,
-        display_repositories: display_repositories,
-      }),
-      hasPermission('ansible.delete_collection') && (
-        <DropdownItem
-          data-cy='delete-collection-version'
-          key='delete-collection-version'
-          onClick={() => this.openDeleteModalWithConfirm(version, true)}
-        >
-          {t`Delete version ${version} from system`}
-        </DropdownItem>
-      ),
-      hasPermission('ansible.delete_collection') && display_repositories && (
-        <DropdownItem
-          data-cy='remove-collection-version'
-          key='remove-collection-version'
-          onClick={() => this.openDeleteModalWithConfirm(version, false)}
-        >
-          {t`Delete version ${version} from repository`}
-        </DropdownItem>
-      ),
-      canSign && !can_upload_signatures && (
-        <DropdownItem
-          key='sign-all'
-          data-cy='sign-collection-button'
-          onClick={() => this.setState({ isOpenSignAllModal: true })}
-        >
-          {t`Sign entire collection`}
-        </DropdownItem>
-      ),
-      canSign && (
-        <DropdownItem
-          key='sign-version'
-          onClick={() => {
-            if (can_upload_signatures) {
-              this.setState({
-                uploadCertificateModalOpen: true,
-                versionToUploadCertificate: collection,
-              });
-            } else {
-              this.setState({ isOpenSignModal: true });
-            }
-          }}
-          data-cy='sign-version-button'
-        >
-          {t`Sign version ${version}`}
-        </DropdownItem>
-      ),
-      hasPermission('galaxy.upload_to_namespace') && (
-        <DropdownItem
-          onClick={() => this.deprecate(collection)}
-          key='deprecate'
-        >
-          {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-        </DropdownItem>
-      ),
-      <DropdownItem
-        key='upload-collection-version'
-        onClick={() => this.checkUploadPrivilleges(collection)}
-        data-cy='upload-collection-version-dropdown'
-      >
-        {t`Upload new version`}
-      </DropdownItem>,
-      display_repositories && (
-        <DropdownItem
-          key='copy-collection-version-to-repository-dropdown'
-          onClick={() => this.copyToRepository(collection)}
-          data-cy='copy-collection-version-to-repository-dropdown'
-        >
-          {t`Copy version ${version} to repositories`}
-        </DropdownItem>
-      ),
-    ].filter(Boolean);
+    const deleteFromRepo = deleteAll ? null : collection.repository.name;
 
-    const deleteFromRepo = this.state.deleteAll
-      ? null
-      : collection.repository.name;
+    const deleteFn = (deleteAll) => ({
+      openModal: () => this.openDeleteModalWithConfirm(null, deleteAll),
+      skipCheck: true, // already handled by deletionBlocked
+    });
 
     return (
-      <React.Fragment>
+      <>
         {showImportModal && (
           <ImportModal
             isOpen={showImportModal}
@@ -356,13 +274,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         {canSign && (
           <>
             <UploadSingCertificateModal
-              isOpen={this.state.uploadCertificateModalOpen}
+              isOpen={uploadCertificateModalOpen}
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
             />
             <SignAllCertificatesModal
               name={collectionName}
-              isOpen={this.state.isOpenSignAllModal}
+              isOpen={isOpenSignAllModal}
               onSubmit={this.signCollection}
               onCancel={() => {
                 this.setState({ isOpenSignAllModal: false });
@@ -371,7 +289,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <SignSingleCertificateModal
               name={collectionName}
               version={version}
-              isOpen={this.state.isOpenSignModal}
+              isOpen={isOpenSignModal}
               onSubmit={this.signVersion}
               onCancel={() => this.setState({ isOpenSignModal: false })}
             />
@@ -464,12 +382,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           className={className}
           title={collection_version.name}
           logo={
-            namespace?.avatar_url && (
+            namespace_metadata?.avatar_url && (
               <Logo
                 alt={t`${nsTitle} logo`}
                 className='image'
                 fallbackToDefault
-                image={namespace.avatar_url}
+                image={namespace_metadata.avatar_url}
                 size='40px'
                 unlockWidth
               />
@@ -554,11 +472,38 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           pageControls={
             <Flex>
-              {dropdownItems.length > 0 ? (
-                <FlexItem data-cy='kebab-toggle'>
-                  <StatefulDropdown items={dropdownItems} />
-                </FlexItem>
-              ) : null}
+              <CollectionDropdown
+                collection={collection}
+                data-cy='kebab-toggle'
+                deletionBlocked={deletionBlocked}
+                namespace={namespace}
+                onCopyVersion={() => this.copyToRepository(collection)}
+                onDelete={deleteFn(true)}
+                onDeleteVersion={() =>
+                  this.openDeleteModalWithConfirm(version, true)
+                }
+                onDeprecate={() => this.deprecate(collection)}
+                onRemove={deleteFn(false)}
+                onRemoveVersion={() =>
+                  this.openDeleteModalWithConfirm(version, false)
+                }
+                onSign={() => this.setState({ isOpenSignAllModal: true })}
+                onSignVersion={() => {
+                  if (can_upload_signatures) {
+                    this.setState({
+                      uploadCertificateModalOpen: true,
+                      versionToUploadCertificate: collection,
+                    });
+                  } else {
+                    this.setState({ isOpenSignModal: true });
+                  }
+                }}
+                onUploadVersion={() => this.checkUploadPrivilleges(collection)}
+                version={version}
+                wrapper={({ any, children }) =>
+                  any ? <FlexItem>{children}</FlexItem> : null
+                }
+              />
             </Flex>
           }
         >
@@ -569,10 +514,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               title={t`This collection has been deprecated.`}
             />
           )}
-          <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          />
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
@@ -591,7 +533,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </div>
           </div>
         </BaseHeader>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -1060,7 +1002,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       deleteCollection: this.props.collection,
       collectionVersion: version,
       confirmDelete: false,
-      deleteAll: deleteAll,
+      deleteAll,
     });
   }
 

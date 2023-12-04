@@ -26,7 +26,7 @@ export class Constants {
   ];
 
   static TASK_NAMES = {
-    'galaxy_ng.app.tasks.curate_all_synclist_repository': msg`Curate all synclist repository`,
+    'galaxy_ng.app.tasks.curate_all_synclist_repository': msg`Curate all synclist repositories`,
     'galaxy_ng.app.tasks.curate_synclist_repository': msg`Curate synclist repository`,
     'galaxy_ng.app.tasks.import_and_auto_approve': msg`Import and auto approve`,
     'galaxy_ng.app.tasks.import_and_move_to_staging': msg`Import and move to staging`,
