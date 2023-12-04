@@ -65,7 +65,7 @@ describe('RBAC test for user without permissions', () => {
     cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
 
     // cannot Delete collection
-    cy.get('[data-cy=kebab-toggle]').should('not.exist');
+    cy.get('[data-cy="kebab-toggle"]').should('not.exist');
   });
 
   it("shouldn't let view, add, change and delete users when user doesn't have permission", () => {
@@ -287,8 +287,8 @@ describe('RBAC test for user with permissions', () => {
     cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
 
     // can Delete collection
-    cy.get('[data-cy=kebab-toggle]').should('exist').click();
-    cy.contains('Delete entire collection from system');
+    cy.openHeaderKebab();
+    cy.contains('Delete collection from system');
   });
 
   it('should let view, add, change and delete users when user has permissions', () => {

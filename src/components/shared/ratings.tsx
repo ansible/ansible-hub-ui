@@ -7,30 +7,9 @@ interface IProps {
   name: string;
 }
 
-const cache = { collection: null, role: null };
-
-const loadScore = (type, namespace, name, callback) => () => {
-  const setScores = (data) => {
-    if (namespace && name && callback) {
-      callback(data?.[namespace]?.[name]);
-    }
-  };
-
-  if (!cache[type]) {
-    // not in cache, trigger load
-    cache[type] = fetch(`/static/scores/${type}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        cache[type] = data;
-        setScores(data);
-      });
-  } else if (typeof cache[type].then === 'function') {
-    // waiting for load
-    cache[type].then(() => setScores(cache[type]));
-  } else {
-    // already loaded
-    setScores(cache[type]);
-  }
+const loadScore = (_type, _namespace, _name, _callback) => () => {
+  // only in community mode
+  return;
 };
 
 export function CollectionRatings({

@@ -10,6 +10,7 @@ export { NamespaceCard, NamespaceNextPageCard } from './cards/namespace-card';
 export { CollectionDependenciesList } from './collection-dependencies-list/collection-dependencies-list';
 export { CollectionUsedbyDependenciesList } from './collection-dependencies-list/collection-usedby-dependencies-list';
 export { CollectionContentList } from './collection-detail/collection-content-list';
+export { CollectionDropdown } from './collection-detail/collection-dropdown';
 export { CollectionInfo } from './collection-detail/collection-info';
 export { TableOfContents } from './collection-detail/table-of-contents';
 export { collectionFilter } from './collection-list/collection-filter';
