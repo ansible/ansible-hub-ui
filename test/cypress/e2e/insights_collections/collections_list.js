@@ -20,7 +20,7 @@ describe('Collections list Tests', () => {
   function undeprecate() {
     cy.visit(`${uiPrefix}repo/published/my_namespace/my_collection0`);
     cy.contains('This collection has been deprecated.');
-    cy.get('[data-cy="kebab-toggle"] [aria-label="Actions"]').click();
+    cy.openHeaderKebab();
     cy.contains('Undeprecate').click();
     cy.contains('This collection has been deprecated.', {
       timeout: 10000,
@@ -110,7 +110,7 @@ describe('Collections list Tests', () => {
     cy.get('.hub-list').contains('my_collection0');
 
     cy.get('.collection-container [aria-label="Actions"]').click();
-    cy.contains('Delete entire collection').click();
+    cy.contains('Delete collection').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
     cy.contains('Collection "my_collection0" has been successfully deleted.', {
@@ -138,7 +138,7 @@ describe('Collections list Tests', () => {
     cy.get('.body').contains('my_collection1');
 
     cy.get('.body [aria-label="Actions"]').click();
-    cy.contains('Delete entire collection').click();
+    cy.contains('Delete collection').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
 

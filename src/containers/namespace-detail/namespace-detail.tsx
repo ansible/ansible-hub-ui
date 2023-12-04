@@ -19,6 +19,7 @@ import {
   AlertList,
   AlertType,
   ClipboardCopy,
+  CollectionDropdown,
   CollectionList,
   DeleteCollectionModal,
   DeleteModal,
@@ -31,7 +32,6 @@ import {
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
-  Tooltip,
   WisdomModal,
   closeAlertMixin,
   collectionFilter,
@@ -220,6 +220,23 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       });
   }
 
+  hasPerm(permission) {
+    const { namespace } = this.state;
+    const {
+      hasPermission,
+      user: { is_superuser },
+    } = this.context;
+
+    const hasObjectPermission = (permission) =>
+      namespace?.related_fields?.my_permissions?.includes?.(permission);
+
+    return (
+      hasPermission(permission) ||
+      hasObjectPermission(permission) ||
+      is_superuser
+    );
+  }
+
   render() {
     const {
       alerts,
@@ -309,12 +326,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       'view_type',
     ];
 
-    const { hasPermission } = this.context;
-
-    const canEditOwners =
-      this.state.namespace.related_fields.my_permissions?.includes(
-        'galaxy.change_namespace',
-      ) || hasPermission('galaxy.change_namespace');
+    const canEditOwners = this.hasPerm('galaxy.change_namespace');
 
     // remove ?user/group (access tab) when switching tabs
     const tabParams = { ...params };
@@ -823,7 +835,6 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const { canSign, collections, unfilteredCount } = this.state;
     const { can_upload_signatures } = this.context.featureFlags;
     const { ai_deny_index } = this.context.featureFlags;
-    const { hasPermission } = this.context;
     const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
@@ -839,26 +850,17 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           </Link>
         }
       />,
-      hasPermission('galaxy.delete_namespace') &&
+      this.hasPerm('galaxy.delete_namespace') &&
         (unfilteredCount === 0 ? (
           <DropdownItem
             key='delete'
             onClick={() => this.setState({ isOpenNamespaceModal: true })}
           >{t`Delete namespace`}</DropdownItem>
         ) : (
-          <Tooltip
-            key='delete'
-            content={
-              <Trans>
-                Cannot delete namespace until <br />
-                collections&apos; dependencies have <br />
-                been deleted
-              </Trans>
-            }
-            position='left'
-          >
-            <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
-          </Tooltip>
+          <DropdownItem
+            isDisabled
+            description={t`Cannot delete non-empty namespace`}
+          >{t`Delete namespace`}</DropdownItem>
         )),
       <DropdownItem
         key='imports'
@@ -999,21 +1001,27 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {
-    const { hasPermission } = this.context;
-    const hasObjectPermission = (permission, namespace) =>
-      namespace?.related_fields?.my_permissions?.includes?.(permission);
-    const { showControls } = this.state;
-    const { display_repositories } = this.context.featureFlags;
-    const canDeleteCommunityCollection =
-      IS_COMMUNITY &&
-      hasObjectPermission('galaxy.change_namespace', this.state.namespace);
+    const { namespace, showControls } = this.state;
+
+    const canUpload = this.hasPerm('galaxy.upload_to_namespace');
 
     if (!showControls) {
       return;
     }
 
+    const deleteFn = (deleteAll) => ({
+      addAlert: (alert) => this.addAlert(alert),
+      collection,
+      openModal: () =>
+        this.setState({
+          deleteCollection: collection,
+          confirmDelete: false,
+          deleteAll,
+        }),
+    });
+
     return {
-      uploadButton: (
+      uploadButton: canUpload && (
         <Button
           onClick={() =>
             this.handleCollectionAction(
@@ -1027,51 +1035,18 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
         </Button>
       ),
       dropdownMenu: (
-        <StatefulDropdown
-          items={[
-            DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
-              noDependencies: null,
-              onClick: () =>
-                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-                  addAlert: (alert) => this.addAlert(alert),
-                  setState: (state) => this.setState(state),
-                  collection,
-                  deleteAll: true,
-                }),
-              deleteAll: true,
-              display_repositories: display_repositories,
-            }),
-            DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                hasPermission('ansible.delete_collection') ||
-                canDeleteCommunityCollection,
-              noDependencies: null,
-              onClick: () =>
-                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
-                  addAlert: (alert) => this.addAlert(alert),
-                  setState: (state) => this.setState(state),
-                  collection,
-                  deleteAll: false,
-                }),
-              deleteAll: false,
-              display_repositories: display_repositories,
-            }),
-            <DropdownItem
-              onClick={() =>
-                this.handleCollectionAction(
-                  collection.collection_version.pulp_href,
-                  'deprecate',
-                )
-              }
-              key='deprecate'
-            >
-              {collection.is_deprecated ? t`Undeprecate` : t`Deprecate`}
-            </DropdownItem>,
-          ].filter(Boolean)}
-          ariaLabel='collection-kebab'
+        <CollectionDropdown
+          collection={collection}
+          data-cy='collection-kebab'
+          namespace={namespace}
+          onDelete={deleteFn(true)}
+          onDeprecate={() =>
+            this.handleCollectionAction(
+              collection.collection_version.pulp_href,
+              'deprecate',
+            )
+          }
+          onRemove={deleteFn(false)}
         />
       ),
     };
