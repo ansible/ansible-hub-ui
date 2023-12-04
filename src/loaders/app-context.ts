@@ -3,15 +3,16 @@ import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 
 export interface IAppContextType {
-  user?: UserType;
-  setUser: (user: UserType) => void;
-  selectedRepo?: string;
-  featureFlags: FeatureFlagsType;
   alerts: AlertType[];
-  setAlerts: (alerts: AlertType[]) => void;
-  queueAlert: (alert: AlertType) => void;
-  settings: SettingsType;
+  featureFlags: FeatureFlagsType;
   hasPermission: (name: string) => boolean;
+  queueAlert: (alert: AlertType) => void;
+  selectedRepo?: string;
+  setAlerts: (alerts: AlertType[]) => void;
+  setUser: (user: UserType) => void;
+  settings: SettingsType;
+  updateTitle: (title: string) => void;
+  user?: UserType;
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);

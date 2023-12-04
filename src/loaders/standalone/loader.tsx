@@ -36,6 +36,12 @@ const App = (_props) => {
       name,
     );
 
+  const updateTitle = (title) => {
+    document.title = title
+      ? `${APPLICATION_NAME} - ${title}`
+      : APPLICATION_NAME;
+  };
+
   let component = <StandaloneRoutes updateInitialData={updateInitialData} />;
 
   // Hide navs on login page
@@ -61,12 +67,13 @@ const App = (_props) => {
       value={{
         alerts,
         featureFlags,
+        hasPermission,
         queueAlert,
         setAlerts,
         setUser,
         settings,
+        updateTitle,
         user,
-        hasPermission,
       }}
     >
       {component}
