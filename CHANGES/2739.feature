@@ -1,1 +1,0 @@
-Add a warning on beta-galaxy about minimum client requirements

@@ -1,3 +1,46 @@
+4.9.0 (2023-12-06)
+==================
+
+Features
+--------
+
+- Add Users section to Access tab (Namespaces, Remotes, Repositories, EEs)
+  `AAH-2284 <https://issues.redhat.com/browse/AAH-2284>`_
+- Add a warning on beta-galaxy about minimum client requirements
+  `AAH-2739 <https://issues.redhat.com/browse/AAH-2739>`_
+- Roles, role namespaces: use separate filter toolbar from collections, add sorts
+  `AAH-2791 <https://issues.redhat.com/browse/AAH-2791>`_
+
+
+Bugfixes
+--------
+
+- community Sync - disable without a requirements file .. on the detail screen
+  `AAH-2360 <https://issues.redhat.com/browse/AAH-2360>`_
+- Collection upload/deprecate - fix permission checks
+  `AAH-2439 <https://issues.redhat.com/browse/AAH-2439>`_,
+  `AAH-2853 <https://issues.redhat.com/browse/AAH-2853>`_
+- Ensure beta-galaxy users can delete their collections
+  `AAH-2632 <https://issues.redhat.com/browse/AAH-2632>`_
+- Show namespace name, not company
+  `AAH-2722 <https://issues.redhat.com/browse/AAH-2722>`_
+- Remote form: warn about signed_only enabled & missing requirements for Galaxy remote
+  `AAH-2748 <https://issues.redhat.com/browse/AAH-2748>`_
+- Use version property name instead of number.
+  `AAH-2807 <https://issues.redhat.com/browse/AAH-2807>`_
+- Repository sync - fix "optimize" description
+  `AAH-2884 <https://issues.redhat.com/browse/AAH-2884>`_
+
+
+Misc
+----
+
+- `AAH-2289 <https://issues.redhat.com/browse/AAH-2289>`_, `AAH-2626 <https://issues.redhat.com/browse/AAH-2626>`_, `AAH-2652 <https://issues.redhat.com/browse/AAH-2652>`_, `AAH-2697 <https://issues.redhat.com/browse/AAH-2697>`_, `AAH-2708 <https://issues.redhat.com/browse/AAH-2708>`_, `AAH-2726 <https://issues.redhat.com/browse/AAH-2726>`_, `AAH-2730 <https://issues.redhat.com/browse/AAH-2730>`_
+
+
+----
+
+
 4.8.0 (2023-09-13)
 ==================
 
