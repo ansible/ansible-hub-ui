@@ -1,3 +1,132 @@
+4.9.0 (2023-12-06)
+==================
+
+Features
+--------
+
+- Add Users section to Access tab (Namespaces, Remotes, Repositories, EEs)
+  `AAH-2284 <https://issues.redhat.com/browse/AAH-2284>`_
+- Add a warning on beta-galaxy about minimum client requirements
+  `AAH-2739 <https://issues.redhat.com/browse/AAH-2739>`_
+- Roles, role namespaces: use separate filter toolbar from collections, add sorts
+  `AAH-2791 <https://issues.redhat.com/browse/AAH-2791>`_
+
+
+Bugfixes
+--------
+
+- community Sync - disable without a requirements file .. on the detail screen
+  `AAH-2360 <https://issues.redhat.com/browse/AAH-2360>`_
+- Collection upload/deprecate - fix permission checks
+  `AAH-2439 <https://issues.redhat.com/browse/AAH-2439>`_,
+  `AAH-2853 <https://issues.redhat.com/browse/AAH-2853>`_
+- Ensure beta-galaxy users can delete their collections
+  `AAH-2632 <https://issues.redhat.com/browse/AAH-2632>`_
+- Show namespace name, not company
+  `AAH-2722 <https://issues.redhat.com/browse/AAH-2722>`_
+- Remote form: warn about signed_only enabled & missing requirements for Galaxy remote
+  `AAH-2748 <https://issues.redhat.com/browse/AAH-2748>`_
+- Use version property name instead of number.
+  `AAH-2807 <https://issues.redhat.com/browse/AAH-2807>`_
+- Repository sync - fix "optimize" description
+  `AAH-2884 <https://issues.redhat.com/browse/AAH-2884>`_
+
+
+Misc
+----
+
+- `AAH-2289 <https://issues.redhat.com/browse/AAH-2289>`_, `AAH-2626 <https://issues.redhat.com/browse/AAH-2626>`_, `AAH-2652 <https://issues.redhat.com/browse/AAH-2652>`_, `AAH-2697 <https://issues.redhat.com/browse/AAH-2697>`_, `AAH-2708 <https://issues.redhat.com/browse/AAH-2708>`_, `AAH-2726 <https://issues.redhat.com/browse/AAH-2726>`_, `AAH-2730 <https://issues.redhat.com/browse/AAH-2730>`_
+
+
+----
+
+
+4.8.0 (2023-09-13)
+==================
+
+Features
+--------
+
+- Collection documentation: support semantic markup.
+  `AAH-2156 <https://issues.redhat.com/browse/AAH-2156>`_
+- Add a landing page to our UI.
+  `AAH-2172 <https://issues.redhat.com/browse/AAH-2172>`_
+- Change Wisdom Modal and legacy namespaces menu, rename to Ansible Lightspeed
+  `AAH-2220 <https://issues.redhat.com/browse/AAH-2220>`_
+- Expose collection download count in the UI
+  `AAH-2237 <https://issues.redhat.com/browse/AAH-2237>`_
+- Expose legacy role download count in the UI
+  `AAH-2241 <https://issues.redhat.com/browse/AAH-2241>`_
+- Enabled community profile in cypress CI
+  `AAH-2242 <https://issues.redhat.com/browse/AAH-2242>`_
+- Repository tests - detail, list.
+  `AAH-2245 <https://issues.redhat.com/browse/AAH-2245>`_
+- cypress tests for Approval with multiple repositories
+  `AAH-2248 <https://issues.redhat.com/browse/AAH-2248>`_
+- add collection upload modal + refactor Approve Modal - extract multiple repo selector and use it both in ApproveModal and UploadModal.
+  `AAH-2250 <https://issues.redhat.com/browse/AAH-2250>`_
+- Cypress tests for collection upload with multiple repositories.
+  `AAH-2251 <https://issues.redhat.com/browse/AAH-2251>`_
+- Add copy collection version in collection detail screen
+  `AAH-2255 <https://issues.redhat.com/browse/AAH-2255>`_
+- Added filter for Approved, Staging and Rejected for Repository list.
+  `AAH-2259 <https://issues.redhat.com/browse/AAH-2259>`_
+- Delete collection or version from repo only.
+  `AAH-2261 <https://issues.redhat.com/browse/AAH-2261>`_
+- Repository list - add columns, filters
+  `AAH-2271 <https://issues.redhat.com/browse/AAH-2271>`_
+- Repository sync - modal to set mirror, optimize
+  `AAH-2301 <https://issues.redhat.com/browse/AAH-2301>`_
+- Disable checkbox for adding collection if collection is already assigned to repository
+  `AAH-2323 <https://issues.redhat.com/browse/AAH-2323>`_
+- Ajdust UI messages to reflect synclist deprecation.
+  `AAH-2335 <https://issues.redhat.com/browse/AAH-2335>`_
+
+
+Bugfixes
+--------
+
+- Properly display DRF API in browser with CSS
+  `AAH-2148 <https://issues.redhat.com/browse/AAH-2148>`_
+- Namespace detail: sign all collections only signs current repo now
+  `AAH-2308 <https://issues.redhat.com/browse/AAH-2308>`_
+- community - fix token page expiration notice when auth provider is github
+  `AAH-2324 <https://issues.redhat.com/browse/AAH-2324>`_
+- Respect `display_repositories` feature flag for collection/namespace/role filters list.
+  `AAH-2326 <https://issues.redhat.com/browse/AAH-2326>`_
+- Repositories, Remotes - clean filter text on search
+  `AAH-2340 <https://issues.redhat.com/browse/AAH-2340>`_
+- Support old galaxy URLs outside of base path, disambiguate
+  `AAH-2342 <https://issues.redhat.com/browse/AAH-2342>`_
+- Approval dashboard: fix when more than 10 staging repos
+  `AAH-2366 <https://issues.redhat.com/browse/AAH-2366>`_
+- c.r.c. move alert list so it's not covered by breadcrumbs
+  `AAH-2432 <https://issues.redhat.com/browse/AAH-2432>`_
+- Fix Namespaces/Partners breadcrumb
+  `AAH-2433 <https://issues.redhat.com/browse/AAH-2433>`_
+- Removed alert from task view page stating users could only see their tasks.  All authenticated users can list and retrieve task details.
+  `AAH-2438 <https://issues.redhat.com/browse/AAH-2438>`_
+- Namespace detail: use is_highest consistently
+  `AAH-2443 <https://issues.redhat.com/browse/AAH-2443>`_
+- Better choice of distribution when multiple per repo
+  `AAH-2586 <https://issues.redhat.com/browse/AAH-2586>`_
+- Add autocomplete=off to login form fields
+  `AAH-2625 <https://issues.redhat.com/browse/AAH-2625>`_
+- Fix dispatch page filter param
+  `AAH-2670 <https://issues.redhat.com/browse/AAH-2670>`_
+- Collection documentation: do not wrongly interpret plugins/modules whose name starts with `_` as deprecated.
+
+
+
+Misc
+----
+
+- `AAH-1893 <https://issues.redhat.com/browse/AAH-1893>`_
+
+
+----
+
+
 4.7.0 (2023-04-17)
 ==================
 
