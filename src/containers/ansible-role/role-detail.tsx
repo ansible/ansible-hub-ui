@@ -3,15 +3,11 @@ import {
   DataList,
   DataListCell,
   DataListItem,
-  DataListItemCells,
   DataListItemRow,
   Nav,
   NavItem,
   NavList,
   Panel,
-  Text,
-  TextContent,
-  TextVariants,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React from 'react';
@@ -25,6 +21,7 @@ import { EmptyStateNoData } from 'src/components';
 import {
   AlertList,
   AlertType,
+  BaseHeader,
   Breadcrumbs,
   ClipboardCopy,
   DateComponent,
@@ -306,52 +303,6 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       release_name = '';
     }
 
-    const header_cells = [
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
-        <Logo
-          alt={t`${namespace.name} logo`}
-          fallbackToDefault
-          image={role.summary_fields.namespace.avatar_url}
-          size='70px'
-          unlockWidth
-          width='97px'
-        />
-        <Link to={namespace_url}>{namespace.name}</Link>
-      </DataListCell>,
-      <DataListCell key='content'>
-        <div>
-          <TextContent>
-            <Text component={TextVariants.h1}>
-              {namespace.name}.{role.name}
-            </Text>
-          </TextContent>
-        </div>
-        <div className='hub-entry'>{role.description}</div>
-        <div className='hub-entry'>
-          <LabelGroup>
-            {role.summary_fields.tags.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
-          </LabelGroup>
-        </div>
-      </DataListCell>,
-      <DataListCell isFilled={false} alignRight key='version'>
-        <div className='hub-right-col hub-entry'>
-          <Trans>
-            Updated <DateComponent date={release_date} />
-          </Trans>
-        </div>
-        {release_name && <div className='hub-entry'>{release_name}</div>}
-        <div className='hub-entry'>
-          <ExternalLink href={repository}>{t`GitHub Repository`}</ExternalLink>
-        </div>
-        <div className='hub-entry'>
-          <RoleRatings namespace={namespace.name} name={role.name} />
-          <DownloadCount item={role} />
-        </div>
-      </DataListCell>,
-    ];
-
     const table = {
       install: { title: t`Install` },
       documentation: { title: t`Documentation` },
@@ -422,38 +373,74 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-
-        <DataList aria-label={t`Role Header`}>
-          <DataListItem data-cy='LegacyRoleListItem'>
-            {/* This renders a bit too small ...? */}
-            <DataListItemRow>
-              <Breadcrumbs links={breadcrumbs} />
-            </DataListItemRow>
-
-            <DataListItemRow>
-              <DataListItemCells dataListCells={header_cells} />
-            </DataListItemRow>
-          </DataListItem>
-        </DataList>
-
-        <Panel isScrollable>
-          <Nav theme='light' variant='tertiary' onSelect={onSelect}>
-            <NavList>
-              {Object.keys(table).map((key) => {
-                return (
-                  <NavItem
-                    isActive={activeItem === key}
-                    title={table[key].title}
-                    key={key}
-                    itemId={key}
-                  >
-                    {table[key].title}
-                  </NavItem>
-                );
-              })}
-            </NavList>
-          </Nav>
-        </Panel>
+        <BaseHeader
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
+          title={`${namespace.name}.${role.name}`}
+          subTitle={
+            <>
+              <div className='hub-entry'>{role.description}</div>
+              <div className='hub-entry'>
+                <LabelGroup>
+                  {role.summary_fields.tags.map((tag, index) => (
+                    <Tag key={index}>{tag}</Tag>
+                  ))}
+                </LabelGroup>
+              </div>
+            </>
+          }
+          logo={
+            <span>
+              <Logo
+                alt={t`${namespace.name} logo`}
+                fallbackToDefault
+                image={role.summary_fields.namespace.avatar_url}
+                size='70px'
+                unlockWidth
+                width='97px'
+              />
+              <Link to={namespace_url}>{namespace.name}</Link>
+            </span>
+          }
+          pageControls={
+            <div>
+              <div className='hub-right-col hub-entry'>
+                <Trans>
+                  Updated <DateComponent date={release_date} />
+                </Trans>
+              </div>
+              {release_name && <div className='hub-entry'>{release_name}</div>}
+              <div className='hub-entry'>
+                <ExternalLink
+                  href={repository}
+                >{t`GitHub Repository`}</ExternalLink>
+              </div>
+              <div className='hub-entry'>
+                <RoleRatings namespace={namespace.name} name={role.name} />
+                <DownloadCount item={role} />
+              </div>
+            </div>
+          }
+        >
+          {/* FIXME: replace with LinkTabs */}
+          <Panel isScrollable>
+            <Nav theme='light' variant='tertiary' onSelect={onSelect}>
+              <NavList>
+                {Object.keys(table).map((key) => {
+                  return (
+                    <NavItem
+                      isActive={activeItem === key}
+                      title={table[key].title}
+                      key={key}
+                      itemId={key}
+                    >
+                      {table[key].title}
+                    </NavItem>
+                  );
+                })}
+              </NavList>
+            </Nav>
+          </Panel>
+        </BaseHeader>
 
         <Main>
           <section className='body'>{renderContent()}</section>

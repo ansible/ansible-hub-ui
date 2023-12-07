@@ -55,6 +55,11 @@ const App = (_props) => {
             },
             name,
           ),
+        updateTitle: (title) => {
+          updateDocumentTitle(
+            title ? `${APPLICATION_NAME} - ${title}` : APPLICATION_NAME,
+          );
+        },
       }}
     >
       <InsightsRoutes />

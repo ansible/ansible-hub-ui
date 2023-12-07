@@ -386,7 +386,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         )}
         <BaseHeader
           className={className}
-          title={collection_version.name}
+          title={`${collection_version.namespace}.${collection_version.name}`}
           logo={
             namespace_metadata?.avatar_url && (
               <Logo
