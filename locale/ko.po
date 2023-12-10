@@ -33,7 +33,7 @@ msgstr "(업로드됨)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} 로고"
@@ -258,6 +258,7 @@ msgstr "태그에는 소문자 및 대문자 ASCII 알파벳 문자, 숫자, 밑
 msgid "About"
 msgstr "정보"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/ansible-remote/detail.tsx
@@ -455,7 +456,7 @@ msgstr ""
 msgid "Ansible Lightspeed"
 msgstr ""
 
-#: src/components/legacy-namespace-list/legacy-namespace-item.tsx
+#: src/components/ansible-role/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -676,6 +677,7 @@ msgstr "CA 인증서"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
@@ -708,13 +710,22 @@ msgid "Canceled"
 msgstr "취소됨"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
-msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다"
+#~ msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
+#~ msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Cannot delete non-empty namespace"
+msgstr ""
 
 #: src/utilities/delete-collection.tsx
 #: src/utilities/delete-collection.tsx
-msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
-msgstr "이 컬렉션 <0/>에 종속된 컬렉션<1/>이/가 삭제될 때까지 컬렉션을 삭제할 수 없습니다."
+#~ msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
+#~ msgstr "이 컬렉션 <0/>에 종속된 컬렉션<1/>이/가 삭제될 때까지 컬렉션을 삭제할 수 없습니다."
+
+#: src/components/collection-detail/collection-dropdown.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Cannot delete until collections that depend on this collection have been deleted."
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
@@ -791,6 +802,12 @@ msgstr "기존 실행 환경 변경."
 #: src/constants.tsx
 #~ msgid "Change namespace"
 #~ msgstr "Change namespace"
+
+#: src/components/ansible-role/legacy-namespace-item.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Change provider namespace"
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Change remote registry"
@@ -1253,7 +1270,7 @@ msgstr "CLI 구성 복사"
 msgid "Copy to clipboard"
 msgstr "클립보드에 복사"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Copy version {version} to repositories"
 msgstr ""
 
@@ -1376,8 +1393,12 @@ msgid "Creation started for distribution {distributionName}"
 msgstr "배포를 위한 생성 시작 {distributionName}"
 
 #: src/constants.tsx
-msgid "Curate all synclist repository"
-msgstr "모든 동기화 목록 리포지토리 관리"
+msgid "Curate all synclist repositories"
+msgstr ""
+
+#: src/constants.tsx
+#~ msgid "Curate all synclist repository"
+#~ msgstr "모든 동기화 목록 리포지토리 관리"
 
 #: src/constants.tsx
 msgid "Curate synclist repository"
@@ -1390,6 +1411,10 @@ msgstr "동기화 목록 리포지토리 배치 관리"
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Current content"
 msgstr "현재 콘텐츠"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Current provider namespace"
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Current tags"
@@ -1457,7 +1482,11 @@ msgstr "삭제"
 #~ msgstr "Delete collection"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete collection from repository"
+#~ msgid "Delete collection from repository"
+#~ msgstr ""
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Delete collection from system"
 msgstr ""
 
 #: src/constants.tsx
@@ -1506,8 +1535,8 @@ msgstr "컨테이너를 삭제하시겠습니까?"
 #~ msgstr "전체 컬렉션 삭제"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete entire collection from system"
-msgstr ""
+#~ msgid "Delete entire collection from system"
+#~ msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Delete group"
@@ -1579,10 +1608,10 @@ msgstr "사용자를 삭제하시겠습니까?"
 #~ msgstr "버전 삭제 {version}"
 
 #: src/components/headers/collection-header.tsx
-msgid "Delete version {version} from repository"
-msgstr ""
+#~ msgid "Delete version {version} from repository"
+#~ msgstr ""
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Delete version {version} from system"
 msgstr ""
 
@@ -1648,9 +1677,7 @@ msgstr "종속 컬렉션"
 msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Deprecate"
 msgstr "더 이상 사용되지 않음"
 
@@ -1667,6 +1694,7 @@ msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr "\"{name}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작합니다."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/namespace-form/namespace-form.tsx
@@ -2215,6 +2243,10 @@ msgstr "{operation} 태그 \"{tag}\"에 실패했습니다."
 msgid "Failed to approve collection."
 msgstr "컬렉션을 승인하지 못했습니다."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Failed to change provider namespace."
+msgstr ""
+
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Failed to copy collection version."
 msgstr ""
@@ -2576,6 +2608,7 @@ msgstr "그룹 목록"
 msgid "Group name"
 msgstr "그룹 이름"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/rbac/user-form.tsx
@@ -2781,6 +2814,7 @@ msgstr ""
 msgid "Key fingerprint"
 msgstr "키 지문"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "keywords"
 msgstr "키워드"
@@ -3039,6 +3073,7 @@ msgstr "내 네임스페이스"
 msgid "My profile"
 msgstr "내 프로필"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/collection-list/collection-filter.ts
@@ -3144,6 +3179,10 @@ msgstr "네임 스페이스 <0>{name}</0> 는 Ansible Lightspeed에서 선택 �
 #~ msgid "Namespace Header"
 #~ msgstr "네임스페이스 헤더"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Namespace list"
+msgstr ""
+
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
 msgstr "네임스페이스 이름"
@@ -3175,6 +3214,7 @@ msgstr "네임스페이스"
 msgid "Namespaces list could not be displayed."
 msgstr "네임스페이스 목록을 표시할 수 없습니다."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "Namespaces will appear once created"
 msgstr "생성된 네임스페이스가 나타납니다"
@@ -3331,6 +3371,10 @@ msgstr ""
 msgid "No namespace selected."
 msgstr "선택된 네임스페이스가 없습니다."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "No namespaces found"
+msgstr ""
+
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "아직 네임스페이스가 없음"
@@ -3430,6 +3474,8 @@ msgstr "{version_range}과 일치하는 {fqn} 버전이 없습니다."
 msgid "No versions"
 msgstr "버전이 없음"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/pulp-labels.tsx
@@ -3746,7 +3792,7 @@ msgstr "보호된 리포지토리는 삭제할 수 없습니다."
 #~ msgid "Provided by <0>{company}</0>"
 #~ msgstr "<0>{company}</0>에서 제공"
 
-#: src/components/legacy-namespace-list/provider-link.tsx
+#: src/components/ansible-role/provider-link.tsx
 msgid "Provided by <0>{name}</0>"
 msgstr ""
 
@@ -4104,6 +4150,10 @@ msgstr "리포지토리 {name} 제거 시작"
 msgid "Remove"
 msgstr "제거"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove collection from repository"
+msgstr ""
+
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Remove collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
@@ -4140,6 +4190,10 @@ msgstr ""
 #: src/containers/group-management/group-detail.tsx
 msgid "Remove user from group?"
 msgstr "그룹에서 사용자를 제거하시겠습니까?"
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove version {version} from repository"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Repo"
@@ -4311,8 +4365,8 @@ msgid "Role {0} has been successfully added to {1}."
 msgstr "역할 {0}이/가 {1}에 성공적으로 추가되었습니다."
 
 #: src/containers/ansible-role/role-detail.tsx
-msgid "Role Header"
-msgstr "역할 헤더"
+#~ msgid "Role Header"
+#~ msgstr "역할 헤더"
 
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
@@ -4321,9 +4375,13 @@ msgstr "역할 헤더"
 msgid "Role name"
 msgstr "역할 이름"
 
-#: src/containers/ansible-role/namespace-detail.tsx
-msgid "Role namespace header"
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Role namespace"
 msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#~ msgid "Role namespace header"
+#~ msgstr ""
 
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
@@ -4377,6 +4435,7 @@ msgstr "가져온 후 역할이 나타납니다"
 msgid "Running"
 msgstr "실행 중"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/rbac/group-modal.tsx
@@ -4545,6 +4604,10 @@ msgstr "선택됨"
 msgid "Selected group"
 msgstr "선택된 그룹"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Selected provider namespace"
+msgstr ""
+
 #: src/components/rbac/select-roles.tsx
 msgid "Selected roles"
 msgstr "선택된 역할"
@@ -4678,9 +4741,13 @@ msgstr "{repository}에서 모든 컬렉션에 서명"
 msgid "Sign and approve"
 msgstr "서명 및 승인"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Sign collection"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx
-msgid "Sign entire collection"
-msgstr "전체 컬렉션에 서명"
+#~ msgid "Sign entire collection"
+#~ msgstr "전체 컬렉션에 서명"
 
 #: src/components/collection-list/collection-filter.tsx
 #~ msgid "sign state"
@@ -4694,7 +4761,7 @@ msgstr "서명 상태"
 #~ msgid "Sign version {0}"
 #~ msgstr "Sign version {0}"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 msgid "Sign version {version}"
 msgstr "서명 버전 {version}"
@@ -4869,6 +4936,10 @@ msgstr "작업을 중지하시겠습니까?"
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Successfully changed provider namespace."
+msgstr ""
 
 #: src/actions/ansible-repository-copy.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -5431,9 +5502,7 @@ msgstr "유형"
 msgid "UI Version"
 msgstr "UI 버전"
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
@@ -5474,8 +5543,8 @@ msgstr "리포지터리 {0}업데이트 시작"
 msgid "updated <0/>"
 msgstr ""
 
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/components/collection-list/collection-list-item.tsx
-#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
 msgstr "업데이트됨 <0/>"
@@ -5499,9 +5568,8 @@ msgstr ""
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
 #: src/containers/search/search.tsx
 msgid "Upload new version"
 msgstr "새 버전 업로드"
@@ -5753,6 +5821,7 @@ msgstr "사용자 이름"
 msgid "Username: {0}"
 msgstr "사용자 이름: {0}"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/user-management/user-create.tsx

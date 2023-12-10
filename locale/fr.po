@@ -33,7 +33,7 @@ msgstr "(téléchargé)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} logo"
@@ -258,6 +258,7 @@ msgstr "Un tag peut contenir des caractères alphabétiques ASCII minuscules et 
 msgid "About"
 msgstr "À propos de"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/ansible-remote/detail.tsx
@@ -455,7 +456,7 @@ msgstr ""
 msgid "Ansible Lightspeed"
 msgstr ""
 
-#: src/components/legacy-namespace-list/legacy-namespace-item.tsx
+#: src/components/ansible-role/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -676,6 +677,7 @@ msgstr "Certificat CA"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
@@ -708,13 +710,22 @@ msgid "Canceled"
 msgstr "Annulé"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
-msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances des collections n'ont pas été supprimées<1/>"
+#~ msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
+#~ msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances des collections n'ont pas été supprimées<1/>"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Cannot delete non-empty namespace"
+msgstr ""
 
 #: src/utilities/delete-collection.tsx
 #: src/utilities/delete-collection.tsx
-msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
-msgstr "Impossible à supprimer tant que les collections <0/> qui dépendent de cette collection <1/> n'ont pas été supprimées."
+#~ msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
+#~ msgstr "Impossible à supprimer tant que les collections <0/> qui dépendent de cette collection <1/> n'ont pas été supprimées."
+
+#: src/components/collection-detail/collection-dropdown.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Cannot delete until collections that depend on this collection have been deleted."
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
@@ -791,6 +802,12 @@ msgstr "Changer les environnements d'exécution existants."
 #: src/constants.tsx
 #~ msgid "Change namespace"
 #~ msgstr "Change namespace"
+
+#: src/components/ansible-role/legacy-namespace-item.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Change provider namespace"
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Change remote registry"
@@ -1253,7 +1270,7 @@ msgstr "Copier la configuration CLI"
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papiers"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Copy version {version} to repositories"
 msgstr ""
 
@@ -1376,8 +1393,12 @@ msgid "Creation started for distribution {distributionName}"
 msgstr "La création a commencé pour la distribution {distributionName}"
 
 #: src/constants.tsx
-msgid "Curate all synclist repository"
-msgstr "Organiser le référentiel de tous les synclistes"
+msgid "Curate all synclist repositories"
+msgstr ""
+
+#: src/constants.tsx
+#~ msgid "Curate all synclist repository"
+#~ msgstr "Organiser le référentiel de tous les synclistes"
 
 #: src/constants.tsx
 msgid "Curate synclist repository"
@@ -1390,6 +1411,10 @@ msgstr "Organiser le groupe de référentiel de synclistes"
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Current content"
 msgstr "Contenu actuel"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Current provider namespace"
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Current tags"
@@ -1457,7 +1482,11 @@ msgstr "Supprimer"
 #~ msgstr "Delete collection"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete collection from repository"
+#~ msgid "Delete collection from repository"
+#~ msgstr ""
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Delete collection from system"
 msgstr ""
 
 #: src/constants.tsx
@@ -1506,8 +1535,8 @@ msgstr "Supprimer le conteneur ?"
 #~ msgstr "Supprimer toute la collection"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete entire collection from system"
-msgstr ""
+#~ msgid "Delete entire collection from system"
+#~ msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Delete group"
@@ -1579,10 +1608,10 @@ msgstr "Supprimer l’utilisateur ?"
 #~ msgstr "Supprimer la version {version}"
 
 #: src/components/headers/collection-header.tsx
-msgid "Delete version {version} from repository"
-msgstr ""
+#~ msgid "Delete version {version} from repository"
+#~ msgstr ""
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Delete version {version} from system"
 msgstr ""
 
@@ -1648,9 +1677,7 @@ msgstr "Collections dépendantes"
 msgid "Dependent collections could not be displayed."
 msgstr "Les collections dépendantes n’ont pas pu être affichées."
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Deprecate"
 msgstr "Dépréciation de"
 
@@ -1667,6 +1694,7 @@ msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr "La mise à jour de l'état de dépréciation commence pour la collection \"{name}\"."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/namespace-form/namespace-form.tsx
@@ -2215,6 +2243,10 @@ msgstr "Échec de {operation} pour la balise \"{tag}\"."
 msgid "Failed to approve collection."
 msgstr "N'a pas approuvé la collection."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Failed to change provider namespace."
+msgstr ""
+
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Failed to copy collection version."
 msgstr ""
@@ -2576,6 +2608,7 @@ msgstr "Liste des groupes"
 msgid "Group name"
 msgstr "Nom du groupe"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/rbac/user-form.tsx
@@ -2781,6 +2814,7 @@ msgstr ""
 msgid "Key fingerprint"
 msgstr "Empreinte digitale de la clé"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "keywords"
 msgstr "mots clés"
@@ -3039,6 +3073,7 @@ msgstr "Mes espaces de noms"
 msgid "My profile"
 msgstr "Mon profil"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/collection-list/collection-filter.ts
@@ -3144,6 +3179,10 @@ msgstr "L'espace de noms <0>{name}</0> est exclu d'Ansible Lightspeed."
 #~ msgid "Namespace Header"
 #~ msgstr "En-tête de l'espace de nommage"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Namespace list"
+msgstr ""
+
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
 msgstr "Nom de l’espace de nommage"
@@ -3175,6 +3214,7 @@ msgstr "Espaces de noms"
 msgid "Namespaces list could not be displayed."
 msgstr "La liste d’espace-noms n’a pas pu être affichée."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
@@ -3331,6 +3371,10 @@ msgstr ""
 msgid "No namespace selected."
 msgstr "Aucun espace de nom n'a été sélectionné."
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "No namespaces found"
+msgstr ""
+
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "Pas encore d'espace de noms"
@@ -3430,6 +3474,8 @@ msgstr "Il n'existe aucune version de {fqn} qui corresponde à {version_range}."
 msgid "No versions"
 msgstr "Aucune version"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/pulp-labels.tsx
@@ -3746,7 +3792,7 @@ msgstr "Les référentiels protégés ne peuvent pas être supprimés."
 #~ msgid "Provided by <0>{company}</0>"
 #~ msgstr "Fourni par <0>{company}</0>"
 
-#: src/components/legacy-namespace-list/provider-link.tsx
+#: src/components/ansible-role/provider-link.tsx
 msgid "Provided by <0>{name}</0>"
 msgstr ""
 
@@ -4104,6 +4150,10 @@ msgstr "Début de la suppression pour le référentiel {name}"
 msgid "Remove"
 msgstr "Supprimer"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove collection from repository"
+msgstr ""
+
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Remove collection version?"
 msgstr "Supprimer la version de la collection ?"
@@ -4140,6 +4190,10 @@ msgstr ""
 #: src/containers/group-management/group-detail.tsx
 msgid "Remove user from group?"
 msgstr "Supprimer un utilisateur d'un groupe ?"
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove version {version} from repository"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Repo"
@@ -4311,8 +4365,8 @@ msgid "Role {0} has been successfully added to {1}."
 msgstr "Le rôle \"{0}\" a été ajouté au groupe \"{1}\"."
 
 #: src/containers/ansible-role/role-detail.tsx
-msgid "Role Header"
-msgstr "Rôle de l'en-tête"
+#~ msgid "Role Header"
+#~ msgstr "Rôle de l'en-tête"
 
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
@@ -4321,9 +4375,13 @@ msgstr "Rôle de l'en-tête"
 msgid "Role name"
 msgstr "Nom du rôle"
 
-#: src/containers/ansible-role/namespace-detail.tsx
-msgid "Role namespace header"
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Role namespace"
 msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#~ msgid "Role namespace header"
+#~ msgstr ""
 
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
@@ -4377,6 +4435,7 @@ msgstr "Les rôles apparaîtront une fois importés"
 msgid "Running"
 msgstr "En cours d'exécution"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/rbac/group-modal.tsx
@@ -4545,6 +4604,10 @@ msgstr "Sélectionné"
 msgid "Selected group"
 msgstr "Groupe sélectionné"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Selected provider namespace"
+msgstr ""
+
 #: src/components/rbac/select-roles.tsx
 msgid "Selected roles"
 msgstr "Rôles choisis"
@@ -4678,9 +4741,13 @@ msgstr "Signer toutes les collections dans {repository}"
 msgid "Sign and approve"
 msgstr "Signer et approuver"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Sign collection"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx
-msgid "Sign entire collection"
-msgstr "Signer toute la collection"
+#~ msgid "Sign entire collection"
+#~ msgstr "Signer toute la collection"
 
 #: src/components/collection-list/collection-filter.tsx
 #~ msgid "sign state"
@@ -4694,7 +4761,7 @@ msgstr "Signer l’état"
 #~ msgid "Sign version {0}"
 #~ msgstr "Sign version {0}"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 msgid "Sign version {version}"
 msgstr "Signer la version {version}"
@@ -4869,6 +4936,10 @@ msgstr "Arrêter la tâche ?"
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Successfully changed provider namespace."
+msgstr ""
 
 #: src/actions/ansible-repository-copy.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -5431,9 +5502,7 @@ msgstr "Type"
 msgid "UI Version"
 msgstr "UI Version"
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Undeprecate"
 msgstr "Réversion de dépréciation"
 
@@ -5474,8 +5543,8 @@ msgstr "La mise à jour a commencé pour le référentiel {0}"
 msgid "updated <0/>"
 msgstr ""
 
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/components/collection-list/collection-list-item.tsx
-#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
 msgstr "Mise à jour de <0/>"
@@ -5499,9 +5568,8 @@ msgstr ""
 msgid "Upload collection"
 msgstr "Télécharger la collection"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
 #: src/containers/search/search.tsx
 msgid "Upload new version"
 msgstr "Télécharger la nouvelle version"
@@ -5753,6 +5821,7 @@ msgstr "Nom d'utilisateur"
 msgid "Username: {0}"
 msgstr "Nom d'utilisateur : {0}"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/user-management/user-create.tsx

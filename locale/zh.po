@@ -33,7 +33,7 @@ msgstr "（上传）"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/legacy-role-list/legacy-role-item.tsx
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} 标志"
@@ -258,6 +258,7 @@ msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划�
 msgid "About"
 msgstr "关于"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/ansible-remote/detail.tsx
@@ -455,7 +456,7 @@ msgstr ""
 msgid "Ansible Lightspeed"
 msgstr ""
 
-#: src/components/legacy-namespace-list/legacy-namespace-item.tsx
+#: src/components/ansible-role/legacy-namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -676,6 +677,7 @@ msgstr "CA 证书"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
@@ -708,13 +710,22 @@ msgid "Canceled"
 msgstr "已取消"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
-msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
-msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
+#~ msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
+#~ msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Cannot delete non-empty namespace"
+msgstr ""
 
 #: src/utilities/delete-collection.tsx
 #: src/utilities/delete-collection.tsx
-msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
-msgstr "无法删除集合，直到集合 <0/>依赖于此集合 <1/> 已被删除。"
+#~ msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
+#~ msgstr "无法删除集合，直到集合 <0/>依赖于此集合 <1/> 已被删除。"
+
+#: src/components/collection-detail/collection-dropdown.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Cannot delete until collections that depend on this collection have been deleted."
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
@@ -791,6 +802,12 @@ msgstr "更改现存的执行环境。"
 #: src/constants.tsx
 #~ msgid "Change namespace"
 #~ msgstr "Change namespace"
+
+#: src/components/ansible-role/legacy-namespace-item.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Change provider namespace"
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Change remote registry"
@@ -1253,7 +1270,7 @@ msgstr "复制 CLI 配置"
 msgid "Copy to clipboard"
 msgstr "复制到剪贴板"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Copy version {version} to repositories"
 msgstr ""
 
@@ -1376,8 +1393,12 @@ msgid "Creation started for distribution {distributionName}"
 msgstr "为分发 {distributionName} 开始创建"
 
 #: src/constants.tsx
-msgid "Curate all synclist repository"
-msgstr "策展所有同步列表仓库"
+msgid "Curate all synclist repositories"
+msgstr ""
+
+#: src/constants.tsx
+#~ msgid "Curate all synclist repository"
+#~ msgstr "策展所有同步列表仓库"
 
 #: src/constants.tsx
 msgid "Curate synclist repository"
@@ -1390,6 +1411,10 @@ msgstr "策展同步列表仓库批量"
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Current content"
 msgstr "当前内容"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Current provider namespace"
+msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Current tags"
@@ -1457,7 +1482,11 @@ msgstr "删除"
 #~ msgstr "Delete collection"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete collection from repository"
+#~ msgid "Delete collection from repository"
+#~ msgstr ""
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Delete collection from system"
 msgstr ""
 
 #: src/constants.tsx
@@ -1506,8 +1535,8 @@ msgstr "删除容器？"
 #~ msgstr "删除整个集合"
 
 #: src/utilities/delete-collection.tsx
-msgid "Delete entire collection from system"
-msgstr ""
+#~ msgid "Delete entire collection from system"
+#~ msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Delete group"
@@ -1579,10 +1608,10 @@ msgstr "删除用户？"
 #~ msgstr "删除版本 {version}"
 
 #: src/components/headers/collection-header.tsx
-msgid "Delete version {version} from repository"
-msgstr ""
+#~ msgid "Delete version {version} from repository"
+#~ msgstr ""
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Delete version {version} from system"
 msgstr ""
 
@@ -1648,9 +1677,7 @@ msgstr "依赖性集合"
 msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Deprecate"
 msgstr "弃用"
 
@@ -1667,6 +1694,7 @@ msgid "Deprecation status update starting for collection \"{name}\"."
 msgstr "为集合 \"{name}\" 开始的弃用状态更新。"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/namespace-form/namespace-form.tsx
@@ -2215,6 +2243,10 @@ msgstr "{operation} tag \"{tag}\" 失败。"
 msgid "Failed to approve collection."
 msgstr "批准集合失败。"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Failed to change provider namespace."
+msgstr ""
+
 #: src/components/copy-collection-to-repository-modal/copy-collection-to-repository-modal.tsx
 msgid "Failed to copy collection version."
 msgstr ""
@@ -2576,6 +2608,7 @@ msgstr "组列表"
 msgid "Group name"
 msgstr "组名称"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/user-form.tsx
 #: src/components/rbac/user-form.tsx
@@ -2781,6 +2814,7 @@ msgstr ""
 msgid "Key fingerprint"
 msgstr "密钥指纹"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "keywords"
 msgstr "关键字"
@@ -3039,6 +3073,7 @@ msgstr "我的命名空间"
 msgid "My profile"
 msgstr "我的配置集"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/collection-list/collection-filter.ts
@@ -3144,6 +3179,10 @@ msgstr "命名空间 <0>{name}</0> 被选择不使用 Ansible Lightspeed。"
 #~ msgid "Namespace Header"
 #~ msgstr "命名空间标头"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Namespace list"
+msgstr ""
+
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
 msgstr "命名空间名称"
@@ -3175,6 +3214,7 @@ msgstr "命名空间"
 msgid "Namespaces list could not be displayed."
 msgstr "无法显示命名空间列表。"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
@@ -3331,6 +3371,10 @@ msgstr ""
 msgid "No namespace selected."
 msgstr "没有选择命名空间。"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "No namespaces found"
+msgstr ""
+
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
@@ -3430,6 +3474,8 @@ msgstr "不存在与 {version_range} 匹配的 {fqn} 版本。"
 msgid "No versions"
 msgstr "没有版本"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/ansible-repository-form.tsx
 #: src/components/repositories/pulp-labels.tsx
@@ -3746,7 +3792,7 @@ msgstr "无法删除受保护的仓库。"
 #~ msgid "Provided by <0>{company}</0>"
 #~ msgstr "由 <0>{company}</0> 提供"
 
-#: src/components/legacy-namespace-list/provider-link.tsx
+#: src/components/ansible-role/provider-link.tsx
 msgid "Provided by <0>{name}</0>"
 msgstr ""
 
@@ -4104,6 +4150,10 @@ msgstr "为仓库 {name} 删除开始"
 msgid "Remove"
 msgstr "删除"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove collection from repository"
+msgstr ""
+
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Remove collection version?"
 msgstr "删除集合版本？"
@@ -4140,6 +4190,10 @@ msgstr ""
 #: src/containers/group-management/group-detail.tsx
 msgid "Remove user from group?"
 msgstr "从组中删除用户？"
+
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Remove version {version} from repository"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 msgid "Repo"
@@ -4311,8 +4365,8 @@ msgid "Role {0} has been successfully added to {1}."
 msgstr "角色 {0} 已成功添加到 {1}。"
 
 #: src/containers/ansible-role/role-detail.tsx
-msgid "Role Header"
-msgstr "角色标头"
+#~ msgid "Role Header"
+#~ msgstr "角色标头"
 
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
@@ -4321,9 +4375,13 @@ msgstr "角色标头"
 msgid "Role name"
 msgstr "角色名称"
 
-#: src/containers/ansible-role/namespace-detail.tsx
-msgid "Role namespace header"
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Role namespace"
 msgstr ""
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#~ msgid "Role namespace header"
+#~ msgstr ""
 
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
@@ -4377,6 +4435,7 @@ msgstr "角色在导入后将显示"
 msgid "Running"
 msgstr "运行中"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/rbac/group-modal.tsx
@@ -4545,6 +4604,10 @@ msgstr "已选择"
 msgid "Selected group"
 msgstr "选择的组"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Selected provider namespace"
+msgstr ""
+
 #: src/components/rbac/select-roles.tsx
 msgid "Selected roles"
 msgstr "选择的角色"
@@ -4678,9 +4741,13 @@ msgstr "签名 {repository} 中的所有集合"
 msgid "Sign and approve"
 msgstr "签发并批准"
 
+#: src/components/collection-detail/collection-dropdown.tsx
+msgid "Sign collection"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx
-msgid "Sign entire collection"
-msgstr "删除整个集合"
+#~ msgid "Sign entire collection"
+#~ msgstr "删除整个集合"
 
 #: src/components/collection-list/collection-filter.tsx
 #~ msgid "sign state"
@@ -4694,7 +4761,7 @@ msgstr "集群状态"
 #~ msgid "Sign version {0}"
 #~ msgstr "Sign version {0}"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/components/signing/sign-single-certificate-modal.tsx
 msgid "Sign version {version}"
 msgstr "签发版本 {version}"
@@ -4869,6 +4936,10 @@ msgstr "停止任务？"
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #~ msgid "Success: {name} was deleted"
 #~ msgstr "Success: {name} was deleted"
+
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
+msgid "Successfully changed provider namespace."
+msgstr ""
 
 #: src/actions/ansible-repository-copy.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -5431,9 +5502,7 @@ msgstr "类型"
 msgid "UI Version"
 msgstr "UI 版本"
 
-#: src/components/headers/collection-header.tsx
-#: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 msgid "Undeprecate"
 msgstr "取消弃用"
 
@@ -5474,8 +5543,8 @@ msgstr "为仓库 \"{0}\" 启动的更新"
 msgid "updated <0/>"
 msgstr ""
 
+#: src/components/ansible-role/legacy-role-item.tsx
 #: src/components/collection-list/collection-list-item.tsx
-#: src/components/legacy-role-list/legacy-role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
 msgstr "更新的 <0/>"
@@ -5499,9 +5568,8 @@ msgstr ""
 msgid "Upload collection"
 msgstr "上传集合"
 
-#: src/components/headers/collection-header.tsx
+#: src/components/collection-detail/collection-dropdown.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
-#: src/containers/search/search.tsx
 #: src/containers/search/search.tsx
 msgid "Upload new version"
 msgstr "上传新版本"
@@ -5753,6 +5821,7 @@ msgstr "用户名"
 msgid "Username: {0}"
 msgstr "用户名：{0}"
 
+#: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/user-management/user-create.tsx
