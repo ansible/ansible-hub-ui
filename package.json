@@ -39,7 +39,7 @@
         "@babel/preset-react": "^7.23.3",
         "@babel/preset-typescript": "^7.23.3",
         "@lingui/cli": "^4.5.0",
-        "@lingui/macro": "^4.5.0",
+        "@lingui/macro": "^4.6.0",
         "@ls-lint/ls-lint": "^2.2.2",
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
         "@typescript-eslint/eslint-plugin": "^6.13.1",
