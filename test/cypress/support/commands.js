@@ -324,10 +324,10 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
     v === true
       ? 'True'
       : v === false
-      ? 'False'
-      : v == null
-      ? 'None'
-      : JSON.stringify(v);
+        ? 'False'
+        : v == null
+          ? 'None'
+          : JSON.stringify(v);
   const pythonify = (obj) =>
     obj
       ? Object.keys(obj).map((k) => `${k} = ${pythonifyValue(obj[k])} #CYPRESS`)
