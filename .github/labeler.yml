@@ -3,13 +3,9 @@
 # called by .github/workflows/labeler.yml
 
 backport-4.9:
-- src/**/*
-- test/**/*
-
-backport-4.8:
-- src/**/*
-- test/**/*
+  - src/**/*
+  - test/**/*
 
 backport-4.7:
-- src/**/*
-- test/**/*
+  - src/**/*
+  - test/**/*

@@ -89,9 +89,7 @@ To map between the two:
 |AAP version|AAH version|notes|
 |-|-|-|
 |2.3|4.6||
-|2.4|4.7||
-|2.4|4.8|django 4, still part of 2.4|
-|2.4|4.9||
+|2.4|4.7 and 4.9|
 
 [Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
 
