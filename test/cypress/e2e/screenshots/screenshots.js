@@ -44,13 +44,14 @@ describe('screenshots', () => {
     screenshot('/containers');
     screenshot('/registries');
 
-    screenshot('/legacy/roles');
-    screenshot('/legacy/namespaces');
+    screenshot('/standalone/roles');
+    screenshot('/standalone/namespaces');
 
     screenshot('/tasks', { blackout: ['time'] });
     screenshot('/signature-keys', {
       blackout: ['time', '[data-cy=hub-signature-list-fingerprint]'],
     });
+
     screenshot('/users', { blackout: ['time'] });
     screenshot('/group-list');
     screenshot('/roles', { blackout: ['time'] });
