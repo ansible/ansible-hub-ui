@@ -248,7 +248,7 @@ jobs:
         rm -rf screenshots-main/
         mv cypress/screenshots/screenshots/screenshots.js ./screenshots-main
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: screenshots_and_videos
