@@ -223,9 +223,9 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
 
-    const { namespace, name } = props.routeParams;
+    const { namespace, name, tab } = props.routeParams;
     this.state = {
-      activeItem: 'install',
+      activeItem: tab || 'install',
       alerts: [],
       loading: true,
       name,
@@ -303,10 +303,10 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       release_name = '';
     }
 
-    const table = {
-      install: { title: t`Install` },
-      documentation: { title: t`Documentation` },
-      versions: { title: t`Versions` },
+    const tabs = {
+      install: t`Install`,
+      documentation: t`Documentation`,
+      versions: t`Versions`,
     };
 
     const addAlert = (alert) => this.addAlert(alert);
@@ -363,12 +363,20 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
           name,
         }),
       },
+      { name: tabs[activeItem || 'install'] },
     ];
 
-    const onSelect = (result) =>
-      this.setState({
-        activeItem: result.itemId,
-      });
+    const onTabSelect = ({ itemId: newTab }) => {
+      this.setState({ activeItem: newTab });
+
+      this.props.navigate(
+        formatPath(Paths.standaloneRole, {
+          namespace: namespace.name,
+          name,
+          tab: newTab,
+        }),
+      );
+    };
 
     return (
       <>
@@ -423,17 +431,17 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         >
           {/* FIXME: replace with LinkTabs */}
           <Panel isScrollable>
-            <Nav theme='light' variant='tertiary' onSelect={onSelect}>
+            <Nav theme='light' variant='tertiary' onSelect={onTabSelect}>
               <NavList>
-                {Object.keys(table).map((key) => {
+                {Object.keys(tabs).map((key) => {
                   return (
                     <NavItem
                       isActive={activeItem === key}
-                      title={table[key].title}
+                      title={tabs[key]}
                       key={key}
                       itemId={key}
                     >
-                      {table[key].title}
+                      {tabs[key]}
                     </NavItem>
                   );
                 })}

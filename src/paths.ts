@@ -1,7 +1,12 @@
 import { t } from '@lingui/macro';
 import { ParamHelper, ParamType } from 'src/utilities';
 
-export function formatPath(path: Paths, data = {}, params?: ParamType) {
+export function formatPath(
+  path: Paths,
+  data = {},
+  params?: ParamType,
+  options?,
+) {
   // insights router has basename="/", "/beta/" or "/preview/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
   let url = IS_INSIGHTS
     ? UI_BASE_PATH.replace('/preview/', '/')
@@ -11,16 +16,34 @@ export function formatPath(path: Paths, data = {}, params?: ParamType) {
   url += (path as string) + '/';
   url = url.replaceAll('//', '/');
 
-  for (const k of Object.keys(data)) {
-    url = url.replace(':' + k, encodeURIComponent(data[k]));
-  }
+  url = url
+    .split('/')
+    .map((fragment) => {
+      const match = fragment.match(/^:(\w+)\??$/);
+      if (!match) {
+        return fragment;
+      }
 
-  if (params) {
-    const path = `${url}?${ParamHelper.getQueryString(params)}`;
-    return path;
-  } else {
-    return url;
-  }
+      const key = match[1];
+      if (!data[key]) {
+        if (options?.ignoreMissing) {
+          // preserve for activateMenu
+          return fragment;
+        }
+
+        if (!fragment.endsWith('?')) {
+          throw new Error(`missing url param ${key}`);
+        }
+
+        return '';
+      }
+
+      return encodeURIComponent(data[key]);
+    })
+    .join('/')
+    .replaceAll('//', '/');
+
+  return params ? `${url}?${ParamHelper.getQueryString(params)}` : url;
 }
 
 // handle long/short EE routes:
@@ -88,7 +111,7 @@ export enum Paths {
   login = '/login',
   logout = '/logout',
   landingPage = '/',
-  standaloneRole = '/standalone/roles/:namespace/:name',
+  standaloneRole = '/standalone/roles/:namespace/:name/:tab?',
   standaloneRoles = '/standalone/roles',
   standaloneNamespace = '/standalone/namespaces/:namespaceid',
   standaloneNamespaces = '/standalone/namespaces',
@@ -123,12 +146,6 @@ export enum Paths {
   taskList = '/tasks',
   signatureKeys = '/signature-keys',
   collections = '/collections',
-
-  // for compatibility with old beta routes, remove later
-  compatLegacyRole = '/legacy/roles/:namespace/:name',
-  compatLegacyRoles = '/legacy/roles',
-  compatLegacyNamespace = '/legacy/namespaces/:namespaceid',
-  compatLegacyNamespaces = '/legacy/namespaces',
 }
 
 export const namespaceBreadcrumb = () =>
