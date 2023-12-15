@@ -1,22 +1,55 @@
 version: 2
 updates:
+  # npm in /
+
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
-
-  - package-ecosystem: 'npm'
-    directory: '/test'
-    schedule:
-      interval: 'weekly'
+    groups:
+      babel:
+        patterns:
+          - "@babel/*"
+          - "babel-core"
+          - "babel-loader"
+      lingui:
+        patterns:
+          - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
 
   - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'stable-4.9'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     commit-message:
       prefix: '[stable-4.9] '
+    groups:
+      babel:
+        patterns:
+          - "@babel/*"
+          - "babel-core"
+          - "babel-loader"
+      lingui:
+        patterns:
+          - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
     ignore:
       - dependency-name: '@lingui/*'
         update-types: ['version-update:semver-major']
@@ -30,20 +63,30 @@ updates:
         update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'npm'
-    directory: '/test'
-    target-branch: 'stable-4.9'
-    schedule:
-      interval: 'monthly'
-    commit-message:
-      prefix: '[stable-4.9] '
-
-  - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'stable-4.7'
     schedule:
       interval: 'monthly'
     commit-message:
       prefix: '[stable-4.7] '
+    groups:
+      babel:
+        patterns:
+          - "@babel/*"
+          - "babel-core"
+          - "babel-loader"
+      lingui:
+        patterns:
+          - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
     ignore:
       - dependency-name: '@lingui/*'
         update-types: ['version-update:semver-major']
@@ -55,14 +98,6 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: 'react-dom'
         update-types: ['version-update:semver-major']
-
-  - package-ecosystem: 'npm'
-    directory: '/test'
-    target-branch: 'stable-4.7'
-    schedule:
-      interval: 'monthly'
-    commit-message:
-      prefix: '[stable-4.7] '
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -71,6 +106,24 @@ updates:
       interval: 'monthly'
     commit-message:
       prefix: '[stable-4.6] '
+    groups:
+      babel:
+        patterns:
+          - "@babel/*"
+          - "babel-core"
+          - "babel-loader"
+      lingui:
+        patterns:
+          - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
     ignore:
       - dependency-name: '@lingui/*'
         update-types: ['version-update:semver-major']
@@ -83,8 +136,40 @@ updates:
       - dependency-name: 'react-dom'
         update-types: ['version-update:semver-major']
 
+  # npm in test/
+
+  - package-ecosystem: 'npm'
+    directory: '/test'
+    schedule:
+      interval: 'weekly'
+
+  - package-ecosystem: 'npm'
+    directory: '/test'
+    target-branch: 'stable-4.9'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+      prefix: '[stable-4.9] '
+
+  - package-ecosystem: 'npm'
+    directory: '/test'
+    target-branch: 'stable-4.7'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+      prefix: '[stable-4.7] '
+
+  - package-ecosystem: 'npm'
+    directory: '/test'
+    target-branch: 'stable-4.6'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+      prefix: '[stable-4.6] '
+
+  # github-actions
+
   - package-ecosystem: 'github-actions'
-    # Workflow files stored in the default location of `.github/workflows`
     directory: '/'
     schedule:
       interval: 'weekly'
