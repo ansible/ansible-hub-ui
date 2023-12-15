@@ -15,9 +15,6 @@ updates:
       lingui:
         patterns:
           - "@lingui/*"
-      patternfly:
-        patterns:
-          - "@patternfly/*"
       react:
         patterns:
           - "react"
@@ -41,9 +38,6 @@ updates:
       lingui:
         patterns:
           - "@lingui/*"
-      patternfly:
-        patterns:
-          - "@patternfly/*"
       react:
         patterns:
           - "react"
@@ -78,9 +72,6 @@ updates:
       lingui:
         patterns:
           - "@lingui/*"
-      patternfly:
-        patterns:
-          - "@patternfly/*"
       react:
         patterns:
           - "react"
@@ -115,9 +106,6 @@ updates:
       lingui:
         patterns:
           - "@lingui/*"
-      patternfly:
-        patterns:
-          - "@patternfly/*"
       react:
         patterns:
           - "react"
