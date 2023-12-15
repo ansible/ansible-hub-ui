@@ -3,9 +3,13 @@
 # called by .github/workflows/labeler.yml
 
 backport-4.9:
-  - src/**/*
-  - test/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - src/**/*
+    - test/**/*
 
 backport-4.7:
-  - src/**/*
-  - test/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - src/**/*
+    - test/**/*
