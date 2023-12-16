@@ -36,6 +36,8 @@ const menuSection = (name, options = {}, items = []) => ({
   items,
 });
 
+const altPath = (p) => formatPath(p, {}, null, { ignoreMissing: true });
+
 function standaloneMenu() {
   return [
     menuItem(t`Search`, {
@@ -50,14 +52,14 @@ function standaloneMenu() {
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        alternativeUrls: [formatPath(Paths.searchByRepo)],
+        alternativeUrls: [altPath(Paths.searchByRepo)],
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths[NAMESPACE_TERM]),
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        alternativeUrls: [formatPath(Paths.myNamespaces)],
+        alternativeUrls: [altPath(Paths.myNamespaces)],
       }),
       menuItem(t`Repositories`, {
         condition: canViewAnsibleRepositories,
@@ -100,18 +102,16 @@ function standaloneMenu() {
       [
         menuItem(t`Roles`, {
           url: formatPath(Paths.standaloneRoles),
-          alternativeUrls: [formatPath(Paths.compatLegacyRoles)],
         }),
         menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.standaloneNamespaces),
-          alternativeUrls: [formatPath(Paths.compatLegacyNamespaces)],
         }),
       ],
     ),
     menuItem(t`Task Management`, {
       url: formatPath(Paths.taskList),
       condition: isLoggedIn,
-      alternativeUrls: [formatPath(Paths.taskDetail)],
+      alternativeUrls: [altPath(Paths.taskDetail)],
     }),
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
@@ -148,19 +148,20 @@ function standaloneMenu() {
       menuItem(t`Groups`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.groupList),
-        alternativeUrls: [formatPath(Paths.groupDetail)],
+        alternativeUrls: [altPath(Paths.groupDetail)],
       }),
       menuItem(t`Roles`, {
         condition: (context) => hasPermission(context, 'galaxy.view_group'),
         url: formatPath(Paths.roleList),
-        alternativeUrls: [formatPath(Paths.roleEdit)],
+        alternativeUrls: [altPath(Paths.roleEdit)],
       }),
     ]),
   ];
 }
 
 function activateMenu(items, pathname) {
-  const normalize = (s) => s.replace(/\/$/, '').replace(/\/:[^/:]+$/, '');
+  // ensure no /:var at the end
+  const normalize = (s) => s.replace(/\/$/, '').replace(/(\/:[^/:]+)+$/, '');
   const normalizedPathname = normalize(pathname).replace(
     /\/repo\/[^/]+\//,
     '/repo/:repo/',
