@@ -1,5 +1,10 @@
 import { Trans, t } from '@lingui/macro';
-import { ActionGroup, Button } from '@patternfly/react-core';
+import {
+  ActionGroup,
+  Button,
+  HelperText,
+  HelperTextItem,
+} from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LegacyImportAPI } from 'src/api';
@@ -18,7 +23,6 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     alternate_role_name?: string;
     github_repo?: string;
     github_user?: string;
-    namespace_id?: string;
   }>(user.is_superuser ? {} : { github_user: user.username });
   const [errors, setErrors] = useState<ErrorMessagesType>(null);
   const navigate = useNavigate();
@@ -32,25 +36,19 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
       helper:
         !data.github_repo ||
         data.github_repo.startsWith('ansible-role-') ||
-        'ansible-role-'.startsWith(data.github_repo)
-          ? null
-          : {
-              variant: 'warning' as const,
-              text: (
-                <>
-                  {t`Did you mean ${`ansible-role-${data.github_repo}`}?`}{' '}
-                  <Button
-                    variant='link'
-                    onClick={() =>
-                      updateField(
-                        'github_repo',
-                        `ansible-role-${data.github_repo}`,
-                      )
-                    }
-                  >{t`Change`}</Button>
-                </>
-              ),
-            },
+        'ansible-role-'.startsWith(data.github_repo) ? null : (
+          <HelperText>
+            <HelperTextItem variant='warning'>
+              {t`Did you mean ${`ansible-role-${data.github_repo}`}?`}{' '}
+              <Button
+                variant='link'
+                onClick={() =>
+                  updateField('github_repo', `ansible-role-${data.github_repo}`)
+                }
+              >{t`Change`}</Button>
+            </HelperTextItem>
+          </HelperText>
+        ),
     },
     {
       id: 'github_reference',

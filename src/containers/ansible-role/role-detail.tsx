@@ -241,7 +241,7 @@ class RoleImportLog extends React.Component<
 
     LegacyImportAPI.list({
       detail: true,
-      limit: 1,
+      page_size: 1,
       role_id: role.id,
       sort: '-created',
       state: 'SUCCESS',
