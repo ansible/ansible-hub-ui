@@ -7,7 +7,7 @@ import {
   DropdownItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
@@ -29,15 +29,15 @@ export function LegacyNamespaceListItem({
     featureFlags: { ai_deny_index },
     user: { username, is_superuser },
   } = useContext();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { id, avatar_url, name, summary_fields } = namespace;
 
   const namespace_url = formatPath(Paths.standaloneNamespace, {
     namespaceid: id,
   });
 
-  const cells = [];
-
-  cells.push(
+  const cells = [
     <DataListCell isFilled={false} alignRight={false} key='ns'>
       <Logo
         alt='logo'
@@ -48,20 +48,18 @@ export function LegacyNamespaceListItem({
         width='97px'
       />
     </DataListCell>,
-  );
-
-  cells.push(
     <DataListCell key='content' size={10}>
       <div>
         <Link to={namespace_url}>{name}</Link>
       </div>
     </DataListCell>,
-  );
+  ];
 
   const userOwnsLegacyNamespace = !!summary_fields.owners.find(
     (n) => n.username == username,
   );
   const showWisdom = ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
+  const canImport = is_superuser || userOwnsLegacyNamespace;
 
   const dropdownItems = [
     showWisdom && openWisdomModal && (
@@ -73,6 +71,22 @@ export function LegacyNamespaceListItem({
       <DropdownItem
         onClick={() => openEditModal(namespace)}
       >{t`Change provider namespace`}</DropdownItem>
+    ),
+    canImport && (
+      <DropdownItem
+        onClick={() =>
+          navigate(
+            formatPath(
+              Paths.standaloneRoleImport,
+              {},
+              {
+                github_user: namespace.name,
+                back: location.pathname,
+              },
+            ),
+          )
+        }
+      >{t`Import role`}</DropdownItem>
     ),
   ].filter(Boolean);
 

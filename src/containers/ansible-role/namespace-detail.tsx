@@ -306,6 +306,7 @@ class AnsibleRoleNamespaceDetail extends React.Component<
     );
     const showWisdom =
       ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
+    const canImport = is_superuser || userOwnsLegacyNamespace;
 
     const dropdownItems = [
       showWisdom && (
@@ -317,6 +318,22 @@ class AnsibleRoleNamespaceDetail extends React.Component<
         <DropdownItem
           onClick={() => this.setState({ editModal: true })}
         >{t`Change provider namespace`}</DropdownItem>
+      ),
+      canImport && (
+        <DropdownItem
+          onClick={() =>
+            navigate(
+              formatPath(
+                Paths.standaloneRoleImport,
+                {},
+                {
+                  github_user: namespace.name,
+                  back: location.pathname,
+                },
+              ),
+            )
+          }
+        >{t`Import role`}</DropdownItem>
       ),
     ].filter(Boolean);
 
