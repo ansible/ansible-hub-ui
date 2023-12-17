@@ -6,7 +6,7 @@ import {
   HelperTextItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LegacyImportAPI, LegacyNamespaceAPI } from 'src/api';
 import {
   AlertType,
@@ -16,7 +16,12 @@ import {
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ErrorMessagesType, handleHttpError, taskAlert } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  ParamHelper,
+  handleHttpError,
+  taskAlert,
+} from 'src/utilities';
 
 interface IProps {
   addAlert: (alert: AlertType) => void;
@@ -170,13 +175,26 @@ const NamespaceCheck = ({
 
 export const RoleImportForm = ({ addAlert }: IProps) => {
   const { queueAlert, user } = useContext();
-  const [data, setData] = useState<{
-    alternate_role_name?: string;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = ParamHelper.parseParamString(location.search) as {
+    github_branch?: string;
     github_repo?: string;
     github_user?: string;
-  }>(user.is_superuser ? {} : { github_user: user.username });
+    back?: string;
+  };
+  const [data, setData] = useState<{
+    alternate_role_name?: string;
+    github_reference?: string;
+    github_repo?: string;
+    github_user?: string;
+  }>({
+    github_reference: params.github_branch,
+    github_repo: params.github_repo,
+    github_user:
+      params.github_user || (user.is_superuser ? null : user.username),
+  });
   const [errors, setErrors] = useState<ErrorMessagesType>(null);
-  const navigate = useNavigate();
 
   const formFields = [
     {
@@ -227,7 +245,8 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
   const nonempty = (o) =>
     Object.fromEntries(Object.entries(o).filter(([_k, v]) => v));
 
-  const onCancel = () => navigate(formatPath(Paths.standaloneRoles));
+  const onCancel = () =>
+    navigate(params.back || formatPath(Paths.standaloneRoles));
 
   const onSaved = ({
     data: {
@@ -237,7 +256,7 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     // the role import_log tab is not available before the role gets imported, go to list
     // TODO waitForTask (needs galaxy_ng#2012) and go to my role imports to see the import
     queueAlert(taskAlert(pulp_id, t`Import started`));
-    navigate(formatPath(Paths.standaloneRoles));
+    navigate(params.back || formatPath(Paths.standaloneRoles));
   };
 
   const onSave = () =>

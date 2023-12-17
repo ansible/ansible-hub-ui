@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
+  Button,
   DataList,
   DataListCell,
   DataListItem,
@@ -14,6 +15,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
+  LegacyNamespaceAPI,
+  LegacyNamespaceDetailType,
   LegacyRoleAPI,
   LegacyRoleDetailType,
   LegacyRoleImportDetailType,
@@ -39,6 +42,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
@@ -290,6 +294,7 @@ class RoleImportLog extends React.Component<
 interface RoleState {
   activeItem: string;
   alerts: AlertType[];
+  fullNamespace: LegacyNamespaceDetailType;
   loading: boolean;
   name: string;
   namespace: string;
@@ -297,6 +302,8 @@ interface RoleState {
 }
 
 class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -307,6 +314,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       loading: true,
       name,
       namespace,
+      fullNamespace: null,
       role: null,
     };
   }
@@ -319,8 +327,21 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       namespace,
       page_size: 1,
     })
-      .then(({ data: { results } }) =>
-        this.setState({ role: results[0], loading: false }),
+      .then(
+        ({
+          data: {
+            results: [role],
+          },
+        }) => {
+          this.setState({ role, loading: false });
+
+          const namespace = role?.summary_fields?.namespace;
+          if (namespace?.id) {
+            return LegacyNamespaceAPI.get(namespace.id).then(
+              ({ data: fullNamespace }) => this.setState({ fullNamespace }),
+            );
+          }
+        },
       )
       .catch(
         handleHttpError(
@@ -342,7 +363,11 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   }
 
   render() {
-    const { activeItem, alerts, loading, name, role } = this.state;
+    const { activeItem, alerts, fullNamespace, loading, name, role } =
+      this.state;
+    const {
+      user: { username, is_superuser },
+    } = this.context;
 
     if (loading) {
       return <LoadingPageWithHeader />;
@@ -458,6 +483,12 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       );
     };
 
+    const canImport =
+      is_superuser ||
+      !!fullNamespace?.summary_fields?.owners?.find(
+        (n) => n.username == username,
+      );
+
     return (
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -506,6 +537,25 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
                 <RoleRatings namespace={namespace.name} name={role.name} />
                 <DownloadCount item={role} />
               </div>
+              {canImport && (
+                <Button
+                  key='import'
+                  onClick={() =>
+                    this.props.navigate(
+                      formatPath(
+                        Paths.standaloneRoleImport,
+                        {},
+                        {
+                          github_user: role.github_user,
+                          github_repo: role.github_repo,
+                          github_branch: role.github_branch,
+                          back: this.props.location.pathname,
+                        },
+                      ),
+                    )
+                  }
+                >{t`Import new version`}</Button>
+              )}
             </div>
           }
         >
