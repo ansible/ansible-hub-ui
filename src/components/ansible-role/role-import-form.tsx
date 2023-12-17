@@ -114,11 +114,30 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
   );
 
   const updateField = (k, v) => {
-    setData((data) => ({ ...data, [k]: v }));
+    if (k === 'github_user' && v.includes('github.com/')) {
+      const [_proto, _empty, _host, github_user, github_repo] = v.split('/');
+      setData((data) => ({
+        ...data,
+        github_user,
+        github_repo: github_repo.replace(/\.git$/, ''),
+      }));
+    } else if (k === 'github_user' && v.includes('/')) {
+      const [github_user, github_repo] = v.split('/');
+      setData((data) => ({
+        ...data,
+        github_user,
+        github_repo,
+      }));
+    } else {
+      setData((data) => ({ ...data, [k]: v }));
+    }
 
     setErrors((errors) => {
       const e = { ...errors };
       delete e[k];
+      if (k === 'github_user' && v.includes('/')) {
+        delete e.github_repo;
+      }
       return e;
     });
 

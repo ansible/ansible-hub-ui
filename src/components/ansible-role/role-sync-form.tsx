@@ -65,11 +65,23 @@ export const RoleSyncForm = ({ addAlert }: IProps) => {
   );
 
   const updateField = (k, v) => {
-    setData((data) => ({ ...data, [k]: v }));
+    if (k === 'github_user' && v.includes('.')) {
+      const [github_user, role_name] = v.split('.');
+      setData((data) => ({
+        ...data,
+        github_user,
+        role_name,
+      }));
+    } else {
+      setData((data) => ({ ...data, [k]: v }));
+    }
 
     setErrors((errors) => {
       const e = { ...errors };
       delete e[k];
+      if (k === 'github_user' && v.includes('.')) {
+        delete e.role_name;
+      }
       return e;
     });
 
