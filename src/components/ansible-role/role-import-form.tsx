@@ -275,6 +275,7 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
 
   const updateField = (k, v) => {
     if (k === 'github_user' && v.includes('github.com/')) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_proto, _empty, _host, github_user, github_repo] = v.split('/');
       setData((data) => ({
         ...data,
