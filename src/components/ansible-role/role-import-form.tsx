@@ -5,9 +5,9 @@ import {
   HelperText,
   HelperTextItem,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LegacyImportAPI } from 'src/api';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LegacyImportAPI, LegacyNamespaceAPI } from 'src/api';
 import { AlertType, DataForm, ExternalLink } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -16,6 +16,128 @@ import { ErrorMessagesType, handleHttpError, taskAlert } from 'src/utilities';
 interface IProps {
   addAlert: (alert: AlertType) => void;
 }
+
+const NamespaceCheck = ({
+  addAlert,
+  is_superuser,
+  user,
+}: {
+  addAlert;
+  is_superuser: boolean;
+  user: string;
+}) => {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [namespace, setNamespace] = useState(null);
+
+  const recheck = () => {
+    setError(null);
+    setNamespace(null);
+
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    LegacyNamespaceAPI.list({
+      name: user,
+      page_size: 1,
+    })
+      .then(
+        ({
+          data: {
+            results: [first],
+          },
+        }) => setNamespace(first),
+      )
+      .catch(setError)
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(recheck, [user]);
+
+  const provider = namespace?.summary_fields?.provider_namespaces?.[0];
+
+  return user ? (
+    <HelperText>
+      {loading ? (
+        <HelperTextItem variant='indeterminate'>{t`Checking ...`}</HelperTextItem>
+      ) : null}
+      {namespace && provider ? (
+        <HelperTextItem variant='success'>
+          {t`Found`} (
+          <Trans>
+            <Link
+              to={formatPath(Paths.standaloneNamespace, {
+                namespaceid: namespace.id,
+              })}
+            >
+              {namespace.name}
+            </Link>
+            , provided by{' '}
+            <Link
+              to={formatPath(Paths.namespaceDetail, {
+                namespace: provider.name,
+              })}
+            >
+              {provider.name}
+            </Link>
+          </Trans>
+          )
+        </HelperTextItem>
+      ) : null}
+      {error ? (
+        <HelperTextItem variant='warning'>
+          {t`Failed`}: {error?.message || error}
+        </HelperTextItem>
+      ) : null}
+      {!namespace && !loading && !error ? (
+        <HelperTextItem variant='error'>
+          {t`No matching namespace found`}
+          {is_superuser ? ' ' : null}
+          {is_superuser ? (
+            <Button
+              variant='link'
+              onClick={() => {
+                LegacyNamespaceAPI.create({ name: user })
+                  .then(() => {
+                    addAlert({
+                      variant: 'success',
+                      title: t`Successfully created role namespace ${user}`,
+                    });
+                    recheck();
+                  })
+                  .catch(
+                    handleHttpError(
+                      t`Failed to create role namespace`,
+                      () => null,
+                      addAlert,
+                    ),
+                  );
+              }}
+            >{t`Create`}</Button>
+          ) : null}
+        </HelperTextItem>
+      ) : null}
+      {namespace && !provider && !loading && !error ? (
+        <HelperTextItem variant='error'>
+          <Trans>
+            Found a standalone namespace (
+            <Link
+              to={formatPath(Paths.standaloneNamespace, {
+                namespaceid: namespace.id,
+              })}
+            >
+              {namespace.name}
+            </Link>
+            ), but NOT a provider namespace.
+          </Trans>
+        </HelperTextItem>
+      ) : null}
+    </HelperText>
+  ) : null;
+};
 
 export const RoleImportForm = ({ addAlert }: IProps) => {
   const { queueAlert, user } = useContext();
@@ -27,9 +149,18 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
   const [errors, setErrors] = useState<ErrorMessagesType>(null);
   const navigate = useNavigate();
 
-  // TODO user will have their namespace, superuser needs to create+assign
   const formFields = [
-    { id: 'github_user', title: t`GitHub user` },
+    {
+      id: 'github_user',
+      title: t`GitHub user`,
+      helper: (
+        <NamespaceCheck
+          addAlert={addAlert}
+          is_superuser={user.is_superuser}
+          user={data.github_user}
+        />
+      ),
+    },
     {
       id: 'github_repo',
       title: t`GitHub repository`,
