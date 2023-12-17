@@ -593,6 +593,10 @@ msgstr "Are you sure you want to revert this repository to the version below?"
 msgid "Authentication provider"
 msgstr "Authentication provider"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Automatic"
+msgstr "Automatic"
+
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Available matching collections"
@@ -684,6 +688,7 @@ msgstr "CA certificate"
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/import-modal/import-modal.tsx
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
@@ -749,6 +754,7 @@ msgstr "Certification status for collection \"{namespace} {name} v{version}\" ha
 msgid "Certified"
 msgstr "Certified"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "Change"
 msgstr "Change"
@@ -1740,6 +1746,10 @@ msgstr "Detail"
 msgid "Details"
 msgstr "Details"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Did you mean {0}?"
+msgstr "Did you mean {0}?"
+
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -2272,6 +2282,10 @@ msgstr "Failed to find repository version"
 msgid "Failed to find role"
 msgstr "Failed to find role"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Failed to import role"
+msgstr "Failed to import role"
+
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "Failed to list distributions, removing only the repository."
@@ -2422,6 +2436,10 @@ msgstr "Failed to sync repository \"{name}\""
 msgid "Featured"
 msgstr "Featured"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Field is required."
+msgstr "Field is required."
+
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
@@ -2497,9 +2515,21 @@ msgstr "Get the trial"
 #~ msgid "Get token"
 #~ msgstr "Get token"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub ref (a commit, branch or tag)"
+msgstr "GitHub ref (a commit, branch or tag)"
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub repository"
+msgstr "GitHub repository"
+
 #: src/containers/ansible-role/role-detail.tsx
 msgid "GitHub Repository"
 msgstr "GitHub Repository"
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub user"
+msgstr "GitHub user"
 
 #: src/utilities/wait-for-task.ts
 msgid "Giving up waiting for task after 10 attempts."
@@ -2703,6 +2733,10 @@ msgstr "Images"
 msgid "Images will appear once uploaded"
 msgstr "Images will appear once uploaded"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import"
+msgstr "Import"
+
 #: src/constants.tsx
 #: src/constants.tsx
 msgid "Import and auto approve"
@@ -2716,6 +2750,15 @@ msgstr "Import and move to staging"
 #: src/containers/collection-detail/collection-import-log.tsx
 msgid "Import log"
 msgstr "Import log"
+
+#: src/containers/ansible-role/role-import.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Import role"
+msgstr "Import role"
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import started"
+msgstr "Import started"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Imports"
@@ -2837,13 +2880,14 @@ msgstr "Keywords"
 msgid "Labels"
 msgstr "Labels"
 
+#: src/components/collection-list/collection-filter.ts
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Last modified"
 msgstr "Last modified"
 
 #: src/components/collection-list/collection-filter.ts
-msgid "Last Modified"
-msgstr "Last Modified"
+#~ msgid "Last Modified"
+#~ msgstr "Last Modified"
 
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -3548,6 +3592,10 @@ msgstr "Only perform the sync if changes are reported by the remote server. To f
 #: src/actions/ansible-repository-sync.tsx
 #~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 #~ msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+msgstr "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4369,6 +4417,7 @@ msgstr "Role {0} has been successfully added to {1}."
 #~ msgid "Role Header"
 #~ msgstr "Role Header"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -5997,6 +6046,10 @@ msgstr "Website"
 #: src/containers/landing/landing-page.tsx
 msgid "Welcome to Galaxy"
 msgstr "Welcome to Galaxy"
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Will clone <0>{link}</0>"
+msgstr "Will clone <0>{link}</0>"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/legacy-namespaces/legacy-namespace.tsx

@@ -592,6 +592,10 @@ msgstr "이 리포지토리를 아래 버전으로 되돌리시겠습니까?"
 msgid "Authentication provider"
 msgstr "인증 제공자"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Automatic"
+msgstr ""
+
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Available matching collections"
@@ -683,6 +687,7 @@ msgstr "CA 인증서"
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/import-modal/import-modal.tsx
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
@@ -748,6 +753,7 @@ msgstr ""
 msgid "Certified"
 msgstr "인증됨"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "Change"
 msgstr "변경"
@@ -1739,6 +1745,10 @@ msgstr "세부 정보"
 msgid "Details"
 msgstr "세부 정보"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Did you mean {0}?"
+msgstr ""
+
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -2271,6 +2281,10 @@ msgstr "리포지토리 버전을 찾을 수 없음"
 msgid "Failed to find role"
 msgstr ""
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Failed to import role"
+msgstr ""
+
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "리포지토리만 제거하여 배포를 나열하지 못했습니다."
@@ -2421,6 +2435,10 @@ msgstr "리포지토리 \"{name}\"를 동기화하지 못했습니다"
 msgid "Featured"
 msgstr ""
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Field is required."
+msgstr ""
+
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
@@ -2496,8 +2514,20 @@ msgstr ""
 #~ msgid "Get token"
 #~ msgstr "Get token"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub ref (a commit, branch or tag)"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub repository"
+msgstr ""
+
 #: src/containers/ansible-role/role-detail.tsx
 msgid "GitHub Repository"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub user"
 msgstr ""
 
 #: src/utilities/wait-for-task.ts
@@ -2702,6 +2732,10 @@ msgstr "이미지"
 msgid "Images will appear once uploaded"
 msgstr "업로드되면 이미지가 나타납니다"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import"
+msgstr ""
+
 #: src/constants.tsx
 #: src/constants.tsx
 msgid "Import and auto approve"
@@ -2715,6 +2749,15 @@ msgstr "가져오기 및 스테이징으로 이동"
 #: src/containers/collection-detail/collection-import-log.tsx
 msgid "Import log"
 msgstr "로그 가져오기"
+
+#: src/containers/ansible-role/role-import.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Import role"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import started"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Imports"
@@ -2836,13 +2879,14 @@ msgstr "키워드"
 msgid "Labels"
 msgstr "레이블"
 
+#: src/components/collection-list/collection-filter.ts
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
 #: src/components/collection-list/collection-filter.ts
-msgid "Last Modified"
-msgstr ""
+#~ msgid "Last Modified"
+#~ msgstr ""
 
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -3547,6 +3591,10 @@ msgstr ""
 #: src/actions/ansible-repository-sync.tsx
 #~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 #~ msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4368,6 +4416,7 @@ msgstr "역할 {0}이/가 {1}에 성공적으로 추가되었습니다."
 #~ msgid "Role Header"
 #~ msgstr "역할 헤더"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -5995,6 +6044,10 @@ msgstr "웹 사이트"
 
 #: src/containers/landing/landing-page.tsx
 msgid "Welcome to Galaxy"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Will clone <0>{link}</0>"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx

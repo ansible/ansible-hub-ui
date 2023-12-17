@@ -592,6 +592,10 @@ msgstr "このリポジトリーを以下のバージョンに戻してもよろ
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Automatic"
+msgstr ""
+
 #: src/containers/not-found/dispatch.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Available matching collections"
@@ -683,6 +687,7 @@ msgstr "CA 証明書"
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/import-modal/import-modal.tsx
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
@@ -748,6 +753,7 @@ msgstr ""
 msgid "Certified"
 msgstr "認定済み"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "Change"
 msgstr "変更"
@@ -1739,6 +1745,10 @@ msgstr "詳細"
 msgid "Details"
 msgstr "詳細"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Did you mean {0}?"
+msgstr ""
+
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -2271,6 +2281,10 @@ msgstr "リポジトリーのバージョンが見つかりませんでした"
 msgid "Failed to find role"
 msgstr ""
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Failed to import role"
+msgstr ""
+
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "ディストリビューションの一覧表示に失敗し、リポジトリーのみを削除します。"
@@ -2421,6 +2435,10 @@ msgstr "リポジトリー \"{name}\" の同期に失敗しました"
 msgid "Featured"
 msgstr ""
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Field is required."
+msgstr ""
+
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
 #: src/components/shared/compound-filter.tsx
@@ -2496,8 +2514,20 @@ msgstr ""
 #~ msgid "Get token"
 #~ msgstr "Get token"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub ref (a commit, branch or tag)"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub repository"
+msgstr ""
+
 #: src/containers/ansible-role/role-detail.tsx
 msgid "GitHub Repository"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "GitHub user"
 msgstr ""
 
 #: src/utilities/wait-for-task.ts
@@ -2702,6 +2732,10 @@ msgstr "イメージ"
 msgid "Images will appear once uploaded"
 msgstr "アップロード後にイメージが表示されます"
 
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import"
+msgstr ""
+
 #: src/constants.tsx
 #: src/constants.tsx
 msgid "Import and auto approve"
@@ -2715,6 +2749,15 @@ msgstr "インポートしてステージングに移動"
 #: src/containers/collection-detail/collection-import-log.tsx
 msgid "Import log"
 msgstr "ログのインポート"
+
+#: src/containers/ansible-role/role-import.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Import role"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Import started"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Imports"
@@ -2836,13 +2879,14 @@ msgstr "キーワード"
 msgid "Labels"
 msgstr "ラベル"
 
+#: src/components/collection-list/collection-filter.ts
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Last modified"
 msgstr "最終変更日時"
 
 #: src/components/collection-list/collection-filter.ts
-msgid "Last Modified"
-msgstr ""
+#~ msgid "Last Modified"
+#~ msgstr ""
 
 #: src/components/rbac/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -3547,6 +3591,10 @@ msgstr ""
 #: src/actions/ansible-repository-sync.tsx
 #~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 #~ msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -4368,6 +4416,7 @@ msgstr "ロール {0} は {1} に正常に追加されました。"
 #~ msgid "Role Header"
 #~ msgstr "ロールヘッダー"
 
+#: src/components/legacy-role/role-import-form.tsx
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -5995,6 +6044,10 @@ msgstr "Web サイト"
 
 #: src/containers/landing/landing-page.tsx
 msgid "Welcome to Galaxy"
+msgstr ""
+
+#: src/components/legacy-role/role-import-form.tsx
+msgid "Will clone <0>{link}</0>"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
