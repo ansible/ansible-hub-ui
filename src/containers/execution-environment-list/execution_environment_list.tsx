@@ -164,7 +164,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
           tag={publishToController?.tag}
         />
         {showRemoteModal && this.renderRemoteModal(itemToEdit)}
-        <BaseHeader title={t`Execution Environments`} />
+        <BaseHeader title={t`Execution environments`} />
 
         {showDeleteModal && (
           <DeleteExecutionEnvironmentModal

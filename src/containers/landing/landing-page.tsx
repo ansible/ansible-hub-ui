@@ -172,7 +172,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
               }
             />
             <LandingPageCard
-              title={t`Terms of Use`}
+              title={t`Terms of use`}
               body={
                 <List variant={ListVariant.inline}>
                   <ListItem>

@@ -183,7 +183,7 @@ class AnsibleRoleNamespaceList extends React.Component<
             namespace={editModal}
           />
         )}
-        <BaseHeader title={t`Role Namespaces`} />
+        <BaseHeader title={t`Role namespaces`} />
         {loading ? (
           <LoadingPageSpinner />
         ) : noData ? (

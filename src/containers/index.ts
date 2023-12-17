@@ -4,6 +4,7 @@ export { default as AnsibleRemoteList } from './ansible-remote/list';
 export { default as AnsibleRepositoryDetail } from './ansible-repository/detail';
 export { default as AnsibleRepositoryEdit } from './ansible-repository/edit';
 export { default as AnsibleRepositoryList } from './ansible-repository/list';
+export { default as AnsibleRoleImports } from './ansible-role/imports';
 export { default as AnsibleRoleNamespaceDetail } from './ansible-role/namespace-detail';
 export { default as AnsibleRoleNamespaceList } from './ansible-role/namespace-list';
 export { default as AnsibleRoleDetail } from './ansible-role/role-detail';

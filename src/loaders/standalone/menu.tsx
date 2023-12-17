@@ -106,6 +106,11 @@ function standaloneMenu() {
         menuItem(t`Role Namespaces`, {
           url: formatPath(Paths.standaloneNamespaces),
         }),
+        menuItem(t`Role Imports`, {
+          url: formatPath(Paths.standaloneImports),
+          condition: ({ featureFlags, user }) =>
+            featureFlags.legacy_roles && !user.is_anonymous,
+        }),
       ],
     ),
     menuItem(t`Task Management`, {

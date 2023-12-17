@@ -224,7 +224,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             </Trans>
           </DeleteModal>
         )}
-        <BaseHeader title={t`Remote Registries`} />
+        <BaseHeader title={t`Remote registries`} />
         {noData && !loading ? (
           <EmptyStateNoData
             title={t`No remote registries yet`}
