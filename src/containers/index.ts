@@ -9,6 +9,7 @@ export { default as AnsibleRoleNamespaceList } from './ansible-role/namespace-li
 export { default as AnsibleRoleDetail } from './ansible-role/role-detail';
 export { default as AnsibleRoleImport } from './ansible-role/role-import';
 export { default as AnsibleRoleList } from './ansible-role/role-list';
+export { default as AnsibleRoleSync } from './ansible-role/role-sync';
 export { default as CertificationDashboard } from './certification-dashboard/certification-dashboard';
 export { default as CollectionContent } from './collection-detail/collection-content';
 export { default as CollectionDependencies } from './collection-detail/collection-dependencies';

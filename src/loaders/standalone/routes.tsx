@@ -14,6 +14,7 @@ import {
   AnsibleRoleList,
   AnsibleRoleNamespaceDetail,
   AnsibleRoleNamespaceList,
+  AnsibleRoleSync,
   CertificationDashboard,
   CollectionContent,
   CollectionDependencies,
@@ -218,6 +219,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: AnsibleRoleNamespaceList, path: Paths.standaloneNamespaces },
       { component: AnsibleRoleDetail, path: Paths.standaloneRole },
       { component: AnsibleRoleImport, path: Paths.standaloneRoleImport },
+      { component: AnsibleRoleSync, path: Paths.standaloneRoleSync },
       { component: AnsibleRoleList, path: Paths.standaloneRoles },
       {
         component: TaskListView,

@@ -113,6 +113,7 @@ export enum Paths {
   landingPage = '/',
   standaloneRole = '/standalone/roles/:namespace/:name/:tab?',
   standaloneRoleImport = '/standalone/roles/import',
+  standaloneRoleSync = '/standalone/roles/sync',
   standaloneRoles = '/standalone/roles',
   standaloneNamespace = '/standalone/namespaces/:namespaceid',
   standaloneNamespaces = '/standalone/namespaces',

@@ -70,6 +70,7 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     Object.fromEntries(Object.entries(o).filter(([_k, v]) => v));
 
   const onCancel = () => navigate(formatPath(Paths.standaloneRoles));
+
   const onSaved = ({
     data: {
       results: [{ pulp_id }],
@@ -91,7 +92,8 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     data.github_repo &&
     `https://github.com/${data.github_user}/${data.github_repo}`;
 
-  const anyErrors = !!errors || requiredFields.some((k) => !data[k]);
+  const anyErrors =
+    !!Object.keys(errors || {}).length || requiredFields.some((k) => !data[k]);
 
   const formSuffix = (
     <>
@@ -115,6 +117,12 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
 
   const updateField = (k, v) => {
     setData((data) => ({ ...data, [k]: v }));
+
+    setErrors((errors) => {
+      const e = { ...errors };
+      delete e[k];
+      return e;
+    });
 
     if (requiredFields.includes(k) && !v) {
       setErrors((errors) => ({ ...errors, [k]: t`Field is required.` }));

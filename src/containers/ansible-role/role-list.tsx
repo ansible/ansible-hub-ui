@@ -158,6 +158,7 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
       );
 
     const canImport = user && !user.is_anonymous;
+    const canSync = user?.is_superuser && !IS_COMMUNITY;
 
     return (
       <div>
@@ -183,6 +184,14 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
                       )
                     }
                   >{t`Import role`}</Button>
+                ),
+                canSync && (
+                  <Button
+                    key='sync'
+                    onClick={() =>
+                      this.props.navigate(formatPath(Paths.standaloneRoleSync))
+                    }
+                  >{t`Sync role`}</Button>
                 ),
               ].filter(Boolean)}
               count={count}

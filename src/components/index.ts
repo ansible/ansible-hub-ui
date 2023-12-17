@@ -5,6 +5,7 @@ export { RoleImportForm } from './ansible-role/role-import-form';
 export { LegacyRoleListItem } from './ansible-role/role-item';
 export { RoleNamespaceEditModal } from './ansible-role/role-namespace-edit-modal';
 export { RoleNamespaceModal } from './ansible-role/role-namespace-modal';
+export { RoleSyncForm } from './ansible-role/role-sync-form';
 export { ApprovalRow } from './approval/approval-row';
 export { ApproveModal } from './approval/approve-modal';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
