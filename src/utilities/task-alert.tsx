@@ -6,7 +6,7 @@ import { parsePulpIDFromURL } from './parse-pulp-id';
 
 type VariantType = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
-const MaybeLink = ({ to, children }: { to: string; children: ReactNode }) =>
+const MaybeLink = ({ to, children }: { to?: string; children: ReactNode }) =>
   to ? <Link to={to}>{children}</Link> : <>{children}</>;
 
 // task can be { task: (pulp_href) } or "(pulp_href)" or "(uuid)"
@@ -18,9 +18,13 @@ export const taskAlert = (task, title, variant: VariantType = 'info') => ({
       <Trans>
         See the task management{' '}
         <MaybeLink
-          to={formatPath(Paths.taskDetail, {
-            task: parsePulpIDFromURL(task?.task || task),
-          })}
+          to={
+            task
+              ? formatPath(Paths.taskDetail, {
+                  task: parsePulpIDFromURL(task?.task || task),
+                })
+              : null
+          }
         >
           detail page{' '}
         </MaybeLink>
