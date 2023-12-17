@@ -33,7 +33,7 @@ describe('Imports filter test', () => {
     cy.visit(`${uiPrefix}my-imports?namespace=test_namespace`);
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
-    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
+    cy.get('[data-cy="MyImports"]').contains(
       `test_namespace.${testCollection}`,
     );
     cy.get(

@@ -20,7 +20,7 @@ $white: #fff;
   width: 100%;
 }
 
-.loading {
+.hub-import-loading {
   height: 500px;
   display: flex;
   align-items: center;
@@ -124,15 +124,6 @@ $white: #fff;
     }
   }
 
-  // Give the last element some extra height so that it doesn't cut off
-  // messages when scroling down to it.
-  .last-message {
-    height: 100px;
-    width: 5px;
-    position: relative;
-    top: -150px;
-  }
-
   .message-list {
     background-color: $black;
     padding: 10px;
@@ -148,10 +139,6 @@ $white: #fff;
       top: 0;
       float: right;
       font-size: 18px;
-    }
-
-    .follow-active {
-      color: $green;
     }
   }
 }
