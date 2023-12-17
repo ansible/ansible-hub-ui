@@ -10,6 +10,7 @@ import {
   AnsibleRepositoryEdit,
   AnsibleRepositoryList,
   AnsibleRoleDetail,
+  AnsibleRoleImport,
   AnsibleRoleList,
   AnsibleRoleNamespaceDetail,
   AnsibleRoleNamespaceList,
@@ -216,6 +217,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       },
       { component: AnsibleRoleNamespaceList, path: Paths.standaloneNamespaces },
       { component: AnsibleRoleDetail, path: Paths.standaloneRole },
+      { component: AnsibleRoleImport, path: Paths.standaloneRoleImport },
       { component: AnsibleRoleList, path: Paths.standaloneRoles },
       {
         component: TaskListView,

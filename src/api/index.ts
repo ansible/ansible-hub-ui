@@ -19,6 +19,7 @@ export { GenericPulpAPI } from './generic-pulp';
 export { GroupAPI } from './group';
 export { GroupRoleAPI } from './group-role';
 export { ImportAPI } from './import';
+export { LegacyImportAPI } from './legacy-import';
 export { LegacyNamespaceAPI } from './legacy-namespace';
 export { LegacyRoleAPI } from './legacy-role';
 export { MyDistributionAPI } from './my-distribution';

@@ -7,6 +7,7 @@ export { default as AnsibleRepositoryList } from './ansible-repository/list';
 export { default as AnsibleRoleNamespaceDetail } from './ansible-role/namespace-detail';
 export { default as AnsibleRoleNamespaceList } from './ansible-role/namespace-list';
 export { default as AnsibleRoleDetail } from './ansible-role/role-detail';
+export { default as AnsibleRoleImport } from './ansible-role/role-import';
 export { default as AnsibleRoleList } from './ansible-role/role-list';
 export { default as CertificationDashboard } from './certification-dashboard/certification-dashboard';
 export { default as CollectionContent } from './collection-detail/collection-content';

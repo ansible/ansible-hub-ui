@@ -1,10 +1,13 @@
 import {
   Form,
   FormGroup,
+  HelperText,
+  HelperTextItem,
+  HelperTextItemProps,
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -15,10 +18,14 @@ interface IProps {
     placeholder?: string;
     title: string;
     type?: string;
+    helper?: {
+      variant: HelperTextItemProps['variant']; // "default" | "error" | "success" | "warning" | "indeterminate"
+      text: ReactNode;
+    };
   }[];
-  formPrefix?: React.ReactNode;
-  formSuffix?: React.ReactNode;
-  isReadonly: boolean;
+  formPrefix?: ReactNode;
+  formSuffix?: ReactNode;
+  isReadonly?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   model: Record<string, any>;
   requiredFields: string[];
@@ -70,6 +77,13 @@ export class DataForm extends React.Component<IProps> {
               {...(field.type === 'password' ? { autoComplete: 'off' } : {})}
             />
           )}
+          {field.helper ? (
+            <HelperText>
+              <HelperTextItem variant={field.helper.variant}>
+                {field.helper.text}
+              </HelperTextItem>
+            </HelperText>
+          ) : null}
         </FormGroup>
       );
     });

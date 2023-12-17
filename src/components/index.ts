@@ -43,6 +43,7 @@ export { CollectionHeader } from './headers/collection-header';
 export { PartnerHeader } from './headers/partner-header';
 export { HelperText } from './helper-text/helper-text';
 export { ImportModal } from './import-modal/import-modal';
+export { RoleImportForm } from './legacy-role/role-import-form';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
