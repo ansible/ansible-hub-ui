@@ -8,7 +8,12 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LegacyImportAPI, LegacyNamespaceAPI } from 'src/api';
-import { AlertType, DataForm, ExternalLink } from 'src/components';
+import {
+  AlertType,
+  DataForm,
+  ExternalLink,
+  RoleNamespaceEditModal,
+} from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ErrorMessagesType, handleHttpError, taskAlert } from 'src/utilities';
@@ -22,13 +27,14 @@ const NamespaceCheck = ({
   is_superuser,
   user,
 }: {
-  addAlert;
+  addAlert: IProps['addAlert'];
   is_superuser: boolean;
   user: string;
 }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [namespace, setNamespace] = useState(null);
+  const [providerModal, setProviderModal] = useState(false);
 
   const recheck = () => {
     setError(null);
@@ -57,85 +63,108 @@ const NamespaceCheck = ({
 
   useEffect(recheck, [user]);
 
+  useEffect(() => {
+    if (providerModal === null) {
+      recheck();
+      setProviderModal(false);
+    }
+  }, [providerModal]);
+
   const provider = namespace?.summary_fields?.provider_namespaces?.[0];
 
   return user ? (
-    <HelperText>
-      {loading ? (
-        <HelperTextItem variant='indeterminate'>{t`Checking ...`}</HelperTextItem>
-      ) : null}
-      {namespace && provider ? (
-        <HelperTextItem variant='success'>
-          {t`Found`} (
-          <Trans>
-            <Link
-              to={formatPath(Paths.standaloneNamespace, {
-                namespaceid: namespace.id,
-              })}
-            >
-              {namespace.name}
-            </Link>
-            , provided by{' '}
-            <Link
-              to={formatPath(Paths.namespaceDetail, {
-                namespace: provider.name,
-              })}
-            >
-              {provider.name}
-            </Link>
-          </Trans>
-          )
-        </HelperTextItem>
-      ) : null}
-      {error ? (
-        <HelperTextItem variant='warning'>
-          {t`Failed`}: {error?.message || error}
-        </HelperTextItem>
-      ) : null}
-      {!namespace && !loading && !error ? (
-        <HelperTextItem variant='error'>
-          {t`No matching namespace found`}
-          {is_superuser ? ' ' : null}
-          {is_superuser ? (
-            <Button
-              variant='link'
-              onClick={() => {
-                LegacyNamespaceAPI.create({ name: user })
-                  .then(() => {
-                    addAlert({
-                      variant: 'success',
-                      title: t`Successfully created role namespace ${user}`,
-                    });
-                    recheck();
-                  })
-                  .catch(
-                    handleHttpError(
-                      t`Failed to create role namespace`,
-                      () => null,
-                      addAlert,
-                    ),
-                  );
-              }}
-            >{t`Create`}</Button>
-          ) : null}
-        </HelperTextItem>
-      ) : null}
-      {namespace && !provider && !loading && !error ? (
-        <HelperTextItem variant='error'>
-          <Trans>
-            Found a standalone namespace (
-            <Link
-              to={formatPath(Paths.standaloneNamespace, {
-                namespaceid: namespace.id,
-              })}
-            >
-              {namespace.name}
-            </Link>
-            ), but NOT a provider namespace.
-          </Trans>
-        </HelperTextItem>
-      ) : null}
-    </HelperText>
+    <>
+      {providerModal && namespace && (
+        <RoleNamespaceEditModal
+          addAlert={addAlert}
+          closeAction={() => setProviderModal(null)}
+          namespace={namespace}
+        />
+      )}
+      <HelperText>
+        {loading ? (
+          <HelperTextItem variant='indeterminate'>{t`Checking ...`}</HelperTextItem>
+        ) : null}
+        {namespace && provider ? (
+          <HelperTextItem variant='success'>
+            {t`Found`} (
+            <Trans>
+              <Link
+                to={formatPath(Paths.standaloneNamespace, {
+                  namespaceid: namespace.id,
+                })}
+              >
+                {namespace.name}
+              </Link>
+              , provided by{' '}
+              <Link
+                to={formatPath(Paths.namespaceDetail, {
+                  namespace: provider.name,
+                })}
+              >
+                {provider.name}
+              </Link>
+            </Trans>
+            )
+          </HelperTextItem>
+        ) : null}
+        {error ? (
+          <HelperTextItem variant='warning'>
+            {t`Failed`}: {error?.message || error}
+          </HelperTextItem>
+        ) : null}
+        {!namespace && !loading && !error ? (
+          <HelperTextItem variant='error'>
+            {t`No matching namespace found`}
+            {is_superuser ? ' ' : null}
+            {is_superuser ? (
+              <Button
+                variant='link'
+                onClick={() => {
+                  LegacyNamespaceAPI.create({ name: user })
+                    .then(() => {
+                      addAlert({
+                        variant: 'success',
+                        title: t`Successfully created role namespace ${user}`,
+                      });
+                      recheck();
+                    })
+                    .catch(
+                      handleHttpError(
+                        t`Failed to create role namespace`,
+                        () => null,
+                        addAlert,
+                      ),
+                    );
+                }}
+              >{t`Create`}</Button>
+            ) : null}
+          </HelperTextItem>
+        ) : null}
+        {namespace && !provider && !loading && !error ? (
+          <HelperTextItem variant='error'>
+            <Trans>
+              Found a standalone namespace (
+              <Link
+                to={formatPath(Paths.standaloneNamespace, {
+                  namespaceid: namespace.id,
+                })}
+              >
+                {namespace.name}
+              </Link>
+              ), but NOT a provider namespace.
+            </Trans>
+            {is_superuser ? ' ' : null}
+            {is_superuser ? (
+              <Button
+                variant='link'
+                onClick={() => setProviderModal(true)}
+              >{t`Change provider namespace`}</Button>
+            ) : null}
+          </HelperTextItem>
+        ) : null}
+      </HelperText>
+    </>
   ) : null;
 };
 
