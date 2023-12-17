@@ -24,8 +24,6 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
   const navigate = useNavigate();
 
   // TODO user will have their namespace, superuser needs to create+assign
-  // curl -X POST '{"name": "foobar"}" /api/v1/namespaces/
-
   const formFields = [
     { id: 'github_user', title: t`GitHub user` },
     {

@@ -3,6 +3,7 @@ export { LegacyNamespaceListItem } from './ansible-role/legacy-namespace-item';
 export { LegacyRoleListItem } from './ansible-role/legacy-role-item';
 export { ProviderLink } from './ansible-role/provider-link';
 export { RoleNamespaceEditModal } from './ansible-role/role-namespace-edit-modal';
+export { RoleNamespaceModal } from './ansible-role/role-namespace-modal';
 export { ApprovalRow } from './approval/approval-row';
 export { ApproveModal } from './approval/approve-modal';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
