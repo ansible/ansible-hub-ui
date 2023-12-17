@@ -56,7 +56,18 @@ export class PartnerHeader extends React.Component<IProps> {
         pageControls={pageControls}
         className='hub-header-bordered'
       >
-        {namespace.description ? <div>{namespace.description}</div> : null}
+        {namespace.description ? (
+          <div>
+            {namespace.description.startsWith('http') &&
+            !namespace.description.match(/\s/) ? (
+              <ExternalLink href={namespace.description}>
+                {namespace.description}
+              </ExternalLink>
+            ) : (
+              namespace.description
+            )}
+          </div>
+        ) : null}
 
         <div className='hub-tab-link-container'>
           <div className='tabs'>
