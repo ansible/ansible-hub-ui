@@ -22,6 +22,7 @@ const loadScore = (type, namespace, name, callback) => () => {
 
   if (!cache[type]) {
     // not in cache, trigger load
+    // FIXME
     cache[type] = fetch(`/static/scores/${type}.json`)
       .then((response) => response.json())
       .then((data) => {
