@@ -123,6 +123,7 @@ export { LanguageSwitcher } from './shared/language-switcher';
 export { LinkTabs } from './shared/link-tabs';
 export { LoginLink } from './shared/login-link';
 export { Main } from './shared/main';
+export { MaybeLink } from './shared/maybe-link';
 export { MultiRepoModal } from './shared/multi-repo-modal';
 export { MultiSearchSearch } from './shared/multi-search-search';
 export { NamespaceListItem } from './shared/namespace-list-item';
