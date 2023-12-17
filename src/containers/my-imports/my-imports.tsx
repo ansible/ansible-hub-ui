@@ -204,11 +204,9 @@ class MyImports extends React.Component<RouteProps, IState> {
                   followMessages={followLogs}
                   loading={loadingImportDetails}
                   selectedImport={selectedImport}
-                  setFollowMessages={(isFollowing) => {
-                    this.setState({
-                      followLogs: isFollowing,
-                    });
-                  }}
+                  setFollowMessages={(followLogs) =>
+                    this.setState({ followLogs })
+                  }
                   task={selectedImportDetails}
                 />
               </div>
@@ -307,14 +305,15 @@ class MyImports extends React.Component<RouteProps, IState> {
               collection: null,
             },
             () => {
-              const importDeets = this.state.selectedImportDetails;
+              const { namespace, name, version } =
+                this.state.selectedImportDetails;
 
               // have to use list instead of get because repository_list isn't
               // available on collection version details
               CollectionVersionAPI.list({
-                namespace: importDeets.namespace,
-                name: importDeets.name,
-                version: importDeets.version,
+                namespace,
+                name,
+                version,
               })
                 .then((result) => {
                   if (result.data.meta.count === 1) {
