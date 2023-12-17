@@ -12,6 +12,7 @@ export class API extends LegacyAPI {
     return super.get(id + '/versions');
   }
 
+  // get(id)
   // list(params?)
 }
 

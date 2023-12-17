@@ -1,21 +1,18 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  CollectionVersionAPI,
-  CollectionVersionSearch,
-  ImportAPI,
-  ImportDetailType,
-  ImportListType,
-  PulpStatus,
+  LegacyImportAPI,
+  LegacyRoleAPI,
+  LegacyRoleImportDetailType,
 } from 'src/api';
 import {
   AlertList,
   AlertType,
   BaseHeader,
   ImportConsole,
-  ImportList,
   Main,
+  RoleImportList,
   closeAlertMixin,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -23,25 +20,63 @@ import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];
-  collection: CollectionVersionSearch;
+  error;
   followLogs: boolean;
-  importDetailError: string;
-  importList: ImportListType[];
-  loadingImportDetails: boolean;
-  loadingImports: boolean;
-  params: {
-    keyword?: string;
-    namespace?: string;
-    page?: number;
-    page_size?: number;
-  };
-  resultsCount: number;
-  selectedImport: ImportListType;
-  selectedImportDetails: ImportDetailType;
+  params;
+  role;
+  selectedImport: LegacyRoleImportDetailType;
 }
 
-// TODO left side recent imports, plus filters
-// right side import log as is except roleImport=
+const RoleLink = ({ role_id }: { role_id?: number }) => {
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    if (!role_id) {
+      setRole(null);
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    LegacyRoleAPI.get(role_id as any).then(
+      ({
+        data: {
+          name,
+          summary_fields: {
+            namespace: { name: namespace },
+          },
+        },
+      }) => setRole({ namespace, name }),
+    );
+  }, [role_id]);
+
+  if (!role) {
+    return null;
+  }
+
+  const { namespace, name } = role;
+
+  return (
+    <div
+      style={{
+        fontSize: '18px',
+        padding: '10px 10px 0 10px',
+      }}
+    >
+      {!role ? (
+        `${namespace}.${name}`
+      ) : (
+        <Link
+          to={formatPath(Paths.standaloneRole, {
+            namespace,
+            name,
+          })}
+        >
+          {namespace}.{name}
+        </Link>
+      )}
+    </div>
+  );
+};
 
 class AnsibleRoleImports extends React.Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
@@ -59,39 +94,17 @@ class AnsibleRoleImports extends React.Component<RouteProps, IState> {
 
     this.state = {
       alerts: [],
-      collection: null,
+      error: null,
       followLogs: false,
-      importDetailError: '',
-      importList: [],
-      loadingImportDetails: true,
-      loadingImports: true,
       params,
-      resultsCount: 0,
-      selectedImport: undefined,
-      selectedImportDetails: undefined,
+      role: null,
+      selectedImport: null,
     };
   }
 
   componentDidMount() {
-    // Load namespaces, use the namespaces to query the import list,
-    // use the import list to load the task details
-    this.loadImportList(() => this.loadTaskDetails());
-
     this.polling = setInterval(() => {
-      if (!this.state.params.namespace) {
-        return;
-      }
-
-      const { selectedImport, selectedImportDetails } = this.state;
-      const allowedStates = [PulpStatus.running, PulpStatus.waiting];
-
-      // selectedImportDetails can be failed while selectedImport is still running, poll() updates selectedImport
-      if (
-        allowedStates.includes(selectedImportDetails?.state) ||
-        allowedStates.includes(selectedImport?.state)
-      ) {
-        this.poll();
-      }
+      this.loadTaskDetails();
     }, 10000);
   }
 
@@ -110,108 +123,38 @@ class AnsibleRoleImports extends React.Component<RouteProps, IState> {
   }
 
   render() {
-    const {
-      collection,
-      followLogs,
-      importDetailError,
-      importList,
-      loadingImportDetails,
-      loadingImports,
-      params,
-      resultsCount,
-      selectedImport,
-      selectedImportDetails,
-    } = this.state;
-
-    if (!importList) {
-      return null;
-    }
+    const { alerts, error, followLogs, params, selectedImport } = this.state;
 
     return (
       <>
         <div ref={this.topOfPage} />
         <BaseHeader title={t`Role imports`} />
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <Main>
           <section className='body'>
             <div style={{ display: 'flex' }} data-cy='AnsibleRoleImports'>
               <div style={{ width: '400px' }}>
-                {false && (
-                  <ImportList
-                    addAlert={(alert) => this.addAlert(alert)}
-                    importList={importList}
-                    selectedImport={selectedImport}
-                    loading={loadingImports}
-                    numberOfResults={resultsCount}
-                    params={params}
-                    selectImport={(sImport) => this.selectImport(sImport)}
-                    updateParams={(params) => {
-                      this.updateParams(params, () => {
-                        if (params.namespace) {
-                          this.setState(
-                            {
-                              loadingImports: true,
-                              loadingImportDetails: true,
-                            },
-                            () =>
-                              this.loadImportList(() => this.loadTaskDetails()),
-                          );
-                        } else {
-                          this.setState({
-                            importDetailError: t`No data`,
-                            loadingImportDetails: false,
-                          });
-                        }
-                      });
-                    }}
-                  />
-                )}
+                <RoleImportList
+                  addAlert={(alert) => this.addAlert(alert)}
+                  params={params}
+                  selectImport={(s) => this.selectImport(s)}
+                  selectedImport={selectedImport}
+                  updateParams={(params) => this.updateParams(params)}
+                />
               </div>
 
               <div style={{ flexGrow: '1', marginLeft: '16px' }}>
-                {selectedImport && this.state.params.namespace && (
-                  <div
-                    style={{
-                      fontSize: '18px',
-                      padding: '10px 10px 0 10px',
-                    }}
-                  >
-                    {!collection ? (
-                      `${selectedImport.namespace}.${selectedImport.name}`
-                    ) : (
-                      <Link
-                        to={formatPath(
-                          Paths.collectionByRepo,
-                          {
-                            namespace: selectedImport.namespace,
-                            collection: selectedImport.name,
-                            repo: collection.repository.name,
-                          },
-                          {
-                            version: selectedImport.version,
-                          },
-                        )}
-                      >
-                        {selectedImport.namespace}.{selectedImport.name}
-                      </Link>
-                    )}
-                  </div>
-                )}
+                <RoleLink role_id={selectedImport?.role_id} />
 
                 <ImportConsole
-                  apiError={importDetailError}
-                  collection={collection}
-                  empty={!this.state.params.namespace}
+                  apiError={
+                    error ? error : selectedImport ? null : `Select an import`
+                  }
                   followMessages={followLogs}
-                  loading={loadingImportDetails}
-                  selectedImport={selectedImport}
+                  roleImport={selectedImport}
                   setFollowMessages={(followLogs) =>
                     this.setState({ followLogs })
                   }
-                  task={selectedImportDetails}
                 />
               </div>
             </div>
@@ -225,124 +168,48 @@ class AnsibleRoleImports extends React.Component<RouteProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private selectImport(sImport) {
-    this.setState(
-      { selectedImport: sImport, loadingImportDetails: true },
-      () => {
-        this.topOfPage.current.scrollIntoView({
-          behavior: 'smooth',
-        });
-        this.loadTaskDetails();
-      },
+  private selectImport(selectedImport) {
+    this.setState({ selectedImport }, () => this.loadTaskDetails());
+    window.requestAnimationFrame(
+      () => this.topOfPage.current?.scrollIntoView({ behavior: 'smooth' }),
     );
   }
 
-  private poll() {
-    this.loadTaskDetails(() => {
-      // Update the state of the selected import in the list if it's
-      // different from the one loaded from the API.
-      const { selectedImport, selectedImportDetails, importList } = this.state;
+  private loadTaskDetails() {
+    const { selectedImport } = this.state;
 
-      if (!selectedImportDetails) {
-        return;
-      }
+    if (!selectedImport) {
+      return null;
+    }
 
-      if (selectedImport.state !== selectedImportDetails.state) {
-        const importIndex = importList.findIndex(
-          (x) => x.id === selectedImport.id,
-        );
-
-        const imports = [...importList];
-        const newSelectedImport = {
-          ...selectedImport,
-          state: selectedImportDetails.state,
-          finished_at: selectedImportDetails.finished_at,
-        };
-
-        imports[importIndex] = newSelectedImport;
-
-        this.setState({
-          selectedImport: newSelectedImport,
-          importList: imports,
-        });
-      }
-    });
-  }
-
-  private loadImportList(callback?: () => void) {
-    if (!this.state.params.namespace) {
-      this.setState({
-        importDetailError: t`No data`,
-        loadingImportDetails: false,
-      });
+    if (!['RUNNING', 'WAITING'].includes(selectedImport.state)) {
       return;
     }
 
-    ImportAPI.list({ ...this.state.params, sort: '-created' })
-      .then((importList) => {
-        this.setState(
-          {
-            importList: importList.data.data,
-            selectedImport: importList.data.data[0],
-            resultsCount: importList.data.meta.count,
-            loadingImports: false,
+    this.setState({ error: null });
+    return LegacyImportAPI.list({
+      detail: true,
+      page_size: 1,
+      role_id: selectedImport.role_id,
+      sort: '-created',
+    })
+      .then(
+        ({
+          data: {
+            results: [first],
           },
-          callback,
-        );
-      })
-      .catch((result) => console.log(result));
-  }
-
-  private loadTaskDetails(callback?: () => void) {
-    if (!this.state.selectedImport) {
-      this.setState({
-        importDetailError: t`No data`,
-        loadingImportDetails: false,
-      });
-    } else {
-      ImportAPI.get(this.state.selectedImport.id)
-        .then((result) => {
-          this.setState(
-            {
-              importDetailError: '',
-              loadingImportDetails: false,
-              selectedImportDetails: result.data,
-              collection: null,
-            },
-            () => {
-              const { namespace, name, version } =
-                this.state.selectedImportDetails;
-
-              // have to use list instead of get because repository_list isn't
-              // available on collection version details
-              CollectionVersionAPI.list({
-                namespace,
-                name,
-                version,
-              })
-                .then((result) => {
-                  if (result.data.meta.count === 1) {
-                    this.setState({
-                      collection: result.data.data[0],
-                    });
-                  }
-                })
-                .finally(() => {
-                  if (callback) {
-                    callback();
-                  }
-                });
-            },
-          );
-        })
-        .catch(() => {
+        }) =>
           this.setState({
-            selectedImportDetails: undefined,
-            importDetailError: t`Error fetching import from API`,
-            loadingImportDetails: false,
-          });
-        });
-    }
+            error: null,
+            selectedImport: first || selectedImport,
+          }),
+      )
+      .catch(() =>
+        this.setState({
+          error: t`Error fetching import from API`,
+          selectedImport: null,
+        }),
+      );
   }
 }
 

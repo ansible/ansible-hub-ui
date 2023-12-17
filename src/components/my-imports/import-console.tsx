@@ -16,7 +16,7 @@ interface IProps {
   collection?: CollectionVersionSearch;
   empty?: boolean;
   followMessages?: boolean;
-  loading: boolean;
+  loading?: boolean;
   roleImport?: LegacyRoleImportDetailType;
   selectedImport?: ImportListType;
   setFollowMessages?: (follow: boolean) => void;

@@ -1,4 +1,5 @@
 export { AboutModalWindow } from './about-modal/about-modal';
+export { RoleImportList } from './ansible-role/import-list';
 export { LegacyNamespaceListItem } from './ansible-role/namespace-item';
 export { ProviderLink } from './ansible-role/provider-link';
 export { RoleImportForm } from './ansible-role/role-import-form';
