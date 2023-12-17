@@ -167,7 +167,7 @@ class MyImports extends React.Component<RouteProps, IState> {
                 />
               </div>
 
-              <div style={{ flexGrow: '1', marginLeft: '10px' }}>
+              <div style={{ flexGrow: '1', marginLeft: '16px' }}>
                 {selectedImport && this.state.params.namespace && (
                   <div
                     style={{

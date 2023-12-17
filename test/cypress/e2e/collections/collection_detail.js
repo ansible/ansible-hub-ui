@@ -154,7 +154,6 @@ describe('Collection detail', () => {
     cy.visit(`${baseURL}/import-log`);
     cy.get('.body').get('.title-bar');
     cy.get('.body').get('.message-list');
-    cy.get('.body').get('.last-message');
   });
 
   it('should display "No Dependencies" when opening the tab', () => {

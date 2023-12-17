@@ -158,7 +158,20 @@ export function ImportConsole({
         )}
       </div>
 
-      <div className='last-message' ref={lastImport} />
+      <div
+        ref={lastImport}
+        style={
+          // Give the last element some extra height so that it doesn't cut off messages when scroling down to it.
+          followMessages
+            ? {
+                height: '100px',
+                width: '5px',
+                position: 'relative',
+                top: '-150px',
+              }
+            : null
+        }
+      />
     </div>
   );
 }
