@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ApplicationInfoAPI, UserType } from 'src/api';
-import { ExternalLink } from 'src/components';
+import { ExternalLink, MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
 const Label = ({ children }: { children: React.ReactNode }) => (
@@ -166,15 +166,19 @@ export const AboutModalWindow = ({
 
           <Label>{t`Username`}</Label>
           <Value>
-            <Link
-              to={formatPath(Paths.userDetail, { userID: user.id })}
+            <MaybeLink
+              to={
+                user.id
+                  ? formatPath(Paths.userDetail, { userID: user.id })
+                  : null
+              }
               title={user.username}
             >
               {userName}
               {user?.username && user.username !== userName ? (
                 <> ({user.username})</>
               ) : null}
-            </Link>
+            </MaybeLink>
           </Value>
 
           <Label>{t`User Groups`}</Label>

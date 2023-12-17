@@ -1,13 +1,10 @@
 import { Trans } from '@lingui/macro';
-import React, { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 
 type VariantType = 'default' | 'success' | 'danger' | 'warning' | 'info';
-
-const MaybeLink = ({ to, children }: { to?: string; children: ReactNode }) =>
-  to ? <Link to={to}>{children}</Link> : <>{children}</>;
 
 // task can be { task: (pulp_href) } or "(pulp_href)" or "(uuid)"
 export const taskAlert = (task, title, variant: VariantType = 'info') => ({
