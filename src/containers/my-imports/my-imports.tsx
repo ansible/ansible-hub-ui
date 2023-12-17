@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import { cloneDeep } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -23,22 +22,22 @@ import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
-  selectedImport: ImportListType;
-  importList: ImportListType[];
-  selectedImportDetails: ImportDetailType;
+  alerts: AlertType[];
   collection: CollectionVersionSearch;
+  followLogs: boolean;
+  importDetailError: string;
+  importList: ImportListType[];
+  loadingImportDetails: boolean;
+  loadingImports: boolean;
   params: {
-    page_size?: number;
-    page?: number;
     keyword?: string;
     namespace?: string;
+    page?: number;
+    page_size?: number;
   };
   resultsCount: number;
-  importDetailError: string;
-  followLogs: boolean;
-  loadingImports: boolean;
-  loadingImportDetails: boolean;
-  alerts: AlertType[];
+  selectedImport: ImportListType;
+  selectedImportDetails: ImportDetailType;
 }
 
 class MyImports extends React.Component<RouteProps, IState> {
@@ -56,17 +55,17 @@ class MyImports extends React.Component<RouteProps, IState> {
     this.topOfPage = React.createRef();
 
     this.state = {
-      selectedImport: undefined,
-      importList: [],
-      params: params,
-      selectedImportDetails: undefined,
-      resultsCount: 0,
-      importDetailError: '',
-      followLogs: false,
-      loadingImports: true,
-      loadingImportDetails: true,
-      collection: null,
       alerts: [],
+      collection: null,
+      followLogs: false,
+      importDetailError: '',
+      importList: [],
+      loadingImportDetails: true,
+      loadingImports: true,
+      params,
+      resultsCount: 0,
+      selectedImport: undefined,
+      selectedImportDetails: undefined,
     };
   }
 
@@ -109,16 +108,16 @@ class MyImports extends React.Component<RouteProps, IState> {
 
   render() {
     const {
-      selectedImport,
-      importList,
-      params,
-      selectedImportDetails,
-      resultsCount,
-      loadingImports,
-      loadingImportDetails,
-      importDetailError,
-      followLogs,
       collection,
+      followLogs,
+      importDetailError,
+      importList,
+      loadingImportDetails,
+      loadingImports,
+      params,
+      resultsCount,
+      selectedImport,
+      selectedImportDetails,
     } = this.state;
 
     if (!importList) {
@@ -248,11 +247,12 @@ class MyImports extends React.Component<RouteProps, IState> {
           (x) => x.id === selectedImport.id,
         );
 
-        const imports = cloneDeep(importList);
-        const newSelectedImport = cloneDeep(selectedImport);
-
-        newSelectedImport.state = selectedImportDetails.state;
-        newSelectedImport.finished_at = selectedImportDetails.finished_at;
+        const imports = [...importList];
+        const newSelectedImport = {
+          ...selectedImport,
+          state: selectedImportDetails.state,
+          finished_at: selectedImportDetails.finished_at,
+        };
 
         imports[importIndex] = newSelectedImport;
 
