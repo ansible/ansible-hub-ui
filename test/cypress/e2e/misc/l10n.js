@@ -23,8 +23,8 @@ describe('Localization tests with the t`String` format', () => {
   });
 
   const translations = {
-    en: 'Task Management',
-    fr: 'Jobs de gestion',
+    en: 'Task management',
+    fr: 'Gestion des tâches',
     ja: 'タスク管理',
     zh: '任务管理',
   };

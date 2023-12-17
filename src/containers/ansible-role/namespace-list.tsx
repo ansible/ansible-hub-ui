@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { DataList } from '@patternfly/react-core';
+import { Button, DataList } from '@patternfly/react-core';
 import React from 'react';
 import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
 import {
@@ -13,9 +13,11 @@ import {
   LoadingPageSpinner,
   Pagination,
   RoleNamespaceEditModal,
+  RoleNamespaceModal,
   WisdomModal,
   closeAlertMixin,
 } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
 import {
   ParamHelper,
   RouteProps,
@@ -26,6 +28,7 @@ import {
 
 interface RoleNamespacesState {
   alerts: AlertType[];
+  createModal?: boolean;
   count: number;
   editModal?: LegacyNamespaceListType;
   lightspeedModal?: string;
@@ -42,6 +45,8 @@ class AnsibleRoleNamespaceList extends React.Component<
   RouteProps,
   RoleNamespacesState
 > {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -53,6 +58,7 @@ class AnsibleRoleNamespaceList extends React.Component<
     this.state = {
       alerts: [],
       count: 0,
+      createModal: false,
       editModal: null,
       lightspeedModal: null,
       loading: true,
@@ -67,6 +73,9 @@ class AnsibleRoleNamespaceList extends React.Component<
   }
 
   componentDidMount() {
+    this.setState({ alerts: this.context.alerts || [] });
+    this.context.setAlerts([]);
+
     this.query(this.state.params);
   }
 
@@ -112,6 +121,7 @@ class AnsibleRoleNamespaceList extends React.Component<
         id: 'keywords',
         title: t`Keywords`,
       },
+      { id: 'provider', title: t`Provider`, hidden: true },
     ];
 
     const sortOptions = [
@@ -126,12 +136,17 @@ class AnsibleRoleNamespaceList extends React.Component<
     const {
       alerts,
       count,
+      createModal,
       editModal,
       lightspeedModal,
       loading,
       params,
       roleNamespaces,
     } = this.state;
+
+    const {
+      user: { is_superuser: canCreate },
+    } = this.context;
 
     const noData =
       count === 0 &&
@@ -143,6 +158,16 @@ class AnsibleRoleNamespaceList extends React.Component<
     return (
       <div>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        {createModal && (
+          <RoleNamespaceModal
+            addAlert={(alert) => this.addAlert(alert)}
+            onClose={() => this.setState({ createModal: false })}
+            onSaved={() => {
+              this.setState({ createModal: false });
+              this.query(params);
+            }}
+          />
+        )}
         {lightspeedModal && (
           <WisdomModal
             addAlert={(alert) => this.addAlert(alert)}
@@ -158,7 +183,7 @@ class AnsibleRoleNamespaceList extends React.Component<
             namespace={editModal}
           />
         )}
-        <BaseHeader title={t`Role Namespaces`} />
+        <BaseHeader title={t`Role namespaces`} />
         {loading ? (
           <LoadingPageSpinner />
         ) : noData ? (
@@ -169,6 +194,14 @@ class AnsibleRoleNamespaceList extends React.Component<
         ) : (
           <div>
             <HubListToolbar
+              buttons={[
+                canCreate && (
+                  <Button
+                    key='create'
+                    onClick={() => this.setState({ createModal: true })}
+                  >{t`Create`}</Button>
+                ),
+              ].filter(Boolean)}
               count={count}
               filterConfig={filterConfig}
               ignoredParams={['page', 'page_size', 'sort']}

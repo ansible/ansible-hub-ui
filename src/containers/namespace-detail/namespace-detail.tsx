@@ -256,6 +256,8 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showImportModal,
       updateCollection,
     } = this.state;
+    const { featureFlags } = this.context;
+    const { legacy_roles, display_signatures } = featureFlags;
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -270,6 +272,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       showControls && { id: 'cli-configuration', name: t`CLI configuration` },
       namespace.resources && { id: 'resources', name: t`Resources` },
       { id: 'access', name: t`Access` },
+      legacy_roles && { id: 'role-namespaces', name: t`Role namespaces` },
     ].filter(Boolean);
 
     const tab = params.tab || 'collections';
@@ -424,7 +427,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             params={params}
             updateParams={updateParams}
             {...collectionFilter({
-              featureFlags: this.context.featureFlags,
+              featureFlags,
               ignoredParams,
             })}
           />
@@ -451,9 +454,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                   ignoredParams={ignoredParams}
                   collections={collections}
                   itemCount={filteredCount}
-                  displaySignatures={
-                    this.context.featureFlags.display_signatures
-                  }
+                  displaySignatures={display_signatures}
                   collectionControls={(collection) =>
                     this.renderCollectionControls(collection)
                   }
@@ -629,6 +630,16 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
                 })}
               />
             </section>
+          ) : null}
+          {tab === 'role-namespaces' ? (
+            <Navigate
+              replace
+              to={formatPath(
+                Paths.standaloneNamespaces,
+                {},
+                { provider: namespace.name },
+              )}
+            />
           ) : null}
         </Main>
         {canSign && (
@@ -833,8 +844,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     }
 
     const { canSign, collections, unfilteredCount } = this.state;
-    const { can_upload_signatures } = this.context.featureFlags;
-    const { ai_deny_index } = this.context.featureFlags;
+    const { ai_deny_index, can_upload_signatures } = this.context.featureFlags;
     const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
@@ -948,6 +958,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     const {
       namespace: { name },
     } = this.state;
+    const { queueAlert } = this.context;
 
     this.setState({ isNamespacePending: true }, () =>
       NamespaceAPI.delete(name)
@@ -957,7 +968,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
             confirmDelete: false,
             isNamespacePending: false,
           });
-          this.context.queueAlert({
+          queueAlert({
             variant: 'success',
             title: (
               <Trans>

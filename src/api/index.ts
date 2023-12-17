@@ -22,6 +22,7 @@ export { ImportAPI } from './import';
 export { LegacyImportAPI } from './legacy-import';
 export { LegacyNamespaceAPI } from './legacy-namespace';
 export { LegacyRoleAPI } from './legacy-role';
+export { LegacySyncAPI } from './legacy-sync';
 export { MyDistributionAPI } from './my-distribution';
 export { MyNamespaceAPI } from './my-namespace';
 export { MySyncListAPI } from './my-synclist';
@@ -53,6 +54,7 @@ export {
 } from './response-types/execution-environment';
 export { FeatureFlagsType } from './response-types/feature-flags';
 export { ImportDetailType, ImportListType } from './response-types/import';
+export { LegacyRoleImportDetailType } from './response-types/legacy-import';
 export {
   LegacyNamespaceDetailType,
   LegacyNamespaceListType,

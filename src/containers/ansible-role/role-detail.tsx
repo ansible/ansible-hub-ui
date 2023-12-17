@@ -1,5 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
+  Button,
   DataList,
   DataListCell,
   DataListItem,
@@ -13,8 +14,12 @@ import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  LegacyImportAPI,
+  LegacyNamespaceAPI,
+  LegacyNamespaceDetailType,
   LegacyRoleAPI,
   LegacyRoleDetailType,
+  LegacyRoleImportDetailType,
   LegacyRoleVersionDetailType,
 } from 'src/api';
 import { EmptyStateNoData } from 'src/components';
@@ -27,6 +32,7 @@ import {
   DateComponent,
   DownloadCount,
   ExternalLink,
+  ImportConsole,
   LabelGroup,
   LoadingPageWithHeader,
   Logo,
@@ -36,6 +42,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
+import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
@@ -210,9 +217,84 @@ class RoleVersions extends React.Component<
   }
 }
 
+interface RoleImportDetailProps {
+  addAlert: (alert: AlertType) => void;
+  role: LegacyRoleDetailType;
+}
+
+interface RoleImportDetailState {
+  lastImport: LegacyRoleImportDetailType;
+  loading: boolean;
+}
+
+class RoleImportLog extends React.Component<
+  RoleImportDetailProps,
+  RoleImportDetailState
+> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      lastImport: null,
+    };
+  }
+
+  componentDidMount() {
+    const { addAlert, role } = this.props;
+    this.setState({ loading: true, lastImport: null });
+
+    LegacyImportAPI.list({
+      detail: true,
+      page_size: 1,
+      role_id: role.id,
+      sort: '-created',
+      state: 'SUCCESS',
+    })
+      .then(
+        ({
+          data: {
+            results: [lastImport],
+          },
+        }) =>
+          this.setState({
+            lastImport,
+            loading: false,
+          }),
+      )
+      .catch(
+        handleHttpError(
+          t`Failed to get import log`,
+          () => this.setState({ loading: false, lastImport: null }),
+          addAlert,
+        ),
+      );
+  }
+
+  render() {
+    const { role } = this.props;
+    const { lastImport, loading } = this.state;
+
+    return (
+      <>
+        {!loading && !lastImport ? (
+          <EmptyStateNoData
+            title={t`No import logs for role id ${role.id}`}
+            description={t`No import logs were found for the role.`}
+          />
+        ) : null}
+
+        {lastImport && (
+          <ImportConsole loading={loading} roleImport={lastImport} />
+        )}
+      </>
+    );
+  }
+}
+
 interface RoleState {
   activeItem: string;
   alerts: AlertType[];
+  fullNamespace: LegacyNamespaceDetailType;
   loading: boolean;
   name: string;
   namespace: string;
@@ -220,6 +302,8 @@ interface RoleState {
 }
 
 class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -230,6 +314,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       loading: true,
       name,
       namespace,
+      fullNamespace: null,
       role: null,
     };
   }
@@ -242,8 +327,21 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       namespace,
       page_size: 1,
     })
-      .then(({ data: { results } }) =>
-        this.setState({ role: results[0], loading: false }),
+      .then(
+        ({
+          data: {
+            results: [role],
+          },
+        }) => {
+          this.setState({ role, loading: false });
+
+          const namespace = role?.summary_fields?.namespace;
+          if (namespace?.id) {
+            return LegacyNamespaceAPI.get(namespace.id).then(
+              ({ data: fullNamespace }) => this.setState({ fullNamespace }),
+            );
+          }
+        },
       )
       .catch(
         handleHttpError(
@@ -265,7 +363,11 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
   }
 
   render() {
-    const { activeItem, alerts, loading, name, role } = this.state;
+    const { activeItem, alerts, fullNamespace, loading, name, role } =
+      this.state;
+    const {
+      user: { username, is_superuser },
+    } = this.context;
 
     if (loading) {
       return <LoadingPageWithHeader />;
@@ -307,6 +409,7 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
       install: t`Install`,
       documentation: t`Documentation`,
       versions: t`Versions`,
+      import_log: t`Import log`,
     };
 
     const addAlert = (alert) => this.addAlert(alert);
@@ -340,6 +443,8 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
             role={role}
           />
         );
+      } else if (activeItem === 'import_log') {
+        return <RoleImportLog addAlert={addAlert} role={role} />;
       } else {
         return <div />;
       }
@@ -377,6 +482,12 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
         }),
       );
     };
+
+    const canImport =
+      is_superuser ||
+      !!fullNamespace?.summary_fields?.owners?.find(
+        (n) => n.username == username,
+      );
 
     return (
       <>
@@ -426,6 +537,25 @@ class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
                 <RoleRatings namespace={namespace.name} name={role.name} />
                 <DownloadCount item={role} />
               </div>
+              {canImport && (
+                <Button
+                  key='import'
+                  onClick={() =>
+                    this.props.navigate(
+                      formatPath(
+                        Paths.standaloneRoleImport,
+                        {},
+                        {
+                          github_user: role.github_user,
+                          github_repo: role.github_repo,
+                          github_branch: role.github_branch,
+                          back: this.props.location.pathname,
+                        },
+                      ),
+                    )
+                  }
+                >{t`Import new version`}</Button>
+              )}
             </div>
           }
         >

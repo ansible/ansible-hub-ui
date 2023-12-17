@@ -84,7 +84,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        <BaseHeader title={t`Signature Keys`} />
+        <BaseHeader title={t`Signature keys`} />
         {unauthorised ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (

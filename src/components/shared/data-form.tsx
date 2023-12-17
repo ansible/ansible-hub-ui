@@ -1,9 +1,6 @@
 import {
   Form,
   FormGroup,
-  HelperText,
-  HelperTextItem,
-  HelperTextItemProps,
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
@@ -18,10 +15,7 @@ interface IProps {
     placeholder?: string;
     title: string;
     type?: string;
-    helper?: {
-      variant: HelperTextItemProps['variant']; // "default" | "error" | "success" | "warning" | "indeterminate"
-      text: ReactNode;
-    };
+    helper?: ReactNode;
   }[];
   formPrefix?: ReactNode;
   formSuffix?: ReactNode;
@@ -77,13 +71,7 @@ export class DataForm extends React.Component<IProps> {
               {...(field.type === 'password' ? { autoComplete: 'off' } : {})}
             />
           )}
-          {field.helper ? (
-            <HelperText>
-              <HelperTextItem variant={field.helper.variant}>
-                {field.helper.text}
-              </HelperTextItem>
-            </HelperText>
-          ) : null}
+          {field.helper}
         </FormGroup>
       );
     });

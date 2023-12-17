@@ -437,7 +437,7 @@ const MultiSearch = (props: RouteProps) => {
         {featureFlags.execution_environments ? (
           <NotFoundSection
             items={containers}
-            title={t`Execution Environments`}
+            title={t`Execution environments`}
             emptyStateTitle={t`No matching execution environments found.`}
             showAllLink={
               <Link

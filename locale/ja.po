@@ -33,7 +33,7 @@ msgstr "(アップロード済み)"
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 msgstr "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
 
-#: src/components/ansible-role/legacy-role-item.tsx
+#: src/components/ansible-role/role-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "{0} logo"
 msgstr "{0} ロゴ"
@@ -171,6 +171,10 @@ msgstr "<0>{0}</0> が削除されます。"
 #: src/components/rbac/delete-user-modal.tsx
 msgid "<0>{0}</0> will be permanently deleted."
 msgstr "<0>{0}</0> は完全に削除されます。"
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "<0>{0}</0>, provided by <1>{1}</1>"
+msgstr ""
 
 #: src/components/patternfly-wrappers/pagination.tsx
 msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
@@ -456,7 +460,7 @@ msgstr ""
 msgid "Ansible Lightspeed"
 msgstr ""
 
-#: src/components/ansible-role/legacy-namespace-item.tsx
+#: src/components/ansible-role/namespace-item.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -592,7 +596,7 @@ msgstr "このリポジトリーを以下のバージョンに戻してもよろ
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Automatic"
 msgstr ""
 
@@ -681,13 +685,15 @@ msgstr "CA 証明書"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
+#: src/components/ansible-role/role-import-form.tsx
 #: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/components/ansible-role/role-namespace-modal.tsx
+#: src/components/ansible-role/role-sync-form.tsx
 #: src/components/confirm-modal/confirm-modal.tsx
 #: src/components/delete-modal/delete-modal.tsx
 #: src/components/execution-environment/repository-form.tsx
 #: src/components/execution-environment/tag-manifest-modal.tsx
 #: src/components/import-modal/import-modal.tsx
-#: src/components/legacy-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/access-tab.tsx
 #: src/components/rbac/access-tab.tsx
@@ -753,7 +759,7 @@ msgstr ""
 msgid "Certified"
 msgstr "認定済み"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
 msgid "Change"
 msgstr "変更"
@@ -809,7 +815,8 @@ msgstr "既存の実行環境を変更します。"
 #~ msgid "Change namespace"
 #~ msgstr "Change namespace"
 
-#: src/components/ansible-role/legacy-namespace-item.tsx
+#: src/components/ansible-role/namespace-item.tsx
+#: src/components/ansible-role/role-import-form.tsx
 #: src/components/ansible-role/role-namespace-edit-modal.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
 msgid "Change provider namespace"
@@ -848,6 +855,10 @@ msgstr "名前空間 \"{0}\" への変更を保存できませんでした。"
 #: src/containers/role-management/role-edit.tsx
 msgid "Changes to role \"{name}\" could not be saved."
 msgstr "ロール \"{name}\" の変更を保存できませんでした。"
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Checking ..."
+msgstr ""
 
 #: src/components/rbac/delete-group-modal.tsx
 msgid "Checking for affected users... <0/>"
@@ -1301,8 +1312,11 @@ msgstr "Count"
 msgid "CRC public key"
 msgstr "CRC public key"
 
+#: src/components/ansible-role/role-import-form.tsx
+#: src/components/ansible-role/role-namespace-modal.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 #: src/components/rbac/group-modal.tsx
+#: src/containers/ansible-role/namespace-list.tsx
 #: src/containers/group-management/group-list.tsx
 #: src/containers/group-management/group-list.tsx
 #: src/containers/namespace-list/namespace-list.tsx
@@ -1339,6 +1353,10 @@ msgstr "特殊文字 (例: <!@$%>) を含めた {minLength} 文字以上のパ�
 #: src/components/user-form/user-form.tsx
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 #~ msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+
+#: src/components/ansible-role/role-namespace-modal.tsx
+msgid "Create a role namespace"
+msgstr ""
 
 #: src/constants.tsx
 msgid "Create and update execution environments under existing container namespaces."
@@ -1745,7 +1763,7 @@ msgstr "詳細"
 msgid "Details"
 msgstr "詳細"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Did you mean {0}?"
 msgstr ""
 
@@ -2048,6 +2066,7 @@ msgstr "グループの削除エラー。"
 #~ msgid "Error editing group."
 #~ msgstr "Error editing group."
 
+#: src/containers/ansible-role/imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 msgid "Error fetching import from API"
 msgstr "API からのインポート取得エラー"
@@ -2213,14 +2232,14 @@ msgstr "実行環境 \"{selectedItem}\" が正常に削除されました。"
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Execution environments"
 msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
-#: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Execution Environments"
@@ -2234,6 +2253,7 @@ msgstr "有効期限"
 msgid "Extend the power of Ansible to your entire team."
 msgstr ""
 
+#: src/components/ansible-role/role-import-form.tsx
 #: src/components/my-imports/import-console.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/status/status-indicator.tsx
@@ -2261,6 +2281,11 @@ msgstr ""
 msgid "Failed to copy collection version."
 msgstr ""
 
+#: src/components/ansible-role/role-import-form.tsx
+#: src/components/ansible-role/role-namespace-modal.tsx
+msgid "Failed to create role namespace"
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx
 #~ msgid "Failed to delete remote registry {name}"
 #~ msgstr "Failed to delete remote registry {name}"
@@ -2281,7 +2306,11 @@ msgstr "リポジトリーのバージョンが見つかりませんでした"
 msgid "Failed to find role"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to get import log"
+msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Failed to import role"
 msgstr ""
 
@@ -2431,11 +2460,16 @@ msgstr "バージョンへの署名に失敗しました。"
 msgid "Failed to sync repository \"{name}\""
 msgstr "リポジトリー \"{name}\" の同期に失敗しました"
 
+#: src/components/ansible-role/role-sync-form.tsx
+msgid "Failed to sync role"
+msgstr ""
+
 #: src/containers/landing/landing-page.tsx
 msgid "Featured"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
+#: src/components/ansible-role/role-sync-form.tsx
 msgid "Field is required."
 msgstr ""
 
@@ -2494,6 +2528,14 @@ msgstr "ログのフォロー"
 msgid "Force a sync to happen."
 msgstr ""
 
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Found"
+msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Found a standalone namespace (<0>{0}</0>), but NOT a provider namespace."
+msgstr ""
+
 #: src/components/about-modal/about-modal.tsx
 msgid "Galaxy Importer"
 msgstr ""
@@ -2514,11 +2556,11 @@ msgstr ""
 #~ msgid "Get token"
 #~ msgstr "Get token"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "GitHub ref (a commit, branch or tag)"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "GitHub repository"
 msgstr ""
 
@@ -2526,7 +2568,8 @@ msgstr ""
 msgid "GitHub Repository"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
+#: src/components/ansible-role/role-sync-form.tsx
 msgid "GitHub user"
 msgstr ""
 
@@ -2732,7 +2775,7 @@ msgstr "イメージ"
 msgid "Images will appear once uploaded"
 msgstr "アップロード後にイメージが表示されます"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Import"
 msgstr ""
 
@@ -2746,16 +2789,23 @@ msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
 #: src/components/headers/collection-header.tsx
+#: src/containers/ansible-role/role-detail.tsx
 #: src/containers/collection-detail/collection-import-log.tsx
 msgid "Import log"
 msgstr "ログのインポート"
 
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Import new version"
+msgstr ""
+
+#: src/components/ansible-role/namespace-item.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-import.tsx
 #: src/containers/ansible-role/role-list.tsx
 msgid "Import role"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Import started"
 msgstr ""
 
@@ -3118,6 +3168,7 @@ msgid "My profile"
 msgstr "自分のプロファイル"
 
 #: src/components/ansible-role/role-namespace-edit-modal.tsx
+#: src/components/ansible-role/role-namespace-modal.tsx
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx
 #: src/components/collection-detail/collection-content-list.tsx
 #: src/components/collection-list/collection-filter.ts
@@ -3350,6 +3401,9 @@ msgstr "まだコンテナーリポジトリーはありません"
 msgid "No Controllers available"
 msgstr "利用可能なコントローラーがありません"
 
+#: src/containers/ansible-role/imports.tsx
+#: src/containers/ansible-role/imports.tsx
+#: src/containers/ansible-role/imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
@@ -3372,6 +3426,14 @@ msgstr "まだグループはありません"
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "No images yet"
 msgstr "まだイメージはありません"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "No import logs for role id {0}"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "No import logs were found for the role."
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx
 msgid "No imports"
@@ -3397,6 +3459,10 @@ msgstr ""
 #: src/containers/not-found/dispatch.tsx
 #~ msgid "No matching legacy roles found."
 #~ msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "No matching namespace found"
+msgstr ""
 
 #: src/containers/search/multi-search.tsx
 msgid "No matching namespaces found."
@@ -3592,7 +3658,7 @@ msgstr ""
 #~ msgid "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 #~ msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
 msgstr ""
 
@@ -3847,6 +3913,10 @@ msgstr ""
 #: src/components/cards/collection-card.tsx
 #: src/components/collection-list/collection-list-item.tsx
 msgid "Provided by <0>{nsTitle}</0>"
+msgstr ""
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Provider"
 msgstr ""
 
 #: src/components/repositories/remote-form.tsx
@@ -4141,6 +4211,9 @@ msgid "Remote name"
 msgstr "リモート名"
 
 #: src/containers/execution-environment/registry-list.tsx
+msgid "Remote registries"
+msgstr ""
+
 #: src/loaders/standalone/menu.tsx
 msgid "Remote Registries"
 msgstr "リモートレジストリー"
@@ -4416,7 +4489,16 @@ msgstr "ロール {0} は {1} に正常に追加されました。"
 #~ msgid "Role Header"
 #~ msgstr "ロールヘッダー"
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/containers/ansible-role/imports.tsx
+msgid "Role imports"
+msgstr ""
+
+#: src/loaders/standalone/menu.tsx
+msgid "Role Imports"
+msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
+#: src/components/ansible-role/role-sync-form.tsx
 #: src/components/rbac/role-form.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -4432,12 +4514,13 @@ msgstr ""
 #~ msgid "Role namespace header"
 #~ msgstr ""
 
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Role namespaces"
 msgstr ""
 
-#: src/containers/ansible-role/namespace-list.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Role Namespaces"
 msgstr ""
@@ -4820,10 +4903,10 @@ msgid "Signature"
 msgstr "署名"
 
 #: src/containers/signature-keys/list.tsx
+#: src/containers/signature-keys/list.tsx
 msgid "Signature keys"
 msgstr "署名鍵"
 
-#: src/containers/signature-keys/list.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Signature Keys"
 msgstr "署名鍵"
@@ -5007,6 +5090,14 @@ msgstr "リモートが正常に作成されました {0}"
 msgid "Successfully created repository {0}"
 msgstr "リポジトリーが正常に作成されました {0}"
 
+#: src/components/ansible-role/role-namespace-modal.tsx
+msgid "Successfully created role namespace {name}"
+msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Successfully created role namespace {user}"
+msgstr ""
+
 #: src/components/headers/collection-header.tsx
 #~ msgid "Successfully deleted collection version."
 #~ msgstr "Successfully deleted collection version."
@@ -5058,6 +5149,7 @@ msgstr "スーパーユーザーには、所属するグループに関係なく
 
 #: src/actions/ansible-repository-sync.tsx
 #: src/actions/ansible-repository-sync.tsx
+#: src/components/ansible-role/role-sync-form.tsx
 #: src/containers/search/search.tsx
 msgid "Sync"
 msgstr "同期"
@@ -5081,6 +5173,15 @@ msgstr "レジストリーからの同期"
 
 #: src/actions/ansible-repository-sync.tsx
 msgid "Sync repository \"{name}\""
+msgstr ""
+
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/ansible-role/role-sync.tsx
+msgid "Sync role"
+msgstr ""
+
+#: src/components/ansible-role/role-sync-form.tsx
+msgid "Sync started"
 msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
@@ -5173,10 +5274,10 @@ msgid "Task list"
 msgstr "タスク一覧"
 
 #: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-list-view.tsx
 msgid "Task management"
 msgstr "タスク管理"
 
-#: src/containers/task-management/task-list-view.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Task Management"
 msgstr "タスク管理"
@@ -5207,10 +5308,10 @@ msgstr "タスクは作成後に表示されます。"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/containers/landing/landing-page.tsx
+#: src/containers/landing/landing-page.tsx
 msgid "Terms of use"
 msgstr ""
 
-#: src/containers/landing/landing-page.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Terms of Use"
 msgstr "利用規約"
@@ -5592,7 +5693,7 @@ msgstr "リポジトリー {0} の更新を開始しました"
 msgid "updated <0/>"
 msgstr ""
 
-#: src/components/ansible-role/legacy-role-item.tsx
+#: src/components/ansible-role/role-item.tsx
 #: src/components/collection-list/collection-list-item.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Updated <0/>"
@@ -6046,8 +6147,12 @@ msgstr "Web サイト"
 msgid "Welcome to Galaxy"
 msgstr ""
 
-#: src/components/legacy-role/role-import-form.tsx
+#: src/components/ansible-role/role-import-form.tsx
 msgid "Will clone <0>{link}</0>"
+msgstr ""
+
+#: src/components/ansible-role/role-sync-form.tsx
+msgid "Will sync <0>{link}</0>"
 msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx

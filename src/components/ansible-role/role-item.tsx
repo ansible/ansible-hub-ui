@@ -19,7 +19,7 @@ import {
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { getProviderInfo } from 'src/utilities';
-import './legacy-role-item.scss';
+import './role-item.scss';
 
 interface LegacyRoleProps {
   role: LegacyRoleDetailType;

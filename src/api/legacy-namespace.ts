@@ -4,6 +4,7 @@ export class API extends LegacyAPI {
   apiPath = 'v1/namespaces/';
   sortParam = 'sort';
 
+  // create(data)
   // get(id)
   // list(params?)
 

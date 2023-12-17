@@ -117,7 +117,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {cancelModalVisible ? this.renderCancelModal() : null}
-        <BaseHeader title={t`Task Management`} />
+        <BaseHeader title={t`Task management`} />
         {unauthorised ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (

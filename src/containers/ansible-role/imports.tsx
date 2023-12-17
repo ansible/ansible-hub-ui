@@ -40,7 +40,10 @@ interface IState {
   selectedImportDetails: ImportDetailType;
 }
 
-class MyImports extends React.Component<RouteProps, IState> {
+// TODO left side recent imports, plus filters
+// right side import log as is except roleImport=
+
+class AnsibleRoleImports extends React.Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
   topOfPage: React.RefObject<HTMLDivElement>;
 
@@ -127,43 +130,45 @@ class MyImports extends React.Component<RouteProps, IState> {
     return (
       <>
         <div ref={this.topOfPage} />
-        <BaseHeader title={t`My imports`} />
+        <BaseHeader title={t`Role imports`} />
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
         <Main>
           <section className='body'>
-            <div style={{ display: 'flex' }} data-cy='MyImports'>
+            <div style={{ display: 'flex' }} data-cy='AnsibleRoleImports'>
               <div style={{ width: '400px' }}>
-                <ImportList
-                  addAlert={(alert) => this.addAlert(alert)}
-                  importList={importList}
-                  selectedImport={selectedImport}
-                  loading={loadingImports}
-                  numberOfResults={resultsCount}
-                  params={params}
-                  selectImport={(sImport) => this.selectImport(sImport)}
-                  updateParams={(params) => {
-                    this.updateParams(params, () => {
-                      if (params.namespace) {
-                        this.setState(
-                          {
-                            loadingImports: true,
-                            loadingImportDetails: true,
-                          },
-                          () =>
-                            this.loadImportList(() => this.loadTaskDetails()),
-                        );
-                      } else {
-                        this.setState({
-                          importDetailError: t`No data`,
-                          loadingImportDetails: false,
-                        });
-                      }
-                    });
-                  }}
-                />
+                {false && (
+                  <ImportList
+                    addAlert={(alert) => this.addAlert(alert)}
+                    importList={importList}
+                    selectedImport={selectedImport}
+                    loading={loadingImports}
+                    numberOfResults={resultsCount}
+                    params={params}
+                    selectImport={(sImport) => this.selectImport(sImport)}
+                    updateParams={(params) => {
+                      this.updateParams(params, () => {
+                        if (params.namespace) {
+                          this.setState(
+                            {
+                              loadingImports: true,
+                              loadingImportDetails: true,
+                            },
+                            () =>
+                              this.loadImportList(() => this.loadTaskDetails()),
+                          );
+                        } else {
+                          this.setState({
+                            importDetailError: t`No data`,
+                            loadingImportDetails: false,
+                          });
+                        }
+                      });
+                    }}
+                  />
+                )}
               </div>
 
               <div style={{ flexGrow: '1', marginLeft: '16px' }}>
@@ -341,4 +346,4 @@ class MyImports extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(MyImports);
+export default withRouter(AnsibleRoleImports);
