@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import { cloneDeep } from 'lodash';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
   CollectionVersionSearch,
@@ -18,8 +19,8 @@ import {
   Main,
   closeAlertMixin,
 } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import './my-imports.scss';
 
 interface IState {
   selectedImport: ImportListType;
@@ -125,7 +126,7 @@ class MyImports extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <div ref={this.topOfPage} />
         <BaseHeader title={t`My imports`} />
         <AlertList
@@ -134,8 +135,8 @@ class MyImports extends React.Component<RouteProps, IState> {
         />
         <Main>
           <section className='body'>
-            <div className='hub-page-container' data-cy='MyImports'>
-              <div className='import-list'>
+            <div style={{ display: 'flex' }} data-cy='MyImports'>
+              <div style={{ width: '400px' }}>
                 <ImportList
                   addAlert={(alert) => this.addAlert(alert)}
                   importList={importList}
@@ -166,26 +167,55 @@ class MyImports extends React.Component<RouteProps, IState> {
                 />
               </div>
 
-              <div className='hub-import-console'>
+              <div style={{ flexGrow: '1', marginLeft: '10px' }}>
+                {selectedImport && this.state.params.namespace && (
+                  <div
+                    style={{
+                      fontSize: '18px',
+                      padding: '10px 10px 0 10px',
+                    }}
+                  >
+                    {!collection ? (
+                      `${selectedImport.namespace}.${selectedImport.name}`
+                    ) : (
+                      <Link
+                        to={formatPath(
+                          Paths.collectionByRepo,
+                          {
+                            namespace: selectedImport.namespace,
+                            collection: selectedImport.name,
+                            repo: collection.repository.name,
+                          },
+                          {
+                            version: selectedImport.version,
+                          },
+                        )}
+                      >
+                        {selectedImport.namespace}.{selectedImport.name}
+                      </Link>
+                    )}
+                  </div>
+                )}
+
                 <ImportConsole
+                  apiError={importDetailError}
+                  collection={collection}
                   empty={!this.state.params.namespace}
-                  loading={loadingImportDetails}
-                  task={selectedImportDetails}
                   followMessages={followLogs}
+                  loading={loadingImportDetails}
+                  selectedImport={selectedImport}
                   setFollowMessages={(isFollowing) => {
                     this.setState({
                       followLogs: isFollowing,
                     });
                   }}
-                  selectedImport={selectedImport}
-                  apiError={importDetailError}
-                  collection={collection}
+                  task={selectedImportDetails}
                 />
               </div>
             </div>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

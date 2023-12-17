@@ -1,8 +1,6 @@
 import { t } from '@lingui/macro';
 import { Spinner } from '@patternfly/react-core';
-import cx from 'classnames';
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import {
   CollectionVersionSearch,
   ImportDetailType,
@@ -10,18 +8,16 @@ import {
   PulpStatus,
 } from 'src/api';
 import { StatusIndicator, Tooltip } from 'src/components';
-import { Paths, formatPath } from 'src/paths';
 import './my-imports.scss';
 
 interface IProps {
   apiError?: string;
   collection?: CollectionVersionSearch;
-  empty: boolean;
-  followMessages: boolean;
-  hideCollectionName?: boolean;
+  empty?: boolean;
+  followMessages?: boolean;
   loading: boolean;
   selectedImport: ImportListType;
-  setFollowMessages: (follow: boolean) => void;
+  setFollowMessages?: (follow: boolean) => void;
   task: ImportDetailType;
 }
 
@@ -30,7 +26,6 @@ export function ImportConsole({
   collection,
   empty,
   followMessages,
-  hideCollectionName,
   loading,
   selectedImport,
   setFollowMessages,
@@ -49,7 +44,7 @@ export function ImportConsole({
     );
 
   // causes scrollToBottom via useEffect on followLogs change
-  const startToFollow = () => setFollowMessages(!followMessages);
+  const startToFollow = () => setFollowMessages?.(!followMessages);
 
   useEffect(() => {
     if (!followMessages) {
@@ -57,7 +52,7 @@ export function ImportConsole({
     }
 
     if (!inProgress) {
-      setFollowMessages(false);
+      setFollowMessages?.(false);
     }
 
     scrollToBottom();
@@ -68,31 +63,6 @@ export function ImportConsole({
   const title =
     !selectedImport || empty ? null : (
       <div>
-        {!hideCollectionName && (
-          <div className='title-container'>
-            {!collection ? (
-              `${selectedImport.namespace}.${selectedImport.name}`
-            ) : (
-              <Link
-                className='title'
-                to={formatPath(
-                  Paths.collectionByRepo,
-                  {
-                    namespace: selectedImport.namespace,
-                    collection: selectedImport.name,
-                    repo: collection?.repository.name,
-                  },
-                  {
-                    version: selectedImport.version,
-                  },
-                )}
-              >
-                {selectedImport.namespace}.{selectedImport.name}
-              </Link>
-            )}
-          </div>
-        )}
-
         <div className='title-bar'>
           <div>
             <span className='data-title'>{t`Status:`}</span>{' '}
@@ -133,7 +103,7 @@ export function ImportConsole({
     return (
       <div className='hub-import-console'>
         {title}
-        <div className='loading message-list'>
+        <div className='hub-import-loading message-list'>
           {apiError ? <div className='message'>{apiError}</div> : <Spinner />}
         </div>
       </div>
@@ -147,14 +117,12 @@ export function ImportConsole({
   );
 
   return (
-    <div className='hub-import-console pf-c-content' data-cy={'ImportConsole'}>
+    <div className='hub-import-console' data-cy={'ImportConsole'}>
       {title}
       <div className='message-list'>
         <div
-          className={cx({
-            'follow-active': followMessages,
-            'log-follow-button': true,
-          })}
+          className='log-follow-button'
+          style={followMessages ? { color: '#5bb75b' } : {}}
         >
           <Tooltip
             position='left'

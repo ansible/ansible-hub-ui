@@ -83,7 +83,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           activeTab='import-log'
           actuallyCollection={actuallyCollection}
@@ -101,18 +101,14 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
         <Main>
           <section className='body'>
             <ImportConsole
-              empty={false}
-              loading={loadingImports}
-              task={selectedImportDetail}
-              followMessages={false}
-              setFollowMessages={() => null}
-              selectedImport={selectedImport}
               apiError={apiError}
-              hideCollectionName={true}
+              loading={loadingImports}
+              selectedImport={selectedImport}
+              task={selectedImportDetail}
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

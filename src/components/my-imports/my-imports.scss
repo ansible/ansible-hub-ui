@@ -20,7 +20,7 @@ $white: #fff;
   width: 100%;
 }
 
-.loading {
+.hub-import-loading {
   height: 500px;
   display: flex;
   align-items: center;
@@ -148,10 +148,6 @@ $white: #fff;
       top: 0;
       float: right;
       font-size: 18px;
-    }
-
-    .follow-active {
-      color: $green;
     }
   }
 }
