@@ -235,7 +235,7 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     },
   }) => {
     // the role import_log tab is not available before the role gets imported, go to list
-    // TODO .. but we could waitForTask, and go to role on success
+    // TODO waitForTask (needs galaxy_ng#2012) and go to my role imports to see the import
     queueAlert(taskAlert(pulp_id, t`Import started`));
     navigate(formatPath(Paths.standaloneRoles));
   };
