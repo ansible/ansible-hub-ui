@@ -114,6 +114,7 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
 
   render() {
     const { alerts, count, loading, params, roles } = this.state;
+    const { user } = this.context;
 
     const updateParams = (params) =>
       this.updateParams(params, () => this.query(params));
@@ -156,6 +157,8 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
         filterConfig.map(({ id }) => id),
       );
 
+    const canImport = user && !user.is_anonymous;
+
     return (
       <div>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -171,13 +174,17 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
           <div>
             <HubListToolbar
               buttons={[
-                <Button
-                  key='import'
-                  onClick={() =>
-                    this.props.navigate(formatPath(Paths.standaloneRoleImport))
-                  }
-                >{t`Import role`}</Button>,
-              ]}
+                canImport && (
+                  <Button
+                    key='import'
+                    onClick={() =>
+                      this.props.navigate(
+                        formatPath(Paths.standaloneRoleImport),
+                      )
+                    }
+                  >{t`Import role`}</Button>
+                ),
+              ].filter(Boolean)}
               count={count}
               filterConfig={filterConfig}
               ignoredParams={['page', 'page_size', 'sort']}
