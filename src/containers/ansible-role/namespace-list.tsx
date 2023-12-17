@@ -121,6 +121,7 @@ class AnsibleRoleNamespaceList extends React.Component<
         id: 'keywords',
         title: t`Keywords`,
       },
+      { id: 'provider', title: t`Provider`, hidden: true },
     ];
 
     const sortOptions = [

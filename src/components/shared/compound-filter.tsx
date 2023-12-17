@@ -22,6 +22,7 @@ export class FilterOption {
   placeholder?: string;
   inputType?: 'text-field' | 'select' | 'multiple' | 'typeahead';
   options?: { id: string; title: string }[];
+  hidden?: boolean;
 }
 
 interface IProps {

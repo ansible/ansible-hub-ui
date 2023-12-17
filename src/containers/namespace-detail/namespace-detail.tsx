@@ -633,6 +633,7 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
           ) : null}
           {tab === 'role-namespaces' ? (
             <Navigate
+              replace
               to={formatPath(
                 Paths.standaloneNamespaces,
                 {},

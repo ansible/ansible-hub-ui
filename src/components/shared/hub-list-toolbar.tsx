@@ -74,11 +74,13 @@ export function HubListToolbar({
     filterConfig.map(({ id, title }) => [id, title]),
   );
 
-  const filterWithOptions = filterConfig.map((item) =>
-    item.inputType !== 'typeahead'
-      ? item
-      : { ...item, options: item.options || typeaheadOptions[item.id] || [] },
-  );
+  const filterWithOptions = filterConfig
+    .filter(({ hidden }) => !hidden)
+    .map((item) =>
+      item.inputType !== 'typeahead'
+        ? item
+        : { ...item, options: item.options || typeaheadOptions[item.id] || [] },
+    );
 
   const renderedButtons = buttons?.length
     ? buttons.map((button, i) =>
