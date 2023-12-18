@@ -184,15 +184,18 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
     back?: string;
   };
   const [data, setData] = useState<{
+    alternate_namespace_name?: string;
     alternate_role_name?: string;
     github_reference?: string;
     github_repo?: string;
     github_user?: string;
   }>({
-    github_reference: params.github_branch,
-    github_repo: params.github_repo,
+    alternate_namespace_name: '',
+    alternate_role_name: '',
+    github_reference: params.github_branch || '',
+    github_repo: params.github_repo || '',
     github_user:
-      params.github_user || (user.is_superuser ? null : user.username),
+      params.github_user || (user.is_superuser ? '' : user.username) || '',
   });
   const [errors, setErrors] = useState<ErrorMessagesType>(null);
 
@@ -234,9 +237,14 @@ export const RoleImportForm = ({ addAlert }: IProps) => {
       placeholder: t`Automatic`,
     },
     {
+      id: 'alternate_namespace_name',
+      title: t`Namespace name`,
+      placeholder: t`Overrides any galaxy_info.namespace metadata`,
+    },
+    {
       id: 'alternate_role_name',
       title: t`Role name`,
-      placeholder: t`Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention.`,
+      placeholder: t`Overrides any galaxy_info.role_name metadata`,
     },
   ];
 
