@@ -1156,6 +1156,8 @@ msgstr ""
 msgid "Company name"
 msgstr "公司名称"
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/status/status-indicator.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -2253,6 +2255,8 @@ msgstr "过期"
 msgid "Extend the power of Ansible to your entire team."
 msgstr ""
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/ansible-role/role-import-form.tsx
 #: src/components/my-imports/import-console.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2317,6 +2321,10 @@ msgstr ""
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "列出发布失败，仅删除仓库。"
+
+#: src/components/ansible-role/import-list.tsx
+msgid "Failed to list role imports"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 msgid "Failed to load Ansible Lightspeed information."
@@ -3401,9 +3409,6 @@ msgstr "还没有容器仓库"
 msgid "No Controllers available"
 msgstr "没有控制器可用"
 
-#: src/containers/ansible-role/imports.tsx
-#: src/containers/ansible-role/imports.tsx
-#: src/containers/ansible-role/imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
@@ -3435,6 +3440,7 @@ msgstr ""
 msgid "No import logs were found for the role."
 msgstr ""
 
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 msgid "No imports"
 msgstr "没有导入"
@@ -4561,6 +4567,8 @@ msgstr "无法显示角色列表。"
 msgid "Roles will appear once imported"
 msgstr "角色在导入后将显示"
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/status/status-indicator.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -5035,6 +5043,7 @@ msgstr "开始于"
 msgid "State"
 msgstr "状态"
 
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -5500,6 +5509,10 @@ msgstr "没有与此仓库关联的远程。"
 #: src/components/my-imports/import-list.tsx
 msgid "There have not been any imports on this namespace."
 msgstr "此命名空间中没有任何导入。"
+
+#: src/components/ansible-role/import-list.tsx
+msgid "There have not been any imports."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -6104,6 +6117,8 @@ msgstr "查看、添加、删除和更改用户。"
 msgid "View, and cancel any task."
 msgstr "查看和取消任何任务。"
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Waiting"

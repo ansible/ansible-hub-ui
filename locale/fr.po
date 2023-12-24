@@ -1156,6 +1156,8 @@ msgstr ""
 msgid "Company name"
 msgstr "Nom de l’entreprise"
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/status/status-indicator.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -2253,6 +2255,8 @@ msgstr "Expiration"
 msgid "Extend the power of Ansible to your entire team."
 msgstr ""
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/ansible-role/role-import-form.tsx
 #: src/components/my-imports/import-console.tsx
 #: src/components/my-imports/import-list.tsx
@@ -2317,6 +2321,10 @@ msgstr ""
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
 msgstr "N'a pas réussi à lister les distributions, ne supprimant que le référentiel."
+
+#: src/components/ansible-role/import-list.tsx
+msgid "Failed to list role imports"
+msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 msgid "Failed to load Ansible Lightspeed information."
@@ -3401,9 +3409,6 @@ msgstr "Pas encore de référentiels de conteneurs"
 msgid "No Controllers available"
 msgstr "Aucun contrôleur disponible"
 
-#: src/containers/ansible-role/imports.tsx
-#: src/containers/ansible-role/imports.tsx
-#: src/containers/ansible-role/imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
@@ -3435,6 +3440,7 @@ msgstr ""
 msgid "No import logs were found for the role."
 msgstr ""
 
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 msgid "No imports"
 msgstr "Pas d'importations"
@@ -4561,6 +4567,8 @@ msgstr "La liste des rôles n’a pas pu être affichée."
 msgid "Roles will appear once imported"
 msgstr "Les rôles apparaîtront une fois importés"
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/status/status-indicator.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -5035,6 +5043,7 @@ msgstr "Commencé à"
 msgid "State"
 msgstr "État"
 
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -5500,6 +5509,10 @@ msgstr "Il n'y a pas de référentiel associé à cet utilisateur à distance."
 #: src/components/my-imports/import-list.tsx
 msgid "There have not been any imports on this namespace."
 msgstr "Il n'y a pas eu d'importations sur cet espace de nom."
+
+#: src/components/ansible-role/import-list.tsx
+msgid "There have not been any imports."
+msgstr ""
 
 #: src/containers/task-management/task_detail.tsx
 #: src/containers/task-management/task_detail.tsx
@@ -6104,6 +6117,8 @@ msgstr "Visualiser, ajouter, supprimer et modifier les utilisateurs."
 msgid "View, and cancel any task."
 msgstr "Visualisez et annulez n'importe quelle tâche."
 
+#: src/components/ansible-role/import-list.tsx
+#: src/components/ansible-role/import-list.tsx
 #: src/components/my-imports/import-list.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Waiting"
