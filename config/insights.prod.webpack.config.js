@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'production';
 const webpackBase = require('./webpack.base.config');
 const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 

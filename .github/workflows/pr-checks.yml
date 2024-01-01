@@ -121,21 +121,17 @@ jobs:
       run: |
         mkdir ~/webpack-config/
 
+        # eliminate differences caused by branch name based logic in f-c-config
+        export BRANCH="${{ github.base_ref }}"
+
         for version in base pr; do
           mkdir ~/webpack-config/$version/
-          pushd $version/config/
+          cd $version/
           npm install
+          cd config/
 
-          for file in *.js; do
-            # FIXME: that's what TARGET_ENVIRONMENT is for
-            NODE_ENV=
-            if grep -q prod <<< "$file"; then
-              NODE_ENV=production
-            fi
-            export NODE_ENV
-
-            # eliminate differences caused by branch name based logic in f-c-config
-            export BRANCH="${{ github.base_ref }}"
+          for file in *.webpack.config.js; do
+            export NODE_ENV=`grep -q '\.prod\.' <<< "$file" && echo production || echo development`
 
             node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' |
               sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
@@ -146,7 +142,7 @@ jobs:
               grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
 
-          popd
+          cd ../../
         done
 
         diff -Naur ~/webpack-config/{base,pr}
