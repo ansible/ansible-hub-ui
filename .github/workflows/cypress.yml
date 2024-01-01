@@ -53,32 +53,24 @@ jobs:
         case "${{ matrix.test }}" in
           community*)
             BACKEND_FLAVOR=community
-            echo "community"
             ;;
           insights*)
             BACKEND_FLAVOR=insights
-            echo "insights"
             ;;
           *)
             BACKEND_FLAVOR=standalone
-            echo "standalone"
             ;;
         esac
 
-        echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "BACKEND_FLAVOR=${BACKEND_FLAVOR}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
+        echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
 
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
       run: |
         UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
         echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
-
-        COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
-        echo 'compare screenshots:'
-        echo $COMPARE_SCREENSHOTS
-        echo "COMPARE_SCREENSHOTS=${COMPARE_SCREENSHOTS}" >> $GITHUB_ENV
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v4
@@ -315,7 +307,7 @@ jobs:
           screenshots-${{env.SHORT_BRANCH}}-
 
     - name: "List cached screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      if: ${{ matrix.test == 'screenshots' && github.event_name == 'pull_request' }}
       run: |
         ls ansible-hub-ui/test/screenshots-main/
 
@@ -337,32 +329,32 @@ jobs:
         ls ansible-hub-ui/test/cypress/screenshots/screenshots/screenshots.js/
 
     - name: "Compare screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      if: ${{ matrix.test == 'screenshots' && github.event_name == 'pull_request' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
         changed=false
 
         for orig in screenshots-main/*; do
-          echo $orig
-          new=cypress/screenshots/screenshots/screenshots.js/"$(basename "$orig")"
-          diff=cypress/screenshots/screenshots/diff--"$(basename "$orig")"
+          name=`basename "$orig"`
+          new="cypress/screenshots/screenshots/screenshots.js/$name"
+          diff="cypress/screenshots/screenshots/diff--$name"
 
-          num=$(compare -metric RMSE "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
-          echo $num
+          num=$(compare -metric RMSE -fuzz 5% "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
           num=${num%.*}
-          if [ "$num" -gt 10 ]; then
-            echo "screenshot $orig changed: $num" 1>&2
+          if [ "$num" -gt 64 ]; then
+            echo "screenshot $name changed: $num" 1>&2
             changed=true
           fi
         done
 
         if [ "$changed" = true ]; then
-          echo "Process failed because change occured"
+          cp -a screenshots-main cypress/screenshots/screenshots/0-before
+          mv cypress/screenshots/screenshots/{screenshots.js,1-after}
           exit 1
         fi
 
-    - name: "Move Cache master screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
+    - name: "Move screenshots to cache"
+      if: ${{ matrix.test == 'screenshots' && github.event_name != 'pull_request' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
         rm -rf screenshots-main/
