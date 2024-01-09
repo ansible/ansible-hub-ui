@@ -1,13 +1,12 @@
-const { resolve } = require('path'); // node:path
+const { resolve } = require('node:path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const {
-  rbac,
-  defaultServices,
-} = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
+  default: { rbac, defaultServices },
+} = require('@redhat-cloud-services/frontend-components-config-utilities/standalone/services');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const { execSync } = require('child_process'); // node:child_process
+const { execSync } = require('node:child_process');
 
 const isBuild = process.env.NODE_ENV === 'production';
 const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
@@ -50,6 +49,23 @@ const defaultConfigs = [
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
 ];
 
+const mockFedModules = {
+  automationHub: {
+    manifestLocation: '/apps/automation-hub/fed-mods.json',
+    modules: [
+      {
+        id: 'ansible-automation-hub',
+        module: './RootApp',
+        routes: [
+          {
+            pathname: '/ansible/automation-hub',
+          },
+        ],
+      },
+    ],
+  },
+};
+
 const insightsMockAPIs = ({ app }) => {
   // GET
   [
@@ -62,6 +78,14 @@ const insightsMockAPIs = ({ app }) => {
           visitedBundles: {},
         },
       },
+    },
+    {
+      url: '/api/chrome-service/v1/static/stable/stage/modules/fed-modules.json',
+      response: mockFedModules,
+    },
+    {
+      url: '/api/chrome-service/v1/static/beta/stage/modules/fed-modules.json',
+      response: mockFedModules,
     },
     { url: '/api/featureflags/v0', response: { toggles: [] } },
     { url: '/api/quickstarts/v1/progress', response: { data: [] } },
@@ -147,7 +171,7 @@ module.exports = (inputConfigs) => {
 
     // insights deployments from master
     ...(!isStandalone &&
-      cloudBeta && {
+      isBuild && {
         deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',
       }),
   });
