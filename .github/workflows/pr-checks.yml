@@ -117,6 +117,14 @@ jobs:
           base/package-lock.json
           pr/package-lock.json
 
+    - name: 'npm install (base)'
+      working-directory: 'base'
+      run: 'npm install'
+
+    - name: 'npm install (pr)'
+      working-directory: 'pr'
+      run: 'npm install'
+
     - name: "Diff configs"
       run: |
         mkdir ~/webpack-config/
@@ -126,9 +134,7 @@ jobs:
 
         for version in base pr; do
           mkdir ~/webpack-config/$version/
-          cd $version/
-          npm install
-          cd config/
+          pushd $version/config/
 
           for file in *.webpack.config.js; do
             export NODE_ENV=`grep -q '\.prod\.' <<< "$file" && echo production || echo development`
@@ -142,7 +148,7 @@ jobs:
               grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
 
-          cd ../../
+          popd
         done
 
         diff -Naur ~/webpack-config/{base,pr}
