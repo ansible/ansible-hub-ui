@@ -3286,6 +3286,7 @@ msgstr "L'espace de noms <0>{name}</0> est exclu d'Ansible Lightspeed."
 msgid "Namespace list"
 msgstr ""
 
+#: src/components/ansible-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
 msgstr "Nom de l’espace de nommage"
@@ -3665,8 +3666,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/ansible-role/role-import-form.tsx
-msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
-msgstr ""
+#~ msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+#~ msgstr ""
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3695,6 +3696,14 @@ msgstr ""
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "OS / Arch"
 msgstr "OS / Arch"
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Overrides any galaxy_info.namespace metadata"
+msgstr ""
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Overrides any galaxy_info.role_name metadata"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx

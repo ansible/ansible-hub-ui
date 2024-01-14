@@ -3287,6 +3287,7 @@ msgstr "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
 msgid "Namespace list"
 msgstr "Namespace list"
 
+#: src/components/ansible-role/role-import-form.tsx
 #: src/components/namespace-modal/namespace-modal.tsx
 msgid "Namespace name"
 msgstr "Namespace name"
@@ -3666,8 +3667,8 @@ msgstr "Only perform the sync if changes are reported by the remote server. To f
 #~ msgstr "Only perform the sync if no changes are reported by the remote server. To force a sync to happen, deselect this option."
 
 #: src/components/ansible-role/role-import-form.tsx
-msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
-msgstr "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+#~ msgid "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
+#~ msgstr "Only used when a role doesn't have galaxy_info.role_name metadata, and doesn't follow the ansible-role-$name naming convention."
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #: src/components/wisdom-modal/wisdom-modal.tsx
@@ -3696,6 +3697,14 @@ msgstr "Optimize"
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "OS / Arch"
 msgstr "OS / Arch"
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Overrides any galaxy_info.namespace metadata"
+msgstr "Overrides any galaxy_info.namespace metadata"
+
+#: src/components/ansible-role/role-import-form.tsx
+msgid "Overrides any galaxy_info.role_name metadata"
+msgstr "Overrides any galaxy_info.role_name metadata"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
