@@ -113,6 +113,10 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
       params.repository_name = props.routeParams.repo;
     }
 
+    if (!params['sort']) {
+      params['sort'] = 'name';
+    }
+
     this.state = {
       alerts: [],
       canSign: false,
