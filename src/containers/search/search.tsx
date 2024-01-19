@@ -91,6 +91,10 @@ class Search extends React.Component<RouteProps, IState> {
       );
     }
 
+    if (!params['sort']) {
+      params['sort'] = 'name';
+    }
+
     this.state = {
       collections: [],
       params: params,
