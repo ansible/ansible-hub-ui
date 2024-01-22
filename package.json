@@ -65,7 +65,7 @@
         "postcss": "^8.4.33",
         "prettier": "^3.1.1",
         "sass": "^1.70.0",
-        "sass-loader": "^13.3.3",
+        "sass-loader": "^14.0.0",
         "source-map-loader": "^4.0.2",
         "style-loader": "^3.3.4",
         "stylelint": "^15.11.0",
