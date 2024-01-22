@@ -170,8 +170,8 @@ class AnsibleRoleImports extends React.Component<RouteProps, IState> {
 
   private selectImport(selectedImport) {
     this.setState({ selectedImport }, () => this.loadTaskDetails());
-    window.requestAnimationFrame(
-      () => this.topOfPage.current?.scrollIntoView({ behavior: 'smooth' }),
+    window.requestAnimationFrame(() =>
+      this.topOfPage.current?.scrollIntoView({ behavior: 'smooth' }),
     );
   }
 
