@@ -53,8 +53,8 @@ export function ImportConsole({
   const inProgress = [PulpStatus.running, PulpStatus.waiting].includes(state);
 
   const scrollToBottom = () =>
-    window.requestAnimationFrame(
-      () => lastImport.current?.scrollIntoView({ behavior: 'smooth' }),
+    window.requestAnimationFrame(() =>
+      lastImport.current?.scrollIntoView({ behavior: 'smooth' }),
     );
 
   // causes scrollToBottom via useEffect on followLogs change

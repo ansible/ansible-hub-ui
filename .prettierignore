@@ -12,3 +12,4 @@ Dockerfile
 test/cypress.env.json.template
 test/cypress/fixtures/
 test/cypress/e2e/*/compose.env
+.eslintrc
