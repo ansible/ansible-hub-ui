@@ -12,7 +12,7 @@ export NODE_BUILD_VERSION=18
 
 export APP_NAME="automation-hub"  # name of app-sre "application" folder this component lives in
 export COMPONENT_NAME="automation-hub"  # name of app-sre "resourceTemplate" in deploy.yaml for this component
-export COMPONENTS_W_RESOURCES="all"  # components which should preserve resource settings (optional, default: none)
+export COMPONENTS_W_RESOURCES="automation-hub"  # components which should preserve resource settings (optional, default: none)
 
 export IMAGE_FRONTEND="quay.io/cloudservices/ansible-hub-ui"
 export IMAGE_FRONTEND_TAG=$(git rev-parse --short=7 HEAD)
@@ -58,25 +58,8 @@ git clone https://github.com/ansible/galaxy_ng.git
 cd galaxy_ng
 oc project ${NAMESPACE}
 
-echo "patching CONTENT_ORIGIN"
-CONTENT_ORIGIN=$(oc get route -l frontend=automation-hub -o jsonpath='https://{.items[0].spec.host}')
-oc patch clowdapp automation-hub --type=json -p '[{"op": "replace", "path": "/spec/deployments/1/podSpec/env/1/value", "value": "'"${CONTENT_ORIGIN}"'"}]'
-sleep 5
-oc rollout status deploy/automation-hub-galaxy-api
-
-echo "patching PULP_AWS_S3_ENDPOINT_URL"
-oc create route edge minio --service=env-${NAMESPACE}-minio --insecure-policy=Redirect
-MINIO_ROUTE=$(oc get route minio -o jsonpath='https://{.spec.host}{"\n"}')
-oc patch clowdapp automation-hub --type=json -p '[{"op": "add", "path": "/spec/deployments/2/podSpec/env/-", "value": {"name": "PULP_AWS_S3_ENDPOINT_URL", "value": "'"${MINIO_ROUTE}"'"}}]'
-sleep 5
-oc rollout status deploy/automation-hub-pulp-content-app
-
-echo "Get pod names"
-AH_API_POD=$(oc get pod -l pod=automation-hub-galaxy-api -o jsonpath='{.items[0].metadata.name}')
-DB_POD=$(oc get pod -l service=db -o jsonpath='{.items[0].metadata.name}')
-
-echo "Creating admin user and data used for tests: i.e. namespaces, groups, users, tokens"
-oc exec $AH_API_POD -c automation-hub-galaxy-api -i -- /entrypoint.sh manage shell < dev/common/setup_test_data.py
+dev/ephemeral/patch_ephemeral.sh
+dev/ephemeral/create_keycloak_users.sh
 
 cd ..
 # end configuring ephemeral
