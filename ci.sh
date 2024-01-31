@@ -6,7 +6,7 @@ npm ci
 npm run gettext:extract
 npm run gettext:compile
 
-if [ "$IS_PR" == true ]; then
+if [ "$IS_PR" = true ]; then
     npm run build-insights
 else
     export HUB_CLOUD_BETA=false
