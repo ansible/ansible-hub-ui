@@ -103,7 +103,7 @@ jobs:
         node-version: '18'
 
     - name: "Cache ~/.npm & ~/.cache/Cypress"
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.npm
@@ -187,7 +187,7 @@ jobs:
 
     - name: "Cache original screenshots"
       if: matrix.test == 'screenshots'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ansible-hub-ui/test/screenshots-main/
         key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MAIN }}
