@@ -93,22 +93,17 @@ npm run cypress
 List of all workflows:
 
 - `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
-- `cloud-stage-disable`: Disable deploy-cloud from master to stage-stable (stage-beta always on); manual
-- `cloud-stage-enable`: Enable deploy-cloud from master to stage-stable (stage-beta always on); manual
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
-- `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
 - `dev-gateway-release`: Build and upload to github releases, update `dev-gateway` tag; when master is updated
 - `i18n`: Extract and merge l10n strings; cron
 - `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
 - `stable-release`: Build and upload to github releases; when a stable release is created
-- `update-manifest`: Update https://github.com/RedHatInsights/manifests ; when master is updated
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `dev-gateway-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
-- `prod-beta`, `prod-stable`: `deploy-cloud`
-- `stable-*`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `master`: `backported-labels`, `cypress`, `dev-release`, `dev-gateway-release`, `i18n`, `pr-checks`, `stable-release`
+- `stable-*`: `backported-labels`, `cypress`, `i18n` (via cron from master), `pr-checks`, `stable-release`
 
 
 ## Version mapping
