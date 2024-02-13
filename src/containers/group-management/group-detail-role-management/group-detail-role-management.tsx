@@ -37,7 +37,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
 } from 'src/utilities';
 import './group-detail-role-management.scss';
 
@@ -353,12 +353,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
                     <td>{role.role}</td>
-                    <td>
-                      {translateLockedRolesDescription(
-                        role.role,
-                        role.description,
-                      )}
-                    </td>
+                    <td>{translateLockedRole(role.role, role.description)}</td>
                     <ListItemActions
                       kebabItems={[
                         hasPermission('galaxy.change_group') && (

@@ -12,7 +12,7 @@ import {
   Pagination,
   RoleListTable,
 } from 'src/components';
-import { filterIsSet, translateLockedRolesDescription } from 'src/utilities';
+import { filterIsSet, translateLockedRole } from 'src/utilities';
 
 interface SelectRolesProps {
   assignedRoles: { role: string }[];
@@ -229,10 +229,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                       >
                         <td>{role.name}</td>
                         <td>
-                          {translateLockedRolesDescription(
-                            role.name,
-                            role.description,
-                          )}
+                          {translateLockedRole(role.name, role.description)}
                         </td>
                       </CheckboxRow>
                     ))}

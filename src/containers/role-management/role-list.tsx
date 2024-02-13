@@ -39,7 +39,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
 } from 'src/utilities';
 
 interface IState {
@@ -308,10 +308,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
                         >
                           <td data-cy='name-field'>{role.name}</td>
                           <td>
-                            {translateLockedRolesDescription(
-                              role.name,
-                              role.description,
-                            )}
+                            {translateLockedRole(role.name, role.description)}
                           </td>
                           <td>
                             <DateComponent date={role.pulp_created} />

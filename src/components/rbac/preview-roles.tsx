@@ -4,7 +4,7 @@ import React from 'react';
 import { RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
-import { translateLockedRolesDescription } from 'src/utilities';
+import { translateLockedRole } from 'src/utilities';
 
 interface Props {
   selectedRoles: RoleType[];
@@ -51,10 +51,7 @@ export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
             <FlexItem>
               <strong>{role.name}</strong>{' '}
               {role.description &&
-                `- ${translateLockedRolesDescription(
-                  role.name,
-                  role.description,
-                )}`}
+                `- ${translateLockedRole(role.name, role.description)}`}
               <Flex className='hub-permissions'>
                 {role.permissions.map((permission) => (
                   <FlexItem

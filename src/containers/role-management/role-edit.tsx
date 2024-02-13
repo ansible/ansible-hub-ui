@@ -19,7 +19,7 @@ import {
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
   validateInput,
 } from 'src/utilities';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -147,10 +147,7 @@ class EditRole extends React.Component<RouteProps, IState> {
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
-          subTitle={translateLockedRolesDescription(
-            role.name,
-            role.description,
-          )}
+          subTitle={translateLockedRole(role.name, role.description)}
           breadcrumbs={breadcrumbs}
         />
         {unauthorised ? (
