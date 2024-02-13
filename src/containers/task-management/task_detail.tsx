@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
@@ -29,12 +28,12 @@ import {
   StatusIndicator,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import {
   RouteProps,
   errorMessage,
   parsePulpIDFromURL,
+  translateTask,
   withRouter,
 } from 'src/utilities';
 import './task.scss';
@@ -55,9 +54,6 @@ interface IState {
   redirect: string;
   polling: ReturnType<typeof setInterval>;
 }
-
-const maybeTranslate = (name) =>
-  (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
 
 class TaskDetail extends React.Component<RouteProps, IState> {
   constructor(props) {
@@ -207,7 +203,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {maybeTranslate(parentTask.name)}
+                            {translateTask(parentTask.name)}
                           </Link>
                         ) : (
                           t`No parent task`
@@ -229,7 +225,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                       task: childTaskId,
                                     })}
                                   >
-                                    {maybeTranslate(childTask.name)}
+                                    {translateTask(childTask.name)}
                                   </Link>
                                   <br />
                                 </React.Fragment>
@@ -503,7 +499,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
             childTasks,
             parentTask,
             loading: false,
-            taskName: maybeTranslate(result.data.name),
+            taskName: translateTask(result.data.name),
             resources,
           });
         });

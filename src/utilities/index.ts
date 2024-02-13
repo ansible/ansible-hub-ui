@@ -28,6 +28,7 @@ export { repositoryRemoveCollection } from './repository-remove-collection';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export { taskAlert } from './task-alert';
 export { translateLockedRole } from './translate-locked-role';
+export { translateTask } from './translate-task';
 export { truncateSha } from './truncate_sha';
 export { validateURLHelper } from './validateURLHelper';
 export { waitForTask, waitForTaskUrl } from './wait-for-task';
