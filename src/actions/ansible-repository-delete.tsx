@@ -2,7 +2,6 @@ import { msg, t } from '@lingui/macro';
 import React from 'react';
 import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';
-import { Constants } from 'src/constants';
 import { canDeleteAnsibleRepository } from 'src/permissions';
 import {
   handleHttpError,
@@ -41,7 +40,16 @@ export const ansibleRepositoryDeleteAction = Action({
       },
     }),
   disabled: ({ name }) => {
-    if (Constants.PROTECTED_REPOSITORIES.includes(name)) {
+    if (
+      [
+        'rh-certified',
+        'validated',
+        'community',
+        'published',
+        'staging',
+        'rejected',
+      ].includes(name)
+    ) {
       return t`Protected repositories cannot be deleted.`;
     }
 

@@ -4,7 +4,6 @@ import {
   PaginationVariant,
 } from '@patternfly/react-core';
 import React from 'react';
-import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
 
 interface IProps {
@@ -69,7 +68,7 @@ export const Pagination = ({
     updateParams({ ...params, page: 1, page_size: p });
   };
 
-  const perPageOptions = Constants.DEFAULT_PAGINATION_OPTIONS.map((option) => ({
+  const perPageOptions = [10, 20, 50, 100].map((option) => ({
     title: String(option),
     value: option,
   }));
@@ -87,7 +86,7 @@ export const Pagination = ({
       onPerPageSelect={onPerPageSelect}
       onSetPage={onSetPage}
       page={params.page || 1}
-      perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+      perPage={params.page_size || 10}
       perPageOptions={perPageOptions}
       titles={titles}
       toggleTemplate={(props) => <ToggleTemplate {...props} />}

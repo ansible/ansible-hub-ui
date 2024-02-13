@@ -3,7 +3,6 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import React from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
@@ -46,7 +45,13 @@ export class PermissionCategories extends React.Component<IProps> {
     // show user/group permissions by default
     const userManagementFilter = (permission) =>
       showUserManagement ||
-      !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission);
+      ![
+        'galaxy.delete_user',
+        'galaxy.add_user',
+        'galaxy.change_user',
+        'galaxy.delete_group',
+        'galaxy.add_group',
+      ].includes(permission);
     const allPermissions =
       Object.keys(model_permissions).filter(userManagementFilter);
 

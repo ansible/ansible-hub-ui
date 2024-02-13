@@ -20,7 +20,6 @@ import {
   SignatureBadge,
   Tooltip,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
@@ -66,7 +65,6 @@ export const CollectionCard = ({
   footer,
 }: IProps) => {
   const { featureFlags } = useContext();
-  const MAX_DESCRIPTION_LENGTH = 60;
 
   const nsTitle = namespaceTitle(
     namespace || { name: collection_version.namespace },
@@ -94,7 +92,8 @@ export const CollectionCard = ({
                       name: repository.name,
                     })}
                   >
-                    {repository.name === Constants.CERTIFIED_REPO
+                    {repository.name ===
+                    (IS_INSIGHTS ? 'published' : 'rh-certified')
                       ? t`Certified`
                       : repository.name}
                   </Link>
@@ -143,10 +142,7 @@ export const CollectionCard = ({
       <CardBody>
         <Tooltip content={<div>{collection_version.description}</div>}>
           <div className='description'>
-            {getDescription(
-              collection_version.description,
-              MAX_DESCRIPTION_LENGTH,
-            )}
+            {getDescription(collection_version.description, 60)}
           </div>
         </Tooltip>
       </CardBody>
@@ -160,6 +156,7 @@ export const CollectionCard = ({
   );
 };
 
+// FIXME: css text-overflow
 function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
   if (!d) {
     return '';

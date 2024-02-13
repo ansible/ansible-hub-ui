@@ -1,30 +1,6 @@
 import { msg } from '@lingui/macro';
 
 export class Constants {
-  static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
-
-  static readonly DEFAULT_PAGE_SIZE = 10;
-  static readonly DEFAULT_PAGINATION_OPTIONS = [10, 20, 50, 100];
-
-  static CERTIFIED_REPO = IS_INSIGHTS ? 'published' : 'rh-certified';
-
-  static USER_GROUP_MGMT_PERMISSIONS = [
-    'galaxy.delete_user',
-    'galaxy.add_user',
-    'galaxy.change_user',
-    'galaxy.delete_group',
-    'galaxy.add_group',
-  ];
-
-  static PROTECTED_REPOSITORIES = [
-    'rh-certified',
-    'validated',
-    'community',
-    'published',
-    'staging',
-    'rejected',
-  ];
-
   static TASK_NAMES = {
     'galaxy_ng.app.tasks.curate_all_synclist_repository': msg`Curate all synclist repositories`,
     'galaxy_ng.app.tasks.curate_synclist_repository': msg`Curate synclist repository`,

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
 
 export class BaseAPI {
@@ -33,8 +32,7 @@ export class BaseAPI {
       // The api uses offset/limit OR page/page_size for pagination
       // the UI uses page/page size and maps to whatever the api expects
 
-      const pageSize =
-        parseInt(newParams['page_size'], 10) || Constants.DEFAULT_PAGE_SIZE;
+      const pageSize = parseInt(newParams['page_size'], 10) || 10;
       const page = parseInt(newParams['page'], 10) || 1;
 
       delete newParams['page'];

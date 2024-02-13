@@ -28,7 +28,6 @@ import {
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -82,15 +81,13 @@ class Search extends React.Component<RouteProps, IState> {
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = Constants.DEFAULT_PAGE_SIZE;
+      params['page_size'] = 10;
     }
 
     // Load view type from local storage if it's not set. This allows a
     // user's view type preference to persist
     if (!params['view_type']) {
-      params['view_type'] = localStorage.getItem(
-        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-      );
+      params['view_type'] = localStorage.getItem('search_view_type');
     }
 
     if (!params['sort']) {
@@ -226,7 +223,7 @@ class Search extends React.Component<RouteProps, IState> {
             count={count}
             ignoredParams={ignoredParams}
             params={params}
-            switcher={Constants.SEARCH_VIEW_TYPE_LOCAL_KEY}
+            switcher='search_view_type'
             updateParams={updateParams}
             {...collectionFilter({
               featureFlags: this.context.featureFlags,

@@ -49,7 +49,6 @@ import {
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -132,7 +131,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       modalCollections: null,
       modalPagination: {
         page: 1,
-        page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
+        page_size: 10,
       },
       namespace: null,
       redirect: null,
