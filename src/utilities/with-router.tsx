@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Paths } from 'src/paths';
 
 // compatibility layer between react-router v6 and class components
 
@@ -14,7 +13,7 @@ export class RouteProps {
   location: ReturnType<typeof useLocation>;
   navigate: ReturnType<typeof useNavigate>;
   routeParams: Record<string, string>;
-  routePath: Paths;
+  routePath: string;
 }
 
 export const withRouter = (ClassComponent) => {

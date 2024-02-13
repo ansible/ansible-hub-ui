@@ -33,7 +33,6 @@ const defaultConfigs = [
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'IS_COMMUNITY', default: false, scope: 'global' },
   { name: 'IS_INSIGHTS', default: false, scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
   { name: 'UI_DOCS_URL', default: docsURL, scope: 'global' },

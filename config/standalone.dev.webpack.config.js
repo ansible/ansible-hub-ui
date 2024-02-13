@@ -28,8 +28,6 @@ module.exports = webpackBase({
   // dev-mode only, support `IS_COMMUNITY=1 npm run start-standalone` in addition to `npm run start-community`
   IS_COMMUNITY: !!process.env.IS_COMMUNITY,
 
-  NAMESPACE_TERM: 'namespaces',
-
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 

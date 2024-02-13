@@ -11,7 +11,6 @@ module.exports = webpackBase({
       : '/ansible/automation-hub/',
   DEPLOYMENT_MODE: 'insights',
   IS_INSIGHTS: true,
-  NAMESPACE_TERM: 'partners',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   APPLICATION_NAME: 'Automation Hub',

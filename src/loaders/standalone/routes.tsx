@@ -266,7 +266,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: CertificationDashboard, path: Paths.approvalDashboard },
       { component: NotFound, path: Paths.notFound },
       { component: TokenStandalone, path: Paths.token },
-      { component: Partners, path: Paths[NAMESPACE_TERM] },
+      { component: Partners, path: Paths.namespaces },
       { component: EditNamespace, path: Paths.editNamespace },
       { component: NamespaceDetail, path: Paths.myCollections },
       { component: NamespaceDetail, path: Paths.myCollectionsByRepo },

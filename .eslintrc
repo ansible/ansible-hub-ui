@@ -26,7 +26,6 @@
   globals: {
     // overridden in test/.eslintrc
     APPLICATION_NAME: "readonly",
-    NAMESPACE_TERM: "readonly",
     UI_BASE_PATH: "readonly",
   },
   rules: {
@@ -53,3 +52,4 @@
     // array-bracket-spacing camelcase comma-dangle comma-spacing comma-style curly dot-notation eol-last eqeqeq func-names indent key-spacing keyword-spacing linebreak-style max-len new-cap no-bitwise no-caller no-mixed-spaces-and-tabs no-multiple-empty-lines no-trailing-spaces no-undef no-unused-vars no-use-before-define no-var no-with object-curly-spacing object-shorthand one-var padding-line-between-statements quote-props quotes react/jsx-curly-spacing semi space-before-blocks space-in-parens space-infix-ops space-unary-ops vars-on-top wrap-iife yoda
   },
 }
+// set vim:ft=javascript

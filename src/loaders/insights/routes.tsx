@@ -98,7 +98,7 @@ const routes = [
   },
   { path: Paths.notFound, component: NotFound },
   { path: Paths.token, component: TokenInsights },
-  { path: Paths.partners, component: Partners },
+  { path: Paths.namespaces, component: Partners },
   { path: Paths.editNamespace, component: EditNamespace },
   { path: Paths.myCollections, component: NamespaceDetail },
   { path: Paths.myCollectionsByRepo, component: NamespaceDetail },

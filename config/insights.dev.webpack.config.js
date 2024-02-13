@@ -29,9 +29,6 @@ module.exports = webpackBase({
   DEPLOYMENT_MODE: 'insights',
   IS_INSIGHTS: true,
 
-  // Determines the title of the "namespaces" page
-  NAMESPACE_TERM: 'partners',
-
   // Determines the title of the app
   APPLICATION_NAME: 'Automation Hub',
 

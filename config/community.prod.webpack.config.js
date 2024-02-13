@@ -7,7 +7,6 @@ module.exports = webpackBase({
   APPLICATION_NAME: 'Ansible Galaxy',
   DEPLOYMENT_MODE: 'standalone',
   IS_COMMUNITY: true,
-  NAMESPACE_TERM: 'namespaces',
   UI_BASE_PATH: '/ui/',
   UI_DEBUG: false,
   UI_EXTERNAL_LOGIN_URI: '/login/github/',

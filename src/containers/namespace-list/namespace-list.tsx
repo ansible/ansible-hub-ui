@@ -48,7 +48,7 @@ interface IState {
 }
 
 interface IProps extends RouteProps {
-  namespacePath: Paths;
+  namespacePath: string;
   filterOwner?: boolean;
 }
 
@@ -190,7 +190,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: formatPath(Paths[NAMESPACE_TERM]),
+                      link: formatPath(Paths.namespaces),
                       active: !filterOwner,
                     },
                     {

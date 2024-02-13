@@ -31,8 +31,6 @@ module.exports = webpackBase({
   DEPLOYMENT_MODE: 'standalone',
   IS_COMMUNITY: true,
 
-  NAMESPACE_TERM: 'namespaces',
-
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 
