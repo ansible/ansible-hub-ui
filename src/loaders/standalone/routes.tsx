@@ -155,31 +155,6 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
     return [
       {
         component: ExecutionEnvironmentDetailActivities,
-        path: Paths.executionEnvironmentDetailActivitiesWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailAccess,
-        path: Paths.executionEnvironmentDetailAccessWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentManifest,
-        path: Paths.executionEnvironmentManifestWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailImages,
-        path: Paths.executionEnvironmentDetailImagesWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetail,
-        path: Paths.executionEnvironmentDetailWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
         isDisabled: isContainerDisabled,
       },

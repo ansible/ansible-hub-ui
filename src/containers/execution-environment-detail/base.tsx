@@ -102,7 +102,7 @@ export function withContainerRepo(WrappedComponent) {
     render() {
       const container = this.props.routeParams.container;
       const redirect = {
-        list: formatEEPath(Paths.executionEnvironments, {}),
+        list: formatPath(Paths.executionEnvironments),
         activity: formatEEPath(Paths.executionEnvironmentDetailActivities, {
           container,
         }),

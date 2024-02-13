@@ -47,31 +47,13 @@ export function formatPath(
 }
 
 // handle long/short EE routes:
-// (path, container: 'namespaced/name') -> (pathWithNamespace, { namespace: 'namespaced', container: 'name' })
+// (path, container: 'namespaced/name') -> (path, { namespace: 'namespaced', container: 'name' })
 // (path, container: 'simple') -> (path, { container: 'simple' })
 // see also withContainerParamFix
 export function formatEEPath(path, data, params?) {
-  const pathsWithNamespace = {
-    [Paths.executionEnvironmentDetail]:
-      Paths.executionEnvironmentDetailWithNamespace,
-    [Paths.executionEnvironmentDetailActivities]:
-      Paths.executionEnvironmentDetailActivitiesWithNamespace,
-    [Paths.executionEnvironmentDetailImages]:
-      Paths.executionEnvironmentDetailImagesWithNamespace,
-    [Paths.executionEnvironmentDetailAccess]:
-      Paths.executionEnvironmentDetailAccessWithNamespace,
-    [Paths.executionEnvironmentManifest]:
-      Paths.executionEnvironmentManifestWithNamespace,
-  };
-
   if (data.container?.includes('/')) {
     const [namespace, container] = data.container.split('/');
-    const pathWithNamespace = pathsWithNamespace[path];
-    return formatPath(
-      pathWithNamespace,
-      { ...data, namespace, container },
-      params,
-    );
+    return formatPath(path, { ...data, namespace, container }, params);
   }
 
   return formatPath(path, data, params);
@@ -107,22 +89,15 @@ export const Paths = {
   dispatch: '/dispatch',
   editNamespace: '/my-namespaces/edit/:namespace',
   editUser: '/users/:userID/edit',
-  executionEnvironmentDetail: '/containers/:container',
-  executionEnvironmentDetailAccess: '/containers/:container/_content/access',
-  executionEnvironmentDetailAccessWithNamespace:
-    '/containers/:namespace/:container/_content/access',
+  executionEnvironmentDetailAccess:
+    '/containers/:namespace?/:container/_content/access',
   executionEnvironmentDetailActivities:
-    '/containers/:container/_content/activity',
-  executionEnvironmentDetailActivitiesWithNamespace:
-    '/containers/:namespace/:container/_content/activity',
-  executionEnvironmentDetailImages: '/containers/:container/_content/images',
-  executionEnvironmentDetailImagesWithNamespace:
-    '/containers/:namespace/:container/_content/images',
-  executionEnvironmentDetailWithNamespace: '/containers/:namespace/:container',
+    '/containers/:namespace?/:container/_content/activity',
+  executionEnvironmentDetailImages:
+    '/containers/:namespace?/:container/_content/images',
+  executionEnvironmentDetail: '/containers/:namespace?/:container',
   executionEnvironmentManifest:
-    '/containers/:container/_content/images/:digest',
-  executionEnvironmentManifestWithNamespace:
-    '/containers/:namespace/:container/_content/images/:digest',
+    '/containers/:namespace?/:container/_content/images/:digest',
   executionEnvironments: '/containers',
   executionEnvironmentsRegistries: '/registries',
   groupDetail: '/group/:group',
