@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Text,
   TextContent,
@@ -25,7 +24,6 @@ import { convertContentSummaryCounts } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
   displaySignatures: boolean;
-  footer?: ReactNode;
   menu?: ReactNode;
 }
 
@@ -61,7 +59,6 @@ export const CollectionCard = ({
   is_signed,
   displaySignatures,
   menu,
-  footer,
 }: IProps) => {
   const nsTitle = namespace?.name || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
@@ -132,7 +129,6 @@ export const CollectionCard = ({
           renderTypeCount(k, contentSummary.contents[k]),
         )}
       </CardBody>
-      {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   );
 };
