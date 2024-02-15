@@ -26,9 +26,7 @@ module.exports = webpackBase({
   // Port that the UI is served over
   UI_PORT: 8002,
 
-  // Determines if the app should be compiled to run on insights or on
-  // another platform. Options: insights, standalone
-  DEPLOYMENT_MODE: 'standalone',
+  // Determines if the app should be compiled to run as community galaxy
   IS_COMMUNITY: true,
 
   // Serve the UI over http or https. Options: true, false

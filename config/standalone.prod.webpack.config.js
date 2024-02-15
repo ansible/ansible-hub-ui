@@ -5,7 +5,6 @@ module.exports = webpackBase({
   API_HOST: '',
   API_BASE_PATH: '/api/galaxy/',
   UI_BASE_PATH: '/ui/',
-  DEPLOYMENT_MODE: 'standalone',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   UI_EXTERNAL_LOGIN_URI: '/login',
