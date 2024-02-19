@@ -70,9 +70,7 @@ export interface LoginFormProps
   /** Flag indicating if the login button is disabled */
   isLoginButtonDisabled?: boolean;
   /** Function that is called when the login button is clicked */
-  onLoginButtonClick?: (
-    event: MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void;
+  onLoginButtonClick?: (event: MouseEvent) => void;
   /** Label for the remember me checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
   rememberMeLabel?: string;
   /** Flag indicating if the remember me checkbox is checked. */
