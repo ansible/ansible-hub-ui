@@ -62,15 +62,19 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
 
   componentDidMount() {
     const { container, digest } = this.state;
-    const whileLoading = (callback) =>
-      this.setState({ loading: true }, () =>
-        callback().then((data) => this.setState({ loading: false, ...data })),
-      );
 
-    whileLoading(() =>
-      this.query({
-        container,
+    this.query({
+      container,
+      digest,
+    }).then(({ digest, environment, error, labels, layers, size }) =>
+      this.setState({
+        loading: false,
         digest,
+        environment,
+        error,
+        labels,
+        layers,
+        size,
       }),
     );
   }
