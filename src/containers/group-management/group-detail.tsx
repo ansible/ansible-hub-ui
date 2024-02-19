@@ -95,7 +95,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       users: null,
       allUsers: null,
       params: {
-        id: id,
+        id,
         page: 0,
         page_size: params['page_size'] || 10,
         sort:

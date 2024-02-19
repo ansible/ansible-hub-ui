@@ -485,7 +485,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     resources.push({
                       name: result.data.name,
                       type: resourceType,
-                      pluginName: pluginName,
+                      pluginName,
                     });
                   })
                   .catch(() => {

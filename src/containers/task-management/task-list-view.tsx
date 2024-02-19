@@ -80,7 +80,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,
@@ -310,7 +310,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >
@@ -326,7 +326,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >

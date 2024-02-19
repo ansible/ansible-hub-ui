@@ -96,7 +96,7 @@ class Search extends React.Component<RouteProps, IState> {
 
     this.state = {
       collections: [],
-      params: params,
+      params,
       count: 0,
       loading: true,
       synclist: undefined,
@@ -336,7 +336,7 @@ class Search extends React.Component<RouteProps, IState> {
             alerts: [
               ...this.state.alerts,
               {
-                title: title,
+                title,
                 variant: 'success',
               },
             ],

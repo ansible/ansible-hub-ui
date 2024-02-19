@@ -89,7 +89,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
       alerts: [],
       loading: true,
       inputText: '',
-      params: params,
+      params,
       roleCount: 0,
       unauthorized: false,
       selectedRole: null,

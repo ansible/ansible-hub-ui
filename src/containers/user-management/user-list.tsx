@@ -80,7 +80,7 @@ class UserList extends React.Component<RouteProps, IState> {
     this.state = {
       deleteUser: undefined,
       showDeleteModal: false,
-      params: params,
+      params,
       users: [],
       loading: true,
       itemCount: 0,

@@ -105,7 +105,7 @@ export function alertErrorsWithoutFields(
     // alert them
     addAlert({
       variant: 'danger',
-      title: title,
+      title,
       description: errors.join('\n'),
     });
 

@@ -64,7 +64,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
       saving: false,
       redirect: null,
       unsavedData: false,
-      params: params,
+      params,
       unauthorized: false,
     };
   }

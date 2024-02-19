@@ -85,7 +85,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       loading: true,
       itemCount: 0,
       alerts: [],

@@ -252,7 +252,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.untag(
             repository.pulp.repository.id,
             tag,
@@ -262,7 +262,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToAdd) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.tag(
             repository.pulp.repository.id,
             tag,

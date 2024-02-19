@@ -188,8 +188,8 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 
       const dependency_repo = {
         name: collection,
-        namespace: namespace,
-        version_range: version_range,
+        namespace,
+        version_range,
         repo: '',
         path: '',
       };

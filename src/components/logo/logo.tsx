@@ -42,7 +42,7 @@ export class Logo extends React.Component<IProps, IState> {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: width,
+      width,
     };
 
     if (flexGrow) {
