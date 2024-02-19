@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './markdown-editor.scss';
 
@@ -12,7 +12,7 @@ interface IProps {
   editing: boolean;
 }
 
-export class MarkdownEditor extends React.Component<IProps> {
+export class MarkdownEditor extends Component<IProps> {
   render() {
     const { text, placeholder, updateText, helperText, editing } = this.props;
 

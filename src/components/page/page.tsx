@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ActionType } from 'src/actions';
 import { LoadingPageSpinner } from 'src/components';
 import {
@@ -88,7 +88,7 @@ export const Page = function <
     );
   };
 
-  const klass = class extends React.Component<RouteProps, IState<T>> {
+  const klass = class extends Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
 

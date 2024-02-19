@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
 import {
   AlertList,
@@ -36,7 +36,7 @@ interface RolesState {
   roles: LegacyRoleListType[];
 }
 
-class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
+class AnsibleRoleList extends Component<RouteProps, RolesState> {
   static contextType = AppContext;
 
   constructor(props) {

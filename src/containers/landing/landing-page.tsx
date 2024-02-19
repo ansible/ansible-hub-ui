@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Alert, List, ListItem, ListVariant } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlertList,
@@ -21,7 +21,7 @@ interface IState {
   redirect: boolean;
 }
 
-export class LandingPage extends React.Component<RouteProps, IState> {
+export class LandingPage extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

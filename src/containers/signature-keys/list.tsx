@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   AlertList,
@@ -43,7 +43,7 @@ interface IState {
   inputText: string;
 }
 
-export class SignatureKeysList extends React.Component<RouteProps, IState> {
+export class SignatureKeysList extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

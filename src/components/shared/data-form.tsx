@@ -4,7 +4,7 @@ import {
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
-import React, { ReactNode } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -27,7 +27,7 @@ interface IProps {
   onSave: () => void;
 }
 
-export class DataForm extends React.Component<IProps> {
+export class DataForm extends Component<IProps> {
   render() {
     const {
       errorMessages,

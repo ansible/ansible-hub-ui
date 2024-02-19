@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
@@ -52,7 +52,7 @@ interface IState {
   hasOnCreateOption: boolean;
 }
 
-export class CompoundFilter extends React.Component<IProps, IState> {
+export class CompoundFilter extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 

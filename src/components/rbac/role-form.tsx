@@ -10,7 +10,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { PermissionCategories } from 'src/components';
 
 interface IState {
@@ -34,7 +34,7 @@ interface IProps {
   originalPermissions?: string[];
 }
 
-export class RoleForm extends React.Component<IProps, IState> {
+export class RoleForm extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

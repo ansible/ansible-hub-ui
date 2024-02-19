@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -67,7 +67,7 @@ interface IState {
   deleteAll: boolean;
 }
 
-class Search extends React.Component<RouteProps, IState> {
+class Search extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   tags: string[];

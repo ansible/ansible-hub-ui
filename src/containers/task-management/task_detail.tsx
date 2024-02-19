@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
 import {
@@ -55,7 +55,7 @@ interface IState {
   polling: ReturnType<typeof setInterval>;
 }
 
-class TaskDetail extends React.Component<RouteProps, IState> {
+class TaskDetail extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

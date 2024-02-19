@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { UserAPI, UserType } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -16,7 +16,7 @@ interface IProps {
   addAlert: (message, variant, description?) => void;
 }
 
-export class DeleteUserModal extends React.Component<IProps, IState> {
+export class DeleteUserModal extends Component<IProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

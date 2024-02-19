@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -27,7 +27,7 @@ interface IState {
   isOpen: boolean;
 }
 
-export class APISearchTypeAhead extends React.Component<IProps, IState> {
+export class APISearchTypeAhead extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 

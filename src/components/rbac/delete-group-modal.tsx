@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Alert, List, ListItem, Spinner } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { UserType } from 'src/api';
 import { DeleteModal } from 'src/components';
 
@@ -13,7 +13,7 @@ interface IProps {
   canViewUsers?: boolean;
 }
 
-export class DeleteGroupModal extends React.Component<IProps> {
+export class DeleteGroupModal extends Component<IProps> {
   render() {
     const { cancelAction, count, deleteAction, name, users, canViewUsers } =
       this.props;

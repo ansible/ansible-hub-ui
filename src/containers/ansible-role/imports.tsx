@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
@@ -78,7 +78,7 @@ const RoleLink = ({ role_id }: { role_id?: number }) => {
   );
 };
 
-class AnsibleRoleImports extends React.Component<RouteProps, IState> {
+class AnsibleRoleImports extends Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
   topOfPage: React.RefObject<HTMLDivElement>;
 

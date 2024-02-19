@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TaskManagementAPI, TaskType } from 'src/api';
 import {
@@ -56,7 +56,7 @@ interface IState {
   inputText: string;
 }
 
-export class TaskListView extends React.Component<RouteProps, IState> {
+export class TaskListView extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

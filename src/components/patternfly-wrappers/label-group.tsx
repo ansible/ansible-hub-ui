@@ -10,7 +10,7 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React from 'react';
+import React, { Component } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
@@ -69,10 +69,7 @@ interface LabelGroupState {
 }
 
 // replaces LabelGroup for localization (chipGroupProps) and to fix button without type when rendering "show more" in forms
-export class LabelGroup extends React.Component<
-  LabelGroupProps,
-  LabelGroupState
-> {
+export class LabelGroup extends Component<LabelGroupProps, LabelGroupState> {
   static displayName = 'LabelGroup';
   constructor(props: LabelGroupProps) {
     super(props);

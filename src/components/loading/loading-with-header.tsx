@@ -1,8 +1,8 @@
 import { Skeleton, Title } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { LoadingPageSpinner, Main } from 'src/components';
 
-export class LoadingPageWithHeader extends React.Component {
+export class LoadingPageWithHeader extends Component {
   render() {
     return (
       <>

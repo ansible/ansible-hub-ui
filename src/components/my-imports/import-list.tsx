@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ImportListType,
   MyNamespaceAPI,
@@ -44,7 +44,7 @@ interface IState {
   namespaces: NamespaceType[];
 }
 
-export class ImportList extends React.Component<IProps, IState> {
+export class ImportList extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 

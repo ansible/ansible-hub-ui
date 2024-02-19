@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { LoginPage as PFLoginPage } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
@@ -17,7 +17,7 @@ interface IState {
   redirect?: string;
 }
 
-class LoginPage extends React.Component<RouteProps, IState> {
+class LoginPage extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   redirectPage: string;

@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AlertList,
   CollectionHeader,
@@ -14,10 +14,7 @@ import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
-class CollectionDetail extends React.Component<
-  RouteProps,
-  IBaseCollectionState
-> {
+class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
   static contextType = AppContext;
 
   constructor(props) {

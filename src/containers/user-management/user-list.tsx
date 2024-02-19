@@ -9,7 +9,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
@@ -58,7 +58,7 @@ interface IState {
   inputText: string;
 }
 
-class UserList extends React.Component<RouteProps, IState> {
+class UserList extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

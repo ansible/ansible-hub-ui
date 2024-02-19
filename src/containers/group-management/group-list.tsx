@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
@@ -65,7 +65,7 @@ interface IState {
   inputText: string;
 }
 
-class GroupList extends React.Component<RouteProps, IState> {
+class GroupList extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

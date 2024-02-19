@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
 import {
   AlertList,
@@ -41,7 +41,7 @@ interface RoleNamespacesState {
   roleNamespaces: LegacyNamespaceListType[];
 }
 
-class AnsibleRoleNamespaceList extends React.Component<
+class AnsibleRoleNamespaceList extends Component<
   RouteProps,
   RoleNamespacesState
 > {

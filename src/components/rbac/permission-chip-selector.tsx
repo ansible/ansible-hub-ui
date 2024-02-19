@@ -5,7 +5,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
@@ -23,7 +23,7 @@ interface IState {
   isOpen: boolean;
 }
 
-export class PermissionChipSelector extends React.Component<IProps, IState> {
+export class PermissionChipSelector extends Component<IProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

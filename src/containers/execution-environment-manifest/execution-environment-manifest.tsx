@@ -14,7 +14,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -43,7 +43,7 @@ interface IState {
   size: number;
 }
 
-class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
+class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React, { Fragment, ReactNode } from 'react';
+import React, { Component, Fragment, ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -45,7 +45,7 @@ function Legend({ children }: { children: ReactNode }) {
   );
 }
 
-export class RenderPluginDoc extends React.Component<IProps, IState> {
+export class RenderPluginDoc extends Component<IProps, IState> {
   subOptionsMaxDepth: number;
   returnContainMaxDepth: number;
 

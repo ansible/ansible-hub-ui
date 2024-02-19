@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ContainerDistributionAPI,
   ExecutionEnvironmentRegistryAPI,
@@ -68,7 +68,7 @@ interface IState {
   formErrors: ErrorMessagesType;
 }
 
-export class RepositoryForm extends React.Component<IProps, IState> {
+export class RepositoryForm extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

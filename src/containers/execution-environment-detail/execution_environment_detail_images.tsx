@@ -12,7 +12,7 @@ import {
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { sum } from 'lodash';
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -66,7 +66,7 @@ interface IState {
   isDeletionPending: boolean;
 }
 
-class ExecutionEnvironmentDetailImages extends React.Component<
+class ExecutionEnvironmentDetailImages extends Component<
   IDetailSharedProps,
   IState
 > {

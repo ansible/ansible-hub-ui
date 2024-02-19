@@ -8,7 +8,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
@@ -66,7 +66,7 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
+class ExecutionEnvironmentList extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
 import {
@@ -51,7 +51,7 @@ interface IProps extends RouteProps {
   filterOwner?: boolean;
 }
 
-export class NamespaceList extends React.Component<IProps, IState> {
+export class NamespaceList extends Component<IProps, IState> {
   static contextType = AppContext;
 
   nonURLParams = ['tenant'];

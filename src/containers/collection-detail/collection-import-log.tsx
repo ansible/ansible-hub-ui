@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
   CollectionHeader,
@@ -19,7 +19,7 @@ interface IState extends IBaseCollectionState {
   apiError: string;
 }
 
-class CollectionImportLog extends React.Component<RouteProps, IState> {
+class CollectionImportLog extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

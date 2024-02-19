@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Checkbox, DropdownItem, Text } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, Navigate } from 'react-router-dom';
 import {
@@ -96,7 +96,7 @@ interface IState {
   updateCollection: CollectionVersionSearch;
 }
 
-export class NamespaceDetail extends React.Component<RouteProps, IState> {
+export class NamespaceDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   nonAPIParams = ['tab', 'group', 'user'];

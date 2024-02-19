@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, DropdownItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   ContainerRepositoryType,
@@ -54,7 +54,7 @@ export const containerName = ({
 
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  return class extends React.Component<RouteProps, IState> {
+  return class extends Component<RouteProps, IState> {
     static contextType = AppContext;
     static displayName = `withContainerRepo(${
       WrappedComponent.displayName || WrappedComponent.name

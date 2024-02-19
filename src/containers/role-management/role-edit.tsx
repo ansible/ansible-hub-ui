@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';
 import {
@@ -49,7 +49,7 @@ interface IState {
   errorMessages: Record<string, string>;
 }
 
-class EditRole extends React.Component<RouteProps, IState> {
+class EditRole extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   nonQueryStringParams = ['role'];

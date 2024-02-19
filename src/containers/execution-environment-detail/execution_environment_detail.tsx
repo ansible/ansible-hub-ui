@@ -7,7 +7,7 @@ import {
   FlexItem,
   Title,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import {
   ClipboardCopy,
@@ -29,10 +29,7 @@ interface IState {
   description: string;
 }
 
-class ExecutionEnvironmentDetail extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetail extends Component<IDetailSharedProps, IState> {
   constructor(props) {
     super(props);
 

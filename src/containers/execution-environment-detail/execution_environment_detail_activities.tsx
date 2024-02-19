@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {
@@ -22,7 +22,7 @@ interface IState {
   page: number;
 }
 
-class ExecutionEnvironmentDetailActivities extends React.Component<
+class ExecutionEnvironmentDetailActivities extends Component<
   IDetailSharedProps,
   IState
 > {

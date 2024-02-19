@@ -8,7 +8,7 @@ import {
   Switch,
   TextInput,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { GroupAPI, UserType } from 'src/api';
 import {
   APISearchTypeAhead,
@@ -50,7 +50,7 @@ interface IState {
   };
 }
 
-export class UserForm extends React.Component<IProps, IState> {
+export class UserForm extends Component<IProps, IState> {
   public static defaultProps = {
     isReadonly: false,
   };

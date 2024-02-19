@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { CollectionVersionSearch } from 'src/api';
@@ -23,7 +23,7 @@ import { IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
+class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
   static contextType = AppContext;
 
   docsRef: React.RefObject<HTMLDivElement>;

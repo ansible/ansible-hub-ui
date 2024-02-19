@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ExecutionEnvironmentNamespaceAPI,
   GroupAPI,
@@ -39,7 +39,7 @@ interface IState {
   users: UserType[];
 }
 
-class ExecutionEnvironmentDetailAccess extends React.Component<
+class ExecutionEnvironmentDetailAccess extends Component<
   IDetailSharedProps,
   IState
 > {

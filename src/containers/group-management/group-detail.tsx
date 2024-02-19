@@ -8,7 +8,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
@@ -71,7 +71,7 @@ interface IState {
   inputText: string;
 }
 
-class GroupDetail extends React.Component<RouteProps, IState> {
+class GroupDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   nonQueryStringParams = ['group'];

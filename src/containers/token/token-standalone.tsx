@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Card, CardBody, CardTitle } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ActiveUserAPI } from 'src/api';
 import {
   AlertList,
@@ -24,7 +24,7 @@ interface IState {
   loadingToken: boolean;
 }
 
-class TokenStandalone extends React.Component<RouteProps, IState> {
+class TokenStandalone extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

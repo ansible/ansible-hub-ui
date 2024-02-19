@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -40,7 +40,7 @@ interface IState {
   selectedImportDetails: ImportDetailType;
 }
 
-class MyImports extends React.Component<RouteProps, IState> {
+class MyImports extends Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
   topOfPage: React.RefObject<HTMLDivElement>;
 

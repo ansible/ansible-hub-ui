@@ -13,7 +13,7 @@ import {
   Spinner,
   Text,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
@@ -108,7 +108,7 @@ interface IState {
   versionToUploadCertificate: CollectionVersionSearch;
 }
 
-export class CollectionHeader extends React.Component<IProps, IState> {
+export class CollectionHeader extends Component<IProps, IState> {
   ignoreParams = ['showing', 'keywords'];
   static contextType = AppContext;
 

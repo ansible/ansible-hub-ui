@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   CollectionAPI,
   CollectionUsedByDependencies,
@@ -37,7 +37,7 @@ interface IState extends IBaseCollectionState {
   usedByDependenciesLoading: boolean;
 }
 
-class CollectionDependencies extends React.Component<RouteProps, IState> {
+class CollectionDependencies extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];

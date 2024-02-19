@@ -4,7 +4,7 @@ import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha
 import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
 import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { ParamHelper } from 'src/utilities';
 
 export class SortFieldType {
@@ -31,7 +31,7 @@ interface IState {
   isExpanded: boolean;
 }
 
-export class Sort extends React.Component<IProps, IState> {
+export class Sort extends Component<IProps, IState> {
   options: { id: string; title: string }[];
   static defaultProps = {
     sortParamName: 'sort',

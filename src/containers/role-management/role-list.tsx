@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';
 import {
@@ -60,7 +60,7 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export class RoleList extends React.Component<RouteProps, IState> {
+export class RoleList extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

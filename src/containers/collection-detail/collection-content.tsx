@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   CollectionContentList,
   CollectionHeader,
@@ -12,10 +12,7 @@ import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 
 // renders list of contents in a collection
-class CollectionContent extends React.Component<
-  RouteProps,
-  IBaseCollectionState
-> {
+class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
   static contextType = AppContext;
 
   constructor(props) {

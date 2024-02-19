@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI } from 'src/api';
 import {
@@ -31,7 +31,7 @@ interface IState {
   alerts: AlertType[];
 }
 
-class RoleCreate extends React.Component<RouteProps, IState> {
+class RoleCreate extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

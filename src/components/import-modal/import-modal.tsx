@@ -11,7 +11,7 @@ import FolderOpenIcon from '@patternfly/react-icons/dist/esm/icons/folder-open-i
 import SpinnerIcon from '@patternfly/react-icons/dist/esm/icons/spinner-icon';
 import axios from 'axios';
 import cx from 'classnames';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
@@ -57,7 +57,7 @@ interface IState {
   hideSelector: boolean;
 }
 
-export class ImportModal extends React.Component<IProps, IState> {
+export class ImportModal extends Component<IProps, IState> {
   static contextType = AppContext;
 
   acceptedFileTypes = ['application/x-gzip', 'application/gzip'];

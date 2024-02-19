@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 // had to declare *.svg in src/index.d.ts
 import DefaultLogo from 'src/../static/images/default-logo.svg';
 
@@ -18,7 +18,7 @@ interface IState {
   failed: boolean;
 }
 
-export class Logo extends React.Component<IProps, IState> {
+export class Logo extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = { failed: false };

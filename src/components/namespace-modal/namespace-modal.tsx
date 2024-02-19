@@ -8,7 +8,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { NamespaceAPI } from 'src/api';
 import { HelperText } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
@@ -25,7 +25,7 @@ interface IState {
   errorMessages: ErrorMessagesType;
 }
 
-export class NamespaceModal extends React.Component<IProps, IState> {
+export class NamespaceModal extends Component<IProps, IState> {
   toggleModal;
 
   constructor(props) {

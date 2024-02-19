@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { UserType } from 'src/api';
 import {
   BaseHeader,
@@ -24,7 +24,7 @@ interface IProps {
   isMe?: boolean;
 }
 
-export class UserFormPage extends React.Component<IProps> {
+export class UserFormPage extends Component<IProps> {
   public static defaultProps = {
     extraControls: null,
   };

@@ -7,7 +7,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -22,7 +22,7 @@ interface IState {
   name: string;
 }
 
-export class GroupModal extends React.Component<IProps, IState> {
+export class GroupModal extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { ContainerRepositoryType } from 'src/api';
 import {
   BaseHeader,
@@ -21,7 +21,7 @@ interface IProps {
   displaySignatures: boolean;
 }
 
-export class ExecutionEnvironmentHeader extends React.Component<IProps> {
+export class ExecutionEnvironmentHeader extends Component<IProps> {
   render() {
     const { container, groupId, tab, displaySignatures } = this.props;
 

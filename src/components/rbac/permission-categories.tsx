@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -33,7 +33,7 @@ function knownPermissionsAndCategories(
   return Object.values(categories);
 }
 
-export class PermissionCategories extends React.Component<IProps> {
+export class PermissionCategories extends Component<IProps> {
   static contextType = AppContext;
 
   render() {

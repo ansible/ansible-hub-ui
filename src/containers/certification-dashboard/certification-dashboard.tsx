@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
@@ -74,7 +74,7 @@ interface IState {
   };
 }
 
-class CertificationDashboard extends React.Component<RouteProps, IState> {
+class CertificationDashboard extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {

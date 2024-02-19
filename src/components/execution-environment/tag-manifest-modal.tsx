@@ -12,7 +12,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ContainerManifestType,
   ContainerRepositoryType,
@@ -52,7 +52,7 @@ interface ITaskUrls {
 
 const VALID_TAG_REGEX = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
-export class TagManifestModal extends React.Component<IProps, IState> {
+export class TagManifestModal extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
