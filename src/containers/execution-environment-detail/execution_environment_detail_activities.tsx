@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactFragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {
@@ -17,7 +17,7 @@ import './execution-environment-detail.scss';
 
 interface IState {
   loading: boolean;
-  activities: { created: string; action: React.ReactFragment }[];
+  activities: { created: string; action: ReactFragment }[];
   redirect: string;
   page: number;
 }
