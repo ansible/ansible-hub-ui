@@ -21,6 +21,7 @@ import React, {
   FunctionComponent,
   MouseEvent,
   ReactNode,
+  useState,
 } from 'react';
 
 export interface LoginFormProps
@@ -108,7 +109,7 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
   onChangeRememberMe = () => undefined,
   ...props
 }: LoginFormProps) => {
-  const [passwordHidden, setPasswordHidden] = React.useState(true);
+  const [passwordHidden, setPasswordHidden] = useState(true);
 
   const passwordInput = (
     <TextInput
