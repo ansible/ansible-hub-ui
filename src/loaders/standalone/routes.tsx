@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, ElementType, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
@@ -75,7 +75,7 @@ interface IRoutesProps {
 }
 
 interface IAuthHandlerProps {
-  component: React.ElementType;
+  component: ElementType;
   isDisabled?: boolean;
   noAuth: boolean;
   updateInitialData: UpdateInitialData;
@@ -83,7 +83,7 @@ interface IAuthHandlerProps {
 }
 
 interface IRouteConfig {
-  component: React.ElementType;
+  component: ElementType;
   path: string;
   noAuth?: boolean;
   isDisabled?: boolean;
