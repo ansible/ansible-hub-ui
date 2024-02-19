@@ -288,7 +288,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             params={{
               pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
             }}
-            singleSelectionOnly={true}
+            singleSelectionOnly
             selectedRepos={selectedRepos}
             setSelectedRepos={(selectedRepos) =>
               this.setState({

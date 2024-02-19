@@ -123,7 +123,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
           }
         >
           <div className='copy-sha'>
-            <ShaLabel digest={digest} long={true} />
+            <ShaLabel digest={digest} long />
             <ClipboardCopyButton
               className='eco-clipboard-copy'
               variant={'plain'}

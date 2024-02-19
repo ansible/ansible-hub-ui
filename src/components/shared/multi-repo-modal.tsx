@@ -105,7 +105,7 @@ export const MultiRepoModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Select repositories`}
       variant='large'

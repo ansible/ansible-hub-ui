@@ -92,7 +92,7 @@ export function LegacyNamespaceListItem({
 
   if (dropdownItems.length) {
     cells.push(
-      <DataListCell key='menu' alignRight={true}>
+      <DataListCell key='menu' alignRight>
         <div style={{ float: 'right' }}>
           <StatefulDropdown items={dropdownItems} />
         </div>

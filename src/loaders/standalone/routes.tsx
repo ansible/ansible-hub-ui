@@ -304,7 +304,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
           element={
             <AuthHandler
               component={NotFound}
-              noAuth={true}
+              noAuth
               path={null}
               updateInitialData={updateInitialData}
             />

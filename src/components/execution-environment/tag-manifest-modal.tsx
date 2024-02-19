@@ -187,7 +187,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           )}
 
           <FormGroup fieldId='remove-tag' label={t`Current tags`}>
-            <LabelGroup id='remove-tag' defaultIsOpen={true}>
+            <LabelGroup id='remove-tag' defaultIsOpen>
               {this.getCurrentTags().map((tag) => (
                 <Label
                   disabled={isSaving}

@@ -67,7 +67,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <UserFormPage
-          isMe={true}
+          isMe
           user={user}
           breadcrumbs={[{ name: t`Settings` }, { name: t`My profile` }]}
           title={t`My profile`}

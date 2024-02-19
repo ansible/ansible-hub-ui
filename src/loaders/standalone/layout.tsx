@@ -200,7 +200,7 @@ export const StandaloneLayout = ({
   );
 
   return (
-    <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+    <Page isManagedSidebar header={Header} sidebar={Sidebar}>
       {IS_COMMUNITY ? (
         <Banner>
           <Trans>

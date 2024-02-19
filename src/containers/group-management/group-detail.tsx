@@ -247,7 +247,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       <Modal
         variant='large'
         onClose={close}
-        isOpen={true}
+        isOpen
         aria-label={t`add-user-modal`}
         title={''}
         header={
@@ -331,7 +331,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           placeholderText={t`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
-          multiple={true}
+          multiple
           onClear={() =>
             this.setState({
               selected: [],

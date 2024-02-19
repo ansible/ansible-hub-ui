@@ -87,7 +87,7 @@ export const RoleNamespaceEditModal = ({
   return (
     <Modal
       actions={actions}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Change provider namespace`}
       variant='large'

@@ -138,7 +138,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                     key={i}
                     collection={c}
                     displaySignatures={featureFlags.display_signatures}
-                    showNamespace={true}
+                    showNamespace
                   />
                 ))}
               </DataList>
@@ -169,11 +169,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                 <>
                   <DataList aria-label={t`Available matching roles`}>
                     {roles.map((r) => (
-                      <LegacyRoleListItem
-                        key={r.id}
-                        role={r}
-                        show_thumbnail={true}
-                      />
+                      <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
                     ))}
                   </DataList>
                   <Link

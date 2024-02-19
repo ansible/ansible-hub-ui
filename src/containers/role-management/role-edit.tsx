@@ -158,7 +158,7 @@ class EditRole extends React.Component<RouteProps, IState> {
               <RoleForm
                 {...this.state}
                 name={name}
-                nameDisabled={true}
+                nameDisabled
                 description={description}
                 descriptionHelperText={errorMessages['description']}
                 descriptionValidated={

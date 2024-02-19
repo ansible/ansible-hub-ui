@@ -41,7 +41,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         onClose={() => {
           onCancel();
         }}
-        isOpen={true}
+        isOpen
         title={t`Create a group`}
         actions={[
           <div key='create' data-cy='create-group-button'>
@@ -69,7 +69,7 @@ export class GroupModal extends React.Component<IProps, IState> {
           }}
         >
           <FormGroup
-            isRequired={true}
+            isRequired
             key='name'
             fieldId='name'
             label={t`Name`}

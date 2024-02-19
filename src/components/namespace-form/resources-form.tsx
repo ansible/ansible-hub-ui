@@ -29,6 +29,6 @@ export const ResourcesForm = ({ namespace, updateNamespace }: IProps) => (
     placeholder={placeholder}
     helperText={t`You can can customize the Resources tab on your profile by entering custom markdown here.`}
     updateText={(resources) => updateNamespace({ ...namespace, resources })}
-    editing={true}
+    editing
   />
 );
