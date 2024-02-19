@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { UserType } from 'src/api';
 import {
   BaseHeader,
@@ -18,7 +18,7 @@ interface IProps {
 
   updateUser: (user: UserType, errorMessages: ErrorMessagesType) => void;
   saveUser?: () => void;
-  extraControls?: React.ReactNode;
+  extraControls?: ReactNode;
   onCancel?: () => void;
   isNewUser?: boolean;
   isMe?: boolean;

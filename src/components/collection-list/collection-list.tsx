@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionListItem,
@@ -12,9 +12,9 @@ import './list.scss';
 
 interface IProps {
   collectionControls: (collection) => {
-    dropdownMenu?: React.ReactNode | null;
-    synclistSwitch?: React.ReactNode | null;
-    uploadButton?: React.ReactNode | null;
+    dropdownMenu?: ReactNode | null;
+    synclistSwitch?: ReactNode | null;
+    uploadButton?: ReactNode | null;
   };
   collections: CollectionVersionSearch[];
   displaySignatures: boolean;

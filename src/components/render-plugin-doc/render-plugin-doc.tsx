@@ -23,7 +23,7 @@ interface IProps {
   renderPluginLink: (
     pluginName: string,
     pluginType: string,
-    text: React.ReactNode | undefined,
+    text: ReactNode | undefined,
   ) => React.ReactElement;
   renderDocLink: (name: string, href: string) => React.ReactElement;
   renderTableOfContentsLink: (
@@ -247,56 +247,56 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return returnValues;
   }
 
-  private formatPartError(part: dom.ErrorPart): React.ReactNode {
+  private formatPartError(part: dom.ErrorPart): ReactNode {
     return <span className='error'>ERROR while parsing: {part.message}</span>;
   }
 
-  private formatPartBold(part: dom.BoldPart): React.ReactNode {
+  private formatPartBold(part: dom.BoldPart): ReactNode {
     return <b>{part.text}</b>;
   }
 
-  private formatPartCode(part: dom.CodePart): React.ReactNode {
+  private formatPartCode(part: dom.CodePart): ReactNode {
     return <span className='inline-code'>{part.text}</span>;
   }
 
   private formatPartHorizontalLine(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     part: dom.HorizontalLinePart,
-  ): React.ReactNode {
+  ): ReactNode {
     return <hr />;
   }
 
-  private formatPartItalic(part: dom.ItalicPart): React.ReactNode {
+  private formatPartItalic(part: dom.ItalicPart): ReactNode {
     return <i>{part.text}</i>;
   }
 
-  private formatPartLink(part: dom.LinkPart): React.ReactNode {
+  private formatPartLink(part: dom.LinkPart): ReactNode {
     return this.props.renderDocLink(part.text, part.url);
   }
 
-  private formatPartModule(part: dom.ModulePart): React.ReactNode {
+  private formatPartModule(part: dom.ModulePart): ReactNode {
     return this.props.renderPluginLink(part.fqcn, 'module', undefined);
   }
 
-  private formatPartRstRef(part: dom.RSTRefPart): React.ReactNode {
+  private formatPartRstRef(part: dom.RSTRefPart): ReactNode {
     return part.text;
   }
 
-  private formatPartURL(part: dom.URLPart): React.ReactNode {
+  private formatPartURL(part: dom.URLPart): ReactNode {
     return <ExternalLink href={part.url}>{part.url}</ExternalLink>;
   }
 
-  private formatPartText(part: dom.TextPart): React.ReactNode {
+  private formatPartText(part: dom.TextPart): ReactNode {
     return part.text;
   }
 
-  private formatPartEnvVariable(part: dom.EnvVariablePart): React.ReactNode {
+  private formatPartEnvVariable(part: dom.EnvVariablePart): ReactNode {
     return <span className='inline-code'>{part.name}</span>;
   }
 
   private formatPartOptionNameReturnValue(
     part: dom.OptionNamePart | dom.ReturnValuePart,
-  ): React.ReactNode {
+  ): ReactNode {
     const content =
       part.value === undefined ? (
         <span className='inline-code'>
@@ -317,11 +317,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private formatPartOptionValue(part: dom.OptionValuePart): React.ReactNode {
+  private formatPartOptionValue(part: dom.OptionValuePart): ReactNode {
     return <span className='inline-code'>{part.value}</span>;
   }
 
-  private formatPartPlugin(part: dom.PluginPart): React.ReactNode {
+  private formatPartPlugin(part: dom.PluginPart): ReactNode {
     return this.props.renderPluginLink(
       part.plugin.fqcn,
       part.plugin.type,
@@ -329,7 +329,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private formatPart(part: dom.Part): React.ReactNode {
+  private formatPart(part: dom.Part): ReactNode {
     switch (part.type) {
       case dom.PartType.ERROR:
         return this.formatPartError(part as dom.ErrorPart);
@@ -366,7 +366,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     }
   }
 
-  private applyDocFormatters(text: string): React.ReactNode {
+  private applyDocFormatters(text: string): ReactNode {
     // TODO: pass current plugin's type and name, and (if role) the current entrypoint as well
     const parsed = parse(text);
 

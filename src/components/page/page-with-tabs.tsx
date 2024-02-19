@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import {
   AlertList,
@@ -50,7 +50,7 @@ type RenderModals = ({
   query,
   setState,
   state,
-}) => React.ReactNode;
+}) => ReactNode;
 
 interface PageWithTabsParams<T> {
   breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
@@ -58,11 +58,11 @@ interface PageWithTabsParams<T> {
   displayName: string;
   errorTitle: MessageDescriptor;
   headerActions?: ActionType[];
-  headerDetails?: (item) => React.ReactNode;
+  headerDetails?: (item) => ReactNode;
   listUrl: string;
   query: ({ name }) => Promise<T>;
   renderModals?: RenderModals;
-  renderTab: (tab, item, actionContext) => React.ReactNode;
+  renderTab: (tab, item, actionContext) => ReactNode;
   tabs: { id: string; name: MessageDescriptor }[];
   tabUpdateParams?: (params: ParamType) => ParamType;
 }

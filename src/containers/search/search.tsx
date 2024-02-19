@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -416,7 +416,7 @@ class Search extends Component<RouteProps, IState> {
     return dropdownMenu;
   }
 
-  private renderSyncToogle(name: string, namespace: string): React.ReactNode {
+  private renderSyncToogle(name: string, namespace: string): ReactNode {
     const { synclist } = this.state;
 
     if (!synclist) {

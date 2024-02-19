@@ -11,7 +11,7 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import {
@@ -26,8 +26,8 @@ import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
   displaySignatures: boolean;
-  footer?: React.ReactNode;
-  menu?: React.ReactNode;
+  footer?: ReactNode;
+  menu?: ReactNode;
 }
 
 export const CollectionNextPageCard = ({

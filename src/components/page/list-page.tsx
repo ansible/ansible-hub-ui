@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import {
   AlertList,
@@ -68,7 +68,7 @@ export type RenderTableRow<T> = (
   index: number,
   { addAlert, setState }: { addAlert; setState? },
   listItemActions?,
-) => React.ReactNode;
+) => ReactNode;
 
 type RenderModals = ({
   addAlert,
@@ -76,7 +76,7 @@ type RenderModals = ({
   query,
   setState,
   state,
-}) => React.ReactNode;
+}) => ReactNode;
 
 type SortHeaders = {
   title: MessageDescriptor;
@@ -101,7 +101,7 @@ interface ListPageParams<T> {
   filterConfig: ({ state }) => FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
-  noDataButton?: (item, actionContext) => React.ReactNode;
+  noDataButton?: (item, actionContext) => ReactNode;
   noDataDescription: MessageDescriptor;
   noDataTitle: MessageDescriptor;
   query: Query<T>;

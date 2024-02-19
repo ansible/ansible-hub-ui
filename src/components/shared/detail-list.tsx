@@ -4,7 +4,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { ActionType } from 'src/actions';
 import {
   AppliedFilters,
@@ -36,7 +36,7 @@ interface IProps<T> {
   filterConfig?: FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
-  noDataButton?: (item, actionContext) => React.ReactNode;
+  noDataButton?: (item, actionContext) => ReactNode;
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;

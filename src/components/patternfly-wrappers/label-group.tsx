@@ -10,12 +10,12 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   /** Content rendered inside the label group. Should be <Label> elements. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Additional classes added to the label item */
   className?: string;
   /** Flag for having the label group default to expanded */
@@ -60,7 +60,7 @@ export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editableTextAreaProps?: any;
   /** Control for adding new labels */
-  addLabelControl?: React.ReactNode;
+  addLabelControl?: ReactNode;
 }
 
 interface LabelGroupState {

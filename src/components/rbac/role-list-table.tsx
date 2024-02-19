@@ -6,7 +6,7 @@ import {
   Td,
   Tr,
 } from '@patternfly/react-table';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { SortTable } from 'src/components';
 
 interface Props {
@@ -80,7 +80,7 @@ export const RoleListTable: React.FC<Props> = ({
 
 export const ExpandableRow: React.FC<{
   rowIndex: number;
-  expandableRowContent?: React.ReactNode;
+  expandableRowContent?: ReactNode;
   colSpan?: number;
   'data-cy'?: string;
 }> = ({ rowIndex, children, expandableRowContent, colSpan, ...props }) => {

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
   item?: object;
   fields?: {
     label: string;
-    value: string | number | boolean | React.ReactNode;
+    value: string | number | boolean | ReactNode;
   }[];
 }
 

@@ -1,10 +1,10 @@
 import { List } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { StatefulDropdown } from '../shared/stateful-dropdown';
 
 interface IProps {
-  kebabItems?: React.ReactNode[];
-  buttons?: React.ReactNode[];
+  kebabItems?: ReactNode[];
+  buttons?: ReactNode[];
 }
 
 export function ListItemActions(props: IProps) {

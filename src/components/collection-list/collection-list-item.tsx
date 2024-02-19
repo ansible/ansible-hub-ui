@@ -11,7 +11,7 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import {
@@ -32,10 +32,10 @@ import './list-item.scss';
 interface IProps {
   collection: CollectionVersionSearch;
   displaySignatures: boolean;
-  dropdownMenu?: React.ReactNode | null;
+  dropdownMenu?: ReactNode | null;
   showNamespace?: boolean;
-  synclistSwitch?: React.ReactNode | null;
-  uploadButton?: React.ReactNode | null;
+  synclistSwitch?: ReactNode | null;
+  uploadButton?: ReactNode | null;
 }
 
 export const CollectionListItem = ({

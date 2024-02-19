@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
   /** Specify if the value is set on the backend already */
@@ -10,7 +10,7 @@ interface IProps {
   onClear: () => void;
 
   /** Component to display when the user is allowed to update this field. */
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const WriteOnlyField = ({ onClear, isValueSet, children }: IProps) =>

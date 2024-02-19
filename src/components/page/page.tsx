@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import { LoadingPageSpinner } from 'src/components';
 import {
@@ -39,7 +39,7 @@ type RenderModals = ({
   query,
   setState,
   state,
-}) => React.ReactNode;
+}) => ReactNode;
 
 interface PageParams<T> {
   breadcrumbs: ({ name }) => { url?: string; name: string }[];
@@ -52,7 +52,7 @@ interface PageParams<T> {
   title: ({ name }) => string;
   transformParams: (routeParams) => Record<string, string>;
   renderModals?: RenderModals;
-  render: (item, actionContext) => React.ReactNode;
+  render: (item, actionContext) => ReactNode;
 }
 
 export const Page = function <

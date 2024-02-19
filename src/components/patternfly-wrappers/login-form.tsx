@@ -16,7 +16,7 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export interface LoginFormProps
   extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
@@ -27,9 +27,9 @@ export interface LoginFormProps
   /** Flag indicating the helper text is visible * */
   showHelperText?: boolean;
   /** Content displayed in the helper text component * */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   /** Icon displayed to the left in the helper text */
-  helperTextIcon?: React.ReactNode;
+  helperTextIcon?: ReactNode;
   /** Label for the username input field */
   usernameLabel?: string;
   /** Value for the username */
