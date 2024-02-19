@@ -16,7 +16,12 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React, { FormEvent, FunctionComponent, ReactNode } from 'react';
+import React, {
+  FormEvent,
+  FunctionComponent,
+  MouseEvent,
+  ReactNode,
+} from 'react';
 
 export interface LoginFormProps
   extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
@@ -64,7 +69,7 @@ export interface LoginFormProps
   isLoginButtonDisabled?: boolean;
   /** Function that is called when the login button is clicked */
   onLoginButtonClick?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    event: MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   /** Label for the remember me checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
   rememberMeLabel?: string;

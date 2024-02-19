@@ -10,7 +10,7 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React, { Component, ReactNode, createRef } from 'react';
+import React, { Component, MouseEvent, ReactNode, createRef } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
@@ -33,7 +33,7 @@ export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   /** Aria label for close button */
   closeBtnAriaLabel?: string;
   /** Function that is called when clicking on the label group close button */
-  onClick?: (event: React.MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
   /** Position of the tooltip which is displayed if the category name text is longer */
   tooltipPosition?:
     | TooltipPosition
@@ -87,7 +87,7 @@ export class LabelGroup extends Component<LabelGroupProps, LabelGroupState> {
     isClosable: false,
     isCompact: false,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onClick: (_e: React.MouseEvent) => undefined as any,
+    onClick: (_e: MouseEvent) => undefined as any,
     closeBtnAriaLabel: 'Close label group',
     tooltipPosition: 'top',
     'aria-label': 'Label group category',
