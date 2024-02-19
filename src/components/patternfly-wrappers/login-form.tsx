@@ -19,13 +19,14 @@ import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon'
 import React, {
   FormEvent,
   FunctionComponent,
+  HTMLProps,
   MouseEvent,
   ReactNode,
   useState,
 } from 'react';
 
 export interface LoginFormProps
-  extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
+  extends Omit<HTMLProps<HTMLFormElement>, 'ref'> {
   /** Flag to indicate if the first dropdown item should not gain initial focus */
   noAutoFocus?: boolean;
   /** Additional classes added to the login main body's form */

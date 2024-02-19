@@ -10,10 +10,16 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React, { Component, MouseEvent, ReactNode, createRef } from 'react';
+import React, {
+  Component,
+  HTMLProps,
+  MouseEvent,
+  ReactNode,
+  createRef,
+} from 'react';
 import { chipGroupProps } from 'src/utilities';
 
-export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
+export interface LabelGroupProps extends HTMLProps<HTMLUListElement> {
   /** Content rendered inside the label group. Should be <Label> elements. */
   children?: ReactNode;
   /** Additional classes added to the label item */
