@@ -10,7 +10,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { capitalize } from 'lodash';
-import React, { useState } from 'react';
+import React, { Ref, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DocsBlobType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
@@ -41,7 +41,7 @@ interface IProps {
   selectedType?: string;
   className?: string;
   updateParams: (p) => void;
-  searchBarRef?: React.Ref<HTMLInputElement>;
+  searchBarRef?: Ref<HTMLInputElement>;
 }
 
 export const TableOfContents = (props: IProps) => {
