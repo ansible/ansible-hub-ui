@@ -16,7 +16,7 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FormEvent, FunctionComponent, ReactNode } from 'react';
 
 export interface LoginFormProps
   extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
@@ -37,7 +37,7 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the username */
   onChangeUsername?: (
     value: string,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
   /** Flag indicating if the username is valid */
   isValidUsername?: boolean;
@@ -48,7 +48,7 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the password */
   onChangePassword?: (
     value: string,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
   /** Flag indicating if the password is valid */
   isValidPassword?: boolean;
@@ -73,7 +73,7 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the remember me checkbox */
   onChangeRememberMe?: (
     checked: boolean,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
 }
 
