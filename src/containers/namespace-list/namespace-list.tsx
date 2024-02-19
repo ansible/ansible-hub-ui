@@ -20,7 +20,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RouteProps,
@@ -48,7 +48,6 @@ interface IState {
 }
 
 interface IProps extends RouteProps {
-  namespacePath: string;
   filterOwner?: boolean;
 }
 
@@ -148,9 +147,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader />;
     }
 
-    // Namespaces or Partners
-    const title = namespaceBreadcrumb().name;
-
     const updateParams = (p) =>
       this.updateParams(p, () => this.loadNamespaces());
 
@@ -184,7 +180,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         />
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
-        <BaseHeader title={title}>
+        <BaseHeader title={IS_INSIGHTS ? t`Partners` : t`Namespaces`}>
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
@@ -235,7 +231,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   private renderBody({ updateParams }) {
     const { itemCount, loading, namespaces, params } = this.state;
-    const { namespacePath, filterOwner } = this.props;
+    const { filterOwner } = this.props;
     const { hasPermission } = this.context;
 
     const noDataTitle = t`No namespaces yet`;
@@ -277,13 +273,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       <section className='hub-card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
-            <NamespaceCard
-              namespaceURL={formatPath(namespacePath, {
-                namespace: ns.name,
-              })}
-              key={i}
-              namespace={ns}
-            />
+            <NamespaceCard showDetailLink key={i} namespace={ns} />
           </div>
         ))}
         {itemCount > params.page_size * (params.page ?? 1) ? (

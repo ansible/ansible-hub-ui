@@ -12,6 +12,7 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-i
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo, Tooltip } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
 
@@ -23,7 +24,7 @@ interface IProps {
     name: string;
     company: string;
   };
-  namespaceURL?: string;
+  showDetailLink?: boolean;
 }
 
 export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
@@ -47,11 +48,9 @@ export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
   );
 };
 
-export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
+export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
   const { avatar_url, name } = namespace;
   const title = namespaceTitle(namespace);
-
-  const MAX_DESCRIPTION_LENGTH = 26;
 
   return (
     <Card className='hub-c-card-ns-container'>
@@ -67,31 +66,36 @@ export const NamespaceCard = ({ namespace, namespaceURL }: IProps) => {
         </CardHeaderMain>
       </CardHeader>
       <Tooltip content={title} noSpan>
-        <CardTitle>{getDescription(title, MAX_DESCRIPTION_LENGTH)}</CardTitle>
+        <CardTitle>{getDescription(title)}</CardTitle>
       </Tooltip>
       {title !== name ? (
         <Tooltip content={name} noSpan>
-          <CardBody>{getDescription(name, MAX_DESCRIPTION_LENGTH)}</CardBody>
+          <CardBody>{getDescription(name)}</CardBody>
         </Tooltip>
       ) : null}
 
-      {namespaceURL && (
+      {showDetailLink ? (
         <CardFooter>
-          <Link to={namespaceURL}>{t`View collections`}</Link>
+          <Link
+            to={formatPath(Paths.namespaceDetail, {
+              namespace: name,
+            })}
+          >{t`View collections`}</Link>
         </CardFooter>
-      )}
+      ) : null}
     </Card>
   );
 };
 
 // FIXME: pf-m-truncate / hub-m-truncated
-function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
+function getDescription(d: string, MAX_DESCRIPTION_LENGTH = 26) {
   if (!d) {
     return '';
   }
+
   if (d.length > MAX_DESCRIPTION_LENGTH) {
     return d.slice(0, MAX_DESCRIPTION_LENGTH) + '...';
-  } else {
-    return d;
   }
+
+  return d;
 }

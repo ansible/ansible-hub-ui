@@ -142,7 +142,7 @@ export const CollectionCard = ({
       <CardBody>
         <Tooltip content={<div>{collection_version.description}</div>}>
           <div className='description'>
-            {getDescription(collection_version.description, 60)}
+            {getDescription(collection_version.description)}
           </div>
         </Tooltip>
       </CardBody>
@@ -156,16 +156,17 @@ export const CollectionCard = ({
   );
 };
 
-// FIXME: css text-overflow
-function getDescription(d: string, MAX_DESCRIPTION_LENGTH) {
+// FIXME: pf-m-truncate / hub-m-truncated
+function getDescription(d: string, MAX_DESCRIPTION_LENGTH = 60) {
   if (!d) {
     return '';
   }
+
   if (d.length > MAX_DESCRIPTION_LENGTH) {
     return d.slice(0, MAX_DESCRIPTION_LENGTH) + '...';
-  } else {
-    return d;
   }
+
+  return d;
 }
 
 function renderTypeCount(type, count) {
