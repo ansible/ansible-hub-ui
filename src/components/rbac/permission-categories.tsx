@@ -8,8 +8,8 @@ import { AppContext } from 'src/loaders/app-context';
 interface IProps {
   permissions: string[];
   setSelected?: (permissions) => void;
-  showCustom: boolean;
-  showEmpty: boolean;
+  showCustom?: boolean;
+  showEmpty?: boolean;
 }
 
 function knownPermissionsAndCategories(

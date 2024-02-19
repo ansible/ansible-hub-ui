@@ -23,7 +23,7 @@ import './role-item.scss';
 
 interface LegacyRoleProps {
   role: LegacyRoleDetailType;
-  show_thumbnail: boolean;
+  show_thumbnail?: boolean;
 }
 
 export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
@@ -44,7 +44,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
   const provider = getProviderInfo(role);
   const cells = [];
 
-  if (show_thumbnail !== false) {
+  if (show_thumbnail) {
     cells.push(
       <DataListCell isFilled={false} alignRight={false} key='ns'>
         <Logo
