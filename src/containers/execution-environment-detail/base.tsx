@@ -46,7 +46,10 @@ export interface IDetailSharedProps extends RouteProps {
 }
 
 // opposite of formatEEPath - converts routeParams from {namespace, container} to "namespace/container"
-export const containerName = ({ namespace, container }) =>
+export const containerName = ({
+  namespace,
+  container,
+}: Record<string, string>): string =>
   [namespace, container].filter(Boolean).join('/');
 
 // A higher order component to wrap individual detail pages
