@@ -370,7 +370,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
             <ApprovalRow
               approve={(v) => this.approve(v)}
               collectionVersion={version}
-              context={this.context}
+              featureFlags={this.context.featureFlags}
               isVersionUpdating={(v) => this.isVersionUpdating(v)}
               key={i}
               openUploadCertificateModal={(v) =>
