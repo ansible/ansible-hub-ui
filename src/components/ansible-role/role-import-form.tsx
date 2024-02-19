@@ -14,7 +14,7 @@ import {
   ExternalLink,
   RoleNamespaceEditModal,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ErrorMessagesType,
@@ -174,7 +174,7 @@ const NamespaceCheck = ({
 };
 
 export const RoleImportForm = ({ addAlert }: IProps) => {
-  const { queueAlert, user } = useContext();
+  const { queueAlert, user } = useHubContext();
   const navigate = useNavigate();
   const location = useLocation();
   const params = ParamHelper.parseParamString(location.search) as {

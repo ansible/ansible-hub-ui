@@ -20,7 +20,7 @@ import {
   SignatureBadge,
   Tooltip,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
@@ -64,7 +64,7 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
 
   const nsTitle = namespaceTitle(
     namespace || { name: collection_version.namespace },

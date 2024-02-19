@@ -24,7 +24,7 @@ import {
   Tooltip,
   closeAlert,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -64,7 +64,7 @@ const Section = ({
 const loading = [];
 
 const MultiSearch = (props: RouteProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [params, setParams] = useState({});
 

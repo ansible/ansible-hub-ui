@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext, useContext } from 'react';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 
@@ -15,5 +15,5 @@ export interface IAppContextType {
   user?: UserType;
 }
 
-export const AppContext = React.createContext<IAppContextType>(undefined);
-export const useContext = () => React.useContext(AppContext);
+export const AppContext = createContext<IAppContextType>(undefined);
+export const useHubContext = () => useContext(AppContext);

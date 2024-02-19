@@ -3,7 +3,7 @@ import { Divider, Flex, FlexItem, Label } from '@patternfly/react-core';
 import React, { Fragment } from 'react';
 import { RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { translateLockedRole } from 'src/utilities';
 
 interface Props {
@@ -27,7 +27,7 @@ const splitByDot = (perm: string) => {
 };
 
 export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
-  const { model_permissions } = useContext().user;
+  const { model_permissions } = useHubContext().user;
 
   return (
     <div className='hub-custom-wizard-layout'>
