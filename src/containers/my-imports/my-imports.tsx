@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -52,7 +52,7 @@ class MyImports extends Component<RouteProps, IState> {
       'page_size',
     ]);
 
-    this.topOfPage = React.createRef();
+    this.topOfPage = createRef();
 
     this.state = {
       alerts: [],

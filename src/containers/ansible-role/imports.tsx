@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, createRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
@@ -90,7 +90,7 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
       'page_size',
     ]);
 
-    this.topOfPage = React.createRef();
+    this.topOfPage = createRef();
 
     this.state = {
       alerts: [],

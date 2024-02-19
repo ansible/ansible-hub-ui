@@ -10,7 +10,7 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactNode, createRef } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
@@ -78,7 +78,7 @@ export class LabelGroup extends Component<LabelGroupProps, LabelGroupState> {
       isTooltipVisible: false,
     };
   }
-  private headingRef = React.createRef<HTMLSpanElement>();
+  private headingRef = createRef<HTMLSpanElement>();
 
   static defaultProps: LabelGroupProps = {
     categoryName: '',
