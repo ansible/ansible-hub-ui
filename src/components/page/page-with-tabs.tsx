@@ -44,14 +44,6 @@ interface IState<T> {
 // unauthorised - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
-type RenderModals = ({
-  addAlert,
-  listQuery,
-  query,
-  setState,
-  state,
-}) => ReactNode;
-
 interface PageWithTabsParams<T> {
   breadcrumbs: ({ name, tab, params }) => { url?: string; name: string }[];
   condition: PermissionContextType;
@@ -61,7 +53,6 @@ interface PageWithTabsParams<T> {
   headerDetails?: (item) => ReactNode;
   listUrl: string;
   query: ({ name }) => Promise<T>;
-  renderModals?: RenderModals;
   renderTab: (tab, item, actionContext) => ReactNode;
   tabs: { id: string; name: MessageDescriptor }[];
   tabUpdateParams?: (params: ParamType) => ParamType;
@@ -86,23 +77,19 @@ export const PageWithTabs = function <
   listUrl,
   // () => Promise<T>
   query,
-  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
-  renderModals,
   renderTab,
   // [{ id, name }]
   tabs,
   // params => params
   tabUpdateParams,
 }: PageWithTabsParams<T>) {
-  renderModals ||= function (actionContext) {
-    return (
-      <>
-        {headerActions?.length
-          ? headerActions.map((action) => action?.modal?.(actionContext))
-          : null}
-      </>
-    );
-  };
+  const renderModals = (actionContext) => (
+    <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
+    </>
+  );
 
   const klass = class extends Component<RouteProps, IState<T>> {
     static displayName = displayName;
