@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { Component, createRef } from 'react';
+import React, { Component, RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -42,7 +42,7 @@ interface IState {
 
 class MyImports extends Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
-  topOfPage: React.RefObject<HTMLDivElement>;
+  topOfPage: RefObject<HTMLDivElement>;
 
   constructor(props) {
     super(props);

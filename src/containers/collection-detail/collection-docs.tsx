@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { Component, createRef } from 'react';
+import React, { Component, RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { CollectionVersionSearch } from 'src/api';
@@ -26,8 +26,8 @@ import './collection-detail.scss';
 class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
   static contextType = AppContext;
 
-  docsRef: React.RefObject<HTMLDivElement>;
-  searchBarRef: React.RefObject<HTMLInputElement>;
+  docsRef: RefObject<HTMLDivElement>;
+  searchBarRef: RefObject<HTMLInputElement>;
 
   constructor(props) {
     super(props);
