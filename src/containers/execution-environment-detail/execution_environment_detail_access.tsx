@@ -43,6 +43,8 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
   IDetailSharedProps,
   IState
 > {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -344,7 +346,5 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
       });
   }
 }
-
-ExecutionEnvironmentDetailAccess.contextType = AppContext;
 
 export default withRouter(withContainerRepo(ExecutionEnvironmentDetailAccess));

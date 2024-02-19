@@ -24,6 +24,8 @@ interface IState {
 }
 
 class UserCreate extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -89,4 +91,3 @@ class UserCreate extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserCreate);
-UserCreate.contextType = AppContext;

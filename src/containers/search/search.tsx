@@ -69,6 +69,8 @@ interface IState {
 }
 
 class Search extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   tags: string[];
 
   constructor(props) {
@@ -559,5 +561,3 @@ class Search extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(Search);
-
-Search.contextType = AppContext;

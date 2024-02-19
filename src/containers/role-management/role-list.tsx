@@ -61,6 +61,8 @@ interface IState {
 }
 
 export class RoleList extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -487,4 +489,3 @@ export class RoleList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(RoleList);
-RoleList.contextType = AppContext;

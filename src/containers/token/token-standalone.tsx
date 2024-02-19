@@ -25,6 +25,8 @@ interface IState {
 }
 
 class TokenStandalone extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -150,5 +152,3 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TokenStandalone);
-
-TokenStandalone.contextType = AppContext;

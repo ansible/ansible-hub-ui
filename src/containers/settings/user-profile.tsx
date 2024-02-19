@@ -24,6 +24,8 @@ interface IState {
 }
 
 class UserProfile extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   private initialState: UserType;
 
   constructor(props) {
@@ -136,8 +138,3 @@ class UserProfile extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserProfile);
-
-// For some reason react complains about setting context type in the class itself.
-// I think that it happens because withRouter confuses react into thinking that the
-// component is a functional compent when it's actually a class component.
-UserProfile.contextType = AppContext;

@@ -67,6 +67,8 @@ interface IState {
 }
 
 class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -527,4 +529,3 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(ExecutionEnvironmentList);
-ExecutionEnvironmentList.contextType = AppContext;

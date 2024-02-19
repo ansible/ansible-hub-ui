@@ -6,6 +6,8 @@ import { RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 
 class MyNamespaces extends React.Component<RouteProps> {
+  static contextType = AppContext;
+
   render() {
     if (!this.context.user || this.context.user.is_anonymous) {
       return <EmptyStateUnauthorized />;
@@ -21,4 +23,3 @@ class MyNamespaces extends React.Component<RouteProps> {
 }
 
 export default withRouter(MyNamespaces);
-MyNamespaces.contextType = AppContext;

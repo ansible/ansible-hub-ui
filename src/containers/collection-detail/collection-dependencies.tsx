@@ -38,6 +38,8 @@ interface IState extends IBaseCollectionState {
 }
 
 class CollectionDependencies extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
 
   constructor(props) {
@@ -304,5 +306,3 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(CollectionDependencies);
-
-CollectionDependencies.contextType = AppContext;

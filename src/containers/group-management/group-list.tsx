@@ -66,6 +66,8 @@ interface IState {
 }
 
 class GroupList extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -502,4 +504,3 @@ class GroupList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(GroupList);
-GroupList.contextType = AppContext;

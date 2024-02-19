@@ -59,6 +59,8 @@ interface IState {
 }
 
 class UserList extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -424,5 +426,3 @@ class UserList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserList);
-
-UserList.contextType = AppContext;

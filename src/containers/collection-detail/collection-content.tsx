@@ -16,6 +16,8 @@ class CollectionContent extends React.Component<
   RouteProps,
   IBaseCollectionState
 > {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -129,5 +131,3 @@ class CollectionContent extends React.Component<
 }
 
 export default withRouter(CollectionContent);
-
-CollectionContent.contextType = AppContext;

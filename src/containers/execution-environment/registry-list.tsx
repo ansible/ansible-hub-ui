@@ -66,6 +66,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   RouteProps,
   IState
 > {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -548,4 +550,3 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 }
 
 export default withRouter(ExecutionEnvironmentRegistryList);
-ExecutionEnvironmentRegistryList.contextType = AppContext;

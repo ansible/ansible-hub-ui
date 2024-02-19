@@ -18,6 +18,8 @@ interface IState {
 }
 
 class LoginPage extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   redirectPage: string;
 
   constructor(props) {
@@ -108,5 +110,3 @@ class LoginPage extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(LoginPage);
-
-LoginPage.contextType = AppContext;

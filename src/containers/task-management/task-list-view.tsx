@@ -61,6 +61,8 @@ const maybeTranslate = (name) =>
   (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
 
 export class TaskListView extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -439,5 +441,3 @@ export class TaskListView extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TaskListView);
-
-TaskListView.contextType = AppContext;

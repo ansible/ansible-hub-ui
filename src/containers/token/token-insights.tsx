@@ -31,6 +31,8 @@ interface IState {
 }
 
 class TokenInsights extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -255,4 +257,3 @@ class TokenInsights extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TokenInsights);
-TokenInsights.contextType = AppContext;

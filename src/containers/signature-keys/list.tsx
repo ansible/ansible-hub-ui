@@ -44,6 +44,8 @@ interface IState {
 }
 
 export class SignatureKeysList extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -289,5 +291,3 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(SignatureKeysList);
-
-SignatureKeysList.contextType = AppContext;

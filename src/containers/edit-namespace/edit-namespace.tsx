@@ -41,6 +41,8 @@ interface IState {
 }
 
 class EditNamespace extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   queryParams: URLSearchParams;
 
   constructor(props) {
@@ -271,7 +273,5 @@ class EditNamespace extends React.Component<RouteProps, IState> {
     });
   }
 }
-
-EditNamespace.contextType = AppContext;
 
 export default withRouter(EditNamespace);

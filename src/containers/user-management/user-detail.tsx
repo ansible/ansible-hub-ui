@@ -26,6 +26,8 @@ interface IState {
 }
 
 class UserDetail extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -142,5 +144,3 @@ class UserDetail extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserDetail);
-
-UserDetail.contextType = AppContext;

@@ -32,6 +32,8 @@ interface IState {
 }
 
 class RoleCreate extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -156,4 +158,3 @@ class RoleCreate extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(RoleCreate);
-RoleCreate.contextType = AppContext;

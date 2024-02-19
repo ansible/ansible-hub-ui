@@ -20,6 +20,8 @@ interface IState extends IBaseCollectionState {
 }
 
 class CollectionImportLog extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -182,5 +184,3 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(CollectionImportLog);
-
-CollectionImportLog.contextType = AppContext;

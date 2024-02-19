@@ -21,6 +21,8 @@ interface IState {
 }
 
 class UserEdit extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -100,4 +102,3 @@ class UserEdit extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserEdit);
-UserEdit.contextType = AppContext;

@@ -70,6 +70,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   IDetailSharedProps,
   IState
 > {
+  static contextType = AppContext;
+
   nonQueryStringParams = [];
 
   constructor(props) {
@@ -617,4 +619,3 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 }
 
 export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));
-ExecutionEnvironmentDetailImages.contextType = AppContext;

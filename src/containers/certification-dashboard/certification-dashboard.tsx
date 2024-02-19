@@ -75,6 +75,8 @@ interface IState {
 }
 
 class CertificationDashboard extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -633,5 +635,3 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(CertificationDashboard);
-
-CertificationDashboard.contextType = AppContext;

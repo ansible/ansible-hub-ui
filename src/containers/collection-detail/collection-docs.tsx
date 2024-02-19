@@ -24,6 +24,8 @@ import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
+  static contextType = AppContext;
+
   docsRef: React.RefObject<HTMLDivElement>;
   searchBarRef: React.RefObject<HTMLInputElement>;
 
@@ -326,5 +328,3 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
 }
 
 export default withRouter(CollectionDocs);
-
-CollectionDocs.contextType = AppContext;

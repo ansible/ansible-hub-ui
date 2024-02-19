@@ -53,6 +53,8 @@ interface IProps extends RouteProps {
 }
 
 export class NamespaceList extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   nonURLParams = ['tenant'];
 
   constructor(props) {
@@ -344,5 +346,3 @@ export class NamespaceList extends React.Component<IProps, IState> {
     return closeAlertMixin('alerts');
   }
 }
-
-NamespaceList.contextType = AppContext;

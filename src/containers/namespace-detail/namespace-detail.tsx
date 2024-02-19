@@ -97,6 +97,8 @@ interface IState {
 }
 
 export class NamespaceDetail extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   nonAPIParams = ['tab', 'group', 'user'];
 
   // namespace is a positional url argument, so don't include it in the
@@ -1067,7 +1069,5 @@ export class NamespaceDetail extends React.Component<RouteProps, IState> {
     };
   }
 }
-
-NamespaceDetail.contextType = AppContext;
 
 export default withRouter(NamespaceDetail);

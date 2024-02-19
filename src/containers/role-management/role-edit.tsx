@@ -50,6 +50,8 @@ interface IState {
 }
 
 class EditRole extends React.Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   nonQueryStringParams = ['role'];
 
   constructor(props) {
@@ -248,4 +250,3 @@ class EditRole extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(EditRole);
-EditRole.contextType = AppContext;
