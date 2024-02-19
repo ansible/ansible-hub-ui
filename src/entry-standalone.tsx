@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'src/l10n';
@@ -34,12 +34,12 @@ if (!window.location.pathname.startsWith(UI_BASE_PATH)) {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Router basename={UI_BASE_PATH}>
       <I18nProvider i18n={i18n}>
         <App />
       </I18nProvider>
     </Router>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 );
