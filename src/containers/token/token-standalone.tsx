@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Card, CardBody, CardTitle } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ActiveUserAPI } from 'src/api';
 import {
   AlertList,
@@ -24,7 +24,9 @@ interface IState {
   loadingToken: boolean;
 }
 
-class TokenStandalone extends React.Component<RouteProps, IState> {
+class TokenStandalone extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -47,7 +49,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
       !this.context.user.auth_provider.includes('github');
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`API token`} />
         <Main>
@@ -117,7 +119,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
             </Card>
           )}
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -150,5 +152,3 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TokenStandalone);
-
-TokenStandalone.contextType = AppContext;

@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Alert, List, ListItem, ListVariant } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlertList,
@@ -21,7 +21,7 @@ interface IState {
   redirect: boolean;
 }
 
-export class LandingPage extends React.Component<RouteProps, IState> {
+export class LandingPage extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -81,7 +81,7 @@ export class LandingPage extends React.Component<RouteProps, IState> {
                   <p>{t`Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.`}</p>
                   <br />
                   <p>
-                    {t`Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`}{' '}
+                    {t`Content from roles and collections can be referenced in Ansible playbooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.`}{' '}
                   </p>
                   <br />
                   <p>

@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React, { ReactNode } from 'react';
+import React, { Component, Fragment, ReactElement, ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -23,14 +23,11 @@ interface IProps {
   renderPluginLink: (
     pluginName: string,
     pluginType: string,
-    text: React.ReactNode | undefined,
-  ) => React.ReactElement;
-  renderDocLink: (name: string, href: string) => React.ReactElement;
-  renderTableOfContentsLink: (
-    title: string,
-    section: string,
-  ) => React.ReactElement;
-  renderWarning: (text: string) => React.ReactElement;
+    text: ReactNode | undefined,
+  ) => ReactElement;
+  renderDocLink: (name: string, href: string) => ReactElement;
+  renderTableOfContentsLink: (title: string, section: string) => ReactElement;
+  renderWarning: (text: string) => ReactElement;
 }
 
 function Choice({ children }: { children: ReactNode }) {
@@ -45,7 +42,7 @@ function Legend({ children }: { children: ReactNode }) {
   );
 }
 
-export class RenderPluginDoc extends React.Component<IProps, IState> {
+export class RenderPluginDoc extends Component<IProps, IState> {
   subOptionsMaxDepth: number;
   returnContainMaxDepth: number;
 
@@ -125,7 +122,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     // be malformed since it isn't validated. When that hapens, show an
     // error instead of crashing the whole app
     return (
-      <React.Fragment>
+      <>
         {this.props.renderWarning(
           'Documentation Syntax Error: cannot parse plugin documention.',
         )}
@@ -147,7 +144,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
           <pre className='plugin-raw'>{JSON.stringify(plugin, null, 2)}</pre>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -247,56 +244,56 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     return returnValues;
   }
 
-  private formatPartError(part: dom.ErrorPart): React.ReactNode {
+  private formatPartError(part: dom.ErrorPart): ReactNode {
     return <span className='error'>ERROR while parsing: {part.message}</span>;
   }
 
-  private formatPartBold(part: dom.BoldPart): React.ReactNode {
+  private formatPartBold(part: dom.BoldPart): ReactNode {
     return <b>{part.text}</b>;
   }
 
-  private formatPartCode(part: dom.CodePart): React.ReactNode {
+  private formatPartCode(part: dom.CodePart): ReactNode {
     return <span className='inline-code'>{part.text}</span>;
   }
 
   private formatPartHorizontalLine(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     part: dom.HorizontalLinePart,
-  ): React.ReactNode {
+  ): ReactNode {
     return <hr />;
   }
 
-  private formatPartItalic(part: dom.ItalicPart): React.ReactNode {
+  private formatPartItalic(part: dom.ItalicPart): ReactNode {
     return <i>{part.text}</i>;
   }
 
-  private formatPartLink(part: dom.LinkPart): React.ReactNode {
+  private formatPartLink(part: dom.LinkPart): ReactNode {
     return this.props.renderDocLink(part.text, part.url);
   }
 
-  private formatPartModule(part: dom.ModulePart): React.ReactNode {
+  private formatPartModule(part: dom.ModulePart): ReactNode {
     return this.props.renderPluginLink(part.fqcn, 'module', undefined);
   }
 
-  private formatPartRstRef(part: dom.RSTRefPart): React.ReactNode {
+  private formatPartRstRef(part: dom.RSTRefPart): ReactNode {
     return part.text;
   }
 
-  private formatPartURL(part: dom.URLPart): React.ReactNode {
+  private formatPartURL(part: dom.URLPart): ReactNode {
     return <ExternalLink href={part.url}>{part.url}</ExternalLink>;
   }
 
-  private formatPartText(part: dom.TextPart): React.ReactNode {
+  private formatPartText(part: dom.TextPart): ReactNode {
     return part.text;
   }
 
-  private formatPartEnvVariable(part: dom.EnvVariablePart): React.ReactNode {
+  private formatPartEnvVariable(part: dom.EnvVariablePart): ReactNode {
     return <span className='inline-code'>{part.name}</span>;
   }
 
   private formatPartOptionNameReturnValue(
     part: dom.OptionNamePart | dom.ReturnValuePart,
-  ): React.ReactNode {
+  ): ReactNode {
     const content =
       part.value === undefined ? (
         <span className='inline-code'>
@@ -317,11 +314,11 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private formatPartOptionValue(part: dom.OptionValuePart): React.ReactNode {
+  private formatPartOptionValue(part: dom.OptionValuePart): ReactNode {
     return <span className='inline-code'>{part.value}</span>;
   }
 
-  private formatPartPlugin(part: dom.PluginPart): React.ReactNode {
+  private formatPartPlugin(part: dom.PluginPart): ReactNode {
     return this.props.renderPluginLink(
       part.plugin.fqcn,
       part.plugin.type,
@@ -329,7 +326,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private formatPart(part: dom.Part): React.ReactNode {
+  private formatPart(part: dom.Part): ReactNode {
     switch (part.type) {
       case dom.PartType.ERROR:
         return this.formatPartError(part as dom.ErrorPart);
@@ -366,7 +363,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
   }
 
-  private applyDocFormatters(text: string): React.ReactNode {
+  private applyDocFormatters(text: string): ReactNode {
     // TODO: pass current plugin's type and name, and (if role) the current entrypoint as well
     const parsed = parse(text);
 
@@ -388,7 +385,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     return (
       <span>
         {fragments.map((x, i) => (
-          <React.Fragment key={i}>{x}</React.Fragment>
+          <Fragment key={i}>{x}</Fragment>
         ))}
       </span>
     );
@@ -414,7 +411,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     const deprecated = doc.deprecated || {};
 
     return (
-      <React.Fragment>
+      <>
         <h2>DEPRECATED</h2>
         {deprecated.removed_in ? (
           <div>
@@ -433,7 +430,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             ? doc.deprecated.alternative
             : 'No alternatives specified.'}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -478,14 +475,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
   private renderSynopsis(doc: PluginDoc) {
     return (
-      <React.Fragment>
+      <>
         <h2 id='synopsis'>Synopsis</h2>
         <ul>
           {doc.description.map((d, i) => (
             <li key={i}>{this.applyDocFormatters(d)}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -508,7 +505,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
 
     return (
-      <React.Fragment>
+      <>
         <h2 id='parameters'>Parameters</h2>
         <table className='options-table'>
           <tbody>
@@ -529,7 +526,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             {paramEntries}
           </tbody>
         </table>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -622,7 +619,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
   private renderPluginConfiguration(option) {
     return (
-      <React.Fragment>
+      <>
         {option['ini'] ? (
           <div className='plugin-config'>
             ini entries:
@@ -650,7 +647,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             ))}
           </div>
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -743,14 +740,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <h2 id='notes'>Notes</h2>
         <ul>
           {doc.notes.map((note, i) => (
             <li key={i}>{this.applyDocFormatters(note)}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -760,14 +757,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <h2>Requirements</h2>
         <ul>
           {doc.requirements.map((req, i) => (
             <li key={i}>{req}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -776,10 +773,10 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <h2 id='examples'>Examples</h2>
         <pre>{example}</pre>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -788,7 +785,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <h2 id='return-values'>Return Values</h2>
         <table className='options-table'>
           <tbody>
@@ -800,7 +797,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             {this.renderReturnValueEntries(returnV, 0, maxDepth, '')}
           </tbody>
         </table>
-      </React.Fragment>
+      </>
     );
   }
 

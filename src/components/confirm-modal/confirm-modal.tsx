@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
   cancelAction: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   confirmAction?: () => void;
   isDisabled?: boolean;
   title: string;
@@ -39,7 +39,7 @@ export const ConfirmModal = (props: IProps) => {
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={cancelAction}
       title={title}
       titleIconVariant='warning'

@@ -8,18 +8,18 @@ import {
   TextListVariants,
 } from '@patternfly/react-core';
 import { detect } from 'detect-browser';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ApplicationInfoAPI, UserType } from 'src/api';
 import { ExternalLink, MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
-const Label = ({ children }: { children: React.ReactNode }) => (
+const Label = ({ children }: { children: ReactNode }) => (
   <TextListItem component={TextListItemVariants.dt}>{children}</TextListItem>
 );
 
-const Value = ({ children }: { children: React.ReactNode }) => (
+const Value = ({ children }: { children: ReactNode }) => (
   <TextListItem component={TextListItemVariants.dd}>{children}</TextListItem>
 );
 

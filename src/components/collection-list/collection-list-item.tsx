@@ -11,7 +11,7 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
 import {
@@ -23,7 +23,7 @@ import {
   Logo,
   Tag,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 import { SignatureBadge } from '../signing';
@@ -32,10 +32,10 @@ import './list-item.scss';
 interface IProps {
   collection: CollectionVersionSearch;
   displaySignatures: boolean;
-  dropdownMenu?: React.ReactNode | null;
+  dropdownMenu?: ReactNode | null;
   showNamespace?: boolean;
-  synclistSwitch?: React.ReactNode | null;
-  uploadButton?: React.ReactNode | null;
+  synclistSwitch?: ReactNode | null;
+  uploadButton?: ReactNode | null;
 }
 
 export const CollectionListItem = ({
@@ -52,7 +52,7 @@ export const CollectionListItem = ({
   synclistSwitch,
   uploadButton,
 }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const cells = [];
 
   const nsTitle = namespaceTitle(
@@ -61,7 +61,7 @@ export const CollectionListItem = ({
 
   if (showNamespace) {
     cells.push(
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
+      <DataListCell isFilled={false} key='ns'>
         <Logo
           alt={t`${nsTitle} logo`}
           fallbackToDefault

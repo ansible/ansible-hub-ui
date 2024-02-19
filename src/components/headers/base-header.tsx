@@ -1,7 +1,7 @@
 import { Title } from '@patternfly/react-core';
 import cx from 'classnames';
 import React, { ReactNode, useEffect } from 'react';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import './header.scss';
 
 interface IProps {
@@ -29,7 +29,7 @@ export const BaseHeader = ({
   status,
   subTitle,
 }: IProps) => {
-  const { updateTitle } = useContext();
+  const { updateTitle } = useHubContext();
   useEffect(() => {
     updateTitle(title);
   }, [title]);

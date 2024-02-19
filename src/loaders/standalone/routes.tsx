@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component, ElementType, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
@@ -56,7 +56,7 @@ import {
   UserList,
   UserProfile,
 } from 'src/containers';
-import { AppContext, useContext } from 'src/loaders/app-context';
+import { AppContext, useHubContext } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -75,7 +75,7 @@ interface IRoutesProps {
 }
 
 interface IAuthHandlerProps {
-  component: React.ElementType;
+  component: ElementType;
   isDisabled?: boolean;
   noAuth: boolean;
   updateInitialData: UpdateInitialData;
@@ -83,7 +83,7 @@ interface IAuthHandlerProps {
 }
 
 interface IRouteConfig {
-  component: React.ElementType;
+  component: ElementType;
   path: string;
   noAuth?: boolean;
   isDisabled?: boolean;
@@ -96,7 +96,7 @@ const AuthHandler = ({
   path,
   updateInitialData,
 }: IAuthHandlerProps) => {
-  const { user, settings, featureFlags } = useContext();
+  const { user, settings, featureFlags } = useHubContext();
   const [isLoading, setLoading] = useState<boolean>(
     !user || !settings || !featureFlags,
   );
@@ -138,7 +138,7 @@ const AuthHandler = ({
   return <Component path={path} />;
 };
 
-export class StandaloneRoutes extends React.Component<IRoutesProps> {
+export class StandaloneRoutes extends Component<IRoutesProps> {
   static contextType = AppContext;
 
   // Note: must be ordered from most specific to least specific
@@ -153,31 +153,6 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
     }
 
     return [
-      {
-        component: ExecutionEnvironmentDetailActivities,
-        path: Paths.executionEnvironmentDetailActivitiesWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailAccess,
-        path: Paths.executionEnvironmentDetailAccessWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentManifest,
-        path: Paths.executionEnvironmentManifestWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailImages,
-        path: Paths.executionEnvironmentDetailImagesWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetail,
-        path: Paths.executionEnvironmentDetailWithNamespace,
-        isDisabled: isContainerDisabled,
-      },
       {
         component: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
@@ -266,7 +241,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: CertificationDashboard, path: Paths.approvalDashboard },
       { component: NotFound, path: Paths.notFound },
       { component: TokenStandalone, path: Paths.token },
-      { component: Partners, path: Paths[NAMESPACE_TERM] },
+      { component: Partners, path: Paths.namespaces },
       { component: EditNamespace, path: Paths.editNamespace },
       { component: NamespaceDetail, path: Paths.myCollections },
       { component: NamespaceDetail, path: Paths.myCollectionsByRepo },
@@ -329,7 +304,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
           element={
             <AuthHandler
               component={NotFound}
-              noAuth={true}
+              noAuth
               path={null}
               updateInitialData={updateInitialData}
             />

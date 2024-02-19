@@ -5,7 +5,7 @@ import {
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface Props {
   name: string;
@@ -15,7 +15,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const SignSingleCertificateModal: React.FC<Props> = ({
+export const SignSingleCertificateModal: FunctionComponent<Props> = ({
   name,
   version,
   isOpen,

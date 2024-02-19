@@ -11,7 +11,7 @@ import {
   Panel,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
@@ -63,7 +63,7 @@ interface RoleMetaReadmeState {
   readme_html: string;
 }
 
-class RoleInstall extends React.Component<RoleMetaProps> {
+class RoleInstall extends Component<RoleMetaProps> {
   render() {
     const installCMD = `ansible-galaxy role install ${this.props.namespace}.${this.props.name}`;
     return (
@@ -79,7 +79,7 @@ class RoleInstall extends React.Component<RoleMetaProps> {
   }
 }
 
-class RoleDocs extends React.Component<RoleMetaProps, RoleMetaReadmeState> {
+class RoleDocs extends Component<RoleMetaProps, RoleMetaReadmeState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,7 +119,7 @@ interface RoleVersionProps {
   role_version: LegacyRoleVersionDetailType;
 }
 
-class RoleVersion extends React.Component<RoleVersionProps> {
+class RoleVersion extends Component<RoleVersionProps> {
   render() {
     return (
       <DataListItemRow>
@@ -152,10 +152,7 @@ interface RoleVersionsProps extends RoleMetaProps {
   repository: string;
 }
 
-class RoleVersions extends React.Component<
-  RoleVersionsProps,
-  RoleVersionsState
-> {
+class RoleVersions extends Component<RoleVersionsProps, RoleVersionsState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -227,7 +224,7 @@ interface RoleImportDetailState {
   loading: boolean;
 }
 
-class RoleImportLog extends React.Component<
+class RoleImportLog extends Component<
   RoleImportDetailProps,
   RoleImportDetailState
 > {
@@ -301,7 +298,7 @@ interface RoleState {
   role: LegacyRoleDetailType;
 }
 
-class AnsibleRoleDetail extends React.Component<RouteProps, RoleState> {
+class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
   static contextType = AppContext;
 
   constructor(props) {

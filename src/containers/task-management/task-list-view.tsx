@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
@@ -7,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TaskManagementAPI, TaskType } from 'src/api';
 import {
@@ -29,7 +28,6 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -38,6 +36,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
+  translateTask,
   withRouter,
 } from 'src/utilities';
 import './task.scss';
@@ -57,10 +56,9 @@ interface IState {
   inputText: string;
 }
 
-const maybeTranslate = (name) =>
-  (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
+export class TaskListView extends Component<RouteProps, IState> {
+  static contextType = AppContext;
 
-export class TaskListView extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -78,7 +76,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,
@@ -114,7 +112,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={t`Task management`} />
@@ -215,7 +213,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -273,11 +271,12 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
     const taskId = parsePulpIDFromURL(pulp_href);
+
     return (
       <tr key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={maybeTranslate(name)}>{name}</Tooltip>
+            <Tooltip content={translateTask(name)}>{name}</Tooltip>
           </Link>
         </td>
         <td>
@@ -308,7 +307,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >
@@ -324,7 +323,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >
@@ -336,20 +335,20 @@ export class TaskListView extends React.Component<RouteProps, IState> {
 
   private renderCancelModal() {
     const { selectedTask } = this.state;
-    const name = maybeTranslate(selectedTask.name);
+    const name = translateTask(selectedTask.name);
 
     return (
       <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         title={t`Stop task?`}
-        confirmAction={() => this.selectedTask(this.state.selectedTask, name)}
+        confirmAction={() => this.selectedTask(selectedTask, name)}
         confirmButtonTitle={t`Yes, stop`}
       >{t`${name} will be cancelled.`}</ConfirmModal>
     );
   }
 
-  private selectedTask(task, name) {
-    TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
+  private selectedTask({ pulp_href }, name) {
+    TaskManagementAPI.patch(parsePulpIDFromURL(pulp_href), {
       state: 'canceled',
     })
       .then(() => {
@@ -439,5 +438,3 @@ export class TaskListView extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TaskListView);
-
-TaskListView.contextType = AppContext;

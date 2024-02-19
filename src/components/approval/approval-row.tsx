@@ -10,17 +10,20 @@ import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionAPI, CollectionVersionSearch } from 'src/api';
+import {
+  CollectionAPI,
+  CollectionVersionSearch,
+  FeatureFlagsType,
+} from 'src/api';
 import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   approve: (collectionVersion: CollectionVersionSearch) => void;
   collectionVersion: CollectionVersionSearch;
-  context: IAppContextType;
+  featureFlags: FeatureFlagsType;
   isVersionUpdating: (collectionVersion: CollectionVersionSearch) => boolean;
   openUploadCertificateModal: (
     collectionVersion: CollectionVersionSearch,
@@ -31,7 +34,7 @@ interface IProps {
 export const ApprovalRow = ({
   approve,
   collectionVersion,
-  context: { featureFlags },
+  featureFlags,
   isVersionUpdating,
   openUploadCertificateModal,
   reject,
@@ -109,11 +112,11 @@ export const ApprovalRow = ({
 
     const approveButton = [
       canUploadSignature && (
-        <React.Fragment key='upload'>
+        <Fragment key='upload'>
           <Button onClick={() => openUploadCertificateModal(collectionVersion)}>
             {t`Upload signature`}
           </Button>{' '}
-        </React.Fragment>
+        </Fragment>
       ),
       <Button
         key='approve-button'

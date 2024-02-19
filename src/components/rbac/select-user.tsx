@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { UserAPI } from 'src/api';
 import {
   AppliedFilters,
@@ -24,7 +24,7 @@ interface IProps {
   updateUser?: (user) => void;
 }
 
-export const SelectUser: React.FC<IProps> = ({
+export const SelectUser: FunctionComponent<IProps> = ({
   assignedUsers,
   selectedUser,
   updateUser,

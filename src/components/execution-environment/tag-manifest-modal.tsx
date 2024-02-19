@@ -12,7 +12,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ContainerManifestType,
   ContainerRepositoryType,
@@ -52,7 +52,7 @@ interface ITaskUrls {
 
 const VALID_TAG_REGEX = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
-export class TagManifestModal extends React.Component<IProps, IState> {
+export class TagManifestModal extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -187,7 +187,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           )}
 
           <FormGroup fieldId='remove-tag' label={t`Current tags`}>
-            <LabelGroup id='remove-tag' defaultIsOpen={true}>
+            <LabelGroup id='remove-tag' defaultIsOpen>
               {this.getCurrentTags().map((tag) => (
                 <Label
                   disabled={isSaving}
@@ -252,7 +252,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.untag(
             repository.pulp.repository.id,
             tag,
@@ -262,7 +262,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToAdd) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.tag(
             repository.pulp.repository.id,
             tag,

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';
 import {
@@ -19,7 +19,7 @@ import {
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
   validateInput,
 } from 'src/utilities';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -49,7 +49,9 @@ interface IState {
   errorMessages: Record<string, string>;
 }
 
-class EditRole extends React.Component<RouteProps, IState> {
+class EditRole extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   nonQueryStringParams = ['role'];
 
   constructor(props) {
@@ -61,7 +63,7 @@ class EditRole extends React.Component<RouteProps, IState> {
       role: null,
 
       params: {
-        id: id,
+        id,
       },
       itemCount: 0,
       alerts: [],
@@ -141,14 +143,11 @@ class EditRole extends React.Component<RouteProps, IState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
-          subTitle={translateLockedRolesDescription(
-            role.name,
-            role.description,
-          )}
+          subTitle={translateLockedRole(role.name, role.description)}
           breadcrumbs={breadcrumbs}
         />
         {unauthorised ? (
@@ -159,7 +158,7 @@ class EditRole extends React.Component<RouteProps, IState> {
               <RoleForm
                 {...this.state}
                 name={name}
-                nameDisabled={true}
+                nameDisabled
                 description={description}
                 descriptionHelperText={errorMessages['description']}
                 descriptionValidated={
@@ -185,7 +184,7 @@ class EditRole extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -248,4 +247,3 @@ class EditRole extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(EditRole);
-EditRole.contextType = AppContext;

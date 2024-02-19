@@ -24,13 +24,8 @@ module.exports = webpackBase({
   // Port that the UI is served over
   UI_PORT: 8002,
 
-  // Determines if the app should be compiled to run on insights or on
-  // another platform. Options: insights, standalone
-  DEPLOYMENT_MODE: 'insights',
+  // Determines if the app should be compiled to run on insights
   IS_INSIGHTS: true,
-
-  // Determines the title of the "namespaces" page
-  NAMESPACE_TERM: 'partners',
 
   // Determines the title of the app
   APPLICATION_NAME: 'Automation Hub',

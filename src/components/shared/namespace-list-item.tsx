@@ -27,7 +27,7 @@ export function NamespaceListItem({
       <DataListItemRow>
         <DataListItemCells
           dataListCells={[
-            <DataListCell isFilled={false} alignRight={false} key='ns'>
+            <DataListCell isFilled={false} key='ns'>
               <Logo
                 alt={t`${title} logo`}
                 fallbackToDefault

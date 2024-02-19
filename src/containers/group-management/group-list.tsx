@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
@@ -65,7 +65,9 @@ interface IState {
   inputText: string;
 }
 
-class GroupList extends React.Component<RouteProps, IState> {
+class GroupList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -83,7 +85,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       loading: true,
       itemCount: 0,
       alerts: [],
@@ -130,7 +132,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
@@ -228,7 +230,7 @@ class GroupList extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -502,4 +504,3 @@ class GroupList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(GroupList);
-GroupList.contextType = AppContext;

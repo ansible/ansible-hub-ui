@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import { NamespaceType } from 'src/api';
 import {
   BaseHeader,
@@ -19,11 +19,11 @@ interface IProps {
   params: { tab?: string };
   updateParams: (p) => void;
 
-  pageControls?: React.ReactNode;
-  filters?: React.ReactNode;
+  pageControls?: ReactNode;
+  filters?: ReactNode;
 }
 
-export class PartnerHeader extends React.Component<IProps> {
+export class PartnerHeader extends Component<IProps> {
   render() {
     const {
       breadcrumbs,

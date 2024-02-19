@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AlertList,
   AlertType,
@@ -14,7 +14,7 @@ interface RoleState {
   alerts: AlertType[];
 }
 
-class AnsibleRoleImport extends React.Component<RouteProps, RoleState> {
+class AnsibleRoleImport extends Component<RouteProps, RoleState> {
   constructor(props) {
     super(props);
     this.state = {

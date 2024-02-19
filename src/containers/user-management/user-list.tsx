@@ -9,7 +9,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
@@ -58,7 +58,9 @@ interface IState {
   inputText: string;
 }
 
-class UserList extends React.Component<RouteProps, IState> {
+class UserList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -78,7 +80,7 @@ class UserList extends React.Component<RouteProps, IState> {
     this.state = {
       deleteUser: undefined,
       showDeleteModal: false,
-      params: params,
+      params,
       users: [],
       loading: true,
       itemCount: 0,
@@ -116,7 +118,7 @@ class UserList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <DeleteUserModal
           isOpen={showDeleteModal}
@@ -220,7 +222,7 @@ class UserList extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -424,5 +426,3 @@ class UserList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserList);
-
-UserList.contextType = AppContext;

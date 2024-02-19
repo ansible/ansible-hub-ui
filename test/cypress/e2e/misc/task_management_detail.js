@@ -26,7 +26,7 @@ describe('Task detail', () => {
     cy.visit(`${uiPrefix}tasks`);
     cy.contains('pulp_ansible.app.tasks.collections.sync').click();
 
-    cy.contains('h1', 'Pulp Ansible: Collections sync');
+    cy.contains('h1', 'Collections sync');
     cy.contains('.card-area h2', 'Task detail');
     cy.contains('.card-area h2', 'Task groups');
     cy.contains('.card-area h2', 'Reserve resources');

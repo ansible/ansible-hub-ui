@@ -7,7 +7,7 @@ import {
   FlexItem,
   Title,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import {
   ClipboardCopy,
@@ -16,11 +16,7 @@ import {
 } from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -33,10 +29,7 @@ interface IState {
   description: string;
 }
 
-class ExecutionEnvironmentDetail extends React.Component<
-  IDetailSharedProps,
-  IState
-> {
+class ExecutionEnvironmentDetail extends Component<IDetailSharedProps, IState> {
   constructor(props) {
     super(props);
 
@@ -138,7 +131,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 )}
 
                 {this.state.markdownEditing && (
-                  <React.Fragment>
+                  <>
                     <div data-cy='save-readme'>
                       <Button
                         variant={'primary'}
@@ -163,7 +156,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     >
                       {t`Cancel`}
                     </Button>
-                  </React.Fragment>
+                  </>
                 )}
               </CardBody>
             </Card>
@@ -198,6 +191,4 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 }
 
-export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetail)),
-);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetail));

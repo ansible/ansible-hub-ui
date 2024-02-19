@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
@@ -13,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
 import {
@@ -29,12 +28,12 @@ import {
   StatusIndicator,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import {
   RouteProps,
   errorMessage,
   parsePulpIDFromURL,
+  translateTask,
   withRouter,
 } from 'src/utilities';
 import './task.scss';
@@ -56,10 +55,7 @@ interface IState {
   polling: ReturnType<typeof setInterval>;
 }
 
-const maybeTranslate = (name) =>
-  (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
-
-class TaskDetail extends React.Component<RouteProps, IState> {
+class TaskDetail extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,7 +116,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
     return loading ? (
       <LoadingPageSpinner />
     ) : (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
@@ -207,7 +203,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {maybeTranslate(parentTask.name)}
+                            {translateTask(parentTask.name)}
                           </Link>
                         ) : (
                           t`No parent task`
@@ -223,16 +219,16 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                 childTask.pulp_href,
                               );
                               return (
-                                <React.Fragment key={childTaskId}>
+                                <Fragment key={childTaskId}>
                                   <Link
                                     to={formatPath(Paths.taskDetail, {
                                       task: childTaskId,
                                     })}
                                   >
-                                    {maybeTranslate(childTask.name)}
+                                    {translateTask(childTask.name)}
                                   </Link>
                                   <br />
-                                </React.Fragment>
+                                </Fragment>
                               );
                             })
                           : t`No child task`}
@@ -251,7 +247,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     <DescriptionList isHorizontal>
                       {resources.map((resource, index) => {
                         return (
-                          <React.Fragment key={resource.type + index}>
+                          <Fragment key={resource.type + index}>
                             <hr />
                             <DescriptionListGroup>
                               <DescriptionListTerm>{t`Type`}</DescriptionListTerm>
@@ -275,7 +271,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                 </DescriptionListDescription>
                               </DescriptionListGroup>
                             )}
-                          </React.Fragment>
+                          </Fragment>
                         );
                       })}
                     </DescriptionList>
@@ -302,7 +298,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                           .reverse()
                           .map((report, index) => {
                             return (
-                              <React.Fragment key={index}>
+                              <Fragment key={index}>
                                 <hr />
                                 {Object.keys(report).map((key, index) => {
                                   return (
@@ -323,7 +319,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                     )
                                   );
                                 })}{' '}
-                              </React.Fragment>
+                              </Fragment>
                             );
                           })}
                       </DescriptionList>
@@ -342,21 +338,21 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                       {t`Error message`}
                     </Title>
                     <br />
-                    <React.Fragment>
+                    <>
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
                       <CodeBlock className={'hub-code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
-                    </React.Fragment>
+                    </>
                   </section>
                 )}
               </FlexItem>
             </Flex>
           </Flex>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -485,7 +481,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     resources.push({
                       name: result.data.name,
                       type: resourceType,
-                      pluginName: pluginName,
+                      pluginName,
                     });
                   })
                   .catch(() => {
@@ -503,7 +499,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
             childTasks,
             parentTask,
             loading: false,
-            taskName: maybeTranslate(result.data.name),
+            taskName: translateTask(result.data.name),
             resources,
           });
         });

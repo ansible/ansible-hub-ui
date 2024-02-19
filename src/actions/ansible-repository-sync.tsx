@@ -62,7 +62,7 @@ const SyncModal = ({
           {t`Close`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Sync repository "${name}"`}
       variant='medium'

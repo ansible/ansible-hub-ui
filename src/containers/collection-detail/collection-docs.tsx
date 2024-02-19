@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Alert } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React from 'react';
+import React, { Component, RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { CollectionVersionSearch } from 'src/api';
@@ -23,9 +23,11 @@ import { IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
-  docsRef: React.RefObject<HTMLDivElement>;
-  searchBarRef: React.RefObject<HTMLInputElement>;
+class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
+  static contextType = AppContext;
+
+  docsRef: RefObject<HTMLDivElement>;
+  searchBarRef: RefObject<HTMLInputElement>;
 
   constructor(props) {
     super(props);
@@ -39,8 +41,8 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
       content: null,
       params,
     };
-    this.docsRef = React.createRef();
-    this.searchBarRef = React.createRef();
+    this.docsRef = createRef();
+    this.searchBarRef = createRef();
   }
 
   componentDidMount() {
@@ -124,7 +126,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           activeTab='documentation'
           actuallyCollection={actuallyCollection}
@@ -202,7 +204,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             </div>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -326,5 +328,3 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
 }
 
 export default withRouter(CollectionDocs);
-
-CollectionDocs.contextType = AppContext;

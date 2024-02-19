@@ -1,8 +1,8 @@
 import cx from 'classnames';
-import React from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 
-interface IProps extends React.HTMLProps<HTMLElement> {
-  children: React.ReactNode;
+interface IProps extends HTMLProps<HTMLElement> {
+  children: ReactNode;
   className?: string;
 }
 

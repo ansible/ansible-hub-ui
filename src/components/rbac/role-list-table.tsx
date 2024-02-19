@@ -6,7 +6,7 @@ import {
   Td,
   Tr,
 } from '@patternfly/react-table';
-import React, { useState } from 'react';
+import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { SortTable } from 'src/components';
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
   isStickyHeader?: boolean;
 }
 
-export const RoleListTable: React.FC<Props> = ({
+export const RoleListTable: FunctionComponent<Props> = ({
   children,
   params,
   updateParams,
@@ -78,9 +78,9 @@ export const RoleListTable: React.FC<Props> = ({
   );
 };
 
-export const ExpandableRow: React.FC<{
+export const ExpandableRow: FunctionComponent<{
   rowIndex: number;
-  expandableRowContent?: React.ReactNode;
+  expandableRowContent?: ReactNode;
   colSpan?: number;
   'data-cy'?: string;
 }> = ({ rowIndex, children, expandableRowContent, colSpan, ...props }) => {
@@ -113,7 +113,7 @@ export const ExpandableRow: React.FC<{
   );
 };
 
-export const CheckboxRow: React.FC<{
+export const CheckboxRow: FunctionComponent<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
@@ -136,7 +136,7 @@ export const CheckboxRow: React.FC<{
   </Tbody>
 );
 
-export const RadioRow: React.FC<{
+export const RadioRow: FunctionComponent<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;

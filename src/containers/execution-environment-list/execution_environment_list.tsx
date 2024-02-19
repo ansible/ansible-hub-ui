@@ -8,7 +8,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
@@ -66,7 +66,9 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
+class ExecutionEnvironmentList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -154,7 +156,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
     );
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <PublishToControllerModal
           digest={publishToController?.digest}
@@ -267,7 +269,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -527,4 +529,3 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(ExecutionEnvironmentList);
-ExecutionEnvironmentList.contextType = AppContext;

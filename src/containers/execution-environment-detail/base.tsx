@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, DropdownItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   ContainerRepositoryType,
@@ -45,30 +45,16 @@ export interface IDetailSharedProps extends RouteProps {
   addAlert: (alert: AlertType) => void;
 }
 
-// opposite of formatEEPath - converts routeParams from {namespace, container} to {container: "namespace/container"}
-export function withContainerParamFix(WrappedComponent) {
-  const Component = (props: RouteProps) => {
-    const newProps = {
-      ...props,
-      routeParams: {
-        ...props.routeParams,
-        container: [props.routeParams.namespace, props.routeParams.container]
-          .filter(Boolean)
-          .join('/'),
-      },
-    };
-    return <WrappedComponent {...newProps} />;
-  };
-
-  Component.displayName = `withContainerParamFix(${
-    WrappedComponent.displayName || WrappedComponent.name
-  })`;
-  return Component;
-}
+// opposite of formatEEPath - converts routeParams from {namespace, container} to "namespace/container"
+export const containerName = ({
+  namespace,
+  container,
+}: Record<string, string>): string =>
+  [namespace, container].filter(Boolean).join('/');
 
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  return class extends React.Component<RouteProps, IState> {
+  return class extends Component<RouteProps, IState> {
     static contextType = AppContext;
     static displayName = `withContainerRepo(${
       WrappedComponent.displayName || WrappedComponent.name
@@ -100,9 +86,10 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      const container = this.props.routeParams.container;
+      const container = containerName(this.props.routeParams);
+
       const redirect = {
-        list: formatEEPath(Paths.executionEnvironments, {}),
+        list: formatPath(Paths.executionEnvironments),
         activity: formatEEPath(Paths.executionEnvironmentDetailActivities, {
           container,
         }),
@@ -189,7 +176,7 @@ export function withContainerRepo(WrappedComponent) {
       ) as { group?: number };
 
       return (
-        <React.Fragment>
+        <>
           <AlertList
             alerts={this.state.alerts}
             closeAlert={(i) => this.closeAlert(i)}
@@ -215,7 +202,7 @@ export function withContainerRepo(WrappedComponent) {
             />
           )}
           <ExecutionEnvironmentHeader
-            id={this.props.routeParams.container}
+            id={container}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
             groupId={groupId}
@@ -273,7 +260,6 @@ export function withContainerRepo(WrappedComponent) {
                 onCancel={() => this.setState({ editing: false })}
                 distributionPulpId={this.state.repo.pulp.distribution.id}
                 isRemote={!!this.state.repo.pulp.repository.remote}
-                isNew={false}
                 upstreamName={
                   this.state.repo.pulp.repository.remote?.upstream_name
                 }
@@ -296,12 +282,13 @@ export function withContainerRepo(WrappedComponent) {
               {...this.props}
             />
           </Main>
-        </React.Fragment>
+        </>
       );
     }
 
     private loadRepo() {
-      ExecutionEnvironmentAPI.get(this.props.routeParams.container)
+      const container = containerName(this.props.routeParams);
+      ExecutionEnvironmentAPI.get(container)
         .then((result) => {
           this.setState({
             repo: result.data,

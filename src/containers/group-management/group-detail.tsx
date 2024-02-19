@@ -8,7 +8,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
@@ -71,7 +71,9 @@ interface IState {
   inputText: string;
 }
 
-class GroupDetail extends React.Component<RouteProps, IState> {
+class GroupDetail extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   nonQueryStringParams = ['group'];
 
   userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
@@ -93,7 +95,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       users: null,
       allUsers: null,
       params: {
-        id: id,
+        id,
         page: 0,
         page_size: params['page_size'] || 10,
         sort:
@@ -163,7 +165,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
@@ -194,7 +196,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           {params.tab == 'access' ? this.renderGroupDetail() : null}
           {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -219,16 +221,19 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 
   private renderGroupDetail() {
     const { params, group } = this.state;
+    const { hasPermission } = this.context;
+    const canEdit = hasPermission('galaxy.change_group');
+
     return (
       <GroupDetailRoleManagement
-        params={params}
-        updateParams={(p) => this.updateParams(p)}
-        context={this.context}
-        group={group}
         addAlert={(title, variant, description) =>
           this.addAlert(title, variant, description)
         }
+        canEdit={canEdit}
+        group={group}
         nonQueryParams={this.userQueryStringParams}
+        params={params}
+        updateParams={(p) => this.updateParams(p)}
       />
     );
   }
@@ -245,7 +250,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       <Modal
         variant='large'
         onClose={close}
-        isOpen={true}
+        isOpen
         aria-label={t`add-user-modal`}
         title={''}
         header={
@@ -329,14 +334,13 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           placeholderText={t`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
-          multiple={true}
+          multiple
           onClear={() =>
             this.setState({
               selected: [],
               options: [...this.state.options, ...this.state.selected],
             })
           }
-          isDisabled={false}
           style={{ overflowY: 'auto', maxHeight: '350px' }}
         />
       </Modal>
@@ -765,4 +769,3 @@ class GroupDetail extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(GroupDetail);
-GroupDetail.contextType = AppContext;

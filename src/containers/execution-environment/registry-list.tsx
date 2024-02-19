@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
 import {
   AlertList,
@@ -62,10 +62,9 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentRegistryList extends React.Component<
-  RouteProps,
-  IState
-> {
+class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -152,7 +151,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ) : null;
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {showRemoteFormModal && (
           <RemoteForm
@@ -298,7 +297,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -548,4 +547,3 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 }
 
 export default withRouter(ExecutionEnvironmentRegistryList);
-ExecutionEnvironmentRegistryList.contextType = AppContext;

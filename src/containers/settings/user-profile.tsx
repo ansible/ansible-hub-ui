@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ActiveUserAPI, UserType } from 'src/api';
 import {
@@ -23,7 +23,9 @@ interface IState {
   redirect?: string;
 }
 
-class UserProfile extends React.Component<RouteProps, IState> {
+class UserProfile extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   private initialState: UserType;
 
   constructor(props) {
@@ -65,7 +67,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
       <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <UserFormPage
-          isMe={true}
+          isMe
           user={user}
           breadcrumbs={[{ name: t`Settings` }, { name: t`My profile` }]}
           title={t`My profile`}
@@ -136,8 +138,3 @@ class UserProfile extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserProfile);
-
-// For some reason react complains about setting context type in the class itself.
-// I think that it happens because withRouter confuses react into thinking that the
-// component is a functional compent when it's actually a class component.
-UserProfile.contextType = AppContext;

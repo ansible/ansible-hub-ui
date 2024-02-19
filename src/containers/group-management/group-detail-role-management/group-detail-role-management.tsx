@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import {
   GroupObjectPermissionType,
   GroupRoleAPI,
@@ -30,33 +30,32 @@ import {
   SelectRoles,
   WizardModal,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   ParamType,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
 } from 'src/utilities';
 import './group-detail-role-management.scss';
 
 interface Props {
+  addAlert: (title, variant, description?) => void;
+  canEdit: boolean;
+  group: GroupObjectPermissionType;
+  nonQueryParams?: string[];
   params: ParamType;
   updateParams: (params) => void;
-  context: IAppContextType;
-  group: GroupObjectPermissionType;
-  addAlert: (title, variant, description?) => void;
-  nonQueryParams?: string[];
 }
 
-const GroupDetailRoleManagement: React.FC<Props> = ({
+const GroupDetailRoleManagement: FunctionComponent<Props> = ({
+  addAlert,
+  canEdit,
+  group,
+  nonQueryParams,
   params,
   updateParams,
-  context,
-  group,
-  addAlert,
-  nonQueryParams,
 }) => {
   const [showAddRolesModal, setShowAddRolesModal] = useState<boolean>(false);
   const [selectedDeleteRole, setSelectedDeleteRole] =
@@ -150,9 +149,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     </DeleteModal>
   );
 
-  const { hasPermission } = context;
-
-  const addRoles = hasPermission('galaxy.change_group') && (
+  const addRoles = canEdit && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
@@ -346,22 +343,16 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     expandableRowContent={
                       <PermissionCategories
                         permissions={role.permissions}
-                        showCustom={true}
-                        showEmpty={false}
+                        showCustom
                       />
                     }
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
                     <td>{role.role}</td>
-                    <td>
-                      {translateLockedRolesDescription(
-                        role.role,
-                        role.description,
-                      )}
-                    </td>
+                    <td>{translateLockedRole(role.role, role.description)}</td>
                     <ListItemActions
                       kebabItems={[
-                        hasPermission('galaxy.change_group') && (
+                        canEdit && (
                           <DropdownItem
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}

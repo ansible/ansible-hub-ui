@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RoleAPI, RoleType } from 'src/api';
 import {
   AppliedFilters,
@@ -12,7 +12,7 @@ import {
   Pagination,
   RoleListTable,
 } from 'src/components';
-import { filterIsSet, translateLockedRolesDescription } from 'src/utilities';
+import { filterIsSet, translateLockedRole } from 'src/utilities';
 
 interface SelectRolesProps {
   assignedRoles: { role: string }[];
@@ -22,7 +22,7 @@ interface SelectRolesProps {
   pulpObjectType?: string;
 }
 
-export const SelectRoles: React.FC<SelectRolesProps> = ({
+export const SelectRoles: FunctionComponent<SelectRolesProps> = ({
   assignedRoles,
   selectedRoles,
   onRolesUpdate,
@@ -229,10 +229,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                       >
                         <td>{role.name}</td>
                         <td>
-                          {translateLockedRolesDescription(
-                            role.name,
-                            role.description,
-                          )}
+                          {translateLockedRole(role.name, role.description)}
                         </td>
                       </CheckboxRow>
                     ))}

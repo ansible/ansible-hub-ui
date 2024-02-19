@@ -9,7 +9,7 @@ import {
   PageSidebar,
 } from '@patternfly/react-core';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ActiveUserAPI,
@@ -29,7 +29,7 @@ import { Paths, formatPath } from 'src/paths';
 import { StandaloneMenu } from './menu';
 
 interface IProps {
-  children: React.ReactNode;
+  children: ReactNode;
   featureFlags: FeatureFlagsType;
   hasPermission: (string) => boolean;
   setUser: (user) => void;
@@ -200,7 +200,7 @@ export const StandaloneLayout = ({
   );
 
   return (
-    <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+    <Page isManagedSidebar header={Header} sidebar={Sidebar}>
       {IS_COMMUNITY ? (
         <Banner>
           <Trans>

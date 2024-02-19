@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
@@ -40,7 +40,9 @@ interface IState {
   unauthorized: boolean;
 }
 
-class EditNamespace extends React.Component<RouteProps, IState> {
+class EditNamespace extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   queryParams: URLSearchParams;
 
   constructor(props) {
@@ -62,7 +64,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
       saving: false,
       redirect: null,
       unsavedData: false,
-      params: params,
+      params,
       unauthorized: false,
     };
   }
@@ -106,7 +108,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
       });
 
     return (
-      <React.Fragment>
+      <>
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
@@ -169,7 +171,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -271,7 +273,5 @@ class EditNamespace extends React.Component<RouteProps, IState> {
     });
   }
 }
-
-EditNamespace.contextType = AppContext;
 
 export default withRouter(EditNamespace);

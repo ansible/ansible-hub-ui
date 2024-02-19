@@ -61,7 +61,7 @@ Cypress.Commands.add(
     const user = {
       firstName: firstName || 'First Name',
       lastName: lastName || 'Last Name',
-      username: username,
+      username,
       email: email || 'firstName@example.com',
       password: password || 'I am a complicated passw0rd',
     };

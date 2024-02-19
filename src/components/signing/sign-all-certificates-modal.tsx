@@ -13,7 +13,7 @@ import {
   Split,
   SplitItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface Props {
   name: string;
@@ -22,7 +22,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const SignAllCertificatesModal: React.FC<Props> = ({
+export const SignAllCertificatesModal: FunctionComponent<Props> = ({
   name,
   isOpen,
   onSubmit,

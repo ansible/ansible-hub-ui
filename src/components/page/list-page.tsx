@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import {
   AlertList,
@@ -68,7 +68,7 @@ export type RenderTableRow<T> = (
   index: number,
   { addAlert, setState }: { addAlert; setState? },
   listItemActions?,
-) => React.ReactNode;
+) => ReactNode;
 
 type RenderModals = ({
   addAlert,
@@ -76,7 +76,7 @@ type RenderModals = ({
   query,
   setState,
   state,
-}) => React.ReactNode;
+}) => ReactNode;
 
 type SortHeaders = {
   title: MessageDescriptor;
@@ -101,7 +101,7 @@ interface ListPageParams<T> {
   filterConfig: ({ state }) => FilterOption[];
   headerActions?: ActionType[];
   listItemActions?: ActionType[];
-  noDataButton?: (item, actionContext) => React.ReactNode;
+  noDataButton?: (item, actionContext) => ReactNode;
   noDataDescription: MessageDescriptor;
   noDataTitle: MessageDescriptor;
   query: Query<T>;
@@ -165,7 +165,7 @@ export const ListPage = function <T>({
     title: i18n._(title),
   });
 
-  const klass = class extends React.Component<RouteProps, IState<T>> {
+  const klass = class extends Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
 
@@ -252,7 +252,7 @@ export const ListPage = function <T>({
         });
 
       return (
-        <React.Fragment>
+        <>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
@@ -351,7 +351,7 @@ export const ListPage = function <T>({
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

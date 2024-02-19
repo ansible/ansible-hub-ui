@@ -4,13 +4,13 @@ import {
   TextInput,
   TextInputTypes,
 } from '@patternfly/react-core';
-import React, { ReactNode } from 'react';
+import React, { Component, ReactElement, ReactNode } from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   errorMessages: ErrorMessagesType;
   formFields: {
-    formGroupLabelIcon?: React.ReactElement;
+    formGroupLabelIcon?: ReactElement;
     id: string;
     placeholder?: string;
     title: string;
@@ -27,7 +27,7 @@ interface IProps {
   onSave: () => void;
 }
 
-export class DataForm extends React.Component<IProps> {
+export class DataForm extends Component<IProps> {
   render() {
     const {
       errorMessages,

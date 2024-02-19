@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -28,7 +28,6 @@ import {
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -68,7 +67,9 @@ interface IState {
   deleteAll: boolean;
 }
 
-class Search extends React.Component<RouteProps, IState> {
+class Search extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   tags: string[];
 
   constructor(props) {
@@ -80,15 +81,13 @@ class Search extends React.Component<RouteProps, IState> {
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = Constants.DEFAULT_PAGE_SIZE;
+      params['page_size'] = 10;
     }
 
     // Load view type from local storage if it's not set. This allows a
     // user's view type preference to persist
     if (!params['view_type']) {
-      params['view_type'] = localStorage.getItem(
-        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-      );
+      params['view_type'] = localStorage.getItem('search_view_type');
     }
 
     if (!params['sort']) {
@@ -97,7 +96,7 @@ class Search extends React.Component<RouteProps, IState> {
 
     this.state = {
       collections: [],
-      params: params,
+      params,
       count: 0,
       loading: true,
       synclist: undefined,
@@ -224,7 +223,7 @@ class Search extends React.Component<RouteProps, IState> {
             count={count}
             ignoredParams={ignoredParams}
             params={params}
-            switcher={Constants.SEARCH_VIEW_TYPE_LOCAL_KEY}
+            switcher='search_view_type'
             updateParams={updateParams}
             {...collectionFilter({
               featureFlags: this.context.featureFlags,
@@ -337,7 +336,7 @@ class Search extends React.Component<RouteProps, IState> {
             alerts: [
               ...this.state.alerts,
               {
-                title: title,
+                title,
                 variant: 'success',
               },
             ],
@@ -417,7 +416,7 @@ class Search extends React.Component<RouteProps, IState> {
     return dropdownMenu;
   }
 
-  private renderSyncToogle(name: string, namespace: string): React.ReactNode {
+  private renderSyncToogle(name: string, namespace: string): ReactNode {
     const { synclist } = this.state;
 
     if (!synclist) {
@@ -559,5 +558,3 @@ class Search extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(Search);
-
-Search.contextType = AppContext;

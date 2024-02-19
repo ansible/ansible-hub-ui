@@ -33,7 +33,6 @@ const defaultConfigs = [
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'IS_COMMUNITY', default: false, scope: 'global' },
   { name: 'IS_INSIGHTS', default: false, scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
   { name: 'UI_DOCS_URL', default: docsURL, scope: 'global' },
@@ -41,7 +40,6 @@ const defaultConfigs = [
 
   // Webpack scope: only available in customConfigs here, not exposed to the UI
   { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
-  { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
@@ -131,7 +129,8 @@ module.exports = (inputConfigs) => {
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
-  const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
+  // community is also considered standalone
+  const isStandalone = !customConfigs.IS_INSIGHTS;
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
@@ -237,7 +236,7 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
   }
 
-  if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
+  if (isStandalone) {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
@@ -258,7 +257,7 @@ module.exports = (inputConfigs) => {
     );
   }
 
-  if (customConfigs.DEPLOYMENT_MODE === 'insights') {
+  if (customConfigs.IS_INSIGHTS) {
     /**
      * Generates remote containers for chrome 2
      */

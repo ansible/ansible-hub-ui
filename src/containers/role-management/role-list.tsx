@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';
 import {
@@ -39,7 +39,7 @@ import {
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
-  translateLockedRolesDescription,
+  translateLockedRole,
 } from 'src/utilities';
 
 interface IState {
@@ -60,7 +60,9 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export class RoleList extends React.Component<RouteProps, IState> {
+export class RoleList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -87,7 +89,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
       alerts: [],
       loading: true,
       inputText: '',
-      params: params,
+      params,
       roleCount: 0,
       unauthorized: false,
       selectedRole: null,
@@ -172,7 +174,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {showDeleteModal && roleToEdit && (
           <DeleteModal
@@ -283,7 +285,6 @@ export class RoleList extends React.Component<RouteProps, IState> {
                   {' '}
                   {roleCount ? (
                     <RoleListTable
-                      isStickyHeader={false}
                       params={this.state.params}
                       updateParams={(p) => {
                         this.updateParams(p, () => this.queryRoles());
@@ -296,8 +297,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
                           expandableRowContent={
                             <PermissionCategories
                               permissions={role.permissions}
-                              showCustom={true}
-                              showEmpty={false}
+                              showCustom
                             />
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
@@ -306,10 +306,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
                         >
                           <td data-cy='name-field'>{role.name}</td>
                           <td>
-                            {translateLockedRolesDescription(
-                              role.name,
-                              role.description,
-                            )}
+                            {translateLockedRole(role.name, role.description)}
                           </td>
                           <td>
                             <DateComponent date={role.pulp_created} />
@@ -351,7 +348,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -487,4 +484,3 @@ export class RoleList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(RoleList);
-RoleList.contextType = AppContext;

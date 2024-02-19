@@ -10,7 +10,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { PermissionCategories } from 'src/components';
 
 interface IState {
@@ -34,7 +34,7 @@ interface IProps {
   originalPermissions?: string[];
 }
 
-export class RoleForm extends React.Component<IProps, IState> {
+export class RoleForm extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,7 +67,7 @@ export class RoleForm extends React.Component<IProps, IState> {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Form>
           <div>
             <div style={{ paddingBottom: '8px' }}>
@@ -76,7 +76,7 @@ export class RoleForm extends React.Component<IProps, IState> {
 
             <div style={{ display: 'flex', gap: '10px' }}>
               <FormGroup
-                isRequired={true}
+                isRequired
                 key='name'
                 fieldId='name'
                 label={t`Name`}
@@ -98,7 +98,7 @@ export class RoleForm extends React.Component<IProps, IState> {
               </FormGroup>
 
               <FormGroup
-                isRequired={true}
+                isRequired
                 style={{ width: '50%' }}
                 key='description'
                 fieldId='description'
@@ -128,8 +128,7 @@ export class RoleForm extends React.Component<IProps, IState> {
             <PermissionCategories
               permissions={permissions}
               setSelected={(permissions) => this.setState({ permissions })}
-              showCustom={false}
-              showEmpty={true}
+              showEmpty
             />
           </div>
 
@@ -149,7 +148,7 @@ export class RoleForm extends React.Component<IProps, IState> {
             {saving ? <Spinner /> : null}
           </ActionGroup>
         </Form>
-      </React.Fragment>
+      </>
     );
   }
 }

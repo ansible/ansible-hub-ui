@@ -14,7 +14,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -28,7 +28,7 @@ import {
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
-import { withContainerParamFix } from '../execution-environment-detail/base';
+import { containerName } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
 interface IState {
@@ -43,12 +43,12 @@ interface IState {
   size: number;
 }
 
-class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
+class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
     this.state = {
-      container: { name: this.props.routeParams.container },
+      container: { name: containerName(this.props.routeParams) },
       digest: this.props.routeParams.digest, // digest or tag until loading done
       environment: [],
       error: false,
@@ -62,15 +62,19 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
 
   componentDidMount() {
     const { container, digest } = this.state;
-    const whileLoading = (callback) =>
-      this.setState({ loading: true }, () =>
-        callback().then((data) => this.setState({ loading: false, ...data })),
-      );
 
-    whileLoading(() =>
-      this.query({
-        container,
+    this.query({
+      container,
+      digest,
+    }).then(({ digest, environment, error, labels, layers, size }) =>
+      this.setState({
+        loading: false,
         digest,
+        environment,
+        error,
+        labels,
+        layers,
+        size,
       }),
     );
   }
@@ -119,7 +123,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
           }
         >
           <div className='copy-sha'>
-            <ShaLabel digest={digest} long={true} />
+            <ShaLabel digest={digest} long />
             <ClipboardCopyButton
               className='eco-clipboard-copy'
               variant={'plain'}
@@ -224,10 +228,10 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                     </CardTitle>
                     <CardBody>
                       {environment.map((line, index) => (
-                        <React.Fragment key={index}>
+                        <Fragment key={index}>
                           <code>{line}</code>
                           <br />
-                        </React.Fragment>
+                        </Fragment>
                       ))}
                     </CardBody>
                   </Card>
@@ -275,4 +279,4 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(withContainerParamFix(ExecutionEnvironmentManifest));
+export default withRouter(ExecutionEnvironmentManifest);

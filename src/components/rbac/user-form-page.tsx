@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import { UserType } from 'src/api';
 import {
   BaseHeader,
@@ -18,13 +18,13 @@ interface IProps {
 
   updateUser: (user: UserType, errorMessages: ErrorMessagesType) => void;
   saveUser?: () => void;
-  extraControls?: React.ReactNode;
+  extraControls?: ReactNode;
   onCancel?: () => void;
   isNewUser?: boolean;
   isMe?: boolean;
 }
 
-export class UserFormPage extends React.Component<IProps> {
+export class UserFormPage extends Component<IProps> {
   public static defaultProps = {
     extraControls: null,
   };
@@ -44,7 +44,7 @@ export class UserFormPage extends React.Component<IProps> {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           pageControls={extraControls}
@@ -64,7 +64,7 @@ export class UserFormPage extends React.Component<IProps> {
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
   AnsibleRepositoryType,
@@ -74,7 +74,9 @@ interface IState {
   };
 }
 
-class CertificationDashboard extends React.Component<RouteProps, IState> {
+class CertificationDashboard extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -368,7 +370,7 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
             <ApprovalRow
               approve={(v) => this.approve(v)}
               collectionVersion={version}
-              context={this.context}
+              featureFlags={this.context.featureFlags}
               isVersionUpdating={(v) => this.isVersionUpdating(v)}
               key={i}
               openUploadCertificateModal={(v) =>
@@ -633,5 +635,3 @@ class CertificationDashboard extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(CertificationDashboard);
-
-CertificationDashboard.contextType = AppContext;

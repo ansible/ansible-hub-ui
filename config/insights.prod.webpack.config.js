@@ -9,9 +9,7 @@ module.exports = webpackBase({
     cloudBeta === 'true'
       ? '/preview/ansible/automation-hub/'
       : '/ansible/automation-hub/',
-  DEPLOYMENT_MODE: 'insights',
   IS_INSIGHTS: true,
-  NAMESPACE_TERM: 'partners',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   APPLICATION_NAME: 'Automation Hub',

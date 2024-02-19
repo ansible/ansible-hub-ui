@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   AlertList,
@@ -43,7 +43,9 @@ interface IState {
   inputText: string;
 }
 
-export class SignatureKeysList extends React.Component<RouteProps, IState> {
+export class SignatureKeysList extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -57,7 +59,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,
@@ -82,7 +84,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Signature keys`} />
         {unauthorised ? (
@@ -157,7 +159,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -289,5 +291,3 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(SignatureKeysList);
-
-SignatureKeysList.contextType = AppContext;

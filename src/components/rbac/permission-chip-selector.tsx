@@ -5,7 +5,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
@@ -23,7 +23,7 @@ interface IState {
   isOpen: boolean;
 }
 
-export class PermissionChipSelector extends React.Component<IProps, IState> {
+export class PermissionChipSelector extends Component<IProps, IState> {
   static contextType = AppContext;
 
   constructor(props) {
@@ -92,13 +92,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         isDisabled={!!isDisabled}
       >
         {availablePermissions.length === 0
-          ? [
-              <SelectOption
-                isDisabled={true}
-                key={'not_found'}
-                value={t`Not found`}
-              />,
-            ]
+          ? [<SelectOption isDisabled key={'not_found'} value={t`Not found`} />]
           : availablePermissions.map((permission) => (
               <SelectOption key={permission} value={permission}>
                 {model_permissions[permission]?.name || permission}

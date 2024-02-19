@@ -12,7 +12,7 @@ import {
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { sum } from 'lodash';
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -44,11 +44,7 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, containerName, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 
@@ -70,10 +66,12 @@ interface IState {
   isDeletionPending: boolean;
 }
 
-class ExecutionEnvironmentDetailImages extends React.Component<
+class ExecutionEnvironmentDetailImages extends Component<
   IDetailSharedProps,
   IState
 > {
+  static contextType = AppContext;
+
   nonQueryStringParams = [];
 
   constructor(props) {
@@ -95,7 +93,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       loading: true,
       images: [],
       numberOfImages: 0,
-      params: params,
+      params,
       redirect: null,
       manageTagsManifestDigest: undefined,
       publishToController: null,
@@ -256,7 +254,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                     onChange={(text) => this.setState({ inputText: text })}
                     updateParams={(p) =>
                       this.updateParams(p, () =>
-                        this.queryImages(this.props.routeParams.container),
+                        this.queryImages(containerName(this.props.routeParams)),
                       )
                     }
                     params={params}
@@ -279,7 +277,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             params={params}
             updateParams={(p) =>
               this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
+                this.queryImages(containerName(this.props.routeParams)),
               )
             }
             count={this.state.numberOfImages}
@@ -290,7 +288,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <AppliedFilters
             updateParams={(p) => {
               this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
+                this.queryImages(containerName(this.props.routeParams)),
               );
               this.setState({ inputText: '' });
             }}
@@ -310,7 +308,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               params={params}
               updateParams={(p) =>
                 this.updateParams(p, () =>
-                  this.queryImages(this.props.routeParams.container),
+                  this.queryImages(containerName(this.props.routeParams)),
                 )
               }
             />
@@ -331,7 +329,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           params={params}
           updateParams={(p) =>
             this.updateParams(p, () =>
-              this.queryImages(this.props.routeParams.container),
+              this.queryImages(containerName(this.props.routeParams)),
             )
           }
           count={this.state.numberOfImages}
@@ -347,7 +345,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     cols: number,
   ) {
     const { hasPermission } = this.context;
-    const container = this.props.routeParams.container;
+    const container = containerName(this.props.routeParams);
     const manifestLink = (digestOrTag) =>
       formatEEPath(Paths.executionEnvironmentManifest, {
         container,
@@ -415,7 +413,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <React.Fragment key={index}>
+      <Fragment key={index}>
         <tr>
           <td className='pf-c-table__toggle'>
             {isManifestList ? (
@@ -471,7 +469,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
           </tr>
         )}
-      </React.Fragment>
+      </Fragment>
     );
   }
 
@@ -573,7 +571,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     const { digest } = selectedImage;
     this.setState({ isDeletionPending: true }, () =>
       ExecutionEnvironmentAPI.deleteImage(
-        this.props.routeParams.container,
+        containerName(this.props.routeParams),
         selectedImage.digest,
       )
         .then((result) => {
@@ -595,7 +593,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                 </Trans>
               ),
             });
-            this.queryImages(this.props.routeParams.container);
+            this.queryImages(containerName(this.props.routeParams));
           });
         })
         .catch((err) => {
@@ -620,7 +618,4 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 }
 
-export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailImages)),
-);
-ExecutionEnvironmentDetailImages.contextType = AppContext;
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));

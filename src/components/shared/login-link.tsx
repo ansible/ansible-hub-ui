@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export const LoginLink = ({ button, next }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const className = button ? 'pf-c-button pf-m-primary' : '';
 
   // NOTE: also update AuthHandler#render (src/loaders/standalone/routes.tsx) when changing this

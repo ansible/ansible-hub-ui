@@ -1,17 +1,17 @@
 import { t } from '@lingui/macro';
 import { Button, Popover, PopoverPosition } from '@patternfly/react-core';
 import OutlinedQuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon';
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import './helper-text.scss';
 
 interface IProps {
   /** Value to display in the tag */
-  content: React.ReactNode;
-  header?: React.ReactNode;
+  content: ReactNode;
+  header?: ReactNode;
   hasAutoWidth?: boolean;
 }
 
-export class HelperText extends React.Component<IProps> {
+export class HelperText extends Component<IProps> {
   render() {
     return (
       <Popover

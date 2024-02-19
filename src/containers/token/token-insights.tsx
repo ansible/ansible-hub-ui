@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Alert, Button, ClipboardCopyVariant } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
@@ -30,7 +30,9 @@ interface IState {
   };
 }
 
-class TokenInsights extends React.Component<RouteProps, IState> {
+class TokenInsights extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -255,4 +257,3 @@ class TokenInsights extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(TokenInsights);
-TokenInsights.contextType = AppContext;

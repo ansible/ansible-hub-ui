@@ -1,7 +1,7 @@
 import ListIcon from '@patternfly/react-icons/dist/esm/icons/list-icon';
 import ThLargeIcon from '@patternfly/react-icons/dist/esm/icons/th-large-icon';
 import cx from 'classnames';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { ParamHelper } from 'src/utilities';
 import './switcher.scss';
 
@@ -14,7 +14,7 @@ interface IProps {
   className?: string;
 }
 
-export const CardListSwitcher: React.FunctionComponent<IProps> = ({
+export const CardListSwitcher: FunctionComponent<IProps> = ({
   params,
   updateParams,
   size = 'sm',

@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   AlertList,
   CollectionHeader,
@@ -14,10 +14,9 @@ import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
-class CollectionDetail extends React.Component<
-  RouteProps,
-  IBaseCollectionState
-> {
+class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -76,7 +75,7 @@ class CollectionDetail extends React.Component<
     ];
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           activeTab='install'
@@ -115,7 +114,7 @@ class CollectionDetail extends React.Component<
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -152,5 +151,3 @@ class CollectionDetail extends React.Component<
 }
 
 export default withRouter(CollectionDetail);
-
-CollectionDetail.contextType = AppContext;

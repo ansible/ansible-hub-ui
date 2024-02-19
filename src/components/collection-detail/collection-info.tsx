@@ -8,7 +8,7 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -21,7 +21,7 @@ import {
   LoginLink,
   Tag,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import './collection-info.scss';
@@ -43,8 +43,8 @@ export const CollectionInfo = ({
   params,
   addAlert,
 }: IProps) => {
-  const downloadLinkRef = React.useRef<HTMLAnchorElement>(null);
-  const { user, settings } = useContext();
+  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
+  const { user, settings } = useHubContext();
 
   let installCommand = `ansible-galaxy collection install ${collection_version.namespace}.${collection_version.name}`;
 
@@ -59,7 +59,7 @@ export const CollectionInfo = ({
   return (
     <div className='pf-c-content info-panel'>
       <h1>{t`Install`}</h1>
-      <Grid hasGutter={true}>
+      <Grid hasGutter>
         <GridItem>{collection_version.description}</GridItem>
         <GridItem>
           {collection_version.tags.map((tag, i) => (
@@ -69,7 +69,7 @@ export const CollectionInfo = ({
 
         {content.license?.length > 0 && (
           <GridItem>
-            <Split hasGutter={true}>
+            <Split hasGutter>
               <SplitItem className='install-title'>{t`License`}</SplitItem>
               <SplitItem isFilled>
                 {content.license ? content.license.join(', ') : ''}
@@ -78,7 +78,7 @@ export const CollectionInfo = ({
           </GridItem>
         )}
         <GridItem>
-          <Split hasGutter={true}>
+          <Split hasGutter>
             <SplitItem className='install-title'>{t`Installation`}</SplitItem>
             <SplitItem isFilled>
               <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
@@ -92,7 +92,7 @@ export const CollectionInfo = ({
           </Split>
         </GridItem>
         <GridItem>
-          <Split hasGutter={true}>
+          <Split hasGutter>
             <SplitItem className='install-title'>{t`Download`}</SplitItem>
             {user.is_anonymous &&
             !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD ? (
@@ -101,10 +101,10 @@ export const CollectionInfo = ({
                 isInline
                 variant='warning'
                 title={
-                  <React.Fragment>
+                  <>
                     {t`You have to be logged in to be able to download the tarball.`}{' '}
                     <LoginLink />
-                  </React.Fragment>
+                  </>
                 }
               />
             ) : (
@@ -163,7 +163,7 @@ export const CollectionInfo = ({
         />
         {content?.requires_ansible && (
           <GridItem>
-            <Split hasGutter={true}>
+            <Split hasGutter>
               <SplitItem className='install-title'>{t`Requires Ansible`}</SplitItem>
               <SplitItem isFilled data-cy='ansible-requirement'>
                 {content?.requires_ansible}

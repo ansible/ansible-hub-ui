@@ -180,7 +180,7 @@ export const WisdomModal = (props: IProps) => {
   return (
     <Modal
       actions={actions}
-      isOpen={true}
+      isOpen
       onClose={props.closeAction}
       title={
         loading

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserAPI, UserType } from 'src/api';
 import {
@@ -23,7 +23,9 @@ interface IState {
   redirect?: string;
 }
 
-class UserCreate extends React.Component<RouteProps, IState> {
+class UserCreate extends Component<RouteProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -56,13 +58,13 @@ class UserCreate extends React.Component<RouteProps, IState> {
     const title = t`Create new user`;
 
     return notAuthorised ? (
-      <React.Fragment>
+      <>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={title}
         />
         <EmptyStateUnauthorized />
-      </React.Fragment>
+      </>
     ) : (
       <UserFormPage
         user={user}
@@ -74,7 +76,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
         }
         saveUser={this.saveUser}
         onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
-        isNewUser={true}
+        isNewUser
       />
     );
   }
@@ -89,4 +91,3 @@ class UserCreate extends React.Component<RouteProps, IState> {
 }
 
 export default withRouter(UserCreate);
-UserCreate.contextType = AppContext;

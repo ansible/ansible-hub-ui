@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import { LoadingPageSpinner } from 'src/components';
 import {
@@ -39,7 +39,7 @@ type RenderModals = ({
   query,
   setState,
   state,
-}) => React.ReactNode;
+}) => ReactNode;
 
 interface PageParams<T> {
   breadcrumbs: ({ name }) => { url?: string; name: string }[];
@@ -52,7 +52,7 @@ interface PageParams<T> {
   title: ({ name }) => string;
   transformParams: (routeParams) => Record<string, string>;
   renderModals?: RenderModals;
-  render: (item, actionContext) => React.ReactNode;
+  render: (item, actionContext) => ReactNode;
 }
 
 export const Page = function <
@@ -88,7 +88,7 @@ export const Page = function <
     );
   };
 
-  const klass = class extends React.Component<RouteProps, IState<T>> {
+  const klass = class extends Component<RouteProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
 
@@ -141,7 +141,7 @@ export const Page = function <
       const name = item?.name || transformParams(routeParams)?.name || null;
 
       return (
-        <React.Fragment>
+        <>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader
             title={title({ name })}
@@ -183,7 +183,7 @@ export const Page = function <
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

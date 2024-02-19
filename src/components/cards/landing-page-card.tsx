@@ -1,9 +1,9 @@
 import { Card, CardBody, CardHeader, Title } from '@patternfly/react-core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
   title: string;
-  body: React.ReactNode;
+  body: ReactNode;
 }
 
 export const LandingPageCard = ({ title, body }: IProps) => {

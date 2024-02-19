@@ -10,7 +10,7 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import './namespace-item.scss';
 
@@ -28,7 +28,7 @@ export function LegacyNamespaceListItem({
   const {
     featureFlags: { ai_deny_index },
     user: { username, is_superuser },
-  } = useContext();
+  } = useHubContext();
   const location = useLocation();
   const navigate = useNavigate();
   const { id, avatar_url, name, summary_fields } = namespace;
@@ -38,7 +38,7 @@ export function LegacyNamespaceListItem({
   });
 
   const cells = [
-    <DataListCell isFilled={false} alignRight={false} key='ns'>
+    <DataListCell isFilled={false} key='ns'>
       <Logo
         alt='logo'
         fallbackToDefault
@@ -92,7 +92,7 @@ export function LegacyNamespaceListItem({
 
   if (dropdownItems.length) {
     cells.push(
-      <DataListCell key='menu' alignRight={true}>
+      <DataListCell key='menu' alignRight>
         <div style={{ float: 'right' }}>
           <StatefulDropdown items={dropdownItems} />
         </div>

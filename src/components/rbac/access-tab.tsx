@@ -8,7 +8,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { sortBy } from 'lodash';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { GroupType, RoleType } from 'src/api';
 import {
@@ -81,7 +81,7 @@ const SectionSeparator = () => (
   />
 );
 
-export class AccessTab extends React.Component<IProps> {
+export class AccessTab extends Component<IProps> {
   render() {
     const {
       canEditOwners,

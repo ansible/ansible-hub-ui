@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ContainerDistributionAPI,
   ExecutionEnvironmentRegistryAPI,
@@ -68,7 +68,7 @@ interface IState {
   formErrors: ErrorMessagesType;
 }
 
-export class RepositoryForm extends React.Component<IProps, IState> {
+export class RepositoryForm extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,7 +134,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       <Modal
         variant='large'
         onClose={onCancel}
-        isOpen={true}
+        isOpen
         title={
           isNew ? t`Add execution environment` : t`Edit execution environment`
         }
@@ -160,12 +160,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           {!isRemote ? (
             <>
               <FormGroup key='name' fieldId='name' label={t`Name`}>
-                <TextInput
-                  id='name'
-                  value={name}
-                  isDisabled={true}
-                  type='text'
-                />
+                <TextInput id='name' value={name} isDisabled type='text' />
               </FormGroup>
 
               <FormGroup
@@ -176,7 +171,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 <TextInput
                   id='namespace'
                   value={namespace}
-                  isDisabled={true}
+                  isDisabled
                   type='text'
                 />
               </FormGroup>
@@ -184,7 +179,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           ) : (
             <>
               <FormGroup
-                isRequired={true}
+                isRequired
                 key='name'
                 fieldId='name'
                 label={t`Name`}
@@ -207,7 +202,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='upstreamName'
                 fieldId='upstreamName'
                 label={t`Upstream name`}
-                isRequired={true}
+                isRequired
                 labelIcon={
                   <HelperText
                     content={t`Use the namespace/name format for namespaced containers. Otherwise, use the library/name format.`}
@@ -226,7 +221,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='registry'
                 label={t`Registry`}
                 className='hub-formgroup-registry'
-                isRequired={true}
+                isRequired
                 helperTextInvalid={
                   this.state.formErrors['registries'] ||
                   this.state.formErrors['registry']
@@ -291,7 +286,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently included tags`}
               >
-                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                <LabelGroup id='remove-tag' defaultIsOpen>
                   {includeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -334,7 +329,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='currentTag'
                 label={t`Currently excluded tags`}
               >
-                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                <LabelGroup id='remove-tag' defaultIsOpen>
                   {excludeTags.map((tag) => (
                     <Label
                       icon={<TagIcon />}
@@ -365,7 +360,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               onChange={(value) => this.setState({ description: value })}
               type='text'
               resizeOrientation={'vertical'}
-              autoResize={true}
+              autoResize
             />
           </FormGroup>
         </Form>

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { DataList, DropdownItem } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyNamespaceAPI,
@@ -58,7 +58,7 @@ interface NamespaceRolesState {
   roles: LegacyRoleListType[];
 }
 
-class NamespaceRoles extends React.Component<
+class NamespaceRoles extends Component<
   NamespaceRolesProps,
   NamespaceRolesState
 > {
@@ -196,11 +196,7 @@ class NamespaceRoles extends React.Component<
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem
-                        key={lrole.id}
-                        role={lrole}
-                        show_thumbnail={false}
-                      />
+                      <LegacyRoleListItem key={lrole.id} role={lrole} />
                     ))}
                 </DataList>
 
@@ -226,7 +222,7 @@ interface RoleNamespaceState {
   namespace: LegacyNamespaceListType;
 }
 
-class AnsibleRoleNamespaceDetail extends React.Component<
+class AnsibleRoleNamespaceDetail extends Component<
   RouteProps,
   RoleNamespaceState
 > {

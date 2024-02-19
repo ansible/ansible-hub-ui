@@ -1,10 +1,10 @@
 import { Trans } from '@lingui/macro';
 import { Divider, Flex, FlexItem, Label } from '@patternfly/react-core';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
-import { translateLockedRolesDescription } from 'src/utilities';
+import { useHubContext } from 'src/loaders/app-context';
+import { translateLockedRole } from 'src/utilities';
 
 interface Props {
   selectedRoles: RoleType[];
@@ -27,7 +27,7 @@ const splitByDot = (perm: string) => {
 };
 
 export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
-  const { model_permissions } = useContext().user;
+  const { model_permissions } = useHubContext().user;
 
   return (
     <div className='hub-custom-wizard-layout'>
@@ -47,14 +47,11 @@ export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
       </p>
       <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
         {selectedRoles.map((role) => (
-          <React.Fragment key={role.name}>
+          <Fragment key={role.name}>
             <FlexItem>
               <strong>{role.name}</strong>{' '}
               {role.description &&
-                `- ${translateLockedRolesDescription(
-                  role.name,
-                  role.description,
-                )}`}
+                `- ${translateLockedRole(role.name, role.description)}`}
               <Flex className='hub-permissions'>
                 {role.permissions.map((permission) => (
                   <FlexItem
@@ -76,7 +73,7 @@ export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
             <FlexItem>
               <Divider />
             </FlexItem>
-          </React.Fragment>
+          </Fragment>
         ))}
       </Flex>
     </div>

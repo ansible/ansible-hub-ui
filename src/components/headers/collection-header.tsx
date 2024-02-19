@@ -13,7 +13,7 @@ import {
   Spinner,
   Text,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
@@ -49,7 +49,6 @@ import {
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -109,7 +108,7 @@ interface IState {
   versionToUploadCertificate: CollectionVersionSearch;
 }
 
-export class CollectionHeader extends React.Component<IProps, IState> {
+export class CollectionHeader extends Component<IProps, IState> {
   ignoreParams = ['showing', 'keywords'];
   static contextType = AppContext;
 
@@ -132,7 +131,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       modalCollections: null,
       modalPagination: {
         page: 1,
-        page_size: Constants.DEFAULT_PAGINATION_OPTIONS[0],
+        page_size: 10,
       },
       namespace: null,
       redirect: null,
@@ -751,7 +750,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
-      namespace: namespace,
+      namespace,
       collection: name,
     })
       .then((result) => {
@@ -805,9 +804,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
-      namespace: namespace,
+      namespace,
       collection: name,
-      version: version,
+      version,
     })
       .then((result) => {
         waitForTask(result.data.task_id)
@@ -847,7 +846,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             alerts: [
               ...this.state.alerts,
               {
-                title: title,
+                title,
                 variant: 'success',
               },
             ],

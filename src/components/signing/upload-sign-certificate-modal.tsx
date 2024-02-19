@@ -5,7 +5,7 @@ import {
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { FileUpload } from 'src/components';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const UploadSingCertificateModal: React.FC<Props> = ({
+export const UploadSingCertificateModal: FunctionComponent<Props> = ({
   isOpen,
   onSubmit,
   onCancel,

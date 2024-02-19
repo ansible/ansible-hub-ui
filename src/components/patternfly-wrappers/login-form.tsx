@@ -16,10 +16,17 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React from 'react';
+import React, {
+  FormEvent,
+  FunctionComponent,
+  HTMLProps,
+  MouseEvent,
+  ReactNode,
+  useState,
+} from 'react';
 
 export interface LoginFormProps
-  extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
+  extends Omit<HTMLProps<HTMLFormElement>, 'ref'> {
   /** Flag to indicate if the first dropdown item should not gain initial focus */
   noAutoFocus?: boolean;
   /** Additional classes added to the login main body's form */
@@ -27,9 +34,9 @@ export interface LoginFormProps
   /** Flag indicating the helper text is visible * */
   showHelperText?: boolean;
   /** Content displayed in the helper text component * */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   /** Icon displayed to the left in the helper text */
-  helperTextIcon?: React.ReactNode;
+  helperTextIcon?: ReactNode;
   /** Label for the username input field */
   usernameLabel?: string;
   /** Value for the username */
@@ -37,7 +44,7 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the username */
   onChangeUsername?: (
     value: string,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
   /** Flag indicating if the username is valid */
   isValidUsername?: boolean;
@@ -48,7 +55,7 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the password */
   onChangePassword?: (
     value: string,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
   /** Flag indicating if the password is valid */
   isValidPassword?: boolean;
@@ -63,9 +70,7 @@ export interface LoginFormProps
   /** Flag indicating if the login button is disabled */
   isLoginButtonDisabled?: boolean;
   /** Function that is called when the login button is clicked */
-  onLoginButtonClick?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void;
+  onLoginButtonClick?: (event: MouseEvent) => void;
   /** Label for the remember me checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
   rememberMeLabel?: string;
   /** Flag indicating if the remember me checkbox is checked. */
@@ -73,12 +78,12 @@ export interface LoginFormProps
   /** Function that handles the onChange event for the remember me checkbox */
   onChangeRememberMe?: (
     checked: boolean,
-    event: React.FormEvent<HTMLInputElement>,
+    event: FormEvent<HTMLInputElement>,
   ) => void;
 }
 
 // replaces LoginForm for localization and to add autoComplete=off to inputs
-export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
+export const LoginForm: FunctionComponent<LoginFormProps> = ({
   noAutoFocus = false,
   className = '',
   showHelperText = false,
@@ -103,7 +108,7 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
   onChangeRememberMe = () => undefined,
   ...props
 }: LoginFormProps) => {
-  const [passwordHidden, setPasswordHidden] = React.useState(true);
+  const [passwordHidden, setPasswordHidden] = useState(true);
 
   const passwordInput = (
     <TextInput

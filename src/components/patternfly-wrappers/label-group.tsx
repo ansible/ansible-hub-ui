@@ -10,12 +10,19 @@ import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle
 import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
-import React from 'react';
+import React, {
+  Children,
+  Component,
+  HTMLProps,
+  MouseEvent,
+  ReactNode,
+  createRef,
+} from 'react';
 import { chipGroupProps } from 'src/utilities';
 
-export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
+export interface LabelGroupProps extends HTMLProps<HTMLUListElement> {
   /** Content rendered inside the label group. Should be <Label> elements. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Additional classes added to the label item */
   className?: string;
   /** Flag for having the label group default to expanded */
@@ -33,7 +40,7 @@ export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   /** Aria label for close button */
   closeBtnAriaLabel?: string;
   /** Function that is called when clicking on the label group close button */
-  onClick?: (event: React.MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
   /** Position of the tooltip which is displayed if the category name text is longer */
   tooltipPosition?:
     | TooltipPosition
@@ -60,7 +67,7 @@ export interface LabelGroupProps extends React.HTMLProps<HTMLUListElement> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editableTextAreaProps?: any;
   /** Control for adding new labels */
-  addLabelControl?: React.ReactNode;
+  addLabelControl?: ReactNode;
 }
 
 interface LabelGroupState {
@@ -69,10 +76,7 @@ interface LabelGroupState {
 }
 
 // replaces LabelGroup for localization (chipGroupProps) and to fix button without type when rendering "show more" in forms
-export class LabelGroup extends React.Component<
-  LabelGroupProps,
-  LabelGroupState
-> {
+export class LabelGroup extends Component<LabelGroupProps, LabelGroupState> {
   static displayName = 'LabelGroup';
   constructor(props: LabelGroupProps) {
     super(props);
@@ -81,7 +85,7 @@ export class LabelGroup extends React.Component<
       isTooltipVisible: false,
     };
   }
-  private headingRef = React.createRef<HTMLSpanElement>();
+  private headingRef = createRef<HTMLSpanElement>();
 
   static defaultProps: LabelGroupProps = {
     categoryName: '',
@@ -90,7 +94,7 @@ export class LabelGroup extends React.Component<
     isClosable: false,
     isCompact: false,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onClick: (_e: React.MouseEvent) => undefined as any,
+    onClick: (_e: MouseEvent) => undefined as any,
     closeBtnAriaLabel: 'Close label group',
     tooltipPosition: 'top',
     'aria-label': 'Label group category',
@@ -175,7 +179,7 @@ export class LabelGroup extends React.Component<
     const { collapsedText, expandedText } = chipGroupProps();
 
     const { isOpen } = this.state;
-    const renderedChildren = React.Children.toArray(children);
+    const renderedChildren = Children.toArray(children);
     const numChildren = renderedChildren.length;
     const collapsedTextResult = fillTemplate(collapsedText as string, {
       remaining: numChildren - numLabels,
@@ -187,7 +191,7 @@ export class LabelGroup extends React.Component<
         : renderedChildren;
 
       const content = (
-        <React.Fragment>
+        <>
           {categoryName && this.renderLabel(id)}
           <ul
             className={css(styles.labelGroupList)}
@@ -233,7 +237,7 @@ export class LabelGroup extends React.Component<
               </li>
             )}
           </ul>
-        </React.Fragment>
+        </>
       );
 
       const close = (

@@ -7,7 +7,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Component } from 'react';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -22,7 +22,7 @@ interface IState {
   name: string;
 }
 
-export class GroupModal extends React.Component<IProps, IState> {
+export class GroupModal extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         onClose={() => {
           onCancel();
         }}
-        isOpen={true}
+        isOpen
         title={t`Create a group`}
         actions={[
           <div key='create' data-cy='create-group-button'>
@@ -69,7 +69,7 @@ export class GroupModal extends React.Component<IProps, IState> {
           }}
         >
           <FormGroup
-            isRequired={true}
+            isRequired
             key='name'
             fieldId='name'
             label={t`Name`}

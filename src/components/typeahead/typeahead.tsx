@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import React from 'react';
+import React, { CSSProperties, Component, ReactElement } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -19,15 +19,15 @@ interface IProps {
     name: string;
   };
   menuAppendTo?: 'parent' | 'inline';
-  toggleIcon?: React.ReactElement;
-  style?: React.CSSProperties;
+  toggleIcon?: ReactElement;
+  style?: CSSProperties;
 }
 
 interface IState {
   isOpen: boolean;
 }
 
-export class APISearchTypeAhead extends React.Component<IProps, IState> {
+export class APISearchTypeAhead extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 
@@ -85,11 +85,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
 
     if (options.length === 0) {
       options.push(
-        <SelectOption
-          key={'not_found'}
-          value={t`Not found`}
-          isDisabled={true}
-        />,
+        <SelectOption key={'not_found'} value={t`Not found`} isDisabled />,
       );
     }
 
