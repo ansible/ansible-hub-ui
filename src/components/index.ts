@@ -61,9 +61,9 @@ export { NamespaceModal } from './namespace-modal/namespace-modal';
 export { CollectionNumericLabel } from './numeric-label/numeric-label';
 export {
   ListPage,
-  type LocalizedSortHeaders,
-  type Query,
-  type RenderTableRow,
+  LocalizedSortHeaders,
+  Query,
+  RenderTableRow,
 } from './page/list-page';
 export { Page } from './page/page';
 export { PageWithTabs } from './page/page-with-tabs';

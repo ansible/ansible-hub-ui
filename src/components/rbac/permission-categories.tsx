@@ -26,7 +26,11 @@ function knownPermissionsAndCategories(
   Object.entries(model_permissions)
     .filter(([k, _]) => allPermissions.includes(k))
     .forEach(([permission, { ui_category }]) => {
-      categories[ui_category] ||= { label: ui_category, allPermissions: [] };
+      // FIXME: categories[ui_category] ||= { label: ui_category, allPermissions: [] };
+      categories[ui_category] = categories[ui_category] || {
+        label: ui_category,
+        allPermissions: [],
+      };
       categories[ui_category].allPermissions.push(permission);
     });
 

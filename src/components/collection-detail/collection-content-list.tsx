@@ -39,7 +39,8 @@ export const CollectionContentList = ({
   const keywords = params.keywords || '';
 
   for (const c of contents) {
-    summary[c.content_type] ||= 0;
+    // FIXME: summary[c.content_type] ||= 0;
+    summary[c.content_type] = summary[c.content_type] || 0;
 
     const keywordMatch = c.name.match(keywords);
     const typeMatch = showing === 'all' ? true : c.content_type === showing;
