@@ -11,6 +11,7 @@ import { css } from '@patternfly/react-styles';
 import labelStyles from '@patternfly/react-styles/css/components/Label/label';
 import styles from '@patternfly/react-styles/css/components/LabelGroup/label-group';
 import React, {
+  Children,
   Component,
   HTMLProps,
   MouseEvent,
@@ -178,7 +179,7 @@ export class LabelGroup extends Component<LabelGroupProps, LabelGroupState> {
     const { collapsedText, expandedText } = chipGroupProps();
 
     const { isOpen } = this.state;
-    const renderedChildren = React.Children.toArray(children);
+    const renderedChildren = Children.toArray(children);
     const numChildren = renderedChildren.length;
     const collapsedTextResult = fillTemplate(collapsedText as string, {
       remaining: numChildren - numLabels,
