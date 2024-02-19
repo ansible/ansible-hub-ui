@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -19,7 +19,7 @@ interface IProps {
     name: string;
   };
   menuAppendTo?: 'parent' | 'inline';
-  toggleIcon?: React.ReactElement;
+  toggleIcon?: ReactElement;
   style?: React.CSSProperties;
 }
 

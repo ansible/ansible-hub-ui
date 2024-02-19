@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React, { Component, Fragment, ReactNode } from 'react';
+import React, { Component, Fragment, ReactElement, ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -24,13 +24,10 @@ interface IProps {
     pluginName: string,
     pluginType: string,
     text: ReactNode | undefined,
-  ) => React.ReactElement;
-  renderDocLink: (name: string, href: string) => React.ReactElement;
-  renderTableOfContentsLink: (
-    title: string,
-    section: string,
-  ) => React.ReactElement;
-  renderWarning: (text: string) => React.ReactElement;
+  ) => ReactElement;
+  renderDocLink: (name: string, href: string) => ReactElement;
+  renderTableOfContentsLink: (title: string, section: string) => ReactElement;
+  renderWarning: (text: string) => ReactElement;
 }
 
 function Choice({ children }: { children: ReactNode }) {

@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { ContainerRepositoryType } from 'src/api';
 import {
   BaseHeader,
@@ -16,7 +16,7 @@ interface IProps {
   tab: string;
   updateState: (any) => void;
   container: ContainerRepositoryType;
-  pageControls?: React.ReactElement;
+  pageControls?: ReactElement;
   groupId?: number;
   displaySignatures: boolean;
 }
