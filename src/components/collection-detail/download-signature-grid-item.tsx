@@ -9,7 +9,7 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CollectionAPI, CollectionVersionSearch } from 'src/api';
 import { LoadingPageSpinner } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
@@ -35,7 +35,7 @@ export const DownloadSignatureGridItem = ({
     return null;
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (show && isLoading) {
       const { namespace, name, version } = collectionVersion;
 
