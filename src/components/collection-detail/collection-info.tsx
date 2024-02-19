@@ -8,7 +8,7 @@ import {
   SplitItem,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,
@@ -43,7 +43,7 @@ export const CollectionInfo = ({
   params,
   addAlert,
 }: IProps) => {
-  const downloadLinkRef = React.useRef<HTMLAnchorElement>(null);
+  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
   const { user, settings } = useHubContext();
 
   let installCommand = `ansible-galaxy collection install ${collection_version.namespace}.${collection_version.name}`;
