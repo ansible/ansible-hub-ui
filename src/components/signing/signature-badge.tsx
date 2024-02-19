@@ -2,13 +2,13 @@ import { t } from '@lingui/macro';
 import { Label, LabelProps } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { FC } from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface Props extends LabelProps {
   signState: 'signed' | 'unsigned';
 }
 
-export const SignatureBadge: FC<Props> = ({
+export const SignatureBadge: FunctionComponent<Props> = ({
   signState = 'unsigned',
   isCompact = false,
   ...props

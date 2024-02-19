@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { GroupAPI, GroupType } from 'src/api';
 import {
   AppliedFilters,
@@ -20,7 +20,7 @@ interface IProps {
   updateGroup?: (group) => void;
 }
 
-export const SelectGroup: React.FC<IProps> = ({
+export const SelectGroup: FunctionComponent<IProps> = ({
   assignedGroups,
   selectedGroup,
   updateGroup,

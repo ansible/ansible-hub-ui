@@ -16,7 +16,7 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React, { ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 
 export interface LoginFormProps
   extends Omit<React.HTMLProps<HTMLFormElement>, 'ref'> {
@@ -78,7 +78,7 @@ export interface LoginFormProps
 }
 
 // replaces LoginForm for localization and to add autoComplete=off to inputs
-export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
+export const LoginForm: FunctionComponent<LoginFormProps> = ({
   noAutoFocus = false,
   className = '',
   showHelperText = false,

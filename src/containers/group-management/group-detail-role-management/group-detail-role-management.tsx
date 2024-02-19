@@ -7,7 +7,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import {
   GroupObjectPermissionType,
   GroupRoleAPI,
@@ -50,7 +50,7 @@ interface Props {
   nonQueryParams?: string[];
 }
 
-const GroupDetailRoleManagement: React.FC<Props> = ({
+const GroupDetailRoleManagement: FunctionComponent<Props> = ({
   params,
   updateParams,
   context,
