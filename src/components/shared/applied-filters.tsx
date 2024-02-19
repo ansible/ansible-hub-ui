@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Chip, ChipGroup } from '@patternfly/react-core';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { ParamHelper, ParamType, chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -19,7 +19,7 @@ interface IProps {
    */
   niceNames?: object;
   niceValues?: object;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   className?: string;
 }
 
