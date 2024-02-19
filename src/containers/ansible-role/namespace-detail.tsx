@@ -196,11 +196,7 @@ class NamespaceRoles extends React.Component<
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem
-                        key={lrole.id}
-                        role={lrole}
-                        show_thumbnail={false}
-                      />
+                      <LegacyRoleListItem key={lrole.id} role={lrole} />
                     ))}
                 </DataList>
 

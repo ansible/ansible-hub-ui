@@ -174,7 +174,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
         return (
           <APISearchTypeAhead
-            multiple={false}
             loadResults={(name) => {
               this.props.onChange(name);
             }}

@@ -24,11 +24,7 @@ export const RolePermissions = ({ name }: IProps) => {
   return (
     <>
       <p>{translateLockedRole(role.name, role.description)}</p>
-      <PermissionCategories
-        permissions={role.permissions}
-        showCustom
-        showEmpty={false}
-      />
+      <PermissionCategories permissions={role.permissions} showCustom />
     </>
   );
 };

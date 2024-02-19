@@ -128,7 +128,6 @@ export class RoleForm extends React.Component<IProps, IState> {
             <PermissionCategories
               permissions={permissions}
               setSelected={(permissions) => this.setState({ permissions })}
-              showCustom={false}
               showEmpty
             />
           </div>

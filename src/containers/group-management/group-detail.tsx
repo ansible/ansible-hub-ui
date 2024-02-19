@@ -338,7 +338,6 @@ class GroupDetail extends React.Component<RouteProps, IState> {
               options: [...this.state.options, ...this.state.selected],
             })
           }
-          isDisabled={false}
           style={{ overflowY: 'auto', maxHeight: '350px' }}
         />
       </Modal>

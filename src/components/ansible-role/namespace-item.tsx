@@ -38,7 +38,7 @@ export function LegacyNamespaceListItem({
   });
 
   const cells = [
-    <DataListCell isFilled={false} alignRight={false} key='ns'>
+    <DataListCell isFilled={false} key='ns'>
       <Logo
         alt='logo'
         fallbackToDefault

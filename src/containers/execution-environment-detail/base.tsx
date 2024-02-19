@@ -260,7 +260,6 @@ export function withContainerRepo(WrappedComponent) {
                 onCancel={() => this.setState({ editing: false })}
                 distributionPulpId={this.state.repo.pulp.distribution.id}
                 isRemote={!!this.state.repo.pulp.repository.remote}
-                isNew={false}
                 upstreamName={
                   this.state.repo.pulp.repository.remote?.upstream_name
                 }

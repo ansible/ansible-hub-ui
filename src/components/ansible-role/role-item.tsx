@@ -46,7 +46,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
 
   if (show_thumbnail) {
     cells.push(
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
+      <DataListCell isFilled={false} key='ns'>
         <Logo
           alt={t`${namespace.name} logo`}
           image={namespace.avatar_url}

@@ -54,7 +54,6 @@ export const StatefulDropdown = ({
       isPlain={isPlain}
       dropdownItems={items}
       position={position || DropdownPosition.right}
-      autoFocus={false}
       aria-label={ariaLabel}
       data-cy={dataCy}
     />

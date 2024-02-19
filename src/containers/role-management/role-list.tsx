@@ -285,7 +285,6 @@ export class RoleList extends React.Component<RouteProps, IState> {
                   {' '}
                   {roleCount ? (
                     <RoleListTable
-                      isStickyHeader={false}
                       params={this.state.params}
                       updateParams={(p) => {
                         this.updateParams(p, () => this.queryRoles());
@@ -299,7 +298,6 @@ export class RoleList extends React.Component<RouteProps, IState> {
                             <PermissionCategories
                               permissions={role.permissions}
                               showCustom
-                              showEmpty={false}
                             />
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}

@@ -61,7 +61,7 @@ export const CollectionListItem = ({
 
   if (showNamespace) {
     cells.push(
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
+      <DataListCell isFilled={false} key='ns'>
         <Logo
           alt={t`${nsTitle} logo`}
           fallbackToDefault
