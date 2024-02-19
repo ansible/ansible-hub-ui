@@ -30,7 +30,6 @@ import {
   SelectRoles,
   WizardModal,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   ParamType,
@@ -42,21 +41,21 @@ import {
 import './group-detail-role-management.scss';
 
 interface Props {
+  addAlert: (title, variant, description?) => void;
+  canEdit: boolean;
+  group: GroupObjectPermissionType;
+  nonQueryParams?: string[];
   params: ParamType;
   updateParams: (params) => void;
-  context: IAppContextType;
-  group: GroupObjectPermissionType;
-  addAlert: (title, variant, description?) => void;
-  nonQueryParams?: string[];
 }
 
 const GroupDetailRoleManagement: FunctionComponent<Props> = ({
+  addAlert,
+  canEdit,
+  group,
+  nonQueryParams,
   params,
   updateParams,
-  context,
-  group,
-  addAlert,
-  nonQueryParams,
 }) => {
   const [showAddRolesModal, setShowAddRolesModal] = useState<boolean>(false);
   const [selectedDeleteRole, setSelectedDeleteRole] =
@@ -150,9 +149,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
     </DeleteModal>
   );
 
-  const { hasPermission } = context;
-
-  const addRoles = hasPermission('galaxy.change_group') && (
+  const addRoles = canEdit && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
@@ -355,7 +352,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
                     <td>{translateLockedRole(role.role, role.description)}</td>
                     <ListItemActions
                       kebabItems={[
-                        hasPermission('galaxy.change_group') && (
+                        canEdit && (
                           <DropdownItem
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}

@@ -221,16 +221,19 @@ class GroupDetail extends Component<RouteProps, IState> {
 
   private renderGroupDetail() {
     const { params, group } = this.state;
+    const { hasPermission } = this.context;
+    const canEdit = hasPermission('galaxy.change_group');
+
     return (
       <GroupDetailRoleManagement
-        params={params}
-        updateParams={(p) => this.updateParams(p)}
-        context={this.context}
-        group={group}
         addAlert={(title, variant, description) =>
           this.addAlert(title, variant, description)
         }
+        canEdit={canEdit}
+        group={group}
         nonQueryParams={this.userQueryStringParams}
+        params={params}
+        updateParams={(p) => this.updateParams(p)}
       />
     );
   }
