@@ -156,7 +156,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
     );
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <PublishToControllerModal
           digest={publishToController?.digest}
@@ -269,7 +269,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

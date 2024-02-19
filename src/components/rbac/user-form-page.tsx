@@ -44,7 +44,7 @@ export class UserFormPage extends React.Component<IProps> {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           pageControls={extraControls}
@@ -64,7 +64,7 @@ export class UserFormPage extends React.Component<IProps> {
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 }

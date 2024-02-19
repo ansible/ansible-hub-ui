@@ -252,7 +252,7 @@ export const ListPage = function <T>({
         });
 
       return (
-        <React.Fragment>
+        <>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
@@ -351,7 +351,7 @@ export const ListPage = function <T>({
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

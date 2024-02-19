@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React, { ReactNode } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import {
   PluginContentType,
   PluginDoc,
@@ -125,7 +125,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     // be malformed since it isn't validated. When that hapens, show an
     // error instead of crashing the whole app
     return (
-      <React.Fragment>
+      <>
         {this.props.renderWarning(
           'Documentation Syntax Error: cannot parse plugin documention.',
         )}
@@ -147,7 +147,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
           <pre className='plugin-raw'>{JSON.stringify(plugin, null, 2)}</pre>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -388,7 +388,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     return (
       <span>
         {fragments.map((x, i) => (
-          <React.Fragment key={i}>{x}</React.Fragment>
+          <Fragment key={i}>{x}</Fragment>
         ))}
       </span>
     );
@@ -414,7 +414,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     const deprecated = doc.deprecated || {};
 
     return (
-      <React.Fragment>
+      <>
         <h2>DEPRECATED</h2>
         {deprecated.removed_in ? (
           <div>
@@ -433,7 +433,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             ? doc.deprecated.alternative
             : 'No alternatives specified.'}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -478,14 +478,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
   private renderSynopsis(doc: PluginDoc) {
     return (
-      <React.Fragment>
+      <>
         <h2 id='synopsis'>Synopsis</h2>
         <ul>
           {doc.description.map((d, i) => (
             <li key={i}>{this.applyDocFormatters(d)}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -508,7 +508,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
 
     return (
-      <React.Fragment>
+      <>
         <h2 id='parameters'>Parameters</h2>
         <table className='options-table'>
           <tbody>
@@ -529,7 +529,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             {paramEntries}
           </tbody>
         </table>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -622,7 +622,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
   private renderPluginConfiguration(option) {
     return (
-      <React.Fragment>
+      <>
         {option['ini'] ? (
           <div className='plugin-config'>
             ini entries:
@@ -650,7 +650,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             ))}
           </div>
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -743,14 +743,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <h2 id='notes'>Notes</h2>
         <ul>
           {doc.notes.map((note, i) => (
             <li key={i}>{this.applyDocFormatters(note)}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -760,14 +760,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <h2>Requirements</h2>
         <ul>
           {doc.requirements.map((req, i) => (
             <li key={i}>{req}</li>
           ))}
         </ul>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -776,10 +776,10 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <h2 id='examples'>Examples</h2>
         <pre>{example}</pre>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -788,7 +788,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <h2 id='return-values'>Return Values</h2>
         <table className='options-table'>
           <tbody>
@@ -800,7 +800,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             {this.renderReturnValueEntries(returnV, 0, maxDepth, '')}
           </tbody>
         </table>
-      </React.Fragment>
+      </>
     );
   }
 

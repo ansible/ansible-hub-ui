@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { Divider, Flex, FlexItem, Label } from '@patternfly/react-core';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
@@ -47,7 +47,7 @@ export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
       </p>
       <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
         {selectedRoles.map((role) => (
-          <React.Fragment key={role.name}>
+          <Fragment key={role.name}>
             <FlexItem>
               <strong>{role.name}</strong>{' '}
               {role.description &&
@@ -73,7 +73,7 @@ export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
             <FlexItem>
               <Divider />
             </FlexItem>
-          </React.Fragment>
+          </Fragment>
         ))}
       </Flex>
     </div>

@@ -14,7 +14,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -228,10 +228,10 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                     </CardTitle>
                     <CardBody>
                       {environment.map((line, index) => (
-                        <React.Fragment key={index}>
+                        <Fragment key={index}>
                           <code>{line}</code>
                           <br />
-                        </React.Fragment>
+                        </Fragment>
                       ))}
                     </CardBody>
                   </Card>

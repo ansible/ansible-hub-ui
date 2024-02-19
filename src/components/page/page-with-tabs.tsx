@@ -179,7 +179,7 @@ export const PageWithTabs = function <
       }
 
       return (
-        <React.Fragment>
+        <>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader
             title={name}
@@ -243,7 +243,7 @@ export const PageWithTabs = function <
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

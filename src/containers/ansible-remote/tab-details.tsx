@@ -27,7 +27,7 @@ const PFCodeBlock = ({ code }: { code: string }) => {
   };
 
   const actions = (
-    <React.Fragment>
+    <>
       <CodeBlockAction>
         <ClipboardCopyButton
           id='basic-copy-button'
@@ -42,7 +42,7 @@ const PFCodeBlock = ({ code }: { code: string }) => {
           {copied ? t`Successfully copied to clipboard` : t`Copy to clipboard`}
         </ClipboardCopyButton>
       </CodeBlockAction>
-    </React.Fragment>
+    </>
   );
 
   return (

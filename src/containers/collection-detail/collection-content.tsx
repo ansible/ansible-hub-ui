@@ -73,7 +73,7 @@ class CollectionContent extends React.Component<
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           activeTab='contents'
           actuallyCollection={actuallyCollection}
@@ -98,7 +98,7 @@ class CollectionContent extends React.Component<
             />
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

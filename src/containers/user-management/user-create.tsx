@@ -58,13 +58,13 @@ class UserCreate extends React.Component<RouteProps, IState> {
     const title = t`Create new user`;
 
     return notAuthorised ? (
-      <React.Fragment>
+      <>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={title}
         />
         <EmptyStateUnauthorized />
-      </React.Fragment>
+      </>
     ) : (
       <UserFormPage
         user={user}

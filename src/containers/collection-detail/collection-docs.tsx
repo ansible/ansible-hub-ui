@@ -126,7 +126,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <CollectionHeader
           activeTab='documentation'
           actuallyCollection={actuallyCollection}
@@ -204,7 +204,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
             </div>
           </section>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

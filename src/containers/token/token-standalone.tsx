@@ -49,7 +49,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
       !this.context.user.auth_provider.includes('github');
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`API token`} />
         <Main>
@@ -119,7 +119,7 @@ class TokenStandalone extends React.Component<RouteProps, IState> {
             </Card>
           )}
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

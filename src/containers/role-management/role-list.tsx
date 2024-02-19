@@ -174,7 +174,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {showDeleteModal && roleToEdit && (
           <DeleteModal
@@ -350,7 +350,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
             )}
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

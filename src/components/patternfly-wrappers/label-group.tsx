@@ -187,7 +187,7 @@ export class LabelGroup extends React.Component<
         : renderedChildren;
 
       const content = (
-        <React.Fragment>
+        <>
           {categoryName && this.renderLabel(id)}
           <ul
             className={css(styles.labelGroupList)}
@@ -233,7 +233,7 @@ export class LabelGroup extends React.Component<
               </li>
             )}
           </ul>
-        </React.Fragment>
+        </>
       );
 
       const close = (

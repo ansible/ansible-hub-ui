@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
 import {
@@ -116,7 +116,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
     return loading ? (
       <LoadingPageSpinner />
     ) : (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
@@ -219,7 +219,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                 childTask.pulp_href,
                               );
                               return (
-                                <React.Fragment key={childTaskId}>
+                                <Fragment key={childTaskId}>
                                   <Link
                                     to={formatPath(Paths.taskDetail, {
                                       task: childTaskId,
@@ -228,7 +228,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                     {translateTask(childTask.name)}
                                   </Link>
                                   <br />
-                                </React.Fragment>
+                                </Fragment>
                               );
                             })
                           : t`No child task`}
@@ -247,7 +247,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     <DescriptionList isHorizontal>
                       {resources.map((resource, index) => {
                         return (
-                          <React.Fragment key={resource.type + index}>
+                          <Fragment key={resource.type + index}>
                             <hr />
                             <DescriptionListGroup>
                               <DescriptionListTerm>{t`Type`}</DescriptionListTerm>
@@ -271,7 +271,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                 </DescriptionListDescription>
                               </DescriptionListGroup>
                             )}
-                          </React.Fragment>
+                          </Fragment>
                         );
                       })}
                     </DescriptionList>
@@ -298,7 +298,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                           .reverse()
                           .map((report, index) => {
                             return (
-                              <React.Fragment key={index}>
+                              <Fragment key={index}>
                                 <hr />
                                 {Object.keys(report).map((key, index) => {
                                   return (
@@ -319,7 +319,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                                     )
                                   );
                                 })}{' '}
-                              </React.Fragment>
+                              </Fragment>
                             );
                           })}
                       </DescriptionList>
@@ -338,21 +338,21 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                       {t`Error message`}
                     </Title>
                     <br />
-                    <React.Fragment>
+                    <>
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
                       <CodeBlock className={'hub-code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
-                    </React.Fragment>
+                    </>
                   </section>
                 )}
               </FlexItem>
             </Flex>
           </Flex>
         </Main>
-      </React.Fragment>
+      </>
     );
   }
 

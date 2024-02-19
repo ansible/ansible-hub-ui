@@ -176,7 +176,7 @@ export function withContainerRepo(WrappedComponent) {
       ) as { group?: number };
 
       return (
-        <React.Fragment>
+        <>
           <AlertList
             alerts={this.state.alerts}
             closeAlert={(i) => this.closeAlert(i)}
@@ -283,7 +283,7 @@ export function withContainerRepo(WrappedComponent) {
               {...this.props}
             />
           </Main>
-        </React.Fragment>
+        </>
       );
     }
 

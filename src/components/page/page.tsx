@@ -141,7 +141,7 @@ export const Page = function <
       const name = item?.name || transformParams(routeParams)?.name || null;
 
       return (
-        <React.Fragment>
+        <>
           <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <BaseHeader
             title={title({ name })}
@@ -183,7 +183,7 @@ export const Page = function <
               )}
             </Main>
           )}
-        </React.Fragment>
+        </>
       );
     }
 

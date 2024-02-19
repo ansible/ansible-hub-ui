@@ -206,7 +206,7 @@ const CollectionDistributions = (props: RouteProps) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <CollectionHeader
         activeTab='distributions'
         actuallyCollection={actuallyCollection}
@@ -289,7 +289,7 @@ const CollectionDistributions = (props: RouteProps) => {
           />
         </section>
       </Main>
-    </React.Fragment>
+    </>
   );
 };
 

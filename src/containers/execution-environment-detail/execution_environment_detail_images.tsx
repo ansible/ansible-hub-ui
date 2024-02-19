@@ -12,7 +12,7 @@ import {
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { sum } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
@@ -413,7 +413,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <React.Fragment key={index}>
+      <Fragment key={index}>
         <tr>
           <td className='pf-c-table__toggle'>
             {isManifestList ? (
@@ -469,7 +469,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
           </tr>
         )}
-      </React.Fragment>
+      </Fragment>
     );
   }
 

@@ -118,7 +118,7 @@ class UserList extends React.Component<RouteProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <DeleteUserModal
           isOpen={showDeleteModal}
@@ -222,7 +222,7 @@ class UserList extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 

@@ -63,7 +63,7 @@ class RoleCreate extends React.Component<RouteProps, IState> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <RoleHeader title={t`Create a new role`} breadcrumbs={breadcrumbs} />
         {notAuthorised ? (
           <EmptyStateUnauthorized />
@@ -109,7 +109,7 @@ class RoleCreate extends React.Component<RouteProps, IState> {
             </section>
           </Main>
         )}
-      </React.Fragment>
+      </>
     );
   }
 
