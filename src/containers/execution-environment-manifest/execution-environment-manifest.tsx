@@ -28,7 +28,7 @@ import {
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
-import { withContainerParamFix } from '../execution-environment-detail/base';
+import { containerName } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
 interface IState {
@@ -48,7 +48,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
     super(props);
 
     this.state = {
-      container: { name: this.props.routeParams.container },
+      container: { name: containerName(this.props.routeParams) },
       digest: this.props.routeParams.digest, // digest or tag until loading done
       environment: [],
       error: false,
@@ -279,4 +279,4 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(withContainerParamFix(ExecutionEnvironmentManifest));
+export default withRouter(ExecutionEnvironmentManifest);

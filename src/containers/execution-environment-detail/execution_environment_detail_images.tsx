@@ -44,11 +44,7 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, containerName, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 
@@ -256,7 +252,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                     onChange={(text) => this.setState({ inputText: text })}
                     updateParams={(p) =>
                       this.updateParams(p, () =>
-                        this.queryImages(this.props.routeParams.container),
+                        this.queryImages(containerName(this.props.routeParams)),
                       )
                     }
                     params={params}
@@ -279,7 +275,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             params={params}
             updateParams={(p) =>
               this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
+                this.queryImages(containerName(this.props.routeParams)),
               )
             }
             count={this.state.numberOfImages}
@@ -290,7 +286,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <AppliedFilters
             updateParams={(p) => {
               this.updateParams(p, () =>
-                this.queryImages(this.props.routeParams.container),
+                this.queryImages(containerName(this.props.routeParams)),
               );
               this.setState({ inputText: '' });
             }}
@@ -310,7 +306,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               params={params}
               updateParams={(p) =>
                 this.updateParams(p, () =>
-                  this.queryImages(this.props.routeParams.container),
+                  this.queryImages(containerName(this.props.routeParams)),
                 )
               }
             />
@@ -331,7 +327,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           params={params}
           updateParams={(p) =>
             this.updateParams(p, () =>
-              this.queryImages(this.props.routeParams.container),
+              this.queryImages(containerName(this.props.routeParams)),
             )
           }
           count={this.state.numberOfImages}
@@ -347,7 +343,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     cols: number,
   ) {
     const { hasPermission } = this.context;
-    const container = this.props.routeParams.container;
+    const container = containerName(this.props.routeParams);
     const manifestLink = (digestOrTag) =>
       formatEEPath(Paths.executionEnvironmentManifest, {
         container,
@@ -573,7 +569,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     const { digest } = selectedImage;
     this.setState({ isDeletionPending: true }, () =>
       ExecutionEnvironmentAPI.deleteImage(
-        this.props.routeParams.container,
+        containerName(this.props.routeParams),
         selectedImage.digest,
       )
         .then((result) => {
@@ -595,7 +591,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                 </Trans>
               ),
             });
-            this.queryImages(this.props.routeParams.container);
+            this.queryImages(containerName(this.props.routeParams));
           });
         })
         .catch((err) => {
@@ -620,7 +616,5 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 }
 
-export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailImages)),
-);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));
 ExecutionEnvironmentDetailImages.contextType = AppContext;

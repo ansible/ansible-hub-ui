@@ -49,7 +49,7 @@ export function formatPath(
 // handle long/short EE routes:
 // (path, container: 'namespaced/name') -> (path, { namespace: 'namespaced', container: 'name' })
 // (path, container: 'simple') -> (path, { container: 'simple' })
-// see also withContainerParamFix
+// see also containerName
 export function formatEEPath(path, data, params?) {
   if (data.container?.includes('/')) {
     const [namespace, container] = data.container.split('/');

@@ -12,11 +12,7 @@ import {
 } from 'src/components';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -236,7 +232,5 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 }
 
 export default withRouter(
-  withContainerParamFix(
-    withContainerRepo(ExecutionEnvironmentDetailActivities),
-  ),
+  withContainerRepo(ExecutionEnvironmentDetailActivities),
 );

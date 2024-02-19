@@ -12,11 +12,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, assignRoles, errorMessage } from 'src/utilities';
-import {
-  IDetailSharedProps,
-  withContainerParamFix,
-  withContainerRepo,
-} from './base';
+import { IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface UserType {
@@ -351,6 +347,4 @@ class ExecutionEnvironmentDetailAccess extends React.Component<
 
 ExecutionEnvironmentDetailAccess.contextType = AppContext;
 
-export default withRouter(
-  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailAccess)),
-);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetailAccess));

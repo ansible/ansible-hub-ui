@@ -129,6 +129,7 @@ module.exports = (inputConfigs) => {
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
+  // community is also considered standalone
   const isStandalone = !customConfigs.IS_INSIGHTS;
 
   const { config: webpackConfig, plugins } = config({
