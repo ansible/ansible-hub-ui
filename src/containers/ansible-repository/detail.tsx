@@ -22,13 +22,6 @@ import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';
 import { RepositoryVersionsTab } from './tab-repository-versions';
 
-const tabs = [
-  { id: 'details', name: msg`Details` },
-  { id: 'access', name: msg`Access` },
-  { id: 'collection-versions', name: msg`Collection versions` },
-  { id: 'repository-versions', name: msg`Versions` },
-];
-
 const AnsibleRepositoryDetail = PageWithTabs<
   AnsibleRepositoryType & { remote?: AnsibleRemoteType }
 >({
@@ -36,25 +29,21 @@ const AnsibleRepositoryDetail = PageWithTabs<
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },
       { url: formatPath(Paths.ansibleRepositoryDetail, { name }), name },
-      (tab.id === 'access' && (group || user)) ||
-      (tab.id === 'repository-versions' && repositoryVersion)
+      (tab === 'access' && (group || user)) ||
+      (tab === 'repository-versions' && repositoryVersion)
         ? {
-            url: formatPath(
-              Paths.ansibleRepositoryDetail,
-              { name },
-              { tab: tab.id },
-            ),
-            name: tab.name,
+            url: formatPath(Paths.ansibleRepositoryDetail, { name }, { tab }),
+            name: t`Versions`,
           }
         : null,
-      tab.id === 'access' && group ? { name: t`Group ${group}` } : null,
-      tab.id === 'access' && user ? { name: t`User ${user}` } : null,
-      tab.id === 'repository-versions' && repositoryVersion
+      tab === 'access' && group ? { name: t`Group ${group}` } : null,
+      tab === 'access' && user ? { name: t`User ${user}` } : null,
+      tab === 'repository-versions' && repositoryVersion
         ? { name: t`Version ${repositoryVersion}` }
         : null,
-      (tab.id === 'access' && !user && !group) ||
-      (tab.id === 'repository-versions' && !repositoryVersion)
-        ? { name: tab.name }
+      (tab === 'access' && !user && !group) ||
+      (tab === 'repository-versions' && !repositoryVersion)
+        ? { name: t`Versions` }
         : null,
     ].filter(Boolean),
   condition: canViewAnsibleRepositories,
@@ -124,13 +113,44 @@ const AnsibleRepositoryDetail = PageWithTabs<
         <RepositoryVersionsTab item={item} actionContext={actionContext} />
       ),
     })[tab],
-  tabs,
-  tabUpdateParams: (p) => {
-    delete p.repositoryVersion;
-    delete p.group;
-    delete p.user;
-    return p;
-  },
+  tabs: (tab, name) => [
+    {
+      active: tab === 'details',
+      title: t`Details`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'details' },
+      ),
+    },
+    {
+      active: tab === 'access',
+      title: t`Access`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'access' },
+      ),
+    },
+    {
+      active: tab === 'collection-versions',
+      title: t`Collection versions`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'collection-versions' },
+      ),
+    },
+    {
+      active: tab === 'repository-versions',
+      title: t`Versions`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'repository-versions' },
+      ),
+    },
+  ],
 });
 
 export default AnsibleRepositoryDetail;

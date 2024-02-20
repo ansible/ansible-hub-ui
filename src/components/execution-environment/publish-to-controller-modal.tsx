@@ -23,8 +23,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   ExternalLink,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
   ShaLabel,
   closeAlert,
 } from 'src/components';
@@ -344,7 +344,7 @@ export const PublishToControllerModal = (props: IProps) => {
             </FlexItem>
             <FlexItem grow={{ default: 'grow' }} />
             <FlexItem>
-              <Pagination
+              <HubPagination
                 params={controllerParams}
                 updateParams={(controllerParams) => {
                   setControllerParams(controllerParams);
@@ -370,7 +370,7 @@ export const PublishToControllerModal = (props: IProps) => {
           {renderControllers()}
           <Spacer />
 
-          <Pagination
+          <HubPagination
             params={controllerParams}
             updateParams={(controllerParams) => {
               setControllerParams(controllerParams);

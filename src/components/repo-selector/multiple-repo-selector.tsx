@@ -19,8 +19,8 @@ import {
   AppliedFilters,
   CheckboxRow,
   CompoundFilter,
+  HubPagination,
   LabelGroup,
-  Pagination,
   RadioRow,
   SortTable,
 } from 'src/components';
@@ -309,7 +309,7 @@ export const MultipleRepoSelector = (props: IProps) => {
           </ToolbarGroup>
         </Toolbar>
 
-        <Pagination
+        <HubPagination
           params={params}
           updateParams={(p) => setParams(p)}
           count={itemsCount}
@@ -333,7 +333,7 @@ export const MultipleRepoSelector = (props: IProps) => {
       {loading ? <Spinner size='lg' /> : renderTable()}
 
       <div className='footer'>
-        <Pagination
+        <HubPagination
           params={params}
           updateParams={(p) => setParams(p)}
           count={itemsCount}

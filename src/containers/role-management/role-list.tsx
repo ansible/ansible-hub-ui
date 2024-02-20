@@ -22,10 +22,10 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   ExpandableRow,
+  HubPagination,
   ListItemActions,
   LoadingPageSpinner,
   Main,
-  Pagination,
   PermissionCategories,
   RoleListTable,
   Tooltip,
@@ -253,7 +253,7 @@ export class RoleList extends Component<RouteProps, IState> {
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryRoles())
@@ -336,7 +336,7 @@ export class RoleList extends Component<RouteProps, IState> {
                   ) : (
                     <EmptyStateFilter />
                   )}
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryRoles())

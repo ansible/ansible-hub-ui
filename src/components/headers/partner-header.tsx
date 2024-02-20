@@ -6,18 +6,16 @@ import {
   BreadcrumbType,
   Breadcrumbs,
   ExternalLink,
+  LinkTabs,
+  LinkTabsProps,
   Logo,
-  Tabs,
-  TabsType,
 } from 'src/components';
 import { namespaceTitle } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
-  tabs: TabsType[];
+  tabs: LinkTabsProps['tabs'];
   breadcrumbs: BreadcrumbType[];
-  params: { tab?: string };
-  updateParams: (p) => void;
 
   pageControls?: ReactNode;
   filters?: ReactNode;
@@ -25,15 +23,7 @@ interface IProps {
 
 export class PartnerHeader extends Component<IProps> {
   render() {
-    const {
-      breadcrumbs,
-      filters,
-      namespace,
-      pageControls,
-      params,
-      tabs,
-      updateParams,
-    } = this.props;
+    const { breadcrumbs, filters, namespace, pageControls, tabs } = this.props;
 
     const title = namespaceTitle(namespace);
 
@@ -71,11 +61,7 @@ export class PartnerHeader extends Component<IProps> {
 
         <div className='hub-tab-link-container'>
           <div className='tabs'>
-            <Tabs
-              tabs={tabs}
-              params={params}
-              updateParams={(p) => updateParams(p)}
-            />
+            <LinkTabs tabs={tabs} />
           </div>
           {namespace.links.length > 0 ? (
             <div className='links'>

@@ -33,14 +33,6 @@ interface IState<T> {
 // unauthorised - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
-type RenderModals = ({
-  addAlert,
-  listQuery,
-  query,
-  setState,
-  state,
-}) => ReactNode;
-
 interface PageParams<T> {
   breadcrumbs: ({ name }) => { url?: string; name: string }[];
   condition: PermissionContextType;
@@ -51,7 +43,6 @@ interface PageParams<T> {
   query: ({ name }) => Promise<T>;
   title: ({ name }) => string;
   transformParams: (routeParams) => Record<string, string>;
-  renderModals?: RenderModals;
   render: (item, actionContext) => ReactNode;
 }
 
@@ -74,19 +65,15 @@ export const Page = function <
   query,
   title,
   transformParams,
-  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
-  renderModals,
   render,
 }: PageParams<T>) {
-  renderModals ||= function (actionContext) {
-    return (
-      <>
-        {headerActions?.length
-          ? headerActions.map((action) => action?.modal?.(actionContext))
-          : null}
-      </>
-    );
-  };
+  const renderModals = (actionContext) => (
+    <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
+    </>
+  );
 
   const klass = class extends Component<RouteProps, IState<T>> {
     static displayName = displayName;

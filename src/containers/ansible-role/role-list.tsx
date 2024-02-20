@@ -9,9 +9,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LegacyRoleListItem,
   LoadingPageSpinner,
-  Pagination,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -218,7 +218,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
                     ))}
                 </DataList>
 
-                <Pagination
+                <HubPagination
                   count={count}
                   params={params}
                   updateParams={updateParams}

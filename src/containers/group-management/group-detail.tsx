@@ -30,12 +30,12 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  HubPagination,
+  LinkTabs,
   ListItemActions,
   LoadingPageWithHeader,
   Main,
-  Pagination,
   SortTable,
-  Tabs,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -46,29 +46,29 @@ import { ParamHelper, filterIsSet } from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {
+  addModalVisible: boolean;
+  alerts: AlertType[];
+  allUsers: UserType[];
   group: GroupObjectPermissionType;
+  inputText: string;
+  itemCount: number;
+  options: { id: number; name: string }[];
+  originalPermissions: { id: number; name: string }[];
   params: {
+    [key: string]: string | number;
     id: string;
     page?: number;
     page_size?: number;
     sort?: string;
     tab: string;
-    [key: string]: string | number;
   };
-  users: UserType[];
-  allUsers: UserType[];
-  itemCount: number;
-  alerts: AlertType[];
-  addModalVisible: boolean;
-  options: { id: number; name: string }[];
+  permissions: string[];
+  redirect?: string;
   selected: { id: number; name: string }[];
   showDeleteModal: boolean;
   showUserRemoveModal: UserType | null;
-  permissions: string[];
-  originalPermissions: { id: number; name: string }[];
-  redirect?: string;
   unauthorised: boolean;
-  inputText: string;
+  users: UserType[];
 }
 
 class GroupDetail extends Component<RouteProps, IState> {
@@ -91,9 +91,14 @@ class GroupDetail extends Component<RouteProps, IState> {
     ]);
 
     this.state = {
-      group: null,
-      users: null,
+      addModalVisible: false,
+      alerts: [],
       allUsers: null,
+      group: null,
+      inputText: '',
+      itemCount: 0,
+      options: undefined,
+      originalPermissions: [],
       params: {
         id,
         page: 0,
@@ -102,17 +107,12 @@ class GroupDetail extends Component<RouteProps, IState> {
           params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
         tab: params['tab'] || 'access',
       },
-      itemCount: 0,
-      alerts: [],
-      addModalVisible: false,
-      options: undefined,
+      permissions: [],
       selected: [],
       showDeleteModal: false,
       showUserRemoveModal: null,
-      permissions: [],
-      originalPermissions: [],
       unauthorised: false,
-      inputText: '',
+      users: null,
     };
   }
 
@@ -122,6 +122,27 @@ class GroupDetail extends Component<RouteProps, IState> {
       this.setState({ unauthorised: true });
     } else {
       this.queryGroup();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      const id = this.props.routeParams.group;
+      const params = ParamHelper.parseParamString(this.props.location.search, [
+        'page',
+        'page_size',
+      ]);
+      this.setState({
+        params: {
+          ...params,
+          id,
+          page_size: params['page_size'] || 10,
+          sort:
+            params['sort'] ||
+            (params['tab'] === 'access' ? 'role' : 'username'),
+          tab: params['tab'] || 'access',
+        },
+      });
     }
   }
 
@@ -137,15 +158,10 @@ class GroupDetail extends Component<RouteProps, IState> {
       params,
       showDeleteModal,
       showUserRemoveModal,
-      users,
       unauthorised,
+      users,
     } = this.state;
     const { user, hasPermission } = this.context;
-
-    const tabs = [{ id: 'access', name: t`Access` }];
-    if (!!user && hasPermission('galaxy.view_user')) {
-      tabs.push({ id: 'users', name: t`Users` });
-    }
 
     if (!group && alerts && alerts.length) {
       return (
@@ -163,6 +179,28 @@ class GroupDetail extends Component<RouteProps, IState> {
       this.queryUsers();
       return <LoadingPageWithHeader />;
     }
+
+    const tabs = [
+      {
+        active: params.tab === 'access',
+        title: t`Access`,
+        link: formatPath(
+          Paths.groupDetail,
+          { group: group.id },
+          { tab: 'access' },
+        ),
+      },
+      !!user &&
+        hasPermission('galaxy.view_user') && {
+          active: params.tab === 'users',
+          title: t`Users`,
+          link: formatPath(
+            Paths.groupDetail,
+            { group: group.id },
+            { tab: 'users' },
+          ),
+        },
+    ];
 
     return (
       <>
@@ -184,11 +222,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         >
           <div className='hub-tab-link-container'>
             <div className='tabs'>
-              <Tabs
-                tabs={tabs}
-                params={params}
-                updateParams={(p) => this.updateParams(p)}
-              />
+              <LinkTabs tabs={tabs} />
             </div>
           </div>
         </BaseHeader>
@@ -552,7 +586,7 @@ class GroupDetail extends Component<RouteProps, IState> {
             </ToolbarContent>
           </Toolbar>
 
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}
@@ -578,7 +612,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         </div>
         {this.renderUsersTable(users)}
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}

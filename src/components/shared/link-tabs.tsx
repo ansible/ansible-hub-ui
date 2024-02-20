@@ -2,7 +2,8 @@ import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export interface IProps {
+// FIXME: interface, and type qualifier in reexport
+export class LinkTabsProps {
   /** List of tabs */
   tabs: {
     active?: boolean;
@@ -11,6 +12,7 @@ export interface IProps {
   }[];
 }
 
+// FIXME(pf5): s/pf-c-/pf-v5-c-/g (not pf-m-)
 const renderTab = ({ link, title, active = false }) => (
   <li
     className={cx({
@@ -26,7 +28,7 @@ const renderTab = ({ link, title, active = false }) => (
 );
 
 // We're not using the Tab react component because they don't support links.
-export const LinkTabs = ({ tabs }: IProps) => (
+export const LinkTabs = ({ tabs }: LinkTabsProps) => (
   <div className='pf-c-tabs'>
     <ul className='pf-c-tabs__list'>
       {tabs.filter(Boolean).map((tab) => renderTab(tab))}

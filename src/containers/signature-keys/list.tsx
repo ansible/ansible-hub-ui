@@ -19,10 +19,10 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  HubPagination,
   ListItemActions,
   LoadingPageSpinner,
   Main,
-  Pagination,
   SortTable,
   closeAlertMixin,
 } from 'src/components';
@@ -126,7 +126,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.query())
@@ -150,7 +150,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
                 </div>
                 {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) => this.updateParams(p, () => this.query())}
                   count={itemCount}

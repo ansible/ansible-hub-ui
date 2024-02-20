@@ -17,9 +17,9 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   FilterOption,
+  HubPagination,
   LoadingPageSpinner,
   Main,
-  Pagination,
   SortTable,
   closeAlertMixin,
 } from 'src/components';
@@ -70,14 +70,6 @@ export type RenderTableRow<T> = (
   listItemActions?,
 ) => ReactNode;
 
-type RenderModals = ({
-  addAlert,
-  listQuery,
-  query,
-  setState,
-  state,
-}) => ReactNode;
-
 type SortHeaders = {
   title: MessageDescriptor;
   type: string;
@@ -105,7 +97,6 @@ interface ListPageParams<T> {
   noDataDescription: MessageDescriptor;
   noDataTitle: MessageDescriptor;
   query: Query<T>;
-  renderModals?: RenderModals;
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
   title: MessageDescriptor;
@@ -135,8 +126,6 @@ export const ListPage = function <T>({
   noDataTitle,
   // ({ params }) => Promise<{ data: { count, results[] } }>
   query,
-  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
-  renderModals,
   // (item, index) => <tr>...</tr>
   renderTableRow,
   // table headers
@@ -146,18 +135,16 @@ export const ListPage = function <T>({
   // for typeahed filters
   typeaheadQuery,
 }: ListPageParams<T>) {
-  renderModals ||= function (actionContext) {
-    return (
-      <>
-        {headerActions?.length
-          ? headerActions.map((action) => action?.modal?.(actionContext))
-          : null}
-        {listItemActions?.length
-          ? listItemActions.map((action) => action?.modal?.(actionContext))
-          : null}
-      </>
-    );
-  };
+  const renderModals = (actionContext) => (
+    <>
+      {headerActions?.length
+        ? headerActions.map((action) => action?.modal?.(actionContext))
+        : null}
+      {listItemActions?.length
+        ? listItemActions.map((action) => action?.modal?.(actionContext))
+        : null}
+    </>
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const translateTitle = ({ title, ...rest }: any) => ({
@@ -317,7 +304,7 @@ export const ListPage = function <T>({
                       </ToolbarContent>
                     </Toolbar>
 
-                    <Pagination
+                    <HubPagination
                       params={params}
                       updateParams={updateParams}
                       count={itemCount}
@@ -342,7 +329,7 @@ export const ListPage = function <T>({
                     this.renderTable(params, updateParams, actionContext)
                   )}
 
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={updateParams}
                     count={itemCount}

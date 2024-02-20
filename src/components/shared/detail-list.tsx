@@ -12,9 +12,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   FilterOption,
+  HubPagination,
   LoadingPageSpinner,
   LocalizedSortHeaders,
-  Pagination,
   Query,
   RenderTableRow,
   SortTable,
@@ -136,7 +136,7 @@ export function DetailList<T>({
               </ToolbarContent>
             </Toolbar>
 
-            <Pagination
+            <HubPagination
               params={params}
               updateParams={setParams}
               count={itemCount}
@@ -175,7 +175,7 @@ export function DetailList<T>({
               </tbody>
             </table>
           )}
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={setParams}
             count={itemCount}

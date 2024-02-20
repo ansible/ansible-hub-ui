@@ -15,8 +15,8 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
 } from 'src/components';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './my-imports.scss';
@@ -128,7 +128,7 @@ export class ImportList extends Component<IProps, IState> {
           {this.renderList(selectImport, importList, selectedImport, loading)}
         </div>
         {this.props.params.namespace && (
-          <Pagination
+          <HubPagination
             count={numberOfResults}
             isCompact
             params={params}

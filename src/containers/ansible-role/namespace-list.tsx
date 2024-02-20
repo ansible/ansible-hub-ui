@@ -9,9 +9,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LegacyNamespaceListItem,
   LoadingPageSpinner,
-  Pagination,
   RoleNamespaceEditModal,
   RoleNamespaceModal,
   WisdomModal,
@@ -230,7 +230,7 @@ class AnsibleRoleNamespaceList extends Component<
                     ))}
                 </DataList>
 
-                <Pagination
+                <HubPagination
                   count={count}
                   params={params}
                   updateParams={updateParams}

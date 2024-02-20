@@ -23,7 +23,7 @@ function createGroupManually(name) {
 function addUserToGroupManually(groupName, userName) {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
+  cy.contains('a.pf-c-tabs__link', 'Users').click();
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
@@ -51,7 +51,7 @@ function deleteGroupManually(name) {
 function removeUserFromGroupManually(groupName, userName) {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
+  cy.contains('a.pf-c-tabs__link', 'Users').click();
   cy.get(
     `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
   ).click();

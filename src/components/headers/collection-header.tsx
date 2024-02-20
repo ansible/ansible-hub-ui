@@ -39,10 +39,10 @@ import {
   DeleteCollectionModal,
   DownloadCount,
   ExternalLink,
+  HubPagination,
   ImportModal,
   LinkTabs,
   Logo,
-  Pagination,
   RepoSelector,
   SignAllCertificatesModal,
   SignSingleCertificateModal,
@@ -309,7 +309,7 @@ export class CollectionHeader extends Component<IProps, IState> {
           <List isPlain>
             <div className='versions-modal-header'>
               <Text>{t`${collectionName}'s versions.`}</Text>
-              <Pagination
+              <HubPagination
                 isTop
                 params={modalPagination}
                 updateParams={this.updatePaginationParams}
@@ -342,7 +342,7 @@ export class CollectionHeader extends Component<IProps, IState> {
               <Spinner />
             )}
           </List>
-          <Pagination
+          <HubPagination
             params={modalPagination}
             updateParams={this.updatePaginationParams}
             count={collectionsCount}

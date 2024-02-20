@@ -7,8 +7,8 @@ import {
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
   RadioRow,
   RoleListTable,
 } from 'src/components';
@@ -199,7 +199,7 @@ export const SelectUser: FunctionComponent<IProps> = ({
 
         {!noData && (
           <FlexItem>
-            <Pagination
+            <HubPagination
               params={localParams}
               updateParams={(p) => setLocalParams(p)}
               count={usersCount}

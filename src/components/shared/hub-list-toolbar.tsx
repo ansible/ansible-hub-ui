@@ -10,7 +10,7 @@ import {
   CardListSwitcher,
   CompoundFilter,
   FilterOption,
-  Pagination,
+  HubPagination,
   Sort,
   SortFieldType,
 } from 'src/components';
@@ -149,7 +149,7 @@ export function HubListToolbar({
             </ToolbarItem>
           ) : null}
           <ToolbarItem>
-            <Pagination
+            <HubPagination
               params={params}
               updateParams={updateParams}
               count={count}

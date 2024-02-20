@@ -10,13 +10,13 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
   NamespaceCard,
   NamespaceModal,
   NamespaceNextPageCard,
-  Pagination,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -151,15 +151,30 @@ export class NamespaceList extends Component<IProps, IState> {
       this.updateParams(p, () => this.loadNamespaces());
 
     const filterConfig = [{ id: 'keywords', title: t`keywords` }];
+
     const sortOptions = [
       { title: t`Name`, id: 'name', type: 'alpha' as const },
     ];
+
     const buttons = [
       hasPermission('galaxy.add_namespace') ? (
         <Button variant='primary' onClick={this.handleModalToggle}>
           {t`Create`}
         </Button>
       ) : null,
+    ];
+
+    const tabs = [
+      {
+        title: t`All`,
+        link: formatPath(Paths.namespaces),
+        active: !filterOwner,
+      },
+      {
+        title: t`My namespaces`,
+        link: formatPath(Paths.myNamespaces),
+        active: filterOwner,
+      },
     ];
 
     return (
@@ -184,20 +199,7 @@ export class NamespaceList extends Component<IProps, IState> {
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
-                <LinkTabs
-                  tabs={[
-                    {
-                      title: t`All`,
-                      link: formatPath(Paths.namespaces),
-                      active: !filterOwner,
-                    },
-                    {
-                      title: t`My namespaces`,
-                      link: formatPath(Paths.myNamespaces),
-                      active: filterOwner,
-                    },
-                  ]}
-                />
+                <LinkTabs tabs={tabs} />
               </div>
             </div>
           )}
@@ -218,7 +220,7 @@ export class NamespaceList extends Component<IProps, IState> {
         </section>
         {noData || loading ? null : (
           <section className='footer'>
-            <Pagination
+            <HubPagination
               params={params}
               updateParams={updateParams}
               count={itemCount}
