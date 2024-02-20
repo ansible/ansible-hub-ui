@@ -13,9 +13,10 @@ import {
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
+  LinkTabs,
+  LinkTabsProps,
   LoadingPageSpinner,
   Main,
-  Tabs,
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
@@ -23,7 +24,6 @@ import { AppContext } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
-  ParamType,
   RouteProps,
   errorMessage,
   withRouter,
@@ -54,8 +54,7 @@ interface PageWithTabsParams<T> {
   listUrl: string;
   query: ({ name }) => Promise<T>;
   renderTab: (tab, item, actionContext) => ReactNode;
-  tabs: { id: string; name: MessageDescriptor }[];
-  tabUpdateParams?: (params: ParamType) => ParamType;
+  tabs: (tab, name) => LinkTabsProps['tabs'];
 }
 
 export const PageWithTabs = function <
@@ -78,10 +77,7 @@ export const PageWithTabs = function <
   // () => Promise<T>
   query,
   renderTab,
-  // [{ id, name }]
   tabs,
-  // params => params
-  tabUpdateParams,
 }: PageWithTabsParams<T>) {
   const renderModals = (actionContext) => (
     <>
@@ -101,7 +97,7 @@ export const PageWithTabs = function <
       const params = ParamHelper.parseParamString(props.location.search);
 
       if (!params['tab']) {
-        params['tab'] = tabs[0].id;
+        params['tab'] = 'details';
       }
 
       this.state = {
@@ -127,7 +123,7 @@ export const PageWithTabs = function <
     componentDidUpdate(prevProps) {
       if (prevProps.location !== this.props.location) {
         const params = ParamHelper.parseParamString(this.props.location.search);
-        this.setState({ params: { tab: tabs[0].id, ...params } });
+        this.setState({ params: { tab: 'details', ...params } });
       }
     }
 
@@ -150,11 +146,7 @@ export const PageWithTabs = function <
       };
 
       const name = item?.name || routeParams.name;
-      const localizedTabs = tabs.map(({ name, ...rest }) => ({
-        ...rest,
-        name: i18n._(name),
-      }));
-      const tab = localizedTabs.find((t) => t.id == params.tab) || tabs[0];
+      const tab = params.tab || 'details';
 
       if (!loading && !unauthorised && !item) {
         return (
@@ -203,13 +195,7 @@ export const PageWithTabs = function <
             {headerDetails?.(item)}
             <div className='hub-tab-link-container'>
               <div className='tabs'>
-                <Tabs
-                  tabs={localizedTabs}
-                  params={params}
-                  updateParams={(p) =>
-                    this.updateParams(tabUpdateParams ? tabUpdateParams(p) : p)
-                  }
-                />
+                <LinkTabs tabs={tabs(tab, name)} />
               </div>
             </div>
           </BaseHeader>
@@ -223,9 +209,9 @@ export const PageWithTabs = function <
               ) : (
                 <section
                   className='body'
-                  data-cy={`PageWithTabs-${displayName}-${params.tab}`}
+                  data-cy={`PageWithTabs-${displayName}-${tab}`}
                 >
-                  {this.renderTab(params.tab, actionContext)}
+                  {this.renderTab(tab, actionContext)}
                 </section>
               )}
             </Main>

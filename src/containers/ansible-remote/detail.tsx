@@ -15,29 +15,20 @@ import { parsePulpIDFromURL } from 'src/utilities';
 import { RemoteAccessTab } from './tab-access';
 import { DetailsTab } from './tab-details';
 
-const tabs = [
-  { id: 'details', name: msg`Details` },
-  { id: 'access', name: msg`Access` },
-];
-
 const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
   breadcrumbs: ({ name, tab, params: { user, group } }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },
       { url: formatPath(Paths.ansibleRemoteDetail, { name }), name },
-      tab.id === 'access' && (group || user)
+      tab === 'access' && (group || user)
         ? {
-            url: formatPath(
-              Paths.ansibleRepositoryDetail,
-              { name },
-              { tab: tab.id },
-            ),
-            name: tab.name,
+            url: formatPath(Paths.ansibleRemoteDetail, { name }, { tab }),
+            name: t`Access`,
           }
         : null,
-      tab.id === 'access' && group ? { name: t`Group ${group}` } : null,
-      tab.id === 'access' && user ? { name: t`User ${user}` } : null,
-      tab.id === 'access' && !user && !group ? { name: tab.name } : null,
+      tab === 'access' && group ? { name: t`Group ${group}` } : null,
+      tab === 'access' && user ? { name: t`User ${user}` } : null,
+      tab === 'access' && !user && !group ? { name: t`Access` } : null,
     ].filter(Boolean),
   condition: canViewAnsibleRemotes,
   displayName: 'AnsibleRemoteDetail',
@@ -75,12 +66,18 @@ const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
       details: <DetailsTab item={item} actionContext={actionContext} />,
       access: <RemoteAccessTab item={item} actionContext={actionContext} />,
     })[tab],
-  tabs,
-  tabUpdateParams: (p) => {
-    delete p.group;
-    delete p.user;
-    return p;
-  },
+  tabs: (tab, name) => [
+    {
+      active: tab === 'details',
+      title: t`Details`,
+      link: formatPath(Paths.ansibleRemoteDetail, { name }, { tab: 'details' }),
+    },
+    {
+      active: tab === 'access',
+      title: t`Access`,
+      link: formatPath(Paths.ansibleRemoteDetail, { name }, { tab: 'access' }),
+    },
+  ],
 });
 
 export default AnsibleRemoteDetail;
