@@ -151,15 +151,30 @@ export class NamespaceList extends Component<IProps, IState> {
       this.updateParams(p, () => this.loadNamespaces());
 
     const filterConfig = [{ id: 'keywords', title: t`keywords` }];
+
     const sortOptions = [
       { title: t`Name`, id: 'name', type: 'alpha' as const },
     ];
+
     const buttons = [
       hasPermission('galaxy.add_namespace') ? (
         <Button variant='primary' onClick={this.handleModalToggle}>
           {t`Create`}
         </Button>
       ) : null,
+    ];
+
+    const tabs = [
+      {
+        title: t`All`,
+        link: formatPath(Paths.namespaces),
+        active: !filterOwner,
+      },
+      {
+        title: t`My namespaces`,
+        link: formatPath(Paths.myNamespaces),
+        active: filterOwner,
+      },
     ];
 
     return (
@@ -184,20 +199,7 @@ export class NamespaceList extends Component<IProps, IState> {
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
-                <LinkTabs
-                  tabs={[
-                    {
-                      title: t`All`,
-                      link: formatPath(Paths.namespaces),
-                      active: !filterOwner,
-                    },
-                    {
-                      title: t`My namespaces`,
-                      link: formatPath(Paths.myNamespaces),
-                      active: filterOwner,
-                    },
-                  ]}
-                />
+                <LinkTabs tabs={tabs} />
               </div>
             </div>
           )}
