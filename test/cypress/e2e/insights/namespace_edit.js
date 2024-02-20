@@ -29,7 +29,7 @@ describe('Edit a namespace', () => {
   let getEditTab = () => {
     return cy
       .get(
-        'ul.pf-c-tabs__list > li.pf-c-tabs__item > button > span.pf-c-tabs__item-text',
+        'ul.pf-c-tabs__list > li.pf-c-tabs__item > a > span.pf-c-tabs__item-text',
       )
       .contains('Edit resources')
       .click();

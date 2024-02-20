@@ -3,7 +3,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 function versionCheck(version) {
   cy.login();
   cy.visit(`${uiPrefix}ansible/repositories/repo1Test/`);
-  cy.contains('button', 'Versions').click();
+  cy.contains('a', 'Versions').click();
   cy.get(
     '[data-cy="PageWithTabs-AnsibleRepositoryDetail-repository-versions"]',
   );
@@ -126,7 +126,7 @@ function versionCheck(version) {
     it('adds collections', () => {
       cy.login();
       cy.visit(`${uiPrefix}ansible/repositories/repo1Test/`);
-      cy.contains('button', 'Collection versions').click();
+      cy.contains('a', 'Collection versions').click();
       cy.contains('button', 'Add collection').click();
       cy.contains('Select a collection');
       cy.get('input[aria-label="keywords"]')
