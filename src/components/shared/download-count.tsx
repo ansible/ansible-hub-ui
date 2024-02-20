@@ -24,7 +24,9 @@ export const DownloadCount = ({ item }: IProps) => {
     <Tooltip
       content={t`Download count is the sum of all versions' download counts`}
     >
-      <DownloadIcon /> <Trans>{downloadCount} Downloads</Trans>
+      <span>
+        <DownloadIcon /> <Trans>{downloadCount} Downloads</Trans>
+      </span>
     </Tooltip>
   );
 };

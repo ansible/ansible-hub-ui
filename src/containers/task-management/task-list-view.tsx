@@ -276,7 +276,9 @@ export class TaskListView extends Component<RouteProps, IState> {
       <tr key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={translateTask(name)}>{name}</Tooltip>
+            <Tooltip content={translateTask(name)}>
+              <span>{name}</span>
+            </Tooltip>
           </Link>
         </td>
         <td>
