@@ -4,6 +4,7 @@ import {
   Flex,
   FlexItem,
   Label,
+  LabelGroup,
   Modal,
   Radio,
 } from '@patternfly/react-core';
@@ -22,7 +23,6 @@ import {
 import {
   AlertList,
   AlertType,
-  LabelGroup,
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';

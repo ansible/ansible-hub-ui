@@ -6,6 +6,7 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
@@ -28,7 +29,6 @@ import {
   Main,
   PermissionCategories,
   RoleListTable,
-  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

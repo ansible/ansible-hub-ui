@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import {
+  ClipboardCopy,
   DropdownItem,
   Toolbar,
   ToolbarContent,
@@ -13,7 +14,6 @@ import {
   AlertType,
   AppliedFilters,
   BaseHeader,
-  ClipboardCopy,
   CompoundFilter,
   DateComponent,
   EmptyStateFilter,

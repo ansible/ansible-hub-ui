@@ -2,6 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   Button,
+  ClipboardCopy,
   Grid,
   GridItem,
   Split,
@@ -15,12 +16,7 @@ import {
   CollectionVersionContentType,
   CollectionVersionSearch,
 } from 'src/api';
-import {
-  ClipboardCopy,
-  LoadingPageSpinner,
-  LoginLink,
-  Tag,
-} from 'src/components';
+import { LoadingPageSpinner, LoginLink, Tag } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';

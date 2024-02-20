@@ -2,7 +2,9 @@ import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Checkbox,
+  ClipboardCopy,
   DropdownItem,
+  LabelGroup,
   Text,
   Toolbar,
   ToolbarContent,
@@ -17,14 +19,12 @@ import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
-  ClipboardCopy,
   CompoundFilter,
   DateComponent,
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LabelGroup,
   ListItemActions,
   LoadingPageSpinner,
   PublishToControllerModal,

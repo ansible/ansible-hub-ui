@@ -7,11 +7,12 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
+  Tooltip,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Logo, Tooltip } from 'src/components';
+import { Logo } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { namespaceTitle } from 'src/utilities';
 import './cards.scss';

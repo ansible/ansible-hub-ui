@@ -7,6 +7,7 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -34,7 +35,6 @@ import {
   PublishToControllerModal,
   RepositoryForm,
   SortTable,
-  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

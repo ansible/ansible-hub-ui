@@ -7,6 +7,7 @@ import {
   Label,
   Switch,
   TextInput,
+  Tooltip,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { GroupAPI, UserType } from 'src/api';
@@ -15,7 +16,6 @@ import {
   AlertType,
   DataForm,
   HelperText,
-  Tooltip,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { ErrorMessagesType, errorMessage } from 'src/utilities';

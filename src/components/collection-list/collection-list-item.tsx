@@ -7,6 +7,7 @@ import {
   Flex,
   FlexItem,
   Label,
+  LabelGroup,
   Text,
   TextContent,
   TextVariants,
@@ -19,7 +20,6 @@ import {
   CollectionRatings,
   DateComponent,
   DeprecatedTag,
-  LabelGroup,
   Logo,
   Tag,
 } from 'src/components';

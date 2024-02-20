@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { Tooltip } from '@patternfly/react-core';
 import React, { Component, ReactElement } from 'react';
 import { ContainerRepositoryType } from 'src/api';
 import {
@@ -6,7 +7,6 @@ import {
   Breadcrumbs,
   LinkTabs,
   SignatureBadge,
-  Tooltip,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { lastSyncStatus, lastSynced } from 'src/utilities';

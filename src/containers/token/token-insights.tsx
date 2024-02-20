@@ -1,12 +1,16 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, Button, ClipboardCopyVariant } from '@patternfly/react-core';
+import {
+  Alert,
+  Button,
+  ClipboardCopy,
+  ClipboardCopyVariant,
+} from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
   BaseHeader,
-  ClipboardCopy,
   ExternalLink,
   Main,
   closeAlertMixin,

@@ -7,6 +7,7 @@ import {
   FormGroup,
   InputGroup,
   Label,
+  LabelGroup,
   Modal,
   Spinner,
   TextInput,
@@ -21,7 +22,7 @@ import {
   PulpStatus,
   TaskAPI,
 } from 'src/api';
-import { AlertType, LabelGroup } from 'src/components';
+import { AlertType } from 'src/components';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {

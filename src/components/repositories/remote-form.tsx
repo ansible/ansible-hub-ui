@@ -6,6 +6,7 @@ import {
   Button,
   Checkbox,
   ExpandableSection,
+  FileUpload,
   Flex,
   FlexItem,
   Form,
@@ -19,12 +20,7 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React, { Component, ReactNode } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
-import {
-  ExternalLink,
-  FileUpload,
-  HelperText,
-  WriteOnlyField,
-} from 'src/components';
+import { ExternalLink, HelperText, WriteOnlyField } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,

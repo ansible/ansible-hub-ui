@@ -4,6 +4,7 @@ import {
   ButtonVariant,
   DropdownItem,
   Label,
+  LabelGroup,
   Spinner,
 } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
@@ -17,7 +18,7 @@ import {
   CollectionVersionSearch,
   FeatureFlagsType,
 } from 'src/api';
-import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
+import { DateComponent, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {

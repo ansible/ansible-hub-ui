@@ -1,6 +1,7 @@
 import { Trans, t } from '@lingui/macro';
+import { Tooltip } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { HelperText, Tooltip } from 'src/components';
+import { HelperText } from 'src/components';
 
 interface IProps {
   namespace: string;

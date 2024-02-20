@@ -7,6 +7,7 @@ import {
   Flex,
   FlexItem,
   Label,
+  LabelGroup,
   Spinner,
   Toolbar,
   ToolbarGroup,
@@ -20,7 +21,6 @@ import {
   CheckboxRow,
   CompoundFilter,
   HubPagination,
-  LabelGroup,
   RadioRow,
   SortTable,
 } from 'src/components';
