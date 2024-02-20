@@ -121,7 +121,7 @@ export { DownloadCount } from './shared/download-count';
 export { ExternalLink } from './shared/external-link';
 export { HubListToolbar } from './shared/hub-list-toolbar';
 export { LanguageSwitcher } from './shared/language-switcher';
-export { LinkTabs } from './shared/link-tabs';
+export { LinkTabs, LinkTabsProps } from './shared/link-tabs';
 export { LoginLink } from './shared/login-link';
 export { Main } from './shared/main';
 export { MaybeLink } from './shared/maybe-link';

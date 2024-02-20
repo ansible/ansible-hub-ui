@@ -25,19 +25,19 @@ import {
 } from 'src/utilities';
 
 interface IState {
+  alerts: AlertType[];
+  errorMessages: ErrorMessagesType;
+  loading: boolean;
   namespace: NamespaceType;
   newLinkName: string;
   newLinkURL: string;
-  errorMessages: ErrorMessagesType;
-  saving: boolean;
-  loading: boolean;
-  redirect: string;
-  unsavedData: boolean;
-  alerts: AlertType[];
   params: {
     tab?: string;
   };
+  redirect: string;
+  saving: boolean;
   unauthorized: boolean;
+  unsavedData: boolean;
 }
 
 class EditNamespace extends Component<RouteProps, IState> {
@@ -55,17 +55,17 @@ class EditNamespace extends Component<RouteProps, IState> {
     }
 
     this.state = {
-      loading: false,
       alerts: [],
-      namespace: null,
-      newLinkURL: '',
-      newLinkName: '',
       errorMessages: {},
-      saving: false,
-      redirect: null,
-      unsavedData: false,
+      loading: false,
+      namespace: null,
+      newLinkName: '',
+      newLinkURL: '',
       params,
+      redirect: null,
+      saving: false,
       unauthorized: false,
+      unsavedData: false,
     };
   }
 
@@ -73,21 +73,23 @@ class EditNamespace extends Component<RouteProps, IState> {
     this.setState({ loading: true }, () => this.loadNamespace());
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      const params = ParamHelper.parseParamString(this.props.location.search);
+      this.setState({ params });
+    }
+  }
+
   render() {
     const {
-      namespace,
       errorMessages,
-      saving,
-      redirect,
-      params,
-      unauthorized,
       loading,
+      namespace,
+      params,
+      redirect,
+      saving,
+      unauthorized,
     } = this.state;
-
-    const tabs = [
-      { id: 'edit-details', name: t`Edit details` },
-      { id: 'edit-resources', name: t`Edit resources` },
-    ];
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -100,6 +102,27 @@ class EditNamespace extends Component<RouteProps, IState> {
     if (!namespace) {
       return null;
     }
+
+    const tabs = [
+      {
+        active: params.tab === 'edit-details',
+        title: t`Edit details`,
+        link: formatPath(
+          Paths.editNamespace,
+          { namespace: namespace.name },
+          { tab: 'edit-details' },
+        ),
+      },
+      {
+        active: params.tab === 'edit-resources',
+        title: t`Edit resources`,
+        link: formatPath(
+          Paths.editNamespace,
+          { namespace: namespace.name },
+          { tab: 'edit-resources' },
+        ),
+      },
+    ];
 
     const updateNamespace = (namespace) =>
       this.setState({
@@ -122,8 +145,6 @@ class EditNamespace extends Component<RouteProps, IState> {
             { name: t`Edit` },
           ]}
           tabs={tabs}
-          params={params}
-          updateParams={(p) => this.updateParams(p)}
         />
         <AlertList
           alerts={this.state.alerts}
@@ -182,10 +203,6 @@ class EditNamespace extends Component<RouteProps, IState> {
         NamespaceForm.validateName(link).validated == 'error' ||
         NamespaceForm.validateUrl(link).validated == 'error',
     );
-  }
-
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
   }
 
   private loadNamespace() {

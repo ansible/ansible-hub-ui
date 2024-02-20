@@ -65,7 +65,6 @@ interface IState {
   deleteCollection: CollectionVersionSearch;
   filteredCount: number;
   group: GroupType;
-  user: UserType;
   isDeletionPending: boolean;
   isNamespacePending: boolean;
   isOpenNamespaceModal: boolean;
@@ -85,15 +84,16 @@ interface IState {
   };
   redirect: string;
   showControls: boolean;
-  showUserRemoveModal?: UserType;
-  showUserSelectWizard?: { user?: UserType; roles?: RoleType[] };
   showGroupRemoveModal?: GroupType;
   showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
   showImportModal: boolean;
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
+  showUserRemoveModal?: UserType;
+  showUserSelectWizard?: { user?: UserType; roles?: RoleType[] };
   unfilteredCount: number;
   updateCollection: CollectionVersionSearch;
+  user: UserType;
 }
 
 export class NamespaceDetail extends Component<RouteProps, IState> {
@@ -130,7 +130,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       deleteCollection: null,
       filteredCount: 0,
       group: null,
-      user: null,
       isDeletionPending: false,
       isNamespacePending: false,
       isOpenNamespaceModal: false,
@@ -147,6 +146,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       showRoleSelectWizard: null,
       unfilteredCount: 0,
       updateCollection: null,
+      user: null,
     };
   }
 
@@ -273,16 +273,56 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       return <LoadingPageWithHeader />;
     }
 
-    const tabs = [
-      { id: 'collections', name: t`Collections` },
-      showControls && { id: 'cli-configuration', name: t`CLI configuration` },
-      namespace.resources && { id: 'resources', name: t`Resources` },
-      { id: 'access', name: t`Access` },
-      legacy_roles && { id: 'role-namespaces', name: t`Role namespaces` },
-    ].filter(Boolean);
-
     const tab = params.tab || 'collections';
     const { user, group } = params;
+
+    const tabs = [
+      {
+        active: tab === 'collections',
+        title: t`Collections`,
+        link: formatPath(
+          Paths.namespaceDetail,
+          { namespace: namespace.name },
+          { tab: 'collections' },
+        ),
+      },
+      showControls && {
+        active: tab === 'cli-configuration',
+        title: t`CLI configuration`,
+        link: formatPath(
+          Paths.namespaceDetail,
+          { namespace: namespace.name },
+          { tab: 'cli-configuration' },
+        ),
+      },
+      namespace.resources && {
+        active: tab === 'resources',
+        title: t`Resources`,
+        link: formatPath(
+          Paths.namespaceDetail,
+          { namespace: namespace.name },
+          { tab: 'resources' },
+        ),
+      },
+      {
+        active: tab === 'access',
+        title: t`Access`,
+        link: formatPath(
+          Paths.namespaceDetail,
+          { namespace: namespace.name },
+          { tab: 'access' },
+        ),
+      },
+      legacy_roles && {
+        active: tab === 'role-namespaces',
+        title: t`Role namespaces`,
+        link: formatPath(
+          Paths.namespaceDetail,
+          { namespace: namespace.name },
+          { tab: 'role-namespaces' },
+        ),
+      },
+    ];
 
     const breadcrumbs = [
       namespaceBreadcrumb(),
@@ -336,11 +376,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     ];
 
     const canEditOwners = this.hasPerm('galaxy.change_namespace');
-
-    // remove ?user/group (access tab) when switching tabs
-    const tabParams = { ...params };
-    delete tabParams.group;
-    delete tabParams.user;
 
     const repository = params.repository_name || null;
     const deleteFromRepo = this.state.deleteAll
@@ -422,8 +457,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
           namespace={namespace}
           breadcrumbs={breadcrumbs}
           tabs={tabs}
-          params={tabParams}
-          updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
         />
         {tab === 'collections' ? (
