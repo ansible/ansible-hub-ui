@@ -72,7 +72,6 @@ export { FileUpload } from './patternfly-wrappers/file-upload';
 export { LabelGroup } from './patternfly-wrappers/label-group';
 export { LoginForm } from './patternfly-wrappers/login-form';
 export { Pagination } from './patternfly-wrappers/pagination';
-export { Tabs, TabsType } from './patternfly-wrappers/tabs';
 export { Tooltip } from './patternfly-wrappers/tooltip';
 export { AccessTab } from './rbac/access-tab';
 export { DeleteGroupModal } from './rbac/delete-group-modal';

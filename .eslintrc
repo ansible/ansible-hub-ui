@@ -35,7 +35,6 @@
           "LabelGroup",
           "LoginForm",
           "Pagination",
-          "Tabs",
           "Tooltip",
         ],
         "message": "Import from src/components instead.",
