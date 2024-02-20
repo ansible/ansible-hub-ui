@@ -45,9 +45,7 @@ const ToggleTemplate = ({
 );
 
 // wraps Pagination for localization and integration with hub flows
-// FIXME: split into Pagination wrapper with only isTop & ToggleTemplate..
-// ..separate HubPagination with updateParams knowledge
-export const Pagination = ({
+const Pagination = ({
   count,
   params,
   updateParams,
@@ -94,3 +92,7 @@ export const Pagination = ({
     />
   );
 };
+
+// FIXME: split into Pagination wrapper with only isTop & ToggleTemplate..
+// ..separate HubPagination with updateParams knowledge
+export const HubPagination = (props) => <Pagination {...props} />;

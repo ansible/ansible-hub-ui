@@ -8,8 +8,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
 } from 'src/components';
 import { filterIsSet, handleHttpError } from 'src/utilities';
 
@@ -187,7 +187,7 @@ export function RoleImportList({
       </div>
 
       {!loading && count ? (
-        <Pagination
+        <HubPagination
           count={count}
           isCompact
           params={params}

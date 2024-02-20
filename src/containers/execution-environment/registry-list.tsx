@@ -21,10 +21,10 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  HubPagination,
   ListItemActions,
   LoadingPageSpinner,
   Main,
-  Pagination,
   RemoteForm,
   SortTable,
   Tooltip,
@@ -263,7 +263,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
                     </ToolbarContent>
                   </Toolbar>
 
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryRegistries())
@@ -286,7 +286,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
                   />
                 </div>
                 {this.renderTable(params)}
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryRegistries())

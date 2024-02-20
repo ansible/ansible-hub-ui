@@ -22,9 +22,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   ImportModal,
   LoadingPageSpinner,
-  Pagination,
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';
@@ -248,7 +248,7 @@ class Search extends Component<RouteProps, IState> {
               })}
             </section>
             <section className='footer'>
-              <Pagination
+              <HubPagination
                 params={params}
                 updateParams={updateParams}
                 count={count}

@@ -27,10 +27,10 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   ExternalLink,
+  HubPagination,
   ListItemActions,
   LoadingPageSpinner,
   Main,
-  Pagination,
   PublishToControllerModal,
   RepositoryForm,
   SortTable,
@@ -234,7 +234,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
                     </ToolbarContent>
                   </Toolbar>
 
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryEnvironments())
@@ -258,7 +258,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
                 </div>
                 {this.renderTable(params)}
 
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryEnvironments())

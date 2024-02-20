@@ -17,9 +17,9 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   FilterOption,
+  HubPagination,
   LoadingPageSpinner,
   Main,
-  Pagination,
   SortTable,
   closeAlertMixin,
 } from 'src/components';
@@ -304,7 +304,7 @@ export const ListPage = function <T>({
                       </ToolbarContent>
                     </Toolbar>
 
-                    <Pagination
+                    <HubPagination
                       params={params}
                       updateParams={updateParams}
                       count={itemCount}
@@ -329,7 +329,7 @@ export const ListPage = function <T>({
                     this.renderTable(params, updateParams, actionContext)
                   )}
 
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={updateParams}
                     count={itemCount}

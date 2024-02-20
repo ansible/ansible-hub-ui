@@ -10,10 +10,10 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubPagination,
   LoadingPageSpinner,
   LoadingPageWithHeader,
   Main,
-  Pagination,
   SortTable,
 } from 'src/components';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
@@ -253,7 +253,7 @@ const CollectionDistributions = (props: RouteProps) => {
               </ToolbarGroup>
             </Toolbar>
 
-            <Pagination
+            <HubPagination
               params={params}
               updateParams={(p) => {
                 updateParamsMixin(p);
@@ -280,7 +280,7 @@ const CollectionDistributions = (props: RouteProps) => {
           ) : (
             renderTable(distributions, params)
           )}
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) => {
               updateParamsMixin(p);

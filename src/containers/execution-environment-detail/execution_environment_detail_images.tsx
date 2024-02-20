@@ -23,10 +23,10 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubPagination,
   LabelGroup,
   ListItemActions,
   LoadingPageSpinner,
-  Pagination,
   PublishToControllerModal,
   ShaLabel,
   SortTable,
@@ -273,7 +273,7 @@ class ExecutionEnvironmentDetailImages extends Component<
               </ToolbarGroup>
             </ToolbarContent>
           </Toolbar>
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) =>
               this.updateParams(p, () =>
@@ -325,7 +325,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           </table>
         )}
 
-        <Pagination
+        <HubPagination
           params={params}
           updateParams={(p) =>
             this.updateParams(p, () =>

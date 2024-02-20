@@ -27,9 +27,9 @@ import {
   AlertType,
   AppliedFilters,
   CompoundFilter,
+  HubPagination,
   LoadingPageSpinner,
   LoadingPageWithHeader,
-  Pagination,
   SortTable,
   UploadSingCertificateModal,
   closeAlertMixin,
@@ -230,7 +230,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
                   </ToolbarContent>
                 </Toolbar>
 
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryCollections(true))
@@ -268,7 +268,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
               )}
 
               <div className='footer'>
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryCollections(true))

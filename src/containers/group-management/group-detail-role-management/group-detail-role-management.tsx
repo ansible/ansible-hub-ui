@@ -21,9 +21,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   ExpandableRow,
+  HubPagination,
   ListItemActions,
   LoadingPageWithHeader,
-  Pagination,
   PermissionCategories,
   PreviewRoles,
   RoleListTable,
@@ -304,7 +304,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
               </ToolbarContent>
             </Toolbar>
 
-            <Pagination
+            <HubPagination
               count={rolesItemCount}
               params={params}
               updateParams={updateParams}
@@ -367,7 +367,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
               </RoleListTable>
 
               <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={updateParams}
                   count={rolesItemCount}

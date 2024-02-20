@@ -20,9 +20,9 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  HubPagination,
   LoadingPageSpinner,
   Main,
-  Pagination,
   SortTable,
   StatusIndicator,
   Tooltip,
@@ -177,7 +177,7 @@ export class TaskListView extends Component<RouteProps, IState> {
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
-                  <Pagination
+                  <HubPagination
                     params={params}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
@@ -202,7 +202,7 @@ export class TaskListView extends Component<RouteProps, IState> {
                 </div>
                 {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryTasks())

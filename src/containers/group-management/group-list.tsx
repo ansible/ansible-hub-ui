@@ -26,10 +26,10 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   GroupModal,
+  HubPagination,
   ListItemActions,
   LoadingPageSpinner,
   Main,
-  Pagination,
   SortTable,
   closeAlertMixin,
 } from 'src/components';
@@ -196,7 +196,7 @@ class GroupList extends Component<RouteProps, IState> {
                   </ToolbarContent>
                 </Toolbar>
 
-                <Pagination
+                <HubPagination
                   params={params}
                   updateParams={(p) =>
                     this.updateParams(p, () => this.queryGroups())
@@ -220,7 +220,7 @@ class GroupList extends Component<RouteProps, IState> {
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-              <Pagination
+              <HubPagination
                 params={params}
                 updateParams={(p) =>
                   this.updateParams(p, () => this.queryGroups())

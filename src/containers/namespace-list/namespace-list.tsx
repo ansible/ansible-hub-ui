@@ -10,13 +10,13 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
   NamespaceCard,
   NamespaceModal,
   NamespaceNextPageCard,
-  Pagination,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -220,7 +220,7 @@ export class NamespaceList extends Component<IProps, IState> {
         </section>
         {noData || loading ? null : (
           <section className='footer'>
-            <Pagination
+            <HubPagination
               params={params}
               updateParams={updateParams}
               count={itemCount}

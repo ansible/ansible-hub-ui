@@ -5,7 +5,7 @@ import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionListItem,
   EmptyStateFilter,
-  Pagination,
+  HubPagination,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 import './list.scss';
@@ -63,7 +63,7 @@ export const CollectionList = ({
           />
         )}
       </DataList>
-      <Pagination
+      <HubPagination
         count={itemCount}
         params={params}
         updateParams={updateParams}

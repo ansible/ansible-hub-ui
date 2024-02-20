@@ -8,8 +8,8 @@ import {
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
   RoleListTable,
 } from 'src/components';
 import { filterIsSet, translateLockedRole } from 'src/utilities';
@@ -242,7 +242,7 @@ export const SelectRoles: FunctionComponent<SelectRolesProps> = ({
 
         {!noData && (
           <FlexItem>
-            <Pagination
+            <HubPagination
               params={localParams}
               updateParams={(p) => setLocalParams(p)}
               count={rolesItemCount}

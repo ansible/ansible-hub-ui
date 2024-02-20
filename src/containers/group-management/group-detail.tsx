@@ -30,11 +30,11 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  HubPagination,
   LinkTabs,
   ListItemActions,
   LoadingPageWithHeader,
   Main,
-  Pagination,
   SortTable,
   closeAlertMixin,
 } from 'src/components';
@@ -586,7 +586,7 @@ class GroupDetail extends Component<RouteProps, IState> {
             </ToolbarContent>
           </Toolbar>
 
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}
@@ -612,7 +612,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         </div>
         {this.renderUsersTable(users)}
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-          <Pagination
+          <HubPagination
             params={params}
             updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}

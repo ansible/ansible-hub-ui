@@ -16,10 +16,10 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LegacyRoleListItem,
   LoadingPageSpinner,
   Logo,
-  Pagination,
   ProviderLink,
   RoleNamespaceEditModal,
   StatefulDropdown,
@@ -200,7 +200,7 @@ class NamespaceRoles extends Component<
                     ))}
                 </DataList>
 
-                <Pagination
+                <HubPagination
                   count={count}
                   params={params}
                   updateParams={updateParams}

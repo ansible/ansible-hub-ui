@@ -6,8 +6,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
+  HubPagination,
   LoadingPageSpinner,
-  Pagination,
 } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 import { Paths, formatPath } from 'src/paths';
@@ -103,7 +103,7 @@ export const CollectionUsedbyDependenciesList = ({
                   )}
                 </tbody>
               </table>
-              <Pagination
+              <HubPagination
                 params={params}
                 updateParams={(params) => updateParams(params)}
                 count={itemCount}
