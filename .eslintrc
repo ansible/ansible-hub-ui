@@ -27,20 +27,6 @@
     "curly": ["error", "all"],
     "eol-last": ["error", "always"],
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-    "no-restricted-imports": ["error", {
-      "paths": [{
-        "importNames": [
-          "ClipboardCopy",
-          "FileUpload",
-          "LabelGroup",
-          "LoginForm",
-          "Pagination",
-          "Tooltip",
-        ],
-        "message": "Import from src/components instead.",
-        "name": "@patternfly/react-core",
-      }],
-    }],
   },
 }
 // set vim:ft=javascript

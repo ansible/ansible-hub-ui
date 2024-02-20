@@ -67,12 +67,6 @@ export {
 } from './page/list-page';
 export { Page } from './page/page';
 export { PageWithTabs } from './page/page-with-tabs';
-export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
-export { FileUpload } from './patternfly-wrappers/file-upload';
-export { LabelGroup } from './patternfly-wrappers/label-group';
-export { LoginForm } from './patternfly-wrappers/login-form';
-export { Pagination } from './patternfly-wrappers/pagination';
-export { Tooltip } from './patternfly-wrappers/tooltip';
 export { AccessTab } from './rbac/access-tab';
 export { DeleteGroupModal } from './rbac/delete-group-modal';
 export { DeleteUserModal } from './rbac/delete-user-modal';
