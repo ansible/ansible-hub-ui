@@ -4,32 +4,52 @@ import { ContainerRepositoryType } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
+  LinkTabs,
   SignatureBadge,
-  Tabs,
   Tooltip,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 
 interface IProps {
-  id: string;
-  tab: string;
-  updateState: (any) => void;
   container: ContainerRepositoryType;
-  pageControls?: ReactElement;
-  groupId?: number;
   displaySignatures: boolean;
+  groupId?: number;
+  id: string;
+  pageControls?: ReactElement;
+  tab: string;
 }
 
 export class ExecutionEnvironmentHeader extends Component<IProps> {
   render() {
     const { container, groupId, tab, displaySignatures } = this.props;
 
+    const linkParams = { container: container.name };
+
     const tabs = [
-      { id: 'detail', name: t`Detail` },
-      { id: 'activity', name: t`Activity` },
-      { id: 'images', name: t`Images` },
-      { id: 'access', name: t`Access` },
+      {
+        active: tab === 'detail',
+        title: t`Detail`,
+        link: formatEEPath(Paths.executionEnvironmentDetail, linkParams),
+      },
+      {
+        active: tab === 'activity',
+        title: t`Activity`,
+        link: formatEEPath(
+          Paths.executionEnvironmentDetailActivities,
+          linkParams,
+        ),
+      },
+      {
+        active: tab === 'images',
+        title: t`Images`,
+        link: formatEEPath(Paths.executionEnvironmentDetailImages, linkParams),
+      },
+      {
+        active: tab === 'access',
+        title: t`Access`,
+        link: formatEEPath(Paths.executionEnvironmentDetailAccess, linkParams),
+      },
     ];
 
     const last_sync_task = container.pulp.repository.remote?.last_sync_task;
@@ -48,18 +68,17 @@ export class ExecutionEnvironmentHeader extends Component<IProps> {
                 name: container.name,
                 url:
                   tab === 'access'
-                    ? formatEEPath(Paths.executionEnvironmentDetail, {
-                        container: container.name,
-                      })
+                    ? formatEEPath(Paths.executionEnvironmentDetail, linkParams)
                     : null,
               },
               tab === 'access'
                 ? {
                     name: t`Access`,
                     url: groupId
-                      ? formatEEPath(Paths.executionEnvironmentDetailAccess, {
-                          container: container.name,
-                        })
+                      ? formatEEPath(
+                          Paths.executionEnvironmentDetailAccess,
+                          linkParams,
+                        )
                       : null,
                   }
                 : null,
@@ -100,13 +119,7 @@ export class ExecutionEnvironmentHeader extends Component<IProps> {
         <span />
         <div className='hub-tab-link-container'>
           <div className='tabs'>
-            <Tabs
-              tabs={tabs}
-              params={{ tab }}
-              updateParams={({ tab }) =>
-                this.props.updateState({ redirect: tab })
-              }
-            />
+            <LinkTabs tabs={tabs} />
           </div>
         </div>
       </BaseHeader>

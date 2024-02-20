@@ -20,7 +20,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatEEPath, formatPath } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RepoSigningUtils,
@@ -90,18 +90,6 @@ export function withContainerRepo(WrappedComponent) {
 
       const redirect = {
         list: formatPath(Paths.executionEnvironments),
-        activity: formatEEPath(Paths.executionEnvironmentDetailActivities, {
-          container,
-        }),
-        detail: formatEEPath(Paths.executionEnvironmentDetail, {
-          container,
-        }),
-        images: formatEEPath(Paths.executionEnvironmentDetailImages, {
-          container,
-        }),
-        access: formatEEPath(Paths.executionEnvironmentDetailAccess, {
-          container,
-        }),
         notFound: formatPath(Paths.notFound),
       }[this.state.redirect];
 
@@ -203,7 +191,6 @@ export function withContainerRepo(WrappedComponent) {
           )}
           <ExecutionEnvironmentHeader
             id={container}
-            updateState={(change) => this.setState(change)}
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
