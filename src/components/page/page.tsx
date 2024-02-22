@@ -99,7 +99,8 @@ export const Page = function <
           hasObjectPermission: (permission) =>
             item?.my_permissions?.includes?.(permission),
         };
-        if (!condition(actionContext)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (!condition(actionContext as any)) {
           this.setState({ loading: false, unauthorised: true });
         }
 

@@ -186,7 +186,8 @@ export const ListPage = function <T>({
     }
 
     componentDidMount() {
-      if (!condition(this.context as IAppContextType)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!condition(this.context as any)) {
         this.setState({ loading: false, unauthorised: true });
       } else {
         this.query();
