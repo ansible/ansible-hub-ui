@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {

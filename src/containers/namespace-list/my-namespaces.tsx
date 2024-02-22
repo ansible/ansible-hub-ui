@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
+import { IAppContextType } from 'src/loaders/app-context';
 import { AppContext } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';

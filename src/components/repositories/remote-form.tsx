@@ -25,7 +25,7 @@ import {
   HelperText,
   WriteOnlyField,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
   downloadString,

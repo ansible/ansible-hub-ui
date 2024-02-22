@@ -26,6 +26,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
+import { IAppContextType } from 'src/loaders/app-context';
 import { AppContext } from 'src/loaders/app-context';
 import { repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
