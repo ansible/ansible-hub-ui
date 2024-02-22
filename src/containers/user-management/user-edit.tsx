@@ -89,7 +89,10 @@ class UserEdit extends Component<RouteProps, IState> {
       .then(() => {
         // redirect to login page when password of logged user is changed
         // SSO not relevant, user-edit disabled
-        if (this.context.user.id === user.id && user.password) {
+        if (
+          (this.context as IAppContextType).user.id === user.id &&
+          user.password
+        ) {
           this.setState({ redirect: formatPath(Paths.login) });
         } else {
           this.setState({ redirect: formatPath(Paths.userList) });

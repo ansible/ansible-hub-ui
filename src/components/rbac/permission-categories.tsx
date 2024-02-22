@@ -38,7 +38,7 @@ export class PermissionCategories extends Component<IProps> {
 
   render() {
     const { permissions, setSelected, showCustom, showEmpty } = this.props;
-    const { featureFlags, user } = this.context;
+    const { featureFlags, user } = this.context as IAppContextType;
     const { model_permissions } = user;
     const showUserManagement = !featureFlags.external_authentication;
 

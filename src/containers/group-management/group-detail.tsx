@@ -117,7 +117,7 @@ class GroupDetail extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorised: true });
     } else {
@@ -161,7 +161,7 @@ class GroupDetail extends Component<RouteProps, IState> {
       unauthorised,
       users,
     } = this.state;
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
 
     if (!group && alerts && alerts.length) {
       return (
@@ -235,7 +235,7 @@ class GroupDetail extends Component<RouteProps, IState> {
   }
 
   private renderControls() {
-    const { hasPermission, user } = this.context;
+    const { hasPermission, user } = this.context as IAppContextType;
 
     if (!user || !hasPermission('galaxy.delete_group')) {
       return null;
@@ -255,7 +255,7 @@ class GroupDetail extends Component<RouteProps, IState> {
 
   private renderGroupDetail() {
     const { params, group } = this.state;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const canEdit = hasPermission('galaxy.change_group');
 
     return (
@@ -405,7 +405,7 @@ class GroupDetail extends Component<RouteProps, IState> {
           );
         });
     };
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const view_user = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
@@ -504,7 +504,8 @@ class GroupDetail extends Component<RouteProps, IState> {
 
   private renderUsers(users) {
     const { itemCount, params } = this.state;
-    const { user, featureFlags, hasPermission } = this.context;
+    const { user, featureFlags, hasPermission } = this
+      .context as IAppContextType;
     const noData =
       itemCount === 0 &&
       !filterIsSet(this.state.params, [
@@ -679,8 +680,8 @@ class GroupDetail extends Component<RouteProps, IState> {
   }
 
   private renderTableRow(user: UserType, index: number) {
-    const currentUser = this.context.user;
-    const { featureFlags, hasPermission } = this.context;
+    const currentUser = (this.context as IAppContextType).user;
+    const { featureFlags, hasPermission } = this.context as IAppContextType;
     const isUserMgmtDisabled = featureFlags.external_authentication;
     const dropdownItems = [
       !!currentUser &&

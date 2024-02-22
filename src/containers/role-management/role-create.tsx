@@ -56,7 +56,9 @@ class RoleCreate extends Component<RouteProps, IState> {
 
     const { errorMessages, description, name, saving } = this.state;
 
-    const notAuthorised = !this.context.user || this.context.user.is_anonymous;
+    const notAuthorised =
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous;
     const breadcrumbs = [
       { url: formatPath(Paths.roleList), name: t`Roles` },
       { name: t`Create new role` },

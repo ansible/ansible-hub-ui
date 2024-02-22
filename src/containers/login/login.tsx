@@ -81,7 +81,7 @@ class LoginPage extends Component<RouteProps, IState> {
       .then(() => {
         ActiveUserAPI.getUser()
           .then((result) => {
-            this.context.setUser(result);
+            (this.context as IAppContextType).setUser(result);
             this.setState({ redirect: this.redirectPage });
           })
           .catch(() =>

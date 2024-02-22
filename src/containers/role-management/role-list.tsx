@@ -100,7 +100,10 @@ export class RoleList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       this.setState({ loading: false, unauthorized: true });
     } else {
       this.queryRoles();
@@ -127,7 +130,7 @@ export class RoleList extends Component<RouteProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const isSuperuser = this.context.user.is_superuser;
+    const isSuperuser = (this.context as IAppContextType).user.is_superuser;
 
     const addRoles = isSuperuser && (
       <Link to={formatPath(Paths.createRole)}>
@@ -407,8 +410,8 @@ export class RoleList extends Component<RouteProps, IState> {
       </DropdownItem>
     );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { hasPermission } = this.context;
-    const dropdownItems = this.context.user.is_superuser
+    const { hasPermission } = this.context as IAppContextType;
+    const dropdownItems = (this.context as IAppContextType).user.is_superuser
       ? [
           // hasPermission('galaxy.change_containerregistryremote') &&
           locked ? (

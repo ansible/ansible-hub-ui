@@ -47,10 +47,11 @@ class UserCreate extends Component<RouteProps, IState> {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />;
     }
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const { user, errorMessages } = this.state;
     const notAuthorised =
-      !this.context.user || !hasPermission('galaxy.add_user');
+      !(this.context as IAppContextType).user ||
+      !hasPermission('galaxy.add_user');
     const breadcrumbs = [
       { url: formatPath(Paths.userList), name: t`Users` },
       { name: t`Create new user` },

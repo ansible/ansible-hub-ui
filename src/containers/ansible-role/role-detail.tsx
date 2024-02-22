@@ -364,7 +364,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
       this.state;
     const {
       user: { username, is_superuser },
-    } = this.context;
+    } = this.context as IAppContextType;
 
     if (loading) {
       return <LoadingPageWithHeader />;

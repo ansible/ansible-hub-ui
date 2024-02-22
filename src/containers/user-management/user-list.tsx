@@ -91,7 +91,7 @@ class UserList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (!user || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorized: true });
     } else {
@@ -111,7 +111,7 @@ class UserList extends Component<RouteProps, IState> {
       unauthorized,
     } = this.state;
 
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
 
     if (redirect) {
       return <Navigate to={redirect} />;
@@ -308,8 +308,11 @@ class UserList extends Component<RouteProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const dropdownItems = [];
-    const { hasPermission } = this.context;
-    if (!!this.context.user && hasPermission('galaxy.change_user')) {
+    const { hasPermission } = this.context as IAppContextType;
+    if (
+      !!(this.context as IAppContextType).user &&
+      hasPermission('galaxy.change_user')
+    ) {
       dropdownItems.push(
         <DropdownItem
           key='edit'
@@ -325,7 +328,10 @@ class UserList extends Component<RouteProps, IState> {
         />,
       );
     }
-    if (!!this.context.user && hasPermission('galaxy.delete_user')) {
+    if (
+      !!(this.context as IAppContextType).user &&
+      hasPermission('galaxy.delete_user')
+    ) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
           {t`Delete`}

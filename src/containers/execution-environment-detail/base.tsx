@@ -109,7 +109,7 @@ export function withContainerRepo(WrappedComponent) {
       const canSync = permissions.includes(
         'container.change_containernamespace',
       );
-      const { hasPermission } = this.context;
+      const { hasPermission } = this.context as IAppContextType;
       const dropdownItems = [
         this.state.repo.pulp.repository.remote && canSync && (
           <DropdownItem
@@ -144,16 +144,17 @@ export function withContainerRepo(WrappedComponent) {
             {t`Delete`}
           </DropdownItem>
         ),
-        this.state.repo && canSignEE(this.context, this.state.repo) && (
-          <DropdownItem
-            key='sign'
-            onClick={() => {
-              this.sign();
-            }}
-          >
-            {t`Sign`}
-          </DropdownItem>
-        ),
+        this.state.repo &&
+          canSignEE(this.context as IAppContextType, this.state.repo) && (
+            <DropdownItem
+              key='sign'
+              onClick={() => {
+                this.sign();
+              }}
+            >
+              {t`Sign`}
+            </DropdownItem>
+          ),
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
@@ -181,7 +182,7 @@ export function withContainerRepo(WrappedComponent) {
               selectedItem={repo.name}
               closeAction={() => this.setState({ showDeleteModal: false })}
               afterDelete={() => {
-                this.context.setAlerts(this.state.alerts);
+                (this.context as IAppContextType).setAlerts(this.state.alerts);
                 this.setState({ redirect: 'list' });
               }}
               addAlert={(text, variant, description = undefined) =>
@@ -194,7 +195,9 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
-            displaySignatures={this.context.featureFlags.container_signing}
+            displaySignatures={
+              (this.context as IAppContextType).featureFlags.container_signing
+            }
             pageControls={
               <div style={{ display: 'flex' }}>
                 {showEdit ? (
@@ -349,7 +352,7 @@ export function withContainerRepo(WrappedComponent) {
     private sign() {
       RepoSigningUtils.sign(
         this.state.repo,
-        this.context,
+        this.context as IAppContextType,
         (alert) => this.addAlertObj(alert),
         () => this.loadRepo(),
       );

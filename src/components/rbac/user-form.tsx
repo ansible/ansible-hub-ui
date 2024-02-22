@@ -83,7 +83,9 @@ export class UserForm extends Component<IProps, IState> {
       isMe,
     } = this.props;
     const { passwordConfirm, formErrors } = this.state;
-    const minLength = this.context.settings.GALAXY_MINIMUM_PASSWORD_LENGTH || 9; // actually counts codepoints, close enough
+    const minLength =
+      (this.context as IAppContextType).settings
+        .GALAXY_MINIMUM_PASSWORD_LENGTH || 9; // actually counts codepoints, close enough
 
     const formFields = [
       { id: 'username', title: t`Username` },
@@ -198,9 +200,9 @@ export class UserForm extends Component<IProps, IState> {
         >
           <Switch
             isDisabled={
-              !this.context.user.is_superuser ||
+              !(this.context as IAppContextType).user.is_superuser ||
               isReadonly ||
-              this.context.user.id === user.id
+              (this.context as IAppContextType).user.id === user.id
             }
             label={t`Super user`}
             labelOff={t`Not a super user`}
@@ -253,10 +255,10 @@ export class UserForm extends Component<IProps, IState> {
   }
 
   private getSuperUserHelperText(user) {
-    if (!this.context.user.is_superuser) {
+    if (!(this.context as IAppContextType).user.is_superuser) {
       return t`Requires super user permissions to edit.`;
     }
-    if (this.context.user.id === user.id) {
+    if ((this.context as IAppContextType).user.id === user.id) {
       return t`Super users can't disable themselves.`;
     }
 

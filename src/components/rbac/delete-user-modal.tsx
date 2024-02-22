@@ -48,7 +48,7 @@ export class DeleteUserModal extends Component<IProps, IState> {
   private getActionDescription(user: UserType) {
     if (user.is_superuser) {
       return t`Deleting super users is not allowed.`;
-    } else if (user.id === this.context.user.id) {
+    } else if (user.id === (this.context as IAppContextType).user.id) {
       return t`Deleting yourself is not allowed.`;
     }
 
@@ -60,7 +60,9 @@ export class DeleteUserModal extends Component<IProps, IState> {
   }
 
   private isUserSelfOrAdmin = (user: UserType): boolean => {
-    return user.is_superuser || user.id === this.context.user.id;
+    return (
+      user.is_superuser || user.id === (this.context as IAppContextType).user.id
+    );
   };
 
   private deleteUser = () => {

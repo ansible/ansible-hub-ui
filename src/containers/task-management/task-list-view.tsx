@@ -89,7 +89,7 @@ export class TaskListView extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user } = this.context;
+    const { user } = this.context as IAppContextType;
     if (!user || user.is_anonymous) {
       this.setState({ loading: false, unauthorised: true });
     } else {

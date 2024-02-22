@@ -344,7 +344,7 @@ class ExecutionEnvironmentDetailImages extends Component<
     canEditTags: boolean,
     cols: number,
   ) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const container = containerName(this.props.routeParams);
     const manifestLink = (digestOrTag) =>
       formatEEPath(Paths.executionEnvironmentManifest, {

@@ -305,7 +305,7 @@ class ExecutionEnvironmentDetailAccess extends Component<
   }
 
   queryNamespace({ id, name }) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     Promise.all([
       ExecutionEnvironmentNamespaceAPI.myPermissions(id).then(
         ({ data: { permissions } }) => permissions,

@@ -70,7 +70,10 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       this.setState({ loading: false, unauthorised: true });
     } else {
       this.query();

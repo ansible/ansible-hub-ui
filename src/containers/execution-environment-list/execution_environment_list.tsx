@@ -102,16 +102,19 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       this.setState({ unauthorized: true, loading: false });
     } else {
       this.queryEnvironments();
-      this.setState({ alerts: this.context.alerts });
+      this.setState({ alerts: (this.context as IAppContextType).alerts });
     }
   }
 
   componentWillUnmount() {
-    this.context.setAlerts([]);
+    (this.context as IAppContextType).setAlerts([]);
   }
 
   render() {
@@ -128,7 +131,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       showDeleteModal,
       selectedItem,
     } = this.state;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
@@ -337,7 +340,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       permissions.includes('container.change_containernamespace') ||
       permissions.includes('container.namespace_change_containerdistribution');
 
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const dropdownItems = [
       canEdit && (

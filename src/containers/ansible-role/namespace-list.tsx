@@ -73,8 +73,8 @@ class AnsibleRoleNamespaceList extends Component<
   }
 
   componentDidMount() {
-    this.setState({ alerts: this.context.alerts || [] });
-    this.context.setAlerts([]);
+    this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+    (this.context as IAppContextType).setAlerts([]);
 
     this.query(this.state.params);
   }
@@ -146,7 +146,7 @@ class AnsibleRoleNamespaceList extends Component<
 
     const {
       user: { is_superuser: canCreate },
-    } = this.context;
+    } = this.context as IAppContextType;
 
     const noData =
       count === 0 &&

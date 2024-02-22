@@ -164,7 +164,7 @@ export class ImportModal extends Component<IProps, IState> {
       uploadProgress,
       uploadStatus,
     } = this.state;
-    const { featureFlags } = this.context;
+    const { featureFlags } = this.context as IAppContextType;
 
     const skipError = () => {
       if (errorVariant === 'skippable') {

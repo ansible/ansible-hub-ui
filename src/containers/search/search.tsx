@@ -226,7 +226,7 @@ class Search extends Component<RouteProps, IState> {
             switcher='search_view_type'
             updateParams={updateParams}
             {...collectionFilter({
-              featureFlags: this.context.featureFlags,
+              featureFlags: (this.context as IAppContextType).featureFlags,
               ignoredParams,
             })}
           />
@@ -308,7 +308,10 @@ class Search extends Component<RouteProps, IState> {
                 c.collection_version.namespace,
               )}
               menu={this.renderMenu(false, c)}
-              displaySignatures={this.context.featureFlags.display_signatures}
+              displaySignatures={
+                (this.context as IAppContextType).featureFlags
+                  .display_signatures
+              }
             />
           );
         })}
@@ -362,7 +365,7 @@ class Search extends Component<RouteProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const canUpload = hasPermission('galaxy.upload_to_namespace');
 
     const deleteFn = (deleteAll) => ({
@@ -506,7 +509,10 @@ class Search extends Component<RouteProps, IState> {
               <CollectionListItem
                 key={i}
                 collection={c}
-                displaySignatures={this.context.featureFlags.display_signatures}
+                displaySignatures={
+                  (this.context as IAppContextType).featureFlags
+                    .display_signatures
+                }
                 showNamespace
                 synclistSwitch={this.renderSyncToogle(
                   c.collection_version.name,

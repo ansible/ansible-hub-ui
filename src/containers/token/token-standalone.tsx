@@ -39,14 +39,19 @@ class TokenStandalone extends Component<RouteProps, IState> {
 
   render() {
     const { token, alerts, loadingToken } = this.state;
-    const unauthorised = !this.context.user || this.context.user.is_anonymous;
-    const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
+    const unauthorised =
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous;
+    const expiration = (this.context as IAppContextType).settings
+      .GALAXY_TOKEN_EXPIRATION;
     const expirationDate = expiration
       ? new Date(Date.now() + 1000 * 60 * expiration)
       : null;
     const isSSO =
-      !this.context.user.auth_provider.includes('django') &&
-      !this.context.user.auth_provider.includes('github');
+      !(this.context as IAppContextType).user.auth_provider.includes(
+        'django',
+      ) &&
+      !(this.context as IAppContextType).user.auth_provider.includes('github');
 
     return (
       <>

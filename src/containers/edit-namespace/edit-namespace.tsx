@@ -246,7 +246,7 @@ class EditNamespace extends Component<RouteProps, IState> {
               }),
             },
             () =>
-              this.context.queueAlert({
+              (this.context as IAppContextType).queueAlert({
                 variant: 'success',
                 title: (
                   <Trans>

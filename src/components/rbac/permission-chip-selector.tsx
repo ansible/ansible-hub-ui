@@ -32,7 +32,7 @@ export class PermissionChipSelector extends Component<IProps, IState> {
   }
 
   render() {
-    const { model_permissions } = this.context.user;
+    const { model_permissions } = (this.context as IAppContextType).user;
     const {
       availablePermissions,
       isDisabled,

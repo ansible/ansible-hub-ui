@@ -90,8 +90,8 @@ export class NamespaceList extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    this.setState({ alerts: this.context.alerts || [] });
-    this.context.setAlerts([]);
+    this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+    (this.context as IAppContextType).setAlerts([]);
 
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
@@ -136,7 +136,7 @@ export class NamespaceList extends Component<IProps, IState> {
 
     const { alerts, namespaces, params, itemCount, loading } = this.state;
     const { filterOwner } = this.props;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
@@ -196,7 +196,7 @@ export class NamespaceList extends Component<IProps, IState> {
         />
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={IS_INSIGHTS ? t`Partners` : t`Namespaces`}>
-          {!this.context.user.is_anonymous && (
+          {!(this.context as IAppContextType).user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
                 <LinkTabs tabs={tabs} />
@@ -234,7 +234,7 @@ export class NamespaceList extends Component<IProps, IState> {
   private renderBody({ updateParams }) {
     const { itemCount, loading, namespaces, params } = this.state;
     const { filterOwner } = this.props;
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
 
     const noDataTitle = t`No namespaces yet`;
     const noDataDescription = !filterOwner

@@ -114,7 +114,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
     if (
       !user ||
       user.is_anonymous ||
@@ -370,7 +370,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
             <ApprovalRow
               approve={(v) => this.approve(v)}
               collectionVersion={version}
-              featureFlags={this.context.featureFlags}
+              featureFlags={(this.context as IAppContextType).featureFlags}
               isVersionUpdating={(v) => this.isVersionUpdating(v)}
               key={i}
               openUploadCertificateModal={(v) =>
