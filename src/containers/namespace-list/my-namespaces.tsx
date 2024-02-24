@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 
@@ -8,7 +8,10 @@ class MyNamespaces extends Component<RouteProps> {
   static contextType = AppContext;
 
   render() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       return <EmptyStateUnauthorized />;
     }
 

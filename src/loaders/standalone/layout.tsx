@@ -155,10 +155,11 @@ export const StandaloneLayout = ({
 
   const Header = (
     <PageHeader
-      logo={<SmallLogo alt={APPLICATION_NAME} />}
-      logoComponent={({ children }) => (
-        <Link to={formatPath(Paths.landingPage)}>{children}</Link>
-      )}
+      logo={
+        <Link to={formatPath(Paths.landingPage)}>
+          <SmallLogo alt={APPLICATION_NAME} />
+        </Link>
+      }
       headerTools={
         <PageHeaderTools>
           <LanguageSwitcher />

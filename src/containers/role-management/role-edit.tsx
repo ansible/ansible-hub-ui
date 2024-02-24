@@ -12,7 +12,7 @@ import {
   RoleHeader,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ErrorMessagesType,
@@ -86,7 +86,10 @@ class EditRole extends Component<RouteProps, IState> {
 
   componentDidMount() {
     this.setState({ editPermissions: true });
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       this.setState({ unauthorised: true });
     } else {
       RoleAPI.get(this.state.params.id)

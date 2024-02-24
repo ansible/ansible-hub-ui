@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
@@ -32,7 +32,7 @@ export class PermissionChipSelector extends Component<IProps, IState> {
   }
 
   render() {
-    const { model_permissions } = this.context.user;
+    const { model_permissions } = (this.context as IAppContextType).user;
     const {
       availablePermissions,
       isDisabled,

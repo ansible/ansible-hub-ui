@@ -25,7 +25,7 @@ import {
   HelperText,
   WriteOnlyField,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
   downloadString,
@@ -194,7 +194,8 @@ export class RemoteForm extends Component<IProps, IState> {
   ) {
     const { errorMessages, remote, remoteType } = this.props;
     const { filenames } = this.state;
-    const { collection_signing } = this.context.featureFlags;
+    const { collection_signing } = (this.context as IAppContextType)
+      .featureFlags;
     const writeOnlyFields =
       remote[
         remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields'

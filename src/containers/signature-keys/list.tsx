@@ -26,7 +26,7 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 
@@ -70,7 +70,10 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !(this.context as IAppContextType).user ||
+      (this.context as IAppContextType).user.is_anonymous
+    ) {
       this.setState({ loading: false, unauthorised: true });
     } else {
       this.query();

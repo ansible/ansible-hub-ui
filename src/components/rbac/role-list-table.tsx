@@ -10,9 +10,10 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { SortTable } from 'src/components';
 
 interface Props {
-  params?: object;
-  updateParams?: (params) => void;
+  children: ReactNode;
   isCompact?: boolean;
+  isStickyHeader?: boolean;
+  params?: object;
   tableHeader?: {
     headers: {
       title: string;
@@ -20,16 +21,16 @@ interface Props {
       id: string;
     }[];
   };
-  isStickyHeader?: boolean;
+  updateParams?: (params) => void;
 }
 
 export const RoleListTable: FunctionComponent<Props> = ({
   children,
-  params,
-  updateParams,
   isCompact,
-  tableHeader,
   isStickyHeader = false,
+  params,
+  tableHeader,
+  updateParams,
 }) => {
   const defaultTableHeader = {
     headers: [
@@ -79,10 +80,11 @@ export const RoleListTable: FunctionComponent<Props> = ({
 };
 
 export const ExpandableRow: FunctionComponent<{
-  rowIndex: number;
-  expandableRowContent?: ReactNode;
+  children: ReactNode;
   colSpan?: number;
   'data-cy'?: string;
+  expandableRowContent?: ReactNode;
+  rowIndex: number;
 }> = ({ rowIndex, children, expandableRowContent, colSpan, ...props }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -114,11 +116,12 @@ export const ExpandableRow: FunctionComponent<{
 };
 
 export const CheckboxRow: FunctionComponent<{
-  rowIndex?: number;
+  children: ReactNode;
+  'data-cy'?: string;
+  isDisabled?: boolean;
   isSelected: boolean;
   onSelect: (value) => void;
-  isDisabled?: boolean;
-  'data-cy'?: string;
+  rowIndex?: number;
 }> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
     <Tr data-cy={props['data-cy']}>
@@ -137,11 +140,12 @@ export const CheckboxRow: FunctionComponent<{
 );
 
 export const RadioRow: FunctionComponent<{
-  rowIndex?: number;
+  children: ReactNode;
+  'data-cy'?: string;
+  isDisabled?: boolean;
   isSelected: boolean;
   onSelect: (value) => void;
-  isDisabled?: boolean;
-  'data-cy'?: string;
+  rowIndex?: number;
 }> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
     <Tr data-cy={props['data-cy']}>

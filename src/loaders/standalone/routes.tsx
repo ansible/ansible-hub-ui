@@ -56,7 +56,11 @@ import {
   UserList,
   UserProfile,
 } from 'src/containers';
-import { AppContext, useHubContext } from 'src/loaders/app-context';
+import {
+  AppContext,
+  IAppContextType,
+  useHubContext,
+} from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -143,7 +147,7 @@ export class StandaloneRoutes extends Component<IRoutesProps> {
 
   // Note: must be ordered from most specific to least specific
   getRoutes(): IRouteConfig[] {
-    const { featureFlags, user } = this.context;
+    const { featureFlags, user } = this.context as IAppContextType;
 
     let isContainerDisabled = true;
     let isUserMgmtDisabled = false;

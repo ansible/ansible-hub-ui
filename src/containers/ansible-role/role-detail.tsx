@@ -42,7 +42,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
@@ -364,7 +364,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
       this.state;
     const {
       user: { username, is_superuser },
-    } = this.context;
+    } = this.context as IAppContextType;
 
     if (loading) {
       return <LoadingPageWithHeader />;

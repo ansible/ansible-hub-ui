@@ -30,7 +30,7 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
   ParamHelper,
@@ -118,11 +118,11 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
-    if (this.context.user.is_anonymous) {
+    if ((this.context as IAppContextType).user.is_anonymous) {
       return <EmptyStateUnauthorized />;
     }
 
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const addButton = hasPermission('galaxy.add_containerregistryremote') ? (
       <Button
         onClick={() =>
@@ -357,7 +357,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
   }
 
   private renderTableRow(item, index: number) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     const buttons = [
       hasPermission('galaxy.change_containerregistryremote') && (
         <Button

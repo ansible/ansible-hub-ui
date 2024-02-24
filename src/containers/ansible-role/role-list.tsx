@@ -14,7 +14,7 @@ import {
   LoadingPageSpinner,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -62,8 +62,8 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
   }
 
   componentDidMount() {
-    this.setState({ alerts: this.context.alerts || [] });
-    this.context.setAlerts([]);
+    this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+    (this.context as IAppContextType).setAlerts([]);
 
     this.query(this.state.params);
   }
@@ -114,7 +114,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
 
   render() {
     const { alerts, count, loading, params, roles } = this.state;
-    const { user } = this.context;
+    const { user } = this.context as IAppContextType;
 
     const updateParams = (params) =>
       this.updateParams(params, () => this.query(params));

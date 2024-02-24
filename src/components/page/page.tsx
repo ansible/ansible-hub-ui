@@ -17,7 +17,7 @@ import {
   Main,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import { RouteProps, errorMessage, withRouter } from 'src/utilities';
 
@@ -94,16 +94,19 @@ export const Page = function <
       // condition check after query, for object permissions
       this.query().then((item) => {
         const actionContext = {
-          ...this.context,
+          ...(this.context as IAppContextType),
           hasObjectPermission: (permission) =>
             item?.my_permissions?.includes?.(permission),
         };
-        if (!condition(actionContext)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (!condition(actionContext as any)) {
           this.setState({ loading: false, unauthorised: true });
         }
 
-        this.setState({ alerts: this.context.alerts || [] });
-        this.context.setAlerts([]);
+        this.setState({
+          alerts: (this.context as IAppContextType).alerts || [],
+        });
+        (this.context as IAppContextType).setAlerts([]);
       });
     }
 
@@ -115,14 +118,14 @@ export const Page = function <
         addAlert: (alert) => this.addAlert(alert),
         hasObjectPermission: (permission) =>
           item?.my_permissions?.includes?.(permission),
-        hasPermission: this.context.hasPermission,
+        hasPermission: (this.context as IAppContextType).hasPermission,
         listQuery: () => this.props.navigate(listUrl),
         navigate: this.props.navigate,
         query: () => this.query(),
-        queueAlert: this.context.queueAlert,
+        queueAlert: (this.context as IAppContextType).queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        user: this.context.user,
+        user: (this.context as IAppContextType).user,
       };
 
       const name = item?.name || transformParams(routeParams)?.name || null;

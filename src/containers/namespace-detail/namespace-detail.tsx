@@ -36,7 +36,7 @@ import {
   closeAlertMixin,
   collectionFilter,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   DeleteCollectionUtils,
@@ -153,8 +153,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
   componentDidMount() {
     this.load();
 
-    this.setState({ alerts: this.context.alerts || [] });
-    this.context.setAlerts([]);
+    this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+    (this.context as IAppContextType).setAlerts([]);
   }
 
   componentDidUpdate(prevProps) {
@@ -231,7 +231,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     const {
       hasPermission,
       user: { is_superuser },
-    } = this.context;
+    } = this.context as IAppContextType;
 
     const hasObjectPermission = (permission) =>
       namespace?.related_fields?.my_permissions?.includes?.(permission);
@@ -262,7 +262,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       showImportModal,
       updateCollection,
     } = this.state;
-    const { featureFlags } = this.context;
+    const { featureFlags } = this.context as IAppContextType;
     const { legacy_roles, display_signatures } = featureFlags;
 
     if (redirect) {
@@ -751,7 +751,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     });
 
     SignCollectionAPI.sign({
-      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      signing_service: (this.context as IAppContextType).settings
+        .GALAXY_COLLECTION_SIGNING_SERVICE,
       repository_name: repository,
       namespace: namespace.name,
     })
@@ -826,8 +827,9 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
         // this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope
         if (
-          this.context.user.is_anonymous &&
-          this.context.settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS
+          (this.context as IAppContextType).user.is_anonymous &&
+          (this.context as IAppContextType).settings
+            .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS
         ) {
           return null;
         }
@@ -850,7 +852,10 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
           myNamespace,
         ]) => {
           this.setState({
-            canSign: canSignNamespace(this.context, myNamespace?.data),
+            canSign: canSignNamespace(
+              this.context as IAppContextType,
+              myNamespace?.data,
+            ),
             group: this.filterGroup(this.state.params.group, namespace.groups),
             user: this.filterUser(this.state.params.user, namespace.users),
             namespace: {
@@ -883,7 +888,9 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     }
 
     const { canSign, collections, unfilteredCount } = this.state;
-    const { ai_deny_index, can_upload_signatures } = this.context.featureFlags;
+    const { ai_deny_index, can_upload_signatures } = (
+      this.context as IAppContextType
+    ).featureFlags;
     const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
@@ -997,7 +1004,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     const {
       namespace: { name },
     } = this.state;
-    const { queueAlert } = this.context;
+    const { queueAlert } = this.context as IAppContextType;
 
     this.setState({ isNamespacePending: true }, () =>
       NamespaceAPI.delete(name)

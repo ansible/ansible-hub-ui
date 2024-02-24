@@ -27,7 +27,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -275,7 +275,7 @@ class AnsibleRoleNamespaceDetail extends Component<
     const {
       featureFlags: { ai_deny_index },
       user: { is_superuser, username },
-    } = this.context;
+    } = this.context as IAppContextType;
     const { location, navigate } = this.props;
 
     if (loading) {

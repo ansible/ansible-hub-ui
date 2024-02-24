@@ -8,7 +8,7 @@ import {
   LoadingPageWithHeader,
   UserFormPage,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ErrorMessagesType, mapErrorMessages } from 'src/utilities';
@@ -89,7 +89,10 @@ class UserEdit extends Component<RouteProps, IState> {
       .then(() => {
         // redirect to login page when password of logged user is changed
         // SSO not relevant, user-edit disabled
-        if (this.context.user.id === user.id && user.password) {
+        if (
+          (this.context as IAppContextType).user.id === user.id &&
+          user.password
+        ) {
           this.setState({ redirect: formatPath(Paths.login) });
         } else {
           this.setState({ redirect: formatPath(Paths.userList) });

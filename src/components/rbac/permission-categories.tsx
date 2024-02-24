@@ -3,7 +3,7 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 
 interface IProps {
   permissions: string[];
@@ -38,7 +38,7 @@ export class PermissionCategories extends Component<IProps> {
 
   render() {
     const { permissions, setSelected, showCustom, showEmpty } = this.props;
-    const { featureFlags, user } = this.context;
+    const { featureFlags, user } = this.context as IAppContextType;
     const { model_permissions } = user;
     const showUserManagement = !featureFlags.external_authentication;
 

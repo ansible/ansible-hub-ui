@@ -8,7 +8,7 @@ import {
   UserAPI,
 } from 'src/api';
 import { AccessTab } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, assignRoles, errorMessage } from 'src/utilities';
@@ -305,7 +305,7 @@ class ExecutionEnvironmentDetailAccess extends Component<
   }
 
   queryNamespace({ id, name }) {
-    const { hasPermission } = this.context;
+    const { hasPermission } = this.context as IAppContextType;
     Promise.all([
       ExecutionEnvironmentNamespaceAPI.myPermissions(id).then(
         ({ data: { permissions } }) => permissions,

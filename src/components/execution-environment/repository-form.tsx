@@ -90,11 +90,11 @@ export class RepositoryForm extends Component<IProps, IState> {
   componentDidMount() {
     if (this.props.isRemote) {
       this.loadRegistries()
-        .then(() => {
+        .then((registries) => {
           // prefill registry if passed from props
           if (this.props.registry) {
             this.setState({
-              registrySelection: this.state.registries.filter(
+              registrySelection: registries.filter(
                 ({ id }) => id === this.props.registry,
               ),
             });

@@ -23,7 +23,7 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
@@ -185,14 +185,15 @@ export const ListPage = function <T>({
     }
 
     componentDidMount() {
-      if (!condition(this.context)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!condition(this.context as any)) {
         this.setState({ loading: false, unauthorised: true });
       } else {
         this.query();
       }
 
-      this.setState({ alerts: this.context.alerts || [] });
-      this.context.setAlerts([]);
+      this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+      (this.context as IAppContextType).setAlerts([]);
     }
 
     render() {
@@ -222,14 +223,14 @@ export const ListPage = function <T>({
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
         hasObjectPermission: () => false, // list items don't load my_permissions .. but superadmin should still work
-        hasPermission: this.context.hasPermission,
+        hasPermission: (this.context as IAppContextType).hasPermission,
         listQuery: () => this.query(),
         navigate: this.props.navigate,
         query: () => this.query(),
-        queueAlert: this.context.queueAlert,
+        queueAlert: (this.context as IAppContextType).queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        user: this.context.user,
+        user: (this.context as IAppContextType).user,
       };
 
       const resetCompoundFilter = () =>

@@ -12,7 +12,7 @@ import {
   UserFormPage,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ErrorMessagesType, RouteProps, withRouter } from 'src/utilities';
 
@@ -41,7 +41,7 @@ class UserDetail extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { hasPermission, user } = this.context;
+    const { hasPermission, user } = this.context as IAppContextType;
     const id = this.props.routeParams.userID;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorised: true });
@@ -59,7 +59,7 @@ class UserDetail extends Component<RouteProps, IState> {
 
     const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =
       this.state;
-    const { user, hasPermission } = this.context;
+    const { user, hasPermission } = this.context as IAppContextType;
 
     if (unauthorised) {
       return <EmptyStateUnauthorized />;

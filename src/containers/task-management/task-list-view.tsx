@@ -28,7 +28,7 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
@@ -89,7 +89,7 @@ export class TaskListView extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    const { user } = this.context;
+    const { user } = this.context as IAppContextType;
     if (!user || user.is_anonymous) {
       this.setState({ loading: false, unauthorised: true });
     } else {

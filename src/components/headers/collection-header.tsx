@@ -49,7 +49,7 @@ import {
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
@@ -201,7 +201,7 @@ export class CollectionHeader extends Component<IProps, IState> {
 
     const {
       featureFlags: { can_upload_signatures, display_signatures },
-    } = this.context;
+    } = this.context as IAppContextType;
 
     const urlKeys = [
       { key: 'documentation', name: t`Docs site` },
@@ -239,7 +239,10 @@ export class CollectionHeader extends Component<IProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const canSign = canSignNamespace(this.context, this.state.namespace);
+    const canSign = canSignNamespace(
+      this.context as IAppContextType,
+      this.state.namespace,
+    );
 
     const issueUrl =
       'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
@@ -367,7 +370,8 @@ export class CollectionHeader extends Component<IProps, IState> {
                     redirect: formatPath(Paths.namespaceDetail, {
                       namespace: deleteCollection.collection_version.namespace,
                     }),
-                    addAlert: (alert) => this.context.queueAlert(alert),
+                    addAlert: (alert) =>
+                      (this.context as IAppContextType).queueAlert(alert),
                     deleteFromRepo,
                   });
             })
@@ -748,7 +752,8 @@ export class CollectionHeader extends Component<IProps, IState> {
     });
 
     SignCollectionAPI.sign({
-      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      signing_service: (this.context as IAppContextType).settings
+        .GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
       namespace,
       collection: name,
@@ -802,7 +807,8 @@ export class CollectionHeader extends Component<IProps, IState> {
     });
 
     SignCollectionAPI.sign({
-      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      signing_service: (this.context as IAppContextType).settings
+        .GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
       namespace,
       collection: name,
@@ -935,7 +941,7 @@ export class CollectionHeader extends Component<IProps, IState> {
           });
         } else {
           // last version in collection => collection will be deleted => redirect
-          this.context.queueAlert({
+          (this.context as IAppContextType).queueAlert({
             variant: 'success',
             title: (
               <Trans>

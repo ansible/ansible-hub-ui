@@ -26,7 +26,7 @@ import {
   MultipleRepoSelector,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 
@@ -164,7 +164,7 @@ export class ImportModal extends Component<IProps, IState> {
       uploadProgress,
       uploadStatus,
     } = this.state;
-    const { featureFlags } = this.context;
+    const { featureFlags } = this.context as IAppContextType;
 
     const skipError = () => {
       if (errorVariant === 'skippable') {

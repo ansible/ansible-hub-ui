@@ -14,7 +14,7 @@ import {
   ResourcesForm,
   closeAlertMixin,
 } from 'src/components';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
 import {
@@ -246,7 +246,7 @@ class EditNamespace extends Component<RouteProps, IState> {
               }),
             },
             () =>
-              this.context.queueAlert({
+              (this.context as IAppContextType).queueAlert({
                 variant: 'success',
                 title: (
                   <Trans>

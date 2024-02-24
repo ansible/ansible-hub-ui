@@ -20,7 +20,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
@@ -110,14 +110,15 @@ export const PageWithTabs = function <
     }
 
     componentDidMount() {
-      if (!condition(this.context)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!condition(this.context as any)) {
         this.setState({ loading: false, unauthorised: true });
       } else {
         this.query();
       }
 
-      this.setState({ alerts: this.context.alerts || [] });
-      this.context.setAlerts([]);
+      this.setState({ alerts: (this.context as IAppContextType).alerts || [] });
+      (this.context as IAppContextType).setAlerts([]);
     }
 
     componentDidUpdate(prevProps) {
@@ -135,14 +136,14 @@ export const PageWithTabs = function <
         addAlert: (alert) => this.addAlert(alert),
         hasObjectPermission: (permission) =>
           item?.my_permissions?.includes?.(permission),
-        hasPermission: this.context.hasPermission,
+        hasPermission: (this.context as IAppContextType).hasPermission,
         listQuery: () => this.props.navigate(listUrl),
         navigate: this.props.navigate,
         query: () => this.query(),
-        queueAlert: this.context.queueAlert,
+        queueAlert: (this.context as IAppContextType).queueAlert,
         setState: (s) => this.setState(s),
         state: this.state,
-        user: this.context.user,
+        user: (this.context as IAppContextType).user,
       };
 
       const name = item?.name || routeParams.name;
