@@ -26,8 +26,7 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 

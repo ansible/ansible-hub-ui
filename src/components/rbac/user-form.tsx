@@ -17,8 +17,7 @@ import {
   HelperText,
   Tooltip,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {

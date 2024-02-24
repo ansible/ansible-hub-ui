@@ -17,8 +17,7 @@ import {
   Main,
   closeAlertMixin,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import { RouteProps, errorMessage, withRouter } from 'src/utilities';
 

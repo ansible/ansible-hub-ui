@@ -27,8 +27,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,

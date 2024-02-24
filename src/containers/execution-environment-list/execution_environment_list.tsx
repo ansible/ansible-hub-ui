@@ -37,8 +37,7 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,

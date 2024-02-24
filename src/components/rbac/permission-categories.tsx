@@ -3,8 +3,7 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 
 interface IProps {
   permissions: string[];

@@ -2,8 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import React, { Component } from 'react';
 import { UserAPI, UserType } from 'src/api';
 import { DeleteModal } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { errorMessage, mapErrorMessages } from 'src/utilities';
 
 interface IState {
