@@ -266,6 +266,8 @@ msgstr "정보"
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -313,6 +315,10 @@ msgstr "이 컨테이너 사용에 대한 정보가 포함된 README를 추가�
 #: src/components/rbac/role-form.tsx
 msgid "Add a role description here"
 msgstr "여기에 역할 설명을 추가"
+
+#: src/utilities/translate-task.ts
+msgid "Add and remove repository"
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "Add Ansible distribution"
@@ -362,6 +368,10 @@ msgstr "새 태그 추가"
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Add new tag to image"
 msgstr "이미지에 새 태그 추가"
+
+#: src/utilities/translate-task.ts
+msgid "Add or remove"
+msgstr ""
 
 #: src/actions/ansible-remote-create.tsx
 msgid "Add remote"
@@ -436,13 +446,17 @@ msgstr ""
 msgid "All Repos"
 msgstr ""
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
+msgid "Allow all actions on a task schedule."
+msgstr ""
+
+#: src/utilities/translate-locked-role.ts
 msgid "Allow all actions on a task."
 msgstr "작업에 대한 모든 작업을 허용합니다."
 
 #: src/constants.tsx
-msgid "Allow all actions on a taskschedule."
-msgstr "작업 스케줄에 대한 모든 작업을 허용합니다."
+#~ msgid "Allow all actions on a taskschedule."
+#~ msgstr "작업 스케줄에 대한 모든 작업을 허용합니다."
 
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Already the current version"
@@ -536,7 +550,7 @@ msgstr "승인 상태:"
 msgid "Approve"
 msgstr "승인"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Approve, reject and sync collections from remotes."
 msgstr "원격에서 컬렉션을 승인, 거부 및 동기화합니다."
 
@@ -656,6 +670,10 @@ msgstr "브라우저 OS"
 msgid "Browser Version"
 msgstr "브라우저 버전"
 
+#: src/utilities/translate-task.ts
+msgid "Build image from Containerfile"
+msgstr ""
+
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -764,7 +782,7 @@ msgstr "인증됨"
 msgid "Change"
 msgstr "변경"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Change and upload collections to namespaces."
 msgstr "컬렉션을 네임스페이스에 변경하고 업로드합니다."
 
@@ -797,7 +815,7 @@ msgstr "컬렉션을 네임스페이스에 변경하고 업로드합니다."
 #~ msgid "Change distribution"
 #~ msgstr "Change distribution"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Change existing execution environments."
 msgstr "기존 실행 환경 변경."
 
@@ -1113,6 +1131,11 @@ msgstr "컬렉션을 수정하면 컬렉션 버전이 표시됩니다."
 msgid "Collections"
 msgstr "컬렉션"
 
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
+msgid "Collections sync"
+msgstr ""
+
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/search/search.tsx
@@ -1241,8 +1264,12 @@ msgstr "콘텐츠 추가됨"
 #~ msgstr "Content count"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgid "Content from roles and collections can be referenced in Ansible playbooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
 msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+#~ msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+#~ msgstr ""
 
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
@@ -1280,6 +1307,10 @@ msgstr "컨트롤러 목록을 표시할 수 없습니다."
 #: src/actions/ansible-repository-copy.tsx
 msgid "Copy CLI configuration"
 msgstr "CLI 구성 복사"
+
+#: src/utilities/translate-task.ts
+msgid "Copy content"
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/components/execution-environment/publish-to-controller-modal.tsx
@@ -1360,7 +1391,7 @@ msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예:
 msgid "Create a role namespace"
 msgstr ""
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "기존 컨테이너 네임스페이스에서 실행 환경을 생성하고 업데이트합니다."
 
@@ -1382,7 +1413,7 @@ msgstr "새 역할 만들기"
 msgid "Create new user"
 msgstr "새 사용자 만들기"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "컬렉션 네임스페이스를 생성, 삭제 및 변경합니다. 컬렉션을 업로드하고 삭제합니다. 원격에서 컬렉션을 동기화합니다. 컬렉션을 승인 및 거부합니다."
 
@@ -1418,7 +1449,7 @@ msgstr "생성된 시간"
 msgid "Creation started for distribution {distributionName}"
 msgstr "배포를 위한 생성 시작 {distributionName}"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate all synclist repositories"
 msgstr ""
 
@@ -1426,11 +1457,11 @@ msgstr ""
 #~ msgid "Curate all synclist repository"
 #~ msgstr "모든 동기화 목록 리포지토리 관리"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate synclist repository"
 msgstr "동기화 목록 리포지토리 관리"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate synclist repository batch"
 msgstr "동기화 목록 리포지토리 배치 관리"
 
@@ -1596,6 +1627,10 @@ msgstr "원격 레지스트리를 삭제하시겠습니까?"
 #: src/components/delete-modal/delete-ansible-remote-modal.tsx
 msgid "Delete remote?"
 msgstr "원격을 삭제하시겠습니까?"
+
+#: src/utilities/translate-task.ts
+msgid "Delete repository version"
+msgstr ""
 
 #: src/components/delete-modal/delete-ansible-repository-modal.tsx
 msgid "Delete repository?"
@@ -2556,6 +2591,22 @@ msgstr "Galaxy 로고"
 msgid "Galaxy only"
 msgstr "Galaxy 전용"
 
+#: src/utilities/translate-task.ts
+msgid "General create"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General delete"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General multi delete"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General update"
+msgstr ""
+
 #: src/containers/landing/landing-page.tsx
 msgid "Get the trial"
 msgstr ""
@@ -2787,14 +2838,18 @@ msgstr "업로드되면 이미지가 나타납니다"
 msgid "Import"
 msgstr ""
 
-#: src/constants.tsx
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
 msgid "Import and auto approve"
 msgstr "가져오기 및 자동 승인"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Import and move to staging"
 msgstr "가져오기 및 스테이징으로 이동"
+
+#: src/utilities/translate-task.ts
+msgid "Import collection"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-role/role-detail.tsx
@@ -2804,6 +2859,10 @@ msgstr "로그 가져오기"
 
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Import new version"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Import repository version"
 msgstr ""
 
 #: src/components/ansible-role/namespace-item.tsx
@@ -3104,15 +3163,15 @@ msgstr "비공개로 설정"
 msgid "Make the repository private."
 msgstr "리포지토리를 비공개로 설정합니다."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage all content types."
 msgstr "모든 콘텐츠 유형을 관리합니다."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage ansible repositories."
 msgstr "ansible 리포지토리를 관리합니다."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage collection remotes."
 msgstr "컬렉션을 원격으로 관리합니다."
 
@@ -3305,6 +3364,7 @@ msgstr "네임스페이스 이름은 영숫자와 밑줄로 제한되며 최소 
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/namespace-list/namespace-list.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
@@ -3693,6 +3753,10 @@ msgstr "Ansible Lightspeed 선택 해제"
 msgid "Optimize"
 msgstr ""
 
+#: src/utilities/translate-task.ts
+msgid "Orphan cleanup"
+msgstr ""
+
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "OS / Arch"
 msgstr "OS/ Arch"
@@ -3726,6 +3790,7 @@ msgstr "상위 작업"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
+#: src/containers/namespace-list/namespace-list.tsx
 #: src/paths.ts
 msgid "Partners"
 msgstr "Partners"
@@ -3974,63 +4039,71 @@ msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 버전"
 
 #: src/constants.tsx
-msgid "Pulp ansible: collection sync"
-msgstr "Pulp ansible: 컬렉션 동기화"
+#~ msgid "Pulp ansible: collection sync"
+#~ msgstr "Pulp ansible: 컬렉션 동기화"
 
 #: src/constants.tsx
-msgid "Pulp Ansible: Collections sync"
-msgstr "Pulp Ansible: 컬렉션 동기화"
+#~ msgid "Pulp Ansible: Collections sync"
+#~ msgstr "Pulp Ansible: 컬렉션 동기화"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Copy content"
-msgstr "Pulp ansible: 콘텐츠 복사"
+#~ msgid "Pulp ansible: Copy content"
+#~ msgstr "Pulp ansible: 콘텐츠 복사"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Import collection"
-msgstr "Pulp ansible: 컬렉션 가져오기"
+#~ msgid "Pulp ansible: Import collection"
+#~ msgstr "Pulp ansible: 컬렉션 가져오기"
 
 #: src/constants.tsx
-msgid "Pulp Ansible: Roles synchronize"
-msgstr "Pulp Ansible: 역할 동기화"
+#~ msgid "Pulp Ansible: Roles synchronize"
+#~ msgstr "Pulp Ansible: 역할 동기화"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Update collection remote"
-msgstr "Pulp ansible: 원격 컬렉션 업데이트"
+#~ msgid "Pulp ansible: Update collection remote"
+#~ msgstr "Pulp ansible: 원격 컬렉션 업데이트"
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Pulp Container Version"
 msgstr ""
 
 #: src/constants.tsx
-msgid "Pulp container: Build image from containerfile"
-msgstr "Pulp 컨테이너: containerfile에서 이미지 빌드"
+#~ msgid "Pulp container: Build image from containerfile"
+#~ msgstr "Pulp 컨테이너: containerfile에서 이미지 빌드"
 
 #: src/constants.tsx
-msgid "Pulp container: General multi delete"
-msgstr "Pulp 컨테이너: 일반 다중 삭제"
+#~ msgid "Pulp container: General multi delete"
+#~ msgstr "Pulp 컨테이너: 일반 다중 삭제"
 
 #: src/constants.tsx
-msgid "Pulp container: Recursive add content"
-msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 추가"
+#~ msgid "Pulp container: Recursive add content"
+#~ msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 추가"
 
 #: src/constants.tsx
-msgid "Pulp container: Recursive remove content"
-msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 삭제"
+#~ msgid "Pulp container: Recursive remove content"
+#~ msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 삭제"
 
 #: src/constants.tsx
-msgid "Pulp container: Tag image"
-msgstr "Pulp 컨테이너: 태그 이미지"
+#~ msgid "Pulp container: Tag image"
+#~ msgstr "Pulp 컨테이너: 태그 이미지"
 
 #: src/constants.tsx
-msgid "Pulp container: Tasks synchronize"
-msgstr "Pulp 컨테이너: 작업 동기화"
+#~ msgid "Pulp container: Tasks synchronize"
+#~ msgstr "Pulp 컨테이너: 작업 동기화"
 
 #: src/constants.tsx
-msgid "Pulp container: Untage image"
-msgstr "Pulp 컨테이너: 이미지 태그 분리"
+#~ msgid "Pulp container: Untage image"
+#~ msgstr "Pulp 컨테이너: 이미지 태그 분리"
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Pulp Core Version"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Pulp export"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Pulp import"
 msgstr ""
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx
@@ -4038,56 +4111,60 @@ msgid "Pulp type"
 msgstr "Pulp 유형"
 
 #: src/constants.tsx
-msgid "Pulpcore: Add and remove"
-msgstr "Pulpcore: 추가 및 제거"
+#~ msgid "Pulpcore: Add and remove"
+#~ msgstr "Pulpcore: 추가 및 제거"
 
 #: src/constants.tsx
-msgid "Pulpcore: Add or remove"
-msgstr "Pulpcore: 추가 또는 제거"
+#~ msgid "Pulpcore: Add or remove"
+#~ msgstr "Pulpcore: 추가 또는 제거"
 
 #: src/constants.tsx
-msgid "Pulpcore: Delete version"
-msgstr "Pulpcore: 버전 삭제"
+#~ msgid "Pulpcore: Delete version"
+#~ msgstr "Pulpcore: 버전 삭제"
 
 #: src/constants.tsx
-msgid "Pulpcore: General create"
-msgstr "Pulpcore: 일반 생성"
+#~ msgid "Pulpcore: General create"
+#~ msgstr "Pulpcore: 일반 생성"
 
 #: src/constants.tsx
-msgid "Pulpcore: General delete"
-msgstr "Pulpcore: 일반 삭제"
+#~ msgid "Pulpcore: General delete"
+#~ msgstr "Pulpcore: 일반 삭제"
 
 #: src/constants.tsx
-msgid "Pulpcore: General update"
-msgstr "Pulpcore: 일반 업데이트"
+#~ msgid "Pulpcore: General update"
+#~ msgstr "Pulpcore: 일반 업데이트"
 
 #: src/constants.tsx
-msgid "Pulpcore: Import repository version"
-msgstr "Pulpcore: 리포지토리 버전 가져오기"
+#~ msgid "Pulpcore: Import repository version"
+#~ msgstr "Pulpcore: 리포지토리 버전 가져오기"
 
 #: src/constants.tsx
-msgid "Pulpcore: Orphan cleanup"
-msgstr "Pulpcore: Orphan 정리"
+#~ msgid "Pulpcore: Orphan cleanup"
+#~ msgstr "Pulpcore: Orphan 정리"
 
 #: src/constants.tsx
-msgid "Pulpcore: Pulp export"
-msgstr "Pulpcore: Pulp 내보내기"
+#~ msgid "Pulpcore: Pulp export"
+#~ msgstr "Pulpcore: Pulp 내보내기"
 
 #: src/constants.tsx
-msgid "Pulpcore: Pulp import"
-msgstr "Pulpcore: Pulp 가져오기"
+#~ msgid "Pulpcore: Pulp import"
+#~ msgstr "Pulpcore: Pulp 가져오기"
 
 #: src/constants.tsx
-msgid "Pulpcore: Repair all artifacts"
-msgstr "Pulpcore: 모든 아티팩트를 수정"
+#~ msgid "Pulpcore: Repair all artifacts"
+#~ msgstr "Pulpcore: 모든 아티팩트를 수정"
 
 #: src/constants.tsx
-msgid "Pulpcore: Repair version"
-msgstr "Pulpcore: 복구 버전"
+#~ msgid "Pulpcore: Repair version"
+#~ msgstr "Pulpcore: 복구 버전"
 
 #: src/constants.tsx
-msgid "Pulpcore: Upload commit"
-msgstr "Pulpcore: 커밋 업로드"
+#~ msgid "Pulpcore: Upload commit"
+#~ msgstr "Pulpcore: 커밋 업로드"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push and change execution environments."
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Push container images"
@@ -4110,12 +4187,16 @@ msgstr "컨테이너 이미지 푸시"
 #~ msgstr "Push to existing containers"
 
 #: src/constants.tsx
-msgid "Push, and change execution environments."
-msgstr "실행 환경을 푸시하고 변경합니다."
+#~ msgid "Push, and change execution environments."
+#~ msgstr "실행 환경을 푸시하고 변경합니다."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push, delete and change execution environments. Create, delete and change remote registries."
+msgstr ""
 
 #: src/constants.tsx
-msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
-msgstr "실행 환경을 푸시, 삭제 및 변경합니다. 원격 레지스트리를 생성, 삭제 및 변경합니다."
+#~ msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
+#~ msgstr "실행 환경을 푸시, 삭제 및 변경합니다. 원격 레지스트리를 생성, 삭제 및 변경합니다."
 
 #: src/components/shared/ratings.tsx
 msgid "Quality of docs"
@@ -4148,6 +4229,14 @@ msgstr ""
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Reason: task {0}"
 msgstr "이유: {0} 작업"
+
+#: src/utilities/translate-task.ts
+msgid "Recursive add content"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Recursive remove content"
+msgstr ""
 
 #: src/components/repo-selector/repo-selector.tsx
 msgid "Red Hat Certified"
@@ -4294,7 +4383,7 @@ msgstr ""
 msgid "Remove collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Remove content from repository"
 msgstr "리포지토리에서 콘텐츠 제거"
 
@@ -4329,6 +4418,14 @@ msgstr "그룹에서 사용자를 제거하시겠습니까?"
 
 #: src/components/collection-detail/collection-dropdown.tsx
 msgid "Remove version {version} from repository"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Repair all artifacts"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Repair repository version"
 msgstr ""
 
 #: src/components/headers/collection-header.tsx
@@ -4570,6 +4667,10 @@ msgstr ""
 #: src/containers/role-management/role-list.tsx
 msgid "Roles list could not be displayed."
 msgstr "역할 목록을 표시할 수 없습니다."
+
+#: src/utilities/translate-task.ts
+msgid "Roles synchronize"
+msgstr ""
 
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
@@ -5227,6 +5328,10 @@ msgstr "동기화 작업이 이미 대기열에 있습니다."
 msgid "Sync will only add missing content"
 msgstr ""
 
+#: src/utilities/translate-task.ts
+msgid "Synchronize"
+msgstr ""
+
 #: src/containers/token/token-insights.tsx
 msgid "Synclist distribution was not found."
 msgstr ""
@@ -5241,6 +5346,10 @@ msgstr ""
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "Tag"
 msgstr "태그"
+
+#: src/utilities/translate-task.ts
+msgid "Tag image"
+msgstr ""
 
 #: src/components/collection-list/collection-filter.tsx
 #~ msgid "tags"
@@ -5695,6 +5804,14 @@ msgstr "서명되지 않음"
 msgid "Unsigned version(s)"
 msgstr "서명되지 않은 버전"
 
+#: src/utilities/translate-task.ts
+msgid "Untag image"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Update collection remote"
+msgstr ""
+
 #: src/constants.tsx
 #~ msgid "Update container information"
 #~ msgstr "Update container information"
@@ -5727,7 +5844,7 @@ msgstr "업데이트됨 <0/>"
 msgid "Upload"
 msgstr "업로드"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Upload and modify collections."
 msgstr "컬렉션을 업로드하고 수정합니다."
 
@@ -5739,6 +5856,10 @@ msgstr ""
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
+
+#: src/utilities/translate-task.ts
+msgid "Upload commit"
+msgstr ""
 
 #: src/components/collection-detail/collection-dropdown.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -6044,6 +6165,8 @@ msgid "Version:"
 msgstr "버전:"
 
 #: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Versions"
 msgstr "버전"
@@ -6051,6 +6174,10 @@ msgstr "버전"
 #: src/constants.tsx
 #~ msgid "View all tasks"
 #~ msgstr "View all tasks"
+
+#: src/utilities/translate-locked-role.ts
+msgid "View and cancel any task."
+msgstr ""
 
 #: src/constants.tsx
 #~ msgid "View Ansible distribution"
@@ -6110,21 +6237,21 @@ msgstr "더 알아보기"
 #~ msgid "View user"
 #~ msgstr "View user"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change groups."
 msgstr "그룹을 확인, 추가, 제거 및 변경합니다."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change synclists."
 msgstr "동기화 목록을 확인, 추가, 제거 및 변경합니다."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change users."
 msgstr "사용자를 확인, 추가, 제거 및 변경합니다."
 
 #: src/constants.tsx
-msgid "View, and cancel any task."
-msgstr "작업을 확인 및 제거합니다."
+#~ msgid "View, and cancel any task."
+#~ msgstr "작업을 확인 및 제거합니다."
 
 #: src/components/ansible-role/import-list.tsx
 #: src/components/ansible-role/import-list.tsx

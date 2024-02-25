@@ -267,6 +267,8 @@ msgstr "About"
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/components/execution-environment-header/execution-environment-header.tsx
 #: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
 #: src/containers/ansible-repository/detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -314,6 +316,10 @@ msgstr "Add a README with instructions for using this container."
 #: src/components/rbac/role-form.tsx
 msgid "Add a role description here"
 msgstr "Add a role description here"
+
+#: src/utilities/translate-task.ts
+msgid "Add and remove repository"
+msgstr "Add and remove repository"
 
 #: src/constants.tsx
 #~ msgid "Add Ansible distribution"
@@ -363,6 +369,10 @@ msgstr "Add new tag"
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Add new tag to image"
 msgstr "Add new tag to image"
+
+#: src/utilities/translate-task.ts
+msgid "Add or remove"
+msgstr "Add or remove"
 
 #: src/actions/ansible-remote-create.tsx
 msgid "Add remote"
@@ -437,13 +447,17 @@ msgstr "All policies and guidelines"
 msgid "All Repos"
 msgstr "All Repos"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
+msgid "Allow all actions on a task schedule."
+msgstr "Allow all actions on a task schedule."
+
+#: src/utilities/translate-locked-role.ts
 msgid "Allow all actions on a task."
 msgstr "Allow all actions on a task."
 
 #: src/constants.tsx
-msgid "Allow all actions on a taskschedule."
-msgstr "Allow all actions on a taskschedule."
+#~ msgid "Allow all actions on a taskschedule."
+#~ msgstr "Allow all actions on a taskschedule."
 
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Already the current version"
@@ -537,7 +551,7 @@ msgstr "Approval status:"
 msgid "Approve"
 msgstr "Approve"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Approve, reject and sync collections from remotes."
 msgstr "Approve, reject and sync collections from remotes."
 
@@ -657,6 +671,10 @@ msgstr "Browser OS"
 msgid "Browser Version"
 msgstr "Browser Version"
 
+#: src/utilities/translate-task.ts
+msgid "Build image from Containerfile"
+msgstr "Build image from Containerfile"
+
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/role-management/role-list.tsx
@@ -765,7 +783,7 @@ msgstr "Certified"
 msgid "Change"
 msgstr "Change"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Change and upload collections to namespaces."
 msgstr "Change and upload collections to namespaces."
 
@@ -798,7 +816,7 @@ msgstr "Change and upload collections to namespaces."
 #~ msgid "Change distribution"
 #~ msgstr "Change distribution"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Change existing execution environments."
 msgstr "Change existing execution environments."
 
@@ -1114,6 +1132,11 @@ msgstr "Collection versions will appear once the collection is modified."
 msgid "Collections"
 msgstr "Collections"
 
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
+msgid "Collections sync"
+msgstr "Collections sync"
+
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/search/search.tsx
@@ -1242,8 +1265,12 @@ msgstr "Content added"
 #~ msgstr "Content count"
 
 #: src/containers/landing/landing-page.tsx
-msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
-msgstr "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgid "Content from roles and collections can be referenced in Ansible playbooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgstr "Content from roles and collections can be referenced in Ansible playbooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+
+#: src/containers/landing/landing-page.tsx
+#~ msgid "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+#~ msgstr "Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
 
 #: src/components/repositories/ansible-repository-form.tsx
 msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
@@ -1281,6 +1308,10 @@ msgstr "Controllers list could not be displayed."
 #: src/actions/ansible-repository-copy.tsx
 msgid "Copy CLI configuration"
 msgstr "Copy CLI configuration"
+
+#: src/utilities/translate-task.ts
+msgid "Copy content"
+msgstr "Copy content"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx
 #: src/components/execution-environment/publish-to-controller-modal.tsx
@@ -1361,7 +1392,7 @@ msgstr "Create a password using at least {minLength} characters, including speci
 msgid "Create a role namespace"
 msgstr "Create a role namespace"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "Create and update execution environments under existing container namespaces."
 
@@ -1383,7 +1414,7 @@ msgstr "Create new role"
 msgid "Create new user"
 msgstr "Create new user"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 
@@ -1419,7 +1450,7 @@ msgstr "Created on"
 msgid "Creation started for distribution {distributionName}"
 msgstr "Creation started for distribution {distributionName}"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate all synclist repositories"
 msgstr "Curate all synclist repositories"
 
@@ -1427,11 +1458,11 @@ msgstr "Curate all synclist repositories"
 #~ msgid "Curate all synclist repository"
 #~ msgstr "Curate all synclist repository"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate synclist repository"
 msgstr "Curate synclist repository"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Curate synclist repository batch"
 msgstr "Curate synclist repository batch"
 
@@ -1597,6 +1628,10 @@ msgstr "Delete remote registry?"
 #: src/components/delete-modal/delete-ansible-remote-modal.tsx
 msgid "Delete remote?"
 msgstr "Delete remote?"
+
+#: src/utilities/translate-task.ts
+msgid "Delete repository version"
+msgstr "Delete repository version"
 
 #: src/components/delete-modal/delete-ansible-repository-modal.tsx
 msgid "Delete repository?"
@@ -2557,6 +2592,22 @@ msgstr "Galaxy Logo"
 msgid "Galaxy only"
 msgstr "Galaxy only"
 
+#: src/utilities/translate-task.ts
+msgid "General create"
+msgstr "General create"
+
+#: src/utilities/translate-task.ts
+msgid "General delete"
+msgstr "General delete"
+
+#: src/utilities/translate-task.ts
+msgid "General multi delete"
+msgstr "General multi delete"
+
+#: src/utilities/translate-task.ts
+msgid "General update"
+msgstr "General update"
+
 #: src/containers/landing/landing-page.tsx
 msgid "Get the trial"
 msgstr "Get the trial"
@@ -2788,14 +2839,18 @@ msgstr "Images will appear once uploaded"
 msgid "Import"
 msgstr "Import"
 
-#: src/constants.tsx
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
 msgid "Import and auto approve"
 msgstr "Import and auto approve"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Import and move to staging"
 msgstr "Import and move to staging"
+
+#: src/utilities/translate-task.ts
+msgid "Import collection"
+msgstr "Import collection"
 
 #: src/components/headers/collection-header.tsx
 #: src/containers/ansible-role/role-detail.tsx
@@ -2806,6 +2861,10 @@ msgstr "Import log"
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Import new version"
 msgstr "Import new version"
+
+#: src/utilities/translate-task.ts
+msgid "Import repository version"
+msgstr "Import repository version"
 
 #: src/components/ansible-role/namespace-item.tsx
 #: src/containers/ansible-role/namespace-detail.tsx
@@ -3105,15 +3164,15 @@ msgstr "Make private"
 msgid "Make the repository private."
 msgstr "Make the repository private."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage all content types."
 msgstr "Manage all content types."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage ansible repositories."
 msgstr "Manage ansible repositories."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Manage collection remotes."
 msgstr "Manage collection remotes."
 
@@ -3306,6 +3365,7 @@ msgstr "Namespace names are limited to alphanumeric characters and underscores, 
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
+#: src/containers/namespace-list/namespace-list.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 #: src/loaders/standalone/menu.tsx
@@ -3694,6 +3754,10 @@ msgstr "Opt out of Ansible Lightspeed"
 msgid "Optimize"
 msgstr "Optimize"
 
+#: src/utilities/translate-task.ts
+msgid "Orphan cleanup"
+msgstr "Orphan cleanup"
+
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "OS / Arch"
 msgstr "OS / Arch"
@@ -3727,6 +3791,7 @@ msgstr "Parent task"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
+#: src/containers/namespace-list/namespace-list.tsx
 #: src/paths.ts
 msgid "Partners"
 msgstr "Partners"
@@ -3975,120 +4040,132 @@ msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible Version"
 
 #: src/constants.tsx
-msgid "Pulp ansible: collection sync"
-msgstr "Pulp ansible: collection sync"
+#~ msgid "Pulp ansible: collection sync"
+#~ msgstr "Pulp ansible: collection sync"
 
 #: src/constants.tsx
-msgid "Pulp Ansible: Collections sync"
-msgstr "Pulp Ansible: Collections sync"
+#~ msgid "Pulp Ansible: Collections sync"
+#~ msgstr "Pulp Ansible: Collections sync"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Copy content"
-msgstr "Pulp ansible: Copy content"
+#~ msgid "Pulp ansible: Copy content"
+#~ msgstr "Pulp ansible: Copy content"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Import collection"
-msgstr "Pulp ansible: Import collection"
+#~ msgid "Pulp ansible: Import collection"
+#~ msgstr "Pulp ansible: Import collection"
 
 #: src/constants.tsx
-msgid "Pulp Ansible: Roles synchronize"
-msgstr "Pulp Ansible: Roles synchronize"
+#~ msgid "Pulp Ansible: Roles synchronize"
+#~ msgstr "Pulp Ansible: Roles synchronize"
 
 #: src/constants.tsx
-msgid "Pulp ansible: Update collection remote"
-msgstr "Pulp ansible: Update collection remote"
+#~ msgid "Pulp ansible: Update collection remote"
+#~ msgstr "Pulp ansible: Update collection remote"
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Pulp Container Version"
 msgstr "Pulp Container Version"
 
 #: src/constants.tsx
-msgid "Pulp container: Build image from containerfile"
-msgstr "Pulp container: Build image from containerfile"
+#~ msgid "Pulp container: Build image from containerfile"
+#~ msgstr "Pulp container: Build image from containerfile"
 
 #: src/constants.tsx
-msgid "Pulp container: General multi delete"
-msgstr "Pulp container: General multi delete"
+#~ msgid "Pulp container: General multi delete"
+#~ msgstr "Pulp container: General multi delete"
 
 #: src/constants.tsx
-msgid "Pulp container: Recursive add content"
-msgstr "Pulp container: Recursive add content"
+#~ msgid "Pulp container: Recursive add content"
+#~ msgstr "Pulp container: Recursive add content"
 
 #: src/constants.tsx
-msgid "Pulp container: Recursive remove content"
-msgstr "Pulp container: Recursive remove content"
+#~ msgid "Pulp container: Recursive remove content"
+#~ msgstr "Pulp container: Recursive remove content"
 
 #: src/constants.tsx
-msgid "Pulp container: Tag image"
-msgstr "Pulp container: Tag image"
+#~ msgid "Pulp container: Tag image"
+#~ msgstr "Pulp container: Tag image"
 
 #: src/constants.tsx
-msgid "Pulp container: Tasks synchronize"
-msgstr "Pulp container: Tasks synchronize"
+#~ msgid "Pulp container: Tasks synchronize"
+#~ msgstr "Pulp container: Tasks synchronize"
 
 #: src/constants.tsx
-msgid "Pulp container: Untage image"
-msgstr "Pulp container: Untage image"
+#~ msgid "Pulp container: Untage image"
+#~ msgstr "Pulp container: Untage image"
 
 #: src/components/about-modal/about-modal.tsx
 msgid "Pulp Core Version"
 msgstr "Pulp Core Version"
+
+#: src/utilities/translate-task.ts
+msgid "Pulp export"
+msgstr "Pulp export"
+
+#: src/utilities/translate-task.ts
+msgid "Pulp import"
+msgstr "Pulp import"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Pulp type"
 msgstr "Pulp type"
 
 #: src/constants.tsx
-msgid "Pulpcore: Add and remove"
-msgstr "Pulpcore: Add and remove"
+#~ msgid "Pulpcore: Add and remove"
+#~ msgstr "Pulpcore: Add and remove"
 
 #: src/constants.tsx
-msgid "Pulpcore: Add or remove"
-msgstr "Pulpcore: Add or remove"
+#~ msgid "Pulpcore: Add or remove"
+#~ msgstr "Pulpcore: Add or remove"
 
 #: src/constants.tsx
-msgid "Pulpcore: Delete version"
-msgstr "Pulpcore: Delete version"
+#~ msgid "Pulpcore: Delete version"
+#~ msgstr "Pulpcore: Delete version"
 
 #: src/constants.tsx
-msgid "Pulpcore: General create"
-msgstr "Pulpcore: General create"
+#~ msgid "Pulpcore: General create"
+#~ msgstr "Pulpcore: General create"
 
 #: src/constants.tsx
-msgid "Pulpcore: General delete"
-msgstr "Pulpcore: General delete"
+#~ msgid "Pulpcore: General delete"
+#~ msgstr "Pulpcore: General delete"
 
 #: src/constants.tsx
-msgid "Pulpcore: General update"
-msgstr "Pulpcore: General update"
+#~ msgid "Pulpcore: General update"
+#~ msgstr "Pulpcore: General update"
 
 #: src/constants.tsx
-msgid "Pulpcore: Import repository version"
-msgstr "Pulpcore: Import repository version"
+#~ msgid "Pulpcore: Import repository version"
+#~ msgstr "Pulpcore: Import repository version"
 
 #: src/constants.tsx
-msgid "Pulpcore: Orphan cleanup"
-msgstr "Pulpcore: Orphan cleanup"
+#~ msgid "Pulpcore: Orphan cleanup"
+#~ msgstr "Pulpcore: Orphan cleanup"
 
 #: src/constants.tsx
-msgid "Pulpcore: Pulp export"
-msgstr "Pulpcore: Pulp export"
+#~ msgid "Pulpcore: Pulp export"
+#~ msgstr "Pulpcore: Pulp export"
 
 #: src/constants.tsx
-msgid "Pulpcore: Pulp import"
-msgstr "Pulpcore: Pulp import"
+#~ msgid "Pulpcore: Pulp import"
+#~ msgstr "Pulpcore: Pulp import"
 
 #: src/constants.tsx
-msgid "Pulpcore: Repair all artifacts"
-msgstr "Pulpcore: Repair all artifacts"
+#~ msgid "Pulpcore: Repair all artifacts"
+#~ msgstr "Pulpcore: Repair all artifacts"
 
 #: src/constants.tsx
-msgid "Pulpcore: Repair version"
-msgstr "Pulpcore: Repair version"
+#~ msgid "Pulpcore: Repair version"
+#~ msgstr "Pulpcore: Repair version"
 
 #: src/constants.tsx
-msgid "Pulpcore: Upload commit"
-msgstr "Pulpcore: Upload commit"
+#~ msgid "Pulpcore: Upload commit"
+#~ msgstr "Pulpcore: Upload commit"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push and change execution environments."
+msgstr "Push and change execution environments."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Push container images"
@@ -4111,12 +4188,16 @@ msgstr "Push container images"
 #~ msgstr "Push to existing containers"
 
 #: src/constants.tsx
-msgid "Push, and change execution environments."
-msgstr "Push, and change execution environments."
+#~ msgid "Push, and change execution environments."
+#~ msgstr "Push, and change execution environments."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push, delete and change execution environments. Create, delete and change remote registries."
+msgstr "Push, delete and change execution environments. Create, delete and change remote registries."
 
 #: src/constants.tsx
-msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
-msgstr "Push, delete, and change execution environments. Create, delete and change remote registries."
+#~ msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
+#~ msgstr "Push, delete, and change execution environments. Create, delete and change remote registries."
 
 #: src/components/shared/ratings.tsx
 msgid "Quality of docs"
@@ -4149,6 +4230,14 @@ msgstr "Ready for production"
 #: src/components/execution-environment/tag-manifest-modal.tsx
 msgid "Reason: task {0}"
 msgstr "Reason: task {0}"
+
+#: src/utilities/translate-task.ts
+msgid "Recursive add content"
+msgstr "Recursive add content"
+
+#: src/utilities/translate-task.ts
+msgid "Recursive remove content"
+msgstr "Recursive remove content"
 
 #: src/components/repo-selector/repo-selector.tsx
 msgid "Red Hat Certified"
@@ -4295,7 +4384,7 @@ msgstr "Remove collection from repository"
 msgid "Remove collection version?"
 msgstr "Remove collection version?"
 
-#: src/constants.tsx
+#: src/utilities/translate-task.ts
 msgid "Remove content from repository"
 msgstr "Remove content from repository"
 
@@ -4331,6 +4420,14 @@ msgstr "Remove user from group?"
 #: src/components/collection-detail/collection-dropdown.tsx
 msgid "Remove version {version} from repository"
 msgstr "Remove version {version} from repository"
+
+#: src/utilities/translate-task.ts
+msgid "Repair all artifacts"
+msgstr "Repair all artifacts"
+
+#: src/utilities/translate-task.ts
+msgid "Repair repository version"
+msgstr "Repair repository version"
 
 #: src/components/headers/collection-header.tsx
 msgid "Repo"
@@ -4571,6 +4668,10 @@ msgstr "Roles are not currently enabled."
 #: src/containers/role-management/role-list.tsx
 msgid "Roles list could not be displayed."
 msgstr "Roles list could not be displayed."
+
+#: src/utilities/translate-task.ts
+msgid "Roles synchronize"
+msgstr "Roles synchronize"
 
 #: src/containers/ansible-role/namespace-detail.tsx
 #: src/containers/ansible-role/role-list.tsx
@@ -5228,6 +5329,10 @@ msgstr "Sync task is already queued."
 msgid "Sync will only add missing content"
 msgstr "Sync will only add missing content"
 
+#: src/utilities/translate-task.ts
+msgid "Synchronize"
+msgstr "Synchronize"
+
 #: src/containers/token/token-insights.tsx
 msgid "Synclist distribution was not found."
 msgstr "Synclist distribution was not found."
@@ -5242,6 +5347,10 @@ msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future rele
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "Tag"
 msgstr "Tag"
+
+#: src/utilities/translate-task.ts
+msgid "Tag image"
+msgstr "Tag image"
 
 #: src/components/collection-list/collection-filter.tsx
 #~ msgid "tags"
@@ -5696,6 +5805,14 @@ msgstr "Unsigned"
 msgid "Unsigned version(s)"
 msgstr "Unsigned version(s)"
 
+#: src/utilities/translate-task.ts
+msgid "Untag image"
+msgstr "Untag image"
+
+#: src/utilities/translate-task.ts
+msgid "Update collection remote"
+msgstr "Update collection remote"
+
 #: src/constants.tsx
 #~ msgid "Update container information"
 #~ msgstr "Update container information"
@@ -5728,7 +5845,7 @@ msgstr "Updated <0/>"
 msgid "Upload"
 msgstr "Upload"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "Upload and modify collections."
 msgstr "Upload and modify collections."
 
@@ -5740,6 +5857,10 @@ msgstr "Upload anyway?"
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Upload collection"
 msgstr "Upload collection"
+
+#: src/utilities/translate-task.ts
+msgid "Upload commit"
+msgstr "Upload commit"
 
 #: src/components/collection-detail/collection-dropdown.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
@@ -6045,6 +6166,8 @@ msgid "Version:"
 msgstr "Version:"
 
 #: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Versions"
 msgstr "Versions"
@@ -6052,6 +6175,10 @@ msgstr "Versions"
 #: src/constants.tsx
 #~ msgid "View all tasks"
 #~ msgstr "View all tasks"
+
+#: src/utilities/translate-locked-role.ts
+msgid "View and cancel any task."
+msgstr "View and cancel any task."
 
 #: src/constants.tsx
 #~ msgid "View Ansible distribution"
@@ -6111,21 +6238,21 @@ msgstr "View more"
 #~ msgid "View user"
 #~ msgstr "View user"
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change groups."
 msgstr "View, add, remove and change groups."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change synclists."
 msgstr "View, add, remove and change synclists."
 
-#: src/constants.tsx
+#: src/utilities/translate-locked-role.ts
 msgid "View, add, remove and change users."
 msgstr "View, add, remove and change users."
 
 #: src/constants.tsx
-msgid "View, and cancel any task."
-msgstr "View, and cancel any task."
+#~ msgid "View, and cancel any task."
+#~ msgstr "View, and cancel any task."
 
 #: src/components/ansible-role/import-list.tsx
 #: src/components/ansible-role/import-list.tsx
