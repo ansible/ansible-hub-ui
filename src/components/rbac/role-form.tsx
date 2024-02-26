@@ -12,7 +12,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { PermissionCategories } from 'src/components';
+import { FormFieldHelper, PermissionCategories } from 'src/components';
 
 interface IState {
   permissions: string[];

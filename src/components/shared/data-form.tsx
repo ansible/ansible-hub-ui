@@ -5,6 +5,7 @@ import {
   TextInputTypes,
 } from '@patternfly/react-core';
 import React, { Component, ReactElement, ReactNode } from 'react';
+import { FormFieldHelper } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {

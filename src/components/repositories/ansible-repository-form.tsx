@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,
+  FormFieldHelper,
   HelperText,
   LazyDistributions,
   PulpLabels,

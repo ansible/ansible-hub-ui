@@ -23,6 +23,7 @@ import {
   APISearchTypeAhead,
   AlertList,
   AlertType,
+  FormFieldHelper,
   HelperText,
   closeAlertMixin,
 } from 'src/components';

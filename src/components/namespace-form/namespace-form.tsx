@@ -4,7 +4,7 @@ import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-i
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
 import React, { Component } from 'react';
 import { NamespaceType } from 'src/api';
-import { NamespaceCard } from 'src/components';
+import { FormFieldHelper, NamespaceCard } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
 import './namespace-form.scss';

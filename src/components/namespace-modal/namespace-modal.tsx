@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { NamespaceAPI } from 'src/api';
-import { HelperText } from 'src/components';
+import { FormFieldHelper, HelperText } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {

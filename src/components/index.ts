@@ -112,6 +112,7 @@ export { DetailList } from './shared/detail-list';
 export { Details } from './shared/details';
 export { DownloadCount } from './shared/download-count';
 export { ExternalLink } from './shared/external-link';
+export { FormFieldHelper } from './shared/form-field-helper';
 export { HubListToolbar } from './shared/hub-list-toolbar';
 export { HubPagination } from './shared/hub-pagination';
 export { LanguageSwitcher } from './shared/language-switcher';
