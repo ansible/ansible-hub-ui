@@ -147,10 +147,8 @@ function Ratings({ scores }: { scores: Record<string, number> }) {
 
   return (
     <Tooltip content={help}>
-      <span>
-        <HelperText hasAutoWidth content={more} />{' '}
-        <span style={{ marginRight: '8px' }}>{scores.score}</span>
-      </span>
+      <HelperText hasAutoWidth content={more} />{' '}
+      <span style={{ marginRight: '8px' }}>{scores.score}</span>
     </Tooltip>
   );
 }
