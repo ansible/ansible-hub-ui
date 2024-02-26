@@ -218,8 +218,8 @@ export class RemoteForm extends Component<IProps, IState> {
 
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
-    // FIXME: calll .. was onchange
-    const fileOnChange = (field) => (value, name) => {
+
+    const fileOnChange = (field) => (_event, value, name) => {
       this.setState(
         {
           filenames: {
