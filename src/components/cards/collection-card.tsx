@@ -32,7 +32,7 @@ export const CollectionNextPageCard = ({
   onClick: () => void;
 }) => {
   return (
-    <Card className='hub-c-card-collection-container card'>
+    <Card className='hub-c-card-collection-container'>
       <div
         style={{
           display: 'flex',
@@ -68,7 +68,7 @@ export const CollectionCard = ({
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
-    <Card className='hub-c-card-collection-container card'>
+    <Card className='hub-c-card-collection-container'>
       <CardHeader className='logo-row'>
         <Logo
           alt={t`${nsTitle} logo`}

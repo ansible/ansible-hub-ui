@@ -57,7 +57,7 @@ export class NamespaceForm extends Component<IProps> {
               </FormFieldHelper>
             </FormGroup>
           </div>
-          <div className='card'>
+          <div className='hub-namespace-form-card'>
             <NamespaceCard namespace={namespace} />
           </div>
         </div>
@@ -211,7 +211,7 @@ export class NamespaceForm extends Component<IProps> {
               onChange={(event, value) => this.updateLink(index, value, event)}
               validated={NamespaceForm.validateName(link).variant}
             />
-            <FormHelperText {...NamespaceForm.validateName(link)} />
+            <FormFieldHelper {...NamespaceForm.validateName(link)} />
           </FormGroup>
         </div>
         <div className='link-url'>
@@ -224,7 +224,7 @@ export class NamespaceForm extends Component<IProps> {
               onChange={(event, value) => this.updateLink(index, value, event)}
               validated={NamespaceForm.validateUrl(link.url).variant}
             />
-            <FormHelperText {...NamespaceForm.validateUrl(link)} />
+            <FormFieldHelper {...NamespaceForm.validateUrl(link)} />
           </FormGroup>
         </div>
         <div className='link-button'>
