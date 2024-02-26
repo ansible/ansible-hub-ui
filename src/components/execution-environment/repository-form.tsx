@@ -180,14 +180,7 @@ export class RepositoryForm extends Component<IProps, IState> {
             </>
           ) : (
             <>
-              <FormGroup
-                isRequired
-                key='name'
-                fieldId='name'
-                label={t`Name`}
-                helperTextInvalid={this.state.formErrors['name']}
-                validated={isFieldValid(this.state.formErrors, 'name')}
-              >
+              <FormGroup isRequired key='name' fieldId='name' label={t`Name`}>
                 <TextInput
                   id='name'
                   value={name}
@@ -198,6 +191,11 @@ export class RepositoryForm extends Component<IProps, IState> {
                   }}
                   validated={isFieldValid(this.state.formErrors, 'name')}
                 />
+                <FormFieldHelper
+                  variant={isFieldValid(this.state.formErrors, 'name')}
+                >
+                  {this.state.formErrors['name']}
+                </FormFieldHelper>
               </FormGroup>
 
               <FormGroup
@@ -226,14 +224,6 @@ export class RepositoryForm extends Component<IProps, IState> {
                 label={t`Registry`}
                 className='hub-formgroup-registry'
                 isRequired
-                helperTextInvalid={
-                  this.state.formErrors['registries'] ||
-                  this.state.formErrors['registry']
-                }
-                validated={isFieldValid(this.state.formErrors, [
-                  'registries',
-                  'registry',
-                ])}
               >
                 {!formErrors?.registries && (
                   <>
@@ -256,6 +246,15 @@ export class RepositoryForm extends Component<IProps, IState> {
                     ) : (
                       <Spinner />
                     )}
+                    <FormFieldHelper
+                      variant={isFieldValid(this.state.formErrors, [
+                        'registries',
+                        'registry',
+                      ])}
+                    >
+                      {this.state.formErrors['registries'] ||
+                        this.state.formErrors['registry']}
+                    </FormFieldHelper>
                   </>
                 )}
               </FormGroup>

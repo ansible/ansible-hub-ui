@@ -135,12 +135,7 @@ export class TagManifestModal extends Component<IProps, IState> {
         to reload when the user hits "enter" or clicks "Show Less" on the LabelGroup
         */}
         <Form onSubmit={(e) => e.preventDefault()}>
-          <FormGroup
-            validated={tagInFormError ? 'error' : 'default'}
-            helperTextInvalid={tagInFormError}
-            fieldId='add-new-tag'
-            label={t`Add new tag`}
-          >
+          <FormGroup fieldId='add-new-tag' label={t`Add new tag`}>
             <InputGroup>
               <InputGroupItem isFill>
                 <TextInput
@@ -169,6 +164,9 @@ export class TagManifestModal extends Component<IProps, IState> {
                 </Button>
               </InputGroupItem>
             </InputGroup>
+            <FormFieldHelper variant={tagInFormError ? 'error' : 'default'}>
+              {tagInFormError}
+            </FormFieldHelper>
           </FormGroup>
           {tagToVerify && (
             <Alert

@@ -51,12 +51,10 @@ export class DataForm extends Component<IProps> {
       return (
         <FormGroup
           fieldId={field.id}
-          helperTextInvalid={errorMessages[field.id]}
           isRequired={!isReadonly && requiredFields.includes(field.id)}
           key={field.id}
           label={field.title}
           labelIcon={!isReadonly && field.formGroupLabelIcon}
-          validated={isReadonly ? 'default' : validated}
           data-cy={`DataForm-field-${field.id}`}
         >
           {isReadonly ? (
@@ -73,6 +71,9 @@ export class DataForm extends Component<IProps> {
             />
           )}
           {field.helper}
+          <FormFieldHelper variant={isReadonly ? 'default' : validated}>
+            {errorMessages[field.id]}
+          </FormFieldHelper>
         </FormGroup>
       );
     });

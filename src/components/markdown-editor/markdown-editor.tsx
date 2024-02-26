@@ -22,7 +22,7 @@ export class MarkdownEditor extends Component<IProps> {
         <div className='markdown-editor'>
           {editing && (
             <div className='column editor'>
-              <FormGroup fieldId='resources' helperText={helperText}>
+              <FormGroup fieldId='resources'>
                 <div id='markdown-title'>{t`Raw Markdown`}</div>
                 <TextArea
                   aria-labelledby='markdown-title'
@@ -31,6 +31,7 @@ export class MarkdownEditor extends Component<IProps> {
                   onChange={(_event, value) => updateText(value)}
                   placeholder={placeholder}
                 />
+                <FormFieldHelper>{helperText}</FormFieldHelper>
               </FormGroup>
             </div>
           )}

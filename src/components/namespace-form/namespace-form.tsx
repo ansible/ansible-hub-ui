@@ -42,19 +42,19 @@ export class NamespaceForm extends Component<IProps> {
 
             <br />
 
-            <FormGroup
-              fieldId='company'
-              label={t`Company name`}
-              helperTextInvalid={errorMessages['company']}
-              validated={this.toError(!('company' in errorMessages))}
-            >
+            <FormGroup fieldId='company' label={t`Company name`}>
               <TextInput
-                validated={this.toError(!('company' in errorMessages))}
+                validated={'company' in errorMessages ? 'error' : 'default'}
                 id='company'
                 type='text'
                 value={namespace.company}
                 onChange={(event, value) => this.updateField(value, event)}
               />
+              <FormFieldHelper
+                variant={'company' in errorMessages ? 'error' : 'default'}
+              >
+                {errorMessages['company']}
+              </FormFieldHelper>
             </FormGroup>
           </div>
           <div className='card'>
@@ -62,44 +62,37 @@ export class NamespaceForm extends Component<IProps> {
           </div>
         </div>
 
-        <FormGroup
-          fieldId='avatar_url'
-          label={t`Logo URL`}
-          helperTextInvalid={errorMessages['avatar_url']}
-          validated={this.toError(!('avatar_url' in errorMessages))}
-        >
+        <FormGroup fieldId='avatar_url' label={t`Logo URL`}>
           <TextInput
-            validated={this.toError(!('avatar_url' in errorMessages))}
+            validated={'avatar_url' in errorMessages ? 'error' : 'default'}
             id='avatar_url'
             type='text'
             value={namespace.avatar_url}
             onChange={(event, value) => this.updateField(value, event)}
           />
+          <FormFieldHelper
+            variant={'avatar_url' in errorMessages ? 'error' : 'default'}
+          >
+            {errorMessages['avatar_url']}
+          </FormFieldHelper>
         </FormGroup>
 
-        <FormGroup
-          fieldId='description'
-          label={t`Description`}
-          helperTextInvalid={errorMessages['description']}
-          validated={this.toError(!('description' in errorMessages))}
-        >
+        <FormGroup fieldId='description' label={t`Description`}>
           <TextArea
-            validated={this.toError(!('description' in errorMessages))}
+            validated={'description' in errorMessages ? 'error' : 'default'}
             id='description'
             type='text'
             value={namespace.description}
             onChange={(event, value) => this.updateField(value, event)}
           />
+          <FormFieldHelper
+            variant={'description' in errorMessages ? 'error' : 'default'}
+          >
+            {errorMessages['description']}
+          </FormFieldHelper>
         </FormGroup>
 
-        <FormGroup
-          fieldId='links'
-          label={t`Useful links`}
-          helperTextInvalid={this.getLinksErrorText(errorMessages)}
-          validated={this.toError(
-            !('links__url' in errorMessages || 'links__name' in errorMessages),
-          )}
-        >
+        <FormGroup fieldId='links' label={t`Useful links`}>
           {namespace.links.map((link, index) =>
             this.renderLinkGroup(link, index),
           )}
@@ -111,6 +104,16 @@ export class NamespaceForm extends Component<IProps> {
               size='sm'
             />
           )}
+
+          <FormFieldHelper
+            variant={
+              'links__url' in errorMessages || 'links__name' in errorMessages
+                ? 'error'
+                : 'default'
+            }
+          >
+            {this.getLinksErrorText(errorMessages)}
+          </FormFieldHelper>
         </FormGroup>
       </Form>
     );
@@ -126,14 +129,6 @@ export class NamespaceForm extends Component<IProps> {
     }
 
     return msg.join(' ');
-  }
-
-  private toError(validated: boolean) {
-    if (validated) {
-      return 'default';
-    } else {
-      return 'error';
-    }
   }
 
   private updateField(value, event) {
@@ -165,25 +160,28 @@ export class NamespaceForm extends Component<IProps> {
   }
 
   public static validateName(link): {
-    validated: 'default' | 'error';
-    helperTextInvalid?: string;
+    variant: 'default' | 'error';
+    children?: string;
   } {
     if (link.url) {
       if (link.name) {
-        return { validated: 'default' };
+        return { variant: 'default' };
       } else {
         return {
-          validated: 'error',
-          helperTextInvalid: t`Name must not be empty.`,
+          variant: 'error',
+          children: t`Name must not be empty.`,
         };
       }
     }
 
     // if link url is empty, there is no need to insert name because the link data will be discarded
-    return { validated: 'default' };
+    return { variant: 'default' };
   }
 
-  public static validateUrl(link): ReturnType<typeof validateURLHelper> {
+  public static validateUrl(link): {
+    variant: 'default' | 'warning' | 'error';
+    children?: string;
+  } {
     if (link.url) {
       // only validate url if input is not blank, blank inputs are thrown away
       return validateURLHelper(undefined, link.url);
@@ -191,12 +189,12 @@ export class NamespaceForm extends Component<IProps> {
 
     if (link.name) {
       return {
-        validated: 'error',
-        helperTextInvalid: t`URL must not be empty.`,
+        variant: 'error',
+        children: t`URL must not be empty.`,
       };
     }
 
-    return { validated: 'default' };
+    return { variant: 'default' };
   }
 
   private renderLinkGroup(link, index) {
@@ -204,27 +202,29 @@ export class NamespaceForm extends Component<IProps> {
     return (
       <div className='useful-links' key={index}>
         <div className='link-name'>
-          <FormGroup fieldId={'name'} {...NamespaceForm.validateName(link)}>
+          <FormGroup fieldId={'name'}>
             <TextInput
               id='name'
               type='text'
               placeholder={t`Link text`}
               value={link.name}
               onChange={(event, value) => this.updateLink(index, value, event)}
-              validated={NamespaceForm.validateName(link).validated}
+              validated={NamespaceForm.validateName(link).variant}
             />
+            <FormHelperText {...NamespaceForm.validateName(link)} />
           </FormGroup>
         </div>
         <div className='link-url'>
-          <FormGroup fieldId={'link'} {...NamespaceForm.validateUrl(link)}>
+          <FormGroup fieldId={'link'}>
             <TextInput
               id='url'
               type='text'
               placeholder={t`Link URL`}
               value={link.url}
               onChange={(event, value) => this.updateLink(index, value, event)}
-              validated={NamespaceForm.validateUrl(link.url).validated}
+              validated={NamespaceForm.validateUrl(link.url).variant}
             />
+            <FormHelperText {...NamespaceForm.validateUrl(link)} />
           </FormGroup>
         </div>
         <div className='link-button'>

@@ -44,7 +44,6 @@ export const AnsibleRepositoryForm = ({
   const requiredFields = [];
   const disabledFields = allowEditName ? [] : ['name'];
 
-  const toError = (bool) => (bool ? 'default' : 'error');
   const formGroup = (fieldName, label, helperText, children) => (
     <FormGroup
       key={fieldName}
@@ -59,10 +58,13 @@ export const AnsibleRepositoryForm = ({
         )
       }
       isRequired={requiredFields.includes(fieldName)}
-      validated={toError(!(fieldName in errorMessages))}
-      helperTextInvalid={errorMessages[fieldName]}
     >
       {children}
+      <FormFieldHelper
+        variant={fieldName in errorMessages ? 'error' : 'default'}
+      >
+        {errorMessages[fieldName]}
+      </FormFieldHelper>
     </FormGroup>
   );
   const inputField = (fieldName, label, helperText, props) =>
@@ -71,7 +73,7 @@ export const AnsibleRepositoryForm = ({
       label,
       helperText,
       <TextInput
-        validated={toError(!(fieldName in errorMessages))}
+        validated={fieldName in errorMessages ? 'error' : 'default'}
         isRequired={requiredFields.includes(fieldName)}
         isDisabled={disabledFields.includes(fieldName)}
         id={fieldName}

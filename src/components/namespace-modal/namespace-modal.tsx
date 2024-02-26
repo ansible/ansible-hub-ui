@@ -67,6 +67,7 @@ export class NamespaceModal extends Component<IProps, IState> {
       name: this.state.newNamespaceName,
       groups: [],
     };
+
     NamespaceAPI.create(data)
       .then(() => {
         this.toggleModal();
@@ -122,8 +123,6 @@ export class NamespaceModal extends Component<IProps, IState> {
             label={t`Name`}
             isRequired
             fieldId='name'
-            helperTextInvalid={this.state.errorMessages['name']}
-            validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
               <HelperText
                 content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
@@ -134,7 +133,9 @@ export class NamespaceModal extends Component<IProps, IState> {
             <InputGroup>
               <InputGroupItem isFill>
                 <TextInput
-                  validated={this.toError(this.state.newNamespaceNameValid)}
+                  validated={
+                    this.state.newNamespaceNameValid ? 'default' : 'error'
+                  }
                   isRequired
                   type='text'
                   id='newNamespaceName'
@@ -148,17 +149,14 @@ export class NamespaceModal extends Component<IProps, IState> {
                 />
               </InputGroupItem>
             </InputGroup>
+            <FormFieldHelper
+              variant={this.state.newNamespaceNameValid ? 'default' : 'error'}
+            >
+              {this.state.errorMessages['name']}
+            </FormFieldHelper>
           </FormGroup>
         </Form>
       </Modal>
     );
-  }
-
-  private toError(validated: boolean) {
-    if (validated) {
-      return 'default';
-    } else {
-      return 'error';
-    }
   }
 }

@@ -69,16 +69,7 @@ export class GroupModal extends Component<IProps, IState> {
             onSave(this.state.name);
           }}
         >
-          <FormGroup
-            isRequired
-            key='name'
-            fieldId='name'
-            label={t`Name`}
-            helperTextInvalid={
-              !this.props.errorMessage ? null : this.props.errorMessage.name
-            }
-            validated={this.toError(!this.props.errorMessage)}
-          >
+          <FormGroup isRequired key='name' fieldId='name' label={t`Name`}>
             <TextInput
               id='group_name'
               value={this.state.name}
@@ -87,15 +78,16 @@ export class GroupModal extends Component<IProps, IState> {
                 clearErrors();
               }}
               type='text'
-              validated={this.toError(!this.props.errorMessage)}
+              validated={this.props.errorMessage ? 'error' : 'default'}
             />
+            <FormFieldHelper
+              variant={this.props.errorMessage ? 'error' : 'default'}
+            >
+              {this.props.errorMessage?.name}
+            </FormFieldHelper>
           </FormGroup>
         </Form>
       </Modal>
     );
-  }
-
-  private toError(validated: boolean) {
-    return validated ? 'default' : 'error';
   }
 }

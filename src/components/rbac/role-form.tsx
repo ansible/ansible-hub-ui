@@ -82,8 +82,6 @@ export class RoleForm extends Component<IProps, IState> {
                 fieldId='name'
                 label={t`Name`}
                 style={{ width: '50%', float: 'left' }}
-                helperTextInvalid={nameHelperText}
-                validated={nameValidated}
               >
                 <InputGroup>
                   <InputGroupItem isFill>
@@ -98,6 +96,9 @@ export class RoleForm extends Component<IProps, IState> {
                     />
                   </InputGroupItem>
                 </InputGroup>
+                <FormFieldHelper variant={nameValidated}>
+                  {nameHelperText}
+                </FormFieldHelper>
               </FormGroup>
 
               <FormGroup
@@ -106,8 +107,6 @@ export class RoleForm extends Component<IProps, IState> {
                 key='description'
                 fieldId='description'
                 label={t`Description`}
-                helperTextInvalid={descriptionHelperText}
-                validated={descriptionValidated}
               >
                 <TextInput
                   id='role_description'
@@ -117,6 +116,9 @@ export class RoleForm extends Component<IProps, IState> {
                   validated={descriptionValidated}
                   placeholder={t`Add a role description here`}
                 />
+                <FormFieldHelper variant={descriptionValidated}>
+                  {descriptionHelperText}
+                </FormFieldHelper>
               </FormGroup>
             </div>
           </div>
