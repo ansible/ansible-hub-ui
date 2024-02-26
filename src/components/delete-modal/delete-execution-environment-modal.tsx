@@ -41,7 +41,7 @@ export const DeleteExecutionEnvironmentModal = (props: IProps) => {
       </Text>
       <Checkbox
         isChecked={confirmDelete}
-        onChange={(value) => setConfirmDelete(value)}
+        onChange={(_event, value) => setConfirmDelete(value)}
         label={t`I understand that this action cannot be undone.`}
         id='delete_confirm'
       />

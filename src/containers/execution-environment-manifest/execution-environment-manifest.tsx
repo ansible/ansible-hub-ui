@@ -172,7 +172,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
                   <CardBody>
                     <DataList
                       aria-label={t`Image layers`}
-                      onSelectDataListItem={(id) =>
+                      onSelectDataListItem={(_event, id) =>
                         this.setState({ selectedLayer: id })
                       }
                       selectedDataListItemId={selectedLayer}

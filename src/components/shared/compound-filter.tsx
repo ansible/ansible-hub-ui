@@ -3,13 +3,16 @@ import {
   Button,
   ButtonVariant,
   InputGroup,
+  InputGroupItem,
+  TextInput,
+} from '@patternfly/react-core';
+import {
+  DropdownItem,
   Select,
   SelectGroup,
   SelectOption,
   SelectVariant,
-  TextInput,
-} from '@patternfly/react-core';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+} from '@patternfly/react-core/deprecated';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React, { Component } from 'react';
@@ -104,13 +107,15 @@ export class CompoundFilter extends Component<IProps, IState> {
           />
         )}
         {this.renderInput(selectedFilter)}
-        <Button
-          onClick={() => this.submitFilter()}
-          variant={ButtonVariant.control}
-          isDisabled={!this.props.inputText.trim().length}
-        >
-          <SearchIcon />
-        </Button>
+        <InputGroupItem>
+          <Button
+            onClick={() => this.submitFilter()}
+            variant={ButtonVariant.control}
+            isDisabled={!this.props.inputText.trim().length}
+          >
+            <SearchIcon />
+          </Button>
+        </InputGroupItem>
       </InputGroup>
     );
   }
@@ -201,7 +206,7 @@ export class CompoundFilter extends Component<IProps, IState> {
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.props.inputText}
-            onChange={(k) => this.props.onChange(k)}
+            onChange={(_event, k) => this.props.onChange(k)}
             onKeyPress={(e) => this.handleEnter(e)}
           />
         );

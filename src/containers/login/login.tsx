@@ -56,8 +56,12 @@ class LoginPage extends Component<RouteProps, IState> {
       >
         <LoginForm
           helperText={helperText}
-          onChangePassword={this.handlePasswordChange}
-          onChangeUsername={this.handleUsernameChange}
+          onChangePassword={(_event, passwordValue) =>
+            this.handlePasswordChange(passwordValue)
+          }
+          onChangeUsername={(_event, usernameValue) =>
+            this.handleUsernameChange(usernameValue)
+          }
           onLoginButtonClick={this.onLoginButtonClick}
           passwordValue={this.state.passwordValue}
           showHelperText={!!this.state.errorMessage}

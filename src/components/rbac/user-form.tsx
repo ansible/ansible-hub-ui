@@ -125,7 +125,7 @@ export class UserForm extends Component<IProps, IState> {
           isDisabled={isReadonly}
           id='password-confirm'
           value={passwordConfirm}
-          onChange={(value) => {
+          onChange={(_event, value) => {
             this.setState({ passwordConfirm: value });
           }}
           type='password'

@@ -217,7 +217,9 @@ class ExecutionEnvironmentDetailImages extends Component<
             </>
             <Checkbox
               isChecked={confirmDelete}
-              onChange={(value) => this.setState({ confirmDelete: value })}
+              onChange={(_event, value) =>
+                this.setState({ confirmDelete: value })
+              }
               label={t`I understand that this action cannot be undone.`}
               id='delete_confirm'
             />

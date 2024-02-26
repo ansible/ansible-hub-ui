@@ -213,6 +213,7 @@ export class RemoteForm extends Component<IProps, IState> {
 
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
+    // FIXME: calll .. was onchange
     const fileOnChange = (field) => (value, name) => {
       this.setState(
         {
@@ -244,7 +245,7 @@ export class RemoteForm extends Component<IProps, IState> {
             id='name'
             type='text'
             value={remote.name || ''}
-            onChange={(value) => this.updateRemote(value, 'name')}
+            onChange={(_event, value) => this.updateRemote(value, 'name')}
           />
         </FormGroup>
 
@@ -268,7 +269,7 @@ export class RemoteForm extends Component<IProps, IState> {
             id='url'
             type='text'
             value={remote.url || ''}
-            onChange={(value) => this.updateRemote(value, 'url')}
+            onChange={(_event, value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
 
@@ -287,7 +288,9 @@ export class RemoteForm extends Component<IProps, IState> {
             <Switch
               id='signed_only'
               isChecked={!!remote.signed_only}
-              onChange={(value) => this.updateRemote(value, 'signed_only')}
+              onChange={(_event, value) =>
+                this.updateRemote(value, 'signed_only')
+              }
             />
           </FormGroup>
         ) : null}
@@ -300,7 +303,7 @@ export class RemoteForm extends Component<IProps, IState> {
             <Switch
               id='sync_dependencies'
               isChecked={!!remote.sync_dependencies}
-              onChange={(value) =>
+              onChange={(_event, value) =>
                 this.updateRemote(value, 'sync_dependencies')
               }
             />
@@ -331,7 +334,7 @@ export class RemoteForm extends Component<IProps, IState> {
                 autoComplete='off'
                 id='token'
                 value={remote.token || ''}
-                onChange={(value) => this.updateRemote(value, 'token')}
+                onChange={(_event, value) => this.updateRemote(value, 'token')}
               />
             </WriteOnlyField>
           </FormGroup>
@@ -352,7 +355,7 @@ export class RemoteForm extends Component<IProps, IState> {
               id='ssoUrl'
               type='text'
               value={this.props.remote.auth_url || ''}
-              onChange={(value) => this.updateRemote(value, 'auth_url')}
+              onChange={(_event, value) => this.updateRemote(value, 'auth_url')}
             />
           </FormGroup>
         )}
@@ -395,7 +398,7 @@ export class RemoteForm extends Component<IProps, IState> {
                   filename={filename('requirements_file')}
                   value={this.props.remote.requirements_file || ''}
                   hideDefaultPreview
-                  onChange={fileOnChange('requirements_file')}
+                  onFileInputChange={fileOnChange('requirements_file')}
                 />
               </FlexItem>
               <FlexItem>
@@ -490,7 +493,7 @@ export class RemoteForm extends Component<IProps, IState> {
               id='username'
               type='text'
               value={remote.username || ''}
-              onChange={(value) => this.updateRemote(value, 'username')}
+              onChange={(_event, value) => this.updateRemote(value, 'username')}
             />
           </WriteOnlyField>
         </FormGroup>
@@ -524,7 +527,7 @@ export class RemoteForm extends Component<IProps, IState> {
               type='password'
               autoComplete='off'
               value={remote.password || ''}
-              onChange={(value) => this.updateRemote(value, 'password')}
+              onChange={(_event, value) => this.updateRemote(value, 'password')}
             />
           </WriteOnlyField>
         </FormGroup>
@@ -548,7 +551,9 @@ export class RemoteForm extends Component<IProps, IState> {
                 id='proxy_url'
                 type='text'
                 value={remote.proxy_url || ''}
-                onChange={(value) => this.updateRemote(value, 'proxy_url')}
+                onChange={(_event, value) =>
+                  this.updateRemote(value, 'proxy_url')
+                }
               />
             </FormGroup>
 
@@ -574,7 +579,7 @@ export class RemoteForm extends Component<IProps, IState> {
                   id='proxy_username'
                   type='text'
                   value={remote.proxy_username || ''}
-                  onChange={(value) =>
+                  onChange={(_event, value) =>
                     this.updateRemote(value, 'proxy_username')
                   }
                 />
@@ -601,7 +606,7 @@ export class RemoteForm extends Component<IProps, IState> {
                   type='password'
                   autoComplete='off'
                   value={remote.proxy_password || ''}
-                  onChange={(value) =>
+                  onChange={(_event, value) =>
                     this.updateRemote(value, 'proxy_password')
                   }
                 />
@@ -621,7 +626,9 @@ export class RemoteForm extends Component<IProps, IState> {
               helperTextInvalid={errorMessages['tls_validation']}
             >
               <Checkbox
-                onChange={(value) => this.updateRemote(value, 'tls_validation')}
+                onChange={(_event, value) =>
+                  this.updateRemote(value, 'tls_validation')
+                }
                 id='tls_validation'
                 isChecked={remote.tls_validation}
               />
@@ -652,7 +659,7 @@ export class RemoteForm extends Component<IProps, IState> {
                   filename={filename('client_key')}
                   value={this.props.remote.client_key || ''}
                   hideDefaultPreview
-                  onChange={fileOnChange('client_key')}
+                  onFileInputChange={fileOnChange('client_key')}
                 />
               </WriteOnlyField>
             </FormGroup>
@@ -679,7 +686,7 @@ export class RemoteForm extends Component<IProps, IState> {
                     filename={filename('client_cert')}
                     value={this.props.remote.client_cert || ''}
                     hideDefaultPreview
-                    onChange={fileOnChange('client_cert')}
+                    onFileInputChange={fileOnChange('client_cert')}
                   />
                 </FlexItem>
                 <FlexItem>
@@ -723,7 +730,7 @@ export class RemoteForm extends Component<IProps, IState> {
                     filename={filename('ca_cert')}
                     value={this.props.remote.ca_cert || ''}
                     hideDefaultPreview
-                    onChange={fileOnChange('ca_cert')}
+                    onFileInputChange={fileOnChange('ca_cert')}
                   />
                 </FlexItem>
                 <FlexItem>
@@ -771,7 +778,7 @@ export class RemoteForm extends Component<IProps, IState> {
                     ? 'default'
                     : 'error'
                 }
-                onChange={(value) =>
+                onChange={(_event, value) =>
                   this.updateRemote(value, 'download_concurrency')
                 }
               />
@@ -797,7 +804,9 @@ export class RemoteForm extends Component<IProps, IState> {
                 id='rate_limit'
                 type='number'
                 value={remote.rate_limit || ''}
-                onChange={(value) => this.updateRemote(value, 'rate_limit')}
+                onChange={(_event, value) =>
+                  this.updateRemote(value, 'rate_limit')
+                }
               />
             </FormGroup>
           </div>

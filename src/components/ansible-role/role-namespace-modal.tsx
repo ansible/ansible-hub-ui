@@ -4,6 +4,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
+  InputGroupItem,
   Modal,
   ModalVariant,
   TextInput,
@@ -62,14 +63,16 @@ export function RoleNamespaceModal({ addAlert, onClose, onSaved }: IProps) {
       >
         <FormGroup label={t`Name`} isRequired fieldId='name'>
           <InputGroup>
-            <TextInput
-              isRequired
-              type='text'
-              id='name'
-              name='name'
-              value={name}
-              onChange={setName}
-            />
+            <InputGroupItem isFill>
+              <TextInput
+                isRequired
+                type='text'
+                id='name'
+                name='name'
+                value={name}
+                onChange={(_event, val) => setName(val)}
+              />
+            </InputGroupItem>
           </InputGroup>
         </FormGroup>
       </Form>

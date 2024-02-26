@@ -4,6 +4,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
+  InputGroupItem,
   Label,
   LabelGroup,
   Modal,
@@ -190,7 +191,7 @@ export class RepositoryForm extends Component<IProps, IState> {
                   id='name'
                   value={name}
                   isDisabled={!isNew}
-                  onChange={(value) => {
+                  onChange={(_event, value) => {
                     this.setState({ name: value });
                     this.validateName(value);
                   }}
@@ -212,7 +213,9 @@ export class RepositoryForm extends Component<IProps, IState> {
                 <TextInput
                   id='upstreamName'
                   value={upstreamName}
-                  onChange={(value) => this.setState({ upstreamName: value })}
+                  onChange={(_event, value) =>
+                    this.setState({ upstreamName: value })
+                  }
                 />
               </FormGroup>
 
@@ -261,24 +264,32 @@ export class RepositoryForm extends Component<IProps, IState> {
                 label={t`Add tag(s) to include`}
               >
                 <InputGroup>
-                  <TextInput
-                    type='text'
-                    id='addTagsInclude'
-                    value={addTagsInclude}
-                    onChange={(val) => this.setState({ addTagsInclude: val })}
-                    onKeyUp={(e) => {
-                      // l10n: don't translate
-                      if (e.key === 'Enter') {
-                        this.addTags(addTagsInclude, 'includeTags');
+                  <InputGroupItem isFill>
+                    <TextInput
+                      type='text'
+                      id='addTagsInclude'
+                      value={addTagsInclude}
+                      onChange={(_event, val) =>
+                        this.setState({ addTagsInclude: val })
                       }
-                    }}
-                  />
-                  <Button
-                    variant='secondary'
-                    onClick={() => this.addTags(addTagsInclude, 'includeTags')}
-                  >
-                    {t`Add`}
-                  </Button>
+                      onKeyUp={(e) => {
+                        // l10n: don't translate
+                        if (e.key === 'Enter') {
+                          this.addTags(addTagsInclude, 'includeTags');
+                        }
+                      }}
+                    />
+                  </InputGroupItem>
+                  <InputGroupItem>
+                    <Button
+                      variant='secondary'
+                      onClick={() =>
+                        this.addTags(addTagsInclude, 'includeTags')
+                      }
+                    >
+                      {t`Add`}
+                    </Button>
+                  </InputGroupItem>
                 </InputGroup>
               </FormGroup>
 
@@ -304,24 +315,32 @@ export class RepositoryForm extends Component<IProps, IState> {
                 label={t`Add tag(s) to exclude`}
               >
                 <InputGroup>
-                  <TextInput
-                    type='text'
-                    id='addTagsExclude'
-                    value={addTagsExclude}
-                    onChange={(val) => this.setState({ addTagsExclude: val })}
-                    onKeyUp={(e) => {
-                      // l10n: don't translate
-                      if (e.key === 'Enter') {
-                        this.addTags(addTagsExclude, 'excludeTags');
+                  <InputGroupItem isFill>
+                    <TextInput
+                      type='text'
+                      id='addTagsExclude'
+                      value={addTagsExclude}
+                      onChange={(_event, val) =>
+                        this.setState({ addTagsExclude: val })
                       }
-                    }}
-                  />
-                  <Button
-                    variant='secondary'
-                    onClick={() => this.addTags(addTagsExclude, 'excludeTags')}
-                  >
-                    {t`Add`}
-                  </Button>
+                      onKeyUp={(e) => {
+                        // l10n: don't translate
+                        if (e.key === 'Enter') {
+                          this.addTags(addTagsExclude, 'excludeTags');
+                        }
+                      }}
+                    />
+                  </InputGroupItem>
+                  <InputGroupItem>
+                    <Button
+                      variant='secondary'
+                      onClick={() =>
+                        this.addTags(addTagsExclude, 'excludeTags')
+                      }
+                    >
+                      {t`Add`}
+                    </Button>
+                  </InputGroupItem>
                 </InputGroup>
               </FormGroup>
 
@@ -357,7 +376,9 @@ export class RepositoryForm extends Component<IProps, IState> {
                   'container.namespace_change_containerdistribution',
                 )
               }
-              onChange={(value) => this.setState({ description: value })}
+              onChange={(_event, value) =>
+                this.setState({ description: value })
+              }
               type='text'
               resizeOrientation={'vertical'}
               autoResize

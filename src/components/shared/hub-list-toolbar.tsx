@@ -133,7 +133,7 @@ export function HubListToolbar({
           renderedButtons
         )}
         <ToolbarGroup
-          alignment={{ default: 'alignRight' }}
+          align={{ default: 'alignRight' }}
           style={{ alignSelf: 'start' }}
         >
           {switcher ? (

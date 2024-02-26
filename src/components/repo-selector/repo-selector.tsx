@@ -37,11 +37,10 @@ export const RepoSelector = ({ selectedRepo }: IProps) => {
       <Flex>
         <FlexItem>
           <InputGroup>
-            <InputGroupText style={{ paddingLeft: 0 }} variant='plain'>
+            <InputGroupText style={{ paddingLeft: 0 }}>
               {t`Repository`}
             </InputGroupText>
             <InputGroupText
-              variant='plain'
               style={{
                 backgroundColor: 'var(--pf-global--disabled-color--300)',
                 color: 'var(--pf-global--Color--100)',

@@ -27,7 +27,7 @@ export class MarkdownEditor extends Component<IProps> {
                   aria-labelledby='markdown-title'
                   id='resources'
                   value={text}
-                  onChange={(value) => updateText(value)}
+                  onChange={(_event, value) => updateText(value)}
                   placeholder={placeholder}
                 />
               </FormGroup>

@@ -6,6 +6,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
+  InputGroupItem,
   Label,
   LabelGroup,
   Modal,
@@ -141,28 +142,32 @@ export class TagManifestModal extends Component<IProps, IState> {
             label={t`Add new tag`}
           >
             <InputGroup>
-              <TextInput
-                validated={tagInFormError ? 'error' : 'default'}
-                type='text'
-                id='add-new-tag'
-                value={tagInForm}
-                onChange={(val) => this.setState({ tagInForm: val })}
-                isDisabled={!!tagToVerify || verifyingTag || isSaving}
-                onKeyUp={(e) => {
-                  // l10n: don't translate
-                  if (e.key === 'Enter') {
-                    this.verifyAndAddTag();
-                  }
-                }}
-              />
-              <Button
-                aria-label={t`Add new tag to image`}
-                variant='secondary'
-                onClick={this.verifyAndAddTag}
-                isDisabled={!!tagToVerify || verifyingTag || isSaving}
-              >
-                {t`Add`} {verifyingTag && <Spinner size='sm' />}
-              </Button>
+              <InputGroupItem isFill>
+                <TextInput
+                  validated={tagInFormError ? 'error' : 'default'}
+                  type='text'
+                  id='add-new-tag'
+                  value={tagInForm}
+                  onChange={(_event, val) => this.setState({ tagInForm: val })}
+                  isDisabled={!!tagToVerify || verifyingTag || isSaving}
+                  onKeyUp={(e) => {
+                    // l10n: don't translate
+                    if (e.key === 'Enter') {
+                      this.verifyAndAddTag();
+                    }
+                  }}
+                />
+              </InputGroupItem>
+              <InputGroupItem>
+                <Button
+                  aria-label={t`Add new tag to image`}
+                  variant='secondary'
+                  onClick={this.verifyAndAddTag}
+                  isDisabled={!!tagToVerify || verifyingTag || isSaving}
+                >
+                  {t`Add`} {verifyingTag && <Spinner size='sm' />}
+                </Button>
+              </InputGroupItem>
             </InputGroup>
           </FormGroup>
           {tagToVerify && (

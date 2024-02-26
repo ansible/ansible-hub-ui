@@ -2,13 +2,14 @@ import { Trans, t } from '@lingui/macro';
 import {
   Banner,
   Page,
-  PageHeader,
-  PageHeaderTools,
   PageSidebar,
+  PageSidebarBody,
 } from '@patternfly/react-core';
 import {
   DropdownItem,
   DropdownSeparator,
+  PageHeader,
+  PageHeaderTools,
 } from '@patternfly/react-core/deprecated';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { ReactNode, useState } from 'react';
@@ -192,14 +193,13 @@ export const StandaloneLayout = ({
   );
 
   const Sidebar = (
-    <PageSidebar
-      theme='dark'
-      nav={
+    <PageSidebar theme='dark'>
+      <PageSidebarBody>
         <StandaloneMenu
           context={{ user, settings, featureFlags, hasPermission }}
         />
-      }
-    />
+      </PageSidebarBody>
+    </PageSidebar>
   );
 
   return (

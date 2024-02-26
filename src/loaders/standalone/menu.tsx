@@ -284,7 +284,10 @@ export const StandaloneMenu = ({ context }) => {
   };
 
   const StandaloneNav = ({ children = null }) => (
-    <Nav theme='dark' onToggle={onToggle}>
+    <Nav
+      theme='dark'
+      onToggle={(_event, { groupId, isExpanded }) => onToggle()}
+    >
       <NavList>
         <NavGroup className={'hub-nav-title'} title={APPLICATION_NAME} />
 

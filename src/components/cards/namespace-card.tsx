@@ -5,7 +5,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  CardHeaderMain,
   CardTitle,
   Tooltip,
 } from '@patternfly/react-core';
@@ -55,8 +54,8 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
 
   return (
     <Card className='hub-c-card-ns-container'>
-      <CardHeader>
-        <CardHeaderMain>
+      <CardHeader
+        actions={
           <Logo
             alt={t`${title} logo`}
             fallbackToDefault
@@ -64,8 +63,8 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
             size='40px'
             unlockWidth
           />
-        </CardHeaderMain>
-      </CardHeader>
+        }
+      />
       <Tooltip content={title}>
         <CardTitle>{getDescription(title)}</CardTitle>
       </Tooltip>

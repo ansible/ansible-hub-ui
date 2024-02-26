@@ -1,5 +1,9 @@
 import { t } from '@lingui/macro';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-down-icon';
 import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
@@ -140,7 +144,7 @@ export class Sort extends Component<IProps, IState> {
           <Select
             variant={SelectVariant.single}
             aria-label={t`Sort results`}
-            onToggle={(e) => this.onToggle(e)}
+            onToggle={(_event, e) => this.onToggle(e)}
             onSelect={(_, name) => this.onSelect(name)}
             selections={selectedOption.title}
             isOpen={isExpanded}

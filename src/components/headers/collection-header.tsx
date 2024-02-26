@@ -7,12 +7,14 @@ import {
   List,
   ListItem,
   Modal,
-  Select,
-  SelectOption,
-  SelectVariant,
   Spinner,
   Text,
 } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -413,7 +415,7 @@ export class CollectionHeader extends Component<IProps, IState> {
                 <div className='install-version-dropdown'>
                   <Select
                     isOpen={isOpenVersionsSelect}
-                    onToggle={(isOpenVersionsSelect) =>
+                    onToggle={(_event, isOpenVersionsSelect) =>
                       this.setState({ isOpenVersionsSelect })
                     }
                     variant={SelectVariant.single}

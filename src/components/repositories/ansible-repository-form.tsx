@@ -5,11 +5,10 @@ import {
   Checkbox,
   Form,
   FormGroup,
-  Select,
-  SelectOption,
   Spinner,
   TextInput,
 } from '@patternfly/react-core';
+import { Select, SelectOption } from '@patternfly/react-core/deprecated';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
@@ -76,7 +75,7 @@ export const AnsibleRepositoryForm = ({
         isDisabled={disabledFields.includes(fieldName)}
         id={fieldName}
         value={repository[fieldName] || ''}
-        onChange={(value) =>
+        onChange={(_event, value) =>
           updateRepository({ ...repository, [fieldName]: value })
         }
         {...props}
@@ -238,7 +237,7 @@ export const AnsibleRepositoryForm = ({
           <Checkbox
             isChecked={createDistribution}
             isDisabled={disabledDistribution}
-            onChange={(value) => setCreateDistribution(value)}
+            onChange={(_event, value) => setCreateDistribution(value)}
             label={t`Create a "${repository.name}" distribution`}
             id='create_distribution'
           />
@@ -284,7 +283,7 @@ export const AnsibleRepositoryForm = ({
               isDisabled={disableHideFromSearch}
               label={t`Hide from search`}
               id='hide_from_search'
-              onChange={(value) => setHideFromSearch(value)}
+              onChange={(_event, value) => setHideFromSearch(value)}
             />
           </div>
         </>,
@@ -298,7 +297,7 @@ export const AnsibleRepositoryForm = ({
           id='private'
           isChecked={repository.private}
           label={t`Make private`}
-          onChange={(value) =>
+          onChange={(_event, value) =>
             updateRepository({ ...repository, private: value })
           }
         />,

@@ -6,6 +6,7 @@ import {
   Form,
   FormGroup,
   InputGroup,
+  InputGroupItem,
   Spinner,
   TextInput,
   Title,
@@ -85,15 +86,17 @@ export class RoleForm extends Component<IProps, IState> {
                 validated={nameValidated}
               >
                 <InputGroup>
-                  <TextInput
-                    id='role_name'
-                    isDisabled={nameDisabled}
-                    value={name}
-                    onChange={onNameChange}
-                    type='text'
-                    validated={nameValidated}
-                    placeholder={t`Role name`}
-                  />
+                  <InputGroupItem isFill>
+                    <TextInput
+                      id='role_name'
+                      isDisabled={nameDisabled}
+                      value={name}
+                      onChange={onNameChange}
+                      type='text'
+                      validated={nameValidated}
+                      placeholder={t`Role name`}
+                    />
+                  </InputGroupItem>
                 </InputGroup>
               </FormGroup>
 

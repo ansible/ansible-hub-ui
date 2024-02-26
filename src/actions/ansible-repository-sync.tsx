@@ -77,7 +77,9 @@ const SyncModal = ({
       >
         <Switch
           isChecked={syncParams.mirror}
-          onChange={(mirror) => setSyncParams({ ...syncParams, mirror })}
+          onChange={(_event, mirror) =>
+            setSyncParams({ ...syncParams, mirror })
+          }
           label={t`Content not present in remote repository will be removed from the local repository`}
           labelOff={t`Sync will only add missing content`}
         />
@@ -93,7 +95,9 @@ const SyncModal = ({
       >
         <Switch
           isChecked={syncParams.optimize}
-          onChange={(optimize) => setSyncParams({ ...syncParams, optimize })}
+          onChange={(_event, optimize) =>
+            setSyncParams({ ...syncParams, optimize })
+          }
           label={t`Only perform the sync if changes are reported by the remote server.`}
           labelOff={t`Force a sync to happen.`}
         />

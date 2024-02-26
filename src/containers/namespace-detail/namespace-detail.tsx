@@ -439,7 +439,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
             </Text>
             <Checkbox
               isChecked={confirmDelete}
-              onChange={(val) => this.setState({ confirmDelete: val })}
+              onChange={(_event, val) => this.setState({ confirmDelete: val })}
               label={t`I understand that this action cannot be undone.`}
               id='delete_confirm'
             />

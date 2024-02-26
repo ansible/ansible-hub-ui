@@ -558,7 +558,11 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
         >
           {/* FIXME: replace with LinkTabs */}
           <Panel isScrollable>
-            <Nav theme='light' variant='tertiary' onSelect={onTabSelect}>
+            <Nav
+              theme='light'
+              variant='tertiary'
+              onSelect={(_event, { itemId: newTab }) => onTabSelect()}
+            >
               <NavList>
                 {Object.keys(tabs).map((key) => {
                   return (

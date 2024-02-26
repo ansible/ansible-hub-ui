@@ -22,7 +22,7 @@ export const UploadSingCertificateModal: FunctionComponent<Props> = ({
   const [filename, setFilename] = useState('');
   const [path, setPath] = useState<File | null>(null);
 
-  const handleFileInputChange = (e, file) => {
+  const handleFileInputChange = (_event, file) => {
     setFilename(file.name);
     setPath(file);
   };

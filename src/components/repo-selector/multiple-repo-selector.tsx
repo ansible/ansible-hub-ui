@@ -205,7 +205,7 @@ export const MultipleRepoSelector = (props: IProps) => {
                 onChange={onToggleCheckbox}
               />,
             ]}
-            onToggle={onToggle}
+            onToggle={(_event, isOpen: boolean) => onToggle(isOpen)}
             id='toggle-split-button'
           />
         }
