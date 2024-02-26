@@ -1,11 +1,6 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  Button,
-  Checkbox,
-  ClipboardCopy,
-  DropdownItem,
-  Text,
-} from '@patternfly/react-core';
+import { Button, Checkbox, ClipboardCopy, Text } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, Navigate } from 'react-router-dom';

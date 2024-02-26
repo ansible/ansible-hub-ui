@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
 import {
   ClipboardCopy,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {

@@ -1,9 +1,5 @@
 import { t } from '@lingui/macro';
 import {
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownToggleCheckbox,
   Flex,
   FlexItem,
   Label,
@@ -13,6 +9,12 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+} from '@patternfly/react-core/deprecated';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import {

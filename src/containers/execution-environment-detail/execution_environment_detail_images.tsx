@@ -3,7 +3,6 @@ import {
   Button,
   Checkbox,
   ClipboardCopy,
-  DropdownItem,
   LabelGroup,
   Text,
   Toolbar,
@@ -11,6 +10,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { sum } from 'lodash';

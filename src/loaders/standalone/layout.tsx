@@ -1,13 +1,15 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Banner,
-  DropdownItem,
-  DropdownSeparator,
   Page,
   PageHeader,
   PageHeaderTools,
   PageSidebar,
 } from '@patternfly/react-core';
+import {
+  DropdownItem,
+  DropdownSeparator,
+} from '@patternfly/react-core/deprecated';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';

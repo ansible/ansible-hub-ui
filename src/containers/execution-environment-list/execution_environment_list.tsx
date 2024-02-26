@@ -1,7 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Label,
   Toolbar,
   ToolbarContent,
@@ -9,6 +8,7 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {

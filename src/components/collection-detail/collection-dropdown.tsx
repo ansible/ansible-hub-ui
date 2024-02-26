@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { DropdownItem } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { StatefulDropdown } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';

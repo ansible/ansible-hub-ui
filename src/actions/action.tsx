@@ -1,5 +1,6 @@
 import { MessageDescriptor, i18n } from '@lingui/core';
-import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
+import { Button, Tooltip } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { ReactNode } from 'react';
 import { PermissionContextType } from 'src/permissions';
 

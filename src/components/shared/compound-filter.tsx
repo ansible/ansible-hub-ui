@@ -2,7 +2,6 @@ import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
-  DropdownItem,
   InputGroup,
   Select,
   SelectGroup,
@@ -10,6 +9,7 @@ import {
   SelectVariant,
   TextInput,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React, { Component } from 'react';
