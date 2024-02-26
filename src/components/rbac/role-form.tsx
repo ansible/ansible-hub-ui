@@ -89,7 +89,7 @@ export class RoleForm extends Component<IProps, IState> {
                       id='role_name'
                       isDisabled={nameDisabled}
                       value={name}
-                      onChange={onNameChange}
+                      onChange={(_event, value) => onNameChange(value)}
                       type='text'
                       validated={nameValidated}
                       placeholder={t`Role name`}
@@ -111,7 +111,7 @@ export class RoleForm extends Component<IProps, IState> {
                 <TextInput
                   id='role_description'
                   value={description}
-                  onChange={onDescriptionChange}
+                  onChange={(_event, value) => onDescriptionChange(value)}
                   type='text'
                   validated={descriptionValidated}
                   placeholder={t`Add a role description here`}

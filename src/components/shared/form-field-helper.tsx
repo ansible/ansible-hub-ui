@@ -6,11 +6,11 @@ import {
 import React, { ReactNode } from 'react';
 
 export function FormFieldHelper({
-  variant,
-  children,
+  variant = 'default',
+  children = null,
 }: {
-  variant: string; // default | indeterminate | success | error | warning
-  children: ReactNode;
+  variant?: string; // default | indeterminate | success | error | warning
+  children?: ReactNode;
 }) {
   return (
     <FormHelperText>

@@ -200,8 +200,8 @@ class EditNamespace extends Component<RouteProps, IState> {
     const namespace = this.state.namespace;
     return namespace.links.some(
       (link) =>
-        NamespaceForm.validateName(link).validated == 'error' ||
-        NamespaceForm.validateUrl(link).validated == 'error',
+        NamespaceForm.validateName(link).variant == 'error' ||
+        NamespaceForm.validateUrl(link).variant == 'error',
     );
   }
 

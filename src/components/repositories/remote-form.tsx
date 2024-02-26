@@ -218,18 +218,18 @@ export class RemoteForm extends Component<IProps, IState> {
     const filename = (field) =>
       filenames[field].original ? t`(uploaded)` : filenames[field].name;
 
-    const fileOnChange = (field) => (_event, value, name) => {
+    const fileOnChange = (field) => (_event, file) => {
       this.setState(
         {
           filenames: {
             ...filenames,
             [field]: {
-              name,
+              name: file.name,
               original: false,
             },
           },
         },
-        () => this.updateRemote(value, field),
+        () => this.updateRemote(file, field),
       );
     };
 

@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from './parse-pulp-id';
@@ -7,7 +7,11 @@ import { parsePulpIDFromURL } from './parse-pulp-id';
 type VariantType = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
 // task can be { task: (pulp_href) } or "(pulp_href)" or "(uuid)"
-export const taskAlert = (task, title, variant: VariantType = 'info') => ({
+export const taskAlert = (
+  task,
+  title: string | ReactNode,
+  variant: VariantType = 'info',
+) => ({
   title,
   variant,
   description: (
