@@ -468,7 +468,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
       { name: tabs[activeItem || 'install'] },
     ];
 
-    const onTabSelect = ({ itemId: newTab }) => {
+    const onTabSelect = (newTab) => {
       this.setState({ activeItem: newTab });
 
       this.props.navigate(
@@ -561,7 +561,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
             <Nav
               theme='light'
               variant='tertiary'
-              onSelect={(_event, { itemId: newTab }) => onTabSelect()}
+              onSelect={(_event, { itemId }) => onTabSelect(itemId)}
             >
               <NavList>
                 {Object.keys(tabs).map((key) => {
