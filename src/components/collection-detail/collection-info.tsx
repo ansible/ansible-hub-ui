@@ -53,7 +53,7 @@ export const CollectionInfo = ({
   }
 
   return (
-    <div className='pf-c-content info-panel'>
+    <div className='pf-v5-c-content info-panel'>
       <h1>{t`Install`}</h1>
       <Grid hasGutter>
         <GridItem>{collection_version.description}</GridItem>
@@ -172,7 +172,7 @@ export const CollectionInfo = ({
           <GridItem>
             <div className='hub-readme-container'>
               <div
-                className='pf-c-content'
+                className='pf-v5-c-content'
                 dangerouslySetInnerHTML={{
                   __html: content?.docs_blob?.collection_readme.html,
                 }}

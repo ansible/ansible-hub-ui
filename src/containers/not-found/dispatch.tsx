@@ -25,7 +25,7 @@ const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
 const SectionSeparator = () => <section>&nbsp;</section>;
 
 const SectionTitle = ({ children }: { children: ReactNode }) => (
-  <h2 className='pf-c-title'>{children}</h2>
+  <h2 className='pf-v5-c-title'>{children}</h2>
 );
 
 const Dispatch = ({ location, navigate }: RouteProps) => {
@@ -102,7 +102,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
             <div className='hub-c-bullseye__center'>
               <img src={NotFoundImage} alt={t`Not found`} width='128px' />
               <div>{t`We couldn't find the page you're looking for!`}</div>
-              <div className='pf-c-content'>
+              <div className='pf-v5-c-content'>
                 <Trans>
                   Pathname{' '}
                   <pre style={{ display: 'inline-block' }}>{pathname}</pre>{' '}

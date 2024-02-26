@@ -11,7 +11,7 @@ interface IProps {
 
 export const LoginLink = ({ button, next }: IProps) => {
   const { featureFlags } = useHubContext();
-  const className = button ? 'pf-c-button pf-m-primary' : '';
+  const className = button ? 'pf-v5-c-button pf-m-primary' : '';
 
   // NOTE: also update AuthHandler#render (src/loaders/standalone/routes.tsx) when changing this
   if (featureFlags?.external_authentication && UI_EXTERNAL_LOGIN_URI) {

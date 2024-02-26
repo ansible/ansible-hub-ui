@@ -109,13 +109,15 @@ function versionCheck(version) {
       if (withRemote) {
         // try to sync it, expect failure
         cy.contains('button', 'Sync').click();
-        cy.get('.pf-c-modal-box__footer .pf-m-primary')
+        cy.get('.pf-v5-c-modal-box__footer .pf-m-primary')
           .contains('Sync')
           .click();
 
         cy.contains('Sync started for repository "repo1Test".');
         cy.contains('a', 'detail page').click();
-        cy.get('.pf-c-label__content').contains('Failed', { timeout: 15000 });
+        cy.get('.pf-v5-c-label__content').contains('Failed', {
+          timeout: 15000,
+        });
       }
     });
 

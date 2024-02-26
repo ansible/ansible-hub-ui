@@ -357,7 +357,7 @@ export const ListPage = function <T>({
       return (
         <table
           aria-label={i18n._(title)}
-          className='hub-c-table-content pf-c-table'
+          className='hub-c-table-content pf-v5-c-table'
         >
           <SortTable
             options={{ headers: localizedSortHeaders }}

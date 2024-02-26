@@ -47,7 +47,7 @@ describe('collection tests', () => {
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
     cy.wait(5000);
-    cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
+    cy.get('[data-cy="AlertList"] h4[class=pf-v5-c-alert__title]').should(
       'have.text',
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );
@@ -69,12 +69,12 @@ describe('collection tests', () => {
 
     cy.contains('Select repositories');
     cy.get(
-      '[data-cy="ApproveModal-CheckboxRow-row-published"] .pf-c-table__check input',
+      '[data-cy="ApproveModal-CheckboxRow-row-published"] .pf-v5-c-table__check input',
     ).should('be.disabled');
 
     cy.get("[aria-label='name__icontains']").type('validate{enter}');
     cy.get(
-      "[data-cy='ApproveModal-CheckboxRow-row-validated'] .pf-c-table__check input",
+      "[data-cy='ApproveModal-CheckboxRow-row-validated'] .pf-v5-c-table__check input",
     ).check();
 
     cy.get('.pf-m-primary').contains('Select').click();

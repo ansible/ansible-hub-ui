@@ -41,7 +41,7 @@ const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
 const SectionSeparator = () => <section>&nbsp;</section>;
 
 const SectionTitle = ({ children }: { children: ReactNode }) => (
-  <h2 className='pf-c-title'>{children}</h2>
+  <h2 className='pf-v5-c-title'>{children}</h2>
 );
 
 const Section = ({
@@ -353,8 +353,8 @@ const MultiSearch = (props: RouteProps) => {
                   className='card-wrapper'
                   style={{ width: '300px' }}
                 >
-                  <article className='pf-c-card'>
-                    <div className='pf-c-card__title'>
+                  <article className='pf-v5-c-card'>
+                    <div className='pf-v5-c-card__title'>
                       <Link
                         to={formatEEPath(Paths.executionEnvironmentDetail, {
                           container: item.pulp.distribution.base_path,
@@ -363,14 +363,14 @@ const MultiSearch = (props: RouteProps) => {
                         {item.name}
                       </Link>
                     </div>
-                    <div className='pf-c-card__body pf-m-truncate'>
+                    <div className='pf-v5-c-card__body pf-m-truncate'>
                       {item.description ? (
                         <Tooltip content={item.description}>
                           {item.description}
                         </Tooltip>
                       ) : null}
                     </div>
-                    <div className='pf-c-card__footer'>
+                    <div className='pf-v5-c-card__footer'>
                       <Label>
                         {item.pulp.repository.remote ? t`Remote` : t`Local`}
                       </Label>

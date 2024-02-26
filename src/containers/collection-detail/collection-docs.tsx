@@ -158,7 +158,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
             />
 
             <div
-              className='body hub-docs-content pf-c-content hub-content-alert-fix'
+              className='body hub-docs-content pf-v5-c-content hub-content-alert-fix'
               ref={this.docsRef}
             >
               {displayHTML || pluginData ? (

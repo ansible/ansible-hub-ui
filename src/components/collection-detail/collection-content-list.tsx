@@ -98,7 +98,7 @@ export const CollectionContentList = ({
           </ToolbarGroup>
         </Toolbar>
       </div>
-      <table className='hub-c-table-content pf-c-table pf-m-compact'>
+      <table className='hub-c-table-content pf-v5-c-table pf-m-compact'>
         <thead>
           <tr>
             <th>{t`Name`}</th>

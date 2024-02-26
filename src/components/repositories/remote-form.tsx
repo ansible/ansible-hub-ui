@@ -561,7 +561,7 @@ export class RemoteForm extends Component<IProps, IState> {
           toggleTextExpanded={t`Hide advanced options`}
           toggleTextCollapsed={t`Show advanced options`}
         >
-          <div className='pf-c-form'>
+          <div className='pf-v5-c-form'>
             <FormGroup
               fieldId={'proxy_url'}
               label={t`Proxy URL`}

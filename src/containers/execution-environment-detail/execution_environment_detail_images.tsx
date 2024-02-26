@@ -146,7 +146,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           title: '',
           type: 'none',
           id: 'expand',
-          className: 'pf-c-table__toggle',
+          className: 'pf-v5-c-table__toggle',
         },
         {
           title: t`Tag`,
@@ -303,7 +303,7 @@ class ExecutionEnvironmentDetailImages extends Component<
         ) : (
           <table
             aria-label={t`Images`}
-            className='hub-c-table-content pf-c-table'
+            className='hub-c-table-content pf-v5-c-table'
           >
             <SortTable
               options={sortTableOptions}
@@ -417,7 +417,7 @@ class ExecutionEnvironmentDetailImages extends Component<
     return (
       <Fragment key={index}>
         <tr>
-          <td className='pf-c-table__toggle'>
+          <td className='pf-v5-c-table__toggle'>
             {isManifestList ? (
               <Button
                 variant='plain'
@@ -477,7 +477,7 @@ class ExecutionEnvironmentDetailImages extends Component<
 
   renderManifestList({ image_manifests }, ShaLink) {
     return (
-      <table className='hub-c-table-content pf-c-table'>
+      <table className='hub-c-table-content pf-v5-c-table'>
         <SortTable
           options={{
             headers: [

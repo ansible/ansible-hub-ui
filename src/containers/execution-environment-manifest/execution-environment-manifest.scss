@@ -18,7 +18,7 @@
 .eco-clipboard-copy {
   display: inline-block;
 
-  .pf-c-clipboard-copy__group {
+  .pf-v5-c-clipboard-copy__group {
     align-items: baseline;
   }
 
@@ -35,7 +35,7 @@
     color: var(--pf-global--Color--200) !important;
   }
 
-  .pf-c-button::after {
+  .pf-v5-c-button::after {
     border: none !important;
   }
 }

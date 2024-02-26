@@ -46,11 +46,11 @@ describe('Collection Upload Tests', () => {
     cy.wait('@upload');
     cy.wait(10000);
     cy.contains('My imports');
-    cy.get('.pf-c-label__content').contains('Running').should('exist');
+    cy.get('.pf-v5-c-label__content').contains('Running').should('exist');
     cy.wait('@upload', { timeout: 10000 });
     cy.wait(5000);
-    cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
-    cy.get('.pf-c-label__content').contains('Completed').should('exist');
+    cy.get('.pf-v5-c-label__content').contains('Failed').should('not.exist');
+    cy.get('.pf-v5-c-label__content').contains('Completed').should('exist');
   });
 
   it('should deprecate let user deprecate and undeprecate collections', () => {

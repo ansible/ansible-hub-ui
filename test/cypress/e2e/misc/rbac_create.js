@@ -79,7 +79,7 @@ describe('add and delete roles', () => {
     cy.get('[aria-label="Actions"]:first').click();
     cy.contains('Delete').click();
     cy.get('button').contains('Delete').click();
-    cy.get('.pf-c-alert__action').click();
+    cy.get('.pf-v5-c-alert__action').click();
     cy.contains(`galaxy.test${num}`).should('not.exist');
   });
 });

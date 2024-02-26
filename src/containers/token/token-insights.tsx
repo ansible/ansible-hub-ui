@@ -102,7 +102,7 @@ class TokenInsights extends Component<RouteProps, IState> {
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={t`Connect to Hub`} />
         <Main>
-          <section className='pf-c-content'>
+          <section className='pf-v5-c-content'>
             <section className='body'>
               <h2>{t`Connect Private Automation Hub`}</h2>
               <p>

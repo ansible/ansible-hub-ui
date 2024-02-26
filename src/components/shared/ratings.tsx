@@ -71,7 +71,7 @@ function Ratings({ scores }: { scores: Record<string, number> }) {
 
   const help = t`This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy.`;
   const more = (
-    <table className='pf-c-table'>
+    <table className='pf-v5-c-table'>
       {scores.quality_score !== null ? (
         <tr>
           <th>{t`Quality score`}</th>

@@ -8,7 +8,7 @@ export class LoadingPageWithHeader extends Component {
       <>
         <section
           className={
-            'pf-l-page-header pf-c-page-header pf-l-page__main-section pf-c-page__main-section pf-m-light'
+            'pf-l-page-header pf-v5-c-page-header pf-l-page__main-section pf-v5-c-page__main-section pf-m-light'
           }
         >
           <Title headingLevel='h1'>

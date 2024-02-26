@@ -15,7 +15,7 @@ export const NotFound = (_props) => (
           <div className='hub-c-bullseye__center'>
             <img src={NotFoundImage} alt={t`Not found image`} />
             <div>{t`We couldn't find the page you're looking for!`}</div>
-            <div className='pf-c-content'>
+            <div className='pf-v5-c-content'>
               <span className='hub-c-bullseye__404'>404</span>
             </div>
           </div>

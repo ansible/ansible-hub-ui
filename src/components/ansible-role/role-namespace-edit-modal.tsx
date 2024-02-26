@@ -125,7 +125,7 @@ export const RoleNamespaceEditModal = ({
       ) : (
         <table
           aria-label={t`Namespace list`}
-          className='hub-c-table-content pf-c-table'
+          className='hub-c-table-content pf-v5-c-table'
         >
           <SortTable
             params={{ sort: 'name' }}

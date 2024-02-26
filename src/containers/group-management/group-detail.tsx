@@ -288,7 +288,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         aria-label={t`add-user-modal`}
         title={''}
         header={
-          <span className='pf-c-content'>
+          <span className='pf-v5-c-content'>
             <h2>{t`Add selected users to group`}</h2>{' '}
           </span>
         }
@@ -667,7 +667,7 @@ class GroupDetail extends Component<RouteProps, IState> {
     return (
       <table
         aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
+        className='hub-c-table-content pf-v5-c-table'
       >
         <SortTable
           options={sortTableOptions}

@@ -37,7 +37,11 @@ export class MarkdownEditor extends Component<IProps> {
           )}
           <div className='column preview-container'>
             {editing && t`Preview`}
-            <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
+            <div
+              className={
+                editing ? 'pf-v5-c-content preview' : 'pf-v5-c-content'
+              }
+            >
               <ReactMarkdown>{text || placeholder}</ReactMarkdown>
             </div>
           </div>

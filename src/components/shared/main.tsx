@@ -10,7 +10,7 @@ export const Main = ({ children, className, ...extra }: IProps) => (
   <section
     className={cx(
       'pf-l-page__main-section',
-      'pf-c-page__main-section',
+      'pf-v5-c-page__main-section',
       className,
     )}
     {...extra}

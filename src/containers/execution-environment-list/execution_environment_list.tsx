@@ -318,7 +318,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table className='hub-c-table-content pf-c-table'>
+      <table className='hub-c-table-content pf-v5-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

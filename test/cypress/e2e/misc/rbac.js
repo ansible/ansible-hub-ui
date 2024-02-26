@@ -308,7 +308,7 @@ describe('RBAC test for user with permissions', () => {
     // can Change and Delete user
     cy.visit(`${uiPrefix}users`);
     cy.get(
-      '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-c-dropdown',
+      '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
     ).click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
@@ -328,7 +328,7 @@ describe('RBAC test for user with permissions', () => {
 
     // can Change and Delete group
     cy.get(
-      '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-c-dropdown',
+      '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
     ).click();
     cy.contains('Delete').should('exist');
   });
@@ -354,7 +354,7 @@ describe('RBAC test for user with permissions', () => {
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('exist');
     cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
+    cy.get('[data-cy="AlertList"] .pf-v5-c-alert__title').contains(
       'Sync started for remote registry "testcontainer".',
     );
   });
@@ -374,7 +374,7 @@ describe('RBAC test for user with permissions', () => {
 
     // can sync remote registry
     cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
+    cy.get('[data-cy="AlertList"] .pf-v5-c-alert__title').contains(
       'Sync started for remote registry "docker".',
     );
   });

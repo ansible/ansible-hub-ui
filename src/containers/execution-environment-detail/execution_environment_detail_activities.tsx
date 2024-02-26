@@ -60,7 +60,7 @@ class ExecutionEnvironmentDetailActivities extends Component<
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <section className='body'>
-              <table aria-label={t`Activities`} className='pf-c-table'>
+              <table aria-label={t`Activities`} className='pf-v5-c-table'>
                 <SortTable
                   options={{
                     headers: [

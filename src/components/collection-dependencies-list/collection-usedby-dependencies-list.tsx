@@ -75,7 +75,7 @@ export const CollectionUsedbyDependenciesList = ({
             <EmptyStateFilter />
           ) : (
             <>
-              <table className='hub-c-table-content pf-c-table pf-m-compact'>
+              <table className='hub-c-table-content pf-v5-c-table pf-m-compact'>
                 <tbody>
                   {usedByDependencies.map(
                     ({ name, namespace, version, repository_list }, i) => (

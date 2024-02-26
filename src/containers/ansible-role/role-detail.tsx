@@ -107,7 +107,7 @@ class RoleDocs extends Component<RoleMetaProps, RoleMetaReadmeState> {
     return (
       <div>
         <div
-          className='pf-c-content'
+          className='pf-v5-c-content'
           dangerouslySetInnerHTML={{ __html: this.state.readme_html }}
         />
       </div>

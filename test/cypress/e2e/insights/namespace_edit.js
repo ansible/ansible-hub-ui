@@ -29,14 +29,16 @@ describe('Edit a namespace', () => {
   let getEditTab = () => {
     return cy
       .get(
-        'ul.pf-c-tabs__list > li.pf-c-tabs__item > a > span.pf-c-tabs__item-text',
+        'ul.pf-v5-c-tabs__list > li.pf-v5-c-tabs__item > a > span.pf-v5-c-tabs__item-text',
       )
       .contains('Edit resources')
       .click();
   };
 
   let getTextField = () => {
-    return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
+    return cy.get(
+      'div.pf-v5-c-form__group-control > textarea.pf-v5-c-form-control',
+    );
   };
 
   before(() => {

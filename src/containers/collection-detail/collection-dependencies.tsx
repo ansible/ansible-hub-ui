@@ -136,7 +136,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
         />
         <Main>
           <section className='body'>
-            <div className='pf-c-content collection-dependencies'>
+            <div className='pf-v5-c-content collection-dependencies'>
               <h1>{t`Dependencies`}</h1>
               <p>{t`This collections requires the following collections for use`}</p>
 

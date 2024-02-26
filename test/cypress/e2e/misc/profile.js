@@ -38,7 +38,7 @@ describe('My Profile Tests', () => {
   });
 
   it('superuser cannot change its superuser rights', () => {
-    cy.get('.pf-c-switch__input').should('be.disabled');
+    cy.get('.pf-v5-c-switch__input').should('be.disabled');
   });
 
   it('user cannot set superusers rights', () => {
@@ -47,7 +47,7 @@ describe('My Profile Tests', () => {
     cy.get('[data-cy="user-dropdown"] button').click();
     cy.get('a').contains('My profile').click();
 
-    cy.get('.pf-c-switch__input').should('be.disabled');
+    cy.get('.pf-v5-c-switch__input').should('be.disabled');
   });
 
   it('email must be email', () => {
@@ -126,7 +126,7 @@ describe('My Profile Tests', () => {
     cy.get('#last_name').clear().type('Last Name');
     cy.get('#email').clear().type('administrator@example.com');
 
-    cy.get('.pf-c-button').contains('Cancel').click();
+    cy.get('.pf-v5-c-button').contains('Cancel').click();
 
     cy.get('[data-cy="DataForm-field-username"]').should(
       'not.contain',

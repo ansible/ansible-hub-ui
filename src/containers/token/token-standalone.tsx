@@ -67,7 +67,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
             <EmptyStateUnauthorized />
           ) : (
             <Card>
-              <section className='body pf-c-content'>
+              <section className='body pf-v5-c-content'>
                 <CardTitle>
                   <h2>{t`API token`}</h2>
                 </CardTitle>
@@ -97,7 +97,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
                       </p>
                     </div>
                   )}
-                  <div className='pf-c-content'>
+                  <div className='pf-v5-c-content'>
                     <Trans>
                       <b>WARNING</b> loading a new token will delete your old
                       token.
@@ -106,7 +106,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
                   {token ? (
                     <div>
                       <CardBody>
-                        <div className='pf-c-content'>
+                        <div className='pf-v5-c-content'>
                           <Trans>
                             <b>WARNING</b> copy this token now. This is the only
                             time you will ever see it.

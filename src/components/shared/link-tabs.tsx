@@ -12,25 +12,24 @@ export class LinkTabsProps {
   }[];
 }
 
-// FIXME(pf5): s/pf-c-/pf-v5-c-/g (not pf-m-)
 const renderTab = ({ link, title, active = false }) => (
   <li
     className={cx({
-      'pf-c-tabs__item': true,
+      'pf-v5-c-tabs__item': true,
       'pf-m-current': active,
     })}
     key={title}
   >
-    <Link to={link} className='pf-c-tabs__link'>
-      <span className='pf-c-tabs__item-text'>{title}</span>
+    <Link to={link} className='pf-v5-c-tabs__link'>
+      <span className='pf-v5-c-tabs__item-text'>{title}</span>
     </Link>
   </li>
 );
 
 // We're not using the Tab react component because they don't support links.
 export const LinkTabs = ({ tabs }: LinkTabsProps) => (
-  <div className='pf-c-tabs'>
-    <ul className='pf-c-tabs__list'>
+  <div className='pf-v5-c-tabs'>
+    <ul className='pf-v5-c-tabs__list'>
       {tabs.filter(Boolean).map((tab) => renderTab(tab))}
     </ul>
   </div>

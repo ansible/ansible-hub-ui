@@ -255,7 +255,7 @@ export class TaskListView extends Component<RouteProps, IState> {
     return (
       <table
         aria-label={t`Task list`}
-        className='hub-c-table-content pf-c-table'
+        className='hub-c-table-content pf-v5-c-table'
       >
         <SortTable
           options={sortTableOptions}

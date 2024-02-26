@@ -161,7 +161,7 @@ export function DetailList<T>({
           ) : (
             <table
               aria-label={title}
-              className='hub-c-table-content pf-c-table'
+              className='hub-c-table-content pf-v5-c-table'
             >
               <SortTable
                 options={{ headers: sortHeaders }}

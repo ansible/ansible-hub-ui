@@ -128,7 +128,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     // select page
     cy.get('.hub-toolbar [aria-label="Select"] svg').click();
     cy.contains('a', 'Select page (10 items)').click();
-    cy.contains('.pf-c-label.pf-m-overflow', 'more').click();
+    cy.contains('.pf-v5-c-label.pf-m-overflow', 'more').click();
 
     reposList.forEach((repo) => {
       if (repo != 'repo9') {

@@ -119,7 +119,7 @@ const ContentSummary = ({ data }: { data: object }) => {
   }
 
   return (
-    <table className='pf-c-table'>
+    <table className='pf-v5-c-table'>
       <tr>
         <th>{t`Count`}</th>
         <th>{t`Pulp type`}</th>
@@ -271,7 +271,7 @@ export const RepositoryVersionsTab = ({
           ]}
         />
         <div
-          className='pf-c-page__main-section'
+          className='pf-v5-c-page__main-section'
           style={{ padding: '8px 0', margin: '24px -16px 0' }}
         />
         <VersionContent

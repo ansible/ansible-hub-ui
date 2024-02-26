@@ -69,7 +69,7 @@ interface IProps {
 }
 
 const SectionTitle = ({ title }: { title: string }) => (
-  <h2 className='pf-c-title'>{title}</h2>
+  <h2 className='pf-v5-c-title'>{title}</h2>
 );
 const SectionSeparator = () => (
   <div
@@ -246,7 +246,7 @@ export class AccessTab extends Component<IProps> {
 
         <table
           aria-label={ariaLabel}
-          className='hub-c-table-content pf-c-table'
+          className='hub-c-table-content pf-v5-c-table'
         >
           <SortTable
             options={{
@@ -384,7 +384,7 @@ export class AccessTab extends Component<IProps> {
         {showRoleRemoveModal ? this.renderRoleRemoveModal() : null}
         {showRoleSelectWizard ? this.renderRoleSelectWizard() : null}
 
-        <h3 className='pf-c-title'>
+        <h3 className='pf-v5-c-title'>
           {user ? <Trans>User {user.username}</Trans> : null}
           {group ? <Trans>Group {group.name}</Trans> : null}
         </h3>

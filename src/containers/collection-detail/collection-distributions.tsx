@@ -180,7 +180,7 @@ const CollectionDistributions = (props: RouteProps) => {
     return (
       <table
         aria-label={t`Collection distributions`}
-        className='hub-c-table-content pf-c-table'
+        className='hub-c-table-content pf-v5-c-table'
       >
         <SortTable
           options={sortTableOptions}
