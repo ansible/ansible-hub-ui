@@ -1,7 +1,6 @@
-import { t } from '@lingui/macro';
 import { Button, Popover, PopoverPosition } from '@patternfly/react-core';
 import OutlinedQuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon';
-import React, { Component, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import './helper-text.scss';
 
 interface IProps {
@@ -11,20 +10,16 @@ interface IProps {
   hasAutoWidth?: boolean;
 }
 
-export class HelperText extends Component<IProps> {
-  render() {
-    return (
-      <Popover
-        aria-label={t`popover example`}
-        position={PopoverPosition.top}
-        bodyContent={this.props.content}
-        headerContent={this.props.header}
-        hasAutoWidth={this.props.hasAutoWidth}
-      >
-        <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
-          <OutlinedQuestionCircleIcon />
-        </Button>
-      </Popover>
-    );
-  }
-}
+// FIXME: disambiguate with patternfly HelperText .. pf has inline text, here it's icon + popover text
+export const HelperText = ({ content, header, hasAutoWidth }: IProps) => (
+  <Popover
+    position={PopoverPosition.top}
+    bodyContent={content}
+    headerContent={header}
+    hasAutoWidth={hasAutoWidth}
+  >
+    <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
+      <OutlinedQuestionCircleIcon />
+    </Button>
+  </Popover>
+);

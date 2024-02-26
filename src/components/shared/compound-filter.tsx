@@ -242,7 +242,7 @@ export class CompoundFilter extends Component<IProps, IState> {
     });
   }
 
-  private onToggle = () => {
+  private onToggle = (_event) => {
     this.setState({
       isOpen: !this.state.isOpen,
     });

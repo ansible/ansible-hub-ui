@@ -2,7 +2,6 @@ import { t } from '@lingui/macro';
 import {
   ExpandableRowContent,
   Table,
-  /* data-codemods */
   Tbody,
   Td,
   Tr,
