@@ -146,7 +146,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                   >{t`Load token`}</Button>
                 </div>
               )}
-              <div style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <div style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <span>
                   <Trans>
                     The token will expire after 30 days of inactivity. Run the
@@ -183,7 +183,7 @@ class TokenInsights extends Component<RouteProps, IState> {
               <ClipboardCopy isReadOnly>
                 {getRepoURL('published', true)}
               </ClipboardCopy>
-              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Use this URL for <strong>validated</strong> content from
                   Automation Hub.{' '}
@@ -192,7 +192,7 @@ class TokenInsights extends Component<RouteProps, IState> {
               <ClipboardCopy isReadOnly>
                 {getRepoURL('validated')}
               </ClipboardCopy>
-              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Synclists are deprecated in AAP 2.4 and will be removed in a
                   future release, use client-side <code>requirements.yml</code>{' '}

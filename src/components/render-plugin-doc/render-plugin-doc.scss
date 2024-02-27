@@ -32,15 +32,15 @@
 }
 
 .blue {
-  color: var(--pf-global--info-color--100);
+  color: var(--pf-v5-global--info-color--100);
 }
 
 .red {
-  color: var(--pf-global--danger-color--100);
+  color: var(--pf-v5-global--danger-color--100);
 }
 
 .green {
-  color: var(--pf-global--success-color--200);
+  color: var(--pf-v5-global--success-color--200);
 }
 
 .option-name {
@@ -57,7 +57,7 @@
 
 .inline-code {
   background-color: #e6e9e9;
-  font-family: var(--pf-global--FontFamily--monospace);
+  font-family: var(--pf-v5-global--FontFamily--monospace);
   display: inline-block;
   border-radius: 2px;
   padding: 0 2px;

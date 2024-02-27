@@ -877,7 +877,7 @@ export class RemoteForm extends Component<IProps, IState> {
         {errorMessages['__nofield'] ? (
           <span
             style={{
-              color: 'var(--pf-global--danger-color--200)',
+              color: 'var(--pf-v5-global--danger-color--200)',
             }}
           >
             {errorMessages['__nofield']}

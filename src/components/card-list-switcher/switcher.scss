@@ -1,12 +1,12 @@
 .icon {
   margin-left: 8px;
-  color: var(--pf-global--icon--Color--light);
+  color: var(--pf-v5-global--icon--Color--light);
 
   &:hover {
-    color: var(--pf-global--link--Color--dark);
+    color: var(--pf-v5-global--link--Color--dark);
   }
 }
 
 .selected {
-  color: var(--pf-global--link--Color--dark);
+  color: var(--pf-v5-global--link--Color--dark);
 }

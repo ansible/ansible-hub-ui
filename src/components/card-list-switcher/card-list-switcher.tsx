@@ -1,3 +1,4 @@
+import { Icon } from '@patternfly/react-core';
 import ListIcon from '@patternfly/react-icons/dist/esm/icons/list-icon';
 import ThLargeIcon from '@patternfly/react-icons/dist/esm/icons/th-large-icon';
 import cx from 'classnames';
@@ -10,43 +11,36 @@ interface IProps {
     view_type?: string;
   };
   updateParams: (params) => void;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  className?: string;
 }
 
 export const CardListSwitcher: FunctionComponent<IProps> = ({
   params,
   updateParams,
-  size = 'sm',
-  className,
 }) => {
-  let disp = params.view_type;
-
-  if (!disp) {
-    disp = 'card';
-  }
-
+  const disp = params.view_type || 'card';
   const iconClasses = ['icon', 'clickable'];
 
   return (
-    <div className={className}>
+    <div>
       <span data-cy='view_type_card'>
-        <ThLargeIcon
-          size={size}
+        <Icon
           className={cx(iconClasses, { selected: disp === 'card' })}
           onClick={() =>
             updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
           }
-        />
+        >
+          <ThLargeIcon />
+        </Icon>
       </span>
       <span data-cy='view_type_list'>
-        <ListIcon
-          size={size}
+        <Icon
           className={cx(iconClasses, { selected: disp === 'list' })}
           onClick={() =>
             updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
           }
-        />
+        >
+          <ListIcon />
+        </Icon>
       </span>
     </div>
   );

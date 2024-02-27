@@ -74,7 +74,7 @@ const SectionTitle = ({ title }: { title: string }) => (
 const SectionSeparator = () => (
   <div
     style={{
-      backgroundColor: 'var(--pf-global--BackgroundColor--light-300)',
+      backgroundColor: 'var(--pf-v5-global--BackgroundColor--light-300)',
       height: '16px',
       margin: '16px -16px',
     }}

@@ -3,10 +3,10 @@ $green: #5bb75b;
 
 .upload-collection {
   .file-error-messages {
-    color: var(--pf-global--danger-color--100);
+    color: var(--pf-v5-global--danger-color--100);
 
     &.skipped {
-      color: var(--pf-global--warning-color--100);
+      color: var(--pf-v5-global--warning-color--100);
     }
   }
 

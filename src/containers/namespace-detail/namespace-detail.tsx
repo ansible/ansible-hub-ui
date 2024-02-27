@@ -432,7 +432,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
             title={t`Delete namespace?`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
-            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+            <Text style={{ paddingBottom: 'var(--pf-v5-global--spacer--md)' }}>
               <Trans>
                 Deleting <b>{namespace.name}</b> and its data will be lost.
               </Trans>

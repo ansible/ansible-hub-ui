@@ -39,7 +39,7 @@ class LoginPage extends Component<RouteProps, IState> {
     }
 
     const helperText = (
-      <span style={{ color: 'var(--pf-global--danger-color--100)' }}>
+      <span style={{ color: 'var(--pf-v5-global--danger-color--100)' }}>
         <ExclamationCircleIcon />
         {'   '}
         {this.state.errorMessage}
@@ -49,7 +49,7 @@ class LoginPage extends Component<RouteProps, IState> {
     return (
       <PFLoginPage
         style={{
-          backgroundColor: 'var(--pf-global--BackgroundColor--dark-100)',
+          backgroundColor: 'var(--pf-v5-global--BackgroundColor--dark-100)',
         }}
         loginTitle={t`Log in to your account`}
         brandImgSrc={Logo}

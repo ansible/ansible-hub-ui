@@ -44,7 +44,7 @@ export const DeleteCollectionModal = (props: IProps) => {
             : t`Delete collection?`
         }
       >
-        <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+        <Text style={{ paddingBottom: 'var(--pf-v5-global--spacer--md)' }}>
           {collectionVersion ? (
             <Trans>
               Deleting{' '}

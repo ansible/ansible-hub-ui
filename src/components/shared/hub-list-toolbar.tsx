@@ -139,7 +139,6 @@ export function HubListToolbar({
           {switcher ? (
             <ToolbarItem>
               <CardListSwitcher
-                size='sm'
                 params={params}
                 updateParams={(p) => {
                   window.localStorage.setItem(switcher, p.view_type);

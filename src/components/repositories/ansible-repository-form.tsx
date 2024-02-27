@@ -342,7 +342,7 @@ export const AnsibleRepositoryForm = ({
             {remotesError ? (
               <span
                 style={{
-                  color: 'var(--pf-global--danger-color--200)',
+                  color: 'var(--pf-v5-global--danger-color--200)',
                 }}
               >
                 {t`Failed to load remotes: ${remotesError}`}
@@ -356,7 +356,7 @@ export const AnsibleRepositoryForm = ({
       {errorMessages['__nofield'] ? (
         <span
           style={{
-            color: 'var(--pf-global--danger-color--200)',
+            color: 'var(--pf-v5-global--danger-color--200)',
           }}
         >
           {errorMessages['__nofield']}
