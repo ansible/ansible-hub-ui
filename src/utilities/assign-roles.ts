@@ -6,13 +6,11 @@ export const assignRoles = (roles) => {
 
   roles.forEach(({ users, groups, role }) => {
     (users || []).forEach((username) => {
-      // FIXME: userRoles[username] ||= [];
-      userRoles[username] = userRoles[username] || [];
+      userRoles[username] ||= [];
       userRoles[username].push(role);
     });
     (groups || []).forEach((name) => {
-      // FIXME: groupRoles[name] ||= [];
-      groupRoles[name] = groupRoles[name] || [];
+      groupRoles[name] ||= [];
       groupRoles[name].push(role);
     });
   });

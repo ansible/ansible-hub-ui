@@ -166,12 +166,8 @@ export const PublishToControllerModal = (props: IProps) => {
 
       // preselect tag if present
       let { digest, tag } = props;
-      // FIXME: tag ||= tags[0]?.tag;
-      // default to first tag unless in props (tags already filtered by digest if in props)
-      tag = tag || tags[0]?.tag;
-      // set digest by tag unless in props
-      // FIXME: digest ||= digestByTag[tag];
-      digest = digest || digestByTag[tag];
+      tag ||= tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
+      digest ||= digestByTag[tag]; // set digest by tag unless in props
 
       setDigest(digest);
       setTag(tag);

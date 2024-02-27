@@ -100,8 +100,7 @@ const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
 
       delete data.my_permissions;
 
-      // FIXME: data.pulp_labels ||= {};
-      data.pulp_labels = data.pulp_labels || {};
+      data.pulp_labels ||= {};
       if (hideFromSearch) {
         data.pulp_labels.hide_from_search = '';
       } else {
