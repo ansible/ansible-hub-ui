@@ -65,11 +65,11 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
           />
         </div>
       </CardHeader>
-      <Tooltip content={title}>
+      <Tooltip content={title} noSpan>
         <CardTitle>{getDescription(title)}</CardTitle>
       </Tooltip>
       {title !== name ? (
-        <Tooltip content={name}>
+        <Tooltip content={name} noSpan>
           <CardBody>{getDescription(name)}</CardBody>
         </Tooltip>
       ) : null}
