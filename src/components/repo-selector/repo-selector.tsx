@@ -42,7 +42,7 @@ export const RepoSelector = ({
     }[name] || name;
 
   const badge = (
-    <Badge isRead title={name}>
+    <Badge isRead title={t`Repository: ${name}`}>
       <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
         {repoName}
       </Link>

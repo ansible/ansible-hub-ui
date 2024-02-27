@@ -42,7 +42,7 @@ export const StatefulDropdown = ({
 }: IProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>(undefined);
-  const onToggle = (open) => setOpen(open);
+  const onToggle = (_event, open) => setOpen(open);
 
   return (
     <Dropdown

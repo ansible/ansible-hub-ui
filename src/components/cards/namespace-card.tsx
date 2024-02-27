@@ -54,8 +54,8 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
 
   return (
     <Card className='hub-c-card-ns-container'>
-      <CardHeader
-        actions={
+      <CardHeader>
+        <div style={{ display: 'flex', justifyContent: 'start' }}>
           <Logo
             alt={t`${title} logo`}
             fallbackToDefault
@@ -63,8 +63,8 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
             size='40px'
             unlockWidth
           />
-        }
-      />
+        </div>
+      </CardHeader>
       <Tooltip content={title}>
         <CardTitle>{getDescription(title)}</CardTitle>
       </Tooltip>

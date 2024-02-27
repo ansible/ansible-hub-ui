@@ -2,6 +2,7 @@ import {
   FormHelperText,
   HelperText,
   HelperTextItem,
+  HelperTextItemProps,
 } from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
 
@@ -16,7 +17,7 @@ export function FormFieldHelper({
     <FormHelperText>
       <HelperText>
         <HelperTextItem
-          variant={variant}
+          variant={variant as HelperTextItemProps['variant']}
           hasIcon={['success', 'error', 'warning'].includes(variant)}
         >
           {children}
