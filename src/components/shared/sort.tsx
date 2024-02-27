@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro';
+import { Icon } from '@patternfly/react-core';
 import {
   Select,
   SelectOption,
@@ -127,16 +128,10 @@ export class Sort extends Component<IProps, IState> {
 
     const selectedOption = this.getSelected(params);
 
-    let IconDesc;
-    let IconAsc;
-
-    if (selectedOption.type === 'alpha') {
-      IconAsc = SortAlphaDownIcon;
-      IconDesc = SortAlphaUpIcon;
-    } else {
-      IconDesc = SortAmountDownIcon;
-      IconAsc = SortAmountUpIcon;
-    }
+    const [IconAsc, IconDesc] =
+      selectedOption.type === 'alpha'
+        ? [SortAlphaDownIcon, SortAlphaUpIcon]
+        : [SortAmountUpIcon, SortAmountDownIcon];
 
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -155,21 +150,13 @@ export class Sort extends Component<IProps, IState> {
           </Select>
         ) : null}
 
-        {this.getIsDescending(params) ? (
-          <IconDesc
-            className='clickable'
-            onClick={() => this.setDescending()}
-            size='md'
-            style={{ margin: '6px 0 6px 5px' }}
-          />
-        ) : (
-          <IconAsc
-            className='clickable'
-            onClick={() => this.setDescending()}
-            size='md'
-            style={{ margin: '5px 0 7px 5px' }}
-          />
-        )}
+        <Icon
+          className='clickable'
+          onClick={() => this.setDescending()}
+          style={{ margin: '6px 0 6px 5px' }}
+        >
+          {this.getIsDescending(params) ? <IconDesc /> : <IconAsc />}
+        </Icon>
       </div>
     );
   }
