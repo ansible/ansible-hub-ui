@@ -41,8 +41,9 @@
     "@lingui/cli": "^4.7.1",
     "@lingui/macro": "^4.7.1",
     "@ls-lint/ls-lint": "^2.2.3",
-    "@redhat-cloud-services/frontend-components-config": "^5.1.1",
+    "@redhat-cloud-services/frontend-components-config": "^6.0.10",
     "@redhat-cloud-services/frontend-components-config-utilities": "^3.0.5",
+    "@redhat-cloud-services/tsc-transform-imports": "^1.0.7",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -69,6 +70,7 @@
     "stylelint": "^15.11.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-scss": "^5.3.2",
+    "ts-patch": "^3.1.2",
     "typescript": "^5.4.2",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
@@ -106,7 +108,8 @@
     "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
     "test": "npm run test-build && npm run test-run",
     "test-build": "test/scripts/ctn-build.sh",
-    "test-run": "test/scripts/ctn-run.sh"
+    "test-run": "test/scripts/ctn-run.sh",
+    "postinstall": "ts-patch install"
   },
   "insights": {
     "appname": "automation-hub"
