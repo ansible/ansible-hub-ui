@@ -2,12 +2,10 @@ import { t } from '@lingui/macro';
 import {
   Button,
   Label,
-  LabelGroup,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Tooltip,
 } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
@@ -26,10 +24,12 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   HubPagination,
+  LabelGroup,
   ListItemActions,
   LoadingPageSpinner,
   Main,
   SortTable,
+  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

@@ -3,14 +3,17 @@ import {
   Button,
   Card,
   CardBody,
-  ClipboardCopy,
   Flex,
   FlexItem,
   Title,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
-import { EmptyStateNoData, MarkdownEditor } from 'src/components';
+import {
+  ClipboardCopy,
+  EmptyStateNoData,
+  MarkdownEditor,
+} from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
 import { IDetailSharedProps, withContainerRepo } from './base';

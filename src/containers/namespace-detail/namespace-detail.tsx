@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import { Button, Checkbox, ClipboardCopy, Text } from '@patternfly/react-core';
+import { Button, Checkbox, Text } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -19,6 +19,7 @@ import {
   AccessTab,
   AlertList,
   AlertType,
+  ClipboardCopy,
   CollectionDropdown,
   CollectionList,
   DeleteCollectionModal,

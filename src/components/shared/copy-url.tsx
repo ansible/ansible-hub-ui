@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
-import { ClipboardCopy } from '@patternfly/react-core';
 import React from 'react';
+import { ClipboardCopy } from 'src/components';
 
 export const CopyURL = ({
   url,

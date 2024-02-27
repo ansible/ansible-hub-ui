@@ -1,11 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Button,
-  ButtonVariant,
-  Label,
-  LabelGroup,
-  Spinner,
-} from '@patternfly/react-core';
+import { Button, ButtonVariant, Label, Spinner } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
@@ -18,7 +12,7 @@ import {
   CollectionVersionSearch,
   FeatureFlagsType,
 } from 'src/api';
-import { DateComponent, ListItemActions } from 'src/components';
+import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {

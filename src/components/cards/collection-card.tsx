@@ -8,7 +8,6 @@ import {
   Text,
   TextContent,
   TextVariants,
-  Tooltip,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React, { ReactNode } from 'react';
@@ -19,6 +18,7 @@ import {
   Logo,
   RepoSelector,
   SignatureBadge,
+  Tooltip,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';

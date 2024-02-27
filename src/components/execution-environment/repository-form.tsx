@@ -6,7 +6,6 @@ import {
   InputGroup,
   InputGroupItem,
   Label,
-  LabelGroup,
   Modal,
   Spinner,
   TextArea,
@@ -25,6 +24,7 @@ import {
   AlertType,
   FormFieldHelper,
   HelperText,
+  LabelGroup,
   closeAlertMixin,
 } from 'src/components';
 import {

@@ -1,7 +1,8 @@
 import { MessageDescriptor, i18n } from '@lingui/core';
-import { Button, Tooltip } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { ReactNode } from 'react';
+import { Tooltip } from 'src/components';
 import { type PermissionContextType } from 'src/permissions';
 
 type ModalType = ({ addAlert, listQuery, query, setState, state }) => ReactNode;

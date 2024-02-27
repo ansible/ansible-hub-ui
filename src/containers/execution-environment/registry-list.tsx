@@ -5,7 +5,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Tooltip,
 } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
@@ -28,6 +27,7 @@ import {
   Main,
   RemoteForm,
   SortTable,
+  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

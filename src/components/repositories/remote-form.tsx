@@ -6,7 +6,6 @@ import {
   Button,
   Checkbox,
   ExpandableSection,
-  FileUpload,
   Flex,
   FlexItem,
   Form,
@@ -21,6 +20,7 @@ import React, { Component, ReactNode } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import {
   ExternalLink,
+  FileUpload,
   FormFieldHelper,
   HelperText,
   WriteOnlyField,

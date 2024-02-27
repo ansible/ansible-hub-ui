@@ -1,14 +1,10 @@
 import { t } from '@lingui/macro';
-import {
-  ClipboardCopy,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import {
   AppliedFilters,
+  ClipboardCopy,
   CollectionHeader,
   CompoundFilter,
   DateComponent,

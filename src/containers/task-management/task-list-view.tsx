@@ -5,7 +5,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Tooltip,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,6 +25,7 @@ import {
   Main,
   SortTable,
   StatusIndicator,
+  Tooltip,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

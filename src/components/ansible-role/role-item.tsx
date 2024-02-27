@@ -4,7 +4,6 @@ import {
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  LabelGroup,
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { LegacyRoleDetailType } from 'src/api';
 import {
   DateComponent,
   DownloadCount,
+  LabelGroup,
   Logo,
   ProviderLink,
   RoleRatings,

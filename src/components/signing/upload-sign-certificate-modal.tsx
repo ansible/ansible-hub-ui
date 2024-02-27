@@ -2,11 +2,11 @@ import { t } from '@lingui/macro';
 import {
   Button,
   ButtonVariant,
-  FileUpload,
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
 import React, { FunctionComponent, useState } from 'react';
+import { FileUpload } from 'src/components';
 
 interface Props {
   isOpen: boolean;

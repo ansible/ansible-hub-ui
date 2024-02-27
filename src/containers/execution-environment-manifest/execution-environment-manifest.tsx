@@ -11,7 +11,6 @@ import {
   DataListItemRow,
   Flex,
   FlexItem,
-  LabelGroup,
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
@@ -21,6 +20,7 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
+  LabelGroup,
   LoadingPageWithHeader,
   Main,
   ShaLabel,

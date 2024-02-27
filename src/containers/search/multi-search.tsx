@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { DataList, Label, Tooltip } from '@patternfly/react-core';
+import { DataList, Label } from '@patternfly/react-core';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -21,6 +21,7 @@ import {
   Main,
   MultiSearchSearch,
   NamespaceListItem,
+  Tooltip,
   closeAlert,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
