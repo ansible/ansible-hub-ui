@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
+import { Label } from '@patternfly/react-core';
 import {
-  Label,
   Select,
   SelectOption,
   SelectVariant,
