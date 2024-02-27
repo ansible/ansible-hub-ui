@@ -6,7 +6,7 @@ export const DateComponent = ({ date }: { date: string }) =>
   date && (
     <time dateTime={date}>
       <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
-        {moment(date).fromNow()}
+        <span>{moment(date).fromNow()}</span>
       </Tooltip>
     </time>
   );

@@ -405,7 +405,10 @@ export class CollectionHeader extends Component<IProps, IState> {
             )
           }
           contextSelector={
-            <RepoSelector selectedRepo={collection.repository.name} />
+            <RepoSelector
+              isBreadcrumbContainer
+              name={collection.repository.name}
+            />
           }
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={

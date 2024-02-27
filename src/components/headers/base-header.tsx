@@ -37,8 +37,12 @@ export const BaseHeader = ({
   return (
     <div className={cx('background', className)}>
       {contextSelector || null}
-      {breadcrumbs && <div className='breadcrumb-container'>{breadcrumbs}</div>}
-      {!breadcrumbs && !contextSelector && <div className='placeholder' />}
+      {breadcrumbs && (
+        <div className='hub-breadcrumb-container'>{breadcrumbs}</div>
+      )}
+      {!breadcrumbs && !contextSelector && (
+        <div className='hub-breadcrumb-placeholder' />
+      )}
 
       <div className='column-section'>
         <div className='title-box'>
@@ -58,7 +62,7 @@ export const BaseHeader = ({
       {children ? (
         <div className='hub-header-bottom'>{children}</div>
       ) : (
-        <div className='placeholder' />
+        <div className='hub-breadcrumb-placeholder' />
       )}
     </div>
   );

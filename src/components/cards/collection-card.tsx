@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Badge,
   Button,
   Card,
   CardBody,
@@ -15,8 +14,12 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-i
 import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch } from 'src/api';
-import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
-import { useHubContext } from 'src/loaders/app-context';
+import {
+  CollectionNumericLabel,
+  Logo,
+  RepoSelector,
+  SignatureBadge,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
@@ -60,8 +63,6 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
-  const { featureFlags } = useHubContext();
-
   const nsTitle = namespaceTitle(
     namespace || { name: collection_version.namespace },
   );
@@ -79,24 +80,7 @@ export const CollectionCard = ({
           flexGrow
         />
         <div className='card-badge-area'>
-          {featureFlags.display_repositories ? (
-            <TextContent>
-              <Text component={TextVariants.small}>
-                <Badge isRead>
-                  <Link
-                    to={formatPath(Paths.ansibleRepositoryDetail, {
-                      name: repository.name,
-                    })}
-                  >
-                    {repository.name ===
-                    (IS_INSIGHTS ? 'published' : 'rh-certified')
-                      ? t`Certified`
-                      : repository.name}
-                  </Link>
-                </Badge>
-              </Text>
-            </TextContent>
-          ) : null}
+          <RepoSelector isTextContent name={repository.name} />
           {displaySignatures ? (
             <SignatureBadge
               isCompact

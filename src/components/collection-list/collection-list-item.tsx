@@ -6,7 +6,6 @@ import {
   DataListItemRow,
   Flex,
   FlexItem,
-  Label,
   LabelGroup,
   Text,
   TextContent,
@@ -21,9 +20,9 @@ import {
   DateComponent,
   DeprecatedTag,
   Logo,
+  RepoSelector,
   Tag,
 } from 'src/components';
-import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 import { SignatureBadge } from '../signing';
@@ -52,7 +51,6 @@ export const CollectionListItem = ({
   synclistSwitch,
   uploadButton,
 }: IProps) => {
-  const { featureFlags } = useHubContext();
   const cells = [];
 
   const nsTitle = namespaceTitle(
@@ -162,19 +160,7 @@ export const CollectionListItem = ({
           direction={{ default: 'row' }}
           alignSelf={{ default: 'alignSelfFlexStart' }}
         >
-          {featureFlags.display_repositories ? (
-            <FlexItem>
-              <Label variant='outline'>
-                <Link
-                  to={formatPath(Paths.ansibleRepositoryDetail, {
-                    name: repository.name,
-                  })}
-                >
-                  {repository.name}
-                </Link>
-              </Label>
-            </FlexItem>
-          ) : null}
+          <RepoSelector isFlexItem name={repository.name} />
           {displaySignatures ? (
             <FlexItem>
               <SignatureBadge
