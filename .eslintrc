@@ -30,7 +30,9 @@
     "no-restricted-imports": ["error", {
       "paths": [{
         "importNames": [
+          "ChipGroup",
           "ClipboardCopy",
+          "ClipboardCopyButton",
           "FileUpload",
           "LabelGroup",
           "LoginForm",

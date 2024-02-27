@@ -1,7 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  ClipboardCopyButton,
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
@@ -19,6 +18,7 @@ import {
   APISearchTypeAhead,
   AlertList,
   AppliedFilters,
+  ClipboardCopyButton,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,

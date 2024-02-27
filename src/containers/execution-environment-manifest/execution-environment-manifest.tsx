@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardTitle,
-  ClipboardCopyButton,
   DataList,
   DataListCell,
   DataListItem,
@@ -20,6 +19,7 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
+  ClipboardCopyButton,
   LabelGroup,
   LoadingPageWithHeader,
   Main,

@@ -1,7 +1,8 @@
 import { t } from '@lingui/macro';
-import { Button, Chip, ChipGroup } from '@patternfly/react-core';
+import { Button, Chip } from '@patternfly/react-core';
 import React, { CSSProperties } from 'react';
-import { ParamHelper, ParamType, chipGroupProps } from 'src/utilities';
+import { ChipGroup } from 'src/components';
+import { ParamHelper, ParamType } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */
@@ -50,7 +51,7 @@ export const AppliedFilters = ({
 
     return (
       <div style={{ display: 'inline', marginRight: '8px' }} key={key}>
-        <ChipGroup categoryName={niceNames[key] || key} {...chipGroupProps()}>
+        <ChipGroup categoryName={niceNames[key] || key}>
           {chips.map((v, i) => (
             <Chip key={i} onClick={() => unsetFilter(v)}>
               {niceValues?.[key]?.[v] || v}

@@ -1,13 +1,17 @@
 import { t } from '@lingui/macro';
 import {
-  ClipboardCopyButton,
   CodeBlock,
   CodeBlockAction,
   CodeBlockCode,
 } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { AnsibleRemoteType } from 'src/api';
-import { CopyURL, Details, LazyRepositories } from 'src/components';
+import {
+  ClipboardCopyButton,
+  CopyURL,
+  Details,
+  LazyRepositories,
+} from 'src/components';
 
 interface TabProps {
   item: AnsibleRemoteType;

@@ -5,7 +5,6 @@ import {
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
 import React, { CSSProperties, Component, ReactElement } from 'react';
-import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
   results: { name: string; id: number | string }[];
@@ -66,7 +65,6 @@ export class APISearchTypeAhead extends Component<IProps, IState> {
         isDisabled={this.props.isDisabled}
         toggleIcon={this.props.toggleIcon}
         style={this.props.style}
-        chipGroupProps={chipGroupProps()}
       >
         {this.getOptions()}
       </Select>

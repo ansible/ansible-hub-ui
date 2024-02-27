@@ -1,6 +1,5 @@
 export { assignRoles } from './assign-roles';
 export { canSignEE, canSignNamespace } from './can-sign';
-export { chipGroupProps } from './chip-group-props';
 export { convertContentSummaryCounts } from './content-summary';
 export { DeleteCollectionUtils } from './delete-collection';
 export { downloadString } from './download-data';

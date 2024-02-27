@@ -8,7 +8,6 @@ import {
 import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { chipGroupProps } from 'src/utilities';
 
 interface IProps {
   availablePermissions?: string[];
@@ -73,7 +72,6 @@ export class PermissionChipSelector extends Component<IProps, IState> {
       <Select
         menuAppendTo='inline'
         variant={SelectVariant.typeaheadMulti}
-        chipGroupProps={chipGroupProps()}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={(_event, isOpen) => this.setState({ isOpen })}
         onSelect={(event, permission) =>
