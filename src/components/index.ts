@@ -74,8 +74,8 @@ export {
   FileUpload,
   LabelGroup,
   LoginForm,
+  Pagination,
 } from './patternfly-wrappers/l10n';
-export { Pagination } from './patternfly-wrappers/pagination';
 export { Tooltip } from './patternfly-wrappers/tooltip';
 export { AccessTab } from './rbac/access-tab';
 export { DeleteGroupModal } from './rbac/delete-group-modal';

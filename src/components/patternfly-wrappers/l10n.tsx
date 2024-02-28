@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import {
   ChipGroupProps,
   ClipboardCopyButtonProps,
@@ -10,6 +10,8 @@ import {
   ClipboardCopy as PFCopy,
   ClipboardCopyButton as PFCopyButton,
   FileUpload as PFFileUpload,
+  Pagination as PFPagination,
+  PaginationProps,
 } from '@patternfly/react-core';
 import React from 'react';
 import { LabelGroup as PFLabelGroup } from './label-group';
@@ -67,3 +69,47 @@ export const LoginForm = (props: LoginFormProps) => (
     {...props}
   />
 );
+
+// AAP-3737 - support both "1 - 2 of 3" and "3 的 1 - 2"
+const ToggleTemplate = ({
+  firstIndex = 0,
+  lastIndex = 0,
+  itemCount = 0,
+}: {
+  firstIndex?: number;
+  lastIndex?: number;
+  itemCount?: number;
+}) => (
+  <Trans>
+    <b>
+      {firstIndex} - {lastIndex}
+    </b>{' '}
+    of <b>{itemCount}</b>
+  </Trans>
+);
+
+export const Pagination = (props: Omit<PaginationProps, 'ref'>) => {
+  const titles = {
+    currPageAriaLabel: t`Current page`,
+    items: '',
+    itemsPerPage: t`Items per page`,
+    ofWord: t`of`,
+    optionsToggleAriaLabel: '',
+    page: '',
+    pages: '',
+    paginationAriaLabel: t`Pagination`,
+    perPageSuffix: t`per page`,
+    toFirstPageAriaLabel: t`Go to first page`,
+    toLastPageAriaLabel: t`Go to last page`,
+    toNextPageAriaLabel: t`Go to next page`,
+    toPreviousPageAriaLabel: t`Go to previous page`,
+  };
+
+  return (
+    <PFPagination
+      titles={titles}
+      toggleTemplate={(props) => <ToggleTemplate {...props} />}
+      {...props}
+    />
+  );
+};
