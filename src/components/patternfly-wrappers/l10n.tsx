@@ -5,6 +5,7 @@ import {
   ClipboardCopyProps,
   FileUploadProps,
   LabelGroupProps,
+  LoginFormProps,
   ChipGroup as PFChipGroup,
   ClipboardCopy as PFCopy,
   ClipboardCopyButton as PFCopyButton,
@@ -12,6 +13,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { LabelGroup as PFLabelGroup } from './label-group';
+import { LoginForm as PFLoginForm } from './login-form';
 
 const count = '${remaining}'; // pf templating
 
@@ -51,6 +53,17 @@ export const LabelGroup = (props: LabelGroupProps) => (
   <PFLabelGroup
     collapsedText={t`${count} more`}
     expandedText={t`Show Less`}
+    {...props}
+  />
+);
+
+export const LoginForm = (props: LoginFormProps) => (
+  <PFLoginForm
+    usernameLabel={t`Username`}
+    passwordLabel={t`Password`}
+    hidePasswordAriaLabel={t`Hide password`}
+    showPasswordAriaLabel={t`Show password`}
+    loginButtonLabel={t`Log In`}
     {...props}
   />
 );
