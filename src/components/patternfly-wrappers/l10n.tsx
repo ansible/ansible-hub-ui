@@ -17,7 +17,7 @@ import { LoginForm as PFLoginForm } from './login-form';
 
 const count = '${remaining}'; // pf templating
 
-export const ChipGroup = (props: ChipGroupProps) => (
+export const ChipGroup = (props: Omit<ChipGroupProps, 'ref'>) => (
   <PFChipGroup
     collapsedText={t`${count} more`}
     expandedText={t`Show Less`}
@@ -25,7 +25,7 @@ export const ChipGroup = (props: ChipGroupProps) => (
   />
 );
 
-export const ClipboardCopy = (props: ClipboardCopyProps) => (
+export const ClipboardCopy = (props: Omit<ClipboardCopyProps, 'ref'>) => (
   <PFCopy
     hoverTip={t`Copy to clipboard`}
     clickTip={t`Successfully copied to clipboard!`}
@@ -49,7 +49,7 @@ export const FileUpload = (props: FileUploadProps) => (
   />
 );
 
-export const LabelGroup = (props: LabelGroupProps) => (
+export const LabelGroup = (props: Omit<LabelGroupProps, 'ref'>) => (
   <PFLabelGroup
     collapsedText={t`${count} more`}
     expandedText={t`Show Less`}
