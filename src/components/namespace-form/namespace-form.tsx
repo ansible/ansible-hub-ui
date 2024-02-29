@@ -1,5 +1,12 @@
 import { t } from '@lingui/macro';
-import { Form, FormGroup, TextArea, TextInput } from '@patternfly/react-core';
+import {
+  Form,
+  FormGroup,
+  HelperText,
+  HelperTextItem,
+  TextArea,
+  TextInput,
+} from '@patternfly/react-core';
 import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
 import React, { Component } from 'react';
@@ -75,6 +82,11 @@ export class NamespaceForm extends Component<IProps> {
             value={namespace.avatar_url}
             onChange={(value, event) => this.updateField(value, event)}
           />
+          <HelperText>
+            <HelperTextItem variant='warning'>
+              {t`Please use jpg or png; svg images are NOT supported.`}
+            </HelperTextItem>
+          </HelperText>
         </FormGroup>
 
         <FormGroup
