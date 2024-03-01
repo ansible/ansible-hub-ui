@@ -1054,7 +1054,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     });
   }
 
-  get closeAlert() {
+  private get closeAlert() {
     return closeAlertMixin('alerts');
   }
 

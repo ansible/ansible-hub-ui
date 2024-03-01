@@ -178,7 +178,7 @@ class CollectionImportLog extends Component<RouteProps, IState> {
     });
   }
 
-  get updateParams() {
+  private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
 }

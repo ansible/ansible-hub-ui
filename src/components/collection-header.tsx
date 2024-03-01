@@ -1043,7 +1043,7 @@ export class CollectionHeader extends Component<IProps, IState> {
     });
   }
 
-  get closeAlert() {
+  private get closeAlert() {
     return closeAlertMixin('alerts');
   }
 }

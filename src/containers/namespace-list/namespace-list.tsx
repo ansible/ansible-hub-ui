@@ -334,7 +334,7 @@ export class NamespaceList extends Component<IProps, IState> {
     });
   }
 
-  get closeAlert() {
+  private get closeAlert() {
     return closeAlertMixin('alerts');
   }
 }

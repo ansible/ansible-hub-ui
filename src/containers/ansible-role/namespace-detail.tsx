@@ -249,7 +249,7 @@ class AnsibleRoleNamespaceDetail extends Component<
     });
   }
 
-  get closeAlert() {
+  private get closeAlert() {
     return closeAlertMixin('alerts');
   }
 

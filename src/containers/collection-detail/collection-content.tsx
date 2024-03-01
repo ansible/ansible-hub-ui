@@ -122,7 +122,7 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
     });
   }
 
-  get updateParams() {
+  private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
 }

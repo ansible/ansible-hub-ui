@@ -322,7 +322,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
     });
   }
 
-  get updateParams() {
+  private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
 }
