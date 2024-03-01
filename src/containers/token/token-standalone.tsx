@@ -11,7 +11,7 @@ import {
   EmptyStateUnauthorized,
   LoadingPageSpinner,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -151,8 +151,11 @@ class TokenStandalone extends Component<RouteProps, IState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }
 

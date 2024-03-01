@@ -25,7 +25,7 @@ import {
   RoleNamespaceEditModal,
   StatefulDropdown,
   WisdomModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -249,8 +249,11 @@ class AnsibleRoleNamespaceDetail extends Component<
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   componentDidMount() {

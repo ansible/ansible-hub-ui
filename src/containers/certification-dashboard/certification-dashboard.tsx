@@ -33,7 +33,7 @@ import {
   LoadingPageWithHeader,
   SortTable,
   UploadSingCertificateModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
@@ -610,8 +610,11 @@ class CertificationDashboard extends Component<RouteProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   private addAlert(title, variant, description?) {

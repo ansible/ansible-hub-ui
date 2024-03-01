@@ -17,7 +17,7 @@ import {
   LinkTabsProps,
   LoadingPageSpinner,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -267,8 +267,11 @@ export const PageWithTabs = function <
       });
     }
 
-    private get closeAlert() {
-      return closeAlertMixin('alerts');
+    private closeAlert(index) {
+      closeAlert(index, {
+        alerts: this.state.alerts,
+        setAlerts: (alerts) => this.setState({ alerts }),
+      });
     }
 
     private get updateParams() {

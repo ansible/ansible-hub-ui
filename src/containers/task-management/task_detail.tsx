@@ -26,7 +26,7 @@ import {
   LoadingPageSpinner,
   Main,
   StatusIndicator,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -509,8 +509,11 @@ class TaskDetail extends Component<RouteProps, IState> {
       });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }
 

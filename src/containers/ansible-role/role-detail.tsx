@@ -39,7 +39,7 @@ import {
   Main,
   RoleRatings,
   Tag,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -355,8 +355,11 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   render() {

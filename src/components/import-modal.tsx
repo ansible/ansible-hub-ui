@@ -24,7 +24,7 @@ import {
   AlertType,
   LabelGroup,
   MultipleRepoSelector,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { repositoryBasePath } from 'src/utilities';
@@ -148,8 +148,11 @@ export class ImportModal extends Component<IProps, IState> {
     this.addAlert(alert.title, alert.variant, alert.description);
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   render() {

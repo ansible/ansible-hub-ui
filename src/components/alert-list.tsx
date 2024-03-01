@@ -53,12 +53,3 @@ export function closeAlert(alertIndex, { alerts, setAlerts }) {
   newList.splice(alertIndex, 1);
   setAlerts(newList);
 }
-
-export function closeAlertMixin(alertStateVariable) {
-  return function (alertIndex) {
-    closeAlert(alertIndex, {
-      alerts: this.state[alertStateVariable],
-      setAlerts: (newList) => this.setState({ [alertStateVariable]: newList }),
-    });
-  };
-}

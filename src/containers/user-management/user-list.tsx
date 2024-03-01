@@ -31,7 +31,7 @@ import {
   Main,
   SortTable,
   Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -424,8 +424,11 @@ class UserList extends Component<RouteProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }
 

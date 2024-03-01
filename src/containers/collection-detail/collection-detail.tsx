@@ -6,7 +6,7 @@ import {
   CollectionInfo,
   LoadingPageWithHeader,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
@@ -145,8 +145,11 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }
 

@@ -10,7 +10,7 @@ import {
   LandingPageCard,
   Main,
   MultiSearchSearch,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { RouteProps, withRouter } from 'src/utilities';
@@ -196,8 +196,11 @@ export class LandingPage extends Component<RouteProps, IState> {
     );
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   private addAlert(alert: AlertType) {

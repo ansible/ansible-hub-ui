@@ -6,7 +6,7 @@ import {
   BaseHeader,
   Main,
   RoleImportForm,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { RouteProps, withRouter } from 'src/utilities';
 
@@ -28,8 +28,11 @@ class AnsibleRoleImport extends Component<RouteProps, RoleState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   render() {

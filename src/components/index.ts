@@ -1,11 +1,6 @@
 export { AboutModalWindow } from './about-modal';
 export { AccessTab } from './access-tab';
-export {
-  AlertList,
-  type AlertType,
-  closeAlert,
-  closeAlertMixin,
-} from './alert-list';
+export { AlertList, type AlertType, closeAlert } from './alert-list';
 export { AnsibleRepositoryForm } from './ansible-repository-form';
 export { AppliedFilters } from './applied-filters';
 export { ApprovalRow } from './approval-row';

@@ -51,7 +51,7 @@ import {
   SignSingleCertificateModal,
   SignatureBadge,
   UploadSingCertificateModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -1043,7 +1043,10 @@ export class CollectionHeader extends Component<IProps, IState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }

@@ -34,7 +34,7 @@ import {
   SignAllCertificatesModal,
   StatefulDropdown,
   WisdomModal,
-  closeAlertMixin,
+  closeAlert,
   collectionFilter,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -1054,8 +1054,11 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {

@@ -15,7 +15,7 @@ import {
   RoleNamespaceEditModal,
   RoleNamespaceModal,
   WisdomModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
@@ -108,8 +108,11 @@ class AnsibleRoleNamespaceList extends Component<
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 
   render() {

@@ -8,7 +8,7 @@ import {
   AlertType,
   LoadingPageWithHeader,
   UserFormPage,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -132,8 +132,11 @@ class UserProfile extends Component<RouteProps, IState> {
       });
   };
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private closeAlert(index) {
+    closeAlert(index, {
+      alerts: this.state.alerts,
+      setAlerts: (alerts) => this.setState({ alerts }),
+    });
   }
 }
 
