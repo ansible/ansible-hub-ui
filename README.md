@@ -1,3 +1,9 @@
+# 4.7 End of life
+
+The 4.7 branch is no longer maintained.
+
+---
+
 # Ansible Automation Hub UI
 
 Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy_ng/).
