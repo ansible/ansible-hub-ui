@@ -1,5 +1,4 @@
-import { Trans, t } from '@lingui/macro';
-import React from 'react';
+import { t } from '@lingui/macro';
 import {
   CollectionAPI,
   CollectionVersionAPI,
@@ -53,12 +52,7 @@ export class DeleteCollectionUtils {
       .then(() => {
         addAlert({
           variant: 'success',
-          title: (
-            <Trans>
-              Collection &quot;{collection.collection_version.name}
-              &quot; has been successfully deleted.
-            </Trans>
-          ),
+          title: t`Collection "${collection.collection_version.name}" has been successfully deleted.`,
         });
 
         if (redirect) {
