@@ -7,9 +7,3 @@ backport-4.9:
   - any-glob-to-any-file:
     - src/**/*
     - test/**/*
-
-backport-4.7:
-- changed-files:
-  - any-glob-to-any-file:
-    - src/**/*
-    - test/**/*
