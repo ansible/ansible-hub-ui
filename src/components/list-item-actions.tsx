@@ -1,6 +1,6 @@
 import { List } from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
-import { StatefulDropdown } from '../shared/stateful-dropdown';
+import { StatefulDropdown } from 'src/components';
 
 interface IProps {
   kebabItems?: ReactNode[];

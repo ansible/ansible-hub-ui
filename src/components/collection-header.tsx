@@ -38,6 +38,7 @@ import {
   CollectionDropdown,
   CollectionRatings,
   CopyCollectionToRepositoryModal,
+  DateComponent,
   DeleteCollectionModal,
   DownloadCount,
   ExternalLink,
@@ -64,7 +65,6 @@ import {
   repositoryRemoveCollection,
   waitForTask,
 } from 'src/utilities';
-import { DateComponent } from '../date-component/date-component';
 
 interface IProps {
   activeTab: string;

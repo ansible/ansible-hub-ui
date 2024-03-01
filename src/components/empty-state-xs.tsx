@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { EmptyStateCustom } from './empty-state-custom';
+import { EmptyStateCustom } from 'src/components';
 
 interface IProps {
   button?: ReactElement;

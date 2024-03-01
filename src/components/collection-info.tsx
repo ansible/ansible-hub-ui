@@ -17,6 +17,7 @@ import {
 } from 'src/api';
 import {
   ClipboardCopy,
+  DownloadSignatureGridItem,
   LoadingPageSpinner,
   LoginLink,
   Tag,
@@ -25,7 +26,6 @@ import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import './collection-info.scss';
-import { DownloadSignatureGridItem } from './download-signature-grid-item';
 
 interface IProps extends CollectionVersionSearch {
   params: {

@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import LockIcon from '@patternfly/react-icons/dist/esm/icons/lock-icon';
 import React from 'react';
-import { LoginLink } from 'src/components';
-import { EmptyStateCustom } from './empty-state-custom';
+import { EmptyStateCustom, LoginLink } from 'src/components';
 
 export const EmptyStateUnauthorized = () => {
   return (

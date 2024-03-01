@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React from 'react';
-import { EmptyStateCustom } from './empty-state-custom';
+import { EmptyStateCustom } from 'src/components';
 
 interface IProps {
   clearAllFilters?: () => void;
