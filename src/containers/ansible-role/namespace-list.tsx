@@ -112,13 +112,6 @@ class AnsibleRoleNamespaceList extends Component<
     });
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   render() {
     const updateParams = (params) =>
       this.updateParams(params, () => this.query(params));
@@ -164,7 +157,15 @@ class AnsibleRoleNamespaceList extends Component<
 
     return (
       <div>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {createModal && (
           <RoleNamespaceModal
             addAlert={(alert) => this.addAlert(alert)}

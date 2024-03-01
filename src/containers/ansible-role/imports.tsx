@@ -118,13 +118,6 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
     clearInterval(this.polling);
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   private addAlert(alert) {
     this.setState({
       alerts: [...this.state.alerts, alert],
@@ -138,7 +131,15 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
       <>
         <div ref={this.topOfPage} />
         <BaseHeader title={t`Role imports`} />
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <Main>
           <section className='body'>
             <div style={{ display: 'flex' }} data-cy='AnsibleRoleImports'>

@@ -96,13 +96,6 @@ class MyImports extends Component<RouteProps, IState> {
     clearInterval(this.polling);
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   private addAlert(alert) {
     this.setState({
       alerts: [...this.state.alerts, alert],
@@ -111,6 +104,7 @@ class MyImports extends Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
       collection,
       followLogs,
       importDetailError,
@@ -132,8 +126,13 @@ class MyImports extends Component<RouteProps, IState> {
         <div ref={this.topOfPage} />
         <BaseHeader title={t`My imports`} />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         <Main>
           <section className='body'>

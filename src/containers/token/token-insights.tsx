@@ -95,7 +95,15 @@ class TokenInsights extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Connect to Hub`} />
         <Main>
           <section className='pf-v5-c-content'>
@@ -249,13 +257,6 @@ class TokenInsights extends Component<RouteProps, IState> {
     // available to getOfflineToken() when the component mounts after
     // the reload
     window.insights.chrome.auth.doOffline();
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
   }
 }
 

@@ -355,13 +355,6 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     });
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   render() {
     const { activeItem, alerts, fullNamespace, loading, name, role } =
       this.state;
@@ -376,7 +369,15 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     if (!role) {
       return (
         <>
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <NotFound />
         </>
       );
@@ -491,7 +492,15 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={`${namespace.name}.${role.name}`}

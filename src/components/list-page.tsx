@@ -242,7 +242,15 @@ export const ListPage = function <T>({
 
       return (
         <>
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
           {unauthorised ? (
@@ -403,13 +411,6 @@ export const ListPage = function <T>({
 
       this.setState({
         alerts: [...alerts, alert],
-      });
-    }
-
-    private closeAlert(index) {
-      closeAlert(index, {
-        alerts: this.state.alerts,
-        setAlerts: (alerts) => this.setState({ alerts }),
       });
     }
 

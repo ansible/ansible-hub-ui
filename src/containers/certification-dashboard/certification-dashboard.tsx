@@ -163,7 +163,8 @@ class CertificationDashboard extends Component<RouteProps, IState> {
   }
 
   render() {
-    const { versions, params, itemCount, loading, unauthorized } = this.state;
+    const { alerts, versions, params, itemCount, loading, unauthorized } =
+      this.state;
     if (!versions && !unauthorized) {
       return <LoadingPageWithHeader />;
     }
@@ -172,8 +173,13 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       <>
         <BaseHeader title={t`Approval dashboard`} />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -611,13 +617,6 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       params,
       navigate: (to) => this.props.navigate(to),
       setState: (state) => this.setState(state, callback),
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 

@@ -89,7 +89,15 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Signature keys`} />
         {unauthorised ? (
           <EmptyStateUnauthorized />
@@ -248,13 +256,6 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
         <ListItemActions kebabItems={dropdownItems} />
       </Tr>
     );
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
   }
 
   private query() {

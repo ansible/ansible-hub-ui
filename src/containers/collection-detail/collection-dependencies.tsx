@@ -118,7 +118,15 @@ class CollectionDependencies extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <CollectionHeader
           activeTab='dependencies'
           actuallyCollection={actuallyCollection}
@@ -296,13 +304,6 @@ class CollectionDependencies extends Component<RouteProps, IState> {
       params,
       navigate: (to) => this.props.navigate(to),
       setState: (state) => this.setState(state, callback),
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 

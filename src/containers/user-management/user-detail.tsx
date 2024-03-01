@@ -76,7 +76,15 @@ class UserDetail extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
@@ -137,13 +145,6 @@ class UserDetail extends Component<RouteProps, IState> {
         }
       },
     );
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
 }
 
 export default withRouter(UserDetail);

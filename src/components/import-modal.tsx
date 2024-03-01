@@ -148,16 +148,10 @@ export class ImportModal extends Component<IProps, IState> {
     this.addAlert(alert.title, alert.variant, alert.description);
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   render() {
     const { collection, namespace, isOpen } = this.props;
     const {
+      alerts,
       errorVariant,
       errors,
       file,
@@ -206,8 +200,13 @@ export class ImportModal extends Component<IProps, IState> {
       >
         <div className='upload-collection'>
           <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
           />
           <form>
             <input

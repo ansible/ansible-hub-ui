@@ -533,7 +533,15 @@ export class CollectionHeader extends Component<IProps, IState> {
               title={t`This collection has been deprecated.`}
             />
           )}
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
@@ -1040,13 +1048,6 @@ export class CollectionHeader extends Component<IProps, IState> {
   private addAlert(alert: AlertType) {
     this.setState({
       alerts: [...this.state.alerts, alert],
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 }

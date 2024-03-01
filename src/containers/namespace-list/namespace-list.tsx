@@ -192,7 +192,15 @@ export class NamespaceList extends Component<IProps, IState> {
             })
           }
         />
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={IS_INSIGHTS ? t`Partners` : t`Namespaces`}>
           {!(this.context as IAppContextType).user.is_anonymous && (
             <div className='hub-tab-link-container'>
@@ -334,13 +342,6 @@ export class NamespaceList extends Component<IProps, IState> {
   private addAlert(alert: AlertType) {
     this.setState({
       alerts: [...this.state.alerts, alert],
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 }

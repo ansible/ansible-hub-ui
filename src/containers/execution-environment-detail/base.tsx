@@ -168,8 +168,13 @@ export function withContainerRepo(WrappedComponent) {
       return (
         <>
           <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
           />
           <PublishToControllerModal
             digest={publishToController?.digest}
@@ -316,13 +321,6 @@ export function withContainerRepo(WrappedComponent) {
       }
 
       return 'detail';
-    }
-
-    private closeAlert(index) {
-      closeAlert(index, {
-        alerts: this.state.alerts,
-        setAlerts: (alerts) => this.setState({ alerts }),
-      });
     }
 
     private addAlert(title, variant, description?) {

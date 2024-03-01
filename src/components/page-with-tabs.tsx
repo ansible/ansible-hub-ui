@@ -152,7 +152,15 @@ export const PageWithTabs = function <
       if (!loading && !unauthorised && !item) {
         return (
           <>
-            <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+            <AlertList
+              alerts={alerts}
+              closeAlert={(i) =>
+                closeAlert(i, {
+                  alerts,
+                  setAlerts: (alerts) => this.setState({ alerts }),
+                })
+              }
+            />
             <NotFound />
           </>
         );
@@ -160,7 +168,15 @@ export const PageWithTabs = function <
 
       return (
         <>
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <BaseHeader
             title={name}
             breadcrumbs={
@@ -264,13 +280,6 @@ export const PageWithTabs = function <
 
       this.setState({
         alerts: [...alerts, alert],
-      });
-    }
-
-    private closeAlert(index) {
-      closeAlert(index, {
-        alerts: this.state.alerts,
-        setAlerts: (alerts) => this.setState({ alerts }),
       });
     }
 

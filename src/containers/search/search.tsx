@@ -130,29 +130,24 @@ class Search extends Component<RouteProps, IState> {
     });
   }
 
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
-  }
-
   render() {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />;
     }
 
     const {
-      loading,
+      alerts,
       collections,
-      params,
+      confirmDelete,
       count,
+      deleteCollection,
+      isDeletionPending,
+      loading,
+      params,
       showImportModal,
       updateCollection,
-      deleteCollection,
-      confirmDelete,
-      isDeletionPending,
     } = this.state;
+
     const noData =
       collections.length === 0 &&
       !filterIsSet(params, [
@@ -175,8 +170,13 @@ class Search extends Component<RouteProps, IState> {
     return (
       <div className='search-page'>
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         <DeleteCollectionModal
           deleteCollection={deleteCollection}

@@ -120,16 +120,17 @@ export class RepositoryForm extends Component<IProps, IState> {
   render() {
     const { onSave, onCancel, namespace, isNew, isRemote } = this.props;
     const {
-      name,
-      description,
-      upstreamName,
-      excludeTags,
-      includeTags,
-      registrySelection,
-      registries,
-      addTagsInclude,
       addTagsExclude,
+      addTagsInclude,
+      alerts,
+      description,
+      excludeTags,
       formErrors,
+      includeTags,
+      name,
+      registries,
+      registrySelection,
+      upstreamName,
     } = this.state;
 
     return (
@@ -155,8 +156,13 @@ export class RepositoryForm extends Component<IProps, IState> {
         ]}
       >
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         <Form>
           {!isRemote ? (
@@ -507,13 +513,6 @@ export class RepositoryForm extends Component<IProps, IState> {
   private addAlert(alert) {
     this.setState({
       alerts: [...this.state.alerts, alert],
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 }

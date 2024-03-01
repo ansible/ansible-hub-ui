@@ -47,7 +47,15 @@ export class LandingPage extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Welcome to Galaxy`} />
         <Main>
           <MultiSearchSearch
@@ -194,13 +202,6 @@ export class LandingPage extends Component<RouteProps, IState> {
         </Main>
       </>
     );
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
-    });
   }
 
   private addAlert(alert: AlertType) {

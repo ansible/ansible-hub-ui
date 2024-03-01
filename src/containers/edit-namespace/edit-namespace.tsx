@@ -82,6 +82,7 @@ class EditNamespace extends Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
       errorMessages,
       loading,
       namespace,
@@ -147,8 +148,13 @@ class EditNamespace extends Component<RouteProps, IState> {
           tabs={tabs}
         />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -275,13 +281,6 @@ class EditNamespace extends Component<RouteProps, IState> {
             });
           }
         });
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 

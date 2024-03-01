@@ -162,7 +162,15 @@ class GroupDetail extends Component<RouteProps, IState> {
 
     if (!group && alerts && alerts.length) {
       return (
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
       );
     }
     if (unauthorised) {
@@ -201,7 +209,15 @@ class GroupDetail extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
@@ -792,13 +808,6 @@ class GroupDetail extends Component<RouteProps, IState> {
       ignoreParams: ['group'],
       navigate: (to) => this.props.navigate(to),
       setState: (state) => this.setState(state, callback),
-    });
-  }
-
-  private closeAlert(index) {
-    closeAlert(index, {
-      alerts: this.state.alerts,
-      setAlerts: (alerts) => this.setState({ alerts }),
     });
   }
 }
