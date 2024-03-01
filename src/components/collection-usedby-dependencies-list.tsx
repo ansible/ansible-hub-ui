@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionUsedByDependencies } from 'src/api';

@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Table, Tbody } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,

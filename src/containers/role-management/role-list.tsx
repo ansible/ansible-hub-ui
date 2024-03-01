@@ -7,7 +7,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Td } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { RoleAPI, RoleType } from 'src/api';

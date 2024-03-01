@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Td, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {

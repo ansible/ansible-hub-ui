@@ -11,7 +11,7 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
-import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import { sum } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
