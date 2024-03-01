@@ -2,8 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// FIXME: interface, and type qualifier in reexport
-export class LinkTabsProps {
+export interface LinkTabsProps {
   /** List of tabs */
   tabs: {
     active?: boolean;

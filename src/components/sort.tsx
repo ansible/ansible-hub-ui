@@ -12,7 +12,7 @@ import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount
 import React, { Component } from 'react';
 import { ParamHelper } from 'src/utilities';
 
-export class SortFieldType {
+export interface SortFieldType {
   id: string;
   title: string;
   type: 'numeric' | 'alpha';

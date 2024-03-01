@@ -19,7 +19,7 @@ import React, { Component } from 'react';
 import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
-export class FilterOption {
+export interface FilterOption {
   id: string;
   title: string;
   placeholder?: string;

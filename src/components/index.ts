@@ -2,7 +2,7 @@ export { AboutModalWindow } from './about-modal';
 export { AccessTab } from './access-tab';
 export {
   AlertList,
-  AlertType,
+  type AlertType,
   closeAlert,
   closeAlertMixin,
 } from './alert-list';
@@ -11,7 +11,7 @@ export { AppliedFilters } from './applied-filters';
 export { ApprovalRow } from './approval-row';
 export { ApproveModal } from './approve-modal';
 export { BaseHeader } from './base-header';
-export { BreadcrumbType, Breadcrumbs } from './breadcrumbs';
+export { type BreadcrumbType, Breadcrumbs } from './breadcrumbs';
 export { CardListSwitcher } from './card-list-switcher';
 export { CollectionCard, CollectionNextPageCard } from './collection-card';
 export { CollectionContentList } from './collection-content-list';
@@ -23,7 +23,7 @@ export { CollectionInfo } from './collection-info';
 export { CollectionList } from './collection-list';
 export { CollectionListItem } from './collection-list-item';
 export { CollectionUsedbyDependenciesList } from './collection-usedby-dependencies-list';
-export { CompoundFilter, FilterOption } from './compound-filter';
+export { CompoundFilter, type FilterOption } from './compound-filter';
 export { ConfirmModal } from './confirm-modal';
 export { CopyCollectionToRepositoryModal } from './copy-collection-to-repository-modal';
 export { CopyURL } from './copy-url';
@@ -60,7 +60,7 @@ export { LandingPageCard } from './landing-page-card';
 export { LanguageSwitcher } from './language-switcher';
 export { LazyDistributions } from './lazy-distributions';
 export { LazyRepositories } from './lazy-repositories';
-export { LinkTabs, LinkTabsProps } from './link-tabs';
+export { LinkTabs, type LinkTabsProps } from './link-tabs';
 export { ListItemActions } from './list-item-actions';
 export {
   ListPage,
@@ -132,7 +132,7 @@ export { SignAllCertificatesModal } from './sign-all-certificates-modal';
 export { SignSingleCertificateModal } from './sign-single-certificate-modal';
 export { SignatureBadge } from './signature-badge';
 export { SmallLogo } from './small-logo';
-export { Sort, SortFieldType } from './sort';
+export { Sort, type SortFieldType } from './sort';
 export { SortTable } from './sort-table';
 export { StatefulDropdown } from './stateful-dropdown';
 export { StatusIndicator } from './status-indicator';

@@ -13,7 +13,7 @@ interface IProps {
   closeAlert: (alertIndex) => void;
 }
 
-export class AlertType {
+export interface AlertType {
   id?: string;
   variant: AlertProps['variant'];
   title: string | ReactNode;
