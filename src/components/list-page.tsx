@@ -229,7 +229,7 @@ export const ListPage = function <T>({
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: (this.context as IAppContextType).queueAlert,
-        setState: (s) => this.setState(s),
+        setState: (state) => this.setState(state),
         state: this.state,
         user: (this.context as IAppContextType).user,
       };
@@ -273,7 +273,7 @@ export const ListPage = function <T>({
                                   typeaheadQuery({
                                     inputText,
                                     selectedFilter: this.state.selectedFilter,
-                                    setState: (s) => this.setState(s),
+                                    setState: (state) => this.setState(state),
                                   });
                                 }
                               }}
@@ -290,7 +290,7 @@ export const ListPage = function <T>({
                                   typeaheadQuery({
                                     inputText: '',
                                     selectedFilter,
-                                    setState: (s) => this.setState(s),
+                                    setState: (state) => this.setState(state),
                                   });
                                 }
                               }}
@@ -413,8 +413,12 @@ export const ListPage = function <T>({
       });
     }
 
-    private get updateParams() {
-      return ParamHelper.updateParamsMixin();
+    private updateParams(params, callback = null) {
+      ParamHelper.updateParams({
+        params,
+        navigate: (to) => this.props.navigate(to),
+        setState: (state) => this.setState(state, callback),
+      });
     }
   };
 

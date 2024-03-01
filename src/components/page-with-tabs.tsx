@@ -141,7 +141,7 @@ export const PageWithTabs = function <
         navigate: this.props.navigate,
         query: () => this.query(),
         queueAlert: (this.context as IAppContextType).queueAlert,
-        setState: (s) => this.setState(s),
+        setState: (state) => this.setState(state),
         state: this.state,
         user: (this.context as IAppContextType).user,
       };
@@ -274,8 +274,12 @@ export const PageWithTabs = function <
       });
     }
 
-    private get updateParams() {
-      return ParamHelper.updateParamsMixin();
+    private updateParams(params, callback = null) {
+      ParamHelper.updateParams({
+        params,
+        navigate: (to) => this.props.navigate(to),
+        setState: (state) => this.setState(state, callback),
+      });
     }
   };
 

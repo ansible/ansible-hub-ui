@@ -125,18 +125,23 @@ export class ParamHelper {
 
   // Reusable function that can be included in a component to update it's
   // internal state and page params at the same time
-  static updateParamsMixin(ignoreParams?: string[]) {
-    return function (params: object, callback?) {
-      // Note. In the callback, make sure to reference the state as
-      // this.state instead of const { foo } = this.state.
-      // In the example above, foo only gets set to the latest state after
-      // the component re-runs render() and the callback typically gets
-      // executed before that happens
-      this.setState({ params }, callback);
-      this.props.navigate({
-        search: '?' + ParamHelper.getQueryString(params, ignoreParams || []),
-      });
-    };
+  static updateParams({
+    params,
+    ignoreParams = [],
+    callback = undefined,
+    navigate,
+    setState,
+  }: {
+    params;
+    ignoreParams?: string[];
+    callback?;
+    navigate;
+    setState;
+  }) {
+    setState({ params }, callback);
+    navigate({
+      search: '?' + ParamHelper.getQueryString(params, ignoreParams || []),
+    });
   }
 
   // removes any params not in ignoredParams from params and calls updateParams with it

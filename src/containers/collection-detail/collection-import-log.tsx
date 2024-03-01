@@ -178,8 +178,12 @@ class CollectionImportLog extends Component<RouteProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 
