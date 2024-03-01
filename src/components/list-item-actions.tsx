@@ -1,4 +1,5 @@
 import { List } from '@patternfly/react-core';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import React, { ReactNode } from 'react';
 import { StatefulDropdown } from 'src/components';
 

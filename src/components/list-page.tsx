@@ -5,6 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
 import {

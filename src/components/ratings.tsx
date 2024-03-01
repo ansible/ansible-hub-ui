@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { HelperText, Tooltip } from 'src/components';
 

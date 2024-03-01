@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import {

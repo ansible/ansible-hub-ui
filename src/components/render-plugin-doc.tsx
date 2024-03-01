@@ -1,4 +1,5 @@
 import { Trans, t } from '@lingui/macro';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import { dom, parse } from 'antsibull-docs';
 import React, { Component, Fragment, ReactElement, ReactNode } from 'react';
 import {

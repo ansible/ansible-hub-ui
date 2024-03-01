@@ -14,6 +14,7 @@ import {
   DropdownToggle,
   DropdownToggleCheckbox,
 } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
 import {
