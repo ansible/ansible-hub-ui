@@ -45,9 +45,10 @@ import {
   ImportModal,
   LinkTabs,
   Logo,
-  RepoSelector,
+  RepositoryBadge,
   SignAllCertificatesModal,
   SignSingleCertificateModal,
+  SignatureBadge,
   UploadSingCertificateModal,
   closeAlertMixin,
 } from 'src/components';
@@ -64,7 +65,6 @@ import {
   waitForTask,
 } from 'src/utilities';
 import { DateComponent } from '../date-component/date-component';
-import { SignatureBadge } from '../signing';
 
 interface IProps {
   activeTab: string;
@@ -405,7 +405,7 @@ export class CollectionHeader extends Component<IProps, IState> {
             )
           }
           contextSelector={
-            <RepoSelector
+            <RepositoryBadge
               isBreadcrumbContainer
               name={collection.repository.name}
             />

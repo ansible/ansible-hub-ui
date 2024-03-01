@@ -19,7 +19,7 @@ interface IProps {
   name: string;
 }
 
-export const RepoSelector = ({
+export const RepositoryBadge = ({
   isBreadcrumbContainer,
   isFlexItem,
   isTextContent,

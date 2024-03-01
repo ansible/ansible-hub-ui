@@ -20,12 +20,12 @@ import {
   DeprecatedTag,
   LabelGroup,
   Logo,
-  RepoSelector,
+  RepositoryBadge,
+  SignatureBadge,
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
-import { SignatureBadge } from '../signing';
 import './list-item.scss';
 
 interface IProps {
@@ -160,7 +160,7 @@ export const CollectionListItem = ({
           direction={{ default: 'row' }}
           alignSelf={{ default: 'alignSelfFlexStart' }}
         >
-          <RepoSelector isFlexItem name={repository.name} />
+          <RepositoryBadge isFlexItem name={repository.name} />
           {displaySignatures ? (
             <FlexItem>
               <SignatureBadge

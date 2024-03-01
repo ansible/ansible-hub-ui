@@ -99,8 +99,6 @@ export { SelectUser } from './rbac/select-user';
 export { UserForm } from './rbac/user-form';
 export { UserFormPage } from './rbac/user-form-page';
 export { RenderPluginDoc } from './render-plugin-doc/render-plugin-doc';
-export { MultipleRepoSelector } from './repo-selector/multiple-repo-selector';
-export { RepoSelector } from './repo-selector/repo-selector';
 export { AnsibleRepositoryForm } from './repositories/ansible-repository-form';
 export { LazyDistributions } from './repositories/lazy-distributions';
 export { LazyRepositories } from './repositories/lazy-repositories';
@@ -132,8 +130,11 @@ export { Main } from './shared/main';
 export { MaybeLink } from './shared/maybe-link';
 export { MultiRepoModal } from './shared/multi-repo-modal';
 export { MultiSearchSearch } from './shared/multi-search-search';
+export { MultipleRepoSelector } from './shared/multiple-repo-selector';
 export { NamespaceListItem } from './shared/namespace-list-item';
 export { CollectionRatings, RoleRatings } from './shared/ratings';
+export { RepositoryBadge } from './shared/repository-badge';
+export { SignatureBadge } from './shared/signature-badge';
 export { Sort, SortFieldType } from './shared/sort';
 export { StatefulDropdown } from './shared/stateful-dropdown';
 export { UIVersion } from './shared/ui-version';
@@ -142,7 +143,6 @@ export { WriteOnlyField } from './shared/write-only-field';
 export {
   SignAllCertificatesModal,
   SignSingleCertificateModal,
-  SignatureBadge,
   UploadSingCertificateModal,
 } from './signing';
 export { SortTable } from './sort-table/sort-table';

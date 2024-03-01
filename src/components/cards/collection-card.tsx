@@ -16,7 +16,7 @@ import { CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
   Logo,
-  RepoSelector,
+  RepositoryBadge,
   SignatureBadge,
   Tooltip,
 } from 'src/components';
@@ -80,7 +80,7 @@ export const CollectionCard = ({
           flexGrow
         />
         <div className='card-badge-area'>
-          <RepoSelector isTextContent name={repository.name} />
+          <RepositoryBadge isTextContent name={repository.name} />
           {displaySignatures ? (
             <SignatureBadge
               isCompact
