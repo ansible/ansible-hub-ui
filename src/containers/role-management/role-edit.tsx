@@ -52,8 +52,6 @@ interface IState {
 class EditRole extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
-  nonQueryStringParams = ['role'];
-
   constructor(props) {
     super(props);
 

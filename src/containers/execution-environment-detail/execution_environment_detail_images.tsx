@@ -73,8 +73,6 @@ class ExecutionEnvironmentDetailImages extends Component<
 > {
   static contextType = AppContext;
 
-  nonQueryStringParams = [];
-
   constructor(props) {
     super(props);
 
@@ -533,7 +531,7 @@ class ExecutionEnvironmentDetailImages extends Component<
   queryImages(name) {
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.images(name, {
-        ...ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
+        ...this.state.params,
         exclude_child_manifests: true,
       })
         .then(({ data: { data, meta } }) => {
@@ -614,7 +612,7 @@ class ExecutionEnvironmentDetailImages extends Component<
   }
 
   private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+    return ParamHelper.updateParamsMixin();
   }
 }
 

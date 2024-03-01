@@ -100,12 +100,6 @@ interface IState {
 export class NamespaceDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
-  nonAPIParams = ['tab', 'group', 'user'];
-
-  // namespace is a positional url argument, so don't include it in the
-  // query params
-  nonQueryStringParams = ['namespace'];
-
   constructor(props) {
     super(props);
     const params = ParamHelper.parseParamString(props.location.search, [
@@ -803,7 +797,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
 
   private loadCollections() {
     return this.loadAllCollections(
-      ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+      ParamHelper.getReduced(this.state.params, ['tab', 'group', 'user']),
     ).then((result) => {
       this.setState({
         collections: result.data.data,
@@ -880,7 +874,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
   }
 
   private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+    return ParamHelper.updateParamsMixin(['namespace']);
   }
 
   private renderPageControls() {

@@ -75,11 +75,7 @@ interface IState {
 class GroupDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
-  nonQueryStringParams = ['group'];
-
   userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
-
-  roleQueryStringParams = ['role__icontains'];
 
   constructor(props) {
     super(props);
@@ -713,9 +709,7 @@ class GroupDetail extends Component<RouteProps, IState> {
 
   private queryUsers() {
     const params = {
-      ...ParamHelper.getReduced(this.state.params, [
-        ...this.roleQueryStringParams,
-      ]),
+      ...ParamHelper.getReduced(this.state.params, ['role__icontains']),
       sort: ParamHelper.validSortParams(
         this.state.params['sort'],
         this.userQueryStringParams,
@@ -793,7 +787,7 @@ class GroupDetail extends Component<RouteProps, IState> {
   }
 
   private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+    return ParamHelper.updateParamsMixin(['group']);
   }
 
   private closeAlert(index) {

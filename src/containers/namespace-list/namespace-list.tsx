@@ -54,8 +54,6 @@ interface IProps extends RouteProps {
 export class NamespaceList extends Component<IProps, IState> {
   static contextType = AppContext;
 
-  nonURLParams = ['tenant'];
-
   constructor(props) {
     super(props);
 
@@ -325,7 +323,7 @@ export class NamespaceList extends Component<IProps, IState> {
   }
 
   private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonURLParams);
+    return ParamHelper.updateParamsMixin(['tenant']);
   }
 
   private addAlert(alert: AlertType) {
