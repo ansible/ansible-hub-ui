@@ -354,10 +354,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Collection versions`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Collection versions`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -365,7 +362,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryCollections(true))
           }
         />
-        <tbody>
+        <Tbody>
           {versions.map((version, i) => (
             <ApprovalRow
               approve={(v) => this.approve(v)}
@@ -379,8 +376,8 @@ class CertificationDashboard extends Component<RouteProps, IState> {
               reject={(v) => this.reject(v)}
             />
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   }
 

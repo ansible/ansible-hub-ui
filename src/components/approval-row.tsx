@@ -37,12 +37,12 @@ export const ApprovalRow = ({
   const { collection_version: version, repository } = collectionVersion;
 
   return (
-    <tr
+    <Tr
       data-cy={`ApprovalRow-${repository.name}-${version.namespace}-${version.name}`}
     >
-      <td>{version.namespace}</td>
-      <td>{version.name}</td>
-      <td>
+      <Td>{version.namespace}</Td>
+      <Td>{version.name}</Td>
+      <Td>
         <Link
           to={formatPath(
             Paths.collectionByRepo,
@@ -71,16 +71,16 @@ export const ApprovalRow = ({
         >
           <DownloadIcon />
         </Button>
-      </td>
-      <td>
+      </Td>
+      <Td>
         <DateComponent date={version.pulp_created} />
-      </td>
-      <td>
+      </Td>
+      <Td>
         <LabelGroup>{repository.name}</LabelGroup>
-      </td>
-      <td>{renderStatus(collectionVersion)}</td>
+      </Td>
+      <Td>{renderStatus(collectionVersion)}</Td>
       {renderButtons(collectionVersion)}
-    </tr>
+    </Tr>
   );
 
   function renderButtons(collectionVersion: CollectionVersionSearch) {

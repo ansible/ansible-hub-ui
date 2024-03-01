@@ -62,16 +62,16 @@ export const SortTable = ({ options, params, updateParams }: IProps) => {
   }
 
   const getHeaderItem = (item) => (
-    <th key={item.id} className={item?.className}>
+    <Th key={item.id} className={item?.className}>
       {item.title} {getIcon(item.type, item.id)}
-    </th>
+    </Th>
   );
 
   return (
-    <thead>
-      <tr className='hub-SortTable-headers' data-cy='SortTable-headers'>
+    <Thead>
+      <Tr className='hub-SortTable-headers' data-cy='SortTable-headers'>
         {options.headers.map((element) => getHeaderItem(element))}
-      </tr>
-    </thead>
+      </Tr>
+    </Thead>
   );
 };

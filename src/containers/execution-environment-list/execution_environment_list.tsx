@@ -318,7 +318,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table className='hub-c-table-content pf-v5-c-table'>
+      <Table>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -326,8 +326,8 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryEnvironments())
           }
         />
-        <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{items.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -386,8 +386,8 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     ].filter((truthy) => truthy);
 
     return (
-      <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
-        <td>
+      <Tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
+        <Td>
           <Link
             to={formatEEPath(Paths.executionEnvironmentDetail, {
               container: item.pulp.distribution.base_path,
@@ -395,25 +395,25 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
           >
             {item.name}
           </Link>
-        </td>
+        </Td>
         {description ? (
-          <td className={'pf-m-truncate'}>
+          <Td className={'pf-m-truncate'}>
             <Tooltip content={description}>{description}</Tooltip>
-          </td>
+          </Td>
         ) : (
-          <td />
+          <Td />
         )}
-        <td>
+        <Td>
           <DateComponent date={item.created_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={item.updated_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 

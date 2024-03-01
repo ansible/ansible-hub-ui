@@ -174,10 +174,7 @@ const CollectionDistributions = (props: RouteProps) => {
     };
 
     return (
-      <table
-        aria-label={t`Collection distributions`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Collection distributions`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -185,23 +182,23 @@ const CollectionDistributions = (props: RouteProps) => {
             updateParamsMixin(params);
           }}
         />
-        <tbody>
+        <Tbody>
           {distributions.map((distribution, i) => (
-            <tr key={i}>
-              <td>{distribution.name}</td>
-              <td>{distribution.base_path}</td>
-              <td>
+            <Tr key={i}>
+              <Td>{distribution.name}</Td>
+              <Td>{distribution.base_path}</Td>
+              <Td>
                 <DateComponent date={distribution.pulp_created} />
-              </td>
-              <td>
+              </Td>
+              <Td>
                 <ClipboardCopy isCode isReadOnly variant={'expansion'} key={i}>
                   {cliConfig(distribution)}
                 </ClipboardCopy>
-              </td>
-            </tr>
+              </Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   };
 

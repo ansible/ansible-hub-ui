@@ -113,17 +113,17 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
     );
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
             {name}
           </Link>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <PulpLabels labels={pulp_labels} />
-        </td>
-        <td>{isPrivate ? t`Yes` : t`No`}</td>
-        <td>
+        </Td>
+        <Td>{isPrivate ? t`Yes` : t`No`}</Td>
+        <Td>
           {!remote ? (
             t`no remote`
           ) : !last_sync_task ? (
@@ -133,12 +133,12 @@ const AnsibleRepositoryList = ListPage<AnsibleRepositoryType>({
               {lastSyncStatus(item)} {lastSynced(item)}
             </>
           )}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={kebabItems} />
-      </tr>
+      </Tr>
     );
   },
   sortHeaders: [

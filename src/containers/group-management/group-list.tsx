@@ -383,17 +383,14 @@ class GroupList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Group list`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Group list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
         />
-        <tbody>{groups.map((group, i) => this.renderTableRow(group, i))}</tbody>
-      </table>
+        <Tbody>{groups.map((group, i) => this.renderTableRow(group, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -416,8 +413,8 @@ class GroupList extends Component<RouteProps, IState> {
       ),
     ];
     return (
-      <tr data-cy={`GroupList-row-${group.name}`} key={index}>
-        <td>
+      <Tr data-cy={`GroupList-row-${group.name}`} key={index}>
+        <Td>
           <Link
             to={formatPath(Paths.groupDetail, {
               group: group.id,
@@ -425,9 +422,9 @@ class GroupList extends Component<RouteProps, IState> {
           >
             {group.name}
           </Link>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 

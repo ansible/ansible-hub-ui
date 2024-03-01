@@ -301,10 +301,7 @@ class ExecutionEnvironmentDetailImages extends Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table
-            aria-label={t`Images`}
-            className='hub-c-table-content pf-v5-c-table'
-          >
+          <Table aria-label={t`Images`}>
             <SortTable
               options={sortTableOptions}
               params={params}
@@ -314,7 +311,7 @@ class ExecutionEnvironmentDetailImages extends Component<
                 )
               }
             />
-            <tbody>
+            <Tbody>
               {images.map((image, i) =>
                 this.renderTableRow(
                   image,
@@ -323,8 +320,8 @@ class ExecutionEnvironmentDetailImages extends Component<
                   sortTableOptions.headers.length,
                 ),
               )}
-            </tbody>
-          </table>
+            </Tbody>
+          </Table>
         )}
 
         <HubPagination
@@ -416,8 +413,8 @@ class ExecutionEnvironmentDetailImages extends Component<
 
     return (
       <Fragment key={index}>
-        <tr>
-          <td className='pf-v5-c-table__toggle'>
+        <Tr>
+          <Td className='pf-v5-c-table__toggle'>
             {isManifestList ? (
               <Button
                 variant='plain'
@@ -434,8 +431,8 @@ class ExecutionEnvironmentDetailImages extends Component<
                 )}
               </Button>
             ) : null}
-          </td>
-          <td>
+          </Td>
+          <Td>
             <LabelGroup className={'hub-c-label-group-tags-column'}>
               {image.tags
                 .sort()
@@ -447,29 +444,29 @@ class ExecutionEnvironmentDetailImages extends Component<
                   ),
                 )}
             </LabelGroup>
-          </td>
-          <td>
+          </Td>
+          <Td>
             <DateComponent date={image.created_at} />
-          </td>
-          <td>{isManifestList ? '---' : image.layers}</td>
-          <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
-          <td>
+          </Td>
+          <Td>{isManifestList ? '---' : image.layers}</Td>
+          <Td>{isManifestList ? '---' : getHumanSize(image.size)}</Td>
+          <Td>
             {isManifestList ? (
               <ShaLabel digest={image.digest} />
             ) : (
               <ShaLink digest={image.digest} />
             )}
-          </td>
-          <td>
+          </Td>
+          <Td>
             <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
-          </td>
+          </Td>
           <ListItemActions kebabItems={dropdownItems} />
-        </tr>
+        </Tr>
 
         {expandedImage === image && (
-          <tr>
-            <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
-          </tr>
+          <Tr>
+            <Td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</Td>
+          </Tr>
         )}
       </Fragment>
     );
@@ -477,7 +474,7 @@ class ExecutionEnvironmentDetailImages extends Component<
 
   renderManifestList({ image_manifests }, ShaLink) {
     return (
-      <table className='hub-c-table-content pf-v5-c-table'>
+      <Table>
         <SortTable
           options={{
             headers: [
@@ -496,7 +493,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           params={{}}
           updateParams={() => null}
         />
-        <tbody>
+        <Tbody>
           {image_manifests.map(
             ({
               digest,
@@ -507,11 +504,11 @@ class ExecutionEnvironmentDetailImages extends Component<
               variant,
               features,
             }) => (
-              <tr key={digest}>
-                <td>
+              <Tr key={digest}>
+                <Td>
                   <ShaLink digest={digest} />
-                </td>
-                <td>
+                </Td>
+                <Td>
                   {[
                     os,
                     os_version,
@@ -523,12 +520,12 @@ class ExecutionEnvironmentDetailImages extends Component<
                   ]
                     .filter(Boolean)
                     .join(' ')}
-                </td>
-              </tr>
+                </Td>
+              </Tr>
             ),
           )}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   }
 

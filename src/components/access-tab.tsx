@@ -244,10 +244,7 @@ export class AccessTab extends Component<IProps> {
           </div>
         )}
 
-        <table
-          aria-label={ariaLabel}
-          className='hub-c-table-content pf-v5-c-table'
-        >
+        <Table aria-label={ariaLabel}>
           <SortTable
             options={{
               headers: [
@@ -266,8 +263,8 @@ export class AccessTab extends Component<IProps> {
             params={{}}
             updateParams={() => null}
           />
-          <tbody>{sorted.map(renderItem)}</tbody>
-        </table>
+          <Tbody>{sorted.map(renderItem)}</Tbody>
+        </Table>
       </>
     );
   }
@@ -291,8 +288,8 @@ export class AccessTab extends Component<IProps> {
     ];
 
     return (
-      <tr data-cy={`AccessTab-row-user-${user.username}`} key={index}>
-        <td>
+      <Tr data-cy={`AccessTab-row-user-${user.username}`} key={index}>
+        <Td>
           <Link
             to={
               urlPrefix +
@@ -305,9 +302,9 @@ export class AccessTab extends Component<IProps> {
           >
             {user.username}
           </Link>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
@@ -330,8 +327,8 @@ export class AccessTab extends Component<IProps> {
     ];
 
     return (
-      <tr data-cy={`AccessTab-row-group-${group.name}`} key={index}>
-        <td>
+      <Tr data-cy={`AccessTab-row-group-${group.name}`} key={index}>
+        <Td>
           <Link
             to={
               urlPrefix +
@@ -344,9 +341,9 @@ export class AccessTab extends Component<IProps> {
           >
             {group.name}
           </Link>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
@@ -429,7 +426,7 @@ export class AccessTab extends Component<IProps> {
               expandableRowContent={<RolePermissions name={role} />}
               data-cy={`RoleListTable-ExpandableRow-row-${role}`}
             >
-              <td>{role}</td>
+              <Td>{role}</Td>
               <ListItemActions
                 kebabItems={[
                   canEditOwners && (

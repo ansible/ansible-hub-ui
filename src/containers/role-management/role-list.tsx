@@ -307,15 +307,15 @@ export class RoleList extends Component<RouteProps, IState> {
                           colSpan={6}
                           rowIndex={i}
                         >
-                          <td data-cy='name-field'>{role.name}</td>
-                          <td>
+                          <Td data-cy='name-field'>{role.name}</Td>
+                          <Td>
                             {translateLockedRole(role.name, role.description)}
-                          </td>
-                          <td>
+                          </Td>
+                          <Td>
                             <DateComponent date={role.pulp_created} />
-                          </td>
+                          </Td>
 
-                          <td>
+                          <Td>
                             {role.locked ? (
                               <Tooltip
                                 content={t`Built-in roles cannot be edited or deleted.`}
@@ -327,7 +327,7 @@ export class RoleList extends Component<RouteProps, IState> {
                             ) : (
                               t`Editable`
                             )}
-                          </td>
+                          </Td>
                           {isSuperuser && (
                             <ListItemActions
                               kebabItems={this.renderDropdownItems(role)}

@@ -237,10 +237,7 @@ export const MultipleRepoSelector = (props: IProps) => {
     };
 
     return (
-      <table
-        aria-label={t`Repositories`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Repositories`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -259,8 +256,8 @@ export const MultipleRepoSelector = (props: IProps) => {
               isDisabled={disabledRepos.includes(repo.name)}
               data-cy={`ApproveModal-RadioRow-row-${repo.name}`}
             >
-              <td>{repo.name}</td>
-              <td>{repo.description}</td>
+              <Td>{repo.name}</Td>
+              <Td>{repo.description}</Td>
             </RadioRow>
           ) : (
             <CheckboxRow
@@ -274,12 +271,12 @@ export const MultipleRepoSelector = (props: IProps) => {
               isDisabled={disabledRepos.includes(repo.name)}
               data-cy={`ApproveModal-CheckboxRow-row-${repo.name}`}
             >
-              <td>{repo.name}</td>
-              <td>{repo.description}</td>
+              <Td>{repo.name}</Td>
+              <Td>{repo.description}</Td>
             </CheckboxRow>
           ),
         )}
-      </table>
+      </Table>
     );
   }
 

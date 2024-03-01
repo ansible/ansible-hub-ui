@@ -55,17 +55,17 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
     );
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link to={formatPath(Paths.ansibleRemoteDetail, { name })}>
             {name}
           </Link>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <CopyURL url={url} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={kebabItems} />
-      </tr>
+      </Tr>
     );
   },
   sortHeaders: [

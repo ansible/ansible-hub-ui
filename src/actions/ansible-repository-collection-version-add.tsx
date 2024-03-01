@@ -120,13 +120,13 @@ const AddCollectionVersionModal = ({
       sourceRepository.pulp_href === repository.pulp_href;
 
     return (
-      <tr
+      <Tr
         onClick={() =>
           setSelected(pushToOrFilterOutCollections(item, selected))
         }
         key={index}
       >
-        <td>
+        <Td>
           <Checkbox
             aria-label={`${namespace}.${name} v${version}`}
             id={`collection-${index}`}
@@ -134,13 +134,13 @@ const AddCollectionVersionModal = ({
             name={`collection-${index}`}
             isDisabled={isCollectionInRepo}
           />
-        </td>
-        <td>
+        </Td>
+        <Td>
           {namespace}.{name} v{version}
-        </td>
-        <td>{description}</td>
-        <td>{repository.name}</td>
-      </tr>
+        </Td>
+        <Td>{description}</Td>
+        <Td>{repository.name}</Td>
+      </Tr>
     );
   };
 

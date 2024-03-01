@@ -292,17 +292,14 @@ class UserList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`User list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
         />
-        <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{users.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -339,8 +336,8 @@ class UserList extends Component<RouteProps, IState> {
       );
     }
     return (
-      <tr data-cy={`UserList-row-${user.username}`} key={index}>
-        <td>
+      <Tr data-cy={`UserList-row-${user.username}`} key={index}>
+        <Td>
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}
           </Link>
@@ -357,22 +354,22 @@ class UserList extends Component<RouteProps, IState> {
               </Tooltip>
             </>
           )}
-        </td>
-        <td>{user.first_name}</td>
-        <td>{user.last_name}</td>
-        <td>{user.email}</td>
-        <td>
+        </Td>
+        <Td>{user.first_name}</Td>
+        <Td>{user.last_name}</Td>
+        <Td>{user.email}</Td>
+        <Td>
           <LabelGroup>
             {user.groups.map((g) => (
               <Label key={g.id}>{g.name}</Label>
             ))}
           </LabelGroup>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={user.date_joined} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 

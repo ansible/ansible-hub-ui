@@ -343,7 +343,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table className='hub-c-table-content pf-v5-c-table'>
+      <Table>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -351,8 +351,8 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryRegistries())
           }
         />
-        <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{items.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -417,26 +417,26 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
       </Tooltip>,
     ].filter(Boolean);
     return (
-      <tr
+      <Tr
         data-cy={`ExecutionEnvironmentRegistryList-row-${item.name}`}
         key={index}
       >
-        <td>{item.name}</td>
-        <td>
+        <Td>{item.name}</Td>
+        <Td>
           <DateComponent date={item.created_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={item.updated_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <CopyURL url={item.url} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           {lastSyncStatus(item) || '---'}
           {lastSynced(item)}
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
-      </tr>
+      </Tr>
     );
   }
 

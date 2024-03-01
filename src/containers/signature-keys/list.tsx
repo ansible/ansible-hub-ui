@@ -203,10 +203,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Signature keys`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Signature keys`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -215,8 +212,8 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.query());
           }}
         />
-        <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
-      </table>
+        <Tbody>{items.map((item, i) => this.renderTableRow(item, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -236,19 +233,19 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
     ];
 
     return (
-      <tr key={index}>
-        <td>{name}</td>
-        <td data-cy='hub-signature-list-fingerprint'>{pubkey_fingerprint}</td>
-        <td>
+      <Tr key={index}>
+        <Td>{name}</Td>
+        <Td data-cy='hub-signature-list-fingerprint'>{pubkey_fingerprint}</Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <ClipboardCopy isCode isReadOnly variant={'expansion'}>
             {public_key}
           </ClipboardCopy>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 

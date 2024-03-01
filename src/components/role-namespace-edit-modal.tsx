@@ -123,10 +123,7 @@ export const RoleNamespaceEditModal = ({
           />
         )
       ) : (
-        <table
-          aria-label={t`Namespace list`}
-          className='hub-c-table-content pf-v5-c-table'
-        >
+        <Table aria-label={t`Namespace list`}>
           <SortTable
             params={{ sort: 'name' }}
             updateParams={() => null}
@@ -147,9 +144,9 @@ export const RoleNamespaceEditModal = ({
               onSelect={() => setSelected({ id, name })}
               isDisabled={provider?.name === name}
             >
-              <td>{name}</td>
-              <td>{description}</td>
-              <td>
+              <Td>{name}</Td>
+              <Td>{description}</Td>
+              <Td>
                 {users.length ? (
                   <>
                     <b>{t`Users`}</b>:{' '}
@@ -163,10 +160,10 @@ export const RoleNamespaceEditModal = ({
                     {groups.map(({ name }) => name).join(', ')}
                   </>
                 ) : null}
-              </td>
+              </Td>
             </RadioRow>
           ))}
-        </table>
+        </Table>
       )}
     </Modal>
   );

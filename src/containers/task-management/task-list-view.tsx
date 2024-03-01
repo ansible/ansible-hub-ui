@@ -253,17 +253,14 @@ export class TaskListView extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Task list`}
-        className='hub-c-table-content pf-v5-c-table'
-      >
+      <Table aria-label={t`Task list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
         />
-        <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
-      </table>
+        <Tbody>{items.map((item, i) => this.renderTableRow(item, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -273,26 +270,26 @@ export class TaskListView extends Component<RouteProps, IState> {
     const taskId = parsePulpIDFromURL(pulp_href);
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
             <Tooltip content={translateTask(name)}>{name}</Tooltip>
           </Link>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={started_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={finished_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <StatusIndicator status={state} />
-        </td>
-        <td>{this.cancelButton(state, item)}</td>
-      </tr>
+        </Td>
+        <Td>{this.cancelButton(state, item)}</Td>
+      </Tr>
     );
   }
 

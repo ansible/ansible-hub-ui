@@ -183,7 +183,7 @@ export const SelectGroup: FunctionComponent<IProps> = ({
                         isDisabled={isAssigned(group)}
                         data-cy={`GroupListTable-CheckboxRow-row-${group.name}`}
                       >
-                        <td>{group.name}</td>
+                        <Td>{group.name}</Td>
                       </RadioRow>
                     ))}
                   </RoleListTable>

@@ -187,7 +187,7 @@ export const SelectUser: FunctionComponent<IProps> = ({
                         isDisabled={isAssigned(user)}
                         data-cy={`UserListTable-CheckboxRow-row-${user.username}`}
                       >
-                        <td>{user.username}</td>
+                        <Td>{user.username}</Td>
                       </RadioRow>
                     ))}
                   </RoleListTable>

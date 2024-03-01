@@ -126,7 +126,7 @@ export const ListPage = function <T>({
   noDataTitle,
   // ({ params }) => Promise<{ data: { count, results[] } }>
   query,
-  // (item, index) => <tr>...</tr>
+  // (item, index) => <Tr>...</Tr>
   renderTableRow,
   // table headers
   sortHeaders,
@@ -355,19 +355,16 @@ export const ListPage = function <T>({
       ) as LocalizedSortHeaders;
 
       return (
-        <table
-          aria-label={i18n._(title)}
-          className='hub-c-table-content pf-v5-c-table'
-        >
+        <Table aria-label={i18n._(title)}>
           <SortTable
             options={{ headers: localizedSortHeaders }}
             params={params}
             updateParams={updateParams}
           />
-          <tbody>
+          <Tbody>
             {items.map((item, i) => renderTableRow(item, i, actionContext))}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       );
     }
 

@@ -227,10 +227,10 @@ export const SelectRoles: FunctionComponent<SelectRolesProps> = ({
                         isDisabled={isAssigned(role.name)}
                         data-cy={`RoleListTable-CheckboxRow-row-${role.name}`}
                       >
-                        <td>{role.name}</td>
-                        <td>
+                        <Td>{role.name}</Td>
+                        <Td>
                           {translateLockedRole(role.name, role.description)}
-                        </td>
+                        </Td>
                       </CheckboxRow>
                     ))}
                   </RoleListTable>

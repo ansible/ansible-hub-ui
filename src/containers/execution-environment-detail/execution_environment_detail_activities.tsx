@@ -60,7 +60,7 @@ class ExecutionEnvironmentDetailActivities extends Component<
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <section className='body'>
-              <table aria-label={t`Activities`} className='pf-v5-c-table'>
+              <Table aria-label={t`Activities`}>
                 <SortTable
                   options={{
                     headers: [
@@ -71,23 +71,23 @@ class ExecutionEnvironmentDetailActivities extends Component<
                   params={{}}
                   updateParams={() => null}
                 />
-                <tbody>
+                <Tbody>
                   {activities.map((action, i) => {
                     return (
-                      <tr key={i}>
-                        <td>{action.action}</td>
+                      <Tr key={i}>
+                        <Td>{action.action}</Td>
                         {action.created ? (
-                          <td>
+                          <Td>
                             <DateComponent date={action.created} />
-                          </td>
+                          </Td>
                         ) : (
-                          <td />
+                          <Td />
                         )}
-                      </tr>
+                      </Tr>
                     );
                   })}
-                </tbody>
-              </table>
+                </Tbody>
+              </Table>
             </section>
           </FlexItem>
         </Flex>

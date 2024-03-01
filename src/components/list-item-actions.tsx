@@ -14,7 +14,7 @@ export function ListItemActions(props: IProps) {
   const anyKebab = kebabItems?.length;
 
   return (
-    <td
+    <Td
       style={{
         paddingRight: anyKebab ? '0px' : '16px',
         textAlign: 'right',
@@ -32,6 +32,6 @@ export function ListItemActions(props: IProps) {
           <StatefulDropdown items={kebabItems} />{' '}
         </div>
       ) : null}
-    </td>
+    </Td>
   );
 }

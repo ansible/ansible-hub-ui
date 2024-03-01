@@ -348,8 +348,8 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
                     }
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
-                    <td>{role.role}</td>
-                    <td>{translateLockedRole(role.role, role.description)}</td>
+                    <Td>{role.role}</Td>
+                    <Td>{translateLockedRole(role.role, role.description)}</Td>
                     <ListItemActions
                       kebabItems={[
                         canEdit && (

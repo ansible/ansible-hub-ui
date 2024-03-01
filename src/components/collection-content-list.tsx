@@ -97,18 +97,18 @@ export const CollectionContentList = ({
           </ToolbarGroup>
         </Toolbar>
       </div>
-      <table className='hub-c-table-content pf-v5-c-table pf-m-compact'>
-        <thead>
-          <tr>
-            <th>{t`Name`}</th>
-            <th>{t`Type`}</th>
-            <th>{t`Description`}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table variant='compact'>
+        <Thead>
+          <Tr>
+            <Th>{t`Name`}</Th>
+            <Th>{t`Type`}</Th>
+            <Th>{t`Description`}</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {toShow.map((content, i) => (
-            <tr key={i}>
-              <td>
+            <Tr key={i}>
+              <Td>
                 <Link
                   to={formatPath(
                     Paths.collectionContentDocsByRepo,
@@ -124,13 +124,13 @@ export const CollectionContentList = ({
                 >
                   {content.name}
                 </Link>
-              </td>
-              <td>{content.content_type}</td>
-              <td>{content.description}</td>
-            </tr>
+              </Td>
+              <Td>{content.content_type}</Td>
+              <Td>{content.description}</Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
       {summary.all <= 0 &&
         repository.name === 'community' &&
         renderCommunityWarningMessage()}

@@ -507,25 +507,25 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         <h2 id='parameters'>Parameters</h2>
-        <table className='options-table'>
-          <tbody>
-            <tr>
-              <th colSpan={maxDepth + 1}>Parameter</th>
-              <th>
+        <Table className='options-table'>
+          <Tbody>
+            <Tr>
+              <Th colSpan={maxDepth + 1}>Parameter</Th>
+              <Th>
                 Choices/
                 <span className='blue'>Defaults</span>
-              </th>
-              {content_type !== 'module' ? <th>Configuration</th> : null}
-              <th>Comments</th>
-            </tr>
+              </Th>
+              {content_type !== 'module' ? <Th>Configuration</Th> : null}
+              <Th>Comments</Th>
+            </Tr>
             {
               // TODO: add support for sub options. Example:
               //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
               // TODO: do we need to display version added?
             }
             {paramEntries}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       </>
     );
   }
@@ -542,15 +542,15 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       const spacers = [];
       const key = `${parent}-${option.name}`;
       for (let x = 0; x < depth; x++) {
-        spacers.push(<td key={x} className='spacer' />);
+        spacers.push(<Td key={x} className='spacer' />);
       }
       output.push(
-        <tr key={key}>
+        <Tr key={key}>
           {
             // PARAMETER --------------------------------
           }
           {spacers}
-          <td
+          <Td
             colSpan={maxDepth + 1 - depth}
             className={option.suboptions ? 'parent' : ''}
           >
@@ -570,21 +570,21 @@ export class RenderPluginDoc extends Component<IProps, IState> {
                 </span>
               ) : null}
             </small>
-          </td>
+          </Td>
           {
             // CHOICES -------------------------------
           }
-          <td>{this.renderChoices(option)}</td>
+          <Td>{this.renderChoices(option)}</Td>
           {
             // CONFIGURATION (non module only) -------
           }
           {content_type !== 'module' ? (
-            <td>{this.renderPluginConfiguration(option)}</td>
+            <Td>{this.renderPluginConfiguration(option)}</Td>
           ) : null}
           {
             // COMMENTS ------------------------------
           }
-          <td>
+          <Td>
             {option.description.map((d, i) => (
               <p key={i}>{this.applyDocFormatters(d)}</p>
             ))}
@@ -596,8 +596,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
                 </span>
               </small>
             ) : null}
-          </td>
-        </tr>,
+          </Td>
+        </Tr>,
       );
 
       // recursively render sub options
@@ -787,16 +787,16 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         <h2 id='return-values'>Return Values</h2>
-        <table className='options-table'>
-          <tbody>
-            <tr>
-              <th colSpan={maxDepth + 1}>Key</th>
-              <th>Returned</th>
-              <th>Description</th>
-            </tr>
+        <Table className='options-table'>
+          <Tbody>
+            <Tr>
+              <Th colSpan={maxDepth + 1}>Key</Th>
+              <Th>Returned</Th>
+              <Th>Description</Th>
+            </Tr>
             {this.renderReturnValueEntries(returnV, 0, maxDepth, '')}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       </>
     );
   }
@@ -812,20 +812,20 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     returnValues.forEach((option) => {
       const spacers = [];
       for (let x = 0; x < depth; x++) {
-        spacers.push(<td key={x} colSpan={1} className='spacer' />);
+        spacers.push(<Td key={x} colSpan={1} className='spacer' />);
       }
       const key = `${parent}-${option.name}`;
       entries.push(
-        <tr key={key}>
+        <Tr key={key}>
           {spacers}
-          <td
+          <Td
             colSpan={maxDepth + 1 - depth}
             className={option.contains ? 'parent' : ''}
           >
             {option.name} <br /> ({option.type})
-          </td>
-          <td>{option.returned}</td>
-          <td>
+          </Td>
+          <Td>{option.returned}</Td>
+          <Td>
             {option.description.map((d, i) => (
               <p key={i}>{this.applyDocFormatters(d)}</p>
             ))}
@@ -841,8 +841,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
                 )}
               </div>
             ) : null}
-          </td>
-        </tr>,
+          </Td>
+        </Tr>,
       );
 
       if (option.contains) {

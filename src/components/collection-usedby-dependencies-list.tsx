@@ -75,12 +75,12 @@ export const CollectionUsedbyDependenciesList = ({
             <EmptyStateFilter />
           ) : (
             <>
-              <table className='hub-c-table-content pf-v5-c-table pf-m-compact'>
-                <tbody>
+              <Table variant='compact'>
+                <Tbody>
                   {usedByDependencies.map(
                     ({ name, namespace, version, repository_list }, i) => (
-                      <tr key={i}>
-                        <td>
+                      <Tr key={i}>
+                        <Td>
                           <Link
                             to={formatPath(
                               Paths.collectionByRepo,
@@ -97,12 +97,12 @@ export const CollectionUsedbyDependenciesList = ({
                           >
                             {namespace + '.' + name} v{version}
                           </Link>
-                        </td>
-                      </tr>
+                        </Td>
+                      </Tr>
                     ),
                   )}
-                </tbody>
-              </table>
+                </Tbody>
+              </Table>
               <HubPagination
                 params={params}
                 updateParams={(params) => updateParams(params)}

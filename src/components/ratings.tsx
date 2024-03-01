@@ -70,78 +70,78 @@ function Ratings({ scores }: { scores: Record<string, number> }) {
 
   const help = t`This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy.`;
   const more = (
-    <table className='pf-v5-c-table'>
+    <Table>
       {scores.quality_score !== null ? (
-        <tr>
-          <th>{t`Quality score`}</th>
-          <td>
+        <Tr>
+          <Th>{t`Quality score`}</Th>
+          <Td>
             <progress max={100} value={~~(20 * scores.quality_score)} />{' '}
-          </td>
-          <td>
+          </Td>
+          <Td>
             <strong>{scores.quality_score}</strong>&nbsp;/&nbsp;5
-          </td>
-        </tr>
+          </Td>
+        </Tr>
       ) : null}
-      <tr>
-        <th>{t`Community score`}</th>
-        <td>
+      <Tr>
+        <Th>{t`Community score`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.score)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.score}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={3} style={{ textAlign: 'right' }}>
+        </Td>
+      </Tr>
+      <Tr>
+        <Td colSpan={3} style={{ textAlign: 'right' }}>
           <Trans>Based on {scores.count} surveys.</Trans>
-        </td>
-      </tr>
-      <tr>
-        <th>{t`Quality of docs`}</th>
-        <td>
+        </Td>
+      </Tr>
+      <Tr>
+        <Th>{t`Quality of docs`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.docs)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.docs}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-      <tr>
-        <th>{t`Ease of use`}</th>
-        <td>
+        </Td>
+      </Tr>
+      <Tr>
+        <Th>{t`Ease of use`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.ease_of_use)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.ease_of_use}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-      <tr>
-        <th>{t`Does what it promises`}</th>
-        <td>
+        </Td>
+      </Tr>
+      <Tr>
+        <Th>{t`Does what it promises`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.does_what_it_says)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.does_what_it_says}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-      <tr>
-        <th>{t`Works without change`}</th>
-        <td>
+        </Td>
+      </Tr>
+      <Tr>
+        <Th>{t`Works without change`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.works_as_is)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.works_as_is}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-      <tr>
-        <th>{t`Ready for production`}</th>
-        <td>
+        </Td>
+      </Tr>
+      <Tr>
+        <Th>{t`Ready for production`}</Th>
+        <Td>
           <progress max={100} value={~~(20 * scores.used_in_production)} />{' '}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <strong>{scores.used_in_production}</strong>&nbsp;/&nbsp;5
-        </td>
-      </tr>
-    </table>
+        </Td>
+      </Tr>
+    </Table>
   );
 
   return (

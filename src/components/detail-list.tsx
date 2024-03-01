@@ -159,21 +159,18 @@ export function DetailList<T>({
           ) : !items.length ? (
             <EmptyStateFilter />
           ) : (
-            <table
-              aria-label={title}
-              className='hub-c-table-content pf-v5-c-table'
-            >
+            <Table aria-label={title}>
               <SortTable
                 options={{ headers: sortHeaders }}
                 params={params}
                 updateParams={setParams}
               />
-              <tbody>
+              <Tbody>
                 {items.map((item, i) =>
                   renderTableRow(item, i, actionContext, listItemActions),
                 )}
-              </tbody>
-            </table>
+              </Tbody>
+            </Table>
           )}
           <HubPagination
             params={params}
