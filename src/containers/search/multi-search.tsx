@@ -15,12 +15,12 @@ import {
   BaseHeader,
   CollectionListItem,
   EmptyStateXs,
-  LegacyNamespaceListItem,
-  LegacyRoleListItem,
   LoadingPageSpinner,
   Main,
   MultiSearchSearch,
   NamespaceListItem,
+  RoleItem,
+  RoleNamespaceItem,
   Tooltip,
   closeAlert,
 } from 'src/components';
@@ -295,7 +295,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching roles`}>
               {roles.map((r) => (
-                <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
+                <RoleItem key={r.id} role={r} show_thumbnail />
               ))}
             </DataList>
           </ResultsSection>
@@ -318,7 +318,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching role namespaces`}>
               {roleNamespaces.map((r) => (
-                <LegacyNamespaceListItem key={r.id} namespace={r} />
+                <RoleNamespaceItem key={r.id} namespace={r} />
               ))}
             </DataList>
           </ResultsSection>

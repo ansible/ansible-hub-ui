@@ -10,8 +10,8 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyRoleListItem,
   LoadingPageSpinner,
+  RoleItem,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -218,11 +218,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem
-                        key={lrole.id}
-                        role={lrole}
-                        show_thumbnail
-                      />
+                      <RoleItem key={lrole.id} role={lrole} show_thumbnail />
                     ))}
                 </DataList>
 

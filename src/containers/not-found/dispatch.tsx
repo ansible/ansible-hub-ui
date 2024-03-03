@@ -8,9 +8,9 @@ import {
   BaseHeader,
   CollectionListItem,
   EmptyStateNoData,
-  LegacyRoleListItem,
   LoadingPageSpinner,
   Main,
+  RoleItem,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -169,7 +169,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                 <>
                   <DataList aria-label={t`Available matching roles`}>
                     {roles.map((r) => (
-                      <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
+                      <RoleItem key={r.id} role={r} show_thumbnail />
                     ))}
                   </DataList>
                   <Link

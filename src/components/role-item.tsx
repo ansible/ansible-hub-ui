@@ -21,12 +21,12 @@ import { Paths, formatPath } from 'src/paths';
 import { getProviderInfo } from 'src/utilities';
 import './role-item.scss';
 
-interface LegacyRoleProps {
+interface RoleProps {
   role: LegacyRoleDetailType;
   show_thumbnail?: boolean;
 }
 
-export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
+export function RoleItem({ role, show_thumbnail }: RoleProps) {
   const {
     description,
     modified,
@@ -93,7 +93,7 @@ export function LegacyRoleListItem({ role, show_thumbnail }: LegacyRoleProps) {
   );
 
   return (
-    <DataListItem data-cy='LegacyRoleListItem'>
+    <DataListItem data-cy='RoleItem'>
       <DataListItemRow>
         <DataListItemCells dataListCells={cells} />
       </DataListItemRow>

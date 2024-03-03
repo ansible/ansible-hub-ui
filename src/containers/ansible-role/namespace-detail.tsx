@@ -18,10 +18,10 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyRoleListItem,
   LoadingPageSpinner,
   Logo,
   ProviderLink,
+  RoleItem,
   RoleNamespaceEditModal,
   StatefulDropdown,
   WisdomModal,
@@ -201,7 +201,7 @@ class NamespaceRoles extends Component<
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem key={lrole.id} role={lrole} />
+                      <RoleItem key={lrole.id} role={lrole} />
                     ))}
                 </DataList>
 

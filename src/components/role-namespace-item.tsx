@@ -14,17 +14,17 @@ import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import './namespace-item.scss';
 
-interface LegacyNamespaceProps {
+interface RoleNamespaceProps {
   namespace: LegacyNamespaceDetailType;
   openEditModal?: (namespace) => void;
   openWisdomModal?: (namespace) => void;
 }
 
-export function LegacyNamespaceListItem({
+export function RoleNamespaceItem({
   namespace,
   openEditModal,
   openWisdomModal,
-}: LegacyNamespaceProps) {
+}: RoleNamespaceProps) {
   const {
     featureFlags: { ai_deny_index },
     user: { username, is_superuser },
@@ -55,11 +55,9 @@ export function LegacyNamespaceListItem({
     </DataListCell>,
   ];
 
-  const userOwnsLegacyNamespace = !!summary_fields.owners.find(
-    (n) => n.username == username,
-  );
-  const showWisdom = ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
-  const canImport = is_superuser || userOwnsLegacyNamespace;
+  const isOwner = !!summary_fields.owners.find((n) => n.username == username);
+  const showWisdom = ai_deny_index && (is_superuser || isOwner);
+  const canImport = is_superuser || isOwner;
 
   const dropdownItems = [
     showWisdom && openWisdomModal && (
@@ -101,7 +99,7 @@ export function LegacyNamespaceListItem({
   }
 
   return (
-    <DataListItem data-cy='LegacyNamespaceListItem'>
+    <DataListItem data-cy='RoleNamespaceItem'>
       <DataListItemRow>
         <DataListItemCells dataListCells={cells} />
       </DataListItemRow>

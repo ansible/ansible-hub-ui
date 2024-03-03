@@ -10,9 +10,9 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyNamespaceListItem,
   LoadingPageSpinner,
   RoleNamespaceEditModal,
+  RoleNamespaceItem,
   RoleNamespaceModal,
   WisdomModal,
   closeAlert,
@@ -225,7 +225,7 @@ class AnsibleRoleNamespaceList extends Component<
                 <DataList aria-label={t`List of role namespaces`}>
                   {roleNamespaces &&
                     roleNamespaces.map((lnamespace) => (
-                      <LegacyNamespaceListItem
+                      <RoleNamespaceItem
                         key={lnamespace.id}
                         namespace={lnamespace}
                         openEditModal={(namespace) =>

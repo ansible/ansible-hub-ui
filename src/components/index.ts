@@ -75,7 +75,6 @@ export { MultiSearchSearch } from './multi-search-search';
 export { MultipleRepoSelector } from './multiple-repo-selector';
 export { NamespaceCard, NamespaceNextPageCard } from './namespace-card';
 export { NamespaceForm } from './namespace-form';
-export { LegacyNamespaceListItem } from './namespace-item';
 export { NamespaceListItem } from './namespace-list-item';
 export { NamespaceModal } from './namespace-modal';
 export { CollectionNumericLabel } from './numeric-label';
@@ -108,7 +107,7 @@ export { RoleForm } from './role-form';
 export { RoleHeader } from './role-header';
 export { RoleImportForm } from './role-import-form';
 export { RoleImportList } from './role-import-list';
-export { LegacyRoleListItem } from './role-item';
+export { RoleItem } from './role-item';
 export {
   CheckboxRow,
   ExpandableRow,
@@ -116,6 +115,7 @@ export {
   RoleListTable,
 } from './role-list-table';
 export { RoleNamespaceEditModal } from './role-namespace-edit-modal';
+export { RoleNamespaceItem } from './role-namespace-item';
 export { RoleNamespaceModal } from './role-namespace-modal';
 export { RolePermissions } from './role-permissions';
 export { RoleSyncForm } from './role-sync-form';
