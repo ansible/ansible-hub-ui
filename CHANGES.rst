@@ -53,6 +53,27 @@ Misc
 ----
 
 
+4.8.1 (2023-10-18)
+==================
+
+Bugfixes
+--------
+
+- community Sync - disable without a requirements file .. on the detail screen
+  `AAH-2360 <https://issues.redhat.com/browse/AAH-2360>`_
+- Remote form: warn about signed_only enabled & missing requirements for Galaxy remote
+  `AAH-2748 <https://issues.redhat.com/browse/AAH-2748>`_
+
+
+Misc
+----
+
+- `AAH-2726 <https://issues.redhat.com/browse/AAH-2726>`_
+
+
+----
+
+
 4.8.0 (2023-09-13)
 ==================
 
