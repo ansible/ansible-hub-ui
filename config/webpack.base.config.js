@@ -47,65 +47,6 @@ const defaultConfigs = [
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
 ];
 
-const mockFedModules = {
-  automationHub: {
-    manifestLocation: '/apps/automation-hub/fed-mods.json',
-    modules: [
-      {
-        id: 'ansible-automation-hub',
-        module: './RootApp',
-        routes: [
-          {
-            pathname: '/ansible/automation-hub',
-          },
-        ],
-      },
-    ],
-  },
-};
-
-const insightsMockAPIs = ({ app }) => {
-  // GET
-  [
-    {
-      url: '/api/chrome-service/v1/user',
-      response: {
-        data: {
-          lastVisited: [],
-          favoritePages: [],
-          visitedBundles: {},
-        },
-      },
-    },
-    {
-      url: '/api/chrome-service/v1/static/stable/stage/modules/fed-modules.json',
-      response: mockFedModules,
-    },
-    {
-      url: '/api/chrome-service/v1/static/beta/stage/modules/fed-modules.json',
-      response: mockFedModules,
-    },
-    { url: '/api/featureflags/v0', response: { toggles: [] } },
-    { url: '/api/quickstarts/v1/progress', response: { data: [] } },
-    { url: '/api/rbac/v1/access', response: { data: [] } },
-    { url: '/api/rbac/v1/cross-account-requests', response: { data: [] } },
-  ].forEach(({ url, response }) =>
-    app.get(url, (_req, res) => res.send(response)),
-  );
-
-  // POST
-  [
-    { url: '/api/chrome-service/v1/last-visited', response: { data: [] } },
-    {
-      url: '/api/chrome-service/v1/user/visited-bundles',
-      response: { data: [] },
-    },
-    { url: '/api/featureflags/v0/client/metrics', response: {} },
-  ].forEach(({ url, response }) =>
-    app.post(url, (_req, res) => res.send(response)),
-  );
-};
-
 module.exports = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
@@ -165,7 +106,6 @@ module.exports = (inputConfigs) => {
           rbac,
           ...defaultServices,
         },
-        registry: [insightsMockAPIs],
       }),
 
     // insights deployments from master
@@ -232,15 +172,11 @@ module.exports = (inputConfigs) => {
   }
 
   if (customConfigs.WEBPACK_PUBLIC_PATH) {
-    console.log(`New output.publicPath: ${customConfigs.WEBPACK_PUBLIC_PATH}`);
     newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
   }
 
   if (isStandalone) {
-    console.log('Overriding configs for standalone mode.');
-
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    console.log(`New entry.App: ${newEntry}`);
     newWebpackConfig.entry.App = newEntry;
   }
 
@@ -256,32 +192,6 @@ module.exports = (inputConfigs) => {
       }),
     );
   }
-
-  // FIXME: no longer needed?, or different?
-  // if (customConfigs.IS_INSIGHTS) {
-  //   /**
-  //    * Generates remote containers for chrome 2
-  //    */
-  //   plugins.push(
-  //     require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-  //       {
-  //         root: resolve(__dirname, '../'),
-  //         exposes: {
-  //           './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
-  //         },
-  //         shared: [
-  //           {
-  //             'react-router-dom': { singleton: true, requiredVersion: '*' },
-  //           },
-  //         ],
-  //         ...(!isBuild && {
-  //           // fixes "Shared module is not available for eager consumption"
-  //           exclude: ['@patternfly/react-core'],
-  //         }),
-  //       },
-  //     ),
-  //   );
-  // }
 
   // @patternfly/react-code-editor
   plugins.push(
