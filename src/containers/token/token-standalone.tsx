@@ -6,7 +6,7 @@ import {
   AlertList,
   AlertType,
   BaseHeader,
-  ClipboardCopy,
+  CopyURL,
   DateComponent,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
@@ -16,7 +16,6 @@ import {
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { RouteProps, withRouter } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
-import './token.scss';
 
 interface IState {
   token: string;
@@ -100,30 +99,40 @@ class TokenStandalone extends Component<RouteProps, IState> {
                       </p>
                     </div>
                   )}
-                  <div className='pf-v5-c-content'>
-                    <Trans>
-                      <b>WARNING</b> loading a new token will delete your old
-                      token.
-                    </Trans>
-                  </div>
                   {token ? (
-                    <div>
-                      <CardBody>
-                        <div className='pf-v5-c-content'>
-                          <Trans>
-                            <b>WARNING</b> copy this token now. This is the only
-                            time you will ever see it.
-                          </Trans>
-                        </div>
-                      </CardBody>
-                      <ClipboardCopy>{token}</ClipboardCopy>
-                    </div>
+                    <>
+                      <div className='pf-v5-c-content'>
+                        <Trans>
+                          <b>WARNING</b> copy this token now. This is the only
+                          time you will ever see it.
+                        </Trans>
+                      </div>
+                      <div
+                        style={{
+                          paddingTop: 'var(--pf-v5-global--spacer--sm)',
+                        }}
+                      >
+                        <CopyURL url={token} />
+                      </div>
+                    </>
                   ) : !token && !loadingToken ? (
-                    <div className='load-token'>
-                      <Button
-                        onClick={() => this.loadToken()}
-                      >{t`Load token`}</Button>
-                    </div>
+                    <>
+                      <div className='pf-v5-c-content'>
+                        <Trans>
+                          <b>WARNING</b> loading a new token will delete your
+                          old token.
+                        </Trans>
+                      </div>
+                      <div
+                        style={{
+                          paddingTop: 'var(--pf-v5-global--spacer--sm)',
+                        }}
+                      >
+                        <Button
+                          onClick={() => this.loadToken()}
+                        >{t`Load token`}</Button>
+                      </div>
+                    </>
                   ) : (
                     <LoadingPageSpinner />
                   )}

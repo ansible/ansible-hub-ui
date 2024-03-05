@@ -16,7 +16,7 @@ import {
   CollectionVersionSearch,
 } from 'src/api';
 import {
-  ClipboardCopy,
+  CopyURL,
   DownloadSignatureGridItem,
   LoadingPageSpinner,
   LoginLink,
@@ -81,7 +81,7 @@ export const CollectionInfo = ({
           <Split hasGutter>
             <SplitItem className='install-title'>{t`Installation`}</SplitItem>
             <SplitItem isFilled>
-              <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
+              <CopyURL fallback={null} url={installCommand} />
               <div>
                 <Trans>
                   <b>Note:</b> Installing collections with ansible-galaxy is

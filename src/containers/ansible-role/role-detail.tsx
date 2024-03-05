@@ -28,7 +28,7 @@ import {
   AlertType,
   BaseHeader,
   Breadcrumbs,
-  ClipboardCopy,
+  CopyURL,
   DateComponent,
   DownloadCount,
   ExternalLink,
@@ -63,21 +63,14 @@ interface RoleMetaReadmeState {
   readme_html: string;
 }
 
-class RoleInstall extends Component<RoleMetaProps> {
-  render() {
-    const installCMD = `ansible-galaxy role install ${this.props.namespace}.${this.props.name}`;
-    return (
-      <>
-        <h1>
-          <Trans>Installation:</Trans>
-        </h1>
-        <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-          {installCMD}
-        </ClipboardCopy>
-      </>
-    );
-  }
-}
+const RoleInstall = ({ namespace, name }: RoleMetaProps) => (
+  <>
+    <h1>
+      <Trans>Installation:</Trans>
+    </h1>
+    <CopyURL url={`ansible-galaxy role install ${namespace}.${name}`} />
+  </>
+);
 
 class RoleDocs extends Component<RoleMetaProps, RoleMetaReadmeState> {
   constructor(props) {

@@ -18,8 +18,8 @@ import { Link } from 'react-router-dom';
 import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
-  ClipboardCopy,
   CompoundFilter,
+  CopyURL,
   DateComponent,
   DeleteModal,
   EmptyStateFilter,
@@ -457,7 +457,7 @@ class ExecutionEnvironmentDetailImages extends Component<
             )}
           </Td>
           <Td>
-            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
+            <CopyURL url={instructions} />
           </Td>
           <ListItemActions kebabItems={dropdownItems} />
         </Tr>

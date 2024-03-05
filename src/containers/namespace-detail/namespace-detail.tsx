@@ -19,9 +19,9 @@ import {
   AccessTab,
   AlertList,
   AlertType,
-  ClipboardCopy,
   CollectionDropdown,
   CollectionList,
+  CopyURL,
   DeleteCollectionModal,
   DeleteModal,
   EmptyStateNoData,
@@ -518,7 +518,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
                     .
                   </Trans>
                 </div>
-                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <CopyURL url={repositoryUrl} />
               </div>
             </section>
           ) : null}

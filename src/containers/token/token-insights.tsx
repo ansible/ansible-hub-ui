@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, Button, ClipboardCopyVariant } from '@patternfly/react-core';
+import { Alert, Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
@@ -7,6 +7,7 @@ import {
   AlertType,
   BaseHeader,
   ClipboardCopy,
+  CopyURL,
   ExternalLink,
   Main,
   closeAlert,
@@ -139,9 +140,10 @@ class TokenInsights extends Component<RouteProps, IState> {
                   location.
                 </Trans>
               </p>
+
               {tokenData ? (
                 <div>
-                  <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
+                  <CopyURL url={tokenData.refresh_token} />
                 </div>
               ) : (
                 <div>
@@ -158,11 +160,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                     expiring.
                   </Trans>
                 </span>
-                <ClipboardCopy
-                  isCode
-                  isReadOnly
-                  variant={ClipboardCopyVariant.expansion}
-                >
+                <ClipboardCopy isCode isReadOnly variant={'expansion'}>
                   {renewTokenCmd}
                 </ClipboardCopy>
               </div>
@@ -184,18 +182,14 @@ class TokenInsights extends Component<RouteProps, IState> {
                   Hub.{' '}
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                {getRepoURL('published', true)}
-              </ClipboardCopy>
+              <CopyURL url={getRepoURL('published', true)} />
               <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Use this URL for <strong>validated</strong> content from
                   Automation Hub.{' '}
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                {getRepoURL('validated')}
-              </ClipboardCopy>
+              <CopyURL url={getRepoURL('validated')} />
               <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Synclists are deprecated in AAP 2.4 and will be removed in a
@@ -207,9 +201,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                 </Trans>
               </p>
               {synclistBasePath ? (
-                <ClipboardCopy isReadOnly>
-                  {getRepoURL(synclistBasePath)}
-                </ClipboardCopy>
+                <CopyURL url={getRepoURL(synclistBasePath)} />
               ) : (
                 <Alert
                   variant='danger'
@@ -227,9 +219,11 @@ class TokenInsights extends Component<RouteProps, IState> {
                   need to download content from Automation Hub.
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-              </ClipboardCopy>
+              <CopyURL
+                url={
+                  'https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token'
+                }
+              />
             </section>
             <section className='body'>
               <h2>{t`CRC public key`}</h2>
