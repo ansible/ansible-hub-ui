@@ -137,7 +137,7 @@ export { TagLabel } from './tag-label';
 export { TagManifestModal } from './tag-manifest-modal';
 export { APISearchTypeAhead } from './typeahead';
 export { UIVersion } from './ui-version';
-export { UploadSingCertificateModal } from './upload-sign-certificate-modal';
+export { UploadSignatureModal } from './upload-signature-modal';
 export { UserForm } from './user-form';
 export { UserFormPage } from './user-form-page';
 export { WisdomModal } from './wisdom-modal';

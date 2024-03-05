@@ -32,7 +32,7 @@ import {
   LoadingPageSpinner,
   LoadingPageWithHeader,
   SortTable,
-  UploadSingCertificateModal,
+  UploadSignatureModal,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -284,7 +284,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
                 />
               </div>
             </section>
-            <UploadSingCertificateModal
+            <UploadSignatureModal
               isOpen={this.state.uploadCertificateModalOpen}
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}

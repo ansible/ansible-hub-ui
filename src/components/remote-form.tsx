@@ -229,7 +229,7 @@ export class RemoteForm extends Component<IProps, IState> {
             },
           },
         },
-        () => this.updateRemote(file, field),
+        () => file.text().then((text) => this.updateRemote(text, field)),
       );
     };
 

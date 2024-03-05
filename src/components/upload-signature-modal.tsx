@@ -14,7 +14,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const UploadSingCertificateModal: FunctionComponent<Props> = ({
+export const UploadSignatureModal: FunctionComponent<Props> = ({
   isOpen,
   onSubmit,
   onCancel,

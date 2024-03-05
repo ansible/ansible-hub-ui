@@ -50,7 +50,7 @@ import {
   SignAllCertificatesModal,
   SignSingleCertificateModal,
   SignatureBadge,
-  UploadSingCertificateModal,
+  UploadSignatureModal,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -283,7 +283,7 @@ export class CollectionHeader extends Component<IProps, IState> {
         )}
         {canSign && (
           <>
-            <UploadSingCertificateModal
+            <UploadSignatureModal
               isOpen={uploadCertificateModalOpen}
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
