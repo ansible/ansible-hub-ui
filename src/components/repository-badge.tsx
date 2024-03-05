@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
 import {
-  Badge,
   Flex,
   FlexItem,
+  Label,
   Text,
   TextContent,
   TextVariants,
@@ -41,26 +41,26 @@ export const RepositoryBadge = ({
       validated: t`Validated`,
     }[name] || name;
 
-  const badge = (
-    <Badge isRead title={t`Repository: ${name}`}>
+  const label = (
+    <Label variant='outline' isCompact={isTextContent}>
       <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
         {repoName}
       </Link>
-    </Badge>
+    </Label>
   );
 
   // collection-card
   if (isTextContent) {
     return (
       <TextContent>
-        <Text component={TextVariants.small}>{badge}</Text>
+        <Text component={TextVariants.small}>{label}</Text>
       </TextContent>
     );
   }
 
   // collection-list-item
   if (isFlexItem) {
-    return <FlexItem>{badge}</FlexItem>;
+    return <FlexItem>{label}</FlexItem>;
   }
 
   // collection-header
@@ -71,12 +71,12 @@ export const RepositoryBadge = ({
           <FlexItem>
             {t`Repository`}
             &nbsp; &nbsp;
-            {badge}
+            {label}
           </FlexItem>
         </Flex>
       </div>
     );
   }
 
-  return badge;
+  return label;
 };
