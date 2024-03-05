@@ -420,8 +420,11 @@ export class CollectionHeader extends Component<IProps, IState> {
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={
             <div
-              data-cy='column-section'
-              style={{ display: 'flex', justifyContent: 'space-between' }}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                paddingTop: '8px',
+              }}
             >
               <div
                 style={{

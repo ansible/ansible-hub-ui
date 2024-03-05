@@ -66,7 +66,7 @@ export const RepositoryBadge = ({
   // collection-header
   if (isBreadcrumbContainer) {
     return (
-      <div style={{ paddingTop: '10px', paddingBottom: '10px' }}>
+      <div style={{ paddingTop: '8px' }}>
         <Flex>
           <FlexItem>
             {t`Repository`}
