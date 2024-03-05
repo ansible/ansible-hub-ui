@@ -42,7 +42,7 @@ export const RepositoryBadge = ({
     }[name] || name;
 
   const label = (
-    <Label variant='outline' isCompact={isTextContent}>
+    <Label variant='outline' isCompact={isTextContent} title={name}>
       <Link to={formatPath(Paths.ansibleRepositoryDetail, { name })}>
         {repoName}
       </Link>
@@ -78,5 +78,6 @@ export const RepositoryBadge = ({
     );
   }
 
+  // approval-row
   return label;
 };

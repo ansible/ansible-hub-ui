@@ -13,7 +13,11 @@ import {
   CollectionVersionSearch,
   FeatureFlagsType,
 } from 'src/api';
-import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
+import {
+  DateComponent,
+  ListItemActions,
+  RepositoryBadge,
+} from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
@@ -77,7 +81,7 @@ export const ApprovalRow = ({
         <DateComponent date={version.pulp_created} />
       </Td>
       <Td>
-        <LabelGroup>{repository.name}</LabelGroup>
+        <RepositoryBadge name={repository.name} />
       </Td>
       <Td>{renderStatus(collectionVersion)}</Td>
       {renderButtons(collectionVersion)}
