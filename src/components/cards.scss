@@ -43,9 +43,12 @@
   }
 
   .logo-row {
-    display: flex;
-    justify-content: space-between;
     padding-right: 8px;
+
+    .pf-v5-c-card__header-main {
+      display: flex;
+      justify-content: space-between;
+    }
 
     .icon {
       color: var(--pf-v5-global--info-color--100);

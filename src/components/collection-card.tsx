@@ -91,7 +91,10 @@ export const CollectionCard = ({
         {menu}
       </CardHeader>
       <CardHeader>
-        <div className='name'>
+        <div
+          className='name'
+          title={`${collection_version.namespace}.${collection_version.name}`}
+        >
           <Link
             to={formatPath(Paths.collectionByRepo, {
               collection: collection_version.name,
