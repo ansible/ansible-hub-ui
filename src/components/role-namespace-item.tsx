@@ -12,7 +12,7 @@ import { LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import './namespace-item.scss';
+import './list-item.scss';
 
 interface RoleNamespaceProps {
   namespace: LegacyNamespaceDetailType;

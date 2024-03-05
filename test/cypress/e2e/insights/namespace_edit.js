@@ -1,32 +1,32 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Edit a namespace', () => {
-  let kebabToggle = () => {
+  const kebabToggle = () => {
     cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click({
       force: true,
     });
   };
 
-  let saveButton = () => {
+  const saveButton = () => {
     return cy.contains('Save');
   };
 
-  let getLinkTextField = () => {
+  const getLinkTextField = () => {
     return cy
       .get('div.useful-links > div.link-name input')
       .invoke('attr', 'placeholder', 'Link text')
       .click();
   };
 
-  let getUrlField = () => {
+  const getUrlField = () => {
     return cy.get('div.useful-links div.link-url #url').click();
   };
 
-  let linksHelper = () => {
+  const linksHelper = () => {
     return cy.get('#links-helper');
   };
 
-  let getEditTab = () => {
+  const getEditTab = () => {
     return cy
       .get(
         'ul.pf-v5-c-tabs__list > li.pf-v5-c-tabs__item > a > span.pf-v5-c-tabs__item-text',
@@ -35,7 +35,7 @@ describe('Edit a namespace', () => {
       .click();
   };
 
-  let getTextField = () => {
+  const getTextField = () => {
     return cy.get(
       'div.pf-v5-c-form__group-control > textarea.pf-v5-c-form-control',
     );
@@ -68,7 +68,7 @@ describe('Edit a namespace', () => {
         'This name is too long vaðlaheiðarvegavinnuverkfærageymsluskúraútidyralyklakippuhringur',
       );
     saveButton().click();
-    let helperText = cy.get('#company-helper');
+    const helperText = cy.get('#company-helper');
     helperText.should(
       'have.text',
       'Ensure this field has no more than 64 characters.',
@@ -89,7 +89,7 @@ describe('Edit a namespace', () => {
     cy.get('#avatar_url-helper').should('have.text', 'Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
     saveButton().click();
-    cy.get('div.title-box > div.image > img').should('have.attr', 'src', url);
+    cy.get('[data-cy="title-box"] > img').should('have.attr', 'src', url);
   });
 
   it('tests the Description field', () => {

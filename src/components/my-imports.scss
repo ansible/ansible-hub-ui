@@ -8,18 +8,6 @@ $white: #fff;
   background-color: #edf8ff;
 }
 
-.status-icon {
-  font-size: 12px;
-}
-
-.sub-text {
-  font-weight: normal;
-}
-
-.namespace-selector {
-  width: 100%;
-}
-
 .hub-import-loading {
   height: 500px;
   display: flex;
@@ -60,11 +48,6 @@ $white: #fff;
     display: flex;
     align-items: center;
     padding: 10px;
-
-    .left {
-      margin-right: 10px;
-    }
-
     border-bottom: 1px solid #ededed;
   }
 

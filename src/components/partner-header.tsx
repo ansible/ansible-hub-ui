@@ -34,7 +34,7 @@ export class PartnerHeader extends Component<IProps> {
           namespace.avatar_url && (
             <Logo
               alt={t`${title} logo`}
-              className='image'
+              className='hub-header-image'
               fallbackToDefault
               image={namespace.avatar_url}
               size='40px'

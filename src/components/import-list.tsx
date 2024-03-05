@@ -184,10 +184,13 @@ export class ImportList extends Component<IProps, IState> {
               })}
               data-cy={`ImportList-row-${item.name}`}
             >
-              <div className='left'>
-                <i className={this.getStatusClass(item.state)} />
+              <div style={{ marginRight: '10px' }}>
+                <i
+                  style={{ fontSize: '12px' }}
+                  className={this.getStatusClass(item.state)}
+                />
               </div>
-              <div className='right'>{this.renderDescription(item)}</div>
+              <div>{this.renderDescription(item)}</div>
             </div>
           );
         })}
@@ -202,7 +205,7 @@ export class ImportList extends Component<IProps, IState> {
           <span data-cy='item-name'>{item.name}</span>{' '}
           {item.version ? 'v' + item.version : ''}
         </div>
-        <div className='sub-text'>
+        <div style={{ fontWeight: 'normal' }}>
           Status: {item.state}{' '}
           {item.finished_at ? <DateComponent date={item.finished_at} /> : null}
         </div>
@@ -211,17 +214,15 @@ export class ImportList extends Component<IProps, IState> {
   }
 
   private getStatusClass(state) {
-    const statusClass = 'fa status-icon ';
-
     switch (state) {
       case PulpStatus.running:
-        return statusClass + 'fa-spin fa-spinner warning';
+        return 'fa fa-spin fa-spinner warning';
       case PulpStatus.waiting:
-        return statusClass + 'fa-spin fa-spinner warning';
+        return 'fa fa-spin fa-spinner warning';
       case PulpStatus.completed:
-        return statusClass + 'fa-circle success';
+        return 'fa fa-circle success';
       default:
-        return statusClass + 'fa-circle failed';
+        return 'fa fa-circle failed';
     }
   }
 

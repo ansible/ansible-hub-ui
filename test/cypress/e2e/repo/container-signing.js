@@ -51,7 +51,7 @@ describe('Container Signing', () => {
   it('can sign remote1', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote1`);
-    cy.contains('.column-section', 'remote1');
+    cy.contains('[data-cy="column-section"]', 'remote1');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });
@@ -69,7 +69,7 @@ describe('Container Signing', () => {
   it('can not sign remote2', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote2`);
-    cy.contains('.column-section', 'remote2');
+    cy.contains('[data-cy="column-section"]', 'remote2');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });
@@ -82,7 +82,7 @@ describe('Container Signing', () => {
   it('can sign local', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/local1`);
-    cy.contains('.column-section', 'local1');
+    cy.contains('[data-cy="column-section"]', 'local1');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });

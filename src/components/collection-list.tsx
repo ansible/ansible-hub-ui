@@ -8,7 +8,6 @@ import {
   HubPagination,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities';
-import './list.scss';
 
 interface IProps {
   collectionControls: (collection) => {

@@ -1,5 +1,4 @@
 import { Title } from '@patternfly/react-core';
-import cx from 'classnames';
 import React, { ReactNode, useEffect } from 'react';
 import { useHubContext } from 'src/loaders/app-context';
 import './header.scss';
@@ -35,17 +34,26 @@ export const BaseHeader = ({
   }, [title]);
 
   return (
-    <div className={cx('background', className)}>
+    <div
+      className={className}
+      style={{ backgroundColor: 'white', padding: '0 24px' }}
+    >
       {contextSelector || null}
       {breadcrumbs && (
-        <div className='hub-breadcrumb-container'>{breadcrumbs}</div>
+        <div style={{ paddingTop: '10px', paddingBottom: '10px' }}>
+          {breadcrumbs}
+        </div>
       )}
-      {!breadcrumbs && !contextSelector && (
-        <div className='hub-breadcrumb-placeholder' />
-      )}
+      {!breadcrumbs && !contextSelector && <div style={{ height: '24px' }} />}
 
-      <div className='column-section'>
-        <div className='title-box'>
+      <div
+        data-cy='column-section'
+        style={{ display: 'flex', justifyContent: 'space-between' }}
+      >
+        <div
+          data-cy='title-box'
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
           {logo}
           <div>
             <Title headingLevel='h1' size='2xl'>
@@ -62,7 +70,7 @@ export const BaseHeader = ({
       {children ? (
         <div className='hub-header-bottom'>{children}</div>
       ) : (
-        <div className='hub-breadcrumb-placeholder' />
+        <div style={{ height: '24px' }} />
       )}
     </div>
   );

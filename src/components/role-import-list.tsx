@@ -29,14 +29,15 @@ interface IProps {
 
 const StatusIcon = ({ state }: { state: string }) => (
   <i
-    className={`fa status-icon ${
+    style={{ fontSize: '12px' }}
+    className={
       {
-        running: 'fa-spin fa-spinner warning',
-        waiting: 'fa-spin fa-spinner warning',
-        success: 'fa-circle success',
-        completed: 'fa-circle success',
-      }[state?.toLowerCase()] || 'fa-circle failed'
-    }`}
+        running: 'fa fa-spin fa-spinner warning',
+        waiting: 'fa fa-spin fa-spinner warning',
+        success: 'fa fa-circle success',
+        completed: 'fa fa-circle success',
+      }[state?.toLowerCase()] || 'fa fa-circle failed'
+    }
   />
 );
 
@@ -159,10 +160,10 @@ export function RoleImportList({
                 })}
                 data-cy={`RoleImportList-row-${item.role_id}`}
               >
-                <div className='left'>
+                <div style={{ marginRight: '10px' }}>
                   <StatusIcon state={item.state} />
                 </div>
-                <div className='right'>
+                <div>
                   <div>
                     <div>
                       <span data-cy='item-name'>
@@ -170,7 +171,7 @@ export function RoleImportList({
                         {item.summary_fields?.github_repo}
                       </span>{' '}
                     </div>
-                    <div className='sub-text'>
+                    <div style={{ fontWeight: 'normal' }}>
                       Status: {statusMap[item.state] || item.state}{' '}
                       {item.summary_fields?.task_messages?.at(-1)?.id ? (
                         <DateComponent

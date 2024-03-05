@@ -31,7 +31,13 @@ function roundNumber(n: number): string {
 const NumericLabel = ({ number, newline, label }: IProps) => {
   let numberElem = <span key='number'>{roundNumber(number)} </span>;
   let labelElem = (
-    <span key='label' className='hub-numeric-label-label'>
+    <span
+      key='label'
+      style={{
+        fontSize: 'var(--pf-v5-global--FontSize--xs)',
+        color: 'var(--pf-v5-global--color--200)',
+      }}
+    >
       {label}
     </span>
   );

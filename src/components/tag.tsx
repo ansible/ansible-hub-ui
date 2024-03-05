@@ -1,6 +1,5 @@
 import { Label } from '@patternfly/react-core';
 import React from 'react';
-import './tag.scss';
 
 interface IProps {
   /** Value to display in the tag */
@@ -8,7 +7,7 @@ interface IProps {
 }
 
 export const Tag = ({ children }: IProps) => (
-  <Label className='hub-c-label-tag' readOnly data-cy='tag'>
+  <Label style={{ margin: '4px' }} readOnly data-cy='tag'>
     {children}
   </Label>
 );

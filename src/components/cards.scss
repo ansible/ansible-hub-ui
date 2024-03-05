@@ -16,12 +16,6 @@
 .hub-c-card-collection-container {
   width: 280px;
 
-  // For some reason the PF Card components overrides all the defaults for
-  // divs
-  div {
-    display: block;
-  }
-
   .card-badge-area {
     display: flex;
     gap: 5px;

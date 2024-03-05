@@ -4,61 +4,12 @@ $breakpoint-md: 1000px;
   border-bottom: 1px solid #d8d8d8;
 }
 
-.image {
+.hub-header-image {
   padding-right: 16px;
-}
-
-.title-box {
-  display: flex;
-  align-items: center;
-}
-
-.column-section {
-  display: flex;
-  justify-content: space-between;
-}
-
-.install-version-column {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.install-version-dropdown {
-  width: 300px;
-}
-
-.last-updated {
-  color: grey;
-}
-
-.background {
-  background-color: white;
-  padding: 0 24px;
-}
-
-.hub-breadcrumb-placeholder {
-  height: 24px;
-}
-
-.hub-breadcrumb-container {
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .hub-header-bottom {
   padding-top: 10px;
-}
-
-.versions-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: var(--pf-v5-global--spacer--md);
-}
-
-.dependent-collections-alert-list {
-  margin-top: var(--pf-v5-global--spacer--sm);
 }
 
 .hub-tab-link-container {

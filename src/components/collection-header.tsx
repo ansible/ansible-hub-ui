@@ -312,7 +312,14 @@ export class CollectionHeader extends Component<IProps, IState> {
           onClose={() => this.setState({ isOpenVersionsModal: false })}
         >
           <List isPlain>
-            <div className='versions-modal-header'>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingBottom: 'var(--pf-v5-global--spacer--md)',
+              }}
+            >
               <Text>{t`${collectionName}'s versions.`}</Text>
               <HubPagination
                 isTop
@@ -396,7 +403,7 @@ export class CollectionHeader extends Component<IProps, IState> {
             namespace_metadata?.avatar_url && (
               <Logo
                 alt={t`${nsTitle} logo`}
-                className='image'
+                className='hub-header-image'
                 fallbackToDefault
                 image={namespace_metadata.avatar_url}
                 size='40px'
@@ -412,10 +419,19 @@ export class CollectionHeader extends Component<IProps, IState> {
           }
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={
-            <div className='column-section'>
-              <div className='install-version-column'>
+            <div
+              data-cy='column-section'
+              style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '0.5rem',
+                }}
+              >
                 <span>{t`Version`}</span>
-                <div className='install-version-dropdown'>
+                <div style={{ width: '300px' }}>
                   <Select
                     isOpen={isOpenVersionsSelect}
                     onToggle={(_event, isOpenVersionsSelect) =>
@@ -462,7 +478,7 @@ export class CollectionHeader extends Component<IProps, IState> {
                   </Select>
                 </div>
                 {lastUpdated ? (
-                  <span className='last-updated'>
+                  <span style={{ color: 'grey' }}>
                     <Trans>
                       Last updated <DateComponent date={lastUpdated} />
                     </Trans>
@@ -981,7 +997,11 @@ export class CollectionHeader extends Component<IProps, IState> {
           const dependencies = (
             <>
               <Trans>Dependent collections</Trans>
-              <List className='dependent-collections-alert-list'>
+              <List
+                style={{
+                  marginTop: 'var(--pf-v5-global--spacer--sm)',
+                }}
+              >
                 {dependent_collection_versions.map((d) => (
                   <ListItem key={d}>{d}</ListItem>
                 ))}

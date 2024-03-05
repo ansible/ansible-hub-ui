@@ -129,7 +129,7 @@ export const CollectionInfo = ({
                 ) : null}
                 <a ref={downloadLinkRef} style={{ display: 'none' }} />
                 <Button
-                  className='download-button'
+                  style={{ paddingLeft: 0 }}
                   variant='link'
                   data-cy='download-collection-tarball-button'
                   icon={<DownloadIcon />}
