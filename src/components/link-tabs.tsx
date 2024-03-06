@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 export interface LinkTabsProps {
@@ -8,10 +8,11 @@ export interface LinkTabsProps {
     active?: boolean;
     link: string;
     title: string;
+    icon?: ReactNode;
   }[];
 }
 
-const renderTab = ({ link, title, active = false }) => (
+const renderTab = ({ link, title, icon = null, active = false }) => (
   <li
     className={cx({
       'pf-v5-c-tabs__item': true,
@@ -20,7 +21,10 @@ const renderTab = ({ link, title, active = false }) => (
     key={title}
   >
     <Link to={link} className='pf-v5-c-tabs__link'>
-      <span className='pf-v5-c-tabs__item-text'>{title}</span>
+      <span className='pf-v5-c-tabs__item-text'>
+        {icon ? <>{icon} </> : null}
+        {title}
+      </span>
     </Link>
   </li>
 );

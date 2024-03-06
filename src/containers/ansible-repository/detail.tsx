@@ -1,5 +1,7 @@
 import { Trans, msg, t } from '@lingui/macro';
+import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   ansibleRepositoryCopyAction,
   ansibleRepositoryDeleteAction,
@@ -112,6 +114,15 @@ const AnsibleRepositoryDetail = PageWithTabs<
       'repository-versions': (
         <RepositoryVersionsTab item={item} actionContext={actionContext} />
       ),
+      collections: (
+        <Navigate
+          to={formatPath(
+            Paths.collections,
+            {},
+            { repository_name: item?.name },
+          )}
+        />
+      ),
     })[tab],
   tabs: (tab, name) => [
     {
@@ -148,6 +159,16 @@ const AnsibleRepositoryDetail = PageWithTabs<
         Paths.ansibleRepositoryDetail,
         { name },
         { tab: 'repository-versions' },
+      ),
+    },
+    {
+      active: tab === 'collections',
+      title: t`Collections`,
+      icon: <ArrowRightIcon />,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'collections' },
       ),
     },
   ],
