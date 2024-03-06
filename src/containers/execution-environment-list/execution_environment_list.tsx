@@ -143,6 +143,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
         data-cy='push-images-button'
       >{t`Push container images`}</ExternalLink>
     );
+
     const addRemoteButton = hasPermission(
       'container.add_containernamespace',
     ) && (
@@ -241,7 +242,11 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
                           />
                         </ToolbarItem>
                         <ToolbarItem>{addRemoteButton}</ToolbarItem>
-                        <ToolbarItem>{pushImagesButton}</ToolbarItem>
+                        <ToolbarItem>
+                          <div style={{ paddingTop: '6px' }}>
+                            {pushImagesButton}
+                          </div>
+                        </ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>

@@ -133,9 +133,11 @@ export class Sort extends Component<IProps, IState> {
         ? [SortAlphaDownIcon, SortAlphaUpIcon]
         : [SortAmountUpIcon, SortAmountDownIcon];
 
+    const showSelect = options.length > 1;
+
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        {options.length > 1 ? (
+        {showSelect ? (
           <Select
             variant={SelectVariant.single}
             aria-label={t`Sort results`}
@@ -153,7 +155,7 @@ export class Sort extends Component<IProps, IState> {
         <Icon
           className='clickable'
           onClick={() => this.setDescending()}
-          style={{ margin: '6px 0 6px 5px' }}
+          style={{ margin: showSelect ? '6px 0 6px 5px' : '10px 0 6px 5px' }}
         >
           {this.getIsDescending(params) ? <IconDesc /> : <IconAsc />}
         </Icon>
