@@ -19,7 +19,7 @@ describe('tests the approval list screen ', () => {
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
-    cy.get('.pf-v5-c-chip > button[aria-label="close"]').click();
+    cy.get('.pf-v5-c-chip > button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
     // reject
@@ -38,7 +38,7 @@ describe('tests the approval list screen ', () => {
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
-    cy.get('.pf-v5-c-chip > button[aria-label="close"]').click();
+    cy.get('.pf-v5-c-chip > button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
     //imports page
