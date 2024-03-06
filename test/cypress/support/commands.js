@@ -153,7 +153,8 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
 
     cy.get('input[id="username"]').type(username);
     cy.get('input[id="password"]').type(password);
-    //advanced options
+
+    // advanced options
     cy.get('.pf-v5-c-expandable-section__toggle-text').click();
     cy.get('input[id="proxy_url"]').type(proxy_url);
     cy.get('input[id="proxy_username"]').type(proxy_username);
@@ -202,7 +203,7 @@ Cypress.Commands.add(
     if (include_tags) {
       cy.get('input[id="addTagsInclude"]')
         .type(include_tags)
-        .parent()
+        .parents('.pf-v5-c-input-group')
         .find('button', 'Add')
         .click();
     }
@@ -210,7 +211,7 @@ Cypress.Commands.add(
     if (exclude_tags) {
       cy.get('input[id="addTagsExclude"]')
         .type(exclude_tags)
-        .parent()
+        .parents('.pf-v5-c-input-group')
         .find('button', 'Add')
         .click();
     }

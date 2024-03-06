@@ -21,7 +21,7 @@ describe('Token Management Tests', () => {
     cy.wait('@tokenPost')
       .its('response.body.token')
       .then((token) => {
-        cy.get('[aria-label="Copyable input"]').should('have.value', token);
+        cy.get('.pf-v5-c-clipboard-copy__text').should('have.value', token);
       });
   });
 });

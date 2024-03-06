@@ -41,9 +41,7 @@ describe('Namespace detail screen', () => {
 
   it('should show the correct URL when clicking on the CLI configuration tab', () => {
     cy.get('.pf-v5-c-tabs__link').eq(1).click();
-    cy.get('[aria-label="Copyable input"]')
-      .invoke('val')
-      .should('contain', apiPrefix);
+    cy.get('.pf-v5-c-clipboard-copy__text').should('contain', apiPrefix);
   });
 
   it('should show an error when tring to upload a new collecting wiht invalid name', () => {

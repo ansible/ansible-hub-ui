@@ -117,7 +117,8 @@ describe('Hub Group Management Tests', () => {
     cy.wait('@groups');
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('[aria-label="Items per page"]').click();
+    cy.get('[data-ouia-component-type="PF5/Pagination"] button:first').click();
+
     cy.contains('100 per page').click();
 
     cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${roleName}"]`)

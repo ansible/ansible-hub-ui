@@ -59,7 +59,9 @@ describe('Group Roles Tests', () => {
     cy.wait('@groups');
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
+    cy.get(
+      '.hub-custom-wizard-layout [data-ouia-component-type="PF5/Pagination"] button:first',
+    ).click();
     cy.contains('100 per page').click();
 
     cy.get(
@@ -115,7 +117,9 @@ describe('Group Roles Tests', () => {
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
+    cy.get(
+      '.hub-custom-wizard-layout [data-ouia-component-type="PF5/Pagination"] button:first',
+    ).click();
     cy.get('.hub-custom-wizard-layout').contains('100 per page').click();
 
     cy.get(

@@ -39,7 +39,7 @@ describe('execution environments', () => {
   it('checks the EE detail view', () => {
     cy.contains('a', `remotepine${num}`).click();
     cy.get('[data-cy="title-box"]').should('have.text', `remotepine${num}`);
-    cy.get('.pf-v5-c-form-control').should(
+    cy.get('.pf-v5-c-clipboard-copy__text').should(
       'have.value',
       `podman pull localhost:8002/remotepine${num}`,
     );
