@@ -92,7 +92,7 @@ describe('Collections list Tests', () => {
 
   it('set page size is working', () => {
     cy.get('.hub-cards')
-      .get('button[aria-label="Items per page"]:first')
+      .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
     cy.get('.hub-cards').get('[data-action="per-page-20"]').click();
 

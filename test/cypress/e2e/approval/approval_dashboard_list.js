@@ -162,7 +162,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   it('should set page size', () => {
     cy.get('[data-cy="body"]')
-      .get('button[aria-label="Items per page"]:first')
+      .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
     cy.get('[data-cy="body"]').contains('20 per page').click();
 
