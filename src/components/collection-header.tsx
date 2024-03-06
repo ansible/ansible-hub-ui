@@ -15,7 +15,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
@@ -231,7 +231,7 @@ export class CollectionHeader extends Component<IProps, IState> {
         version === latestVersion ? t`(latest)` : '',
       ]
         .filter(Boolean)
-        .map((b, i) => (i ? <> {b}</> : b)); // join with spaces
+        .map((b, i) => (i ? <Fragment key={i}> {b}</Fragment> : b)); // join with spaces
 
     const nsTitle = namespaceTitle(
       namespace_metadata || { name: collection_version.namespace },
