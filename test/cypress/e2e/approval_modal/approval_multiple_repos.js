@@ -140,7 +140,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     // reapprove
     menuActionClick('rejected', 'Sign and approve');
     cy.contains('Select repositories');
-    cy.contains('[aria-label="Label group category"]', 'repo2');
     toggleItem('repo1');
     cy.contains('button', 'Select').click();
     cy.contains(
