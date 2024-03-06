@@ -253,7 +253,7 @@ export class UserForm extends Component<IProps, IState> {
         isReadonly={isReadonly}
         model={user}
         requiredFields={requiredFields}
-        updateField={(v, e) => this.updateField(v, e)}
+        updateField={(e, v) => this.updateField(v, e)}
         onSave={() => saveUser()}
       />
     );

@@ -97,7 +97,7 @@ export const RoleSyncForm = ({ addAlert }: IProps) => {
       formSuffix={formSuffix}
       model={data}
       requiredFields={requiredFields}
-      updateField={(v, e) => updateField(e.target.id, v)}
+      updateField={(e, v) => updateField(e.target.id, v)}
       onSave={onSave}
     />
   );
