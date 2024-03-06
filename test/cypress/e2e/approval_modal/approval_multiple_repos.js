@@ -121,7 +121,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('Clear all filters').click();
     cy.contains('[aria-label="Collection versions"]', 'repo1');
     cy.contains('[aria-label="Collection versions"]', 'repo2');
-    cy.contains('[aria-label="Collection versions"]', 'published');
+    cy.contains('[aria-label="Collection versions"]', 'Published');
 
     rejectItem('repo1');
     rejectItem('published');
@@ -192,6 +192,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('Clear all filters').click();
     cy.contains('[aria-label="Collection versions"]', 'repo1');
     cy.contains('[aria-label="Collection versions"]', 'repo2');
-    cy.contains('[aria-label="Collection versions"]', 'published');
+    cy.contains('[aria-label="Collection versions"]', 'Published');
   });
 });
