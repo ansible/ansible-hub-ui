@@ -133,7 +133,9 @@ export class UserForm extends Component<IProps, IState> {
             this.samePass(user.password, passwordConfirm) ? 'default' : 'error'
           }
         >
-          {t`Passwords do not match`}
+          {this.samePass(user.password, passwordConfirm)
+            ? null
+            : t`Passwords do not match`}
         </FormFieldHelper>
       </FormGroup>
     );

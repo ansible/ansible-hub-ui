@@ -98,7 +98,7 @@ describe('My Profile Tests', () => {
 
     cy.get('#password').clear().type(password);
     cy.get('#password-confirm').clear().type(password);
-    helperText('password-confirm').should('not.exist');
+    helperText('password-confirm').should('be.empty');
   });
 
   it('groups input is readonly', () => {
