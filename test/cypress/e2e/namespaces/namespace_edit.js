@@ -33,7 +33,7 @@ describe('Edit a namespace', () => {
 
   const getTextField = () => {
     return cy.get(
-      'div.pf-v5-c-form__group-control textarea.pf-v5-c-form-control',
+      'div.pf-v5-c-form__group-control .pf-v5-c-form-control textarea',
     );
   };
 
