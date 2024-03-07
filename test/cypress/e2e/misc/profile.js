@@ -1,5 +1,11 @@
 const apiPrefix = Cypress.env('apiPrefix');
 
+const helperText = (id) =>
+  cy
+    .get(`#${id}`)
+    .parents('.pf-v5-c-form__group')
+    .find('.pf-v5-c-helper-text__item-text');
+
 describe('My Profile Tests', () => {
   const username = 'nopermission';
   const password = 'n0permissi0n';
@@ -58,14 +64,14 @@ describe('My Profile Tests', () => {
     cy.get('button:contains("Edit")').click();
 
     cy.get('#email').clear().type('test{enter}');
-    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+    helperText('email').should('contain', 'Enter a valid email address.');
 
     cy.get('#email').type('@example');
-    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+    helperText('email').should('contain', 'Enter a valid email address.');
 
     cy.get('#email').type('.com{enter}');
 
-    cy.get('[aria-label="Success Alert"]').should('be.visible');
+    cy.get('.pf-v5-c-alert.pf-m-success').should('be.visible');
   });
 
   it('password validations', () => {
