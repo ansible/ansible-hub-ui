@@ -94,15 +94,11 @@ describe('My Profile Tests', () => {
     );
 
     cy.get('#password-confirm').clear().type('pwd123456');
-    cy.get('#password-confirm-helper').should(
-      'contain',
-      'Passwords do not match',
-    );
+    helperText('password-confirm').should('contain', 'Passwords do not match');
 
     cy.get('#password').clear().type(password);
     cy.get('#password-confirm').clear().type(password);
-
-    cy.get('#password-confirm-helper').should('not.exist');
+    helperText('password-confirm').should('not.exist');
   });
 
   it('groups input is readonly', () => {
