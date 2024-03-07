@@ -84,12 +84,12 @@ describe('My Profile Tests', () => {
     cy.get('#password').clear().type('12345');
     cy.get('#password-confirm').clear().type('12345');
     cy.contains('Save').click();
-    cy.get('#password-helper').contains('This password is entirely numeric.');
+    helperText('password').contains('This password is entirely numeric.');
 
     cy.get('#password').clear().type('pwd12345');
     cy.get('#password-confirm').clear().type('pwd12345');
     cy.contains('Save').click();
-    cy.get('#password-helper').contains(
+    helperText('password').contains(
       'This password is too short. It must contain at least 9 characters.',
     );
 
@@ -115,13 +115,13 @@ describe('My Profile Tests', () => {
     cy.intercept('PUT', `${apiPrefix}_ui/v1/me/`).as('saveForm');
 
     cy.contains('Save').click();
-    cy.get('[aria-label="Success Alert"]').contains(
+    cy.get('.pf-v5-c-alert.pf-m-success').contains(
       'Saved changes to user "admin".',
     );
 
     cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
 
-    cy.get('[aria-label="Success Alert"]').contains(
+    cy.get('.pf-v5-c-alert.pf-m-success').contains(
       'Saved changes to user "admin".',
     );
   });
