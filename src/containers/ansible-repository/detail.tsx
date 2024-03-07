@@ -22,6 +22,7 @@ import { lastSyncStatus, lastSynced } from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';
+import { DistributionsTab } from './tab-distributions';
 import { RepositoryVersionsTab } from './tab-repository-versions';
 
 const AnsibleRepositoryDetail = PageWithTabs<
@@ -114,6 +115,9 @@ const AnsibleRepositoryDetail = PageWithTabs<
       'repository-versions': (
         <RepositoryVersionsTab item={item} actionContext={actionContext} />
       ),
+      distributions: (
+        <DistributionsTab item={item} actionContext={actionContext} />
+      ),
       collections: (
         <Navigate
           to={formatPath(
@@ -159,6 +163,15 @@ const AnsibleRepositoryDetail = PageWithTabs<
         Paths.ansibleRepositoryDetail,
         { name },
         { tab: 'repository-versions' },
+      ),
+    },
+    {
+      active: tab === 'distributions',
+      title: t`Distributions`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'distributions' },
       ),
     },
     {

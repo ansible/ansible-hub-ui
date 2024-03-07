@@ -28,8 +28,8 @@ interface IProps<T> {
     hasObjectPermission?;
     hasPermission;
     query;
-    setState;
-    state;
+    setState?;
+    state?;
   };
   defaultPageSize: number;
   defaultSort?: string;
