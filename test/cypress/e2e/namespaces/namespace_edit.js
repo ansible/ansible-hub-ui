@@ -33,7 +33,7 @@ describe('Edit a namespace', () => {
 
   const getTextField = () => {
     return cy.get(
-      'div.pf-v5-c-form__group-control > textarea.pf-v5-c-form-control',
+      'div.pf-v5-c-form__group-control textarea.pf-v5-c-form-control',
     );
   };
 
@@ -82,7 +82,7 @@ describe('Edit a namespace', () => {
     helperText('avatar_url').should('have.text', 'Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
     saveButton().click();
-    cy.get('[data-cy="title-box"] > img').should('have.attr', 'src', url);
+    cy.get('[data-cy="title-box"] img').should('have.attr', 'src', url);
   });
 
   it('tests the Description field', () => {
@@ -102,7 +102,7 @@ describe('Edit a namespace', () => {
     getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
     getUrlField().first().type('https://example.com');
     saveButton().click();
-    helperText('links').should(
+    helperText('url').should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );
