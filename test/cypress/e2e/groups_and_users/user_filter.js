@@ -36,7 +36,7 @@ describe('Search for users', () => {
   const chooseField = () => cy.get('.pf-v5-c-dropdown__menu > li > a');
   const emptyState = () =>
     cy
-      .get('.pf-v5-c-empty-state__content > .pf-v5-c-title')
+      .get('.pf-v5-c-empty-state__content .pf-v5-c-empty-state__title-text')
       .should('have.text', 'No results found');
 
   it('filters users', () => {
