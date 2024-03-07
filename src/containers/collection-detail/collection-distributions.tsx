@@ -126,7 +126,7 @@ const CollectionDistributions = (props: RouteProps) => {
       'token=<put your token here>',
     ].join('\n');
 
-  const updateParamsMixin = (params) => {
+  const updateParams = (params) => {
     props.navigate({
       search: '?' + ParamHelper.getQueryString(params || []),
     });
@@ -179,9 +179,7 @@ const CollectionDistributions = (props: RouteProps) => {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(params) => {
-            updateParamsMixin(params);
-          }}
+          updateParams={updateParams}
         />
         <Tbody>
           {distributions.map((distribution, i) => (
@@ -215,11 +213,9 @@ const CollectionDistributions = (props: RouteProps) => {
         content={content}
         params={params}
         reload={() => loadCollections(true)}
-        updateParams={(params) => {
-          updateParamsMixin(
-            ParamHelper.setParam(params, 'version', params.version),
-          );
-        }}
+        updateParams={(params) =>
+          updateParams(ParamHelper.setParam(params, 'version', params.version))
+        }
       />
       <Main>
         <section className='body'>
@@ -232,9 +228,7 @@ const CollectionDistributions = (props: RouteProps) => {
                     onChange={(text) => {
                       setInputText(text);
                     }}
-                    updateParams={(p) => {
-                      updateParamsMixin(p);
-                    }}
+                    updateParams={updateParams}
                     params={params}
                     filterConfig={[
                       {
@@ -253,9 +247,7 @@ const CollectionDistributions = (props: RouteProps) => {
 
             <HubPagination
               params={params}
-              updateParams={(p) => {
-                updateParamsMixin(p);
-              }}
+              updateParams={updateParams}
               count={count}
               isTop
             />
@@ -263,7 +255,7 @@ const CollectionDistributions = (props: RouteProps) => {
 
           <AppliedFilters
             updateParams={(p) => {
-              updateParamsMixin(p);
+              updateParams(p);
               setInputText('');
             }}
             params={params}
@@ -280,9 +272,7 @@ const CollectionDistributions = (props: RouteProps) => {
           )}
           <HubPagination
             params={params}
-            updateParams={(p) => {
-              updateParamsMixin(p);
-            }}
+            updateParams={updateParams}
             count={count}
           />
         </section>
