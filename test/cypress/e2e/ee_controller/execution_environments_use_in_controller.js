@@ -103,7 +103,7 @@ describe('Execution Environments - Use in Controller', () => {
           );
 
         // search tag
-        cy.get('input.pf-v5-c-select__toggle-typeahead').click();
+        cy.get('.pf-v5-c-select__toggle-typeahead input').click();
         cy.contains('.pf-v5-c-select__menu', 'latest').click();
         cy.contains('a', 'https://another.example.com')
           .should('have.attr', 'href')

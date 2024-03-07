@@ -194,7 +194,7 @@ Cypress.Commands.add(
     cy.get('input[id="upstreamName"]').type(upstream_name);
 
     cy.get(
-      '.hub-formgroup-registry .pf-v5-c-form-control.pf-v5-c-select__toggle-typeahead',
+      '.hub-formgroup-registry .pf-v5-c-form-control.pf-v5-c-select__toggle-typeahead input',
     )
       .click()
       .type(registry);

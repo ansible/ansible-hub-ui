@@ -25,7 +25,7 @@ function addUserToGroupManually(groupName, userName) {
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('a.pf-v5-c-tabs__link', 'Users').click();
   cy.contains('button', 'Add').click();
-  cy.get('input.pf-v5-c-select__toggle-typeahead').type(userName);
+  cy.get('.pf-v5-c-select__toggle-typeahead input').type(userName);
   cy.contains('button', userName).click();
   cy.get('.pf-v5-c-content h2').click(); // click modal header to close dropdown
   cy.contains('footer > button', 'Add').click({ force: true });

@@ -22,10 +22,6 @@ describe('Edit a namespace', () => {
     return cy.get('div.useful-links div.link-url #url').click();
   };
 
-  const linksHelper = () => {
-    return cy.get('#links-helper');
-  };
-
   const getEditTab = () => {
     return cy
       .get(
@@ -40,6 +36,12 @@ describe('Edit a namespace', () => {
       'div.pf-v5-c-form__group-control > textarea.pf-v5-c-form-control',
     );
   };
+
+  const helperText = (id) =>
+    cy
+      .get(`#${id}`)
+      .parents('.pf-v5-c-form__group')
+      .find('.pf-v5-c-helper-text__item-text');
 
   before(() => {
     cy.deleteTestGroups();
@@ -67,8 +69,7 @@ describe('Edit a namespace', () => {
         'This name is too long vaðlaheiðarvegavinnuverkfærageymsluskúraútidyralyklakippuhringur',
       );
     saveButton().click();
-    const helperText = cy.get('#company-helper');
-    helperText.should(
+    helperText('company').should(
       'have.text',
       'Ensure this field has no more than 64 characters.',
     );
@@ -78,7 +79,7 @@ describe('Edit a namespace', () => {
     const url = 'https://example.com/';
     cy.get('#avatar_url').clear().type('abcde');
     saveButton().click();
-    cy.get('#avatar_url-helper').should('have.text', 'Enter a valid URL.');
+    helperText('avatar_url').should('have.text', 'Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
     saveButton().click();
     cy.get('[data-cy="title-box"] > img').should('have.attr', 'src', url);
@@ -88,7 +89,7 @@ describe('Edit a namespace', () => {
     cy.get('#description').type(`
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna velit, tempor at interdum viverra, egestas quis libero. Aenean arcu magna, sodales ut dictum accumsan, consectetur vitae mi. Maecenas efficitur ipsum a orci condimentum, in lobortis turpis accumsan. Vivamus non libero varius, vulputate nunc vitae, posuere risus. In ut malesuada magna. Cras ac rhoncus mi. Nulla tempus semper interdum. Aliquam scelerisque, purus quis vestibulum finibus, dolor augue dictum erat, id commodo justo quam non metus.`);
     saveButton().click();
-    cy.get('#description-helper').should(
+    helperText('description').should(
       'have.text',
       'Ensure this field has no more than 256 characters.',
     );
@@ -101,7 +102,7 @@ describe('Edit a namespace', () => {
     getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
     getUrlField().first().type('https://example.com');
     saveButton().click();
-    linksHelper().should(
+    helperText('links').should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );

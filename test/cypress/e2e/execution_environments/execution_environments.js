@@ -40,7 +40,7 @@ describe('execution environments', () => {
     cy.contains('a', `remotepine${num}`).click();
     cy.get('[data-cy="title-box"]').should('have.text', `remotepine${num}`);
     cy.get('.pf-v5-c-clipboard-copy__text').should(
-      'have.value',
+      'have.text',
       `podman pull localhost:8002/remotepine${num}`,
     );
   });

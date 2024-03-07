@@ -26,7 +26,7 @@ describe('Search for users', () => {
   const search = () =>
     cy
       .get(
-        '.pf-v5-c-toolbar__item > .pf-v5-c-input-group > .pf-v5-c-button.pf-m-control',
+        '.pf-v5-c-toolbar__item > .pf-v5-c-input-group .pf-v5-c-button.pf-m-control',
       )
       .click();
   const filterDropdown = () =>

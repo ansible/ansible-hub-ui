@@ -138,10 +138,12 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const pushImagesButton = (
-      <ExternalLink
-        href={UI_DOCS_URL}
-        data-cy='push-images-button'
-      >{t`Push container images`}</ExternalLink>
+      <div style={{ paddingTop: '6px' }}>
+        <ExternalLink
+          href={UI_DOCS_URL}
+          data-cy='push-images-button'
+        >{t`Push container images`}</ExternalLink>
+      </div>
     );
 
     const addRemoteButton = hasPermission(
@@ -242,11 +244,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
                           />
                         </ToolbarItem>
                         <ToolbarItem>{addRemoteButton}</ToolbarItem>
-                        <ToolbarItem>
-                          <div style={{ paddingTop: '6px' }}>
-                            {pushImagesButton}
-                          </div>
-                        </ToolbarItem>
+                        <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
