@@ -193,6 +193,20 @@ module.exports = (inputConfigs) => {
     );
   }
 
+  if (customConfigs.IS_INSIGHTS) {
+    // insights federated modules
+    plugins.push(
+      require('@redhat-cloud-services/frontend-components-config-utilities/federated-modules')(
+        {
+          root: resolve(__dirname, '../'),
+          exposes: {
+            './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
+          },
+        },
+      ),
+    );
+  }
+
   // @patternfly/react-code-editor
   plugins.push(
     new MonacoWebpackPlugin({
