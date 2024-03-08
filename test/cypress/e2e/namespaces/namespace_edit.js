@@ -79,7 +79,7 @@ describe('Edit a namespace', () => {
     const url = 'https://example.com/';
     cy.get('#avatar_url').clear().type('abcde');
     saveButton().click();
-    helperText('avatar_url').should('have.text', 'Enter a valid URL.');
+    helperText('avatar_url').contains('Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
     saveButton().click();
     cy.get('[data-cy="title-box"] img').should('have.attr', 'src', url);

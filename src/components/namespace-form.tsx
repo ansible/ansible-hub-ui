@@ -81,6 +81,9 @@ export class NamespaceForm extends Component<IProps> {
           >
             {errorMessages['avatar_url']}
           </FormFieldHelper>
+          <FormFieldHelper variant='indeterminate'>
+            {t`Please use a jpeg or png; svg images are not supported.`}
+          </FormFieldHelper>
         </FormGroup>
 
         <FormGroup fieldId='description' label={t`Description`}>
