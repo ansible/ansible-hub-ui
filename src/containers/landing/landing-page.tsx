@@ -95,12 +95,12 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <p>
                     <Trans>
                       Use the{' '}
-                      <Link to={formatPath(Paths.collections)}>
+                      <Link to={formatPath(Paths.search)}>
                         Search page{' '}
                       </Link>
                       to find content for your project, then download them onto
                       your Ansible host using{' '}
-                      <ExternalLink href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'>
+                      <ExternalLink href='https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html'>
                         ansible-galaxy
                       </ExternalLink>
                       , the command line tool that comes bundled with Ansible.
@@ -122,7 +122,7 @@ export class LandingPage extends Component<RouteProps, IState> {
                     <Trans>
                       Red Hat is working on exciting new Ansible content
                       development capabilities within the context of{' '}
-                      <ExternalLink href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'>
+                      <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed'>
                         Ansible Lightspeed
                       </ExternalLink>{' '}
                       to help other automators build Ansible content. Your roles
@@ -174,7 +174,7 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <p>{t`Try Red Hat Ansible Automation Platform`}</p>
                   <br />
                   <p>
-                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
+                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/trial?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
                   </p>
                 </>
               }
