@@ -105,7 +105,7 @@ export const CollectionListItem = ({
           </TextContent>
         ) : null}
       </div>
-      <div className='hub-entry pf-l-flex pf-m-wrap'>
+      <div className='hub-entry pf-v5-l-flex pf-m-wrap'>
         {Object.keys(contentSummary.contents).map((type) => (
           <div key={type}>
             <CollectionNumericLabel
@@ -115,7 +115,7 @@ export const CollectionListItem = ({
           </div>
         ))}
       </div>
-      <div className='hub-entry pf-l-flex pf-m-wrap'>
+      <div className='hub-entry pf-v5-l-flex pf-m-wrap'>
         <LabelGroup>
           {collection_version.tags.map((tag, index) => (
             <Tag key={index}>{tag.name}</Tag>
