@@ -10,7 +10,7 @@ import {
   CollectionHeader,
   EmptyStateCustom,
   ExternalLink,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   RenderPluginDoc,
   TableOfContents,
@@ -61,7 +61,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     // If the parser can't find anything that matches the URL, neither of

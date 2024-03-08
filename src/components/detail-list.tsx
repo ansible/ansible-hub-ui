@@ -14,7 +14,7 @@ import {
   EmptyStateNoData,
   FilterOption,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   LocalizedSortHeaders,
   Query,
   RenderTableRow,
@@ -111,7 +111,7 @@ export function DetailList<T>({
           title={noDataTitle}
         />
       ) : loading ? (
-        <LoadingPageSpinner />
+        <LoadingSpinner />
       ) : (
         <>
           <div className='hub-toolbar' data-cy={`DetailList`}>
@@ -156,7 +156,7 @@ export function DetailList<T>({
             />
           </div>
           {loading ? (
-            <LoadingPageSpinner />
+            <LoadingSpinner />
           ) : !items.length ? (
             <EmptyStateFilter />
           ) : (

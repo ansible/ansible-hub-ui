@@ -19,7 +19,7 @@ import {
   EmptyStateUnauthorized,
   FilterOption,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   closeAlert,
@@ -264,7 +264,7 @@ export const ListPage = function <T>({
           ) : (
             <Main>
               {loading ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : (
                 <section className='body' data-cy={`ListPage-${displayName}`}>
                   <div className='hub-toolbar'>
@@ -334,7 +334,7 @@ export const ListPage = function <T>({
                     />
                   </div>
                   {loading ? (
-                    <LoadingPageSpinner />
+                    <LoadingSpinner />
                   ) : (
                     this.renderTable(params, updateParams, actionContext)
                   )}

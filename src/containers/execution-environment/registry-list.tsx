@@ -24,7 +24,7 @@ import {
   EmptyStateUnauthorized,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   RemoteForm,
   SortTable,
@@ -242,7 +242,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>

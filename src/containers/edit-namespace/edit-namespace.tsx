@@ -7,7 +7,7 @@ import {
   AlertList,
   AlertType,
   EmptyStateUnauthorized,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   NamespaceForm,
   PartnerHeader,
@@ -97,7 +97,7 @@ class EditNamespace extends Component<RouteProps, IState> {
     }
 
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
 
     if (!namespace) {

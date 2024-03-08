@@ -15,7 +15,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Typeahead,
 } from 'src/components';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
@@ -149,7 +149,7 @@ export class ImportList extends Component<IProps, IState> {
     if (loading) {
       return (
         <div className='loading'>
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         </div>
       );
     }

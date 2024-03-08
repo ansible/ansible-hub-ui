@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component, ReactNode } from 'react';
 import { ActionType } from 'src/actions';
-import { LoadingPageSpinner } from 'src/components';
+import { LoadingSpinner } from 'src/components';
 import {
   AlertList,
   AlertType,
@@ -173,7 +173,7 @@ export const Page = function <
           ) : (
             <Main>
               {loading ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : (
                 <section className='body' data-cy={`Page-${displayName}`}>
                   {render(item, actionContext)}

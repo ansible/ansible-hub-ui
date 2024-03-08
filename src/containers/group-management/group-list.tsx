@@ -29,7 +29,7 @@ import {
   GroupModal,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   closeAlert,
@@ -150,7 +150,7 @@ class GroupList extends Component<RouteProps, IState> {
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No groups yet`}
@@ -227,7 +227,7 @@ class GroupList extends Component<RouteProps, IState> {
                   }}
                 />
               </div>
-              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
               <HubPagination
                 params={params}

@@ -10,7 +10,7 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   RoleNamespaceEditModal,
   RoleNamespaceItem,
   RoleNamespaceModal,
@@ -193,7 +193,7 @@ class AnsibleRoleNamespaceList extends Component<
         )}
         <BaseHeader title={t`Role namespaces`} />
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No role namespaces yet`}

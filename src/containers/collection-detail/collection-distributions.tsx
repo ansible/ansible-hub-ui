@@ -12,8 +12,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   Main,
   SortTable,
 } from 'src/components';
@@ -92,7 +92,7 @@ const CollectionDistributions = (props: RouteProps) => {
   }, [params]);
 
   if (!collection || !content || collections.length <= 0) {
-    return <LoadingPageWithHeader />;
+    return <LoadingPage />;
   }
 
   const { collection_version, repository } = collection;
@@ -265,11 +265,7 @@ const CollectionDistributions = (props: RouteProps) => {
               name__icontains: t`Name`,
             }}
           />
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            renderTable(distributions, params)
-          )}
+          {loading ? <LoadingSpinner /> : renderTable(distributions, params)}
           <HubPagination
             params={params}
             updateParams={updateParams}

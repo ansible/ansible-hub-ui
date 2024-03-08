@@ -18,7 +18,7 @@ import {
   EmptyStateXs,
   ExpandableRow,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   PreviewRoles,
   RoleListTable,
   RolePermissions,
@@ -114,7 +114,7 @@ export class AccessTab extends Component<IProps> {
     });
 
     return loading ? (
-      <LoadingPageSpinner />
+      <LoadingSpinner />
     ) : (
       <>
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}

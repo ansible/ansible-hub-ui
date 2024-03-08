@@ -22,7 +22,7 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   StatusIndicator,
@@ -135,7 +135,7 @@ export class TaskListView extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -209,7 +209,7 @@ export class TaskListView extends Component<RouteProps, IState> {
                     }}
                   />
                 </div>
-                {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
                 <HubPagination
                   params={params}

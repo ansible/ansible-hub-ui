@@ -18,7 +18,7 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Logo,
   ProviderLink,
   RoleItem,
@@ -177,7 +177,7 @@ class NamespaceRoles extends Component<
     return (
       <div>
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No roles yet`}
@@ -280,7 +280,7 @@ class AnsibleRoleNamespaceDetail extends Component<
     const { location, navigate } = this.props;
 
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
 
     if (!namespace) {

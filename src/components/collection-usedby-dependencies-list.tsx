@@ -8,7 +8,7 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
 } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 import { Paths, formatPath } from 'src/paths';
@@ -69,7 +69,7 @@ export const CollectionUsedbyDependenciesList = ({
       />
 
       {usedByDependenciesLoading ? (
-        <LoadingPageSpinner />
+        <LoadingSpinner />
       ) : (
         <>
           {!itemCount ? (

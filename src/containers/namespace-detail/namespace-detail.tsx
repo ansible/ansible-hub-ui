@@ -29,7 +29,7 @@ import {
   ExternalLink,
   HubListToolbar,
   ImportModal,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   PartnerHeader,
   SignAllCertificatesModal,
@@ -266,7 +266,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     }
 
     if (!namespace) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const tab = params.tab || 'collections';

@@ -9,7 +9,7 @@ import {
   CopyURL,
   DateComponent,
   EmptyStateUnauthorized,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   closeAlert,
 } from 'src/components';
@@ -134,7 +134,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
                       </div>
                     </>
                   ) : (
-                    <LoadingPageSpinner />
+                    <LoadingSpinner />
                   )}
                 </CardBody>
               </section>

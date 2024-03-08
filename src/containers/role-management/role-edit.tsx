@@ -6,7 +6,7 @@ import {
   AlertList,
   AlertType,
   EmptyStateUnauthorized,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   RoleForm,
   RoleHeader,
@@ -143,7 +143,7 @@ class EditRole extends Component<RouteProps, IState> {
     }
 
     if (!role) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const breadcrumbs = [

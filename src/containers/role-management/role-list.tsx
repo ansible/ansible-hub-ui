@@ -25,7 +25,7 @@ import {
   ExpandableRow,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   PermissionCategories,
   RoleListTable,
@@ -220,7 +220,7 @@ export class RoleList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>

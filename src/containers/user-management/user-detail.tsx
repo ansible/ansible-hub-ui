@@ -8,7 +8,7 @@ import {
   AlertType,
   DeleteUserModal,
   EmptyStateUnauthorized,
-  LoadingPageWithHeader,
+  LoadingPage,
   UserFormPage,
   closeAlert,
 } from 'src/components';
@@ -65,7 +65,7 @@ class UserDetail extends Component<RouteProps, IState> {
       return <EmptyStateUnauthorized />;
     }
     if (!userDetail) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const breadcrumbs = [

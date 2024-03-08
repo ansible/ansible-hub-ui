@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RoleAPI } from 'src/api';
-import { LoadingPageSpinner, PermissionCategories } from 'src/components';
+import { LoadingSpinner, PermissionCategories } from 'src/components';
 import { translateLockedRole } from 'src/utilities';
 
 interface IProps {
@@ -18,7 +18,7 @@ export const RolePermissions = ({ name }: IProps) => {
   }, []);
 
   if (!role) {
-    return <LoadingPageSpinner />;
+    return <LoadingSpinner />;
   }
 
   return (

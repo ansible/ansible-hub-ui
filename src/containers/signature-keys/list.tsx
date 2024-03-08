@@ -22,7 +22,7 @@ import {
   EmptyStateUnauthorized,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   closeAlert,
@@ -109,7 +109,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -160,7 +160,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
                     }}
                   />
                 </div>
-                {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
                 <HubPagination
                   params={params}

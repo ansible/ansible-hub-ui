@@ -15,7 +15,7 @@ import {
   BaseHeader,
   CollectionListItem,
   EmptyStateXs,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   MultiSearchSearch,
   NamespaceListItem,
@@ -186,7 +186,7 @@ const MultiSearch = (props: RouteProps) => {
     items === loading || !keywords || items.length ? (
       <Section title={title}>
         {items === loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : !keywords ? (
           showAllLink
         ) : (

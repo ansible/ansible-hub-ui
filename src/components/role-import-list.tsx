@@ -9,7 +9,7 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
 } from 'src/components';
 import { filterIsSet, handleHttpError } from 'src/utilities';
 
@@ -136,7 +136,7 @@ export function RoleImportList({
       <div data-cy='import-list-data'>
         {loading ? (
           <div className='loading'>
-            <LoadingPageSpinner />
+            <LoadingSpinner />
           </div>
         ) : !count &&
           filterIsSet(params, ['role_name', 'namespace_name', 'state']) ? (

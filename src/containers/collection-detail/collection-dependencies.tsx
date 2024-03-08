@@ -12,7 +12,7 @@ import {
   CollectionHeader,
   CollectionUsedbyDependenciesList,
   EmptyStateNoData,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   closeAlert,
 } from 'src/components';
@@ -86,7 +86,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version: version, repository } = collection;

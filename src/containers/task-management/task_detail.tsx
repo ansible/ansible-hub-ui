@@ -23,7 +23,7 @@ import {
   ConfirmModal,
   DateComponent,
   EmptyStateCustom,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   StatusIndicator,
   closeAlert,
@@ -114,7 +114,7 @@ class TaskDetail extends Component<RouteProps, IState> {
     }
 
     return loading ? (
-      <LoadingPageSpinner />
+      <LoadingSpinner />
     ) : (
       <>
         <AlertList

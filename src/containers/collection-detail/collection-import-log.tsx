@@ -4,7 +4,7 @@ import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
   CollectionHeader,
   ImportConsole,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -60,7 +60,7 @@ class CollectionImportLog extends Component<RouteProps, IState> {
     } = this.state;
 
     if (!collection) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version, repository } = collection;

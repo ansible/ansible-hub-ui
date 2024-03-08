@@ -15,7 +15,7 @@ import {
   EmptyStateUnauthorized,
   LinkTabs,
   LinkTabsProps,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   closeAlert,
 } from 'src/components';
@@ -222,7 +222,7 @@ export const PageWithTabs = function <
           ) : (
             <Main>
               {loading ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : (
                 <section
                   className='body'

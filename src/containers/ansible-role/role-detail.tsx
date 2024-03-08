@@ -34,7 +34,7 @@ import {
   ExternalLink,
   ImportConsole,
   LabelGroup,
-  LoadingPageWithHeader,
+  LoadingPage,
   Logo,
   Main,
   RoleRatings,
@@ -356,7 +356,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     } = this.context as IAppContextType;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     if (!role) {

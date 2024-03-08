@@ -30,7 +30,7 @@ import {
   ExternalLink,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   PublishToControllerModal,
   RepositoryForm,
@@ -214,7 +214,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>

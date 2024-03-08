@@ -6,7 +6,7 @@ import { ActiveUserAPI, UserType } from 'src/api';
 import {
   AlertList,
   AlertType,
-  LoadingPageWithHeader,
+  LoadingPage,
   UserFormPage,
   closeAlert,
 } from 'src/components';
@@ -61,7 +61,7 @@ class UserProfile extends Component<RouteProps, IState> {
     const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (!user) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
     return (
       <>

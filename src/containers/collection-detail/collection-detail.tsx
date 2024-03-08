@@ -4,7 +4,7 @@ import {
   AlertList,
   CollectionHeader,
   CollectionInfo,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   closeAlert,
 } from 'src/components';
@@ -56,7 +56,7 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version: version } = collection;

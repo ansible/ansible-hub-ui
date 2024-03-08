@@ -29,8 +29,8 @@ import {
   AppliedFilters,
   CompoundFilter,
   HubPagination,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   SortTable,
   UploadSignatureModal,
   closeAlert,
@@ -166,7 +166,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
     const { alerts, versions, params, itemCount, loading, unauthorized } =
       this.state;
     if (!versions && !unauthorized) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     return (
@@ -269,7 +269,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
                 />
               </div>
               {loading ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : (
                 this.renderTable(versions, params)
               )}

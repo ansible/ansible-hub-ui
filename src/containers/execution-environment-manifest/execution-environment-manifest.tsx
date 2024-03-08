@@ -21,7 +21,7 @@ import {
   Breadcrumbs,
   ClipboardCopyButton,
   LabelGroup,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   ShaLabel,
   TagLabel,
@@ -93,7 +93,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
     } = this.state;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const command = (layers[selectedLayer.split(/-/)[1]] || {}).text;

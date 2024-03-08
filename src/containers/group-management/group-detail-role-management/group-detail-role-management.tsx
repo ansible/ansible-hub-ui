@@ -24,7 +24,7 @@ import {
   ExpandableRow,
   HubPagination,
   ListItemActions,
-  LoadingPageWithHeader,
+  LoadingPage,
   PermissionCategories,
   PreviewRoles,
   RoleListTable,
@@ -163,7 +163,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
   if (loading) {
     return (
       <section className='body'>
-        <LoadingPageWithHeader />
+        <LoadingPage />
       </section>
     );
   }

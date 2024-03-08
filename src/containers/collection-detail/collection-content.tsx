@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   CollectionContentList,
   CollectionHeader,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
@@ -45,7 +45,7 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version, repository } = collection;

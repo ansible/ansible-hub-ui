@@ -27,7 +27,7 @@ import {
   HubPagination,
   LabelGroup,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   PublishToControllerModal,
   ShaLabel,
   SortTable,
@@ -137,7 +137,7 @@ class ExecutionEnvironmentDetailImages extends Component<
       );
     }
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
     const sortTableOptions = {
       headers: [

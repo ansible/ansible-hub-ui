@@ -12,8 +12,8 @@ import {
   HubListToolbar,
   HubPagination,
   LinkTabs,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   NamespaceCard,
   NamespaceModal,
   NamespaceNextPageCard,
@@ -142,7 +142,7 @@ export class NamespaceList extends Component<IProps, IState> {
       namespaces.length === 0;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const updateParams = (p) =>
@@ -256,7 +256,7 @@ export class NamespaceList extends Component<IProps, IState> {
     if (loading) {
       return (
         <section>
-          <LoadingPageSpinner />;
+          <LoadingSpinner />;
         </section>
       );
     }

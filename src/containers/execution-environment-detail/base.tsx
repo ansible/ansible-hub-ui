@@ -13,7 +13,7 @@ import {
   AlertType,
   DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   PublishToControllerModal,
   RepositoryForm,
@@ -99,7 +99,7 @@ export function withContainerRepo(WrappedComponent) {
       }
 
       if (this.state.loading) {
-        return <LoadingPageWithHeader />;
+        return <LoadingPage />;
       }
 
       const permissions = this.state.repo.namespace.my_permissions;

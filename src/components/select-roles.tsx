@@ -10,7 +10,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   RoleListTable,
 } from 'src/components';
 import { filterIsSet, translateLockedRole } from 'src/utilities';
@@ -60,7 +60,7 @@ export const SelectRoles: FunctionComponent<SelectRolesProps> = ({
   if (loading) {
     return (
       <div className='hub-custom-wizard-layout hub-loading-wizard'>
-        <LoadingPageSpinner />
+        <LoadingSpinner />
       </div>
     );
   }

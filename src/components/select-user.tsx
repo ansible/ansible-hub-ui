@@ -9,7 +9,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   RadioRow,
   RoleListTable,
 } from 'src/components';
@@ -56,7 +56,7 @@ export const SelectUser: FunctionComponent<IProps> = ({
   if (loading) {
     return (
       <div className='hub-custom-wizard-layout hub-loading-wizard'>
-        <LoadingPageSpinner />
+        <LoadingSpinner />
       </div>
     );
   }

@@ -8,7 +8,7 @@ import {
   BaseHeader,
   CollectionListItem,
   EmptyStateNoData,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   RoleItem,
 } from 'src/components';
@@ -120,7 +120,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
           <SectionTitle>{t`Collections`}</SectionTitle>
 
           {collections === null ? (
-            <LoadingPageSpinner />
+            <LoadingSpinner />
           ) : collections.length === 0 ? (
             <EmptyStateNoData
               title={t`No matching collections found.`}
@@ -155,7 +155,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
               <SectionTitle>{t`Roles`}</SectionTitle>
 
               {roles === null ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : roles.length === 0 ? (
                 <EmptyStateNoData
                   title={t`No matching roles found.`}

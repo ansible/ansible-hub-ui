@@ -33,7 +33,7 @@ import {
   HubPagination,
   LinkTabs,
   ListItemActions,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   SortTable,
   Typeahead,
@@ -177,12 +177,12 @@ class GroupDetail extends Component<RouteProps, IState> {
       return <EmptyStateUnauthorized />;
     }
     if (!group) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     if (params.tab == 'users' && !users && !unauthorised) {
       this.queryUsers();
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const tabs = [

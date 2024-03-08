@@ -18,7 +18,7 @@ import {
 import {
   CopyURL,
   DownloadSignatureGridItem,
-  LoadingPageSpinner,
+  LoadingSpinner,
   LoginLink,
   Tag,
 } from 'src/components';
@@ -53,7 +53,7 @@ export const CollectionInfo = ({
   }
 
   if (!content) {
-    return <LoadingPageSpinner />;
+    return <LoadingSpinner />;
   }
 
   return (

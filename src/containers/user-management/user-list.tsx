@@ -27,7 +27,7 @@ import {
   HubPagination,
   LabelGroup,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   Tooltip,
@@ -219,7 +219,7 @@ class UserList extends Component<RouteProps, IState> {
                   }}
                 />
               </div>
-              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
               <HubPagination
                 params={params}

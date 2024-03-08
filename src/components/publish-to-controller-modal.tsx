@@ -23,7 +23,7 @@ import {
   EmptyStateNoData,
   ExternalLink,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   ShaLabel,
   Typeahead,
   closeAlert,
@@ -261,7 +261,7 @@ export const PublishToControllerModal = (props: IProps) => {
       />
       {loading && (
         <div style={{ padding: '16px' }}>
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         </div>
       )}
       {noData && !loading ? (

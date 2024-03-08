@@ -10,7 +10,7 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   RoleItem,
   closeAlert,
 } from 'src/components';
@@ -173,7 +173,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
         />
         <BaseHeader title={t`Roles`} />
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No roles yet`}

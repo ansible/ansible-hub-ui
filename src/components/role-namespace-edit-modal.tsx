@@ -12,7 +12,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
-  LoadingPageSpinner,
+  LoadingSpinner,
   RadioRow,
   SortTable,
 } from 'src/components';
@@ -113,7 +113,7 @@ export const RoleNamespaceEditModal = ({
         updateParams={(newParams) => setParams(newParams)}
       />
       {loading ? (
-        <LoadingPageSpinner />
+        <LoadingSpinner />
       ) : !count ? (
         filterIsSet(params, ['keywords']) ? (
           <EmptyStateFilter />

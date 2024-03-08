@@ -5,7 +5,7 @@ import { UserAPI, UserType } from 'src/api';
 import {
   BaseHeader,
   EmptyStateUnauthorized,
-  LoadingPageWithHeader,
+  LoadingPage,
   UserFormPage,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -57,7 +57,7 @@ class UserEdit extends Component<RouteProps, IState> {
     }
 
     if (!user) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const breadcrumbs = [

@@ -24,7 +24,7 @@ import {
   HubListToolbar,
   HubPagination,
   ImportModal,
-  LoadingPageSpinner,
+  LoadingSpinner,
   closeAlert,
   collectionFilter,
 } from 'src/components';
@@ -235,7 +235,7 @@ class Search extends Component<RouteProps, IState> {
           />
         )}
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No collections yet`}

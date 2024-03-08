@@ -1,8 +1,8 @@
 import { Skeleton, Title } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { LoadingPageSpinner, Main } from 'src/components';
+import { LoadingSpinner, Main } from 'src/components';
 
-export class LoadingPageWithHeader extends Component {
+export class LoadingPage extends Component {
   render() {
     return (
       <>
@@ -17,7 +17,7 @@ export class LoadingPageWithHeader extends Component {
         </section>
         <Main>
           <section>
-            <LoadingPageSpinner />
+            <LoadingSpinner />
           </section>
         </Main>
       </>

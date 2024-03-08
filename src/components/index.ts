@@ -63,8 +63,8 @@ export {
   type Query,
   type RenderTableRow,
 } from './list-page';
-export { LoadingPageSpinner } from './loading-page-spinner';
-export { LoadingPageWithHeader } from './loading-with-header';
+export { LoadingPage } from './loading-page';
+export { LoadingSpinner } from './loading-spinner';
 export { LoginLink } from './login-link';
 export { Logo } from './logo';
 export { Main } from './main';
