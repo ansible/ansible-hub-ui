@@ -68,20 +68,20 @@ export const Paths = {
   ansibleRepositoryEdit: '/ansible/repositories/:name/edit',
   approvalDashboard: '/approval-dashboard',
   collectionByRepo: '/repo/:repo/:namespace/:collection',
-  collectionContentDocs: '/:namespace/:collection/content/:type/:name',
+  collectionContentDocs: '/:namespace/:collection/content/:type/:name', // compat
   collectionContentDocsByRepo:
     '/repo/:repo/:namespace/:collection/content/:type/:name',
-  collectionContentList: '/:namespace/:collection/content',
+  collectionContentList: '/:namespace/:collection/content', // compat
   collectionContentListByRepo: '/repo/:repo/:namespace/:collection/content',
   collectionDependenciesByRepo:
     '/repo/:repo/:namespace/:collection/dependencies',
   collectionDistributionsByRepo:
     '/repo/:repo/:namespace/:collection/distributions',
-  collectionDocsIndex: '/:namespace/:collection/docs',
+  collectionDocsIndex: '/:namespace/:collection/docs', // compat
   collectionDocsIndexByRepo: '/repo/:repo/:namespace/:collection/docs',
-  collectionDocsPage: '/:namespace/:collection/docs/:page',
+  collectionDocsPage: '/:namespace/:collection/docs/:page', // compat
   collectionDocsPageByRepo: '/repo/:repo/:namespace/:collection/docs/:page',
-  collectionImportLog: '/:namespace/:collection/import-log',
+  collectionImportLog: '/:namespace/:collection/import-log', // compat
   collectionImportLogByRepo: '/repo/:repo/:namespace/:collection/import-log',
   collections: '/collections',
   createRole: '/roles/create',
@@ -104,20 +104,17 @@ export const Paths = {
   groupList: '/group-list',
   landingPage: '/',
   login: '/login',
-  logout: '/logout',
-  myCollections: '/my-namespaces/:namespace',
-  myCollectionsByRepo: '/repo/:repo/my-namespaces/:namespace',
+  myCollections: '/my-namespaces/:namespace', // compat
+  myCollectionsByRepo: '/repo/:repo/my-namespaces/:namespace', // compat
   myImports: '/my-imports',
   myNamespaces: '/my-namespaces',
-  namespace: '/:namespace',
-  namespaceByRepo: '/repo/:repo/:namespace',
+  namespace: '/:namespace', // compat
   namespaceDetail: '/namespaces/:namespace',
   namespaces: IS_INSIGHTS ? '/partners' : '/namespaces',
-  notFound: '/not-found',
+  notFound: '/not-found', // FIXME don't redirect
   roleEdit: '/role/:role',
   roleList: '/roles',
   search: '/search',
-  searchByRepo: '/repo/:repo',
   signatureKeys: '/signature-keys',
   standaloneImports: '/standalone/imports',
   standaloneNamespace: '/standalone/namespaces/:namespaceid',

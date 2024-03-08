@@ -52,7 +52,7 @@ function standaloneMenu() {
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        alternativeUrls: [altPath(Paths.searchByRepo)],
+        alternativeUrls: [altPath('/repo/:repo')],
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths.namespaces),
