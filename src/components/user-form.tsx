@@ -11,12 +11,12 @@ import {
 import React, { Component } from 'react';
 import { GroupAPI, UserType } from 'src/api';
 import {
-  APISearchTypeAhead,
   AlertType,
   DataForm,
   FormFieldHelper,
   HelperText,
   Tooltip,
+  Typeahead,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { ErrorMessagesType, errorMessage } from 'src/utilities';
@@ -172,7 +172,7 @@ export class UserForm extends Component<IProps, IState> {
             {formErrors.groups.description}
           </Alert>
         ) : (
-          <APISearchTypeAhead
+          <Typeahead
             results={this.state.searchGroups}
             loadResults={this.loadGroups}
             onSelect={this.onSelectGroup}

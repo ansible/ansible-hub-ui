@@ -30,7 +30,7 @@ interface IState {
   isOpen: boolean;
 }
 
-export class APISearchTypeAhead extends Component<IProps, IState> {
+export class Typeahead extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 

@@ -19,12 +19,12 @@ import {
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import {
-  APISearchTypeAhead,
   AlertList,
   AlertType,
   FormFieldHelper,
   HelperText,
   LabelGroup,
+  Typeahead,
   closeAlert,
 } from 'src/components';
 import {
@@ -234,7 +234,7 @@ export class RepositoryForm extends Component<IProps, IState> {
                 {!formErrors?.registries && (
                   <>
                     {registries ? (
-                      <APISearchTypeAhead
+                      <Typeahead
                         loadResults={(name) => this.loadRegistries(name)}
                         onClear={() => this.setState({ registrySelection: [] })}
                         onSelect={(event, value) =>

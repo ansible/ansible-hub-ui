@@ -18,7 +18,6 @@ import {
   UserType,
 } from 'src/api';
 import {
-  APISearchTypeAhead,
   AlertList,
   AlertType,
   AppliedFilters,
@@ -37,6 +36,7 @@ import {
   LoadingPageWithHeader,
   Main,
   SortTable,
+  Typeahead,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -323,7 +323,7 @@ class GroupDetail extends Component<RouteProps, IState> {
           </Button>,
         ]}
       >
-        <APISearchTypeAhead
+        <Typeahead
           results={this.state.options}
           loadResults={(name) =>
             UserAPI.list({ username__contains: name, page_size: 1000 })

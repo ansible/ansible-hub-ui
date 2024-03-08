@@ -21,8 +21,8 @@ import {
   UserType,
 } from 'src/api';
 import {
-  AboutModalWindow,
   ExternalLink,
+  HubAboutModal,
   LanguageSwitcher,
   LoginLink,
   SmallLogo,
@@ -147,7 +147,7 @@ export const StandaloneLayout = ({
     ].filter(Boolean);
 
     aboutModal = (
-      <AboutModalWindow
+      <HubAboutModal
         isOpen={aboutModalVisible}
         onClose={() => setAboutModalVisible(false)}
         user={user}

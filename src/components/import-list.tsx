@@ -9,7 +9,6 @@ import {
   PulpStatus,
 } from 'src/api';
 import {
-  APISearchTypeAhead,
   AppliedFilters,
   CompoundFilter,
   DateComponent,
@@ -17,6 +16,7 @@ import {
   EmptyStateNoData,
   HubPagination,
   LoadingPageSpinner,
+  Typeahead,
 } from 'src/components';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './my-imports.scss';
@@ -248,7 +248,7 @@ export class ImportList extends Component<IProps, IState> {
       <div className='namespace-selector-wrapper'>
         <div className='label'>{t`Namespace`}</div>
         <div className='selector'>
-          <APISearchTypeAhead
+          <Typeahead
             loadResults={(name) => this.loadNamespaces(name)}
             onSelect={(event, value) => {
               const params = ParamHelper.setParam(

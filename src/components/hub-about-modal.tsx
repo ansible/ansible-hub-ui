@@ -41,12 +41,7 @@ interface IApplicationInfo {
   server_version?: string;
 }
 
-export const AboutModalWindow = ({
-  isOpen,
-  onClose,
-  user,
-  userName,
-}: IProps) => {
+export const HubAboutModal = ({ isOpen, onClose, user, userName }: IProps) => {
   const [applicationInfo, setApplicationInfo] = useState<IApplicationInfo>({});
 
   useEffect(() => {

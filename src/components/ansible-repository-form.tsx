@@ -12,11 +12,11 @@ import { Select, SelectOption } from '@patternfly/react-core/deprecated';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
-  APISearchTypeAhead,
   FormFieldHelper,
   HelperText,
   LazyDistributions,
   PulpLabels,
+  Typeahead,
 } from 'src/components';
 import {
   ErrorMessagesType,
@@ -313,7 +313,7 @@ export const AnsibleRepositoryForm = ({
         <>
           <div data-cy='remote'>
             {remotes ? (
-              <APISearchTypeAhead
+              <Typeahead
                 loadResults={loadRemotes}
                 onClear={() =>
                   updateRepository({ ...repository, remote: null })

@@ -16,7 +16,7 @@ import {
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React, { Component } from 'react';
-import { APISearchTypeAhead, StatefulDropdown } from 'src/components';
+import { StatefulDropdown, Typeahead } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
 export interface FilterOption {
@@ -178,7 +178,7 @@ export class CompoundFilter extends Component<IProps, IState> {
           .options.map(({ id, title }) => ({ id, name: title }));
 
         return (
-          <APISearchTypeAhead
+          <Typeahead
             loadResults={(name) => {
               this.props.onChange(name);
             }}

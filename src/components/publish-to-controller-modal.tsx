@@ -15,7 +15,6 @@ import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React, { useEffect, useState } from 'react';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
-  APISearchTypeAhead,
   AlertList,
   AppliedFilters,
   ClipboardCopyButton,
@@ -26,6 +25,7 @@ import {
   HubPagination,
   LoadingPageSpinner,
   ShaLabel,
+  Typeahead,
   closeAlert,
 } from 'src/components';
 import { errorMessage, filterIsSet, getContainersURL } from 'src/utilities';
@@ -283,7 +283,7 @@ export const PublishToControllerModal = (props: IProps) => {
               <DescriptionListDescription>
                 <Flex>
                   <FlexItem>
-                    <APISearchTypeAhead
+                    <Typeahead
                       loadResults={(name) => fetchTags(image, name)}
                       onClear={() => {
                         setTag(null);
