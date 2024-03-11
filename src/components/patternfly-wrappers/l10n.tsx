@@ -41,17 +41,18 @@ const count = '${remaining}'; // pf templating
 
 export const Alert = ({ variant, ...props }: AlertProps) => {
   const alertType = {
-    success: t`success`,
-    danger: t`danger`,
-    warning: t`warning`,
-    info: t`info`,
-    custom: t`custom`,
+    success: t`Success`,
+    danger: t`Danger`,
+    warning: t`Warning`,
+    info: t`Info`,
+    custom: t`Custom`,
   }[variant || 'custom'];
 
   return (
     <PFAlert
       toggleAriaLabel={t`${alertType} alert details`}
       variantLabel={t`${alertType} alert:`}
+      variant={variant}
       {...props}
     />
   );
