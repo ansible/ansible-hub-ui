@@ -14,7 +14,10 @@ function apiLogin(username, password, url = '/', title = 'Collections') {
             method: 'POST',
             url: loginUrl,
             body: { username, password },
-            headers: { 'X-CSRFToken': csrftoken.value },
+            headers: {
+              'X-CSRFToken': csrftoken.value,
+              Referer: Cypress.config().baseUrl,
+            },
           });
         });
       });
