@@ -22,7 +22,7 @@ import {
   translateLockedRole,
   validateInput,
 } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   role: RoleType;

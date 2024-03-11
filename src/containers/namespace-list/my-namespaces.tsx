@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 
 class MyNamespaces extends Component<RouteProps> {

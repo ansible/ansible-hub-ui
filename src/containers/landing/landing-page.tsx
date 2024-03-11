@@ -14,7 +14,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import './landing-page.scss';
 
 interface IState {

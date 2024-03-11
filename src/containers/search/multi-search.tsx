@@ -28,7 +28,7 @@ import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   handleHttpError,
   withRouter,
 } from 'src/utilities';

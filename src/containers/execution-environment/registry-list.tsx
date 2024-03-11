@@ -35,7 +35,7 @@ import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import {
   ErrorMessagesType,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   lastSyncStatus,

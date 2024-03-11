@@ -14,7 +14,7 @@ import {
   Breadcrumbs,
   EmptyStateUnauthorized,
   LinkTabs,
-  LinkTabsProps,
+  type LinkTabsProps,
   LoadingSpinner,
   Main,
   closeAlert,
@@ -24,7 +24,7 @@ import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   withRouter,
 } from 'src/utilities';

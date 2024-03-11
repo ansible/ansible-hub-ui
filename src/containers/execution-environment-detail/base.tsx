@@ -25,7 +25,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RepoSigningUtils,
-  RouteProps,
+  type RouteProps,
   canSignEE,
   taskAlert,
   waitForTask,

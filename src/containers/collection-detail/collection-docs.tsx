@@ -17,7 +17,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';

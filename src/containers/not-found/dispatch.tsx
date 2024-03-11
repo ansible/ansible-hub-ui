@@ -14,7 +14,7 @@ import {
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
   <section className='body' {...rest}>

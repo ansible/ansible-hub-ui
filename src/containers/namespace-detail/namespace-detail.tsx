@@ -43,7 +43,7 @@ import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   canSignNamespace,
   errorMessage,
   filterIsSet,

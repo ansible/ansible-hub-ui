@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Label, LabelProps } from '@patternfly/react-core';
+import { Label, type LabelProps } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-icon';

@@ -18,7 +18,7 @@ import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   handleHttpError,
   withRouter,

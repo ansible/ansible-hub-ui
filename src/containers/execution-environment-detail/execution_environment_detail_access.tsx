@@ -12,7 +12,7 @@ import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, assignRoles, errorMessage } from 'src/utilities';
-import { IDetailSharedProps, withContainerRepo } from './base';
+import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface UserType {

@@ -1,4 +1,7 @@
-import { AlertActionCloseButton, AlertProps } from '@patternfly/react-core';
+import {
+  AlertActionCloseButton,
+  type AlertProps,
+} from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
 import { Alert } from 'src/components';
 

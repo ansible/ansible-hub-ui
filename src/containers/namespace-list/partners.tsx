@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 
 class Partners extends Component<RouteProps> {

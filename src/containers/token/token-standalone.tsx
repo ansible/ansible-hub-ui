@@ -14,7 +14,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
 
 interface IState {

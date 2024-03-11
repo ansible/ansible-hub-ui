@@ -8,7 +8,7 @@ import { ActiveUserAPI } from 'src/api';
 import { LoginForm } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   usernameValue: string;

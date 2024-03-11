@@ -8,7 +8,7 @@ import {
   RoleImportForm,
   closeAlert,
 } from 'src/components';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 
 interface RoleState {
   alerts: AlertType[];

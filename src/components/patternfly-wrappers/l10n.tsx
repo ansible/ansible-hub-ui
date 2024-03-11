@@ -1,20 +1,20 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  CodeEditorProps,
+  type CodeEditorProps,
   CodeEditor as PFCodeEditor,
 } from '@patternfly/react-code-editor';
 import {
-  AlertProps,
-  BreadcrumbProps,
-  ChipGroupProps,
-  ChipProps,
-  ClipboardCopyButtonProps,
-  ClipboardCopyProps,
-  FileUploadProps,
-  IconComponentProps,
-  LabelGroupProps,
-  LoginFormProps,
-  NavListProps,
+  type AlertProps,
+  type BreadcrumbProps,
+  type ChipGroupProps,
+  type ChipProps,
+  type ClipboardCopyButtonProps,
+  type ClipboardCopyProps,
+  type FileUploadProps,
+  type IconComponentProps,
+  type LabelGroupProps,
+  type LoginFormProps,
+  type NavListProps,
   Alert as PFAlert,
   Breadcrumb as PFBreadcrumb,
   Chip as PFChip,
@@ -28,10 +28,10 @@ import {
   Popover as PFPopover,
   SearchInput as PFSearchInput,
   Spinner as PFSpinner,
-  PaginationProps,
-  PopoverProps,
-  SearchInputProps,
-  SpinnerProps,
+  type PaginationProps,
+  type PopoverProps,
+  type SearchInputProps,
+  type SpinnerProps,
 } from '@patternfly/react-core';
 import React from 'react';
 import { LabelGroup as PFLabelGroup } from './label-group';

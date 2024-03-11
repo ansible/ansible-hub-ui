@@ -20,7 +20,7 @@ import {
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   getRepoURL,
   withRouter,

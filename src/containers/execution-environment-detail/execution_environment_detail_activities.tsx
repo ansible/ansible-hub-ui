@@ -13,7 +13,7 @@ import {
 } from 'src/components';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
-import { IDetailSharedProps, withContainerRepo } from './base';
+import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {

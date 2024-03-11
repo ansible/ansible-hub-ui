@@ -37,7 +37,7 @@ import {
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import {
   ErrorMessagesType,
   ParamHelper,

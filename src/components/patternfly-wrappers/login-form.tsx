@@ -9,7 +9,7 @@ import {
   HelperTextItem,
   InputGroup,
   InputGroupItem,
-  LoginFormProps,
+  type LoginFormProps,
   TextInput,
   ValidatedOptions,
 } from '@patternfly/react-core';

@@ -33,7 +33,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,

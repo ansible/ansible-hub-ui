@@ -27,7 +27,7 @@ import {
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
+import { type RouteProps, getHumanSize, withRouter } from 'src/utilities';
 import { containerName } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 

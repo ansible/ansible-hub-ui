@@ -22,7 +22,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];

@@ -28,7 +28,7 @@ import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   withRouter,

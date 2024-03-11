@@ -19,7 +19,7 @@ import {
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { PermissionContextType } from 'src/permissions';
-import { RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 
 interface IState<T> {
   alerts: AlertType[];

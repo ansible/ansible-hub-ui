@@ -12,7 +12,7 @@ import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import { CopyURL, EmptyStateNoData, MarkdownEditor } from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
-import { IDetailSharedProps, withContainerRepo } from './base';
+import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {

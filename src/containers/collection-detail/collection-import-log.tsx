@@ -9,7 +9,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 import { IBaseCollectionState, loadCollection } from './base';
 
 interface IState extends IBaseCollectionState {

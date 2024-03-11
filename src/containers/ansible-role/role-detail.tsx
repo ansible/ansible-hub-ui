@@ -44,7 +44,7 @@ import {
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
+import { type RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
 const DownloadLink = ({ href, text }: { href: string; text: string }) => (
   <ExternalLink href={href} variant='download'>

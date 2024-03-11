@@ -45,7 +45,11 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import { IDetailSharedProps, containerName, withContainerRepo } from './base';
+import {
+  type IDetailSharedProps,
+  containerName,
+  withContainerRepo,
+} from './base';
 import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 

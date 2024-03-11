@@ -30,7 +30,7 @@ import {
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
-  RouteProps,
+  type RouteProps,
   errorMessage,
   parsePulpIDFromURL,
   translateTask,

@@ -2,7 +2,7 @@ import {
   FormHelperText,
   HelperText,
   HelperTextItem,
-  HelperTextItemProps,
+  type HelperTextItemProps,
 } from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
 

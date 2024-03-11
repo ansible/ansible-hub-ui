@@ -7,7 +7,7 @@ import {
   Breadcrumbs,
   ExternalLink,
   LinkTabs,
-  LinkTabsProps,
+  type LinkTabsProps,
   Logo,
 } from 'src/components';
 import { namespaceTitle } from 'src/utilities';

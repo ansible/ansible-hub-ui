@@ -10,7 +10,7 @@ import {
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ErrorMessagesType, mapErrorMessages } from 'src/utilities';
 
 interface IState {
