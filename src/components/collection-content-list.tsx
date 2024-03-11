@@ -1,17 +1,12 @@
 import { t } from '@lingui/macro';
-import {
-  SearchInput,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
+import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
-import { EmptyStateCustom } from 'src/components';
+import { EmptyStateCustom, SearchInput } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities';
 import './collection-content-list.scss';

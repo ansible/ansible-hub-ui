@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Alert,
   AlertActionLink,
   Button,
   Form,
@@ -9,7 +8,6 @@ import {
   InputGroupItem,
   Label,
   Modal,
-  Spinner,
   TextInput,
 } from '@patternfly/react-core';
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
@@ -22,7 +20,13 @@ import {
   PulpStatus,
   TaskAPI,
 } from 'src/api';
-import { AlertType, FormFieldHelper, LabelGroup } from 'src/components';
+import {
+  Alert,
+  AlertType,
+  FormFieldHelper,
+  LabelGroup,
+  Spinner,
+} from 'src/components';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {

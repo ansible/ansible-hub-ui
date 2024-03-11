@@ -1,6 +1,7 @@
-import { Button, Popover, PopoverPosition } from '@patternfly/react-core';
+import { Button, PopoverPosition } from '@patternfly/react-core';
 import OutlinedQuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon';
 import React, { ReactNode } from 'react';
+import { Popover } from 'src/components';
 
 interface IProps {
   /** Value to display in the tag */

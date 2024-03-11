@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import { Spinner } from '@patternfly/react-core';
 import { Table, Td, Th, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -15,6 +14,7 @@ import {
   DetailList,
   Details,
   ListItemActions,
+  Spinner,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';

@@ -1,12 +1,9 @@
-import { Bullseye, Spinner } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import { Bullseye } from '@patternfly/react-core';
+import React from 'react';
+import { Spinner } from 'src/components';
 
-export class LoadingSpinner extends Component {
-  render() {
-    return (
-      <Bullseye style={{ width: '100%', height: '100%' }}>
-        <Spinner />
-      </Bullseye>
-    );
-  }
-}
+export const LoadingSpinner = () => (
+  <Bullseye style={{ width: '100%', height: '100%' }}>
+    <Spinner />
+  </Bullseye>
+);

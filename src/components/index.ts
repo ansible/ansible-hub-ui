@@ -89,6 +89,15 @@ export {
   LabelGroup,
   LoginForm,
   Pagination,
+  Alert,
+  Breadcrumb,
+  Chip,
+  CodeEditor,
+  Icon,
+  NavList,
+  Popover,
+  SearchInput,
+  Spinner,
 } from './patternfly-wrappers/l10n';
 export { Tooltip } from './patternfly-wrappers/tooltip';
 export { PermissionCategories } from './permission-categories';

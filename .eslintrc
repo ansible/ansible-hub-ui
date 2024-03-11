@@ -30,17 +30,32 @@
     "no-restricted-imports": ["error", {
       "paths": [{
         "importNames": [
+          "Alert",
+          "Breadcrumb",
+          "Chip",
           "ChipGroup",
           "ClipboardCopy",
           "ClipboardCopyButton",
           "FileUpload",
+          "Icon",
           "LabelGroup",
           "LoginForm",
+          "NavList",
           "Pagination",
+          "Popover",
+          "SearchInput",
+          "Spinner",
           "Tooltip",
         ],
         "message": "Import from src/components instead.",
         "name": "@patternfly/react-core",
+      },
+      {
+        "importNames": [
+          "CodeEditor",
+        ],
+        "message": "Import from src/components instead.",
+        "name": "@patternfly/react-code-editor",
       }],
     }],
   },

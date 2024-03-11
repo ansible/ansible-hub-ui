@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Alert,
   Button,
   Grid,
   GridItem,
@@ -16,6 +15,7 @@ import {
   CollectionVersionSearch,
 } from 'src/api';
 import {
+  Alert,
   CopyURL,
   DownloadSignatureGridItem,
   LoadingSpinner,

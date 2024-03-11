@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
+import { ActionGroup, Button, Form } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
@@ -12,6 +12,7 @@ import {
   NamespaceForm,
   PartnerHeader,
   ResourcesForm,
+  Spinner,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';

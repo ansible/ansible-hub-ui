@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import { Spinner } from '@patternfly/react-core';
 import React, { useEffect, useRef } from 'react';
 import {
   CollectionVersionSearch,
@@ -8,7 +7,7 @@ import {
   LegacyRoleImportDetailType,
   PulpStatus,
 } from 'src/api';
-import { StatusIndicator, Tooltip } from 'src/components';
+import { Spinner, StatusIndicator, Tooltip } from 'src/components';
 import './my-imports.scss';
 
 interface IProps {

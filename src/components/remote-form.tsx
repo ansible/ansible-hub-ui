@@ -1,8 +1,7 @@
 import { Trans, t } from '@lingui/macro';
-import { CodeEditor, Language } from '@patternfly/react-code-editor';
+import { Language } from '@patternfly/react-code-editor';
 import {
   ActionGroup,
-  Alert,
   Button,
   Checkbox,
   ExpandableSection,
@@ -19,6 +18,8 @@ import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/excl
 import React, { Component, ReactNode } from 'react';
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import {
+  Alert,
+  CodeEditor,
   ExternalLink,
   FileUpload,
   FormFieldHelper,

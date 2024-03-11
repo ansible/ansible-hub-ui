@@ -7,7 +7,6 @@ import {
   InputGroupItem,
   Label,
   Modal,
-  Spinner,
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
@@ -24,6 +23,7 @@ import {
   FormFieldHelper,
   HelperText,
   LabelGroup,
+  Spinner,
   Typeahead,
   closeAlert,
 } from 'src/components';

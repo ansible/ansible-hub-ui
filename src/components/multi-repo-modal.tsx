@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { Button, Modal, Spinner } from '@patternfly/react-core';
+import { Button, Modal } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryType,
@@ -10,6 +10,7 @@ import {
   AlertList,
   AlertType,
   MultipleRepoSelector,
+  Spinner,
   closeAlert,
 } from 'src/components';
 

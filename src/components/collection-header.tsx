@@ -1,13 +1,11 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Alert,
   Button,
   Flex,
   FlexItem,
   List,
   ListItem,
   Modal,
-  Spinner,
   Text,
 } from '@patternfly/react-core';
 import {
@@ -30,6 +28,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import {
+  Alert,
   AlertList,
   AlertType,
   BaseHeader,
@@ -50,6 +49,7 @@ import {
   SignAllCertificatesModal,
   SignSingleCertificateModal,
   SignatureBadge,
+  Spinner,
   UploadSignatureModal,
   closeAlert,
 } from 'src/components';

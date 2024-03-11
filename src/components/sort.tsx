@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import { Icon } from '@patternfly/react-core';
 import {
   Select,
   SelectOption,
@@ -10,6 +9,7 @@ import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-u
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
 import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
 import React, { Component } from 'react';
+import { Icon } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
 export interface SortFieldType {

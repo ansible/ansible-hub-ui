@@ -3,16 +3,15 @@ import {
   Nav,
   NavExpandable,
   NavItem,
-  NavList,
-  SearchInput,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
 import { capitalize } from 'lodash';
-import React, { Ref, useState } from 'react';
+import React, { RefObject, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DocsBlobType } from 'src/api';
+import { NavList, SearchInput } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 
@@ -41,7 +40,7 @@ interface IProps {
   selectedType?: string;
   className?: string;
   updateParams: (p) => void;
-  searchBarRef?: Ref<HTMLInputElement>;
+  searchBarRef?: RefObject<HTMLInputElement>;
 }
 
 export const TableOfContents = (props: IProps) => {
@@ -62,7 +61,7 @@ export const TableOfContents = (props: IProps) => {
         <ToolbarGroup>
           <ToolbarItem>
             <SearchInput
-              ref={props.searchBarRef}
+              innerRef={props.searchBarRef}
               value={params.keywords}
               onChange={(_e, val) =>
                 updateParams(ParamHelper.setParam(params, 'keywords', val))

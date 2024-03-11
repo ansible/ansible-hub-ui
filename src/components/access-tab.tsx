@@ -1,7 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  Spinner,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
@@ -26,6 +25,7 @@ import {
   SelectRoles,
   SelectUser,
   SortTable,
+  Spinner,
   WizardModal,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities';

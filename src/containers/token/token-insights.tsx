@@ -1,8 +1,9 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, Button } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
+  Alert,
   AlertList,
   AlertType,
   BaseHeader,

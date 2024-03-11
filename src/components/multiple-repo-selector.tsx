@@ -3,7 +3,6 @@ import {
   Flex,
   FlexItem,
   Label,
-  Spinner,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
@@ -26,6 +25,7 @@ import {
   LabelGroup,
   RadioRow,
   SortTable,
+  Spinner,
 } from 'src/components';
 import { errorMessage } from 'src/utilities';
 

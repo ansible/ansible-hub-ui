@@ -4,11 +4,16 @@ import {
   ButtonVariant,
   ExpandableSection,
   Modal,
-  Spinner,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { WisdomDenyIndexAPI } from 'src/api';
-import { AlertList, AlertType, ExternalLink, closeAlert } from 'src/components';
+import {
+  AlertList,
+  AlertType,
+  ExternalLink,
+  Spinner,
+  closeAlert,
+} from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {

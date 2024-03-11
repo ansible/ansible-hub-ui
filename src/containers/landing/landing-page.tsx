@@ -1,8 +1,9 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, List, ListItem, ListVariant } from '@patternfly/react-core';
+import { List, ListItem, ListVariant } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Alert,
   AlertList,
   AlertType,
   BaseHeader,
@@ -95,9 +96,7 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <p>
                     <Trans>
                       Use the{' '}
-                      <Link to={formatPath(Paths.search)}>
-                        Search page{' '}
-                      </Link>
+                      <Link to={formatPath(Paths.search)}>Search page </Link>
                       to find content for your project, then download them onto
                       your Ansible host using{' '}
                       <ExternalLink href='https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html'>

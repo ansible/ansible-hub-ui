@@ -1,16 +1,10 @@
 import { t } from '@lingui/macro';
-import {
-  Form,
-  FormGroup,
-  Icon,
-  TextArea,
-  TextInput,
-} from '@patternfly/react-core';
+import { Form, FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
 import React, { Component } from 'react';
 import { NamespaceType } from 'src/api';
-import { FormFieldHelper, NamespaceCard } from 'src/components';
+import { FormFieldHelper, Icon, NamespaceCard } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
 import './namespace-form.scss';

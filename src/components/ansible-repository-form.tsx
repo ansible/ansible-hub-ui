@@ -5,7 +5,6 @@ import {
   Checkbox,
   Form,
   FormGroup,
-  Spinner,
   TextInput,
 } from '@patternfly/react-core';
 import { Select, SelectOption } from '@patternfly/react-core/deprecated';
@@ -16,6 +15,7 @@ import {
   HelperText,
   LazyDistributions,
   PulpLabels,
+  Spinner,
   Typeahead,
 } from 'src/components';
 import {

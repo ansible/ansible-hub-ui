@@ -7,7 +7,6 @@ import {
   DataListItemRow,
   Nav,
   NavItem,
-  NavList,
   Panel,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
@@ -22,7 +21,6 @@ import {
   LegacyRoleImportDetailType,
   LegacyRoleVersionDetailType,
 } from 'src/api';
-import { EmptyStateNoData } from 'src/components';
 import {
   AlertList,
   AlertType,
@@ -31,12 +29,14 @@ import {
   CopyURL,
   DateComponent,
   DownloadCount,
+  EmptyStateNoData,
   ExternalLink,
   ImportConsole,
   LabelGroup,
   LoadingPage,
   Logo,
   Main,
+  NavList,
   RoleRatings,
   Tag,
   closeAlert,

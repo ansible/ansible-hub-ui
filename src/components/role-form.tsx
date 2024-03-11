@@ -7,12 +7,11 @@ import {
   FormGroup,
   InputGroup,
   InputGroupItem,
-  Spinner,
   TextInput,
   Title,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { FormFieldHelper, PermissionCategories } from 'src/components';
+import { FormFieldHelper, PermissionCategories, Spinner } from 'src/components';
 
 interface IState {
   permissions: string[];

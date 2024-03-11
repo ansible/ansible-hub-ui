@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import {
   ActionGroup,
-  Alert,
   Button,
   FormGroup,
   Label,
@@ -11,6 +10,7 @@ import {
 import React, { Component } from 'react';
 import { GroupAPI, UserType } from 'src/api';
 import {
+  Alert,
   AlertType,
   DataForm,
   FormFieldHelper,

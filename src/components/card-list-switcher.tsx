@@ -1,8 +1,8 @@
-import { Icon } from '@patternfly/react-core';
 import ListIcon from '@patternfly/react-icons/dist/esm/icons/list-icon';
 import ThLargeIcon from '@patternfly/react-icons/dist/esm/icons/th-large-icon';
 import cx from 'classnames';
 import React, { FunctionComponent } from 'react';
+import { Icon } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 import './switcher.scss';
 
