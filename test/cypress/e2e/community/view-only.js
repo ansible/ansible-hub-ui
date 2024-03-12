@@ -29,7 +29,7 @@ describe('view-only mode - with download', () => {
     ].forEach((item) => cy.menuMissing(item));
 
     // login button in top right nav
-    cy.contains('.pf-v5-c-page__header-tools a', 'Login');
+    cy.contains('.pf-v5-c-masthead__content', 'Login');
   });
 
   it('can load Dashboard & Collections', () => {
