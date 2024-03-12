@@ -9,7 +9,6 @@ export { getContainersURL, getRepoURL } from './get-repo-url';
 export { getHumanSize } from './get_human_size';
 export { hasPermission } from './has-permission';
 export { lastSyncStatus, lastSynced } from './last-sync-task';
-export { getProviderInfo } from './legacy-namespace';
 export {
   ErrorMessagesType,
   alertErrorsWithoutFields,
@@ -24,6 +23,7 @@ export { parsePulpIDFromURL } from './parse-pulp-id';
 export { RepoSigningUtils } from './repo-signing';
 export { repositoryBasePath } from './repository-base-path';
 export { repositoryRemoveCollection } from './repository-remove-collection';
+export { roleNamespaceInfo } from './role-namespace-info';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export { taskAlert } from './task-alert';
 export { translateLockedRole } from './translate-locked-role';

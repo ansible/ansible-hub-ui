@@ -1,6 +1,6 @@
 import { Paths, formatPath } from 'src/paths';
 
-export function getProviderInfo(data) {
+export function roleNamespaceInfo(data) {
   const summary_fields = data.summary_fields;
   let provider = null;
 

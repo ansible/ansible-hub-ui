@@ -18,7 +18,7 @@ import {
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { getProviderInfo } from 'src/utilities';
+import { roleNamespaceInfo } from 'src/utilities';
 import './list-item.scss';
 
 interface RoleProps {
@@ -41,7 +41,7 @@ export function RoleItem({ role, show_thumbnail }: RoleProps) {
   });
   const release_date = latest?.release_date || modified;
   const release_name = latest?.name || '';
-  const provider = getProviderInfo(role);
+  const provider = roleNamespaceInfo(role);
   const cells = [];
 
   if (show_thumbnail) {

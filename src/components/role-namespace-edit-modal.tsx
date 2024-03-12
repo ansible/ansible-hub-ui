@@ -16,7 +16,7 @@ import {
   RadioRow,
   SortTable,
 } from 'src/components';
-import { filterIsSet, getProviderInfo, handleHttpError } from 'src/utilities';
+import { filterIsSet, handleHttpError, roleNamespaceInfo } from 'src/utilities';
 
 interface IProps {
   addAlert: (alert) => void;
@@ -47,7 +47,7 @@ export const RoleNamespaceEditModal = ({
         ),
       );
 
-  const provider = getProviderInfo(namespace);
+  const provider = roleNamespaceInfo(namespace);
 
   const [count, setCount] = useState(0);
   const [items, setItems] = useState([]);

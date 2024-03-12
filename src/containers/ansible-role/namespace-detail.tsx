@@ -34,8 +34,8 @@ import {
   ParamHelper,
   type RouteProps,
   filterIsSet,
-  getProviderInfo,
   handleHttpError,
+  roleNamespaceInfo,
   withRouter,
 } from 'src/utilities';
 
@@ -304,7 +304,7 @@ class AnsibleRoleNamespaceDetail extends Component<
       namespaceid: namespace.id,
     });
 
-    const provider = getProviderInfo(namespace);
+    const provider = roleNamespaceInfo(namespace);
 
     const userOwnsLegacyNamespace = !!namespace.summary_fields?.owners?.find(
       (n) => n.username == username,
