@@ -31,4 +31,4 @@ export class API extends HubAPI {
   }
 }
 
-export const WisdomDenyIndexAPI = new API();
+export const AIDenyIndexAPI = new API();

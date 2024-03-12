@@ -10,11 +10,11 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
+  LightspeedModal,
   LoadingSpinner,
   RoleNamespaceEditModal,
   RoleNamespaceItem,
   RoleNamespaceModal,
-  WisdomModal,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -177,7 +177,7 @@ class AnsibleRoleNamespaceList extends Component<
           />
         )}
         {lightspeedModal && (
-          <WisdomModal
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ lightspeedModal: null })}
             reference={lightspeedModal}
@@ -231,7 +231,7 @@ class AnsibleRoleNamespaceList extends Component<
                         openEditModal={(namespace) =>
                           this.setState({ editModal: namespace })
                         }
-                        openWisdomModal={({ name }) =>
+                        openLightspeedModal={({ name }) =>
                           this.setState({ lightspeedModal: name })
                         }
                       />

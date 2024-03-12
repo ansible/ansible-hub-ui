@@ -55,6 +55,7 @@ export { LandingPageCard } from './landing-page-card';
 export { LanguageSwitcher } from './language-switcher';
 export { LazyDistributions } from './lazy-distributions';
 export { LazyRepositories } from './lazy-repositories';
+export { LightspeedModal } from './lightspeed-modal';
 export { LinkTabs, type LinkTabsProps } from './link-tabs';
 export { ListItemActions } from './list-item-actions';
 export {
@@ -82,19 +83,19 @@ export { Page } from './page';
 export { PageWithTabs } from './page-with-tabs';
 export { PartnerHeader } from './partner-header';
 export {
-  ChipGroup,
-  ClipboardCopy,
-  ClipboardCopyButton,
-  FileUpload,
-  LabelGroup,
-  LoginForm,
-  Pagination,
   Alert,
   Breadcrumb,
   Chip,
+  ChipGroup,
+  ClipboardCopy,
+  ClipboardCopyButton,
   CodeEditor,
+  FileUpload,
   Icon,
+  LabelGroup,
+  LoginForm,
   NavList,
+  Pagination,
   Popover,
   SearchInput,
   Spinner,
@@ -149,6 +150,5 @@ export { UIVersion } from './ui-version';
 export { UploadSignatureModal } from './upload-signature-modal';
 export { UserForm } from './user-form';
 export { UserFormPage } from './user-form-page';
-export { WisdomModal } from './wisdom-modal';
 export { WizardModal } from './wizard-modal';
 export { WriteOnlyField } from './write-only-field';

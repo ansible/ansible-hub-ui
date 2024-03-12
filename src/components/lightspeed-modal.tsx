@@ -6,7 +6,7 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { WisdomDenyIndexAPI } from 'src/api';
+import { AIDenyIndexAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -23,7 +23,7 @@ interface IProps {
   addAlert: (alert) => void;
 }
 
-export const WisdomModal = (props: IProps) => {
+export const LightspeedModal = (props: IProps) => {
   const [isInDenyIndex, setIsInDenyIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState([]);
@@ -88,7 +88,7 @@ export const WisdomModal = (props: IProps) => {
     setIsInDenyIndex(null);
     setLoading(true);
 
-    WisdomDenyIndexAPI.isInDenyIndex(props.scope, props.reference)
+    AIDenyIndexAPI.isInDenyIndex(props.scope, props.reference)
       .then((result) => {
         setIsInDenyIndex(result);
         setLoading(false);
@@ -119,7 +119,7 @@ export const WisdomModal = (props: IProps) => {
 
   const removeFromDenyIndex = () => {
     setLoading(true);
-    WisdomDenyIndexAPI.removeFromDenyIndex(props.scope, props.reference)
+    AIDenyIndexAPI.removeFromDenyIndex(props.scope, props.reference)
       .then(() => {
         finishAction(false);
       })
@@ -135,7 +135,7 @@ export const WisdomModal = (props: IProps) => {
 
   const addToDenyIndex = () => {
     setLoading(true);
-    WisdomDenyIndexAPI.addToDenyIndex(props.scope, props.reference)
+    AIDenyIndexAPI.addToDenyIndex(props.scope, props.reference)
       .then(() => {
         finishAction(true);
       })
@@ -210,7 +210,7 @@ export const WisdomModal = (props: IProps) => {
               <p>
                 Red Hat is working on exciting new Ansible content development
                 capabilities within the context of{' '}
-                <ExternalLink href='https://www.redhat.com/en/engage/project-wisdom'>
+                <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed'>
                   Ansible Lightspeed
                 </ExternalLink>{' '}
                 to help other automators build Ansible content.

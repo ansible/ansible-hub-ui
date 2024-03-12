@@ -1,5 +1,6 @@
 export { ActiveUserAPI } from './active-user';
 export { ActivitiesAPI } from './activities';
+export { AIDenyIndexAPI } from './ai-deny-index';
 export { AnsibleDistributionAPI } from './ansible-distribution';
 export { AnsibleRemoteAPI } from './ansible-remote';
 export { AnsibleRepositoryAPI } from './ansible-repository';
@@ -91,4 +92,3 @@ export { TagAPI } from './tag';
 export { TaskAPI } from './task';
 export { TaskManagementAPI } from './task-management';
 export { UserAPI } from './user';
-export { WisdomDenyIndexAPI } from './wisdom-deny-index';

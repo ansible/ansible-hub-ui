@@ -18,13 +18,13 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
+  LightspeedModal,
   LoadingSpinner,
   Logo,
   ProviderLink,
   RoleItem,
   RoleNamespaceEditModal,
   StatefulDropdown,
-  WisdomModal,
   closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
@@ -309,12 +309,12 @@ class AnsibleRoleNamespaceDetail extends Component<
     const userOwnsLegacyNamespace = !!namespace.summary_fields?.owners?.find(
       (n) => n.username == username,
     );
-    const showWisdom =
+    const showLightspeed =
       ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
     const canImport = is_superuser || userOwnsLegacyNamespace;
 
     const dropdownItems = [
-      showWisdom && (
+      showLightspeed && (
         <DropdownItem
           onClick={() => this.setState({ lightspeedModal: true })}
         >{t`Ansible Lightspeed settings`}</DropdownItem>
@@ -379,7 +379,7 @@ class AnsibleRoleNamespaceDetail extends Component<
         />
 
         {lightspeedModal && (
-          <WisdomModal
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ lightspeedModal: false })}
             reference={namespace.name}

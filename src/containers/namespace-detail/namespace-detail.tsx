@@ -29,12 +29,12 @@ import {
   ExternalLink,
   HubListToolbar,
   ImportModal,
+  LightspeedModal,
   LoadingPage,
   Main,
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
-  WisdomModal,
   closeAlert,
   collectionFilter,
 } from 'src/components';
@@ -69,9 +69,9 @@ interface IState {
   group: GroupType;
   isDeletionPending: boolean;
   isNamespacePending: boolean;
+  isOpenLightspeedModal: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
-  isOpenWisdomModal: boolean;
   namespace: NamespaceType;
   params: {
     group?: string;
@@ -128,9 +128,9 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       group: null,
       isDeletionPending: false,
       isNamespacePending: false,
+      isOpenLightspeedModal: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
-      isOpenWisdomModal: false,
       namespace: null,
       params,
       redirect: null,
@@ -249,8 +249,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       filteredCount,
       isDeletionPending,
       isNamespacePending,
+      isOpenLightspeedModal,
       isOpenNamespaceModal,
-      isOpenWisdomModal,
       namespace,
       params,
       redirect,
@@ -450,10 +450,10 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
             />
           </DeleteModal>
         )}
-        {isOpenWisdomModal && (
-          <WisdomModal
+        {isOpenLightspeedModal && (
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
+            closeAction={() => this.setState({ isOpenLightspeedModal: false })}
             scope={'namespace'}
             reference={this.state.namespace.name}
           />
@@ -965,8 +965,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
         )),
       ai_deny_index && (
         <DropdownItem
-          key='wisdom-settings'
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
+          key='lightspeed-settings'
+          onClick={() => this.setState({ isOpenLightspeedModal: true })}
         >
           {t`Ansible Lightspeed settings`}
         </DropdownItem>
