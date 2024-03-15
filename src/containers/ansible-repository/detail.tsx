@@ -178,11 +178,7 @@ const AnsibleRepositoryDetail = PageWithTabs<
       active: tab === 'collections',
       title: t`Collections`,
       icon: <ArrowRightIcon />,
-      link: formatPath(
-        Paths.ansibleRepositoryDetail,
-        { name },
-        { tab: 'collections' },
-      ),
+      link: formatPath(Paths.collections, {}, { repository_name: name }),
     },
   ],
 });

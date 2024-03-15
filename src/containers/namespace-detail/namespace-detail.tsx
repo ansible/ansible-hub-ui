@@ -314,9 +314,9 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
         title: t`Role namespaces`,
         icon: <ArrowRightIcon />,
         link: formatPath(
-          Paths.namespaceDetail,
-          { namespace: namespace.name },
-          { tab: 'role-namespaces' },
+          Paths.standaloneNamespaces,
+          {},
+          { provider: namespace.name },
         ),
       },
     ];
