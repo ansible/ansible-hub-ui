@@ -17,12 +17,9 @@ describe('My Profile Tests', () => {
 
   beforeEach(() => {
     cy.login();
-    // open the dropdown labeled with the username and then...
     cy.get('[data-cy="user-dropdown"] button').click();
-    // a little hacky, but basically
-    // just click the one link that says 'My profile'.
-    cy.get('a').contains('My profile').click();
-    cy.get('button:contains("Edit")').click();
+    cy.contains('a', 'My profile').click();
+    cy.contains('button', 'Edit').click();
   });
 
   it('only has input fields for name, email, username, password and pass confirmation', () => {
@@ -51,7 +48,8 @@ describe('My Profile Tests', () => {
     cy.login(username, password);
 
     cy.get('[data-cy="user-dropdown"] button').click();
-    cy.get('a').contains('My profile').click();
+    cy.contains('a', 'My profile').click();
+    cy.contains('button', 'Edit').click();
 
     cy.get('.pf-v5-c-switch__input').should('be.disabled');
   });
@@ -102,9 +100,7 @@ describe('My Profile Tests', () => {
   });
 
   it('groups input is readonly', () => {
-    cy.get('[data-cy="UserForm-readonly-groups"]')
-      .find('input')
-      .should('not.exist');
+    cy.get('[data-cy="UserForm-readonly-groups"]').should('not.exist');
   });
 
   it('user can save form', () => {
