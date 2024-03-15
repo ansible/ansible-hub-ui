@@ -15,7 +15,6 @@ import {
   DataForm,
   FormFieldHelper,
   HelpButton,
-  Tooltip,
   Typeahead,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -52,9 +51,6 @@ interface IState {
 }
 
 export class UserForm extends Component<IProps, IState> {
-  public static defaultProps = {
-    isReadonly: false,
-  };
   static contextType = AppContext;
 
   constructor(props) {
@@ -152,18 +148,19 @@ export class UserForm extends Component<IProps, IState> {
       </FormGroup>
     );
 
-    const readonlyGroups = () => (
-      <FormGroup
-        fieldId='groups'
-        key='readonlyGroups'
-        label={t`Groups`}
-        data-cy='UserForm-readonly-groups'
-      >
-        {user.groups.map((group) => (
-          <Label key={group.name}>{group.name}</Label>
-        ))}
-      </FormGroup>
-    );
+    const readonlyGroups = () =>
+      user.groups.length ? (
+        <FormGroup
+          fieldId='groups'
+          key='readonlyGroups'
+          label={t`Groups`}
+          data-cy='UserForm-readonly-groups'
+        >
+          {user.groups.map((group) => (
+            <Label key={group.name}>{group.name}</Label>
+          ))}
+        </FormGroup>
+      ) : null;
 
     const editGroups = () => (
       <FormGroup fieldId='groups' key='editGroups' label={t`Groups`}>
@@ -195,30 +192,44 @@ export class UserForm extends Component<IProps, IState> {
       <FormGroup
         fieldId='is_superuser'
         key='superuserLabel'
-        label={t`User type`}
+        label={
+          <>
+            {t`User type`}
+            <HelpButton
+              content={t`Super users have all system permissions regardless of what groups they are in.`}
+            />
+          </>
+        }
       >
-        <Tooltip
-          content={t`Super users have all system permissions regardless of what groups they are in.`}
-        >
-          <Switch
-            isDisabled={
-              !(this.context as IAppContextType).user.is_superuser ||
-              isReadonly ||
-              (this.context as IAppContextType).user.id === user.id
-            }
-            label={t`Super user`}
-            labelOff={t`Not a super user`}
-            isChecked={user.is_superuser}
-            onChange={() =>
-              this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
-            }
-          />
-        </Tooltip>
-        <FormFieldHelper
-          variant={'is_superuser' in errorMessages ? 'error' : 'default'}
-        >
-          {errorMessages['is_superuser'] || this.getSuperUserHelperText(user)}
-        </FormFieldHelper>
+        {isReadonly ? (
+          user.is_superuser ? (
+            t`Super user`
+          ) : (
+            t`Not a super user`
+          )
+        ) : (
+          <>
+            <Switch
+              isDisabled={
+                !(this.context as IAppContextType).user.is_superuser ||
+                isReadonly ||
+                (this.context as IAppContextType).user.id === user.id
+              }
+              label={t`Super user`}
+              labelOff={t`Not a super user`}
+              isChecked={user.is_superuser}
+              onChange={() =>
+                this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
+              }
+            />
+            <FormFieldHelper
+              variant={'is_superuser' in errorMessages ? 'error' : 'default'}
+            >
+              {errorMessages['is_superuser'] ||
+                this.getSuperUserHelperText(user)}
+            </FormFieldHelper>
+          </>
+        )}
       </FormGroup>
     );
 

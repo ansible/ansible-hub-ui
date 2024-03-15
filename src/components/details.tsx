@@ -1,3 +1,9 @@
+import {
+  DescriptionList,
+  DescriptionListDescription,
+  DescriptionListGroup,
+  DescriptionListTerm,
+} from '@patternfly/react-core';
 import React, { ReactNode } from 'react';
 
 interface IProps {
@@ -10,21 +16,18 @@ interface IProps {
 
 export const Details = ({ item, fields = [] }: IProps) => (
   <>
-    {fields.map(({ label, value }) => (
-      <div key={label} style={{ overflowWrap: 'break-word' }}>
-        <div>
-          <b>{label}</b>
-        </div>
-        <div>{value}</div>
-      </div>
-    ))}
+    <DescriptionList isCompact>
+      {fields.map(({ label, value }) => (
+        <DescriptionListGroup key={label}>
+          <DescriptionListTerm>{label}</DescriptionListTerm>
+          <DescriptionListDescription>{value}</DescriptionListDescription>
+        </DescriptionListGroup>
+      ))}
+    </DescriptionList>
     {item && (
-      <>
-        <hr />
-        <pre style={{ whiteSpace: 'pre-wrap' }}>
-          {JSON.stringify(item, null, 2)}
-        </pre>
-      </>
+      <pre style={{ whiteSpace: 'pre-wrap' }}>
+        {JSON.stringify(item, null, 2)}
+      </pre>
     )}
   </>
 );
