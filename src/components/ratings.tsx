@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Table, Td, Th, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
-import { HelperText, Tooltip } from 'src/components';
+import { HelpButton, Tooltip } from 'src/components';
 
 interface IProps {
   namespace: string;
@@ -147,7 +147,7 @@ function Ratings({ scores }: { scores: Record<string, number> }) {
 
   return (
     <Tooltip content={help}>
-      <HelperText hasAutoWidth content={more} />{' '}
+      <HelpButton hasAutoWidth content={more} />{' '}
       <span style={{ marginRight: '8px' }}>{scores.score}</span>
     </Tooltip>
   );

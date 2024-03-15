@@ -21,7 +21,7 @@ import {
   AlertList,
   AlertType,
   FormFieldHelper,
-  HelperText,
+  HelpButton,
   LabelGroup,
   Spinner,
   Typeahead,
@@ -210,7 +210,7 @@ export class RepositoryForm extends Component<IProps, IState> {
                 label={t`Upstream name`}
                 isRequired
                 labelIcon={
-                  <HelperText
+                  <HelpButton
                     content={t`Use the namespace/name format for namespaced containers. Otherwise, use the library/name format.`}
                   />
                 }

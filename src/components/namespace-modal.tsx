@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { NamespaceAPI } from 'src/api';
-import { FormFieldHelper, HelperText } from 'src/components';
+import { FormFieldHelper, HelpButton } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
@@ -124,7 +124,7 @@ export class NamespaceModal extends Component<IProps, IState> {
             isRequired
             fieldId='name'
             labelIcon={
-              <HelperText
+              <HelpButton
                 content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
                 header={t`Namespace name`}
               />

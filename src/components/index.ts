@@ -44,7 +44,7 @@ export { ExecutionEnvironmentHeader } from './execution-environment-header';
 export { ExternalLink } from './external-link';
 export { FormFieldHelper } from './form-field-helper';
 export { GroupModal } from './group-modal';
-export { HelperText } from './helper-text';
+export { HelpButton } from './help-button';
 export { HubAboutModal } from './hub-about-modal';
 export { HubListToolbar } from './hub-list-toolbar';
 export { HubPagination } from './hub-pagination';

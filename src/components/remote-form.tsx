@@ -23,7 +23,7 @@ import {
   ExternalLink,
   FileUpload,
   FormFieldHelper,
-  HelperText,
+  HelpButton,
   WriteOnlyField,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -261,7 +261,7 @@ export class RemoteForm extends Component<IProps, IState> {
           fieldId={'url'}
           label={t`URL`}
           labelIcon={
-            <HelperText content={t`The URL of an external content source.`} />
+            <HelpButton content={t`The URL of an external content source.`} />
           }
           isRequired={requiredFields.includes('url')}
         >
@@ -323,7 +323,7 @@ export class RemoteForm extends Component<IProps, IState> {
             fieldId={'token'}
             label={t`Token`}
             labelIcon={
-              <HelperText
+              <HelpButton
                 content={t`Token for authenticating to the server URL.`}
               />
             }
@@ -355,7 +355,7 @@ export class RemoteForm extends Component<IProps, IState> {
           <FormGroup
             fieldId={'auth_url'}
             label={t`SSO URL`}
-            labelIcon={<HelperText content={t`Single sign on URL.`} />}
+            labelIcon={<HelpButton content={t`Single sign on URL.`} />}
             isRequired={requiredFields.includes('auth_url')}
           >
             <TextInput
@@ -379,7 +379,7 @@ export class RemoteForm extends Component<IProps, IState> {
             fieldId={'yaml'}
             label={t`YAML requirements`}
             labelIcon={
-              <HelperText
+              <HelpButton
                 content={
                   <Trans>
                     This uses the same {docsAnsibleLink} format as the
@@ -486,7 +486,7 @@ export class RemoteForm extends Component<IProps, IState> {
           fieldId={'username'}
           label={t`Username`}
           labelIcon={
-            <HelperText
+            <HelpButton
               content={
                 disabledFields.includes('token')
                   ? t`The username to be used for authentication when syncing.`
@@ -525,7 +525,7 @@ export class RemoteForm extends Component<IProps, IState> {
           fieldId={'password'}
           label={t`Password`}
           labelIcon={
-            <HelperText
+            <HelpButton
               content={
                 disabledFields.includes('token')
                   ? t`The password to be used for authentication when syncing.`
@@ -659,7 +659,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'tls_validation'}
               label={t`TLS validation`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`If selected, TLS peer validation must be performed.`}
                 />
               }
@@ -685,7 +685,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'client_key'}
               label={t`Client key`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`A PEM encoded private key used for authentication.`}
                 />
               }
@@ -720,7 +720,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'client_cert'}
               label={t`Client certificate`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
@@ -769,7 +769,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'ca_cert'}
               label={t`CA certificate`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
@@ -816,7 +816,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'download_concurrency'}
               label={t`Download concurrency`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`Total number of simultaneous connections.`}
                 />
               }
@@ -849,7 +849,7 @@ export class RemoteForm extends Component<IProps, IState> {
               fieldId={'rate_limit'}
               label={t`Rate Limit`}
               labelIcon={
-                <HelperText
+                <HelpButton
                   content={t`Limits total download rate in requests per second.`}
                 />
               }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DateComponent, HelperText, StatusIndicator } from 'src/components';
+import { DateComponent, HelpButton, StatusIndicator } from 'src/components';
 
 export function lastSynced(entity) {
   if (!entity.last_sync_task || !entity.last_sync_task.finished_at) {
@@ -21,7 +21,7 @@ export function lastSyncStatus(entity) {
   let errorMessage = null;
   if (entity.last_sync_task.error) {
     errorMessage = (
-      <HelperText content={entity.last_sync_task.error['description']} />
+      <HelpButton content={entity.last_sync_task.error['description']} />
     );
   }
 

@@ -14,7 +14,7 @@ import {
   AlertType,
   DataForm,
   FormFieldHelper,
-  HelperText,
+  HelpButton,
   Tooltip,
   Typeahead,
 } from 'src/components';
@@ -99,7 +99,7 @@ export class UserForm extends Component<IProps, IState> {
         type: 'password',
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
-          <HelperText
+          <HelpButton
             content={t`Create a password using at least ${minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions.`}
           />
         ),

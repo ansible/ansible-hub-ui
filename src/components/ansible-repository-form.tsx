@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
 import {
   FormFieldHelper,
-  HelperText,
+  HelpButton,
   LazyDistributions,
   PulpLabels,
   Spinner,
@@ -51,7 +51,7 @@ export const AnsibleRepositoryForm = ({
       label={
         helperText ? (
           <>
-            {label} <HelperText content={helperText} />
+            {label} <HelpButton content={helperText} />
           </>
         ) : (
           label

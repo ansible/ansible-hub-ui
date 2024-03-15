@@ -3,7 +3,7 @@ import { List, ListItem } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CollectionVersion, CollectionVersionSearch } from 'src/api';
-import { EmptyStateNoData, HelperText } from 'src/components';
+import { EmptyStateNoData, HelpButton } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
@@ -51,7 +51,7 @@ const listDep = (dependency, i, dependencies) => {
     return (
       <ListItem key={i} style={{ marginRight: '70px' }}>
         {fqn}: {version_range}{' '}
-        <HelperText
+        <HelpButton
           content={t`No version of ${fqn} exists that matches ${version_range}.`}
         />
       </ListItem>

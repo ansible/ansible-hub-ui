@@ -3,7 +3,7 @@ import { Button, FormGroup, Modal, Switch } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnsibleRepositoryAPI } from 'src/api';
-import { HelperText, Spinner } from 'src/components';
+import { HelpButton, Spinner } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canSyncAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
@@ -64,7 +64,7 @@ const SyncModal = ({
       <FormGroup
         label={t`Mirror`}
         labelIcon={
-          <HelperText
+          <HelpButton
             content={t`If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content.`}
           />
         }
@@ -82,7 +82,7 @@ const SyncModal = ({
       <FormGroup
         label={t`Optimize`}
         labelIcon={
-          <HelperText
+          <HelpButton
             content={t`Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option.`}
           />
         }

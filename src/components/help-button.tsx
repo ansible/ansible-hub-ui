@@ -10,8 +10,7 @@ interface IProps {
   hasAutoWidth?: boolean;
 }
 
-// FIXME: disambiguate with patternfly HelperText .. pf has inline text, here it's icon + popover text
-export const HelperText = ({ content, header, hasAutoWidth }: IProps) => (
+export const HelpButton = ({ content, header, hasAutoWidth }: IProps) => (
   <Popover
     position={PopoverPosition.top}
     bodyContent={content}
