@@ -39,36 +39,36 @@ import {
 import './task.scss';
 
 interface IState {
-  loading: boolean;
-  task: TaskType;
-  parentTask: TaskType;
-  childTasks: TaskType[];
   alerts: AlertType[];
   cancelModalVisible: boolean;
-  taskName: string;
+  childTasks: TaskType[];
+  loading: boolean;
+  parentTask: TaskType;
+  polling: ReturnType<typeof setInterval>;
+  redirect: string;
   resources: {
     name?: string;
-    type: string;
     pluginName?: string;
+    type: string;
   }[];
-  redirect: string;
-  polling: ReturnType<typeof setInterval>;
+  task: TaskType;
+  taskName: string;
 }
 
 class TaskDetail extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
-      task: null,
-      parentTask: null,
-      childTasks: [],
       alerts: [],
       cancelModalVisible: false,
-      taskName: '',
-      resources: [],
-      redirect: null,
+      childTasks: [],
+      loading: true,
+      parentTask: null,
       polling: null,
+      redirect: null,
+      resources: [],
+      task: null,
+      taskName: '',
     };
   }
 
@@ -91,24 +91,25 @@ class TaskDetail extends Component<RouteProps, IState> {
 
   render() {
     const {
-      loading,
-      task,
-      parentTask,
-      childTasks,
-      cancelModalVisible,
       alerts,
-      taskName,
-      resources,
+      cancelModalVisible,
+      childTasks,
+      loading,
+      parentTask,
       redirect,
+      resources,
+      task,
+      taskName,
     } = this.state;
+
     const breadcrumbs = [
       { url: formatPath(Paths.taskList), name: t`Task management` },
       { name: task ? taskName : '' },
     ];
-    let parentTaskId = null;
-    if (parentTask) {
-      parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
-    }
+    const parentTaskId = parentTask
+      ? parsePulpIDFromURL(parentTask.pulp_href)
+      : null;
+
     if (redirect) {
       return <Navigate to={redirect} />;
     }
@@ -168,7 +169,7 @@ class TaskDetail extends Component<RouteProps, IState> {
                     </DescriptionListGroup>
                     {task.name !== taskName && (
                       <DescriptionListGroup>
-                        <DescriptionListTerm>{t`Descriptive name`}</DescriptionListTerm>
+                        <DescriptionListTerm>{t`Description`}</DescriptionListTerm>
                         <DescriptionListDescription>
                           {taskName}
                         </DescriptionListDescription>

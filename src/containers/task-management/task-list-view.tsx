@@ -26,7 +26,6 @@ import {
   Main,
   SortTable,
   StatusIndicator,
-  Tooltip,
   closeAlert,
 } from 'src/components';
 import { AppContext, IAppContextType } from 'src/loaders/app-context';
@@ -228,15 +227,22 @@ export class TaskListView extends Component<RouteProps, IState> {
 
   private renderTable(params) {
     const { items } = this.state;
+
     if (items.length === 0) {
       return <EmptyStateFilter />;
     }
+
     const sortTableOptions = {
       headers: [
         {
           title: t`Task name`,
           type: 'alpha',
           id: 'name',
+        },
+        {
+          title: t`Description`,
+          type: 'none',
+          id: 'description',
         },
         {
           title: t`Created on`,
@@ -277,14 +283,16 @@ export class TaskListView extends Component<RouteProps, IState> {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
     const taskId = parsePulpIDFromURL(pulp_href);
+    const description = translateTask(name);
 
     return (
       <Tr key={index}>
         <Td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={translateTask(name)}>{name}</Tooltip>
+            {name}
           </Link>
         </Td>
+        <Td>{description !== name ? description : null}</Td>
         <Td>
           <DateComponent date={pulp_created} />
         </Td>
