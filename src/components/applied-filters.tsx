@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
-import React, { CSSProperties } from 'react';
+import React, { type CSSProperties } from 'react';
 import { Chip, ChipGroup } from 'src/components';
-import { ParamHelper, ParamType } from 'src/utilities';
+import { ParamHelper, type ParamType } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */

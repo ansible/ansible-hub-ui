@@ -10,7 +10,7 @@ import {
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import React, { useEffect, useState } from 'react';
-import { CollectionAPI, CollectionVersionSearch } from 'src/api';
+import { CollectionAPI, type CollectionVersionSearch } from 'src/api';
 import { LoadingSpinner } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 

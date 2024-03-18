@@ -11,7 +11,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
 class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {

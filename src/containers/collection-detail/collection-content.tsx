@@ -9,7 +9,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 // renders list of contents in a collection
 class CollectionContent extends Component<RouteProps, IBaseCollectionState> {

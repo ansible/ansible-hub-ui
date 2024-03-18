@@ -1,8 +1,12 @@
 import '../app.scss';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import React, { useEffect, useState } from 'react';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AlertType, UIVersion } from 'src/components';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
+import { type AlertType, UIVersion } from 'src/components';
 import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
 import { loadContext } from '../load-context';

@@ -5,19 +5,19 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody } from '@patternfly/react-table';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { ActionType } from 'src/actions';
+import React, { type ReactNode, useEffect, useState } from 'react';
+import { type ActionType } from 'src/actions';
 import {
   AppliedFilters,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
-  FilterOption,
+  type FilterOption,
   HubPagination,
   LoadingSpinner,
-  LocalizedSortHeaders,
-  Query,
-  RenderTableRow,
+  type LocalizedSortHeaders,
+  type Query,
+  type RenderTableRow,
   SortTable,
 } from 'src/components';
 import { filterIsSet, handleHttpError } from 'src/utilities';

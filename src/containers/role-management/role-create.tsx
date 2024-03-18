@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI } from 'src/api';
 import {
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
   Main,
   RoleForm,
   RoleHeader,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   type RouteProps,

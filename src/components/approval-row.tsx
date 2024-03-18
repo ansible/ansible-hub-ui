@@ -10,8 +10,8 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,
-  CollectionVersionSearch,
-  FeatureFlagsType,
+  type CollectionVersionSearch,
+  type FeatureFlagsType,
 } from 'src/api';
 import {
   DateComponent,

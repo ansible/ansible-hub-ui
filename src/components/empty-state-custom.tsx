@@ -8,8 +8,8 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ComponentClass } from 'react';
-import { ReactElement, ReactNode } from 'react';
+import { type ComponentClass } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 
 interface IProps {
   icon?: ComponentClass;

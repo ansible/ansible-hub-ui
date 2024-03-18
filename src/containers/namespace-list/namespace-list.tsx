@@ -2,10 +2,10 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
+import { MyNamespaceAPI, NamespaceAPI, type NamespaceListType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -19,7 +19,7 @@ import {
   NamespaceNextPageCard,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,

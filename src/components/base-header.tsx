@@ -1,5 +1,5 @@
 import { Title } from '@patternfly/react-core';
-import React, { ReactNode, useEffect } from 'react';
+import React, { type ReactNode, useEffect } from 'react';
 import { useHubContext } from 'src/loaders/app-context';
 import './header.scss';
 

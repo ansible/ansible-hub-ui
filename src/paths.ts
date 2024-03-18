@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { ParamHelper, ParamType } from 'src/utilities';
+import { ParamHelper, type ParamType } from 'src/utilities';
 
 export function formatPath(
   path: string,

@@ -13,13 +13,13 @@ import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
@@ -39,7 +39,7 @@ import {
   Typeahead,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import { type RouteProps, withRouter } from 'src/utilities';

@@ -10,9 +10,9 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersionSearch } from 'src/api';
+import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
   Logo,

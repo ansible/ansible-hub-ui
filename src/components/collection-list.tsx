@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
-import React, { ReactNode } from 'react';
-import { CollectionVersionSearch } from 'src/api';
+import React, { type ReactNode } from 'react';
+import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionListItem,
   EmptyStateFilter,

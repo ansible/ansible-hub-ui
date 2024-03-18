@@ -8,9 +8,9 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { capitalize } from 'lodash';
-import React, { RefObject, useState } from 'react';
+import React, { type RefObject, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DocsBlobType } from 'src/api';
+import { type DocsBlobType } from 'src/api';
 import { NavList, SearchInput } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';

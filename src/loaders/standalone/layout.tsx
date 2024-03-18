@@ -17,13 +17,13 @@ import {
 } from '@patternfly/react-core/deprecated';
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
-import React, { ReactNode, useState } from 'react';
+import React, { type ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ActiveUserAPI,
-  FeatureFlagsType,
-  SettingsType,
-  UserType,
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
 } from 'src/api';
 import {
   ExternalLink,

@@ -8,18 +8,18 @@ import { Link, Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
-  GroupType,
+  type CollectionVersionSearch,
+  type GroupType,
   MyNamespaceAPI,
   NamespaceAPI,
-  NamespaceType,
-  RoleType,
+  type NamespaceType,
+  type RoleType,
   SignCollectionAPI,
 } from 'src/api';
 import {
   AccessTab,
   AlertList,
-  AlertType,
+  type AlertType,
   CollectionDropdown,
   CollectionList,
   CopyURL,
@@ -38,7 +38,7 @@ import {
   closeAlert,
   collectionFilter,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   DeleteCollectionUtils,

@@ -1,4 +1,4 @@
-import { WriteOnlyFieldType } from 'src/api';
+import { type WriteOnlyFieldType } from 'src/api';
 
 export function isWriteOnly(
   name: string,

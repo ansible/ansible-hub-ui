@@ -4,17 +4,17 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import {
   AppliedFilters,
   CardListSwitcher,
   CompoundFilter,
-  FilterOption,
+  type FilterOption,
   HubPagination,
   Sort,
-  SortFieldType,
+  type SortFieldType,
 } from 'src/components';
-import { ParamType } from 'src/utilities';
+import { type ParamType } from 'src/utilities';
 
 interface IProps {
   buttons?: ReactNode[];

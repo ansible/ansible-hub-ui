@@ -1,8 +1,8 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import { Td } from '@patternfly/react-table';
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { GroupAPI, GroupType } from 'src/api';
+import React, { type FunctionComponent, useEffect, useState } from 'react';
+import { GroupAPI, type GroupType } from 'src/api';
 import {
   AppliedFilters,
   CompoundFilter,

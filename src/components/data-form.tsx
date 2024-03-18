@@ -2,11 +2,11 @@ import {
   Form,
   FormGroup,
   TextInput,
-  TextInputTypes,
+  type TextInputTypes,
 } from '@patternfly/react-core';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { type ReactElement, type ReactNode } from 'react';
 import { FormFieldHelper } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   errorMessages: ErrorMessagesType;

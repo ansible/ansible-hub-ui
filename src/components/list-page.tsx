@@ -1,4 +1,4 @@
-import { MessageDescriptor, i18n } from '@lingui/core';
+import { type MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -6,26 +6,26 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody } from '@patternfly/react-table';
-import React, { Component, ReactNode } from 'react';
-import { ActionType } from 'src/actions';
+import React, { Component, type ReactNode } from 'react';
+import { type ActionType } from 'src/actions';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  FilterOption,
+  type FilterOption,
   HubPagination,
   LoadingSpinner,
   Main,
   SortTable,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { PermissionContextType } from 'src/permissions';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
+import { type PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
   type RouteProps,

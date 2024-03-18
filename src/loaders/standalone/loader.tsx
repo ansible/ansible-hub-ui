@@ -2,8 +2,12 @@ import '../app.scss';
 import '@patternfly/patternfly/patternfly.scss';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AlertType, UIVersion } from 'src/components';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
+import { type AlertType, UIVersion } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission as hasPermissionUtil } from 'src/utilities';
 import { AppContext } from '../app-context';

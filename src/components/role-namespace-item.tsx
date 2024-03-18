@@ -8,7 +8,7 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LegacyNamespaceDetailType } from 'src/api';
+import { type LegacyNamespaceDetailType } from 'src/api';
 import { Logo, StatefulDropdown } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';

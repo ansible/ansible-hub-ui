@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from './parse-pulp-id';

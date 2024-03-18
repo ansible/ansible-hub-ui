@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LegacyImportAPI, LegacyNamespaceAPI } from 'src/api';
 import {
-  AlertType,
+  type AlertType,
   DataForm,
   ExternalLink,
   RoleNamespaceEditModal,
@@ -17,7 +17,7 @@ import {
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   handleHttpError,
   taskAlert,

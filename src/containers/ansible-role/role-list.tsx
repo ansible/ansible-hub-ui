@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
+import { LegacyRoleAPI, type LegacyRoleListType, TagAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -14,7 +14,7 @@ import {
   RoleItem,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,

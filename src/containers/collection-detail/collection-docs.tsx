@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { Component, RefObject, createRef } from 'react';
+import React, { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { CollectionVersionSearch } from 'src/api';
+import { type CollectionVersionSearch } from 'src/api';
 import {
   Alert,
   CollectionHeader,
@@ -19,7 +19,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory

@@ -2,10 +2,14 @@ import { Trans, t } from '@lingui/macro';
 import { ActionGroup, Button, Form } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
+import {
+  MyNamespaceAPI,
+  type NamespaceLinkType,
+  type NamespaceType,
+} from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
   LoadingSpinner,
   Main,
@@ -15,11 +19,11 @@ import {
   Spinner,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import { type RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   errorMessage,
   mapErrorMessages,

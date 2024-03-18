@@ -12,7 +12,7 @@ import {
 import React, { Component } from 'react';
 import { NamespaceAPI } from 'src/api';
 import { FormFieldHelper, HelpButton } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;

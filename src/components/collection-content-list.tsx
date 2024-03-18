@@ -5,7 +5,7 @@ import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
+import { type CollectionVersionSearch, type ContentSummaryType } from 'src/api';
 import { EmptyStateCustom, SearchInput } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities';

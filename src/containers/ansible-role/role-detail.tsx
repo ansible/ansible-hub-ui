@@ -15,15 +15,15 @@ import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
   LegacyNamespaceAPI,
-  LegacyNamespaceDetailType,
+  type LegacyNamespaceDetailType,
   LegacyRoleAPI,
-  LegacyRoleDetailType,
-  LegacyRoleImportDetailType,
-  LegacyRoleVersionDetailType,
+  type LegacyRoleDetailType,
+  type LegacyRoleImportDetailType,
+  type LegacyRoleVersionDetailType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   CopyURL,
@@ -42,7 +42,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { type RouteProps, handleHttpError, withRouter } from 'src/utilities';
 

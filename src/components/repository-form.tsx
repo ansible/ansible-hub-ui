@@ -19,7 +19,7 @@ import {
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   FormFieldHelper,
   HelpButton,
   LabelGroup,
@@ -28,7 +28,7 @@ import {
   closeAlert,
 } from 'src/components';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   alertErrorsWithoutFields,
   errorMessage,
   isFieldValid,

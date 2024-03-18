@@ -8,10 +8,10 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
-import { SigningServiceAPI, SigningServiceType } from 'src/api';
+import { SigningServiceAPI, type SigningServiceType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   ClipboardCopy,
@@ -27,7 +27,7 @@ import {
   SortTable,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 

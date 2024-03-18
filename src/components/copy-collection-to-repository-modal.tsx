@@ -2,10 +2,10 @@ import { t } from '@lingui/macro';
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   SigningServiceAPI,
 } from 'src/api';
-import { AlertType, MultiRepoModal } from 'src/components';
+import { type AlertType, MultiRepoModal } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { errorMessage, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 

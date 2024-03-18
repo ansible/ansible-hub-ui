@@ -11,8 +11,8 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,
-  CollectionVersionContentType,
-  CollectionVersionSearch,
+  type CollectionVersionContentType,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   Alert,

@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Modal, ModalVariant } from '@patternfly/react-core';
 import {
   Wizard as PFWizard,
-  WizardStep,
+  type WizardStep,
 } from '@patternfly/react-core/deprecated';
 import React from 'react';
 

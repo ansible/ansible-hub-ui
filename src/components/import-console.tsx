@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useRef } from 'react';
 import {
-  CollectionVersionSearch,
-  ImportDetailType,
-  ImportListType,
-  LegacyRoleImportDetailType,
+  type CollectionVersionSearch,
+  type ImportDetailType,
+  type ImportListType,
+  type LegacyRoleImportDetailType,
   PulpStatus,
 } from 'src/api';
 import { Spinner, StatusIndicator, Tooltip } from 'src/components';

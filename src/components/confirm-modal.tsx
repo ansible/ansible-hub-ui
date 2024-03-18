@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Modal } from '@patternfly/react-core';
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { Spinner } from 'src/components';
 
 interface IProps {

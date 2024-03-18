@@ -2,13 +2,13 @@ import { t } from '@lingui/macro';
 import { Button, Modal } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   MultipleRepoSelector,
   Spinner,
   closeAlert,

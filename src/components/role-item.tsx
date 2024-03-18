@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LegacyRoleDetailType } from 'src/api';
+import { type LegacyRoleDetailType } from 'src/api';
 import {
   DateComponent,
   DownloadCount,

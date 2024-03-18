@@ -9,7 +9,7 @@ import {
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { FormFieldHelper } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   onCancel?: () => void;

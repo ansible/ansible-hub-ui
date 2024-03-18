@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
-import React, { Component, ReactFragment } from 'react';
+import React, { Component, type ReactFragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {

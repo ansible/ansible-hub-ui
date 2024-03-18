@@ -18,21 +18,21 @@ import { Navigate } from 'react-router-dom';
 import {
   CertificateUploadAPI,
   CollectionAPI,
-  CollectionDetailType,
+  type CollectionDetailType,
   CollectionVersionAPI,
-  CollectionVersionContentType,
-  CollectionVersionSearch,
+  type CollectionVersionContentType,
+  type CollectionVersionSearch,
   MyNamespaceAPI,
   NamespaceAPI,
-  NamespaceType,
+  type NamespaceType,
   SignCollectionAPI,
 } from 'src/api';
 import {
   Alert,
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
-  BreadcrumbType,
+  type BreadcrumbType,
   Breadcrumbs,
   CollectionDropdown,
   CollectionRatings,
@@ -53,7 +53,7 @@ import {
   UploadSignatureModal,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,

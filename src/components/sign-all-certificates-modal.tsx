@@ -13,7 +13,7 @@ import {
   Split,
   SplitItem,
 } from '@patternfly/react-core';
-import React, { FunctionComponent } from 'react';
+import React, { type FunctionComponent } from 'react';
 
 interface Props {
   name: string;

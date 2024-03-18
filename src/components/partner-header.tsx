@@ -1,9 +1,9 @@
 import { t } from '@lingui/macro';
-import React, { Component, ReactNode } from 'react';
-import { NamespaceType } from 'src/api';
+import React, { Component, type ReactNode } from 'react';
+import { type NamespaceType } from 'src/api';
 import {
   BaseHeader,
-  BreadcrumbType,
+  type BreadcrumbType,
   Breadcrumbs,
   ExternalLink,
   LinkTabs,

@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 
 interface IProps {
   availablePermissions?: string[];

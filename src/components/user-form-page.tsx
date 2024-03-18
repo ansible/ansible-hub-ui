@@ -1,13 +1,13 @@
-import React, { ReactNode } from 'react';
-import { UserType } from 'src/api';
+import React, { type ReactNode } from 'react';
+import { type UserType } from 'src/api';
 import {
   BaseHeader,
-  BreadcrumbType,
+  type BreadcrumbType,
   Breadcrumbs,
   Main,
   UserForm,
 } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   breadcrumbs: BreadcrumbType[];

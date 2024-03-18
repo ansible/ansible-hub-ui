@@ -5,7 +5,7 @@ import { MyDistributionAPI } from 'src/api';
 import {
   Alert,
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ClipboardCopy,
   CopyURL,

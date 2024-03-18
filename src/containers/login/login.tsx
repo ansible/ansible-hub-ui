@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
 import { LoginForm } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 

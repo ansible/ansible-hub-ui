@@ -3,9 +3,13 @@ import { ActionGroup, Button } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LegacySyncAPI } from 'src/api';
-import { AlertType, DataForm, ExternalLink } from 'src/components';
+import { type AlertType, DataForm, ExternalLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ErrorMessagesType, handleHttpError, taskAlert } from 'src/utilities';
+import {
+  type ErrorMessagesType,
+  handleHttpError,
+  taskAlert,
+} from 'src/utilities';
 
 interface IProps {
   addAlert: (alert: AlertType) => void;

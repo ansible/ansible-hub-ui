@@ -8,12 +8,12 @@ import {
 } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Td } from '@patternfly/react-table';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { type FunctionComponent, useEffect, useState } from 'react';
 import {
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   GroupRoleAPI,
-  GroupRoleType,
-  RoleType,
+  type GroupRoleType,
+  type RoleType,
 } from 'src/api';
 import {
   AppliedFilters,
@@ -33,7 +33,7 @@ import {
 } from 'src/components';
 import {
   ParamHelper,
-  ParamType,
+  type ParamType,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,

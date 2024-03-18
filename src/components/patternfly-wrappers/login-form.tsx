@@ -15,7 +15,7 @@ import {
 } from '@patternfly/react-core';
 import EyeIcon from '@patternfly/react-icons/dist/esm/icons/eye-icon';
 import EyeSlashIcon from '@patternfly/react-icons/dist/esm/icons/eye-slash-icon';
-import React, { FunctionComponent, useState } from 'react';
+import React, { type FunctionComponent, useState } from 'react';
 
 // replaces LoginForm to add autoComplete=off to inputs
 // this comes from @patternfly/react-core@5.2.0

@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
+import { LegacyNamespaceAPI, type LegacyNamespaceListType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -17,7 +17,7 @@ import {
   RoleNamespaceModal,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   type RouteProps,

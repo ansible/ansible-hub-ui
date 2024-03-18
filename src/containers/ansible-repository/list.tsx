@@ -12,7 +12,7 @@ import {
 import {
   AnsibleRemoteAPI,
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
 } from 'src/api';
 import {
   DateComponent,

@@ -2,18 +2,18 @@ import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ActiveUserAPI, UserType } from 'src/api';
+import { ActiveUserAPI, type UserType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   LoadingPage,
   UserFormPage,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { type RouteProps, withRouter } from 'src/utilities';
-import { ErrorMessagesType, mapErrorMessages } from 'src/utilities';
+import { type ErrorMessagesType, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   user: UserType;

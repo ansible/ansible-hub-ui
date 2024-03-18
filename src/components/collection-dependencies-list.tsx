@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { List, ListItem } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersion, CollectionVersionSearch } from 'src/api';
+import { type CollectionVersion, type CollectionVersionSearch } from 'src/api';
 import { EmptyStateNoData, HelpButton } from 'src/components';
 import 'src/containers/collection-detail/collection-dependencies.scss';
 

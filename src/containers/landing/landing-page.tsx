@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   Alert,
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ExternalLink,
   LandingPageCard,

@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import React, { Component } from 'react';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Main,
   RoleImportForm,

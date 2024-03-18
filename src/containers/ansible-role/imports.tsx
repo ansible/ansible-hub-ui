@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import React, {
   Component,
-  RefObject,
+  type RefObject,
   createRef,
   useEffect,
   useState,
@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
   LegacyRoleAPI,
-  LegacyRoleImportDetailType,
+  type LegacyRoleImportDetailType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ImportConsole,
   Main,

@@ -14,19 +14,19 @@ import cx from 'classnames';
 import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionAPI,
-  CollectionUploadType,
-  CollectionVersionSearch,
+  type CollectionUploadType,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   LabelGroup,
   MultipleRepoSelector,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { repositoryBasePath } from 'src/utilities';
 import './import-modal.scss';
 

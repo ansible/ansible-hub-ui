@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { AIDenyIndexAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   ExternalLink,
   Spinner,
   closeAlert,

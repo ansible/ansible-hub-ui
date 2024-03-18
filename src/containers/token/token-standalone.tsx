@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { ActiveUserAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CopyURL,
   DateComponent,
@@ -13,7 +13,7 @@ import {
   Main,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { type RouteProps, withRouter } from 'src/utilities';
 import { errorMessage } from 'src/utilities';
 

@@ -9,10 +9,10 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
-import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
+import { ExecutionEnvironmentRegistryAPI, type RemoteType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -31,9 +31,9 @@ import {
   Tooltip,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   type RouteProps,
   errorMessage,

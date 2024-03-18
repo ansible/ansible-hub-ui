@@ -5,7 +5,7 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 import ExclamationIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-icon';
 import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
 import SyncAltIcon from '@patternfly/react-icons/dist/esm/icons/sync-alt-icon';
-import React, { ReactElement } from 'react';
+import React, { type ReactElement } from 'react';
 import { PulpStatus } from 'src/api';
 
 interface IProps {

@@ -1,17 +1,17 @@
 import { t } from '@lingui/macro';
-import React, { Component, RefObject, createRef } from 'react';
+import React, { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   ImportAPI,
-  ImportDetailType,
-  ImportListType,
+  type ImportDetailType,
+  type ImportListType,
   PulpStatus,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ImportConsole,
   ImportList,

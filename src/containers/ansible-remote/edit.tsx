@@ -1,6 +1,6 @@
 import { msg, t } from '@lingui/macro';
 import React from 'react';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, type AnsibleRemoteType } from 'src/api';
 import { Page, RemoteForm } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canAddAnsibleRemote, canEditAnsibleRemote } from 'src/permissions';

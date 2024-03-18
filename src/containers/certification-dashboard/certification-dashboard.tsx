@@ -9,10 +9,10 @@ import { Table, Tbody } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   ApprovalRow,
@@ -25,7 +25,7 @@ import {
 } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   CompoundFilter,
   HubPagination,
@@ -35,7 +35,7 @@ import {
   UploadSignatureModal,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   type RouteProps,

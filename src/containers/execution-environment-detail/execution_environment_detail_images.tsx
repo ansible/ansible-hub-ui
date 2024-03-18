@@ -15,7 +15,7 @@ import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import { sum } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
+import { type ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -34,7 +34,7 @@ import {
   TagLabel,
   TagManifestModal,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,

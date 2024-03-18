@@ -7,7 +7,7 @@ import {
   ansibleRemoteDownloadRequirementsAction,
   ansibleRemoteEditAction,
 } from 'src/actions';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, type AnsibleRemoteType } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';

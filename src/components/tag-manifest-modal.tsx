@@ -13,8 +13,8 @@ import {
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React, { Component } from 'react';
 import {
-  ContainerManifestType,
-  ContainerRepositoryType,
+  type ContainerManifestType,
+  type ContainerRepositoryType,
   ContainerTagAPI,
   ExecutionEnvironmentAPI,
   PulpStatus,
@@ -22,7 +22,7 @@ import {
 } from 'src/api';
 import {
   Alert,
-  AlertType,
+  type AlertType,
   FormFieldHelper,
   LabelGroup,
   Spinner,

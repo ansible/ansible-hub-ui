@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { ansibleRepositoryVersionRevertAction } from 'src/actions';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-  AnsibleRepositoryVersionType,
+  type AnsibleRepositoryType,
+  type AnsibleRepositoryVersionType,
   PulpAPI,
 } from 'src/api';
 import {

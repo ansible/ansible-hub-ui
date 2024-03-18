@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import { Td } from '@patternfly/react-table';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { type FunctionComponent, useEffect, useState } from 'react';
 import { UserAPI } from 'src/api';
 import {
   AppliedFilters,

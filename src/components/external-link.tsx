@@ -1,5 +1,5 @@
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 
 interface IProps {
   children: ReactNode;

@@ -4,7 +4,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
-import React, { CSSProperties, Component, ReactElement } from 'react';
+import React, { type CSSProperties, Component, type ReactElement } from 'react';
 
 interface IProps {
   results: { name: string; id: number | string }[];

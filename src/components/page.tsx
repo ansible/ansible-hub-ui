@@ -1,24 +1,24 @@
-import { MessageDescriptor, i18n } from '@lingui/core';
+import { type MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { Component, ReactNode } from 'react';
-import { ActionType } from 'src/actions';
+import React, { Component, type ReactNode } from 'react';
+import { type ActionType } from 'src/actions';
 import { LoadingSpinner } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
   Main,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { PermissionContextType } from 'src/permissions';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
+import { type PermissionContextType } from 'src/permissions';
 import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 
 interface IState<T> {

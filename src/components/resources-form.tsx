@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { NamespaceType } from 'src/api';
+import { type NamespaceType } from 'src/api';
 import { MarkdownEditor } from 'src/components';
 import './namespace-form.scss';
 

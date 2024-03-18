@@ -3,9 +3,9 @@ import { Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
 import React, { Component } from 'react';
 import {
-  ImportListType,
+  type ImportListType,
   MyNamespaceAPI,
-  NamespaceType,
+  type NamespaceType,
   PulpStatus,
 } from 'src/api';
 import {

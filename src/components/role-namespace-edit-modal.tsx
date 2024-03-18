@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyNamespaceAPI,
-  LegacyNamespaceListType,
+  type LegacyNamespaceListType,
   NamespaceAPI,
 } from 'src/api';
 import {

@@ -4,13 +4,13 @@ import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
-  ContainerRepositoryType,
+  type ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
   LoadingPage,
@@ -20,7 +20,7 @@ import {
   StatefulDropdown,
   closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,

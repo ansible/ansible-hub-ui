@@ -15,9 +15,9 @@ import {
 } from '@patternfly/react-core/deprecated';
 import { Table, Td } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import { AnsibleRepositoryAPI, type AnsibleRepositoryType } from 'src/api';
 import {
-  AlertType,
+  type AlertType,
   AppliedFilters,
   CheckboxRow,
   CompoundFilter,

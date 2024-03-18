@@ -8,7 +8,10 @@ import {
   Title,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
+import {
+  ExecutionEnvironmentAPI,
+  type GroupObjectPermissionType,
+} from 'src/api';
 import { CopyURL, EmptyStateNoData, MarkdownEditor } from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';

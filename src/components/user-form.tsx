@@ -8,17 +8,17 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { GroupAPI, UserType } from 'src/api';
+import { GroupAPI, type UserType } from 'src/api';
 import {
   Alert,
-  AlertType,
+  type AlertType,
   DataForm,
   FormFieldHelper,
   HelpButton,
   Typeahead,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { ErrorMessagesType, errorMessage } from 'src/utilities';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
+import { type ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
   /** User to edit */

@@ -1,18 +1,18 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import React, { Component, ReactNode } from 'react';
+import React, { Component, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   MyNamespaceAPI,
   MySyncListAPI,
-  SyncListType,
+  type SyncListType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionCard,
   CollectionDropdown,
@@ -28,7 +28,7 @@ import {
   closeAlert,
   collectionFilter,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,

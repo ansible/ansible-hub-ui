@@ -1,5 +1,5 @@
-import { PulpStatus } from './pulp';
-import { WriteOnlyFieldType } from './write-only-field';
+import { type PulpStatus } from './pulp';
+import { type WriteOnlyFieldType } from './write-only-field';
 
 export class LastSyncType {
   state: PulpStatus;
