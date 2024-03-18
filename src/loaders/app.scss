@@ -16,11 +16,16 @@
     var(--pf-v5-global--palette--black-800);
 }
 
-.hub-nav-title > .pf-v5-c-nav__section-title {
-  height: 50px;
-  margin-bottom: 0;
-  font-size: var(--pf-v5-c-nav__link--FontSize);
-  font-weight: var(--pf-v5-c-nav__link--FontWeight);
+.hub-nav-title {
+  &.pf-v5-c-nav__section:first-child {
+    padding-top: 0;
+  }
+
+  & > .pf-v5-c-nav__section-title {
+    font-size: var(--pf-v5-c-nav__link--FontSize);
+    height: 50px;
+    margin-bottom: 0;
+  }
 }
 
 // this was getting applied globally when it was in the collection-info.scss file
