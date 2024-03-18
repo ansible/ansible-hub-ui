@@ -17,11 +17,11 @@ import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AlertList,
   AppliedFilters,
-  ClipboardCopyButton,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   ExternalLink,
+  HubCopyButton,
   HubPagination,
   LoadingSpinner,
   ShaLabel,
@@ -211,14 +211,7 @@ export const PublishToControllerModal = (props: IProps) => {
           return (
             <ListItem style={{ paddingTop: '8px' }} key={host}>
               <ExternalLink href={href}>{host}</ExternalLink>
-              <ClipboardCopyButton
-                variant={'plain'}
-                id={href}
-                textId={t`Copy to clipboard`}
-                onClick={() => navigator.clipboard.writeText(href)}
-              >
-                {t`Copy to clipboard`}
-              </ClipboardCopyButton>
+              <HubCopyButton text={href} />
             </ListItem>
           );
         })}

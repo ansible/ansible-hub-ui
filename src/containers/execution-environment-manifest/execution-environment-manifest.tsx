@@ -19,7 +19,7 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
-  ClipboardCopyButton,
+  HubCopyButton,
   LabelGroup,
   LoadingPage,
   Main,
@@ -124,15 +124,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
         >
           <div className='copy-sha'>
             <ShaLabel digest={digest} long />
-            <ClipboardCopyButton
-              className='eco-clipboard-copy'
-              variant={'plain'}
-              onClick={() => navigator.clipboard.writeText(digest)}
-              id={digest}
-              textId={t`Copy to clipboard`}
-            >
-              {digest}
-            </ClipboardCopyButton>
+            <HubCopyButton text={digest} />
           </div>
 
           <LabelGroup numLabels={6}>

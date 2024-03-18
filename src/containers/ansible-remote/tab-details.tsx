@@ -4,12 +4,12 @@ import {
   CodeBlockAction,
   CodeBlockCode,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import React from 'react';
 import { AnsibleRemoteType } from 'src/api';
 import {
-  ClipboardCopyButton,
   CopyURL,
   Details,
+  HubCopyButton,
   LazyRepositories,
 } from 'src/components';
 
@@ -19,34 +19,10 @@ interface TabProps {
 }
 
 const PFCodeBlock = ({ code }: { code: string }) => {
-  const [copied, setCopied] = useState(false);
-
-  const clipboardCopyFunc = (event, text) => {
-    navigator.clipboard.writeText(text.toString());
-  };
-
-  const onClick = (event, text) => {
-    clipboardCopyFunc(event, text);
-    setCopied(true);
-  };
-
   const actions = (
-    <>
-      <CodeBlockAction>
-        <ClipboardCopyButton
-          id='basic-copy-button'
-          textId='code-content'
-          aria-label='Copy to clipboard'
-          onClick={(e) => onClick(e, code)}
-          exitDelay={copied ? 1500 : 600}
-          maxWidth='110px'
-          variant='plain'
-          onTooltipHidden={() => setCopied(false)}
-        >
-          {copied ? t`Successfully copied to clipboard` : t`Copy to clipboard`}
-        </ClipboardCopyButton>
-      </CodeBlockAction>
-    </>
+    <CodeBlockAction>
+      <HubCopyButton text={code} textId='code-content' />
+    </CodeBlockAction>
   );
 
   return (

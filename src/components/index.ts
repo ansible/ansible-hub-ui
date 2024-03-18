@@ -46,6 +46,7 @@ export { FormFieldHelper } from './form-field-helper';
 export { GroupModal } from './group-modal';
 export { HelpButton } from './help-button';
 export { HubAboutModal } from './hub-about-modal';
+export { HubCopyButton } from './hub-copy-button';
 export { HubListToolbar } from './hub-list-toolbar';
 export { HubPagination } from './hub-pagination';
 export { ImportConsole } from './import-console';
