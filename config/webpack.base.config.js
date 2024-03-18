@@ -168,7 +168,14 @@ module.exports = (inputConfigs) => {
   };
 
   if (customConfigs.WEBPACK_PROXY) {
-    newWebpackConfig.devServer.proxy = customConfigs.WEBPACK_PROXY;
+    // array since webpack-dev-server 5
+    newWebpackConfig.devServer.proxy = Object.entries(
+      customConfigs.WEBPACK_PROXY,
+    ).map(([k, v]) => ({
+      context: [k],
+      target: v,
+      changeOrigin: true,
+    }));
   }
 
   if (customConfigs.WEBPACK_PUBLIC_PATH) {
@@ -213,6 +220,18 @@ module.exports = (inputConfigs) => {
       languages: ['yaml'],
     }),
   );
+
+  // webpack-dev-server 5
+  if (!isBuild && newWebpackConfig.devServer.onBeforeSetupMiddleware) {
+    const orig = newWebpackConfig.devServer.onBeforeSetupMiddleware;
+    delete newWebpackConfig.devServer.onBeforeSetupMiddleware;
+    delete newWebpackConfig.devServer.https;
+
+    newWebpackConfig.devServer.setupMiddlewares = (middlewares, app) => {
+      orig(app);
+      return middlewares;
+    };
+  }
 
   return {
     ...newWebpackConfig,
