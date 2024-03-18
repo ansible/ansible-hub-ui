@@ -79,11 +79,9 @@ export class Typeahead extends Component<IProps, IState> {
   };
 
   private getOptions() {
-    const options = [];
-
-    for (const option of this.props.results) {
-      options.push(<SelectOption key={option.id} value={option.name} />);
-    }
+    const options = this.props.results.map(({ id, name }) => (
+      <SelectOption key={id} value={name} />
+    ));
 
     if (options.length === 0) {
       options.push(

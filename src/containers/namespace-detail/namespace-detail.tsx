@@ -924,6 +924,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
           >{t`Delete namespace`}</DropdownItem>
         ) : (
           <DropdownItem
+            key='delete'
             isDisabled
             description={t`Cannot delete non-empty namespace`}
           >{t`Delete namespace`}</DropdownItem>
