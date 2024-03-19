@@ -202,10 +202,6 @@ module.exports = (inputConfigs) => {
 
   if (customConfigs.IS_INSIGHTS) {
     // insights federated modules
-    const packageLock = require(resolve(__dirname, '../package-lock.json'));
-    const routerVersion =
-      packageLock.packages['node_modules/react-router-dom'].version;
-
     plugins.push(
       require('@redhat-cloud-services/frontend-components-config-utilities/federated-modules')(
         {
@@ -215,7 +211,7 @@ module.exports = (inputConfigs) => {
           },
           shared: [
             {
-              'react-router-dom': { singleton: true, version: routerVersion },
+              'react-router-dom': { singleton: true, version: '*' },
             },
           ],
         },
