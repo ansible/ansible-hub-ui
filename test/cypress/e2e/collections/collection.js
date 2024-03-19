@@ -47,7 +47,7 @@ describe('collection tests', () => {
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
     cy.wait(5000);
-    cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
+    cy.get('[data-cy="AlertList"] h4[class=pf-v5-c-alert__title]').should(
       'have.text',
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );
@@ -69,12 +69,12 @@ describe('collection tests', () => {
 
     cy.contains('Select repositories');
     cy.get(
-      '[data-cy="ApproveModal-CheckboxRow-row-published"] .pf-c-table__check input',
+      '[data-cy="ApproveModal-CheckboxRow-row-published"] .pf-v5-c-table__check input',
     ).should('be.disabled');
 
     cy.get("[aria-label='name__icontains']").type('validate{enter}');
     cy.get(
-      "[data-cy='ApproveModal-CheckboxRow-row-validated'] .pf-c-table__check input",
+      "[data-cy='ApproveModal-CheckboxRow-row-validated'] .pf-v5-c-table__check input",
     ).check();
 
     cy.get('.pf-m-primary').contains('Select').click();
@@ -87,7 +87,7 @@ describe('collection tests', () => {
     cy.contains('Completed');
   });
 
-  it('deletes an collection from repository', () => {
+  it('deletes a collection from repository', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteRepositories();
     cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
@@ -101,7 +101,7 @@ describe('collection tests', () => {
 
     cy.visit(`${uiPrefix}collections?view_type=list`);
     cy.contains('Collections');
-    cy.contains('[data-cy="CollectionListItem"]', 'published');
+    cy.contains('[data-cy="CollectionListItem"]', 'Published');
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
     cy.get('.collection-container [aria-label="Actions"]:first').click({
@@ -117,7 +117,7 @@ describe('collection tests', () => {
       },
     );
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
-    cy.contains('[data-cy="CollectionListItem"]', 'published').should(
+    cy.contains('[data-cy="CollectionListItem"]', 'Published').should(
       'not.exist',
     );
 
@@ -125,7 +125,7 @@ describe('collection tests', () => {
     cy.deleteRepositories();
   });
 
-  it('deletes an collection version from repository', () => {
+  it('deletes a collection version from repository', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteRepositories();
     cy.galaxykit('repository create repo2 --pipeline approved');
@@ -149,7 +149,7 @@ describe('collection tests', () => {
 
     cy.visit(`${uiPrefix}collections?view_type=list`);
     cy.contains('Collections');
-    cy.contains('[data-cy="CollectionListItem"]', 'published');
+    cy.contains('[data-cy="CollectionListItem"]', 'Published');
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
     cy.visit(

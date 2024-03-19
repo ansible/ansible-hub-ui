@@ -1,4 +1,4 @@
-import { PulpStatus } from './pulp';
+import { type PulpStatus } from './pulp';
 
 export class TaskType {
   pulp_created: string;

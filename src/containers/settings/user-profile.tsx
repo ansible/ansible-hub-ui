@@ -2,18 +2,18 @@ import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ActiveUserAPI, UserType } from 'src/api';
+import { ActiveUserAPI, type UserType } from 'src/api';
 import {
   AlertList,
-  AlertType,
-  LoadingPageWithHeader,
+  type AlertType,
+  LoadingPage,
   UserFormPage,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ErrorMessagesType, mapErrorMessages } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
+import { type ErrorMessagesType, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   user: UserType;
@@ -61,11 +61,19 @@ class UserProfile extends Component<RouteProps, IState> {
     const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (!user) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <UserFormPage
           isMe
           user={user}
@@ -131,10 +139,6 @@ class UserProfile extends Component<RouteProps, IState> {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
   };
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
 }
 
 export default withRouter(UserProfile);

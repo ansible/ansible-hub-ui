@@ -1,24 +1,24 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
+import { LegacyRoleAPI, type LegacyRoleListType, TagAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyRoleListItem,
-  LoadingPageSpinner,
-  closeAlertMixin,
+  LoadingSpinner,
+  RoleItem,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   handleHttpError,
   withRouter,
@@ -98,18 +98,18 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
       .catch(() => []);
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(alert: AlertType) {
     this.setState({
       alerts: [...this.state.alerts, alert],
     });
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   render() {
@@ -162,10 +162,18 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
 
     return (
       <div>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Roles`} />
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No roles yet`}
@@ -210,11 +218,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem
-                        key={lrole.id}
-                        role={lrole}
-                        show_thumbnail
-                      />
+                      <RoleItem key={lrole.id} role={lrole} show_thumbnail />
                     ))}
                 </DataList>
 

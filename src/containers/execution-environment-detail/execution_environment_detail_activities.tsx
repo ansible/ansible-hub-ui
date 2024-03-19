@@ -1,6 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import React, { Component, ReactFragment } from 'react';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
+import React, { Component, type ReactFragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {
@@ -12,7 +13,7 @@ import {
 } from 'src/components';
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
-import { IDetailSharedProps, withContainerRepo } from './base';
+import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -60,7 +61,7 @@ class ExecutionEnvironmentDetailActivities extends Component<
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <section className='body'>
-              <table aria-label={t`Activities`} className='pf-c-table'>
+              <Table aria-label={t`Activities`}>
                 <SortTable
                   options={{
                     headers: [
@@ -71,23 +72,23 @@ class ExecutionEnvironmentDetailActivities extends Component<
                   params={{}}
                   updateParams={() => null}
                 />
-                <tbody>
+                <Tbody>
                   {activities.map((action, i) => {
                     return (
-                      <tr key={i}>
-                        <td>{action.action}</td>
+                      <Tr key={i}>
+                        <Td>{action.action}</Td>
                         {action.created ? (
-                          <td>
+                          <Td>
                             <DateComponent date={action.created} />
-                          </td>
+                          </Td>
                         ) : (
-                          <td />
+                          <Td />
                         )}
-                      </tr>
+                      </Tr>
                     );
                   })}
-                </tbody>
-              </table>
+                </Tbody>
+              </Table>
             </section>
           </FlexItem>
         </Flex>

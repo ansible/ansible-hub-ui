@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardTitle,
-  ClipboardCopyButton,
   DataList,
   DataListCell,
   DataListItem,
@@ -20,14 +19,15 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
+  HubCopyButton,
   LabelGroup,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   ShaLabel,
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
+import { type RouteProps, getHumanSize, withRouter } from 'src/utilities';
 import { containerName } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
@@ -93,7 +93,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
     } = this.state;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const command = (layers[selectedLayer.split(/-/)[1]] || {}).text;
@@ -124,15 +124,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
         >
           <div className='copy-sha'>
             <ShaLabel digest={digest} long />
-            <ClipboardCopyButton
-              className='eco-clipboard-copy'
-              variant={'plain'}
-              onClick={() => navigator.clipboard.writeText(digest)}
-              id={digest}
-              textId={t`Copy to clipboard`}
-            >
-              {digest}
-            </ClipboardCopyButton>
+            <HubCopyButton text={digest} />
           </div>
 
           <LabelGroup numLabels={6}>
@@ -172,7 +164,7 @@ class ExecutionEnvironmentManifest extends Component<RouteProps, IState> {
                   <CardBody>
                     <DataList
                       aria-label={t`Image layers`}
-                      onSelectDataListItem={(id) =>
+                      onSelectDataListItem={(_event, id) =>
                         this.setState({ selectedLayer: id })
                       }
                       selectedDataListItemId={selectedLayer}

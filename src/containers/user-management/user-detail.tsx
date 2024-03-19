@@ -2,19 +2,23 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { UserAPI, UserType } from 'src/api';
+import { UserAPI, type UserType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   DeleteUserModal,
   EmptyStateUnauthorized,
-  LoadingPageWithHeader,
+  LoadingPage,
   UserFormPage,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ErrorMessagesType, RouteProps, withRouter } from 'src/utilities';
+import {
+  type ErrorMessagesType,
+  type RouteProps,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   userDetail: UserType;
@@ -65,7 +69,7 @@ class UserDetail extends Component<RouteProps, IState> {
       return <EmptyStateUnauthorized />;
     }
     if (!userDetail) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const breadcrumbs = [
@@ -76,7 +80,15 @@ class UserDetail extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
@@ -137,10 +149,6 @@ class UserDetail extends Component<RouteProps, IState> {
         }
       },
     );
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
 }
 
 export default withRouter(UserDetail);

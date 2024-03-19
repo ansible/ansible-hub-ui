@@ -41,34 +41,31 @@ describe('Execution Environments - Use in Controller', () => {
     );
 
     // one row of each type available
-    cy.contains('.hub-c-table-content .pf-c-label', 'Remote');
-    cy.contains('.hub-c-table-content .pf-c-label', 'Local');
+    cy.contains('.pf-v5-c-label', 'Remote');
+    cy.contains('.pf-v5-c-label', 'Local');
   });
 
   const list = (type) =>
     cy
-      .contains('.hub-c-table-content .pf-c-label', type)
+      .contains('.pf-v5-c-label', type)
       .parents('tr')
       .find('button[aria-label="Actions"]')
       .click()
       .parents('tr')
-      .contains('.pf-c-dropdown__menu-item', 'Use in Controller')
+      .contains('.pf-v5-c-dropdown__menu-item', 'Use in Controller')
       .click();
 
   const detail = (type) => {
-    cy.contains('.hub-c-table-content .pf-c-label', type)
-      .parents('tr')
-      .find('td a')
-      .click();
+    cy.contains('.pf-v5-c-label', type).parents('tr').find('td a').click();
 
     ['Detail', 'Activity', 'Images'].forEach((tab) =>
-      cy.contains('.pf-c-tabs__item', tab),
+      cy.contains('.pf-v5-c-tabs__item', tab),
     );
 
     cy.get('button[aria-label="Actions"]')
       .click()
       .parent()
-      .contains('.pf-c-dropdown__menu-item', 'Use in Controller')
+      .contains('.pf-v5-c-dropdown__menu-item', 'Use in Controller')
       .click();
   };
 
@@ -86,18 +83,18 @@ describe('Execution Environments - Use in Controller', () => {
             /^https:\/\/www\.example\.com\/#\/execution_environments\/add\?image=.*latest$/,
           );
         cy.contains('a', 'https://another.example.com');
-        cy.get('ul.pf-c-list > li > a').should('have.length', 2);
+        cy.get('ul.pf-v5-c-list > li > a').should('have.length', 2);
 
         // filter controllers
         cy.get('input[placeholder="Filter by controller name"]')
           .click()
           .type('another{enter}');
         cy.contains('a', 'https://another.example.com');
-        cy.get('ul.pf-c-list > li > a').should('have.length', 1);
+        cy.get('ul.pf-v5-c-list > li > a').should('have.length', 1);
         cy.contains('a', 'https://www.example.com').should('not.exist');
 
         // unset tag, see digest
-        cy.get('.pf-m-typeahead .pf-c-select__toggle-clear').click();
+        cy.get('.pf-m-typeahead .pf-v5-c-select__toggle-clear').click();
         cy.contains('a', 'https://another.example.com')
           .should('have.attr', 'href')
           .and(
@@ -106,8 +103,8 @@ describe('Execution Environments - Use in Controller', () => {
           );
 
         // search tag
-        cy.get('input.pf-c-select__toggle-typeahead').click();
-        cy.contains('.pf-c-select__menu', 'latest').click();
+        cy.get('.pf-v5-c-select__toggle-typeahead input').click();
+        cy.contains('.pf-v5-c-select__menu', 'latest').click();
         cy.contains('a', 'https://another.example.com')
           .should('have.attr', 'href')
           .and(
@@ -117,7 +114,7 @@ describe('Execution Environments - Use in Controller', () => {
 
         // unfilter controllers
         cy.contains('Clear all filters').click();
-        cy.get('ul.pf-c-list > li > a').should('have.length', 2);
+        cy.get('ul.pf-v5-c-list > li > a').should('have.length', 2);
 
         // leave
         cy.get('button[aria-label="Close"]').click();

@@ -1,0 +1,27 @@
+import { t } from '@lingui/macro';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useHubContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+
+interface IProps {
+  button?: boolean;
+  next?: string;
+}
+
+export const LoginLink = ({ button, next }: IProps) => {
+  const { featureFlags } = useHubContext();
+  const className = button ? 'pf-v5-c-button pf-m-primary' : '';
+
+  // NOTE: also update AuthHandler#render (src/loaders/standalone/routes.tsx) when changing this
+  if (featureFlags?.external_authentication && UI_EXTERNAL_LOGIN_URI) {
+    return <a className={className} href={UI_EXTERNAL_LOGIN_URI}>{t`Login`}</a>;
+  } else {
+    return (
+      <Link
+        className={className}
+        to={formatPath(Paths.login, {}, { next })}
+      >{t`Login`}</Link>
+    );
+  }
+};

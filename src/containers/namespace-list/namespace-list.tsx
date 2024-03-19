@@ -2,28 +2,28 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
+import { MyNamespaceAPI, NamespaceAPI, type NamespaceListType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
   LinkTabs,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   NamespaceCard,
   NamespaceModal,
   NamespaceNextPageCard,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
 } from 'src/utilities';
@@ -53,8 +53,6 @@ interface IProps extends RouteProps {
 
 export class NamespaceList extends Component<IProps, IState> {
   static contextType = AppContext;
-
-  nonURLParams = ['tenant'];
 
   constructor(props) {
     super(props);
@@ -144,7 +142,7 @@ export class NamespaceList extends Component<IProps, IState> {
       namespaces.length === 0;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const updateParams = (p) =>
@@ -194,7 +192,15 @@ export class NamespaceList extends Component<IProps, IState> {
             })
           }
         />
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={IS_INSIGHTS ? t`Partners` : t`Namespaces`}>
           {!(this.context as IAppContextType).user.is_anonymous && (
             <div className='hub-tab-link-container'>
@@ -250,7 +256,7 @@ export class NamespaceList extends Component<IProps, IState> {
     if (loading) {
       return (
         <section>
-          <LoadingPageSpinner />;
+          <LoadingSpinner />;
         </section>
       );
     }
@@ -324,17 +330,18 @@ export class NamespaceList extends Component<IProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonURLParams);
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      ignoreParams: ['tenant'],
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(alert: AlertType) {
     this.setState({
       alerts: [...this.state.alerts, alert],
     });
-  }
-
-  get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }

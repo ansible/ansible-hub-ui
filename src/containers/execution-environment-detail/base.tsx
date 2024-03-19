@@ -1,30 +1,31 @@
 import { Trans, t } from '@lingui/macro';
-import { Button, DropdownItem } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
-  ContainerRepositoryType,
+  type ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   PublishToControllerModal,
   RepositoryForm,
   StatefulDropdown,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RepoSigningUtils,
-  RouteProps,
+  type RouteProps,
   canSignEE,
   taskAlert,
   waitForTask,
@@ -98,7 +99,7 @@ export function withContainerRepo(WrappedComponent) {
       }
 
       if (this.state.loading) {
-        return <LoadingPageWithHeader />;
+        return <LoadingPage />;
       }
 
       const permissions = this.state.repo.namespace.my_permissions;
@@ -167,8 +168,13 @@ export function withContainerRepo(WrappedComponent) {
       return (
         <>
           <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
           />
           <PublishToControllerModal
             digest={publishToController?.digest}
@@ -315,10 +321,6 @@ export function withContainerRepo(WrappedComponent) {
       }
 
       return 'detail';
-    }
-
-    private get closeAlert() {
-      return closeAlertMixin('alerts');
     }
 
     private addAlert(title, variant, description?) {

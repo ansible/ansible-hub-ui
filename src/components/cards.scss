@@ -1,0 +1,77 @@
+.hub-c-card-ns-container {
+  width: 300px;
+
+  .title {
+    font-weight: bold;
+  }
+
+  .ns-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 180px;
+  }
+}
+
+.hub-c-card-collection-container {
+  width: 280px;
+
+  .card-badge-area {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    place-content: stretch end;
+    align-items: center;
+  }
+
+  .name {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .author .pf-v5-c-content small {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .type-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo-row {
+    padding-right: 8px;
+
+    .pf-v5-c-card__header-main {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .icon {
+      color: var(--pf-v5-global--info-color--100);
+      margin-right: 3px;
+    }
+  }
+
+  .description {
+    height: 48px;
+    overflow: hidden;
+  }
+}
+
+.hidden-menu-space {
+  margin-right: 8px;
+}
+
+.hub-card-layout {
+  display: flex;
+  flex-wrap: wrap;
+
+  .card-wrapper {
+    margin-right: 24px;
+    margin-bottom: 24px;
+  }
+}

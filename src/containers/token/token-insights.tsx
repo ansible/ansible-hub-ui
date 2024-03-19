@@ -1,18 +1,20 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, Button, ClipboardCopyVariant } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { MyDistributionAPI } from 'src/api';
 import {
+  Alert,
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ClipboardCopy,
+  CopyURL,
   ExternalLink,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 import { getRepoURL } from 'src/utilities';
 
 interface IState {
@@ -95,10 +97,18 @@ class TokenInsights extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Connect to Hub`} />
         <Main>
-          <section className='pf-c-content'>
+          <section className='pf-v5-c-content'>
             <section className='body'>
               <h2>{t`Connect Private Automation Hub`}</h2>
               <p>
@@ -131,9 +141,10 @@ class TokenInsights extends Component<RouteProps, IState> {
                   location.
                 </Trans>
               </p>
+
               {tokenData ? (
                 <div>
-                  <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
+                  <CopyURL url={tokenData.refresh_token} />
                 </div>
               ) : (
                 <div>
@@ -142,7 +153,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                   >{t`Load token`}</Button>
                 </div>
               )}
-              <div style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <div style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <span>
                   <Trans>
                     The token will expire after 30 days of inactivity. Run the
@@ -150,11 +161,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                     expiring.
                   </Trans>
                 </span>
-                <ClipboardCopy
-                  isCode
-                  isReadOnly
-                  variant={ClipboardCopyVariant.expansion}
-                >
+                <ClipboardCopy isCode isReadOnly variant={'expansion'}>
                   {renewTokenCmd}
                 </ClipboardCopy>
               </div>
@@ -176,19 +183,15 @@ class TokenInsights extends Component<RouteProps, IState> {
                   Hub.{' '}
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                {getRepoURL('published', true)}
-              </ClipboardCopy>
-              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <CopyURL url={getRepoURL('published', true)} />
+              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Use this URL for <strong>validated</strong> content from
                   Automation Hub.{' '}
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                {getRepoURL('validated')}
-              </ClipboardCopy>
-              <p style={{ paddingTop: 'var(--pf-global--spacer--md)' }}>
+              <CopyURL url={getRepoURL('validated')} />
+              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
                 <Trans>
                   Synclists are deprecated in AAP 2.4 and will be removed in a
                   future release, use client-side <code>requirements.yml</code>{' '}
@@ -199,9 +202,7 @@ class TokenInsights extends Component<RouteProps, IState> {
                 </Trans>
               </p>
               {synclistBasePath ? (
-                <ClipboardCopy isReadOnly>
-                  {getRepoURL(synclistBasePath)}
-                </ClipboardCopy>
+                <CopyURL url={getRepoURL(synclistBasePath)} />
               ) : (
                 <Alert
                   variant='danger'
@@ -219,9 +220,11 @@ class TokenInsights extends Component<RouteProps, IState> {
                   need to download content from Automation Hub.
                 </Trans>
               </p>
-              <ClipboardCopy isReadOnly>
-                https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-              </ClipboardCopy>
+              <CopyURL
+                url={
+                  'https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token'
+                }
+              />
             </section>
             <section className='body'>
               <h2>{t`CRC public key`}</h2>
@@ -249,10 +252,6 @@ class TokenInsights extends Component<RouteProps, IState> {
     // available to getOfflineToken() when the component mounts after
     // the reload
     window.insights.chrome.auth.doOffline();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }
 

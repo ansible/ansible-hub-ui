@@ -1,25 +1,25 @@
 import { t } from '@lingui/macro';
-import React, { Component, RefObject, createRef } from 'react';
+import React, { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   ImportAPI,
-  ImportDetailType,
-  ImportListType,
+  type ImportDetailType,
+  type ImportListType,
   PulpStatus,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ImportConsole,
   ImportList,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];
@@ -96,10 +96,6 @@ class MyImports extends Component<RouteProps, IState> {
     clearInterval(this.polling);
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   private addAlert(alert) {
     this.setState({
       alerts: [...this.state.alerts, alert],
@@ -108,6 +104,7 @@ class MyImports extends Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
       collection,
       followLogs,
       importDetailError,
@@ -129,8 +126,13 @@ class MyImports extends Component<RouteProps, IState> {
         <div ref={this.topOfPage} />
         <BaseHeader title={t`My imports`} />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         <Main>
           <section className='body'>
@@ -216,8 +218,12 @@ class MyImports extends Component<RouteProps, IState> {
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private selectImport(sImport) {

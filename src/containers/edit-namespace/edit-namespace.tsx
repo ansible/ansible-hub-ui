@@ -1,24 +1,29 @@
 import { Trans, t } from '@lingui/macro';
-import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
+import { ActionGroup, Button, Form } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
+import {
+  MyNamespaceAPI,
+  type NamespaceLinkType,
+  type NamespaceType,
+} from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   NamespaceForm,
   PartnerHeader,
   ResourcesForm,
-  closeAlertMixin,
+  Spinner,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   errorMessage,
   mapErrorMessages,
@@ -82,6 +87,7 @@ class EditNamespace extends Component<RouteProps, IState> {
 
   render() {
     const {
+      alerts,
       errorMessages,
       loading,
       namespace,
@@ -96,7 +102,7 @@ class EditNamespace extends Component<RouteProps, IState> {
     }
 
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
 
     if (!namespace) {
@@ -147,8 +153,13 @@ class EditNamespace extends Component<RouteProps, IState> {
           tabs={tabs}
         />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -200,8 +211,8 @@ class EditNamespace extends Component<RouteProps, IState> {
     const namespace = this.state.namespace;
     return namespace.links.some(
       (link) =>
-        NamespaceForm.validateName(link).validated == 'error' ||
-        NamespaceForm.validateUrl(link).validated == 'error',
+        NamespaceForm.validateName(link).variant == 'error' ||
+        NamespaceForm.validateUrl(link).variant == 'error',
     );
   }
 
@@ -276,10 +287,6 @@ class EditNamespace extends Component<RouteProps, IState> {
           }
         });
     });
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   private cancel() {

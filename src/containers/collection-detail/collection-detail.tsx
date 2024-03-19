@@ -4,14 +4,14 @@ import {
   AlertList,
   CollectionHeader,
   CollectionInfo,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
 class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
@@ -56,7 +56,7 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version: version } = collection;
@@ -76,7 +76,15 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <CollectionHeader
           activeTab='install'
           actuallyCollection={actuallyCollection}
@@ -141,12 +149,12 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
     });
   }
 
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

@@ -1,47 +1,49 @@
 import { Trans, t } from '@lingui/macro';
-import { Button, Checkbox, DropdownItem, Text } from '@patternfly/react-core';
+import { Button, Checkbox, Text } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
-  GroupType,
+  type CollectionVersionSearch,
+  type GroupType,
   MyNamespaceAPI,
   NamespaceAPI,
-  NamespaceType,
-  RoleType,
+  type NamespaceType,
+  type RoleType,
   SignCollectionAPI,
 } from 'src/api';
 import {
   AccessTab,
   AlertList,
-  AlertType,
-  ClipboardCopy,
+  type AlertType,
   CollectionDropdown,
   CollectionList,
+  CopyURL,
   DeleteCollectionModal,
   DeleteModal,
   EmptyStateNoData,
   ExternalLink,
   HubListToolbar,
   ImportModal,
-  LoadingPageWithHeader,
+  LightspeedModal,
+  LoadingPage,
   Main,
   PartnerHeader,
   SignAllCertificatesModal,
   StatefulDropdown,
-  WisdomModal,
-  closeAlertMixin,
+  closeAlert,
   collectionFilter,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   canSignNamespace,
   errorMessage,
   filterIsSet,
@@ -67,9 +69,9 @@ interface IState {
   group: GroupType;
   isDeletionPending: boolean;
   isNamespacePending: boolean;
+  isOpenLightspeedModal: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
-  isOpenWisdomModal: boolean;
   namespace: NamespaceType;
   params: {
     group?: string;
@@ -99,12 +101,6 @@ interface IState {
 export class NamespaceDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
-  nonAPIParams = ['tab', 'group', 'user'];
-
-  // namespace is a positional url argument, so don't include it in the
-  // query params
-  nonQueryStringParams = ['namespace'];
-
   constructor(props) {
     super(props);
     const params = ParamHelper.parseParamString(props.location.search, [
@@ -132,9 +128,9 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       group: null,
       isDeletionPending: false,
       isNamespacePending: false,
+      isOpenLightspeedModal: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
-      isOpenWisdomModal: false,
       namespace: null,
       params,
       redirect: null,
@@ -253,8 +249,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       filteredCount,
       isDeletionPending,
       isNamespacePending,
+      isOpenLightspeedModal,
       isOpenNamespaceModal,
-      isOpenWisdomModal,
       namespace,
       params,
       redirect,
@@ -270,7 +266,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     }
 
     if (!namespace) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const tab = params.tab || 'collections';
@@ -316,10 +312,11 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       legacy_roles && {
         active: tab === 'role-namespaces',
         title: t`Role namespaces`,
+        icon: <ArrowRightIcon />,
         link: formatPath(
-          Paths.namespaceDetail,
-          { namespace: namespace.name },
-          { tab: 'role-namespaces' },
+          Paths.standaloneNamespaces,
+          {},
+          { provider: namespace.name },
         ),
       },
     ];
@@ -384,7 +381,15 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <ImportModal
           isOpen={showImportModal}
           onUploadSuccess={() =>
@@ -432,23 +437,23 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
             title={t`Delete namespace?`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
-            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+            <Text style={{ paddingBottom: 'var(--pf-v5-global--spacer--md)' }}>
               <Trans>
                 Deleting <b>{namespace.name}</b> and its data will be lost.
               </Trans>
             </Text>
             <Checkbox
               isChecked={confirmDelete}
-              onChange={(val) => this.setState({ confirmDelete: val })}
+              onChange={(_event, val) => this.setState({ confirmDelete: val })}
               label={t`I understand that this action cannot be undone.`}
               id='delete_confirm'
             />
           </DeleteModal>
         )}
-        {isOpenWisdomModal && (
-          <WisdomModal
+        {isOpenLightspeedModal && (
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenWisdomModal: false })}
+            closeAction={() => this.setState({ isOpenLightspeedModal: false })}
             scope={'namespace'}
             reference={this.state.namespace.name}
           />
@@ -515,7 +520,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
                     .
                   </Trans>
                 </div>
-                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <CopyURL url={repositoryUrl} />
               </div>
             </section>
           ) : null}
@@ -737,7 +742,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
 
   private renderResources(namespace: NamespaceType) {
     return (
-      <div className='pf-c-content preview'>
+      <div className='pf-v5-c-content preview'>
         <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
@@ -802,7 +807,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
 
   private loadCollections() {
     return this.loadAllCollections(
-      ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+      ParamHelper.getReduced(this.state.params, ['tab', 'group', 'user']),
     ).then((result) => {
       this.setState({
         collections: result.data.data,
@@ -878,8 +883,13 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      ignoreParams: ['namespace'],
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private renderPageControls() {
@@ -914,6 +924,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
           >{t`Delete namespace`}</DropdownItem>
         ) : (
           <DropdownItem
+            key='delete'
             isDisabled
             description={t`Cannot delete non-empty namespace`}
           >{t`Delete namespace`}</DropdownItem>
@@ -955,8 +966,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
         )),
       ai_deny_index && (
         <DropdownItem
-          key='wisdom-settings'
-          onClick={() => this.setState({ isOpenWisdomModal: true })}
+          key='lightspeed-settings'
+          onClick={() => this.setState({ isOpenLightspeedModal: true })}
         >
           {t`Ansible Lightspeed settings`}
         </DropdownItem>
@@ -1051,10 +1062,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     this.setState({
       alerts: [...this.state.alerts, alert],
     });
-  }
-
-  get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   private renderCollectionControls(collection: CollectionVersionSearch) {

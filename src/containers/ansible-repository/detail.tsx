@@ -1,5 +1,7 @@
 import { Trans, msg, t } from '@lingui/macro';
+import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   ansibleRepositoryCopyAction,
   ansibleRepositoryDeleteAction,
@@ -8,9 +10,9 @@ import {
 } from 'src/actions';
 import {
   AnsibleRemoteAPI,
-  AnsibleRemoteType,
+  type AnsibleRemoteType,
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
 } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -20,6 +22,7 @@ import { lastSyncStatus, lastSynced } from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';
+import { DistributionsTab } from './tab-distributions';
 import { RepositoryVersionsTab } from './tab-repository-versions';
 
 const AnsibleRepositoryDetail = PageWithTabs<
@@ -112,6 +115,18 @@ const AnsibleRepositoryDetail = PageWithTabs<
       'repository-versions': (
         <RepositoryVersionsTab item={item} actionContext={actionContext} />
       ),
+      distributions: (
+        <DistributionsTab item={item} actionContext={actionContext} />
+      ),
+      collections: (
+        <Navigate
+          to={formatPath(
+            Paths.collections,
+            {},
+            { repository_name: item?.name },
+          )}
+        />
+      ),
     })[tab],
   tabs: (tab, name) => [
     {
@@ -149,6 +164,21 @@ const AnsibleRepositoryDetail = PageWithTabs<
         { name },
         { tab: 'repository-versions' },
       ),
+    },
+    {
+      active: tab === 'distributions',
+      title: t`Distributions`,
+      link: formatPath(
+        Paths.ansibleRepositoryDetail,
+        { name },
+        { tab: 'distributions' },
+      ),
+    },
+    {
+      active: tab === 'collections',
+      title: t`Collections`,
+      icon: <ArrowRightIcon />,
+      link: formatPath(Paths.collections, {}, { repository_name: name }),
     },
   ],
 });

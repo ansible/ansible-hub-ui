@@ -14,23 +14,23 @@ import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
+import { GenericPulpAPI, TaskManagementAPI, type TaskType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   ConfirmModal,
   DateComponent,
   EmptyStateCustom,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   StatusIndicator,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
-  RouteProps,
+  type RouteProps,
   errorMessage,
   parsePulpIDFromURL,
   translateTask,
@@ -39,36 +39,36 @@ import {
 import './task.scss';
 
 interface IState {
-  loading: boolean;
-  task: TaskType;
-  parentTask: TaskType;
-  childTasks: TaskType[];
   alerts: AlertType[];
   cancelModalVisible: boolean;
-  taskName: string;
+  childTasks: TaskType[];
+  loading: boolean;
+  parentTask: TaskType;
+  polling: ReturnType<typeof setInterval>;
+  redirect: string;
   resources: {
     name?: string;
-    type: string;
     pluginName?: string;
+    type: string;
   }[];
-  redirect: string;
-  polling: ReturnType<typeof setInterval>;
+  task: TaskType;
+  taskName: string;
 }
 
 class TaskDetail extends Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
-      task: null,
-      parentTask: null,
-      childTasks: [],
       alerts: [],
       cancelModalVisible: false,
-      taskName: '',
-      resources: [],
-      redirect: null,
+      childTasks: [],
+      loading: true,
+      parentTask: null,
       polling: null,
+      redirect: null,
+      resources: [],
+      task: null,
+      taskName: '',
     };
   }
 
@@ -91,33 +91,42 @@ class TaskDetail extends Component<RouteProps, IState> {
 
   render() {
     const {
-      loading,
-      task,
-      parentTask,
-      childTasks,
-      cancelModalVisible,
       alerts,
-      taskName,
-      resources,
+      cancelModalVisible,
+      childTasks,
+      loading,
+      parentTask,
       redirect,
+      resources,
+      task,
+      taskName,
     } = this.state;
+
     const breadcrumbs = [
       { url: formatPath(Paths.taskList), name: t`Task management` },
       { name: task ? taskName : '' },
     ];
-    let parentTaskId = null;
-    if (parentTask) {
-      parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
-    }
+    const parentTaskId = parentTask
+      ? parsePulpIDFromURL(parentTask.pulp_href)
+      : null;
+
     if (redirect) {
       return <Navigate to={redirect} />;
     }
 
     return loading ? (
-      <LoadingPageSpinner />
+      <LoadingSpinner />
     ) : (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
           title={taskName}
@@ -160,7 +169,7 @@ class TaskDetail extends Component<RouteProps, IState> {
                     </DescriptionListGroup>
                     {task.name !== taskName && (
                       <DescriptionListGroup>
-                        <DescriptionListTerm>{t`Descriptive name`}</DescriptionListTerm>
+                        <DescriptionListTerm>{t`Description`}</DescriptionListTerm>
                         <DescriptionListDescription>
                           {taskName}
                         </DescriptionListDescription>
@@ -507,10 +516,6 @@ class TaskDetail extends Component<RouteProps, IState> {
       .catch(() => {
         this.setState({ redirect: formatPath(Paths.notFound) });
       });
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }
 

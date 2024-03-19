@@ -1,16 +1,16 @@
 import { t } from '@lingui/macro';
 import React, { Component } from 'react';
-import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
+import { ImportAPI, type ImportDetailType, type ImportListType } from 'src/api';
 import {
   CollectionHeader,
   ImportConsole,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;
@@ -60,7 +60,7 @@ class CollectionImportLog extends Component<RouteProps, IState> {
     } = this.state;
 
     if (!collection) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version, repository } = collection;
@@ -178,8 +178,12 @@ class CollectionImportLog extends Component<RouteProps, IState> {
     });
   }
 
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

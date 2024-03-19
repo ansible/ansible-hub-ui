@@ -1,18 +1,18 @@
 import { t } from '@lingui/macro';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { UserAPI, UserType } from 'src/api';
+import { UserAPI, type UserType } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
   UserFormPage,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  ErrorMessagesType,
-  RouteProps,
+  type ErrorMessagesType,
+  type RouteProps,
   mapErrorMessages,
   withRouter,
 } from 'src/utilities';

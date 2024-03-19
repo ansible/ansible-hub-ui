@@ -1,25 +1,25 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Modal,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
-  APISearchTypeAhead,
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
@@ -33,15 +33,16 @@ import {
   HubPagination,
   LinkTabs,
   ListItemActions,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   SortTable,
-  closeAlertMixin,
+  Typeahead,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, filterIsSet } from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
@@ -74,11 +75,7 @@ interface IState {
 class GroupDetail extends Component<RouteProps, IState> {
   static contextType = AppContext;
 
-  nonQueryStringParams = ['group'];
-
   userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
-
-  roleQueryStringParams = ['role__icontains'];
 
   constructor(props) {
     super(props);
@@ -165,19 +162,27 @@ class GroupDetail extends Component<RouteProps, IState> {
 
     if (!group && alerts && alerts.length) {
       return (
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
       );
     }
     if (unauthorised) {
       return <EmptyStateUnauthorized />;
     }
     if (!group) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     if (params.tab == 'users' && !users && !unauthorised) {
       this.queryUsers();
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const tabs = [
@@ -204,7 +209,15 @@ class GroupDetail extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
@@ -288,7 +301,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         aria-label={t`add-user-modal`}
         title={''}
         header={
-          <span className='pf-c-content'>
+          <span className='pf-v5-c-content'>
             <h2>{t`Add selected users to group`}</h2>{' '}
           </span>
         }
@@ -310,7 +323,7 @@ class GroupDetail extends Component<RouteProps, IState> {
           </Button>,
         ]}
       >
-        <APISearchTypeAhead
+        <Typeahead
           results={this.state.options}
           loadResults={(name) =>
             UserAPI.list({ username__contains: name, page_size: 1000 })
@@ -665,17 +678,14 @@ class GroupDetail extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`User list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
         />
-        <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{users.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -696,28 +706,26 @@ class GroupDetail extends Component<RouteProps, IState> {
         ),
     ];
     return (
-      <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
-        <td>
+      <Tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
+        <Td>
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}
           </Link>
-        </td>
-        <td>{user.email}</td>
-        <td>{user.last_name}</td>
-        <td>{user.first_name}</td>
-        <td>
+        </Td>
+        <Td>{user.email}</Td>
+        <Td>{user.last_name}</Td>
+        <Td>{user.first_name}</Td>
+        <Td>
           <DateComponent date={user.date_joined} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
   private queryUsers() {
     const params = {
-      ...ParamHelper.getReduced(this.state.params, [
-        ...this.roleQueryStringParams,
-      ]),
+      ...ParamHelper.getReduced(this.state.params, ['role__icontains']),
       sort: ParamHelper.validSortParams(
         this.state.params['sort'],
         this.userQueryStringParams,
@@ -794,12 +802,13 @@ class GroupDetail extends Component<RouteProps, IState> {
       });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      ignoreParams: ['group'],
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

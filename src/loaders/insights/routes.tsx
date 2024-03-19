@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { LoadingPageWithHeader } from 'src/components';
+import { LoadingPage } from 'src/components';
 import { Paths } from 'src/paths';
 
 const AnsibleRemoteDetail = lazy(
@@ -163,7 +163,7 @@ const routes = [
  */
 export const InsightsRoutes = () => {
   return (
-    <Suspense fallback={<LoadingPageWithHeader />}>
+    <Suspense fallback={<LoadingPage />}>
       <Routes>
         {routes.map(({ component: Component, path }, index) => (
           <Route key={index} path={path} element={<Component path={path} />} />

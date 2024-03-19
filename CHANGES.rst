@@ -1,3 +1,15 @@
+4.9.1 (2024-01-30)
+==================
+
+Misc
+----
+
+- `AAH-850 <https://issues.redhat.com/browse/AAH-850>`_
+
+
+----
+
+
 4.9.0 (2023-12-06)
 ==================
 
@@ -36,6 +48,27 @@ Misc
 ----
 
 - `AAH-2289 <https://issues.redhat.com/browse/AAH-2289>`_, `AAH-2626 <https://issues.redhat.com/browse/AAH-2626>`_, `AAH-2652 <https://issues.redhat.com/browse/AAH-2652>`_, `AAH-2697 <https://issues.redhat.com/browse/AAH-2697>`_, `AAH-2708 <https://issues.redhat.com/browse/AAH-2708>`_, `AAH-2726 <https://issues.redhat.com/browse/AAH-2726>`_, `AAH-2730 <https://issues.redhat.com/browse/AAH-2730>`_
+
+
+----
+
+
+4.8.1 (2023-10-18)
+==================
+
+Bugfixes
+--------
+
+- community Sync - disable without a requirements file .. on the detail screen
+  `AAH-2360 <https://issues.redhat.com/browse/AAH-2360>`_
+- Remote form: warn about signed_only enabled & missing requirements for Galaxy remote
+  `AAH-2748 <https://issues.redhat.com/browse/AAH-2748>`_
+
+
+Misc
+----
+
+- `AAH-2726 <https://issues.redhat.com/browse/AAH-2726>`_
 
 
 ----
@@ -115,13 +148,104 @@ Bugfixes
 - Fix dispatch page filter param
   `AAH-2670 <https://issues.redhat.com/browse/AAH-2670>`_
 - Collection documentation: do not wrongly interpret plugins/modules whose name starts with `_` as deprecated.
-
+  `AAH-3715 <https://issues.redhat.com/browse/AAH-3715>`_
 
 
 Misc
 ----
 
 - `AAH-1893 <https://issues.redhat.com/browse/AAH-1893>`_
+
+
+----
+
+
+4.7.3 (2023-09-18)
+==================
+
+No significant changes.
+
+
+----
+
+
+4.7.2 (2023-09-14)
+==================
+
+Features
+--------
+
+- Expose legacy role download count in the UI
+  `AAH-2241 <https://issues.redhat.com/browse/AAH-2241>`_
+- Repository tests - detail, list.
+  `AAH-2245 <https://issues.redhat.com/browse/AAH-2245>`_
+- cypress tests for Approval with multiple repositories
+  `AAH-2248 <https://issues.redhat.com/browse/AAH-2248>`_
+- add collection upload modal + refactor Approve Modal - extract multiple repo selector and use it both in ApproveModal and UploadModal.
+  `AAH-2250 <https://issues.redhat.com/browse/AAH-2250>`_
+- Cypress tests for collection upload with multiple repositories.
+  `AAH-2251 <https://issues.redhat.com/browse/AAH-2251>`_
+- Add copy collection version in collection detail screen
+  `AAH-2255 <https://issues.redhat.com/browse/AAH-2255>`_
+- Delete collection or version from repo only.
+  `AAH-2261 <https://issues.redhat.com/browse/AAH-2261>`_
+- Repository list - add columns, filters
+  `AAH-2271 <https://issues.redhat.com/browse/AAH-2271>`_
+- Repository sync - modal to set mirror, optimize
+  `AAH-2301 <https://issues.redhat.com/browse/AAH-2301>`_
+
+
+Bugfixes
+--------
+
+- community - fix token page expiration notice when auth provider is github
+  `AAH-2324 <https://issues.redhat.com/browse/AAH-2324>`_
+- Repositories, Remotes - clean filter text on search
+  `AAH-2340 <https://issues.redhat.com/browse/AAH-2340>`_
+- Support old galaxy URLs outside of base path, disambiguate
+  `AAH-2342 <https://issues.redhat.com/browse/AAH-2342>`_
+- Approval dashboard: fix when more than 10 staging repos
+  `AAH-2366 <https://issues.redhat.com/browse/AAH-2366>`_
+- Fix Namespaces/Partners breadcrumb
+  `AAH-2433 <https://issues.redhat.com/browse/AAH-2433>`_
+- Namespace detail: use is_highest consistently
+  `AAH-2443 <https://issues.redhat.com/browse/AAH-2443>`_
+- Better choice of distribution when multiple per repo
+  `AAH-2586 <https://issues.redhat.com/browse/AAH-2586>`_
+- Add autocomplete=off to login form fields
+  `AAH-2625 <https://issues.redhat.com/browse/AAH-2625>`_
+- Fix dispatch page filter param
+  `AAH-2670 <https://issues.redhat.com/browse/AAH-2670>`_
+
+
+----
+
+
+4.7.1 (2023-05-23)
+==================
+
+Features
+--------
+
+- Collection documentation: support semantic markup.
+  `AAH-2156 <https://issues.redhat.com/browse/AAH-2156>`_
+- Change Wisdom Modal and legacy namespaces menu, rename to Ansible Lightspeed
+  `AAH-2220 <https://issues.redhat.com/browse/AAH-2220>`_
+- Added filter for Approved, Staging and Rejected for Repository list.
+  `AAH-2259 <https://issues.redhat.com/browse/AAH-2259>`_
+- Disable checkbox for adding collection if collection is already assigned to repository
+  `AAH-2323 <https://issues.redhat.com/browse/AAH-2323>`_
+
+
+Bugfixes
+--------
+
+- Fix Edit collection ignoring repository object permissions
+  `AAH-2305 <https://issues.redhat.com/browse/AAH-2305>`_
+- Namespace detail: sign all collections only signs current repo now
+  `AAH-2308 <https://issues.redhat.com/browse/AAH-2308>`_
+- Collection documentation: do not wrongly interpret plugins/modules whose name starts with `_` as deprecated.
+  `AAH-3715 <https://issues.redhat.com/browse/AAH-3715>`_
 
 
 ----
@@ -261,13 +385,98 @@ Misc
 ----
 
 
-4.6.0 (2022-10-13)
+4.6.6 (2023-05-26)
+==================
+
+No significant changes.
+
+
+----
+
+
+4.6.5 (2023-04-20)
+==================
+
 Bugfixes
 --------
 
+- Repair list of collection dependencies - add namespace to the link caption.
+  `AAH-1807 <https://issues.redhat.com/browse/AAH-1807>`_
+- Repair error mesages in EE form.
+  `AAH-1845 <https://issues.redhat.com/browse/AAH-1845>`_
+- Fix podman pull URLs when latest tag not present, fix digest urls
+  `AAH-1988 <https://issues.redhat.com/browse/AAH-1988>`_
+- Show container signing button based only on container_signing, not collection_signing
+  `AAH-2013 <https://issues.redhat.com/browse/AAH-2013>`_
+- Show container signature badge based only on container_signing, not collection_signing
+  `AAH-2015 <https://issues.redhat.com/browse/AAH-2015>`_
+- License fields on AH - blank or formatted incorrectly - Add comma separator between licences. And also hide license field when empty.
+  `AAH-2048 <https://issues.redhat.com/browse/AAH-2048>`_
+
+
+----
+
+
+4.6.4 (2023-04-04)
+==================
+
+Features
+--------
+
+- Display boolean values in docs as true/false (was yes/no)
+  `AAH-1859 <https://issues.redhat.com/browse/AAH-1859>`_
+
+
+Bugfixes
+--------
+
+- Fix a bug where the UI was falsely reporting that collection dependencies don't exist.
+  `AAH-2018 <https://issues.redhat.com/browse/AAH-2018>`_
+- Fix bug where the resource type on "reserved resources" on the task management page always returns "api".
+  `AAH-2055 <https://issues.redhat.com/browse/AAH-2055>`_
+
+
+----
+
+
+4.6.3 (2022-12-05)
+==================
+
+No significant changes.
+
+
+----
+
+
+4.6.2 (2022-10-21)
+==================
+
+No significant changes.
+
+
+----
+
+
+4.6.1 (2022-10-14)
+==================
+
+No significant changes.
+
+
+----
+
+
+4.6.0 (2022-10-13)
+==================
+
+Bugfixes
+--------
+
+- Added search ahead in namespace selection in imports.
+  `AAH-1725 <https://issues.redhat.com/browse/AAH-1725>`_
 - Owners tab - go up to group list when clicking the tab
   `AAH-1733 <https://issues.redhat.com/browse/AAH-1733>`_
-- Moved to the *owners tab only clickable when already created
+- Moved to the owners tab only clickable when already created
   `AAH-1792 <https://issues.redhat.com/browse/AAH-1792>`_
 
 
@@ -277,17 +486,6 @@ Misc
 - `AAH-618 <https://issues.redhat.com/browse/AAH-618>`_
 
 
-----
-
-
-4.6.0 (2022-10-13)
-No significant changes.
-
-
-----
-
-
-4.6.0 (2022-10-13)
 Features
 --------
 
@@ -359,6 +557,94 @@ Misc
 ----
 
 
+4.5.5 (2023-02-02)
+==================
+
+Features
+--------
+
+- Display boolean values in docs as true/false (was yes/no)
+  `AAH-1859 <https://issues.redhat.com/browse/AAH-1859>`_
+
+
+Bugfixes
+--------
+
+- Repair list of collection dependencies - add namespace to the link caption.
+  `AAH-1807 <https://issues.redhat.com/browse/AAH-1807>`_
+- Repair error mesages in EE form.
+  `AAH-1845 <https://issues.redhat.com/browse/AAH-1845>`_
+- Fix podman pull URLs when latest tag not present, fix digest urls
+  `AAH-1988 <https://issues.redhat.com/browse/AAH-1988>`_
+- Fix a bug where the UI was falsely reporting that collection dependencies don't exist.
+  `AAH-2018 <https://issues.redhat.com/browse/AAH-2018>`_
+- License fields on AH - blank or formatted incorrectly - Add comma separator between licences. And also hide license field when empty.
+  `AAH-2048 <https://issues.redhat.com/browse/AAH-2048>`_
+- Fix bug where the resource type on "reserved resources" on the task management page always returns "api".
+  `AAH-2055 <https://issues.redhat.com/browse/AAH-2055>`_
+
+
+----
+
+
+4.5.4 (2022-11-21)
+==================
+
+Bugfixes
+--------
+
+- Fix success alert after signature upload failure
+  `AAH-1769 <https://issues.redhat.com/browse/AAH-1769>`_
+
+
+----
+
+
+4.5.3 (2022-09-20)
+==================
+
+Bugfixes
+--------
+
+- EE list: filter by name__icontains, not name exact
+  `AAH-1913 <https://issues.redhat.com/browse/AAH-1913>`_
+
+
+----
+
+
+4.5.2 (2022-08-23)
+==================
+
+Features
+--------
+
+- Show the proper MINIMUM PASSWORD LENGTH in UI
+  `AAH-1573 <https://issues.redhat.com/browse/AAH-1573>`_
+- Localize collection modules/roles/... counter
+  `AAH-1684 <https://issues.redhat.com/browse/AAH-1684>`_
+
+
+Bugfixes
+--------
+
+- Repaired - Do not use global active CSS selector in sort table headers
+  `AAH-1546 <https://issues.redhat.com/browse/AAH-1546>`_
+- Wait for setDeprecation task before running loadCollections and success handler.
+  `AAH-1596 <https://issues.redhat.com/browse/AAH-1596>`_
+- Edit group permissions - correctly hide user/group-related permissions in keycloak mode
+  `AAH-1688 <https://issues.redhat.com/browse/AAH-1688>`_
+
+
+Misc
+----
+
+- `AAH-1428 <https://issues.redhat.com/browse/AAH-1428>`_, `AAH-1553 <https://issues.redhat.com/browse/AAH-1553>`_, `AAH-1575 <https://issues.redhat.com/browse/AAH-1575>`_, `AAH-1578 <https://issues.redhat.com/browse/AAH-1578>`_, `AAH-1710 <https://issues.redhat.com/browse/AAH-1710>`_
+
+
+----
+
+
 4.5.0 (2022-05-04)
 ==================
 
@@ -398,6 +684,76 @@ Misc
 ----
 
 - `AAH-149 <https://issues.redhat.com/browse/AAH-149>`_, `AAH-396 <https://issues.redhat.com/browse/AAH-396>`_, `AAH-624 <https://issues.redhat.com/browse/AAH-624>`_, `AAH-628 <https://issues.redhat.com/browse/AAH-628>`_, `AAH-635 <https://issues.redhat.com/browse/AAH-635>`_, `AAH-820 <https://issues.redhat.com/browse/AAH-820>`_, `AAH-822 <https://issues.redhat.com/browse/AAH-822>`_, `AAH-832 <https://issues.redhat.com/browse/AAH-832>`_, `AAH-968 <https://issues.redhat.com/browse/AAH-968>`_, `AAH-1000 <https://issues.redhat.com/browse/AAH-1000>`_, `AAH-1059 <https://issues.redhat.com/browse/AAH-1059>`_, `AAH-1060 <https://issues.redhat.com/browse/AAH-1060>`_, `AAH-1061 <https://issues.redhat.com/browse/AAH-1061>`_, `AAH-1062 <https://issues.redhat.com/browse/AAH-1062>`_, `AAH-1069 <https://issues.redhat.com/browse/AAH-1069>`_, `AAH-1070 <https://issues.redhat.com/browse/AAH-1070>`_, `AAH-1072 <https://issues.redhat.com/browse/AAH-1072>`_, `AAH-1088 <https://issues.redhat.com/browse/AAH-1088>`_, `AAH-1106 <https://issues.redhat.com/browse/AAH-1106>`_, `AAH-1111 <https://issues.redhat.com/browse/AAH-1111>`_, `AAH-1189 <https://issues.redhat.com/browse/AAH-1189>`_, `AAH-1195 <https://issues.redhat.com/browse/AAH-1195>`_, `AAH-1198 <https://issues.redhat.com/browse/AAH-1198>`_, `AAH-1199 <https://issues.redhat.com/browse/AAH-1199>`_, `AAH-1204 <https://issues.redhat.com/browse/AAH-1204>`_, `AAH-1205 <https://issues.redhat.com/browse/AAH-1205>`_, `AAH-1207 <https://issues.redhat.com/browse/AAH-1207>`_, `AAH-1235 <https://issues.redhat.com/browse/AAH-1235>`_, `AAH-1245 <https://issues.redhat.com/browse/AAH-1245>`_, `AAH-1253 <https://issues.redhat.com/browse/AAH-1253>`_, `AAH-1264 <https://issues.redhat.com/browse/AAH-1264>`_, `AAH-1273 <https://issues.redhat.com/browse/AAH-1273>`_, `AAH-1282 <https://issues.redhat.com/browse/AAH-1282>`_, `AAH-1333 <https://issues.redhat.com/browse/AAH-1333>`_, `AAH-1357 <https://issues.redhat.com/browse/AAH-1357>`_, `AAH-1410 <https://issues.redhat.com/browse/AAH-1410>`_, `AAH-1432 <https://issues.redhat.com/browse/AAH-1432>`_, `AAH-1439 <https://issues.redhat.com/browse/AAH-1439>`_
+
+
+----
+
+
+4.4.5 (2022-11-21)
+==================
+
+Misc
+----
+
+- `AAH-1575 <https://issues.redhat.com/browse/AAH-1575>`_
+
+
+----
+
+
+4.4.4 (2022-07-26)
+==================
+
+Features
+--------
+
+- Create a changelog for the UI.
+  `AAH-1228 <https://issues.redhat.com/browse/AAH-1228>`_
+- Show the proper MINIMUM PASSWORD LENGTH in UI
+  `AAH-1573 <https://issues.redhat.com/browse/AAH-1573>`_
+- Localize collection modules/roles/... counter
+  `AAH-1684 <https://issues.redhat.com/browse/AAH-1684>`_
+
+
+Bugfixes
+--------
+
+- Fix "Publish container images" documentation link version - 2.0-ea -> 2.1
+  `AAH-1364 <https://issues.redhat.com/browse/AAH-1364>`_
+- Fix an error where images created by ansible builder couldn't be inspected in the UI.
+  `AAH-1527 <https://issues.redhat.com/browse/AAH-1527>`_
+- Edit group permissions - correctly hide user/group-related permissions in keycloak mode
+  `AAH-1688 <https://issues.redhat.com/browse/AAH-1688>`_
+
+
+Misc
+----
+
+- `AAH-396 <https://issues.redhat.com/browse/AAH-396>`_
+
+
+----
+
+
+4.4.3 (2022-03-16)
+==================
+
+Misc
+----
+
+- `AAH-1198 <https://issues.redhat.com/browse/AAH-1198>`_, `AAH-1199 <https://issues.redhat.com/browse/AAH-1199>`_, `AAH-1204 <https://issues.redhat.com/browse/AAH-1204>`_, `AAH-1205 <https://issues.redhat.com/browse/AAH-1205>`_
+
+
+----
+
+
+4.4.2 (2022-03-01)
+==================
+
+Misc
+----
+
+- `AAH-635 <https://issues.redhat.com/browse/AAH-635>`_, `AAH-820 <https://issues.redhat.com/browse/AAH-820>`_, `AAH-968 <https://issues.redhat.com/browse/AAH-968>`_, `AAH-1069 <https://issues.redhat.com/browse/AAH-1069>`_, `AAH-1070 <https://issues.redhat.com/browse/AAH-1070>`_, `AAH-1195 <https://issues.redhat.com/browse/AAH-1195>`_, `AAH-1207 <https://issues.redhat.com/browse/AAH-1207>`_, `AAH-1253 <https://issues.redhat.com/browse/AAH-1253>`_
 
 
 ----

@@ -1,19 +1,20 @@
 import { Trans, t } from '@lingui/macro';
-import { Alert, List, ListItem, ListVariant } from '@patternfly/react-core';
+import { List, ListItem, ListVariant } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Alert,
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ExternalLink,
   LandingPageCard,
   Main,
   MultiSearchSearch,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import './landing-page.scss';
 
 interface IState {
@@ -47,7 +48,15 @@ export class LandingPage extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Welcome to Galaxy`} />
         <Main>
           <MultiSearchSearch
@@ -87,12 +96,10 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <p>
                     <Trans>
                       Use the{' '}
-                      <Link to={formatPath(Paths.collections)}>
-                        Search page{' '}
-                      </Link>
+                      <Link to={formatPath(Paths.search)}>Search page </Link>
                       to find content for your project, then download them onto
                       your Ansible host using{' '}
-                      <ExternalLink href='https://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html#the-command-line-tool'>
+                      <ExternalLink href='https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html'>
                         ansible-galaxy
                       </ExternalLink>
                       , the command line tool that comes bundled with Ansible.
@@ -114,7 +121,7 @@ export class LandingPage extends Component<RouteProps, IState> {
                     <Trans>
                       Red Hat is working on exciting new Ansible content
                       development capabilities within the context of{' '}
-                      <ExternalLink href='https://www.redhat.com/en/engage/project-wisdom?extIdCarryOver=true&sc_cid=701f2000001OH6uAAG'>
+                      <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed'>
                         Ansible Lightspeed
                       </ExternalLink>{' '}
                       to help other automators build Ansible content. Your roles
@@ -166,7 +173,7 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <p>{t`Try Red Hat Ansible Automation Platform`}</p>
                   <br />
                   <p>
-                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/try-it?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
+                    <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/trial?sc_cid=7013a0000030vCCAAY'>{t`Get the trial`}</ExternalLink>
                   </p>
                 </>
               }
@@ -194,10 +201,6 @@ export class LandingPage extends Component<RouteProps, IState> {
         </Main>
       </>
     );
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   private addAlert(alert: AlertType) {

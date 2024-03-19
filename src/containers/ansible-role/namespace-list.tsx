@@ -1,26 +1,26 @@
 import { t } from '@lingui/macro';
 import { Button, DataList } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { LegacyNamespaceAPI, LegacyNamespaceListType } from 'src/api';
+import { LegacyNamespaceAPI, type LegacyNamespaceListType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyNamespaceListItem,
-  LoadingPageSpinner,
+  LightspeedModal,
+  LoadingSpinner,
   RoleNamespaceEditModal,
+  RoleNamespaceItem,
   RoleNamespaceModal,
-  WisdomModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   handleHttpError,
   withRouter,
@@ -98,18 +98,18 @@ class AnsibleRoleNamespaceList extends Component<
       );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(alert: AlertType) {
     this.setState({
       alerts: [...this.state.alerts, alert],
     });
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   render() {
@@ -157,7 +157,15 @@ class AnsibleRoleNamespaceList extends Component<
 
     return (
       <div>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {createModal && (
           <RoleNamespaceModal
             addAlert={(alert) => this.addAlert(alert)}
@@ -169,7 +177,7 @@ class AnsibleRoleNamespaceList extends Component<
           />
         )}
         {lightspeedModal && (
-          <WisdomModal
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ lightspeedModal: null })}
             reference={lightspeedModal}
@@ -185,7 +193,7 @@ class AnsibleRoleNamespaceList extends Component<
         )}
         <BaseHeader title={t`Role namespaces`} />
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No role namespaces yet`}
@@ -217,13 +225,13 @@ class AnsibleRoleNamespaceList extends Component<
                 <DataList aria-label={t`List of role namespaces`}>
                   {roleNamespaces &&
                     roleNamespaces.map((lnamespace) => (
-                      <LegacyNamespaceListItem
+                      <RoleNamespaceItem
                         key={lnamespace.id}
                         namespace={lnamespace}
                         openEditModal={(namespace) =>
                           this.setState({ editModal: namespace })
                         }
-                        openWisdomModal={({ name }) =>
+                        openLightspeedModal={({ name }) =>
                           this.setState({ lightspeedModal: name })
                         }
                       />

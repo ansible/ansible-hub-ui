@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
-import { Spinner } from '@patternfly/react-core';
+import { Table, Td, Th, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ansibleRepositoryVersionRevertAction } from 'src/actions';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
-  AnsibleRepositoryVersionType,
+  type AnsibleRepositoryType,
+  type AnsibleRepositoryVersionType,
   PulpAPI,
 } from 'src/api';
 import {
@@ -14,6 +14,7 @@ import {
   DetailList,
   Details,
   ListItemActions,
+  Spinner,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { parsePulpIDFromURL } from 'src/utilities';
@@ -58,8 +59,8 @@ const VersionContent = ({
     },
     description,
   }) => (
-    <tr>
-      <td>
+    <Tr>
+      <Td>
         <Link
           to={formatPath(
             Paths.collectionByRepo,
@@ -75,9 +76,9 @@ const VersionContent = ({
         >
           {namespace}.{name} v{version}
         </Link>
-      </td>
-      <td>{description}</td>
-    </tr>
+      </Td>
+      <Td>{description}</Td>
+    </Tr>
   );
 
   return (
@@ -119,18 +120,18 @@ const ContentSummary = ({ data }: { data: object }) => {
   }
 
   return (
-    <table className='pf-c-table'>
-      <tr>
-        <th>{t`Count`}</th>
-        <th>{t`Pulp type`}</th>
-      </tr>
+    <Table>
+      <Tr>
+        <Th>{t`Count`}</Th>
+        <Th>{t`Pulp type`}</Th>
+      </Tr>
       {Object.entries(data).map(([k, v]) => (
-        <tr key={k}>
-          <td>{v['count']}</td>
-          <th>{k}</th>
-        </tr>
+        <Tr key={k}>
+          <Td>{v['count']}</Td>
+          <Th>{k}</Th>
+        </Tr>
       ))}
-    </table>
+    </Table>
   );
 };
 
@@ -211,8 +212,8 @@ export const RepositoryVersionsTab = ({
     );
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link
             to={formatPath(
               Paths.ansibleRepositoryDetail,
@@ -228,12 +229,12 @@ export const RepositoryVersionsTab = ({
             {number}
           </Link>
           {isLatest ? ' ' + t`(latest)` : null}
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={kebabItems} />
-      </tr>
+      </Tr>
     );
   };
 
@@ -271,7 +272,7 @@ export const RepositoryVersionsTab = ({
           ]}
         />
         <div
-          className='pf-c-page__main-section'
+          className='pf-v5-c-page__main-section'
           style={{ padding: '8px 0', margin: '24px -16px 0' }}
         />
         <VersionContent

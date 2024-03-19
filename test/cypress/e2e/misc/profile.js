@@ -1,5 +1,11 @@
 const apiPrefix = Cypress.env('apiPrefix');
 
+const helperText = (id) =>
+  cy
+    .get(`#${id}`)
+    .parents('.pf-v5-c-form__group')
+    .find('.pf-v5-c-helper-text__item-text');
+
 describe('My Profile Tests', () => {
   const username = 'nopermission';
   const password = 'n0permissi0n';
@@ -11,12 +17,9 @@ describe('My Profile Tests', () => {
 
   beforeEach(() => {
     cy.login();
-    // open the dropdown labeled with the username and then...
     cy.get('[data-cy="user-dropdown"] button').click();
-    // a little hacky, but basically
-    // just click the one link that says 'My profile'.
-    cy.get('a').contains('My profile').click();
-    cy.get('button:contains("Edit")').click();
+    cy.contains('a', 'My profile').click();
+    cy.contains('button', 'Edit').click();
   });
 
   it('only has input fields for name, email, username, password and pass confirmation', () => {
@@ -38,16 +41,17 @@ describe('My Profile Tests', () => {
   });
 
   it('superuser cannot change its superuser rights', () => {
-    cy.get('.pf-c-switch__input').should('be.disabled');
+    cy.get('.pf-v5-c-switch__input').should('be.disabled');
   });
 
   it('user cannot set superusers rights', () => {
     cy.login(username, password);
 
     cy.get('[data-cy="user-dropdown"] button').click();
-    cy.get('a').contains('My profile').click();
+    cy.contains('a', 'My profile').click();
+    cy.contains('button', 'Edit').click();
 
-    cy.get('.pf-c-switch__input').should('be.disabled');
+    cy.get('.pf-v5-c-switch__input').should('be.disabled');
   });
 
   it('email must be email', () => {
@@ -58,14 +62,14 @@ describe('My Profile Tests', () => {
     cy.get('button:contains("Edit")').click();
 
     cy.get('#email').clear().type('test{enter}');
-    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+    helperText('email').should('contain', 'Enter a valid email address.');
 
     cy.get('#email').type('@example');
-    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+    helperText('email').should('contain', 'Enter a valid email address.');
 
     cy.get('#email').type('.com{enter}');
 
-    cy.get('[aria-label="Success Alert"]').should('be.visible');
+    cy.get('.pf-v5-c-alert.pf-m-success').should('be.visible');
   });
 
   it('password validations', () => {
@@ -78,44 +82,38 @@ describe('My Profile Tests', () => {
     cy.get('#password').clear().type('12345');
     cy.get('#password-confirm').clear().type('12345');
     cy.contains('Save').click();
-    cy.get('#password-helper').contains('This password is entirely numeric.');
+    helperText('password').contains('This password is entirely numeric.');
 
     cy.get('#password').clear().type('pwd12345');
     cy.get('#password-confirm').clear().type('pwd12345');
     cy.contains('Save').click();
-    cy.get('#password-helper').contains(
+    helperText('password').contains(
       'This password is too short. It must contain at least 9 characters.',
     );
 
     cy.get('#password-confirm').clear().type('pwd123456');
-    cy.get('#password-confirm-helper').should(
-      'contain',
-      'Passwords do not match',
-    );
+    helperText('password-confirm').should('contain', 'Passwords do not match');
 
     cy.get('#password').clear().type(password);
     cy.get('#password-confirm').clear().type(password);
-
-    cy.get('#password-confirm-helper').should('not.exist');
+    helperText('password-confirm').should('be.empty');
   });
 
   it('groups input is readonly', () => {
-    cy.get('[data-cy="UserForm-readonly-groups"]')
-      .find('input')
-      .should('not.exist');
+    cy.get('[data-cy="UserForm-readonly-groups"]').should('not.exist');
   });
 
   it('user can save form', () => {
     cy.intercept('PUT', `${apiPrefix}_ui/v1/me/`).as('saveForm');
 
     cy.contains('Save').click();
-    cy.get('[aria-label="Success Alert"]').contains(
+    cy.get('.pf-v5-c-alert.pf-m-success').contains(
       'Saved changes to user "admin".',
     );
 
     cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
 
-    cy.get('[aria-label="Success Alert"]').contains(
+    cy.get('.pf-v5-c-alert.pf-m-success').contains(
       'Saved changes to user "admin".',
     );
   });
@@ -126,7 +124,7 @@ describe('My Profile Tests', () => {
     cy.get('#last_name').clear().type('Last Name');
     cy.get('#email').clear().type('administrator@example.com');
 
-    cy.get('.pf-c-button').contains('Cancel').click();
+    cy.get('.pf-v5-c-button').contains('Cancel').click();
 
     cy.get('[data-cy="DataForm-field-username"]').should(
       'not.contain',

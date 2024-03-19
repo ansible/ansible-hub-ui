@@ -29,7 +29,7 @@ describe('view-only mode - with download', () => {
     ].forEach((item) => cy.menuMissing(item));
 
     // login button in top right nav
-    cy.contains('.pf-c-page__header-tools a', 'Login');
+    cy.contains('.pf-v5-c-masthead__content', 'Login');
   });
 
   it('can load Dashboard & Collections', () => {
@@ -40,9 +40,9 @@ describe('view-only mode - with download', () => {
     cy.assertTitle('Collections');
 
     // go to a detail screen
-    cy.get('.pf-c-card__header .name a').first().click();
+    cy.get('.pf-v5-c-card__header .name a').first().click();
 
-    cy.contains('.pf-c-button', 'Download tarball');
+    cy.contains('.pf-v5-c-button', 'Download tarball');
   });
 
   it('can load Namespaces', () => {
@@ -50,7 +50,7 @@ describe('view-only mode - with download', () => {
     cy.assertTitle('Namespaces');
 
     cy.contains('button', 'Create').should('not.exist');
-    cy.contains('.pf-c-tabs__item a', 'My namespaces').should('not.exist');
+    cy.contains('.pf-v5-c-tabs__item a', 'My namespaces').should('not.exist');
 
     // go to a (namespace) detail screen
     cy.contains('a', 'View collections').click();
@@ -63,6 +63,6 @@ describe('view-only mode - with download', () => {
   it('gets Unauthorized elsewhere', () => {
     cy.visit(`${uiPrefix}ansible/repositories`);
     cy.contains('You do not have access to Automation Hub');
-    cy.contains('.pf-c-button', 'Login');
+    cy.contains('.pf-v5-c-button', 'Login');
   });
 });

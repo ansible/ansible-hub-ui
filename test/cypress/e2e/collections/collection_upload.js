@@ -7,12 +7,11 @@ describe('Collection Upload Tests', () => {
 
   before(() => {
     cy.deleteNamespacesAndCollections();
-
-    cy.login();
     cy.deleteTestGroups();
     cy.deleteTestUsers();
-    cy.createUser(userName, userPassword);
+
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit('user create', userName, userPassword);
   });
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
@@ -104,9 +103,9 @@ describe('Collection Upload Tests', () => {
     cy.get('[data-cy="confirm-upload"]').click();
     cy.wait('@upload');
     cy.contains('My imports');
-    cy.get('.pf-c-label__content').contains('Completed', { timeout: 15000 });
-    cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
-    cy.get('.pf-c-label__content').contains('Running').should('not.exist');
+    cy.get('.pf-v5-c-label__content').contains('Completed', { timeout: 15000 });
+    cy.get('.pf-v5-c-label__content').contains('Failed').should('not.exist');
+    cy.get('.pf-v5-c-label__content').contains('Running').should('not.exist');
   });
 
   it('should not upload new collection version when user does not have permissions', () => {

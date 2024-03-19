@@ -1,43 +1,47 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Edit a namespace', () => {
-  let kebabToggle = () => {
+  const kebabToggle = () => {
     cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click({
       force: true,
     });
   };
 
-  let saveButton = () => {
+  const saveButton = () => {
     return cy.contains('Save');
   };
 
-  let getLinkTextField = () => {
+  const getLinkTextField = () => {
     return cy
       .get('div.useful-links > div.link-name input')
       .invoke('attr', 'placeholder', 'Link text')
       .click();
   };
 
-  let getUrlField = () => {
+  const getUrlField = () => {
     return cy.get('div.useful-links div.link-url #url').click();
   };
 
-  let linksHelper = () => {
-    return cy.get('#links-helper');
-  };
-
-  let getEditTab = () => {
+  const getEditTab = () => {
     return cy
       .get(
-        'ul.pf-c-tabs__list > li.pf-c-tabs__item > a > span.pf-c-tabs__item-text',
+        'ul.pf-v5-c-tabs__list > li.pf-v5-c-tabs__item > a > span.pf-v5-c-tabs__item-text',
       )
       .contains('Edit resources')
       .click();
   };
 
-  let getTextField = () => {
-    return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
+  const getTextField = () => {
+    return cy.get(
+      'div.pf-v5-c-form__group-control .pf-v5-c-form-control textarea',
+    );
   };
+
+  const helperText = (id) =>
+    cy
+      .get(`#${id}`)
+      .parents('.pf-v5-c-form__group')
+      .find('.pf-v5-c-helper-text__item-text');
 
   before(() => {
     cy.deleteTestGroups();
@@ -66,8 +70,7 @@ describe('Edit a namespace', () => {
         'This name is too long vaðlaheiðarvegavinnuverkfærageymsluskúraútidyralyklakippuhringur',
       );
     saveButton().click();
-    let helperText = cy.get('#company-helper');
-    helperText.should(
+    helperText('company').should(
       'have.text',
       'Ensure this field has no more than 64 characters.',
     );
@@ -84,17 +87,17 @@ describe('Edit a namespace', () => {
     const url = 'https://example.com/';
     cy.get('#avatar_url').clear().type('abcde');
     saveButton().click();
-    cy.get('#avatar_url-helper').should('have.text', 'Enter a valid URL.');
+    helperText('avatar_url').should('have.text', 'Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
     saveButton().click();
-    cy.get('div.title-box > div.image > img').should('have.attr', 'src', url);
+    cy.get('[data-cy="title-box"] img').should('have.attr', 'src', url);
   });
 
   it('tests the Description field', () => {
     cy.get('#description').type(`
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna velit, tempor at interdum viverra, egestas quis libero. Aenean arcu magna, sodales ut dictum accumsan, consectetur vitae mi. Maecenas efficitur ipsum a orci condimentum, in lobortis turpis accumsan. Vivamus non libero varius, vulputate nunc vitae, posuere risus. In ut malesuada magna. Cras ac rhoncus mi. Nulla tempus semper interdum. Aliquam scelerisque, purus quis vestibulum finibus, dolor augue dictum erat, id commodo justo quam non metus.`);
     saveButton().click();
-    cy.get('#description-helper').should(
+    helperText('description').should(
       'have.text',
       'Ensure this field has no more than 256 characters.',
     );
@@ -107,7 +110,7 @@ describe('Edit a namespace', () => {
     getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
     getUrlField().first().type('https://example.com');
     saveButton().click();
-    linksHelper().should(
+    helperText('url').should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );

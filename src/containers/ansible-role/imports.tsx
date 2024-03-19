@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import React, {
   Component,
-  RefObject,
+  type RefObject,
   createRef,
   useEffect,
   useState,
@@ -10,19 +10,19 @@ import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
   LegacyRoleAPI,
-  LegacyRoleImportDetailType,
+  type LegacyRoleImportDetailType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ImportConsole,
   Main,
   RoleImportList,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];
@@ -118,10 +118,6 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
     clearInterval(this.polling);
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   private addAlert(alert) {
     this.setState({
       alerts: [...this.state.alerts, alert],
@@ -135,7 +131,15 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
       <>
         <div ref={this.topOfPage} />
         <BaseHeader title={t`Role imports`} />
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <Main>
           <section className='body'>
             <div style={{ display: 'flex' }} data-cy='AnsibleRoleImports'>
@@ -170,8 +174,12 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private selectImport(selectedImport) {

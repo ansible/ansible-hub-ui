@@ -1,0 +1,56 @@
+$breakpoint-md: 1000px;
+
+.hub-header-bordered {
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.hub-header-image {
+  padding-right: 16px;
+}
+
+.hub-header-bottom {
+  padding-top: 10px;
+}
+
+.hub-tab-link-container {
+  display: flex;
+  margin-top: 10px;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column-reverse;
+  }
+
+  .tabs {
+    flex-grow: 0;
+  }
+
+  // Tabs isDisabled
+  .pf-v5-c-tabs__item.disabled .pf-v5-c-tabs__link {
+    cursor: not-allowed;
+  }
+
+  .links {
+    @media (min-width: $breakpoint-md) {
+      justify-content: flex-end;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      margin-bottom: 10px;
+    }
+
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    div {
+      @media (min-width: $breakpoint-md) {
+        margin-left: 20px;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-right: 20px;
+      }
+    }
+  }
+}

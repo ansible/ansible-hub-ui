@@ -1,28 +1,28 @@
 import { t } from '@lingui/macro';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoleAPI, RoleType } from 'src/api';
+import { RoleAPI, type RoleType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   RoleForm,
   RoleHeader,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
   translateLockedRole,
   validateInput,
 } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   role: RoleType;
@@ -51,8 +51,6 @@ interface IState {
 
 class EditRole extends Component<RouteProps, IState> {
   static contextType = AppContext;
-
-  nonQueryStringParams = ['role'];
 
   constructor(props) {
     super(props);
@@ -132,12 +130,20 @@ class EditRole extends Component<RouteProps, IState> {
 
     if (!role && alerts && alerts.length) {
       return (
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
       );
     }
 
     if (!role) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const breadcrumbs = [
@@ -147,7 +153,15 @@ class EditRole extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
           subTitle={translateLockedRole(role.name, role.description)}
@@ -242,10 +256,6 @@ class EditRole extends Component<RouteProps, IState> {
 
   private toError(validated: boolean) {
     return validated ? 'default' : 'error';
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }
 

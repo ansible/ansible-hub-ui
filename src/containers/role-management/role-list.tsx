@@ -1,18 +1,19 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Td } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { RoleAPI, RoleType } from 'src/api';
+import { RoleAPI, type RoleType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -24,16 +25,16 @@ import {
   ExpandableRow,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   PermissionCategories,
   RoleListTable,
   Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import {
   ParamHelper,
   errorMessage,
@@ -178,7 +179,15 @@ export class RoleList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {showDeleteModal && roleToEdit && (
           <DeleteModal
             cancelAction={() =>
@@ -211,7 +220,7 @@ export class RoleList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -307,15 +316,15 @@ export class RoleList extends Component<RouteProps, IState> {
                           colSpan={6}
                           rowIndex={i}
                         >
-                          <td data-cy='name-field'>{role.name}</td>
-                          <td>
+                          <Td data-cy='name-field'>{role.name}</Td>
+                          <Td>
                             {translateLockedRole(role.name, role.description)}
-                          </td>
-                          <td>
+                          </Td>
+                          <Td>
                             <DateComponent date={role.pulp_created} />
-                          </td>
+                          </Td>
 
-                          <td>
+                          <Td>
                             {role.locked ? (
                               <Tooltip
                                 content={t`Built-in roles cannot be edited or deleted.`}
@@ -327,7 +336,7 @@ export class RoleList extends Component<RouteProps, IState> {
                             ) : (
                               t`Editable`
                             )}
-                          </td>
+                          </Td>
                           {isSuperuser && (
                             <ListItemActions
                               kebabItems={this.renderDropdownItems(role)}
@@ -464,8 +473,12 @@ export class RoleList extends Component<RouteProps, IState> {
     });
   };
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(title, variant, description?) {
@@ -479,10 +492,6 @@ export class RoleList extends Component<RouteProps, IState> {
         },
       ],
     });
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }
 

@@ -37,7 +37,7 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 });
 
 Cypress.Commands.add('assertTitle', {}, (title) => {
-  cy.contains('.pf-c-title', title);
+  cy.contains('.pf-v5-c-title', title);
 });
 
 Cypress.Commands.add('openHeaderKebab', {}, () => {
@@ -102,7 +102,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   )} ${args}`;
 
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
-    console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
+    console.log(`RUN ${cmd}`);
 
     if (code) {
       cy.log('galaxykit code: ' + code);
@@ -153,8 +153,9 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
 
     cy.get('input[id="username"]').type(username);
     cy.get('input[id="password"]').type(password);
-    //advanced options
-    cy.get('.pf-c-expandable-section__toggle-text').click();
+
+    // advanced options
+    cy.get('.pf-v5-c-expandable-section__toggle-text').click();
     cy.get('input[id="proxy_url"]').type(proxy_url);
     cy.get('input[id="proxy_username"]').type(proxy_username);
     cy.get('input[id="proxy_password"]').type(proxy_password);
@@ -193,7 +194,7 @@ Cypress.Commands.add(
     cy.get('input[id="upstreamName"]').type(upstream_name);
 
     cy.get(
-      '.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead',
+      '.hub-formgroup-registry .pf-v5-c-form-control.pf-v5-c-select__toggle-typeahead input',
     )
       .click()
       .type(registry);
@@ -202,7 +203,7 @@ Cypress.Commands.add(
     if (include_tags) {
       cy.get('input[id="addTagsInclude"]')
         .type(include_tags)
-        .parent()
+        .parents('.pf-v5-c-input-group')
         .find('button', 'Add')
         .click();
     }
@@ -210,7 +211,7 @@ Cypress.Commands.add(
     if (exclude_tags) {
       cy.get('input[id="addTagsExclude"]')
         .type(exclude_tags)
-        .parent()
+        .parents('.pf-v5-c-input-group')
         .find('button', 'Add')
         .click();
     }
@@ -276,15 +277,15 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .find('button[aria-label="Actions"]')
     .click()
     .parents('tr')
-    .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
+    .contains('.pf-v5-c-dropdown__menu-item', 'Sync from registry')
     .click();
   cy.contains(
-    '.pf-c-alert__title',
+    '.pf-v5-c-alert__title',
     `Sync started for execution environment "${name}".`,
   );
   // wait for finish
   cy.contains('a', 'detail page').click();
-  cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
+  cy.contains('[data-cy="title-box"] h1', 'Completed', { timeout: 30000 });
 });
 
 Cypress.Commands.add('deleteRegistries', {}, () => {

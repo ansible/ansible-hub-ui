@@ -1,15 +1,9 @@
 import { Trans, msg, t } from '@lingui/macro';
-import {
-  Button,
-  FormGroup,
-  Modal,
-  Spinner,
-  Switch,
-} from '@patternfly/react-core';
+import { Button, FormGroup, Modal, Switch } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnsibleRepositoryAPI } from 'src/api';
-import { HelperText } from 'src/components';
+import { HelpButton, Spinner } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canSyncAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
@@ -70,14 +64,16 @@ const SyncModal = ({
       <FormGroup
         label={t`Mirror`}
         labelIcon={
-          <HelperText
+          <HelpButton
             content={t`If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content.`}
           />
         }
       >
         <Switch
           isChecked={syncParams.mirror}
-          onChange={(mirror) => setSyncParams({ ...syncParams, mirror })}
+          onChange={(_event, mirror) =>
+            setSyncParams({ ...syncParams, mirror })
+          }
           label={t`Content not present in remote repository will be removed from the local repository`}
           labelOff={t`Sync will only add missing content`}
         />
@@ -86,14 +82,16 @@ const SyncModal = ({
       <FormGroup
         label={t`Optimize`}
         labelIcon={
-          <HelperText
+          <HelpButton
             content={t`Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option.`}
           />
         }
       >
         <Switch
           isChecked={syncParams.optimize}
-          onChange={(optimize) => setSyncParams({ ...syncParams, optimize })}
+          onChange={(_event, optimize) =>
+            setSyncParams({ ...syncParams, optimize })
+          }
           label={t`Only perform the sync if changes are reported by the remote server.`}
           labelOff={t`Force a sync to happen.`}
         />

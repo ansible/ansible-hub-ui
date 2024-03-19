@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { DataList, Label } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -11,16 +11,16 @@ import {
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionListItem,
   EmptyStateXs,
-  LegacyNamespaceListItem,
-  LegacyRoleListItem,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   MultiSearchSearch,
   NamespaceListItem,
+  RoleItem,
+  RoleNamespaceItem,
   Tooltip,
   closeAlert,
 } from 'src/components';
@@ -28,7 +28,7 @@ import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   handleHttpError,
   withRouter,
 } from 'src/utilities';
@@ -42,7 +42,7 @@ const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
 const SectionSeparator = () => <section>&nbsp;</section>;
 
 const SectionTitle = ({ children }: { children: ReactNode }) => (
-  <h2 className='pf-c-title'>{children}</h2>
+  <h2 className='pf-v5-c-title'>{children}</h2>
 );
 
 const Section = ({
@@ -186,7 +186,7 @@ const MultiSearch = (props: RouteProps) => {
     items === loading || !keywords || items.length ? (
       <Section title={title}>
         {items === loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : !keywords ? (
           showAllLink
         ) : (
@@ -295,7 +295,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching roles`}>
               {roles.map((r) => (
-                <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
+                <RoleItem key={r.id} role={r} show_thumbnail />
               ))}
             </DataList>
           </ResultsSection>
@@ -318,7 +318,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching role namespaces`}>
               {roleNamespaces.map((r) => (
-                <LegacyNamespaceListItem key={r.id} namespace={r} />
+                <RoleNamespaceItem key={r.id} namespace={r} />
               ))}
             </DataList>
           </ResultsSection>
@@ -354,8 +354,8 @@ const MultiSearch = (props: RouteProps) => {
                   className='card-wrapper'
                   style={{ width: '300px' }}
                 >
-                  <article className='pf-c-card'>
-                    <div className='pf-c-card__title'>
+                  <article className='pf-v5-c-card'>
+                    <div className='pf-v5-c-card__title'>
                       <Link
                         to={formatEEPath(Paths.executionEnvironmentDetail, {
                           container: item.pulp.distribution.base_path,
@@ -364,14 +364,14 @@ const MultiSearch = (props: RouteProps) => {
                         {item.name}
                       </Link>
                     </div>
-                    <div className='pf-c-card__body pf-m-truncate'>
+                    <div className='pf-v5-c-card__body pf-m-truncate'>
                       {item.description ? (
                         <Tooltip content={item.description}>
                           {item.description}
                         </Tooltip>
                       ) : null}
                     </div>
-                    <div className='pf-c-card__footer'>
+                    <div className='pf-v5-c-card__footer'>
                       <Label>
                         {item.pulp.repository.remote ? t`Remote` : t`Local`}
                       </Label>

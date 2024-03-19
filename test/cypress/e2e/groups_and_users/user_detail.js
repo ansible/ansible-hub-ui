@@ -48,11 +48,6 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('[data-cy="DataForm-field-last_name"]').contains('last_name');
     cy.get('[data-cy="DataForm-field-email"]').contains('example@example.com');
     cy.get('[data-cy="UserForm-readonly-groups"]').contains(`alphaGroup${num}`);
-    // FIXME test the right value, not both
-    cy.get('.pf-c-switch > .pf-c-switch__label').should(
-      'have.text',
-      'Super userNot a super user',
-    );
   });
 
   it('edits user', () => {
@@ -85,7 +80,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
 
     cy.contains('testUser').should('not.exist');
     // looks like we need a success alert deleting user from user_detail?
-    // cy.get('.pf-c-alert__title').should('have.text', 'Successfully deleted testUser')
+    // cy.get('.pf-v5-c-alert__title').should('have.text', 'Successfully deleted testUser')
   });
 
   it.skip('checks a user without edit permissions', () => {

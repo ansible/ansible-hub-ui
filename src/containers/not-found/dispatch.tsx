@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Bullseye, DataList } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotFoundImage from 'src/../static/images/not_found.svg';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
@@ -8,13 +8,13 @@ import {
   BaseHeader,
   CollectionListItem,
   EmptyStateNoData,
-  LegacyRoleListItem,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
+  RoleItem,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
   <section className='body' {...rest}>
@@ -25,7 +25,7 @@ const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
 const SectionSeparator = () => <section>&nbsp;</section>;
 
 const SectionTitle = ({ children }: { children: ReactNode }) => (
-  <h2 className='pf-c-title'>{children}</h2>
+  <h2 className='pf-v5-c-title'>{children}</h2>
 );
 
 const Dispatch = ({ location, navigate }: RouteProps) => {
@@ -102,7 +102,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
             <div className='hub-c-bullseye__center'>
               <img src={NotFoundImage} alt={t`Not found`} width='128px' />
               <div>{t`We couldn't find the page you're looking for!`}</div>
-              <div className='pf-c-content'>
+              <div className='pf-v5-c-content'>
                 <Trans>
                   Pathname{' '}
                   <pre style={{ display: 'inline-block' }}>{pathname}</pre>{' '}
@@ -120,7 +120,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
           <SectionTitle>{t`Collections`}</SectionTitle>
 
           {collections === null ? (
-            <LoadingPageSpinner />
+            <LoadingSpinner />
           ) : collections.length === 0 ? (
             <EmptyStateNoData
               title={t`No matching collections found.`}
@@ -155,7 +155,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
               <SectionTitle>{t`Roles`}</SectionTitle>
 
               {roles === null ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : roles.length === 0 ? (
                 <EmptyStateNoData
                   title={t`No matching roles found.`}
@@ -169,7 +169,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                 <>
                   <DataList aria-label={t`Available matching roles`}>
                     {roles.map((r) => (
-                      <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
+                      <RoleItem key={r.id} role={r} show_thumbnail />
                     ))}
                   </DataList>
                   <Link

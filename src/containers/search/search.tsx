@@ -1,18 +1,18 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
-import React, { Component, ReactNode } from 'react';
+import React, { Component, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   MyNamespaceAPI,
   MySyncListAPI,
-  SyncListType,
+  type SyncListType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionCard,
   CollectionDropdown,
@@ -24,16 +24,16 @@ import {
   HubListToolbar,
   HubPagination,
   ImportModal,
-  LoadingPageSpinner,
-  closeAlertMixin,
+  LoadingSpinner,
+  closeAlert,
   collectionFilter,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -130,26 +130,24 @@ class Search extends Component<RouteProps, IState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   render() {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />;
     }
 
     const {
-      loading,
+      alerts,
       collections,
-      params,
+      confirmDelete,
       count,
+      deleteCollection,
+      isDeletionPending,
+      loading,
+      params,
       showImportModal,
       updateCollection,
-      deleteCollection,
-      confirmDelete,
-      isDeletionPending,
     } = this.state;
+
     const noData =
       collections.length === 0 &&
       !filterIsSet(params, [
@@ -172,8 +170,13 @@ class Search extends Component<RouteProps, IState> {
     return (
       <div className='search-page'>
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         <DeleteCollectionModal
           deleteCollection={deleteCollection}
@@ -232,7 +235,7 @@ class Search extends Component<RouteProps, IState> {
           />
         )}
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No collections yet`}
@@ -558,8 +561,12 @@ class Search extends Component<RouteProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

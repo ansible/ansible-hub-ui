@@ -6,12 +6,13 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { TaskManagementAPI, TaskType } from 'src/api';
+import { TaskManagementAPI, type TaskType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -21,18 +22,17 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   HubPagination,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   StatusIndicator,
-  Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -113,7 +113,15 @@ export class TaskListView extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={t`Task management`} />
         {unauthorised ? (
@@ -126,7 +134,7 @@ export class TaskListView extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -200,7 +208,7 @@ export class TaskListView extends Component<RouteProps, IState> {
                     }}
                   />
                 </div>
-                {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
                 <HubPagination
                   params={params}
@@ -219,15 +227,22 @@ export class TaskListView extends Component<RouteProps, IState> {
 
   private renderTable(params) {
     const { items } = this.state;
+
     if (items.length === 0) {
       return <EmptyStateFilter />;
     }
+
     const sortTableOptions = {
       headers: [
         {
           title: t`Task name`,
           type: 'alpha',
           id: 'name',
+        },
+        {
+          title: t`Description`,
+          type: 'none',
+          id: 'description',
         },
         {
           title: t`Created on`,
@@ -253,17 +268,14 @@ export class TaskListView extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Task list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`Task list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
         />
-        <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
-      </table>
+        <Tbody>{items.map((item, i) => this.renderTableRow(item, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -271,28 +283,30 @@ export class TaskListView extends Component<RouteProps, IState> {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
     const taskId = parsePulpIDFromURL(pulp_href);
+    const description = translateTask(name);
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={translateTask(name)}>{name}</Tooltip>
+            {name}
           </Link>
-        </td>
-        <td>
+        </Td>
+        <Td>{description !== name ? description : null}</Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={started_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={finished_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <StatusIndicator status={state} />
-        </td>
-        <td>{this.cancelButton(state, item)}</td>
-      </tr>
+        </Td>
+        <Td>{this.cancelButton(state, item)}</Td>
+      </Tr>
     );
   }
 
@@ -386,10 +400,6 @@ export class TaskListView extends Component<RouteProps, IState> {
       });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   private queryTasks() {
     this.setState({ loading: true }, () => {
       TaskManagementAPI.list(this.state.params)
@@ -432,8 +442,12 @@ export class TaskListView extends Component<RouteProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

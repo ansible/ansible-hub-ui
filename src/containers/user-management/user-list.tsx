@@ -1,20 +1,21 @@
 import { t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { UserAPI, UserType } from 'src/api';
+import { UserAPI, type UserType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -26,17 +27,17 @@ import {
   HubPagination,
   LabelGroup,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
   Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   withRouter,
@@ -119,7 +120,15 @@ class UserList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
@@ -210,7 +219,7 @@ class UserList extends Component<RouteProps, IState> {
                   }}
                 />
               </div>
-              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
               <HubPagination
                 params={params}
@@ -292,17 +301,14 @@ class UserList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`User list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
         />
-        <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{users.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -339,8 +345,8 @@ class UserList extends Component<RouteProps, IState> {
       );
     }
     return (
-      <tr data-cy={`UserList-row-${user.username}`} key={index}>
-        <td>
+      <Tr data-cy={`UserList-row-${user.username}`} key={index}>
+        <Td>
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}
           </Link>
@@ -357,22 +363,22 @@ class UserList extends Component<RouteProps, IState> {
               </Tooltip>
             </>
           )}
-        </td>
-        <td>{user.first_name}</td>
-        <td>{user.last_name}</td>
-        <td>{user.email}</td>
-        <td>
+        </Td>
+        <Td>{user.first_name}</Td>
+        <Td>{user.last_name}</Td>
+        <Td>{user.email}</Td>
+        <Td>
           <LabelGroup>
             {user.groups.map((g) => (
               <Label key={g.id}>{g.name}</Label>
             ))}
           </LabelGroup>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={user.date_joined} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
@@ -422,12 +428,12 @@ class UserList extends Component<RouteProps, IState> {
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

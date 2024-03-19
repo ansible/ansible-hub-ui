@@ -2,23 +2,24 @@ import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Checkbox,
-  DropdownItem,
   Text,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import { sum } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
+import { type ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
-  ClipboardCopy,
   CompoundFilter,
+  CopyURL,
   DateComponent,
   DeleteModal,
   EmptyStateFilter,
@@ -26,14 +27,14 @@ import {
   HubPagination,
   LabelGroup,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   PublishToControllerModal,
   ShaLabel,
   SortTable,
   TagLabel,
   TagManifestModal,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
@@ -44,7 +45,11 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import { IDetailSharedProps, containerName, withContainerRepo } from './base';
+import {
+  type IDetailSharedProps,
+  containerName,
+  withContainerRepo,
+} from './base';
 import './execution-environment-detail.scss';
 import './execution-environment-detail_images.scss';
 
@@ -71,8 +76,6 @@ class ExecutionEnvironmentDetailImages extends Component<
   IState
 > {
   static contextType = AppContext;
-
-  nonQueryStringParams = [];
 
   constructor(props) {
     super(props);
@@ -138,7 +141,7 @@ class ExecutionEnvironmentDetailImages extends Component<
       );
     }
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
     const sortTableOptions = {
       headers: [
@@ -146,7 +149,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           title: '',
           type: 'none',
           id: 'expand',
-          className: 'pf-c-table__toggle',
+          className: 'pf-v5-c-table__toggle',
         },
         {
           title: t`Tag`,
@@ -217,7 +220,9 @@ class ExecutionEnvironmentDetailImages extends Component<
             </>
             <Checkbox
               isChecked={confirmDelete}
-              onChange={(value) => this.setState({ confirmDelete: value })}
+              onChange={(_event, value) =>
+                this.setState({ confirmDelete: value })
+              }
               label={t`I understand that this action cannot be undone.`}
               id='delete_confirm'
             />
@@ -299,10 +304,7 @@ class ExecutionEnvironmentDetailImages extends Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table
-            aria-label={t`Images`}
-            className='hub-c-table-content pf-c-table'
-          >
+          <Table aria-label={t`Images`}>
             <SortTable
               options={sortTableOptions}
               params={params}
@@ -312,7 +314,7 @@ class ExecutionEnvironmentDetailImages extends Component<
                 )
               }
             />
-            <tbody>
+            <Tbody>
               {images.map((image, i) =>
                 this.renderTableRow(
                   image,
@@ -321,8 +323,8 @@ class ExecutionEnvironmentDetailImages extends Component<
                   sortTableOptions.headers.length,
                 ),
               )}
-            </tbody>
-          </table>
+            </Tbody>
+          </Table>
         )}
 
         <HubPagination
@@ -414,8 +416,8 @@ class ExecutionEnvironmentDetailImages extends Component<
 
     return (
       <Fragment key={index}>
-        <tr>
-          <td className='pf-c-table__toggle'>
+        <Tr>
+          <Td className='pf-v5-c-table__toggle'>
             {isManifestList ? (
               <Button
                 variant='plain'
@@ -432,8 +434,8 @@ class ExecutionEnvironmentDetailImages extends Component<
                 )}
               </Button>
             ) : null}
-          </td>
-          <td>
+          </Td>
+          <Td>
             <LabelGroup className={'hub-c-label-group-tags-column'}>
               {image.tags
                 .sort()
@@ -445,29 +447,29 @@ class ExecutionEnvironmentDetailImages extends Component<
                   ),
                 )}
             </LabelGroup>
-          </td>
-          <td>
+          </Td>
+          <Td>
             <DateComponent date={image.created_at} />
-          </td>
-          <td>{isManifestList ? '---' : image.layers}</td>
-          <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
-          <td>
+          </Td>
+          <Td>{isManifestList ? '---' : image.layers}</Td>
+          <Td>{isManifestList ? '---' : getHumanSize(image.size)}</Td>
+          <Td>
             {isManifestList ? (
               <ShaLabel digest={image.digest} />
             ) : (
               <ShaLink digest={image.digest} />
             )}
-          </td>
-          <td>
-            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
-          </td>
+          </Td>
+          <Td>
+            <CopyURL url={instructions} />
+          </Td>
           <ListItemActions kebabItems={dropdownItems} />
-        </tr>
+        </Tr>
 
         {expandedImage === image && (
-          <tr>
-            <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
-          </tr>
+          <Tr>
+            <Td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</Td>
+          </Tr>
         )}
       </Fragment>
     );
@@ -475,7 +477,7 @@ class ExecutionEnvironmentDetailImages extends Component<
 
   renderManifestList({ image_manifests }, ShaLink) {
     return (
-      <table className='hub-c-table-content pf-c-table'>
+      <Table>
         <SortTable
           options={{
             headers: [
@@ -494,7 +496,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           params={{}}
           updateParams={() => null}
         />
-        <tbody>
+        <Tbody>
           {image_manifests.map(
             ({
               digest,
@@ -505,11 +507,11 @@ class ExecutionEnvironmentDetailImages extends Component<
               variant,
               features,
             }) => (
-              <tr key={digest}>
-                <td>
+              <Tr key={digest}>
+                <Td>
                   <ShaLink digest={digest} />
-                </td>
-                <td>
+                </Td>
+                <Td>
                   {[
                     os,
                     os_version,
@@ -521,19 +523,19 @@ class ExecutionEnvironmentDetailImages extends Component<
                   ]
                     .filter(Boolean)
                     .join(' ')}
-                </td>
-              </tr>
+                </Td>
+              </Tr>
             ),
           )}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   }
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.images(name, {
-        ...ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
+        ...this.state.params,
         exclude_child_manifests: true,
       })
         .then(({ data: { data, meta } }) => {
@@ -613,8 +615,12 @@ class ExecutionEnvironmentDetailImages extends Component<
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

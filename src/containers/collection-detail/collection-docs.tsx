@@ -1,25 +1,25 @@
 import { t } from '@lingui/macro';
-import { Alert } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { Component, RefObject, createRef } from 'react';
+import React, { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { CollectionVersionSearch } from 'src/api';
+import { type CollectionVersionSearch } from 'src/api';
 import {
+  Alert,
   CollectionHeader,
   EmptyStateCustom,
   ExternalLink,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
   RenderPluginDoc,
   TableOfContents,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 import './collection-detail.scss';
 
 // renders markdown files in collection docs/ directory
@@ -61,7 +61,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
     const urlFields = this.props.routeParams;
 
     if (!collection || !content) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     // If the parser can't find anything that matches the URL, neither of
@@ -158,7 +158,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
             />
 
             <div
-              className='body hub-docs-content pf-c-content hub-content-alert-fix'
+              className='body hub-docs-content pf-v5-c-content hub-content-alert-fix'
               ref={this.docsRef}
             >
               {displayHTML || pluginData ? (
@@ -322,8 +322,12 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
     });
   }
 
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

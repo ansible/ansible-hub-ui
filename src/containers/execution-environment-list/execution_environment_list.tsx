@@ -1,23 +1,24 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
-  ExecutionEnvironmentType,
+  type ExecutionEnvironmentType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -29,19 +30,19 @@ import {
   ExternalLink,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   PublishToControllerModal,
   RepositoryForm,
   SortTable,
   Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   taskAlert,
   withRouter,
@@ -142,6 +143,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
         data-cy='push-images-button'
       >{t`Push container images`}</ExternalLink>
     );
+
     const addRemoteButton = hasPermission(
       'container.add_containernamespace',
     ) && (
@@ -160,7 +162,15 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <PublishToControllerModal
           digest={publishToController?.digest}
           image={publishToController?.image}
@@ -194,17 +204,17 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
             title={t`No container repositories yet`}
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
             button={
-              <>
+              <div>
                 {addRemoteButton}
                 {addRemoteButton && pushImagesButton ? <div>&nbsp;</div> : null}
                 {pushImagesButton}
-              </>
+              </div>
             }
           />
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -232,7 +242,11 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
                           />
                         </ToolbarItem>
                         <ToolbarItem>{addRemoteButton}</ToolbarItem>
-                        <ToolbarItem>{pushImagesButton}</ToolbarItem>
+                        <ToolbarItem>
+                          <div style={{ paddingTop: '6px' }}>
+                            {pushImagesButton}
+                          </div>
+                        </ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
@@ -318,7 +332,7 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table className='hub-c-table-content pf-c-table'>
+      <Table>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -326,8 +340,8 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryEnvironments())
           }
         />
-        <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{items.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -386,8 +400,8 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     ].filter((truthy) => truthy);
 
     return (
-      <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
-        <td>
+      <Tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
+        <Td>
           <Link
             to={formatEEPath(Paths.executionEnvironmentDetail, {
               container: item.pulp.distribution.base_path,
@@ -395,25 +409,25 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
           >
             {item.name}
           </Link>
-        </td>
+        </Td>
         {description ? (
-          <td className={'pf-m-truncate'}>
+          <Td className={'pf-m-truncate'}>
             <Tooltip content={description}>{description}</Tooltip>
-          </td>
+          </Td>
         ) : (
-          <td />
+          <Td />
         )}
-        <td>
+        <Td>
           <DateComponent date={item.created_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={item.updated_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
@@ -495,12 +509,12 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(title, variant, description?) {

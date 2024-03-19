@@ -1,23 +1,24 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -28,17 +29,17 @@ import {
   GroupModal,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   filterIsSet,
   mapErrorMessages,
@@ -133,7 +134,15 @@ class GroupList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
@@ -141,7 +150,7 @@ class GroupList extends Component<RouteProps, IState> {
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No groups yet`}
@@ -218,7 +227,7 @@ class GroupList extends Component<RouteProps, IState> {
                   }}
                 />
               </div>
-              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
               <HubPagination
                 params={params}
@@ -383,17 +392,14 @@ class GroupList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Group list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`Group list`}>
         <SortTable
           options={sortTableOptions}
           params={params}
           updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
         />
-        <tbody>{groups.map((group, i) => this.renderTableRow(group, i))}</tbody>
-      </table>
+        <Tbody>{groups.map((group, i) => this.renderTableRow(group, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -416,8 +422,8 @@ class GroupList extends Component<RouteProps, IState> {
       ),
     ];
     return (
-      <tr data-cy={`GroupList-row-${group.name}`} key={index}>
-        <td>
+      <Tr data-cy={`GroupList-row-${group.name}`} key={index}>
+        <Td>
           <Link
             to={formatPath(Paths.groupDetail, {
               group: group.id,
@@ -425,18 +431,18 @@ class GroupList extends Component<RouteProps, IState> {
           >
             {group.name}
           </Link>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private selectedGroup(group) {

@@ -1,5 +1,5 @@
 import { PulpAPI } from './pulp';
-import { AnsibleRemoteType } from './response-types/ansible-remote';
+import { type AnsibleRemoteType } from './response-types/ansible-remote';
 
 // simplified version of smartUpdate from execution-environment-registry
 function smartUpdate(

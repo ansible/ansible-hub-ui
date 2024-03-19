@@ -59,24 +59,26 @@ describe('Group Roles Tests', () => {
     cy.wait('@groups');
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
+    cy.get(
+      '.hub-custom-wizard-layout [data-ouia-component-type="PF5/Pagination"] button:first',
+    ).click();
     cy.contains('100 per page').click();
 
     cy.get(
       `[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"] input`,
     ).click({ force: true });
 
-    cy.get('.pf-c-wizard__footer > button').contains('Next').click();
+    cy.get('.pf-v5-c-wizard__footer > button').contains('Next').click();
 
     cy.contains(testRole.name);
 
-    cy.get('.pf-c-wizard__footer > button').contains('Add').click();
+    cy.get('.pf-v5-c-wizard__footer > button').contains('Add').click();
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.get('[data-cy="RoleListTable"]').contains(testRole.name);
     cy.get(
-      `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] .pf-c-table__toggle`,
+      `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] .pf-v5-c-table__toggle`,
     ).click();
 
     cy.contains('1 more').click();
@@ -115,7 +117,9 @@ describe('Group Roles Tests', () => {
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.get('[data-cy=add-roles]').click();
 
-    cy.get('.hub-custom-wizard-layout [aria-label="Items per page"]').click();
+    cy.get(
+      '.hub-custom-wizard-layout [data-ouia-component-type="PF5/Pagination"] button:first',
+    ).click();
     cy.get('.hub-custom-wizard-layout').contains('100 per page').click();
 
     cy.get(
@@ -140,7 +144,7 @@ describe('Group Roles Tests', () => {
     cy.get('.hub-custom-wizard-layout').contains(groupName);
     cy.get('.hub-custom-wizard-layout').contains(testContainerRole.name);
 
-    cy.get('.pf-c-wizard__footer > button')
+    cy.get('.pf-v5-c-wizard__footer > button')
       .contains('Add')
       .should('not.be.disabled');
   });
@@ -152,7 +156,7 @@ describe('Group Roles Tests', () => {
     cy.get(
       `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] [data-cy="kebab-toggle"]`,
     ).click();
-    cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
+    cy.get('.pf-v5-c-dropdown__menu-item').contains('Remove role').click();
 
     cy.get('[data-cy="delete-button"]').contains('Delete').click();
   });

@@ -1,25 +1,33 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Banner,
+  Masthead,
+  MastheadBrand,
+  MastheadContent,
+  MastheadMain,
+  MastheadToggle,
+  Page,
+  PageSidebar,
+  PageSidebarBody,
+  PageToggleButton,
+} from '@patternfly/react-core';
+import {
   DropdownItem,
   DropdownSeparator,
-  Page,
-  PageHeader,
-  PageHeaderTools,
-  PageSidebar,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
+import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
-import React, { ReactNode, useState } from 'react';
+import React, { type ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ActiveUserAPI,
-  FeatureFlagsType,
-  SettingsType,
-  UserType,
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
 } from 'src/api';
 import {
-  AboutModalWindow,
   ExternalLink,
+  HubAboutModal,
   LanguageSwitcher,
   LoginLink,
   SmallLogo,
@@ -144,7 +152,7 @@ export const StandaloneLayout = ({
     ].filter(Boolean);
 
     aboutModal = (
-      <AboutModalWindow
+      <HubAboutModal
         isOpen={aboutModalVisible}
         onClose={() => setAboutModalVisible(false)}
         user={user}
@@ -154,50 +162,54 @@ export const StandaloneLayout = ({
   }
 
   const Header = (
-    <PageHeader
-      logo={
-        <Link to={formatPath(Paths.landingPage)}>
-          <SmallLogo alt={APPLICATION_NAME} />
-        </Link>
-      }
-      headerTools={
-        <PageHeaderTools>
-          <LanguageSwitcher />
-          {user ? (
-            <StatefulDropdown
-              ariaLabel={t`Docs dropdown`}
-              data-cy='docs-dropdown'
-              defaultText={<QuestionCircleIcon />}
-              items={docsDropdownItems}
-              toggleType='icon'
-            />
-          ) : null}
-          {!user || user.is_anonymous ? (
-            <LoginLink next={location.pathname} />
-          ) : (
-            <StatefulDropdown
-              ariaLabel={t`User dropdown`}
-              data-cy='user-dropdown'
-              defaultText={userName}
-              items={userDropdownItems}
-              toggleType='dropdown'
-            />
-          )}
-        </PageHeaderTools>
-      }
-      showNavToggle
-    />
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton>
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand>
+          <Link to={formatPath(Paths.landingPage)}>
+            <SmallLogo alt={APPLICATION_NAME} />
+          </Link>
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>
+        <span style={{ flexGrow: 1 }} />
+        <LanguageSwitcher />
+        {user ? (
+          <StatefulDropdown
+            ariaLabel={t`Docs dropdown`}
+            data-cy='docs-dropdown'
+            defaultText={<QuestionCircleIcon />}
+            items={docsDropdownItems}
+            toggleType='icon'
+          />
+        ) : null}
+        {!user || user.is_anonymous ? (
+          <LoginLink next={location.pathname} />
+        ) : (
+          <StatefulDropdown
+            ariaLabel={t`User dropdown`}
+            data-cy='user-dropdown'
+            defaultText={userName}
+            items={userDropdownItems}
+            toggleType='dropdown'
+          />
+        )}
+      </MastheadContent>
+    </Masthead>
   );
 
   const Sidebar = (
-    <PageSidebar
-      theme='dark'
-      nav={
+    <PageSidebar>
+      <PageSidebarBody>
         <StandaloneMenu
           context={{ user, settings, featureFlags, hasPermission }}
         />
-      }
-    />
+      </PageSidebarBody>
+    </PageSidebar>
   );
 
   return (

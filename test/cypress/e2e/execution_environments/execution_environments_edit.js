@@ -19,7 +19,7 @@ function deleteContainersManual() {
       cy.get('input[id=delete_confirm]').click();
       cy.contains('button', 'Delete').click();
       cy.wait('@listLoad', { timeout: 50000 });
-      cy.get('.pf-c-alert__action').click();
+      cy.get('.pf-v5-c-alert__action').click();
     });
   });
 }
@@ -74,7 +74,7 @@ describe('execution environments', () => {
 
   it('edits a remote container', () => {
     cy.contains('a', `remotepine${num}`).click();
-    cy.get('.pf-c-button.pf-m-secondary').contains('Edit').click();
+    cy.get('.pf-v5-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();
     cy.wait(10000); // FIXME have a reload request, wait for it; can't wait for an unspecified number of task requests
@@ -86,7 +86,7 @@ describe('execution environments', () => {
 
   it('edits a local container', () => {
     cy.contains('a', `localpine${num}`).click();
-    cy.get('.pf-c-button.pf-m-secondary').contains('Edit').click();
+    cy.get('.pf-v5-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();
     cy.wait(10000); // FIXME have a reload request, wait for it; can't wait for an unspecified number of task requests

@@ -5,13 +5,14 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { Table, Tbody } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   ApprovalRow,
@@ -24,20 +25,20 @@ import {
 } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   CompoundFilter,
   HubPagination,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   SortTable,
-  UploadSingCertificateModal,
-  closeAlertMixin,
+  UploadSignatureModal,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -162,17 +163,23 @@ class CertificationDashboard extends Component<RouteProps, IState> {
   }
 
   render() {
-    const { versions, params, itemCount, loading, unauthorized } = this.state;
+    const { alerts, versions, params, itemCount, loading, unauthorized } =
+      this.state;
     if (!versions && !unauthorized) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     return (
       <>
         <BaseHeader title={t`Approval dashboard`} />
         <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
         />
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -262,7 +269,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
                 />
               </div>
               {loading ? (
-                <LoadingPageSpinner />
+                <LoadingSpinner />
               ) : (
                 this.renderTable(versions, params)
               )}
@@ -277,7 +284,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
                 />
               </div>
             </section>
-            <UploadSingCertificateModal
+            <UploadSignatureModal
               isOpen={this.state.uploadCertificateModalOpen}
               onCancel={() => this.closeUploadCertificateModal()}
               onSubmit={(d) => this.submitCertificate(d)}
@@ -354,10 +361,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Collection versions`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`Collection versions`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -365,7 +369,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryCollections(true))
           }
         />
-        <tbody>
+        <Tbody>
           {versions.map((version, i) => (
             <ApprovalRow
               approve={(v) => this.approve(v)}
@@ -379,8 +383,8 @@ class CertificationDashboard extends Component<RouteProps, IState> {
               reject={(v) => this.reject(v)}
             />
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   }
 
@@ -608,12 +612,12 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private addAlert(title, variant, description?) {

@@ -1,16 +1,17 @@
 import { t } from '@lingui/macro';
 import {
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
-import { SigningServiceAPI, SigningServiceType } from 'src/api';
+import { SigningServiceAPI, type SigningServiceType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   ClipboardCopy,
@@ -21,13 +22,13 @@ import {
   EmptyStateUnauthorized,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   SortTable,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 
 interface IState {
@@ -88,7 +89,15 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader title={t`Signature keys`} />
         {unauthorised ? (
           <EmptyStateUnauthorized />
@@ -100,7 +109,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -151,7 +160,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
                     }}
                   />
                 </div>
-                {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                {loading ? <LoadingSpinner /> : this.renderTable(params)}
 
                 <HubPagination
                   params={params}
@@ -203,10 +212,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table
-        aria-label={t`Signature keys`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`Signature keys`}>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -215,8 +221,8 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.query());
           }}
         />
-        <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
-      </table>
+        <Tbody>{items.map((item, i) => this.renderTableRow(item, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -236,24 +242,20 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
     ];
 
     return (
-      <tr key={index}>
-        <td>{name}</td>
-        <td data-cy='hub-signature-list-fingerprint'>{pubkey_fingerprint}</td>
-        <td>
+      <Tr key={index}>
+        <Td>{name}</Td>
+        <Td data-cy='hub-signature-list-fingerprint'>{pubkey_fingerprint}</Td>
+        <Td>
           <DateComponent date={pulp_created} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <ClipboardCopy isCode isReadOnly variant={'expansion'}>
             {public_key}
           </ClipboardCopy>
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} />
-      </tr>
+      </Tr>
     );
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 
   private query() {
@@ -288,8 +290,12 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

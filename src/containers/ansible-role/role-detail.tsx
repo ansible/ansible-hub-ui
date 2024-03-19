@@ -7,7 +7,6 @@ import {
   DataListItemRow,
   Nav,
   NavItem,
-  NavList,
   Panel,
 } from '@patternfly/react-core';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
@@ -16,35 +15,36 @@ import { Link } from 'react-router-dom';
 import {
   LegacyImportAPI,
   LegacyNamespaceAPI,
-  LegacyNamespaceDetailType,
+  type LegacyNamespaceDetailType,
   LegacyRoleAPI,
-  LegacyRoleDetailType,
-  LegacyRoleImportDetailType,
-  LegacyRoleVersionDetailType,
+  type LegacyRoleDetailType,
+  type LegacyRoleImportDetailType,
+  type LegacyRoleVersionDetailType,
 } from 'src/api';
-import { EmptyStateNoData } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
-  ClipboardCopy,
+  CopyURL,
   DateComponent,
   DownloadCount,
+  EmptyStateNoData,
   ExternalLink,
   ImportConsole,
   LabelGroup,
-  LoadingPageWithHeader,
+  LoadingPage,
   Logo,
   Main,
+  NavList,
   RoleRatings,
   Tag,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
+import { type RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
 const DownloadLink = ({ href, text }: { href: string; text: string }) => (
   <ExternalLink href={href} variant='download'>
@@ -63,21 +63,14 @@ interface RoleMetaReadmeState {
   readme_html: string;
 }
 
-class RoleInstall extends Component<RoleMetaProps> {
-  render() {
-    const installCMD = `ansible-galaxy role install ${this.props.namespace}.${this.props.name}`;
-    return (
-      <>
-        <h1>
-          <Trans>Installation:</Trans>
-        </h1>
-        <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-          {installCMD}
-        </ClipboardCopy>
-      </>
-    );
-  }
-}
+const RoleInstall = ({ namespace, name }: RoleMetaProps) => (
+  <>
+    <h1>
+      <Trans>Installation:</Trans>
+    </h1>
+    <CopyURL url={`ansible-galaxy role install ${namespace}.${name}`} />
+  </>
+);
 
 class RoleDocs extends Component<RoleMetaProps, RoleMetaReadmeState> {
   constructor(props) {
@@ -107,7 +100,7 @@ class RoleDocs extends Component<RoleMetaProps, RoleMetaReadmeState> {
     return (
       <div>
         <div
-          className='pf-c-content'
+          className='pf-v5-c-content'
           dangerouslySetInnerHTML={{ __html: this.state.readme_html }}
         />
       </div>
@@ -355,10 +348,6 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     });
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   render() {
     const { activeItem, alerts, fullNamespace, loading, name, role } =
       this.state;
@@ -367,13 +356,21 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
     } = this.context as IAppContextType;
 
     if (loading) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     if (!role) {
       return (
         <>
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <NotFound />
         </>
       );
@@ -468,7 +465,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
       { name: tabs[activeItem || 'install'] },
     ];
 
-    const onTabSelect = ({ itemId: newTab }) => {
+    const onTabSelect = (newTab) => {
       this.setState({ activeItem: newTab });
 
       this.props.navigate(
@@ -488,7 +485,15 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={`${namespace.name}.${role.name}`}
@@ -558,7 +563,11 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
         >
           {/* FIXME: replace with LinkTabs */}
           <Panel isScrollable>
-            <Nav theme='light' variant='tertiary' onSelect={onTabSelect}>
+            <Nav
+              theme='light'
+              variant='tertiary'
+              onSelect={(_event, { itemId }) => onTabSelect(itemId)}
+            >
               <NavList>
                 {Object.keys(tabs).map((key) => {
                   return (

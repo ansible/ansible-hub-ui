@@ -1,4 +1,5 @@
 import { msg, t } from '@lingui/macro';
+import { Td, Tr } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -9,7 +10,7 @@ import {
   ansibleRemoteDownloadRequirementsAction,
   ansibleRemoteEditAction,
 } from 'src/actions';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, type AnsibleRemoteType } from 'src/api';
 import { CopyURL, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';
@@ -55,17 +56,17 @@ const AnsibleRemoteList = ListPage<AnsibleRemoteType>({
     );
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link to={formatPath(Paths.ansibleRemoteDetail, { name })}>
             {name}
           </Link>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <CopyURL url={url} />
-        </td>
+        </Td>
         <ListItemActions kebabItems={kebabItems} />
-      </tr>
+      </Tr>
     );
   },
   sortHeaders: [

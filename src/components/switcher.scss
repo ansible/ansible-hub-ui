@@ -1,0 +1,10 @@
+.hub-switcher-icon {
+  color: var(--pf-v5-global--icon--Color--light);
+  cursor: pointer;
+  margin-left: 8px;
+
+  &:hover,
+  &.selected {
+    color: var(--pf-v5-global--link--Color--dark);
+  }
+}

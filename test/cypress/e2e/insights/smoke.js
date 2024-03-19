@@ -29,7 +29,7 @@ describe('cloud smoketest', () => {
      * **************************************************/
 
     // wait for navbar to appear
-    cy.get('.pf-c-page__sidebar').should('be.visible');
+    cy.get('.pf-v5-c-page__sidebar').should('be.visible');
     // wait for the automation-hub button to appear and then click on it
     cy.get('[data-quickstart-id="Automation-Hub"]').click();
     // wait for the collections button to appear and then click on it
@@ -68,7 +68,7 @@ describe('cloud smoketest', () => {
     cy.get('.hub-namespace-page').should('be.visible');
 
     // click on the first available Partner
-    cy.get('.hub-c-card-ns-container .pf-c-card__footer a').first().click();
+    cy.get('.hub-c-card-ns-container .pf-v5-c-card__footer a').first().click();
 
     // wait for the summary|list to load
     cy.get('[aria-label="List of Collections"]').should('be.visible');

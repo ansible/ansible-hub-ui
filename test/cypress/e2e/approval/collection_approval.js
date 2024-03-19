@@ -11,7 +11,7 @@ describe('tests the approval list screen ', () => {
   });
 
   it('has a default Needs Review filter', () => {
-    cy.get('.pf-c-chip-group__list').contains('Needs Review');
+    cy.get('.pf-v5-c-chip-group__list').contains('Needs Review');
   });
 
   it('rejects certification status and approves it again', () => {
@@ -19,7 +19,7 @@ describe('tests the approval list screen ', () => {
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
-    cy.get('.pf-c-chip > button[aria-label="close"]').click();
+    cy.get('.pf-v5-c-chip button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
     // reject
@@ -38,7 +38,7 @@ describe('tests the approval list screen ', () => {
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=10`,
     ).as('reload');
-    cy.get('.pf-c-chip > button[aria-label="close"]').click();
+    cy.get('.pf-v5-c-chip button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
     //imports page
@@ -53,7 +53,7 @@ describe('tests the approval list screen ', () => {
     cy.contains('My imports');
     cy.get('[placeholder="Select namespace"]').should('have.value', 'ansible');
 
-    cy.get('.pf-c-chip-group__list').contains('network');
-    cy.get('.pf-c-chip-group').contains('1.0.0');
+    cy.get('.pf-v5-c-chip-group__list').contains('network');
+    cy.get('.pf-v5-c-chip-group').contains('1.0.0');
   });
 });

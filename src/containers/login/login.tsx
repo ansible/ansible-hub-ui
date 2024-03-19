@@ -6,9 +6,9 @@ import { Navigate } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
 import { LoginForm } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   usernameValue: string;
@@ -40,7 +40,7 @@ class LoginPage extends Component<RouteProps, IState> {
     }
 
     const helperText = (
-      <span style={{ color: 'var(--pf-global--danger-color--100)' }}>
+      <span style={{ color: 'var(--pf-v5-global--danger-color--100)' }}>
         <ExclamationCircleIcon />
         {'   '}
         {this.state.errorMessage}
@@ -50,15 +50,19 @@ class LoginPage extends Component<RouteProps, IState> {
     return (
       <PFLoginPage
         style={{
-          backgroundColor: 'var(--pf-global--BackgroundColor--dark-100)',
+          backgroundColor: 'var(--pf-v5-global--BackgroundColor--dark-100)',
         }}
         loginTitle={t`Log in to your account`}
         brandImgSrc={Logo}
       >
         <LoginForm
           helperText={helperText}
-          onChangePassword={this.handlePasswordChange}
-          onChangeUsername={this.handleUsernameChange}
+          onChangePassword={(_event, passwordValue) =>
+            this.handlePasswordChange(passwordValue)
+          }
+          onChangeUsername={(_event, usernameValue) =>
+            this.handleUsernameChange(usernameValue)
+          }
           onLoginButtonClick={this.onLoginButtonClick}
           passwordValue={this.state.passwordValue}
           showHelperText={!!this.state.errorMessage}

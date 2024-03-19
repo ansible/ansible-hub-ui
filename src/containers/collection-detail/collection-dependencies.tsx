@@ -2,8 +2,8 @@ import { t } from '@lingui/macro';
 import React, { Component } from 'react';
 import {
   CollectionAPI,
-  CollectionUsedByDependencies,
-  CollectionVersion,
+  type CollectionUsedByDependencies,
+  type CollectionVersion,
   CollectionVersionAPI,
 } from 'src/api';
 import {
@@ -12,15 +12,15 @@ import {
   CollectionHeader,
   CollectionUsedbyDependenciesList,
   EmptyStateNoData,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 import './collection-dependencies.scss';
 
 interface IState extends IBaseCollectionState {
@@ -86,7 +86,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version: version, repository } = collection;
@@ -118,7 +118,15 @@ class CollectionDependencies extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <CollectionHeader
           activeTab='dependencies'
           actuallyCollection={actuallyCollection}
@@ -136,7 +144,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
         />
         <Main>
           <section className='body'>
-            <div className='pf-c-content collection-dependencies'>
+            <div className='pf-v5-c-content collection-dependencies'>
               <h1>{t`Dependencies`}</h1>
               <p>{t`This collections requires the following collections for use`}</p>
 
@@ -291,12 +299,12 @@ class CollectionDependencies extends Component<RouteProps, IState> {
     });
   }
 
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   private separateVersion(version) {

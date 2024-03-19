@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro';
+import { Td, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -6,9 +7,9 @@ import {
   ansibleRepositoryCollectionVersionRemoveAction,
 } from 'src/actions';
 import {
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import { DetailList, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -68,8 +69,8 @@ export const CollectionVersionsTab = ({
     );
 
     return (
-      <tr key={index}>
-        <td>
+      <Tr key={index}>
+        <Td>
           <Link
             to={formatPath(
               Paths.collectionByRepo,
@@ -85,10 +86,10 @@ export const CollectionVersionsTab = ({
           >
             {namespace}.{name} v{version}
           </Link>
-        </td>
-        <td>{description}</td>
+        </Td>
+        <Td>{description}</Td>
         <ListItemActions kebabItems={kebabItems} />
-      </tr>
+      </Tr>
     );
   };
 

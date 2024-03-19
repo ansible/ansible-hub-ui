@@ -1,16 +1,10 @@
 /* eslint react/prop-types: 0 */
 import { t } from '@lingui/macro';
-import {
-  Nav,
-  NavExpandable,
-  NavGroup,
-  NavItem,
-  NavList,
-} from '@patternfly/react-core';
+import { Nav, NavExpandable, NavGroup, NavItem } from '@patternfly/react-core';
 import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ExternalLink } from 'src/components';
+import { ExternalLink, NavList } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import {
   canViewAnsibleRemotes,
@@ -52,7 +46,7 @@ function standaloneMenu() {
         condition: ({ settings, user }) =>
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
-        alternativeUrls: [altPath(Paths.searchByRepo)],
+        alternativeUrls: [altPath('/repo/:repo')],
       }),
       menuItem(t`Namespaces`, {
         url: formatPath(Paths.namespaces),
@@ -284,10 +278,9 @@ export const StandaloneMenu = ({ context }) => {
   };
 
   const StandaloneNav = ({ children = null }) => (
-    <Nav theme='dark' onToggle={onToggle}>
+    <Nav onToggle={(_event, data) => onToggle(data)}>
       <NavList>
         <NavGroup className={'hub-nav-title'} title={APPLICATION_NAME} />
-
         {children}
       </NavList>
     </Nav>

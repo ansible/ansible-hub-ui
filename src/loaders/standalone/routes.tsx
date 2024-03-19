@@ -1,7 +1,11 @@
-import React, { Component, ElementType, useEffect, useState } from 'react';
+import React, { Component, type ElementType, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AlertType } from 'src/components';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
+import { type AlertType } from 'src/components';
 import {
   AnsibleRemoteDetail,
   AnsibleRemoteEdit,
@@ -58,7 +62,7 @@ import {
 } from 'src/containers';
 import {
   AppContext,
-  IAppContextType,
+  type IAppContextType,
   useHubContext,
 } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';

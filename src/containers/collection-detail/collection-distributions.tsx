@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { useEffect, useState } from 'react';
 import { AnsibleDistributionAPI } from 'src/api';
 import {
@@ -11,15 +12,15 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   HubPagination,
-  LoadingPageSpinner,
-  LoadingPageWithHeader,
+  LoadingPage,
+  LoadingSpinner,
   Main,
   SortTable,
 } from 'src/components';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   getRepoURL,
   withRouter,
@@ -91,7 +92,7 @@ const CollectionDistributions = (props: RouteProps) => {
   }, [params]);
 
   if (!collection || !content || collections.length <= 0) {
-    return <LoadingPageWithHeader />;
+    return <LoadingPage />;
   }
 
   const { collection_version, repository } = collection;
@@ -125,7 +126,7 @@ const CollectionDistributions = (props: RouteProps) => {
       'token=<put your token here>',
     ].join('\n');
 
-  const updateParamsMixin = (params) => {
+  const updateParams = (params) => {
     props.navigate({
       search: '?' + ParamHelper.getQueryString(params || []),
     });
@@ -174,34 +175,29 @@ const CollectionDistributions = (props: RouteProps) => {
     };
 
     return (
-      <table
-        aria-label={t`Collection distributions`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <Table aria-label={t`Collection distributions`}>
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(params) => {
-            updateParamsMixin(params);
-          }}
+          updateParams={updateParams}
         />
-        <tbody>
+        <Tbody>
           {distributions.map((distribution, i) => (
-            <tr key={i}>
-              <td>{distribution.name}</td>
-              <td>{distribution.base_path}</td>
-              <td>
+            <Tr key={i}>
+              <Td>{distribution.name}</Td>
+              <Td>{distribution.base_path}</Td>
+              <Td>
                 <DateComponent date={distribution.pulp_created} />
-              </td>
-              <td>
+              </Td>
+              <Td>
                 <ClipboardCopy isCode isReadOnly variant={'expansion'} key={i}>
                   {cliConfig(distribution)}
                 </ClipboardCopy>
-              </td>
-            </tr>
+              </Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
     );
   };
 
@@ -217,11 +213,9 @@ const CollectionDistributions = (props: RouteProps) => {
         content={content}
         params={params}
         reload={() => loadCollections(true)}
-        updateParams={(params) => {
-          updateParamsMixin(
-            ParamHelper.setParam(params, 'version', params.version),
-          );
-        }}
+        updateParams={(params) =>
+          updateParams(ParamHelper.setParam(params, 'version', params.version))
+        }
       />
       <Main>
         <section className='body'>
@@ -234,9 +228,7 @@ const CollectionDistributions = (props: RouteProps) => {
                     onChange={(text) => {
                       setInputText(text);
                     }}
-                    updateParams={(p) => {
-                      updateParamsMixin(p);
-                    }}
+                    updateParams={updateParams}
                     params={params}
                     filterConfig={[
                       {
@@ -255,9 +247,7 @@ const CollectionDistributions = (props: RouteProps) => {
 
             <HubPagination
               params={params}
-              updateParams={(p) => {
-                updateParamsMixin(p);
-              }}
+              updateParams={updateParams}
               count={count}
               isTop
             />
@@ -265,7 +255,7 @@ const CollectionDistributions = (props: RouteProps) => {
 
           <AppliedFilters
             updateParams={(p) => {
-              updateParamsMixin(p);
+              updateParams(p);
               setInputText('');
             }}
             params={params}
@@ -275,16 +265,10 @@ const CollectionDistributions = (props: RouteProps) => {
               name__icontains: t`Name`,
             }}
           />
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            renderTable(distributions, params)
-          )}
+          {loading ? <LoadingSpinner /> : renderTable(distributions, params)}
           <HubPagination
             params={params}
-            updateParams={(p) => {
-              updateParamsMixin(p);
-            }}
+            updateParams={updateParams}
             count={count}
           />
         </section>

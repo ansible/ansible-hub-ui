@@ -1,4 +1,4 @@
-import { LastSyncType } from './remote';
+import { type LastSyncType } from './remote';
 
 export class ExecutionEnvironmentType {
   created_at: string;

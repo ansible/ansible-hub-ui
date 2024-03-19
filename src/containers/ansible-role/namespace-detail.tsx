@@ -1,40 +1,41 @@
 import { t } from '@lingui/macro';
-import { DataList, DropdownItem } from '@patternfly/react-core';
+import { DataList } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyNamespaceAPI,
-  LegacyNamespaceListType,
+  type LegacyNamespaceListType,
   LegacyRoleAPI,
-  LegacyRoleListType,
+  type LegacyRoleListType,
   TagAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LegacyRoleListItem,
-  LoadingPageSpinner,
+  LightspeedModal,
+  LoadingSpinner,
   Logo,
   ProviderLink,
+  RoleItem,
   RoleNamespaceEditModal,
   StatefulDropdown,
-  WisdomModal,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
-  getProviderInfo,
   handleHttpError,
+  roleNamespaceInfo,
   withRouter,
 } from 'src/utilities';
 
@@ -125,8 +126,12 @@ class NamespaceRoles extends Component<
       .catch(() => []);
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 
   render() {
@@ -172,7 +177,7 @@ class NamespaceRoles extends Component<
     return (
       <div>
         {loading ? (
-          <LoadingPageSpinner />
+          <LoadingSpinner />
         ) : noData ? (
           <EmptyStateNoData
             title={t`No roles yet`}
@@ -196,7 +201,7 @@ class NamespaceRoles extends Component<
                 <DataList aria-label={t`List of roles`}>
                   {roles &&
                     roles.map((lrole) => (
-                      <LegacyRoleListItem key={lrole.id} role={lrole} />
+                      <RoleItem key={lrole.id} role={lrole} />
                     ))}
                 </DataList>
 
@@ -248,10 +253,6 @@ class AnsibleRoleNamespaceDetail extends Component<
     });
   }
 
-  get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   componentDidMount() {
     LegacyNamespaceAPI.get(this.props.routeParams.namespaceid)
       .then((response) =>
@@ -279,13 +280,21 @@ class AnsibleRoleNamespaceDetail extends Component<
     const { location, navigate } = this.props;
 
     if (loading) {
-      return <LoadingPageSpinner />;
+      return <LoadingSpinner />;
     }
 
     if (!namespace) {
       return (
         <>
-          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
+              })
+            }
+          />
           <NotFound />
         </>
       );
@@ -295,17 +304,17 @@ class AnsibleRoleNamespaceDetail extends Component<
       namespaceid: namespace.id,
     });
 
-    const provider = getProviderInfo(namespace);
+    const provider = roleNamespaceInfo(namespace);
 
     const userOwnsLegacyNamespace = !!namespace.summary_fields?.owners?.find(
       (n) => n.username == username,
     );
-    const showWisdom =
+    const showLightspeed =
       ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
     const canImport = is_superuser || userOwnsLegacyNamespace;
 
     const dropdownItems = [
-      showWisdom && (
+      showLightspeed && (
         <DropdownItem
           onClick={() => this.setState({ lightspeedModal: true })}
         >{t`Ansible Lightspeed settings`}</DropdownItem>
@@ -335,7 +344,15 @@ class AnsibleRoleNamespaceDetail extends Component<
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         <BaseHeader
           logo={
             <span>
@@ -362,7 +379,7 @@ class AnsibleRoleNamespaceDetail extends Component<
         />
 
         {lightspeedModal && (
-          <WisdomModal
+          <LightspeedModal
             addAlert={(alert) => this.addAlert(alert)}
             closeAction={() => this.setState({ lightspeedModal: false })}
             reference={namespace.name}

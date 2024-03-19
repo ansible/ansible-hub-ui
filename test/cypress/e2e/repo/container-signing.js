@@ -51,7 +51,7 @@ describe('Container Signing', () => {
   it('can sign remote1', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote1`);
-    cy.contains('.column-section', 'remote1');
+    cy.contains('[data-cy="column-section"]', 'remote1');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });
@@ -59,7 +59,7 @@ describe('Container Signing', () => {
     cy.contains('Last updated from registry');
 
     cy.get('button[aria-label="Actions"]').click();
-    cy.contains('.pf-c-dropdown ul li a', 'Sign').click();
+    cy.contains('.pf-v5-c-dropdown ul li a', 'Sign').click();
     cy.contains('Signing started for container "remote1');
     cy.contains('.hub-header-bottom', 'Signed', {
       timeout: 30000,
@@ -69,26 +69,26 @@ describe('Container Signing', () => {
   it('can not sign remote2', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote2`);
-    cy.contains('.column-section', 'remote2');
+    cy.contains('[data-cy="column-section"]', 'remote2');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });
 
     cy.get('button[aria-label="Actions"]').click();
-    cy.contains('.pf-c-dropdown ul li a', 'Sign').click();
+    cy.contains('.pf-v5-c-dropdown ul li a', 'Sign').click();
     cy.contains('Container must be synchronized with remote repository first.');
   });
 
   it('can sign local', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/local1`);
-    cy.contains('.column-section', 'local1');
+    cy.contains('[data-cy="column-section"]', 'local1');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,
     });
 
     cy.get('button[aria-label="Actions"]').click();
-    cy.contains('.pf-c-dropdown ul li a', 'Sign').click();
+    cy.contains('.pf-v5-c-dropdown ul li a', 'Sign').click();
     cy.contains('Signing started for container "local1');
     cy.contains('.hub-header-bottom', 'Signed', {
       timeout: 30000,

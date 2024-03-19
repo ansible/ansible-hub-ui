@@ -8,15 +8,14 @@ import {
   Title,
 } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import {
-  ClipboardCopy,
-  EmptyStateNoData,
-  MarkdownEditor,
-} from 'src/components';
+  ExecutionEnvironmentAPI,
+  type GroupObjectPermissionType,
+} from 'src/api';
+import { CopyURL, EmptyStateNoData, MarkdownEditor } from 'src/components';
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
-import { IDetailSharedProps, withContainerRepo } from './base';
+import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -75,11 +74,11 @@ class ExecutionEnvironmentDetail extends Component<IDetailSharedProps, IState> {
             <Title headingLevel='h3' size='md'>
               {t`Pull this image`}
             </Title>
-            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
+            <CopyURL url={instructions} />
           </section>
         </FlexItem>
         <FlexItem>
-          <section className='body pf-c-content'>
+          <section className='body pf-v5-c-content'>
             <Card>
               <CardBody>
                 <Title headingLevel='h2' size='lg'>

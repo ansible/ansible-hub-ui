@@ -1,13 +1,19 @@
 import { msg, plural, t } from '@lingui/macro';
 import { Button, Checkbox, Modal } from '@patternfly/react-core';
+import { Td, Tr } from '@patternfly/react-table';
 import React, { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
-import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
+import {
+  AlertList,
+  type AlertType,
+  DetailList,
+  closeAlert,
+} from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
@@ -120,13 +126,13 @@ const AddCollectionVersionModal = ({
       sourceRepository.pulp_href === repository.pulp_href;
 
     return (
-      <tr
+      <Tr
         onClick={() =>
           setSelected(pushToOrFilterOutCollections(item, selected))
         }
         key={index}
       >
-        <td>
+        <Td>
           <Checkbox
             aria-label={`${namespace}.${name} v${version}`}
             id={`collection-${index}`}
@@ -134,13 +140,13 @@ const AddCollectionVersionModal = ({
             name={`collection-${index}`}
             isDisabled={isCollectionInRepo}
           />
-        </td>
-        <td>
+        </Td>
+        <Td>
           {namespace}.{name} v{version}
-        </td>
-        <td>{description}</td>
-        <td>{repository.name}</td>
-      </tr>
+        </Td>
+        <Td>{description}</Td>
+        <Td>{repository.name}</Td>
+      </Tr>
     );
   };
 

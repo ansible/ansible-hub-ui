@@ -1,18 +1,19 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Td } from '@patternfly/react-table';
+import React, { type FunctionComponent, useEffect, useState } from 'react';
 import {
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   GroupRoleAPI,
-  GroupRoleType,
-  RoleType,
+  type GroupRoleType,
+  type RoleType,
 } from 'src/api';
 import {
   AppliedFilters,
@@ -23,7 +24,7 @@ import {
   ExpandableRow,
   HubPagination,
   ListItemActions,
-  LoadingPageWithHeader,
+  LoadingPage,
   PermissionCategories,
   PreviewRoles,
   RoleListTable,
@@ -32,7 +33,7 @@ import {
 } from 'src/components';
 import {
   ParamHelper,
-  ParamType,
+  type ParamType,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -162,7 +163,7 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
   if (loading) {
     return (
       <section className='body'>
-        <LoadingPageWithHeader />
+        <LoadingPage />
       </section>
     );
   }
@@ -348,8 +349,8 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
                     }
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
-                    <td>{role.role}</td>
-                    <td>{translateLockedRole(role.role, role.description)}</td>
+                    <Td>{role.role}</Td>
+                    <Td>{translateLockedRole(role.role, role.description)}</Td>
                     <ListItemActions
                       kebabItems={[
                         canEdit && (

@@ -72,10 +72,14 @@ describe('Collections list Tests', () => {
 
   it('paging is working', () => {
     // there should be 11 items in db, 10 per page + 1 view more
-    cy.get('.collection-container').get('article').should('have.length', 11);
+    cy.get('.collection-container')
+      .get('.hub-c-card-collection-container')
+      .should('have.length', 11);
 
     cy.get('.hub-cards').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.collection-container').get('article').should('have.length', 1);
+    cy.get('.collection-container')
+      .get('.hub-c-card-collection-container')
+      .should('have.length', 1);
   });
 
   it('filter is working', () => {
@@ -88,11 +92,13 @@ describe('Collections list Tests', () => {
 
   it('set page size is working', () => {
     cy.get('.hub-cards')
-      .get('button[aria-label="Items per page"]:first')
+      .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
     cy.get('.hub-cards').get('[data-action="per-page-20"]').click();
 
-    cy.get('.collection-container').get('article').should('have.length', 11);
+    cy.get('.collection-container')
+      .get('.hub-c-card-collection-container')
+      .should('have.length', 11);
   });
 
   it('Cards/List switch is working', () => {

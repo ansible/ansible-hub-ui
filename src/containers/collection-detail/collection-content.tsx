@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import {
   CollectionContentList,
   CollectionHeader,
-  LoadingPageWithHeader,
+  LoadingPage,
   Main,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 // renders list of contents in a collection
 class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
@@ -45,7 +45,7 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
     } = this.state;
 
     if (collections.length <= 0) {
-      return <LoadingPageWithHeader />;
+      return <LoadingPage />;
     }
 
     const { collection_version, repository } = collection;
@@ -122,8 +122,12 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
     });
   }
 
-  get updateParams() {
-    return ParamHelper.updateParamsMixin();
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 import {
   AnsibleDistributionAPI,
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
 } from 'src/api';
 import { AnsibleRepositoryForm, Page } from 'src/components';
 import { Paths, formatPath } from 'src/paths';

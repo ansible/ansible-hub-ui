@@ -2,10 +2,10 @@ import axios from 'axios';
 import { repositoryBasePath } from 'src/utilities';
 import { HubAPI } from './hub';
 import {
-  CollectionDetailType,
-  CollectionListType,
-  CollectionUploadType,
-  CollectionVersionSearch,
+  type CollectionDetailType,
+  type CollectionListType,
+  type CollectionUploadType,
+  type CollectionVersionSearch,
 } from './response-types/collection';
 
 function filterContents(contents) {

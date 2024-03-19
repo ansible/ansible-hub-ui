@@ -42,7 +42,7 @@ describe('collection tests', () => {
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
     cy.wait(5000);
-    cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
+    cy.get('[data-cy="AlertList"] h4[class=pf-v5-c-alert__title]').should(
       'have.text',
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );

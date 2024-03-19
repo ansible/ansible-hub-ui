@@ -1,17 +1,18 @@
 import { Trans, t } from '@lingui/macro';
 import {
   Button,
-  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
-import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
+import { ExecutionEnvironmentRegistryAPI, type RemoteType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -23,18 +24,18 @@ import {
   EmptyStateUnauthorized,
   HubPagination,
   ListItemActions,
-  LoadingPageSpinner,
+  LoadingSpinner,
   Main,
   RemoteForm,
   SortTable,
   Tooltip,
-  closeAlertMixin,
+  closeAlert,
 } from 'src/components';
-import { AppContext, IAppContextType } from 'src/loaders/app-context';
+import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   lastSyncStatus,
@@ -152,7 +153,15 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
 
     return (
       <>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) =>
+            closeAlert(i, {
+              alerts,
+              setAlerts: (alerts) => this.setState({ alerts }),
+            })
+          }
+        />
         {showRemoteFormModal && (
           <RemoteForm
             remote={remoteToEdit}
@@ -233,7 +242,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
         ) : (
           <Main>
             {loading ? (
-              <LoadingPageSpinner />
+              <LoadingSpinner />
             ) : (
               <section className='body'>
                 <div className='hub-toolbar'>
@@ -343,7 +352,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
     };
 
     return (
-      <table className='hub-c-table-content pf-c-table'>
+      <Table>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -351,8 +360,8 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
             this.updateParams(p, () => this.queryRegistries())
           }
         />
-        <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
-      </table>
+        <Tbody>{items.map((user, i) => this.renderTableRow(user, i))}</Tbody>
+      </Table>
     );
   }
 
@@ -417,26 +426,26 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
       </Tooltip>,
     ].filter(Boolean);
     return (
-      <tr
+      <Tr
         data-cy={`ExecutionEnvironmentRegistryList-row-${item.name}`}
         key={index}
       >
-        <td>{item.name}</td>
-        <td>
+        <Td>{item.name}</Td>
+        <Td>
           <DateComponent date={item.created_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <DateComponent date={item.updated_at} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <CopyURL url={item.url} />
-        </td>
-        <td>
+        </Td>
+        <Td>
           {lastSyncStatus(item) || '---'}
           {lastSynced(item)}
-        </td>
+        </Td>
         <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
-      </tr>
+      </Tr>
     );
   }
 
@@ -537,12 +546,12 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
     });
   }
 
-  private get updateParams() {
-    return ParamHelper.updateParamsMixin();
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
+  private updateParams(params, callback = null) {
+    ParamHelper.updateParams({
+      params,
+      navigate: (to) => this.props.navigate(to),
+      setState: (state) => this.setState(state, callback),
+    });
   }
 }
 
