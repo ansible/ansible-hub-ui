@@ -1,9 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-down-icon';
 import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';

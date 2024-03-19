@@ -1,9 +1,5 @@
 import { t } from '@lingui/macro';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import React, { type CSSProperties, Component, type ReactElement } from 'react';
 
 interface IProps {

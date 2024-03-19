@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, ButtonVariant, Label } from '@patternfly/react-core';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { DropdownItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';

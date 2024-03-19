@@ -11,10 +11,7 @@ import {
   PageSidebarBody,
   PageToggleButton,
 } from '@patternfly/react-core';
-import {
-  DropdownItem,
-  DropdownSeparator,
-} from '@patternfly/react-core/deprecated';
+import { DropdownItem, DropdownSeparator } from '@patternfly/react-core';
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { type ReactNode, useState } from 'react';

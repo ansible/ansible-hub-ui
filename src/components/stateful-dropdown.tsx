@@ -4,7 +4,7 @@ import {
   DropdownPosition,
   DropdownToggle,
   KebabToggle,
-} from '@patternfly/react-core/deprecated';
+} from '@patternfly/react-core';
 import React, { type ReactNode, useState } from 'react';
 
 interface IProps {

@@ -1,8 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import {
-  DropdownItem,
-  DropdownSeparator,
-} from '@patternfly/react-core/deprecated';
+import { DropdownItem, DropdownSeparator } from '@patternfly/react-core';
 import React from 'react';
 import { StatefulDropdown } from 'src/components';
 import { availableLanguages, language, languageNames } from 'src/l10n';

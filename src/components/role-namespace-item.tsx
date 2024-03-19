@@ -5,7 +5,7 @@ import {
   DataListItemCells,
   DataListItemRow,
 } from '@patternfly/react-core';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { type LegacyNamespaceDetailType } from 'src/api';

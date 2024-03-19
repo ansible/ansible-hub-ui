@@ -6,7 +6,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { DropdownItem } from '@patternfly/react-core/deprecated';
+import { DropdownItem } from '@patternfly/react-core';
 import { Td } from '@patternfly/react-table';
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';

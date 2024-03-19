@@ -1,10 +1,6 @@
 import { t } from '@lingui/macro';
 import { Label } from '@patternfly/react-core';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { LabelGroup } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
