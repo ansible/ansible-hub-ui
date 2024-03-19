@@ -145,7 +145,7 @@ jobs:
               perl -ne 'print unless /^[0-9a-f]{64,64}$/d' |
               grep -v '^Current branch:' |
               grep -v '^Waiting for ' |
-              grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
+              grep -v 'Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
 
           popd
