@@ -12,7 +12,7 @@ import {
   SelectGroup,
   SelectOption,
   SelectVariant,
-} from '@patternfly/react-core/deprecated';
+} from '@patternfly/react-core';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import React, { Component } from 'react';
