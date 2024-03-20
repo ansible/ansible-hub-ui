@@ -5,7 +5,7 @@ const helperText = (id) =>
     .find('.pf-v5-c-helper-text__item-text');
 
 describe('add and delete roles', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
+  const num = (~~(Math.random() * 1000000)).toString();
   before(() => {
     cy.login();
     cy.menuGo('User Access > Roles');

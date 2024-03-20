@@ -296,9 +296,8 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
 
   cy.visit(`${uiPrefix}registries?page_size=100`);
 
-  cy.wait('@registries').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@registries').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.galaxykit('registry delete', element.name);
     });
   });
@@ -312,9 +311,8 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 
   cy.visit(`${uiPrefix}containers?page_size=100`);
 
-  cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@listLoad').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.galaxykit('container delete', element.name);
     });
   });

@@ -23,7 +23,7 @@ describe('My Profile Tests', () => {
   });
 
   it('only has input fields for name, email, username, password and pass confirmation', () => {
-    let inputs = [
+    const inputs = [
       'first_name',
       'last_name',
       'email',

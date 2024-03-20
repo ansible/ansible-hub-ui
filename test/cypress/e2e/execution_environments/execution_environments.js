@@ -1,5 +1,5 @@
 describe('execution environments', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
+  const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
