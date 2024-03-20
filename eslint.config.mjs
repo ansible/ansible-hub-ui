@@ -47,6 +47,9 @@ export default config(
         version: 'detect',
       },
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
     rules: {
       curly: ['error', 'all'],
       'eol-last': ['error', 'always'],
