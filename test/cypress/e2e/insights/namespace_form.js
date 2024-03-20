@@ -1,19 +1,19 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('A namespace form', () => {
-  let getMessage = () => {
+  const getMessage = () => {
     return cy.get('.pf-v5-c-form__helper-text');
   };
-  let getCreateButton = () => {
+  const getCreateButton = () => {
     return cy.get('.pf-v5-c-modal-box__footer .pf-m-primary');
   };
-  let getInputBox = () => {
+  const getInputBox = () => {
     return cy.get('input[name="newNamespaceName"]');
   };
-  let clearInput = () => {
+  const clearInput = () => {
     return getInputBox().clear();
   };
-  let createNamespace = () => {
+  const createNamespace = () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
 
@@ -83,7 +83,7 @@ describe('A namespace form', () => {
   });
 
   it('creates a new namespace with no error messages', () => {
-    let id = parseInt(Math.random() * 1000000);
+    const id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}namespaces/testns_`));

@@ -31,15 +31,14 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   function loadData() {
     // we cant delete all data using galaxykit right now, because when collection is rejected
     // it cant be deleted. So we must load the data, that are right now in the table
-    let intercept_url = `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=100`;
+    const intercept_url = `${apiPrefix}v3/plugin/ansible/search/collection-versions/?order_by=-pulp_created&offset=0&limit=100`;
 
     cy.visit(`${uiPrefix}approval-dashboard?page_size=100`);
     cy.intercept('GET', intercept_url).as('data');
     cy.contains('button', 'Clear all filters').click();
 
-    cy.wait('@data').then((res) => {
-      let data = res.response.body.data;
-      data.forEach((record) => {
+    cy.wait('@data').then(({ response: { body } }) => {
+      body.data.forEach((record) => {
         items.push({ name: record.collection_version.name });
       });
       items = sortBy(items, 'name');

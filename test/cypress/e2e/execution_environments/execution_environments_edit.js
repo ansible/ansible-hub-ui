@@ -9,9 +9,8 @@ function deleteContainersManual() {
 
   cy.visit(`${uiPrefix}containers`);
 
-  cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@listLoad').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.get(
         `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
@@ -32,9 +31,8 @@ function deleteRegistriesManual() {
 
   cy.visit(`${uiPrefix}registries`);
 
-  cy.wait('@registries').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@registries').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.get(
         `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
@@ -46,7 +44,7 @@ function deleteRegistriesManual() {
 }
 
 describe('execution environments', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
+  const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();

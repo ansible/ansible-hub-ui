@@ -1,7 +1,7 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Execution Environments - Use in Controller', () => {
-  let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
+  const num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
 
   before(() => {
     cy.login();
