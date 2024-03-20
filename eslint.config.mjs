@@ -18,6 +18,11 @@ const reactConfig = {
 delete reactConfig.parserOptions;
 
 export default config(
+  eslint.configs.recommended,
+  reactConfig,
+  ...tsConfigs.recommended,
+  ...tsConfigs.stylistic,
+  prettierConfig,
   {
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
     plugins: {
@@ -42,13 +47,6 @@ export default config(
         version: 'detect',
       },
     },
-    extends: [
-      eslint.configs.recommended,
-      reactConfig,
-      ...tsConfigs.recommended,
-      ...tsConfigs.stylistic,
-      prettierConfig,
-    ],
     rules: {
       curly: ['error', 'all'],
       'eol-last': ['error', 'always'],
@@ -98,6 +96,11 @@ export default config(
   },
   {
     files: ['config/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
     rules: {
       '@typescript-eslint/no-var-requires': 'off',
     },
@@ -112,6 +115,7 @@ export default config(
     files: ['test/**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       globals: {
+        ...globals.node,
         Cypress: 'readonly',
         after: 'readonly',
         before: 'readonly',
