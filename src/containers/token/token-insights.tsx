@@ -1,9 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { MyDistributionAPI } from 'src/api';
 import {
-  Alert,
   AlertList,
   type AlertType,
   BaseHeader,
@@ -14,12 +12,11 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { getRepoURL } from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];
-  synclistBasePath?: string;
   tokenData?: {
     access_token: string;
     expires_in: number;
@@ -40,14 +37,12 @@ class TokenInsights extends Component<RouteProps, IState> {
 
     this.state = {
       alerts: [],
-      synclistBasePath: null,
       tokenData: null,
     };
   }
 
   componentDidMount() {
     this.getTokenData();
-    this.getSynclistBasePath();
   }
 
   getTokenData() {
@@ -63,34 +58,8 @@ class TokenInsights extends Component<RouteProps, IState> {
       .then(({ data: tokenData }) => this.setState({ tokenData }));
   }
 
-  getSynclistBasePath() {
-    MyDistributionAPI.list()
-      .then(({ data }) => {
-        const syncDistro = data.data.find(({ base_path }) =>
-          base_path.includes('synclist'),
-        );
-        this.setState({
-          synclistBasePath: syncDistro?.base_path,
-        });
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        this.setState({
-          synclistBasePath: null,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Server URL could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
-  }
-
   render() {
-    const { alerts, synclistBasePath, tokenData } = this.state;
+    const { alerts, tokenData } = this.state;
     const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="cloud-services" -d refresh_token="${
       tokenData?.refresh_token ?? '{{ user_token }}'
     }" --fail --silent --show-error --output /dev/null`;
@@ -191,26 +160,6 @@ class TokenInsights extends Component<RouteProps, IState> {
                 </Trans>
               </p>
               <CopyURL url={getRepoURL('validated')} />
-              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
-                <Trans>
-                  Synclists are deprecated in AAP 2.4 and will be removed in a
-                  future release, use client-side <code>requirements.yml</code>{' '}
-                  instead.
-                  <br />
-                  If you&apos;re using sync toggles with AAP 2.3 or older, you
-                  will need to use a different URL:
-                </Trans>
-              </p>
-              {synclistBasePath ? (
-                <CopyURL url={getRepoURL(synclistBasePath)} />
-              ) : (
-                <Alert
-                  variant='danger'
-                  isInline
-                  title={t`Synclist distribution was not found.`}
-                  className='hub-content-alert-fix'
-                />
-              )}
             </section>
             <section className='body'>
               <h2>{t`SSO URL`}</h2>
