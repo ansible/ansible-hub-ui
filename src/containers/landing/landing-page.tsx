@@ -194,6 +194,11 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <ListItem>
                     <ExternalLink href='https://www.redhat.com/en/about/digital-accessibility'>{t`Digital accessibility`}</ExternalLink>
                   </ListItem>
+                  <ListItem>
+                    <a
+                      onClick={this.cookiePreferences}
+                    >{t`Cookie preferences`}</a>
+                  </ListItem>
                 </List>
               }
             />
@@ -207,6 +212,14 @@ export class LandingPage extends Component<RouteProps, IState> {
     this.setState({
       alerts: [...this.state.alerts, alert],
     });
+  }
+
+  private cookiePreferences() {
+    (
+      window.document.querySelector(
+        '#teconsent > a',
+      ) as HTMLAnchorElement | null
+    )?.click();
   }
 }
 

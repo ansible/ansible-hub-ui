@@ -3,6 +3,7 @@ WORKDIR /workspace/
 RUN mkdir -p /workspace/ && \
     apk add --no-cache git
 COPY . /workspace/
+COPY community/index.html /workspace/src/index.html
 RUN npm ci && \
     npm run gettext:extract && \
     npm run gettext:compile && \
