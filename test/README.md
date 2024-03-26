@@ -17,9 +17,7 @@ A `cypress.env.json` in your test directory will be copied into the container to
 
 The settings can be changed by setting these environment variables.
 
-    HUB_SERVER = "localhost:8002"
     HUB_UI_LOCATION = "${SCRIPTDIR}/../"
-    CYPRESS_PREFIX = "/api/automation-hub/"
     CYPRESS_BASE_URL = "http://localhost:8002"
     CYPRESS_USERNAME = "admin"
     CYPRESS_PASSWORD = "admin"
