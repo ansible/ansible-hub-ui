@@ -188,17 +188,6 @@ jobs:
       if: ${{ env.BACKEND_FLAVOR == 'insights' }}
       working-directory: 'ansible-hub-ui'
       run: |
-        # pre-pull containers (and check for version changes)
-        FROM=node_modules/@redhat-cloud-services/frontend-components-config-utilities/standalone/services/
-        grep postgres:9.6 "$FROM"/rbac.js
-        docker pull postgres:9.6
-        grep redis:5.0.4 "$FROM"/rbac.js
-        docker pull redis:5.0.4
-        grep quay.io/cloudservices/rbac "$FROM"/rbac.js
-        docker pull quay.io/cloudservices/rbac
-        grep jboss/keycloak "$FROM"/default/chrome.js
-        docker pull jboss/keycloak
-
         npm run start-insights &
 
     - name: "Install Cypress & test dependencies"
