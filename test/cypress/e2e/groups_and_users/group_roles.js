@@ -136,7 +136,7 @@ describe('Group Roles Tests', () => {
       .should('not.be.disabled')
       .click();
 
-    cy.get('[aria-label="Add roles content"]').contains('Selected roles');
+    cy.get('.pf-v5-c-wizard').contains('Selected roles');
     cy.get(`[data-cy="HubPermission-${testContainerRole.name}"]`);
 
     cy.contains('Next').click();

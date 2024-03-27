@@ -182,23 +182,19 @@ const GroupDetailRoleManagement: FunctionComponent<Props> = ({
     {
       id: 0,
       name: t`Select role(s)`,
-      component: (
+      children: (
         <SelectRoles
           assignedRoles={roles}
           selectedRoles={selectedRoles}
           onRolesUpdate={(roles) => setSelectedRoles(roles)}
         />
       ),
-      backButtonText: t`Cancel`,
-      enableNext: isPreviewEnabled,
     },
     {
       id: 1,
       name: t`Preview`,
-      component: <PreviewRoles group={group} selectedRoles={selectedRoles} />,
-      nextButtonText: t`Add`,
-      canJumpTo: isPreviewEnabled,
-      isFinished: true,
+      children: <PreviewRoles group={group} selectedRoles={selectedRoles} />,
+      isDisabled: !isPreviewEnabled,
     },
   ];
 
