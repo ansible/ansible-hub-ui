@@ -46,8 +46,10 @@ export const Typeahead = ({
         loadResults('');
         onClear?.();
       }}
-      onFilter={(e) => e && loadResults(e.target.value)}
-      onSelect={(e, selection, isPlaceholder) => {
+      onFilter={(_e, value) => {
+        loadResults(value);
+      }}
+      onSelect={(event, selection, isPlaceholder) => {
         onSelect(event, selection, isPlaceholder);
 
         if (!multiple) {
