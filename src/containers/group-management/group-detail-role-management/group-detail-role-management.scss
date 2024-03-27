@@ -6,14 +6,8 @@
 }
 
 .hub-custom-wizard-layout {
-  padding: 1rem 1.5rem 0;
-
   .hub-select-roles-content {
     overflow: auto;
-  }
-
-  .pf-v5-c-pagination.pf-m-bottom {
-    padding-top: 0;
   }
 
   .hub-permission {
@@ -41,15 +35,15 @@
     justify-content: center;
     height: 400px;
   }
-}
 
-.hub-loading-wizard {
-  display: flex;
-  align-items: center;
-}
+  &.hub-no-data {
+    display: flex;
+    justify-content: center;
+    min-height: 590px;
+  }
 
-.hub-no-data {
-  display: flex;
-  justify-content: center;
-  min-height: 590px;
+  &.hub-loading-wizard {
+    display: flex;
+    align-items: center;
+  }
 }

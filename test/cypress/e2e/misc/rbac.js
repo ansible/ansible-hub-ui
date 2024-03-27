@@ -285,6 +285,7 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('task wait all');
 
     cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
+    cy.contains('Go to documentation');
 
     // can Delete collection
     cy.openHeaderKebab();

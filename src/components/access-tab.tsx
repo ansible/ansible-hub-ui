@@ -541,7 +541,7 @@ export class AccessTab extends Component<IProps> {
       {
         id: 0,
         name: t`Select a user`,
-        component: (
+        children: (
           <SelectUser
             assignedUsers={users}
             selectedUser={user}
@@ -552,13 +552,11 @@ export class AccessTab extends Component<IProps> {
             }
           />
         ),
-        backButtonText: t`Cancel`,
-        enableNext: hasUser,
       },
       {
         id: 1,
         name: t`Select role(s)`,
-        component: (
+        children: (
           <SelectRoles
             assignedRoles={assignedRoles}
             selectedRoles={roles}
@@ -571,16 +569,13 @@ export class AccessTab extends Component<IProps> {
             pulpObjectType={pulpObjectType}
           />
         ),
-        canJumpTo: hasUser,
-        enableNext: hasUser && hasRoles,
+        isDisabled: !hasUser,
       },
       {
         id: 2,
         name: t`Preview`,
-        component: <PreviewRoles user={user} selectedRoles={roles} />,
-        nextButtonText: t`Add`,
-        canJumpTo: hasUser && hasRoles,
-        isFinished: true,
+        children: <PreviewRoles user={user} selectedRoles={roles} />,
+        isDisabled: !(hasUser && hasRoles),
       },
     ];
 
@@ -617,7 +612,7 @@ export class AccessTab extends Component<IProps> {
       {
         id: 0,
         name: t`Select a group`,
-        component: (
+        children: (
           <SelectGroup
             assignedGroups={groups}
             selectedGroup={group}
@@ -628,13 +623,11 @@ export class AccessTab extends Component<IProps> {
             }
           />
         ),
-        backButtonText: t`Cancel`,
-        enableNext: hasGroup,
       },
       {
         id: 1,
         name: t`Select role(s)`,
-        component: (
+        children: (
           <SelectRoles
             assignedRoles={assignedRoles}
             selectedRoles={roles}
@@ -647,16 +640,13 @@ export class AccessTab extends Component<IProps> {
             pulpObjectType={pulpObjectType}
           />
         ),
-        canJumpTo: hasGroup,
-        enableNext: hasGroup && hasRoles,
+        isDisabled: !hasGroup,
       },
       {
         id: 2,
         name: t`Preview`,
-        component: <PreviewRoles group={group} selectedRoles={roles} />,
-        nextButtonText: t`Add`,
-        canJumpTo: hasGroup && hasRoles,
-        isFinished: true,
+        children: <PreviewRoles group={group} selectedRoles={roles} />,
+        isDisabled: !(hasGroup && hasRoles),
       },
     ];
 
@@ -692,7 +682,7 @@ export class AccessTab extends Component<IProps> {
       {
         id: 0,
         name: t`Select role(s)`,
-        component: (
+        children: (
           <SelectRoles
             assignedRoles={assignedRoles}
             selectedRoles={roles}
@@ -702,18 +692,14 @@ export class AccessTab extends Component<IProps> {
             pulpObjectType={pulpObjectType}
           />
         ),
-        backButtonText: t`Cancel`,
-        enableNext: hasRoles,
       },
       {
         id: 1,
         name: t`Preview`,
-        component: (
+        children: (
           <PreviewRoles user={user} group={group} selectedRoles={roles} />
         ),
-        nextButtonText: t`Add`,
-        canJumpTo: hasRoles,
-        isFinished: true,
+        isDisabled: !hasRoles,
       },
     ];
 

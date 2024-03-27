@@ -1,47 +1,69 @@
 import { t } from '@lingui/macro';
-import { Modal, ModalVariant } from '@patternfly/react-core';
 import {
-  Wizard as PFWizard,
-  type WizardStep,
-} from '@patternfly/react-core/deprecated';
-import React from 'react';
+  Modal,
+  ModalVariant,
+  Wizard,
+  WizardHeader,
+  WizardStep,
+} from '@patternfly/react-core';
+import React, { type ReactNode } from 'react';
 
 interface Props {
-  steps: WizardStep[];
-  title: string;
-  variant?: ModalVariant;
   onClose: () => void;
   onSave: () => void;
+  steps: {
+    children: ReactNode;
+    id: string | number;
+    isDisabled?: boolean;
+    name: string;
+  }[];
+  title: string;
 }
 
-export const WizardModal = ({
-  steps,
-  title,
-  onClose,
-  onSave,
-  variant,
-}: Props) => (
-  <Modal
-    isOpen
-    variant={variant ?? ModalVariant.large}
-    showClose={false}
-    aria-label={title}
-    hasNoBodyWrapper
-  >
-    <PFWizard
-      hasNoBodyPadding
-      navAriaLabel={t`${title} steps`}
-      mainAriaLabel={t`${title} content`}
-      backButtonText={t`Back`}
-      cancelButtonText={t`Cancel`}
-      closeButtonAriaLabel={t`Close`}
-      nextButtonText={t`Next`}
-      titleId='wizard-modal-title'
-      descriptionId='wizard-modal-description'
-      title={title}
-      steps={steps}
-      onClose={onClose}
-      onSave={onSave}
-    />
-  </Modal>
-);
+export const WizardModal = ({ onClose, onSave, steps, title }: Props) => {
+  const footer = {
+    backButtonText: t`Back`,
+    cancelButtonText: t`Cancel`,
+    nextButtonText: t`Next`,
+  };
+
+  return (
+    <Modal
+      aria-label={title}
+      hasNoBodyWrapper
+      isOpen
+      onEscapePress={onClose}
+      showClose={false}
+      variant={ModalVariant.large}
+    >
+      <Wizard
+        header={
+          <WizardHeader
+            closeButtonAriaLabel={t`Close`}
+            onClose={onClose}
+            title={title}
+          />
+        }
+        navAriaLabel={t`${title} steps`}
+        onClose={onClose}
+        onSave={onSave}
+      >
+        {steps.map((step, i, { [i + 1]: next, length }) =>
+          i === length - 1 ? (
+            <WizardStep
+              key={step.id}
+              {...step}
+              footer={{ ...footer, nextButtonText: t`Add` }}
+            />
+          ) : (
+            <WizardStep
+              key={step.id}
+              {...step}
+              footer={{ ...footer, isNextDisabled: next.isDisabled }}
+            />
+          ),
+        )}
+      </Wizard>
+    </Modal>
+  );
+};
