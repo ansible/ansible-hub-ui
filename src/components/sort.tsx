@@ -8,7 +8,7 @@ import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha
 import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
 import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Icon } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
@@ -32,134 +32,76 @@ interface IProps {
   sortParamName?: string;
 }
 
-interface IState {
-  isExpanded: boolean;
-}
+export const Sort = ({
+  options,
+  params,
+  sortParamName,
+  updateParams,
+}: IProps) => {
+  const [isExpanded, setExpanded] = useState(false);
 
-export class Sort extends Component<IProps, IState> {
-  options: { id: string; title: string }[];
-  static defaultProps = {
-    sortParamName: 'sort',
-  };
+  const sort = params[sortParamName || 'sort'];
+  const isDescending = !sort ? true : sort.startsWith('-');
+  const sortField = !sort
+    ? options[0].id
+    : isDescending
+      ? sort.substring(1)
+      : sort;
+  const selectedOption = options.find(({ id }) => id === sortField);
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isExpanded: false,
-    };
-  }
-
-  private onToggle(isExpanded) {
-    this.setState({
-      isExpanded,
-    });
-  }
-
-  private onSelect(name) {
-    let isDescending = this.getIsDescending(this.props.params);
-
-    const option = this.props.options.find((i) => i.title === name);
-
-    // Alphabetical sorting is inverted in Django, so flip it here to make
-    // things match up with the UI.
-    if (option.type === 'alpha') {
-      isDescending = !isDescending;
-    }
-    const desc = isDescending ? '-' : '';
-
-    this.setState({ isExpanded: false }, () =>
-      this.props.updateParams({
-        ...ParamHelper.setParam(
-          this.props.params,
-          this.props.sortParamName,
-          desc + option.id,
-        ),
-        page: 1,
-      }),
-    );
-  }
-
-  private setDescending() {
-    const field = this.getSelected(this.props.params);
-    const descending = !this.getIsDescending(this.props.params);
-
-    this.props.updateParams({
+  const update = (option, isDescending) =>
+    updateParams({
       ...ParamHelper.setParam(
-        this.props.params,
-        this.props.sortParamName,
-        (descending ? '-' : '') + field.id,
+        params,
+        sortParamName || 'sort',
+        (isDescending ? '-' : '') + option.id,
       ),
       page: 1,
     });
-  }
 
-  private getIsDescending(params) {
-    const sort = params[this.props.sortParamName];
-
-    // The ?sort= url param is not always guaranteed to be set. If it's
-    // not set, return the default
-    if (!sort) {
-      return true;
-    }
-    return sort.startsWith('-');
-  }
-
-  private getSelected(params) {
-    let sort = params[this.props.sortParamName];
-    const def = this.props.options[0];
-
-    if (!sort) {
-      return def;
-    }
-
-    if (sort.startsWith('-')) {
-      sort = sort.substring(1, sort.length);
-    }
-
-    const option = this.props.options.find((x) => x.id === sort);
-
-    return option ? option : def;
-  }
-
-  render() {
-    const { options, params } = this.props;
-    const { isExpanded } = this.state;
-
-    const selectedOption = this.getSelected(params);
-
-    const [IconAsc, IconDesc] =
-      selectedOption.type === 'alpha'
-        ? [SortAlphaDownIcon, SortAlphaUpIcon]
-        : [SortAmountUpIcon, SortAmountDownIcon];
-
-    const showSelect = options.length > 1;
-
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {showSelect ? (
-          <Select
-            variant={SelectVariant.single}
-            aria-label={t`Sort results`}
-            onToggle={(_event, e) => this.onToggle(e)}
-            onSelect={(_, name) => this.onSelect(name)}
-            selections={selectedOption.title}
-            isOpen={isExpanded}
-          >
-            {options.map((option) => (
-              <SelectOption key={option.id} value={option.title} />
-            ))}
-          </Select>
-        ) : null}
-
-        <Icon
-          className='clickable'
-          onClick={() => this.setDescending()}
-          style={{ margin: showSelect ? '6px 0 6px 5px' : '10px 0 6px 5px' }}
-        >
-          {this.getIsDescending(params) ? <IconDesc /> : <IconAsc />}
-        </Icon>
-      </div>
+  const onSelect = (name) => {
+    const option = options.find(({ title }) => title === name);
+    setExpanded(false);
+    update(
+      option,
+      // alphabetical sorting is inverted in Django, so flip it here to make it match
+      option.type === 'alpha' && selectedOption.type !== 'alpha'
+        ? !isDescending
+        : isDescending,
     );
-  }
-}
+  };
+
+  const [IconAsc, IconDesc] =
+    selectedOption.type === 'alpha'
+      ? [SortAlphaDownIcon, SortAlphaUpIcon]
+      : [SortAmountUpIcon, SortAmountDownIcon];
+
+  const showSelect = options.length > 1;
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      {showSelect ? (
+        <Select
+          aria-label={t`Sort results`}
+          isOpen={isExpanded}
+          onSelect={(_e, name) => onSelect(name)}
+          onToggle={(_e, expanded) => setExpanded(expanded)}
+          selections={selectedOption.title}
+          variant={SelectVariant.single}
+        >
+          {options.map(({ id, title }) => (
+            <SelectOption key={id} value={title} />
+          ))}
+        </Select>
+      ) : null}
+
+      <Icon
+        className='clickable'
+        onClick={() => update(selectedOption, !isDescending)}
+        style={{ margin: showSelect ? '6px 0 6px 5px' : '10px 0 6px 5px' }}
+      >
+        {isDescending ? <IconDesc /> : <IconAsc />}
+      </Icon>
+    </div>
+  );
+};
