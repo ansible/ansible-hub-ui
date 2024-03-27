@@ -8,11 +8,7 @@ import {
   Modal,
   Text,
 } from '@patternfly/react-core';
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core/deprecated';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import React, { Component, Fragment } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
