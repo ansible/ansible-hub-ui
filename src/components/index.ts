@@ -49,6 +49,7 @@ export { HubAboutModal } from './hub-about-modal';
 export { HubCopyButton } from './hub-copy-button';
 export { HubListToolbar } from './hub-list-toolbar';
 export { HubPagination } from './hub-pagination';
+export { HubSelect } from './hub-select';
 export { ImportConsole } from './import-console';
 export { ImportList } from './import-list';
 export { ImportModal } from './import-modal';

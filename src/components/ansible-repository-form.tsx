@@ -7,12 +7,12 @@ import {
   FormGroup,
   TextInput,
 } from '@patternfly/react-core';
-import { Select, SelectOption } from '@patternfly/react-core/deprecated';
 import React, { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, type AnsibleRepositoryType } from 'src/api';
 import {
   FormFieldHelper,
   HelpButton,
+  HubSelect,
   LazyDistributions,
   PulpLabels,
   Spinner,
@@ -150,12 +150,11 @@ export const AnsibleRepositoryForm = ({
         : 'none',
   );
 
-  const [selectOpen, setSelectOpen] = useState(false);
-
   const selectPipeline = (value) => {
     if (disableHideFromSearch && value !== 'staging') {
       setHideFromSearch(repository?.pulp_labels?.hide_from_search === '');
     }
+
     if (value === 'staging') {
       setSelectedPipeline(value);
       setPipeline(value);
@@ -170,13 +169,12 @@ export const AnsibleRepositoryForm = ({
       setPipeline(null);
       setDisableHideFromSearch(false);
     }
-    setSelectOpen(false);
   };
 
   const selectOptions = {
-    staging: { id: 'staging', toString: () => t`Staging` },
-    approved: { id: 'approved', toString: () => t`Approved` },
-    none: { id: 'none', toString: () => t`None` },
+    staging: t`Staging`,
+    approved: t`Approved`,
+    none: t`None`,
   };
 
   const pipelineHelp = (
@@ -252,17 +250,11 @@ export const AnsibleRepositoryForm = ({
         t`Pipeline`,
         pipelineHelp,
         <div data-cy='pipeline'>
-          <Select
-            variant='single'
-            isOpen={selectOpen}
-            onToggle={() => setSelectOpen(!selectOpen)}
-            onSelect={(_e, value: { id }) => selectPipeline(value.id)}
-            selections={selectOptions[selectedPipeline]}
-          >
-            {Object.entries(selectOptions).map(([k, v]) => (
-              <SelectOption key={k} value={v} />
-            ))}
-          </Select>
+          <HubSelect
+            onSelect={selectPipeline}
+            selected={selectedPipeline}
+            options={selectOptions}
+          />
         </div>,
       )}
 
