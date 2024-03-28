@@ -34,8 +34,7 @@ interface IProps {
 
   /** Current page params */
   // Type help: this shoud be something like: Record<string, string | SelectOptionObject | (string | SelectOptionObject)[]>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: any;
+  params;
 
   /** Sets the current page params to p */
   updateParams: (params) => void;
