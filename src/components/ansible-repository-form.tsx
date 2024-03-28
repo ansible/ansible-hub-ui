@@ -256,7 +256,7 @@ export const AnsibleRepositoryForm = ({
             variant='single'
             isOpen={selectOpen}
             onToggle={() => setSelectOpen(!selectOpen)}
-            onSelect={(_e, value: { id }) => selectPipeline(value.id)}
+            onSelect={(_event, value) => selectPipeline(value.id)}
             selections={selectOptions[selectedPipeline]}
           >
             {Object.entries(selectOptions).map(([k, v]) => (
