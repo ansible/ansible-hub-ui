@@ -140,8 +140,8 @@ msgid "{subTitle}"
 msgstr "{subTitle}"
 
 #: src/components/wizard-modal.tsx
-msgid "{title} content"
-msgstr "{title} contenido"
+#~ msgid "{title} content"
+#~ msgstr "{title} contenido"
 
 #: src/components/namespace-card.tsx
 #: src/components/namespace-list-item.tsx
@@ -301,16 +301,13 @@ msgstr "Las actividades aparecerán cuando pulse algo"
 msgid "Activity"
 msgstr "Actividad"
 
-#: src/components/access-tab.tsx
-#: src/components/access-tab.tsx
-#: src/components/access-tab.tsx
 #: src/components/repository-form.tsx
 #: src/components/repository-form.tsx
 #: src/components/tag-manifest-modal.tsx
+#: src/components/wizard-modal.tsx
 #: src/containers/ansible-remote/edit.tsx
 #: src/containers/ansible-repository/edit.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -722,9 +719,6 @@ msgstr "Certificado de CA"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 #: src/actions/ansible-repository-version-revert.tsx
-#: src/components/access-tab.tsx
-#: src/components/access-tab.tsx
-#: src/components/access-tab.tsx
 #: src/components/ansible-repository-form.tsx
 #: src/components/confirm-modal.tsx
 #: src/components/delete-modal.tsx
@@ -748,7 +742,6 @@ msgstr "Certificado de CA"
 #: src/components/wizard-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 #: src/containers/group-management/group-detail.tsx
 msgid "Cancel"
 msgstr "Cancelar"
@@ -1325,6 +1318,10 @@ msgstr "Nombre del controlador"
 #: src/components/publish-to-controller-modal.tsx
 msgid "Controllers list could not be displayed."
 msgstr "No se pudo mostrar la lista de controladores."
+
+#: src/containers/landing/landing-page.tsx
+msgid "Cookie preferences"
+msgstr ""
 
 #: src/components/patternfly-wrappers/copy-url.tsx
 #~ msgid "Copied"
