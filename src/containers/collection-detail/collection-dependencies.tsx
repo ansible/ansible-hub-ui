@@ -141,7 +141,6 @@ class CollectionDependencies extends Component<RouteProps, IState> {
           content={content}
           params={headerParams}
           reload={() => this.loadData(true)}
-          repo={repository.name}
           updateParams={(p) => {
             this.updateParams(p, () => this.loadData(true));
           }}

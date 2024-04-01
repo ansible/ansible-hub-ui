@@ -135,7 +135,6 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
           activeTab='documentation'
           actuallyCollection={actuallyCollection}
           breadcrumbs={breadcrumbs}
-          className='hub-header-bordered'
           collection={collection}
           collections={collections}
           collectionsCount={collectionsCount}

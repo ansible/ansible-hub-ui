@@ -95,7 +95,6 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
           content={content}
           params={params}
           reload={() => this.loadCollections(true)}
-          repo={this.props.routeParams.repo}
           updateParams={(p) =>
             this.updateParams(p, () => this.loadCollections(true))
           }
