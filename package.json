@@ -52,7 +52,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
     "fork-ts-checker-webpack-plugin": "^9.0.2",
-    "globals": "^14.0.0",
+    "globals": "^15.0.0",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.8.1",
     "monaco-editor-webpack-plugin": "^7.1.0",
