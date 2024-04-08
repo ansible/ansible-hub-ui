@@ -31,11 +31,7 @@ jobs:
         - 'approval_modal'
         - 'collections'
         - 'community'
-        - 'ee_controller'
         - 'execution_environments'
-        - 'groups_and_users'
-        - 'imports'
-        - 'misc'
         - 'namespaces'
         - 'repo'
 
