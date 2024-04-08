@@ -15,6 +15,6 @@ module.exports = defineConfig({
   },
   // overridden in cypress.yml
   screenshotsFolder: 'cypress/screenshots',
-  // only record videos when running action in debug mode
+  // only record videos when running github action in debug mode
   video: !!process.env.RUNNER_DEBUG,
 });
