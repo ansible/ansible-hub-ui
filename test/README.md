@@ -11,7 +11,7 @@ To run the tests very quickly without any pre-requisite setup (other than Docker
 
 ### Configuring the Test Container
 
-The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy_ng.
+The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy\_ng.
 
 A `cypress.env.json` in your test directory will be copied into the container to configure your tests.
 
@@ -40,8 +40,7 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "username": "<your username here>",
         "password": "<your password here>",
         "containers": "<container push target>",
-        "galaxykit": "<galaxykit command>",
-        "insightsLogin": true|false
+        "galaxykit": "<galaxykit command>"
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
