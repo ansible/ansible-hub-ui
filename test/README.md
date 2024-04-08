@@ -1,42 +1,40 @@
-# Ansible Hub UI Testing
+# Ansible Hub UI testing
 
-These are the integration tests for Ansible Hub UI. Please run the tests before commiting or merging
-new UI functionality, or before changes to existing functionality.
+These are the integration tests for Ansible Hub UI. Please run the tests before merging.
 
 
-## Run the Tests in Docker
+## Run the tests in a container
 
-To run the tests very quickly without any pre-requisite setup (other than Docker) simply do:
+To run the tests very quickly without any pre-requisite setup (other than backend & Docker) simply do:
 
     npm run test
 
 
-### Configuring the Test Container
+### Configuring the test container
 
 The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy\_ng.
 
-A `cypress.env.json` in your test directory will be copied into the container to configure your tests.
+A `cypress.env.json` in the `test/` directory will be copied into the container to configure your tests.
 
 The settings can be changed by setting these environment variables.
 
-    HUB_UI_LOCATION = "${SCRIPTDIR}/../"
-    CYPRESS_BASE_URL = "http://localhost:8002"
-    CYPRESS_USERNAME = "admin"
-    CYPRESS_PASSWORD = "admin"
+    export CYPRESS_BASE_URL = "http://localhost:8002"
+    export CYPRESS_USERNAME = "admin"
+    export CYPRESS_PASSWORD = "admin"
 
 
-## Setup the Tests Natively
+## Setup the tests natively
 
 ### Install test dependencies
 
-These are separate from the project's own dependencies. Run the following from the /test directory
+These are separate from the project's own dependencies. Run the following from the `test/` directory
 
     npm ci
 
 
 ### Prepare your `cypress.env.json`
 
-The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template or start by copying `cypress.env.json.template`.
+The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the `test/` directory, and use the below example as a template or start by copying `cypress.env.json.template`.
 
     {
         "apiPrefix": "<api root>",
@@ -47,16 +45,18 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "galaxykit": "<galaxykit command>"
     }
 
-*note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
 
-*note*: `containers` is what you would use with `docker push`/`podman push` to add a local container
+*NOTE*: the likely values for `apiPrefix` are `/api/` (community), `/api/automation-hub/` (insights), or `/api/galaxy/` (standalone).
+
+*NOTE*: `containers` is what you would use with `docker push`/`podman push` to add a local container, eg. `localhost:5001`
 
 
-## Run the Tests Directly
+## Run the tests directly
 
-Tests must be run from inside the test/ directory.
+Tests must be run from inside the `test/` directory.
 
     cd test
+
 
 The tests can be run in two modes: CLI or GUI. To run the tests in headless CLI mode, run one of the following based on the browser you'd like to test under:
 
@@ -66,12 +66,13 @@ The tests can be run in two modes: CLI or GUI. To run the tests in headless CLI 
 
     npm run cypress:firefox
 
-To run the tests in GUI mode, which opens the Cypress interface and an embedded browser in which to
-observe and inspect test runs:
+
+To run the tests in GUI mode, which opens the Cypress interface and an embedded browser in which to observe and inspect test runs:
 
     npm run cypress
 
-After the tests have run you can view a video recording of the run is test/cypress/videos.
+
+After the tests have run you can view a video recording of the run is `test/cypress/videos`.
 
 
 ## Learn more
@@ -105,7 +106,7 @@ and [Cypress best practices](https://docs.cypress.io/guides/references/best-prac
     * can't rely on it
 
 
-## GalaxyKit Integration
+## `galaxykit` integration
 
 In order to help manage test data, our Cypress setup includes wrappers around the galaxykit command. The galakxykit command is an interface to the GalaxyNG API.
 
