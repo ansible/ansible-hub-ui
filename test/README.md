@@ -3,38 +3,18 @@
 These are the integration tests for Ansible Hub UI. Please run the tests before merging.
 
 
-## Run the tests in a container
-
-To run the tests very quickly without any pre-requisite setup (other than backend & Docker) simply do:
-
-    npm run test
-
-
-### Configuring the test container
-
-The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy\_ng.
-
-A `cypress.env.json` in the `test/` directory will be copied into the container to configure your tests.
-
-The settings can be changed by setting these environment variables.
-
-    export CYPRESS_BASE_URL = "http://localhost:8002"
-    export CYPRESS_USERNAME = "admin"
-    export CYPRESS_PASSWORD = "admin"
-
-
-## Setup the tests natively
+## Setup the tests
 
 ### Install test dependencies
 
 These are separate from the project's own dependencies. Run the following from the `test/` directory
 
-    npm ci
+    npm install
 
 
 ### Prepare your `cypress.env.json`
 
-The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the `test/` directory, and use the below example as a template or start by copying `cypress.env.json.template`.
+The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the `test/` directory, and use the below example as a template, or start by copying `cypress.env.json.template`.
 
     {
         "apiPrefix": "<api root>",
@@ -51,7 +31,7 @@ The tests need to know details about the instance of Automation Hub that it's ru
 *NOTE*: `containers` is what you would use with `docker push`/`podman push` to add a local container, eg. `localhost:5001`
 
 
-## Run the tests directly
+## Run the tests
 
 Tests must be run from inside the `test/` directory.
 
@@ -77,7 +57,7 @@ After the tests have run you can view a video recording of the run is `test/cypr
 
 ## Learn more
 
-See [Cypress documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html),
+See [Cypress documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests),
 and [Cypress best practices](https://docs.cypress.io/guides/references/best-practices).
 
 

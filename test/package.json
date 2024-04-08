@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cd ..; npm run test",
     "cypress:chrome": "cypress run --e2e --browser chrome --headless",
     "cypress:chromium": "cypress run --e2e --browser chromium-browser --headless",
     "cypress:firefox": "cypress run --e2e --browser firefox --headless",
