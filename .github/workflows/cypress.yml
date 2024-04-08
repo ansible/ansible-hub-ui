@@ -53,15 +53,18 @@ jobs:
         case "${{ matrix.test }}" in
           community*)
             BACKEND_FLAVOR=community
+            API=api
             ;;
           *)
             BACKEND_FLAVOR=standalone
+            API=api/galaxy
             ;;
         esac
 
         echo "BACKEND_FLAVOR=${BACKEND_FLAVOR}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
+        echo "API=${API}" >> $GITHUB_ENV
 
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
@@ -157,8 +160,10 @@ jobs:
       run: |
         mkdir -p www/static/
         mv ansible-hub-ui/dist www/static/galaxy_ng
+
         cd www
         echo '{}' > package.json
+
         npm install local-web-server
         node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
           --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
@@ -171,6 +176,7 @@ jobs:
       run: |
         mkdir -p www/
         mv ansible-hub-ui/dist/* www/
+
         cd www
         echo '{}' > package.json
 
@@ -208,39 +214,19 @@ jobs:
         echo 'expecting /js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure galaxykit can connect to API (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+    - name: "Ensure galaxykit can connect to API"
       run: |
-        galaxykit -s http://localhost:8002/api/ -u admin -p admin collection list
+        galaxykit -s http://localhost:8002/"$API"/ -u admin -p admin collection list
 
-    - name: "Ensure galaxykit can connect to API (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
+    - name: "Check initial feature flags"
       run: |
-        galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
+        curl -s http://localhost:5001/"$API"/_ui/v1/feature-flags/ | jq
 
-    - name: "Check initial feature flags (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+    - name: "Check component versions & settings"
       run: |
-        curl -s http://localhost:5001/api/_ui/v1/feature-flags/ | jq
-
-    - name: "Check initial feature flags (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
-      run: |
-        curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
-
-    - name: "Check component versions & settings (community)"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
-      run: |
-        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/v3/auth/token/ | jq -r .token`
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/ | jq
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/_ui/v1/settings/ | jq
-
-    - name: "Check component versions & settings (standalone)"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
-      run: |
-        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
+        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/"$API"/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/"$API"/ | jq
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/"$API"/_ui/v1/settings/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
