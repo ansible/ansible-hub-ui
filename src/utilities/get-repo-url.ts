@@ -32,7 +32,7 @@ export function getContainersURL({
 
 // returns controller UI URL for the EE add form, prefilling a chosen image from hub
 export function controllerURL({
-  image,
+  image: name,
   tag,
   digest,
 }: {
@@ -44,14 +44,8 @@ export function controllerURL({
     tag = 'latest';
   }
 
-  const imageUrl = encodeURIComponent(
-    getContainersURL({
-      name: image,
-      tag,
-      digest,
-    }),
-  );
+  const imageURL = encodeURIComponent(getContainersURL({ name, tag, digest }));
+  const origin = window.location.origin;
 
-  // TODO update to 2.5 link
-  return `${window.location.origin}/#/execution_environments/add?image=${imageUrl}`;
+  return `${origin}/execution/infrastructure/execution-environments/add?image=${imageURL}`;
 }
