@@ -106,7 +106,6 @@ export { PermissionCategories } from './permission-categories';
 export { PermissionChipSelector } from './permission-chip-selector';
 export { PreviewRoles } from './preview-roles';
 export { ProviderLink } from './provider-link';
-export { PublishToControllerModal } from './publish-to-controller-modal';
 export { PulpLabels } from './pulp-labels';
 export { CollectionRatings, RoleRatings } from './ratings';
 export { RemoteForm } from './remote-form';

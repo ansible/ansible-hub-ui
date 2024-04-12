@@ -28,7 +28,6 @@ import {
   LabelGroup,
   ListItemActions,
   LoadingSpinner,
-  PublishToControllerModal,
   ShaLabel,
   SortTable,
   TagLabel,
@@ -63,7 +62,6 @@ interface IState {
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
-  publishToController: { digest?: string; image: string; tag?: string };
   selectedImage: ContainerManifestType;
   deleteModalVisible: boolean;
   confirmDelete: boolean;
@@ -99,7 +97,6 @@ class ExecutionEnvironmentDetailImages extends Component<
       params,
       redirect: null,
       manageTagsManifestDigest: undefined,
-      publishToController: null,
       selectedImage: undefined,
       deleteModalVisible: false,
       confirmDelete: false,
@@ -122,7 +119,6 @@ class ExecutionEnvironmentDetailImages extends Component<
       params,
       images,
       manageTagsManifestDigest,
-      publishToController,
       selectedImage,
       deleteModalVisible,
       confirmDelete,
@@ -240,13 +236,6 @@ class ExecutionEnvironmentDetailImages extends Component<
           repositoryName={this.props.containerRepository.name}
           onAlert={(alert) => this.props.addAlert(alert)}
           containerRepository={this.props.containerRepository}
-        />
-        <PublishToControllerModal
-          digest={publishToController?.digest}
-          image={publishToController?.image}
-          isOpen={!!publishToController}
-          onClose={() => this.setState({ publishToController: null })}
-          tag={publishToController?.tag}
         />
 
         <div className='hub-toolbar'>
@@ -389,15 +378,11 @@ class ExecutionEnvironmentDetailImages extends Component<
         </DropdownItem>
       ),
       <DropdownItem
-        key='publish-to-controller'
+        key='use-in-controller'
         onClick={() => {
-          this.setState({
-            publishToController: {
-              digest: image.digest,
-              image: this.props.containerRepository.name,
-              tag: image.tags[0],
-            },
-          });
+          // TODO digest: image.digest,
+          //    image: this.props.containerRepository.name,
+          //    tag: image.tags[0],
         }}
       >
         {t`Use in Controller`}

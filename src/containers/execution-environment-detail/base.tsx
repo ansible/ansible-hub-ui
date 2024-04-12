@@ -15,7 +15,6 @@ import {
   ExecutionEnvironmentHeader,
   LoadingPage,
   Main,
-  PublishToControllerModal,
   RepositoryForm,
   StatefulDropdown,
   closeAlert,
@@ -32,7 +31,6 @@ import {
 } from 'src/utilities';
 
 interface IState {
-  publishToController: { digest?: string; image: string; tag?: string };
   repo: ContainerRepositoryType;
   loading: boolean;
   redirect: string;
@@ -65,7 +63,6 @@ export function withContainerRepo(WrappedComponent) {
       super(props);
 
       this.state = {
-        publishToController: null,
         repo: undefined,
         loading: true,
         redirect: undefined,
@@ -124,13 +121,9 @@ export function withContainerRepo(WrappedComponent) {
           </DropdownItem>
         ),
         <DropdownItem
-          key='publish-to-controller'
+          key='use-in-controller'
           onClick={() => {
-            this.setState({
-              publishToController: {
-                image: this.state.repo.name,
-              },
-            });
+            // TODO image: this.state.repo.name,
           }}
         >
           {t`Use in Controller`}
@@ -158,7 +151,7 @@ export function withContainerRepo(WrappedComponent) {
           ),
       ].filter((truthy) => truthy);
 
-      const { alerts, repo, publishToController, showDeleteModal } = this.state;
+      const { alerts, repo, showDeleteModal } = this.state;
 
       // move to Owner tab when it can have its own breadcrumbs
       const { group: groupId } = ParamHelper.parseParamString(
@@ -175,13 +168,6 @@ export function withContainerRepo(WrappedComponent) {
                 setAlerts: (alerts) => this.setState({ alerts }),
               })
             }
-          />
-          <PublishToControllerModal
-            digest={publishToController?.digest}
-            image={publishToController?.image}
-            isOpen={!!publishToController}
-            onClose={() => this.setState({ publishToController: null })}
-            tag={publishToController?.tag}
           />
           {showDeleteModal && (
             <DeleteExecutionEnvironmentModal
