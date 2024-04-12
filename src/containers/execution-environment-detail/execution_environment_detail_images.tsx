@@ -24,6 +24,7 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  ExternalLink,
   HubPagination,
   LabelGroup,
   ListItemActions,
@@ -37,6 +38,7 @@ import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
+  controllerURL,
   errorMessage,
   filterIsSet,
   getContainersURL,
@@ -379,14 +381,19 @@ class ExecutionEnvironmentDetailImages extends Component<
       ),
       <DropdownItem
         key='use-in-controller'
-        onClick={() => {
-          // TODO digest: image.digest,
-          //    image: this.props.containerRepository.name,
-          //    tag: image.tags[0],
-        }}
-      >
-        {t`Use in Controller`}
-      </DropdownItem>,
+        component={
+          <ExternalLink
+            href={controllerURL({
+              digest: image.digest,
+              image: this.props.containerRepository.name,
+              tag: image.tags[0],
+            })}
+            variant='menu'
+          >
+            {t`Use in Controller`}
+          </ExternalLink>
+        }
+      />,
       hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete-image'

@@ -13,6 +13,7 @@ import {
   type AlertType,
   DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
+  ExternalLink,
   LoadingPage,
   Main,
   RepositoryForm,
@@ -26,6 +27,7 @@ import {
   RepoSigningUtils,
   type RouteProps,
   canSignEE,
+  controllerURL,
   taskAlert,
   waitForTask,
 } from 'src/utilities';
@@ -122,12 +124,15 @@ export function withContainerRepo(WrappedComponent) {
         ),
         <DropdownItem
           key='use-in-controller'
-          onClick={() => {
-            // TODO image: this.state.repo.name,
-          }}
-        >
-          {t`Use in Controller`}
-        </DropdownItem>,
+          component={
+            <ExternalLink
+              href={controllerURL({ image: this.state.repo.name })}
+              variant='menu'
+            >
+              {t`Use in Controller`}
+            </ExternalLink>
+          }
+        />,
         hasPermission('container.delete_containerrepository') && (
           <DropdownItem
             key='delete'

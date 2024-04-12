@@ -29,3 +29,29 @@ export function getContainersURL({
     digest && !tag ? `@${digest}` : ''
   }`;
 }
+
+// returns controller UI URL for the EE add form, prefilling a chosen image from hub
+export function controllerURL({
+  image,
+  tag,
+  digest,
+}: {
+  image: string;
+  tag?: string;
+  digest?: string;
+}) {
+  if (!digest && !tag) {
+    tag = 'latest';
+  }
+
+  const imageUrl = encodeURIComponent(
+    getContainersURL({
+      name: image,
+      tag,
+      digest,
+    }),
+  );
+
+  // TODO update to 2.5 link
+  return `${window.location.origin}/#/execution_environments/add?image=${imageUrl}`;
+}

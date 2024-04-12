@@ -5,7 +5,7 @@ export { DeleteCollectionUtils } from './delete-collection';
 export { downloadString } from './download-data';
 export { errorMessage, handleHttpError } from './fail-alerts';
 export { filterIsSet } from './filter-is-set';
-export { getContainersURL, getRepoURL } from './get-repo-url';
+export { controllerURL, getContainersURL, getRepoURL } from './get-repo-url';
 export { getHumanSize } from './get_human_size';
 export { hasPermission } from './has-permission';
 export { lastSyncStatus, lastSynced } from './last-sync-task';

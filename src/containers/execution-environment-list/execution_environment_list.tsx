@@ -42,6 +42,7 @@ import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
+  controllerURL,
   filterIsSet,
   taskAlert,
   withRouter,
@@ -366,12 +367,15 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       ),
       <DropdownItem
         key='use-in-controller'
-        onClick={() => {
-          // TODO image: item.name,
-        }}
-      >
-        {t`Use in Controller`}
-      </DropdownItem>,
+        component={
+          <ExternalLink
+            href={controllerURL({ image: item.name })}
+            variant='menu'
+          >
+            {t`Use in Controller`}
+          </ExternalLink>
+        }
+      />,
       hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete'
