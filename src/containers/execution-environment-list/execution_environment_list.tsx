@@ -32,7 +32,6 @@ import {
   ListItemActions,
   LoadingSpinner,
   Main,
-  PublishToControllerModal,
   RepositoryForm,
   SortTable,
   Tooltip,
@@ -43,6 +42,7 @@ import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
+  controllerURL,
   filterIsSet,
   taskAlert,
   withRouter,
@@ -59,7 +59,6 @@ interface IState {
     page?: number;
     page_size?: number;
   };
-  publishToController: { digest?: string; image: string; tag?: string };
   showRemoteModal: boolean;
   unauthorized: boolean;
   showDeleteModal: boolean;
@@ -93,7 +92,6 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       items: [],
       loading: true,
       params,
-      publishToController: null,
       showRemoteModal: false,
       unauthorized: false,
       showDeleteModal: false,
@@ -126,7 +124,6 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       items,
       loading,
       params,
-      publishToController,
       showRemoteModal,
       unauthorized,
       showDeleteModal,
@@ -170,13 +167,6 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
               setAlerts: (alerts) => this.setState({ alerts }),
             })
           }
-        />
-        <PublishToControllerModal
-          digest={publishToController?.digest}
-          image={publishToController?.image}
-          isOpen={!!publishToController}
-          onClose={() => this.setState({ publishToController: null })}
-          tag={publishToController?.tag}
         />
         {showRemoteModal && this.renderRemoteModal(itemToEdit)}
         <BaseHeader title={t`Execution environments`} />
@@ -376,17 +366,16 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
         </DropdownItem>
       ),
       <DropdownItem
-        key='publish-to-controller'
-        onClick={() => {
-          this.setState({
-            publishToController: {
-              image: item.name,
-            },
-          });
-        }}
-      >
-        {t`Use in Controller`}
-      </DropdownItem>,
+        key='use-in-controller'
+        component={
+          <ExternalLink
+            href={controllerURL({ image: item.name })}
+            variant='menu'
+          >
+            {t`Use in Controller`}
+          </ExternalLink>
+        }
+      />,
       hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete'

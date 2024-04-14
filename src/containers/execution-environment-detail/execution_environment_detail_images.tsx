@@ -24,11 +24,11 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  ExternalLink,
   HubPagination,
   LabelGroup,
   ListItemActions,
   LoadingSpinner,
-  PublishToControllerModal,
   ShaLabel,
   SortTable,
   TagLabel,
@@ -38,6 +38,7 @@ import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
+  controllerURL,
   errorMessage,
   filterIsSet,
   getContainersURL,
@@ -63,7 +64,6 @@ interface IState {
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
-  publishToController: { digest?: string; image: string; tag?: string };
   selectedImage: ContainerManifestType;
   deleteModalVisible: boolean;
   confirmDelete: boolean;
@@ -99,7 +99,6 @@ class ExecutionEnvironmentDetailImages extends Component<
       params,
       redirect: null,
       manageTagsManifestDigest: undefined,
-      publishToController: null,
       selectedImage: undefined,
       deleteModalVisible: false,
       confirmDelete: false,
@@ -122,7 +121,6 @@ class ExecutionEnvironmentDetailImages extends Component<
       params,
       images,
       manageTagsManifestDigest,
-      publishToController,
       selectedImage,
       deleteModalVisible,
       confirmDelete,
@@ -240,13 +238,6 @@ class ExecutionEnvironmentDetailImages extends Component<
           repositoryName={this.props.containerRepository.name}
           onAlert={(alert) => this.props.addAlert(alert)}
           containerRepository={this.props.containerRepository}
-        />
-        <PublishToControllerModal
-          digest={publishToController?.digest}
-          image={publishToController?.image}
-          isOpen={!!publishToController}
-          onClose={() => this.setState({ publishToController: null })}
-          tag={publishToController?.tag}
         />
 
         <div className='hub-toolbar'>
@@ -389,19 +380,20 @@ class ExecutionEnvironmentDetailImages extends Component<
         </DropdownItem>
       ),
       <DropdownItem
-        key='publish-to-controller'
-        onClick={() => {
-          this.setState({
-            publishToController: {
+        key='use-in-controller'
+        component={
+          <ExternalLink
+            href={controllerURL({
               digest: image.digest,
               image: this.props.containerRepository.name,
               tag: image.tags[0],
-            },
-          });
-        }}
-      >
-        {t`Use in Controller`}
-      </DropdownItem>,
+            })}
+            variant='menu'
+          >
+            {t`Use in Controller`}
+          </ExternalLink>
+        }
+      />,
       hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete-image'

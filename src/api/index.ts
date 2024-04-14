@@ -10,7 +10,6 @@ export { CollectionAPI } from './collection';
 export { CollectionVersionAPI } from './collection-version';
 export { ContainerDistributionAPI } from './container-distribution';
 export { ContainerTagAPI } from './container-tag';
-export { ControllerAPI } from './controller';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namespace';
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
