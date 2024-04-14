@@ -100,7 +100,9 @@ describe('Container Signing', () => {
     cy.visit(`${uiPrefix}containers/local1`);
     // this is now covered by alert that should not be here in the future
     cy.get('button[aria-label="Actions"]').click({ force: true });
-    cy.contains('[role="menuitem"]', 'Use in Controller');
-    cy.contains('[role="menuitem"]', 'Sign').should('not.exist');
+    cy.contains('[role=menu] li a', 'Use in Controller')
+      .should('have.attr', 'href')
+      .and('match', /^http.*\/execution-environments\/add.*local1%3Alatest$/);
+    cy.contains('[role=menu] li', 'Sign').should('not.exist');
   });
 });
