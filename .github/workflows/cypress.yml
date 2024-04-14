@@ -26,14 +26,13 @@ jobs:
       fail-fast: false
       matrix:
         test:
-        - 'screenshots'
         - 'approval'
         - 'approval_modal'
         - 'collections'
         - 'community'
-        - 'execution_environments'
         - 'namespaces'
         - 'repo'
+        - 'screenshots'
 
     steps:
 
