@@ -2,6 +2,7 @@
 
 Frontend for Ansible Hub and Galaxy. The backend for this project can be found at [ansible/galaxy\_ng](https://github.com/ansible/galaxy_ng/),
 developer docs at [ansible.readthedocs.io](https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/), and an outdated wiki at [ansibe/galaxy\_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
+Also read [developer\_guidelines](./developer_guidelines.md).
 
 The project is built on React & Patternfly, using components from [patternfly-react](https://github.com/patternfly/patternfly-react), with [lingui](https://github.com/lingui/js-lingui/) for l10n.
 
