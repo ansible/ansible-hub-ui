@@ -76,7 +76,7 @@
     "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
     "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
     "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
-    "build-standalone-gateway": "NODE_ENV=production webpack --config config/standalone-gateway.prod.webpack.config.js",
+    "build-standalone-gateway": "NODE_ENV=production webpack --config config/standalone.gateway.prod.webpack.config.js",
     "eslint": "eslint src/ config/ test/",
     "eslint:fix": "eslint --fix src/ config/ test/",
     "find-unused-exports": "npx find-unused-exports --module-glob 'src/**/*.{js,ts,jsx,tsx}' --resolve-file-extensions 'tsx,ts,jsx,js' --resolve-index-files",
