@@ -1,0 +1,62 @@
+# Updates the "dev" github release whenever new changes are merged into master.
+# This provides an up to date tarball that https://github.com/ansible/galaxy_ng can use.
+name: "Dev Gateway release"
+
+on:
+  workflow_dispatch: # allow running manually
+  push:
+    branches: [ 'master' ]
+
+concurrency:
+  group: dev-gateway-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dev:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: 'master' # for webpack
+      NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
+
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v4
+
+    - name: "Install node 18"
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: "Update the dev tag"
+      run: |
+        git config --local user.name "Dev release workflow"
+        git config --local user.email "ansible-hub-ui+dev@example.com"
+        git tag -f dev-gateway
+        git push -f --tags
+
+    - name: "Cache ~/.npm"
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ env.GITHUB_REF }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ env.GITHUB_REF }}-
+          ${{ runner.os }}-node-
+
+    - name: "Build a tarball"
+      run: |
+        npm ci || npm install
+        npm run build-standalone-gateway
+        tar -C dist/ -czvf automation-hub-ui-gateway-dist.tar.gz .
+
+    - name: "Release"
+      run: |
+        gh release create -p "$RELEASE_TAG" --title "$RELEASE_NAME" --notes "$RELEASE_BODY" || true # may already exist
+        gh release upload "$RELEASE_TAG" "$RELEASE_FILE" --clobber
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_NAME: "UI Dev Gateway Release"
+        RELEASE_BODY: "Provides an up to date build off of the latest changes in the `master` branch. The `automation-hub-ui-gateway-dist.tar.gz` artifact provided here corresponds to the latest version of `master`."
+        RELEASE_FILE: 'automation-hub-ui-gateway-dist.tar.gz'
+        RELEASE_TAG: 'dev-gateway'
