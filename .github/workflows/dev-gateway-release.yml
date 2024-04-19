@@ -57,6 +57,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE_NAME: "UI Dev Gateway Release"
-        RELEASE_BODY: "This is a special release that provides an up to date build off of the latest changes in the `master` branch. The `automation-hub-ui-gateway-dist.tar.gz` artifact provided here corresponds to the latest version of `master`."
+        RELEASE_BODY: "Provides an up to date build off of the latest changes in the `master` branch. The `automation-hub-ui-gateway-dist.tar.gz` artifact provided here corresponds to the latest version of `master`."
         RELEASE_FILE: 'automation-hub-ui-gateway-dist.tar.gz'
         RELEASE_TAG: 'dev-gateway'
