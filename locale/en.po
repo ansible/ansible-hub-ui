@@ -924,8 +924,8 @@ msgstr "CLI configuration"
 #~ msgstr "CLI Configuration"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
-msgstr "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
+#~ msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
+#~ msgstr "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 
 #: src/components/remote-form.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -942,7 +942,6 @@ msgid "close"
 msgstr "close"
 
 #: src/actions/ansible-repository-sync.tsx
-#: src/components/publish-to-controller-modal.tsx
 #: src/components/wizard-modal.tsx
 msgid "Close"
 msgstr "Close"
@@ -1313,12 +1312,12 @@ msgstr "Contents"
 
 #: src/components/publish-to-controller-modal.tsx
 #: src/components/publish-to-controller-modal.tsx
-msgid "Controller name"
-msgstr "Controller name"
+#~ msgid "Controller name"
+#~ msgstr "Controller name"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Controllers list could not be displayed."
-msgstr "Controllers list could not be displayed."
+#~ msgid "Controllers list could not be displayed."
+#~ msgstr "Controllers list could not be displayed."
 
 #: src/containers/landing/landing-page.tsx
 msgid "Cookie preferences"
@@ -1854,7 +1853,6 @@ msgstr "Details"
 msgid "Did you mean {0}?"
 msgstr "Did you mean {0}?"
 
-#: src/components/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
@@ -2299,8 +2297,8 @@ msgid "Except for members of groups below."
 msgstr "Except for members of groups below."
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Execution Environment"
-msgstr "Execution Environment"
+#~ msgid "Execution Environment"
+#~ msgstr "Execution Environment"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 msgid "Execution environment \"{0}\" has been added successfully."
@@ -2889,8 +2887,8 @@ msgid "If selected, TLS peer validation must be performed."
 msgstr "If selected, TLS peer validation must be performed."
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "If the Controller is not listed in the table, check settings.py."
-msgstr "If the Controller is not listed in the table, check settings.py."
+#~ msgid "If the Controller is not listed in the table, check settings.py."
+#~ msgstr "If the Controller is not listed in the table, check settings.py."
 
 #: src/components/remote-form.tsx
 msgid "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
@@ -3133,8 +3131,8 @@ msgid "Layers"
 msgstr "Layers"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Learn more"
-msgstr "Learn more"
+#~ msgid "Learn more"
+#~ msgstr "Learn more"
 
 #: src/components/wisdom-modal/wisdom-modal.tsx
 #~ msgid "Learn more about Ansible Wisdom."
@@ -3571,8 +3569,8 @@ msgid "No container repositories yet"
 msgstr "No container repositories yet"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "No Controllers available"
-msgstr "No Controllers available"
+#~ msgid "No Controllers available"
+#~ msgstr "No Controllers available"
 
 #: src/containers/my-imports/my-imports.tsx
 #: src/containers/my-imports/my-imports.tsx
@@ -3727,8 +3725,8 @@ msgid "No signature keys yet"
 msgstr "No signature keys yet"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "No tag or digest selected."
-msgstr "No tag or digest selected."
+#~ msgid "No tag or digest selected."
+#~ msgstr "No tag or digest selected."
 
 #: src/containers/task-management/task_detail.tsx
 msgid "No task group"
@@ -4906,8 +4904,8 @@ msgid "Select a remote"
 msgstr "Select a remote"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Select a tag"
-msgstr "Select a tag"
+#~ msgid "Select a tag"
+#~ msgstr "Select a tag"
 
 #: src/components/access-tab.tsx
 #: src/components/access-tab.tsx
@@ -5486,7 +5484,6 @@ msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future relea
 msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 
 #: src/components/collection-filter.ts
-#: src/components/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 msgid "Tag"
@@ -5506,8 +5503,8 @@ msgid "Tags"
 msgstr "Tags"
 
 #: src/components/publish-to-controller-modal.tsx
-msgid "Tags could not be displayed."
-msgstr "Tags could not be displayed."
+#~ msgid "Tags could not be displayed."
+#~ msgstr "Tags could not be displayed."
 
 #: src/containers/task-management/task-list-view.tsx
 msgid "Task \"{name}\" could not be stopped."
@@ -6044,7 +6041,6 @@ msgstr "URL must not be empty."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/publish-to-controller-modal.tsx
 #: src/containers/execution-environment-detail/base.tsx
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
