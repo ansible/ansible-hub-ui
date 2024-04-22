@@ -30,13 +30,6 @@ export const HubPagination = ({
   isTop,
   isCompact,
 }: IProps) => {
-  const extraProps = isTop
-    ? {}
-    : {
-        widgetId: 'pagination-options-menu-bottom',
-        variant: PaginationVariant.bottom,
-      };
-
   const onSetPage = (_, p) =>
     updateParams(ParamHelper.setParam(params, 'page', p));
 
@@ -58,7 +51,7 @@ export const HubPagination = ({
       page={params.page || 1}
       perPage={params.page_size || 10}
       perPageOptions={perPageOptions}
-      {...extraProps}
+      variant={isTop ? PaginationVariant.top : PaginationVariant.bottom}
     />
   );
 };
