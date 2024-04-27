@@ -118,6 +118,22 @@ function standaloneMenu() {
         (featureFlags.collection_signing || featureFlags.container_signing) &&
         !user.is_anonymous,
     }),
+    menuSection(t`User Access`, {}, [
+      menuItem(t`Users`, {
+        condition: (context) => hasPermission(context, 'galaxy.view_user'),
+        url: formatPath(Paths.userList),
+      }),
+      menuItem(t`Groups`, {
+        condition: (context) => hasPermission(context, 'galaxy.view_group'),
+        url: formatPath(Paths.groupList),
+        alternativeUrls: [altPath(Paths.groupDetail)],
+      }),
+      menuItem(t`Roles`, {
+        condition: (context) => hasPermission(context, 'galaxy.view_group'),
+        url: formatPath(Paths.roleList),
+        alternativeUrls: [altPath(Paths.roleEdit)],
+      }),
+    ]),
     menuItem(t`Documentation`, {
       url: UI_DOCS_URL,
       external: true,
@@ -139,22 +155,6 @@ function standaloneMenu() {
       external: true,
       condition: ({ featureFlags }) => featureFlags.legacy_roles,
     }),
-    menuSection(t`User Access`, {}, [
-      menuItem(t`Users`, {
-        condition: (context) => hasPermission(context, 'galaxy.view_user'),
-        url: formatPath(Paths.userList),
-      }),
-      menuItem(t`Groups`, {
-        condition: (context) => hasPermission(context, 'galaxy.view_group'),
-        url: formatPath(Paths.groupList),
-        alternativeUrls: [altPath(Paths.groupDetail)],
-      }),
-      menuItem(t`Roles`, {
-        condition: (context) => hasPermission(context, 'galaxy.view_group'),
-        url: formatPath(Paths.roleList),
-        alternativeUrls: [altPath(Paths.roleEdit)],
-      }),
-    ]),
   ];
 }
 
