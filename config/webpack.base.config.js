@@ -32,6 +32,7 @@ const defaultConfigs = [
   { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'IS_COMMUNITY', default: false, scope: 'global' },
+  { name: 'IS_GATEWAY', default: false, scope: 'global' },
   { name: 'IS_INSIGHTS', default: false, scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
