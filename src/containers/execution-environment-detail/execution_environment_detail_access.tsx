@@ -10,8 +10,12 @@ import {
 import { AccessTab } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatEEPath } from 'src/paths';
-import { withRouter } from 'src/utilities';
-import { ParamHelper, assignRoles, errorMessage } from 'src/utilities';
+import {
+  ParamHelper,
+  assignRoles,
+  errorMessage,
+  withRouter,
+} from 'src/utilities';
 import { type IDetailSharedProps, withContainerRepo } from './base';
 import './execution-environment-detail.scss';
 

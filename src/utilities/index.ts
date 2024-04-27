@@ -5,10 +5,11 @@ export { DeleteCollectionUtils } from './delete-collection';
 export { downloadString } from './download-data';
 export { errorMessage, handleHttpError } from './fail-alerts';
 export { filterIsSet } from './filter-is-set';
+export { getHumanSize } from './get-human-size';
 export { controllerURL, getContainersURL, getRepoURL } from './get-repo-url';
-export { getHumanSize } from './get_human_size';
 export { hasPermission } from './has-permission';
 export { lastSyncStatus, lastSynced } from './last-sync-task';
+export { loginURL } from './login-url';
 export {
   ErrorMessagesType,
   alertErrorsWithoutFields,
@@ -28,8 +29,8 @@ export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export { taskAlert } from './task-alert';
 export { translateLockedRole } from './translate-locked-role';
 export { translateTask } from './translate-task';
-export { truncateSha } from './truncate_sha';
-export { validateURLHelper } from './validateURLHelper';
+export { truncateSha } from './truncate-sha';
+export { validateURLHelper } from './validate-url-helper';
 export { waitForTask, waitForTaskUrl } from './wait-for-task';
 export { RouteProps, withRouter } from './with-router';
 export {

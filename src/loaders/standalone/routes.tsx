@@ -67,6 +67,7 @@ import {
 } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
+import { loginURL } from 'src/utilities';
 
 type UpdateInitialData = (
   data: {
@@ -126,11 +127,11 @@ const AuthHandler = ({
     return null;
   }
 
-  const isExternalAuth = featureFlags.external_authentication;
   if (!user && !noAuth) {
+    const isExternalAuth = featureFlags.external_authentication;
     // NOTE: also update LoginLink when changing this
     if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
-      window.location.replace(UI_EXTERNAL_LOGIN_URI);
+      window.location.replace(loginURL(pathname));
       return null;
     }
 
