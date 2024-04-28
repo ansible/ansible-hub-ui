@@ -1,66 +1,94 @@
 # Ansible Automation Hub UI
 
-Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy_ng/).
+Frontend for Ansible Hub and Galaxy. The backend for this project can be found at [ansible/galaxy\_ng](https://github.com/ansible/galaxy_ng/),
+developer docs at [ansible.readthedocs.io](https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/), and an outdated wiki at [ansibe/galaxy_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
 
-# Setting up Your Dev Environment
+The project is built on React & Patternfly, using components from [patternfly-react](https://github.com/patternfly/patternfly-react) and [lingui](https://github.com/lingui/js-lingui/) for l10n.
 
-## Develop using Docker Compose (Recommended)
 
-This project can now be run as a container alongside the API. Just follow the instructions on the [ansibe/galaxy_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
+## Setting up Your Dev Environment
 
-## Develop without containers
+### Backend
 
-This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and Roles.
+The development version of the backend runs in a container, using the [pulp/oci\_env](https://github.com/pulp/oci_env) wrapper.
 
-For every mode, you first need to:
+Set up:
 
-1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the setup instructions
-2. Install node. Node v18+ is known to work. Older versions may work as well.
-3. `npm install` in the UI
+```
+git clone https://github.com/pulp/oci_env
+git clone https://github.com/ansible/galaxy_ng
 
-### Develop in Standalone Mode (default)
+pip install -e oci_env/client/
+oci-env # make sure oci-env is in PATH
+```
 
-1. Start the API with `COMPOSE_PROFILE=standalone` (compose) or `COMPOSE_PROFILE=galaxy_ng/base` (oci-env)
-2. `npm run start-standalone`
+Run:
 
-The app will run on http://localhost:8002/ui and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
+```
+cd galaxy_ng
+make oci/standalone
+```
 
-### Develop in Community Mode
+The backend can be run in multiple modes - `standalone`, `community`, `insights`, `keycloak`, `ldap` and `dab`.
+Depending on the mode, it will listen on http://localhost:5001 or http://localhost:55001, under `/api/galaxy/`, `/api/` or `/api/automation-hub/`.
 
-1. Start the API with `COMPOSE_PROFILE=standalone-community` (compose)
-2. `npm run start-community`
 
-The app will run on http://localhost:8002/ui and proxy requests for `/api` to the api on `http://localhost:5001`.
+### Frontend
 
-### Develop in Insights Mode
+UI can run either as part of the backend container, or locally. The development version of the frontend uses webpack dev server.
 
-**NOTE:** This option is only relevant to Red Hat employees. Community contributors should follow setup for [standalone mode](#develop-in-standalone-mode)
+Set up:
 
-1. Start the API with `COMPOSE_PROFILE=insights` (compose) or `COMPOSE_PROFILE=galaxy_ng/base:galaxy_ng/insights` (oci-env)
-2. `npm run start-insights`
+Install node. Node v20+ is known to work. Other versions may work as well.
 
-The app will run on http://localhost:8002/preview/ansible/automation-hub (and http://localhost:8002/beta/ansible/automation-hub) and proxy requests for `/api/automation-hub` to the api on `http://localhost:5001`.
+```
+git clone https://github.com/ansible/ansible-hub-ui
+cd ansible-hub-ui
+npm install
+```
 
-## Deploying
+Run:
 
-We're using GitHub Actions for deployment.
+```
+cd ansible-hub-ui
+npm run start-standalone
+```
 
-### How it works
+This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and roles.
 
-The GitHub Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
 
-- any push to the `master` branch will deploy to `ansible-hub-ui-build` `qa-beta` branch
-- any push to the `master` branch will ALSO deploy to `ansible-hub-ui-build` `qa-stable` branch when `.cloud-stage-cron.enabled` exists
-- any push to the `prod-beta` branch will deploy to a `ansible-hub-ui-build` `prod-beta` branch
-- any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
-- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `qa-beta`
+#### Modes
 
-- `qa-beta` builds end up on `console.stage.redhat.com/preview` (and `/beta`)
-- `qa-stable` builds end up on `console.stage.redhat.com`
-- `prod-beta` builds end up on `console.redhat.com/preview` (and `/beta`)
-- `prod-stable` builds end up on `console.redhat.com`
+* `start-standalone`: assumes `oci/standalone`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
+* `start-community`: assumes `oci/community`, http://localhost:8002/ui/ and http://localhost:5001/api/
+* `start-insights`: assumes `oci/insights`,  http://localhost:8002/preview/ansible/automation-hub/ and http://localhost:55001/api/automation-hub/
+  * **NOTE:** This option is only relevant to Red Hat employees.
 
-### Workflows
+
+### Tests
+
+For more information about UI testing go to [test/README.md](https://github.com/ansible/ansible-hub-ui/tree/master/test/README.md).
+
+Set up:
+
+```
+pip install galaxykit ansible
+
+cd ansible-hub-ui/test/
+npm install
+```
+
+And create a `cypress.env.json` from the `cypress.env.json.template` template.
+
+Run:
+
+```
+cd ansible-hub-ui/test/
+npm run cypress
+```
+
+
+## GitHub Workflows
 
 List of all workflows:
 
@@ -81,7 +109,8 @@ List by branches:
 - `prod-beta`, `prod-stable`: `deploy-cloud`
 - `stable-*`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
-### Version mapping
+
+## Version mapping
 
 Our branches, backport labels, releases and tags use AAH versions, but Jira uses AAP versions.
 To map between the two:
@@ -92,16 +121,3 @@ To map between the two:
 |2.4|4.9|
 
 [Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
-
-## Patternfly
-
-- This project imports Patternfly components:
-  - [Patternfly React](https://github.com/patternfly/patternfly-react)
-
-## Insights Components
-
-Insights Platform will deliver components and static assets through [npm](https://www.npmjs.com/package/@red-hat-insights/insights-frontend-components). [insights-chrome](https://github.com/RedHatInsights/insights-chrome) takes care of the header, sidebar, and footer.
-
-## UI Testing
-
-For more information about UI testing go to [test README](https://github.com/ansible/ansible-hub-ui/tree/master/test/README.md).
