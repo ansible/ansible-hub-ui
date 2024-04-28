@@ -27,7 +27,7 @@ jobs:
       matrix:
         test:
         - 'approval'
-        - 'approval_modal'
+        - 'approval-modal'
         - 'collections'
         - 'community'
         - 'namespaces'

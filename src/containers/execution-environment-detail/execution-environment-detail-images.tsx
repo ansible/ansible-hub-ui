@@ -51,8 +51,8 @@ import {
   containerName,
   withContainerRepo,
 } from './base';
+import './execution-environment-detail-images.scss';
 import './execution-environment-detail.scss';
-import './execution-environment-detail_images.scss';
 
 interface IState {
   loading: boolean;
