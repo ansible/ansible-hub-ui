@@ -41,9 +41,13 @@ import {
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
-import { type RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  type RouteProps,
+  errorMessage,
+  filterIsSet,
+  withRouter,
+} from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {

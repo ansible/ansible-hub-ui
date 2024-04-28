@@ -17,8 +17,12 @@ import {
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRepositories } from 'src/permissions';
-import { parsePulpIDFromURL, repositoryBasePath } from 'src/utilities';
-import { lastSyncStatus, lastSynced } from 'src/utilities';
+import {
+  lastSyncStatus,
+  lastSynced,
+  parsePulpIDFromURL,
+  repositoryBasePath,
+} from 'src/utilities';
 import { RepositoryAccessTab } from './tab-access';
 import { CollectionVersionsTab } from './tab-collection-versions';
 import { DetailsTab } from './tab-details';

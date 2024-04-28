@@ -4,6 +4,7 @@ const webpackBase = require('./webpack.base.config');
 module.exports = webpackBase({
   API_HOST: '',
   API_BASE_PATH: '/api/galaxy/',
+  IS_GATEWAY: true,
   UI_BASE_PATH: '/hub/',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,

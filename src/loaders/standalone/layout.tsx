@@ -18,7 +18,7 @@ import {
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
 import React, { type ReactNode, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ActiveUserAPI,
   type FeatureFlagsType,
@@ -53,8 +53,6 @@ export const StandaloneLayout = ({
   settings,
   user,
 }: IProps) => {
-  const location = useLocation();
-
   const [aboutModalVisible, setAboutModalVisible] = useState<boolean>(false);
 
   let aboutModal = null;
@@ -188,7 +186,7 @@ export const StandaloneLayout = ({
           />
         ) : null}
         {!user || user.is_anonymous ? (
-          <LoginLink next={location.pathname} />
+          <LoginLink />
         ) : (
           <StatefulDropdown
             ariaLabel={t`User dropdown`}

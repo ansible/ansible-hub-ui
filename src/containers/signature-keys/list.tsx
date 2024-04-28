@@ -28,8 +28,13 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
-import { type RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  type RouteProps,
+  errorMessage,
+  filterIsSet,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   params: {
