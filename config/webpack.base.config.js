@@ -175,7 +175,6 @@ module.exports = (inputConfigs) => {
     ).map(([k, v]) => ({
       context: [k],
       target: v,
-      changeOrigin: true,
     }));
   }
 
