@@ -7,13 +7,13 @@ import {
 } from '@patternfly/react-core';
 import React, { Component, type ReactNode } from 'react';
 import { type ActionType } from 'src/actions';
-import { LoadingSpinner } from 'src/components';
 import {
   AlertList,
   type AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
+  LoadingSpinner,
   Main,
   closeAlert,
 } from 'src/components';

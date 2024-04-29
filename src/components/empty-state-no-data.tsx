@@ -1,7 +1,6 @@
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-icon';
-import React from 'react';
-import { type ReactElement, type ReactNode } from 'react';
+import React, { type ReactElement, type ReactNode } from 'react';
 import { EmptyStateCustom } from 'src/components';
 
 interface IProps {
