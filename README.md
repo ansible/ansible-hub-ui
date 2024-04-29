@@ -98,6 +98,7 @@ List of all workflows:
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
+- `dev-gateway-release`: Build and upload to github releases, update `dev-gateway` tag; when master is updated
 - `i18n`: Extract and merge l10n strings; cron
 - `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
 - `stable-release`: Build and upload to github releases; when a stable release is created
@@ -105,7 +106,7 @@ List of all workflows:
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
+- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `dev-gateway-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `prod-beta`, `prod-stable`: `deploy-cloud`
 - `stable-*`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
