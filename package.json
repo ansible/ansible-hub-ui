@@ -40,7 +40,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@lingui/cli": "^4.10.1",
     "@lingui/macro": "^4.10.1",
-    "@ls-lint/ls-lint": "^2.2.2",
+    "@ls-lint/ls-lint": "^2.2.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.14.0",
