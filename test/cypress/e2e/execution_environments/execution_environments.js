@@ -1,5 +1,5 @@
 describe('execution environments', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
+  const num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
@@ -48,7 +48,7 @@ describe('execution environments', () => {
   it('adds a Readme', () => {
     cy.contains('a', `remotepine${num}`).click();
     cy.get('[data-cy=add-readme]').click();
-    cy.get('textarea').type('This is the readme file.');
+    cy.get('textarea').type('{del}This is the readme file.');
     cy.get('[data-cy=save-readme]').click();
     cy.get('.markdown-editor').should(
       'have.text',
