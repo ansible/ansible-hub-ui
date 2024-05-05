@@ -112,7 +112,7 @@ msgstr "{downloadCount} Downloads"
 #~ msgid "{github_user} logo"
 #~ msgstr "{github_user} logo"
 
-#: src/utilities/get_human_size.ts
+#: src/utilities/get-human-size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
@@ -1222,7 +1222,7 @@ msgstr "Connect the ansible-galaxy client"
 msgid "Connect to Hub"
 msgstr "Connect to Hub"
 
-#: src/utilities/validateURLHelper.ts
+#: src/utilities/validate-url-helper.ts
 msgid "Consider using a secure URL (https://)."
 msgstr "Consider using a secure URL (https://)."
 
@@ -5701,7 +5701,7 @@ msgstr "The selected roles will be added to this specific namespace."
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
-#: src/utilities/validateURLHelper.ts
+#: src/utilities/validate-url-helper.ts
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "The URL needs to be in 'http(s)://' format."
 

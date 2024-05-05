@@ -111,7 +111,7 @@ msgstr ""
 #~ msgid "{github_user} logo"
 #~ msgstr ""
 
-#: src/utilities/get_human_size.ts
+#: src/utilities/get-human-size.ts
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
@@ -1221,7 +1221,7 @@ msgstr "Connect the ansible-galaxy client"
 msgid "Connect to Hub"
 msgstr "Connect to Hub"
 
-#: src/utilities/validateURLHelper.ts
+#: src/utilities/validate-url-helper.ts
 msgid "Consider using a secure URL (https://)."
 msgstr "보안 URL(https://)을 사용하는 것이 좋습니다."
 
@@ -5700,7 +5700,7 @@ msgstr "선택한 역할이 이 특정 네임스페이스에 추가됩니다."
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
-#: src/utilities/validateURLHelper.ts
+#: src/utilities/validate-url-helper.ts
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "URL은 'http(s)://' 형식이어야 합니다."
 
