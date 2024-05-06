@@ -22,10 +22,9 @@ jobs:
       working-directory: ".github/workflows"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR_TITLE: "${{ github.event.pull_request.title }}"
       run: |
         node automerge.js
-      env:
-        PR_TITLE: "${{ github.event.pull_request.title }}"
 
     - name: "Automerge the PR"
       env:
