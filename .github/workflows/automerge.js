@@ -1,5 +1,19 @@
 const { exec } = require('node:child_process');
-const [ _node, _automerge, branch, prTitle, actor ] = process.argv;
+const [ _node, _automerge ] = process.argv;
+
+// get these values from env instead of cli args due to RCE issues
+let branch = null;
+let prTitle = null;
+let actor = null;
+if (process.env.HEAD_REF) {
+    branch = process.env.HEAD_REF;
+}
+if (process.env.PR_TITLE) {
+    prTitle = process.env.PR_TITLE;
+}
+if (process.env.GITHUB_ACTOR) {
+    actor = process.env.GITHUB_ACTOR;
+}
 
 console.log({ branch, prTitle, actor });
 
