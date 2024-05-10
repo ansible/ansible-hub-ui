@@ -1,66 +1,20 @@
 const { exec } = require('node:child_process');
-const [ _node, _automerge ] = process.argv;
 
 // get these values from env instead of cli args due to RCE issues
-let branch = null;
-let prTitle = null;
-let actor = null;
-if (process.env.HEAD_REF) {
-    branch = process.env.HEAD_REF;
-}
-if (process.env.PR_TITLE) {
-    prTitle = process.env.PR_TITLE;
-}
-if (process.env.GITHUB_ACTOR) {
-    actor = process.env.GITHUB_ACTOR;
-}
-
-console.log({ branch, prTitle, actor });
+const branch = process.env.GITHUB_HEAD_REF;
 
 if (!branch) {
-  console.log('Branch name argument (first) was not specified');
+  console.log('Branch name not set (GITHUB_HEAD_REF)');
   process.exit(1);
 }
-
-if (!prTitle) {
-  console.log('PR title argument (second) was not specified');
-  process.exit(1);
-}
-
-if (!actor) {
-  console.log('Actor argument (third) was not specified');
-  process.exit(1);
-}
-
-if (actor != 'dependabot[bot]') {
-  console.log('Automerge works only for PRs created by dependabot.');
-  process.exit(1);
-}
-
-if (prTitle.includes('patternfly')) {
-  console.log('Automerge can\'t merge patternfly PRs.');
-  process.exit(1);
-}
-
-if (prTitle.includes('@types/node')) {
-  console.log('Checking for @types/node version.');
-  const pattern = /from (\d+)\.\d+\.\d+ to \1\.\d+\.\d+/;
-  if (pattern.test(prTitle)) {
-    console.log('Version does match the pattern ' + pattern);
-  } else {
-    console.log('Version does not match the pattern ' + pattern);
-    process.exit(1);
-  }
-}
-
-console.log('Waiting for checks');
 
 let waitCount = 0;
 
 function waitForAll() {
   waitCount++;
-  // dont cycle more that 50x (that is 50 minutes)
-  if (waitCount > 50) {
+
+  // fail after 30 minutes
+  if (waitCount > 30) {
     console.log('Waiting limit reached. Exiting.');
     process.exit(1);
   }
@@ -141,6 +95,7 @@ function waitForAll() {
         process.exit(1);
       }
 
+      // retry after a minute
       setTimeout(waitForAll, 60000);
     },
   );
