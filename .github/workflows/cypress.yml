@@ -70,8 +70,8 @@ jobs:
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
       run: |
-        UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
-        echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
+        UI_COMMIT_BASE=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        echo "UI_COMMIT_BASE=${UI_COMMIT_BASE}" >> $GITHUB_ENV
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v4
@@ -230,19 +230,19 @@ jobs:
       run: |
         diff -Naur <(ls test/cypress/e2e | sort) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
-    - name: "Cache master screenshots"
+    - name: "Cache base screenshots"
       if: matrix.test == 'screenshots'
       uses: actions/cache@v4
       with:
-        path: ansible-hub-ui/test/screenshots-main/
-        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MASTER }}
+        path: ansible-hub-ui/test/screenshots-base/
+        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_BASE }}
         restore-keys: |
           screenshots-${{env.SHORT_BRANCH}}-
 
     - name: "List cached screenshots"
       if: ${{ matrix.test == 'screenshots' && github.event_name == 'pull_request' }}
       run: |
-        ls ansible-hub-ui/test/screenshots-main/
+        ls ansible-hub-ui/test/screenshots-base/
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
@@ -267,7 +267,7 @@ jobs:
       run: |
         changed=false
 
-        for orig in screenshots-main/*; do
+        for orig in screenshots-base/*; do
           name=`basename "$orig"`
           new="cypress/screenshots/screenshots/screenshots.js/$name"
           diff="cypress/screenshots/screenshots/diff--$name"
@@ -281,7 +281,7 @@ jobs:
         done
 
         if [ "$changed" = true ]; then
-          cp -a screenshots-main cypress/screenshots/screenshots/0-before
+          cp -a screenshots-base cypress/screenshots/screenshots/0-before
           mv cypress/screenshots/screenshots/{screenshots.js,1-after}
           exit 1
         fi
@@ -290,8 +290,8 @@ jobs:
       if: ${{ matrix.test == 'screenshots' && github.event_name != 'pull_request' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
-        rm -rf screenshots-main/
-        mv cypress/screenshots/screenshots/screenshots.js ./screenshots-main
+        rm -rf screenshots-base/
+        mv cypress/screenshots/screenshots/screenshots.js ./screenshots-base
 
     - uses: actions/upload-artifact@v4
       if: failure()
