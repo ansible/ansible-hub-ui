@@ -1,5 +1,13 @@
-import { t } from '@lingui/macro';
-import { Button, DataList, Switch } from '@patternfly/react-core';
+import { Trans, t } from '@lingui/macro';
+import {
+  Banner,
+  Button,
+  DataList,
+  Flex,
+  FlexItem,
+  Switch,
+} from '@patternfly/react-core';
+import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
 import React, { Component, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -21,6 +29,7 @@ import {
   DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  ExternalLink,
   HubListToolbar,
   HubPagination,
   ImportModal,
@@ -168,98 +177,117 @@ class Search extends Component<RouteProps, IState> {
     const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
 
     return (
-      <div className='search-page'>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) =>
-            closeAlert(i, {
-              alerts,
-              setAlerts: (alerts) => this.setState({ alerts }),
-            })
-          }
-        />
-        <DeleteCollectionModal
-          deleteCollection={deleteCollection}
-          collections={collections}
-          isDeletionPending={isDeletionPending}
-          confirmDelete={confirmDelete}
-          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
-          cancelAction={() => this.setState({ deleteCollection: null })}
-          deleteAction={() =>
-            this.setState({ isDeletionPending: true }, () =>
-              DeleteCollectionUtils.deleteCollection({
-                collection: deleteCollection,
-                setState: (state) => this.setState(state),
-                load: () => this.load(),
-                redirect: false,
-                addAlert: (alert) => this.addAlert(alert),
-                deleteFromRepo,
-              }),
-            )
-          }
-          deleteFromRepo={deleteFromRepo}
-        />
-
-        {showImportModal && (
-          <ImportModal
-            isOpen={showImportModal}
-            onUploadSuccess={() =>
-              this.setState({
-                redirect: formatPath(
-                  Paths.myImports,
-                  {},
-                  {
-                    namespace: updateCollection.collection_version.namespace,
-                  },
-                ),
+      <>
+        {IS_GATEWAY ? (
+          <Banner variant='blue'>
+            <Flex spaceItems={{ default: 'spaceItemsSm' }}>
+              <FlexItem>
+                <InfoCircleIcon />
+              </FlexItem>
+              <FlexItem>
+                <Trans>
+                  A tech preview of the new Automation Hub user interface can be
+                  found <ExternalLink href='/'>here</ExternalLink>.
+                </Trans>
+              </FlexItem>
+            </Flex>
+          </Banner>
+        ) : null}
+        <div className='hub-search-page'>
+          <AlertList
+            alerts={alerts}
+            closeAlert={(i) =>
+              closeAlert(i, {
+                alerts,
+                setAlerts: (alerts) => this.setState({ alerts }),
               })
             }
-            // onCancel
-            setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
-            collection={updateCollection.collection_version}
-            namespace={updateCollection.collection_version.namespace}
           />
-        )}
-        <BaseHeader className='hub-header-bordered' title={t`Collections`} />
-        {!noData && (
-          <HubListToolbar
-            count={count}
-            ignoredParams={ignoredParams}
-            params={params}
-            switcher='search_view_type'
-            updateParams={updateParams}
-            {...collectionFilter({
-              featureFlags: (this.context as IAppContextType).featureFlags,
-              ignoredParams,
-            })}
+          <DeleteCollectionModal
+            deleteCollection={deleteCollection}
+            collections={collections}
+            isDeletionPending={isDeletionPending}
+            confirmDelete={confirmDelete}
+            setConfirmDelete={(confirmDelete) =>
+              this.setState({ confirmDelete })
+            }
+            cancelAction={() => this.setState({ deleteCollection: null })}
+            deleteAction={() =>
+              this.setState({ isDeletionPending: true }, () =>
+                DeleteCollectionUtils.deleteCollection({
+                  collection: deleteCollection,
+                  setState: (state) => this.setState(state),
+                  load: () => this.load(),
+                  redirect: false,
+                  addAlert: (alert) => this.addAlert(alert),
+                  deleteFromRepo,
+                }),
+              )
+            }
+            deleteFromRepo={deleteFromRepo}
           />
-        )}
-        {loading ? (
-          <LoadingSpinner />
-        ) : noData ? (
-          <EmptyStateNoData
-            title={t`No collections yet`}
-            description={t`Collections will appear once uploaded`}
-          />
-        ) : (
-          <>
-            <section className='collection-container'>
-              {this.renderCollections(collections, {
-                count,
-                params,
-                updateParams,
+
+          {showImportModal && (
+            <ImportModal
+              isOpen={showImportModal}
+              onUploadSuccess={() =>
+                this.setState({
+                  redirect: formatPath(
+                    Paths.myImports,
+                    {},
+                    {
+                      namespace: updateCollection.collection_version.namespace,
+                    },
+                  ),
+                })
+              }
+              // onCancel
+              setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
+              collection={updateCollection.collection_version}
+              namespace={updateCollection.collection_version.namespace}
+            />
+          )}
+          <BaseHeader className='hub-header-bordered' title={t`Collections`} />
+          {!noData && (
+            <HubListToolbar
+              count={count}
+              ignoredParams={ignoredParams}
+              params={params}
+              switcher='search_view_type'
+              updateParams={updateParams}
+              {...collectionFilter({
+                featureFlags: (this.context as IAppContextType).featureFlags,
+                ignoredParams,
               })}
-            </section>
-            <section className='footer'>
-              <HubPagination
-                params={params}
-                updateParams={updateParams}
-                count={count}
-              />
-            </section>
-          </>
-        )}
-      </div>
+            />
+          )}
+          {loading ? (
+            <LoadingSpinner />
+          ) : noData ? (
+            <EmptyStateNoData
+              title={t`No collections yet`}
+              description={t`Collections will appear once uploaded`}
+            />
+          ) : (
+            <>
+              <section className='collection-container'>
+                {this.renderCollections(collections, {
+                  count,
+                  params,
+                  updateParams,
+                })}
+              </section>
+              <section className='footer'>
+                <HubPagination
+                  params={params}
+                  updateParams={updateParams}
+                  count={count}
+                />
+              </section>
+            </>
+          )}
+        </div>
+      </>
     );
   }
 

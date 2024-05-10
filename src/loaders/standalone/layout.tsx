@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import {
-  Banner,
   Masthead,
   MastheadBrand,
   MastheadContent,
@@ -212,18 +211,6 @@ export const StandaloneLayout = ({
 
   return (
     <Page isManagedSidebar header={Header} sidebar={Sidebar}>
-      {IS_COMMUNITY ? (
-        <Banner>
-          <Trans>
-            Thanks for trying out the new and improved Galaxy, please share your
-            feedback on{' '}
-            <ExternalLink href='https://forum.ansible.com/'>
-              forum.ansible.com
-            </ExternalLink>
-            .
-          </Trans>
-        </Banner>
-      ) : null}
       {children}
       {aboutModalVisible && aboutModal}
     </Page>
