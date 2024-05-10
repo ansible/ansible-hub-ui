@@ -20,7 +20,7 @@ const gitCommit =
   execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
 
 const docsURL =
-  'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4';
+  'https://docs.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4';
 
 // Default user defined settings
 const defaultConfigs = [
