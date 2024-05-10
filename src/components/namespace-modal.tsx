@@ -9,154 +9,124 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { NamespaceAPI } from 'src/api';
 import { FormFieldHelper, HelpButton } from 'src/components';
 import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;
-  toggleModal: object;
   onCreateSuccess: (result) => void;
+  toggleModal: () => void;
 }
 
-interface IState {
-  newNamespaceName: string;
-  newNamespaceNameValid: boolean;
-  errorMessages: ErrorMessagesType;
-}
+export const NamespaceModal = ({
+  isOpen,
+  onCreateSuccess,
+  toggleModal,
+}: IProps) => {
+  const [name, setName] = useState<string>('');
+  const [nameValid, setNameValid] = useState<boolean>(true);
+  const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({});
 
-export class NamespaceModal extends Component<IProps, IState> {
-  toggleModal;
-
-  constructor(props) {
-    super(props);
-
-    this.toggleModal = this.props.toggleModal;
-    this.state = {
-      newNamespaceName: '',
-      newNamespaceNameValid: true,
-      errorMessages: {},
-    };
-  }
-
-  private newNamespaceNameIsValid() {
-    const error = this.state.errorMessages;
-    const name: string = this.state.newNamespaceName;
-
+  function nameIsValid(name) {
     if (name == '') {
-      error['name'] = t`Please, provide the namespace name`;
+      errorMessages['name'] = t`Please, provide the namespace name`;
     } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
-      error['name'] = t`Name can only contain letters and numbers`;
+      errorMessages['name'] = t`Name can only contain letters and numbers`;
     } else if (name.length <= 2) {
-      error['name'] = t`Name must be longer than 2 characters`;
+      errorMessages['name'] = t`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {
-      error['name'] = t`Name cannot begin with '_'`;
+      errorMessages['name'] = t`Name cannot begin with '_'`;
     } else {
-      delete error['name'];
+      delete errorMessages['name'];
     }
 
-    this.setState({
-      newNamespaceNameValid: !('name' in error),
-      errorMessages: error,
-    });
+    setNameValid(!('name' in errorMessages));
+    setErrorMessages(errorMessages);
   }
 
-  private handleSubmit = () => {
+  function handleSubmit() {
     const data = {
-      name: this.state.newNamespaceName,
+      name: name,
       groups: [],
     };
 
     NamespaceAPI.create(data)
       .then(() => {
-        this.toggleModal();
-        this.setState({
-          newNamespaceName: '',
-          errorMessages: {},
-        });
-        this.props.onCreateSuccess(data);
+        toggleModal();
+        setName('');
+        setErrorMessages({});
+        onCreateSuccess(data);
       })
       .catch((error) => {
-        const result = error.response;
-        const messages = this.state.errorMessages;
-        for (const e of result.data.errors) {
-          messages[e.source.parameter] = e.detail;
+        for (const e of error.response.data.errors) {
+          errorMessages[e.source.parameter] = e.detail;
         }
-        this.setState({
-          errorMessages: messages,
-          newNamespaceNameValid: !('name' in messages),
-        });
+
+        setNameValid(!('name' in errorMessages));
+        setErrorMessages(errorMessages);
       });
-  };
-
-  render() {
-    const { newNamespaceName, newNamespaceNameValid } = this.state;
-
-    return (
-      <Modal
-        variant={ModalVariant.medium}
-        title={t`Create a new namespace`}
-        isOpen={this.props.isOpen}
-        onClose={this.toggleModal}
-        actions={[
-          <Button
-            key='confirm'
-            variant='primary'
-            onClick={this.handleSubmit}
-            isDisabled={!newNamespaceName || !newNamespaceNameValid}
-          >
-            {t`Create`}
-          </Button>,
-          <Button key='cancel' variant='link' onClick={this.toggleModal}>
-            {t`Cancel`}
-          </Button>,
-        ]}
-      >
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            this.handleSubmit();
-          }}
-        >
-          <FormGroup
-            label={t`Name`}
-            isRequired
-            fieldId='name'
-            labelIcon={
-              <HelpButton
-                content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
-                header={t`Namespace name`}
-              />
-            }
-          >
-            <InputGroup>
-              <InputGroupItem isFill>
-                <TextInput
-                  validated={
-                    this.state.newNamespaceNameValid ? 'default' : 'error'
-                  }
-                  isRequired
-                  type='text'
-                  id='newNamespaceName'
-                  name='newNamespaceName'
-                  value={newNamespaceName}
-                  onChange={(_event, value) => {
-                    this.setState({ newNamespaceName: value }, () => {
-                      this.newNamespaceNameIsValid();
-                    });
-                  }}
-                />
-              </InputGroupItem>
-            </InputGroup>
-            <FormFieldHelper
-              variant={this.state.newNamespaceNameValid ? 'default' : 'error'}
-            >
-              {this.state.errorMessages['name']}
-            </FormFieldHelper>
-          </FormGroup>
-        </Form>
-      </Modal>
-    );
   }
-}
+
+  return (
+    <Modal
+      variant={ModalVariant.medium}
+      title={t`Create a new namespace`}
+      isOpen={isOpen}
+      onClose={toggleModal}
+      actions={[
+        <Button
+          key='confirm'
+          variant='primary'
+          onClick={handleSubmit}
+          isDisabled={!name || !nameValid}
+        >
+          {t`Create`}
+        </Button>,
+        <Button key='cancel' variant='link' onClick={toggleModal}>
+          {t`Cancel`}
+        </Button>,
+      ]}
+    >
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <FormGroup
+          label={t`Name`}
+          isRequired
+          fieldId='name'
+          labelIcon={
+            <HelpButton
+              content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
+              header={t`Namespace name`}
+            />
+          }
+        >
+          <InputGroup>
+            <InputGroupItem isFill>
+              <TextInput
+                validated={nameValid ? 'default' : 'error'}
+                isRequired
+                type='text'
+                id='name'
+                name='name'
+                value={name}
+                onChange={(_event, value) => {
+                  setName(value);
+                  nameIsValid(value);
+                }}
+              />
+            </InputGroupItem>
+          </InputGroup>
+          <FormFieldHelper variant={nameValid ? 'default' : 'error'}>
+            {errorMessages['name']}
+          </FormFieldHelper>
+        </FormGroup>
+      </Form>
+    </Modal>
+  );
+};

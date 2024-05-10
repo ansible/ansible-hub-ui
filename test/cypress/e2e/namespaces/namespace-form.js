@@ -8,7 +8,7 @@ describe('A namespace form', () => {
     return cy.get('.pf-v5-c-modal-box__footer .pf-m-primary');
   };
   const getInputBox = () => {
-    return cy.get('input[name="newNamespaceName"]');
+    return cy.get('input[name="name"]');
   };
   const clearInput = () => {
     return getInputBox().clear();
