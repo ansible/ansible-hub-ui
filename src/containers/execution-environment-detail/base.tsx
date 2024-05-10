@@ -86,8 +86,6 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      const container = containerName(this.props.routeParams);
-
       const redirect = {
         list: formatPath(Paths.executionEnvironments),
         notFound: formatPath(Paths.notFound),
@@ -188,7 +186,6 @@ export function withContainerRepo(WrappedComponent) {
             />
           )}
           <ExecutionEnvironmentHeader
-            id={container}
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
