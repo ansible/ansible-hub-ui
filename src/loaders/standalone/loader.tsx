@@ -49,10 +49,13 @@ const App = (_props) => {
   let component = <StandaloneRoutes updateInitialData={updateInitialData} />;
 
   // Hide navs on login page
-  if (
+  // FIXME: replace with "showing the login page" logic
+  const showNav =
     location.pathname !== formatPath(Paths.login) &&
-    location.pathname !== UI_EXTERNAL_LOGIN_URI
-  ) {
+    (location.pathname !== UI_EXTERNAL_LOGIN_URI ||
+      UI_EXTERNAL_LOGIN_URI === '/');
+
+  if (showNav) {
     component = (
       <StandaloneLayout
         featureFlags={featureFlags}
