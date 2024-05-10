@@ -58,8 +58,8 @@ jobs:
     - name: "Set variables for screenshots"
       if: matrix.test == 'screenshots'
       run: |
-        UI_COMMIT_MAIN=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
-        echo "UI_COMMIT_MAIN=${UI_COMMIT_MAIN}" >> $GITHUB_ENV
+        UI_COMMIT_BASE=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        echo "UI_COMMIT_BASE=${UI_COMMIT_BASE}" >> $GITHUB_ENV
 
         COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
         echo 'compare screenshots:'
@@ -190,19 +190,19 @@ jobs:
       run: |
         diff -Naur <(ls test/cypress/e2e | sort) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
-    - name: "Cache original screenshots"
+    - name: "Cache base screenshots"
       if: matrix.test == 'screenshots'
       uses: actions/cache@v4
       with:
-        path: ansible-hub-ui/test/screenshots-main/
-        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MAIN }}
+        path: ansible-hub-ui/test/screenshots-base/
+        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_BASE }}
         restore-keys: |
           screenshots-${{env.SHORT_BRANCH}}-
 
     - name: "List cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
       run: |
-        ls ansible-hub-ui/test/screenshots-main/
+        ls ansible-hub-ui/test/screenshots-base/
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
@@ -227,7 +227,7 @@ jobs:
       run: |
         changed=false
 
-        for orig in screenshots-main/*; do
+        for orig in screenshots-base/*; do
           echo $orig
           new=cypress/screenshots/screenshots/screenshots.js/"$(basename "$orig")"
           diff=cypress/screenshots/screenshots/diff--"$(basename "$orig")"
@@ -250,8 +250,8 @@ jobs:
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
-        rm -rf screenshots-main/
-        mv cypress/screenshots/screenshots/screenshots.js ./screenshots-main
+        rm -rf screenshots-base/
+        mv cypress/screenshots/screenshots/screenshots.js ./screenshots-base
 
     - uses: actions/upload-artifact@v4
       if: failure()
