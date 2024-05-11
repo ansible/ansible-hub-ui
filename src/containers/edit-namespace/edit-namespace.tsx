@@ -18,6 +18,8 @@ import {
   ResourcesForm,
   Spinner,
   closeAlert,
+  validateName,
+  validateURL,
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
@@ -212,8 +214,8 @@ class EditNamespace extends Component<RouteProps, IState> {
     const namespace = this.state.namespace;
     return namespace.links.some(
       (link) =>
-        NamespaceForm.validateName(link).variant == 'error' ||
-        NamespaceForm.validateUrl(link).variant == 'error',
+        validateName(link).variant == 'error' ||
+        validateURL(link).variant == 'error',
     );
   }
 
