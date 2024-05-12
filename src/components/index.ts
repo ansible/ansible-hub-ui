@@ -76,7 +76,7 @@ export { MultiRepoModal } from './multi-repo-modal';
 export { MultiSearchSearch } from './multi-search-search';
 export { MultipleRepoSelector } from './multiple-repo-selector';
 export { NamespaceCard, NamespaceNextPageCard } from './namespace-card';
-export { NamespaceForm } from './namespace-form';
+export { NamespaceForm, validateName, validateURL } from './namespace-form';
 export { NamespaceListItem } from './namespace-list-item';
 export { NamespaceModal } from './namespace-modal';
 export { CollectionNumericLabel } from './numeric-label';

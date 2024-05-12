@@ -7,87 +7,73 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FormFieldHelper } from 'src/components';
 import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
+  clearErrors?: () => void;
+  errorMessage?: ErrorMessagesType;
+  group?: { name: string };
   onCancel?: () => void;
   onSave?: (string) => void;
-  clearErrors?: () => void;
-  group?: { name: string };
-  errorMessage?: ErrorMessagesType;
 }
 
-interface IState {
-  name: string;
-}
+export const GroupModal = ({
+  clearErrors,
+  errorMessage,
+  group,
+  onCancel,
+  onSave,
+}: IProps) => {
+  const [name, setName] = useState<string>(group?.name || '');
 
-export class GroupModal extends Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name:
-        !this.props.group || !this.props.group.name
-          ? ''
-          : this.props.group.name,
-    };
-  }
-
-  render() {
-    const { onCancel, onSave, clearErrors } = this.props;
-    return (
-      <Modal
-        variant={ModalVariant.medium}
-        onClose={() => {
-          onCancel();
+  return (
+    <Modal
+      variant={ModalVariant.medium}
+      onClose={() => {
+        onCancel();
+      }}
+      isOpen
+      title={t`Create a group`}
+      actions={[
+        <div key='create' data-cy='create-group-button'>
+          <Button
+            isDisabled={name.length === 0 || (group && name === group.name)}
+            key='create'
+            variant='primary'
+            onClick={() => onSave(name)}
+          >
+            {!group ? t`Create` : t`Save`}
+          </Button>
+        </div>,
+        <Button key='cancel' variant='link' onClick={() => onCancel()}>
+          {t`Cancel`}
+        </Button>,
+      ]}
+    >
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSave(name);
         }}
-        isOpen
-        title={t`Create a group`}
-        actions={[
-          <div key='create' data-cy='create-group-button'>
-            <Button
-              isDisabled={
-                this.state.name.length === 0 ||
-                (this.props.group && this.state.name === this.props.group.name)
-              }
-              key='create'
-              variant='primary'
-              onClick={() => onSave(this.state.name)}
-            >
-              {!this.props.group ? t`Create` : t`Save`}
-            </Button>
-          </div>,
-          <Button key='cancel' variant='link' onClick={() => onCancel()}>
-            {t`Cancel`}
-          </Button>,
-        ]}
       >
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSave(this.state.name);
-          }}
-        >
-          <FormGroup isRequired key='name' fieldId='name' label={t`Name`}>
-            <TextInput
-              id='group_name'
-              value={this.state.name}
-              onChange={(_event, value) => {
-                this.setState({ name: value });
-                clearErrors();
-              }}
-              type='text'
-              validated={this.props.errorMessage ? 'error' : 'default'}
-            />
-            <FormFieldHelper
-              variant={this.props.errorMessage ? 'error' : 'default'}
-            >
-              {this.props.errorMessage?.name}
-            </FormFieldHelper>
-          </FormGroup>
-        </Form>
-      </Modal>
-    );
-  }
-}
+        <FormGroup isRequired key='name' fieldId='name' label={t`Name`}>
+          <TextInput
+            id='group_name'
+            value={name}
+            onChange={(_event, value) => {
+              setName(value);
+              clearErrors();
+            }}
+            type='text'
+            validated={errorMessage ? 'error' : 'default'}
+          />
+          <FormFieldHelper variant={errorMessage ? 'error' : 'default'}>
+            {errorMessage?.name}
+          </FormFieldHelper>
+        </FormGroup>
+      </Form>
+    </Modal>
+  );
+};

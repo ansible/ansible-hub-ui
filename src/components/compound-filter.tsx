@@ -15,7 +15,7 @@ import {
 } from '@patternfly/react-core/deprecated';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StatefulDropdown, Typeahead } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 
@@ -29,108 +29,83 @@ export interface FilterOption {
 }
 
 interface IProps {
-  /** Configures the options that the filter displays */
   filterConfig: FilterOption[];
-
-  /** Current page params */
-  // Type help: this shoud be something like: Record<string, string | SelectOptionObject | (string | SelectOptionObject)[]>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: any;
-
-  /** Sets the current page params to p */
-  updateParams: (params) => void;
-
   inputText: string;
-
   onChange: (inputText: string) => void;
-
+  params;
   selectFilter?: (filterId: string) => void;
+  updateParams: (params) => void;
 }
 
-interface IState {
-  selectedFilter: FilterOption;
-  isExpanded: boolean;
-  isCreatable: boolean;
-  isOpen: boolean;
-  hasOnCreateOption: boolean;
-}
+export const CompoundFilter = ({
+  filterConfig,
+  inputText,
+  onChange,
+  params,
+  selectFilter,
+  updateParams,
+}: IProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState(filterConfig[0]);
 
-export class CompoundFilter extends Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedFilter: props.filterConfig[0],
-      isExpanded: false,
-      isCreatable: false,
-      isOpen: false,
-      hasOnCreateOption: false,
-    };
+  if (filterConfig.length === 0) {
+    return null;
   }
 
-  render() {
-    const { filterConfig, selectFilter } = this.props;
-    const { selectedFilter } = this.state;
+  const filterOptions = filterConfig.map((v) => (
+    <DropdownItem
+      onClick={() => {
+        onChange('');
+        setSelectedFilter(v);
+        selectFilter && selectFilter(v.id);
+      }}
+      key={v.id}
+    >
+      {v.title}
+    </DropdownItem>
+  ));
 
-    if (filterConfig.length === 0) {
-      return null;
-    }
+  return (
+    <InputGroup data-cy='compound_filter'>
+      {filterConfig.length !== 1 && (
+        <StatefulDropdown
+          toggleType='dropdown'
+          defaultText={
+            <span>
+              <FilterIcon />
+              {'   '}
+              {selectedFilter.title}
+            </span>
+          }
+          position='left'
+          isPlain={false}
+          items={filterOptions}
+        />
+      )}
+      {renderInput()}
+      <InputGroupItem>
+        <Button
+          onClick={() => submitFilter()}
+          variant={ButtonVariant.control}
+          isDisabled={!inputText.trim().length}
+        >
+          <SearchIcon />
+        </Button>
+      </InputGroupItem>
+    </InputGroup>
+  );
 
-    const filterOptions = filterConfig.map((v) => (
-      <DropdownItem
-        onClick={() => {
-          this.props.onChange('');
-          this.setState({ selectedFilter: v });
-          selectFilter && selectFilter(v.id);
-        }}
-        key={v.id}
-      >
-        {v.title}
-      </DropdownItem>
-    ));
-
-    return (
-      <InputGroup data-cy='compound_filter'>
-        {filterConfig.length !== 1 && (
-          <StatefulDropdown
-            toggleType='dropdown'
-            defaultText={
-              <span>
-                <FilterIcon />
-                {'   '}
-                {selectedFilter.title}
-              </span>
-            }
-            position='left'
-            isPlain={false}
-            items={filterOptions}
-          />
-        )}
-        {this.renderInput(selectedFilter)}
-        <InputGroupItem>
-          <Button
-            onClick={() => this.submitFilter()}
-            variant={ButtonVariant.control}
-            isDisabled={!this.props.inputText.trim().length}
-          >
-            <SearchIcon />
-          </Button>
-        </InputGroupItem>
-      </InputGroup>
-    );
-  }
-
-  private renderInput(selectedFilter: FilterOption) {
+  function renderInput() {
     switch (selectedFilter.inputType) {
       case 'multiple':
         return (
           <Select
             variant={SelectVariant.checkbox}
-            onToggle={this.onToggle}
-            onSelect={this.onSelectMultiple}
-            isOpen={this.state.isOpen}
+            onToggle={(_e) => setIsOpen(!isOpen)}
+            onSelect={onSelectMultiple}
+            isOpen={isOpen}
             placeholderText={t`Filter by ${selectedFilter.id.toLowerCase()}`}
-            selections={this.props.params[this.state.selectedFilter.id]}
+            selections={params[selectedFilter.id]}
             isGrouped
           >
             {[
@@ -142,6 +117,7 @@ export class CompoundFilter extends Component<IProps, IState> {
                   // patternfly does not allow for us to set a display name aside from the ID
                   // which unfortunately means that multiple select will ignore the human readable
                   // option.title
+                  // FIXME: pf5?
                   <SelectOption key={option.id} value={option.id} />
                 ))}
               </SelectGroup>,
@@ -153,7 +129,7 @@ export class CompoundFilter extends Component<IProps, IState> {
           <StatefulDropdown
             toggleType='dropdown'
             defaultText={
-              this.selectTitleById(this.props.inputText, selectedFilter) ||
+              selectTitleById(inputText, selectedFilter) ||
               selectedFilter.placeholder ||
               selectedFilter.title
             }
@@ -162,8 +138,8 @@ export class CompoundFilter extends Component<IProps, IState> {
             items={selectedFilter.options.map((v) => (
               <DropdownItem
                 onClick={() => {
-                  this.props.onChange(v.id);
-                  this.submitFilter(v.id);
+                  onChange(v.id);
+                  submitFilter(v.id);
                 }}
                 key={v.id}
               >
@@ -173,21 +149,21 @@ export class CompoundFilter extends Component<IProps, IState> {
           />
         );
       case 'typeahead': {
-        const typeaheadResults = this.props.filterConfig
+        const typeaheadResults = filterConfig
           .find(({ id }) => id === selectedFilter.id)
           .options.map(({ id, title }) => ({ id, name: title }));
 
         return (
           <Typeahead
             loadResults={(name) => {
-              this.props.onChange(name);
+              onChange(name);
             }}
             onClear={() => {
-              this.props.onChange('');
+              onChange('');
             }}
             onSelect={(event, value) => {
               const item = typeaheadResults.find(({ name }) => name === value);
-              this.submitFilter(item?.id || value);
+              submitFilter(item?.id || value);
             }}
             placeholderText={
               selectedFilter?.placeholder ||
@@ -205,51 +181,37 @@ export class CompoundFilter extends Component<IProps, IState> {
               selectedFilter.placeholder ||
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
-            value={this.props.inputText}
-            onChange={(_event, k) => this.props.onChange(k)}
-            onKeyPress={(e) => this.handleEnter(e)}
+            value={inputText}
+            onChange={(_event, k) => onChange(k)}
+            onKeyPress={(e) => handleEnter(e)}
           />
         );
     }
   }
 
-  private handleEnter(e) {
+  function handleEnter(e) {
     // l10n: don't translate
-    if (e.key === 'Enter' && this.props.inputText.trim().length > 0) {
-      this.submitFilter();
+    if (e.key === 'Enter' && inputText.trim().length > 0) {
+      submitFilter();
     }
   }
 
-  private submitMultiple(newValues: string[]) {
-    this.props.updateParams({
-      ...ParamHelper.setParam(
-        this.props.params,
-        this.state.selectedFilter.id,
-        newValues,
-      ),
+  function submitMultiple(newValues: string[]) {
+    updateParams({
+      ...ParamHelper.setParam(params, selectedFilter.id, newValues),
       page: 1,
     });
   }
 
-  private submitFilter(id = undefined) {
-    this.props.updateParams({
-      ...ParamHelper.setParam(
-        this.props.params,
-        this.state.selectedFilter.id,
-        id ? id : this.props.inputText,
-      ),
+  function submitFilter(id = undefined) {
+    updateParams({
+      ...ParamHelper.setParam(params, selectedFilter.id, id ? id : inputText),
       page: 1,
     });
   }
 
-  private onToggle = (_event) => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
-
-  private onSelectMultiple = (event) => {
-    let newParams = this.props.params[this.state.selectedFilter.id];
+  function onSelectMultiple(event) {
+    let newParams = params[selectedFilter.id];
 
     // no tags => falsy
     // 1 tag => "foo"
@@ -262,7 +224,7 @@ export class CompoundFilter extends Component<IProps, IState> {
       newParams = [newParams];
     }
 
-    // TODO: Remove this replace after patternfly fixes the pf-random-id issue
+    // FIXME: TODO: Remove after patternfly fixes the pf-random-id issue
     const selectedID = event.currentTarget.id.replace(/pf-random-id-\d+-/, '');
     if (newParams.includes(selectedID)) {
       const index = newParams.indexOf(selectedID);
@@ -273,14 +235,14 @@ export class CompoundFilter extends Component<IProps, IState> {
       newParams.push(selectedID);
     }
 
-    this.submitMultiple(newParams);
-  };
+    submitMultiple(newParams);
+  }
 
-  private selectTitleById(inputText: string, selectedFilter: FilterOption) {
+  function selectTitleById(inputText: string, selectedFilter: FilterOption) {
     if (!inputText || !selectedFilter?.options) {
       return inputText;
     }
 
     return selectedFilter.options.find((opt) => opt.id === inputText).title;
   }
-}
+};

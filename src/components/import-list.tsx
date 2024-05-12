@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   type ImportListType,
   MyNamespaceAPI,
@@ -22,125 +22,106 @@ import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 import './my-imports.scss';
 
 interface IProps {
+  addAlert: (alert) => void;
   importList: ImportListType[];
-  selectedImport: ImportListType;
-  numberOfResults: number;
   loading: boolean;
+  numberOfResults: number;
   params: {
-    page_size?: number;
-    page?: number;
     keyword?: string;
     namespace?: string;
+    page?: number;
+    page_size?: number;
   };
-
   selectImport: (x) => void;
+  selectedImport: ImportListType;
   updateParams: (filters) => void;
-  addAlert: (alert) => void;
 }
 
-interface IState {
-  kwField: string;
-  inputText: string;
-  namespaces: NamespaceType[];
-}
+export const ImportList = ({
+  addAlert,
+  importList,
+  loading,
+  numberOfResults,
+  params,
+  selectImport,
+  selectedImport,
+  updateParams,
+}: IProps) => {
+  const [inputText, setInputText] = useState<string>('');
+  const [namespaces, setNamespaces] = useState<NamespaceType[]>([]);
 
-export class ImportList extends Component<IProps, IState> {
-  constructor(props) {
-    super(props);
+  useEffect(() => loadNamespaces(params.namespace), []);
 
-    this.state = {
-      kwField: '',
-      inputText: '',
-      namespaces: [],
-    };
-  }
-
-  componentDidMount() {
-    this.loadNamespaces(this.props.params.namespace);
-  }
-
-  render() {
-    const {
-      selectImport,
-      importList,
-      selectedImport,
-      numberOfResults,
-      params,
-      updateParams,
-      loading,
-    } = this.props;
-
-    return (
-      <div className='import-list'>
-        {this.renderApiSearchAhead()}
-        <Toolbar>
-          <CompoundFilter
-            inputText={this.state.inputText}
-            onChange={(text) => this.setState({ inputText: text })}
-            updateParams={(p) => this.props.updateParams(p)}
-            params={params}
-            filterConfig={[
-              {
-                id: 'keywords',
-                title: t`Name`,
-              },
-              {
-                id: 'state',
-                title: t`Status`,
-                inputType: 'select',
-                options: [
-                  {
-                    id: 'completed',
-                    title: t`Completed`,
-                  },
-                  {
-                    id: 'failed',
-                    title: t`Failed`,
-                  },
-                  {
-                    id: 'running',
-                    title: t`Running`,
-                  },
-                  {
-                    id: 'waiting',
-                    title: t`Waiting`,
-                  },
-                ],
-              },
-            ]}
-          />
-        </Toolbar>
-
-        <AppliedFilters
-          updateParams={(p) => {
-            this.props.updateParams(p);
-            this.setState({ inputText: '' });
-          }}
+  return (
+    <div className='import-list'>
+      {renderApiSearchAhead()}
+      <Toolbar>
+        <CompoundFilter
+          inputText={inputText}
+          onChange={(text) => setInputText(text)}
+          updateParams={(p) => updateParams(p)}
           params={params}
-          ignoredParams={['page_size', 'page', 'sort', 'ordering', 'namespace']}
-          niceNames={{
-            keywords: t`Name`,
-            state: t`Status`,
-          }}
+          filterConfig={[
+            {
+              id: 'keywords',
+              title: t`Name`,
+            },
+            {
+              id: 'state',
+              title: t`Status`,
+              inputType: 'select',
+              options: [
+                {
+                  id: 'completed',
+                  title: t`Completed`,
+                },
+                {
+                  id: 'failed',
+                  title: t`Failed`,
+                },
+                {
+                  id: 'running',
+                  title: t`Running`,
+                },
+                {
+                  id: 'waiting',
+                  title: t`Waiting`,
+                },
+              ],
+            },
+          ]}
         />
+      </Toolbar>
 
-        <div data-cy='import-list-data'>
-          {this.renderList(selectImport, importList, selectedImport, loading)}
-        </div>
-        {this.props.params.namespace && (
-          <HubPagination
-            count={numberOfResults}
-            isCompact
-            params={params}
-            updateParams={updateParams}
-          />
-        )}
+      <AppliedFilters
+        updateParams={(p) => {
+          updateParams(p);
+          setInputText('');
+        }}
+        params={params}
+        ignoredParams={['page_size', 'page', 'sort', 'ordering', 'namespace']}
+        niceNames={{
+          keywords: t`Name`,
+          state: t`Status`,
+        }}
+      />
+
+      <div data-cy='import-list-data'>
+        {renderList(selectImport, importList, selectedImport, loading)}
       </div>
-    );
-  }
+      {params.namespace && (
+        <HubPagination
+          count={numberOfResults}
+          isCompact
+          params={params}
+          updateParams={updateParams}
+        />
+      )}
+    </div>
+  );
 
-  private renderList(selectImport, importList, selectedImport, loading) {
-    if (!this.props.params.namespace) {
+  function renderList(selectImport, importList, selectedImport, loading) {
+    if (!params.namespace) {
       return (
         <EmptyStateNoData title={t`No namespace selected.`} description={''} />
       );
@@ -156,7 +137,7 @@ export class ImportList extends Component<IProps, IState> {
 
     if (
       importList.length === 0 &&
-      !filterIsSet(this.props.params, ['keywords', 'state'])
+      !filterIsSet(params, ['keywords', 'state'])
     ) {
       return (
         <EmptyStateNoData
@@ -187,10 +168,10 @@ export class ImportList extends Component<IProps, IState> {
               <div style={{ marginRight: '10px' }}>
                 <i
                   style={{ fontSize: '12px' }}
-                  className={this.getStatusClass(item.state)}
+                  className={getStatusClass(item.state)}
                 />
               </div>
-              <div>{this.renderDescription(item)}</div>
+              <div>{renderDescription(item)}</div>
             </div>
           );
         })}
@@ -198,7 +179,7 @@ export class ImportList extends Component<IProps, IState> {
     );
   }
 
-  private renderDescription(item) {
+  function renderDescription(item) {
     return (
       <div>
         <div>
@@ -213,7 +194,7 @@ export class ImportList extends Component<IProps, IState> {
     );
   }
 
-  private getStatusClass(state) {
+  function getStatusClass(state) {
     switch (state) {
       case PulpStatus.running:
         return 'fa fa-spin fa-spinner warning';
@@ -226,16 +207,16 @@ export class ImportList extends Component<IProps, IState> {
     }
   }
 
-  private loadNamespaces(namespace_filter) {
+  function loadNamespaces(namespace_filter) {
     if (!namespace_filter) {
       namespace_filter = '';
     }
     MyNamespaceAPI.list({ page_size: 10, keywords: namespace_filter })
       .then((result) => {
-        this.setState({ namespaces: result.data.data });
+        setNamespaces(result.data.data);
       })
       .catch((e) =>
-        this.props.addAlert({
+        addAlert({
           variant: 'danger',
           title: t`Namespaces list could not be displayed.`,
           description: errorMessage(e.status, e.statusText),
@@ -243,37 +224,29 @@ export class ImportList extends Component<IProps, IState> {
       );
   }
 
-  private renderApiSearchAhead() {
+  function renderApiSearchAhead() {
     return (
       <div className='namespace-selector-wrapper'>
         <div className='label'>{t`Namespace`}</div>
         <div className='selector'>
           <Typeahead
-            loadResults={(name) => this.loadNamespaces(name)}
+            loadResults={(name) => loadNamespaces(name)}
             onSelect={(event, value) => {
-              const params = ParamHelper.setParam(
-                this.props.params,
-                'namespace',
-                value,
-              );
-              params['page'] = 1;
-              this.props.updateParams(params);
+              const p = ParamHelper.setParam(params, 'namespace', value);
+              p['page'] = 1;
+              updateParams(p);
             }}
             onClear={() => {
-              const params = ParamHelper.setParam(
-                this.props.params,
-                'namespace',
-                '',
-              );
-              params['page'] = 1;
-              this.props.updateParams(params);
+              const p = ParamHelper.setParam(params, 'namespace', '');
+              p['page'] = 1;
+              updateParams(p);
             }}
             placeholderText={t`Select namespace`}
-            selections={[{ id: -1, name: this.props.params.namespace }]}
-            results={this.state.namespaces}
+            selections={[{ id: -1, name: params.namespace }]}
+            results={namespaces}
           />
         </div>
       </div>
     );
   }
-}
+};
