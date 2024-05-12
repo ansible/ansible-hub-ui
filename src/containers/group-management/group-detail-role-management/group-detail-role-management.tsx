@@ -41,7 +41,7 @@ import {
 } from 'src/utilities';
 import './group-detail-role-management.scss';
 
-interface Props {
+interface IProps {
   addAlert: (title, variant, description?) => void;
   canEdit: boolean;
   group: GroupObjectPermissionType;
@@ -50,7 +50,7 @@ interface Props {
   updateParams: (params) => void;
 }
 
-const GroupDetailRoleManagement: FunctionComponent<Props> = ({
+const GroupDetailRoleManagement: FunctionComponent<IProps> = ({
   addAlert,
   canEdit,
   group,

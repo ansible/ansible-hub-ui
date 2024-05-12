@@ -8,13 +8,13 @@ import {
 import React, { type FunctionComponent, useState } from 'react';
 import { FileUpload } from 'src/components';
 
-interface Props {
+interface IProps {
   isOpen: boolean;
   onSubmit: (file: File) => void;
   onCancel: () => void;
 }
 
-export const UploadSignatureModal: FunctionComponent<Props> = ({
+export const UploadSignatureModal: FunctionComponent<IProps> = ({
   isOpen,
   onSubmit,
   onCancel,

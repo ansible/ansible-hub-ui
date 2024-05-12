@@ -15,14 +15,14 @@ import {
 } from '@patternfly/react-core';
 import React, { type FunctionComponent } from 'react';
 
-interface Props {
+interface IProps {
   name: string;
   isOpen: boolean;
   onSubmit: () => void;
   onCancel: () => void;
 }
 
-export const SignAllCertificatesModal: FunctionComponent<Props> = ({
+export const SignAllCertificatesModal: FunctionComponent<IProps> = ({
   name,
   isOpen,
   onSubmit,

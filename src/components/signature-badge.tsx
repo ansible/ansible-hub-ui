@@ -4,11 +4,11 @@ import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React, { type FunctionComponent } from 'react';
 
-interface Props extends LabelProps {
+interface IProps extends LabelProps {
   signState: 'signed' | 'unsigned';
 }
 
-export const SignatureBadge: FunctionComponent<Props> = ({
+export const SignatureBadge: FunctionComponent<IProps> = ({
   signState = 'unsigned',
   isCompact = false,
   ...props

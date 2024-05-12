@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import React, { type FunctionComponent } from 'react';
 
-interface Props {
+interface IProps {
   name: string;
   version: string;
   isOpen: boolean;
@@ -15,7 +15,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const SignSingleCertificateModal: FunctionComponent<Props> = ({
+export const SignSingleCertificateModal: FunctionComponent<IProps> = ({
   name,
   version,
   isOpen,
