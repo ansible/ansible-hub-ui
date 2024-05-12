@@ -36,12 +36,12 @@ interface IState<T> {
   params: {
     tab?: string;
   };
-  unauthorised: boolean;
+  unauthorized: boolean;
 }
 
 // states:
 // loading - initial state, only Main + spinner, header and alerts
-// unauthorised - only EmptyStateUnauthorized, header and alerts
+// unauthorized - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
 interface PageWithTabsParams<T> {
@@ -104,7 +104,7 @@ export const PageWithTabs = function <
         alerts: [],
         item: null,
         loading: true,
-        unauthorised: false,
+        unauthorized: false,
         params,
       };
     }
@@ -112,7 +112,7 @@ export const PageWithTabs = function <
     componentDidMount() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (!condition(this.context as any)) {
-        this.setState({ loading: false, unauthorised: true });
+        this.setState({ loading: false, unauthorized: true });
       } else {
         this.query();
       }
@@ -130,7 +130,7 @@ export const PageWithTabs = function <
 
     render() {
       const { routeParams } = this.props;
-      const { alerts, item, loading, params, unauthorised } = this.state;
+      const { alerts, item, loading, params, unauthorized } = this.state;
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
@@ -149,7 +149,7 @@ export const PageWithTabs = function <
       const name = item?.name || routeParams.name;
       const tab = params.tab || 'details';
 
-      if (!loading && !unauthorised && !item) {
+      if (!loading && !unauthorized && !item) {
         return (
           <>
             <AlertList
@@ -217,7 +217,7 @@ export const PageWithTabs = function <
             </div>
           </BaseHeader>
           {renderModals?.(actionContext)}
-          {unauthorised ? (
+          {unauthorized ? (
             <EmptyStateUnauthorized />
           ) : (
             <Main>

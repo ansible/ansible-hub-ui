@@ -72,7 +72,7 @@ interface IState {
   selected: { id: number; name: string }[];
   showDeleteModal: boolean;
   showUserRemoveModal: UserType | null;
-  unauthorised: boolean;
+  unauthorized: boolean;
   users: UserType[];
 }
 
@@ -112,7 +112,7 @@ class GroupDetail extends Component<RouteProps, IState> {
       selected: [],
       showDeleteModal: false,
       showUserRemoveModal: null,
-      unauthorised: false,
+      unauthorized: false,
       users: null,
     };
   }
@@ -120,7 +120,7 @@ class GroupDetail extends Component<RouteProps, IState> {
   componentDidMount() {
     const { user, hasPermission } = this.context as IAppContextType;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_group')) {
-      this.setState({ unauthorised: true });
+      this.setState({ unauthorized: true });
     } else {
       this.queryGroup();
     }
@@ -159,7 +159,7 @@ class GroupDetail extends Component<RouteProps, IState> {
       params,
       showDeleteModal,
       showUserRemoveModal,
-      unauthorised,
+      unauthorized,
       users,
     } = this.state;
     const { user, hasPermission } = this.context as IAppContextType;
@@ -177,14 +177,14 @@ class GroupDetail extends Component<RouteProps, IState> {
         />
       );
     }
-    if (unauthorised) {
+    if (unauthorized) {
       return <EmptyStateUnauthorized />;
     }
     if (!group) {
       return <LoadingPage />;
     }
 
-    if (params.tab == 'users' && !users && !unauthorised) {
+    if (params.tab == 'users' && !users && !unauthorized) {
       this.queryUsers();
       return <LoadingPage />;
     }
