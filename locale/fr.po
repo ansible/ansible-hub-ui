@@ -267,6 +267,10 @@ msgstr "Une clé privée codée PEM utilisée pour l'authentification."
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 msgstr "Un tag peut contenir des caractères alphabétiques ASCII minuscules et majuscules, des chiffres, des traits de soulignement, des points et des tirets. Un tag ne doit pas commencer par un point, un trait de soulignement ou un tiret."
 
+#: src/containers/search/search.tsx
+msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
+msgstr ""
+
 #: src/loaders/standalone/layout.tsx
 msgid "About"
 msgstr "À propos de"
@@ -5593,8 +5597,8 @@ msgstr "Texte : {0}"
 #~ msgstr ""
 
 #: src/loaders/standalone/layout.tsx
-msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
-msgstr ""
+#~ msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
+#~ msgstr ""
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."

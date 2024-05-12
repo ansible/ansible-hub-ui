@@ -267,6 +267,10 @@ msgstr "認証に使用する PEM でエンコードされた秘密鍵。"
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 msgstr "タグには、小文字、大文字、小文字、数字、アンダースコア、ピリオド、およびダッシュを含めることができます。ただし、ピリオド、アンダースコア、またはダッシュで開始しないでください。"
 
+#: src/containers/search/search.tsx
+msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
+msgstr ""
+
 #: src/loaders/standalone/layout.tsx
 msgid "About"
 msgstr "情報"
@@ -5593,8 +5597,8 @@ msgstr "テキスト: {0}"
 #~ msgstr ""
 
 #: src/loaders/standalone/layout.tsx
-msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
-msgstr ""
+#~ msgid "Thanks for trying out the new and improved Galaxy, please share your feedback on <0>forum.ansible.com</0>."
+#~ msgstr ""
 
 #: src/loaders/insights/loader.tsx
 #~ msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
