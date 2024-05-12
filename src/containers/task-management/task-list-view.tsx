@@ -52,7 +52,7 @@ interface IState {
   alerts: AlertType[];
   cancelModalVisible: boolean;
   selectedTask: TaskType;
-  unauthorised: boolean;
+  unauthorized: boolean;
   inputText: string;
 }
 
@@ -83,7 +83,7 @@ export class TaskListView extends Component<RouteProps, IState> {
       alerts: [],
       cancelModalVisible: false,
       selectedTask: null,
-      unauthorised: false,
+      unauthorized: false,
       inputText: '',
     };
   }
@@ -91,7 +91,7 @@ export class TaskListView extends Component<RouteProps, IState> {
   componentDidMount() {
     const { user } = this.context as IAppContextType;
     if (!user || user.is_anonymous) {
-      this.setState({ loading: false, unauthorised: true });
+      this.setState({ loading: false, unauthorized: true });
     } else {
       this.queryTasks();
     }
@@ -105,7 +105,7 @@ export class TaskListView extends Component<RouteProps, IState> {
       items,
       alerts,
       cancelModalVisible,
-      unauthorised,
+      unauthorized,
     } = this.state;
 
     const noData =
@@ -124,7 +124,7 @@ export class TaskListView extends Component<RouteProps, IState> {
         />
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={t`Task management`} />
-        {unauthorised ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (
           <EmptyStateNoData

@@ -2,8 +2,6 @@
 
 Renders the documentation strings from a plugin.
 
-Props
-
 - `plugin`: documentation blob for plugin being rendered. This is produced by the galaxy-importer.
 - `renderModuleLink(moduleName)`: function that should return a link pointing to a module
 - `renderDocLink(name, href)`: function that should return a link pointing to docs

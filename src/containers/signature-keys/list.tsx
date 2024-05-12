@@ -45,7 +45,7 @@ interface IState {
   items: SigningServiceType[];
   itemCount: number;
   alerts: AlertType[];
-  unauthorised: boolean;
+  unauthorized: boolean;
   inputText: string;
 }
 
@@ -70,7 +70,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
-      unauthorised: false,
+      unauthorized: false,
       inputText: '',
     };
   }
@@ -80,14 +80,14 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
       !(this.context as IAppContextType).user ||
       (this.context as IAppContextType).user.is_anonymous
     ) {
-      this.setState({ loading: false, unauthorised: true });
+      this.setState({ loading: false, unauthorized: true });
     } else {
       this.query();
     }
   }
 
   render() {
-    const { params, itemCount, loading, items, alerts, unauthorised } =
+    const { params, itemCount, loading, items, alerts, unauthorized } =
       this.state;
 
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
@@ -104,7 +104,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
           }
         />
         <BaseHeader title={t`Signature keys`} />
-        {unauthorised ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (
           <EmptyStateNoData

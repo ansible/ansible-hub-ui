@@ -41,7 +41,7 @@ interface IState {
   permissions: string[];
   originalPermissions: string[];
   redirect?: string;
-  unauthorised: boolean;
+  unauthorized: boolean;
   inputText: string;
   name: string;
   description: string;
@@ -74,7 +74,7 @@ class EditRole extends Component<RouteProps, IState> {
       nameError: false,
       permissions: [],
       originalPermissions: [],
-      unauthorised: false,
+      unauthorized: false,
       inputText: '',
       name: null,
       description: null,
@@ -89,7 +89,7 @@ class EditRole extends Component<RouteProps, IState> {
       !(this.context as IAppContextType).user ||
       (this.context as IAppContextType).user.is_anonymous
     ) {
-      this.setState({ unauthorised: true });
+      this.setState({ unauthorized: true });
     } else {
       RoleAPI.get(this.state.params.id)
         .then((result) => {
@@ -125,7 +125,7 @@ class EditRole extends Component<RouteProps, IState> {
       editPermissions,
       role,
       errorMessages,
-      unauthorised,
+      unauthorized,
       saving,
     } = this.state;
 
@@ -168,7 +168,7 @@ class EditRole extends Component<RouteProps, IState> {
           subTitle={translateLockedRole(role.name, role.description)}
           breadcrumbs={breadcrumbs}
         />
-        {unauthorised ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
           <Main>

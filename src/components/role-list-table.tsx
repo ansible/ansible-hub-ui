@@ -9,7 +9,7 @@ import {
 import React, { type FunctionComponent, type ReactNode, useState } from 'react';
 import { SortTable } from 'src/components';
 
-interface Props {
+interface IProps {
   children: ReactNode;
   isCompact?: boolean;
   isStickyHeader?: boolean;
@@ -24,7 +24,7 @@ interface Props {
   updateParams?: (params) => void;
 }
 
-export const RoleListTable: FunctionComponent<Props> = ({
+export const RoleListTable: FunctionComponent<IProps> = ({
   children,
   isCompact,
   isStickyHeader = false,

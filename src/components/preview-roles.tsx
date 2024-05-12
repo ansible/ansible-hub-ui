@@ -6,7 +6,7 @@ import { Tooltip } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { translateLockedRole } from 'src/utilities';
 
-interface Props {
+interface IProps {
   selectedRoles: RoleType[];
   user?: {
     username: string;
@@ -26,7 +26,7 @@ const splitByDot = (perm: string) => {
   );
 };
 
-export const PreviewRoles = ({ user, group, selectedRoles }: Props) => {
+export const PreviewRoles = ({ user, group, selectedRoles }: IProps) => {
   const { model_permissions } = useHubContext().user;
 
   return (

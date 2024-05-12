@@ -8,7 +8,7 @@ import {
 } from '@patternfly/react-core';
 import React, { type ReactNode } from 'react';
 
-interface Props {
+interface IProps {
   onClose: () => void;
   onSave: () => void;
   steps: {
@@ -20,7 +20,7 @@ interface Props {
   title: string;
 }
 
-export const WizardModal = ({ onClose, onSave, steps, title }: Props) => {
+export const WizardModal = ({ onClose, onSave, steps, title }: IProps) => {
   const footer = {
     backButtonText: t`Back`,
     cancelButtonText: t`Cancel`,

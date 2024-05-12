@@ -26,7 +26,7 @@ interface IState {
   showDeleteModal: boolean;
   alerts: AlertType[];
   redirect?: string;
-  unauthorised: boolean;
+  unauthorized: boolean;
 }
 
 class UserDetail extends Component<RouteProps, IState> {
@@ -40,7 +40,7 @@ class UserDetail extends Component<RouteProps, IState> {
       errorMessages: {},
       alerts: [],
       showDeleteModal: false,
-      unauthorised: false,
+      unauthorized: false,
     };
   }
 
@@ -48,7 +48,7 @@ class UserDetail extends Component<RouteProps, IState> {
     const { hasPermission, user } = this.context as IAppContextType;
     const id = this.props.routeParams.userID;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_user')) {
-      this.setState({ unauthorised: true });
+      this.setState({ unauthorized: true });
     } else {
       UserAPI.get(id)
         .then((result) => this.setState({ userDetail: result.data }))
@@ -61,11 +61,11 @@ class UserDetail extends Component<RouteProps, IState> {
       return <Navigate to={this.state.redirect} />;
     }
 
-    const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =
+    const { userDetail, errorMessages, alerts, showDeleteModal, unauthorized } =
       this.state;
     const { user, hasPermission } = this.context as IAppContextType;
 
-    if (unauthorised) {
+    if (unauthorized) {
       return <EmptyStateUnauthorized />;
     }
     if (!userDetail) {

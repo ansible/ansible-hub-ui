@@ -7,13 +7,13 @@ import {
 } from '@patternfly/react-core';
 import React, { Component, type ReactNode } from 'react';
 import { type ActionType } from 'src/actions';
-import { LoadingSpinner } from 'src/components';
 import {
   AlertList,
   type AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
+  LoadingSpinner,
   Main,
   closeAlert,
 } from 'src/components';
@@ -25,12 +25,12 @@ interface IState<T> {
   alerts: AlertType[];
   item: T;
   loading: boolean;
-  unauthorised: boolean;
+  unauthorized: boolean;
 }
 
 // states:
 // loading - initial state, only Main + spinner, header and alerts
-// unauthorised - only EmptyStateUnauthorized, header and alerts
+// unauthorized - only EmptyStateUnauthorized, header and alerts
 // (data) - renders detail
 
 interface PageParams<T> {
@@ -86,7 +86,7 @@ export const Page = function <
         alerts: [],
         item: null,
         loading: true,
-        unauthorised: false,
+        unauthorized: false,
       };
     }
 
@@ -100,7 +100,7 @@ export const Page = function <
         };
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!condition(actionContext as any)) {
-          this.setState({ loading: false, unauthorised: true });
+          this.setState({ loading: false, unauthorized: true });
         }
 
         this.setState({
@@ -112,7 +112,7 @@ export const Page = function <
 
     render() {
       const { routeParams } = this.props;
-      const { alerts, item, loading, unauthorised } = this.state;
+      const { alerts, item, loading, unauthorized } = this.state;
 
       const actionContext = {
         addAlert: (alert) => this.addAlert(alert),
@@ -168,7 +168,7 @@ export const Page = function <
             }
           />
           {renderModals?.(actionContext)}
-          {unauthorised ? (
+          {unauthorized ? (
             <EmptyStateUnauthorized />
           ) : (
             <Main>

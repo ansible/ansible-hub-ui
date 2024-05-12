@@ -43,14 +43,14 @@ interface IState<T> {
   items: T[];
   itemCount: number;
   alerts: AlertType[];
-  unauthorised: boolean;
+  unauthorized: boolean;
   inputText: string;
   selectedFilter: string;
 }
 
 // states:
 // loading - initial state, only Main + spinner, header and alerts
-// unauthorised - only EmptyStateUnauthorized, header and alerts
+// unauthorized - only EmptyStateUnauthorized, header and alerts
 // noData - no data at all, EmptyStateNoData with possible buttons
 // !items.length - no visible data but a filter is on, EmptyStateFilter with a clear filters button, CompoundFilter + AppliedFilters
 // (data) - also renders SortTable
@@ -181,14 +181,14 @@ export const ListPage = function <T>({
         loading: true,
         params,
         selectedFilter: null,
-        unauthorised: false,
+        unauthorized: false,
       };
     }
 
     componentDidMount() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (!condition(this.context as any)) {
-        this.setState({ loading: false, unauthorised: true });
+        this.setState({ loading: false, unauthorized: true });
       } else {
         this.query();
       }
@@ -198,7 +198,7 @@ export const ListPage = function <T>({
     }
 
     render() {
-      const { alerts, itemCount, items, loading, params, unauthorised } =
+      const { alerts, itemCount, items, loading, params, unauthorized } =
         this.state;
 
       const localizedFilterConfig = filterConfig({ state: this.state }) || [];
@@ -253,7 +253,7 @@ export const ListPage = function <T>({
           />
           <BaseHeader title={i18n._(title)} />
           {renderModals?.(actionContext)}
-          {unauthorised ? (
+          {unauthorized ? (
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
             <EmptyStateNoData

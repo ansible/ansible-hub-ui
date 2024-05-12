@@ -76,7 +76,7 @@ const SignatureKeysList = lazy(
 );
 
 const TaskDetail = lazy(
-  () => import('src/containers/task-management/task_detail'),
+  () => import('src/containers/task-management/task-detail'),
 );
 
 const TaskListView = lazy(

@@ -37,7 +37,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
 
   render() {
     const { token, alerts, loadingToken } = this.state;
-    const unauthorised =
+    const unauthorized =
       !(this.context as IAppContextType).user ||
       (this.context as IAppContextType).user.is_anonymous;
     const expiration = (this.context as IAppContextType).settings
@@ -64,7 +64,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
         />
         <BaseHeader title={t`API token`} />
         <Main>
-          {unauthorised ? (
+          {unauthorized ? (
             <EmptyStateUnauthorized />
           ) : (
             <Card>
