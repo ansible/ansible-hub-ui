@@ -3,7 +3,7 @@ export { canSignEE, canSignNamespace } from './can-sign';
 export { convertContentSummaryCounts } from './content-summary';
 export { DeleteCollectionUtils } from './delete-collection';
 export { downloadString } from './download-data';
-export { errorMessage, handleHttpError } from './fail-alerts';
+export { errorMessage, handleHttpError, jsxErrorMessage } from './fail-alerts';
 export { filterIsSet } from './filter-is-set';
 export { getHumanSize } from './get-human-size';
 export { controllerURL, getContainersURL, getRepoURL } from './get-repo-url';

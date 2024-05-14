@@ -23,6 +23,22 @@ export function errorMessage(
   return messages[statusCode] || messages.default;
 }
 
+export function jsxErrorMessage(code, text, custom?) {
+  const description = errorMessage(code, text, custom);
+
+  if (code == 401) {
+    return (
+      <>
+        {description}
+        <br />
+        <LoginLink />
+      </>
+    );
+  }
+
+  return description;
+}
+
 export const handleHttpError = (title, callback, addAlert) => (e) => {
   let description = e.toString();
 
@@ -33,19 +49,7 @@ export const handleHttpError = (title, callback, addAlert) => (e) => {
     const err = mapErrorMessages(e);
     const message = Object.values(err).join(' ');
 
-    description = message
-      ? errorMessage(status, statusText, message)
-      : errorMessage(status, statusText);
-
-    if (status === 401) {
-      description = (
-        <>
-          {description}
-          <br />
-          <LoginLink />
-        </>
-      );
-    }
+    description = jsxErrorMessage(status, statusText, message);
   }
 
   addAlert({
