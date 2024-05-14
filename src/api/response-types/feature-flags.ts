@@ -3,7 +3,8 @@ export class FeatureFlagsType {
   container_signing: boolean;
   execution_environments: boolean;
 
-  // keycloak login screen
+  // gateway / keycloak
+  dab_resource_registry: boolean;
   external_authentication: boolean;
 
   // community mode
