@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { UserAPI, type UserType } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
-import { errorMessage, mapErrorMessages } from 'src/utilities';
+import { jsxErrorMessage, mapErrorMessages } from 'src/utilities';
 
 interface IProps {
   addAlert: (message, variant, description?) => void;
@@ -80,7 +80,7 @@ export const DeleteUserModal = ({
           addAlert(
             t`User "${user.username}" could not be deleted.`,
             'danger',
-            errorMessage(status, statusText),
+            jsxErrorMessage(status, statusText),
           );
         }
 

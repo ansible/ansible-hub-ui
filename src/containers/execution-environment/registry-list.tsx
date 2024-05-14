@@ -36,8 +36,8 @@ import {
   type ErrorMessagesType,
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   lastSyncStatus,
   lastSynced,
   mapErrorMessages,
@@ -484,7 +484,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
         this.addAlert(
           t`Remote registry "${name}" could not be deleted.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       })
       .then(() => {
@@ -506,7 +506,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
         this.addAlert(
           t`Remote registry "${name}" could not be synced.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   }
@@ -527,7 +527,7 @@ class ExecutionEnvironmentRegistryList extends Component<RouteProps, IState> {
         this.addAlert(
           t`Execution environment "${name}" could not be indexed.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   }

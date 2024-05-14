@@ -17,7 +17,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   type ErrorMessagesType,
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
   translateLockedRole,
@@ -106,7 +106,7 @@ class EditRole extends Component<RouteProps, IState> {
           this.addAlert(
             t`Role "${this.state.role.name}" could not be displayed.`,
             'danger',
-            errorMessage(status, statusText),
+            jsxErrorMessage(status, statusText),
           );
         });
     }

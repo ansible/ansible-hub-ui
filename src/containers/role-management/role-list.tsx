@@ -37,8 +37,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   translateLockedRole,
   withRouter,
@@ -379,7 +379,7 @@ export class RoleList extends Component<RouteProps, IState> {
         this.addAlert(
           t`Role "${name}" could not be deleted.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       })
       .then(() => {
@@ -468,7 +468,7 @@ export class RoleList extends Component<RouteProps, IState> {
           this.addAlert(
             t`Roles list could not be displayed.`,
             'danger',
-            errorMessage(status, statusText),
+            jsxErrorMessage(status, statusText),
           );
         });
     });

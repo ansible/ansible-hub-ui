@@ -37,8 +37,8 @@ import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   repositoryBasePath,
   waitForTask,
@@ -428,7 +428,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       .catch((error) => {
         const description = !error.response
           ? error
-          : errorMessage(error.response.status, error.response.statusText);
+          : jsxErrorMessage(error.response.status, error.response.statusText);
 
         this.addAlert(
           t`The certificate for "${namespace} ${name} v${version}" could not be saved.`,
@@ -516,7 +516,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       .catch((error) => {
         const description = !error.response
           ? error
-          : errorMessage(error.response.status, error.response.statusText);
+          : jsxErrorMessage(error.response.status, error.response.statusText);
 
         this.addAlert(
           t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
@@ -546,7 +546,7 @@ class CertificationDashboard extends Component<RouteProps, IState> {
       .catch((error) => {
         const description = !error.response
           ? error
-          : errorMessage(error.response.status, error.response.statusText);
+          : jsxErrorMessage(error.response.status, error.response.statusText);
 
         this.addAlert(
           t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,

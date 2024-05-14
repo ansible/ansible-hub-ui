@@ -24,7 +24,7 @@ import {
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
+import { jsxErrorMessage } from 'src/utilities';
 import './collection-info.scss';
 
 interface IProps extends CollectionVersionSearch {
@@ -157,7 +157,7 @@ export const CollectionInfo = ({
             addAlert(
               'danger',
               t`Signatures could not be loaded.`,
-              errorMessage(status, statusText),
+              jsxErrorMessage(status, statusText),
             )
           }
         />
@@ -226,7 +226,7 @@ function download(
       addAlert(
         'danger',
         t`Collection "${name}" could not be downloaded.`,
-        errorMessage(status, statusText),
+        jsxErrorMessage(status, statusText),
       );
     });
 }

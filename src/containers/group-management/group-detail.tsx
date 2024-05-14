@@ -44,8 +44,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
@@ -353,7 +353,7 @@ class GroupDetail extends Component<RouteProps, IState> {
                 this.addAlert(
                   t`Users list could not be displayed.`,
                   'danger',
-                  errorMessage(status, statusText),
+                  jsxErrorMessage(status, statusText),
                 );
               })
           }
@@ -418,7 +418,7 @@ class GroupDetail extends Component<RouteProps, IState> {
           this.addAlert(
             t`Group "${group}" could not be deleted.`,
             'danger',
-            errorMessage(status, statusText),
+            jsxErrorMessage(status, statusText),
           );
         });
     };
@@ -482,7 +482,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         this.addAlert(
           t`User "${selectedUsers[0].name}" could not be added to group "${this.state.group.name}".`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       })
       .then(() => this.queryUsers());
@@ -501,7 +501,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         this.addAlert(
           t`Users list could not be displayed.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   }
@@ -752,7 +752,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         this.addAlert(
           t`Users list could not be displayed.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   }
@@ -770,7 +770,7 @@ class GroupDetail extends Component<RouteProps, IState> {
           this.addAlert(
             t`Group could not be displayed.`,
             'danger',
-            errorMessage(status, statusText),
+            jsxErrorMessage(status, statusText),
           );
         }
       });
@@ -801,7 +801,7 @@ class GroupDetail extends Component<RouteProps, IState> {
         this.addAlert(
           t`User "${user.username}" could not be removed from group "${name}".`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   }

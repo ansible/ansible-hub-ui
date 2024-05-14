@@ -3,7 +3,7 @@ import { Checkbox, Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import { DeleteModal } from 'src/components';
-import { errorMessage, waitForTask } from 'src/utilities';
+import { jsxErrorMessage, waitForTask } from 'src/utilities';
 
 interface IProps {
   closeAction: () => void;
@@ -82,7 +82,7 @@ function deleteContainer(
       addAlert(
         t`Execution environment "${selectedItem}" could not be deleted.`,
         'danger',
-        errorMessage(status, statusText),
+        jsxErrorMessage(status, statusText),
       );
       closeAction();
     });
