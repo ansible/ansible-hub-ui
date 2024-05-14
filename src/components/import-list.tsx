@@ -18,7 +18,7 @@ import {
   LoadingSpinner,
   Typeahead,
 } from 'src/components';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import { ParamHelper, filterIsSet, jsxErrorMessage } from 'src/utilities';
 import './my-imports.scss';
 
 interface IProps {
@@ -219,7 +219,7 @@ export const ImportList = ({
         addAlert({
           variant: 'danger',
           title: t`Namespaces list could not be displayed.`,
-          description: errorMessage(e.status, e.statusText),
+          description: jsxErrorMessage(e.status, e.statusText),
         }),
       );
   }

@@ -11,7 +11,11 @@ import {
 import { AccessTab } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canEditAnsibleRemoteAccess } from 'src/permissions';
-import { assignRoles, errorMessage, parsePulpIDFromURL } from 'src/utilities';
+import {
+  assignRoles,
+  jsxErrorMessage,
+  parsePulpIDFromURL,
+} from 'src/utilities';
 
 interface UserType {
   username: string;
@@ -112,7 +116,7 @@ export const RemoteAccessTab = ({
         addAlert({
           title: alertFailure,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       })
       .finally(() => {

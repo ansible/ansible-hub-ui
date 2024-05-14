@@ -14,7 +14,7 @@ import {
   Spinner,
   closeAlert,
 } from 'src/components';
-import { errorMessage } from 'src/utilities';
+import { jsxErrorMessage } from 'src/utilities';
 
 interface IProps {
   scope: 'namespace' | 'legacy_namespace';
@@ -97,7 +97,7 @@ export const LightspeedModal = (props: IProps) => {
         addAlert({
           title: t`Failed to load Ansible Lightspeed information.`,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       });
   }, [props.scope, props.reference]);
@@ -127,7 +127,7 @@ export const LightspeedModal = (props: IProps) => {
         addAlert({
           title: t`Failed to opt in to Ansible Lightspeed.`,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
         setLoading(false);
       });
@@ -143,7 +143,7 @@ export const LightspeedModal = (props: IProps) => {
         addAlert({
           title: t`Failed to opt out of Ansible Lightspeed.`,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
         setLoading(false);
       });

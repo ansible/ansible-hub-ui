@@ -58,7 +58,7 @@ import {
   DeleteCollectionUtils,
   ParamHelper,
   canSignNamespace,
-  errorMessage,
+  jsxErrorMessage,
   namespaceTitle,
   parsePulpIDFromURL,
   repositoryRemoveCollection,
@@ -779,7 +779,7 @@ export const CollectionHeader = ({
           title: !collection.is_deprecated
             ? t`Collection "${collection.collection_version.name}" could not be deprecated.`
             : t`Collection "${collection.collection_version.name}" could not be undeprecated.`,
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       });
   }
@@ -890,7 +890,7 @@ export const CollectionHeader = ({
           addAlert({
             variant: 'danger',
             title: t`Collection "${deleteCollection.collection_version.name} v${collectionVersion}" could not be deleted.`,
-            description: errorMessage(status, statusText),
+            description: jsxErrorMessage(status, statusText),
           });
         }
       });

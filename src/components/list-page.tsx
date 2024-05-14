@@ -29,8 +29,8 @@ import { type PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 
@@ -397,7 +397,7 @@ export const ListPage = function <T>({
             this.addAlert({
               title: i18n._(errorTitle),
               variant: 'danger',
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             });
           });
       });

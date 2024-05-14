@@ -27,7 +27,7 @@ import {
   type ErrorMessagesType,
   ParamHelper,
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   mapErrorMessages,
   withRouter,
 } from 'src/utilities';
@@ -283,7 +283,7 @@ class EditNamespace extends Component<RouteProps, IState> {
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: t`Changes to namespace "${this.state.namespace.name}" could not be saved.`,
-                description: errorMessage(result.status, result.statusText),
+                description: jsxErrorMessage(result.status, result.statusText),
               }),
               saving: false,
             });

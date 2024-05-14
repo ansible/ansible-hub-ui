@@ -18,7 +18,7 @@ import {
   Typeahead,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
-import { type ErrorMessagesType, errorMessage } from 'src/utilities';
+import { type ErrorMessagesType, jsxErrorMessage } from 'src/utilities';
 
 interface IProps {
   errorMessages: ErrorMessagesType;
@@ -279,7 +279,7 @@ export const UserForm = ({
           groups: {
             variant: 'danger',
             title: t`Groups list could not be displayed.`,
-            description: errorMessage(status, statusText),
+            description: jsxErrorMessage(status, statusText),
           },
         });
       });

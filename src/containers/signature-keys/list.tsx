@@ -31,8 +31,8 @@ import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 
@@ -283,7 +283,7 @@ export class SignatureKeysList extends Component<RouteProps, IState> {
           this.addAlert({
             title: t`Signature keys could not be displayed.`,
             variant: 'danger',
-            description: errorMessage(status, statusText),
+            description: jsxErrorMessage(status, statusText),
           });
         });
     });

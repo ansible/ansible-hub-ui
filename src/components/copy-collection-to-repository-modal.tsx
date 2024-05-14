@@ -7,7 +7,7 @@ import {
 } from 'src/api';
 import { type AlertType, MultiRepoModal } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
-import { errorMessage, parsePulpIDFromURL, taskAlert } from 'src/utilities';
+import { jsxErrorMessage, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 interface IProps {
   addAlert: (alert: AlertType) => void;
@@ -71,7 +71,7 @@ export const CopyCollectionToRepositoryModal = ({
         addAlert({
           variant: 'danger',
           title: t`Collection ${namespace}.${name} v${version} could not be copied.`,
-          description: errorMessage(e.status, e.statusText),
+          description: jsxErrorMessage(e.status, e.statusText),
         }),
       )
       .finally(() => setLoading(false));

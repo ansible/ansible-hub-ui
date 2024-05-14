@@ -13,7 +13,7 @@ import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
   assignRoles,
-  errorMessage,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 import { type IDetailSharedProps, withContainerRepo } from './base';
@@ -120,7 +120,7 @@ class ExecutionEnvironmentDetailAccess extends Component<
         addAlert({
           title: alertFailure,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       })
       .finally(() => {

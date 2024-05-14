@@ -45,9 +45,9 @@ import {
   ParamHelper,
   type RouteProps,
   canSignNamespace,
-  errorMessage,
   filterIsSet,
   getRepoURL,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   waitForTask,
   withRouter,
@@ -214,7 +214,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
         this.addAlert({
           title: alertFailure,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       })
       .finally(() => {
@@ -1046,7 +1046,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
               this.addAlert({
                 variant: 'danger',
                 title: t`Namespace "${name}" could not be deleted.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               });
             },
           );

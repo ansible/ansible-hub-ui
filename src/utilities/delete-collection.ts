@@ -4,7 +4,7 @@ import {
   CollectionVersionAPI,
   type CollectionVersionSearch,
 } from 'src/api';
-import { errorMessage } from './fail-alerts';
+import { jsxErrorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { repositoryRemoveCollection } from './repository-remove-collection';
 import { waitForTask } from './wait-for-task';
@@ -19,7 +19,7 @@ export class DeleteCollectionUtils {
         return Promise.reject({
           title: t`Dependencies for collection "${name}" could not be displayed.`,
           variant: 'danger',
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       });
   }
@@ -69,7 +69,7 @@ export class DeleteCollectionUtils {
         addAlert({
           variant: 'danger',
           title: t`Collection "${collection.collection_version.name}" could not be deleted.`,
-          description: errorMessage(status, statusText),
+          description: jsxErrorMessage(status, statusText),
         });
       })
       .finally(() =>

@@ -31,7 +31,7 @@ import {
 import { Paths, formatPath } from 'src/paths';
 import {
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   translateTask,
   withRouter,
@@ -411,7 +411,7 @@ class TaskDetail extends Component<RouteProps, IState> {
             {
               variant: 'danger',
               title: t`Task "${taskName}" could not be stopped.`,
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             },
           ],
         });

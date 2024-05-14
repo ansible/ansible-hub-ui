@@ -13,7 +13,7 @@ import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   mapNetworkErrors,
   validateInput,
   withRouter,
@@ -149,7 +149,7 @@ class RoleCreate extends Component<RouteProps, IState> {
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: t`Role "${this.state.name}" could not be created.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               }),
               saving: false,
             });

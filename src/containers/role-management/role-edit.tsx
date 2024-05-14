@@ -246,7 +246,7 @@ class EditRole extends Component<RouteProps, IState> {
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: t`Changes to role "${name}" could not be saved.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               }),
               saving: false,
             });

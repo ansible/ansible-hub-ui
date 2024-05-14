@@ -39,10 +39,10 @@ import { Paths, formatEEPath } from 'src/paths';
 import {
   ParamHelper,
   controllerURL,
-  errorMessage,
   filterIsSet,
   getContainersURL,
   getHumanSize,
+  jsxErrorMessage,
   waitForTask,
   withRouter,
 } from 'src/utilities';
@@ -601,7 +601,7 @@ class ExecutionEnvironmentDetailImages extends Component<
           this.props.addAlert({
             variant: 'danger',
             title: t`Image "${digest}" could not be deleted.`,
-            description: errorMessage(status, statusText),
+            description: jsxErrorMessage(status, statusText),
           });
         }),
     );

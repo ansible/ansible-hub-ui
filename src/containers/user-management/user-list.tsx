@@ -38,8 +38,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 
@@ -420,7 +420,7 @@ class UserList extends Component<RouteProps, IState> {
               {
                 variant: 'danger',
                 title: t`Users list could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               },
             ],
           });

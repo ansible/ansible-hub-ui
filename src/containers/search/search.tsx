@@ -43,8 +43,8 @@ import {
   DeleteCollectionUtils,
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   waitForTask,
   withRouter,
@@ -391,7 +391,7 @@ class Search extends Component<RouteProps, IState> {
               title: !collection.deprecated
                 ? t`Collection "${name}" could not be deprecated.`
                 : t`Collection "${name}" could not be undeprecated.`,
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             },
           ],
         });

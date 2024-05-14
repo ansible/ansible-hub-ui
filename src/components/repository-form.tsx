@@ -30,9 +30,9 @@ import {
 import {
   type ErrorMessagesType,
   alertErrorsWithoutFields,
-  errorMessage,
   isFieldValid,
   isFormValid,
+  jsxErrorMessage,
   mapErrorMessages,
 } from 'src/utilities';
 
@@ -108,7 +108,7 @@ export class RepositoryForm extends Component<IProps, IState> {
           this.addAlert({
             variant: 'danger',
             title: errorTitle,
-            description: errorMessage(status, statusText),
+            description: jsxErrorMessage(status, statusText),
           });
           this.setState({
             formErrors: { ...this.state.formErrors, registries: errorTitle },
