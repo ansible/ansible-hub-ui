@@ -21,7 +21,7 @@ import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 import { type IBaseCollectionState, loadCollection } from './base';
@@ -266,7 +266,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
               {
                 variant: 'danger',
                 title: t`Dependent collections could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               },
             ],
           });

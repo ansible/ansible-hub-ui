@@ -25,7 +25,7 @@ import { type PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 
@@ -266,7 +266,7 @@ export const PageWithTabs = function <
             this.addAlert({
               title: i18n._(errorTitle),
               variant: 'danger',
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             });
           });
       });

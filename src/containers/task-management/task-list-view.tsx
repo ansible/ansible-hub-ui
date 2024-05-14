@@ -33,8 +33,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   translateTask,
   withRouter,
@@ -393,7 +393,7 @@ export class TaskListView extends Component<RouteProps, IState> {
             {
               variant: 'danger',
               title: t`Task "${name}" could not be stopped.`,
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             },
           ],
         });
@@ -421,7 +421,7 @@ export class TaskListView extends Component<RouteProps, IState> {
               {
                 variant: 'danger',
                 title: t`Tasks list could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               },
             ],
           });

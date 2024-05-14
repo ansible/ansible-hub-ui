@@ -34,8 +34,8 @@ import {
 import {
   ParamHelper,
   type ParamType,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   parsePulpIDFromURL,
   translateLockedRole,
 } from 'src/utilities';
@@ -96,7 +96,7 @@ const GroupDetailRoleManagement: FunctionComponent<IProps> = ({
         addAlert(
           t`Permissions for group "${group.name}" could not be displayed.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       });
   };
@@ -119,7 +119,7 @@ const GroupDetailRoleManagement: FunctionComponent<IProps> = ({
         addAlert(
           t`Role "${selectedDeleteRole.role}" could not be deleted.`,
           'danger',
-          errorMessage(status, statusText),
+          jsxErrorMessage(status, statusText),
         );
       })
       .finally(() => {
@@ -249,7 +249,7 @@ const GroupDetailRoleManagement: FunctionComponent<IProps> = ({
                   const errMessage =
                     data?.non_field_errors?.length > 0
                       ? data.non_field_errors[0]
-                      : errorMessage(status, statusText);
+                      : jsxErrorMessage(status, statusText);
 
                   addAlert(
                     t`Role ${role.name} could not be assigned to group ${group.name}.`,

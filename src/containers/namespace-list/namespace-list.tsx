@@ -24,8 +24,8 @@ import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
 } from 'src/utilities';
 import './namespace-list.scss';
 
@@ -118,7 +118,7 @@ export class NamespaceList extends Component<IProps, IState> {
               this.addAlert({
                 variant: 'danger',
                 title: t`Namespaces list could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               }),
           );
         });
@@ -323,7 +323,7 @@ export class NamespaceList extends Component<IProps, IState> {
               this.addAlert({
                 variant: 'danger',
                 title: t`Namespaces list could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               }),
           );
         });

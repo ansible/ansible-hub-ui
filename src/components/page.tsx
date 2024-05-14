@@ -19,7 +19,7 @@ import {
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { type PermissionContextType } from 'src/permissions';
-import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type RouteProps, jsxErrorMessage, withRouter } from 'src/utilities';
 
 interface IState<T> {
   alerts: AlertType[];
@@ -212,7 +212,7 @@ export const Page = function <
               this.addAlert({
                 title: i18n._(errorTitle),
                 variant: 'danger',
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               });
               reject();
             });

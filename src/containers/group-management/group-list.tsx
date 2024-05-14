@@ -40,8 +40,8 @@ import {
   type ErrorMessagesType,
   ParamHelper,
   type RouteProps,
-  errorMessage,
   filterIsSet,
+  jsxErrorMessage,
   mapErrorMessages,
   withRouter,
 } from 'src/utilities';
@@ -323,7 +323,7 @@ class GroupList extends Component<RouteProps, IState> {
             {
               variant: 'danger',
               title: t`Users list could not be displayed.`,
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             },
           ],
         });
@@ -501,7 +501,7 @@ class GroupList extends Component<RouteProps, IState> {
               {
                 variant: 'danger',
                 title: t`Groups list could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               },
             ],
           });

@@ -14,7 +14,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
-import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type RouteProps, jsxErrorMessage, withRouter } from 'src/utilities';
 
 interface IState {
   token: string;
@@ -158,7 +158,7 @@ class TokenStandalone extends Component<RouteProps, IState> {
               {
                 variant: 'danger',
                 title: t`Token could not be displayed.`,
-                description: errorMessage(status, statusText),
+                description: jsxErrorMessage(status, statusText),
               },
             ],
             loadingToken: false,

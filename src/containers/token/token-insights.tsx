@@ -16,8 +16,8 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import {
   type RouteProps,
-  errorMessage,
   getRepoURL,
+  jsxErrorMessage,
   withRouter,
 } from 'src/utilities';
 
@@ -86,7 +86,7 @@ class TokenInsights extends Component<RouteProps, IState> {
             {
               variant: 'danger',
               title: t`Server URL could not be displayed.`,
-              description: errorMessage(status, statusText),
+              description: jsxErrorMessage(status, statusText),
             },
           ],
         });
