@@ -1,4 +1,6 @@
 import { t } from '@lingui/macro';
+import React from 'react';
+import { LoginLink } from 'src/components';
 import { mapErrorMessages } from './map-error-messages';
 
 export function errorMessage(
@@ -34,6 +36,16 @@ export const handleHttpError = (title, callback, addAlert) => (e) => {
     description = message
       ? errorMessage(status, statusText, message)
       : errorMessage(status, statusText);
+
+    if (status === 401) {
+      description = (
+        <>
+          {description}
+          <br />
+          <LoginLink />
+        </>
+      );
+    }
   }
 
   addAlert({
