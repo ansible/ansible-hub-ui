@@ -131,7 +131,7 @@ const AuthHandler = ({
     const isExternalAuth = featureFlags.external_authentication;
     // NOTE: also update LoginLink when changing this
     if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
-      window.location.replace(loginURL(pathname));
+      window.location.replace(loginURL(pathname, featureFlags));
       return null;
     }
 

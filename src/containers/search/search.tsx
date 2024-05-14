@@ -176,9 +176,12 @@ class Search extends Component<RouteProps, IState> {
 
     const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
 
+    const isGateway = (this.context as IAppContextType).featureFlags
+      .dab_resource_registry;
+
     return (
       <>
-        {IS_GATEWAY ? (
+        {isGateway ? (
           <Banner variant='blue'>
             <Flex spaceItems={{ default: 'spaceItemsSm' }}>
               <FlexItem>
