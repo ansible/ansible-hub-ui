@@ -36,7 +36,7 @@ function versionCheck(version) {
         `collection upload repo_test_namespace repo_test_collection`,
       );
       cy.galaxykit(
-        `-i collection move repo_test_namespace repo_test_collection`,
+        `collection approve repo_test_namespace repo_test_collection 1.0.0`,
       );
 
       cy.visit(`${uiPrefix}ansible/repositories/`);
