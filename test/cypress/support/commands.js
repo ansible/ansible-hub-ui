@@ -91,7 +91,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
   const server = Cypress.config().baseUrl + apiPrefix;
   const options = (args.length >= 1 &&
-    typeof args[args.length - 1] == 'object' &&
+    typeof args.at(-1) == 'object' &&
     args.splice(args.length - 1, 1)[0]) || { failOnNonZeroExit: false };
 
   cy.log(`${galaxykitCommand} ${operation} ${args}`);

@@ -86,9 +86,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
-    cy.get('[data-cy^="ApprovalRow"]:first').contains(items[items.length - 1]);
-    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 2]);
-    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 3]);
+    cy.get('[data-cy^="ApprovalRow"]:first').contains(items.at(-1));
+    cy.get('[data-cy^="ApprovalRow"]').contains(items.at(-2));
+    cy.get('[data-cy^="ApprovalRow"]').contains(items.at(-3));
   });
 
   it('should see time informations', () => {
