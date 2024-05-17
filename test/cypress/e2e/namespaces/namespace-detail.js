@@ -73,7 +73,5 @@ describe('Namespace detail screen', () => {
       });
     cy.get('[data-cy="confirm-upload"]').click();
     cy.get('.file-error-messages').should('contain', 'Invalid filename');
-
-    // The test for success are impmeneted in the collection_upload file
   });
 });
