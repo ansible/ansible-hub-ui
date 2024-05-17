@@ -73,8 +73,16 @@ module.exports = (inputConfigs) => {
   // community is also considered standalone
   const isStandalone = !customConfigs.IS_INSIGHTS;
 
+  const rootFolder = resolve(__dirname, '../');
+  const appEntry = resolve(
+    rootFolder,
+    'src',
+    isStandalone ? 'entry-standalone.tsx' : 'entry-insights.tsx',
+  );
+
   const { config: webpackConfig, plugins } = config({
-    rootFolder: resolve(__dirname, '../'),
+    appEntry,
+    rootFolder,
     definePlugin: globals,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
@@ -182,11 +190,6 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
   }
 
-  if (isStandalone) {
-    const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    newWebpackConfig.entry.App = newEntry;
-  }
-
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
 
   // keep HtmlWebpackPlugin for standalone, inject src/index.html
@@ -202,12 +205,13 @@ module.exports = (inputConfigs) => {
 
   if (customConfigs.IS_INSIGHTS) {
     // insights federated modules
+    // FIXME: still needed?
     plugins.push(
       require('@redhat-cloud-services/frontend-components-config-utilities/federated-modules')(
         {
-          root: resolve(__dirname, '../'),
+          root: rootFolder,
           exposes: {
-            './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
+            './RootApp': appEntry,
           },
           shared: [
             {
