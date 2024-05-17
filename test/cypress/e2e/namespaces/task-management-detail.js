@@ -21,7 +21,7 @@ describe('Task detail', () => {
     cy.get('.pf-v5-c-alert.pf-m-info');
   });
 
-  it('contains correct headers and field names.', () => {
+  it('contains correct headers and field names', () => {
     cy.login();
     cy.visit(`${uiPrefix}tasks`);
     cy.contains('pulp_ansible.app.tasks.collections.sync').click();

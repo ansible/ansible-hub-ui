@@ -52,7 +52,7 @@ describe('Approval Dashboard process with multiple repos', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace');
-    cy.galaxykit('-i collection upload', 'namespace', 'collection1');
+    cy.galaxykit('collection upload', 'namespace', 'collection1');
 
     const max = 11;
     range(1, max).forEach((i) => {
@@ -100,12 +100,12 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.login();
   });
 
-  it('should contains no colletctions in list.', () => {
+  it('should contains no colletctions in list', () => {
     cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');
   });
 
-  it('should approve, reject and reapprove.', () => {
+  it('should approve, reject and reapprove', () => {
     openModal();
     toggleItem('repo1');
     toggleItem('repo2');
@@ -163,7 +163,7 @@ describe('Approval Dashboard process with multiple repos', () => {
   it('should be able to approve from different staging repo', () => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace');
-    cy.galaxykit('-i collection upload', 'namespace', 'collection1');
+    cy.galaxykit('collection upload', 'namespace', 'collection1');
     cy.galaxykit(
       '-i collection move',
       'namespace',

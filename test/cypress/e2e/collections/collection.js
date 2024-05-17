@@ -17,8 +17,8 @@ describe('collection tests', () => {
   });
 
   it('deletes an entire collection', () => {
-    cy.galaxykit('-i collection upload test_namespace test_collection');
-    cy.galaxykit('task wait all');
+    cy.galaxykit('collection upload test_namespace test_collection');
+    cy.galaxykit('collection approve test_namespace test_collection 1.0.0');
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
@@ -30,8 +30,8 @@ describe('collection tests', () => {
   });
 
   it('deletes a collection version', () => {
-    cy.galaxykit('-i collection upload my_namespace my_collection');
-    cy.galaxykit('task wait all');
+    cy.galaxykit('collection upload my_namespace my_collection');
+    cy.galaxykit('collection approve my_namespace my_collection 1.0.0');
 
     cy.visit(`${uiPrefix}collections`);
 
@@ -58,8 +58,8 @@ describe('collection tests', () => {
     const rand = Math.floor(Math.random() * 9999999);
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
-    cy.galaxykit(`-i collection upload ${namespace} ${collection}`);
-    cy.galaxykit('task wait all');
+    cy.galaxykit(`collection upload ${namespace} ${collection}`);
+    cy.galaxykit('collection approve', namespace, collection, '1.0.0');
     cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
 
     cy.openHeaderKebab();
@@ -90,11 +90,12 @@ describe('collection tests', () => {
   it('deletes a collection from repository', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteRepositories();
-    cy.galaxykit('-i collection upload test_namespace test_repo_collection2');
+    cy.galaxykit('collection upload test_namespace test_repo_collection2');
+    cy.galaxykit(
+      'collection approve test_namespace test_repo_collection2 1.0.0',
+    );
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
-
-    cy.galaxykit('task wait all');
     cy.galaxykit(
       'collection copy test_namespace test_repo_collection2 1.0.0 published repo2',
     );
@@ -132,17 +133,21 @@ describe('collection tests', () => {
     cy.galaxykit('distribution create repo2');
 
     cy.galaxykit(
-      '-i collection upload test_namespace test_repo_collection_version2 1.0.0',
+      'collection upload test_namespace test_repo_collection_version2 1.0.0',
     );
-    cy.galaxykit('task wait all');
+    cy.galaxykit(
+      'collection approve test_namespace test_repo_collection_version2 1.0.0',
+    );
     cy.galaxykit(
       'collection copy test_namespace test_repo_collection_version2 1.0.0 published repo2',
     );
 
     cy.galaxykit(
-      '-i collection upload test_namespace test_repo_collection_version2 1.0.1',
+      'collection upload test_namespace test_repo_collection_version2 1.0.1',
     );
-    cy.galaxykit('task wait all');
+    cy.galaxykit(
+      'collection approve test_namespace test_repo_collection_version2 1.0.1',
+    );
     cy.galaxykit(
       'collection copy test_namespace test_repo_collection_version2 1.0.1 published repo2',
     );

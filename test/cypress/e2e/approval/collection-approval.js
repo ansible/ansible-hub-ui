@@ -6,7 +6,7 @@ describe('tests the approval list screen ', () => {
     cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
-    cy.galaxykit('-i collection upload ansible network');
+    cy.galaxykit('collection upload ansible network');
     cy.visit(`${uiPrefix}approval-dashboard`);
   });
 
@@ -41,7 +41,7 @@ describe('tests the approval list screen ', () => {
     cy.get('.pf-v5-c-chip button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
-    //imports page
+    // imports page
 
     cy.get('button[aria-label="Actions"]:first').click();
     cy.intercept(

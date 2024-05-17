@@ -119,7 +119,7 @@ describe('Remote Registry Tests', () => {
     cy.get('input[id = "url"]').clear();
     cy.get('input[id = "url"]').type('https://some new url2');
 
-    //edit advanced options
+    // edit advanced options
     cy.contains('Show advanced options').click();
 
     cy.get('input[id="username"]').type('test');

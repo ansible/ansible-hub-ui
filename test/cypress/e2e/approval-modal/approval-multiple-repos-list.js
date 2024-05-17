@@ -31,7 +31,7 @@ describe('Approval Dashboard process with multiple repos', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace');
-    cy.galaxykit('-i collection upload', 'namespace', 'collection1');
+    cy.galaxykit('collection upload', 'namespace', 'collection1');
 
     const max = 11;
     range(1, max).forEach((i) => {
@@ -79,7 +79,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.login();
   });
 
-  it('should test paging.', () => {
+  it('should test paging', () => {
     openModal();
     cy.contains('.modal-body .hub-toolbar', '1 - 10 of 11');
     cy.contains('.modal-body', 'repo1');
@@ -89,7 +89,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('.modal-body', 'repo9');
   });
 
-  it('should test ordering.', () => {
+  it('should test ordering', () => {
     openModal();
     cy.contains('.modal-body', 'repo9').should('not.exist');
     cy.get('.modal-body [data-cy="sort_name"]').click();
@@ -97,7 +97,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('.modal-body', 'published').should('not.exist');
   });
 
-  it('should test filtering.', () => {
+  it('should test filtering', () => {
     openModal();
     cy.contains('.modal-body', 'repo9').should('not.exist');
     cy.get('.modal-body [data-cy="compound_filter"] input').type('repo{enter}');
@@ -113,7 +113,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('.modal-body', 'published').should('not.exist');
   });
 
-  it('should test select/deselect all/page.', () => {
+  it('should test select/deselect all/page', () => {
     openModal();
 
     // deselect all
@@ -159,7 +159,7 @@ describe('Approval Dashboard process with multiple repos', () => {
     });
   });
 
-  it('should test selection.', () => {
+  it('should test selection', () => {
     openModal();
     toggleItem('repo1');
     toggleItem('published');

@@ -5,7 +5,7 @@ describe('signing versions - auto sign on approval', () => {
     cy.deleteNamespacesAndCollections();
 
     cy.galaxykit('-i namespace create', 'autosign_test');
-    cy.galaxykit('-i collection upload autosign_test test_collection');
+    cy.galaxykit('collection upload autosign_test test_collection');
   });
 
   after(() => {
@@ -32,8 +32,6 @@ describe('signing versions - auto sign on approval', () => {
 
     // Sign the first collection
     cy.get('[data-cy="approve-button"]').first().click();
-
-    // TODO: Maybe we can wait on some specific event?
     cy.wait(10000);
 
     // Go and check if it is signed in the collections

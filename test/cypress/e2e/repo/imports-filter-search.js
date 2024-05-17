@@ -29,7 +29,7 @@ describe('Imports filter test', () => {
     cy.visit(`${uiPrefix}my-imports?namespace=filter_test_namespace`);
   });
 
-  it('partial filter for name is working.', () => {
+  it('partial filter for name', () => {
     cy.intercept(
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`,
@@ -45,7 +45,7 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
   });
 
-  it('exact filter for name is working.', () => {
+  it('exact filter for name', () => {
     cy.intercept(
       'GET',
       `${apiPrefix}v3/plugin/ansible/search/collection-versions/?*`,
@@ -63,7 +63,7 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
-  it('Exact search for completed is working.', () => {
+  it('Exact search for completed', () => {
     cy.get('[data-cy="compound_filter"] button:first').click();
     cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
@@ -83,7 +83,7 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="import-list-data"]').contains('different_name');
   });
 
-  it('Exact search for waiting is working.', () => {
+  it('Exact search for waiting', () => {
     cy.get('[data-cy="compound_filter"] button:first').click();
     cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
@@ -92,7 +92,7 @@ describe('Imports filter test', () => {
     cy.contains('No results found');
   });
 
-  it('Exact search for name and completed is working.', () => {
+  it('Exact search for name and completed', () => {
     cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
       'my_collection1{enter}',
     );
@@ -116,7 +116,7 @@ describe('Imports filter test', () => {
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
-  it('Partial search for name and completed is working.', () => {
+  it('Partial search for name and completed', () => {
     cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
       'my_collection{enter}',
     );

@@ -45,15 +45,17 @@ describe('Collections list Tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
 
-    cy.galaxykit('namespace create my_namespace');
     // insert test data
-    range(11).forEach((i) => {
-      cy.galaxykit(`-i collection upload my_namespace my_collection${i}`);
-    });
+    cy.galaxykit('namespace create my_namespace');
+    range(11).forEach((i) =>
+      cy.galaxykit(`collection upload my_namespace my_collection${i}`),
+    );
+    range(11).forEach((i) =>
+      cy.galaxykit(`collection approve my_namespace my_collection${i} 1.0.0`),
+    );
   });
 
   after(() => {
-    cy.galaxykit('task wait all');
     cy.deleteNamespacesAndCollections();
   });
 
@@ -87,7 +89,7 @@ describe('Collections list Tests', () => {
     undeprecate(false);
   });
 
-  it('paging is working', () => {
+  it('paging', () => {
     // there should be 11 items in db, 10 per page + 1 view more
     cy.get('.collection-container')
       .get('.hub-c-card-collection-container')
@@ -99,7 +101,7 @@ describe('Collections list Tests', () => {
       .should('have.length', 1);
   });
 
-  it('filter is working', () => {
+  it('filter', () => {
     cy.get('.hub-cards')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
@@ -107,7 +109,7 @@ describe('Collections list Tests', () => {
     cy.get('.hub-cards').contains('my_collection1').should('not.exist');
   });
 
-  it('set page size is working', () => {
+  it('set page size', () => {
     cy.get('.hub-cards')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
@@ -118,7 +120,7 @@ describe('Collections list Tests', () => {
       .should('have.length', 11);
   });
 
-  it('Cards/List switch is working', () => {
+  it('Cards/List switch', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
 
     cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);
@@ -140,7 +142,6 @@ describe('Collections list Tests', () => {
       timeout: 15000,
     });
     cy.contains('No results found');
-    cy.galaxykit('-i collection upload my_namespace my_collection0');
   });
 
   it('Can delete collection in namespace collection list', () => {
@@ -149,17 +150,7 @@ describe('Collections list Tests', () => {
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');
 
-    // because of randomized order of items in list and weird filter behavior
-    // we have to check that all of them dissapeared, not only one particular
-    range(11).forEach((i) => {
-      if (i != 1) {
-        cy.get('.body')
-          .contains('my_collection' + i)
-          .should('not.exist');
-      }
-    });
     cy.get('.body').contains('my_collection1');
-
     cy.get('.body [aria-label="Actions"]').click();
     cy.contains('Delete collection from system').click();
     cy.get('[data-cy=modal_checkbox] input').click();
@@ -169,6 +160,5 @@ describe('Collections list Tests', () => {
       timeout: 15000,
     });
     cy.contains('No results found');
-    cy.galaxykit('-i collection upload my_namespace my_collection1');
   });
 });

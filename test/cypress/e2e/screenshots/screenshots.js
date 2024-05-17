@@ -9,7 +9,7 @@ describe('screenshots', () => {
     // insert test data
     cy.galaxykit('namespace create my_namespace');
     range(5).forEach((i) => {
-      cy.galaxykit('-i collection upload my_namespace my_collection' + i);
+      cy.galaxykit('collection upload my_namespace my_collection' + i);
     });
   });
 

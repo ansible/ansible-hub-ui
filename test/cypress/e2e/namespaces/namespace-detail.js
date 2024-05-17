@@ -5,8 +5,10 @@ describe('Namespace detail screen', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace_detail_test');
-    cy.galaxykit('-i collection upload namespace_detail_test collection1');
-    cy.galaxykit('-i collection upload namespace_detail_test collection2');
+    cy.galaxykit('collection upload namespace_detail_test collection1');
+    cy.galaxykit('collection upload namespace_detail_test collection2');
+    cy.galaxykit('collection approve namespace_detail_test collection1 1.0.0');
+    cy.galaxykit('collection approve namespace_detail_test collection2 1.0.0');
   });
 
   after(() => {
@@ -71,7 +73,5 @@ describe('Namespace detail screen', () => {
       });
     cy.get('[data-cy="confirm-upload"]').click();
     cy.get('.file-error-messages').should('contain', 'Invalid filename');
-
-    // The test for success are impmeneted in the collection_upload file
   });
 });

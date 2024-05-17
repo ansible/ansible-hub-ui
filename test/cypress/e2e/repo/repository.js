@@ -29,14 +29,15 @@ function versionCheck(version) {
           'https://www.example.com/',
         );
       }
-      cy.galaxykit('-i namespace create repo_test_namespace');
 
       cy.deleteNamespacesAndCollections();
+
+      cy.galaxykit('-i namespace create repo_test_namespace');
       cy.galaxykit(
-        `-i collection upload repo_test_namespace repo_test_collection`,
+        'collection upload repo_test_namespace repo_test_collection',
       );
       cy.galaxykit(
-        `-i collection move repo_test_namespace repo_test_collection`,
+        'collection approve repo_test_namespace repo_test_collection 1.0.0',
       );
 
       cy.visit(`${uiPrefix}ansible/repositories/`);
@@ -169,7 +170,6 @@ function versionCheck(version) {
       cy.contains('a', 'Remove').click();
       cy.contains('Remove collection version?');
       cy.contains('button', 'Remove').click();
-      // checking for message and clicking detail page does not work, it fails, not sure why
     });
 
     it('checks if collection was removed', () => {

@@ -14,9 +14,9 @@ describe('Approval Dashboard process', () => {
     cy.login();
   });
 
-  it('should test the whole approval process.', () => {
+  it('should test the whole approval process', () => {
     cy.galaxykit('-i namespace create', 'appp_n_test');
-    cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
+    cy.galaxykit('collection upload', 'appp_n_test', 'appp_c_test1');
     cy.galaxykit('task wait all');
     cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');

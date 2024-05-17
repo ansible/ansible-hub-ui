@@ -1,9 +1,9 @@
-import { range, sortBy } from 'lodash';
+import { range } from 'lodash';
 
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('User list tests for sorting, paging and filtering', () => {
-  let items = [];
+  const items = [];
 
   before(() => {
     cy.deleteTestUsers();
@@ -13,13 +13,13 @@ describe('User list tests for sorting, paging and filtering', () => {
 
     range(20).forEach((i) => {
       const name = 'user_test' + i;
-      items.push({ name });
+      items.push(name);
       cy.galaxykit('user create', name, name + 'password');
     });
 
-    items.push({ name: 'admin' });
+    items.push('admin');
 
-    items = sortBy(items, 'name');
+    items.sort();
   });
 
   beforeEach(() => {
@@ -44,23 +44,23 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.contains('a few seconds ago');
   });
 
-  it('items are sorted alphabetically and paging is working', () => {
-    cy.get('.body').contains(items[0].name);
+  it('paging', () => {
+    cy.get('.body').contains(items[0]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body').contains(items[10].name);
+    cy.get('.body').contains(items[10]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body').contains(items[20].name);
+    cy.get('.body').contains(items[20]);
   });
 
-  it('sorting is working for username', () => {
+  it('sorting', () => {
     cy.get('.body').get('[data-cy="sort_username"]').click();
-    cy.get('.body tbody tr:first td:first').contains(items[20].name);
-    cy.get('.body').contains(items[0].name).should('not.exist');
+    cy.get('.body tbody tr:first td:first').contains(items[20]);
+    cy.get('.body').contains(items[0]).should('not.exist');
   });
 
-  it('filter is working', () => {
+  it('filter', () => {
     cy.get('.body')
       .get('[aria-label="username__contains"]:first')
       .type('user_test0{enter}');
@@ -68,16 +68,16 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains('user_test1').should('not.exist');
   });
 
-  it('set page size is working', () => {
+  it('set page size', () => {
     cy.get('.body')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
     cy.get('.body').contains('20 per page').click();
 
     range(20).forEach((i) => {
-      cy.get('.body').contains(items[i].name);
+      cy.get('.body').contains(items[i]);
     });
 
-    cy.get('.body').contains(items[20].name).should('not.exist');
+    cy.get('.body').contains(items[20]).should('not.exist');
   });
 });
