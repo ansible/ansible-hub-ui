@@ -38,7 +38,7 @@ interface IProps {
 
 function Choice({ c }: { c: string | Record<string, string> }) {
   return (
-    <pre style={{ display: 'inline-block' }}>
+    <pre style={{ display: 'inline-block', padding: '2px 4px' }}>
       {typeof c === 'object' ? JSON.stringify(c, null, 2) : c}
     </pre>
   );
