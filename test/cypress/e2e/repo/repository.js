@@ -33,7 +33,7 @@ function versionCheck(version) {
 
       cy.deleteNamespacesAndCollections();
       cy.galaxykit(
-        `-i collection upload repo_test_namespace repo_test_collection`,
+        `collection upload repo_test_namespace repo_test_collection`,
       );
       cy.galaxykit(
         `-i collection move repo_test_namespace repo_test_collection`,

@@ -5,7 +5,7 @@ describe('signing versions - auto sign on approval', () => {
     cy.deleteNamespacesAndCollections();
 
     cy.galaxykit('-i namespace create', 'autosign_test');
-    cy.galaxykit('-i collection upload autosign_test test_collection');
+    cy.galaxykit('collection upload autosign_test test_collection');
   });
 
   after(() => {

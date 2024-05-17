@@ -10,19 +10,19 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
     range(9).forEach((i) => {
       cy.galaxykit(
-        '-i collection upload',
+        'collection upload',
         'approval_dashboard_namespace_test',
         'approval_dashboard_collection_test' + i,
       );
     });
 
     cy.galaxykit(
-      '-i collection upload',
+      'collection upload',
       'approval_dashboard_namespace_test_additional_data',
       'approval_dashboard_collection_test_additional1',
     );
     cy.galaxykit(
-      '-i collection upload',
+      'collection upload',
       'approval_dashboard_namespace_test_additional_data',
       'approval_dashboard_collection_test_additional2',
     );

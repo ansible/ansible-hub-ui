@@ -31,7 +31,7 @@ describe('Approval Dashboard process with multiple repos', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'namespace');
-    cy.galaxykit('-i collection upload', 'namespace', 'collection1');
+    cy.galaxykit('collection upload', 'namespace', 'collection1');
 
     const max = 11;
     range(1, max).forEach((i) => {
