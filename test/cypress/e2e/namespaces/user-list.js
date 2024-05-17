@@ -44,7 +44,7 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.contains('a few seconds ago');
   });
 
-  it('items are sorted alphabetically and paging is working', () => {
+  it('paging', () => {
     cy.get('.body').contains(items[0]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
@@ -54,13 +54,13 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains(items[20]);
   });
 
-  it('sorting is working for username', () => {
+  it('sorting', () => {
     cy.get('.body').get('[data-cy="sort_username"]').click();
     cy.get('.body tbody tr:first td:first').contains(items[20]);
     cy.get('.body').contains(items[0]).should('not.exist');
   });
 
-  it('filter is working', () => {
+  it('filter', () => {
     cy.get('.body')
       .get('[aria-label="username__contains"]:first')
       .type('user_test0{enter}');
@@ -68,7 +68,7 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains('user_test1').should('not.exist');
   });
 
-  it('set page size is working', () => {
+  it('set page size', () => {
     cy.get('.body')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();

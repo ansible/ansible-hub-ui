@@ -89,7 +89,7 @@ describe('Collections list Tests', () => {
     undeprecate(false);
   });
 
-  it('paging is working', () => {
+  it('paging', () => {
     // there should be 11 items in db, 10 per page + 1 view more
     cy.get('.collection-container')
       .get('.hub-c-card-collection-container')
@@ -101,7 +101,7 @@ describe('Collections list Tests', () => {
       .should('have.length', 1);
   });
 
-  it('filter is working', () => {
+  it('filter', () => {
     cy.get('.hub-cards')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
@@ -109,7 +109,7 @@ describe('Collections list Tests', () => {
     cy.get('.hub-cards').contains('my_collection1').should('not.exist');
   });
 
-  it('set page size is working', () => {
+  it('set page size', () => {
     cy.get('.hub-cards')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
@@ -120,7 +120,7 @@ describe('Collections list Tests', () => {
       .should('have.length', 11);
   });
 
-  it('Cards/List switch is working', () => {
+  it('Cards/List switch', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
 
     cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);

@@ -29,7 +29,7 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.get('tr[data-cy="SortTable-headers"] th').contains('Group');
   });
 
-  it('items are sorted alphabetically and paging is working', () => {
+  it('paging', () => {
     cy.get('.body').contains(items[0]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
@@ -39,13 +39,13 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains(items[20]);
   });
 
-  it('sorting is working', () => {
+  it('sorting', () => {
     cy.get('.body').get('[data-cy="sort_name"]').click();
     cy.get('.body tbody tr:first td:first').contains(items[20]);
     cy.get('.body').contains(items[0]).should('not.exist');
   });
 
-  it('filter is working', () => {
+  it('filter', () => {
     cy.get('.body')
       .get('[placeholder="Filter by group name"]:first')
       .type('group_test0{enter}');
@@ -53,7 +53,7 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains('group_test1').should('not.exist');
   });
 
-  it('set page size is working', () => {
+  it('set page size', () => {
     cy.get('.body')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();

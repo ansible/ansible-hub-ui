@@ -18,7 +18,7 @@ describe('Ansible Lightspeed Modal Test', () => {
     cy.galaxykit('-i namespace create', 'testns1');
   });
 
-  it('can opt in or opt out of namespace.', () => {
+  it('can opt in or opt out of namespace', () => {
     cy.login(null, null, '/', 'Welcome to Galaxy');
     cy.visit(`${uiPrefix}namespaces/testns1`);
 

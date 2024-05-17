@@ -100,12 +100,12 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.login();
   });
 
-  it('should contains no colletctions in list.', () => {
+  it('should contains no colletctions in list', () => {
     cy.visit(`${uiPrefix}collections`);
     cy.contains('No collections yet');
   });
 
-  it('should approve, reject and reapprove.', () => {
+  it('should approve, reject and reapprove', () => {
     openModal();
     toggleItem('repo1');
     toggleItem('repo2');

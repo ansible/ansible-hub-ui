@@ -62,7 +62,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.contains('button', 'Clear all filters').click();
   });
 
-  it('should contains all columns.', () => {
+  it('should contains all columns', () => {
     ['Namespace', 'Collection', 'Version', 'Date created', 'Status'].forEach(
       (item) => {
         cy.get('[data-cy="SortTable-headers"]').contains(item);
@@ -70,7 +70,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     );
   });
 
-  it('should sort alphabetically and paging is working.', () => {
+  it('should sort & page', () => {
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="sort_name"]').click();
 
@@ -82,7 +82,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="body"]').contains(items[10]);
   });
 
-  it('should sort collection.', () => {
+  it('should sort collection', () => {
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
@@ -91,11 +91,11 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 3]);
   });
 
-  it('should see time informations.', () => {
+  it('should see time informations', () => {
     cy.contains('[data-cy="body"]', 'a few seconds ago');
   });
 
-  it('should filter collection.', () => {
+  it('should filter collection', () => {
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -113,7 +113,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       .should('not.exist');
   });
 
-  it('should filter collection and namespace together.', () => {
+  it('should filter collection and namespace together', () => {
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -171,7 +171,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     });
   });
 
-  it('should redirect to import logs.', () => {
+  it('should redirect to import logs', () => {
     cy.get(
       '[data-cy="kebab-toggle"]:first button[aria-label="Actions"]',
     ).click();
