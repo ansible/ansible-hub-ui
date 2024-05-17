@@ -735,8 +735,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
           <span>
             <span className='option-name'>
-              <Trans>Default: </Trans>
-            </span>
+              <Trans>Default:</Trans>
+            </span>{' '}
             <span className='blue'>{defaultChoice}</span>
           </span>
         ) : null}
