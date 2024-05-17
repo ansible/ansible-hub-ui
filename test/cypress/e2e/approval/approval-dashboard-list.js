@@ -39,7 +39,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
     cy.wait('@data').then(({ response: { body } }) => {
       body.data.forEach((record) => {
-        items.push(record.collection_version);
+        items.push(record.collection_version.name);
       });
       items.sort();
     });
