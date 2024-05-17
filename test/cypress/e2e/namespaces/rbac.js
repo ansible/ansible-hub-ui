@@ -27,8 +27,8 @@ describe('RBAC test for user without permissions', () => {
     cy.galaxykit('-i user group add', userName, groupName);
 
     cy.galaxykit('-i namespace create', 'testspace');
-    cy.galaxykit('-i collection upload testspace testcollection');
-    cy.galaxykit('task wait all');
+    cy.galaxykit('collection upload testspace testcollection');
+    cy.galaxykit('collection approve testspace testcollection 1.0.0');
   });
 
   after(() => {
@@ -280,8 +280,8 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_collections');
     cy.login(userName, userPassword);
 
-    cy.galaxykit('-i collection upload testspace2 testcollection2');
-    cy.galaxykit('task wait all');
+    cy.galaxykit('collection upload testspace2 testcollection2');
+    cy.galaxykit('collection approve testspace2 testcollection2 1.0.0');
 
     cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
     cy.contains('Go to documentation');
