@@ -36,8 +36,12 @@ interface IProps {
   renderWarning: (text: string) => ReactElement;
 }
 
-function Choice({ children }: { children: ReactNode }) {
-  return <pre style={{ display: 'inline-block' }}>{children}</pre>;
+function Choice({ c }: { c: string | Record<string, string> }) {
+  return (
+    <pre style={{ display: 'inline-block' }}>
+      {typeof c === 'object' ? JSON.stringify(c, null, 2) : c}
+    </pre>
+  );
 }
 
 function Legend({ children }: { children: ReactNode }) {
@@ -716,10 +720,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
                 <li key={i}>
                   {c === defaultChoice ? (
                     <span className='blue' title={t`default`}>
-                      <Choice>{c}</Choice> &nbsp;&larr;
+                      <Choice c={c} /> &nbsp;&larr;
                     </span>
                   ) : (
-                    <Choice>{c}</Choice>
+                    <Choice c={c} />
                   )}
                   {this.renderLegend(legends[c])}
                 </li>
