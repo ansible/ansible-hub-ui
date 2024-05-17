@@ -4,9 +4,9 @@ describe('Hub User Management Tests', () => {
       cy.login();
       cy.menuGo('User Access > Users');
 
-      const actionsSelector = `[data-cy="UserList-row-admin"] [aria-label="Actions"]`;
-      cy.get(actionsSelector).click();
-      cy.containsnear(actionsSelector, 'Delete').click();
+      const kebab = '[data-cy="UserList-row-admin"] [aria-label="Actions"]';
+      cy.get(kebab).click();
+      cy.containsnear(kebab, 'Delete').click();
       cy.get('button').contains('Delete').should('be.disabled');
       cy.get('button').contains('Cancel').click();
     });

@@ -8,7 +8,7 @@ describe('Namespace Access tab', () => {
     cy.deleteTestGroups();
 
     cy.galaxykit(`-i namespace create rbac_access_${num}`);
-    cy.galaxykit('-i group create', `access_group`);
+    cy.galaxykit('-i group create', 'access_group');
   });
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('Execution Environment Access tab', () => {
       'library/alpine',
       `rbac_access_${num}_registry`,
     );
-    cy.galaxykit('-i group create', `access_group`);
+    cy.galaxykit('-i group create', 'access_group');
   });
 
   beforeEach(() => {

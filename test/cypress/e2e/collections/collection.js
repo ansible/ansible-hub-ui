@@ -175,13 +175,13 @@ describe('collection tests', () => {
     cy.visit(
       `${uiPrefix}repo/repo2/test_namespace/test_repo_collection_version2/?version=1.0.0`,
     );
-    cy.contains(`We couldn't find the page you're looking for!`);
+    cy.contains("We couldn't find the page you're looking for!");
 
     cy.visit(
       `${uiPrefix}repo/published/test_namespace/test_repo_collection_version2/?version=1.0.0`,
     );
     cy.contains('test_repo_collection_version2');
-    cy.contains(`We couldn't find the page you're looking for!`).should(
+    cy.contains("We couldn't find the page you're looking for!").should(
       'not.exist',
     );
 

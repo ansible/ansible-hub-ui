@@ -19,7 +19,7 @@ describe('Container Signing', () => {
 
     cy.galaxykit(
       'registry create',
-      `docker`,
+      'docker',
       'https://registry.hub.docker.com/',
     );
 

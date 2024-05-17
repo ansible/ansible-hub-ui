@@ -61,7 +61,7 @@ describe('Approval Dashboard process with multiple repos', () => {
       });
       cy.galaxykit('-i task wait all');
       range(1, max).forEach((i) => {
-        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
+        cy.galaxykit('-i repository create', 'repo' + i, '--pipeline=approved');
         cy.galaxykit('-i distribution create', 'repo' + i);
       });
       cy.galaxykit('-i task wait all');

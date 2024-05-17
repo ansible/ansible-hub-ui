@@ -33,7 +33,7 @@ describe('add and delete roles', () => {
     cy.get('#role_name').clear().type('test');
     helperText('role_name').should(
       'have.text',
-      `This field must start with 'galaxy.'.`,
+      "This field must start with 'galaxy.'.",
     );
 
     cy.get('#role_name').clear();

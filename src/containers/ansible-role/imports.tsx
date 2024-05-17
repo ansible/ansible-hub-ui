@@ -158,7 +158,7 @@ class AnsibleRoleImports extends Component<RouteProps, IState> {
 
                 <ImportConsole
                   apiError={
-                    error ? error : selectedImport ? null : `Select an import`
+                    error ? error : selectedImport ? null : t`Select an import`
                   }
                   followMessages={followLogs}
                   roleImport={selectedImport}

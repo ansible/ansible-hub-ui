@@ -175,7 +175,7 @@ describe('Group Roles Tests', () => {
   it('should show group empty state', () => {
     cy.galaxykit('-i group create', 'empty_group');
     cy.menuGo('User Access > Groups');
-    cy.get(`[data-cy="GroupList-row-empty_group"] a`).click();
+    cy.get('[data-cy="GroupList-row-empty_group"] a').click();
     cy.contains('There are currently no roles assigned to this group.');
   });
 });

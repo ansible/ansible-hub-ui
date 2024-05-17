@@ -169,7 +169,7 @@ export class API extends HubAPI {
         name,
         version,
       },
-      `pulp/api/v3/content/ansible/collection_versions/`,
+      'pulp/api/v3/content/ansible/collection_versions/',
     );
   }
 

@@ -41,7 +41,7 @@ function rejectItem(repo) {
   cy.visit(`${uiPrefix}approval-dashboard`);
   cy.contains('Clear all filters').click();
   cy.contains(
-    `[data-cy="ApprovalRow-rejected-namespace-collection1"]`,
+    '[data-cy="ApprovalRow-rejected-namespace-collection1"]',
     'Rejected',
   );
 }
@@ -82,7 +82,7 @@ describe('Approval Dashboard process with multiple repos', () => {
       });
       cy.galaxykit('-i task wait all');
       range(1, max).forEach((i) => {
-        cy.galaxykit(`-i repository create`, 'repo' + i, '--pipeline=approved');
+        cy.galaxykit('-i repository create', 'repo' + i, '--pipeline=approved');
         cy.galaxykit('-i distribution create', 'repo' + i);
       });
       cy.galaxykit('-i task wait all');
