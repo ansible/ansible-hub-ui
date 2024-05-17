@@ -1,13 +1,5 @@
-import { Trans, t } from '@lingui/macro';
-import {
-  Banner,
-  Button,
-  DataList,
-  Flex,
-  FlexItem,
-  Switch,
-} from '@patternfly/react-core';
-import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
+import { t } from '@lingui/macro';
+import { Button, DataList, Switch } from '@patternfly/react-core';
 import React, { Component, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
@@ -29,7 +21,6 @@ import {
   DeleteCollectionModal,
   EmptyStateFilter,
   EmptyStateNoData,
-  ExternalLink,
   HubListToolbar,
   HubPagination,
   ImportModal,
@@ -176,26 +167,8 @@ class Search extends Component<RouteProps, IState> {
 
     const ignoredParams = ['page', 'page_size', 'sort', 'view_type'];
 
-    const isGateway = (this.context as IAppContextType).featureFlags
-      .dab_resource_registry;
-
     return (
       <>
-        {isGateway ? (
-          <Banner variant='blue'>
-            <Flex spaceItems={{ default: 'spaceItemsSm' }}>
-              <FlexItem>
-                <InfoCircleIcon />
-              </FlexItem>
-              <FlexItem>
-                <Trans>
-                  A tech preview of the new Automation Hub user interface can be
-                  found <ExternalLink href='/'>here</ExternalLink>.
-                </Trans>
-              </FlexItem>
-            </Flex>
-          </Banner>
-        ) : null}
         <div className='hub-search-page'>
           <AlertList
             alerts={alerts}
