@@ -1,10 +1,10 @@
-import { range, sortBy } from 'lodash';
+import { range } from 'lodash';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Approval Dashboard list tests for sorting, paging and filtering', () => {
-  let items = [];
+  const items = [];
 
   function createData() {
     cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
@@ -39,9 +39,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
     cy.wait('@data').then(({ response: { body } }) => {
       body.data.forEach((record) => {
-        items.push({ name: record.collection_version.name });
+        items.push(record.collection_version);
       });
-      items = sortBy(items, 'name');
+      items.sort();
     });
   }
 
@@ -74,23 +74,21 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="sort_name"]').click();
 
-    cy.get('[data-cy="body"]').contains(items[0].name);
+    cy.get('[data-cy="body"]').contains(items[0]);
 
     cy.get('[data-cy="body"]')
       .get('[aria-label="Go to next page"]:first')
       .click();
-    cy.get('[data-cy="body"]').contains(items[10].name);
+    cy.get('[data-cy="body"]').contains(items[10]);
   });
 
   it('should sort collection.', () => {
     cy.get('[data-cy="sort_name"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
-    cy.get('[data-cy^="ApprovalRow"]:first').contains(
-      items[items.length - 1].name,
-    );
-    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 2].name);
-    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 3].name);
+    cy.get('[data-cy^="ApprovalRow"]:first').contains(items[items.length - 1]);
+    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 2]);
+    cy.get('[data-cy^="ApprovalRow"]').contains(items[items.length - 3]);
   });
 
   it('should see time informations.', () => {
@@ -169,7 +167,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_name"]').click();
 
     range(11).forEach((i) => {
-      cy.get('[data-cy="body"]').contains(items[i].name);
+      cy.get('[data-cy="body"]').contains(items[i]);
     });
   });
 

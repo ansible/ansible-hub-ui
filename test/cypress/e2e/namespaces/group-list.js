@@ -1,9 +1,9 @@
-import { range, sortBy } from 'lodash';
+import { range } from 'lodash';
 
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Group list tests for sorting, paging and filtering', () => {
-  let items = [];
+  const items = [];
 
   before(() => {
     cy.deleteTestGroups();
@@ -13,11 +13,11 @@ describe('Group list tests for sorting, paging and filtering', () => {
 
     range(21).forEach((i) => {
       const name = 'group_test' + i;
-      items.push({ name });
+      items.push(name);
       cy.galaxykit('-i group create', name);
     });
 
-    items = sortBy(items, 'name');
+    items.sort();
   });
 
   beforeEach(() => {
@@ -30,19 +30,19 @@ describe('Group list tests for sorting, paging and filtering', () => {
   });
 
   it('items are sorted alphabetically and paging is working', () => {
-    cy.get('.body').contains(items[0].name);
+    cy.get('.body').contains(items[0]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body').contains(items[10].name);
+    cy.get('.body').contains(items[10]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body').contains(items[20].name);
+    cy.get('.body').contains(items[20]);
   });
 
   it('sorting is working', () => {
     cy.get('.body').get('[data-cy="sort_name"]').click();
-    cy.get('.body tbody tr:first td:first').contains(items[20].name);
-    cy.get('.body').contains(items[0].name).should('not.exist');
+    cy.get('.body tbody tr:first td:first').contains(items[20]);
+    cy.get('.body').contains(items[0]).should('not.exist');
   });
 
   it('filter is working', () => {
@@ -60,9 +60,9 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.get('.body').contains('20 per page').click();
 
     range(20).forEach((i) => {
-      cy.get('.body').contains(items[i].name);
+      cy.get('.body').contains(items[i]);
     });
 
-    cy.get('.body').contains(items[20].name).should('not.exist');
+    cy.get('.body').contains(items[20]).should('not.exist');
   });
 });

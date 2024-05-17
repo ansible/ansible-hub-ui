@@ -75,7 +75,7 @@ describe('execution environments', () => {
     cy.get('.pf-v5-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();
-    cy.wait(10000); // FIXME have a reload request, wait for it; can't wait for an unspecified number of task requests
+    cy.wait(10000);
     cy.get('[data-cy=description]').should(
       'have.text',
       'This is the description.',
@@ -87,7 +87,7 @@ describe('execution environments', () => {
     cy.get('.pf-v5-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();
-    cy.wait(10000); // FIXME have a reload request, wait for it; can't wait for an unspecified number of task requests
+    cy.wait(10000);
     cy.get('[data-cy=description]').should(
       'have.text',
       'This is the description.',

@@ -41,7 +41,7 @@ describe('tests the approval list screen ', () => {
     cy.get('.pf-v5-c-chip button[data-ouia-component-id="close"]').click();
     cy.wait('@reload');
 
-    //imports page
+    // imports page
 
     cy.get('button[aria-label="Actions"]:first').click();
     cy.intercept(

@@ -27,7 +27,7 @@ describe('Delete a namespace', () => {
   });
 
   it('cannot delete a non-empty namespace', () => {
-    //create namespace
+    // create namespace
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
     );
@@ -37,11 +37,8 @@ describe('Delete a namespace', () => {
 
     cy.get(`a[href*="${uiPrefix}namespaces/ansible"]`).click();
 
-    //upload a collection
+    // upload a collection
     cy.galaxykit('-i collection upload ansible network');
-
-    // wait for imports to finish successfully
-
     cy.wait(10000);
 
     // attempt deletion

@@ -25,11 +25,6 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('checks all fields', () => {
-    // FIXME
-    //cy.addPermissions(`alphaGroup${num}`, [
-    //  { group: 'users', permissions: ['View user'] },
-    //]);
-
     cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
     cy.contains('Edit').click();
@@ -53,14 +48,16 @@ describe('user detail tests all fields, editing, and deleting', () => {
   it('edits user', () => {
     cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
-    //edits some fields
+
+    // edits some fields
     cy.contains('Edit').click();
     selectInput('first_name').type('new_first_name');
     selectInput('last_name').type('new_last_name');
     selectInput('email').type('new_example@example.com');
     cy.get('button[type=submit]').click();
     cy.reload();
-    //checks those fields
+
+    // checks those fields
     cy.visit(`${uiPrefix}users`);
     cy.intercept('GET', `${apiPrefix}_ui/v1/users/*/`).as('user');
     cy.contains('testUser').click();
@@ -79,25 +76,5 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('[data-cy="delete-button"]').click();
 
     cy.contains('testUser').should('not.exist');
-    // looks like we need a success alert deleting user from user_detail?
-    // cy.get('.pf-v5-c-alert__title').should('have.text', 'Successfully deleted testUser')
-  });
-
-  it.skip('checks a user without edit permissions', () => {
-    // cy.logout();
-    cy.get('input[id="pf-login-username-id"]').type('testUser');
-    cy.get('input[id="pf-login-password-id"]').type('testUserpassword');
-    cy.get('button[type="submit"]').click();
-    cy.intercept(
-      'GET',
-      `${apiPrefix}_ui/v1/repo/published/?deprecated=false&offset=0&limit=10`,
-    );
-
-    //unable to log in with test credentials
-
-    cy.get(`a[href*="${uiPrefix}users/"]`).click();
-    cy.contains('User detail');
-    cy.contains('Edit').should('not.exist');
-    cy.contains('Delete').should('not.exist');
   });
 });

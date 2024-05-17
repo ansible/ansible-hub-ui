@@ -16,7 +16,7 @@ describe('RBAC table contains correct headers and filter', () => {
       cy.get(name).contains('galaxy.'),
     );
 
-    //ensure proper headers
+    // ensure proper headers
     [('Role name', 'Description', 'Created', 'Editable')].forEach((item) => {
       cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
     });
