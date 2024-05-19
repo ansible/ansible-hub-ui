@@ -46,7 +46,7 @@ msgstr "{0} 标志"
 #~ msgid "{0} updated {1}"
 #~ msgstr "{0} 更新的 {1}"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "{0} was added"
 msgstr "{0} 被添加"
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "{name} will be cancelled."
 msgstr "{name} 将被取消。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "{name} will stop running."
 msgstr "{name} 将停止运行。"
 
@@ -153,23 +153,23 @@ msgstr ""
 msgid "{title} steps"
 msgstr "{title} 步骤"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was added"
 msgstr "<0/> 被添加"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was added to <1/>"
 msgstr "<0/> 已添加到 <1/>"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was moved to <1/> from <2/>"
 msgstr "<0/> 从 <2/> 移到 <1/>"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was removed"
 msgstr "<0/> 被删除"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> 已从 <1/> 中删除"
 
@@ -268,8 +268,8 @@ msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, di
 msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划线、句点和短划线。标签不得以句点、下划线或短划线开头。"
 
 #: src/containers/search/search.tsx
-msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
-msgstr ""
+#~ msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
+#~ msgstr ""
 
 #: src/loaders/standalone/layout.tsx
 msgid "About"
@@ -293,11 +293,11 @@ msgstr "访问"
 #~ msgid "Active user profile \"{0}\" could not be displayed."
 #~ msgstr "Active user profile \"{0}\" could not be displayed."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Activities"
 msgstr "活动"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Activities will appear once you push something"
 msgstr "推送内容后，将显示活动"
 
@@ -311,14 +311,14 @@ msgstr "活动"
 #: src/components/wizard-modal.tsx
 #: src/containers/ansible-remote/edit.tsx
 #: src/containers/ansible-repository/edit.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 msgid "Add"
 msgstr "添加"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Add a README with instructions for using this container."
 msgstr "添加一个包括使用这个容器信息的 README。"
 
@@ -351,7 +351,7 @@ msgstr "添加集合"
 #~ msgstr "Add container repository"
 
 #: src/components/repository-form.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Add execution environment"
 msgstr "添加执行环境"
 
@@ -745,7 +745,7 @@ msgstr "CA 证书"
 #: src/components/user-form.tsx
 #: src/components/wizard-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 msgid "Cancel"
 msgstr "取消"
@@ -794,7 +794,7 @@ msgid "Certified"
 msgstr "已认证"
 
 #: src/components/role-import-form.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Change"
 msgstr "更改"
 
@@ -898,7 +898,7 @@ msgstr ""
 msgid "Checking for affected users... <0/>"
 msgstr "检查受影响的用户... <0/>"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Child tasks"
 msgstr "子任务"
 
@@ -953,7 +953,7 @@ msgstr "关闭"
 msgid "Close YAML editor"
 msgstr "关闭 YAML 编辑器"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Code"
 msgstr "代码"
 
@@ -1260,12 +1260,12 @@ msgstr "容器命名空间"
 #~ msgid "Container Registry"
 #~ msgstr "Container Registry"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Container registry type"
 msgstr "容器注册表类型"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Container repository name"
 msgstr "容器仓库名称"
 
@@ -1459,7 +1459,7 @@ msgstr "创建、删除和更改集合命名空间。上传和删除集合。从
 #: src/containers/ansible-role/namespace-list.tsx
 #: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/role-management/role-list.tsx
@@ -1474,7 +1474,7 @@ msgid "Created date"
 msgstr "创建日期"
 
 #: src/containers/signature-keys/list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Created on"
 msgstr "创建于"
@@ -1547,7 +1547,7 @@ msgstr ""
 msgid "Danger"
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Date"
 msgstr "日期"
 
@@ -1567,8 +1567,8 @@ msgstr ""
 #: src/actions/ansible-repository-delete.tsx
 #: src/components/delete-modal.tsx
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-list.tsx
@@ -1653,7 +1653,7 @@ msgstr "删除容器？"
 msgid "Delete group?"
 msgstr "删除组？"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Delete image?"
 msgstr "删除镜像？"
 
@@ -1746,7 +1746,7 @@ msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 msgid "Deleting <0>{0}</0>, its data will be lost."
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Deleting <0>{digest}</0> and its data will be lost."
 msgstr "删除 <0>{digest}</0> 其数据将会丢失。"
 
@@ -1817,11 +1817,11 @@ msgstr "为集合 \"{name}\" 开始的弃用状态更新。"
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 #: src/containers/role-management/role-list.tsx
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Description"
 msgstr "描述"
@@ -1856,9 +1856,9 @@ msgstr "详情"
 msgid "Did you mean {0}?"
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Digest"
 msgstr "摘要"
 
@@ -1919,7 +1919,7 @@ msgid "Does what it promises"
 msgstr ""
 
 #: src/components/import-console.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Done"
 msgstr "完成"
 
@@ -2022,8 +2022,8 @@ msgstr ""
 #: src/containers/ansible-repository/edit.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/settings/user-profile.tsx
@@ -2108,31 +2108,31 @@ msgstr "启用"
 msgid "Environment"
 msgstr "环境"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}"
 msgstr "错误 {statusCode} - {statusText}"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: {customMessage}"
 msgstr "错误 {statusCode} - {statusText}: {customMessage}"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "错误 {statusCode} - {statusText}: 禁止：您没有权利进行这个请求。请联系服务器管理员以提高权限。"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server could not find the requested URL."
 msgstr "错误 {statusCode} - {statusText} ：服务器无法找到请求的 URL。"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
 msgstr "错误 {statusCode} - {statusText} ：服务器遇到错误，且无法完成请求。"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server was unable to complete your request."
 msgstr "错误 {statusCode} - {statusText} ：服务器无法完成您的请求。"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "错误 {statusCode} - {statusText}: 您没有权利进行这个请求。请联系服务器管理员以提高权限。"
 
@@ -2194,7 +2194,7 @@ msgstr "加载集合时出错。"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Error loading environments."
 msgstr "加载环境时出错。"
 
@@ -2260,7 +2260,7 @@ msgstr "加载带有标签 {pipeline} 的存储库时出错。"
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Error message"
 msgstr "错误消息"
 
@@ -2303,7 +2303,7 @@ msgstr ""
 #~ msgid "Execution Environment"
 #~ msgstr "执行环境"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr "执行环境 \"{0}\" 已成功添加。"
 
@@ -2331,7 +2331,7 @@ msgstr "执行环境 \"{selectedItem}\" 已成功删除。"
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Execution environments"
@@ -2615,7 +2615,7 @@ msgstr "在此注册表中查找执行环境"
 msgid "find-content"
 msgstr "查找内容"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Finished at"
 msgstr "完成于"
@@ -2729,7 +2729,7 @@ msgstr "组"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "组 \"{0}\" 无法被添加到 \"{name}\"。"
@@ -2740,14 +2740,14 @@ msgstr "组 \"{0}\" 无法被添加到 \"{name}\"。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "组 \"{0}\" 无法从 \"{name}\" 中删除。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "组 \"{0}\" 已被添加到 \"{name}\"。"
@@ -2758,7 +2758,7 @@ msgstr "组 \"{0}\" 已成功删除。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "组 \"{0}\" 已从 \"{name}\" 中成功删除。"
@@ -2767,8 +2767,8 @@ msgstr "组 \"{0}\" 已从 \"{name}\" 中成功删除。"
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
@@ -2778,8 +2778,8 @@ msgstr "组 \"{0}\" 角色无法在 \"{name}\" 中更新。"
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
@@ -2876,7 +2876,7 @@ msgstr "隐藏签名"
 
 #: src/components/delete-collection-modal.tsx
 #: src/components/delete-execution-environment-modal.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
@@ -2897,11 +2897,11 @@ msgstr "如果选中，则必须执行 TLS 对等验证。"
 msgid "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
 msgstr "如果您填充这个要求文件，这个远程将只同步此文件的集合，否则所有集合都会被同步。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "镜像 \"{digest}\" 无法被删除。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "镜像 \"{digest}\" 已成功删除。"
 
@@ -2912,11 +2912,11 @@ msgid "Image layers"
 msgstr "镜像层"
 
 #: src/components/execution-environment-header.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Images"
 msgstr "镜像"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Images will appear once uploaded"
 msgstr "上传后将显示镜像"
 
@@ -3016,7 +3016,7 @@ msgstr "安装"
 msgid "Installation:"
 msgstr "安装："
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Instructions"
 msgstr "说明"
 
@@ -3095,7 +3095,7 @@ msgid "Labels"
 msgstr "标签"
 
 #: src/components/collection-filter.ts
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Last modified"
 msgstr "最后修改"
 
@@ -3129,7 +3129,7 @@ msgstr "最后更新 <0/>"
 msgid "Last updated from registry {0}"
 msgstr "最后从注册表 {0} 更新"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Layers"
 msgstr "层"
 
@@ -3231,7 +3231,7 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Local"
 msgstr "本地"
@@ -3279,7 +3279,7 @@ msgid "Manage collection remotes."
 msgstr "管理集合远程。"
 
 #: src/components/tag-manifest-modal.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Manage tags"
 msgstr "管理标签"
 
@@ -3295,7 +3295,7 @@ msgstr "此屏幕目前不支持清单列表，请使用 <0>Images</0> 标签页
 msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Message"
 msgstr "信息"
 
@@ -3368,7 +3368,7 @@ msgstr "我的配置集"
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
@@ -3378,7 +3378,7 @@ msgstr "我的配置集"
 #: src/containers/signature-keys/list.tsx
 #: src/containers/signature-keys/list.tsx
 #: src/containers/signature-keys/list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Name"
 msgstr "名称"
 
@@ -3532,7 +3532,7 @@ msgstr "下一步"
 msgid "No"
 msgstr "否"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "No activities yet"
 msgstr "还没有活动"
 
@@ -3548,7 +3548,7 @@ msgstr "无可分配角色。"
 msgid "No assignable users."
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No child task"
 msgstr "没有子任务"
 
@@ -3567,7 +3567,7 @@ msgstr "还没有集合版本"
 msgid "No collections yet"
 msgstr "还没有集合"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "No container repositories yet"
 msgstr "还没有容器仓库"
 
@@ -3598,7 +3598,7 @@ msgstr "还没有发布"
 msgid "No groups yet"
 msgstr "还没有组"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "No images yet"
 msgstr "还没有镜像"
 
@@ -3665,7 +3665,7 @@ msgstr ""
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No parent task"
 msgstr "没有父任务"
 
@@ -3678,7 +3678,7 @@ msgstr "没有权限"
 msgid "No permissions"
 msgstr "没有权限"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "No README"
 msgstr "没有 README"
 
@@ -3731,7 +3731,7 @@ msgstr "还没有签名密钥"
 #~ msgid "No tag or digest selected."
 #~ msgstr "没有选择标签或摘要。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No task group"
 msgstr "没有任务组"
 
@@ -3867,7 +3867,7 @@ msgstr ""
 msgid "Orphan cleanup"
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
@@ -3892,7 +3892,7 @@ msgstr ""
 msgid "Pagination"
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Parent task"
 msgstr "父任务"
 
@@ -4053,7 +4053,7 @@ msgstr ""
 msgid "Please, provide the namespace name"
 msgstr "请提供命名空间名称"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Plugin"
 msgstr "插件"
 
@@ -4082,7 +4082,7 @@ msgstr "私有"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Progress messages"
 msgstr "进度消息"
 
@@ -4135,7 +4135,7 @@ msgid "Public key"
 msgstr "公钥"
 
 #: src/components/repository-badge.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Published"
 msgstr "已发布"
 
@@ -4148,7 +4148,7 @@ msgstr "已发布"
 #~ msgid "Pull private containers"
 #~ msgstr "Pull private containers"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Pull this image"
 msgstr "拉取此镜像"
 
@@ -4284,7 +4284,7 @@ msgstr "Pulp 类型"
 msgid "Push and change execution environments."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Push container images"
 msgstr "推容器镜像"
 
@@ -4416,7 +4416,7 @@ msgstr "发布的 <0/>"
 #: src/components/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Remote"
 msgstr "远程"
@@ -4640,7 +4640,7 @@ msgstr "需要 Ansible"
 msgid "Requires super user permissions to edit."
 msgstr "需要超级用户权限进行编辑。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Reserve resources"
 msgstr "保留资源"
 
@@ -4816,12 +4816,12 @@ msgstr "运行中"
 #: src/components/tag-manifest-modal.tsx
 #: src/components/user-form.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Save"
 msgstr "保存"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "已保存对执行环境 \"{0}\" 的变化。"
 
@@ -5235,7 +5235,7 @@ msgstr "为容器 \"{0}\" 签名已开始。"
 msgid "Single sign on URL."
 msgstr "单点登录。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Size"
 msgstr "大小"
 
@@ -5290,7 +5290,7 @@ msgstr "已开始的将 {namespace}.{name} v{version} 从 \"{0}\" 添加到仓�
 msgid "Started at"
 msgstr "开始于"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "State"
 msgstr "状态"
 
@@ -5310,8 +5310,8 @@ msgstr "状态"
 msgid "Status:"
 msgstr "状态："
 
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Stop task"
@@ -5420,12 +5420,12 @@ msgid "Sync"
 msgstr "同步"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Sync failed for {name}"
 msgstr "为 {name} 同步失败"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Sync from registry"
 msgstr "从注册表进行同步"
@@ -5449,7 +5449,7 @@ msgstr ""
 msgid "Sync started"
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "执行环境 \"{name}\" 的同步开始。"
 
@@ -5487,8 +5487,8 @@ msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future relea
 msgstr ""
 
 #: src/components/collection-filter.ts
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Tag"
 msgstr "标签"
 
@@ -5517,15 +5517,15 @@ msgstr "任务 \"{name}\" 无法被停止。"
 msgid "Task \"{name}\" stopped successfully."
 msgstr "任务 \"{name}\" 成功停止。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "任务 \"{taskName}\" 无法被停止。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "任务 \"{taskName}\" 成功停止。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task detail"
 msgstr "任务详情"
 
@@ -5533,11 +5533,11 @@ msgstr "任务详情"
 msgid "Task failed without error message."
 msgstr "任务失败，没有错误消息。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task group"
 msgstr "任务组"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task groups"
 msgstr "任务组"
 
@@ -5545,7 +5545,7 @@ msgstr "任务组"
 msgid "Task list"
 msgstr "任务列表"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Task management"
 msgstr "任务管理"
@@ -5554,7 +5554,7 @@ msgstr "任务管理"
 msgid "Task Management"
 msgstr "任务管理"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -5692,7 +5692,7 @@ msgstr "所选角色将添加到此特定的 Ansible 远程中。"
 msgid "The selected roles will be added to this specific Ansible repository."
 msgstr "所选角色将添加到此特定的 Ansible 仓库中。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "所选角色将添加到这个特定执行环境中。"
 
@@ -5777,8 +5777,8 @@ msgstr "此命名空间中没有任何导入。"
 msgid "There have not been any imports."
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "There is no progress message."
 msgstr "没有进度消息。"
 
@@ -5786,7 +5786,7 @@ msgstr "没有进度消息。"
 msgid "There must be only one repository with pipeline=rejected."
 msgstr ""
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "There's no resource record"
 msgstr "没有资源记录"
 
@@ -5899,7 +5899,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Traceback"
 msgstr "追溯"
 
@@ -5920,7 +5920,7 @@ msgid "Try Red Hat Ansible Automation Platform"
 msgstr ""
 
 #: src/components/collection-content-list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Type"
 msgstr "类型"
 
@@ -6045,8 +6045,8 @@ msgid "URL: {0}"
 msgstr "URL：{0}"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Use in Controller"
 msgstr "在控制器中使用"
 
@@ -6125,7 +6125,7 @@ msgstr ""
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" could not be added to \"{name}\"."
 msgstr ""
@@ -6141,7 +6141,7 @@ msgstr "用户 \"{0}\" 无法被删除。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" could not be removed from \"{name}\"."
 msgstr ""
@@ -6152,7 +6152,7 @@ msgstr "用户 \"{0}\" 无法从组 \"{name}\" 中删除。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" has been successfully added to \"{name}\"."
 msgstr ""
@@ -6167,7 +6167,7 @@ msgstr "用户 \"{0}\" 已成功删除。"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" has been successfully removed from \"{name}\"."
 msgstr ""
@@ -6184,8 +6184,8 @@ msgstr "用户 \"{0}\" 已成功从组 \"{name}\" 中删除。"
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" roles could not be update in \"{name}\"."
@@ -6195,8 +6195,8 @@ msgstr ""
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" roles successfully updated in \"{name}\"."
@@ -6493,7 +6493,7 @@ msgstr ""
 msgid "Yes"
 msgstr "是"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Yes, stop"
 msgstr "是，停止"
@@ -6550,7 +6550,7 @@ msgstr "您可以通过在此处输入自定义标记来自定义配置集上的
 msgid "You can edit this repository to create a distribution."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "您当前没有容器仓库。通过 CLI 添加容器仓库以开始。"
 

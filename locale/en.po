@@ -47,7 +47,7 @@ msgstr "{0} logo"
 #~ msgid "{0} updated {1}"
 #~ msgstr "{0} updated {1}"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "{0} was added"
 msgstr "{0} was added"
 
@@ -126,7 +126,7 @@ msgstr "{name} ({count})"
 msgid "{name} will be cancelled."
 msgstr "{name} will be cancelled."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "{name} will stop running."
 msgstr "{name} will stop running."
 
@@ -154,23 +154,23 @@ msgstr "{title} logo"
 msgid "{title} steps"
 msgstr "{title} steps"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was added"
 msgstr "<0/> was added"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was added to <1/>"
 msgstr "<0/> was added to <1/>"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was moved to <1/> from <2/>"
 msgstr "<0/> was moved to <1/> from <2/>"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was removed"
 msgstr "<0/> was removed"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> was removed from <1/>"
 
@@ -269,8 +269,8 @@ msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, di
 msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 
 #: src/containers/search/search.tsx
-msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
-msgstr "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
+#~ msgid "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
+#~ msgstr "A tech preview of the new Automation Hub user interface can be found <0>here</0>."
 
 #: src/loaders/standalone/layout.tsx
 msgid "About"
@@ -294,11 +294,11 @@ msgstr "Access"
 #~ msgid "Active user profile \"{0}\" could not be displayed."
 #~ msgstr "Active user profile \"{0}\" could not be displayed."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Activities"
 msgstr "Activities"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Activities will appear once you push something"
 msgstr "Activities will appear once you push something"
 
@@ -312,14 +312,14 @@ msgstr "Activity"
 #: src/components/wizard-modal.tsx
 #: src/containers/ansible-remote/edit.tsx
 #: src/containers/ansible-repository/edit.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 msgid "Add"
 msgstr "Add"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Add a README with instructions for using this container."
 msgstr "Add a README with instructions for using this container."
 
@@ -352,7 +352,7 @@ msgstr "Add collection"
 #~ msgstr "Add container repository"
 
 #: src/components/repository-form.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Add execution environment"
 msgstr "Add execution environment"
 
@@ -746,7 +746,7 @@ msgstr "CA certificate"
 #: src/components/user-form.tsx
 #: src/components/wizard-modal.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 #: src/containers/group-management/group-detail.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -795,7 +795,7 @@ msgid "Certified"
 msgstr "Certified"
 
 #: src/components/role-import-form.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Change"
 msgstr "Change"
 
@@ -899,7 +899,7 @@ msgstr "Checking ..."
 msgid "Checking for affected users... <0/>"
 msgstr "Checking for affected users... <0/>"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Child tasks"
 msgstr "Child tasks"
 
@@ -954,7 +954,7 @@ msgstr "Close"
 msgid "Close YAML editor"
 msgstr "Close YAML editor"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Code"
 msgstr "Code"
 
@@ -1261,12 +1261,12 @@ msgstr "Container namespace"
 #~ msgid "Container Registry"
 #~ msgstr "Container Registry"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Container registry type"
 msgstr "Container registry type"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Container repository name"
 msgstr "Container repository name"
 
@@ -1460,7 +1460,7 @@ msgstr "Create, delete and change collection namespaces. Upload and delete colle
 #: src/containers/ansible-role/namespace-list.tsx
 #: src/containers/ansible-role/role-list.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/role-management/role-list.tsx
@@ -1475,7 +1475,7 @@ msgid "Created date"
 msgstr "Created date"
 
 #: src/containers/signature-keys/list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Created on"
 msgstr "Created on"
@@ -1548,7 +1548,7 @@ msgstr "Customer Support"
 msgid "Danger"
 msgstr "Danger"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "Date"
 msgstr "Date"
 
@@ -1568,8 +1568,8 @@ msgstr "Default:"
 #: src/actions/ansible-repository-delete.tsx
 #: src/components/delete-modal.tsx
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-list.tsx
@@ -1654,7 +1654,7 @@ msgstr "Delete container?"
 msgid "Delete group?"
 msgstr "Delete group?"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Delete image?"
 msgstr "Delete image?"
 
@@ -1747,7 +1747,7 @@ msgstr "Deleting <0>{0}</0> and its data will be lost."
 msgid "Deleting <0>{0}</0>, its data will be lost."
 msgstr "Deleting <0>{0}</0>, its data will be lost."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Deleting <0>{digest}</0> and its data will be lost."
 msgstr "Deleting <0>{digest}</0> and its data will be lost."
 
@@ -1818,11 +1818,11 @@ msgstr "Deprecation status update starting for collection \"{name}\"."
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
 #: src/containers/role-management/role-list.tsx
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Description"
 msgstr "Description"
@@ -1857,9 +1857,9 @@ msgstr "Details"
 msgid "Did you mean {0}?"
 msgstr "Did you mean {0}?"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Digest"
 msgstr "Digest"
 
@@ -1920,7 +1920,7 @@ msgid "Does what it promises"
 msgstr "Does what it promises"
 
 #: src/components/import-console.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Done"
 msgstr "Done"
 
@@ -2023,8 +2023,8 @@ msgstr "Ease of use"
 #: src/containers/ansible-repository/edit.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/role-management/role-list.tsx
 #: src/containers/settings/user-profile.tsx
@@ -2109,31 +2109,31 @@ msgstr "Enabled"
 msgid "Environment"
 msgstr "Environment"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}"
 msgstr "Error {statusCode} - {statusText}"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: {customMessage}"
 msgstr "Error {statusCode} - {statusText}: {customMessage}"
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server could not find the requested URL."
 msgstr "Error {statusCode} - {statusText}: The server could not find the requested URL."
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
 msgstr "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server was unable to complete your request."
 msgstr "Error {statusCode} - {statusText}: The server was unable to complete your request."
 
-#: src/utilities/fail-alerts.ts
+#: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 
@@ -2195,7 +2195,7 @@ msgstr "Error loading collections."
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Error loading environments."
 msgstr "Error loading environments."
 
@@ -2261,7 +2261,7 @@ msgstr "Error loading repository with label {pipeline}."
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Error message"
 msgstr "Error message"
 
@@ -2304,7 +2304,7 @@ msgstr "Except for members of groups below."
 #~ msgid "Execution Environment"
 #~ msgstr "Execution Environment"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr "Execution environment \"{0}\" has been added successfully."
 
@@ -2332,7 +2332,7 @@ msgstr "Execution environment \"{selectedItem}\" has been successfully deleted."
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Execution environments"
@@ -2616,7 +2616,7 @@ msgstr "Find execution environments in this registry"
 msgid "find-content"
 msgstr "find-content"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Finished at"
 msgstr "Finished at"
@@ -2730,7 +2730,7 @@ msgstr "Group"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr "Group \"{0}\" could not be added to \"{name}\"."
@@ -2741,14 +2741,14 @@ msgstr "Group \"{0}\" could not be added to \"{name}\"."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr "Group \"{0}\" could not be removed from \"{name}\"."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr "Group \"{0}\" has been successfully added to \"{name}\"."
@@ -2759,7 +2759,7 @@ msgstr "Group \"{0}\" has been successfully deleted."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "Group \"{0}\" has been successfully removed from \"{name}\"."
@@ -2768,8 +2768,8 @@ msgstr "Group \"{0}\" has been successfully removed from \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" roles could not be update in \"{name}\"."
@@ -2779,8 +2779,8 @@ msgstr "Group \"{0}\" roles could not be update in \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
@@ -2877,7 +2877,7 @@ msgstr "Hide the signature"
 
 #: src/components/delete-collection-modal.tsx
 #: src/components/delete-execution-environment-modal.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
@@ -2898,11 +2898,11 @@ msgstr "If selected, TLS peer validation must be performed."
 msgid "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
 msgstr "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "Image \"{digest}\" could not be deleted."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "Image \"{digest}\" has been successfully deleted."
 
@@ -2913,11 +2913,11 @@ msgid "Image layers"
 msgstr "Image layers"
 
 #: src/components/execution-environment-header.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Images"
 msgstr "Images"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Images will appear once uploaded"
 msgstr "Images will appear once uploaded"
 
@@ -3017,7 +3017,7 @@ msgstr "Installation"
 msgid "Installation:"
 msgstr "Installation:"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Instructions"
 msgstr "Instructions"
 
@@ -3096,7 +3096,7 @@ msgid "Labels"
 msgstr "Labels"
 
 #: src/components/collection-filter.ts
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Last modified"
 msgstr "Last modified"
 
@@ -3130,7 +3130,7 @@ msgstr "Last updated <0/>"
 msgid "Last updated from registry {0}"
 msgstr "Last updated from registry {0}"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Layers"
 msgstr "Layers"
 
@@ -3232,7 +3232,7 @@ msgstr "Loading distribution..."
 msgid "Loading..."
 msgstr "Loading..."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Local"
 msgstr "Local"
@@ -3280,7 +3280,7 @@ msgid "Manage collection remotes."
 msgstr "Manage collection remotes."
 
 #: src/components/tag-manifest-modal.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Manage tags"
 msgstr "Manage tags"
 
@@ -3296,7 +3296,7 @@ msgstr "Manifest lists are not currently supported on this screen, please use th
 msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
 msgstr "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Message"
 msgstr "Message"
 
@@ -3369,7 +3369,7 @@ msgstr "My profile"
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
 #: src/containers/collection-detail/collection-distributions.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
@@ -3379,7 +3379,7 @@ msgstr "My profile"
 #: src/containers/signature-keys/list.tsx
 #: src/containers/signature-keys/list.tsx
 #: src/containers/signature-keys/list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Name"
 msgstr "Name"
 
@@ -3533,7 +3533,7 @@ msgstr "Next"
 msgid "No"
 msgstr "No"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
 msgid "No activities yet"
 msgstr "No activities yet"
 
@@ -3549,7 +3549,7 @@ msgstr "No assignable roles."
 msgid "No assignable users."
 msgstr "No assignable users."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No child task"
 msgstr "No child task"
 
@@ -3568,7 +3568,7 @@ msgstr "No collection versions yet"
 msgid "No collections yet"
 msgstr "No collections yet"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "No container repositories yet"
 msgstr "No container repositories yet"
 
@@ -3599,7 +3599,7 @@ msgstr "No distributions yet"
 msgid "No groups yet"
 msgstr "No groups yet"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "No images yet"
 msgstr "No images yet"
 
@@ -3666,7 +3666,7 @@ msgstr "No namespaces found"
 msgid "No namespaces yet"
 msgstr "No namespaces yet"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No parent task"
 msgstr "No parent task"
 
@@ -3679,7 +3679,7 @@ msgstr "No permission"
 msgid "No permissions"
 msgstr "No permissions"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "No README"
 msgstr "No README"
 
@@ -3732,7 +3732,7 @@ msgstr "No signature keys yet"
 #~ msgid "No tag or digest selected."
 #~ msgstr "No tag or digest selected."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "No task group"
 msgstr "No task group"
 
@@ -3868,7 +3868,7 @@ msgstr "Optimize"
 msgid "Orphan cleanup"
 msgstr "Orphan cleanup"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
@@ -3893,7 +3893,7 @@ msgstr "Overrides any galaxy_info.role_name metadata"
 msgid "Pagination"
 msgstr "Pagination"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Parent task"
 msgstr "Parent task"
 
@@ -4054,7 +4054,7 @@ msgstr "Please, check it running the command:"
 msgid "Please, provide the namespace name"
 msgstr "Please, provide the namespace name"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Plugin"
 msgstr "Plugin"
 
@@ -4083,7 +4083,7 @@ msgstr "Private"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Progress messages"
 msgstr "Progress messages"
 
@@ -4136,7 +4136,7 @@ msgid "Public key"
 msgstr "Public key"
 
 #: src/components/repository-badge.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Published"
 msgstr "Published"
 
@@ -4149,7 +4149,7 @@ msgstr "Published"
 #~ msgid "Pull private containers"
 #~ msgstr "Pull private containers"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Pull this image"
 msgstr "Pull this image"
 
@@ -4285,7 +4285,7 @@ msgstr "Pulp type"
 msgid "Push and change execution environments."
 msgstr "Push and change execution environments."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Push container images"
 msgstr "Push container images"
 
@@ -4417,7 +4417,7 @@ msgstr "Released <0/>"
 #: src/components/ansible-repository-form.tsx
 #: src/containers/ansible-repository/list.tsx
 #: src/containers/ansible-repository/tab-details.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Remote"
 msgstr "Remote"
@@ -4641,7 +4641,7 @@ msgstr "Requires Ansible"
 msgid "Requires super user permissions to edit."
 msgstr "Requires super user permissions to edit."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Reserve resources"
 msgstr "Reserve resources"
 
@@ -4817,12 +4817,12 @@ msgstr "Running"
 #: src/components/tag-manifest-modal.tsx
 #: src/components/user-form.tsx
 #: src/containers/edit-namespace/edit-namespace.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
 msgid "Save"
 msgstr "Save"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Saved changes to execution environment \"{0}\"."
 
@@ -5236,7 +5236,7 @@ msgstr "Signing started for container \"{0}\"."
 msgid "Single sign on URL."
 msgstr "Single sign on URL."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Size"
 msgstr "Size"
 
@@ -5291,7 +5291,7 @@ msgstr "Started adding {namespace}.{name} v{version} from \"{0}\" to repository 
 msgid "Started at"
 msgstr "Started at"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "State"
 msgstr "State"
 
@@ -5311,8 +5311,8 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Stop task"
@@ -5421,12 +5421,12 @@ msgid "Sync"
 msgstr "Sync"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Sync failed for {name}"
 msgstr "Sync failed for {name}"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Sync from registry"
 msgstr "Sync from registry"
@@ -5450,7 +5450,7 @@ msgstr "Sync role"
 msgid "Sync started"
 msgstr "Sync started"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Sync started for execution environment \"{name}\"."
 
@@ -5488,8 +5488,8 @@ msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future relea
 msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
 
 #: src/components/collection-filter.ts
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Tag"
 msgstr "Tag"
 
@@ -5518,15 +5518,15 @@ msgstr "Task \"{name}\" could not be stopped."
 msgid "Task \"{name}\" stopped successfully."
 msgstr "Task \"{name}\" stopped successfully."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "Task \"{taskName}\" could not be stopped."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "Task \"{taskName}\" stopped successfully."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task detail"
 msgstr "Task detail"
 
@@ -5534,11 +5534,11 @@ msgstr "Task detail"
 msgid "Task failed without error message."
 msgstr "Task failed without error message."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task group"
 msgstr "Task group"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Task groups"
 msgstr "Task groups"
 
@@ -5546,7 +5546,7 @@ msgstr "Task groups"
 msgid "Task list"
 msgstr "Task list"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Task management"
 msgstr "Task management"
@@ -5555,7 +5555,7 @@ msgstr "Task management"
 msgid "Task Management"
 msgstr "Task Management"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
 #: src/containers/task-management/task-list-view.tsx
@@ -5693,7 +5693,7 @@ msgstr "The selected roles will be added to this specific Ansible remote."
 msgid "The selected roles will be added to this specific Ansible repository."
 msgstr "The selected roles will be added to this specific Ansible repository."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "The selected roles will be added to this specific Execution Environment."
 
@@ -5778,8 +5778,8 @@ msgstr "There have not been any imports on this namespace."
 msgid "There have not been any imports."
 msgstr "There have not been any imports."
 
-#: src/containers/task-management/task_detail.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "There is no progress message."
 msgstr "There is no progress message."
 
@@ -5787,7 +5787,7 @@ msgstr "There is no progress message."
 msgid "There must be only one repository with pipeline=rejected."
 msgstr "There must be only one repository with pipeline=rejected."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "There's no resource record"
 msgstr "There's no resource record"
 
@@ -5900,7 +5900,7 @@ msgstr "Token for authenticating to the server URL."
 msgid "Total number of simultaneous connections."
 msgstr "Total number of simultaneous connections."
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Traceback"
 msgstr "Traceback"
 
@@ -5921,7 +5921,7 @@ msgid "Try Red Hat Ansible Automation Platform"
 msgstr "Try Red Hat Ansible Automation Platform"
 
 #: src/components/collection-content-list.tsx
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 msgid "Type"
 msgstr "Type"
 
@@ -6046,8 +6046,8 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/containers/execution-environment-detail/base.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Use in Controller"
 msgstr "Use in Controller"
 
@@ -6126,7 +6126,7 @@ msgstr "User"
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" could not be added to \"{name}\"."
 msgstr "User \"{0}\" could not be added to \"{name}\"."
@@ -6142,7 +6142,7 @@ msgstr "User \"{0}\" could not be deleted."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" could not be removed from \"{name}\"."
 msgstr "User \"{0}\" could not be removed from \"{name}\"."
@@ -6153,7 +6153,7 @@ msgstr "User \"{0}\" could not be removed from group \"{name}\"."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" has been successfully added to \"{name}\"."
 msgstr "User \"{0}\" has been successfully added to \"{name}\"."
@@ -6168,7 +6168,7 @@ msgstr "User \"{0}\" has been successfully deleted."
 
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" has been successfully removed from \"{name}\"."
 msgstr "User \"{0}\" has been successfully removed from \"{name}\"."
@@ -6185,8 +6185,8 @@ msgstr "User \"{0}\" has been successfully removed from group \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" roles could not be update in \"{name}\"."
@@ -6196,8 +6196,8 @@ msgstr "User \"{0}\" roles could not be update in \"{name}\"."
 #: src/containers/ansible-remote/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
 #: src/containers/ansible-repository/tab-access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
-#: src/containers/execution-environment-detail/execution_environment_detail_access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "User \"{0}\" roles successfully updated in \"{name}\"."
@@ -6494,7 +6494,7 @@ msgstr "YAML requirements are required to sync from Galaxy. You can <0>edit the 
 msgid "Yes"
 msgstr "Yes"
 
-#: src/containers/task-management/task_detail.tsx
+#: src/containers/task-management/task-detail.tsx
 #: src/containers/task-management/task-list-view.tsx
 msgid "Yes, stop"
 msgstr "Yes, stop"
@@ -6551,7 +6551,7 @@ msgstr "You can can customize the Resources tab on your profile by entering cust
 msgid "You can edit this repository to create a distribution."
 msgstr "You can edit this repository to create a distribution."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "You currently have no container repositories. Add a container repository via the CLI to get started."
 
