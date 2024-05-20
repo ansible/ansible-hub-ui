@@ -15,6 +15,7 @@ export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namesp
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export { ExecutionEnvironmentRemoteAPI } from './execution-environment-remote';
 export { FeatureFlagsAPI } from './feature-flags';
+export { GatewayLogoutAPI } from './gateway-logout';
 export { GenericPulpAPI } from './generic-pulp';
 export { GroupAPI } from './group';
 export { GroupRoleAPI } from './group-role';
