@@ -8,16 +8,28 @@ interface IProps {
   content: ReactNode;
   header?: ReactNode;
   hasAutoWidth?: boolean;
+  prefix?: string;
 }
 
-export const HelpButton = ({ content, header, hasAutoWidth }: IProps) => (
+export const HelpButton = ({
+  content,
+  header,
+  hasAutoWidth,
+  prefix,
+}: IProps) => (
   <Popover
     position={PopoverPosition.top}
     bodyContent={content}
     headerContent={header}
     hasAutoWidth={hasAutoWidth}
   >
-    <Button iconPosition={'left'} variant={'plain'} style={{ padding: 0 }}>
+    <Button
+      iconPosition={'left'}
+      variant={prefix ? 'link' : 'plain'}
+      style={{ padding: 0 }}
+    >
+      {prefix}
+      {prefix ? ' ' : ''}
       <OutlinedQuestionCircleIcon />
     </Button>
   </Popover>

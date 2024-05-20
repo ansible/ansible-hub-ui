@@ -21,6 +21,7 @@ import {
   type AlertType,
   AppliedFilters,
   BaseHeader,
+  ClipboardCopy,
   CompoundFilter,
   DateComponent,
   DeleteExecutionEnvironmentModal,
@@ -28,6 +29,7 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   ExternalLink,
+  HelpButton,
   HubPagination,
   ListItemActions,
   LoadingSpinner,
@@ -44,6 +46,7 @@ import {
   type RouteProps,
   controllerURL,
   filterIsSet,
+  getContainersURL,
   taskAlert,
   withRouter,
 } from 'src/utilities';
@@ -134,11 +137,33 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
+    const instructions = (
+      <ClipboardCopy isCode isReadOnly isExpanded variant='expansion'>
+        podman login {getContainersURL({ name: '' }).replace(/\/$/, '')}
+        {'\n'}
+        podman image tag example{' '}
+        {getContainersURL({ name: 'example', tag: 'latest' })}
+        {'\n'}
+        podman push {getContainersURL({ name: 'example', tag: 'latest' })}
+        {'\n'}
+      </ClipboardCopy>
+    );
+
     const pushImagesButton = (
-      <ExternalLink
-        href={UI_DOCS_URL}
-        data-cy='push-images-button'
-      >{t`Push container images`}</ExternalLink>
+      <HelpButton
+        header={t`Push container images`}
+        prefix={t`Push container images`}
+        hasAutoWidth
+        content={
+          <>
+            {instructions}
+            <ExternalLink
+              href={UI_DOCS_URL}
+              data-cy='push-images-button'
+            >{t`Documentation`}</ExternalLink>
+          </>
+        }
+      />
     );
 
     const addRemoteButton = hasPermission(

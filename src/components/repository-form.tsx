@@ -366,6 +366,14 @@ export class RepositoryForm extends Component<IProps, IState> {
                   ))}
                 </LabelGroup>
               </FormGroup>
+
+              {!excludeTags.length && !includeTags.length ? (
+                <FormGroup>
+                  <FormFieldHelper variant='warning'>
+                    {t`Including all tags might transfer a lot of data.`}
+                  </FormFieldHelper>
+                </FormGroup>
+              ) : null}
             </>
           )}
 
