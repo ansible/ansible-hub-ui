@@ -41,7 +41,7 @@
     "@lingui/macro": "^4.11.0",
     "@ls-lint/ls-lint": "^2.2.3",
     "@redhat-cloud-services/frontend-components-config": "^6.0.13",
-    "@redhat-cloud-services/frontend-components-config-utilities": "^3.0.5",
+    "@redhat-cloud-services/frontend-components-config-utilities": "^3.0.6",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^9.1.3",
