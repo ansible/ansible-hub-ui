@@ -41,7 +41,7 @@ describe('execution environments', () => {
     cy.get('[data-cy="title-box"]').should('have.text', `remotepine${num}`);
     cy.get('.pf-v5-c-clipboard-copy__text').should(
       'have.text',
-      `podman pull localhost:8002/remotepine${num}`,
+      `podman pull --tls-verify=false localhost:8002/remotepine${num}`,
     );
   });
 

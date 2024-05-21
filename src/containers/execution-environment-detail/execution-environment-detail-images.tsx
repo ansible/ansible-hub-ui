@@ -356,13 +356,13 @@ class ExecutionEnvironmentDetailImages extends Component<
       </Link>
     );
 
-    const instructions =
-      'podman pull ' +
-      getContainersURL({
-        name: container,
-        tag: image.tags?.[0],
-        digest: image.digest,
-      });
+    const tlsVerify = window.location.protocol == 'https:';
+    const containerURL = getContainersURL({
+      name: container,
+      tag: image.tags?.[0],
+      digest: image.digest,
+    });
+    const instructions = `podman pull --tls-verify=${tlsVerify} ${containerURL}`;
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
     const { isManifestList } = image;

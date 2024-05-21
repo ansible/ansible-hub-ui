@@ -138,14 +138,15 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const tlsVerify = window.location.protocol == 'https:';
+    const serverURL = getContainersURL({ name: '' }).replace(/\/$/, '');
+    const containerURL = getContainersURL({ name: 'example', tag: 'latest' });
     const instructions = (
       <ClipboardCopy isCode isReadOnly isExpanded variant='expansion'>
-        podman login --tls-verify={tlsVerify} {getContainersURL({ name: '' }).replace(/\/$/, '')}
+        podman login --tls-verify={tlsVerify.toString()} {serverURL}
         {'\n'}
-        podman image tag example{' '}
-        {getContainersURL({ name: 'example', tag: 'latest' })}
+        podman image tag example {containerURL}
         {'\n'}
-        podman push --tls-verify={tlsVerify} {getContainersURL({ name: 'example', tag: 'latest' })}
+        podman push --tls-verify={tlsVerify.toString()} {containerURL}
         {'\n'}
       </ClipboardCopy>
     );
