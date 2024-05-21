@@ -370,7 +370,15 @@ export class RepositoryForm extends Component<IProps, IState> {
               {!excludeTags.length && !includeTags.length ? (
                 <FormGroup>
                   <FormFieldHelper variant='warning'>
-                    {t`Including all tags might transfer a lot of data.`}
+                    {t`Including all tags might transfer a lot of data.`}{' '}
+                    <Button
+                      variant='link'
+                      style={{
+                        padding: 0,
+                        fontSize: 'var(--pf-v5-c-helper-text--FontSize)',
+                      }}
+                      onClick={() => this.setState({ includeTags: ['latest'] })}
+                    >{t`Pull only latest?`}</Button>
                   </FormFieldHelper>
                 </FormGroup>
               ) : null}
