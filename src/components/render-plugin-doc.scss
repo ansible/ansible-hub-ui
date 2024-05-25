@@ -1,4 +1,4 @@
-.options-table {
+.hub-doc-options-table {
   td,
   th {
     border: 1px solid black;
@@ -31,32 +31,31 @@
   }
 }
 
-.blue {
+.hub-doc-blue {
   color: var(--pf-v5-global--info-color--100);
 }
 
-// FIXME: dedup, this one looks better
-.red {
+.hub-doc-red {
   color: var(--pf-v5-global--danger-color--100);
 }
 
-.green {
+.hub-doc-green {
   color: var(--pf-v5-global--success-color--200);
 }
 
-.option-name {
+.hub-doc-option-name {
   font-weight: bold;
 }
 
-.plugin-config {
+.hub-doc-plugin-config {
   margin-bottom: 16px;
 }
 
-.plugin-raw {
+.hub-doc-plugin-raw {
   white-space: pre-wrap;
 }
 
-.inline-code {
+.hub-doc-inline-code {
   background-color: #e6e9e9;
   font-family: var(--pf-v5-global--FontFamily--monospace);
   display: inline-block;

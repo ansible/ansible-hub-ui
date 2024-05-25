@@ -151,7 +151,9 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
           <h2>Unformatted Documentation</h2>
 
-          <pre className='plugin-raw'>{JSON.stringify(plugin, null, 2)}</pre>
+          <pre className='hub-doc-plugin-raw'>
+            {JSON.stringify(plugin, null, 2)}
+          </pre>
         </div>
       </>
     );
@@ -262,7 +264,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartCode(part: dom.CodePart): ReactNode {
-    return <span className='inline-code'>{part.text}</span>;
+    return <span className='hub-doc-inline-code'>{part.text}</span>;
   }
 
   private formatPartHorizontalLine(
@@ -297,7 +299,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartEnvVariable(part: dom.EnvVariablePart): ReactNode {
-    return <span className='inline-code'>{part.name}</span>;
+    return <span className='hub-doc-inline-code'>{part.name}</span>;
   }
 
   private formatPartOptionNameReturnValue(
@@ -305,11 +307,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   ): ReactNode {
     const content =
       part.value === undefined ? (
-        <span className='inline-code'>
+        <span className='hub-doc-inline-code'>
           <b>{part.name}</b>
         </span>
       ) : (
-        <span className='inline-code'>
+        <span className='hub-doc-inline-code'>
           {part.name}={part.value}
         </span>
       );
@@ -324,7 +326,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartOptionValue(part: dom.OptionValuePart): ReactNode {
-    return <span className='inline-code'>{part.value}</span>;
+    return <span className='hub-doc-inline-code'>{part.value}</span>;
   }
 
   private formatPartPlugin(part: dom.PluginPart): ReactNode {
@@ -514,13 +516,13 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         <h2 id='parameters'>Parameters</h2>
-        <Table className='options-table'>
+        <Table className='hub-doc-options-table'>
           <Tbody>
             <Tr>
               <Th colSpan={maxDepth + 1}>Parameter</Th>
               <Th>
                 Choices/
-                <span className='blue'>Defaults</span>
+                <span className='hub-doc-blue'>Defaults</span>
               </Th>
               {content_type !== 'module' ? <Th>Configuration</Th> : null}
               <Th>Comments</Th>
@@ -562,7 +564,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
             colSpan={maxDepth + 1 - depth}
             className={option.suboptions ? 'parent' : ''}
           >
-            <span className='option-name'>{option.name}</span>
+            <span className='hub-doc-option-name'>{option.name}</span>
             <small>
               {this.documentedType(option['type'])}
               {option['elements'] ? (
@@ -574,7 +576,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
               {option['required'] ? (
                 <span>
                   {' '}
-                  / <span className='red'>required</span>
+                  / <span className='hub-doc-red'>required</span>
                 </span>
               ) : null}
             </small>
@@ -599,7 +601,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
             {option['aliases'] ? (
               <small>
-                <span className='green'>
+                <span className='hub-doc-green'>
                   aliases: {option['aliases'].join(', ')}
                 </span>
               </small>
@@ -629,7 +631,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         {option['ini'] ? (
-          <div className='plugin-config'>
+          <div className='hub-doc-plugin-config'>
             ini entries:
             {option['ini'].map((v, i) => (
               <p key={i}>
@@ -641,7 +643,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         ) : null}
 
         {option['env'] ? (
-          <div className='plugin-config'>
+          <div className='hub-doc-plugin-config'>
             {option['env'].map((v, i) => (
               <div key={i}>env: {v.name}</div>
             ))}
@@ -649,7 +651,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         ) : null}
 
         {option['vars'] ? (
-          <div className='plugin-config'>
+          <div className='hub-doc-plugin-config'>
             {option['vars'].map((v, i) => (
               <div key={i}>var: {v.name}</div>
             ))}
@@ -710,14 +712,14 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
           <div>
-            <span className='option-name'>
+            <span className='hub-doc-option-name'>
               <Trans>Choices: </Trans>
             </span>
             <ul>
               {choices.map((c, i) => (
                 <li key={i}>
                   {c === defaultChoice ? (
-                    <span className='blue' title={t`default`}>
+                    <span className='hub-doc-blue' title={t`default`}>
                       <Choice c={c} /> &nbsp;&larr;
                     </span>
                   ) : (
@@ -732,10 +734,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
         {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
           <span>
-            <span className='option-name'>
+            <span className='hub-doc-option-name'>
               <Trans>Default:</Trans>
             </span>{' '}
-            <span className='blue'>{defaultChoice}</span>
+            <span className='hub-doc-blue'>{defaultChoice}</span>
           </span>
         ) : null}
       </>
@@ -796,7 +798,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         <h2 id='return-values'>Return Values</h2>
-        <Table className='options-table'>
+        <Table className='hub-doc-options-table'>
           <Tbody>
             <Tr>
               <Th colSpan={maxDepth + 1}>Key</Th>
