@@ -313,6 +313,7 @@ export class RepositoryForm extends Component<IProps, IState> {
                       {tag}
                     </Label>
                   ))}
+                  {!includeTags.length ? t`None` : null}
                 </LabelGroup>
               </FormGroup>
 
@@ -364,6 +365,7 @@ export class RepositoryForm extends Component<IProps, IState> {
                       {tag}
                     </Label>
                   ))}
+                  {!excludeTags.length ? t`None` : null}
                 </LabelGroup>
               </FormGroup>
 
