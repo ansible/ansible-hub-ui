@@ -219,8 +219,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private parseReturn(plugin: PluginContentType): ReturnedValue[] {
-    // TODO: make the return string match the desired output as closely as
-    // possible
+    // TODO: make the return string match the desired output as closely as possible
 
     if (!plugin.doc_strings) {
       return null;
@@ -237,8 +236,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         maxDepth = depth;
       }
       for (const ret of returnV) {
-        // Description is expected to be an array of strings. If its not,
-        // do what we can to make it one
+        // Description is expected to be an array of strings. If its not, do what we can to make it one
         ret.description = this.ensureListofStrings(ret.description);
 
         // recursively parse sub options
@@ -267,10 +265,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return <span className='hub-doc-inline-code'>{part.text}</span>;
   }
 
-  private formatPartHorizontalLine(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    part: dom.HorizontalLinePart,
-  ): ReactNode {
+  private formatPartHorizontalLine(_part: dom.HorizontalLinePart): ReactNode {
     return <hr />;
   }
 
@@ -701,6 +696,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     } else {
       choices = option['choices'] || [];
       defaultChoice = option['default'];
+    }
+
+    // allow multistring values to wrap
+    if (defaultChoice?.[0] === '[') {
+      defaultChoice = defaultChoice.replaceAll('","', '", "');
     }
 
     if (typeof choices === 'object' && !Array.isArray(choices)) {
