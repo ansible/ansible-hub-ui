@@ -28,7 +28,7 @@ describe('execution environments', () => {
   it('checks the EE list view', () => {
     cy.contains('a', `remotepine${num}`);
     cy.contains('button', 'Add execution environment');
-    cy.contains('a[target=_blank]', 'Push container images');
+    cy.contains('button', 'Push container images');
     cy.contains('table th', 'Container repository name');
     cy.contains('table th', 'Description');
     cy.contains('table th', 'Created');
