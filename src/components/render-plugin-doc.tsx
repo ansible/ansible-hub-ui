@@ -64,6 +64,12 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     this.setState({ renderError: true });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.state.renderError && this.props.plugin !== prevProps.plugin) {
+      this.setState({ renderError: false });
+    }
+  }
+
   render() {
     const { plugin } = this.props;
 
