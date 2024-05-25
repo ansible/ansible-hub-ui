@@ -1,36 +1,3 @@
-.hub-doc-options-table {
-  td,
-  th {
-    border: 1px solid black;
-    padding: 5px;
-    vertical-align: top;
-  }
-
-  ul {
-    margin-top: 0;
-  }
-
-  small {
-    margin-bottom: 0;
-  }
-
-  // ensures the bottom of the table always has a border even
-  // if there is a spacer at the bottom which might otherwise cause
-  // a gap
-  border-bottom: 1px solid black;
-  width: 100%;
-
-  .spacer {
-    width: 20px;
-    border-top: 0;
-    border-bottom: 0;
-  }
-
-  .parent {
-    border-bottom: 0;
-  }
-}
-
 .hub-doc-blue {
   color: var(--pf-v5-global--info-color--100);
 }

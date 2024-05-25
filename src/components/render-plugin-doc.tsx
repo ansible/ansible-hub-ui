@@ -1,5 +1,10 @@
 import { Trans, t } from '@lingui/macro';
-import { Table, Tbody, Td, Th, Tr } from '@patternfly/react-table';
+import {
+  DescriptionList,
+  DescriptionListDescription,
+  DescriptionListGroup,
+  DescriptionListTerm,
+} from '@patternfly/react-core';
 import { dom, parse } from 'antsibull-docs';
 import React, {
   Component,
@@ -48,10 +53,53 @@ const Legend = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-export class RenderPluginDoc extends Component<IProps, IState> {
-  subOptionsMaxDepth: number;
-  returnContainMaxDepth: number;
+const Nesting = ({
+  children,
+  level = 0,
+}: {
+  children: ReactNode;
+  level: number;
+}) => {
+  if (level < 1) {
+    return children;
+  }
 
+  return (
+    <Nesting level={level - 1}>
+      <div
+        style={{
+          borderLeft: '4px solid var(--pf-v5-global--info-color--100)',
+          paddingLeft: '20px',
+        }}
+      >
+        {children}
+      </div>
+    </Nesting>
+  );
+};
+
+const DescriptionListHorizontal = ({
+  items,
+}: {
+  items: [ReactNode, ReactNode][];
+}) => (
+  <DescriptionList
+    isCompact
+    isHorizontal
+    style={{ gridTemplateColumns: 'none' }}
+  >
+    {items.map(([k, v], i) =>
+      v ? (
+        <DescriptionListGroup key={i}>
+          <DescriptionListTerm>{k}</DescriptionListTerm>
+          <DescriptionListDescription>{v}</DescriptionListDescription>
+        </DescriptionListGroup>
+      ) : null,
+    )}
+  </DescriptionList>
+);
+
+export class RenderPluginDoc extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -87,17 +135,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       const returnVals: ReturnedValue[] = this.parseReturn(plugin);
       content = {
         synopsis: this.renderSynopsis(doc),
-        parameters: this.renderParameters(
-          doc.options,
-          plugin.content_type,
-          this.subOptionsMaxDepth,
-        ),
+        parameters: this.renderParameters(doc.options, plugin.content_type),
         notes: this.renderNotes(doc),
         examples: this.renderExample(example),
-        returnValues: this.renderReturnValues(
-          returnVals,
-          this.returnContainMaxDepth,
-        ),
+        returnValues: this.renderReturnValues(returnVals),
         shortDescription: this.renderShortDescription(doc),
         deprecated: this.renderDeprecated(doc, plugin.content_name),
         requirements: this.renderRequirements(doc),
@@ -174,12 +215,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
     const doc: PluginDoc = { ...plugin.doc_strings.doc };
 
-    let maxDepth = 0;
-
     const parseOptions = (options: PluginOption[], depth) => {
-      if (depth > maxDepth) {
-        maxDepth = depth;
-      }
       for (const op of options) {
         // Description is expected to be an array of strings. If its not,
         // do what we can to make it one
@@ -201,7 +237,6 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     }
 
     doc.description = this.ensureListofStrings(doc.description);
-    this.subOptionsMaxDepth = maxDepth;
 
     return doc;
   }
@@ -231,12 +266,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       return null;
     }
 
-    let maxDepth = 0;
-
     const parseReturnRecursive = (returnV: ReturnedValue[], depth) => {
-      if (depth > maxDepth) {
-        maxDepth = depth;
-      }
       for (const ret of returnV) {
         // Description is expected to be an array of strings. If its not, do what we can to make it one
         ret.description = this.ensureListofStrings(ret.description);
@@ -250,7 +280,6 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
     const returnValues = [...plugin.doc_strings.return];
     parseReturnRecursive(returnValues, 0);
-    this.returnContainMaxDepth = maxDepth;
 
     return returnValues;
   }
@@ -496,11 +525,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private renderParameters(
-    parameters: PluginOption[],
-    content_type: string,
-    maxDepth: number,
-  ) {
+  private renderParameters(parameters: PluginOption[], content_type: string) {
     if (!parameters) {
       return null;
     }
@@ -509,34 +534,14 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     const paramEntries = this.renderParameterEntries(
       parameters,
       content_type,
-      0,
-      maxDepth,
-      '',
+      1,
+      'params',
     );
 
-    // FIXME table 2 flex
     return (
       <>
         <h2 id='parameters'>{t`Parameters`}</h2>
-        <Table className='hub-doc-options-table'>
-          <Tbody>
-            <Tr>
-              <Th colSpan={maxDepth + 1}>{t`Parameter`}</Th>
-              <Th>
-                {t`Choices`} /{' '}
-                <span className='hub-doc-blue'>{t`Defaults`}</span>
-              </Th>
-              {content_type !== 'module' ? <Th>{t`Configuration`}</Th> : null}
-              <Th>{t`Comments`}</Th>
-            </Tr>
-            {
-              // TODO: add support for sub options. Example:
-              //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
-              // TODO: do we need to display version added?
-            }
-            {paramEntries}
-          </Tbody>
-        </Table>
+        {paramEntries}
       </>
     );
   }
@@ -545,85 +550,89 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     parameters: PluginOption[],
     content_type: string,
     depth: number,
-    maxDepth: number,
     parent: string,
   ) {
     let output = [];
 
     parameters.forEach((option) => {
-      const spacers = [];
       const key = `${parent}-${option.name}`;
-      for (let x = 0; x < depth; x++) {
-        spacers.push(<Td key={x} className='spacer' />);
-      }
-      output.push(
-        <Tr key={key}>
-          {
-            // PARAMETER --------------------------------
-          }
-          {spacers}
-          <Td
-            colSpan={maxDepth + 1 - depth}
-            className={option.suboptions ? 'parent' : ''}
-          >
-            <span className='hub-doc-option-name'>{option.name}</span>
-            <small>
-              {this.documentedType(option['type'])}
-              {option['elements'] ? (
-                <span>
-                  {' '}
-                  / {t`elements`}={this.documentedType(option['elements'])}
-                </span>
-              ) : null}
-              {option['required'] ? (
-                <span>
-                  {' '}
-                  / <span className='hub-doc-red'>{t`required`}</span>
-                </span>
-              ) : null}
-            </small>
-          </Td>
-          {
-            // CHOICES -------------------------------
-          }
-          <Td>{this.renderChoices(option)}</Td>
-          {
-            // CONFIGURATION (non module only) -------
-          }
-          {content_type !== 'module' ? (
-            <Td>{this.renderPluginConfiguration(option)}</Td>
-          ) : null}
-          {
-            // COMMENTS ------------------------------
-          }
-          <Td>
-            {option.description.map((d, i) => (
-              <p key={i}>{this.applyDocFormatters(d)}</p>
-            ))}
 
-            {option['aliases'] ? (
-              <small>
-                <span className='hub-doc-green'>
-                  {t`aliases`}: {option['aliases'].join(', ')}
-                </span>
-              </small>
-            ) : null}
-          </Td>
-        </Tr>,
+      // TODO: add support for sub options. Example:
+      // https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93
+      output.push(
+        <Nesting level={depth} key={key}>
+          <DescriptionListHorizontal
+            items={[
+              [
+                depth > 1 ? t`Key` : t`Parameter`,
+                <>
+                  <span className='hub-doc-option-name'>{option.name}</span>
+                  <small>
+                    {this.documentedType(option['type'])}
+                    {option['elements'] ? (
+                      <span>
+                        {' '}
+                        / {t`elements`}=
+                        {this.documentedType(option['elements'])}
+                      </span>
+                    ) : null}
+                    {option['required'] ? (
+                      <span>
+                        {' '}
+                        / <span className='hub-doc-red'>{t`required`}</span>
+                      </span>
+                    ) : null}
+                  </small>
+                </>,
+              ],
+              [
+                <>
+                  {t`Choices`} /{' '}
+                  <span className='hub-doc-blue'>{t`Defaults`}</span>
+                </>,
+                this.renderChoices(option),
+              ],
+              [
+                t`Configuration`,
+                content_type !== 'module'
+                  ? this.renderPluginConfiguration(option)
+                  : null,
+              ],
+              [
+                t`Comments`,
+                <>
+                  {option.description.map((d, i) => (
+                    <p key={i}>{this.applyDocFormatters(d)}</p>
+                  ))}
+
+                  {option['aliases'] ? (
+                    <small>
+                      <span className='hub-doc-green'>
+                        {t`aliases`}: {option['aliases'].join(', ')}
+                      </span>
+                    </small>
+                  ) : null}
+                </>,
+              ],
+            ]}
+          />
+        </Nesting>,
       );
 
       // recursively render sub options
       if (option.suboptions) {
+        output.push(<br />);
         output = output.concat(
           this.renderParameterEntries(
             option.suboptions,
             content_type,
             depth + 1,
-            maxDepth,
             key,
           ),
         );
       }
+
+      output.push(<br />);
     });
 
     return output;
@@ -719,6 +728,13 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       choices = Object.keys(choices);
     }
 
+    if (
+      (!choices || !Array.isArray(choices) || !choices.length) &&
+      (defaultChoice === undefined || choices?.includes(defaultChoice))
+    ) {
+      return null;
+    }
+
     return (
       <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
@@ -798,25 +814,15 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private renderReturnValues(returnV: ReturnedValue[], maxDepth: number) {
+  private renderReturnValues(returnV: ReturnedValue[]) {
     if (!returnV) {
       return null;
     }
 
-    // FIXME table 2 flex
     return (
       <>
         <h2 id='return-values'>{t`Return Values`}</h2>
-        <Table className='hub-doc-options-table'>
-          <Tbody>
-            <Tr>
-              <Th colSpan={maxDepth + 1}>{t`Key`}</Th>
-              <Th>{t`Returned`}</Th>
-              <Th>{t`Description`}</Th>
-            </Tr>
-            {this.renderReturnValueEntries(returnV, 0, maxDepth, '')}
-          </Tbody>
-        </Table>
+        {this.renderReturnValueEntries(returnV, 1, 'return')}
       </>
     );
   }
@@ -824,59 +830,60 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   private renderReturnValueEntries(
     returnValues: ReturnedValue[],
     depth: number,
-    maxDepth: number,
     parent: string,
   ) {
     let entries = [];
 
     returnValues.forEach((option) => {
-      const spacers = [];
-      for (let x = 0; x < depth; x++) {
-        spacers.push(<Td key={x} colSpan={1} className='spacer' />);
-      }
-
       const key = `${parent}-${option.name}`;
-      entries.push(
-        <Tr key={key}>
-          {spacers}
-          <Td
-            colSpan={maxDepth + 1 - depth}
-            className={option.contains ? 'parent' : ''}
-          >
-            {option.name} <br /> ({option.type})
-          </Td>
-          <Td>{option.returned}</Td>
-          <Td>
-            {option.description.map((d, i) => (
-              <p key={i}>{this.applyDocFormatters(d)}</p>
-            ))}
 
-            {option.sample ? (
-              <div>
-                <br />
-                {t`sample:`}{' '}
-                {typeof option.sample === 'string' ? (
-                  option.sample
-                ) : (
-                  <pre>{JSON.stringify(option.sample, null, 2)}</pre>
-                )}
-              </div>
-            ) : null}
-          </Td>
-        </Tr>,
+      entries.push(
+        <Nesting level={depth} key={key}>
+          <DescriptionListHorizontal
+            items={[
+              [
+                t`Key`,
+                <>
+                  <span className='hub-doc-option-name'>{option.name}</span>
+                  <small>{option.type}</small>
+                </>,
+              ],
+              [t`Returned`, option.returned],
+              [
+                t`Description`,
+                <>
+                  {option.description.map((d, i) => (
+                    <p key={i}>{this.applyDocFormatters(d)}</p>
+                  ))}
+
+                  {option.sample ? (
+                    <div>
+                      <br />
+                      {t`sample:`}{' '}
+                      {typeof option.sample === 'string' ? (
+                        option.sample
+                      ) : (
+                        <pre>{JSON.stringify(option.sample, null, 2)}</pre>
+                      )}
+                    </div>
+                  ) : null}
+                </>,
+              ],
+            ]}
+          />
+        </Nesting>,
       );
 
       if (option.contains) {
+        entries.push(<br />);
+
+        // recursively render values
         entries = entries.concat(
-          // recursively render values
-          this.renderReturnValueEntries(
-            option.contains,
-            depth + 1,
-            maxDepth,
-            key,
-          ),
+          this.renderReturnValueEntries(option.contains, depth + 1, key),
         );
       }
+
+      entries.push(<br />);
     });
 
     return entries;
