@@ -153,17 +153,16 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
 
     const pushImagesButton = (
       <HelpButton
-        header={t`Push container images`}
-        prefix={t`Push container images`}
-        hasAutoWidth
         content={
           <>
             {instructions}
-            <ExternalLink
-              href={UI_DOCS_URL}
-              data-cy='push-images-button'
-            >{t`Documentation`}</ExternalLink>
+            <ExternalLink href={UI_DOCS_URL}>{t`Documentation`}</ExternalLink>
           </>
+        }
+        hasAutoWidth
+        header={t`Push container images`}
+        prefix={
+          <span data-cy='push-images-button'>{t`Push container images`}</span>
         }
       />
     );
