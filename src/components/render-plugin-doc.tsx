@@ -36,21 +36,17 @@ interface IProps {
   renderWarning: (text: string) => ReactElement;
 }
 
-function Choice({ c }: { c: string | Record<string, string> }) {
-  return (
-    <pre style={{ display: 'inline-block', padding: '2px 4px' }}>
-      {typeof c === 'object' ? JSON.stringify(c, null, 2) : c}
-    </pre>
-  );
-}
+const Choice = ({ c }: { c: string | Record<string, string> }) => (
+  <pre style={{ display: 'inline-block', padding: '2px 4px' }}>
+    {typeof c === 'object' ? JSON.stringify(c, null, 2) : c}
+  </pre>
+);
 
-function Legend({ children }: { children: ReactNode }) {
-  return (
-    <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-      {children}
-    </div>
-  );
-}
+const Legend = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+    {children}
+  </div>
+);
 
 export class RenderPluginDoc extends Component<IProps, IState> {
   subOptionsMaxDepth: number;
@@ -64,67 +60,64 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   componentDidCatch(error) {
-    console.log(error);
+    console.log('RenderPluginDoc did catch', error);
     this.setState({ renderError: true });
   }
 
   render() {
     const { plugin } = this.props;
 
-    if (!this.state.renderError) {
-      // componentDidCatch doesn't seem to be able to catch errors that
-      // are thrown outside of return(), so we'll wrap everything in a
-      // try just in case
-      let doc: PluginDoc;
-      let example: string;
-      let returnVals: ReturnedValue[];
-      let content;
-      try {
-        doc = this.parseDocString(plugin);
-        example = this.parseExamples(plugin);
-        returnVals = this.parseReturn(plugin);
-        content = {
-          synopsis: this.renderSynopsis(doc),
-          parameters: this.renderParameters(
-            doc.options,
-            plugin.content_type,
-            this.subOptionsMaxDepth,
-          ),
-          notes: this.renderNotes(doc),
-          examples: this.renderExample(example),
-          returnValues: this.renderReturnValues(
-            returnVals,
-            this.returnContainMaxDepth,
-          ),
-          shortDescription: this.renderShortDescription(doc),
-          deprecated: this.renderDeprecated(doc, plugin.content_name),
-          requirements: this.renderRequirements(doc),
-        };
-      } catch (err) {
-        console.log(err);
-        return this.renderError(plugin);
-      }
-
-      return (
-        <div>
-          <h1>
-            {plugin.content_type} &gt; {plugin.content_name}
-          </h1>
-          <br />
-          {content.shortDescription}
-          {content.deprecated}
-          {this.renderTableOfContents(content)}
-          {content.synopsis}
-          {content.requirements}
-          {content.parameters}
-          {content.notes}
-          {content.examples}
-          {content.returnValues}
-        </div>
-      );
-    } else {
+    if (this.state.renderError) {
       return this.renderError(plugin);
     }
+
+    // componentDidCatch doesn't seem to be able to catch errors that
+    // are thrown outside of return(), so we'll wrap everything in a
+    // try just in case
+    let content;
+    try {
+      const doc: PluginDoc = this.parseDocString(plugin);
+      const example: string = this.parseExamples(plugin);
+      const returnVals: ReturnedValue[] = this.parseReturn(plugin);
+      content = {
+        synopsis: this.renderSynopsis(doc),
+        parameters: this.renderParameters(
+          doc.options,
+          plugin.content_type,
+          this.subOptionsMaxDepth,
+        ),
+        notes: this.renderNotes(doc),
+        examples: this.renderExample(example),
+        returnValues: this.renderReturnValues(
+          returnVals,
+          this.returnContainMaxDepth,
+        ),
+        shortDescription: this.renderShortDescription(doc),
+        deprecated: this.renderDeprecated(doc, plugin.content_name),
+        requirements: this.renderRequirements(doc),
+      };
+    } catch (error) {
+      console.log('RenderPluginDoc render catch', error);
+      return this.renderError(plugin);
+    }
+
+    return (
+      <div>
+        <h1>
+          {plugin.content_type} &gt; {plugin.content_name}
+        </h1>
+        <br />
+        {content.shortDescription}
+        {content.deprecated}
+        {this.renderTableOfContents(content)}
+        {content.synopsis}
+        {content.requirements}
+        {content.parameters}
+        {content.notes}
+        {content.examples}
+        {content.returnValues}
+      </div>
+    );
   }
 
   private renderError(plugin) {
@@ -445,8 +438,6 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private renderTableOfContents(content) {
-    // return this.props.renderTableOfContentsLink('Synopsis', 'synopsis');
-
     return (
       <ul>
         {content['synopsis'] !== null && (
@@ -548,6 +539,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     parent: string,
   ) {
     let output = [];
+
     parameters.forEach((option) => {
       const spacers = [];
       const key = `${parent}-${option.name}`;
@@ -782,6 +774,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     if (!example) {
       return null;
     }
+
     return (
       <>
         <h2 id='examples'>Examples</h2>
@@ -824,6 +817,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       for (let x = 0; x < depth; x++) {
         spacers.push(<Td key={x} colSpan={1} className='spacer' />);
       }
+
       const key = `${parent}-${option.name}`;
       entries.push(
         <Tr key={key}>
@@ -867,6 +861,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         );
       }
     });
+
     return entries;
   }
 
