@@ -81,16 +81,16 @@ const Nesting = ({
 const DescriptionListHorizontal = ({
   items,
 }: {
-  items: [ReactNode, ReactNode][];
+  items: [string, ReactNode][];
 }) => (
   <DescriptionList
     isCompact
     isHorizontal
     style={{ gridTemplateColumns: 'none' }}
   >
-    {items.map(([k, v], i) =>
+    {items.map(([k, v]) =>
       v ? (
-        <DescriptionListGroup key={i}>
+        <DescriptionListGroup key={k}>
           <DescriptionListTerm>{k}</DescriptionListTerm>
           <DescriptionListDescription>{v}</DescriptionListDescription>
         </DescriptionListGroup>
@@ -585,13 +585,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
                   </small>
                 </>,
               ],
-              [
-                <>
-                  {t`Choices`} /{' '}
-                  <span className='hub-doc-blue'>{t`Defaults`}</span>
-                </>,
-                this.renderChoices(option),
-              ],
+              [t`Choices`, this.renderChoices(option)],
+              [t`Default`, this.renderDefault(option)],
               [
                 t`Configuration`,
                 content_type !== 'module'
@@ -600,19 +595,19 @@ export class RenderPluginDoc extends Component<IProps, IState> {
               ],
               [
                 t`Comments`,
-                <>
-                  {option.description.map((d, i) => (
-                    <p key={i}>{this.applyDocFormatters(d)}</p>
-                  ))}
-
-                  {option['aliases'] ? (
-                    <small>
-                      <span className='hub-doc-green'>
-                        {t`aliases`}: {option['aliases'].join(', ')}
-                      </span>
-                    </small>
-                  ) : null}
-                </>,
+                option.description.map((d, i) => (
+                  <p key={i}>{this.applyDocFormatters(d)}</p>
+                )),
+              ],
+              [
+                t`Aliases`,
+                option['aliases'] ? (
+                  <small>
+                    <span className='hub-doc-green'>
+                      {option['aliases'].join(', ')}
+                    </span>
+                  </small>
+                ) : null,
               ],
             ]}
           />
@@ -700,7 +695,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private renderChoices(option) {
+  private parseChoices(option) {
     let choices,
       defaultChoice,
       legends = {};
@@ -728,43 +723,42 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       choices = Object.keys(choices);
     }
 
-    if (
-      (!choices || !Array.isArray(choices) || !choices.length) &&
-      (defaultChoice === undefined || choices?.includes(defaultChoice))
-    ) {
+    return { choices, defaultChoice, legends };
+  }
+
+  private renderChoices(option) {
+    const { choices, defaultChoice, legends } = this.parseChoices(option);
+
+    if (!choices || !Array.isArray(choices) || !choices.length) {
       return null;
     }
 
     return (
-      <>
-        {choices && Array.isArray(choices) && choices.length !== 0 ? (
-          <div>
-            <span className='hub-doc-option-name'>{t`Choices:`}</span>{' '}
-            <ul>
-              {choices.map((c, i) => (
-                <li key={i}>
-                  {c === defaultChoice ? (
-                    <span className='hub-doc-blue' title={t`default`}>
-                      <Choice c={c} /> &nbsp;&larr;
-                    </span>
-                  ) : (
-                    <Choice c={c} />
-                  )}
-                  {this.renderLegend(legends[c])}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
-          <span>
-            <span className='hub-doc-option-name'>{t`Default:`}</span>{' '}
-            <span className='hub-doc-blue'>{defaultChoice}</span>
-          </span>
-        ) : null}
-      </>
+      <ul>
+        {choices.map((c, i) => (
+          <li key={i}>
+            {c === defaultChoice ? (
+              <span className='hub-doc-blue' title={t`default`}>
+                <Choice c={c} /> &nbsp;&larr; ({t`default`})
+              </span>
+            ) : (
+              <Choice c={c} />
+            )}
+            {this.renderLegend(legends[c])}
+          </li>
+        ))}
+      </ul>
     );
+  }
+
+  private renderDefault(option) {
+    const { choices, defaultChoice, legends } = this.parseChoices(option);
+
+    if (defaultChoice === undefined || choices?.includes(defaultChoice)) {
+      return null;
+    }
+
+    return <span className='hub-doc-blue'>{defaultChoice}</span>;
   }
 
   private renderNotes(doc: PluginDoc) {
@@ -851,23 +845,19 @@ export class RenderPluginDoc extends Component<IProps, IState> {
               [t`Returned`, option.returned],
               [
                 t`Description`,
-                <>
-                  {option.description.map((d, i) => (
-                    <p key={i}>{this.applyDocFormatters(d)}</p>
-                  ))}
-
-                  {option.sample ? (
-                    <div>
-                      <br />
-                      {t`sample:`}{' '}
-                      {typeof option.sample === 'string' ? (
-                        option.sample
-                      ) : (
-                        <pre>{JSON.stringify(option.sample, null, 2)}</pre>
-                      )}
-                    </div>
-                  ) : null}
-                </>,
+                option.description.map((d, i) => (
+                  <p key={i}>{this.applyDocFormatters(d)}</p>
+                )),
+              ],
+              [
+                t`Sample`,
+                option.sample ? (
+                  typeof option.sample === 'string' ? (
+                    option.sample
+                  ) : (
+                    <pre>{JSON.stringify(option.sample, null, 2)}</pre>
+                  )
+                ) : null,
               ],
             ]}
           />
