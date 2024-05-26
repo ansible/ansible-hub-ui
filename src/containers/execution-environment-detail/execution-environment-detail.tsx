@@ -56,11 +56,11 @@ class ExecutionEnvironmentDetail extends Component<IDetailSharedProps, IState> {
       'container.change_containernamespace',
     );
 
-    const instructions =
-      'podman pull ' +
-      getContainersURL({
-        name: containerRepository.name,
-      });
+    const tlsVerify = window.location.protocol == 'https:';
+    const containerURL = getContainersURL({
+      name: containerRepository.name,
+    });
+    const instructions = `podman pull --tls-verify=${tlsVerify} ${containerURL}`;
 
     return (
       <Flex direction={{ default: 'column' }}>

@@ -21,6 +21,7 @@ import {
   type AlertType,
   AppliedFilters,
   BaseHeader,
+  ClipboardCopy,
   CompoundFilter,
   DateComponent,
   DeleteExecutionEnvironmentModal,
@@ -28,6 +29,7 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   ExternalLink,
+  HelpButton,
   HubPagination,
   ListItemActions,
   LoadingSpinner,
@@ -44,6 +46,7 @@ import {
   type RouteProps,
   controllerURL,
   filterIsSet,
+  getContainersURL,
   taskAlert,
   withRouter,
 } from 'src/utilities';
@@ -134,11 +137,34 @@ class ExecutionEnvironmentList extends Component<RouteProps, IState> {
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
+    const tlsVerify = window.location.protocol == 'https:';
+    const serverURL = getContainersURL({ name: '' }).replace(/\/$/, '');
+    const containerURL = getContainersURL({ name: 'example', tag: 'latest' });
+    const instructions = (
+      <ClipboardCopy isCode isReadOnly isExpanded variant='expansion'>
+        podman login --tls-verify={tlsVerify.toString()} {serverURL}
+        {'\n'}
+        podman image tag example {containerURL}
+        {'\n'}
+        podman push --tls-verify={tlsVerify.toString()} {containerURL}
+        {'\n'}
+      </ClipboardCopy>
+    );
+
     const pushImagesButton = (
-      <ExternalLink
-        href={UI_DOCS_URL}
-        data-cy='push-images-button'
-      >{t`Push container images`}</ExternalLink>
+      <HelpButton
+        content={
+          <>
+            {instructions}
+            <ExternalLink href={UI_DOCS_URL}>{t`Documentation`}</ExternalLink>
+          </>
+        }
+        hasAutoWidth
+        header={t`Push container images`}
+        prefix={
+          <span data-cy='push-images-button'>{t`Push container images`}</span>
+        }
+      />
     );
 
     const addRemoteButton = hasPermission(

@@ -6,18 +6,30 @@ import { Popover } from 'src/components';
 interface IProps {
   /** Value to display in the tag */
   content: ReactNode;
-  header?: ReactNode;
   hasAutoWidth?: boolean;
+  header?: ReactNode;
+  prefix?: ReactNode;
 }
 
-export const HelpButton = ({ content, header, hasAutoWidth }: IProps) => (
+export const HelpButton = ({
+  content,
+  hasAutoWidth,
+  header,
+  prefix,
+}: IProps) => (
   <Popover
-    position={PopoverPosition.top}
     bodyContent={content}
-    headerContent={header}
     hasAutoWidth={hasAutoWidth}
+    headerContent={header}
+    position={PopoverPosition.top}
   >
-    <Button iconPosition={'left'} variant={'plain'} style={{ padding: 0 }}>
+    <Button
+      iconPosition='left'
+      style={{ padding: 0 }}
+      variant={prefix ? 'link' : 'plain'}
+    >
+      {prefix}
+      {prefix ? ' ' : ''}
       <OutlinedQuestionCircleIcon />
     </Button>
   </Popover>
