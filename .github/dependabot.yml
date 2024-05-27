@@ -10,7 +10,6 @@ updates:
       babel:
         patterns:
           - "@babel/*"
-          - "babel-core"
           - "babel-loader"
       lingui:
         patterns:
