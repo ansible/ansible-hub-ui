@@ -257,7 +257,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
   private formatPartError(part: dom.ErrorPart): ReactNode {
     return (
-      <span className='error'>{t`ERROR while parsing: {part.message}`}</span>
+      <span className='error'>{t`ERROR while parsing: ${part.message}`}</span>
     );
   }
 
