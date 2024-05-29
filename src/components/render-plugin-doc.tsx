@@ -854,7 +854,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
             {option.sample ? (
               <div>
                 <br />
-                {t`sample:`}
+                {t`sample:`}{' '}
                 {typeof option.sample === 'string' ? (
                   option.sample
                 ) : (
