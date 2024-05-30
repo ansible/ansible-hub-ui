@@ -53,44 +53,30 @@ const Legend = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-const Nesting = ({
-  children,
-  level = 0,
-}: {
-  children: ReactNode;
-  level: number;
-}) => {
-  if (level < 1) {
-    return children;
-  }
-
-  return (
-    <Nesting level={level - 1}>
-      <div
-        style={{
-          borderLeft: '4px solid var(--pf-v5-global--info-color--100)',
-          paddingLeft: '20px',
-        }}
-      >
-        {children}
-      </div>
-    </Nesting>
-  );
-};
+const Nesting = ({ children }: { children: ReactNode }) => (
+  <div
+    style={{
+      borderLeft: '4px solid var(--pf-v5-global--info-color--100)',
+      paddingLeft: '20px',
+    }}
+  >
+    {children}
+  </div>
+);
 
 const DescriptionListHorizontal = ({
   items,
 }: {
-  items: [string, ReactNode][];
+  items: [ReactNode, ReactNode][];
 }) => (
   <DescriptionList
     isCompact
     isHorizontal
     style={{ gridTemplateColumns: 'none' }}
   >
-    {items.map(([k, v]) =>
+    {items.map(([k, v], i) =>
       v ? (
-        <DescriptionListGroup key={k}>
+        <DescriptionListGroup key={i}>
           <DescriptionListTerm>{k}</DescriptionListTerm>
           <DescriptionListDescription>{v}</DescriptionListDescription>
         </DescriptionListGroup>
@@ -213,9 +199,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       return { description: [], short_description: '' } as PluginDoc;
     }
 
-    const doc: PluginDoc = { ...plugin.doc_strings.doc };
+    const parseOptions = (options?: PluginOption[]) => {
+      if (!options) {
+        return;
+      }
 
-    const parseOptions = (options: PluginOption[], depth) => {
       for (const op of options) {
         // Description is expected to be an array of strings. If its not,
         // do what we can to make it one
@@ -226,16 +214,12 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         }
 
         // recursively parse sub options
-        if (op.suboptions) {
-          parseOptions(op.suboptions, depth + 1);
-        }
+        parseOptions(op.suboptions);
       }
     };
 
-    if (doc.options) {
-      parseOptions(doc.options, 0);
-    }
-
+    const doc: PluginDoc = { ...plugin.doc_strings.doc };
+    parseOptions(doc.options);
     doc.description = this.ensureListofStrings(doc.description);
 
     return doc;
@@ -266,20 +250,22 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       return null;
     }
 
-    const parseReturnRecursive = (returnV: ReturnedValue[], depth) => {
+    const parseReturnRecursive = (returnV: ReturnedValue[]) => {
+      if (!returnV) {
+        return;
+      }
+
       for (const ret of returnV) {
         // Description is expected to be an array of strings. If its not, do what we can to make it one
         ret.description = this.ensureListofStrings(ret.description);
 
         // recursively parse sub options
-        if (ret.contains) {
-          parseReturnRecursive(ret.contains, depth + 1);
-        }
+        parseReturnRecursive(ret.contains);
       }
     };
 
     const returnValues = [...plugin.doc_strings.return];
-    parseReturnRecursive(returnValues, 0);
+    parseReturnRecursive(returnValues);
 
     return returnValues;
   }
@@ -534,7 +520,6 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     const paramEntries = this.renderParameterEntries(
       parameters,
       content_type,
-      1,
       'params',
     );
 
@@ -549,88 +534,77 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   private renderParameterEntries(
     parameters: PluginOption[],
     content_type: string,
-    depth: number,
     parent: string,
   ) {
-    let output = [];
-
-    parameters.forEach((option) => {
+    return parameters.map((option) => {
       const key = `${parent}-${option.name}`;
 
       // TODO: add support for sub options. Example:
       // https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93
-      output.push(
-        <Nesting level={depth} key={key}>
-          <DescriptionListHorizontal
-            items={[
-              [
-                depth > 1 ? t`Key` : t`Parameter`,
-                <>
-                  <span className='hub-doc-option-name'>{option.name}</span>
-                  <small>
-                    {this.documentedType(option['type'])}
-                    {option['elements'] ? (
-                      <span>
-                        {' '}
-                        / {t`elements`}=
-                        {this.documentedType(option['elements'])}
-                      </span>
-                    ) : null}
-                    {option['required'] ? (
-                      <span>
-                        {' '}
-                        / <span className='hub-doc-red'>{t`required`}</span>
-                      </span>
-                    ) : null}
-                  </small>
-                </>,
-              ],
-              [t`Choices`, this.renderChoices(option)],
-              [t`Default`, this.renderDefault(option)],
-              [
-                t`Configuration`,
-                content_type !== 'module'
-                  ? this.renderPluginConfiguration(option)
-                  : null,
-              ],
-              [
-                t`Comments`,
-                option.description.map((d, i) => (
-                  <p key={i}>{this.applyDocFormatters(d)}</p>
-                )),
-              ],
-              [
-                t`Aliases`,
-                option['aliases'] ? (
-                  <small>
-                    <span className='hub-doc-green'>
-                      {option['aliases'].join(', ')}
-                    </span>
-                  </small>
-                ) : null,
-              ],
-            ]}
-          />
-        </Nesting>,
+      return (
+        <DescriptionListHorizontal
+          key={key}
+          items={[
+            [
+              <code className='hub-doc-option-name' key='name'>
+                {option.name}
+              </code>,
+              <small key='type'>
+                {this.documentedType(option.type)}
+                {option['elements'] ? (
+                  <span>
+                    {' '}
+                    / {t`elements`}={this.documentedType(option['elements'])}
+                  </span>
+                ) : null}
+                {option.required ? (
+                  <span>
+                    {' '}
+                    / <span className='hub-doc-red'>{t`required`}</span>
+                  </span>
+                ) : null}
+              </small>,
+            ],
+            [t`Choices`, this.renderChoices(option)],
+            [t`Default`, this.renderDefault(option)],
+            [
+              t`Configuration`,
+              content_type !== 'module'
+                ? this.renderPluginConfiguration(option)
+                : null,
+            ],
+            [
+              t`Comments`,
+              option.description.map((d, i) => (
+                <p key={i}>{this.applyDocFormatters(d)}</p>
+              )),
+            ],
+            [
+              t`Aliases`,
+              option.aliases ? (
+                <small>
+                  <span className='hub-doc-green'>
+                    {option.aliases.join(', ')}
+                  </span>
+                </small>
+              ) : null,
+            ],
+            [
+              t`Fields`,
+              option.suboptions?.length ? (
+                <Nesting>
+                  {this.renderParameterEntries(
+                    option.suboptions,
+                    content_type,
+                    key,
+                  )}
+                </Nesting>
+              ) : null,
+            ],
+          ]}
+        />
       );
-
-      // recursively render sub options
-      if (option.suboptions) {
-        output.push(<br />);
-        output = output.concat(
-          this.renderParameterEntries(
-            option.suboptions,
-            content_type,
-            depth + 1,
-            key,
-          ),
-        );
-      }
-
-      output.push(<br />);
     });
-
-    return output;
   }
 
   private renderPluginConfiguration(option) {
@@ -752,7 +726,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private renderDefault(option) {
-    const { choices, defaultChoice, legends } = this.parseChoices(option);
+    const { choices, defaultChoice } = this.parseChoices(option);
 
     if (defaultChoice === undefined || choices?.includes(defaultChoice)) {
       return null;
@@ -816,67 +790,57 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         <h2 id='return-values'>{t`Return Values`}</h2>
-        {this.renderReturnValueEntries(returnV, 1, 'return')}
+        {this.renderReturnValueEntries(returnV, 'return')}
       </>
     );
   }
 
   private renderReturnValueEntries(
     returnValues: ReturnedValue[],
-    depth: number,
     parent: string,
   ) {
-    let entries = [];
-
-    returnValues.forEach((option) => {
+    return returnValues.map((option) => {
       const key = `${parent}-${option.name}`;
 
-      entries.push(
-        <Nesting level={depth} key={key}>
-          <DescriptionListHorizontal
-            items={[
-              [
-                t`Key`,
-                <>
-                  <span className='hub-doc-option-name'>{option.name}</span>
-                  <small>{option.type}</small>
-                </>,
-              ],
-              [t`Returned`, option.returned],
-              [
-                t`Description`,
-                option.description.map((d, i) => (
-                  <p key={i}>{this.applyDocFormatters(d)}</p>
-                )),
-              ],
-              [
-                t`Sample`,
-                option.sample ? (
-                  typeof option.sample === 'string' ? (
-                    option.sample
-                  ) : (
-                    <pre>{JSON.stringify(option.sample, null, 2)}</pre>
-                  )
-                ) : null,
-              ],
-            ]}
-          />
-        </Nesting>,
+      return (
+        <DescriptionListHorizontal
+          key={key}
+          items={[
+            [
+              <code className='hub-doc-option-name' key='name'>
+                {option.name}
+              </code>,
+              <small key='type'>{option.type}</small>,
+            ],
+            [t`Returned`, option.returned],
+            [
+              t`Description`,
+              option.description.map((d, i) => (
+                <p key={i}>{this.applyDocFormatters(d)}</p>
+              )),
+            ],
+            [
+              t`Sample`,
+              option.sample ? (
+                typeof option.sample === 'string' ? (
+                  option.sample
+                ) : (
+                  <pre>{JSON.stringify(option.sample, null, 2)}</pre>
+                )
+              ) : null,
+            ],
+            [
+              t`Fields`,
+              option.contains?.length ? (
+                <Nesting>
+                  {this.renderReturnValueEntries(option.contains, key)}
+                </Nesting>
+              ) : null,
+            ],
+          ]}
+        />
       );
-
-      if (option.contains) {
-        entries.push(<br />);
-
-        // recursively render values
-        entries = entries.concat(
-          this.renderReturnValueEntries(option.contains, depth + 1, key),
-        );
-      }
-
-      entries.push(<br />);
     });
-
-    return entries;
   }
 
   // https://github.com/ansible/ansible/blob/1b8aa798df6f6fa96ba5ea2a9dbf01b3f1de555c/hacking/build_library/build_ansible/jinja2/filters.py#L53
