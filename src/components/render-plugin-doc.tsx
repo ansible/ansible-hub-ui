@@ -36,17 +36,17 @@ interface IProps {
   renderWarning: (text: string) => ReactElement;
 }
 
-function Choice({ children }: { children: ReactNode }) {
-  return <pre style={{ display: 'inline-block' }}>{children}</pre>;
-}
+const Choice = ({ c }: { c: string | Record<string, string> }) => (
+  <pre style={{ display: 'inline-block', padding: '2px 4px' }}>
+    {typeof c === 'object' ? JSON.stringify(c, null, 2) : c}
+  </pre>
+);
 
-function Legend({ children }: { children: ReactNode }) {
-  return (
-    <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-      {children}
-    </div>
-  );
-}
+const Legend = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+    {children}
+  </div>
+);
 
 export class RenderPluginDoc extends Component<IProps, IState> {
   subOptionsMaxDepth: number;
@@ -60,67 +60,70 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   componentDidCatch(error) {
-    console.log(error);
+    console.log('RenderPluginDoc did catch', error);
     this.setState({ renderError: true });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.renderError && this.props.plugin !== prevProps.plugin) {
+      this.setState({ renderError: false });
+    }
   }
 
   render() {
     const { plugin } = this.props;
 
-    if (!this.state.renderError) {
-      // componentDidCatch doesn't seem to be able to catch errors that
-      // are thrown outside of return(), so we'll wrap everything in a
-      // try just in case
-      let doc: PluginDoc;
-      let example: string;
-      let returnVals: ReturnedValue[];
-      let content;
-      try {
-        doc = this.parseDocString(plugin);
-        example = this.parseExamples(plugin);
-        returnVals = this.parseReturn(plugin);
-        content = {
-          synopsis: this.renderSynopsis(doc),
-          parameters: this.renderParameters(
-            doc.options,
-            plugin.content_type,
-            this.subOptionsMaxDepth,
-          ),
-          notes: this.renderNotes(doc),
-          examples: this.renderExample(example),
-          returnValues: this.renderReturnValues(
-            returnVals,
-            this.returnContainMaxDepth,
-          ),
-          shortDescription: this.renderShortDescription(doc),
-          deprecated: this.renderDeprecated(doc, plugin.content_name),
-          requirements: this.renderRequirements(doc),
-        };
-      } catch (err) {
-        console.log(err);
-        return this.renderError(plugin);
-      }
-
-      return (
-        <div>
-          <h1>
-            {plugin.content_type} &gt; {plugin.content_name}
-          </h1>
-          <br />
-          {content.shortDescription}
-          {content.deprecated}
-          {this.renderTableOfContents(content)}
-          {content.synopsis}
-          {content.requirements}
-          {content.parameters}
-          {content.notes}
-          {content.examples}
-          {content.returnValues}
-        </div>
-      );
-    } else {
+    if (this.state.renderError) {
       return this.renderError(plugin);
     }
+
+    // componentDidCatch doesn't seem to be able to catch errors that
+    // are thrown outside of return(), so we'll wrap everything in a
+    // try just in case
+    let content;
+    try {
+      const doc: PluginDoc = this.parseDocString(plugin);
+      const example: string = this.parseExamples(plugin);
+      const returnVals: ReturnedValue[] = this.parseReturn(plugin);
+      content = {
+        synopsis: this.renderSynopsis(doc),
+        parameters: this.renderParameters(
+          doc.options,
+          plugin.content_type,
+          this.subOptionsMaxDepth,
+        ),
+        notes: this.renderNotes(doc),
+        examples: this.renderExample(example),
+        returnValues: this.renderReturnValues(
+          returnVals,
+          this.returnContainMaxDepth,
+        ),
+        shortDescription: this.renderShortDescription(doc),
+        deprecated: this.renderDeprecated(doc, plugin.content_name),
+        requirements: this.renderRequirements(doc),
+      };
+    } catch (error) {
+      console.log('RenderPluginDoc render catch', error);
+      return this.renderError(plugin);
+    }
+
+    return (
+      <div>
+        <h1>
+          {plugin.content_type} &gt; {plugin.content_name}
+        </h1>
+        <br />
+        {content.shortDescription}
+        {content.deprecated}
+        {this.renderTableOfContents(content)}
+        {content.synopsis}
+        {content.requirements}
+        {content.parameters}
+        {content.notes}
+        {content.examples}
+        {content.returnValues}
+      </div>
+    );
   }
 
   private renderError(plugin) {
@@ -130,7 +133,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         {this.props.renderWarning(
-          'Documentation Syntax Error: cannot parse plugin documention.',
+          t`Documentation Syntax Error: cannot parse plugin documention.`,
         )}
         <br />
         <div>
@@ -140,15 +143,19 @@ export class RenderPluginDoc extends Component<IProps, IState> {
             </h1>
           ) : null}
           <p>
-            The documentation object for this plugin seems to contain invalid
-            syntax that makes it impossible for Automation Hub to parse. You can
-            still look at the unformatted documentation object bellow if you
-            need to.
+            <Trans>
+              The documentation object for this plugin seems to contain invalid
+              syntax that makes it impossible for Automation Hub to parse. You
+              can still look at the unformatted documentation object bellow if
+              you need to.
+            </Trans>
           </p>
 
-          <h2>Unformatted Documentation</h2>
+          <h2>{t`Unformatted Documentation`}</h2>
 
-          <pre className='plugin-raw'>{JSON.stringify(plugin, null, 2)}</pre>
+          <pre className='hub-doc-plugin-raw'>
+            {JSON.stringify(plugin, null, 2)}
+          </pre>
         </div>
       </>
     );
@@ -214,8 +221,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private parseReturn(plugin: PluginContentType): ReturnedValue[] {
-    // TODO: make the return string match the desired output as closely as
-    // possible
+    // TODO: make the return string match the desired output as closely as possible
 
     if (!plugin.doc_strings) {
       return null;
@@ -232,8 +238,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         maxDepth = depth;
       }
       for (const ret of returnV) {
-        // Description is expected to be an array of strings. If its not,
-        // do what we can to make it one
+        // Description is expected to be an array of strings. If its not, do what we can to make it one
         ret.description = this.ensureListofStrings(ret.description);
 
         // recursively parse sub options
@@ -251,7 +256,9 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartError(part: dom.ErrorPart): ReactNode {
-    return <span className='error'>ERROR while parsing: {part.message}</span>;
+    return (
+      <span className='error'>{t`ERROR while parsing: ${part.message}`}</span>
+    );
   }
 
   private formatPartBold(part: dom.BoldPart): ReactNode {
@@ -259,13 +266,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartCode(part: dom.CodePart): ReactNode {
-    return <span className='inline-code'>{part.text}</span>;
+    return <span className='hub-doc-inline-code'>{part.text}</span>;
   }
 
-  private formatPartHorizontalLine(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    part: dom.HorizontalLinePart,
-  ): ReactNode {
+  private formatPartHorizontalLine(_part: dom.HorizontalLinePart): ReactNode {
     return <hr />;
   }
 
@@ -294,7 +298,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartEnvVariable(part: dom.EnvVariablePart): ReactNode {
-    return <span className='inline-code'>{part.name}</span>;
+    return <span className='hub-doc-inline-code'>{part.name}</span>;
   }
 
   private formatPartOptionNameReturnValue(
@@ -302,11 +306,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   ): ReactNode {
     const content =
       part.value === undefined ? (
-        <span className='inline-code'>
+        <span className='hub-doc-inline-code'>
           <b>{part.name}</b>
         </span>
       ) : (
-        <span className='inline-code'>
+        <span className='hub-doc-inline-code'>
           {part.name}={part.value}
         </span>
       );
@@ -321,7 +325,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   }
 
   private formatPartOptionValue(part: dom.OptionValuePart): ReactNode {
-    return <span className='inline-code'>{part.value}</span>;
+    return <span className='hub-doc-inline-code'>{part.value}</span>;
   }
 
   private formatPartPlugin(part: dom.PluginPart): ReactNode {
@@ -418,55 +422,55 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
     return (
       <>
-        <h2>DEPRECATED</h2>
+        <h2>{t`DEPRECATED`}</h2>
         {deprecated.removed_in ? (
           <div>
-            <b>Removed in version</b> {doc.deprecated.removed_in}
+            <Trans>
+              <b>Removed in version</b> {doc.deprecated.removed_in}
+            </Trans>
           </div>
         ) : null}
 
         <div>
-          <b>Why: </b>
-          {deprecated.why ? doc.deprecated.why : 'No reason specified.'}
+          <b>{t`Why:`}</b>{' '}
+          {deprecated.why ? doc.deprecated.why : t`No reason specified.`}
         </div>
 
         <div>
-          <b>Alternative: </b>
+          <b>{t`Alternative:`}</b>{' '}
           {deprecated.alternative
             ? doc.deprecated.alternative
-            : 'No alternatives specified.'}
+            : t`No alternatives specified.`}
         </div>
       </>
     );
   }
 
   private renderTableOfContents(content) {
-    // return this.props.renderTableOfContentsLink('Synopsis', 'synopsis');
-
     return (
       <ul>
         {content['synopsis'] !== null && (
           <li>
-            {this.props.renderTableOfContentsLink('Synopsis', 'synopsis')}
+            {this.props.renderTableOfContentsLink(t`Synopsis`, 'synopsis')}
           </li>
         )}
         {content['parameters'] !== null && (
           <li>
-            {this.props.renderTableOfContentsLink('Parameters', 'parameters')}
+            {this.props.renderTableOfContentsLink(t`Parameters`, 'parameters')}
           </li>
         )}
         {content['notes'] !== null && (
-          <li>{this.props.renderTableOfContentsLink('Notes', 'notes')}</li>
+          <li>{this.props.renderTableOfContentsLink(t`Notes`, 'notes')}</li>
         )}
         {content['examples'] !== null && (
           <li>
-            {this.props.renderTableOfContentsLink('Examples', 'examples')}
+            {this.props.renderTableOfContentsLink(t`Examples`, 'examples')}
           </li>
         )}
         {content['returnValues'] !== null && (
           <li>
             {this.props.renderTableOfContentsLink(
-              'Return Values',
+              t`Return Values`,
               'return-values',
             )}
           </li>
@@ -482,7 +486,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
   private renderSynopsis(doc: PluginDoc) {
     return (
       <>
-        <h2 id='synopsis'>Synopsis</h2>
+        <h2 id='synopsis'>{t`Synopsis`}</h2>
         <ul>
           {doc.description.map((d, i) => (
             <li key={i}>{this.applyDocFormatters(d)}</li>
@@ -510,19 +514,20 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       '',
     );
 
+    // FIXME table 2 flex
     return (
       <>
-        <h2 id='parameters'>Parameters</h2>
-        <Table className='options-table'>
+        <h2 id='parameters'>{t`Parameters`}</h2>
+        <Table className='hub-doc-options-table'>
           <Tbody>
             <Tr>
-              <Th colSpan={maxDepth + 1}>Parameter</Th>
+              <Th colSpan={maxDepth + 1}>{t`Parameter`}</Th>
               <Th>
-                Choices/
-                <span className='blue'>Defaults</span>
+                {t`Choices`} /{' '}
+                <span className='hub-doc-blue'>{t`Defaults`}</span>
               </Th>
-              {content_type !== 'module' ? <Th>Configuration</Th> : null}
-              <Th>Comments</Th>
+              {content_type !== 'module' ? <Th>{t`Configuration`}</Th> : null}
+              <Th>{t`Comments`}</Th>
             </Tr>
             {
               // TODO: add support for sub options. Example:
@@ -544,6 +549,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     parent: string,
   ) {
     let output = [];
+
     parameters.forEach((option) => {
       const spacers = [];
       const key = `${parent}-${option.name}`;
@@ -560,19 +566,19 @@ export class RenderPluginDoc extends Component<IProps, IState> {
             colSpan={maxDepth + 1 - depth}
             className={option.suboptions ? 'parent' : ''}
           >
-            <span className='option-name'>{option.name}</span>
+            <span className='hub-doc-option-name'>{option.name}</span>
             <small>
               {this.documentedType(option['type'])}
               {option['elements'] ? (
                 <span>
                   {' '}
-                  / elements ={this.documentedType(option['elements'])}
+                  / {t`elements`}={this.documentedType(option['elements'])}
                 </span>
               ) : null}
               {option['required'] ? (
                 <span>
                   {' '}
-                  / <span className='red'>required</span>
+                  / <span className='hub-doc-red'>{t`required`}</span>
                 </span>
               ) : null}
             </small>
@@ -597,8 +603,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
             {option['aliases'] ? (
               <small>
-                <span className='green'>
-                  aliases: {option['aliases'].join(', ')}
+                <span className='hub-doc-green'>
+                  {t`aliases`}: {option['aliases'].join(', ')}
                 </span>
               </small>
             ) : null}
@@ -627,29 +633,33 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     return (
       <>
         {option['ini'] ? (
-          <div className='plugin-config'>
-            ini entries:
+          <div className='hub-doc-plugin-config'>
+            {t`ini entries:`}
             {option['ini'].map((v, i) => (
               <p key={i}>
                 [{v.section}]<br />
-                {v.key} = {v.default ? v.default : 'VALUE'}
+                {v.key} = {v.default ? v.default : t`VALUE`}
               </p>
             ))}
           </div>
         ) : null}
 
         {option['env'] ? (
-          <div className='plugin-config'>
+          <div className='hub-doc-plugin-config'>
             {option['env'].map((v, i) => (
-              <div key={i}>env: {v.name}</div>
+              <div key={i}>
+                {t`env`}: {v.name}
+              </div>
             ))}
           </div>
         ) : null}
 
         {option['vars'] ? (
-          <div className='plugin-config'>
+          <div className='hub-doc-plugin-config'>
             {option['vars'].map((v, i) => (
-              <div key={i}>var: {v.name}</div>
+              <div key={i}>
+                {t`var`}: {v.name}
+              </div>
             ))}
           </div>
         ) : null}
@@ -699,6 +709,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       defaultChoice = option['default'];
     }
 
+    // allow multistring values to wrap
+    if (defaultChoice?.[0] === '[') {
+      defaultChoice = defaultChoice.replaceAll('","', '", "');
+    }
+
     if (typeof choices === 'object' && !Array.isArray(choices)) {
       legends = choices;
       choices = Object.keys(choices);
@@ -708,18 +723,16 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       <>
         {choices && Array.isArray(choices) && choices.length !== 0 ? (
           <div>
-            <span className='option-name'>
-              <Trans>Choices: </Trans>
-            </span>
+            <span className='hub-doc-option-name'>{t`Choices:`}</span>{' '}
             <ul>
               {choices.map((c, i) => (
                 <li key={i}>
                   {c === defaultChoice ? (
-                    <span className='blue' title={t`default`}>
-                      <Choice>{c}</Choice> &nbsp;&larr;
+                    <span className='hub-doc-blue' title={t`default`}>
+                      <Choice c={c} /> &nbsp;&larr;
                     </span>
                   ) : (
-                    <Choice>{c}</Choice>
+                    <Choice c={c} />
                   )}
                   {this.renderLegend(legends[c])}
                 </li>
@@ -730,10 +743,8 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
         {defaultChoice !== undefined && !choices.includes(defaultChoice) ? (
           <span>
-            <span className='option-name'>
-              <Trans>Default: </Trans>
-            </span>
-            <span className='blue'>{defaultChoice}</span>
+            <span className='hub-doc-option-name'>{t`Default:`}</span>{' '}
+            <span className='hub-doc-blue'>{defaultChoice}</span>
           </span>
         ) : null}
       </>
@@ -747,7 +758,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
     return (
       <>
-        <h2 id='notes'>Notes</h2>
+        <h2 id='notes'>{t`Notes`}</h2>
         <ul>
           {doc.notes.map((note, i) => (
             <li key={i}>{this.applyDocFormatters(note)}</li>
@@ -764,7 +775,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
     return (
       <>
-        <h2>Requirements</h2>
+        <h2>{t`Requirements`}</h2>
         <ul>
           {doc.requirements.map((req, i) => (
             <li key={i}>{req}</li>
@@ -778,9 +789,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     if (!example) {
       return null;
     }
+
     return (
       <>
-        <h2 id='examples'>Examples</h2>
+        <h2 id='examples'>{t`Examples`}</h2>
         <pre>{example}</pre>
       </>
     );
@@ -790,15 +802,17 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     if (!returnV) {
       return null;
     }
+
+    // FIXME table 2 flex
     return (
       <>
-        <h2 id='return-values'>Return Values</h2>
-        <Table className='options-table'>
+        <h2 id='return-values'>{t`Return Values`}</h2>
+        <Table className='hub-doc-options-table'>
           <Tbody>
             <Tr>
-              <Th colSpan={maxDepth + 1}>Key</Th>
-              <Th>Returned</Th>
-              <Th>Description</Th>
+              <Th colSpan={maxDepth + 1}>{t`Key`}</Th>
+              <Th>{t`Returned`}</Th>
+              <Th>{t`Description`}</Th>
             </Tr>
             {this.renderReturnValueEntries(returnV, 0, maxDepth, '')}
           </Tbody>
@@ -820,6 +834,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       for (let x = 0; x < depth; x++) {
         spacers.push(<Td key={x} colSpan={1} className='spacer' />);
       }
+
       const key = `${parent}-${option.name}`;
       entries.push(
         <Tr key={key}>
@@ -839,7 +854,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
             {option.sample ? (
               <div>
                 <br />
-                sample:
+                {t`sample:`}{' '}
                 {typeof option.sample === 'string' ? (
                   option.sample
                 ) : (
@@ -863,6 +878,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         );
       }
     });
+
     return entries;
   }
 
