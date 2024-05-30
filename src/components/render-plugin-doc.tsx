@@ -111,46 +111,46 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       return this.renderError(plugin);
     }
 
-    // componentDidCatch doesn't seem to be able to catch errors that
-    // are thrown outside of return(), so we'll wrap everything in a
-    // try just in case
-    let content;
+    // componentDidCatch only catches at child component render
     try {
       const doc: PluginDoc = this.parseDocString(plugin);
-      const example: string = this.parseExamples(plugin);
-      const returnVals: ReturnedValue[] = this.parseReturn(plugin);
-      content = {
-        synopsis: this.renderSynopsis(doc),
-        parameters: this.renderParameters(doc.options, plugin.content_type),
-        notes: this.renderNotes(doc),
-        examples: this.renderExample(example),
-        returnValues: this.renderReturnValues(returnVals),
-        shortDescription: this.renderShortDescription(doc),
-        deprecated: this.renderDeprecated(doc, plugin.content_name),
-        requirements: this.renderRequirements(doc),
-      };
+
+      const synopsis = this.renderSynopsis(doc);
+      const parameters = this.renderParameters(
+        doc.options,
+        plugin.content_type,
+      );
+      const notes = this.renderNotes(doc);
+      const examples = this.renderExample(this.parseExamples(plugin));
+      const returnValues = this.renderReturnValues(this.parseReturn(plugin));
+
+      return (
+        <div>
+          <h1>
+            {plugin.content_type} &gt; {plugin.content_name}
+          </h1>
+          <br />
+          {this.renderShortDescription(doc)}
+          {this.renderDeprecated(doc, plugin.content_name)}
+          {this.renderTableOfContents({
+            synopsis,
+            parameters,
+            notes,
+            examples,
+            returnValues,
+          })}
+          {synopsis}
+          {this.renderRequirements(doc)}
+          {parameters}
+          {notes}
+          {examples}
+          {returnValues}
+        </div>
+      );
     } catch (error) {
       console.log('RenderPluginDoc render catch', error);
       return this.renderError(plugin);
     }
-
-    return (
-      <div>
-        <h1>
-          {plugin.content_type} &gt; {plugin.content_name}
-        </h1>
-        <br />
-        {content.shortDescription}
-        {content.deprecated}
-        {this.renderTableOfContents(content)}
-        {content.synopsis}
-        {content.requirements}
-        {content.parameters}
-        {content.notes}
-        {content.examples}
-        {content.returnValues}
-      </div>
-    );
   }
 
   private renderError(plugin) {
@@ -329,9 +329,11 @@ export class RenderPluginDoc extends Component<IProps, IState> {
           {part.name}={part.value}
         </span>
       );
+
     if (!part.plugin) {
       return content;
     }
+
     return this.props.renderPluginLink(
       part.plugin.fqcn,
       part.plugin.type,
@@ -407,6 +409,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
         fragments.push(this.formatPart(part));
       }
     }
+
     return (
       <span>
         {fragments.map((x, i) => (
@@ -461,28 +464,34 @@ export class RenderPluginDoc extends Component<IProps, IState> {
     );
   }
 
-  private renderTableOfContents(content) {
+  private renderTableOfContents({
+    synopsis,
+    parameters,
+    notes,
+    examples,
+    returnValues,
+  }) {
     return (
       <ul>
-        {content['synopsis'] !== null && (
+        {synopsis !== null && (
           <li>
             {this.props.renderTableOfContentsLink(t`Synopsis`, 'synopsis')}
           </li>
         )}
-        {content['parameters'] !== null && (
+        {parameters !== null && (
           <li>
             {this.props.renderTableOfContentsLink(t`Parameters`, 'parameters')}
           </li>
         )}
-        {content['notes'] !== null && (
+        {notes !== null && (
           <li>{this.props.renderTableOfContentsLink(t`Notes`, 'notes')}</li>
         )}
-        {content['examples'] !== null && (
+        {examples !== null && (
           <li>
             {this.props.renderTableOfContentsLink(t`Examples`, 'examples')}
           </li>
         )}
-        {content['returnValues'] !== null && (
+        {returnValues !== null && (
           <li>
             {this.props.renderTableOfContentsLink(
               t`Return Values`,
