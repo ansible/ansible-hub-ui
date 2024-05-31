@@ -68,9 +68,7 @@ module.exports = (inputConfigs) => {
             historyApiFallback: true,
             host: '0.0.0.0',
             hot: false,
-            https: customConfigs.UI_USE_HTTPS,
             liveReload: true,
-            magicHtml: false,
             onListening: (server) =>
               console.log(
                 'App should run on:',
@@ -79,7 +77,14 @@ module.exports = (inputConfigs) => {
                 }`,
               ),
             port: customConfigs.UI_PORT,
-            proxy: customConfigs.WEBPACK_PROXY,
+            proxy: Object.entries(customConfigs.WEBPACK_PROXY).map(
+              ([k, v]) => ({
+                context: [k],
+                target: v,
+                changeOrigin: true,
+              }),
+            ),
+            server: { type: customConfigs.UI_USE_HTTPS ? 'https' : 'http' },
             static: { directory: resolve(__dirname, '../dist') },
           },
         }),
