@@ -234,6 +234,10 @@ msgstr "<0>Red Hat is working on exciting new Ansible content development capabi
 #~ msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
 #~ msgstr "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Project Wisdom</1> <2/> to help other automators build Ansible content.</0><3>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</3><4>If you have concerns, please contact the Ansible team at <5>ansible-content-ai@redhat.com</5>.</4>"
 
+#: src/components/render-plugin-doc.tsx
+msgid "<0>Removed in version</0> {0}"
+msgstr "<0>Removed in version</0> {0}"
+
 #: src/containers/role-management/role-list.tsx
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
 msgstr "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
@@ -440,6 +444,10 @@ msgstr "add-user-modal"
 msgid "Additional details"
 msgstr "Additional details"
 
+#: src/components/render-plugin-doc.tsx
+msgid "aliases"
+msgstr "aliases"
+
 #: src/containers/ansible-repository/tab-details.tsx
 #: src/containers/namespace-list/namespace-list.tsx
 msgid "All"
@@ -472,6 +480,10 @@ msgstr "Allow all actions on a task."
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Already the current version"
 msgstr "Already the current version"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Alternative:"
+msgstr "Alternative:"
 
 #: src/components/hub-about-modal.tsx
 msgid "Ansible Automation Platform"
@@ -904,6 +916,10 @@ msgid "Child tasks"
 msgstr "Child tasks"
 
 #: src/components/render-plugin-doc.tsx
+msgid "Choices"
+msgstr "Choices"
+
+#: src/components/render-plugin-doc.tsx
 msgid "Choices:"
 msgstr "Choices:"
 
@@ -1169,6 +1185,10 @@ msgstr "Collections will appear once uploaded"
 msgid "Command"
 msgstr "Command"
 
+#: src/components/render-plugin-doc.tsx
+msgid "Comments"
+msgstr "Comments"
+
 #: src/loaders/standalone/layout.tsx
 msgid "Communicating with the Ansible community"
 msgstr "Communicating with the Ansible community"
@@ -1209,6 +1229,10 @@ msgstr "Company name"
 #: src/containers/task-management/task-list-view.tsx
 msgid "Completed"
 msgstr "Completed"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Configuration"
+msgstr "Configuration"
 
 #: src/components/repositories/remote-repository-table.tsx
 #~ msgid "Configure"
@@ -1564,6 +1588,10 @@ msgstr "default"
 msgid "Default:"
 msgstr "Default:"
 
+#: src/components/render-plugin-doc.tsx
+msgid "Defaults"
+msgstr "Defaults"
+
 #: src/actions/ansible-remote-delete.tsx
 #: src/actions/ansible-repository-delete.tsx
 #: src/components/delete-modal.tsx
@@ -1794,6 +1822,7 @@ msgid "Deprecate"
 msgstr "Deprecate"
 
 #: src/components/deprecated-tag.tsx
+#: src/components/render-plugin-doc.tsx
 msgid "DEPRECATED"
 msgstr "DEPRECATED"
 
@@ -1810,6 +1839,7 @@ msgstr "Deprecation status update starting for collection \"{name}\"."
 #: src/components/collection-content-list.tsx
 #: src/components/multiple-repo-selector.tsx
 #: src/components/namespace-form.tsx
+#: src/components/render-plugin-doc.tsx
 #: src/components/repository-form.tsx
 #: src/components/role-form.tsx
 #: src/components/role-list-table.tsx
@@ -1906,6 +1936,7 @@ msgstr "Docs site"
 #: src/components/collection-header.tsx
 #: src/containers/ansible-role/role-detail.tsx
 #: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
@@ -1914,6 +1945,10 @@ msgstr "Documentation"
 #: src/containers/token/token-insights.tsx
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+
+#: src/components/render-plugin-doc.tsx
+msgid "Documentation Syntax Error: cannot parse plugin documention."
+msgstr "Documentation Syntax Error: cannot parse plugin documention."
 
 #: src/components/ratings.tsx
 msgid "Does what it promises"
@@ -2092,6 +2127,10 @@ msgstr "Edit user"
 msgid "Editable"
 msgstr "Editable"
 
+#: src/components/render-plugin-doc.tsx
+msgid "elements"
+msgstr "elements"
+
 #: src/components/user-form.tsx
 #: src/containers/group-management/group-detail.tsx
 #: src/containers/group-management/group-detail.tsx
@@ -2104,6 +2143,10 @@ msgstr "Email"
 #: src/containers/ansible-remote/tab-details.tsx
 msgid "Enabled"
 msgstr "Enabled"
+
+#: src/components/render-plugin-doc.tsx
+msgid "env"
+msgstr "env"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
 msgid "Environment"
@@ -2286,6 +2329,10 @@ msgstr "Error message:"
 msgid "Error when saving registry."
 msgstr "Error when saving registry."
 
+#: src/components/render-plugin-doc.tsx
+msgid "ERROR while parsing: {0}"
+msgstr "ERROR while parsing: {0}"
+
 #: src/containers/execution-environment-detail/base.tsx
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #~ msgid "Error: changes weren't saved"
@@ -2295,6 +2342,11 @@ msgstr "Error when saving registry."
 #: src/containers/execution-environment-list/execution_environment_list.tsx
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Examples"
+msgstr "Examples"
 
 #: src/components/access-tab.tsx
 msgid "Except for members of groups below."
@@ -2975,6 +3027,10 @@ msgstr "In order to retain all versions, leave this field blank."
 msgid "Include all dependencies when syncing a collection."
 msgstr "Include all dependencies when syncing a collection."
 
+#: src/components/repository-form.tsx
+msgid "Including all tags might transfer a lot of data."
+msgstr "Including all tags might transfer a lot of data."
+
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Index execution environments"
 msgstr "Index execution environments"
@@ -2998,6 +3054,10 @@ msgstr "Indexing started for execution environment \"{name}\"."
 #: src/components/patternfly-wrappers/l10n.tsx
 msgid "Info"
 msgstr "Info"
+
+#: src/components/render-plugin-doc.tsx
+msgid "ini entries:"
+msgstr "ini entries:"
 
 #: src/components/collection-header.tsx
 #: src/components/collection-info.tsx
@@ -3064,6 +3124,10 @@ msgstr "Items per page"
 #: src/containers/landing/landing-page.tsx
 msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
 msgstr "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
+
+#: src/components/render-plugin-doc.tsx
+msgid "Key"
+msgstr "Key"
 
 #: src/containers/signature-keys/list.tsx
 msgid "Key fingerprint"
@@ -3537,6 +3601,10 @@ msgstr "No"
 msgid "No activities yet"
 msgstr "No activities yet"
 
+#: src/components/render-plugin-doc.tsx
+msgid "No alternatives specified."
+msgstr "No alternatives specified."
+
 #: src/components/select-group.tsx
 msgid "No assignable groups."
 msgstr "No assignable groups."
@@ -3683,6 +3751,10 @@ msgstr "No permissions"
 msgid "No README"
 msgstr "No README"
 
+#: src/components/render-plugin-doc.tsx
+msgid "No reason specified."
+msgstr "No reason specified."
+
 #: src/containers/ansible-repository/list.tsx
 msgid "no remote"
 msgstr "no remote"
@@ -3765,6 +3837,8 @@ msgstr "No versions"
 #: src/components/ansible-repository-form.tsx
 #: src/components/copy-url.tsx
 #: src/components/pulp-labels.tsx
+#: src/components/repository-form.tsx
+#: src/components/repository-form.tsx
 #: src/components/role-namespace-edit-modal.tsx
 #: src/components/role-namespace-edit-modal.tsx
 #: src/containers/ansible-remote/tab-details.tsx
@@ -3807,6 +3881,11 @@ msgstr "Not required for use by other collections"
 #: src/containers/token/token-insights.tsx
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Notes"
+msgstr "Notes"
 
 #: src/components/remote-form.tsx
 msgid "Number must be greater than 0"
@@ -3892,6 +3971,15 @@ msgstr "Overrides any galaxy_info.role_name metadata"
 #: src/components/patternfly-wrappers/l10n.tsx
 msgid "Pagination"
 msgstr "Pagination"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Parameter"
+msgstr "Parameter"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Parameters"
+msgstr "Parameters"
 
 #: src/containers/task-management/task-detail.tsx
 msgid "Parent task"
@@ -4144,6 +4232,10 @@ msgstr "Published"
 #~ msgid "Pull distribution"
 #~ msgstr "Pull distribution"
 
+#: src/components/repository-form.tsx
+msgid "Pull only latest?"
+msgstr "Pull only latest?"
+
 #: src/constants.tsx
 #: src/constants.tsx
 #~ msgid "Pull private containers"
@@ -4285,6 +4377,7 @@ msgstr "Pulp type"
 msgid "Push and change execution environments."
 msgstr "Push and change execution environments."
 
+#: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Push container images"
 msgstr "Push container images"
@@ -4633,6 +4726,14 @@ msgstr "Repository versions could not be displayed."
 msgid "Repository versions will appear once the repository is modified."
 msgstr "Repository versions will appear once the repository is modified."
 
+#: src/components/render-plugin-doc.tsx
+msgid "required"
+msgstr "required"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Requirements"
+msgstr "Requirements"
+
 #: src/components/collection-info.tsx
 msgid "Requires Ansible"
 msgstr "Requires Ansible"
@@ -4664,6 +4765,15 @@ msgstr "Retained number of versions"
 #: src/containers/ansible-repository/tab-details.tsx
 msgid "Retained version count"
 msgstr "Retained version count"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Return Values"
+msgstr "Return Values"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Returned"
+msgstr "Returned"
 
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Revert"
@@ -4807,6 +4917,10 @@ msgstr "Roles will appear once imported"
 #: src/containers/task-management/task-list-view.tsx
 msgid "Running"
 msgstr "Running"
+
+#: src/components/render-plugin-doc.tsx
+msgid "sample:"
+msgstr "sample:"
 
 #: src/components/ansible-repository-form.tsx
 #: src/components/group-modal.tsx
@@ -5007,8 +5121,8 @@ msgid "Server URL"
 msgstr "Server URL"
 
 #: src/containers/token/token-insights.tsx
-msgid "Server URL could not be displayed."
-msgstr "Server URL could not be displayed."
+#~ msgid "Server URL could not be displayed."
+#~ msgstr "Server URL could not be displayed."
 
 #: src/components/hub-about-modal.tsx
 msgid "Server version"
@@ -5480,12 +5594,21 @@ msgid "Synchronize"
 msgstr "Synchronize"
 
 #: src/containers/token/token-insights.tsx
-msgid "Synclist distribution was not found."
-msgstr "Synclist distribution was not found."
+#~ msgid "Synclist distribution was not found."
+#~ msgstr "Synclist distribution was not found."
 
 #: src/containers/token/token-insights.tsx
-msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
-msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
+msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead."
+msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead."
+
+#: src/containers/token/token-insights.tsx
+#~ msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
+#~ msgstr "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead.<1/>If you're using sync toggles with AAP 2.3 or older, you will need to use a different URL:"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Synopsis"
+msgstr "Synopsis"
 
 #: src/components/collection-filter.ts
 #: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
@@ -5648,6 +5771,10 @@ msgstr "The collection you have selected does not match this namespace."
 #: src/components/import-modal.tsx
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "The collection you have selected doesn't appear to match {0}"
+
+#: src/components/render-plugin-doc.tsx
+msgid "The documentation object for this plugin seems to contain invalid syntax that makes it impossible for Automation Hub to parse. You can still look at the unformatted documentation object bellow if you need to."
+msgstr "The documentation object for this plugin seems to contain invalid syntax that makes it impossible for Automation Hub to parse. You can still look at the unformatted documentation object bellow if you need to."
 
 #: src/containers/collection-detail/collection-docs.tsx
 msgid "The file is not available for this version of {collectionName}"
@@ -5932,6 +6059,10 @@ msgstr "UI Version"
 #: src/components/collection-dropdown.tsx
 msgid "Undeprecate"
 msgstr "Undeprecate"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Unformatted Documentation"
+msgstr "Unformatted Documentation"
 
 #: src/components/import-modal.tsx
 msgid "unknown"
@@ -6294,6 +6425,14 @@ msgstr "Users will appear once created"
 msgid "Validated"
 msgstr "Validated"
 
+#: src/components/render-plugin-doc.tsx
+msgid "VALUE"
+msgstr "VALUE"
+
+#: src/components/render-plugin-doc.tsx
+msgid "var"
+msgstr "var"
+
 #: src/components/collection-filter.ts
 #: src/components/collection-header.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
@@ -6451,6 +6590,10 @@ msgstr "Website"
 #: src/containers/landing/landing-page.tsx
 msgid "Welcome to Galaxy"
 msgstr "Welcome to Galaxy"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Why:"
+msgstr "Why:"
 
 #: src/components/role-import-form.tsx
 msgid "Will clone <0>{link}</0>"
