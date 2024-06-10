@@ -19,6 +19,8 @@ describe('Documentation dropdown', () => {
       .should('have.attr', 'href')
       .and('contain', 'https://www.ansible.com/resources/webinars-training');
 
+    cy.get('.pf-v5-c-dropdown__menu').contains('Documentation');
+
     cy.get('.pf-v5-c-dropdown__menu').contains('About');
   });
 
