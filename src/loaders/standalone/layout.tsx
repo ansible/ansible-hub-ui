@@ -85,7 +85,11 @@ export const StandaloneLayout = ({
         aria-label={'logout'}
         onClick={() =>
           ActiveUserAPI.logout()
-            .then(isGateway ? () => GatewayLogoutAPI.logout() : () => null)
+            .then(
+              isGateway
+                ? () => GatewayLogoutAPI.logout().catch(() => null)
+                : () => null,
+            )
             .then(() => ActiveUserAPI.getUser().catch(() => null))
             .then((user) => setUser(user))
         }
