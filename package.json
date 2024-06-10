@@ -94,7 +94,7 @@
     "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js"
   },
   "engines": {
-    "node": ">=18",
-    "npm": ">=9"
+    "node": ">=20",
+    "npm": ">=10"
   }
 }
