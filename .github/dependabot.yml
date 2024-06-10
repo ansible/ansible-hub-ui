@@ -11,9 +11,18 @@ updates:
         patterns:
           - "@babel/*"
           - "babel-loader"
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+          - "typescript-eslint"
       lingui:
         patterns:
           - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
       react:
         patterns:
           - "react"
@@ -30,11 +39,19 @@ updates:
       babel:
         patterns:
           - "@babel/*"
-          - "babel-core"
           - "babel-loader"
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+          - "typescript-eslint"
       lingui:
         patterns:
           - "@lingui/*"
+      patternfly:
+        patterns:
+          - "@patternfly/*"
       react:
         patterns:
           - "react"
