@@ -61,7 +61,7 @@ Cypress.Commands.add(
     const user = {
       firstName: firstName || 'First Name',
       lastName: lastName || 'Last Name',
-      username: username,
+      username,
       email: email || 'firstName@example.com',
       password: password || 'I am a complicated passw0rd',
     };
@@ -91,7 +91,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
   const server = Cypress.config().baseUrl + apiPrefix;
   const options = (args.length >= 1 &&
-    typeof args[args.length - 1] == 'object' &&
+    typeof args.at(-1) == 'object' &&
     args.splice(args.length - 1, 1)[0]) || { failOnNonZeroExit: false };
 
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
@@ -102,7 +102,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   )} ${args}`;
 
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
-    console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
+    console.log(`RUN ${cmd}`);
 
     if (code) {
       cy.log('galaxykit code: ' + code);
@@ -153,7 +153,8 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
 
     cy.get('input[id="username"]').type(username);
     cy.get('input[id="password"]').type(password);
-    //advanced options
+
+    // advanced options
     cy.get('.pf-c-expandable-section__toggle-text').click();
     cy.get('input[id="proxy_url"]').type(proxy_url);
     cy.get('input[id="proxy_username"]').type(proxy_username);
@@ -295,9 +296,8 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
 
   cy.visit(`${uiPrefix}registries?page_size=100`);
 
-  cy.wait('@registries').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@registries').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.galaxykit('registry delete', element.name);
     });
   });
@@ -311,9 +311,8 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 
   cy.visit(`${uiPrefix}containers?page_size=100`);
 
-  cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
-    data.forEach((element) => {
+  cy.wait('@listLoad').then(({ response: { body } }) => {
+    body.data.forEach((element) => {
       cy.galaxykit('container delete', element.name);
     });
   });
