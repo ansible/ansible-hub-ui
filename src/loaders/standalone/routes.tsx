@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { type FeatureFlagsType, type SettingsType, type UserType } from 'src/api';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
 import { type AlertType } from 'src/components';
 import {
   AnsibleRemoteDetail,

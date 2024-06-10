@@ -1,5 +1,9 @@
 import React from 'react';
-import { type FeatureFlagsType, type SettingsType, type UserType } from 'src/api';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
 import { type AlertType } from 'src/components';
 
 export interface IAppContextType {

@@ -1,4 +1,7 @@
-import { Tooltip as PFTooltip, type TooltipPosition } from '@patternfly/react-core';
+import {
+  Tooltip as PFTooltip,
+  type TooltipPosition,
+} from '@patternfly/react-core';
 import React, { type ReactNode } from 'react';
 
 interface IProps {

@@ -7,7 +7,12 @@ import {
   CollectionVersionAPI,
   type CollectionVersionSearch,
 } from 'src/api';
-import { AlertList, type AlertType, DetailList, closeAlert } from 'src/components';
+import {
+  AlertList,
+  type AlertType,
+  DetailList,
+  closeAlert,
+} from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';

@@ -14,7 +14,11 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { type ErrorMessagesType, type RouteProps, withRouter } from 'src/utilities';
+import {
+  type ErrorMessagesType,
+  type RouteProps,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   userDetail: UserType;

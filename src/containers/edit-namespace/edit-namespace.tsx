@@ -2,7 +2,11 @@ import { Trans, t } from '@lingui/macro';
 import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, type NamespaceLinkType, type NamespaceType } from 'src/api';
+import {
+  MyNamespaceAPI,
+  type NamespaceLinkType,
+  type NamespaceType,
+} from 'src/api';
 import {
   AlertList,
   type AlertType,

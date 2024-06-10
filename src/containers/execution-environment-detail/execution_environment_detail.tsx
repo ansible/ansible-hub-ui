@@ -8,7 +8,10 @@ import {
   Title,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ExecutionEnvironmentAPI, type GroupObjectPermissionType } from 'src/api';
+import {
+  ExecutionEnvironmentAPI,
+  type GroupObjectPermissionType,
+} from 'src/api';
 import {
   ClipboardCopy,
   EmptyStateNoData,
