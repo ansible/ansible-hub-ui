@@ -13,7 +13,6 @@ describe('Hub Menu Tests', () => {
     'Execution Environments > Remote Registries',
     'Task Management',
     'Signature Keys',
-    'Documentation',
     'User Access > Users',
     'User Access > Groups',
     'User Access > Roles',
@@ -38,7 +37,6 @@ describe('Hub Menu Tests', () => {
       'Collections > Collections',
       'Collections > Namespaces',
       'Collections > Repositories',
-      'Documentation',
       'Execution Environments > Execution Environments',
       'Execution Environments > Remote Registries',
       'Signature Keys',
@@ -57,16 +55,6 @@ describe('Hub Menu Tests', () => {
 
       visibleMenuItems.forEach((item) => cy.menuPresent(item));
       missingMenuItems.forEach((item) => cy.menuMissing(item));
-    });
-
-    it('has Documentation tab', () => {
-      cy.login(username, password);
-
-      cy.menuPresent('Documentation').should(
-        'have.attr',
-        'href',
-        'https://docs.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-      );
     });
   });
 });
