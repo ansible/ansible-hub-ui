@@ -3,8 +3,8 @@ const config = require('@redhat-cloud-services/frontend-components-config');
 const {
   default: { rbac, defaultServices },
 } = require('@redhat-cloud-services/frontend-components-config-utilities/standalone/services');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { execSync } = require('node:child_process');
 
@@ -52,18 +52,14 @@ module.exports = (inputConfigs) => {
   const globals = {};
 
   defaultConfigs.forEach((item) => {
-    // == will match null and undefined, but not false
-    if (inputConfigs[item.name] == null) {
-      customConfigs[item.name] = item.default;
-    } else {
-      customConfigs[item.name] = inputConfigs[item.name];
-    }
-    if (item.scope === 'global') {
-      globals[item.name] = JSON.stringify(
-        inputConfigs[item.name] || item.default,
-      );
-    }
+    customConfigs[item.name] = inputConfigs[item.name] ?? item.default;
   });
+
+  defaultConfigs
+    .filter(({ scope }) => scope === 'global')
+    .forEach((item) => {
+      globals[item.name] = JSON.stringify(customConfigs[item.name]);
+    });
 
   // 4.6+: pulp APIs live under API_BASE_PATH now, ignore previous overrides
   globals.PULP_API_BASE_PATH = JSON.stringify(
@@ -169,9 +165,8 @@ module.exports = (inputConfigs) => {
         static: resolve(__dirname, '../static'),
       },
     },
-
-    // ignore editor files when watching
     watchOptions: {
+      // ignore editor files when watching
       ignored: ['**/.*.sw[po]'],
     },
   };

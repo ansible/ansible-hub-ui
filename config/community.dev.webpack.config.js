@@ -38,7 +38,7 @@ module.exports = webpackBase({
   // Login URI to allow stand alone with and without keycloak
   UI_EXTERNAL_LOGIN_URI: uiExternalLoginURI,
 
-  //required?
+  // required?
   WEBPACK_PUBLIC_PATH: '/',
 
   // Value for webpack.devServer.proxy
