@@ -21,7 +21,7 @@ import {
   Tooltip,
 } from 'src/components';
 import { Constants } from 'src/constants';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 
@@ -65,7 +65,7 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const MAX_DESCRIPTION_LENGTH = 60;
 
   const nsTitle = namespaceTitle(

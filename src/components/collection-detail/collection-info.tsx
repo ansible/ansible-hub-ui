@@ -21,7 +21,7 @@ import {
   LoginLink,
   Tag,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
 import './collection-info.scss';
@@ -44,7 +44,7 @@ export const CollectionInfo = ({
   addAlert,
 }: IProps) => {
   const downloadLinkRef = React.useRef<HTMLAnchorElement>(null);
-  const context = useContext();
+  const context = useHubContext();
 
   let installCommand = `ansible-galaxy collection install ${collection_version.namespace}.${collection_version.name}`;
 

@@ -19,4 +19,4 @@ export interface IAppContextType {
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);
-export const useContext = () => React.useContext(AppContext);
+export const useHubContext = () => React.useContext(AppContext);

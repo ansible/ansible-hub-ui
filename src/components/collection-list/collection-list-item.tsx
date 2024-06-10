@@ -23,7 +23,7 @@ import {
   Logo,
   Tag,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
 import { SignatureBadge } from '../signing';
@@ -50,7 +50,7 @@ export const CollectionListItem = ({
   showNamespace,
   uploadButton,
 }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const cells = [];
 
   const nsTitle = namespaceTitle(

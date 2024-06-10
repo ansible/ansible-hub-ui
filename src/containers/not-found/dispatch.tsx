@@ -11,7 +11,7 @@ import {
   LoadingPageSpinner,
   Main,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 import NotFoundImage from 'static/images/not_found.svg';
@@ -29,7 +29,7 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
 );
 
 const Dispatch = ({ location, navigate }: RouteProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
 
   const { pathname } = ParamHelper.parseParamString(location.search) as {
     pathname: string;

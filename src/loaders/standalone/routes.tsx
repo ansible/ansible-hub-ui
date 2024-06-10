@@ -56,7 +56,7 @@ import {
   UserList,
   UserProfile,
 } from 'src/containers';
-import { AppContext, useContext } from 'src/loaders/app-context';
+import { AppContext, useHubContext } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -96,7 +96,7 @@ const AuthHandler = ({
   path,
   updateInitialData,
 }: IAuthHandlerProps) => {
-  const { user, settings, featureFlags } = useContext();
+  const { user, settings, featureFlags } = useHubContext();
   const [isLoading, setLoading] = useState<boolean>(
     !user || !settings || !featureFlags,
   );
