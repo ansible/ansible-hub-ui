@@ -187,7 +187,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           )}
 
           <FormGroup fieldId='remove-tag' label={t`Current tags`}>
-            <LabelGroup id='remove-tag' defaultIsOpen={true}>
+            <LabelGroup id='remove-tag' defaultIsOpen>
               {this.getCurrentTags().map((tag) => (
                 <Label
                   disabled={isSaving}
@@ -252,7 +252,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.untag(
             repository.pulp.repository.id,
             tag,
@@ -262,7 +262,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
       for (const tag of this.state.tagsToAdd) {
         promises.push({
-          tag: tag,
+          tag,
           promise: ContainerTagAPI.tag(
             repository.pulp.repository.id,
             tag,

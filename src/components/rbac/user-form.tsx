@@ -176,7 +176,7 @@ export class UserForm extends React.Component<IProps, IState> {
             onSelect={this.onSelectGroup}
             placeholderText={t`Select groups`}
             selections={user.groups}
-            multiple={true}
+            multiple
             onClear={this.clearGroups}
             isDisabled={isReadonly}
           />

@@ -97,7 +97,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       users: null,
       allUsers: null,
       params: {
-        id: id,
+        id,
         page: 0,
         page_size: params['page_size'] || 10,
         sort:
@@ -249,7 +249,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       <Modal
         variant='large'
         onClose={close}
-        isOpen={true}
+        isOpen
         aria-label={t`add-user-modal`}
         title={''}
         header={
@@ -333,7 +333,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           placeholderText={t`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
-          multiple={true}
+          multiple
           onClear={() =>
             this.setState({
               selected: [],

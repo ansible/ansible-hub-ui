@@ -59,7 +59,7 @@ export const CollectionInfo = ({
   return (
     <div className='pf-c-content info-panel'>
       <h1>{t`Install`}</h1>
-      <Grid hasGutter={true}>
+      <Grid hasGutter>
         <GridItem>{collection_version.description}</GridItem>
         <GridItem>
           {collection_version.tags.map((tag, i) => (
@@ -69,7 +69,7 @@ export const CollectionInfo = ({
 
         {content.license?.length > 0 && (
           <GridItem>
-            <Split hasGutter={true}>
+            <Split hasGutter>
               <SplitItem className='install-title'>{t`License`}</SplitItem>
               <SplitItem isFilled>
                 {content.license ? content.license.join(', ') : ''}
@@ -78,7 +78,7 @@ export const CollectionInfo = ({
           </GridItem>
         )}
         <GridItem>
-          <Split hasGutter={true}>
+          <Split hasGutter>
             <SplitItem className='install-title'>{t`Installation`}</SplitItem>
             <SplitItem isFilled>
               <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
@@ -92,7 +92,7 @@ export const CollectionInfo = ({
           </Split>
         </GridItem>
         <GridItem>
-          <Split hasGutter={true}>
+          <Split hasGutter>
             <SplitItem className='install-title'>{t`Download`}</SplitItem>
             {context.user.is_anonymous &&
             !context.settings
@@ -162,7 +162,7 @@ export const CollectionInfo = ({
         />
         {content?.requires_ansible && (
           <GridItem>
-            <Split hasGutter={true}>
+            <Split hasGutter>
               <SplitItem className='install-title'>{t`Requires Ansible`}</SplitItem>
               <SplitItem isFilled data-cy='ansible-requirement'>
                 {content?.requires_ansible}

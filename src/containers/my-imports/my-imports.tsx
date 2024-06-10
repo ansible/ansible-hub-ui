@@ -57,7 +57,7 @@ class MyImports extends React.Component<RouteProps, IState> {
     this.state = {
       selectedImport: undefined,
       importList: [],
-      params: params,
+      params,
       selectedImportDetails: undefined,
       resultsCount: 0,
       importDetailError: '',

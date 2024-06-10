@@ -182,7 +182,7 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
                       <LegacyRoleListItem
                         key={lrole.id}
                         role={lrole}
-                        show_thumbnail={true}
+                        show_thumbnail
                       />
                     ))}
                 </DataList>

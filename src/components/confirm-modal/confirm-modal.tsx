@@ -39,7 +39,7 @@ export const ConfirmModal = (props: IProps) => {
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={cancelAction}
       title={title}
       titleIconVariant='warning'

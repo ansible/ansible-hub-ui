@@ -74,7 +74,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
         }
         saveUser={this.saveUser}
         onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
-        isNewUser={true}
+        isNewUser
       />
     );
   }

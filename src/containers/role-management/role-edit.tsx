@@ -62,7 +62,7 @@ class EditRole extends React.Component<RouteProps, IState> {
       role: null,
 
       params: {
-        id: id,
+        id,
       },
       itemCount: 0,
       alerts: [],
@@ -160,7 +160,7 @@ class EditRole extends React.Component<RouteProps, IState> {
               <RoleForm
                 {...this.state}
                 name={name}
-                nameDisabled={true}
+                nameDisabled
                 description={description}
                 descriptionHelperText={errorMessages['description']}
                 descriptionValidated={

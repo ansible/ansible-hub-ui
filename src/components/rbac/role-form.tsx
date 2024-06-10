@@ -76,7 +76,7 @@ export class RoleForm extends React.Component<IProps, IState> {
 
             <div style={{ display: 'flex', gap: '10px' }}>
               <FormGroup
-                isRequired={true}
+                isRequired
                 key='name'
                 fieldId='name'
                 label={t`Name`}
@@ -98,7 +98,7 @@ export class RoleForm extends React.Component<IProps, IState> {
               </FormGroup>
 
               <FormGroup
-                isRequired={true}
+                isRequired
                 style={{ width: '50%' }}
                 key='description'
                 fieldId='description'
@@ -129,7 +129,7 @@ export class RoleForm extends React.Component<IProps, IState> {
               permissions={permissions}
               setSelected={(permissions) => this.setState({ permissions })}
               showCustom={false}
-              showEmpty={true}
+              showEmpty
             />
           </div>
 

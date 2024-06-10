@@ -164,7 +164,7 @@ const AddCollectionVersionModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Select a collection`}
       variant='large'

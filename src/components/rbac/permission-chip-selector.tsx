@@ -92,13 +92,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         isDisabled={!!isDisabled}
       >
         {availablePermissions.length === 0
-          ? [
-              <SelectOption
-                isDisabled={true}
-                key={'not_found'}
-                value={t`Not found`}
-              />,
-            ]
+          ? [<SelectOption isDisabled key={'not_found'} value={t`Not found`} />]
           : availablePermissions.map((permission) => (
               <SelectOption key={permission} value={permission}>
                 {model_permissions[permission]?.name || permission}

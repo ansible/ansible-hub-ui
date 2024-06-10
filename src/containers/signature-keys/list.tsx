@@ -62,7 +62,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,

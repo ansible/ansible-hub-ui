@@ -47,7 +47,7 @@ export const DeleteModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={cancelAction}
       title={title}
       titleIconVariant='warning'

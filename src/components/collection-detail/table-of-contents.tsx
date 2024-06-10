@@ -100,8 +100,8 @@ function parseLinks(docs_blob: DocsBlobType, props): Table {
   const { namespace, collection } = props;
 
   const baseUrlParams = {
-    namespace: namespace,
-    collection: collection,
+    namespace,
+    collection,
     repo: props.repository,
   };
 

@@ -95,7 +95,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       loading: true,
       images: [],
       numberOfImages: 0,
-      params: params,
+      params,
       redirect: null,
       manageTagsManifestDigest: undefined,
       publishToController: null,

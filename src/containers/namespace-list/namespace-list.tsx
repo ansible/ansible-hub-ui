@@ -75,7 +75,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       alerts: [],
       namespaces: undefined,
       itemCount: 0,
-      params: params,
+      params,
       hasPermission: true,
       isModalOpen: false,
       loading: true,

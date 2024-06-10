@@ -738,7 +738,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
-      namespace: namespace,
+      namespace,
       collection: name,
     })
       .then((result) => {
@@ -792,9 +792,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.props.collection.repository,
-      namespace: namespace,
+      namespace,
       collection: name,
-      version: version,
+      version,
     })
       .then((result) => {
         waitForTask(result.data.task_id)
@@ -834,7 +834,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             alerts: [
               ...this.state.alerts,
               {
-                title: title,
+                title,
                 variant: 'success',
               },
             ],

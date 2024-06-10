@@ -159,7 +159,7 @@ const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
         remote={remoteToEdit}
         updateRemote={(r) => setState({ remoteToEdit: r })}
         remoteType='ansible-remote'
-        showMain={true}
+        showMain
         saveRemote={saveRemote}
         errorMessages={errorMessages}
         closeModal={closeModal}

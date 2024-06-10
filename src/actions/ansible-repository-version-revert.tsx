@@ -38,7 +38,7 @@ const RevertModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={cancelAction}
       title={t`Revert repository`}
       titleIconVariant='warning'

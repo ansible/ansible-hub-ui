@@ -251,7 +251,7 @@ const MultiSearch = (props: RouteProps) => {
                 key={i}
                 collection={c}
                 displaySignatures={featureFlags.display_signatures}
-                showNamespace={true}
+                showNamespace
               />
             ))}
           </DataList>
@@ -295,7 +295,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching roles`}>
               {roles.map((r) => (
-                <LegacyRoleListItem key={r.id} role={r} show_thumbnail={true} />
+                <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
               ))}
             </DataList>
           </ResultsSection>

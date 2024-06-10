@@ -108,7 +108,7 @@ class CollectionImportLog extends React.Component<RouteProps, IState> {
               setFollowMessages={() => null}
               selectedImport={selectedImport}
               apiError={apiError}
-              hideCollectionName={true}
+              hideCollectionName
             />
           </section>
         </Main>
