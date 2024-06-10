@@ -95,6 +95,17 @@ export const StandaloneLayout = ({
     ];
 
     docsDropdownItems = [
+      !IS_COMMUNITY && (
+        <DropdownItem
+          key='documentation'
+          component={
+            <ExternalLink
+              href={UI_DOCS_URL}
+              variant='menu'
+            >{t`Documentation`}</ExternalLink>
+          }
+        />
+      ),
       <DropdownItem
         key='customer_support'
         component={
@@ -143,17 +154,6 @@ export const StandaloneLayout = ({
               href='https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/'
               variant='menu'
             >{t`Community User Guide`}</ExternalLink>
-          }
-        />
-      ),
-      !IS_COMMUNITY && (
-        <DropdownItem
-          key='documentation'
-          component={
-            <ExternalLink
-              href={UI_DOCS_URL}
-              variant='menu'
-            >{t`Documentation`}</ExternalLink>
           }
         />
       ),
