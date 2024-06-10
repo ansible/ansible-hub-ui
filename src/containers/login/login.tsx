@@ -3,12 +3,12 @@ import { LoginPage as PFLoginPage } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import Logo from 'static/images/logo_large.svg';
 import { ActiveUserAPI } from 'src/api';
 import { LoginForm } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import Logo from 'static/images/logo_large.svg';
 
 interface IState {
   usernameValue: string;

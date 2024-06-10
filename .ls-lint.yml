@@ -1,12 +1,6 @@
 ls:
-  .travis:
-    .js: snake_case
-
   config:
     .js: point.case | kebab-case
-
-  src/loaders/insights:
-    .js: kebab-case | PascalCase
 
   src/utilities:
     .js: camelCase | snake_case
