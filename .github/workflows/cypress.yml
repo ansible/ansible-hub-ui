@@ -84,8 +84,7 @@ jobs:
       run: |
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
-        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env.standalone \
+        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -159,7 +158,7 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json.standalone cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
