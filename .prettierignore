@@ -7,7 +7,6 @@
 *.xml
 .*.sw[po]
 .DS_Store
-.eslintrc
 Dockerfile
 test/cypress.env.json.template
 test/cypress/e2e/*/compose.env
