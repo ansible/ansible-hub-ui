@@ -2,8 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
-import { waitForTask } from 'src/utilities';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, waitForTask } from 'src/utilities';
 import { DeleteModal } from './delete-modal';
 
 interface IProps {

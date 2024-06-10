@@ -16,13 +16,14 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   type ErrorMessagesType,
+  type RouteProps,
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
   translateLockedRolesDescription,
   validateInput,
+  withRouter,
 } from 'src/utilities';
-import { type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   role: RoleType;

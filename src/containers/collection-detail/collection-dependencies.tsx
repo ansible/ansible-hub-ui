@@ -18,8 +18,12 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { type RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage } from 'src/utilities';
+import {
+  ParamHelper,
+  type RouteProps,
+  errorMessage,
+  withRouter,
+} from 'src/utilities';
 import { type IBaseCollectionState, loadCollection } from './base';
 import './collection-dependencies.scss';
 

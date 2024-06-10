@@ -14,21 +14,19 @@ import {
   type CollectionVersionSearch,
 } from 'src/api';
 import {
-  ApprovalRow,
-  ApproveModal,
-  BaseHeader,
-  EmptyStateFilter,
-  EmptyStateNoData,
-  EmptyStateUnauthorized,
-  Main,
-} from 'src/components';
-import {
   AlertList,
   type AlertType,
   AppliedFilters,
+  ApprovalRow,
+  ApproveModal,
+  BaseHeader,
   CompoundFilter,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
   LoadingPageSpinner,
   LoadingPageWithHeader,
+  Main,
   Pagination,
   SortTable,
   UploadSingCertificateModal,

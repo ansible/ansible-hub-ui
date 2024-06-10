@@ -17,8 +17,7 @@ import {
   EmptyStateNoData,
   MarkdownEditor,
 } from 'src/components';
-import { withRouter } from 'src/utilities';
-import { getContainersURL } from 'src/utilities';
+import { getContainersURL, withRouter } from 'src/utilities';
 import {
   type IDetailSharedProps,
   withContainerParamFix,

@@ -14,8 +14,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { type RouteProps, withRouter } from 'src/utilities';
-import { errorMessage } from 'src/utilities';
+import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 import './token.scss';
 
 interface IState {

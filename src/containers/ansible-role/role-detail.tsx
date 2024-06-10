@@ -21,7 +21,6 @@ import {
   type LegacyRoleDetailType,
   type LegacyRoleVersionDetailType,
 } from 'src/api';
-import { EmptyStateNoData } from 'src/components';
 import {
   AlertList,
   type AlertType,
@@ -29,6 +28,7 @@ import {
   ClipboardCopy,
   DateComponent,
   DownloadCount,
+  EmptyStateNoData,
   ExternalLink,
   LabelGroup,
   LoadingPageWithHeader,
