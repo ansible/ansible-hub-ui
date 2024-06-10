@@ -1,7 +1,4 @@
 ls:
-  .travis:
-    .js: snake_case
-
   .config.js: point.case
   .d.ts: kebab-case
   .js: kebab-case
