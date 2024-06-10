@@ -1,4 +1,4 @@
-import { FeatureFlagsType } from 'src/api';
+import { type FeatureFlagsType } from 'src/api';
 
 export const canSignNamespace = (
   { featureFlags }: { featureFlags: FeatureFlagsType },

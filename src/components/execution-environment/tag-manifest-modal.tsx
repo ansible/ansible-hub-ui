@@ -14,14 +14,14 @@ import {
 import TagIcon from '@patternfly/react-icons/dist/esm/icons/tag-icon';
 import React from 'react';
 import {
-  ContainerManifestType,
-  ContainerRepositoryType,
+  type ContainerManifestType,
+  type ContainerRepositoryType,
   ContainerTagAPI,
   ExecutionEnvironmentAPI,
   PulpStatus,
   TaskAPI,
 } from 'src/api';
-import { AlertType, LabelGroup } from 'src/components';
+import { type AlertType, LabelGroup } from 'src/components';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {

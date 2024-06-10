@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button, Chip, ChipGroup } from '@patternfly/react-core';
 import React from 'react';
-import { ParamHelper, ParamType, chipGroupProps } from 'src/utilities';
+import { ParamHelper, type ParamType, chipGroupProps } from 'src/utilities';
 
 interface IProps {
   /** Sets the current page params to p */

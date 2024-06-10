@@ -1,11 +1,11 @@
 import {
   CollectionAPI,
-  CollectionDetailType,
+  type CollectionDetailType,
   CollectionVersionAPI,
-  CollectionVersionContentType,
-  CollectionVersionSearch,
+  type CollectionVersionContentType,
+  type CollectionVersionSearch,
 } from 'src/api';
-import { AlertType } from 'src/components';
+import { type AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { repositoryBasePath } from 'src/utilities';
 

@@ -6,7 +6,7 @@ import {
   CodeBlockCode,
 } from '@patternfly/react-core';
 import React from 'react';
-import { AnsibleRemoteType } from 'src/api';
+import { type AnsibleRemoteType } from 'src/api';
 import { CopyURL, Details, LazyRepositories } from 'src/components';
 
 interface TabProps {

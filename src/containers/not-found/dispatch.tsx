@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { Bullseye, DataList } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotFoundImage from 'src/../static/images/not_found.svg';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
@@ -14,7 +14,7 @@ import {
 } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 
 const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
   <section className='body' {...rest}>

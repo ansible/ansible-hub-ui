@@ -1,4 +1,4 @@
-import { MessageDescriptor, i18n } from '@lingui/core';
+import { type MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -6,10 +6,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ActionType } from 'src/actions';
+import { type ActionType } from 'src/actions';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
@@ -20,11 +20,11 @@ import {
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { AppContext } from 'src/loaders/app-context';
-import { PermissionContextType } from 'src/permissions';
+import { type PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
-  ParamType,
-  RouteProps,
+  type ParamType,
+  type RouteProps,
   errorMessage,
   withRouter,
 } from 'src/utilities';

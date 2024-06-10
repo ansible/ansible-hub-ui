@@ -20,13 +20,13 @@ import {
 import {
   APISearchTypeAhead,
   AlertList,
-  AlertType,
+  type AlertType,
   HelperText,
   LabelGroup,
   closeAlertMixin,
 } from 'src/components';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   alertErrorsWithoutFields,
   errorMessage,
   isFieldValid,

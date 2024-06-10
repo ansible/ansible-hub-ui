@@ -11,13 +11,13 @@ import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -36,9 +36,9 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
   filterIsSet,
   mapErrorMessages,

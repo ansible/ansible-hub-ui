@@ -1,4 +1,4 @@
-import { MessageDescriptor, i18n } from '@lingui/core';
+import { type MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -6,17 +6,17 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ActionType } from 'src/actions';
+import { type ActionType } from 'src/actions';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  FilterOption,
+  type FilterOption,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -24,10 +24,10 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { PermissionContextType } from 'src/permissions';
+import { type PermissionContextType } from 'src/permissions';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   withRouter,

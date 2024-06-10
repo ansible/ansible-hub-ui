@@ -3,7 +3,7 @@ import {
   GenerateId,
   Label,
   Tooltip,
-  TooltipPosition,
+  type TooltipPosition,
   fillTemplate,
 } from '@patternfly/react-core';
 import TimesCircleIcon from '@patternfly/react-icons/dist/esm/icons/times-circle-icon';

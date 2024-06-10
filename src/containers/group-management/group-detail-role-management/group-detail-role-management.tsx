@@ -9,10 +9,10 @@ import {
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   GroupRoleAPI,
-  GroupRoleType,
-  RoleType,
+  type GroupRoleType,
+  type RoleType,
 } from 'src/api';
 import {
   AppliedFilters,
@@ -30,10 +30,10 @@ import {
   SelectRoles,
   WizardModal,
 } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
+import { type IAppContextType } from 'src/loaders/app-context';
 import {
   ParamHelper,
-  ParamType,
+  type ParamType,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,

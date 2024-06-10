@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import React from 'react';
-import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
+import { LegacyRoleAPI, type LegacyRoleListType, TagAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -16,7 +16,7 @@ import {
 } from 'src/components';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   handleHttpError,
   withRouter,

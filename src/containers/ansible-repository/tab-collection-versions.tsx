@@ -6,9 +6,9 @@ import {
   ansibleRepositoryCollectionVersionRemoveAction,
 } from 'src/actions';
 import {
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import { DetailList, ListItemActions } from 'src/components';
 import { Paths, formatPath } from 'src/paths';

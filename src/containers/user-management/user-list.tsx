@@ -11,10 +11,10 @@ import {
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { UserAPI, UserType } from 'src/api';
+import { UserAPI, type UserType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -36,7 +36,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   withRouter,

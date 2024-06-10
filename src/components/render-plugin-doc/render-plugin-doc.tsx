@@ -1,11 +1,11 @@
 import { Trans, t } from '@lingui/macro';
 import { dom, parse } from 'antsibull-docs';
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import {
-  PluginContentType,
-  PluginDoc,
-  PluginOption,
-  ReturnedValue,
+  type PluginContentType,
+  type PluginDoc,
+  type PluginOption,
+  type ReturnedValue,
 } from 'src/api';
 import { ExternalLink } from 'src/components';
 import './render-plugin-doc.scss';

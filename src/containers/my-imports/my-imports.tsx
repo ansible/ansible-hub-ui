@@ -3,22 +3,22 @@ import { cloneDeep } from 'lodash';
 import React from 'react';
 import {
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   ImportAPI,
-  ImportDetailType,
-  ImportListType,
+  type ImportDetailType,
+  type ImportListType,
   PulpStatus,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ImportConsole,
   ImportList,
   Main,
   closeAlertMixin,
 } from 'src/components';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 import './my-imports.scss';
 
 interface IState {

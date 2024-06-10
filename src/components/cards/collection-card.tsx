@@ -13,7 +13,7 @@ import {
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersionSearch } from 'src/api';
+import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
   Logo,

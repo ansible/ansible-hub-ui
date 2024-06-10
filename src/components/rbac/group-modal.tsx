@@ -8,7 +8,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   onCancel?: () => void;

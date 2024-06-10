@@ -8,9 +8,9 @@ import {
 } from 'src/actions';
 import {
   AnsibleRemoteAPI,
-  AnsibleRemoteType,
+  type AnsibleRemoteType,
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
 } from 'src/api';
 import { PageWithTabs } from 'src/components';
 import { Paths, formatPath } from 'src/paths';

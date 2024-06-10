@@ -4,9 +4,9 @@ import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  CollectionVersionSearch,
-  ImportDetailType,
-  ImportListType,
+  type CollectionVersionSearch,
+  type ImportDetailType,
+  type ImportListType,
   PulpStatus,
 } from 'src/api';
 import { StatusIndicator, Tooltip } from 'src/components';

@@ -1,4 +1,4 @@
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { type FeatureFlagsType, type SettingsType, type UserType } from 'src/api';
 
 export type PermissionContextType = (
   o: {

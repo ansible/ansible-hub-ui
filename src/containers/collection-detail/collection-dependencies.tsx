@@ -2,8 +2,8 @@ import { t } from '@lingui/macro';
 import React from 'react';
 import {
   CollectionAPI,
-  CollectionUsedByDependencies,
-  CollectionVersion,
+  type CollectionUsedByDependencies,
+  type CollectionVersion,
   CollectionVersionAPI,
 } from 'src/api';
 import {
@@ -18,9 +18,9 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { ParamHelper, errorMessage } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { type IBaseCollectionState, loadCollection } from './base';
 import './collection-dependencies.scss';
 
 interface IState extends IBaseCollectionState {

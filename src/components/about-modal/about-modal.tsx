@@ -11,7 +11,7 @@ import { detect } from 'detect-browser';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'src/../static/images/logo_large.svg';
-import { ApplicationInfoAPI, UserType } from 'src/api';
+import { ApplicationInfoAPI, type UserType } from 'src/api';
 import { ExternalLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 

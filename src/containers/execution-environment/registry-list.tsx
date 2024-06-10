@@ -8,10 +8,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
+import { ExecutionEnvironmentRegistryAPI, type RemoteType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -32,9 +32,9 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   lastSyncStatus,

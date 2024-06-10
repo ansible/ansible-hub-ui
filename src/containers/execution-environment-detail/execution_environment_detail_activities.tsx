@@ -13,7 +13,7 @@ import {
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import {
-  IDetailSharedProps,
+  type IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
 } from './base';

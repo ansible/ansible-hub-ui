@@ -9,7 +9,7 @@ import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/excl
 import cx from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionVersionSearch, ContentSummaryType } from 'src/api';
+import { type CollectionVersionSearch, type ContentSummaryType } from 'src/api';
 import { EmptyStateCustom } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities';

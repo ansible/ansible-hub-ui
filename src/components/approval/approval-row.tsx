@@ -12,9 +12,9 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CollectionAPI, CollectionVersionSearch } from 'src/api';
+import { CollectionAPI, type CollectionVersionSearch } from 'src/api';
 import { DateComponent, LabelGroup, ListItemActions } from 'src/components';
-import { IAppContextType } from 'src/loaders/app-context';
+import { type IAppContextType } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 
 interface IProps {

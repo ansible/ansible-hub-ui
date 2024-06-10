@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { DataList, Label } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -11,7 +11,7 @@ import {
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionListItem,
   EmptyStateXs,
@@ -28,7 +28,7 @@ import { useContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   handleHttpError,
   withRouter,
 } from 'src/utilities';

@@ -6,18 +6,18 @@ import { Link, Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
-  GroupType,
+  type CollectionVersionSearch,
+  type GroupType,
   MyNamespaceAPI,
   NamespaceAPI,
-  NamespaceType,
-  RoleType,
+  type NamespaceType,
+  type RoleType,
   SignCollectionAPI,
 } from 'src/api';
 import {
   AccessTab,
   AlertList,
-  AlertType,
+  type AlertType,
   ClipboardCopy,
   CollectionDropdown,
   CollectionList,
@@ -40,7 +40,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   canSignNamespace,
   errorMessage,
   filterIsSet,

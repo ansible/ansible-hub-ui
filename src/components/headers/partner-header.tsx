@@ -1,14 +1,14 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { NamespaceType } from 'src/api';
+import { type NamespaceType } from 'src/api';
 import {
   BaseHeader,
-  BreadcrumbType,
+  type BreadcrumbType,
   Breadcrumbs,
   ExternalLink,
   Logo,
   Tabs,
-  TabsType,
+  type TabsType,
 } from 'src/components';
 import { namespaceTitle } from 'src/utilities';
 

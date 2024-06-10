@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import {
-  FileUploadProps,
+  type FileUploadProps,
   FileUpload as PFFileUpload,
 } from '@patternfly/react-core';
 import React from 'react';

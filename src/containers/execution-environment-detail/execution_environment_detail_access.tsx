@@ -3,8 +3,8 @@ import React from 'react';
 import {
   ExecutionEnvironmentNamespaceAPI,
   GroupAPI,
-  GroupType,
-  RoleType,
+  type GroupType,
+  type RoleType,
   UserAPI,
 } from 'src/api';
 import { AccessTab } from 'src/components';
@@ -13,7 +13,7 @@ import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import { ParamHelper, assignRoles, errorMessage } from 'src/utilities';
 import {
-  IDetailSharedProps,
+  type IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
 } from './base';

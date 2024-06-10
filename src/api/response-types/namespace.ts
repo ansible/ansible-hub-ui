@@ -1,4 +1,4 @@
-import { GroupObjectPermissionType } from './permissions';
+import { type GroupObjectPermissionType } from './permissions';
 
 export class NamespaceLinkType {
   name: string;

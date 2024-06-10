@@ -10,14 +10,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyNamespaceAPI,
-  LegacyNamespaceListType,
+  type LegacyNamespaceListType,
   LegacyRoleAPI,
-  LegacyRoleListType,
+  type LegacyRoleListType,
   TagAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -34,7 +34,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   filterIsSet,
   getProviderInfo,
   handleHttpError,

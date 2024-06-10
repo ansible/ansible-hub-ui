@@ -1,6 +1,6 @@
 import { repositoryBasePath } from 'src/utilities';
 import { HubAPI } from './hub';
-import { CollectionVersionSearch } from './response-types/collection';
+import { type CollectionVersionSearch } from './response-types/collection';
 
 interface SignNamespace {
   signing_service?: string;

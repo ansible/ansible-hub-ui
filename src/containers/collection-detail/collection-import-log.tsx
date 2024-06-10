@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
+import { ImportAPI, type ImportDetailType, type ImportListType } from 'src/api';
 import {
   CollectionHeader,
   ImportConsole,
@@ -9,8 +9,8 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;

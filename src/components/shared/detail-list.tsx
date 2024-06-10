@@ -5,18 +5,18 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { ActionType } from 'src/actions';
+import { type ActionType } from 'src/actions';
 import {
   AppliedFilters,
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
-  FilterOption,
+  type FilterOption,
   LoadingPageSpinner,
-  LocalizedSortHeaders,
+  type LocalizedSortHeaders,
   Pagination,
-  Query,
-  RenderTableRow,
+  type Query,
+  type RenderTableRow,
   SortTable,
 } from 'src/components';
 import { filterIsSet, handleHttpError } from 'src/utilities';

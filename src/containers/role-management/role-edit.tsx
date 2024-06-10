@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoleAPI, RoleType } from 'src/api';
+import { RoleAPI, type RoleType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
   LoadingPageWithHeader,
   Main,
@@ -15,14 +15,14 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
   translateLockedRolesDescription,
   validateInput,
 } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   role: RoleType;

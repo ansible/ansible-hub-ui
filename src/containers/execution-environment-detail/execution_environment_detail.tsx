@@ -8,7 +8,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
+import { ExecutionEnvironmentAPI, type GroupObjectPermissionType } from 'src/api';
 import {
   ClipboardCopy,
   EmptyStateNoData,
@@ -17,7 +17,7 @@ import {
 import { withRouter } from 'src/utilities';
 import { getContainersURL } from 'src/utilities';
 import {
-  IDetailSharedProps,
+  type IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
 } from './base';

@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/macro';
 import { Divider, Flex, FlexItem, Label } from '@patternfly/react-core';
 import React from 'react';
-import { RoleType } from 'src/api';
+import { type RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
 import { useContext } from 'src/loaders/app-context';
 import { translateLockedRolesDescription } from 'src/utilities';

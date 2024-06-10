@@ -1,5 +1,5 @@
 import { clearSetFieldsFromRequest } from 'src/utilities';
-import { RemoteType } from '.';
+import { type RemoteType } from '.';
 import { HubAPI } from './hub';
 
 // removes unchanged values and write only fields before updating

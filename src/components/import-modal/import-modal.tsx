@@ -14,14 +14,14 @@ import cx from 'classnames';
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionAPI,
-  CollectionUploadType,
-  CollectionVersionSearch,
+  type CollectionUploadType,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   LabelGroup,
   MultipleRepoSelector,
   closeAlertMixin,

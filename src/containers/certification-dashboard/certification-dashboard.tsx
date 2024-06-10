@@ -8,10 +8,10 @@ import {
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   ApprovalRow,
@@ -24,7 +24,7 @@ import {
 } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   CompoundFilter,
   LoadingPageSpinner,
@@ -37,7 +37,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,

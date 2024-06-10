@@ -12,9 +12,9 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ActiveUserAPI,
-  FeatureFlagsType,
-  SettingsType,
-  UserType,
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
 } from 'src/api';
 import {
   AboutModalWindow,
