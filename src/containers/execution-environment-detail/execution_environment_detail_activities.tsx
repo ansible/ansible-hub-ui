@@ -214,7 +214,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               ),
             });
           } else {
-            const lastActivity = activities[activities.length - 1];
+            const lastActivity = activities.at(-1);
             if (lastActivity) {
               activities.push({
                 created: lastActivity.created,
