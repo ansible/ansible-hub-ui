@@ -1,9 +1,9 @@
 # Ansible Automation Hub UI
 
 Frontend for Ansible Hub and Galaxy. The backend for this project can be found at [ansible/galaxy\_ng](https://github.com/ansible/galaxy_ng/),
-developer docs at [ansible.readthedocs.io](https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/), and an outdated wiki at [ansibe/galaxy_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
+developer docs at [ansible.readthedocs.io](https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/), and an outdated wiki at [ansibe/galaxy\_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
 
-The project is built on React & Patternfly, using components from [patternfly-react](https://github.com/patternfly/patternfly-react) and [lingui](https://github.com/lingui/js-lingui/) for l10n.
+The project is built on React & Patternfly, using components from [patternfly-react](https://github.com/patternfly/patternfly-react), with [lingui](https://github.com/lingui/js-lingui/) for l10n.
 
 
 ## Setting up Your Dev Environment
@@ -67,7 +67,7 @@ This app can be developed in standalone, community, or insights mode. Insights m
 
 ### Tests
 
-For more information about UI testing go to [test/README.md](https://github.com/ansible/ansible-hub-ui/tree/master/test/README.md).
+For more information about UI testing go to [test/README.md](./test/README.md).
 
 Set up:
 
