@@ -59,7 +59,7 @@ This app can be developed in standalone, community, or insights mode. Insights m
 
 #### Modes
 
-* `start-standalone`: assumes `oci/standalone`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
+* `start-standalone`: assumes `oci/standalone` or `oci/dab`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
 * `start-community`: assumes `oci/community`, http://localhost:8002/ui/ and http://localhost:5001/api/
 * `start-insights`: assumes `oci/insights`,  http://localhost:8002/preview/ansible/automation-hub/ and http://localhost:55001/api/automation-hub/
   * **NOTE:** This option is only relevant to Red Hat employees.
@@ -95,14 +95,13 @@ List of all workflows:
 - `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
-- `dev-gateway-release`: Build and upload to github releases, update `dev-gateway` tag; when master is updated
 - `i18n`: Extract and merge l10n strings; cron
 - `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
 - `stable-release`: Build and upload to github releases; when a stable release is created
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `dev-release`, `dev-gateway-release`, `i18n`, `pr-checks`, `stable-release`
+- `master`: `backported-labels`, `cypress`, `dev-release`, `i18n`, `pr-checks`, `stable-release`
 - `stable-*`: `backported-labels`, `cypress`, `i18n` (via cron from master), `pr-checks`, `stable-release`
 
 
