@@ -2,7 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { Bullseye, DataList } from '@patternfly/react-core';
 import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import NotFoundImage from 'src/../static/images/not_found.svg';
+import NotFoundImage from 'static/images/not_found.svg';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,

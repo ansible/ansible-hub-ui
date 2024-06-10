@@ -10,7 +10,8 @@
     "noImplicitAny": false,
     "outDir": "./dist/",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "static/*": ["static/*"]
     },
     "skipLibCheck": true,
     "sourceMap": true,
