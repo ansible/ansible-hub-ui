@@ -10,10 +10,10 @@ import {
 import { detect } from 'detect-browser';
 import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from 'static/images/logo_large.svg';
 import { ApplicationInfoAPI, type UserType } from 'src/api';
 import { ExternalLink, MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
+import Logo from 'static/images/logo_large.svg';
 
 const Label = ({ children }: { children: ReactNode }) => (
   <TextListItem component={TextListItemVariants.dt}>{children}</TextListItem>

@@ -3,7 +3,6 @@ const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=
 
 // Compile configuration for deploying to insights
 module.exports = webpackBase({
-  API_HOST: '',
   API_BASE_PATH: '/api/automation-hub/',
   UI_BASE_PATH:
     cloudBeta === 'true'

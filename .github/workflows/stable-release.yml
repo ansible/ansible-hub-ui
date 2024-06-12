@@ -4,9 +4,10 @@ name: "Stable release"
 on:
   push:
     tags:
-    - '[0-9]+.[0-9]+.**'
-    - '!dev'
-    - '!**cloud**'
+    - '[0-9]+.[0-9]+.*'
+    - '!dev*'
+    - '!cloud-*'
+    - '!crc-*'
 
 concurrency:
   group: stable-release-${{ github.ref }}
