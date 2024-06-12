@@ -15,10 +15,10 @@ import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { GenericPulpAPI, TaskManagementAPI, TaskType } from 'src/api';
+import { GenericPulpAPI, TaskManagementAPI, type TaskType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   ConfirmModal,
@@ -32,7 +32,7 @@ import {
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import {
-  RouteProps,
+  type RouteProps,
   errorMessage,
   parsePulpIDFromURL,
   withRouter,
@@ -485,7 +485,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
                     resources.push({
                       name: result.data.name,
                       type: resourceType,
-                      pluginName: pluginName,
+                      pluginName,
                     });
                   })
                   .catch(() => {

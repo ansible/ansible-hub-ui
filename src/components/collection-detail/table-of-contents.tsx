@@ -12,7 +12,7 @@ import {
 import { capitalize } from 'lodash';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DocsBlobType } from 'src/api';
+import { type DocsBlobType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 
@@ -100,8 +100,8 @@ function parseLinks(docs_blob: DocsBlobType, props): Table {
   const { namespace, collection } = props;
 
   const baseUrlParams = {
-    namespace: namespace,
-    collection: collection,
+    namespace,
+    collection,
     repo: props.repository,
   };
 

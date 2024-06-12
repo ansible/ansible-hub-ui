@@ -1,5 +1,5 @@
 import { HubAPI } from './hub';
-import { UserType } from './response-types/user';
+import { type UserType } from './response-types/user';
 
 class API extends HubAPI {
   apiPath = '_ui/v1/me/';

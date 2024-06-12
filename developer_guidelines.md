@@ -4,16 +4,9 @@ These are the rules we try to follow to make sure this project is as consistent 
 
 ## Imports
 
-### Ordering
-
-Imports should be ordered as follows:
-
-1. Any imports from 'react'
-2. Stylesheets
-3. Any imports from 3rd party libraries such as patternfly, lodash, etc.
-4. Local imports
-
-### Importing and exporting local components
+Imports get automatically sorted by prettier. For local imports, make sure to import from
+`src/SUBDIR` without the full path, or `./FILE`. Only use the file extension for scss &
+images.
 
 All components in local directories should be exported and imported via the index.ts file
 at the directory's root.
@@ -58,7 +51,7 @@ Updating the params keyword should be done with the `ParamHelper` object found i
 be used to update `params` as well as mixins that can be used to update the pages's
 query params when the state changes.
 
-An example of how this works is the `Sort` component (`src/components/patternfly-wrappers/sort.tsx`).
+An example of how this works is the `Sort` component (`src/components/shared/sort.tsx`).
 This component loads the field being sorted and direction to sort by from `params['sort']`.
 When the component is changed it calls the `updateParams` callback which updates the component's
 `params` object, the page's query params and optionally calls the API with the new params to

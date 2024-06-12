@@ -1,8 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Bullseye, DataList } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import NotFoundImage from 'src/../static/images/not_found.svg';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,
@@ -12,9 +11,10 @@ import {
   LoadingPageSpinner,
   Main,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import NotFoundImage from 'static/images/not_found.svg';
 
 const PageSection = ({ children, ...rest }: { children: ReactNode }) => (
   <section className='body' {...rest}>
@@ -29,7 +29,7 @@ const SectionTitle = ({ children }: { children: ReactNode }) => (
 );
 
 const Dispatch = ({ location, navigate }: RouteProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
 
   const { pathname } = ParamHelper.parseParamString(location.search) as {
     pathname: string;
@@ -138,7 +138,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                     key={i}
                     collection={c}
                     displaySignatures={featureFlags.display_signatures}
-                    showNamespace={true}
+                    showNamespace
                   />
                 ))}
               </DataList>
@@ -169,11 +169,7 @@ const Dispatch = ({ location, navigate }: RouteProps) => {
                 <>
                   <DataList aria-label={t`Available matching roles`}>
                     {roles.map((r) => (
-                      <LegacyRoleListItem
-                        key={r.id}
-                        role={r}
-                        show_thumbnail={true}
-                      />
+                      <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
                     ))}
                   </DataList>
                   <Link

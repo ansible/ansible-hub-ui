@@ -5,12 +5,12 @@ import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   MyNamespaceAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionCard,
   CollectionDropdown,
@@ -32,7 +32,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -94,7 +94,7 @@ class Search extends React.Component<RouteProps, IState> {
 
     this.state = {
       collections: [],
-      params: params,
+      params,
       count: 0,
       loading: true,
       alerts: [],
@@ -325,7 +325,7 @@ class Search extends React.Component<RouteProps, IState> {
             alerts: [
               ...this.state.alerts,
               {
-                title: title,
+                title,
                 variant: 'success',
               },
             ],

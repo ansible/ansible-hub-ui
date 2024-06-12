@@ -9,10 +9,10 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TaskManagementAPI, TaskType } from 'src/api';
+import { TaskManagementAPI, type TaskType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -34,7 +34,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,
@@ -78,7 +78,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,
@@ -308,7 +308,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >
@@ -324,7 +324,7 @@ export class TaskListView extends React.Component<RouteProps, IState> {
             onClick={() =>
               this.setState({
                 cancelModalVisible: true,
-                selectedTask: selectedTask,
+                selectedTask,
               })
             }
           >

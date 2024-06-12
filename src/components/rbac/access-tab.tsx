@@ -10,7 +10,7 @@ import {
 import { sortBy } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GroupType, RoleType } from 'src/api';
+import { type GroupType, type RoleType } from 'src/api';
 import {
   DeleteModal,
   EmptyStateNoData,

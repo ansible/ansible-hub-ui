@@ -9,7 +9,7 @@ import {
   ansibleRemoteDownloadRequirementsAction,
   ansibleRemoteEditAction,
 } from 'src/actions';
-import { AnsibleRemoteAPI, AnsibleRemoteType } from 'src/api';
+import { AnsibleRemoteAPI, type AnsibleRemoteType } from 'src/api';
 import { CopyURL, ListItemActions, ListPage } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { canViewAnsibleRemotes } from 'src/permissions';

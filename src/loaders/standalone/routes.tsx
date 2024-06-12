@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AlertType } from 'src/components';
+import {
+  type FeatureFlagsType,
+  type SettingsType,
+  type UserType,
+} from 'src/api';
+import { type AlertType } from 'src/components';
 import {
   AnsibleRemoteDetail,
   AnsibleRemoteEdit,
@@ -52,7 +56,7 @@ import {
   UserList,
   UserProfile,
 } from 'src/containers';
-import { AppContext, useContext } from 'src/loaders/app-context';
+import { AppContext, useHubContext } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -92,7 +96,7 @@ const AuthHandler = ({
   path,
   updateInitialData,
 }: IAuthHandlerProps) => {
-  const { user, settings, featureFlags } = useContext();
+  const { user, settings, featureFlags } = useHubContext();
   const [isLoading, setLoading] = useState<boolean>(
     !user || !settings || !featureFlags,
   );
@@ -322,7 +326,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
           element={
             <AuthHandler
               component={NotFound}
-              noAuth={true}
+              noAuth
               path={null}
               updateInitialData={updateInitialData}
             />

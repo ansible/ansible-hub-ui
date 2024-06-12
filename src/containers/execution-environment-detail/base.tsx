@@ -3,13 +3,13 @@ import { Button, DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
-  ContainerRepositoryType,
+  type ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
   LoadingPageWithHeader,
@@ -24,7 +24,7 @@ import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
   RepoSigningUtils,
-  RouteProps,
+  type RouteProps,
   canSignEE,
   taskAlert,
   waitForTask,

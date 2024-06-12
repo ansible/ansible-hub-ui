@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import React from 'react';
-import { ContainerRepositoryType } from 'src/api';
+import { type ContainerRepositoryType } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,

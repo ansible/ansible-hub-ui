@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoleAPI, RoleType } from 'src/api';
+import { RoleAPI, type RoleType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
   LoadingPageWithHeader,
   Main,
@@ -15,14 +15,15 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
+  type RouteProps,
   errorMessage,
   mapNetworkErrors,
   parsePulpIDFromURL,
   translateLockedRolesDescription,
   validateInput,
+  withRouter,
 } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   role: RoleType;
@@ -61,7 +62,7 @@ class EditRole extends React.Component<RouteProps, IState> {
       role: null,
 
       params: {
-        id: id,
+        id,
       },
       itemCount: 0,
       alerts: [],
@@ -159,7 +160,7 @@ class EditRole extends React.Component<RouteProps, IState> {
               <RoleForm
                 {...this.state}
                 name={name}
-                nameDisabled={true}
+                nameDisabled
                 description={description}
                 descriptionHelperText={errorMessages['description']}
                 descriptionValidated={

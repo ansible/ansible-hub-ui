@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
-import { Label, LabelProps } from '@patternfly/react-core';
+import { Label, type LabelProps } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { FC } from 'react';
+import React, { type FC } from 'react';
 
 interface Props extends LabelProps {
   signState: 'signed' | 'unsigned';

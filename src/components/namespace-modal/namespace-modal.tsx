@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { NamespaceAPI } from 'src/api';
 import { HelperText } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;

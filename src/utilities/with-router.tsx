@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Paths } from 'src/paths';
+import { type Paths } from 'src/paths';
 
 // compatibility layer between react-router v6 and class components
 

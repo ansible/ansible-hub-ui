@@ -1,12 +1,12 @@
 import {
   ActiveUserAPI,
   FeatureFlagsAPI,
-  FeatureFlagsType,
+  type FeatureFlagsType,
   SettingsAPI,
-  SettingsType,
-  UserType,
+  type SettingsType,
+  type UserType,
 } from 'src/api';
-import { AlertType } from 'src/components';
+import { type AlertType } from 'src/components';
 
 interface ContextFragment {
   alerts: AlertType[];

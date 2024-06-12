@@ -11,8 +11,8 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper, RouteProps, withRouter } from 'src/utilities';
-import { IBaseCollectionState, loadCollection } from './base';
+import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
+import { type IBaseCollectionState, loadCollection } from './base';
 
 // renders collection level information
 class CollectionDetail extends React.Component<

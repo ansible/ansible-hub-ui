@@ -13,7 +13,7 @@ import {
 import { Paths, formatEEPath } from 'src/paths';
 import { withRouter } from 'src/utilities';
 import {
-  IDetailSharedProps,
+  type IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
 } from './base';
@@ -214,7 +214,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               ),
             });
           } else {
-            const lastActivity = activities[activities.length - 1];
+            const lastActivity = activities.at(-1);
             if (lastActivity) {
               activities.push({
                 created: lastActivity.created,

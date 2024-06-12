@@ -1,4 +1,4 @@
-import { MessageDescriptor, i18n } from '@lingui/core';
+import { type MessageDescriptor, i18n } from '@lingui/core';
 import {
   Toolbar,
   ToolbarContent,
@@ -6,20 +6,20 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { ActionType } from 'src/actions';
-import { LoadingPageSpinner } from 'src/components';
+import { type ActionType } from 'src/actions';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
+  LoadingPageSpinner,
   Main,
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { PermissionContextType } from 'src/permissions';
-import { RouteProps, errorMessage, withRouter } from 'src/utilities';
+import { type PermissionContextType } from 'src/permissions';
+import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 
 interface IState<T> {
   alerts: AlertType[];

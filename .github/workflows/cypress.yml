@@ -23,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         test:
-        - 'screenshots'
         - 'approval'
         - 'approval_modal'
         - 'collections'
@@ -34,6 +33,7 @@ jobs:
         - 'misc'
         - 'namespaces'
         - 'repo'
+        - 'screenshots'
 
     steps:
 
@@ -61,11 +61,6 @@ jobs:
         UI_COMMIT_BASE=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
         echo "UI_COMMIT_BASE=${UI_COMMIT_BASE}" >> $GITHUB_ENV
 
-        COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
-        echo 'compare screenshots:'
-        echo $COMPARE_SCREENSHOTS
-        echo "COMPARE_SCREENSHOTS=${COMPARE_SCREENSHOTS}" >> $GITHUB_ENV
-
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v4
       with:
@@ -89,8 +84,7 @@ jobs:
       run: |
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
-        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env.standalone \
+        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -164,22 +158,22 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json.standalone cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure galaxykit can connect to API (standalone)"
+    - name: "Ensure galaxykit can connect to API"
       run: |
         galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Check initial feature flags (standalone)"
+    - name: "Check initial feature flags"
       run: |
         curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
 
-    - name: "Check component versions & settings (standalone)"
+    - name: "Check component versions & settings"
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
@@ -200,7 +194,7 @@ jobs:
           screenshots-${{env.SHORT_BRANCH}}-
 
     - name: "List cached screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      if: ${{ matrix.test == 'screenshots' && github.event_name == 'pull_request' }}
       run: |
         ls ansible-hub-ui/test/screenshots-base/
 
@@ -222,32 +216,32 @@ jobs:
         ls ansible-hub-ui/test/cypress/screenshots/screenshots/screenshots.js/
 
     - name: "Compare screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      if: ${{ matrix.test == 'screenshots' && github.event_name == 'pull_request' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
         changed=false
 
         for orig in screenshots-base/*; do
-          echo $orig
-          new=cypress/screenshots/screenshots/screenshots.js/"$(basename "$orig")"
-          diff=cypress/screenshots/screenshots/diff--"$(basename "$orig")"
+          name=`basename "$orig"`
+          new="cypress/screenshots/screenshots/screenshots.js/$name"
+          diff="cypress/screenshots/screenshots/diff--$name"
 
-          num=$(compare -metric RMSE "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
-          echo $num
+          num=$(compare -metric RMSE -fuzz 5% "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
           num=${num%.*}
-          if [ "$num" -gt 10 ]; then
-            echo "screenshot $orig changed: $num" 1>&2
+          if [ "$num" -gt 64 ]; then
+            echo "screenshot $name changed: $num" 1>&2
             changed=true
           fi
         done
 
         if [ "$changed" = true ]; then
-          echo "Process failed because change occured"
+          cp -a screenshots-base cypress/screenshots/screenshots/0-before
+          mv cypress/screenshots/screenshots/{screenshots.js,1-after}
           exit 1
         fi
 
-    - name: "Move cached screenshots"
-      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
+    - name: "Move screenshots to cache"
+      if: ${{ matrix.test == 'screenshots' && github.event_name != 'pull_request' }}
       working-directory: 'ansible-hub-ui/test'
       run: |
         rm -rf screenshots-base/

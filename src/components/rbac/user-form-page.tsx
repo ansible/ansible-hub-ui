@@ -1,13 +1,13 @@
 import React from 'react';
-import { UserType } from 'src/api';
+import { type UserType } from 'src/api';
 import {
   BaseHeader,
-  BreadcrumbType,
+  type BreadcrumbType,
   Breadcrumbs,
   Main,
   UserForm,
 } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { type ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   title: string;

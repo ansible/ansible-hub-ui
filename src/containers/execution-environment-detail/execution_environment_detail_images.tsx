@@ -14,7 +14,7 @@ import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-i
 import { sum } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
+import { type ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {
   AppliedFilters,
   ClipboardCopy,
@@ -45,7 +45,7 @@ import {
   withRouter,
 } from 'src/utilities';
 import {
-  IDetailSharedProps,
+  type IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
 } from './base';
@@ -95,7 +95,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       loading: true,
       images: [],
       numberOfImages: 0,
-      params: params,
+      params,
       redirect: null,
       manageTagsManifestDigest: undefined,
       publishToController: null,

@@ -2,10 +2,14 @@ import { Trans, t } from '@lingui/macro';
 import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
+import {
+  MyNamespaceAPI,
+  type NamespaceLinkType,
+  type NamespaceType,
+} from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
   Main,
@@ -16,12 +20,13 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
+  type RouteProps,
   errorMessage,
   mapErrorMessages,
+  withRouter,
 } from 'src/utilities';
 
 interface IState {
@@ -62,7 +67,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
       saving: false,
       redirect: null,
       unsavedData: false,
-      params: params,
+      params,
       unauthorized: false,
     };
   }

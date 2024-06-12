@@ -3,7 +3,7 @@ import React from 'react';
 import {
   CollectionAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import { errorMessage } from './fail-alerts';
 import { parsePulpIDFromURL } from './parse-pulp-id';

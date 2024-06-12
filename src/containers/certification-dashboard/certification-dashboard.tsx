@@ -8,27 +8,25 @@ import {
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CertificateUploadAPI,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
+  AlertList,
+  type AlertType,
+  AppliedFilters,
   ApprovalRow,
   ApproveModal,
   BaseHeader,
+  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  Main,
-} from 'src/components';
-import {
-  AlertList,
-  AlertType,
-  AppliedFilters,
-  CompoundFilter,
   LoadingPageSpinner,
   LoadingPageWithHeader,
+  Main,
   Pagination,
   SortTable,
   UploadSingCertificateModal,
@@ -37,7 +35,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
   parsePulpIDFromURL,

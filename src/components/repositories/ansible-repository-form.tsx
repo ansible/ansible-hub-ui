@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRemoteAPI, AnsibleRepositoryType } from 'src/api';
+import { AnsibleRemoteAPI, type AnsibleRepositoryType } from 'src/api';
 import {
   APISearchTypeAhead,
   HelperText,
@@ -19,7 +19,7 @@ import {
   PulpLabels,
 } from 'src/components';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   errorMessage,
   repositoryBasePath,
 } from 'src/utilities';

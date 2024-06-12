@@ -3,11 +3,16 @@ import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
-import { AlertList, AlertType, DetailList, closeAlert } from 'src/components';
+import {
+  AlertList,
+  type AlertType,
+  DetailList,
+  closeAlert,
+} from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';
 import { handleHttpError, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 import { Action } from './action';
@@ -159,7 +164,7 @@ const AddCollectionVersionModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Select a collection`}
       variant='large'

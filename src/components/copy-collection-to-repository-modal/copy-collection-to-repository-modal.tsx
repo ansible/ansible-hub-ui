@@ -2,11 +2,11 @@ import { t } from '@lingui/macro';
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
   SigningServiceAPI,
 } from 'src/api';
-import { AlertType, MultiRepoModal } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { type AlertType, MultiRepoModal } from 'src/components';
+import { useHubContext } from 'src/loaders/app-context';
 import { errorMessage, parsePulpIDFromURL, taskAlert } from 'src/utilities';
 
 interface IProps {
@@ -20,7 +20,7 @@ export const CopyCollectionToRepositoryModal = ({
   closeAction,
   collectionVersion,
 }: IProps) => {
-  const { settings } = useContext();
+  const { settings } = useHubContext();
   const { collection_version, repository } = collectionVersion;
   const { namespace, name, version, pulp_href } = collection_version;
 

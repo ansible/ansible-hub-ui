@@ -159,6 +159,7 @@ module.exports = (inputConfigs) => {
       alias: {
         // imports relative to repo root
         src: resolve(__dirname, '../src'),
+        static: resolve(__dirname, '../static'),
       },
     },
     watchOptions: {

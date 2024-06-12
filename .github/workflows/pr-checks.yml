@@ -97,25 +97,27 @@ jobs:
           base/package-lock.json
           pr/package-lock.json
 
+    - name: 'npm install (base)'
+      working-directory: 'base'
+      run: 'npm install'
+
+    - name: 'npm install (pr)'
+      working-directory: 'pr'
+      run: 'npm install'
+
     - name: "Diff configs"
       run: |
         mkdir ~/webpack-config/
 
+        # eliminate differences caused by branch name based logic in f-c-config
+        export BRANCH="${{ github.base_ref }}"
+
         for version in base pr; do
           mkdir ~/webpack-config/$version/
           pushd $version/config/
-          npm install
 
-          for file in *.js; do
-            # FIXME: that's what TARGET_ENVIRONMENT is for
-            NODE_ENV=
-            if grep -q prod <<< "$file"; then
-              NODE_ENV=production
-            fi
-            export NODE_ENV
-
-            # eliminate differences caused by branch name based logic in f-c-config
-            export BRANCH="${{ github.base_ref }}"
+          for file in *.webpack.config.js; do
+            export NODE_ENV=`grep -q '\.prod\.' <<< "$file" && echo production || echo development`
 
             node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' |
               sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
@@ -123,7 +125,7 @@ jobs:
               perl -ne 'print unless /^[0-9a-f]{64,64}$/d' |
               grep -v '^Current branch:' |
               grep -v '^Waiting for ' |
-              grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
+              grep -v 'Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
 
           popd

@@ -2,10 +2,10 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { MyNamespaceAPI, NamespaceAPI, NamespaceListType } from 'src/api';
+import { MyNamespaceAPI, NamespaceAPI, type NamespaceListType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -23,7 +23,7 @@ import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   errorMessage,
   filterIsSet,
 } from 'src/utilities';
@@ -75,7 +75,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       alerts: [],
       namespaces: undefined,
       itemCount: 0,
-      params: params,
+      params,
       hasPermission: true,
       isModalOpen: false,
       loading: true,

@@ -18,17 +18,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyRoleAPI,
-  LegacyRoleDetailType,
-  LegacyRoleVersionDetailType,
+  type LegacyRoleDetailType,
+  type LegacyRoleVersionDetailType,
 } from 'src/api';
-import { EmptyStateNoData } from 'src/components';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   Breadcrumbs,
   ClipboardCopy,
   DateComponent,
   DownloadCount,
+  EmptyStateNoData,
   ExternalLink,
   LabelGroup,
   LoadingPageWithHeader,
@@ -40,7 +40,7 @@ import {
 } from 'src/components';
 import { NotFound } from 'src/containers/not-found/not-found';
 import { Paths, formatPath } from 'src/paths';
-import { RouteProps, handleHttpError, withRouter } from 'src/utilities';
+import { type RouteProps, handleHttpError, withRouter } from 'src/utilities';
 
 interface RoleMetaProps {
   addAlert: (alert: AlertType) => void;

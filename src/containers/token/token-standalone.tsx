@@ -4,7 +4,7 @@ import React from 'react';
 import { ActiveUserAPI } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   ClipboardCopy,
   DateComponent,
@@ -14,8 +14,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
-import { errorMessage } from 'src/utilities';
+import { type RouteProps, errorMessage, withRouter } from 'src/utilities';
 import './token.scss';
 
 interface IState {

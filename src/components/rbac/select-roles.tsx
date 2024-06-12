@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { RoleAPI, RoleType } from 'src/api';
+import { RoleAPI, type RoleType } from 'src/api';
 import {
   AppliedFilters,
   CheckboxRow,

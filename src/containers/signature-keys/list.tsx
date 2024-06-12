@@ -7,10 +7,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import { SigningServiceAPI, SigningServiceType } from 'src/api';
+import { SigningServiceAPI, type SigningServiceType } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   ClipboardCopy,
@@ -27,8 +27,13 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  type RouteProps,
+  errorMessage,
+  filterIsSet,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   params: {
@@ -57,7 +62,7 @@ export class SignatureKeysList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       items: [],
       loading: true,
       itemCount: 0,

@@ -1,6 +1,6 @@
 import React from 'react';
 // had to declare *.svg in src/index.d.ts
-import DefaultLogo from 'src/../static/images/default-logo.svg';
+import DefaultLogo from 'static/images/default-logo.svg';
 
 interface IProps {
   // size should be css length measurment: '100px'
@@ -42,7 +42,7 @@ export class Logo extends React.Component<IProps, IState> {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: width,
+      width,
     };
 
     if (flexGrow) {

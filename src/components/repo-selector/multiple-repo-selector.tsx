@@ -13,9 +13,9 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { AnsibleRepositoryAPI, AnsibleRepositoryType } from 'src/api';
+import { AnsibleRepositoryAPI, type AnsibleRepositoryType } from 'src/api';
 import {
-  AlertType,
+  type AlertType,
   AppliedFilters,
   CheckboxRow,
   CompoundFilter,

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { DataList, Label } from '@patternfly/react-core';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
@@ -11,7 +11,7 @@ import {
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   BaseHeader,
   CollectionListItem,
   EmptyStateXs,
@@ -24,11 +24,11 @@ import {
   Tooltip,
   closeAlert,
 } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
 import {
   ParamHelper,
-  RouteProps,
+  type RouteProps,
   handleHttpError,
   withRouter,
 } from 'src/utilities';
@@ -64,7 +64,7 @@ const Section = ({
 const loading = [];
 
 const MultiSearch = (props: RouteProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [params, setParams] = useState({});
 
@@ -251,7 +251,7 @@ const MultiSearch = (props: RouteProps) => {
                 key={i}
                 collection={c}
                 displaySignatures={featureFlags.display_signatures}
-                showNamespace={true}
+                showNamespace
               />
             ))}
           </DataList>
@@ -295,7 +295,7 @@ const MultiSearch = (props: RouteProps) => {
           >
             <DataList aria-label={t`Available matching roles`}>
               {roles.map((r) => (
-                <LegacyRoleListItem key={r.id} role={r} show_thumbnail={true} />
+                <LegacyRoleListItem key={r.id} role={r} show_thumbnail />
               ))}
             </DataList>
           </ResultsSection>

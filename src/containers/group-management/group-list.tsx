@@ -11,13 +11,13 @@ import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -35,13 +35,14 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   ParamHelper,
+  type RouteProps,
+  errorMessage,
   filterIsSet,
   mapErrorMessages,
+  withRouter,
 } from 'src/utilities';
 
 interface IState {
@@ -83,7 +84,7 @@ class GroupList extends React.Component<RouteProps, IState> {
     }
 
     this.state = {
-      params: params,
+      params,
       loading: true,
       itemCount: 0,
       alerts: [],

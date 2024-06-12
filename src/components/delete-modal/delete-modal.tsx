@@ -1,5 +1,10 @@
 import { t } from '@lingui/macro';
-import { Button, Modal, ModalProps, Spinner } from '@patternfly/react-core';
+import {
+  Button,
+  Modal,
+  type ModalProps,
+  Spinner,
+} from '@patternfly/react-core';
 import React from 'react';
 
 export interface IProps {
@@ -42,7 +47,7 @@ export const DeleteModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={cancelAction}
       title={title}
       titleIconVariant='warning'

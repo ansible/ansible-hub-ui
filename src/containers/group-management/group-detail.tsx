@@ -12,14 +12,14 @@ import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import {
   GroupAPI,
-  GroupObjectPermissionType,
+  type GroupObjectPermissionType,
   UserAPI,
-  UserType,
+  type UserType,
 } from 'src/api';
 import {
   APISearchTypeAhead,
   AlertList,
-  AlertType,
+  type AlertType,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
@@ -40,9 +40,13 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
-import { RouteProps, withRouter } from 'src/utilities';
-import { ParamHelper, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  type RouteProps,
+  errorMessage,
+  filterIsSet,
+  withRouter,
+} from 'src/utilities';
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {
@@ -93,7 +97,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       users: null,
       allUsers: null,
       params: {
-        id: id,
+        id,
         page: 0,
         page_size: params['page_size'] || 10,
         sort:
@@ -245,7 +249,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       <Modal
         variant='large'
         onClose={close}
-        isOpen={true}
+        isOpen
         aria-label={t`add-user-modal`}
         title={''}
         header={
@@ -329,7 +333,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           placeholderText={t`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
-          multiple={true}
+          multiple
           onClear={() =>
             this.setState({
               selected: [],

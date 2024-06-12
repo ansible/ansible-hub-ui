@@ -2,13 +2,13 @@ import { t } from '@lingui/macro';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import {
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionVersionAPI,
-  CollectionVersionSearch,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   MultipleRepoSelector,
   closeAlert,
 } from 'src/components';
@@ -105,7 +105,7 @@ export const MultiRepoModal = ({
           {t`Cancel`}
         </Button>,
       ]}
-      isOpen={true}
+      isOpen
       onClose={closeAction}
       title={t`Select repositories`}
       variant='large'

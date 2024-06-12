@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { DropdownItem } from '@patternfly/react-core';
 import React from 'react';
 import { StatefulDropdown } from 'src/components';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 import { DeleteCollectionUtils } from 'src/utilities';
 
 interface IProps {
@@ -48,7 +48,7 @@ export const CollectionDropdown = ({
     },
     hasPermission,
     user: { is_anonymous, is_superuser },
-  } = useContext();
+  } = useHubContext();
 
   const hasObjectPermission = (permission) =>
     namespace?.related_fields?.my_permissions?.includes?.(permission);

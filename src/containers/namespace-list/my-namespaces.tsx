@@ -2,7 +2,7 @@ import React from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { Paths } from 'src/paths';
-import { RouteProps, withRouter } from 'src/utilities';
+import { type RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 
 class MyNamespaces extends React.Component<RouteProps> {
@@ -14,7 +14,7 @@ class MyNamespaces extends React.Component<RouteProps> {
       <NamespaceList
         {...this.props}
         namespacePath={Paths.namespaceDetail}
-        filterOwner={true}
+        filterOwner
       />
     );
   }

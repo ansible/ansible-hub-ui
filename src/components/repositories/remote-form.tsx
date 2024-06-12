@@ -17,8 +17,8 @@ import {
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import React, { ReactNode } from 'react';
-import { RemoteType, WriteOnlyFieldType } from 'src/api';
+import React, { type ReactNode } from 'react';
+import { type RemoteType, type WriteOnlyFieldType } from 'src/api';
 import {
   ExternalLink,
   FileUpload,
@@ -27,7 +27,7 @@ import {
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import {
-  ErrorMessagesType,
+  type ErrorMessagesType,
   downloadString,
   isFieldSet,
   isWriteOnly,

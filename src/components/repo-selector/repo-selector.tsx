@@ -6,14 +6,14 @@ import {
   InputGroupText,
 } from '@patternfly/react-core';
 import React from 'react';
-import { useContext } from 'src/loaders/app-context';
+import { useHubContext } from 'src/loaders/app-context';
 
 interface IProps {
   selectedRepo: string;
 }
 
 export const RepoSelector = ({ selectedRepo }: IProps) => {
-  const { featureFlags } = useContext();
+  const { featureFlags } = useHubContext();
 
   if (!featureFlags.display_repositories) {
     return null;

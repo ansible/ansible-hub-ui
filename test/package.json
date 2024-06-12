@@ -1,16 +1,10 @@
 {
-  "name": "hub-ui-test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "cypress:chrome": "cypress run --e2e --browser chrome --headless",
     "cypress:chromium": "cypress run --e2e --browser chromium-browser --headless",
     "cypress:firefox": "cypress run --e2e --browser firefox --headless",
     "cypress": "cypress open"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "chrome-remote-interface": "^0.33.0",
     "cypress": "^13.10.0",

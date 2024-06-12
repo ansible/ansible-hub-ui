@@ -14,14 +14,14 @@ import cx from 'classnames';
 import React from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   CollectionAPI,
-  CollectionUploadType,
-  CollectionVersionSearch,
+  type CollectionUploadType,
+  type CollectionVersionSearch,
 } from 'src/api';
 import {
   AlertList,
-  AlertType,
+  type AlertType,
   LabelGroup,
   MultipleRepoSelector,
   closeAlertMixin,
@@ -288,7 +288,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             params={{
               pulp_label_select: onlyStaging ? 'pipeline=staging' : '!pipeline',
             }}
-            singleSelectionOnly={true}
+            singleSelectionOnly
             selectedRepos={selectedRepos}
             setSelectedRepos={(selectedRepos) =>
               this.setState({

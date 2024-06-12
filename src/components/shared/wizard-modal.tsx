@@ -3,7 +3,7 @@ import {
   Modal,
   ModalVariant,
   Wizard as PFWizard,
-  WizardStep,
+  type WizardStep,
 } from '@patternfly/react-core';
 import React from 'react';
 

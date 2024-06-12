@@ -27,7 +27,7 @@ import {
   TagLabel,
 } from 'src/components';
 import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { RouteProps, getHumanSize, withRouter } from 'src/utilities';
+import { type RouteProps, getHumanSize, withRouter } from 'src/utilities';
 import { withContainerParamFix } from '../execution-environment-detail/base';
 import './execution-environment-manifest.scss';
 
@@ -119,7 +119,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
           }
         >
           <div className='copy-sha'>
-            <ShaLabel digest={digest} long={true} />
+            <ShaLabel digest={digest} long />
             <ClipboardCopyButton
               className='eco-clipboard-copy'
               variant={'plain'}

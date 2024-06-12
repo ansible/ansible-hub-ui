@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { NamespaceType } from 'src/api';
+import { type NamespaceType } from 'src/api';
 import { MarkdownEditor } from '..';
 import './namespace-form.scss';
 
@@ -29,6 +29,6 @@ export const ResourcesForm = ({ namespace, updateNamespace }: IProps) => (
     placeholder={placeholder}
     helperText={t`You can can customize the Resources tab on your profile by entering custom markdown here.`}
     updateText={(resources) => updateNamespace({ ...namespace, resources })}
-    editing={true}
+    editing
   />
 );

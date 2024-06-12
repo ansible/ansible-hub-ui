@@ -9,16 +9,16 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import React from 'react';
-import { GroupAPI, UserType } from 'src/api';
+import { GroupAPI, type UserType } from 'src/api';
 import {
   APISearchTypeAhead,
-  AlertType,
+  type AlertType,
   DataForm,
   HelperText,
   Tooltip,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { ErrorMessagesType, errorMessage } from 'src/utilities';
+import { type ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
   /** User to edit */
@@ -176,7 +176,7 @@ export class UserForm extends React.Component<IProps, IState> {
             onSelect={this.onSelectGroup}
             placeholderText={t`Select groups`}
             selections={user.groups}
-            multiple={true}
+            multiple
             onClear={this.clearGroups}
             isDisabled={isReadonly}
           />

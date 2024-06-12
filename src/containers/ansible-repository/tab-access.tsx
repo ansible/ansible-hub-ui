@@ -2,10 +2,10 @@ import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryAPI,
-  AnsibleRepositoryType,
+  type AnsibleRepositoryType,
   GroupAPI,
-  GroupType,
-  RoleType,
+  type GroupType,
+  type RoleType,
   UserAPI,
 } from 'src/api';
 import { AccessTab } from 'src/components';
