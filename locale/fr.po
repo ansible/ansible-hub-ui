@@ -1936,7 +1936,7 @@ msgstr "Site des docs"
 #: src/containers/ansible-role/role-detail.tsx
 #: src/containers/collection-detail/collection-docs.tsx
 #: src/containers/execution-environment-list/execution-environment-list.tsx
-#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/layout.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Documentation"
 msgstr "Documentation"
