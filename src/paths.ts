@@ -7,12 +7,7 @@ export function formatPath(
   params?: ParamType,
   options?,
 ) {
-  // insights router has basename="/", "/beta/" or "/preview/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
-  let url = IS_INSIGHTS
-    ? UI_BASE_PATH.replace('/preview/', '/')
-        .replace('/beta/', '/')
-        .replace(/\/$/, '')
-    : '';
+  let url = '';
   url += (path as string) + '/';
   url = url.replaceAll('//', '/');
 
@@ -110,7 +105,7 @@ export const Paths = {
   myNamespaces: '/my-namespaces',
   namespace: '/:namespace', // compat
   namespaceDetail: '/namespaces/:namespace',
-  namespaces: IS_INSIGHTS ? '/partners' : '/namespaces',
+  namespaces: '/namespaces',
   notFound: '/not-found', // FIXME don't redirect
   roleEdit: '/role/:role',
   roleList: '/roles',
@@ -132,6 +127,6 @@ export const Paths = {
 };
 
 export const namespaceBreadcrumb = () => ({
-  name: IS_INSIGHTS ? t`Partners` : t`Namespaces`,
+  name: t`Namespaces`,
   url: formatPath(Paths.namespaces),
 });

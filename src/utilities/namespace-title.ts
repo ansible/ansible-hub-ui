@@ -1,3 +1,4 @@
+// TODO dead
 export function namespaceTitle({
   name,
   company,
@@ -5,5 +6,5 @@ export function namespaceTitle({
   name: string;
   company?: string;
 }): string {
-  return IS_INSIGHTS ? company || name : name;
+  return name;
 }

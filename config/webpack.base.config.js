@@ -31,7 +31,6 @@ const defaultConfigs = [
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
   { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
-  { name: 'IS_INSIGHTS', default: false, scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
   { name: 'UI_DOCS_URL', default: docsURL, scope: 'global' },
@@ -65,15 +64,8 @@ module.exports = (inputConfigs) => {
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
-  // community is also considered standalone
-  const isStandalone = !customConfigs.IS_INSIGHTS;
-
   const rootFolder = resolve(__dirname, '../');
-  const appEntry = resolve(
-    rootFolder,
-    'src',
-    isStandalone ? 'entry-standalone.tsx' : 'entry-insights.tsx',
-  );
+  const appEntry = resolve(rootFolder, 'src', 'entry-standalone.tsx');
 
   const { config: webpackConfig, plugins } = config({
     appEntry,
@@ -85,37 +77,11 @@ module.exports = (inputConfigs) => {
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
-    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
-    bundlePfModules: isStandalone,
+    // frontend-components-config 4.5.0+: don't remove patternfly
+    bundlePfModules: true,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
     useFileHash: true,
-
-    // insights dev
-    ...(!isStandalone &&
-      !isBuild && {
-        appUrl: customConfigs.UI_BASE_PATH.includes('/preview/')
-          ? [
-              customConfigs.UI_BASE_PATH,
-              customConfigs.UI_BASE_PATH.replace('/preview/', '/beta/'),
-            ]
-          : customConfigs.UI_BASE_PATH,
-        deployment: cloudBeta !== 'false' ? 'beta/apps' : 'apps',
-        standalone: {
-          api: {
-            context: [customConfigs.API_BASE_PATH],
-            target: customConfigs.API_PROXY_TARGET,
-          },
-          rbac,
-          ...defaultServices,
-        },
-      }),
-
-    // insights deployments from master
-    ...(!isStandalone &&
-      isBuild && {
-        deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',
-      }),
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -187,35 +153,13 @@ module.exports = (inputConfigs) => {
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
 
   // keep HtmlWebpackPlugin for standalone, inject src/index.html
-  if (isStandalone) {
-    plugins.push(
-      new HtmlWebpackPlugin({
-        applicationName: customConfigs.APPLICATION_NAME,
-        favicon: 'static/images/favicon.ico',
-        template: resolve(__dirname, '../src/index.html'),
-      }),
-    );
-  }
-
-  if (customConfigs.IS_INSIGHTS) {
-    // insights federated modules
-    // FIXME: still needed?
-    plugins.push(
-      require('@redhat-cloud-services/frontend-components-config-utilities/federated-modules')(
-        {
-          root: rootFolder,
-          exposes: {
-            './RootApp': appEntry,
-          },
-          shared: [
-            {
-              'react-router-dom': { singleton: true, version: '*' },
-            },
-          ],
-        },
-      ),
-    );
-  }
+  plugins.push(
+    new HtmlWebpackPlugin({
+      applicationName: customConfigs.APPLICATION_NAME,
+      favicon: 'static/images/favicon.ico',
+      template: resolve(__dirname, '../src/index.html'),
+    }),
+  );
 
   // @patternfly/react-code-editor
   plugins.push(

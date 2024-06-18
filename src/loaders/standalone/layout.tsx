@@ -99,15 +99,15 @@ export const StandaloneLayout = ({
     ];
 
     docsDropdownItems = [
-        <DropdownItem
-          key='documentation'
-          component={
-            <ExternalLink
-              href={UI_DOCS_URL}
-              variant='menu'
-            >{t`Documentation`}</ExternalLink>
-          }
-        />
+      <DropdownItem
+        key='documentation'
+        component={
+          <ExternalLink
+            href={UI_DOCS_URL}
+            variant='menu'
+          >{t`Documentation`}</ExternalLink>
+        }
+      />,
       <DropdownItem
         key='customer_support'
         component={

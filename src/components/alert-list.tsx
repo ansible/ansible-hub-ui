@@ -25,9 +25,7 @@ export const AlertList = ({ alerts, closeAlert }: IProps) => (
     style={{
       position: 'fixed',
       right: '5px',
-      top: IS_INSIGHTS
-        ? '124px' // 70 + 50 + 4
-        : '80px', // 76 + 4
+      top: '80px', // 76 + 4
       zIndex: 300,
       display: 'flex',
       flexDirection: 'column',

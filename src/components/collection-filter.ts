@@ -12,34 +12,16 @@ const loadRepos = (inputText) =>
     })),
   );
 
-// insights-only
-const defaultTags = [
-  'application',
-  'cloud',
-  'database',
-  'eda',
-  'infrastructure',
-  'linux',
-  'monitoring',
-  'networking',
-  'security',
-  'storage',
-  'tools',
-  'windows',
-].map((tag) => ({ id: tag, title: tag }));
-
 const loadTags = (inputText) =>
-  !inputText && IS_INSIGHTS
-    ? Promise.resolve(defaultTags)
-    : TagAPI.listCollections({
-        name__icontains: inputText,
-        sort: '-count',
-      }).then(({ data: { data } }) =>
-        data.map(({ name, count }) => ({
-          id: name,
-          title: count === undefined ? name : t`${name} (${count})`,
-        })),
-      );
+  TagAPI.listCollections({
+    name__icontains: inputText,
+    sort: '-count',
+  }).then(({ data: { data } }) =>
+    data.map(({ name, count }) => ({
+      id: name,
+      title: count === undefined ? name : t`${name} (${count})`,
+    })),
+  );
 
 export const collectionFilter = ({
   featureFlags: { display_signatures, display_repositories },

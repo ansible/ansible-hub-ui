@@ -201,7 +201,7 @@ export class NamespaceList extends Component<IProps, IState> {
             })
           }
         />
-        <BaseHeader title={IS_INSIGHTS ? t`Partners` : t`Namespaces`}>
+        <BaseHeader title={t`Namespaces`}>
           {!(this.context as IAppContextType).user.is_anonymous && (
             <div className='hub-tab-link-container'>
               <div className='tabs'>
