@@ -21,7 +21,7 @@ import {
   Tooltip,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
+import { convertContentSummaryCounts } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
   displaySignatures: boolean;
@@ -63,9 +63,7 @@ export const CollectionCard = ({
   menu,
   footer,
 }: IProps) => {
-  const nsTitle = namespaceTitle(
-    namespace || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace?.name || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
