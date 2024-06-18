@@ -52,7 +52,6 @@ export { HubPagination } from './hub-pagination';
 export { ImportConsole } from './import-console';
 export { ImportList } from './import-list';
 export { ImportModal } from './import-modal';
-export { LandingPageCard } from './landing-page-card';
 export { LanguageSwitcher } from './language-switcher';
 export { LazyDistributions } from './lazy-distributions';
 export { LazyRepositories } from './lazy-repositories';
