@@ -34,7 +34,6 @@ const defaultConfigs = [
 
   // Webpack scope: only available in customConfigs here, not exposed to the UI
   { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
-  { name: 'UI_DEBUG', default: false, scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
@@ -67,7 +66,6 @@ module.exports = (inputConfigs) => {
     appEntry,
     rootFolder,
     definePlugin: globals,
-    debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
 
     // defines port for dev server
