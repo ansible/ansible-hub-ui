@@ -158,7 +158,7 @@ class AnsibleRoleList extends Component<RouteProps, RolesState> {
       );
 
     const canImport = user && !user.is_anonymous;
-    const canSync = user?.is_superuser && !IS_COMMUNITY;
+    const canSync = user?.is_superuser;
 
     return (
       <div>

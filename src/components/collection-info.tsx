@@ -109,24 +109,22 @@ export const CollectionInfo = ({
               />
             ) : (
               <SplitItem isFilled>
-                {!IS_COMMUNITY ? (
-                  <div>
-                    <Trans>
-                      To download this collection, configure your client to
-                      connect to one of the{' '}
-                      <Link
-                        to={formatPath(Paths.collectionDistributionsByRepo, {
-                          repo: repository.name,
-                          namespace: collection_version.namespace,
-                          collection: collection_version.name,
-                        })}
-                      >
-                        distributions
-                      </Link>{' '}
-                      of this repository.
-                    </Trans>
-                  </div>
-                ) : null}
+                <div>
+                  <Trans>
+                    To download this collection, configure your client to
+                    connect to one of the{' '}
+                    <Link
+                      to={formatPath(Paths.collectionDistributionsByRepo, {
+                        repo: repository.name,
+                        namespace: collection_version.namespace,
+                        collection: collection_version.name,
+                      })}
+                    >
+                      distributions
+                    </Link>{' '}
+                    of this repository.
+                  </Trans>
+                </div>
                 <a ref={downloadLinkRef} style={{ display: 'none' }} />
                 <Button
                   style={{ paddingLeft: 0 }}

@@ -11,33 +11,10 @@ interface IProps {
 const cache = { collection: null, role: null };
 
 const loadScore = (type, namespace, name, callback) => () => {
-  if (!IS_COMMUNITY) {
-    return;
-  }
-
-  const setScores = (data) => {
-    if (namespace && name && callback) {
-      callback(data?.[namespace]?.[name]);
-    }
-  };
-
-  if (!cache[type]) {
-    // not in cache, trigger load
-    cache[type] = fetch(`/static/scores/${type}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        cache[type] = data;
-        setScores(data);
-      });
-  } else if (typeof cache[type].then === 'function') {
-    // waiting for load
-    cache[type].then(() => setScores(cache[type]));
-  } else {
-    // already loaded
-    setScores(cache[type]);
-  }
+  return;
 };
 
+// TODO dead
 export function CollectionRatings({
   namespace,
   name,
@@ -56,6 +33,7 @@ export function CollectionRatings({
   );
 }
 
+// TODO dead
 export function RoleRatings({ namespace, name }: IProps) {
   const [scores, setScores] = useState(null);
   const loader = loadScore('role', namespace, name, setScores);
