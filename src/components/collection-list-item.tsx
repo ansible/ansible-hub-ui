@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
-  CollectionRatings,
   DateComponent,
   DeprecatedTag,
   LabelGroup,
@@ -149,11 +148,6 @@ export const CollectionListItem = ({
               </Trans>
             </div>
             <div>v{collection_version.version}</div>
-            <CollectionRatings
-              isList
-              namespace={collection_version.namespace}
-              name={collection_version.name}
-            />
           </FlexItem>
         </Flex>
         <Flex
