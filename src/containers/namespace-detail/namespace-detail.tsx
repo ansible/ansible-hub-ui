@@ -39,7 +39,7 @@ import {
   collectionFilter,
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   ParamHelper,
@@ -322,7 +322,7 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     ];
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         name: namespace.name,
         url:

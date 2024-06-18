@@ -17,7 +17,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
@@ -96,7 +96,7 @@ class CollectionDependencies extends Component<RouteProps, IState> {
     const { collection_version: version, repository } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,

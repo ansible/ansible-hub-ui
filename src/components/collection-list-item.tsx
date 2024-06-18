@@ -50,7 +50,7 @@ export const CollectionListItem = ({
 }: IProps) => {
   const cells = [];
 
-  const nsTitle = namespace?.title || collection_version.namespace;
+  const nsTitle = namespace?.name || collection_version.namespace;
 
   if (showNamespace) {
     cells.push(

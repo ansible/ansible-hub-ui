@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro';
 import { ParamHelper, type ParamType } from 'src/utilities';
 
 export function formatPath(
@@ -125,8 +124,3 @@ export const Paths = {
   userList: '/users',
   userProfileSettings: '/settings/user-profile',
 };
-
-export const namespaceBreadcrumb = () => ({
-  name: t`Namespaces`,
-  url: formatPath(Paths.namespaces),
-});

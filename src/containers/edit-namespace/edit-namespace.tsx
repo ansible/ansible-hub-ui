@@ -22,7 +22,7 @@ import {
   validateURL,
 } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   type ErrorMessagesType,
   ParamHelper,
@@ -144,7 +144,7 @@ class EditNamespace extends Component<RouteProps, IState> {
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
-            namespaceBreadcrumb(),
+            { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
             {
               name: namespace.name,
               url: formatPath(Paths.namespaceDetail, {
