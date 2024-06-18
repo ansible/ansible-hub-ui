@@ -183,12 +183,6 @@ export const CollectionHeader = ({
 
   const canSign = canSignNamespace(context, namespace);
 
-  const issueUrl =
-    'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
-    encodeURIComponent(
-      `${collection_version.namespace}-${collectionName}-${version}`,
-    );
-
   const deleteFromRepo = deleteAll ? null : collection.repository.name;
 
   const deleteFn = (deleteAll) => ({
@@ -442,11 +436,6 @@ export const CollectionHeader = ({
         }
         pageControls={
           <Flex>
-            {IS_INSIGHTS ? (
-              <FlexItem>
-                <ExternalLink href={issueUrl}>{t`Create issue`}</ExternalLink>
-              </FlexItem>
-            ) : null}
             <CollectionDropdown
               collection={collection}
               data-cy='kebab-toggle'

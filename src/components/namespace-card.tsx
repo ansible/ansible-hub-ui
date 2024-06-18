@@ -32,7 +32,7 @@ export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
       <div
         style={{
           display: 'flex',
-          height: IS_INSIGHTS ? '216px' : '168px',
+          height: '168px',
           justifyContent: 'center',
         }}
       >
