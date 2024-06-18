@@ -24,7 +24,7 @@ import {
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
+import { convertContentSummaryCounts } from 'src/utilities';
 import './list-item.scss';
 
 interface IProps {
@@ -52,9 +52,7 @@ export const CollectionListItem = ({
 }: IProps) => {
   const cells = [];
 
-  const nsTitle = namespaceTitle(
-    namespace || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace?.title || collection_version.namespace;
 
   if (showNamespace) {
     cells.push(

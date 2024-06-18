@@ -58,7 +58,6 @@ import {
   ParamHelper,
   canSignNamespace,
   jsxErrorMessage,
-  namespaceTitle,
   parsePulpIDFromURL,
   repositoryRemoveCollection,
   waitForTask,
@@ -172,9 +171,7 @@ export const CollectionHeader = ({
       .filter(Boolean)
       .map((b, i) => (i ? <Fragment key={i}> {b}</Fragment> : b)); // join with spaces
 
-  const nsTitle = namespaceTitle(
-    namespace_metadata || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace_metadata?.name || collection_version.namespace;
 
   if (redirect) {
     return <Navigate to={redirect} />;
