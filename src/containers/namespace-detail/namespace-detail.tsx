@@ -29,7 +29,6 @@ import {
   ExternalLink,
   HubListToolbar,
   ImportModal,
-  LightspeedModal,
   LoadingPage,
   Main,
   PartnerHeader,
@@ -69,7 +68,6 @@ interface IState {
   group: GroupType;
   isDeletionPending: boolean;
   isNamespacePending: boolean;
-  isOpenLightspeedModal: boolean;
   isOpenNamespaceModal: boolean;
   isOpenSignModal: boolean;
   namespace: NamespaceType;
@@ -128,7 +126,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       group: null,
       isDeletionPending: false,
       isNamespacePending: false,
-      isOpenLightspeedModal: false,
       isOpenNamespaceModal: false,
       isOpenSignModal: false,
       namespace: null,
@@ -249,7 +246,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
       filteredCount,
       isDeletionPending,
       isNamespacePending,
-      isOpenLightspeedModal,
       isOpenNamespaceModal,
       namespace,
       params,
@@ -449,14 +445,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
               id='delete_confirm'
             />
           </DeleteModal>
-        )}
-        {isOpenLightspeedModal && (
-          <LightspeedModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ isOpenLightspeedModal: false })}
-            scope={'namespace'}
-            reference={this.state.namespace.name}
-          />
         )}
         <PartnerHeader
           namespace={namespace}
@@ -898,9 +886,8 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
     }
 
     const { canSign, collections, unfilteredCount } = this.state;
-    const { ai_deny_index, can_upload_signatures } = (
-      this.context as IAppContextType
-    ).featureFlags;
+    const { can_upload_signatures } = (this.context as IAppContextType)
+      .featureFlags;
     const repository = this.state.params.repository_name || null;
 
     const dropdownItems = [
@@ -964,14 +951,6 @@ export class NamespaceDetail extends Component<RouteProps, IState> {
             {t`Sign all collections`}
           </DropdownItem>
         )),
-      ai_deny_index && (
-        <DropdownItem
-          key='lightspeed-settings'
-          onClick={() => this.setState({ isOpenLightspeedModal: true })}
-        >
-          {t`Ansible Lightspeed settings`}
-        </DropdownItem>
-      ),
     ].filter(Boolean);
 
     return (

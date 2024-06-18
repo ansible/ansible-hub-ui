@@ -18,7 +18,6 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LightspeedModal,
   LoadingSpinner,
   Logo,
   ProviderLink,
@@ -222,7 +221,6 @@ class NamespaceRoles extends Component<
 interface RoleNamespaceState {
   alerts: AlertType[];
   editModal: boolean;
-  lightspeedModal: boolean;
   loading: boolean;
   namespace: LegacyNamespaceListType;
 }
@@ -241,7 +239,6 @@ class AnsibleRoleNamespaceDetail extends Component<
     this.state = {
       alerts: [],
       editModal: false,
-      lightspeedModal: false,
       loading: true,
       namespace: null,
     };
@@ -271,10 +268,8 @@ class AnsibleRoleNamespaceDetail extends Component<
   }
 
   render() {
-    const { alerts, editModal, lightspeedModal, loading, namespace } =
-      this.state;
+    const { alerts, editModal, loading, namespace } = this.state;
     const {
-      featureFlags: { ai_deny_index },
       user: { is_superuser, username },
     } = this.context as IAppContextType;
     const { location, navigate } = this.props;
@@ -309,16 +304,9 @@ class AnsibleRoleNamespaceDetail extends Component<
     const userOwnsLegacyNamespace = !!namespace.summary_fields?.owners?.find(
       (n) => n.username == username,
     );
-    const showLightspeed =
-      ai_deny_index && (is_superuser || userOwnsLegacyNamespace);
     const canImport = is_superuser || userOwnsLegacyNamespace;
 
     const dropdownItems = [
-      showLightspeed && (
-        <DropdownItem
-          onClick={() => this.setState({ lightspeedModal: true })}
-        >{t`Ansible Lightspeed settings`}</DropdownItem>
-      ),
       is_superuser && (
         <DropdownItem
           onClick={() => this.setState({ editModal: true })}
@@ -378,14 +366,6 @@ class AnsibleRoleNamespaceDetail extends Component<
           }
         />
 
-        {lightspeedModal && (
-          <LightspeedModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ lightspeedModal: false })}
-            reference={namespace.name}
-            scope={'legacy_namespace'}
-          />
-        )}
         {editModal && (
           <RoleNamespaceEditModal
             addAlert={(alert) => this.addAlert(alert)}
