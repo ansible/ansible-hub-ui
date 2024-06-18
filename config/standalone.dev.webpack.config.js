@@ -22,9 +22,6 @@ module.exports = webpackBase({
   // Port that the UI is served over
   UI_PORT: 8002,
 
-  // dev-mode only, support `IS_COMMUNITY=1 npm run start-standalone` in addition to `npm run start-community`
-  IS_COMMUNITY: !!process.env.IS_COMMUNITY,
-
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 

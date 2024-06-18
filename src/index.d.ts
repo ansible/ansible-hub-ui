@@ -8,7 +8,6 @@ declare module '*.svg';
 declare var API_BASE_PATH;
 declare var API_HOST;
 declare var APPLICATION_NAME;
-declare var IS_COMMUNITY: boolean;
 declare var IS_INSIGHTS: boolean;
 declare var PULP_API_BASE_PATH;
 declare var UI_BASE_PATH;

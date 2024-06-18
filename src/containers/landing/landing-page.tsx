@@ -33,9 +33,7 @@ export class LandingPage extends Component<RouteProps, IState> {
   }
 
   componentDidMount() {
-    if (!IS_COMMUNITY) {
-      this.setState({ redirect: true });
-    }
+    this.setState({ redirect: true });
   }
 
   render() {
@@ -46,6 +44,7 @@ export class LandingPage extends Component<RouteProps, IState> {
       return null;
     }
 
+    // TODO dead
     return (
       <>
         <AlertList

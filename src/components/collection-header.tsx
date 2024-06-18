@@ -581,17 +581,15 @@ export const CollectionHeader = ({
           reduced,
         ),
       },
-      !IS_COMMUNITY
-        ? {
-            active: active === 'distributions',
-            title: t`Distributions`,
-            link: formatPath(
-              Paths.collectionDistributionsByRepo,
-              pathParams,
-              reduced,
-            ),
-          }
-        : null,
+      {
+        active: active === 'distributions',
+        title: t`Distributions`,
+        link: formatPath(
+          Paths.collectionDistributionsByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
     ];
 
     return <LinkTabs tabs={tabs} />;
