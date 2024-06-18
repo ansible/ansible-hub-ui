@@ -1,6 +1,5 @@
 export { ActiveUserAPI } from './active-user';
 export { ActivitiesAPI } from './activities';
-export { AIDenyIndexAPI } from './ai-deny-index';
 export { AnsibleDistributionAPI } from './ansible-distribution';
 export { AnsibleRemoteAPI } from './ansible-remote';
 export { AnsibleRepositoryAPI } from './ansible-repository';
