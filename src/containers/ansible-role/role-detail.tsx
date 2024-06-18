@@ -37,7 +37,6 @@ import {
   Logo,
   Main,
   NavList,
-  RoleRatings,
   Tag,
   closeAlert,
 } from 'src/components';
@@ -536,7 +535,6 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
                 >{t`GitHub Repository`}</ExternalLink>
               </div>
               <div className='hub-entry'>
-                <RoleRatings namespace={namespace.name} name={role.name} />
                 <DownloadCount item={role} />
               </div>
               {canImport && (

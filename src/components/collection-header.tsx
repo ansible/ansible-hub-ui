@@ -34,7 +34,6 @@ import {
   type BreadcrumbType,
   Breadcrumbs,
   CollectionDropdown,
-  CollectionRatings,
   CopyCollectionToRepositoryModal,
   DateComponent,
   DeleteCollectionModal,
@@ -426,10 +425,6 @@ export const CollectionHeader = ({
               ) : null}
             </div>
             <div style={{ alignSelf: 'center' }}>
-              <CollectionRatings
-                namespace={collection_version.namespace}
-                name={collection_version.name}
-              />
               <DownloadCount item={actuallyCollection} />
             </div>
           </div>

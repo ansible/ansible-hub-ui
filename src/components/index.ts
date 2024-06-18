@@ -107,7 +107,6 @@ export { PermissionChipSelector } from './permission-chip-selector';
 export { PreviewRoles } from './preview-roles';
 export { ProviderLink } from './provider-link';
 export { PulpLabels } from './pulp-labels';
-export { CollectionRatings, RoleRatings } from './ratings';
 export { RemoteForm } from './remote-form';
 export { RenderPluginDoc } from './render-plugin-doc';
 export { RepositoryBadge } from './repository-badge';
