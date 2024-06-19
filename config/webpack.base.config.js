@@ -86,7 +86,6 @@ module.exports = (inputConfigs) => {
               ([k, v]) => ({
                 context: [k],
                 target: v,
-                changeOrigin: true,
               }),
             ),
             server: { type: customConfigs.UI_USE_HTTPS ? 'https' : 'http' },
