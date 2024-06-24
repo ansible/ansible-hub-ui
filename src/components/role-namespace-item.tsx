@@ -17,16 +17,13 @@ import './list-item.scss';
 interface RoleNamespaceProps {
   namespace: LegacyNamespaceDetailType;
   openEditModal?: (namespace) => void;
-  openLightspeedModal?: (namespace) => void;
 }
 
 export function RoleNamespaceItem({
   namespace,
   openEditModal,
-  openLightspeedModal,
 }: RoleNamespaceProps) {
   const {
-    featureFlags: { ai_deny_index },
     user: { username, is_superuser },
   } = useHubContext();
   const location = useLocation();
@@ -56,15 +53,9 @@ export function RoleNamespaceItem({
   ];
 
   const isOwner = !!summary_fields.owners.find((n) => n.username == username);
-  const showLightspeed = ai_deny_index && (is_superuser || isOwner);
   const canImport = is_superuser || isOwner;
 
   const dropdownItems = [
-    showLightspeed && openLightspeedModal && (
-      <DropdownItem
-        onClick={() => openLightspeedModal(namespace)}
-      >{t`Ansible Lightspeed settings`}</DropdownItem>
-    ),
     is_superuser && openEditModal && (
       <DropdownItem
         onClick={() => openEditModal(namespace)}

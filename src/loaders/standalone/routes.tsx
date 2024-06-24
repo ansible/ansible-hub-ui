@@ -40,7 +40,6 @@ import {
   ExecutionEnvironmentRegistryList,
   GroupDetail,
   GroupList,
-  LandingPage,
   LoginPage,
   MultiSearch,
   MyImports,
@@ -280,7 +279,7 @@ export class StandaloneRoutes extends Component<IRoutesProps> {
       { component: MyImports, path: Paths.myImports },
       { component: NamespaceDetail, path: Paths.namespace },
       { component: Search, path: Paths.collections },
-      { component: LandingPage, path: Paths.landingPage },
+      { component: Search, path: Paths.landingPage },
       { component: Dispatch, path: Paths.dispatch },
       { component: MultiSearch, path: Paths.search },
     ];

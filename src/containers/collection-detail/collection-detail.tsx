@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import { isEqual } from 'lodash';
 import React, { Component } from 'react';
 import {
@@ -9,7 +10,7 @@ import {
   closeAlert,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { ParamHelper, type RouteProps, withRouter } from 'src/utilities';
 import { type IBaseCollectionState, loadCollection } from './base';
 
@@ -62,7 +63,7 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
     const { collection_version: version } = collection;
 
     const breadcrumbs = [
-      namespaceBreadcrumb(),
+      { name: t`Namespaces`, url: formatPath(Paths.namespaces) },
       {
         url: formatPath(Paths.namespaceDetail, {
           namespace: version.namespace,

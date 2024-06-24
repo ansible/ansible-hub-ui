@@ -34,7 +34,6 @@ import {
   type BreadcrumbType,
   Breadcrumbs,
   CollectionDropdown,
-  CollectionRatings,
   CopyCollectionToRepositoryModal,
   DateComponent,
   DeleteCollectionModal,
@@ -59,7 +58,6 @@ import {
   ParamHelper,
   canSignNamespace,
   jsxErrorMessage,
-  namespaceTitle,
   parsePulpIDFromURL,
   repositoryRemoveCollection,
   waitForTask,
@@ -173,21 +171,13 @@ export const CollectionHeader = ({
       .filter(Boolean)
       .map((b, i) => (i ? <Fragment key={i}> {b}</Fragment> : b)); // join with spaces
 
-  const nsTitle = namespaceTitle(
-    namespace_metadata || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace_metadata?.name || collection_version.namespace;
 
   if (redirect) {
     return <Navigate to={redirect} />;
   }
 
   const canSign = canSignNamespace(context, namespace);
-
-  const issueUrl =
-    'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
-    encodeURIComponent(
-      `${collection_version.namespace}-${collectionName}-${version}`,
-    );
 
   const deleteFromRepo = deleteAll ? null : collection.repository.name;
 
@@ -432,21 +422,12 @@ export const CollectionHeader = ({
               ) : null}
             </div>
             <div style={{ alignSelf: 'center' }}>
-              <CollectionRatings
-                namespace={collection_version.namespace}
-                name={collection_version.name}
-              />
               <DownloadCount item={actuallyCollection} />
             </div>
           </div>
         }
         pageControls={
           <Flex>
-            {IS_INSIGHTS ? (
-              <FlexItem>
-                <ExternalLink href={issueUrl}>{t`Create issue`}</ExternalLink>
-              </FlexItem>
-            ) : null}
             <CollectionDropdown
               collection={collection}
               data-cy='kebab-toggle'
@@ -581,17 +562,15 @@ export const CollectionHeader = ({
           reduced,
         ),
       },
-      !IS_COMMUNITY
-        ? {
-            active: active === 'distributions',
-            title: t`Distributions`,
-            link: formatPath(
-              Paths.collectionDistributionsByRepo,
-              pathParams,
-              reduced,
-            ),
-          }
-        : null,
+      {
+        active: active === 'distributions',
+        title: t`Distributions`,
+        link: formatPath(
+          Paths.collectionDistributionsByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
     ];
 
     return <LinkTabs tabs={tabs} />;

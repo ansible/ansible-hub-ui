@@ -9,9 +9,6 @@ interface IProps {
 }
 
 export const DownloadCount = ({ item }: IProps) => {
-  if (IS_INSIGHTS) {
-    return null;
-  }
   if (!item?.download_count) {
     return null;
   }

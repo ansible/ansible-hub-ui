@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Text,
   TextContent,
@@ -21,11 +20,10 @@ import {
   Tooltip,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
+import { convertContentSummaryCounts } from 'src/utilities';
 
 interface IProps extends CollectionVersionSearch {
   displaySignatures: boolean;
-  footer?: ReactNode;
   menu?: ReactNode;
 }
 
@@ -61,11 +59,8 @@ export const CollectionCard = ({
   is_signed,
   displaySignatures,
   menu,
-  footer,
 }: IProps) => {
-  const nsTitle = namespaceTitle(
-    namespace || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace?.name || collection_version.namespace;
   const contentSummary = convertContentSummaryCounts(collection_version);
 
   return (
@@ -134,7 +129,6 @@ export const CollectionCard = ({
           renderTypeCount(k, contentSummary.contents[k]),
         )}
       </CardBody>
-      {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   );
 };
