@@ -1,7 +1,7 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
-describe('user detail tests all fields, editing, and deleting', () => {
+describe.standalone('user detail tests all fields, editing, and deleting', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
   const selectInput = (id) => cy.get(`input[id=${id}]`).click().clear();

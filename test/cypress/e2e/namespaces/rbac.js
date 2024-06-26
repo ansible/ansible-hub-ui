@@ -291,7 +291,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Delete collection from system');
   });
 
-  it('should let view, add, change and delete users when user has permissions', () => {
+  it.standalone('should let view, add, change and delete users when user has permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
     cy.login(userName, userPassword);
 
@@ -314,7 +314,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Delete').should('exist');
   });
 
-  it('should let view, add, change and delete groups when user has permissions', () => {
+  it.standalone('should let view, add, change and delete groups when user has permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
     cy.login(userName, userPassword);
 

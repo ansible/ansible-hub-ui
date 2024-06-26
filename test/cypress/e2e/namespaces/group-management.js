@@ -79,7 +79,7 @@ describe('Hub Group Management Tests', () => {
     cy.login();
   });
 
-  it('admin user can create/delete a group', () => {
+  it.standalone('admin user can create/delete a group', () => {
     const name = 'testGroup';
 
     createGroupManually(name);
@@ -87,7 +87,7 @@ describe('Hub Group Management Tests', () => {
     cy.contains('No groups yet').should('exist');
   });
 
-  it('admin user can add/remove a user to/from a group', () => {
+  it.standalone('admin user can add/remove a user to/from a group', () => {
     const groupName = 'testGroup';
     const userName = 'testUser';
 
