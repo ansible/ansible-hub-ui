@@ -60,9 +60,16 @@ export const NamespaceModal = ({
         onCreateSuccess(data);
       })
       .catch((error) => {
+        const nofield = [];
+
         for (const e of error.response.data.errors) {
-          errorMessages[e.source.parameter] = e.detail;
+          if (e.source) {
+            errorMessages[e.source.parameter] = e.detail;
+          } else {
+            nofield.push(e.detail || e.title);
+          }
         }
+        errorMesssages.__nofield = nofield.join('\n');
 
         setNameValid(!('name' in errorMessages));
         setErrorMessages(errorMessages);
