@@ -15,7 +15,7 @@ describe('Collections list Tests', () => {
 
     cy.get('.collection-container [aria-label="Actions"]').click();
     cy.contains('Deprecate').click();
-    cy.contains('No results found', { timeout: 10000 });
+    cy.contains('No results found');
   }
 
   function undeprecate() {
@@ -23,9 +23,7 @@ describe('Collections list Tests', () => {
     cy.contains('This collection has been deprecated.');
     cy.openHeaderKebab();
     cy.contains('Undeprecate').click();
-    cy.contains('This collection has been deprecated.', {
-      timeout: 10000,
-    }).should('not.exist');
+    cy.contains('This collection has been deprecated.').should('not.exist');
   }
 
   function undeprecateIfDeprecated() {
@@ -138,9 +136,7 @@ describe('Collections list Tests', () => {
     cy.contains('Delete collection from system').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
-    cy.contains('Collection "my_collection0" has been successfully deleted.', {
-      timeout: 15000,
-    });
+    cy.contains('Collection "my_collection0" has been successfully deleted.');
     cy.contains('No results found');
   });
 
@@ -156,9 +152,7 @@ describe('Collections list Tests', () => {
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
 
-    cy.contains('Collection "my_collection1" has been successfully deleted.', {
-      timeout: 15000,
-    });
+    cy.contains('Collection "my_collection1" has been successfully deleted.');
     cy.contains('No results found');
   });
 });

@@ -38,7 +38,7 @@ describe('Imports filter test', () => {
     );
     cy.get(
       '[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar',
-    ).contains('Completed', { timeout: 10000 });
+    ).contains('Completed');
     cy.get(
       '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
     ).contains('Done');
@@ -46,9 +46,7 @@ describe('Imports filter test', () => {
 
   it('should be able to switch between namespaces', () => {
     cy.get('button[aria-label="Clear all"]').click();
-    cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {
-      timeout: 8000,
-    });
+    cy.contains('[data-cy="import-list-data"]', 'No namespace selected.');
 
     cy.intercept(
       'GET',

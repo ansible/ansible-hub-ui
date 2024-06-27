@@ -25,7 +25,7 @@ describe('Approval Dashboard process', () => {
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('[data-cy^="ApprovalRow"]', 'Needs review');
     cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
-    cy.contains('.body', 'No results found', { timeout: 8000 });
+    cy.contains('.body', 'No results found');
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('button', 'Clear all filters').click();
     cy.contains('[data-cy^="ApprovalRow"]', 'Signed and approved');
@@ -77,7 +77,7 @@ describe('Approval Dashboard process', () => {
     cy.wait(10000);
     cy.contains('My imports');
     cy.get('.pf-v5-c-label__content').contains('Running').should('exist');
-    cy.wait('@upload', { timeout: 10000 });
+    cy.wait('@upload');
     cy.wait(5000);
     cy.get('.pf-v5-c-label__content').contains('Failed').should('not.exist');
     cy.get('.pf-v5-c-label__content').contains('Completed').should('exist');

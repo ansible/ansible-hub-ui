@@ -26,7 +26,7 @@ describe('collection tests', () => {
     cy.get('[data-cy=delete-collection]').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
-    cy.contains('No collections yet', { timeout: 10000 });
+    cy.contains('No collections yet');
   });
 
   it('deletes a collection version', () => {
@@ -113,9 +113,6 @@ describe('collection tests', () => {
     cy.get('button').contains('Delete').click();
     cy.contains(
       'Collection "test_repo_collection2" has been successfully deleted.',
-      {
-        timeout: 10000,
-      },
     );
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
     cy.contains('[data-cy="CollectionListItem"]', 'Published').should(
@@ -167,9 +164,6 @@ describe('collection tests', () => {
     cy.get('button').contains('Delete').click();
     cy.contains(
       'Collection "test_repo_collection_version2 v1.0.0" has been successfully deleted.',
-      {
-        timeout: 10000,
-      },
     );
 
     cy.visit(

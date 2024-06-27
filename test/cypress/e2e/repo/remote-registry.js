@@ -82,7 +82,7 @@ describe('Remote Registry Tests', () => {
 
     cy.get(
       '[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]',
-    ).contains('Completed', { timeout: 10000 });
+    ).contains('Completed');
   });
 
   it('users can index only redhat.registry.io', () => {

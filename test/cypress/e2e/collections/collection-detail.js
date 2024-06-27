@@ -6,15 +6,13 @@ describe('Collection detail', () => {
   function deprecate() {
     cy.openHeaderKebab();
     cy.contains('Deprecate').click();
-    cy.contains('This collection has been deprecated.', { timeout: 10000 });
+    cy.contains('This collection has been deprecated.');
   }
 
   function undeprecate() {
     cy.openHeaderKebab();
     cy.contains('Undeprecate').click();
-    cy.contains('This collection has been deprecated.', {
-      timeout: 10000,
-    }).should('not.exist');
+    cy.contains('This collection has been deprecated.').should('not.exist');
   }
 
   before(() => {
@@ -80,9 +78,7 @@ describe('Collection detail', () => {
       }
 
       if (tab.name == 'Import log') {
-        cy.contains('.body', 'Approval status', {
-          timeout: 10000,
-        });
+        cy.contains('.body', 'Approval status');
       }
 
       if (tab.name == 'Contents') {

@@ -116,9 +116,7 @@ function versionCheck(version) {
 
         cy.contains('Sync started for repository "repo1Test".');
         cy.contains('a', 'detail page').click();
-        cy.get('.pf-v5-c-label__content').contains('Failed', {
-          timeout: 15000,
-        });
+        cy.get('.pf-v5-c-label__content').contains('Failed');
       }
     });
 

@@ -104,7 +104,7 @@ describe('Collection Upload Tests', () => {
     cy.get('[data-cy="confirm-upload"]').click();
     cy.wait('@upload');
     cy.contains('My imports');
-    cy.get('.pf-v5-c-label__content').contains('Completed', { timeout: 15000 });
+    cy.get('.pf-v5-c-label__content').contains('Completed');
     cy.get('.pf-v5-c-label__content').contains('Failed').should('not.exist');
     cy.get('.pf-v5-c-label__content').contains('Running').should('not.exist');
   });

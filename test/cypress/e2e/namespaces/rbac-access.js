@@ -154,7 +154,7 @@ function testAccessTab({
   cy.get(
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] .pf-v5-c-table__toggle button`,
   ).click();
-  cy.contains('.pf-v5-c-label', permissionLabel, { timeout: 10000 });
+  cy.contains('.pf-v5-c-label', permissionLabel);
 
   // role list view, remove
   cy.get(
