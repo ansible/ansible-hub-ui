@@ -291,47 +291,53 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Delete collection from system');
   });
 
-  it.standalone('should let view, add, change and delete users when user has permissions', () => {
-    cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
-    cy.login(userName, userPassword);
+  it.standalone(
+    'should let view, add, change and delete users when user has permissions',
+    () => {
+      cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
+      cy.login(userName, userPassword);
 
-    // can View user
-    cy.menuPresent('User Access > Users');
-    cy.visit(`${uiPrefix}users`);
-    cy.contains('Users');
+      // can View user
+      cy.menuPresent('User Access > Users');
+      cy.visit(`${uiPrefix}users`);
+      cy.contains('Users');
 
-    // can Add user
-    cy.contains('Create');
-    cy.visit(`${uiPrefix}users/create`);
-    cy.contains('Create new user');
+      // can Add user
+      cy.contains('Create');
+      cy.visit(`${uiPrefix}users/create`);
+      cy.contains('Create new user');
 
-    // can Change and Delete user
-    cy.visit(`${uiPrefix}users`);
-    cy.get(
-      '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
-    ).click();
-    cy.contains('Edit').should('exist');
-    cy.contains('Delete').should('exist');
-  });
+      // can Change and Delete user
+      cy.visit(`${uiPrefix}users`);
+      cy.get(
+        '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
+      ).click();
+      cy.contains('Edit').should('exist');
+      cy.contains('Delete').should('exist');
+    },
+  );
 
-  it.standalone('should let view, add, change and delete groups when user has permissions', () => {
-    cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
-    cy.login(userName, userPassword);
+  it.standalone(
+    'should let view, add, change and delete groups when user has permissions',
+    () => {
+      cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
+      cy.login(userName, userPassword);
 
-    // can View group
-    cy.menuPresent('User Access > Groups');
-    cy.visit(`${uiPrefix}group-list`);
-    cy.contains('Groups');
+      // can View group
+      cy.menuPresent('User Access > Groups');
+      cy.visit(`${uiPrefix}group-list`);
+      cy.contains('Groups');
 
-    // can Add group
-    cy.contains('Create').should('exist');
+      // can Add group
+      cy.contains('Create').should('exist');
 
-    // can Change and Delete group
-    cy.get(
-      '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
-    ).click();
-    cy.contains('Delete').should('exist');
-  });
+      // can Change and Delete group
+      cy.get(
+        '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
+      ).click();
+      cy.contains('Delete').should('exist');
+    },
+  );
 
   it('should let create, edit or delete container when user has permission', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_containers');
