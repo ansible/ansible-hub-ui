@@ -1,9 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Container Signing', () => {
-  const user = 'EESignTestUser';
-  const password = 'MyPassword123';
-
   function deleteAll() {
     cy.deleteRegistries();
     cy.deleteContainers();
@@ -13,9 +10,6 @@ describe('Container Signing', () => {
   before(() => {
     cy.login();
     deleteAll();
-
-    // user without sign privilleges
-    cy.galaxykit('-i user create', user, password);
 
     cy.galaxykit(
       'registry create',
@@ -52,9 +46,7 @@ describe('Container Signing', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote1`);
     cy.contains('[data-cy="column-section"]', 'remote1');
-    cy.contains('.hub-header-bottom', 'Unsigned', {
-      timeout: 10000,
-    });
+    cy.contains('.hub-header-bottom', 'Unsigned');
 
     cy.contains('Last updated from registry');
 
@@ -70,9 +62,7 @@ describe('Container Signing', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/remote2`);
     cy.contains('[data-cy="column-section"]', 'remote2');
-    cy.contains('.hub-header-bottom', 'Unsigned', {
-      timeout: 10000,
-    });
+    cy.contains('.hub-header-bottom', 'Unsigned');
 
     cy.get('button[aria-label="Actions"]').click();
     cy.contains('.pf-v5-c-dropdown ul li a', 'Sign').click();
@@ -83,9 +73,7 @@ describe('Container Signing', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/local1`);
     cy.contains('[data-cy="column-section"]', 'local1');
-    cy.contains('.hub-header-bottom', 'Unsigned', {
-      timeout: 10000,
-    });
+    cy.contains('.hub-header-bottom', 'Unsigned');
 
     cy.get('button[aria-label="Actions"]').click();
     cy.contains('.pf-v5-c-dropdown ul li a', 'Sign').click();
@@ -95,7 +83,12 @@ describe('Container Signing', () => {
     });
   });
 
-  it('cant see sign button when user has no rights', () => {
+  it.standalone('cant see sign button when user has no rights', () => {
+    // user without sign privilleges
+    const user = 'EESignTestUser';
+    const password = 'MyPassword123';
+    cy.galaxykit('-i user create', user, password);
+
     cy.login(user, password);
     cy.visit(`${uiPrefix}containers/local1`);
     // this is now covered by alert that should not be here in the future

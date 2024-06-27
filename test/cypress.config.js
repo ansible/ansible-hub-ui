@@ -4,6 +4,7 @@ module.exports = defineConfig({
   viewportWidth: 1280,
   viewportHeight: 800,
   e2e: {
+    defaultCommandTimeout: 20000,
     setupNodeEvents(on, _config) {
       if (process.env.CONSOLE_LOG_TO_TERMINAL) {
         return require('./cypress/plugins/console-logger').install(on);

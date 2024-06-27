@@ -36,7 +36,6 @@ function rejectItem(repo) {
   menuActionClick(repo, 'Reject');
   cy.contains(
     'Certification status for collection "namespace collection1 v1.0.0" has been successfully updated.',
-    { timeout: 10000 },
   );
   cy.visit(`${uiPrefix}approval-dashboard`);
   cy.contains('Clear all filters').click();
@@ -113,7 +112,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('button', 'Select').click();
     cy.contains(
       'Certification status for collection "namespace collection1 v1.0.0" has been successfully updated.',
-      { timeout: 20000 },
     );
 
     cy.visit(`${uiPrefix}approval-dashboard`);
@@ -144,7 +142,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('button', 'Select').click();
     cy.contains(
       'Certification status for collection "namespace collection1 v1.0.0" has been successfully updated.',
-      { timeout: 20000 },
     );
 
     cy.visit(`${uiPrefix}approval-dashboard`);
@@ -183,7 +180,6 @@ describe('Approval Dashboard process with multiple repos', () => {
     cy.contains('button', 'Select').click();
     cy.contains(
       'Certification status for collection "namespace collection1 v1.0.0" has been successfully updated.',
-      { timeout: 20000 },
     );
 
     cy.visit(`${uiPrefix}approval-dashboard`);

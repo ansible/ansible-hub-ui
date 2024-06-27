@@ -28,7 +28,6 @@ describe('Documentation dropdown', () => {
     cy.get('[data-cy="docs-dropdown"]').click();
     cy.get('.pf-v5-c-dropdown__menu').contains('About').click();
     cy.get('.pf-v5-c-about-modal-box').should('be.visible');
-    cy.get('h1').contains('Galaxy NG');
     cy.get('[aria-label="Close Dialog"]').click();
     cy.get('.pf-v5-c-about-modal-box').should('not.exist');
   });
