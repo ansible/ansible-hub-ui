@@ -145,7 +145,7 @@ describe('RBAC test for user without permissions', () => {
   });
 });
 
-describe('RBAC test for user with permissions', () => {
+describe.standalone('RBAC test for user with permissions', () => {
   const allPerms = [
     {
       group: 'namespaces',

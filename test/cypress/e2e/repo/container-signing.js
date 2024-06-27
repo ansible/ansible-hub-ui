@@ -1,9 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Container Signing', () => {
-  const user = 'EESignTestUser';
-  const password = 'MyPassword123';
-
   function deleteAll() {
     cy.deleteRegistries();
     cy.deleteContainers();
@@ -13,9 +10,6 @@ describe('Container Signing', () => {
   before(() => {
     cy.login();
     deleteAll();
-
-    // user without sign privilleges
-    cy.galaxykit('-i user create', user, password);
 
     cy.galaxykit(
       'registry create',
@@ -89,7 +83,12 @@ describe('Container Signing', () => {
     });
   });
 
-  it('cant see sign button when user has no rights', () => {
+  it.standalone('cant see sign button when user has no rights', () => {
+    // user without sign privilleges
+    const user = 'EESignTestUser';
+    const password = 'MyPassword123';
+    cy.galaxykit('-i user create', user, password);
+
     cy.login(user, password);
     cy.visit(`${uiPrefix}containers/local1`);
     // this is now covered by alert that should not be here in the future

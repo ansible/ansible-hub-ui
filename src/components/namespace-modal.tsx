@@ -69,7 +69,10 @@ export const NamespaceModal = ({
             nofield.push(e.detail || e.title);
           }
         }
-        errorMesssages.__nofield = nofield.join('\n');
+
+        if (nofield.length) {
+          errorMessages.__nofield = nofield.join('\n');
+        }
 
         setNameValid(!('name' in errorMessages));
         setErrorMessages(errorMessages);
