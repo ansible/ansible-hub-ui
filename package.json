@@ -12,7 +12,7 @@
     "@patternfly/react-core": "^5.3.3",
     "@patternfly/react-table": "^5.3.3",
     "@redhat-cloud-services/frontend-components": "^4.2.12",
-    "antsibull-docs": "^1.0.1",
+    "antsibull-docs": "^1.0.2",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
     "csstype": "^3.1.3",
