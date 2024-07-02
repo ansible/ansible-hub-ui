@@ -9,6 +9,7 @@ module.exports = defineConfig({
       if (process.env.CONSOLE_LOG_TO_TERMINAL) {
         return require('./cypress/plugins/console-logger').install(on);
       }
+      require('cypress-terminal-report/src/installLogsPrinter')(on);
     },
     baseUrl: 'http://localhost:8002',
     // overridden in cypress.yml
