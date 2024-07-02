@@ -1,5 +1,6 @@
 // https://on.cypress.io/configuration
 import 'cypress-file-upload';
+import 'cypress-terminal-report/src/installLogsCollector';
 import './commands';
 import './login';
 
