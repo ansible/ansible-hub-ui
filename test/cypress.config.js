@@ -6,6 +6,7 @@ module.exports = defineConfig({
   e2e: {
     defaultCommandTimeout: 20000,
     setupNodeEvents(on, _config) {
+      require('cypress-terminal-report/src/installLogsPrinter')(on);
       if (process.env.CONSOLE_LOG_TO_TERMINAL) {
         return require('./cypress/plugins/console-logger').install(on);
       }
