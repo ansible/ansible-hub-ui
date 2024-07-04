@@ -14,16 +14,3 @@ export const canSignNamespace = (
     permissions.includes('galaxy.upload_to_namespace')
   );
 };
-
-export const canSignEE = (
-  { featureFlags }: { featureFlags: FeatureFlagsType },
-  container,
-) => {
-  const { container_signing } = featureFlags;
-  const permissions = container.namespace.my_permissions;
-
-  return (
-    container_signing &&
-    permissions.includes('container.change_containernamespace')
-  );
-};

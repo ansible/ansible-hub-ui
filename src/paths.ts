@@ -46,19 +46,6 @@ export function formatPath(
   return params ? `${url}?${ParamHelper.getQueryString(params)}` : url;
 }
 
-// handle long/short EE routes:
-// (path, container: 'namespaced/name') -> (path, { namespace: 'namespaced', container: 'name' })
-// (path, container: 'simple') -> (path, { container: 'simple' })
-// see also containerName
-export function formatEEPath(path, data, params?) {
-  if (data.container?.includes('/')) {
-    const [namespace, container] = data.container.split('/');
-    return formatPath(path, { ...data, namespace, container }, params);
-  }
-
-  return formatPath(path, data, params);
-}
-
 export const Paths = {
   ansibleRemoteDetail: '/ansible/remotes/:name',
   ansibleRemoteEdit: '/ansible/remotes/:name/edit',
@@ -89,17 +76,6 @@ export const Paths = {
   dispatch: '/dispatch',
   editNamespace: '/my-namespaces/edit/:namespace',
   editUser: '/users/:userID/edit',
-  executionEnvironmentDetailAccess:
-    '/containers/:namespace?/:container/_content/access',
-  executionEnvironmentDetailActivities:
-    '/containers/:namespace?/:container/_content/activity',
-  executionEnvironmentDetailImages:
-    '/containers/:namespace?/:container/_content/images',
-  executionEnvironmentDetail: '/containers/:namespace?/:container',
-  executionEnvironmentManifest:
-    '/containers/:namespace?/:container/_content/images/:digest',
-  executionEnvironments: '/containers',
-  executionEnvironmentsRegistries: '/registries',
   groupDetail: '/group/:group',
   groupList: '/group-list',
   landingPage: '/',

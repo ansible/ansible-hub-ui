@@ -17,12 +17,7 @@ export const LoginLink = ({ button }: IProps) => {
 
   // NOTE: also update AuthHandler#render (src/loaders/standalone/routes.tsx) when changing this
   if (featureFlags?.external_authentication && UI_EXTERNAL_LOGIN_URI) {
-    return (
-      <a
-        className={className}
-        href={loginURL(pathname, featureFlags)}
-      >{t`Login`}</a>
-    );
+    return <a className={className} href={loginURL(pathname)}>{t`Login`}</a>;
   } else {
     return (
       <Link

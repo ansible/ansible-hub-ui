@@ -9,8 +9,6 @@ describe('Hub Menu Tests', () => {
     'Collections > Remotes',
     'Collections > API token',
     'Collections > Approval',
-    'Execution Environments > Execution Environments',
-    'Execution Environments > Remote Registries',
     'Task Management',
     'Signature Keys',
     'User Access > Users',
@@ -37,8 +35,6 @@ describe('Hub Menu Tests', () => {
       'Collections > Collections',
       'Collections > Namespaces',
       'Collections > Repositories',
-      'Execution Environments > Execution Environments',
-      'Execution Environments > Remote Registries',
       'Signature Keys',
       'Task Management',
     ];

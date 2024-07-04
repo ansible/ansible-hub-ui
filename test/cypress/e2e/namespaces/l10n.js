@@ -35,27 +35,3 @@ describe('Localization tests with the t`String` format', () => {
     });
   });
 });
-
-describe('Localization tests with the <Trans> format', () => {
-  const helper = languageCheckHelper(
-    `${uiPrefix}containers`,
-    '[data-cy="push-images-button"]',
-  );
-
-  beforeEach(() => {
-    cy.login();
-  });
-
-  const translations = {
-    en: 'Push container images',
-    fr: 'Pousser images de conteneurs',
-    ja: 'コンテナーイメージのプッシュ',
-    zh: '推容器镜像',
-  };
-
-  Object.entries(translations).forEach(([language, message]) => {
-    it(`should display the correct translation in ${language}`, () => {
-      helper(language, message);
-    });
-  });
-});

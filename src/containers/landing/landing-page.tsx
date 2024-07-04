@@ -19,7 +19,6 @@ import './landing-page.scss';
 
 interface IState {
   alerts: AlertType[];
-  redirect: boolean;
 }
 
 export class LandingPage extends Component<RouteProps, IState> {
@@ -28,23 +27,11 @@ export class LandingPage extends Component<RouteProps, IState> {
 
     this.state = {
       alerts: [],
-      redirect: false,
     };
   }
 
-  componentDidMount() {
-    if (!IS_COMMUNITY) {
-      this.setState({ redirect: true });
-    }
-  }
-
   render() {
-    const { alerts, redirect } = this.state;
-
-    if (redirect) {
-      setTimeout(() => this.props.navigate(formatPath(Paths.collections)));
-      return null;
-    }
+    const { alerts } = this.state;
 
     return (
       <>

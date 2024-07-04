@@ -423,7 +423,6 @@ export class RoleList extends Component<RouteProps, IState> {
     const { hasPermission } = this.context as IAppContextType;
     const dropdownItems = (this.context as IAppContextType).user.is_superuser
       ? [
-          // hasPermission('galaxy.change_containerregistryremote') &&
           locked ? (
             <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
               {editItem}
@@ -431,7 +430,6 @@ export class RoleList extends Component<RouteProps, IState> {
           ) : (
             editItem
           ),
-          // hasPermission('galaxy.delete_containerregistryremote') &&
           locked ? (
             <Tooltip
               key='delete'

@@ -21,7 +21,6 @@ import { Link } from 'react-router-dom';
 import {
   ActiveUserAPI,
   type FeatureFlagsType,
-  GatewayLogoutAPI,
   type SettingsType,
   type UserType,
 } from 'src/api';
@@ -54,7 +53,6 @@ export const StandaloneLayout = ({
   user,
 }: IProps) => {
   const [aboutModalVisible, setAboutModalVisible] = useState<boolean>(false);
-  const isGateway = featureFlags?.dab_resource_registry;
 
   let aboutModal = null;
   let docsDropdownItems = [];
@@ -85,11 +83,6 @@ export const StandaloneLayout = ({
         aria-label={'logout'}
         onClick={() =>
           ActiveUserAPI.logout()
-            .then(
-              isGateway
-                ? () => GatewayLogoutAPI.logout().catch(() => null)
-                : () => null,
-            )
             .then(() => ActiveUserAPI.getUser().catch(() => null))
             .then((user) => setUser(user))
         }

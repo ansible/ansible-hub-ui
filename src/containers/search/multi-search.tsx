@@ -1,10 +1,9 @@
 import { t } from '@lingui/macro';
-import { DataList, Label } from '@patternfly/react-core';
+import { DataList } from '@patternfly/react-core';
 import React, { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,
-  ExecutionEnvironmentAPI,
   LegacyNamespaceAPI,
   LegacyRoleAPI,
   NamespaceAPI,
@@ -21,11 +20,10 @@ import {
   NamespaceListItem,
   RoleItem,
   RoleNamespaceItem,
-  Tooltip,
   closeAlert,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
-import { Paths, formatEEPath, formatPath } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   ParamHelper,
   type RouteProps,
@@ -72,7 +70,6 @@ const MultiSearch = (props: RouteProps) => {
   const [roles, setRoles] = useState([]);
   const [namespaces, setNamespaces] = useState([]);
   const [roleNamespaces, setRoleNamespaces] = useState([]);
-  const [containers, setContainers] = useState([]);
 
   const keywords = (params as { keywords: string })?.keywords || '';
 
@@ -86,7 +83,6 @@ const MultiSearch = (props: RouteProps) => {
       setNamespaces([]);
       setRoles([]);
       setRoleNamespaces([]);
-      setContainers([]);
       return;
     }
 
@@ -133,19 +129,6 @@ const MultiSearch = (props: RouteProps) => {
           handleHttpError(
             t`Failed to search role namespaces (${keywords})`,
             () => setRoleNamespaces([]),
-            addAlert,
-          ),
-        );
-    }
-
-    if (featureFlags.execution_environments) {
-      setContainers(loading);
-      ExecutionEnvironmentAPI.list({ ...shared, name__icontains: keywords })
-        .then(({ data: { data } }) => setContainers(data || []))
-        .catch(
-          handleHttpError(
-            t`Failed to search execution environments (${keywords})`,
-            () => setContainers([]),
             addAlert,
           ),
         );
@@ -324,65 +307,6 @@ const MultiSearch = (props: RouteProps) => {
           </ResultsSection>
         ) : null}
 
-        {featureFlags.execution_environments ? (
-          <ResultsSection
-            items={containers}
-            title={t`Execution environments`}
-            showAllLink={
-              <Link
-                to={formatPath(Paths.executionEnvironments)}
-              >{t`Show all execution environments`}</Link>
-            }
-            showMoreLink={
-              <Link
-                to={formatPath(
-                  Paths.executionEnvironments,
-                  {},
-                  { name__icontains: keywords },
-                )}
-              >{t`Show more execution environments`}</Link>
-            }
-          >
-            <DataList
-              aria-label={t`Available matching execution environments`}
-              className='hub-card-layout'
-              style={{ paddingTop: '8px' }}
-            >
-              {containers.map((item, index) => (
-                <section
-                  key={index}
-                  className='card-wrapper'
-                  style={{ width: '300px' }}
-                >
-                  <article className='pf-v5-c-card'>
-                    <div className='pf-v5-c-card__title'>
-                      <Link
-                        to={formatEEPath(Paths.executionEnvironmentDetail, {
-                          container: item.pulp.distribution.base_path,
-                        })}
-                      >
-                        {item.name}
-                      </Link>
-                    </div>
-                    <div className='pf-v5-c-card__body pf-m-truncate'>
-                      {item.description ? (
-                        <Tooltip content={item.description}>
-                          {item.description}
-                        </Tooltip>
-                      ) : null}
-                    </div>
-                    <div className='pf-v5-c-card__footer'>
-                      <Label>
-                        {item.pulp.repository.remote ? t`Remote` : t`Local`}
-                      </Label>
-                    </div>
-                  </article>
-                </section>
-              ))}
-            </DataList>
-          </ResultsSection>
-        ) : null}
-
         <SectionSeparator />
         <hr />
 
@@ -430,19 +354,6 @@ const MultiSearch = (props: RouteProps) => {
               <Link
                 to={formatPath(Paths.standaloneNamespaces)}
               >{t`Show all role namespaces`}</Link>
-            }
-          />
-        ) : null}
-
-        {featureFlags.execution_environments ? (
-          <NotFoundSection
-            items={containers}
-            title={t`Execution environments`}
-            emptyStateTitle={t`No matching execution environments found.`}
-            showAllLink={
-              <Link
-                to={formatPath(Paths.executionEnvironments)}
-              >{t`Show all execution environments`}</Link>
             }
           />
         ) : null}

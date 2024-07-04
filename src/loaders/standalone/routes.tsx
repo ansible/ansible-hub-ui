@@ -31,13 +31,6 @@ import {
   EditNamespace,
   EditRole,
   EditUser,
-  ExecutionEnvironmentDetail,
-  ExecutionEnvironmentDetailAccess,
-  ExecutionEnvironmentDetailActivities,
-  ExecutionEnvironmentDetailImages,
-  ExecutionEnvironmentList,
-  ExecutionEnvironmentManifest,
-  ExecutionEnvironmentRegistryList,
   GroupDetail,
   GroupList,
   LandingPage,
@@ -131,7 +124,7 @@ const AuthHandler = ({
     const isExternalAuth = featureFlags.external_authentication;
     // NOTE: also update LoginLink when changing this
     if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
-      window.location.replace(loginURL(pathname, featureFlags));
+      window.location.replace(loginURL(pathname));
       return null;
     }
 
@@ -154,49 +147,12 @@ export class StandaloneRoutes extends Component<IRoutesProps> {
   getRoutes(): IRouteConfig[] {
     const { featureFlags, user } = this.context as IAppContextType;
 
-    let isContainerDisabled = true;
     let isUserMgmtDisabled = false;
     if (featureFlags) {
-      isContainerDisabled = !featureFlags.execution_environments;
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
 
     return [
-      {
-        component: ExecutionEnvironmentDetailActivities,
-        path: Paths.executionEnvironmentDetailActivities,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailAccess,
-        path: Paths.executionEnvironmentDetailAccess,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentManifest,
-        path: Paths.executionEnvironmentManifest,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetailImages,
-        path: Paths.executionEnvironmentDetailImages,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentDetail,
-        path: Paths.executionEnvironmentDetail,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentList,
-        path: Paths.executionEnvironments,
-        isDisabled: isContainerDisabled,
-      },
-      {
-        component: ExecutionEnvironmentRegistryList,
-        path: Paths.executionEnvironmentsRegistries,
-        isDisabled: isContainerDisabled,
-      },
       { component: AnsibleRoleDetail, path: Paths.standaloneRole },
       { component: AnsibleRoleImport, path: Paths.standaloneRoleImport },
       { component: AnsibleRoleImports, path: Paths.standaloneImports },

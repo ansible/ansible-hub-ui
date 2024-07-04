@@ -19,13 +19,6 @@ export { default as CollectionDistributions } from './collection-detail/collecti
 export { default as CollectionDocs } from './collection-detail/collection-docs';
 export { default as CollectionImportLog } from './collection-detail/collection-import-log';
 export { default as EditNamespace } from './edit-namespace/edit-namespace';
-export { default as ExecutionEnvironmentDetail } from './execution-environment-detail/execution-environment-detail';
-export { default as ExecutionEnvironmentDetailAccess } from './execution-environment-detail/execution-environment-detail-access';
-export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution-environment-detail-activities';
-export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution-environment-detail-images';
-export { default as ExecutionEnvironmentList } from './execution-environment-list/execution-environment-list';
-export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
-export { default as ExecutionEnvironmentRegistryList } from './execution-environment/registry-list';
 export { default as GroupDetail } from './group-management/group-detail';
 export { default as GroupList } from './group-management/group-list';
 export { default as LandingPage } from './landing/landing-page';

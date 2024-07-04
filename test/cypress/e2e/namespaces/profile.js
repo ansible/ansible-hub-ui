@@ -6,7 +6,7 @@ const helperText = (id) =>
     .parents('.pf-v5-c-form__group')
     .find('.pf-v5-c-helper-text__item-text');
 
-describe.standalone('My Profile Tests', () => {
+describe('My Profile Tests', () => {
   const username = 'nopermission';
   const password = 'n0permissi0n';
 

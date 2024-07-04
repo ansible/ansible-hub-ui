@@ -9,10 +9,8 @@ describe('Feature flags', () => {
       expect(body).to.include({ can_upload_signatures: false });
       expect(body).to.include({ collection_auto_sign: true });
       expect(body).to.include({ collection_signing: true });
-      expect(body).to.include({ container_signing: true });
       expect(body).to.include({ display_repositories: true });
       expect(body).to.include({ display_signatures: true });
-      expect(body).to.include({ execution_environments: true });
       expect(body).to.include({ legacy_roles: false });
       expect(body).to.include({ require_upload_signatures: false });
       expect(body).to.include({ signatures_enabled: true });

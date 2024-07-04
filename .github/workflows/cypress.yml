@@ -4,9 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master' ]
   push:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master' ]
   # daily on master
   schedule:
   - cron: '30 5 * * *'
@@ -47,22 +47,9 @@ jobs:
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install git+https://github.com/ansible/galaxykit.git
 
-    - name: "Set env.SHORT_BRANCH, BACKEND_FLAVOR"
+    - name: "Set env.SHORT_BRANCH"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-
-        case "${{ matrix.test }}" in
-          community*)
-            BACKEND_FLAVOR=community
-            API=api
-            ;;
-          *)
-            BACKEND_FLAVOR=standalone
-            API=api/galaxy
-            ;;
-        esac
-
-        echo "BACKEND_FLAVOR=${BACKEND_FLAVOR}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "API=${API}" >> $GITHUB_ENV
@@ -96,8 +83,7 @@ jobs:
       run: |
         pip install --editable ./client/
         # merge common, profile-specific and test matrix specific config
-        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$BACKEND_FLAVOR" \
+        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env \
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
@@ -136,18 +122,7 @@ jobs:
         npm run gettext:extract
         npm run gettext:compile
 
-    - name: "Build standalone UI"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
-      working-directory: 'ansible-hub-ui'
-      run: |
-        npm run build-standalone
-
-        # save the App.*.js hash for later verification
-        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
-        echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
-
-    - name: "Build community UI"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+    - name: "Build UI"
       working-directory: 'ansible-hub-ui'
       run: |
         npm run build-community
@@ -156,22 +131,7 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
-    - name: "Serve standalone UI"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
-      run: |
-        mkdir -p www/static/
-        mv ansible-hub-ui/dist www/static/galaxy_ng
-        cd www
-        echo '{}' > package.json
-        npm install local-web-server
-        node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
-          --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
-          --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
-          --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
-          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
-
-    - name: "Serve community UI"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+    - name: "Serve UI"
       run: |
         mkdir -p www/
         mv ansible-hub-ui/dist/* www/
@@ -197,16 +157,9 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json."$BACKEND_FLAVOR" cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json cypress.env.json
 
-    - name: "Ensure standalone index.html uses the new js"
-      if: ${{ env.BACKEND_FLAVOR == 'standalone' }}
-      run: |
-        echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
-        curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
-
-    - name: "Ensure community index.html uses the new js"
-      if: ${{ env.BACKEND_FLAVOR == 'community' }}
+    - name: "Ensure index.html uses the new js"
       run: |
         echo 'expecting /js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/index.html | tee /dev/stderr | grep '/js/App.'"$BUILD_HASH"'.js'

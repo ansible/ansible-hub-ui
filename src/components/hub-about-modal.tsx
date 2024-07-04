@@ -36,7 +36,6 @@ interface IApplicationInfo {
   galaxy_ng_commit?: string;
   galaxy_ng_version?: string;
   pulp_ansible_version?: string;
-  pulp_container_version?: string;
   pulp_core_version?: string;
   server_version?: string;
 }
@@ -57,7 +56,6 @@ export const HubAboutModal = ({ isOpen, onClose, user, userName }: IProps) => {
     galaxy_importer_version, // 0.4.13
     pulp_core_version, // 3.28.12
     pulp_ansible_version, // 0.19.0
-    pulp_container_version, // 2.15.2
     aap_version, // ?
   } = applicationInfo;
 
@@ -113,15 +111,6 @@ export const HubAboutModal = ({ isOpen, onClose, user, userName }: IProps) => {
               href={`https://github.com/pulp/pulp_ansible/releases/tag/${pulp_ansible_version}`}
             >
               {pulp_ansible_version}
-            </ExternalLink>
-          </Value>
-
-          <Label>{t`Pulp Container Version`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/pulp/pulp_container/releases/tag/${pulp_container_version}`}
-            >
-              {pulp_container_version}
             </ExternalLink>
           </Value>
 

@@ -21,14 +21,11 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "uiPrefix": "<ui base path>",
         "username": "<your username here>",
         "password": "<your password here>",
-        "containers": "<container push target>",
         "galaxykit": "<galaxykit command>"
     }
 
 
-*NOTE*: the likely values for `apiPrefix` are `/api/` (community), `/api/automation-hub/` (insights), or `/api/galaxy/` (standalone).
-
-*NOTE*: `containers` is what you would use with `docker push`/`podman push` to add a local container, eg. `localhost:5001`
+*NOTE*: the likely values for `apiPrefix` are `/api/` (community) or `/api/automation-hub/` (insights).
 
 
 ## Run the tests

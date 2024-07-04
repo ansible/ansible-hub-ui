@@ -17,8 +17,6 @@ describe('view-only mode - with download', () => {
       'Collections > Remotes',
       'Collections > API token',
       'Collections > Approval',
-      'Execution Environments > Execution Environments',
-      'Execution Environments > Remote Registries',
       'Task Management',
       'Signature Keys',
       'User Access > Users',

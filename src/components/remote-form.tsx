@@ -40,7 +40,6 @@ interface IProps {
   closeModal: () => void;
   errorMessages: ErrorMessagesType;
   remote: RemoteType;
-  remoteType: 'registry' | 'ansible-remote';
   saveRemote: () => void;
   showModal?: boolean;
   showMain?: boolean;
@@ -93,10 +92,7 @@ export class RemoteForm extends Component<IProps, IState> {
     };
 
     // Shim in a default concurrency value to pass form validation (AAH-959)
-    if (
-      this.props.remoteType !== 'registry' &&
-      this.props.remote.download_concurrency === null
-    ) {
+    if (this.props.remote.download_concurrency === null) {
       this.updateRemote(10, 'download_concurrency');
     }
   }
@@ -109,7 +105,6 @@ export class RemoteForm extends Component<IProps, IState> {
       saveRemote,
       showMain,
       showModal,
-      remoteType,
       title,
     } = this.props;
 
@@ -117,28 +112,11 @@ export class RemoteForm extends Component<IProps, IState> {
       return null;
     }
 
+    // require only name, url; nothing disabled
     const requiredFields = ['name', 'url'];
-    let disabledFields = allowEditName ? [] : ['name'];
+    const disabledFields = allowEditName ? [] : ['name'];
 
-    const isCommunityRemote =
-      remoteType === 'ansible-remote' &&
-      remote?.url === 'https://galaxy.ansible.com/api/';
-
-    switch (remoteType) {
-      case 'ansible-remote':
-        // require only name, url; nothing disabled
-        break;
-
-      case 'registry':
-        disabledFields = disabledFields.concat([
-          'auth_url',
-          'token',
-          'requirements_file',
-          'signed_only',
-          'sync_dependencies',
-        ]);
-        break;
-    }
+    const isCommunityRemote = remote?.url === 'https://galaxy.ansible.com/api/';
 
     const save = (
       <Button
@@ -193,15 +171,11 @@ export class RemoteForm extends Component<IProps, IState> {
       isCommunityRemote,
     }: { extra?: ReactNode; isCommunityRemote: boolean },
   ) {
-    const { errorMessages, remote, remoteType } = this.props;
+    const { errorMessages, remote } = this.props;
     const { filenames } = this.state;
     const { collection_signing } = (this.context as IAppContextType)
       .featureFlags;
-    const writeOnlyFields =
-      remote[
-        remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields'
-      ];
-
+    const writeOnlyFields = remote.hidden_fields;
     const docsAnsibleLink = (
       <ExternalLink href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'>
         requirements.yml
@@ -890,7 +864,7 @@ export class RemoteForm extends Component<IProps, IState> {
   }
 
   private isValid(requiredFields) {
-    const { remote, remoteType } = this.props;
+    const { remote } = this.props;
 
     for (const field of requiredFields) {
       if (!remote[field] || remote[field] === '') {
@@ -898,11 +872,8 @@ export class RemoteForm extends Component<IProps, IState> {
       }
     }
 
-    if (remoteType === 'ansible-remote') {
-      // only required in remotes, not registries
-      if (remote.download_concurrency < 1) {
-        return false;
-      }
+    if (remote.download_concurrency < 1) {
+      return false;
     }
 
     if (validateURLHelper(null, remote.url).variant == 'error') {
@@ -913,19 +884,16 @@ export class RemoteForm extends Component<IProps, IState> {
   }
 
   private updateIsSet(fieldName: string, value: boolean) {
-    const { remote, remoteType } = this.props;
-    const hiddenFieldsName =
-      remoteType === 'ansible-remote' ? 'hidden_fields' : 'write_only_fields';
+    const { remote } = this.props;
 
-    const newFields: WriteOnlyFieldType[] = remote[hiddenFieldsName].map(
-      (field) =>
-        field.name === fieldName ? { ...field, is_set: value } : field,
+    const newFields: WriteOnlyFieldType[] = remote.hidden_fields.map((field) =>
+      field.name === fieldName ? { ...field, is_set: value } : field,
     );
 
     this.props.updateRemote({
       ...remote,
       [fieldName]: null,
-      [hiddenFieldsName]: newFields,
+      hidden_fields: newFields,
     });
   }
 

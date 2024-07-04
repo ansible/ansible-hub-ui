@@ -37,16 +37,13 @@ describe('Login helpers', () => {
     cy.galaxykit('user create', username, password);
   });
 
-  it.standalone(
-    'can login manually and logout as admin or different user',
-    () => {
-      manualLogin(username, password);
-      cy.contains(username);
-      manualLogout();
-      manualLogin(adminUsername, adminPassword);
-      cy.contains(adminUsername);
-    },
-  );
+  it('can login manually and logout as admin or different user', () => {
+    manualLogin(username, password);
+    cy.contains(username);
+    manualLogout();
+    manualLogin(adminUsername, adminPassword);
+    cy.contains(adminUsername);
+  });
 
   it('can use api login', () => {
     cy.login();

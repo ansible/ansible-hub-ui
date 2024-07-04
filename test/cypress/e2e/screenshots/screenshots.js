@@ -41,9 +41,6 @@ describe('screenshots', () => {
     screenshot('/approval-dashboard');
     screenshot('/my-imports');
 
-    screenshot('/containers');
-    screenshot('/registries');
-
     screenshot('/standalone/roles');
     screenshot('/standalone/namespaces');
 

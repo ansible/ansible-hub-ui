@@ -29,47 +29,6 @@ describe('Namespace Access tab', () => {
   });
 });
 
-describe('Execution Environment Access tab', () => {
-  const num = (~~(Math.random() * 1000000)).toString();
-
-  before(() => {
-    cy.login();
-    cy.deleteRegistries();
-    cy.deleteContainers();
-    cy.deleteTestGroups();
-
-    cy.galaxykit(
-      'registry create',
-      `rbac_access_${num}_registry`,
-      'https://registry.hub.docker.com/',
-    );
-    cy.galaxykit(
-      'container create',
-      `rbac_access_${num}`,
-      'library/alpine',
-      `rbac_access_${num}_registry`,
-    );
-    cy.galaxykit('-i group create', `access_group`);
-  });
-
-  beforeEach(() => {
-    cy.login();
-    cy.visit(`${uiPrefix}containers/rbac_access_${num}`);
-    cy.get('.pf-v5-c-tabs__item-text').contains('Access').click();
-  });
-
-  it('add and remove group and roles', () => {
-    testAccessTab({
-      num,
-      permission: 'change_containernamespace',
-      permissionGroup: 'Container',
-      permissionLabel: 'Change container namespace permissions',
-      role: 'galaxy.execution_environment_publisher',
-      roleFilter: 'publish',
-    });
-  });
-});
-
 function testAccessTab({
   num,
   permission,

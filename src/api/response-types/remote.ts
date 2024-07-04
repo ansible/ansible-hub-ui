@@ -35,7 +35,7 @@ export class RemoteType {
   ca_cert?: string;
   sync_dependencies?: boolean;
 
-  write_only_fields: WriteOnlyFieldType[];
+  hidden_fields?: WriteOnlyFieldType[];
 
   repositories: {
     name: string;

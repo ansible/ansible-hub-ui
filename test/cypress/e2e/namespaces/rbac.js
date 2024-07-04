@@ -9,19 +9,6 @@ describe('RBAC test for user without permissions', () => {
   before(() => {
     cy.login();
 
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
-
-    cy.galaxykit(
-      '-i container create',
-      `testcontainer`,
-      'library/alpine',
-      `docker`,
-    );
-
     cy.galaxykit('-i user create', userName, userPassword);
     cy.galaxykit('-i group create', groupName);
     cy.galaxykit('-i user group add', userName, groupName);
@@ -36,8 +23,6 @@ describe('RBAC test for user without permissions', () => {
 
     cy.deleteTestGroups();
     cy.deleteTestUsers();
-    cy.deleteRegistries();
-    cy.deleteContainers();
     cy.deleteNamespacesAndCollections();
   });
 
@@ -99,45 +84,6 @@ describe('RBAC test for user without permissions', () => {
     cy.get('[data-cy="GroupList-row-testgroup"]').should('not.exist');
   });
 
-  it("shouldn't let create, edit or delete container when user doesn't have permission", () => {
-    cy.visit(`${uiPrefix}containers`);
-
-    // cannot Create new containers
-    cy.contains('Add execution environment').should('not.exist');
-
-    // cannot Change and Delete container
-    cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
-    ).click();
-    cy.contains('Edit').should('not.exist');
-    cy.contains('Delete').should('not.exist');
-
-    cy.visit(`${uiPrefix}containers/testcontainer`);
-    cy.contains('Edit').should('not.exist');
-    cy.get('[aria-label="Actions"]').click();
-    cy.contains('Delete').should('not.exist');
-
-    // temporary solution (button should not be visible, if user has no permissions to sync it)
-    cy.contains('Sync from registry').should('not.exist');
-  });
-
-  it("shouldn't let add, delete and sync remote registries when user doesn't have permission", () => {
-    // can Add remote registry
-    // in here we hide the button (correct), but in containers we dont (wrong)
-    cy.visit(`${uiPrefix}registries`);
-    cy.contains('Add remote registry').should('not.exist');
-
-    // can Change and Delete remote registry
-    cy.get(
-      '[data-cy="ExecutionEnvironmentRegistryList-row-docker"] [data-cy="kebab-toggle"]',
-    ).click();
-    cy.contains('Edit').should('not.exist');
-    cy.contains('Delete').should('not.exist');
-
-    // cannot sync remote registry
-    cy.contains('Sync from registry').should('not.exist');
-  });
-
   it("should let view task when user doesn't have permission", () => {
     cy.visit(`${uiPrefix}tasks`);
     cy.get('[aria-label="Task list"] tr td a').first().click();
@@ -145,7 +91,7 @@ describe('RBAC test for user without permissions', () => {
   });
 });
 
-describe.standalone('RBAC test for user with permissions', () => {
+describe('RBAC test for user with permissions', () => {
   const allPerms = [
     {
       group: 'namespaces',
@@ -189,25 +135,6 @@ describe.standalone('RBAC test for user with permissions', () => {
       ],
     },
     {
-      group: 'containers',
-      permissions: [
-        'container.delete_containerrepository',
-        'container.change_containernamespace',
-        'container.namespace_change_containerdistribution',
-        'container.namespace_modify_content_containerpushrepository',
-        'container.add_containernamespace',
-        'container.namespace_push_containerdistribution',
-      ],
-    },
-    {
-      group: 'registries',
-      permissions: [
-        'galaxy.add_containerregistryremote',
-        'galaxy.change_containerregistryremote',
-        'galaxy.delete_containerregistryremote',
-      ],
-    },
-    {
       group: 'task_management',
       permissions: ['core.delete_task', 'core.change_task'],
     },
@@ -215,18 +142,6 @@ describe.standalone('RBAC test for user with permissions', () => {
 
   before(() => {
     cy.login();
-
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
-    cy.addRemoteContainer({
-      name: `testcontainer`,
-      upstream_name: 'library/alpine',
-      registry: `docker`,
-      include_tags: 'latest',
-    });
 
     cy.galaxykit('-i user create', userName, userPassword);
     cy.galaxykit('-i group create', groupName);
@@ -247,8 +162,6 @@ describe.standalone('RBAC test for user with permissions', () => {
 
     cy.deleteTestGroups();
     cy.deleteTestUsers();
-    cy.deleteRegistries();
-    cy.deleteContainers();
     cy.deleteNamespacesAndCollections();
 
     allPerms.forEach(({ group }) => {
@@ -291,98 +204,46 @@ describe.standalone('RBAC test for user with permissions', () => {
     cy.contains('Delete collection from system');
   });
 
-  it.standalone(
-    'should let view, add, change and delete users when user has permissions',
-    () => {
-      cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
-      cy.login(userName, userPassword);
-
-      // can View user
-      cy.menuPresent('User Access > Users');
-      cy.visit(`${uiPrefix}users`);
-      cy.contains('Users');
-
-      // can Add user
-      cy.contains('Create');
-      cy.visit(`${uiPrefix}users/create`);
-      cy.contains('Create new user');
-
-      // can Change and Delete user
-      cy.visit(`${uiPrefix}users`);
-      cy.get(
-        '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
-      ).click();
-      cy.contains('Edit').should('exist');
-      cy.contains('Delete').should('exist');
-    },
-  );
-
-  it.standalone(
-    'should let view, add, change and delete groups when user has permissions',
-    () => {
-      cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
-      cy.login(userName, userPassword);
-
-      // can View group
-      cy.menuPresent('User Access > Groups');
-      cy.visit(`${uiPrefix}group-list`);
-      cy.contains('Groups');
-
-      // can Add group
-      cy.contains('Create').should('exist');
-
-      // can Change and Delete group
-      cy.get(
-        '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
-      ).click();
-      cy.contains('Delete').should('exist');
-    },
-  );
-
-  it('should let create, edit or delete container when user has permission', () => {
-    cy.galaxykit('-i group role add', groupName, 'galaxy.test_containers');
+  it('should let view, add, change and delete users when user has permissions', () => {
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
     cy.login(userName, userPassword);
 
-    cy.visit(`${uiPrefix}containers`);
+    // can View user
+    cy.menuPresent('User Access > Users');
+    cy.visit(`${uiPrefix}users`);
+    cy.contains('Users');
 
-    // can Create new containers
-    cy.contains('Add execution environment').should('exist');
+    // can Add user
+    cy.contains('Create');
+    cy.visit(`${uiPrefix}users/create`);
+    cy.contains('Create new user');
 
-    // can Change and Delete container
+    // can Change and Delete user
+    cy.visit(`${uiPrefix}users`);
     cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
+      '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
     ).click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
-
-    cy.visit(`${uiPrefix}containers/testcontainer`);
-    cy.contains('Edit').should('exist');
-    cy.get('[aria-label="Actions"]').click();
-    cy.contains('Delete').should('exist');
-    cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-v5-c-alert__title').contains(
-      'Sync started for remote registry "testcontainer".',
-    );
   });
 
-  it('should let add, delete and sync remote registries when user has permission', () => {
-    cy.galaxykit('-i group role add', groupName, 'galaxy.test_registries');
+  it('should let view, add, change and delete groups when user has permissions', () => {
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
     cy.login(userName, userPassword);
 
-    // can Add remote registry
-    cy.visit(`${uiPrefix}registries`);
-    cy.contains('Add remote registry').should('exist');
+    // can View group
+    cy.menuPresent('User Access > Groups');
+    cy.visit(`${uiPrefix}group-list`);
+    cy.contains('Groups');
 
-    // can Change and Delete remote registry
-    cy.get('[data-cy="kebab-toggle"]').click();
-    cy.contains('Edit');
-    cy.contains('Delete');
+    // can Add group
+    cy.contains('Create').should('exist');
 
-    // can sync remote registry
-    cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-v5-c-alert__title').contains(
-      'Sync started for remote registry "docker".',
-    );
+    // can Change and Delete group
+    cy.get(
+      '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-v5-c-dropdown',
+    ).click();
+    cy.contains('Delete').should('exist');
   });
 
   it('should let view task when user has permission', () => {

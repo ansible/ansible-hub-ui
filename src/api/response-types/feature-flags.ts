@@ -1,10 +1,5 @@
 export class FeatureFlagsType {
-  // execution environments
-  container_signing: boolean;
-  execution_environments: boolean;
-
   // gateway / keycloak
-  dab_resource_registry: boolean;
   external_authentication: boolean;
 
   // community mode

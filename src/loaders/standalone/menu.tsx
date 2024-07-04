@@ -74,21 +74,6 @@ function standaloneMenu() {
       }),
     ]),
     menuSection(
-      t`Execution Environments`,
-      {
-        condition: ({ featureFlags, user }) =>
-          featureFlags.execution_environments && !user.is_anonymous,
-      },
-      [
-        menuItem(t`Execution Environments`, {
-          url: formatPath(Paths.executionEnvironments),
-        }),
-        menuItem(t`Remote Registries`, {
-          url: formatPath(Paths.executionEnvironmentsRegistries),
-        }),
-      ],
-    ),
-    menuSection(
       t`Roles`,
       {
         condition: ({ featureFlags }) => featureFlags.legacy_roles,
@@ -115,8 +100,7 @@ function standaloneMenu() {
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
       condition: ({ featureFlags, user }) =>
-        (featureFlags.collection_signing || featureFlags.container_signing) &&
-        !user.is_anonymous,
+        featureFlags.collection_signing && !user.is_anonymous,
     }),
     menuSection(t`User Access`, {}, [
       menuItem(t`Users`, {

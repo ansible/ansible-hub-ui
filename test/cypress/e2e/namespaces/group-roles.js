@@ -17,21 +17,9 @@ describe('Group Roles Tests', () => {
     },
   };
 
-  const testContainerRole = {
-    name: `galaxy.test_container_role_${num}`,
-    description: 'this is test container role',
-    permissions: {
-      'container.namespace_change_containerdistribution': 'Change containers',
-      'container.namespace_modify_content_containerpushrepository':
-        'Change image tags',
-      'container.delete_containerrepository': 'Delete container repository',
-    },
-  };
-
   const cleanup = () => {
     cy.galaxykit('-i group delete', 'empty_group');
     cy.galaxykit('-i group delete', groupName);
-    cy.galaxykit('-i role delete', testContainerRole.name);
     cy.galaxykit('-i role delete', testRole.name);
   };
 
@@ -46,7 +34,6 @@ describe('Group Roles Tests', () => {
     cleanup();
 
     cy.galaxykit('-i group create', groupName);
-    createRole(testContainerRole);
     createRole(testRole);
   });
 
@@ -129,20 +116,11 @@ describe('Group Roles Tests', () => {
       .check()
       .should('be.disabled');
 
-    cy.get(
-      `[data-cy="RoleListTable"] [data-cy="RoleListTable-CheckboxRow-row-${testContainerRole.name}"] [type="checkbox"]`,
-    )
-      .uncheck()
-      .should('not.be.disabled')
-      .click();
-
     cy.get('.pf-v5-c-wizard').contains('Selected roles');
-    cy.get(`[data-cy="HubPermission-${testContainerRole.name}"]`);
 
     cy.contains('Next').click();
 
     cy.get('.hub-custom-wizard-layout').contains(groupName);
-    cy.get('.hub-custom-wizard-layout').contains(testContainerRole.name);
 
     cy.get('.pf-v5-c-wizard__footer > button')
       .contains('Add')
@@ -162,14 +140,9 @@ describe('Group Roles Tests', () => {
   });
 
   it('should not display deleted role in group detail', () => {
-    cy.galaxykit('group role add', groupName, testContainerRole.name);
-    cy.galaxykit('role delete', testContainerRole.name);
-
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.get('[data-cy="EmptyState"]')
-      .contains(testContainerRole.name)
-      .should('not.exist');
+    cy.get('[data-cy="EmptyState"]').should('not.exist');
   });
 
   it('should show group empty state', () => {
