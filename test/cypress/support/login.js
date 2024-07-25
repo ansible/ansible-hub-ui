@@ -1,21 +1,50 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
-function apiLogin(username, password, url = '/', title = 'Collections') {
+const setFormData = (username, password) => {
+  const formData = new FormData();
+  formData.set('username', username);
+  formData.set('password', password);
+  return formData;
+};
+
+function apiLogin(
+  username,
+  password,
+  url,
+  title = 'Collections',
+  isGateway = false,
+) {
   cy.session(
     ['apiLogin', username],
     () => {
-      const loginUrl = `${apiPrefix}_ui/v1/auth/login/`;
+      const loginUrl = isGateway
+        ? `/api/gateway/v1/login/`
+        : `${apiPrefix}_ui/v1/auth/login/`;
       cy.request('GET', loginUrl).then(() => {
-        cy.getCookie('csrftoken').then((csrftoken) => {
+        cy.getCookie('csrftoken').then((csrf) => {
+          const csrfToken = csrf.value;
+
+          const headers = {
+            'X-CSRFToken': csrfToken,
+            Referer: Cypress.config().baseUrl,
+          };
+
+          if (isGateway) {
+            headers['content-type'] = 'multipart/form-data';
+            headers['Set-Cookie'] = `csrftoken=${csrfToken}`;
+          }
+
+          const body = isGateway
+            ? setFormData(username, password)
+            : { username, password };
+
           cy.request({
             method: 'POST',
             url: loginUrl,
-            body: { username, password },
-            headers: {
-              'X-CSRFToken': csrftoken.value,
-              Referer: Cypress.config().baseUrl,
-            },
+            body,
+            headers,
           });
         });
       });
@@ -30,12 +59,17 @@ function apiLogin(username, password, url = '/', title = 'Collections') {
   cy.assertTitle(title);
 }
 
-Cypress.Commands.add('login', {}, (username, password, url, title) => {
+Cypress.Commands.add('login', {}, (username, password, url = '/', title) => {
   if (!username && !password) {
     // default to admin
     username = Cypress.env('username');
     password = Cypress.env('password');
   }
 
-  apiLogin(username, password, url, title);
+  const isGateway =
+    ['1', 1, 'true', true].includes(Cypress.env('HUB_GATEWAY')) || false;
+
+  const loginUrl = isGateway ? uiPrefix : url;
+
+  apiLogin(username, password, loginUrl, title, isGateway);
 });
