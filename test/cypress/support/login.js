@@ -1,5 +1,6 @@
 // https://on.cypress.io/custom-commands
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 const setFormData = (username, password) => {
   const formData = new FormData();
@@ -68,10 +69,7 @@ Cypress.Commands.add('login', {}, (username, password, url = '/', title) => {
   const isGateway =
     ['1', 1, 'true', true].includes(Cypress.env('HUB_GATEWAY')) || false;
 
-  // redirects to HUB full experience /ui/
-  const gwHubPrefix = '/ui/';
-
-  const loginUrl = isGateway ? gwHubPrefix : url;
+  const loginUrl = isGateway ? uiPrefix : url;
 
   apiLogin(username, password, loginUrl, title, isGateway);
 });
