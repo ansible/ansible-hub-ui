@@ -65,8 +65,6 @@ Cypress.Commands.add('login', {}, (username, password, url = '/', title) => {
     password = Cypress.env('password');
   }
 
-  cy.log('gateway', Cypress.env('HUB_GATEWAY'));
-
   const isGateway =
     ['1', 1, 'true', true].includes(Cypress.env('HUB_GATEWAY')) || false;
 
