@@ -113,5 +113,6 @@ To map between the two:
 |AAP version|AAH version|
 |-|-|
 |2.4|4.9|
+|2.5|4.10|
 
 [Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
