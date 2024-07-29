@@ -33,7 +33,6 @@ interface IProps {
   displaySignatures: boolean;
   dropdownMenu?: ReactNode | null;
   showNamespace?: boolean;
-  synclistSwitch?: ReactNode | null;
   uploadButton?: ReactNode | null;
 }
 
@@ -48,7 +47,6 @@ export const CollectionListItem = ({
   displaySignatures,
   dropdownMenu,
   showNamespace,
-  synclistSwitch,
   uploadButton,
 }: IProps) => {
   const cells = [];
@@ -135,7 +133,6 @@ export const CollectionListItem = ({
           direction={{ default: 'column' }}
           alignItems={{ default: 'alignItemsFlexStart' }}
         >
-          {synclistSwitch && <FlexItem>{synclistSwitch}</FlexItem>}
           {uploadButton || dropdownMenu ? (
             <FlexItem>
               {uploadButton}
