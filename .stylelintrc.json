@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "custom-property-pattern": "^([a-z][a-z0-9]*)(-+[a-zA-Z0-9_]+)*$",
+    "scss/at-import-partial-extension": null,
     "selector-class-pattern": null
   }
 }
