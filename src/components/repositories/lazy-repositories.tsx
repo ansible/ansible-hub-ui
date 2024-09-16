@@ -92,7 +92,7 @@ export const LazyRepositories = ({
           </Link>
         </>
       ))}
-      {!repositories?.length ? emptyText ?? '---' : null}
+      {!repositories?.length ? (emptyText ?? '---') : null}
       {count > repositories?.length ? (
         <>
           {' '}
