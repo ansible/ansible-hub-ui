@@ -101,6 +101,14 @@ jobs:
           ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
           | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
+    # oci-env compose build: FileNotFoundError: [Errno 2] No such file or directory: 'docker-compose'
+    - name: "Provide docker-compose"
+      run: |
+        mkdir -p /home/runner/.local/bin/
+        cd /home/runner/.local/bin/
+        ( echo '#!/bin/sh' ; echo 'docker compose "$@"' ) > docker-compose
+        chmod +x docker-compose
+
     - name: "oci-env compose build"
       working-directory: 'oci_env'
       run: 'oci-env compose build'
