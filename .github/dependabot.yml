@@ -9,24 +9,44 @@ updates:
     groups:
       babel:
         patterns:
-          - "@babel/*"
-          - "babel-loader"
+          - '@babel/*'
+          - 'babel-loader'
       eslint:
         patterns:
-          - "eslint"
-          - "eslint-config-*"
-          - "eslint-plugin-*"
-          - "typescript-eslint"
+          - 'eslint'
+          - 'eslint-config-*'
+          - 'eslint-plugin-*'
+          - 'typescript-eslint'
       lingui:
         patterns:
-          - "@lingui/*"
+          - '@lingui/*'
       patternfly:
         patterns:
-          - "@patternfly/*"
+          - '@patternfly/*'
       react:
         patterns:
-          - "react"
-          - "react-dom"
+          - 'react'
+          - 'react-dom'
+    ignore:
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'react-monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'sass'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
+      - dependency-name: 'typescript-eslint'
+        update-types:
+          - 'version-update:semver-major'
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -38,37 +58,47 @@ updates:
     groups:
       babel:
         patterns:
-          - "@babel/*"
-          - "babel-loader"
+          - '@babel/*'
+          - 'babel-loader'
       eslint:
         patterns:
-          - "eslint"
-          - "eslint-config-*"
-          - "eslint-plugin-*"
-          - "typescript-eslint"
+          - 'eslint'
+          - 'eslint-config-*'
+          - 'eslint-plugin-*'
+          - 'typescript-eslint'
       lingui:
         patterns:
-          - "@lingui/*"
+          - '@lingui/*'
       patternfly:
         patterns:
-          - "@patternfly/*"
+          - '@patternfly/*'
       react:
         patterns:
-          - "react"
-          - "react-dom"
-          - "@types/react"
-          - "@types/react-dom"
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
     ignore:
       - dependency-name: '@lingui/*'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: '@patternfly/*'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: '@types/*'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: 'react'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: 'react-dom'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'sass'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
 
   # npm in test/
 
@@ -92,10 +122,10 @@ updates:
     schedule:
       interval: 'weekly'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     target-branch: 'stable-4.9'
     commit-message:
       prefix: '[stable-4.9] '
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
