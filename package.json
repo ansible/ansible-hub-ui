@@ -11,7 +11,6 @@
     "@patternfly/react-code-editor": "^5.4.0",
     "@patternfly/react-core": "^5.4.0",
     "@patternfly/react-table": "^5.4.0",
-    "@redhat-cloud-services/frontend-components": "^4.2.15",
     "antsibull-docs": "^1.1.0",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
@@ -39,8 +38,6 @@
     "@lingui/cli": "^4.11.4",
     "@lingui/macro": "^4.11.4",
     "@ls-lint/ls-lint": "^2.2.3",
-    "@redhat-cloud-services/frontend-components-config": "^6.2.8",
-    "@redhat-cloud-services/frontend-components-config-utilities": "^3.2.2",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-macros": "^3.1.0",
@@ -71,8 +68,6 @@
     "webpack-dev-server": "^5.1.0"
   },
   "scripts": {
-    "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
-    "build-insights": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
     "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
     "eslint": "eslint src/ config/ test/",
     "eslint:fix": "eslint --fix src/ config/ test/",
@@ -96,13 +91,7 @@
     "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
     "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
     "sort-exports": "perl -i -pe 's/^export/import/' src/**/index.ts ; npm run prettier ; perl -i -pe 's/^import/export/' src/**/index.ts",
-    "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
-    "start-insights": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
-    "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
     "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js"
-  },
-  "insights": {
-    "appname": "automation-hub"
   },
   "engines": {
     "node": ">=18",

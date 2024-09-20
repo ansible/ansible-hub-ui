@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,
-  CollectionRatings,
   DateComponent,
   DeprecatedTag,
   LabelGroup,
@@ -25,7 +24,7 @@ import {
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
+import { convertContentSummaryCounts } from 'src/utilities';
 import './list-item.scss';
 
 interface IProps {
@@ -33,7 +32,6 @@ interface IProps {
   displaySignatures: boolean;
   dropdownMenu?: ReactNode | null;
   showNamespace?: boolean;
-  synclistSwitch?: ReactNode | null;
   uploadButton?: ReactNode | null;
 }
 
@@ -48,14 +46,11 @@ export const CollectionListItem = ({
   displaySignatures,
   dropdownMenu,
   showNamespace,
-  synclistSwitch,
   uploadButton,
 }: IProps) => {
   const cells = [];
 
-  const nsTitle = namespaceTitle(
-    namespace || { name: collection_version.namespace },
-  );
+  const nsTitle = namespace?.name || collection_version.namespace;
 
   if (showNamespace) {
     cells.push(
@@ -135,7 +130,6 @@ export const CollectionListItem = ({
           direction={{ default: 'column' }}
           alignItems={{ default: 'alignItemsFlexStart' }}
         >
-          {synclistSwitch && <FlexItem>{synclistSwitch}</FlexItem>}
           {uploadButton || dropdownMenu ? (
             <FlexItem>
               {uploadButton}
@@ -149,11 +143,6 @@ export const CollectionListItem = ({
               </Trans>
             </div>
             <div>v{collection_version.version}</div>
-            <CollectionRatings
-              isList
-              namespace={collection_version.namespace}
-              name={collection_version.name}
-            />
           </FlexItem>
         </Flex>
         <Flex

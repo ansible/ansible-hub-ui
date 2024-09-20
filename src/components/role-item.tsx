@@ -14,7 +14,6 @@ import {
   LabelGroup,
   Logo,
   ProviderLink,
-  RoleRatings,
   Tag,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
@@ -86,7 +85,6 @@ export function RoleItem({ role, show_thumbnail }: RoleProps) {
       </div>
       <div className='hub-entry'>{release_name}</div>
       <div className='hub-entry'>
-        <RoleRatings namespace={namespace.name} name={name} />
         <DownloadCount item={role} />
       </div>
     </DataListCell>,

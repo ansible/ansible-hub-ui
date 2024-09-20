@@ -10,7 +10,6 @@ import {
   EmptyStateNoData,
   HubListToolbar,
   HubPagination,
-  LightspeedModal,
   LoadingSpinner,
   RoleNamespaceEditModal,
   RoleNamespaceItem,
@@ -31,7 +30,6 @@ interface RoleNamespacesState {
   createModal?: boolean;
   count: number;
   editModal?: LegacyNamespaceListType;
-  lightspeedModal?: string;
   loading: boolean;
   params: {
     page?: number;
@@ -60,7 +58,6 @@ class AnsibleRoleNamespaceList extends Component<
       count: 0,
       createModal: false,
       editModal: null,
-      lightspeedModal: null,
       loading: true,
       params: {
         page: 1,
@@ -138,7 +135,6 @@ class AnsibleRoleNamespaceList extends Component<
       count,
       createModal,
       editModal,
-      lightspeedModal,
       loading,
       params,
       roleNamespaces,
@@ -174,14 +170,6 @@ class AnsibleRoleNamespaceList extends Component<
               this.setState({ createModal: false });
               this.query(params);
             }}
-          />
-        )}
-        {lightspeedModal && (
-          <LightspeedModal
-            addAlert={(alert) => this.addAlert(alert)}
-            closeAction={() => this.setState({ lightspeedModal: null })}
-            reference={lightspeedModal}
-            scope={'legacy_namespace'}
           />
         )}
         {editModal && (
@@ -230,9 +218,6 @@ class AnsibleRoleNamespaceList extends Component<
                         namespace={lnamespace}
                         openEditModal={(namespace) =>
                           this.setState({ editModal: namespace })
-                        }
-                        openLightspeedModal={({ name }) =>
-                          this.setState({ lightspeedModal: name })
                         }
                       />
                     ))}

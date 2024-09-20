@@ -2,13 +2,10 @@ import { t } from '@lingui/macro';
 
 export const translateTask = (name) =>
   ({
-    'galaxy_ng.app.tasks.curate_all_synclist_repository': t`Curate all synclist repositories`,
-    'galaxy_ng.app.tasks.curate_synclist_repository': t`Curate synclist repository`,
     'galaxy_ng.app.tasks.import_and_auto_approve': t`Import and auto approve`,
     'galaxy_ng.app.tasks.import_and_move_to_staging': t`Import and move to staging`,
     'galaxy_ng.app.tasks.promotion._remove_content_from_repository': t`Remove content from repository`,
     'galaxy_ng.app.tasks.publishing.import_and_auto_approve': t`Import and auto approve`,
-    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch': t`Curate synclist repository batch`,
     'pulp_ansible.app.tasks.collections.collection_sync': t`Collections sync`,
     'pulp_ansible.app.tasks.collections.import_collection': t`Import collection`,
     'pulp_ansible.app.tasks.collections.sync': t`Collections sync`,

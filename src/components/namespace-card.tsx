@@ -2,7 +2,6 @@ import { t } from '@lingui/macro';
 import {
   Button,
   Card,
-  CardBody,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -12,7 +11,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo, Tooltip } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { namespaceTitle } from 'src/utilities';
 import './cards.scss';
 
 // Use snake case to match field types provided py python API so that the
@@ -32,7 +30,7 @@ export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
       <div
         style={{
           display: 'flex',
-          height: IS_INSIGHTS ? '216px' : '168px',
+          height: '168px',
           justifyContent: 'center',
         }}
       >
@@ -49,14 +47,13 @@ export const NamespaceNextPageCard = ({ onClick }: { onClick: () => void }) => {
 
 export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
   const { avatar_url, name } = namespace;
-  const title = namespaceTitle(namespace);
 
   return (
     <Card className='hub-c-card-ns-container'>
       <CardHeader>
         <div style={{ display: 'flex', justifyContent: 'start' }}>
           <Logo
-            alt={t`${title} logo`}
+            alt={t`${name} logo`}
             fallbackToDefault
             image={avatar_url}
             size='40px'
@@ -64,14 +61,9 @@ export const NamespaceCard = ({ namespace, showDetailLink }: IProps) => {
           />
         </div>
       </CardHeader>
-      <Tooltip content={title} noSpan>
-        <CardTitle>{getDescription(title)}</CardTitle>
+      <Tooltip content={name} noSpan>
+        <CardTitle>{getDescription(name)}</CardTitle>
       </Tooltip>
-      {title !== name ? (
-        <Tooltip content={name} noSpan>
-          <CardBody>{getDescription(name)}</CardBody>
-        </Tooltip>
-      ) : null}
 
       {showDetailLink ? (
         <CardFooter>

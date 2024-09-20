@@ -16,7 +16,7 @@ Set up:
 
 ```
 git clone https://github.com/pulp/oci_env
-git clone https://github.com/ansible/galaxy_ng
+git clone https://github.com/ansible/galaxy_ng -b stable-4.10
 
 pip install -e oci_env/client/
 oci-env # make sure oci-env is in PATH
@@ -29,8 +29,8 @@ cd galaxy_ng
 make oci/standalone
 ```
 
-The backend can be run in multiple modes - `standalone`, `community`, `insights`, `keycloak`, `ldap` and `dab`.
-Depending on the mode, it will listen on http://localhost:5001 or http://localhost:55001, under `/api/galaxy/`, `/api/` or `/api/automation-hub/`.
+The backend can be run in multiple modes - `standalone`, `keycloak` and `ldap`.
+It will listen on http://localhost:55001, under `/api/galaxy/`.
 
 
 ### Frontend
@@ -42,7 +42,7 @@ Set up:
 Install node. Node v20+ is known to work. Other versions may work as well.
 
 ```
-git clone https://github.com/ansible/ansible-hub-ui
+git clone https://github.com/ansible/ansible-hub-ui -b stable-4.10
 cd ansible-hub-ui
 npm install
 ```
@@ -54,15 +54,12 @@ cd ansible-hub-ui
 npm run start-standalone
 ```
 
-This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and roles.
+Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
 
 #### Modes
 
-* `start-standalone`: assumes `oci/standalone` or `oci/dab`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
-* `start-community`: assumes `oci/community`, http://localhost:8002/ui/ and http://localhost:5001/api/
-* `start-insights`: assumes `oci/insights`,  http://localhost:8002/preview/ansible/automation-hub/ and http://localhost:55001/api/automation-hub/
-  * **NOTE:** This option is only relevant to Red Hat employees.
+* `start-standalone`: assumes `oci/standalone`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
 
 
 ### Tests
@@ -86,32 +83,3 @@ Run:
 cd ansible-hub-ui/test/
 npm run cypress
 ```
-
-
-## GitHub Workflows
-
-List of all workflows:
-
-- `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
-- `cypress`: Run Cypress integration tests; on PRs, pushes and cron
-- `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
-- `i18n`: Extract and merge l10n strings; cron
-- `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
-- `stable-release`: Build and upload to github releases; when a stable release is created
-
-List by branches:
-
-- `master`: `backported-labels`, `cypress`, `dev-release`, `i18n`, `pr-checks`, `stable-release`
-- `stable-*`: `backported-labels`, `cypress`, `i18n` (via cron from master), `pr-checks`, `stable-release`
-
-
-## Version mapping
-
-Our branches, backport labels, releases and tags use AAH versions, but Jira uses AAP versions.
-To map between the two:
-
-|AAP version|AAH version|
-|-|-|
-|2.4|4.9|
-
-[Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)

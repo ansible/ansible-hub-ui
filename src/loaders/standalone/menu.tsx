@@ -134,19 +134,6 @@ function standaloneMenu() {
         alternativeUrls: [altPath(Paths.roleEdit)],
       }),
     ]),
-    menuItem(t`Documentation`, {
-      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
-      external: true,
-      condition: ({ settings, user }) =>
-        IS_COMMUNITY &&
-        (settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous),
-    }),
-    menuItem(t`Terms of Use`, {
-      url: 'https://www.redhat.com/en/about/terms-use',
-      external: true,
-      condition: ({ featureFlags }) => featureFlags.legacy_roles,
-    }),
   ];
 }
 

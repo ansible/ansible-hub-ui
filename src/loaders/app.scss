@@ -51,13 +51,6 @@ body,
   height: 100%;
 }
 
-// insights mode Sidenav/Navigation overrides this for all navitems, restoring in main
-.pf-v5-c-page__main {
-  .pf-v5-c-nav__list > .pf-v5-c-nav__item:not(:first-child) {
-    border-top: 0;
-  }
-}
-
 // list screen toolbars
 .hub-toolbar {
   display: flex;

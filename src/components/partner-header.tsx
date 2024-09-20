@@ -10,7 +10,6 @@ import {
   type LinkTabsProps,
   Logo,
 } from 'src/components';
-import { namespaceTitle } from 'src/utilities';
 
 interface IProps {
   breadcrumbs: BreadcrumbType[];
@@ -27,15 +26,15 @@ export const PartnerHeader = ({
   pageControls,
   tabs,
 }: IProps) => {
-  const title = namespaceTitle(namespace);
+  const { name } = namespace;
 
   return (
     <BaseHeader
-      title={title}
+      title={name}
       logo={
         namespace.avatar_url && (
           <Logo
-            alt={t`${title} logo`}
+            alt={t`${name} logo`}
             className='hub-header-image'
             fallbackToDefault
             image={namespace.avatar_url}

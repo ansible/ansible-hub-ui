@@ -35,7 +35,7 @@ export const RepositoryBadge = ({
     {
       'rh-certified': t`Red Hat Certified`,
       community: t`Community`,
-      published: IS_INSIGHTS ? t`Certified` : t`Published`,
+      published: t`Published`,
       rejected: t`Rejected`,
       staging: t`Staging`,
       validated: t`Validated`,
