@@ -26,7 +26,7 @@ Run:
 
 ```
 cd galaxy_ng
-make oci/standalone
+make oci/dab
 ```
 
 The backend can be run in multiple modes - `standalone`, `community`, `insights`, `keycloak`, `ldap` and `dab`.
@@ -51,7 +51,7 @@ Run:
 
 ```
 cd ansible-hub-ui
-npm run start-standalone
+API_PROXY_PORT=5001 npm run start-standalone
 ```
 
 This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and roles.
