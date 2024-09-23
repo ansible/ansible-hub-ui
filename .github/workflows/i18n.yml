@@ -16,6 +16,7 @@ jobs:
         branch:
         - 'master'
         - 'stable-4.9'
+        - 'stable-4.10'
 
     steps:
 
