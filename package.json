@@ -8,7 +8,7 @@
     "@babel/runtime": "^7.25.6",
     "@lingui/react": "^4.11.4",
     "@patternfly/patternfly": "^5.4.0",
-    "@patternfly/react-code-editor": "^5.4.0",
+    "@patternfly/react-code-editor": "^5.4.1",
     "@patternfly/react-core": "^5.4.0",
     "@patternfly/react-table": "^5.4.0",
     "antsibull-docs": "^1.1.0",
