@@ -8,6 +8,6 @@ export default {
     },
   ],
   format: po,
-  locales: ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'],
+  locales: ['en', 'es', 'fr', 'ko', 'nl', 'ru', 'ja', 'zh'],
   sourceLocale: 'en',
 };

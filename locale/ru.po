@@ -1,0 +1,5213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-08-26 14:21+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ru\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-09-11 09:29+0300\n"
+"Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/collection-header.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "(latest)"
+msgstr "(последняя)"
+
+#: src/components/collection-header.tsx
+msgid "(signed)"
+msgstr "(подписанная)"
+
+#: src/components/collection-header.tsx
+msgid "(unsigned)"
+msgstr "(неподписанная)"
+
+#: src/components/remote-form.tsx
+msgid "(uploaded)"
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
+msgstr ""
+
+#: src/components/role-item.tsx
+#: src/containers/ansible-role/role-detail.tsx
+msgid "{0} logo"
+msgstr "Логотип {0}"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "{0} was added"
+msgstr "{0} было добавлено"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "{alertType} alert details"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "{alertType} alert:"
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "{collectionName}'s versions."
+msgstr "Версии коллекции {collectionName}"
+
+#: src/components/numeric-label.tsx
+msgid "{count, plural, one {Dependency} other {Dependencies}}"
+msgstr ""
+
+#: src/components/numeric-label.tsx
+msgid "{count, plural, one {Module} other {Modules}}"
+msgstr ""
+
+#: src/components/numeric-label.tsx
+msgid "{count, plural, one {Plugin} other {Plugins}}"
+msgstr ""
+
+#: src/components/numeric-label.tsx
+msgid "{count, plural, one {Role} other {Roles}}"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "{count} more"
+msgstr "{count} ещё"
+
+#: src/components/language-switcher.tsx
+msgid "{currentLanguage} (browser default)"
+msgstr "{currentLanguage} (настройки браузера по умолчанию)"
+
+#: src/components/language-switcher.tsx
+msgid "{currentLanguage} (current)"
+msgstr "{currentLanguage} (текущий)"
+
+#: src/components/download-count.tsx
+msgid "{downloadCount} Downloads"
+msgstr "{downloadCount} загрузок"
+
+#: src/utilities/get-human-size.ts
+msgid "{n, plural, one {# byte} other {# bytes}}"
+msgstr ""
+
+#: src/components/collection-filter.ts
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "{name} ({count})"
+msgstr "{name} ({count})"
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "{name} will be cancelled."
+msgstr "{name} будет отменена."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "{name} will stop running."
+msgstr "Выполнение {name} будет остановлено."
+
+#: src/components/collection-card.tsx
+#: src/components/collection-header.tsx
+#: src/components/collection-list-item.tsx
+msgid "{nsTitle} logo"
+msgstr "Логотип {nsTitle}"
+
+#: src/components/role-header.tsx
+msgid "{subTitle}"
+msgstr "{subTitle}"
+
+#: src/components/namespace-card.tsx
+#: src/components/namespace-list-item.tsx
+#: src/components/partner-header.tsx
+msgid "{title} logo"
+msgstr "Логотип {title}"
+
+#: src/components/wizard-modal.tsx
+msgid "{title} steps"
+msgstr "Шаги {title}"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "<0/> was added"
+msgstr "<0/> было добавлено"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "<0/> was added to <1/>"
+msgstr "<0/> было добавлено в <1/>"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "<0/> was moved to <1/> from <2/>"
+msgstr "<0/> было перемещено в <1/> из <2/>"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "<0/> was removed"
+msgstr "<0/> было удалено"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "<0/> was removed from <1/>"
+msgstr "<0/> было удалено из <1/>"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "<0>{0}</0> will be deleted."
+msgstr "<0>{0}</0> будет удалено."
+
+#: src/components/delete-user-modal.tsx
+msgid "<0>{0}</0> will be permanently deleted."
+msgstr "<0>{0}</0> будет удалено навсегда."
+
+#: src/components/role-import-form.tsx
+msgid "<0>{0}</0>, provided by <1>{1}</1>"
+msgstr "<0>{0}</0>, предоставлено <1>{1}</1>"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "<0>{firstIndex} - {lastIndex}</0> of <1>{itemCount}</1>"
+msgstr "<0>{firstIndex} - {lastIndex}</0> из <1>{itemCount}</1>"
+
+#: src/components/delete-group-modal.tsx
+msgid "<0>{name}</0> will be permanently deleted."
+msgstr "<0>{name}</0> будет удалена навсегда."
+
+#: src/components/collection-info.tsx
+msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible-core>=2.13.9"
+msgstr "<0>Примечание:</0> Установка коллекций с помощью ansible-galaxy поддерживается только с ansible-core>=2.13.9"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
+msgstr "<0>Note</0> Используйте этот URL для настройки ansible-galaxy для выгрузки коллекций в это пространство имён. Больше информации о настройках ansible-galaxy вы можете найти <1>здесь</1>."
+
+#: src/components/lightspeed-modal.tsx
+msgid "<0>Red Hat is working on exciting new Ansible content development capabilities within the context of <1>Ansible Lightspeed</1> to help other automators build Ansible content.</0>"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "<0>Removed in version</0> {0}"
+msgstr "<0>Удалено в версии</0> {0}"
+
+#: src/containers/role-management/role-list.tsx
+msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
+msgstr "<0>Роль <1>{0}</1> будет удалена навсегда.</0><2>Это приведёт к удалению всех разрешений, связанных с этой ролью.</2>"
+
+#: src/containers/token/token-standalone.tsx
+msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
+msgstr "<0>ПРЕДУПРЕЖДЕНИЕ</0> скопируйте токен прямо сейчас. Это единственный раз когда вы его видите."
+
+#: src/containers/token/token-standalone.tsx
+msgid "<0>WARNING</0> loading a new token will delete your old token."
+msgstr "<0>ПРЕДУПРЕЖДЕНИЕ</0> загрузка нового токена приведёт к удалению вашего старого токена."
+
+#: src/components/lightspeed-modal.tsx
+msgid "<0>Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations.</0><1>If you have concerns, please contact the Ansible team at <2>ansible-content-ai@redhat.com</2>.</1>"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/not-found.tsx
+msgid "404 - Page not found"
+msgstr "404 - Страница не найдена"
+
+#: src/components/remote-form.tsx
+#: src/components/remote-form.tsx
+msgid "A PEM encoded client certificate used for authentication."
+msgstr "Сертификат в формате PEM, используемый для аутентификации."
+
+#: src/components/remote-form.tsx
+msgid "A PEM encoded private key used for authentication."
+msgstr "Приватный ключ в формате PEM, используемый для аутентификации."
+
+#: src/components/tag-manifest-modal.tsx
+msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
+msgstr "Тег может содержать символы ASCII в верхнем и нижнем регистрах, цифры, знак подчёркивания, точки и дефисы. Тег не должен начинаться с точки, подчёркивания или дефиса."
+
+#: src/loaders/standalone/layout.tsx
+msgid "About"
+msgstr "О программе"
+
+#: src/components/execution-environment-header.tsx
+#: src/components/execution-environment-header.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Access"
+msgstr "Доступ"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "Activities"
+msgstr "Действия"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "Activities will appear once you push something"
+msgstr "Действия появятся, как только вы что-нибудь нажмёте"
+
+#: src/components/execution-environment-header.tsx
+msgid "Activity"
+msgstr "Действия"
+
+#: src/components/repository-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/tag-manifest-modal.tsx
+#: src/components/wizard-modal.tsx
+#: src/containers/ansible-remote/edit.tsx
+#: src/containers/ansible-repository/edit.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+msgid "Add"
+msgstr "Добавить"
+
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+msgid "Add a README with instructions for using this container."
+msgstr "Добавьте README с инструкциями по использованию этого контейнера."
+
+#: src/components/role-form.tsx
+msgid "Add a role description here"
+msgstr "Добавьте описание роли здесь"
+
+#: src/utilities/translate-task.ts
+msgid "Add and remove repository"
+msgstr "Добавить или удалить репозиторий"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+msgid "Add collection"
+msgstr "Добавить коллекцию"
+
+#: src/components/repository-form.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Add execution environment"
+msgstr "Добавить среду исполнения"
+
+#: src/containers/ansible-remote/edit.tsx
+msgid "Add new remote"
+msgstr "Добавить сторонний источник"
+
+#: src/containers/ansible-repository/edit.tsx
+msgid "Add new repository"
+msgstr "Добавить репозиторий"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Add new tag"
+msgstr "Добавить тег"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Add new tag to image"
+msgstr "Добавить тег для образа"
+
+#: src/utilities/translate-task.ts
+msgid "Add or remove"
+msgstr "Добавить или удалить"
+
+#: src/actions/ansible-remote-create.tsx
+msgid "Add remote"
+msgstr "Добавить сторонний источник"
+
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Add remote registry"
+msgstr "Добавить сторонний реестр"
+
+#: src/actions/ansible-repository-create.tsx
+msgid "Add repository"
+msgstr "Добавить репозиторий"
+
+#: src/components/access-tab.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/role-management/role-list.tsx
+msgid "Add roles"
+msgstr "Добавить роли"
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Add selected users to group"
+msgstr "Добавить выбранных пользователей в группу"
+
+#: src/components/repository-form.tsx
+msgid "Add tag(s) to exclude"
+msgstr "Добавьть тег(и) в исключения"
+
+#: src/components/repository-form.tsx
+msgid "Add tag(s) to include"
+msgstr "Добавить тег(и) во включения"
+
+#: src/containers/group-management/group-detail.tsx
+msgid "add-user-modal"
+msgstr "add-user-modal"
+
+#: src/components/lightspeed-modal.tsx
+msgid "Additional details"
+msgstr "Дополнительные подробности"
+
+#: src/components/render-plugin-doc.tsx
+msgid "aliases"
+msgstr "псевдонимы"
+
+#: src/containers/ansible-repository/tab-details.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "All"
+msgstr "Все"
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "All associated permissions under this role were removed."
+msgstr "Все разрешения, связанные с этой ролью, будут удалены."
+
+#: src/containers/landing/landing-page.tsx
+msgid "All policies and guidelines"
+msgstr "Все политики и руководства"
+
+#: src/components/import-modal.tsx
+msgid "All Repos"
+msgstr "Все репозитории"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Allow all actions on a task schedule."
+msgstr "Разрешить все действия по планированию задач."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Allow all actions on a task."
+msgstr "Разрешить все действия над задачами."
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Already the current version"
+msgstr "Уже на этой версии"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Alternative:"
+msgstr "Альтернатива:"
+
+#: src/components/hub-about-modal.tsx
+msgid "Ansible Automation Platform"
+msgstr "Ansible Automation Platform"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Ansible Community Forum"
+msgstr "Форум Ansible Community"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Ansible Lightspeed"
+msgstr "Ansible Lightspeed"
+
+#: src/components/lightspeed-modal.tsx
+#: src/components/role-namespace-item.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Ansible Lightspeed settings"
+msgstr "Настройки Ansible Lightspeed"
+
+#: src/utilities/repo-signing.ts
+msgid "API Error: {ex}"
+msgstr "Ошибка API: {ex}"
+
+#: src/components/collection-header.tsx
+#: src/components/collection-header.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "API Error: {status}"
+msgstr "Ошибка API: {status}"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "API Error: Failed to set deprecation."
+msgstr "Ошибка API: Отказ в установке флага устаревания."
+
+#: src/components/import-modal.tsx
+#: src/components/import-modal.tsx
+msgid "API error. Status code: {0}"
+msgstr "Ошибка API. Код статуса: {0}"
+
+#: src/containers/token/token-standalone.tsx
+#: src/containers/token/token-standalone.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "API token"
+msgstr "Токен API"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Approval"
+msgstr "Согласование"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Approval dashboard"
+msgstr "Панель согласования"
+
+#: src/components/import-console.tsx
+msgid "Approval status:"
+msgstr "Статус согласования:"
+
+#: src/components/approval-row.tsx
+#: src/components/approval-row.tsx
+msgid "Approve"
+msgstr "Одобрить"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Approve, reject and sync collections from remotes."
+msgstr "Одобрение, отклонение и синхронизация коллекций со сторонними источниками."
+
+#: src/components/import-console.tsx
+msgid "approved"
+msgstr "одобрена"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/approval-row.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Approved"
+msgstr "Одобрена"
+
+#: src/components/delete-ansible-remote-modal.tsx
+msgid "Are you sure you want to delete the remote <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this remote."
+msgstr "Вы действительно хотите удалить сторонний источник <0>{name}</0>?<1/><2>Примечание:</2> Это также приведёт к удалению всех ресурсов, связанных с этим источником."
+
+#: src/components/delete-ansible-repository-modal.tsx
+msgid "Are you sure you want to delete the repository <0>{name}</0>?<1/><2>Note:</2> This will also delete all associated resources under this repository."
+msgstr "Вы действительно хотите удалить репозиторий <0>{name}</0>/<1/><2>Примечание:</2> Это также приведёт к удалению всех ресурсов, связанных с этим репозиторием."
+
+#: src/components/lightspeed-modal.tsx
+msgid "Are you sure you want to opt the following legacy namespace out of Ansible Lightspeed?"
+msgstr "Вы уверены, что хотите исключить следующее устаревшее пространство имён из Ansible Lightspeed?"
+
+#: src/components/lightspeed-modal.tsx
+msgid "Are you sure you want to opt the following namespace out of Ansible Lightspeed?"
+msgstr "Вы уверены, что хотите исключить следующее пространство имён из Ansible Lightspeed?"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx
+msgid "Are you sure you want to remove the collection version <0>{namespace}.{name} v{version}</0> from the <1>{repositoryName}</1> repository?"
+msgstr "Вы уверены, что хотите удалить коллекцию версии <0>{namespace}.{name} v{version}</0> из репозитория <1>{repositoryName}</1>?"
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Are you sure you want to revert this repository to the version below?"
+msgstr "Вы уверены, что хотите вернуть этот репозиторий к указанной ниже версии?"
+
+#: src/components/user-form.tsx
+msgid "Authentication provider"
+msgstr "Провайдер аутентификации"
+
+#: src/components/role-import-form.tsx
+msgid "Automatic"
+msgstr "Автоматически"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Available matching collections"
+msgstr "Доступные соответствующие коллекции"
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching execution environments"
+msgstr "Доступные соответствующие среды исполнения"
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching namespaces"
+msgstr "Доступные соответствующие пространства имён"
+
+#: src/containers/search/multi-search.tsx
+msgid "Available matching role namespaces"
+msgstr "Доступные соответствующие роли пространств имён"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Available matching roles"
+msgstr "Доступные соответствующие роли"
+
+#: src/components/wizard-modal.tsx
+msgid "Back"
+msgstr "Назад"
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+msgid "Base path"
+msgstr "Основной путь"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Base version"
+msgstr "Основная версия"
+
+#: src/components/ratings.tsx
+msgid "Based on {0} surveys."
+msgstr "На основе {0} опросов."
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Breadcrumb"
+msgstr "Хлебные крошки"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Browse"
+msgstr "Обзор"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Browse..."
+msgstr "Обзор..."
+
+#: src/components/hub-about-modal.tsx
+msgid "Browser OS"
+msgstr "Браузер ОС"
+
+#: src/components/hub-about-modal.tsx
+msgid "Browser Version"
+msgstr "Версия браузера"
+
+#: src/utilities/translate-task.ts
+msgid "Build image from Containerfile"
+msgstr "Сборка образа из Containerfile"
+
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+msgid "Built-in"
+msgstr "Встроенный"
+
+#: src/containers/role-management/role-list.tsx
+msgid "Built-in roles cannot be deleted."
+msgstr "Встроенные роли не могут быть удалены."
+
+#: src/containers/role-management/role-list.tsx
+msgid "Built-in roles cannot be edited or deleted."
+msgstr "Встроенные роли не могут быть изменены или удалены."
+
+#: src/containers/role-management/role-list.tsx
+msgid "Built-in roles cannot be edited."
+msgstr "Встроенные роли не могут быть изменены."
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "CA certificate"
+msgstr "Сертификат УЦ"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/actions/ansible-repository-version-revert.tsx
+#: src/components/ansible-repository-form.tsx
+#: src/components/confirm-modal.tsx
+#: src/components/delete-modal.tsx
+#: src/components/group-modal.tsx
+#: src/components/import-modal.tsx
+#: src/components/lightspeed-modal.tsx
+#: src/components/multi-repo-modal.tsx
+#: src/components/namespace-modal.tsx
+#: src/components/remote-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/role-form.tsx
+#: src/components/role-import-form.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/role-namespace-modal.tsx
+#: src/components/role-sync-form.tsx
+#: src/components/sign-all-certificates-modal.tsx
+#: src/components/sign-single-certificate-modal.tsx
+#: src/components/tag-manifest-modal.tsx
+#: src/components/upload-signature-modal.tsx
+#: src/components/user-form.tsx
+#: src/components/wizard-modal.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/components/status-indicator.tsx
+msgid "Canceled"
+msgstr "Отменено"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Cannot delete non-empty namespace"
+msgstr "Нельзя удалить не пустое пространство имён"
+
+#: src/components/collection-dropdown.tsx
+#: src/components/collection-dropdown.tsx
+msgid "Cannot delete until collections that depend on this collection have been deleted."
+msgstr "Нельзя удалить, пока не будут удалены коллекции, зависящие от этой коллекции."
+
+#: src/components/collection-header.tsx
+msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
+msgstr "Сертификат для коллекции \"{0} {1} v{2}\" успешно выгружен."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Certificate for collection \"{namespace} {name} v{version}\" has been successfully uploaded."
+msgstr "Сертификат для коллекции \"{namespace} {name} v{version}\" успешно выгружен."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
+msgstr "Статус сертификации коллекции \"{0} {1} v{2}\" успешно обновлён."
+
+#: src/components/approve-modal.tsx
+msgid "Certification status for collection \"{namespace} {name} v{version}\" has been successfully updated."
+msgstr "Статус сертификации коллекции \"{namespace} {name} v{version}\" успешно обновлён."
+
+#: src/components/repository-badge.tsx
+msgid "Certified"
+msgstr "Сертифицирована"
+
+#: src/components/role-import-form.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "Change"
+msgstr "Изменить"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Change and upload collections to namespaces."
+msgstr "Изменение и загрузка коллекций в пространство имён."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Change existing execution environments."
+msgstr "Изменение существующих сред исполнения."
+
+#: src/components/role-import-form.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/role-namespace-item.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Change provider namespace"
+msgstr "Изменение поставщика пространства имён"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
+msgstr "Изменение статуса сертификации коллекции \"{0} {1} v{2}\" не было сохранено."
+
+#: src/containers/group-management/group-list.tsx
+msgid "Changes to group \"{0}\" could not be saved."
+msgstr "Изменения в группе \"{0}\" не были сохранены."
+
+#: src/containers/edit-namespace/edit-namespace.tsx
+msgid "Changes to namespace \"{0}\" could not be saved."
+msgstr "Изменения в пространстве имён \"{0}\" не были сохранены."
+
+#: src/containers/role-management/role-edit.tsx
+msgid "Changes to role \"{name}\" could not be saved."
+msgstr "Изменения в роли \"{name}\" не были сохранены."
+
+#: src/components/role-import-form.tsx
+msgid "Checking ..."
+msgstr "Проверка..."
+
+#: src/components/delete-group-modal.tsx
+msgid "Checking for affected users... <0/>"
+msgstr "Проверка наличия затронутых пользователей... <0/>"
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Child tasks"
+msgstr "Дочерние задачи"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Choices"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "Choices:"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/write-only-field.tsx
+msgid "Clear"
+msgstr "Очистить"
+
+#: src/components/applied-filters.tsx
+#: src/components/empty-state-filter.tsx
+msgid "Clear all filters"
+msgstr "Очистить все фильтры"
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "CLI configuration"
+msgstr "Настройки CLI"
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Client certificate"
+msgstr "Клиентский сертификат"
+
+#: src/components/remote-form.tsx
+msgid "Client key"
+msgstr "Клиентский ключ"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "close"
+msgstr "закрыть"
+
+#: src/actions/ansible-repository-sync.tsx
+#: src/components/wizard-modal.tsx
+msgid "Close"
+msgstr "Закрыть"
+
+#: src/components/remote-form.tsx
+msgid "Close YAML editor"
+msgstr "Закрыть редактор YAML"
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Code"
+msgstr "Код"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/collection-usedby-dependencies-list.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection"
+msgstr "Коллекция"
+
+#: src/components/collection-header.tsx
+msgid "Collection \"{0} v{collectionVersion}\" could not be deleted."
+msgstr "Коллекцию \"{0} v{collectionVersion}\" не удалось удалить."
+
+#: src/utilities/delete-collection.ts
+msgid "Collection \"{0}\" could not be deleted."
+msgstr "Коллекцию \"{0}\" не удалось удалить."
+
+#: src/components/collection-header.tsx
+msgid "Collection \"{0}\" could not be deprecated."
+msgstr "Коллекцию \"{0}\" не удалось отметить как устаревшую."
+
+#: src/components/collection-header.tsx
+msgid "Collection \"{0}\" could not be undeprecated."
+msgstr "Коллекцию \"{0}\" не удалось отметить как не устаревшую."
+
+#: src/utilities/delete-collection.ts
+msgid "Collection \"{0}\" has been successfully deleted."
+msgstr "Коллекция \"{0}\" успешно удалена."
+
+#: src/components/collection-header.tsx
+#: src/components/collection-header.tsx
+msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
+msgstr "Коллекция \"{name} v{collectionVersion}\" успешно удалена."
+
+#: src/containers/search/search.tsx
+msgid "Collection \"{name}\" could not be deprecated."
+msgstr "Коллекция \"{name}\" не может быть отмечена как устаревшая."
+
+#: src/components/collection-info.tsx
+msgid "Collection \"{name}\" could not be downloaded."
+msgstr "Коллекция \"{name}\" не может быть загружена."
+
+#: src/containers/search/search.tsx
+msgid "Collection \"{name}\" could not be undeprecated."
+msgstr "Коллекция \"{name}\" не может быть отмечена как не устаревшая."
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Collection \"{name}\" has been successfully deprecated."
+msgstr "Коллекция \"{name}\" успешно отмечена как устаревшая."
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Collection \"{name}\" has been successfully undeprecated."
+msgstr "Коллекция \"{name}\" успешно отмечена как не устаревшая."
+
+#: src/components/copy-collection-to-repository-modal.tsx
+msgid "Collection {namespace}.{name} v{version} could not be copied."
+msgstr "Коллекция {namespace}.{name} v{version} не может быть скопирована."
+
+#: src/containers/collection-detail/collection-distributions.tsx
+msgid "Collection distributions"
+msgstr "Распространение коллекции"
+
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "Collection does not have any dependencies."
+msgstr "Коллекция не имеет никаких зависимостей."
+
+#: src/components/collection-dependencies-list.tsx
+msgid "Collection does not have dependencies."
+msgstr "Коллекция не имеет зависимостей."
+
+#: src/containers/collection-detail/collection-distributions.tsx
+msgid "Collection doesn't have any distribution assigned."
+msgstr ""
+
+#: src/components/collection-usedby-dependencies-list.tsx
+msgid "Collection is not being used by any collection."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection name"
+msgstr "Название коллекции"
+
+#: src/components/import-modal.tsx
+msgid "Collection upload canceled"
+msgstr "Загрузка коллекции отменена"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/collection-header.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Collection versions"
+msgstr "Версии коллекции"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Collection versions could not be displayed."
+msgstr "Версии коллекции не могут быть отображены."
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+msgid "Collection versions will appear once a collection is uploaded."
+msgstr "Версии коллекции появятся после её загрузки."
+
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+msgid "Collection versions will appear once the collection is modified."
+msgstr "Версии коллекции появятся после её изменения."
+
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/search.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Collections"
+msgstr "Коллекции"
+
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
+msgid "Collections sync"
+msgstr "Синхронизация коллекций"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/search/search.tsx
+msgid "Collections will appear once uploaded"
+msgstr "Коллекции появятся после загрузки"
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+msgid "Command"
+msgstr "Команда"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Comments"
+msgstr "Комментарии"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Communicating with the Ansible community"
+msgstr "Взаимодействие с сообществом Ansible"
+
+#: src/components/repository-badge.tsx
+msgid "Community"
+msgstr "Сообщество"
+
+#: src/components/collection-content-list.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Community content will never be synced if the remote is set to only sync signed content. You can <0>edit the {name} remote</0> to change it."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "Community content will never be synced if this setting is enabled"
+msgstr "Контент сообщества никогда не будет синхронизироваться, если эта настройка включена"
+
+#: src/components/ratings.tsx
+msgid "Community score"
+msgstr "Оценка сообщества"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Community User Guide"
+msgstr "Руководство Пользователя Сообщества"
+
+#: src/components/namespace-form.tsx
+msgid "Company name"
+msgstr "Название компании"
+
+#: src/components/import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/status-indicator.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Completed"
+msgstr "Выполнено"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Configuration"
+msgstr "Настройка"
+
+#: src/containers/token/token-insights.tsx
+msgid "Connect Private Automation Hub"
+msgstr "Подключить Private Automation Hub"
+
+#: src/containers/token/token-insights.tsx
+msgid "Connect the ansible-galaxy client"
+msgstr "Подключить клиент ansible-galaxy"
+
+#: src/containers/token/token-insights.tsx
+msgid "Connect to Hub"
+msgstr "Подключение к Hub"
+
+#: src/utilities/validate-url-helper.ts
+msgid "Consider using a secure URL (https://)."
+msgstr "Рассмотрите возможность использования безопасного URL (https://)."
+
+#: src/components/empty-state-unauthorized.tsx
+msgid "Contact your organization administrator for more information."
+msgstr "Обратитесь к администратору своей организации для получения большей информации."
+
+#: src/utilities/repo-signing.ts
+msgid "Container must be synchronized with remote repository first."
+msgstr "Сначала контейнер должен быть синхронизирован со сторонним репозиторием."
+
+#: src/components/repository-form.tsx
+msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and zero or one \"/\"."
+msgstr "Названия контейнеров могут содержать только алфавитно-цифровые символы, \".\", \"_\", \"-\" и ноль или один \"/\"."
+
+#: src/components/repository-form.tsx
+msgid "Container namespace"
+msgstr "Пространство имён контейнера"
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Container registry type"
+msgstr "Тип реестра контейнеров"
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Container repository name"
+msgstr "Название репозитория контейнеров"
+
+#: src/containers/collection-detail/collection-content.tsx
+msgid "Content"
+msgstr "Содержимое"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Content added"
+msgstr "Содержимое добавлено"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Content added to clipboard"
+msgstr "Содержимое добавлено в буфер обмена"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Content from roles and collections can be referenced in Ansible playbooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday."
+msgstr "На содержимое ролей и коллекций можно ссылаться сразу в Ansible playbooks и сразу же использовать в работе. Вы найдёте материалы для подготовки инфраструктуры, развёртывания приложений и выполнения всех задач, которые вы выполняете каждый день."
+
+#: src/components/ansible-repository-form.tsx
+msgid "Content in repositories without a distribution will not be visible to clients for sync, download or search."
+msgstr "Содержимое репозиториев без распространения не будет видно клиентам при синхронизации, загрузке или поиске."
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Content not present in remote repository will be removed from the local repository"
+msgstr "Содержимое, отсутствующее в стороннем репозитории, будет удалено из локального репозитория"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Content removed"
+msgstr "Содержимое удалено"
+
+#: src/components/collection-header.tsx
+msgid "Contents"
+msgstr "Содержимое"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Cookie preferences"
+msgstr "Настройки cookie"
+
+#: src/actions/ansible-repository-copy.tsx
+msgid "Copy CLI configuration"
+msgstr "Скопировать настройки CLI"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Copy code to clipboard"
+msgstr "Скопировать код в буфер обмена"
+
+#: src/utilities/translate-task.ts
+msgid "Copy content"
+msgstr "Скопировать содержимое"
+
+#: src/components/hub-copy-button.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Copy to clipboard"
+msgstr "Скопировать в буфер обмена"
+
+#: src/components/collection-dropdown.tsx
+msgid "Copy version {version} to repositories"
+msgstr "Копировать версию {version} в репозитории"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Copyable input"
+msgstr "Копируемый ввод"
+
+#: src/components/import-console.tsx
+msgid "could not be determined yet"
+msgstr "пока не удалось определить"
+
+#: src/containers/collection-detail/collection-import-log.tsx
+msgid "Could not load import log"
+msgstr "Не удалось загрузить журнал импорта"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Count"
+msgstr "Количество"
+
+#: src/containers/token/token-insights.tsx
+msgid "CRC public key"
+msgstr "Публичный ключ CRC"
+
+#: src/components/group-modal.tsx
+#: src/components/namespace-modal.tsx
+#: src/components/role-import-form.tsx
+#: src/components/role-namespace-modal.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Create"
+msgstr "Создать"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Create a \"{0}\" distribution"
+msgstr "Создать распространение \"{0}\""
+
+#: src/components/group-modal.tsx
+msgid "Create a group"
+msgstr "Создать группу"
+
+#: src/components/namespace-modal.tsx
+msgid "Create a new namespace"
+msgstr "Создать пространство имён"
+
+#: src/containers/role-management/role-create.tsx
+msgid "Create a new role"
+msgstr "Создать роль"
+
+#: src/components/user-form.tsx
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr "Создайте пароль, используя не менее {minLength} знаков, включая специальные символы , например <!@$%>. Избегайте использования общих имён и выражений."
+
+#: src/components/role-namespace-modal.tsx
+msgid "Create a role namespace"
+msgstr "Создать роль пространства имён"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Create and update execution environments under existing container namespaces."
+msgstr "Создание и обновление сред исполнения в рамках существующих пространств имён контейнеров."
+
+#: src/components/collection-header.tsx
+msgid "Create issue"
+msgstr "Создать запрос"
+
+#: src/containers/role-management/role-create.tsx
+msgid "Create new role"
+msgstr "Создать роль"
+
+#: src/containers/user-management/user-create.tsx
+#: src/containers/user-management/user-create.tsx
+msgid "Create new user"
+msgstr "Создать пользователя"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
+msgstr "Создание, удаление и изменение пространств имён коллекций. Загрузка и удаление коллекций. Синхронизация коллекций со сторонними источниками. Согласование и отклонение коллекций."
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Created"
+msgstr "Создано"
+
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Created date"
+msgstr "Дата создания"
+
+#: src/containers/signature-keys/list.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Created on"
+msgstr "Создано"
+
+#: src/containers/ansible-repository/edit.tsx
+msgid "Creation started for distribution {distributionName}"
+msgstr "Запущено создание распространения {distributionName}"
+
+#: src/utilities/translate-task.ts
+msgid "Curate all synclist repositories"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Curate synclist repository"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Curate synclist repository batch"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Current content"
+msgstr "Текущее содержимое"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Current page"
+msgstr "Текущая страница"
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Current provider namespace"
+msgstr "Текущий поставщик пространства имён"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Current tags"
+msgstr "Текущие теги"
+
+#: src/components/repository-form.tsx
+msgid "Currently excluded tags"
+msgstr "Исключённые теги"
+
+#: src/components/repository-form.tsx
+msgid "Currently included tags"
+msgstr "Включённые теги"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Custom"
+msgstr "Пользовательский"
+
+#: src/components/permission-categories.tsx
+msgid "Custom permissions"
+msgstr "Пользовательские разрешения"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Customer Support"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Danger"
+msgstr "Опасно"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "Date"
+msgstr "Дата"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Date created"
+msgstr "Дата создания"
+
+#: src/components/render-plugin-doc.tsx
+msgid "default"
+msgstr "по умолчанию"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Default:"
+msgstr "По умолчанию:"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Defaults"
+msgstr "По умолчанию"
+
+#: src/actions/ansible-remote-delete.tsx
+#: src/actions/ansible-repository-delete.tsx
+#: src/components/delete-modal.tsx
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/user-management/user-detail.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Delete"
+msgstr "Удалить"
+
+#: src/components/collection-dropdown.tsx
+msgid "Delete collection from system"
+msgstr "Удалить коллекцию из системы"
+
+#: src/components/delete-collection-modal.tsx
+msgid "Delete collection version?"
+msgstr "Удалить версию коллекции?"
+
+#: src/components/delete-collection-modal.tsx
+msgid "Delete collection?"
+msgstr "Удалить коллекцию?"
+
+#: src/components/delete-execution-environment-modal.tsx
+msgid "Delete container?"
+msgstr "Удалить контейнер?"
+
+#: src/components/delete-group-modal.tsx
+msgid "Delete group?"
+msgstr "Удалить группу?"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Delete image?"
+msgstr "Удалить образ?"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Delete namespace"
+msgstr "Удалить пространство имён"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Delete namespace?"
+msgstr "Удалить пространство имён?"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Delete remote registry?"
+msgstr "Удалить сторонний реестр?"
+
+#: src/components/delete-ansible-remote-modal.tsx
+msgid "Delete remote?"
+msgstr "Удалить сторонний источник?"
+
+#: src/utilities/translate-task.ts
+msgid "Delete repository version"
+msgstr "Удалить версию репозитория?"
+
+#: src/components/delete-ansible-repository-modal.tsx
+msgid "Delete repository?"
+msgstr "Удалить репозиторий?"
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Delete role: {0}"
+msgstr "Удалить роль: {0}"
+
+#: src/containers/role-management/role-list.tsx
+msgid "Delete role?"
+msgstr "Удалить роль?"
+
+#: src/components/delete-user-modal.tsx
+msgid "Delete user?"
+msgstr "Удалить пользователя?"
+
+#: src/components/collection-dropdown.tsx
+msgid "Delete version {version} from system"
+msgstr "Удалить версию {version} из системы"
+
+#: src/components/delete-collection-modal.tsx
+msgid "Deleting <0>{0} v{collectionVersion}</0>, its data will be lost."
+msgstr "При удалении <0>{0} v{collectionVersion}</0> её данные будут утеряны."
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Deleting <0>{0}</0> and its data will be lost."
+msgstr ""
+
+#: src/components/delete-collection-modal.tsx
+msgid "Deleting <0>{0}</0>, its data will be lost."
+msgstr "Удаление <0>{0}</0>, её данные будут утеряны."
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Deleting <0>{digest}</0> and its data will be lost."
+msgstr ""
+
+#: src/components/delete-execution-environment-modal.tsx
+msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
+msgstr ""
+
+#: src/components/delete-user-modal.tsx
+msgid "Deleting super users is not allowed."
+msgstr "Удаление суперпользователей не разрешено."
+
+#: src/components/delete-group-modal.tsx
+msgid "Deleting this group will affect {count} users."
+msgstr "Удаление этой группы затронет {count} пользователей."
+
+#: src/components/delete-user-modal.tsx
+msgid "Deleting yourself is not allowed."
+msgstr "Удаление самого себя не разрешено."
+
+#: src/components/collection-header.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "Dependencies"
+msgstr "Зависимости"
+
+#: src/utilities/delete-collection.ts
+msgid "Dependencies for collection \"{name}\" could not be displayed."
+msgstr "Зависимости коллекции \"{name}\" не могут быть отображены."
+
+#: src/components/collection-header.tsx
+msgid "Dependent collections"
+msgstr "Зависимые коллекции"
+
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "Dependent collections could not be displayed."
+msgstr "Зависимые коллекции не могут быть отбражены."
+
+#: src/components/collection-dropdown.tsx
+msgid "Deprecate"
+msgstr "Отметить устаревшей"
+
+#: src/components/deprecated-tag.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "DEPRECATED"
+msgstr "УСТАРЕЛА"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Deprecation status update starting for collection \"{name}\"."
+msgstr "Запущено изменения статуса устаревания коллекции \"{name}\"."
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/ansible-repository-form.tsx
+#: src/components/collection-content-list.tsx
+#: src/components/multiple-repo-selector.tsx
+#: src/components/namespace-form.tsx
+#: src/components/render-plugin-doc.tsx
+#: src/components/repository-form.tsx
+#: src/components/role-form.tsx
+#: src/components/role-list-table.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/select-roles.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Description"
+msgstr "Описание"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Deselect all ({0} items)"
+msgstr "Отменить выбор всех ({0} записей)"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Deselect page ({0} items)"
+msgstr "Отменить выбор страницы ({0} записей)"
+
+#: src/components/execution-environment-header.tsx
+msgid "Detail"
+msgstr "Подробности"
+
+#: src/components/role-form.tsx
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+msgid "Details"
+msgstr "Подробности"
+
+#: src/components/role-import-form.tsx
+msgid "Did you mean {0}?"
+msgstr "Вы имели ввиду {0}?"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Digest"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Digital accessibility"
+msgstr ""
+
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Disabled"
+msgstr "Выключено"
+
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Distribution"
+msgstr "Распространение"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/collection-header.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+msgid "Distributions"
+msgstr "Распространения"
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+msgid "Distributions could not be displayed."
+msgstr "Распространения не могут быть отображены."
+
+#: src/loaders/standalone/layout.tsx
+msgid "Docs dropdown"
+msgstr "Выпадающая документация"
+
+#: src/components/collection-header.tsx
+msgid "Docs site"
+msgstr "Сайт документации"
+
+#: src/components/collection-header.tsx
+#: src/containers/ansible-role/role-detail.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/loaders/standalone/layout.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Documentation"
+msgstr "Документация"
+
+#: src/containers/token/token-insights.tsx
+msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
+msgstr "Документацию по настройке клиента <0>ansible-galaxy</0> вы можете найти <1>здесь</1>. Используйте следующие параметры для настройки клиента."
+
+#: src/components/render-plugin-doc.tsx
+msgid "Documentation Syntax Error: cannot parse plugin documention."
+msgstr ""
+
+#: src/components/ratings.tsx
+msgid "Does what it promises"
+msgstr "Делает то, что обещает"
+
+#: src/components/import-console.tsx
+#: src/containers/task-management/task-detail.tsx
+msgid "Done"
+msgstr "Выполнено"
+
+#: src/components/collection-info.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/containers/landing/landing-page.tsx
+msgid "Download"
+msgstr "Загрузить"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Download {0} tarball"
+msgstr "Загрузить {0} тарболл"
+
+#: src/actions/ansible-remote-download-ca.tsx
+msgid "Download CA certificate"
+msgstr "Загрузить сертификат УЦ"
+
+#: src/components/remote-form.tsx
+msgid "Download CA certification file"
+msgstr "Загрузить файл сертификата УЦ"
+
+#: src/actions/ansible-remote-download-client.tsx
+msgid "Download client certificate"
+msgstr "Загрузить клиентcкий сертификат"
+
+#: src/components/remote-form.tsx
+msgid "Download client certification file"
+msgstr "Загрузить файл клиентского сертификата"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Download code"
+msgstr "Загрузить код"
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Download concurrency"
+msgstr "Загрузить параллельно"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Download count"
+msgstr "Количество загрузок"
+
+#: src/components/download-count.tsx
+msgid "Download count is the sum of all versions' download counts"
+msgstr "Количество загрузок это сумма количества загрузок всех версий"
+
+#: src/containers/signature-keys/list.tsx
+msgid "Download key"
+msgstr "Загрузить ключ"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Download latest tarball"
+msgstr "Загрузить новейший тарболл"
+
+#: src/components/remote-form.tsx
+msgid "Download only signed collections"
+msgstr "Загрузить только подписанные коллекции"
+
+#: src/components/remote-form.tsx
+msgid "Download requirements file"
+msgstr "Загрузить файл зависимостей"
+
+#: src/actions/ansible-remote-download-requirements.tsx
+msgid "Download requirements YAML"
+msgstr "Загрузить YAML с зависимостями"
+
+#: src/components/collection-info.tsx
+msgid "Download tarball"
+msgstr "Загрузить тарболл"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Drag a file here or browse to upload"
+msgstr "Для загрузки бросьте файл здесь или воспользуйтесь поиском"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Drag and drop a file or upload one."
+msgstr ""
+
+#: src/components/stateful-dropdown.tsx
+#: src/components/stateful-dropdown.tsx
+msgid "Dropdown"
+msgstr ""
+
+#: src/components/ratings.tsx
+msgid "Ease of use"
+msgstr ""
+
+#: src/actions/ansible-remote-edit.tsx
+#: src/actions/ansible-repository-edit.tsx
+#: src/containers/ansible-remote/edit.tsx
+#: src/containers/ansible-repository/edit.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/settings/user-profile.tsx
+#: src/containers/user-management/user-detail.tsx
+#: src/containers/user-management/user-edit.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Edit"
+msgstr "Изменить"
+
+#: src/containers/edit-namespace/edit-namespace.tsx
+msgid "Edit details"
+msgstr "Изменить детали"
+
+#: src/components/repository-form.tsx
+msgid "Edit execution environment"
+msgstr "Изменить среду исполнения"
+
+#: src/components/remote-form.tsx
+msgid "Edit in YAML editor"
+msgstr "Изменить в редакторе YAML"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Edit namespace"
+msgstr "Изменить пространство имён"
+
+#: src/components/remote-form.tsx
+msgid "Edit remote"
+msgstr "Изменить сторонний источник"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Edit remote registry"
+msgstr "Удалить сторонний реестр"
+
+#: src/containers/edit-namespace/edit-namespace.tsx
+msgid "Edit resources"
+msgstr "Изменить ресурсы"
+
+#: src/containers/role-management/role-edit.tsx
+msgid "Edit role permissions"
+msgstr "Изменить разрешения роли"
+
+#: src/containers/user-management/user-edit.tsx
+msgid "Edit user"
+msgstr "Изменить пользователя"
+
+#: src/components/role-list-table.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+msgid "Editable"
+msgstr "Редактируемый"
+
+#: src/components/render-plugin-doc.tsx
+msgid "elements"
+msgstr "элементы"
+
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Email"
+msgstr "Электронная почта"
+
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Enabled"
+msgstr "Включено"
+
+#: src/components/render-plugin-doc.tsx
+msgid "env"
+msgstr "env"
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+msgid "Environment"
+msgstr "Окружение"
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}"
+msgstr "Ошибка {statusCode} - {statusText}"
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: {customMessage}"
+msgstr "Ошибка {statusCode} - {statusText}: {customMessage}"
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
+msgstr ""
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: The server could not find the requested URL."
+msgstr ""
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
+msgstr ""
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: The server was unable to complete your request."
+msgstr ""
+
+#: src/utilities/fail-alerts.tsx
+msgid "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx
+msgid "Error deleting group."
+msgstr "Ошибка удаления группы."
+
+#: src/containers/ansible-role/imports.tsx
+#: src/containers/my-imports/my-imports.tsx
+msgid "Error fetching import from API"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Error loading collections."
+msgstr "Ошибка загрузки коллекции."
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Error loading environments."
+msgstr "Ошибка загрузки окружений."
+
+#: src/components/import-modal.tsx
+msgid "Error loading repositories."
+msgstr "Ошибка загрузки репозиториев."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Error loading repository with label {pipeline}."
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Error message"
+msgstr "Сообщение ошибки"
+
+#: src/components/import-console.tsx
+msgid "Error message:"
+msgstr "Сообщение ошибки:"
+
+#: src/components/repository-form.tsx
+msgid "Error when saving registry."
+msgstr "Ошибка при сохранении реестра."
+
+#: src/components/render-plugin-doc.tsx
+msgid "ERROR while parsing: {0}"
+msgstr "ОШИБКА при разборе: {0}"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Examples"
+msgstr "Примеры"
+
+#: src/components/access-tab.tsx
+msgid "Except for members of groups below."
+msgstr ""
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Execution environment \"{0}\" has been added successfully."
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Execution environment \"{name}\" could not be indexed."
+msgstr ""
+
+#: src/components/delete-execution-environment-modal.tsx
+msgid "Execution environment \"{selectedItem}\" could not be deleted."
+msgstr ""
+
+#: src/components/delete-execution-environment-modal.tsx
+msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
+msgstr ""
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Execution environments"
+msgstr ""
+
+#: src/components/execution-environment-header.tsx
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Execution Environments"
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "Expiration"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Extend the power of Ansible to your entire team."
+msgstr ""
+
+#: src/components/import-console.tsx
+#: src/components/import-list.tsx
+#: src/components/role-import-form.tsx
+#: src/components/role-import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/status-indicator.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Failed"
+msgstr ""
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Failed to {operation} tag \"{tag}\"."
+msgstr ""
+
+#: src/components/approve-modal.tsx
+msgid "Failed to approve collection."
+msgstr ""
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Failed to change provider namespace."
+msgstr ""
+
+#: src/components/copy-collection-to-repository-modal.tsx
+msgid "Failed to copy collection version."
+msgstr ""
+
+#: src/components/role-import-form.tsx
+#: src/components/role-namespace-modal.tsx
+msgid "Failed to create role namespace"
+msgstr ""
+
+#: src/utilities/repository-base-path.ts
+msgid "Failed to find a distribution for repository {name}"
+msgstr ""
+
+#: src/utilities/repository-base-path.ts
+msgid "Failed to find repository {name}"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Failed to find repository version"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to find role"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to get import log"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "Failed to import role"
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Failed to list distributions, removing only the repository."
+msgstr ""
+
+#: src/components/role-import-list.tsx
+msgid "Failed to list role imports"
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Failed to load Ansible Lightspeed information."
+msgstr ""
+
+#: src/components/lazy-distributions.tsx
+msgid "Failed to load distributions: {error}"
+msgstr ""
+
+#: src/components/ansible-repository-form.tsx
+msgid "Failed to load remotes: {remotesError}"
+msgstr "Отказ при загрузке сторонних источников: {remotesError}"
+
+#: src/components/lazy-repositories.tsx
+msgid "Failed to load repositories: {error}"
+msgstr "Отказ при загрузке репозиториев: {error}"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Failed to load repositories."
+msgstr "Отказ при загрузке репозиториев."
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role content"
+msgstr "Отказ при загрузке содержимого роли"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+msgid "Failed to load role namespace"
+msgstr "Отказ при загрузке пространства имён роли"
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Failed to load role namespaces"
+msgstr "Отказ при загрузке пространств имён роли"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Failed to load role versions"
+msgstr "Отказ при загрузке версий роли"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Failed to load roles"
+msgstr "Отказ при загрузке ролей"
+
+#: src/components/lightspeed-modal.tsx
+msgid "Failed to opt in to Ansible Lightspeed."
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Failed to opt out of Ansible Lightspeed."
+msgstr ""
+
+#: src/components/multi-repo-modal.tsx
+msgid "Failed to query repositories."
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-remove.tsx
+msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Failed to remove distribution {name}"
+msgstr ""
+
+#: src/actions/ansible-remote-delete.tsx
+msgid "Failed to remove remote {name}"
+msgstr "Отказ при удалении стороннего источника {name}"
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Failed to remove repository {name}"
+msgstr ""
+
+#: src/containers/login/login.tsx
+msgid "Failed to retrieve user data."
+msgstr ""
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search collections ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search execution environments ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search namespaces ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search role namespaces ({keywords})"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "Failed to search roles ({keywords})"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Failed to sign all collections."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Failed to sign all versions in the collection."
+msgstr ""
+
+#: src/utilities/repo-signing.ts
+#: src/utilities/repo-signing.ts
+msgid "Failed to sign the container version."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Failed to sign the version."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Failed to sync repository \"{name}\""
+msgstr ""
+
+#: src/components/role-sync-form.tsx
+msgid "Failed to sync role"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Featured"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+#: src/components/role-sync-form.tsx
+msgid "Field is required."
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "File upload"
+msgstr ""
+
+#: src/components/compound-filter.tsx
+#: src/components/compound-filter.tsx
+#: src/components/compound-filter.tsx
+#: src/components/compound-filter.tsx
+msgid "Filter by {0}"
+msgstr ""
+
+#: src/components/collection-content-list.tsx
+#: src/components/table-of-contents.tsx
+msgid "Find content"
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Find execution environments in this registry"
+msgstr ""
+
+#: src/components/collection-content-list.tsx
+#: src/components/table-of-contents.tsx
+msgid "find-content"
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Finished at"
+msgstr ""
+
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "First name"
+msgstr ""
+
+#: src/components/import-console.tsx
+msgid "Follow logs"
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Force a sync to happen."
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "Found"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "Found a standalone namespace (<0>{0}</0>), but NOT a provider namespace."
+msgstr ""
+
+#: src/components/hub-about-modal.tsx
+msgid "Galaxy Importer"
+msgstr ""
+
+#: src/components/hub-about-modal.tsx
+msgid "Galaxy Logo"
+msgstr ""
+
+#: src/containers/role-management/role-list.tsx
+msgid "Galaxy only"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General create"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General delete"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General multi delete"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "General update"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Get the trial"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "GitHub ref (a commit, branch or tag)"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "GitHub repository"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "GitHub Repository"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+#: src/components/role-sync-form.tsx
+msgid "GitHub user"
+msgstr ""
+
+#: src/utilities/wait-for-task.ts
+msgid "Giving up waiting for task after 10 attempts."
+msgstr ""
+
+#: src/components/collection-info.tsx
+msgid "Go to documentation"
+msgstr "К документации"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Go to first page"
+msgstr "На первую страницу"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Go to last page"
+msgstr "На последнюю страницу"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Go to next page"
+msgstr "На следующую страницу"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Go to previous page"
+msgstr "На предыдущую страницу"
+
+#: src/components/access-tab.tsx
+#: src/components/select-group.tsx
+msgid "Group"
+msgstr "Группа"
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" could not be added to \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" could not be removed from \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" has been successfully added to \"{name}\"."
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx
+msgid "Group \"{0}\" has been successfully deleted."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" roles could not be update in \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Group \"{group}\" could not be deleted."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Group \"{group}\" has been successfully deleted."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "Group {0}"
+msgstr ""
+
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Group {group}"
+msgstr ""
+
+#: src/components/execution-environment-header.tsx
+msgid "Group {groupId}"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Group could not be displayed."
+msgstr ""
+
+#: src/components/access-tab.tsx
+#: src/containers/group-management/group-list.tsx
+msgid "Group list"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/group-management/group-list.tsx
+msgid "Group name"
+msgstr ""
+
+#: src/components/access-tab.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/user-form.tsx
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Groups"
+msgstr ""
+
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-list.tsx
+msgid "Groups list could not be displayed."
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx
+msgid "Groups will appear once created"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Has words"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Help other Ansible users by sharing the awesome roles and collections you create."
+msgstr ""
+
+#: src/components/write-only-field.tsx
+msgid "hidden value"
+msgstr "скрытое значение"
+
+#: src/components/remote-form.tsx
+msgid "Hide advanced options"
+msgstr "Скрыть дополнительные опции"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Hide from search"
+msgstr "Скрыть из поика"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Hide password"
+msgstr "Скрыть пароль"
+
+#: src/components/download-signature-grid-item.tsx
+msgid "Hide the signature"
+msgstr "Скрыть подпись"
+
+#: src/components/delete-collection-modal.tsx
+#: src/components/delete-execution-environment-modal.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "I understand that this action cannot be undone."
+msgstr "Я понимаю что это действие нельзя будет отменить."
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "If selected, all content that is not present in the remote repository will be removed from the local repository; otherwise, sync will add missing content."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "If selected, TLS peer validation must be performed."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "If you populate this requirements file, this remote will only sync collections from this file, otherwise all collections will be synchronized."
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Image \"{digest}\" could not be deleted."
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Image \"{digest}\" has been successfully deleted."
+msgstr ""
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+msgid "Image layers"
+msgstr ""
+
+#: src/components/execution-environment-header.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Images"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Images will appear once uploaded"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "Import"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+#: src/utilities/translate-task.ts
+msgid "Import and auto approve"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Import and move to staging"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Import collection"
+msgstr ""
+
+#: src/components/collection-header.tsx
+#: src/containers/ansible-role/role-detail.tsx
+#: src/containers/collection-detail/collection-import-log.tsx
+msgid "Import log"
+msgstr "Импорт журнала"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Import new version"
+msgstr "Импорт новой версии"
+
+#: src/utilities/translate-task.ts
+msgid "Import repository version"
+msgstr "Импорт версии репозитория"
+
+#: src/components/role-namespace-item.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-import.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Import role"
+msgstr "Импорт роли"
+
+#: src/components/role-import-form.tsx
+msgid "Import started"
+msgstr "Импорт запущен"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Imports"
+msgstr "Импорты"
+
+#: src/components/ansible-repository-form.tsx
+msgid "In order to retain all versions, leave this field blank."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "Include all dependencies when syncing a collection."
+msgstr "Подключить все зависимости при синхронизации коллекции."
+
+#: src/components/repository-form.tsx
+msgid "Including all tags might transfer a lot of data."
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Index execution environments"
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Indexing execution environments is only supported on registry.redhat.io"
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Indexing started for execution environment \"{name}\"."
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Info"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "ini entries:"
+msgstr ""
+
+#: src/components/collection-header.tsx
+#: src/components/collection-info.tsx
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Install"
+msgstr ""
+
+#: src/components/collection-info.tsx
+msgid "Installation"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Installation:"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+msgid "Instructions"
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "Invalid file format: {detectedType} (expected: {acceptedTypes})."
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
+msgstr ""
+
+#: src/containers/login/login.tsx
+msgid "Invalid login credentials."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Issue tracker"
+msgstr ""
+
+#: src/components/tag-manifest-modal.tsx
+msgid "It's safe to close this window. These tasks will finish in the background."
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Items per page"
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections."
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "Key"
+msgstr ""
+
+#: src/containers/signature-keys/list.tsx
+msgid "Key fingerprint"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: src/components/role-namespace-edit-modal.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "keywords"
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/collection-filter.ts
+#: src/components/multi-search-search.tsx
+#: src/components/multi-search-search.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Keywords"
+msgstr ""
+
+#: src/components/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Labels"
+msgstr ""
+
+#: src/components/collection-filter.ts
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Last modified"
+msgstr ""
+
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Last name"
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Last updated"
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Last updated <0/>"
+msgstr ""
+
+#: src/components/execution-environment-header.tsx
+#: src/containers/ansible-repository/detail.tsx
+msgid "Last updated from registry {0}"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Layers"
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Legacy namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Legacy namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+msgstr ""
+
+#: src/components/collection-info.tsx
+msgid "License"
+msgstr "Лицензия"
+
+#: src/components/remote-form.tsx
+msgid "Limits total download rate in requests per second."
+msgstr ""
+
+#: src/components/namespace-form.tsx
+msgid "Link text"
+msgstr "Текст ссылки"
+
+#: src/components/namespace-form.tsx
+msgid "Link URL"
+msgstr "URL ссылки"
+
+#: src/components/collection-list.tsx
+#: src/containers/search/search.tsx
+msgid "List of Collections"
+msgstr "Список коллекций"
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "List of role namespaces"
+msgstr "Список пространств имён роли"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "List of roles"
+msgstr "Список ролей"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "List of versions"
+msgstr "Список версий"
+
+#: src/containers/token/token-insights.tsx
+#: src/containers/token/token-standalone.tsx
+msgid "Load token"
+msgstr "Загрузка токена"
+
+#: src/actions/ansible-repository-copy.tsx
+msgid "Loading distribution..."
+msgstr "Загрузка распространения..."
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Local"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx
+msgid "Log in to your account"
+msgstr ""
+
+#: src/components/login-link.tsx
+#: src/components/login-link.tsx
+msgid "Login"
+msgstr ""
+
+#: src/components/namespace-form.tsx
+msgid "Logo URL"
+msgstr "URL логотипа"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Logout"
+msgstr ""
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/ansible-repository-form.tsx
+msgid "Make private"
+msgstr "Сделать приватным"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Make the repository private."
+msgstr "Сделать репозиторий приватным."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Manage all content types."
+msgstr "Управление всеми типами содержимого."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Manage ansible repositories."
+msgstr "Управление репозиториями Ansible."
+
+#: src/utilities/translate-locked-role.ts
+msgid "Manage collection remotes."
+msgstr "Управление сторонними источниками коллекций."
+
+#: src/components/tag-manifest-modal.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Manage tags"
+msgstr "Управление тегами"
+
+#: src/containers/token/token-insights.tsx
+msgid "Manage tokens"
+msgstr "Управление токенами"
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community."
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Message"
+msgstr "Сообщение"
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Mirror"
+msgstr "Зеркало"
+
+#: src/components/remote-form.tsx
+msgid "Must be an integer."
+msgstr "Должно быть целым числом."
+
+#: src/containers/my-imports/my-imports.tsx
+msgid "My imports"
+msgstr "Мои импорты"
+
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "My namespaces"
+msgstr "Мои пространства имён"
+
+#: src/containers/settings/user-profile.tsx
+#: src/containers/settings/user-profile.tsx
+#: src/loaders/standalone/layout.tsx
+msgid "My profile"
+msgstr "Мой профиль"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/collection-content-list.tsx
+#: src/components/collection-filter.ts
+#: src/components/collection-usedby-dependencies-list.tsx
+#: src/components/group-modal.tsx
+#: src/components/import-list.tsx
+#: src/components/import-list.tsx
+#: src/components/multiple-repo-selector.tsx
+#: src/components/multiple-repo-selector.tsx
+#: src/components/namespace-form.tsx
+#: src/components/namespace-modal.tsx
+#: src/components/remote-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/role-form.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/role-namespace-modal.tsx
+#: src/components/select-group.tsx
+#: src/components/select-group.tsx
+#: src/components/select-roles.tsx
+#: src/components/select-roles.tsx
+#: src/components/select-user.tsx
+#: src/components/select-user.tsx
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/ansible-repository/tab-distributions.tsx
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/collection-detail/collection-distributions.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/containers/signature-keys/list.tsx
+#: src/containers/signature-keys/list.tsx
+#: src/containers/signature-keys/list.tsx
+#: src/containers/task-management/task-detail.tsx
+msgid "Name"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+msgid "Name can only contain letters and numbers"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+msgid "Name cannot begin with '_'"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+msgid "Name must be longer than 2 characters"
+msgstr ""
+
+#: src/components/namespace-form.tsx
+msgid "Name must not be empty."
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/collection-filter.ts
+#: src/components/collection-filter.ts
+#: src/components/import-list.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Namespace"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Namespace \"{name}\" could not be deleted."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Namespace \"{name}\" has been successfully deleted."
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Namespace <0>{name}</0> is opted in to Ansible Lightspeed."
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "Namespace <0>{name}</0> is opted out of Ansible Lightspeed."
+msgstr ""
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Namespace list"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+#: src/components/role-import-form.tsx
+msgid "Namespace name"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/paths.ts
+msgid "Namespaces"
+msgstr ""
+
+#: src/components/import-list.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "Namespaces list could not be displayed."
+msgstr ""
+
+#: src/components/role-namespace-edit-modal.tsx
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "Namespaces will appear once created"
+msgstr ""
+
+#: src/components/approval-row.tsx
+msgid "Needs review"
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Needs Review"
+msgstr ""
+
+#: src/components/approval-row.tsx
+msgid "Needs signature and review"
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx
+msgid "never synced"
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "New collection"
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "New version of {namespace}.{0}"
+msgstr ""
+
+#: src/components/wizard-modal.tsx
+msgid "Next"
+msgstr ""
+
+#: src/components/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "No"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-activities.tsx
+msgid "No activities yet"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "No alternatives specified."
+msgstr ""
+
+#: src/components/select-group.tsx
+msgid "No assignable groups."
+msgstr ""
+
+#: src/components/select-roles.tsx
+msgid "No assignable roles."
+msgstr ""
+
+#: src/components/select-user.tsx
+msgid "No assignable users."
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "No child task"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "No collection versions in this repository version."
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/containers/ansible-repository/tab-collection-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "No collection versions yet"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/search/search.tsx
+msgid "No collections yet"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "No container repositories yet"
+msgstr ""
+
+#: src/containers/my-imports/my-imports.tsx
+#: src/containers/my-imports/my-imports.tsx
+#: src/containers/my-imports/my-imports.tsx
+msgid "No data"
+msgstr ""
+
+#: src/components/collection-dependencies-list.tsx
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "No dependencies"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+msgid "No distributions created"
+msgstr ""
+
+#: src/containers/collection-detail/collection-distributions.tsx
+msgid "No distributions yet"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx
+msgid "No groups yet"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "No images yet"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "No import logs for role id {0}"
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "No import logs were found for the role."
+msgstr ""
+
+#: src/components/import-list.tsx
+#: src/components/role-import-list.tsx
+msgid "No imports"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "No managed collections yet"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+msgid "No matching collections found."
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching execution environments found."
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "No matching namespace found"
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching namespaces found."
+msgstr ""
+
+#: src/containers/search/multi-search.tsx
+msgid "No matching role namespaces found."
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+msgid "No matching roles found."
+msgstr ""
+
+#: src/components/import-list.tsx
+msgid "No namespace selected."
+msgstr ""
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "No namespaces found"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "No namespaces yet"
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "No parent task"
+msgstr ""
+
+#: src/components/permission-chip-selector.tsx
+#: src/components/permission-chip-selector.tsx
+msgid "No permission"
+msgstr ""
+
+#: src/components/permission-categories.tsx
+msgid "No permissions"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+msgid "No README"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "No reason specified."
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx
+msgid "no remote"
+msgstr "нет стороннего источника"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "No remote registries yet"
+msgstr "Пока нет сторонних репозиториев"
+
+#: src/containers/ansible-remote/list.tsx
+msgid "No remotes yet"
+msgstr "Пока нет сторонних источников"
+
+#: src/containers/ansible-repository/list.tsx
+msgid "No repositories yet"
+msgstr "Пока нет репозиториев"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "No repository versions yet"
+msgstr "Нет версий репозитория"
+
+#: src/components/empty-state-filter.tsx
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+#: src/components/empty-state-filter.tsx
+msgid "No results match the filter criteria. Try changing your filter settings."
+msgstr ""
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "No role namespaces yet"
+msgstr "Пока нет пространств имён роли"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "No roles yet"
+msgstr "Пока нет ролей"
+
+#: src/containers/signature-keys/list.tsx
+msgid "No signature keys yet"
+msgstr "Пока нет ключей подписи"
+
+#: src/containers/task-management/task-detail.tsx
+msgid "No task group"
+msgstr "Нет групп задач"
+
+#: src/components/import-console.tsx
+msgid "No task messages available"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "No tasks yet"
+msgstr "Пока нет задач"
+
+#: src/components/delete-group-modal.tsx
+msgid "No users will be affected."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "No users yet"
+msgstr "Пока нет пользователей"
+
+#: src/components/collection-dependencies-list.tsx
+msgid "No version of {fqn} exists that matches {version_range}."
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "No versions"
+msgstr "Нет версий"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/ansible-repository-form.tsx
+#: src/components/copy-url.tsx
+#: src/components/pulp-labels.tsx
+#: src/components/repository-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "None"
+msgstr "Ничего"
+
+#: src/components/user-form.tsx
+#: src/components/user-form.tsx
+msgid "Not a super user"
+msgstr "Не суперпользователь"
+
+#: src/components/permission-chip-selector.tsx
+#: src/components/typeahead.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+#: src/containers/not-found/dispatch.tsx
+msgid "Not found"
+msgstr "Не найден"
+
+#: src/containers/not-found/not-found.tsx
+msgid "Not found image"
+msgstr "Образ не найден"
+
+#: src/components/collection-usedby-dependencies-list.tsx
+msgid "Not required for use by other collections"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Notes"
+msgstr "Примечания"
+
+#: src/components/remote-form.tsx
+msgid "Number must be greater than 0"
+msgstr "Номер должно быть больше 0"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "of"
+msgstr "из"
+
+#: src/containers/token/token-insights.tsx
+msgid "Offline token"
+msgstr "Оффлайн токен"
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Only perform the sync if changes are reported by the remote server."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Only perform the sync if changes are reported by the remote server. To force a sync to happen, deselect this option."
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+#: src/components/lightspeed-modal.tsx
+msgid "Opt in to Ansible Lightspeed"
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+#: src/components/lightspeed-modal.tsx
+msgid "Opt out of Ansible Lightspeed"
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Optimize"
+msgstr "Оптимизировать"
+
+#: src/utilities/translate-task.ts
+msgid "Orphan cleanup"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "OS / Arch"
+msgstr "ОС / Архит."
+
+#: src/components/role-import-form.tsx
+msgid "Overrides any galaxy_info.namespace metadata"
+msgstr ""
+
+#: src/components/role-import-form.tsx
+msgid "Overrides any galaxy_info.role_name metadata"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Pagination"
+msgstr "Пагинация"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Parameter"
+msgstr "Параметр"
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Parameters"
+msgstr "Параметры"
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Parent task"
+msgstr "Родительская задача"
+
+#: src/containers/namespace-list/namespace-list.tsx
+#: src/paths.ts
+msgid "Partners"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/remote-form.tsx
+#: src/components/user-form.tsx
+msgid "Password"
+msgstr "Пароль"
+
+#: src/components/user-form.tsx
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+#: src/components/user-form.tsx
+msgid "Passwords do not match"
+msgstr ""
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Pathname <0>{pathname}</0> could refer to a collection or a role."
+msgstr ""
+
+#: src/components/status-indicator.tsx
+msgid "Pending"
+msgstr "Ожидание"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "per page"
+msgstr "на страницу"
+
+#: src/components/role-form.tsx
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Permissions for group \"{0}\" could not be displayed."
+msgstr ""
+
+#: src/components/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
+msgid "Pipeline"
+msgstr ""
+
+#: src/components/ansible-repository-form.tsx
+msgid "Pipeline adds repository labels with pre-defined meanings:<0><1><2>None</2> - users require permissions to modify content in this repository to upload collection.</1><3><4>Approved</4> - collections can be moved here on approval. Publishing directly to this repository is disabled.</3><5><6>Staging</6> - collections uploaded here require approval before showing up on the search page. Anyone with upload permissions for a namespace can upload collections to this repository.</5></0>"
+msgstr ""
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+#: src/containers/role-management/role-list.tsx
+msgid "Please add a role by using the button below."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "Please add an owner by using the button below."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "Please add an owner by using the buttons below."
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "Please note that these repositories are not filtered by permissions. Upload may fail without the right permissions."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Please select a repository filter"
+msgstr ""
+
+#: src/components/upload-signature-modal.tsx
+msgid "Please select a signature file to upload."
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "Please select no more than one file."
+msgstr ""
+
+#: src/components/namespace-form.tsx
+msgid "Please use a jpeg or png; svg images are not supported."
+msgstr ""
+
+#: src/containers/landing/landing-page.tsx
+msgid "Please, check it running the command:"
+msgstr ""
+
+#: src/components/namespace-modal.tsx
+msgid "Please, provide the namespace name"
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Plugin"
+msgstr "Расширение"
+
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/markdown-editor.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Privacy statement"
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Private"
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Progress messages"
+msgstr ""
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Protected repositories cannot be deleted."
+msgstr "Защищённые репозитории не могут быть удалены."
+
+#: src/components/provider-link.tsx
+msgid "Provided by <0>{name}</0>"
+msgstr "Предоставлено <0>{name}</0>"
+
+#: src/components/collection-card.tsx
+#: src/components/collection-list-item.tsx
+msgid "Provided by <0>{nsTitle}</0>"
+msgstr "Предоставлено <0>{nsTitle}</0>"
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Provider"
+msgstr "Поставщик"
+
+#: src/components/remote-form.tsx
+msgid "Proxy password"
+msgstr "Пароль прокси-сервера"
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Proxy URL"
+msgstr "URL прокси-сервера"
+
+#: src/components/remote-form.tsx
+msgid "Proxy username"
+msgstr "Учетная запись пользователя прокси-сервера"
+
+#: src/containers/signature-keys/list.tsx
+msgid "Public key"
+msgstr "Публичный ключ"
+
+#: src/components/repository-badge.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Published"
+msgstr ""
+
+#: src/components/repository-form.tsx
+msgid "Pull only latest?"
+msgstr "Вытянуть только последний?"
+
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+msgid "Pull this image"
+msgstr "Вытянуть этот образ"
+
+#: src/components/hub-about-modal.tsx
+msgid "Pulp Ansible Version"
+msgstr "Версия Pulp Ansible"
+
+#: src/components/hub-about-modal.tsx
+msgid "Pulp Container Version"
+msgstr "Версия Pulp Container"
+
+#: src/components/hub-about-modal.tsx
+msgid "Pulp Core Version"
+msgstr "Версия Pulp Core"
+
+#: src/utilities/translate-task.ts
+msgid "Pulp export"
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Pulp import"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Pulp type"
+msgstr ""
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push and change execution environments."
+msgstr ""
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Push container images"
+msgstr "Вытолкнуть образы контейнеров"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Push, delete and change execution environments. Create, delete and change remote registries."
+msgstr "Выталкивание, удаление и изменение сред исполнения. Создание, удаление и изменение сторонних реестров."
+
+#: src/components/ratings.tsx
+msgid "Quality of docs"
+msgstr "Качество документации"
+
+#: src/components/ratings.tsx
+msgid "Quality score"
+msgstr "Оценка качества"
+
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Rate limit"
+msgstr "Ограничение загрузки"
+
+#: src/components/remote-form.tsx
+msgid "Rate Limit"
+msgstr "Ограничение загрузки"
+
+#: src/components/markdown-editor.tsx
+msgid "Raw Markdown"
+msgstr "Сырая разметка"
+
+#: src/components/table-of-contents.tsx
+msgid "Readme"
+msgstr "Readme"
+
+#: src/components/ratings.tsx
+msgid "Ready for production"
+msgstr "Готово к промышленному применению"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Reason: task {0}"
+msgstr "Причина: задача {0}"
+
+#: src/utilities/translate-task.ts
+msgid "Recursive add content"
+msgstr "Добавить содержимое рекурсивно"
+
+#: src/utilities/translate-task.ts
+msgid "Recursive remove content"
+msgstr "Удалить содержимое рекурсивно"
+
+#: src/components/repository-badge.tsx
+msgid "Red Hat Certified"
+msgstr "Сертифицировано Red Hat"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
+msgstr ""
+
+#: src/components/repository-form.tsx
+msgid "Registries list could not be displayed."
+msgstr "Список реестров не может быть отображён."
+
+#: src/components/repository-form.tsx
+msgid "Registry"
+msgstr "Реестр"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Registry sync status"
+msgstr "Статус синхронизации реестра"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Registry URL"
+msgstr "URL реестра"
+
+#: src/components/approval-row.tsx
+msgid "Reject"
+msgstr "Отклонить"
+
+#: src/components/import-console.tsx
+msgid "rejected"
+msgstr "отклонена"
+
+#: src/components/approval-row.tsx
+#: src/components/repository-badge.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Rejected"
+msgstr "Отклонена"
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Released <0/>"
+msgstr "Выпущена <0/>"
+
+#: src/components/ansible-repository-form.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Remote"
+msgstr "Сторонний источник"
+
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/edit.tsx
+msgid "Remote could not be displayed."
+msgstr "Сторонние источники не могут быть отображены."
+
+#: src/containers/ansible-remote/list.tsx
+#: src/containers/ansible-remote/list.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "Remote name"
+msgstr "Название стороннего источника"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Remote registries"
+msgstr "Сторонние реестры"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Remote Registries"
+msgstr "Сторонние реестры"
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Remote registry \"{name}\" could not be deleted."
+msgstr "Сторонний реестр \"{name}\" не может быть удалён."
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Remote registry \"{name}\" could not be synced."
+msgstr "Сторонний реестр \"{name}\" не может быть синхронизирован."
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Remote registry \"{name}\" has been successfully deleted."
+msgstr "Сторонний реестр \"{name}\" успешно удалён."
+
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-remote/edit.tsx
+#: src/containers/ansible-remote/list.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Remotes"
+msgstr "Сторонние источники"
+
+#: src/containers/ansible-remote/list.tsx
+msgid "Remotes could not be displayed."
+msgstr "Сторонние источники не могут быть отображены."
+
+#: src/containers/ansible-remote/list.tsx
+msgid "Remotes will appear once created."
+msgstr "Сторонние источники появятся после создания."
+
+#: src/actions/ansible-repository-collection-version-remove.tsx
+msgid "Removal of {namespace}.{name} v{version} from repository \"{repositoryName}\" started."
+msgstr "Удаление {namespace}.{name} v{version} из репозитория \"{repositoryName}\" запущено."
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Removal started for distribution {name}"
+msgstr "Запущено удаление распространения {name}"
+
+#: src/actions/ansible-remote-delete.tsx
+msgid "Removal started for remote {name}"
+msgstr "Запущено удаление стороннего источника {name}"
+
+#: src/actions/ansible-repository-delete.tsx
+msgid "Removal started for repository {name}"
+msgstr "Запущено удаление репозитория {name}"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx
+#: src/components/delete-modal.tsx
+#: src/containers/group-management/group-detail.tsx
+msgid "Remove"
+msgstr "Убрать"
+
+#: src/components/collection-dropdown.tsx
+msgid "Remove collection from repository"
+msgstr "Убрать коллекцию из репозитория"
+
+#: src/actions/ansible-repository-collection-version-remove.tsx
+msgid "Remove collection version?"
+msgstr "Убрать версию коллекции?"
+
+#: src/utilities/translate-task.ts
+msgid "Remove content from repository"
+msgstr "Убрать контент из репозитория"
+
+#: src/components/access-tab.tsx
+msgid "Remove group"
+msgstr "Убрать группу"
+
+#: src/components/access-tab.tsx
+msgid "Remove group {groupname}?"
+msgstr "Убрать группу {groupname}?"
+
+#: src/components/access-tab.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Remove role"
+msgstr "Убрать роль"
+
+#: src/components/access-tab.tsx
+msgid "Remove role {role}?"
+msgstr "Убрать роль {role}?"
+
+#: src/components/access-tab.tsx
+msgid "Remove user"
+msgstr "Убрать пользователя"
+
+#: src/components/access-tab.tsx
+msgid "Remove user {username}?"
+msgstr "Убрать пользователя {username}?"
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Remove user from group?"
+msgstr "Убрать пользователя из группы?"
+
+#: src/components/collection-dropdown.tsx
+msgid "Remove version {version} from repository"
+msgstr "Убрать версию {version} из репозитория"
+
+#: src/utilities/translate-task.ts
+msgid "Repair all artifacts"
+msgstr "Восстановить все артефакты"
+
+#: src/utilities/translate-task.ts
+msgid "Repair repository version"
+msgstr "Восстановить версию репозитория"
+
+#: src/components/collection-header.tsx
+msgid "Repo"
+msgstr "Репозиторий"
+
+#: src/components/multiple-repo-selector.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/edit.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Repositories"
+msgstr "Репозитории"
+
+#: src/containers/ansible-repository/list.tsx
+msgid "Repositories could not be displayed."
+msgstr "Репозитории не могут быть отображены."
+
+#: src/containers/ansible-repository/list.tsx
+msgid "Repositories will appear once created."
+msgstr "Репозитории появятся после создания."
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/collection-filter.ts
+#: src/components/import-modal.tsx
+#: src/components/multiple-repo-selector.tsx
+#: src/components/repository-badge.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Repository"
+msgstr "Репозиторий"
+
+#: src/utilities/repository-remove-collection.ts
+msgid "Repository {repoName} not found."
+msgstr "Репозиторий {repoName} не найден."
+
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/edit.tsx
+msgid "Repository could not be displayed."
+msgstr "Репозиторий не может быть отображён."
+
+#: src/components/ansible-repository-form.tsx
+msgid "Repository labels can change the context in which a repository is seen.<0><1><2>Hide from search</2> (<3>hide_from_search</3>) - prevent collections in this repository from showing up on the home page</1><4>(<5>pipeline: *</5>) - see Pipeline above</4></0>"
+msgstr ""
+
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Repository name"
+msgstr "Название репозитория"
+
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Repository URL"
+msgstr "URL репозитория"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Repository versions"
+msgstr "Версии репозитория"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Repository versions could not be displayed."
+msgstr "Версии репозитория не могут быть отображены."
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Repository versions will appear once the repository is modified."
+msgstr "Версии репозитория появятся после его изменения."
+
+#: src/components/render-plugin-doc.tsx
+msgid "required"
+msgstr "требуется"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Requirements"
+msgstr "Требования"
+
+#: src/components/collection-info.tsx
+msgid "Requires Ansible"
+msgstr "Требуется Ansible"
+
+#: src/components/user-form.tsx
+msgid "Requires super user permissions to edit."
+msgstr "Требуются привилегии суперпользователя для изменения."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Reserve resources"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Reset"
+msgstr "Сбросить"
+
+#: src/components/language-switcher.tsx
+msgid "Reset to browser defaults"
+msgstr "Сбросить к настройкам браузера по умолчанию"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Resources"
+msgstr "Ресурсы"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Retained number of versions"
+msgstr ""
+
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Retained version count"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Return Values"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "Returned"
+msgstr "Возвращено"
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Revert"
+msgstr "Вернуть"
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Revert repository"
+msgstr "Вернуть репозиторий"
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Revert started for repository \"{repositoryName}\"."
+msgstr "Запущен возврат репозитория \"{repositoryName}\""
+
+#: src/actions/ansible-repository-version-revert.tsx
+msgid "Revert to this version"
+msgstr "Вернуть к этой версии"
+
+#: src/components/access-tab.tsx
+#: src/components/role-list-table.tsx
+#: src/components/select-roles.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Role"
+msgstr "Роль"
+
+#: src/containers/role-management/role-create.tsx
+msgid "Role \"{0}\" could not be created."
+msgstr "Роль \"{0}\" не может быть создана."
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Role \"{0}\" could not be deleted."
+msgstr "Роль \"{0}\" не может быть удалена."
+
+#: src/containers/role-management/role-edit.tsx
+msgid "Role \"{0}\" could not be displayed."
+msgstr "Роль \"{0}\" не может быть отображена."
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Role \"{0}\" has been successfully removed."
+msgstr "Роль \"{0}\" успешно убрана."
+
+#: src/containers/role-management/role-list.tsx
+msgid "Role \"{name}\" could not be deleted."
+msgstr "Роль \"{name}\" не может быть удалена."
+
+#: src/containers/role-management/role-list.tsx
+msgid "Role \"{name}\" has been successfully deleted."
+msgstr "Роль \"{name}\" успешно удалена."
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Role {0} could not be assigned to group {1}."
+msgstr "Роль {0} не может быть связана с группой {1}."
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Role {0} has been successfully added to {1}."
+msgstr "Роль {0} успешно добавлена в {1}."
+
+#: src/containers/ansible-role/imports.tsx
+msgid "Role imports"
+msgstr "Импорт ролей"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Role Imports"
+msgstr "Импорт ролей"
+
+#: src/components/role-form.tsx
+#: src/components/role-import-form.tsx
+#: src/components/role-sync-form.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/role-management/role-list.tsx
+msgid "Role name"
+msgstr "Название роли"
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Role namespace"
+msgstr "Пространство имён роли"
+
+#: src/containers/ansible-role/namespace-list.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Role namespaces"
+msgstr "Пространства имён роли"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Role Namespaces"
+msgstr "Пространства имён роли"
+
+#: src/containers/ansible-role/namespace-list.tsx
+msgid "Role namespaces will appear once created or roles are imported"
+msgstr "Пространства имён роли появятся после создания или импорта ролей"
+
+#: src/containers/ansible-role/role-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/role-management/role-create.tsx
+#: src/containers/role-management/role-edit.tsx
+#: src/containers/role-management/role-list.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Roles"
+msgstr "Роли"
+
+#: src/containers/not-found/dispatch.tsx
+msgid "Roles are not currently enabled."
+msgstr "В данный момент роли не включены."
+
+#: src/containers/role-management/role-list.tsx
+msgid "Roles list could not be displayed."
+msgstr ""
+
+#: src/utilities/translate-task.ts
+msgid "Roles synchronize"
+msgstr "Синхронизация ролей"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Roles will appear once imported"
+msgstr "Роли появятся после импорта"
+
+#: src/components/import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/status-indicator.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Running"
+msgstr "Выполнение"
+
+#: src/components/render-plugin-doc.tsx
+msgid "sample:"
+msgstr "образец:"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/group-modal.tsx
+#: src/components/remote-form.tsx
+#: src/components/repository-form.tsx
+#: src/components/role-form.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/components/tag-manifest-modal.tsx
+#: src/components/user-form.tsx
+#: src/containers/edit-namespace/edit-namespace.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail.tsx
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Saved changes to execution environment \"{0}\"."
+msgstr "Сохранены изменения среды исполнения \"{0}\"."
+
+#: src/containers/edit-namespace/edit-namespace.tsx
+msgid "Saved changes to namespace \"{0}\"."
+msgstr "Сохранены изменения пространства имён \"{0}\"."
+
+#: src/containers/settings/user-profile.tsx
+msgid "Saved changes to user \"{username}\"."
+msgstr "Сохранены изменения пользователя \"{username}\"."
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Scroll back"
+msgstr "Прокрутить назад"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Scroll foward"
+msgstr "Прокрутить вперёд"
+
+#: src/components/import-console.tsx
+msgid "Scroll to end"
+msgstr "Прокрутить в конец"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/containers/search/multi-search.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Search"
+msgstr "Поиск"
+
+#: src/utilities/task-alert.tsx
+msgid "See the task management <0>detail page </0>for the status of this task."
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+#: src/components/multi-repo-modal.tsx
+msgid "Select"
+msgstr "Выбрать"
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+msgid "Select a collection"
+msgstr "Выберите коллекцию"
+
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+msgid "Select a group"
+msgstr "Выберите группу"
+
+#: src/components/repository-form.tsx
+msgid "Select a registry"
+msgstr "Выберите реестр"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Select a remote"
+msgstr "Выберите сторонний источник"
+
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+msgid "Select a user"
+msgstr "Выберите пользователя"
+
+#: src/components/collection-header.tsx
+msgid "Select collection version"
+msgstr "Выберите версию коллекции"
+
+#: src/components/import-modal.tsx
+msgid "Select file"
+msgstr "Выберите файл"
+
+#: src/components/user-form.tsx
+msgid "Select groups"
+msgstr "Выберите группы"
+
+#: src/components/language-switcher.tsx
+msgid "Select language"
+msgstr "Выберите язык"
+
+#: src/components/import-list.tsx
+msgid "Select namespace"
+msgstr "Выберите пространство имён"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Select page"
+msgstr "Выберите страницу"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Select page ({0} items)"
+msgstr "Выберите страницу ({0} записей)"
+
+#: src/components/permission-chip-selector.tsx
+#: src/components/permission-chip-selector.tsx
+msgid "Select permissions"
+msgstr "Выберите разрешения"
+
+#: src/components/multi-repo-modal.tsx
+msgid "Select repositories"
+msgstr "Выберите репозитории"
+
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/components/access-tab.tsx
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "Select role(s)"
+msgstr "Выберите роль (роли)"
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Select users"
+msgstr "Выберите пользователей"
+
+#: src/components/multiple-repo-selector.tsx
+msgid "Selected"
+msgstr "Выбрано"
+
+#: src/components/select-group.tsx
+msgid "Selected group"
+msgstr "Выбранные группы"
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Selected provider namespace"
+msgstr "Выбрать поставщика пространства имён"
+
+#: src/components/select-roles.tsx
+msgid "Selected roles"
+msgstr "Выбранные роли"
+
+#: src/components/select-user.tsx
+msgid "Selected user"
+msgstr "Выбранный пользователь"
+
+#: src/containers/login/login.tsx
+msgid "Server error. Please come back later."
+msgstr "Ошибка сервера. Пожалуйста, возвращайтесь позднее."
+
+#: src/containers/token/token-insights.tsx
+msgid "Server URL"
+msgstr "URL сервера"
+
+#: src/components/hub-about-modal.tsx
+msgid "Server version"
+msgstr "Версия сервера"
+
+#: src/components/ansible-repository-form.tsx
+msgid "Setting a remote allows a repository to sync from elsewhere."
+msgstr ""
+
+#: src/containers/settings/user-profile.tsx
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Share"
+msgstr "Поделиться"
+
+#: src/components/remote-form.tsx
+msgid "Show advanced options"
+msgstr "Показать дополнительные опции"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all collections"
+msgstr "Показать все коллекции"
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all execution environments"
+msgstr "Показать все среды исполнения"
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all namespaces"
+msgstr "Показать все пространства имён"
+
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all role namespaces"
+msgstr "Показать все пространства имён роли"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/search/multi-search.tsx
+#: src/containers/search/multi-search.tsx
+msgid "Show all roles"
+msgstr "Показать все роли"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Show content"
+msgstr "Показать содержимое"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Show Less"
+msgstr "Показать меньше"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more collections"
+msgstr "Показать больше коллекций"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more execution environments"
+msgstr "Показать больше сред исполнения"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more namespaces"
+msgstr "Показать больше пространств имён"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more role namespaces"
+msgstr "Показать больше пространств имён роли"
+
+#: src/containers/search/multi-search.tsx
+msgid "Show more roles"
+msgstr "Показать больше ролей"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Show password"
+msgstr "Показать пароль"
+
+#: src/components/download-signature-grid-item.tsx
+msgid "Show the signature"
+msgstr "Показать подпись"
+
+#: src/components/collection-content-list.tsx
+msgid "Showing:"
+msgstr "Отображение:"
+
+#: src/components/sign-single-certificate-modal.tsx
+#: src/containers/execution-environment-detail/base.tsx
+msgid "Sign"
+msgstr "Подписать"
+
+#: src/components/sign-all-certificates-modal.tsx
+msgid "Sign all"
+msgstr "Подписать всё"
+
+#: src/components/sign-all-certificates-modal.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Sign all collections"
+msgstr "Подписать все коллекции"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Sign all collections in {repository}"
+msgstr "Подписать все коллекции в {repository}"
+
+#: src/components/approval-row.tsx
+#: src/components/approval-row.tsx
+msgid "Sign and approve"
+msgstr "Подписать и одобрить"
+
+#: src/components/collection-dropdown.tsx
+msgid "Sign collection"
+msgstr "Подписать коллекцию"
+
+#: src/components/collection-filter.ts
+msgid "Sign state"
+msgstr ""
+
+#: src/components/collection-dropdown.tsx
+#: src/components/sign-single-certificate-modal.tsx
+msgid "Sign version {version}"
+msgstr "Подписать версию {version}"
+
+#: src/components/download-signature-grid-item.tsx
+msgid "Signature"
+msgstr "Подпись"
+
+#: src/containers/signature-keys/list.tsx
+#: src/containers/signature-keys/list.tsx
+msgid "Signature keys"
+msgstr "Ключи подписи"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Signature Keys"
+msgstr "Ключи подписи"
+
+#: src/containers/signature-keys/list.tsx
+msgid "Signature keys could not be displayed."
+msgstr "Ключи подписи не могут быть отображены."
+
+#: src/containers/signature-keys/list.tsx
+msgid "Signature keys will appear once created."
+msgstr "Ключи подписи появятся после создания."
+
+#: src/components/collection-info.tsx
+msgid "Signatures could not be loaded."
+msgstr "Подписи не могут быть загружены."
+
+#: src/components/collection-filter.ts
+#: src/components/signature-badge.tsx
+msgid "Signed"
+msgstr "Подписана"
+
+#: src/components/approval-row.tsx
+msgid "Signed and approved"
+msgstr "Подписана и одобрена"
+
+#: src/components/sign-all-certificates-modal.tsx
+msgid "Signed version(s)"
+msgstr "Подписанная версия (версии)"
+
+#: src/components/approve-modal.tsx
+#: src/components/copy-collection-to-repository-modal.tsx
+msgid "Signing service {signingServiceName} not found"
+msgstr "Служба подписи {signingServiceName} не найдена"
+
+#: src/components/sign-all-certificates-modal.tsx
+msgid "Signing service selector:"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Signing started for all collections in namespace \"{0}\"."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Signing started for all versions in collection \"{name}\""
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Signing started for collection \"{name} v{version}\"."
+msgstr ""
+
+#: src/utilities/repo-signing.ts
+msgid "Signing started for container \"{0}\"."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "Single sign on URL."
+msgstr "URL единого входа"
+
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Size"
+msgstr "Размер"
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
+msgid "Size: {size}"
+msgstr "Размер: {size}"
+
+#: src/components/sort.tsx
+msgid "Sort results"
+msgstr "Сортировать результаты"
+
+#: src/components/remote-form.tsx
+#: src/containers/token/token-insights.tsx
+msgid "SSO URL"
+msgstr "SSO URL"
+
+#: src/components/ansible-repository-form.tsx
+#: src/components/repository-badge.tsx
+msgid "Staging"
+msgstr ""
+
+#: src/components/import-modal.tsx
+msgid "Staging Repos"
+msgstr ""
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Start editing"
+msgstr "Начать редактирование"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/remote-form.tsx
+msgid "Start from scratch"
+msgstr "Начать с чистого листа"
+
+#: src/components/copy-collection-to-repository-modal.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repo}\"."
+msgstr ""
+
+#: src/actions/ansible-repository-collection-version-add.tsx
+msgid "Started adding {namespace}.{name} v{version} from \"{0}\" to repository \"{repositoryName}\"."
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Started at"
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "State"
+msgstr ""
+
+#: src/components/import-list.tsx
+#: src/components/import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Status"
+msgstr "Статус"
+
+#: src/components/import-console.tsx
+msgid "Status:"
+msgstr "Статус:"
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Stop task"
+msgstr "Остановить задачу"
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Stop task?"
+msgstr "Остановить задачу?"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Success"
+msgstr "Успешно"
+
+#: src/components/role-namespace-edit-modal.tsx
+msgid "Successfully changed provider namespace."
+msgstr "Успешно изменён поставщик пространства имён."
+
+#: src/actions/ansible-repository-copy.tsx
+#: src/components/hub-copy-button.tsx
+msgid "Successfully copied to clipboard"
+msgstr "Успешно скопировано в буфер обмена"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Successfully copied to clipboard!"
+msgstr "Успешно скопировано в буфер обмена!"
+
+#: src/containers/ansible-remote/edit.tsx
+msgid "Successfully created remote {0}"
+msgstr "Успешно создан сторонний источник {0}"
+
+#: src/containers/ansible-repository/edit.tsx
+msgid "Successfully created repository {0}"
+msgstr "Успешно создан репозиторий {0}"
+
+#: src/components/role-namespace-modal.tsx
+msgid "Successfully created role namespace {name}"
+msgstr "Успешно создано пространство имён роли {name}"
+
+#: src/components/role-import-form.tsx
+msgid "Successfully created role namespace {user}"
+msgstr "Успешно создано пространство имён роли {user}"
+
+#: src/components/user-form.tsx
+#: src/components/user-form.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Super user"
+msgstr "Суперпользователь"
+
+#: src/components/user-form.tsx
+msgid "Super users can't disable themselves."
+msgstr "Суперпользователь не может отключить сам себя."
+
+#: src/components/user-form.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Super users have all system permissions regardless of what groups they are in."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+#: src/actions/ansible-repository-sync.tsx
+#: src/components/role-sync-form.tsx
+#: src/containers/search/search.tsx
+msgid "Sync"
+msgstr "Синхронизировать"
+
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Sync failed for {name}"
+msgstr "Сбой синхронизации {name}"
+
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Sync from registry"
+msgstr "Синхронизация из реестра"
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Sync repository \"{name}\""
+msgstr "Синхронизация репозитория \"{name}\""
+
+#: src/containers/ansible-role/role-list.tsx
+#: src/containers/ansible-role/role-sync.tsx
+msgid "Sync role"
+msgstr "Синхронизация роли"
+
+#: src/components/role-sync-form.tsx
+msgid "Sync started"
+msgstr "Синхронизация запущена"
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Sync started for execution environment \"{name}\"."
+msgstr "Запущена синхронизация среды исполнения \"{name}\""
+
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment/registry-list.tsx
+msgid "Sync started for remote registry \"{name}\"."
+msgstr "Запущена синхронизация со сторонним реестром \"{name}\""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Sync started for repository \"{name}\"."
+msgstr "Запущена синхронизация репозитория \"{name}\"."
+
+#: src/containers/ansible-repository/list.tsx
+msgid "Sync status"
+msgstr "Статус синхронизации"
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Sync task is already queued."
+msgstr "Задача синхронизации уже в очереди."
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "Sync will only add missing content"
+msgstr "Синхронизация будет добавлять только отсутствующее содержимое"
+
+#: src/utilities/translate-task.ts
+msgid "Synchronize"
+msgstr "Синхронизировать"
+
+#: src/containers/token/token-insights.tsx
+msgid "Synclists are deprecated in AAP 2.4 and will be removed in a future release, use client-side <0>requirements.yml</0> instead."
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+#: src/components/render-plugin-doc.tsx
+msgid "Synopsis"
+msgstr ""
+
+#: src/components/collection-filter.ts
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+msgid "Tag"
+msgstr "Тег"
+
+#: src/utilities/translate-task.ts
+msgid "Tag image"
+msgstr "Тег образа"
+
+#: src/containers/ansible-role/namespace-detail.tsx
+#: src/containers/ansible-role/role-list.tsx
+msgid "Tags"
+msgstr "Теги"
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Task \"{name}\" could not be stopped."
+msgstr "Задача \"{name}\" не может быть остановлена."
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Task \"{name}\" stopped successfully."
+msgstr "Задача \"{name}\" успешно остановлена."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Task \"{taskName}\" could not be stopped."
+msgstr "Задача \"{taskName}\" не может быть остановлена."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Task \"{taskName}\" stopped successfully."
+msgstr "Задача \"{taskName}\" успешно остановлена."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Task detail"
+msgstr "Подробности задачи"
+
+#: src/utilities/wait-for-task.ts
+msgid "Task failed without error message."
+msgstr "Сбой задачи без сообщений об ошибках."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Task group"
+msgstr "Группа задачи"
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Task groups"
+msgstr "Группы задачи"
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Task list"
+msgstr "Список задач"
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Task management"
+msgstr "Управление задачами"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Task Management"
+msgstr "Управление задачами"
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Task name"
+msgstr "Название задачи"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Task to change tag \"{0}\" could not be completed."
+msgstr "Задача изменения тега \"{0}\" не может быть выполнена."
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Tasks list could not be displayed."
+msgstr "Список задач не может быть отображён."
+
+#: src/containers/task-management/task-list-view.tsx
+msgid "Tasks will appear once created."
+msgstr "Задачи появятся после создания."
+
+#: src/containers/landing/landing-page.tsx
+#: src/containers/landing/landing-page.tsx
+msgid "Terms of use"
+msgstr "Условия использования"
+
+#: src/loaders/standalone/menu.tsx
+msgid "Terms of Use"
+msgstr "Условия использования"
+
+#: src/components/namespace-form.tsx
+msgid "Text: {0}"
+msgstr "Текст: {0}"
+
+#: src/components/collection-header.tsx
+msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "The certificate for \"{namespace} {name} v{version}\" could not be saved."
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "The collection \"{0}\" has been successfully deprecated."
+msgstr "Коллекция \"{0}\" успешно помечена как устаревшая."
+
+#: src/components/collection-header.tsx
+msgid "The collection \"{0}\" has been successfully undeprecated."
+msgstr "Коллекция \"{0}\" успешно отмечена как не устаревшая."
+
+#: src/containers/search/search.tsx
+msgid "The collection \"{name}\" has been successfully deprecated."
+msgstr "Коллекция \"{name}\" успешно отмечена как устаревшая."
+
+#: src/containers/search/search.tsx
+msgid "The collection \"{name}\" has been successfully undeprecated."
+msgstr "Коллекция \"{name}\" успешно отмечена как не устаревшая.<"
+
+#: src/components/multi-repo-modal.tsx
+msgid "The collection exists in too many repositories. Some repositories may not be disabled and preselected correctly."
+msgstr "Коллекция существует в слишком большом количестве репозиториев. Некоторые репозитории могут быть неправильно отключены и предварительно выбраны."
+
+#: src/components/delete-collection-modal.tsx
+msgid "The collection will be deleted only from repository {deleteFromRepo}."
+msgstr "Коллекция будет удалена только из репозитория {deleteFromRepo}."
+
+#: src/components/import-modal.tsx
+msgid "The collection you have selected does not match this namespace."
+msgstr "Выбранная вами коллекция не соответствует этому пространству имён."
+
+#: src/components/import-modal.tsx
+msgid "The collection you have selected doesn't appear to match {0}"
+msgstr "Выбранная вами коллекция, похоже, не соответствует {0}"
+
+#: src/components/render-plugin-doc.tsx
+msgid "The documentation object for this plugin seems to contain invalid syntax that makes it impossible for Automation Hub to parse. You can still look at the unformatted documentation object bellow if you need to."
+msgstr ""
+
+#: src/containers/collection-detail/collection-docs.tsx
+msgid "The file is not available for this version of {collectionName}"
+msgstr "Этот файл недоступен для этой версии {collectionName}"
+
+#: src/components/lightspeed-modal.tsx
+msgid "The following legacy namespace will be opted in to Ansible Lightspeed:"
+msgstr ""
+
+#: src/components/lightspeed-modal.tsx
+msgid "The following namespace will be opted in to Ansible Lightspeed:"
+msgstr ""
+
+#: src/components/preview-roles.tsx
+msgid "The following roles will be applied to group: <0>{0}</0>"
+msgstr "Следующие роли будут применены к группе: <0>{0}></0>"
+
+#: src/components/preview-roles.tsx
+msgid "The following roles will be applied to user: <0>{0}</0>"
+msgstr "Следующие роли будут применены к пользователю: <0>{0}</0>"
+
+#: src/components/remote-form.tsx
+msgid "The password to be used for authentication when syncing."
+msgstr "Пароль, используемый для аутентификации при синхронизации."
+
+#: src/components/remote-form.tsx
+msgid "The password to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
+
+#: src/containers/ansible-role/role-detail.tsx
+msgid "The role is versionless and will always install from the {github_branch} branch."
+msgstr "Роль не версионирована и будет всегда устанавливаться из ветки {github_branch}."
+
+#: src/containers/ansible-remote/tab-access.tsx
+msgid "The selected roles will be added to this specific Ansible remote."
+msgstr "Выбранные роли будут добавлены к указанному стороннему источнику Ansible."
+
+#: src/containers/ansible-repository/tab-access.tsx
+msgid "The selected roles will be added to this specific Ansible repository."
+msgstr "Выбранные роли будут добавлены к указанному репозиторию Ansible."
+
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+msgid "The selected roles will be added to this specific Execution Environment."
+msgstr "Выбранные роли будут добавлены к указанной среде исполнения."
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "The selected roles will be added to this specific namespace."
+msgstr "Выбранные роли будут добавлены к указанному пространству имён."
+
+#: src/containers/token/token-insights.tsx
+msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
+msgstr ""
+
+#: src/utilities/validate-url-helper.ts
+msgid "The URL needs to be in 'http(s)://' format."
+msgstr "Требуется URL в формате 'http(s)://'."
+
+#: src/components/remote-form.tsx
+msgid "The URL of an external content source."
+msgstr "URL внешнего источника содержимого."
+
+#: src/components/remote-form.tsx
+msgid "The username to be used for authentication when syncing."
+msgstr "Имя пользователя, используемое для аутентификации при синхронизации."
+
+#: src/components/remote-form.tsx
+msgid "The username to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "There are currently no groups assigned."
+msgstr "В настоящее время группы не привязаны."
+
+#: src/components/select-group.tsx
+msgid "There are currently no groups that can be assigned ownership."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "There are currently no owners assigned."
+msgstr "В настоящее время владельцы не назначены."
+
+#: src/containers/role-management/role-list.tsx
+msgid "There are currently no roles"
+msgstr "В настоящее время ролей нет"
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "There are currently no roles assigned to this group."
+msgstr "В настоящее время нет ролей, привязанных к группе."
+
+#: src/components/select-roles.tsx
+msgid "There are currently no roles that can be assigned to this group."
+msgstr "В настоящее время нет ролей, которые могут быть привязаны к этой группе."
+
+#: src/components/access-tab.tsx
+msgid "There are currently no users assigned."
+msgstr "В настоящее время пользователи не привязаны."
+
+#: src/components/select-user.tsx
+msgid "There are currently no users that can be assigned ownership."
+msgstr ""
+
+#: src/actions/ansible-repository-copy.tsx
+#: src/actions/ansible-repository-copy.tsx
+msgid "There are no distributions associated with this repository."
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "There are no remotes associated with this repository."
+msgstr "Здесь нет сторонних источников, связанных с этим репозиторием."
+
+#: src/components/import-list.tsx
+msgid "There have not been any imports on this namespace."
+msgstr ""
+
+#: src/components/role-import-list.tsx
+msgid "There have not been any imports."
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-detail.tsx
+msgid "There is no progress message."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "There must be only one repository with pipeline=rejected."
+msgstr ""
+
+#: src/containers/task-management/task-detail.tsx
+msgid "There's no resource record"
+msgstr ""
+
+#: src/components/delete-group-modal.tsx
+msgid "These users will lose access to the group content:"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx
+msgid "This account is not set up to manage any namespaces"
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "This collection has been deprecated."
+msgstr "Эта коллекция устарела."
+
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "This collection is being used by"
+msgstr "Эта коллекция используется"
+
+#: src/containers/collection-detail/collection-dependencies.tsx
+msgid "This collections requires the following collections for use"
+msgstr "Эта коллекция требует следующие коллекции для использования"
+
+#: src/utilities/map-role-errors.ts
+msgid "This field can only contain letters and numbers"
+msgstr "Это поле может содержать только буквы и цифры"
+
+#: src/utilities/map-role-errors.ts
+msgid "This field may not be blank."
+msgstr "Это поле не может быть пустым."
+
+#: src/utilities/map-role-errors.ts
+msgid "This field must be longer than 2 characters"
+msgstr "Значение в этом поле должно быть длиннее 2 символов"
+
+#: src/utilities/map-role-errors.ts
+msgid "This field must start with 'galaxy.'."
+msgstr "Значение в этом поле должно начинаться с 'galaxy.'."
+
+#: src/components/delete-group-modal.tsx
+msgid "This group can include users"
+msgstr ""
+
+#: src/components/ratings.tsx
+msgid "This is the rating from old-galaxy.ansible.com. We are working on redoing the rating for the new version of galaxy."
+msgstr ""
+
+#: src/components/tag-manifest-modal.tsx
+msgid "This tag already exists on another image. Do you want to move it to this image?"
+msgstr "Этот тег уже существует в другом образе. Вы действительно хотите переместить его в этот образ?"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "This tag is already selected for this image. You cannot add it twice."
+msgstr "Этот тег уже выбран для этого образа. Нельзя добавить его дважды."
+
+#: src/components/remote-form.tsx
+msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
+msgstr ""
+
+#: src/components/delete-collection-modal.tsx
+msgid "This will cause the entire collection to be deleted."
+msgstr ""
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "This will revoke all permissions associated with this role from the group."
+msgstr ""
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "TLS validation"
+msgstr "Валидация TLS"
+
+#: src/containers/landing/landing-page.tsx
+msgid "To be able to download content from galaxy it is required to have ansible-core>=2.13.9"
+msgstr ""
+
+#: src/components/collection-info.tsx
+msgid "To download this collection, configure your client to connect to one of the <0>distributions</0> of this repository."
+msgstr ""
+
+#: src/containers/token/token-insights.tsx
+msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "Token"
+msgstr "Токен"
+
+#: src/containers/token/token-standalone.tsx
+msgid "Token could not be displayed."
+msgstr "Токен не может быть отображён."
+
+#: src/components/remote-form.tsx
+msgid "Token for authenticating to the server URL."
+msgstr ""
+
+#: src/components/remote-form.tsx
+msgid "Total number of simultaneous connections."
+msgstr "Общее количество одновременных подключений."
+
+#: src/containers/task-management/task-detail.tsx
+msgid "Traceback"
+msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+msgid "Training"
+msgstr ""
+
+#: src/containers/role-management/role-list.tsx
+msgid "true"
+msgstr "true"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Try Red Hat Ansible Automation Platform"
+msgstr "Попробуйте Red Hat Ansible Automation Platform"
+
+#: src/components/collection-content-list.tsx
+#: src/containers/task-management/task-detail.tsx
+msgid "Type"
+msgstr "Тип"
+
+#: src/components/hub-about-modal.tsx
+msgid "UI Version"
+msgstr "Версия UI"
+
+#: src/components/collection-dropdown.tsx
+msgid "Undeprecate"
+msgstr "Отметить не устаревшей"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Unformatted Documentation"
+msgstr "Неотформатированная документация"
+
+#: src/components/import-modal.tsx
+msgid "unknown"
+msgstr ""
+
+#: src/components/collection-filter.ts
+#: src/components/signature-badge.tsx
+msgid "Unsigned"
+msgstr "Неподписанные"
+
+#: src/components/sign-all-certificates-modal.tsx
+msgid "Unsigned version(s)"
+msgstr "Неподписанная версия (версии)"
+
+#: src/utilities/translate-task.ts
+msgid "Untag image"
+msgstr "Убрать тег образа"
+
+#: src/utilities/translate-task.ts
+msgid "Update collection remote"
+msgstr "Обновить коллекцию из источника"
+
+#: src/containers/ansible-remote/edit.tsx
+msgid "Update started for remote {0}"
+msgstr "Запущено обновление для внешнего реестра {0}"
+
+#: src/containers/ansible-repository/edit.tsx
+msgid "Update started for repository {0}"
+msgstr "Запущено обновление репозитория {0}"
+
+#: src/components/collection-header.tsx
+msgid "updated <0/>"
+msgstr "обновлена <0/>"
+
+#: src/components/collection-list-item.tsx
+#: src/components/role-item.tsx
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Updated <0/>"
+msgstr "Обновлена <0/>"
+
+#: src/components/import-modal.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/upload-signature-modal.tsx
+msgid "Upload"
+msgstr "Загрузить"
+
+#: src/utilities/translate-locked-role.ts
+msgid "Upload and modify collections."
+msgstr "Загрузка и изменение коллекций."
+
+#: src/components/import-modal.tsx
+msgid "Upload anyway?"
+msgstr "Всё равно загрузить?"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "Upload code"
+msgstr "Загрузить код"
+
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "Upload collection"
+msgstr "Загрузить коллекцию"
+
+#: src/utilities/translate-task.ts
+msgid "Upload commit"
+msgstr "Загрузить коммит"
+
+#: src/components/collection-dropdown.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/search/search.tsx
+msgid "Upload new version"
+msgstr "Загрузить новую версию"
+
+#: src/components/approval-row.tsx
+#: src/components/upload-signature-modal.tsx
+msgid "Upload signature"
+msgstr "Загрузить подпись"
+
+#: src/components/repository-form.tsx
+msgid "Upstream name"
+msgstr ""
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/list.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "URL"
+msgstr "URL"
+
+#: src/components/namespace-form.tsx
+msgid "URL must not be empty."
+msgstr "URL не может быть пустым."
+
+#: src/components/namespace-form.tsx
+msgid "URL: {0}"
+msgstr "URL: {0}"
+
+#: src/containers/execution-environment-detail/base.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "Use in Controller"
+msgstr "Используйте в контроллере"
+
+#: src/components/remote-form.tsx
+msgid "Use template"
+msgstr "Использовать шаблон"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Use the <0>Search page </0>to find content for your project, then download them onto your Ansible host using <1>ansible-galaxy</1>, the command line tool that comes bundled with Ansible."
+msgstr ""
+
+#: src/components/repository-form.tsx
+msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
+msgstr "Используйте формат namespace/name для контейнеров пространств имён. В противном случае используйте формат library/name."
+
+#: src/containers/token/token-insights.tsx
+msgid "Use the Server URL below to sync certified collections to the Red Hat Certified repository in your private Automation Hub. If you wish to sync validated content, you can add a remote with a server url pointed to the validated repo."
+msgstr ""
+
+#: src/containers/token/token-insights.tsx
+msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
+msgstr "Используйте этот токен для аутентификации клиента <0>ansible-galaxy</0>."
+
+#: src/containers/token/token-insights.tsx
+msgid "Use this URL for <0>validated</0> content from Automation Hub."
+msgstr ""
+
+#: src/containers/token/token-insights.tsx
+msgid "Use this URL to configure the API endpoints that clients need to download <0>certified</0> content from Automation Hub."
+msgstr ""
+
+#: src/containers/token/token-insights.tsx
+msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
+msgstr ""
+
+#: src/components/namespace-form.tsx
+msgid "Useful links"
+msgstr "Полезные ссылки"
+
+#: src/components/access-tab.tsx
+#: src/components/select-user.tsx
+msgid "User"
+msgstr "Пользователь"
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" could not be added to \"{name}\"."
+msgstr "Пользователь \"{0}\" не может быть добавлен в \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx
+msgid "User \"{0}\" could not be added to group \"{1}\"."
+msgstr "Пользователь \"{0}\" не может быть добавлен в группу \"{1}\"."
+
+#: src/components/delete-user-modal.tsx
+#: src/components/delete-user-modal.tsx
+msgid "User \"{0}\" could not be deleted."
+msgstr "Пользователь \"{0}\" не может быть удалён."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" could not be removed from \"{name}\"."
+msgstr "Пользователь \"{0}\" не может быть удален из \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx
+msgid "User \"{0}\" could not be removed from group \"{name}\"."
+msgstr "Пользователь \"{0}\" не может быть удалён из группы \"{name}\"."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" has been successfully added to \"{name}\"."
+msgstr "Пользователь \"{0}\" успешно добавлен в \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx
+msgid "User \"{0}\" has been successfully added to group \"{1}\"."
+msgstr "Пользователь \"{0}\" успешно добавлен в группу \"{1}\"."
+
+#: src/components/delete-user-modal.tsx
+msgid "User \"{0}\" has been successfully deleted."
+msgstr "Пользователь \"{0}\" успешно удалён."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" has been successfully removed from \"{name}\"."
+msgstr "Пользователь \"{0}\" успешно исключён из \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx
+msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
+msgstr "Пользователь \"{0}\" успешно исключён из группы \"{name}\"."
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" roles could not be update in \"{name}\"."
+msgstr ""
+
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-remote/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/ansible-repository/tab-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/execution-environment-detail/execution-environment-detail-access.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User \"{0}\" roles successfully updated in \"{name}\"."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "User {0}"
+msgstr "Пользователь {0}"
+
+#: src/containers/ansible-remote/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/namespace-detail/namespace-detail.tsx
+msgid "User {user}"
+msgstr "Пользователь {user}"
+
+#: src/containers/group-management/group-detail.tsx
+msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
+msgstr "Пользователь <0>{username}</0> будет исключён из группы <1>{groupname}</1>."
+
+#: src/loaders/standalone/menu.tsx
+msgid "User Access"
+msgstr "Пользовательский доступ"
+
+#: src/containers/user-management/user-detail.tsx
+msgid "User details"
+msgstr ""
+
+#: src/loaders/standalone/layout.tsx
+msgid "User dropdown"
+msgstr ""
+
+#: src/components/hub-about-modal.tsx
+msgid "User Groups"
+msgstr "Группы пользователя"
+
+#: src/components/access-tab.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "User list"
+msgstr "Список пользователей"
+
+#: src/components/user-form.tsx
+msgid "User type"
+msgstr "Тип пользователя"
+
+#: src/components/hub-about-modal.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/components/remote-form.tsx
+#: src/components/user-form.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Username"
+msgstr "Учётная запись"
+
+#: src/loaders/standalone/layout.tsx
+msgid "Username: {0}"
+msgstr "Учётная запись: {0}"
+
+#: src/components/access-tab.tsx
+#: src/components/role-namespace-edit-modal.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/user-management/user-create.tsx
+#: src/containers/user-management/user-detail.tsx
+#: src/containers/user-management/user-edit.tsx
+#: src/containers/user-management/user-list.tsx
+#: src/loaders/standalone/menu.tsx
+msgid "Users"
+msgstr "Пользователи"
+
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-detail.tsx
+#: src/containers/group-management/group-list.tsx
+#: src/containers/user-management/user-list.tsx
+msgid "Users list could not be displayed."
+msgstr "Список пользователей не может быть отображён."
+
+#: src/containers/group-management/group-detail.tsx
+msgid "Users will appear once added to this group"
+msgstr "Пользователи появятся после добавления в эту группу"
+
+#: src/containers/user-management/user-list.tsx
+msgid "Users will appear once created"
+msgstr "Пользователи появятся после создания"
+
+#: src/components/repository-badge.tsx
+msgid "Validated"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "VALUE"
+msgstr ""
+
+#: src/components/render-plugin-doc.tsx
+msgid "var"
+msgstr ""
+
+#: src/components/collection-filter.ts
+#: src/components/collection-header.tsx
+#: src/containers/certification-dashboard/certification-dashboard.tsx
+msgid "Version"
+msgstr "Версия"
+
+#: src/containers/ansible-repository/detail.tsx
+msgid "Version {repositoryVersion}"
+msgstr "Версия {repositoryVersion}"
+
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+#: src/containers/ansible-repository/tab-repository-versions.tsx
+msgid "Version number"
+msgstr "Номер версии"
+
+#: src/components/import-console.tsx
+msgid "Version:"
+msgstr "Версия:"
+
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-repository/detail.tsx
+#: src/containers/ansible-role/role-detail.tsx
+msgid "Versions"
+msgstr "Версии"
+
+#: src/utilities/translate-locked-role.ts
+msgid "View and cancel any task."
+msgstr "Просмотр и отмена любых задач."
+
+#: src/components/namespace-card.tsx
+msgid "View collections"
+msgstr "Просмотр коллекций"
+
+#: src/components/approval-row.tsx
+msgid "View Import Logs"
+msgstr "Просмотр журналов импорта"
+
+#: src/components/collection-card.tsx
+#: src/components/collection-header.tsx
+#: src/components/namespace-card.tsx
+msgid "View more"
+msgstr "Показать больше"
+
+#: src/components/patternfly-wrappers/l10n.tsx
+msgid "View Shortcuts"
+msgstr ""
+
+#: src/utilities/translate-locked-role.ts
+msgid "View, add, remove and change groups."
+msgstr "Просмотр, добавление, удаление и изменение групп."
+
+#: src/utilities/translate-locked-role.ts
+msgid "View, add, remove and change synclists."
+msgstr "Просмотр, добавление, удаление и изменение списков синхронизации."
+
+#: src/utilities/translate-locked-role.ts
+msgid "View, add, remove and change users."
+msgstr "Просмотр, добавление, удаление и изменение пользователей."
+
+#: src/components/import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/components/role-import-list.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Waiting"
+msgstr "Ожидание"
+
+#: src/components/tag-manifest-modal.tsx
+msgid "Waiting for {pendingTasks} task(s) to finish."
+msgstr ""
+
+#: src/components/import-console.tsx
+msgid "waiting for approval"
+msgstr ""
+
+#: src/components/import-console.tsx
+msgid "waiting for import to finish"
+msgstr ""
+
+#: src/components/collection-content-list.tsx
+#: src/components/patternfly-wrappers/l10n.tsx
+#: src/containers/collection-detail/collection-docs.tsx
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: src/containers/not-found/dispatch.tsx
+#: src/containers/not-found/not-found.tsx
+msgid "We couldn't find the page you're looking for!"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx
+msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
+msgstr ""
+
+#: src/components/collection-header.tsx
+msgid "Website"
+msgstr "Вебсайт"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Welcome to Galaxy"
+msgstr "Добро пожаловать в Galaxy"
+
+#: src/components/render-plugin-doc.tsx
+msgid "Why:"
+msgstr "Почему:"
+
+#: src/components/role-import-form.tsx
+msgid "Will clone <0>{link}</0>"
+msgstr ""
+
+#: src/components/role-sync-form.tsx
+msgid "Will sync <0>{link}</0>"
+msgstr ""
+
+#: src/components/ratings.tsx
+msgid "Works without change"
+msgstr ""
+
+#: src/components/remote-form.tsx
+#: src/containers/ansible-remote/tab-details.tsx
+msgid "YAML requirements"
+msgstr "Требования YAML"
+
+#: src/components/remote-form.tsx
+msgid "YAML requirements are required to sync from Galaxy"
+msgstr ""
+
+#: src/actions/ansible-repository-sync.tsx
+msgid "YAML requirements are required to sync from Galaxy. You can <0>edit the {name} remote</0> to add requirements."
+msgstr ""
+
+#: src/components/confirm-modal.tsx
+#: src/components/tag-manifest-modal.tsx
+#: src/containers/ansible-repository/list.tsx
+#: src/containers/ansible-repository/tab-details.tsx
+msgid "Yes"
+msgstr "Да"
+
+#: src/containers/task-management/task-detail.tsx
+#: src/containers/task-management/task-list-view.tsx
+msgid "Yes, stop"
+msgstr "Да, остановить"
+
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx
+msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "You are about to remove <0>{groupname}</0> from <1>{name}</1>.<2/>This will also remove all associated permissions."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "You are about to remove <0>{role}</0> from <1>{userOrGroupName}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
+msgstr ""
+
+#: src/components/access-tab.tsx
+msgid "You are about to remove <0>{username}</0> from <1>{name}</1>.<2/>This will also remove all associated permissions."
+msgstr ""
+
+#: src/components/sign-all-certificates-modal.tsx
+msgid "You are about to sign <0>all versions</0> under <1>{name}</1>."
+msgstr ""
+
+#: src/components/sign-single-certificate-modal.tsx
+msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx
+msgid "You are an SSO user."
+msgstr ""
+
+#: src/components/resources-form.tsx
+msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
+msgstr ""
+
+#: src/containers/ansible-repository/tab-distributions.tsx
+msgid "You can edit this repository to create a distribution."
+msgstr "Вы можете отредактировать этот репозиторий для создания распространения."
+
+#: src/containers/execution-environment-list/execution-environment-list.tsx
+msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx
+msgid "You currently have no remote registries."
+msgstr "Сейчас у вас нет сторонних реестров."
+
+#: src/components/empty-state-unauthorized.tsx
+msgid "You do not have access to Automation Hub"
+msgstr "У вас нет доступа к Automation Hub"
+
+#: src/components/delete-group-modal.tsx
+msgid "You don't have permission to display users."
+msgstr "У вас нет разрешения на отображение пользователей."
+
+#: src/components/collection-header.tsx
+#: src/containers/search/search.tsx
+msgid "You don't have rights to do this operation."
+msgstr "У вас нет прав для выполнения этой операции."
+
+#: src/components/collection-info.tsx
+msgid "You have to be logged in to be able to download the tarball."
+msgstr ""
+
+#: src/containers/edit-namespace/edit-namespace.tsx
+msgid "You have unsaved changes"
+msgstr "У вас есть несохранённые изменения"
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will expire <0/>."
+msgstr "Ваш токен истечёт <0/>."
+
+#: src/containers/token/token-standalone.tsx
+msgid "Your token will not expire."
+msgstr "Ваш токен не истечёт."
