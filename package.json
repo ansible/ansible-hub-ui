@@ -7,10 +7,10 @@
   "dependencies": {
     "@babel/runtime": "^7.25.6",
     "@lingui/react": "^4.11.4",
-    "@patternfly/patternfly": "^5.4.0",
-    "@patternfly/react-code-editor": "^5.4.0",
+    "@patternfly/patternfly": "^5.4.1",
+    "@patternfly/react-code-editor": "^5.4.3",
     "@patternfly/react-core": "^5.4.0",
-    "@patternfly/react-table": "^5.4.0",
+    "@patternfly/react-table": "^5.4.1",
     "antsibull-docs": "^1.1.0",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
