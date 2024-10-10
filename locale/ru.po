@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-26 12:03+0300\n"
+"PO-Revision-Date: 2024-10-10 13:10+0300\n"
 "Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
 "Language-Team: \n"
 "Plural-Forms: \n"
@@ -666,7 +666,7 @@ msgstr "Изменение поставщика пространства имё�
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
-msgstr "Не удалось сохранить изменения в статусе сертификации коллекции \"{0} {1} v{2}\"."
+msgstr "Не удалось обновить статус сертификации коллекции \"{0} {1} v{2}\"."
 
 #: src/containers/group-management/group-list.tsx
 msgid "Changes to group \"{0}\" could not be saved."
@@ -678,7 +678,7 @@ msgstr "Не удалось сохранить изменения в прост�
 
 #: src/containers/role-management/role-edit.tsx
 msgid "Changes to role \"{name}\" could not be saved."
-msgstr "Не удалось сохранить изменения в роли \"{name}\"."
+msgstr "Не удалось сохранить изменения роли \"{name}\"."
 
 #: src/components/role-import-form.tsx
 msgid "Checking ..."
