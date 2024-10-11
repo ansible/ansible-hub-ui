@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-10-10 13:10+0300\n"
+"PO-Revision-Date: 2024-10-11 09:58+0300\n"
 "Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
 "Language-Team: \n"
 "Plural-Forms: \n"
@@ -842,7 +842,7 @@ msgstr "Версии коллекции"
 #: src/containers/ansible-repository/tab-collection-versions.tsx
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Collection versions could not be displayed."
-msgstr "Не удалось отображить версии коллекции."
+msgstr "Не удалось отобразить версии коллекции."
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 msgid "Collection versions will appear once a collection is uploaded."
