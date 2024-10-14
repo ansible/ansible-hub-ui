@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-10-14 09:42+0300\n"
+"PO-Revision-Date: 2024-10-14 11:36+0300\n"
 "Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
 "Language-Team: \n"
 "Plural-Forms: \n"
@@ -32,7 +32,7 @@ msgstr "(неподписанная)"
 
 #: src/components/remote-form.tsx
 msgid "(uploaded)"
-msgstr "(загружена)"
+msgstr "(загруж.)"
 
 #: src/actions/ansible-repository-collection-version-add.tsx
 msgid "{0, plural, one {Failed to add collection to repository \"{repositoryName}\".} other {Failed to add collections to repository \"{repositoryName}\".}}"
