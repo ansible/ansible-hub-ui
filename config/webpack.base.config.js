@@ -226,15 +226,8 @@ module.exports = (inputConfigs) => {
   );
 
   // webpack-dev-server 5
-  if (!isBuild && newWebpackConfig.devServer.onBeforeSetupMiddleware) {
-    const orig = newWebpackConfig.devServer.onBeforeSetupMiddleware;
-    delete newWebpackConfig.devServer.onBeforeSetupMiddleware;
+  if (!isBuild && 'https' in newWebpackConfig.devServer) {
     delete newWebpackConfig.devServer.https;
-
-    newWebpackConfig.devServer.setupMiddlewares = (middlewares, app) => {
-      orig(app);
-      return middlewares;
-    };
   }
 
   return {
