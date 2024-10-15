@@ -19,6 +19,11 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
+    - name: "Install python 3.11"
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
     - name: "Checks"
       run: |
         # fail if npm install had to change package-lock.json
