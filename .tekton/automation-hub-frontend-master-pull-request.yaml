@@ -218,17 +218,17 @@ spec:
     # put this before the "build-container" task in your repository
     - name: parse-build-deploy-script
       params:
-        - name: path-context
-          value: $(params.path-context)
+      - name: path-context
+        value: $(params.path-context)
       taskRef:
         resolver: git
         params:
-          - name: url
-            value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
-          - name: revision
-            value: 2fcdfa9b4858ac941b50ad37317c4f9aaabf91b4  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
-          - name: pathInRepo
-            value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
+        - name: url
+          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
+        - name: revision
+          value: 2fcdfa9b4858ac941b50ad37317c4f9aaabf91b4  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
+        - name: pathInRepo
+          value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
       workspaces:
       - name: source
         workspace: workspace
@@ -238,42 +238,42 @@ spec:
       taskRef:
         resolver: git
         params:
-          - name: url
-            value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
-          - name: revision
-            value: 2fcdfa9b4858ac941b50ad37317c4f9aaabf91b4  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
-          - name: pathInRepo
-            value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
+        - name: url
+          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
+        - name: revision
+          value: 2fcdfa9b4858ac941b50ad37317c4f9aaabf91b4  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
+        - name: pathInRepo
+          value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
       workspaces:
       - name: source
         workspace: workspace
       params:
-        - name: path-context
-          value: $(params.path-context)
-        - name: component
-          value: $(tasks.parse-build-deploy-script.results.component)
-        - name: image
-          value: $(tasks.parse-build-deploy-script.results.image)
-        - name: node-build-version
-          value: $(tasks.parse-build-deploy-script.results.node-build-version)
-        - name: quay-expire-time
-          value: $(tasks.parse-build-deploy-script.results.quay-expire-time)
-        - name: npm-build-script
-          value: $(tasks.parse-build-deploy-script.results.npm-build-script)
-        - name: yarn-build-script
-          value: $(tasks.parse-build-deploy-script.results.yarn-build-script)
-        - name: route-path
-          value: $(tasks.parse-build-deploy-script.results.route-path)
-        - name: beta-route-path
-          value: $(tasks.parse-build-deploy-script.results.beta-route-path)
-        - name: preview-route-path
-          value: $(tasks.parse-build-deploy-script.results.preview-route-path)
-        - name: ci-root
-          value: $(tasks.parse-build-deploy-script.results.ci-root)
-        - name: server-name
-          value: $(tasks.parse-build-deploy-script.results.server-name)
-        - name: dist-folder
-          value: $(tasks.parse-build-deploy-script.results.dist-folder)
+      - name: path-context
+        value: $(params.path-context)
+      - name: component
+        value: $(tasks.parse-build-deploy-script.results.component)
+      - name: image
+        value: $(tasks.parse-build-deploy-script.results.image)
+      - name: node-build-version
+        value: $(tasks.parse-build-deploy-script.results.node-build-version)
+      - name: quay-expire-time
+        value: $(tasks.parse-build-deploy-script.results.quay-expire-time)
+      - name: npm-build-script
+        value: $(tasks.parse-build-deploy-script.results.npm-build-script)
+      - name: yarn-build-script
+        value: $(tasks.parse-build-deploy-script.results.yarn-build-script)
+      - name: route-path
+        value: $(tasks.parse-build-deploy-script.results.route-path)
+      - name: beta-route-path
+        value: $(tasks.parse-build-deploy-script.results.beta-route-path)
+      - name: preview-route-path
+        value: $(tasks.parse-build-deploy-script.results.preview-route-path)
+      - name: ci-root
+        value: $(tasks.parse-build-deploy-script.results.ci-root)
+      - name: server-name
+        value: $(tasks.parse-build-deploy-script.results.server-name)
+      - name: dist-folder
+        value: $(tasks.parse-build-deploy-script.results.dist-folder)
       runAfter:
       - parse-build-deploy-script
     - name: clone-repository-oci-ta
@@ -306,44 +306,44 @@ spec:
     - name: run-unit-tests
       description: Validates frontend unit tests
       params:
-        - name: SOURCE_ARTIFACT
-          value: $(tasks.clone-repository-oci-ta.results.SOURCE_ARTIFACT)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.clone-repository-oci-ta.results.SOURCE_ARTIFACT)
       runAfter:
-        - clone-repository-oci-ta
+      - clone-repository-oci-ta
       workspaces:
       - name: basic-auth
         workspace: git-auth
       taskSpec:
         params:
-          - description: The Trusted Artifact URI pointing to the artifact with the application source code.
-            name: SOURCE_ARTIFACT
-            type: string
+        - description: The Trusted Artifact URI pointing to the artifact with the application source code.
+          name: SOURCE_ARTIFACT
+          type: string
         volumes:
-          # New volume to store a copy of the source code accessible only to this Task.
-          - name: workdir
-            emptyDir: {}
+        # New volume to store a copy of the source code accessible only to this Task.
+        - name: workdir
+          emptyDir: {}
         stepTemplate:
           volumeMounts:
-            - mountPath: /var/workdir
-              name: workdir
-              readOnly: false
+          - mountPath: /var/workdir
+            name: workdir
+            readOnly: false
         sidecars:
         steps:
-          - name: use-trusted-artifact
-            image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
-            args:
-              - use
-              - $(params.SOURCE_ARTIFACT)=/var/workdir
-          - image: registry.access.redhat.com/ubi8/nodejs-20
-            workingDir: /var/workdir
-            name: unit-tests
-            securityContext:
-              runAsUser: 0
-            script: |
-              #!/bin/bash
-              set -ex
-              npm install
-              npm test
+        - name: use-trusted-artifact
+          image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
+          args:
+          - use
+          - $(params.SOURCE_ARTIFACT)=/var/workdir
+        - image: registry.access.redhat.com/ubi8/nodejs-20
+          workingDir: /var/workdir
+          name: unit-tests
+          securityContext:
+            runAsUser: 0
+          script: |
+            #!/bin/bash
+            set -ex
+            npm install
+            npm test
     # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
     - name: build-container
       params:
