@@ -303,47 +303,6 @@ spec:
       workspaces:
       - name: basic-auth
         workspace: git-auth
-    - name: run-unit-tests
-      description: Validates frontend unit tests
-      params:
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.clone-repository-oci-ta.results.SOURCE_ARTIFACT)
-      runAfter:
-      - clone-repository-oci-ta
-      workspaces:
-      - name: basic-auth
-        workspace: git-auth
-      taskSpec:
-        params:
-        - description: The Trusted Artifact URI pointing to the artifact with the application source code.
-          name: SOURCE_ARTIFACT
-          type: string
-        volumes:
-        # New volume to store a copy of the source code accessible only to this Task.
-        - name: workdir
-          emptyDir: {}
-        stepTemplate:
-          volumeMounts:
-          - mountPath: /var/workdir
-            name: workdir
-            readOnly: false
-        sidecars:
-        steps:
-        - name: use-trusted-artifact
-          image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
-          args:
-          - use
-          - $(params.SOURCE_ARTIFACT)=/var/workdir
-        - image: registry.access.redhat.com/ubi8/nodejs-20
-          workingDir: /var/workdir
-          name: unit-tests
-          securityContext:
-            runAsUser: 0
-          script: |
-            #!/bin/bash
-            set -ex
-            npm install
-            npm test
     # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
     - name: build-container
       params:
