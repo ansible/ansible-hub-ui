@@ -273,33 +273,6 @@ spec:
         value: $(tasks.parse-build-deploy-script.results.dist-folder)
       runAfter:
       - parse-build-deploy-script
-    - name: clone-repository-oci-ta
-      params:
-      - name: url
-        value: $(params.git-url)
-      - name: revision
-        value: $(params.revision)
-      - name: ociStorage
-        value: $(params.output-image).git
-      runAfter:
-      - init
-      taskRef:
-        params:
-        - name: name
-          value: git-clone-oci-ta
-        - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta@sha256:0f4360ce144d46171ebd2e8f4d4575539a0600e02208ba5fc9beeb2c27ddfd4c
-        - name: kind
-          value: task
-        resolver: bundles
-      when:
-      - input: $(tasks.init.results.build)
-        operator: in
-        values:
-        - "true"
-      workspaces:
-      - name: basic-auth
-        workspace: git-auth
     # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
     - name: build-container
       params:
