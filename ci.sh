@@ -23,4 +23,4 @@ else
 fi
 
 # do not use dev dockerfile
-rm "$APP_ROOT"/Dockerfile "$APP_ROOT"/.dockerignore || true
+rm "$APP_ROOT"/Dockerfile "$APP_ROOT"/.dockerignore /workspace/source/source/.dockerignore || true
