@@ -34,7 +34,8 @@ spec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
 
-      _Uses `buildah` to create a container image. It also optionally creates a source image and runs some build-time tests. EC will flag a violation for [`trusted_task.trusted`](https://enterprisecontract.dev/docs/ec-policies/release_policy.html#trusted_task__trusted) if any tasks are added to the pipeline.
+      _Uses `buildah` to create a container image. It also optionally creates a source image and runs some build-time tests.
+      EC will flag a violation for [`trusted_task.trusted`](https://enterprisecontract.dev/docs/ec-policies/release_policy.html#trusted_task__trusted) if any tasks are added to the pipeline.
       This pipeline is pushed as a Tekton bundle to [quay.io](https://quay.io/repository/konflux-ci/tekton-catalog/pipeline-docker-build?tab=tags)_
     finally:
     - name: show-sbom
@@ -214,6 +215,68 @@ spec:
         workspace: git-auth
       - name: netrc
         workspace: netrc
+    # put this before the "build-container" task in your repository
+    - name: parse-build-deploy-script
+      params:
+      - name: path-context
+        value: $(params.path-context)
+      taskRef:
+        resolver: git
+        params:
+        - name: url
+          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
+        - name: revision
+          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
+        - name: pathInRepo
+          value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
+      workspaces:
+      - name: source
+        workspace: workspace
+      runAfter:
+      - clone-repository
+    - name: create-frontend-dockerfile
+      taskRef:
+        resolver: git
+        params:
+        - name: url
+          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
+        - name: revision
+          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
+        - name: pathInRepo
+          value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
+      workspaces:
+      - name: source
+        workspace: workspace
+      params:
+      - name: path-context
+        value: $(params.path-context)
+      - name: component
+        value: $(tasks.parse-build-deploy-script.results.component)
+      - name: image
+        value: $(tasks.parse-build-deploy-script.results.image)
+      - name: node-build-version
+        value: $(tasks.parse-build-deploy-script.results.node-build-version)
+      - name: quay-expire-time
+        value: $(tasks.parse-build-deploy-script.results.quay-expire-time)
+      - name: npm-build-script
+        value: $(tasks.parse-build-deploy-script.results.npm-build-script)
+      - name: yarn-build-script
+        value: $(tasks.parse-build-deploy-script.results.yarn-build-script)
+      - name: route-path
+        value: $(tasks.parse-build-deploy-script.results.route-path)
+      - name: beta-route-path
+        value: $(tasks.parse-build-deploy-script.results.beta-route-path)
+      - name: preview-route-path
+        value: $(tasks.parse-build-deploy-script.results.preview-route-path)
+      - name: ci-root
+        value: $(tasks.parse-build-deploy-script.results.ci-root)
+      - name: server-name
+        value: $(tasks.parse-build-deploy-script.results.server-name)
+      - name: dist-folder
+        value: $(tasks.parse-build-deploy-script.results.dist-folder)
+      runAfter:
+      - parse-build-deploy-script
+    # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
     - name: build-container
       params:
       - name: IMAGE
@@ -237,6 +300,7 @@ spec:
         value: $(params.build-args-file)
       runAfter:
       - prefetch-dependencies
+      - create-frontend-dockerfile
       taskRef:
         params:
         - name: name
