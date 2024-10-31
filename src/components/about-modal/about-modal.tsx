@@ -158,7 +158,11 @@ export const AboutModalWindow = ({
           <Label>{t`UI Version`}</Label>
           <Value>
             <ExternalLink
-              href={`https://github.com/ansible/ansible-hub-ui/commit/${ui_sha}`}
+              href={
+                ui_sha.includes('.')
+                  ? `https://github.com/ansible/ansible-hub-ui/releases/tag/${ui_sha}`
+                  : `https://github.com/ansible/ansible-hub-ui/commit/${ui_sha}`
+              }
             >
               {ui_sha}
             </ExternalLink>
