@@ -11,7 +11,6 @@ import { detect } from 'detect-browser';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ApplicationInfoAPI, type UserType } from 'src/api';
-import { ExternalLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import Logo from 'static/images/logo_large.svg';
 
@@ -66,7 +65,6 @@ export const AboutModalWindow = ({
     aap_version, // ?
   } = applicationInfo;
 
-  const galaxy_ng_sha = galaxy_ng_commit?.split(':')[1];
   const ui_sha = UI_COMMIT_HASH?.slice(0, 7);
 
   return (
@@ -87,66 +85,26 @@ export const AboutModalWindow = ({
                 <br />
               </>
             ) : null}
-            {galaxy_ng_version?.includes('dev') ? (
-              galaxy_ng_version
-            ) : (
-              <ExternalLink
-                href={`https://github.com/ansible/galaxy_ng/releases/tag/${galaxy_ng_version}`}
-              >
-                {galaxy_ng_version}
-              </ExternalLink>
-            )}
+            {galaxy_ng_version}
             {galaxy_ng_commit ? (
               <>
                 <br />
-                {galaxy_ng_sha ? (
-                  <ExternalLink
-                    href={`https://github.com/ansible/galaxy_ng/commit/${galaxy_ng_sha}`}
-                  >
-                    {galaxy_ng_commit}
-                  </ExternalLink>
-                ) : (
-                  galaxy_ng_commit
-                )}
+                {galaxy_ng_commit}
               </>
             ) : null}
           </Value>
 
           <Label>{t`Pulp Ansible Version`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/pulp/pulp_ansible/releases/tag/${pulp_ansible_version}`}
-            >
-              {pulp_ansible_version}
-            </ExternalLink>
-          </Value>
+          <Value>{pulp_ansible_version}</Value>
 
           <Label>{t`Pulp Container Version`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/pulp/pulp_container/releases/tag/${pulp_container_version}`}
-            >
-              {pulp_container_version}
-            </ExternalLink>
-          </Value>
+          <Value>{pulp_container_version}</Value>
 
           <Label>{t`Pulp Core Version`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/pulp/pulpcore/releases/tag/${pulp_core_version}`}
-            >
-              {pulp_core_version}
-            </ExternalLink>
-          </Value>
+          <Value>{pulp_core_version}</Value>
 
           <Label>{t`Galaxy Importer`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/ansible/galaxy-importer/releases/tag/v${galaxy_importer_version}`}
-            >
-              {galaxy_importer_version}
-            </ExternalLink>
-          </Value>
+          <Value>{galaxy_importer_version}</Value>
 
           {aap_version && (
             <>
@@ -156,13 +114,7 @@ export const AboutModalWindow = ({
           )}
 
           <Label>{t`UI Version`}</Label>
-          <Value>
-            <ExternalLink
-              href={`https://github.com/ansible/ansible-hub-ui/commit/${ui_sha}`}
-            >
-              {ui_sha}
-            </ExternalLink>
-          </Value>
+          <Value>{ui_sha}</Value>
 
           <Label>{t`Username`}</Label>
           <Value>
