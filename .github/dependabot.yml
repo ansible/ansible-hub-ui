@@ -28,6 +28,8 @@ updates:
           - 'react'
           - 'react-dom'
     ignore:
+      - dependency-name: '@patternfly/*'
+        update-types: ['version-update:semver-major']
       - dependency-name: 'eslint'
         update-types:
           - 'version-update:semver-major'
