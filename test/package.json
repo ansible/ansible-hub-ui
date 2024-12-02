@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "chrome-remote-interface": "^0.33.2",
-    "cypress": "^13.14.2",
+    "cypress": "^13.16.0",
     "cypress-file-upload": "^5.0.8",
     "shell-escape-tag": "^2.0.2",
     "url-join": "^5.0.0"
