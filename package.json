@@ -5,7 +5,7 @@
   "author": "Red Hat, Inc.",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
+    "@babel/runtime": "^7.26.0",
     "@lingui/react": "^4.11.4",
     "@patternfly/patternfly": "^5.4.0",
     "@patternfly/react-code-editor": "^5.4.0",
@@ -30,11 +30,11 @@
     "react-router-hash-link": "^2.4.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/plugin-transform-runtime": "^7.25.4",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
     "@lingui/cli": "^4.11.4",
     "@lingui/macro": "^4.11.4",
     "@ls-lint/ls-lint": "^2.2.3",
