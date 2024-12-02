@@ -8,7 +8,7 @@ export COMPONENT="automation-hub"
 export WORKSPACE=${WORKSPACE:-$APP_ROOT} # if running in jenkins, use the build's workspace
 export APP_ROOT=$(pwd)
 COMMON_BUILDER=https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master
-export NODE_BUILD_VERSION=18
+export NODE_BUILD_VERSION=20
 
 export APP_NAME="automation-hub"  # name of app-sre "application" folder this component lives in
 export COMPONENT_NAME="automation-hub"  # name of app-sre "resourceTemplate" in deploy.yaml for this component
