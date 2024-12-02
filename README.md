@@ -32,6 +32,8 @@ make oci/dab
 The backend can be run in multiple modes - `standalone`, `community`, `insights`, `keycloak`, `ldap` and `dab`.
 Depending on the mode, it will listen on http://localhost:5001 or http://localhost:55001, under `/api/galaxy/`, `/api/` or `/api/automation-hub/`.
 
+Or, use the [simplified compose stack](https://github.com/ansible/galaxy_ng/tree/master/dev/compose#galaxy-simplified-compose-stack).
+
 
 ### Frontend
 
