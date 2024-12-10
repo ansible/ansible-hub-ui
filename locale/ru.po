@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-11 09:29+0300\n"
+"PO-Revision-Date: 2024-12-10 09:35+0300\n"
 "Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
 "Language-Team: \n"
 "Plural-Forms: \n"
@@ -1299,15 +1299,15 @@ msgstr ""
 
 #: src/components/delete-collection-modal.tsx
 msgid "Deleting <0>{0}</0>, its data will be lost."
-msgstr "Удаление <0>{0}</0>, её данные будут утеряны."
+msgstr "При удалении <0>{0}</0> её данные будут утеряны."
 
 #: src/containers/execution-environment-detail/execution-environment-detail-images.tsx
 msgid "Deleting <0>{digest}</0> and its data will be lost."
-msgstr ""
+msgstr "При удалении <0>{digest}</0> его данные будут утеряны."
 
 #: src/components/delete-execution-environment-modal.tsx
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
-msgstr ""
+msgstr "При удалении <0>{selectedItem}</0> его данные будут утеряны."
 
 #: src/components/delete-user-modal.tsx
 msgid "Deleting super users is not allowed."
@@ -1544,7 +1544,7 @@ msgstr ""
 
 #: src/components/ratings.tsx
 msgid "Ease of use"
-msgstr ""
+msgstr "Простота использования"
 
 #: src/actions/ansible-remote-edit.tsx
 #: src/actions/ansible-repository-edit.tsx
@@ -1648,7 +1648,7 @@ msgstr ""
 
 #: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server could not find the requested URL."
-msgstr ""
+msgstr "Ошибка {statusCode} - {statusText}: Серверу не удалось найти запрошенный URL."
 
 #: src/utilities/fail-alerts.tsx
 msgid "Error {statusCode} - {statusText}: The server encountered an error and was unable to complete your request."
@@ -1673,7 +1673,7 @@ msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Error loading collections."
-msgstr "Ошибка загрузки коллекции."
+msgstr "Ошибка загрузки коллекций."
 
 #: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Error loading environments."
@@ -1685,7 +1685,7 @@ msgstr "Ошибка загрузки репозиториев."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx
 msgid "Error loading repository with label {pipeline}."
-msgstr ""
+msgstr "Ошибка загрузки репозитория с меткой {pipeline}."
 
 #: src/containers/task-management/task-detail.tsx
 msgid "Error message"
@@ -1714,36 +1714,36 @@ msgstr ""
 
 #: src/containers/execution-environment-list/execution-environment-list.tsx
 msgid "Execution environment \"{0}\" has been added successfully."
-msgstr ""
+msgstr "Среда исполнения \"{0}\" успешно добавлена."
 
 #: src/containers/execution-environment/registry-list.tsx
 msgid "Execution environment \"{name}\" could not be indexed."
-msgstr ""
+msgstr "Среда исполнения \"{name}\" не может быть проиндексирована."
 
 #: src/components/delete-execution-environment-modal.tsx
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
-msgstr ""
+msgstr "Среда исполнения \"{selectedItem}\" не может быть удалена."
 
 #: src/components/delete-execution-environment-modal.tsx
 msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
-msgstr ""
+msgstr "Среда исполнения \"{selectedItem}\" успешно удалена."
 
 #: src/containers/execution-environment-list/execution-environment-list.tsx
 #: src/containers/search/multi-search.tsx
 #: src/containers/search/multi-search.tsx
 msgid "Execution environments"
-msgstr ""
+msgstr "Среды исполнения"
 
 #: src/components/execution-environment-header.tsx
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx
 #: src/loaders/standalone/menu.tsx
 #: src/loaders/standalone/menu.tsx
 msgid "Execution Environments"
-msgstr ""
+msgstr "Среды исполнения"
 
 #: src/containers/token/token-standalone.tsx
 msgid "Expiration"
-msgstr ""
+msgstr "Истечение"
 
 #: src/containers/landing/landing-page.tsx
 msgid "Extend the power of Ansible to your entire team."
@@ -1765,7 +1765,7 @@ msgstr ""
 
 #: src/components/approve-modal.tsx
 msgid "Failed to approve collection."
-msgstr ""
+msgstr "Сбой согласования коллекции."
 
 #: src/components/role-namespace-edit-modal.tsx
 msgid "Failed to change provider namespace."
@@ -1773,7 +1773,7 @@ msgstr ""
 
 #: src/components/copy-collection-to-repository-modal.tsx
 msgid "Failed to copy collection version."
-msgstr ""
+msgstr "Сбой при копировании версии коллекции."
 
 #: src/components/role-import-form.tsx
 #: src/components/role-namespace-modal.tsx
@@ -1786,23 +1786,23 @@ msgstr ""
 
 #: src/utilities/repository-base-path.ts
 msgid "Failed to find repository {name}"
-msgstr ""
+msgstr "Сбой при поиске репозитория {name}"
 
 #: src/containers/ansible-repository/tab-repository-versions.tsx
 msgid "Failed to find repository version"
-msgstr ""
+msgstr "Сбой при поиске версий репозитория"
 
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Failed to find role"
-msgstr ""
+msgstr "Сбой при поиске роли"
 
 #: src/containers/ansible-role/role-detail.tsx
 msgid "Failed to get import log"
-msgstr ""
+msgstr "Сбой при получении журнала импорта"
 
 #: src/components/role-import-form.tsx
 msgid "Failed to import role"
-msgstr ""
+msgstr "Сбой при импорте роли"
 
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to list distributions, removing only the repository."
