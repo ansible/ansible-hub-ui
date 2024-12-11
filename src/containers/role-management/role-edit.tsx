@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { RoleAPI, type RoleType } from 'src/api';
 import {
   AlertList,

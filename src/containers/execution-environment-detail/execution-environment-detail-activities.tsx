@@ -2,7 +2,7 @@ import { Trans, t } from '@lingui/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component, type ReactFragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ActivitiesAPI } from 'src/api';
 import {
   DateComponent,

@@ -14,7 +14,7 @@ import {
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
 import React, { Fragment, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import {
   CertificateUploadAPI,
   CollectionAPI,

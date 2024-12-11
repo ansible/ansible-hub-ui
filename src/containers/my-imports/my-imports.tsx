@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { Component, type RefObject, createRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   CollectionVersionAPI,
   type CollectionVersionSearch,

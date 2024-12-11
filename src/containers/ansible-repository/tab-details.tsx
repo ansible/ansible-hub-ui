@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { type AnsibleRemoteType, type AnsibleRepositoryType } from 'src/api';
 import {
   CopyURL,

@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { LoginPage as PFLoginPage } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { ActiveUserAPI } from 'src/api';
 import { LoginForm } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';

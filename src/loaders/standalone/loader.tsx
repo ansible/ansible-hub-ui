@@ -1,7 +1,7 @@
 import '../app.scss';
 import '@patternfly/patternfly/patternfly.scss';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import {
   type FeatureFlagsType,
   type SettingsType,

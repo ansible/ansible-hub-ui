@@ -6,7 +6,7 @@ import {
   DataListItemRow,
 } from '@patternfly/react-core';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { type LegacyRoleDetailType } from 'src/api';
 import {
   DateComponent,

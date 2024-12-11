@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { Spinner, Tooltip } from 'src/components';
 import { Paths, formatPath } from 'src/paths';

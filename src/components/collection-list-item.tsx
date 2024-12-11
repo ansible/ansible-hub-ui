@@ -11,7 +11,7 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 import React, { type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { type CollectionVersionSearch } from 'src/api';
 import {
   CollectionNumericLabel,

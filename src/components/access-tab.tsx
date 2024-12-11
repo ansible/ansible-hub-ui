@@ -9,7 +9,7 @@ import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import { sortBy } from 'lodash';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { type GroupType, type RoleType } from 'src/api';
 import {
   DeleteModal,

@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import React, { Component } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router';
 import { UserAPI, type UserType } from 'src/api';
 import {
   AlertList,
