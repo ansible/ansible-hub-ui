@@ -57,7 +57,9 @@ export const CompoundFilter = ({
       onClick={() => {
         onChange('');
         setSelectedFilter(v);
-        selectFilter && selectFilter(v.id);
+        if (selectFilter) {
+          selectFilter(v.id);
+        }
       }}
       key={v.id}
     >

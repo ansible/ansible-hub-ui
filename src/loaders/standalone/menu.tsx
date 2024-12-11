@@ -189,7 +189,10 @@ function MenuItem({ item, context }) {
     <NavItem
       isActive={item.active}
       onClick={(e) => {
-        item.onclick && item.onclick();
+        if (item.onclick) {
+          item.onclick();
+        }
+
         e.stopPropagation();
       }}
     >

@@ -28,13 +28,7 @@ updates:
           - 'react'
           - 'react-dom'
     ignore:
-      - dependency-name: '@lingui/*'
-        update-types:
-          - 'version-update:semver-major'
       - dependency-name: '@patternfly/*'
-        update-types:
-          - 'version-update:semver-major'
-      - dependency-name: 'eslint'
         update-types:
           - 'version-update:semver-major'
       - dependency-name: 'react'
@@ -56,9 +50,6 @@ updates:
           - 'version-update:semver-major'
           - 'version-update:semver-minor'
           - 'version-update:semver-patch'
-      - dependency-name: 'typescript-eslint'
-        update-types:
-          - 'version-update:semver-major'
 
   - package-ecosystem: 'npm'
     directory: '/'
