@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Button, Modal } from '@patternfly/react-core';
 import React, { type ReactNode } from 'react';
 import { Spinner } from 'src/components';

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { List, ListItem } from '@patternfly/react-core';
 import React from 'react';
 import { Link } from 'react-router-dom';

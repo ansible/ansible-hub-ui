@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Button, DataList } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { LegacyRoleAPI, type LegacyRoleListType, TagAPI } from 'src/api';

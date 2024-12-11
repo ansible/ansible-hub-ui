@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import React, { type ReactNode } from 'react';
 import { MaybeLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
