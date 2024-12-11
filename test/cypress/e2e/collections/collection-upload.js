@@ -119,16 +119,15 @@ describe('Collection Upload Tests', () => {
 
   it('should deprecate let user deprecate and undeprecate collections', () => {
     cy.login();
+
     cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.get('[data-cy=collection-kebab]').first().click();
     cy.contains('Deprecate').click();
-    cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.contains('DEPRECATED');
 
     cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.get('[data-cy=collection-kebab]').first().click();
     cy.contains('Undeprecate').click();
-    cy.visit(`${uiPrefix}namespaces/testspace`);
     cy.contains('DEPRECATED').should('not.exist');
   });
 });
