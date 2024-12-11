@@ -207,16 +207,16 @@ export const LightspeedModal = (props: IProps) => {
       ) : (
         <div>
           <div>
-            <Trans>
-              <p>
+            <p>
+              <Trans>
                 Red Hat is working on exciting new Ansible content development
                 capabilities within the context of{' '}
                 <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed'>
                   Ansible Lightspeed
                 </ExternalLink>{' '}
                 to help other automators build Ansible content.
-              </p>
-            </Trans>
+              </Trans>
+            </p>
             <br />
             <ExpandableSection
               toggleTextExpanded={expandableTitle}

@@ -1,5 +1,6 @@
 import eslint from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
+import pluginLingui from 'eslint-plugin-lingui';
 import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
 import {
@@ -23,6 +24,7 @@ export default config(
   ...tsConfigs.recommended,
   ...tsConfigs.stylistic,
   prettierConfig,
+  pluginLingui.configs['flat/recommended'],
   {
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
     plugins: {
@@ -55,12 +57,13 @@ export default config(
       'eol-last': ['error', 'always'],
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { argsIgnorePattern: '^_' },
+        { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { fixStyle: 'inline-type-imports' },
       ],
+      'lingui/no-expression-in-message': 'off',
       'no-restricted-imports': [
         'error',
         {
@@ -105,6 +108,7 @@ export default config(
       },
     },
     rules: {
+      '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-var-requires': 'off',
     },
   },
@@ -130,6 +134,7 @@ export default config(
       },
     },
     rules: {
+      '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-var-requires': 'off',
     },
   },
