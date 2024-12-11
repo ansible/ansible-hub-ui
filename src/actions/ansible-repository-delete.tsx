@@ -1,4 +1,4 @@
-import { msg, t } from '@lingui/macro';
+import { msg, t } from '@lingui/core/macro';
 import React from 'react';
 import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 import { DeleteAnsibleRepositoryModal } from 'src/components';

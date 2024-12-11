@@ -1,4 +1,5 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 import React, { useState } from 'react';
 import { UserAPI, type UserType } from 'src/api';
 import { DeleteModal } from 'src/components';

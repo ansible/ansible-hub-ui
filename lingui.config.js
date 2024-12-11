@@ -1,13 +1,14 @@
-const po = require("@lingui/format-po").formatter({ lineNumbers: false });
+import { defineConfig } from '@lingui/cli';
+import { formatter } from '@lingui/format-po';
 
-export default {
+export default defineConfig({
   catalogs: [
     {
       path: '<rootDir>/locale/{locale}',
       include: ['<rootDir>/src'],
     },
   ],
-  format: po,
-  locales: ['en', 'es', 'fr', 'ko', 'nl', 'ru', 'ja', 'zh'],
+  format: formatter({ lineNumbers: false }),
+  locales: ['en', 'es', 'fr', 'ja', 'ko', 'nl', 'ru', 'zh'],
   sourceLocale: 'en',
-};
+});

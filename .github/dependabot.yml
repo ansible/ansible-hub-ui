@@ -29,8 +29,12 @@ updates:
           - 'react-dom'
     ignore:
       - dependency-name: '@patternfly/*'
-        update-types: ['version-update:semver-major']
-      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'react'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'react-dom'
         update-types:
           - 'version-update:semver-major'
       - dependency-name: 'monaco-editor'
@@ -46,9 +50,6 @@ updates:
           - 'version-update:semver-major'
           - 'version-update:semver-minor'
           - 'version-update:semver-patch'
-      - dependency-name: 'typescript-eslint'
-        update-types:
-          - 'version-update:semver-major'
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -78,19 +79,38 @@ updates:
         patterns:
           - 'react'
           - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
     ignore:
       - dependency-name: '@lingui/*'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: '@patternfly/*'
-        update-types: ['version-update:semver-major']
-      - dependency-name: '@types/*'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: 'react'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
       - dependency-name: 'react-dom'
-        update-types: ['version-update:semver-major']
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'react-monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'sass'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
+      - dependency-name: 'typescript-eslint'
+        update-types:
+          - 'version-update:semver-major'
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -120,8 +140,6 @@ updates:
         patterns:
           - 'react'
           - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
     ignore:
       - dependency-name: '@lingui/*'
         update-types:
@@ -129,7 +147,7 @@ updates:
       - dependency-name: '@patternfly/*'
         update-types:
           - 'version-update:semver-major'
-      - dependency-name: '@types/*'
+      - dependency-name: 'eslint'
         update-types:
           - 'version-update:semver-major'
       - dependency-name: 'react'
@@ -138,11 +156,22 @@ updates:
       - dependency-name: 'react-dom'
         update-types:
           - 'version-update:semver-major'
+      - dependency-name: 'monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'react-monaco-editor'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
       - dependency-name: 'sass'
         update-types:
           - 'version-update:semver-major'
           - 'version-update:semver-minor'
           - 'version-update:semver-patch'
+      - dependency-name: 'typescript-eslint'
+        update-types:
+          - 'version-update:semver-major'
 
   # npm in test/
 

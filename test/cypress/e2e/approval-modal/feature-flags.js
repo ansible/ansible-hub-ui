@@ -3,6 +3,7 @@ const apiPrefix = Cypress.env('apiPrefix');
 describe('Feature flags', () => {
   it('match expectations', () => {
     cy.request(`${apiPrefix}_ui/v1/feature-flags/`).then(({ body }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(body._messages).to.be.empty;
       expect(body).to.include({ ai_deny_index: false });
       expect(body).to.include({ can_create_signatures: true });

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Form, FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';

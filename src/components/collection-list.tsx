@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { DataList } from '@patternfly/react-core';
 import React, { type ReactNode } from 'react';
 import { type CollectionVersionSearch } from 'src/api';

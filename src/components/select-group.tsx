@@ -1,4 +1,5 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import { Td } from '@patternfly/react-table';
 import React, { type FunctionComponent, useEffect, useState } from 'react';

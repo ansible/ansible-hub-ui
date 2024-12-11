@@ -1,4 +1,4 @@
-import { msg, t } from '@lingui/macro';
+import { msg, t } from '@lingui/core/macro';
 import React from 'react';
 import {
   ansibleRemoteDeleteAction,

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 import { waitForTaskUrl } from './wait-for-task';

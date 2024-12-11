@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { DataList } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';

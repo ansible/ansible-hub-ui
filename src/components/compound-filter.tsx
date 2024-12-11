@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import {
   Button,
   ButtonVariant,
@@ -57,7 +57,9 @@ export const CompoundFilter = ({
       onClick={() => {
         onChange('');
         setSelectedFilter(v);
-        selectFilter && selectFilter(v.id);
+        if (selectFilter) {
+          selectFilter(v.id);
+        }
       }}
       key={v.id}
     >

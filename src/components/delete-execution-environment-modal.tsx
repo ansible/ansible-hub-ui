@@ -1,4 +1,5 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';

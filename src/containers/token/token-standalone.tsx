@@ -1,4 +1,5 @@
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, Card, CardBody, CardTitle } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { ActiveUserAPI } from 'src/api';
