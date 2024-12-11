@@ -32,9 +32,6 @@ describe('Namespace detail screen', () => {
     ).click();
     cy.contains('.body ul a', 'Deprecate').click();
 
-    // Reload the page
-    cy.visit(`${uiPrefix}namespaces/namespace_detail_test`);
-
     cy.get('[data-cy="CollectionListItem"]:first').contains('DEPRECATED');
   });
 
