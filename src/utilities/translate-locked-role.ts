@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 // hardcoding description for locked roles, can't be translated API side
 export const translateLockedRole = (name, description) =>

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { Paths, formatPath } from 'src/paths';
 import { canAddAnsibleRemote } from 'src/permissions';
 import { Action } from './action';

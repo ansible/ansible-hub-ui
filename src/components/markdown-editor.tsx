@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';

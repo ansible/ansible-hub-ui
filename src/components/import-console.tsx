@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import React, { useEffect, useRef } from 'react';
 import {
   type CollectionVersionSearch,
