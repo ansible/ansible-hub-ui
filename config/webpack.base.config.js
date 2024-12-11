@@ -210,7 +210,7 @@ module.exports = (inputConfigs) => {
           },
           shared: [
             {
-              'react-router-dom': { singleton: true, version: '*' },
+              'react-router': { singleton: true, version: '*' },
             },
           ],
         },

@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Bullseye, DataList } from '@patternfly/react-core';
 import React, { type ReactNode, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { CollectionVersionAPI, LegacyRoleAPI } from 'src/api';
 import {
   BaseHeader,

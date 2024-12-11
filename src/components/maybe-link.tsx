@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export const MaybeLink = ({
   children,

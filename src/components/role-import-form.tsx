@@ -6,7 +6,7 @@ import {
   HelperTextItem,
 } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { LegacyImportAPI, LegacyNamespaceAPI } from 'src/api';
 import {
   type AlertType,

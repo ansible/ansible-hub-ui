@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Button, DataList, Switch } from '@patternfly/react-core';
 import React, { Component, type ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import {
   CollectionAPI,
   CollectionVersionAPI,

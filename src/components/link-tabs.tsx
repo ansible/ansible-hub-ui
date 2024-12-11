@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import React, { type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export interface LinkTabsProps {
   /** List of tabs */

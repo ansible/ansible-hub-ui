@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   LegacyNamespaceAPI,
   type LegacyNamespaceListType,

@@ -10,7 +10,7 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
