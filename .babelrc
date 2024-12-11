@@ -6,6 +6,6 @@
   ],
   "plugins": [
     "@babel/plugin-transform-runtime",
-    "babel-plugin-macros"
+    "@lingui/babel-plugin-lingui-macro"
   ]
 }
