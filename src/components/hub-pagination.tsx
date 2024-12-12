@@ -1,5 +1,4 @@
 import { PaginationVariant } from '@patternfly/react-core';
-import React from 'react';
 import { Pagination } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 

@@ -3,7 +3,6 @@ import {
   DropdownItem,
   DropdownSeparator,
 } from '@patternfly/react-core/deprecated';
-import React from 'react';
 import { StatefulDropdown } from 'src/components';
 import { availableLanguages, language, languageNames } from 'src/l10n';
 

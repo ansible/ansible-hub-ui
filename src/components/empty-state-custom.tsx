@@ -7,11 +7,7 @@ import {
   EmptyStateIcon,
   EmptyStateVariant,
 } from '@patternfly/react-core';
-import {
-  type ComponentClass,
-  type ReactElement,
-  type ReactNode,
-} from 'react';
+import { type ComponentClass, type ReactElement, type ReactNode } from 'react';
 
 interface IProps {
   icon?: ComponentClass;

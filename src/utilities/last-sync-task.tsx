@@ -1,4 +1,3 @@
-import React from 'react';
 import { DateComponent, HelpButton, StatusIndicator } from 'src/components';
 
 export function lastSynced(entity) {

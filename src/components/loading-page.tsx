@@ -1,5 +1,4 @@
 import { Skeleton, Title } from '@patternfly/react-core';
-import React from 'react';
 import { LoadingSpinner, Main } from 'src/components';
 
 export const LoadingPage = (_props) => (
