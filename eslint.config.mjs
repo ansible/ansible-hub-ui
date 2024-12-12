@@ -64,6 +64,7 @@ export default config(
         { fixStyle: 'inline-type-imports' },
       ],
       'lingui/no-expression-in-message': 'off',
+      'react/react-in-jsx-scope': 'off',
       'no-restricted-imports': [
         'error',
         {

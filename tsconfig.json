@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["es2021", "dom"],
     "module": "es2020",
     "moduleResolution": "node",
