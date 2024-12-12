@@ -4,7 +4,7 @@ import {
   TextInput,
   type TextInputTypes,
 } from '@patternfly/react-core';
-import React, { type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { FormFieldHelper } from 'src/components';
 import { type ErrorMessagesType } from 'src/utilities';
 

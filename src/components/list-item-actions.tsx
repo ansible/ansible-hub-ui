@@ -1,6 +1,6 @@
 import { List } from '@patternfly/react-core';
 import { Td } from '@patternfly/react-table';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { StatefulDropdown } from 'src/components';
 
 interface IProps {

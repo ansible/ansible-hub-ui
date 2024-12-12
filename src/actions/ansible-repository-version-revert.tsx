@@ -1,6 +1,6 @@
 import { Trans, msg, t } from '@lingui/macro';
 import { Button, Modal } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { Spinner } from 'src/components';
 import { canRevertAnsibleRepositoryVersion } from 'src/permissions';

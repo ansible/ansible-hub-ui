@@ -7,7 +7,7 @@ import {
   Switch,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GroupAPI, type UserType } from 'src/api';
 import {
   Alert,

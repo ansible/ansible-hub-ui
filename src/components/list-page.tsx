@@ -6,7 +6,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody } from '@patternfly/react-table';
-import React, { Component, type ReactNode } from 'react';
+import { Component, type ReactNode } from 'react';
 import { type ActionType } from 'src/actions';
 import {
   AlertList,

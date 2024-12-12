@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ClipboardCopyButton } from 'src/components';
 
 export const HubCopyButton = ({

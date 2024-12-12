@@ -6,7 +6,7 @@ import {
   WizardHeader,
   WizardStep,
 } from '@patternfly/react-core';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 interface IProps {
   onClose: () => void;

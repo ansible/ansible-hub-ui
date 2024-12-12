@@ -5,7 +5,7 @@ import {
   InputGroupItem,
   TextInput,
 } from '@patternfly/react-core';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 interface IProps {
   /** Specify if the value is set on the backend already */

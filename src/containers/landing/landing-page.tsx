@@ -1,6 +1,6 @@
 import { Trans, t } from '@lingui/macro';
 import { List, ListItem, ListVariant } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Alert,

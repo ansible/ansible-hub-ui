@@ -15,7 +15,7 @@ import {
 } from '@patternfly/react-core/deprecated';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StatefulDropdown, Typeahead } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 

@@ -9,7 +9,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NamespaceAPI } from 'src/api';
 import { FormFieldHelper, HelpButton } from 'src/components';
 import { type ErrorMessagesType } from 'src/utilities';

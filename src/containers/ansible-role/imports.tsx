@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, {
+import {
   Component,
   type RefObject,
   createRef,

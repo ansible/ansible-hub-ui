@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 export interface LinkTabsProps {

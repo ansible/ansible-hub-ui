@@ -6,7 +6,7 @@ import {
   Td,
   Tr,
 } from '@patternfly/react-table';
-import React, { type FunctionComponent, type ReactNode, useState } from 'react';
+import { type FunctionComponent, type ReactNode, useState } from 'react';
 import { SortTable } from 'src/components';
 
 interface IProps {

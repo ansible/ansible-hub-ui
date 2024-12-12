@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import 'src/l10n';
 import App from './loaders/insights/loader';
 

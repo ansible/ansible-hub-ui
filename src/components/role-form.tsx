@@ -10,7 +10,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormFieldHelper, PermissionCategories, Spinner } from 'src/components';
 
 interface IProps {

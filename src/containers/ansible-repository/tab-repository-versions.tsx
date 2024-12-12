@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Table, Td, Th, Tr } from '@patternfly/react-table';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ansibleRepositoryVersionRevertAction } from 'src/actions';
 import {

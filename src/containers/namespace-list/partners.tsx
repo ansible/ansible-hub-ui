@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { type RouteProps, withRouter } from 'src/utilities';
 import { NamespaceList } from './namespace-list';
 

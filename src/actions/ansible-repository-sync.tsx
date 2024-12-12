@@ -1,6 +1,6 @@
 import { Trans, msg, t } from '@lingui/macro';
 import { Button, FormGroup, Modal, Switch } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { HelpButton, Spinner } from 'src/components';

@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import { capitalize } from 'lodash';
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { GenericPulpAPI, TaskManagementAPI, type TaskType } from 'src/api';
 import {

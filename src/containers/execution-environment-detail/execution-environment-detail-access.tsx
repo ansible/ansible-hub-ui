@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   ExecutionEnvironmentNamespaceAPI,
   GroupAPI,
