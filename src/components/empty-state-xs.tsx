@@ -1,4 +1,4 @@
-import React, { type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { EmptyStateCustom } from 'src/components';
 
 interface IProps {

@@ -11,7 +11,7 @@ import FolderOpenIcon from '@patternfly/react-icons/dist/esm/icons/folder-open-i
 import SpinnerIcon from '@patternfly/react-icons/dist/esm/icons/spinner-icon';
 import axios from 'axios';
 import cx from 'classnames';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   AnsibleRepositoryAPI,
   type AnsibleRepositoryType,

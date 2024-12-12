@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { type NamespaceType } from 'src/api';
 import {
   BaseHeader,

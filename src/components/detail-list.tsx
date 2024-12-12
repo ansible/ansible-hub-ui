@@ -5,7 +5,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody } from '@patternfly/react-table';
-import React, { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { type ActionType } from 'src/actions';
 import {
   AppliedFilters,

@@ -1,6 +1,5 @@
 import { Trans, t } from '@lingui/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
-import React from 'react';
 import { type CollectionVersionSearch } from 'src/api';
 import { DeleteModal } from 'src/components';
 

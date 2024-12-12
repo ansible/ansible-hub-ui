@@ -1,7 +1,7 @@
 import { Trans, t } from '@lingui/macro';
 import { Button } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   type ContainerRepositoryType,

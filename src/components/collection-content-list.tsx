@@ -3,7 +3,6 @@ import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import cx from 'classnames';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { type CollectionVersionSearch, type ContentSummaryType } from 'src/api';
 import { EmptyStateCustom, SearchInput } from 'src/components';

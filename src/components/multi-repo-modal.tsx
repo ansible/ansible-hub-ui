@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { Button, Modal } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   type AnsibleRepositoryType,
   CollectionVersionAPI,

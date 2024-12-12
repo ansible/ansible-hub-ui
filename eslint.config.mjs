@@ -61,6 +61,7 @@ export default config(
         'error',
         { fixStyle: 'inline-type-imports' },
       ],
+      'react/react-in-jsx-scope': 'off',
       'no-restricted-imports': [
         'error',
         {

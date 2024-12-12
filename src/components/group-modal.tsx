@@ -7,7 +7,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormFieldHelper } from 'src/components';
 import { type ErrorMessagesType } from 'src/utilities';
 

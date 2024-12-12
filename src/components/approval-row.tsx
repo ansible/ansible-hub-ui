@@ -6,7 +6,7 @@ import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import { Td, Tr } from '@patternfly/react-table';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionAPI,

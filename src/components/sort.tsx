@@ -8,7 +8,7 @@ import SortAlphaDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha
 import SortAlphaUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-alpha-up-icon';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
 import SortAmountUpIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-up-icon';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Icon } from 'src/components';
 import { ParamHelper } from 'src/utilities';
 

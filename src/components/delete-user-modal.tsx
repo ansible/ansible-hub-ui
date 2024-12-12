@@ -1,5 +1,5 @@
 import { Trans, t } from '@lingui/macro';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { UserAPI, type UserType } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';

@@ -5,7 +5,7 @@ import {
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
-import React, { type FunctionComponent } from 'react';
+import { type FunctionComponent } from 'react';
 
 interface IProps {
   name: string;

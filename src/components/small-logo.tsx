@@ -1,4 +1,3 @@
-import React from 'react';
 import SmallLogoImage from 'static/images/logo_small.svg';
 
 interface IProps {
