@@ -34,7 +34,6 @@ import {
   type SearchInputProps,
   type SpinnerProps,
 } from '@patternfly/react-core';
-import React from 'react';
 import { LabelGroup as PFLabelGroup } from './label-group';
 import { LoginForm as PFLoginForm } from './login-form';
 

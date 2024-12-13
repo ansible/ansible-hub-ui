@@ -1,6 +1,5 @@
 import { msg, t } from '@lingui/core/macro';
 import { Td, Tr } from '@patternfly/react-table';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ansibleRepositoryCopyAction,

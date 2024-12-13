@@ -1,6 +1,5 @@
 import { t } from '@lingui/core/macro';
 import { List, ListItem } from '@patternfly/react-core';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { type CollectionVersion, type CollectionVersionSearch } from 'src/api';
 import { EmptyStateNoData, HelpButton } from 'src/components';

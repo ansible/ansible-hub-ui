@@ -1,6 +1,5 @@
 import { t } from '@lingui/core/macro';
 import { Bullseye } from '@patternfly/react-core';
-import React from 'react';
 import { BaseHeader, Main } from 'src/components';
 import { withRouter } from 'src/utilities';
 import NotFoundImage from 'static/images/not_found.svg';

@@ -1,7 +1,6 @@
 import { msg, t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   ansibleRepositoryCopyAction,

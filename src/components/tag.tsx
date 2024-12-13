@@ -1,5 +1,4 @@
 import { Label } from '@patternfly/react-core';
-import React from 'react';
 
 interface IProps {
   /** Value to display in the tag */

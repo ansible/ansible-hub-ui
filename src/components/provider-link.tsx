@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/react/macro';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface IProps {

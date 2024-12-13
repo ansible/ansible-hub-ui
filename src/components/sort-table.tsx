@@ -2,7 +2,6 @@ import ArrowsAltVIcon from '@patternfly/react-icons/dist/esm/icons/arrows-alt-v-
 import LongArrowAltDownIcon from '@patternfly/react-icons/dist/esm/icons/long-arrow-alt-down-icon';
 import LongArrowAltUpIcon from '@patternfly/react-icons/dist/esm/icons/long-arrow-alt-up-icon';
 import { Th, Thead, Tr } from '@patternfly/react-table';
-import React from 'react';
 import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 

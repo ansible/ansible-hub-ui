@@ -1,5 +1,4 @@
 import { t } from '@lingui/core/macro';
-import React from 'react';
 import {
   AnsibleRepositoryAPI,
   type CollectionVersionSearch,

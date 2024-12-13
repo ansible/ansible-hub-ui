@@ -4,7 +4,6 @@ import {
   CodeBlockAction,
   CodeBlockCode,
 } from '@patternfly/react-core';
-import React from 'react';
 import { type AnsibleRemoteType } from 'src/api';
 import {
   CopyURL,

@@ -1,5 +1,4 @@
 import { t } from '@lingui/core/macro';
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';

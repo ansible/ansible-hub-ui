@@ -1,6 +1,5 @@
 import { t } from '@lingui/core/macro';
 import { Td, Tr } from '@patternfly/react-table';
-import React from 'react';
 import { AnsibleDistributionAPI, type AnsibleRepositoryType } from 'src/api';
 import { ClipboardCopy, DateComponent, DetailList } from 'src/components';
 import { getRepoURL } from 'src/utilities';
