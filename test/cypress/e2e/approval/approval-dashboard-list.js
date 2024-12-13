@@ -92,7 +92,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should see time informations', () => {
-    cy.contains('[data-cy="body"]', 'a few seconds ago');
+    cy.contains('[data-cy="body"]', 'seconds ago');
   });
 
   it('should filter collection', () => {

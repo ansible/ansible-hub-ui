@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Table, Td, Th, Tr } from '@patternfly/react-table';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HelpButton, Tooltip } from 'src/components';
 
 interface IProps {

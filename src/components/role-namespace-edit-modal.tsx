@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Button, Label, Modal } from '@patternfly/react-core';
 import { Table, Td } from '@patternfly/react-table';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LegacyNamespaceAPI,

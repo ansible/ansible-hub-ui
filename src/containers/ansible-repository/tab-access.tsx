@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AnsibleRepositoryAPI,
   type AnsibleRepositoryType,

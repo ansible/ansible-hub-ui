@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DefaultLogo from 'static/images/default-logo.svg';
 
 interface IProps {

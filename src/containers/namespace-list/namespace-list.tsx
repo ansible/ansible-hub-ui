@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { Button } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { MyNamespaceAPI, NamespaceAPI, type NamespaceListType } from 'src/api';
 import {

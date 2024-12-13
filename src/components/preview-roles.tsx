@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 import { Divider, Flex, FlexItem, Label } from '@patternfly/react-core';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { type RoleType } from 'src/api';
 import { Tooltip } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';

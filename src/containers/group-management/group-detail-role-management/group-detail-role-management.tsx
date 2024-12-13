@@ -9,7 +9,7 @@ import {
 } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import { Td } from '@patternfly/react-table';
-import React, { type FunctionComponent, useEffect, useState } from 'react';
+import { type FunctionComponent, useEffect, useState } from 'react';
 import {
   type GroupObjectPermissionType,
   GroupRoleAPI,

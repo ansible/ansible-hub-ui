@@ -5,7 +5,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core/deprecated';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LabelGroup } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 

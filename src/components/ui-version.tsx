@@ -1,4 +1,4 @@
-import React, { type HTMLAttributes } from 'react';
+import { type HTMLAttributes } from 'react';
 
 interface IProps extends HTMLAttributes<HTMLDivElement> {
   text: string;

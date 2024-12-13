@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { DataList, Label } from '@patternfly/react-core';
-import React, { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,

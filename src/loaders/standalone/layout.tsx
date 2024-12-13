@@ -17,7 +17,7 @@ import {
 } from '@patternfly/react-core/deprecated';
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
-import React, { type ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ActiveUserAPI,

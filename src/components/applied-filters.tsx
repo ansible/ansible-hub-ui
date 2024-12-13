@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { Button } from '@patternfly/react-core';
-import React, { type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import { Chip, ChipGroup } from 'src/components';
 import { ParamHelper, type ParamType } from 'src/utilities';
 

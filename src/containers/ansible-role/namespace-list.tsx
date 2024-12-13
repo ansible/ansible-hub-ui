@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { Button, DataList } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { LegacyNamespaceAPI, type LegacyNamespaceListType } from 'src/api';
 import {
   AlertList,

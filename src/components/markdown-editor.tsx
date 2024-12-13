@@ -1,6 +1,5 @@
 import { t } from '@lingui/core/macro';
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
-import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { FormFieldHelper } from 'src/components';
 import './markdown-editor.scss';

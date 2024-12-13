@@ -2,7 +2,7 @@ import {
   AlertActionCloseButton,
   type AlertProps,
 } from '@patternfly/react-core';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Alert } from 'src/components';
 
 interface IProps {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RoleAPI } from 'src/api';
 import { LoadingSpinner, PermissionCategories } from 'src/components';
 import { translateLockedRole } from 'src/utilities';

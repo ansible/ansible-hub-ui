@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon';
-import React from 'react';
 import { Tooltip } from 'src/components';
 import { language as locale } from 'src/l10n';
 

@@ -1,5 +1,4 @@
 import { msg, t } from '@lingui/core/macro';
-import React from 'react';
 import {
   AnsibleDistributionAPI,
   AnsibleRepositoryAPI,

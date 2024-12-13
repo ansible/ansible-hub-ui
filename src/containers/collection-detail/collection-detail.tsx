@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   AlertList,
   CollectionHeader,

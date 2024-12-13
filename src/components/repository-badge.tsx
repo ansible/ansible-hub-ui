@@ -7,7 +7,6 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';

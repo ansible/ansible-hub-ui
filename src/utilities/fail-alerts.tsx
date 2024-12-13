@@ -1,5 +1,4 @@
 import { t } from '@lingui/core/macro';
-import React from 'react';
 import { LoginLink } from 'src/components';
 import { mapErrorMessages } from './map-error-messages';
 

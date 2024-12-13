@@ -8,7 +8,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TaskManagementAPI, type TaskType } from 'src/api';
 import {

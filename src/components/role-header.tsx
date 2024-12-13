@@ -1,4 +1,3 @@
-import React from 'react';
 import { BaseHeader, type BreadcrumbType, Breadcrumbs } from 'src/components';
 
 interface IProps {

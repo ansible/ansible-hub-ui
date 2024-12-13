@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, { type HTMLProps, type ReactNode } from 'react';
+import { type HTMLProps, type ReactNode } from 'react';
 
 interface IProps extends HTMLProps<HTMLElement> {
   children: ReactNode;

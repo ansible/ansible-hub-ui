@@ -2,7 +2,7 @@
 import { t } from '@lingui/core/macro';
 import { Nav, NavExpandable, NavGroup, NavItem } from '@patternfly/react-core';
 import { reject, some } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ExternalLink, NavList } from 'src/components';
 import { Paths, formatPath } from 'src/paths';

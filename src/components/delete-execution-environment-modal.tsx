@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Checkbox, Text } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { jsxErrorMessage, waitForTask } from 'src/utilities';

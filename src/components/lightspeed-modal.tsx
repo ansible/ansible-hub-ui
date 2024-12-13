@@ -6,7 +6,7 @@ import {
   ExpandableSection,
   Modal,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AIDenyIndexAPI } from 'src/api';
 import {
   AlertList,

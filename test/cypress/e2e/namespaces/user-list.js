@@ -41,7 +41,7 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   it('table contains some time informations for new users', () => {
-    cy.contains('a few seconds ago');
+    cy.contains('seconds ago');
   });
 
   it('paging', () => {

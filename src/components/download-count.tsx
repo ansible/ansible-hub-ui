@@ -1,7 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import DownloadIcon from '@patternfly/react-icons/dist/esm/icons/download-icon';
-import React from 'react';
 import { Tooltip } from 'src/components';
 import { language } from 'src/l10n';
 

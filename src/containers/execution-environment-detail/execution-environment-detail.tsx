@@ -7,7 +7,7 @@ import {
   FlexItem,
   Title,
 } from '@patternfly/react-core';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   ExecutionEnvironmentAPI,
   type GroupObjectPermissionType,
