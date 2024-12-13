@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import React, { Component, type RefObject, createRef } from 'react';
+import { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CollectionVersionAPI,

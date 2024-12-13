@@ -9,7 +9,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { Select, SelectOption } from '@patternfly/react-core/deprecated';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnsibleRemoteAPI, type AnsibleRepositoryType } from 'src/api';
 import {
   FormFieldHelper,

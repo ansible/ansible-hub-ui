@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   CollectionContentList,
   CollectionHeader,

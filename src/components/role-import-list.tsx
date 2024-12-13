@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 import cx from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LegacyImportAPI, type LegacyRoleImportDetailType } from 'src/api';
 import {
   type AlertType,

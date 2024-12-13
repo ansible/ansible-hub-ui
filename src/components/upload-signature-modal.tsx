@@ -5,7 +5,7 @@ import {
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
-import React, { type FunctionComponent, useState } from 'react';
+import { type FunctionComponent, useState } from 'react';
 import { FileUpload } from 'src/components';
 
 interface IProps {

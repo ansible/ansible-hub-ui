@@ -14,7 +14,7 @@ import AngleDownIcon from '@patternfly/react-icons/dist/esm/icons/angle-down-ico
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
 import { sum } from 'lodash';
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { type ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
 import {

@@ -2,7 +2,7 @@ import { t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
-import React, { Component, type ReactNode } from 'react';
+import { Component, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ActivitiesAPI } from 'src/api';
 import {

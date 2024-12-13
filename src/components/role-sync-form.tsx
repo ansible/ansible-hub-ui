@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LegacySyncAPI } from 'src/api';
 import { type AlertType, DataForm, ExternalLink } from 'src/components';

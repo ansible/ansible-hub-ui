@@ -7,7 +7,7 @@ import {
   EmptyStateIcon,
   EmptyStateVariant,
 } from '@patternfly/react-core';
-import React, {
+import {
   type ComponentClass,
   type ReactElement,
   type ReactNode,

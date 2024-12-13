@@ -10,7 +10,7 @@ import {
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import UserPlusIcon from '@patternfly/react-icons/dist/esm/icons/user-plus-icon';
 import { Table, Tbody, Td, Tr } from '@patternfly/react-table';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAPI, type UserType } from 'src/api';
 import {

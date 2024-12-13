@@ -1,6 +1,6 @@
 import '../app.scss';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   type FeatureFlagsType,
   type SettingsType,

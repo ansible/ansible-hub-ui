@@ -14,7 +14,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import {

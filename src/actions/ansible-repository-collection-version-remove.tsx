@@ -1,7 +1,7 @@
 import { msg, t } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Text } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AnsibleRepositoryAPI } from 'src/api';
 import { DeleteModal } from 'src/components';
 import { canEditAnsibleRepository } from 'src/permissions';

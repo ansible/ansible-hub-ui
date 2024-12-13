@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserAPI, type UserType } from 'src/api';
 import {

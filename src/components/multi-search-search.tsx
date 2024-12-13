@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { type ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { AppliedFilters, CompoundFilter } from 'src/components';
 
 const PageSection = ({ children, style }: { children: ReactNode; style }) => (

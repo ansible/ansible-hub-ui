@@ -1,7 +1,7 @@
 import { msg, plural, t } from '@lingui/core/macro';
 import { Button, Checkbox, Modal } from '@patternfly/react-core';
 import { Td, Tr } from '@patternfly/react-table';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   AnsibleRepositoryAPI,
   type AnsibleRepositoryType,

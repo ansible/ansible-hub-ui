@@ -4,7 +4,7 @@ import {
   HelperTextItem,
   type HelperTextItemProps,
 } from '@patternfly/react-core';
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export function FormFieldHelper({
   variant = 'default',

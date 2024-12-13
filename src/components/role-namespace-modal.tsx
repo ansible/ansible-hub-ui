@@ -9,7 +9,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LegacyNamespaceAPI } from 'src/api';
 import { handleHttpError } from 'src/utilities';
 

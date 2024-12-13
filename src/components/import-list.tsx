@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Toolbar } from '@patternfly/react-core';
 import cx from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   type ImportListType,
   MyNamespaceAPI,

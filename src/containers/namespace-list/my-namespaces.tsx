@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { EmptyStateUnauthorized } from 'src/components';
 import { AppContext, type IAppContextType } from 'src/loaders/app-context';
 import { type RouteProps, withRouter } from 'src/utilities';
