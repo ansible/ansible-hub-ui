@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RoleAPI } from 'src/api';

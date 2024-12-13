@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Button, ButtonVariant, Label } from '@patternfly/react-core';
 import { DropdownItem } from '@patternfly/react-core/deprecated';
 import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';

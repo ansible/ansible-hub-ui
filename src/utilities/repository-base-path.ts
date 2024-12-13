@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { AnsibleDistributionAPI, AnsibleRepositoryAPI } from 'src/api';
 
 // returns the preferred distribution base_path given a repo name

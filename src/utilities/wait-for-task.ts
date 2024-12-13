@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { TaskAPI } from 'src/api';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 

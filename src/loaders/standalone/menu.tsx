@@ -1,5 +1,5 @@
 /* eslint react/prop-types: 0 */
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Nav, NavExpandable, NavGroup, NavItem } from '@patternfly/react-core';
 import { reject, some } from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -189,7 +189,10 @@ function MenuItem({ item, context }) {
     <NavItem
       isActive={item.active}
       onClick={(e) => {
-        item.onclick && item.onclick();
+        if (item.onclick) {
+          item.onclick();
+        }
+
         e.stopPropagation();
       }}
     >

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Bullseye } from '@patternfly/react-core';
 import React from 'react';
 import { BaseHeader, Main } from 'src/components';

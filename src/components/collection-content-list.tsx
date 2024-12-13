@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';

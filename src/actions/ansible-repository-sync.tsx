@@ -1,4 +1,5 @@
-import { Trans, msg, t } from '@lingui/macro';
+import { msg, t } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, FormGroup, Modal, Switch } from '@patternfly/react-core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';

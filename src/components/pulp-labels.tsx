@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Label } from '@patternfly/react-core';
 import React from 'react';
 import { LabelGroup } from 'src/components';
