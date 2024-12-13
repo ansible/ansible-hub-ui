@@ -27,8 +27,7 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "react-monaco-editor": "^0.55.0",
-    "react-router-dom": "^6.26.2",
-    "react-router-hash-link": "^2.4.3"
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
