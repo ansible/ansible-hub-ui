@@ -38,7 +38,7 @@
     "@lingui/cli": "^4.14.1",
     "@lingui/macro": "^4.14.1",
     "@ls-lint/ls-lint": "^2.2.3",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-macros": "^3.1.0",
     "clean-webpack-plugin": "^4.0.0",
