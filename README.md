@@ -2,6 +2,7 @@
 
 Frontend for Ansible Hub and Galaxy. The backend for this project can be found at [ansible/galaxy\_ng](https://github.com/ansible/galaxy_ng/),
 developer docs at [ansible.readthedocs.io](https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/), and an outdated wiki at [ansibe/galaxy\_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
+Also read [developer\_guidelines](./developer_guidelines.md).
 
 The project is built on React & Patternfly, using components from [patternfly-react](https://github.com/patternfly/patternfly-react), with [lingui](https://github.com/lingui/js-lingui/) for l10n.
 
@@ -94,7 +95,6 @@ npm run cypress
 
 List of all workflows:
 
-- `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
 - `i18n`: Extract and merge l10n strings; cron
@@ -103,8 +103,8 @@ List of all workflows:
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `dev-release`, `i18n`, `pr-checks`, `stable-release`
-- `stable-*`: `backported-labels`, `cypress`, `i18n` (via cron from master), `pr-checks`, `stable-release`
+- `master`: `cypress`, `dev-release`, `i18n`, `pr-checks`, `stable-release`
+- `stable-*`: `cypress`, `i18n` (via cron from master), `pr-checks`, `stable-release`
 
 
 ## Version mapping
