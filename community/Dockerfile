@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /workspace/
 RUN mkdir -p /workspace/ && \
     apk add --no-cache git
