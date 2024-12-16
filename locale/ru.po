@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-10 09:35+0300\n"
+"PO-Revision-Date: 2024-12-16 09:44+0300\n"
 "Last-Translator: Maxim Dunaevsky <dunmaksim@yandex.ru>\n"
 "Language-Team: \n"
 "Plural-Forms: \n"
@@ -1786,7 +1786,7 @@ msgstr "Истечение"
 
 #: src/containers/landing/landing-page.tsx
 msgid "Extend the power of Ansible to your entire team."
-msgstr ""
+msgstr "Расширьте возможности Ansible для всей вашей команды."
 
 #: src/containers/task-management/task-list-view.tsx
 #: src/components/status-indicator.tsx
@@ -1796,11 +1796,11 @@ msgstr ""
 #: src/components/import-list.tsx
 #: src/components/import-console.tsx
 msgid "Failed"
-msgstr ""
+msgstr "Сбой"
 
 #: src/components/tag-manifest-modal.tsx
 msgid "Failed to {operation} tag \"{tag}\"."
-msgstr ""
+msgstr "Сбой при {operation} с тегом \"{tag}\"."
 
 #: src/components/approve-modal.tsx
 msgid "Failed to approve collection."
@@ -1817,11 +1817,11 @@ msgstr "Сбой при копировании версии коллекции."
 #: src/components/role-namespace-modal.tsx
 #: src/components/role-import-form.tsx
 msgid "Failed to create role namespace"
-msgstr ""
+msgstr "Сбой при создании пространства имён роли"
 
 #: src/utilities/repository-base-path.ts
 msgid "Failed to find a distribution for repository {name}"
-msgstr ""
+msgstr "Сбой при поиске распространения для репозитория {name}"
 
 #: src/utilities/repository-base-path.ts
 msgid "Failed to find repository {name}"
@@ -1853,11 +1853,11 @@ msgstr ""
 
 #: src/components/lightspeed-modal.tsx
 msgid "Failed to load Ansible Lightspeed information."
-msgstr ""
+msgstr "Сбой при загрузке информации Ansible Lightspeed."
 
 #: src/components/lazy-distributions.tsx
 msgid "Failed to load distributions: {error}"
-msgstr ""
+msgstr "Сбой при загрузке распространений: {error}"
 
 #: src/components/ansible-repository-form.tsx
 msgid "Failed to load remotes: {remotesError}"
@@ -1902,43 +1902,43 @@ msgstr ""
 
 #: src/components/multi-repo-modal.tsx
 msgid "Failed to query repositories."
-msgstr ""
+msgstr "Сбой при запросе репозиториев."
 
 #: src/actions/ansible-repository-collection-version-remove.tsx
 msgid "Failed to remove {namespace}.{name} v{version} from repository \"{repositoryName}\"."
-msgstr ""
+msgstr "Сбой при удалении {namespace}.{name} v{version} из репозитория \"{repositoryName}\"."
 
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to remove distribution {name}"
-msgstr ""
+msgstr "Сбой при удалении распространения {name}"
 
 #: src/actions/ansible-remote-delete.tsx
 msgid "Failed to remove remote {name}"
-msgstr "Отказ при удалении стороннего источника {name}"
+msgstr "Сбой при удалении стороннего источника {name}"
 
 #: src/actions/ansible-repository-delete.tsx
 msgid "Failed to remove repository {name}"
-msgstr ""
+msgstr "Сбой при удалении репозитория {name}"
 
 #: src/containers/login/login.tsx
 msgid "Failed to retrieve user data."
-msgstr ""
+msgstr "Сбой при получении данных пользователя."
 
 #: src/actions/ansible-repository-version-revert.tsx
 msgid "Failed to revert repository \"{repositoryName}\" to version \"{number}\""
-msgstr ""
+msgstr "Сбой при восстановлении репозитория \"{repositoryName}\" до версии \"{number}\""
 
 #: src/containers/search/multi-search.tsx
 msgid "Failed to search collections ({keywords})"
-msgstr ""
+msgstr "Сбой при поиске коллекций ({keywords})"
 
 #: src/containers/search/multi-search.tsx
 msgid "Failed to search execution environments ({keywords})"
-msgstr ""
+msgstr "Сбой при поиске сред исполнения ({keywords})"
 
 #: src/containers/search/multi-search.tsx
 msgid "Failed to search namespaces ({keywords})"
-msgstr ""
+msgstr "Сбой при поиске пространств имён ({keywords})"
 
 #: src/containers/search/multi-search.tsx
 msgid "Failed to search role namespaces ({keywords})"
@@ -1946,7 +1946,7 @@ msgstr ""
 
 #: src/containers/search/multi-search.tsx
 msgid "Failed to search roles ({keywords})"
-msgstr ""
+msgstr "Сбой при поиске ролей ({keywords})"
 
 #: src/containers/namespace-detail/namespace-detail.tsx
 msgid "Failed to sign all collections."
@@ -1959,15 +1959,15 @@ msgstr ""
 #: src/utilities/repo-signing.ts
 #: src/utilities/repo-signing.ts
 msgid "Failed to sign the container version."
-msgstr ""
+msgstr "Сбой при подписывании версии контейнера."
 
 #: src/components/collection-header.tsx
 msgid "Failed to sign the version."
-msgstr ""
+msgstr "Сбой при подписывании версии."
 
 #: src/actions/ansible-repository-sync.tsx
 msgid "Failed to sync repository \"{name}\""
-msgstr ""
+msgstr "Сбой при синхронизации репозитория \"{name}\""
 
 #: src/components/role-sync-form.tsx
 msgid "Failed to sync role"
