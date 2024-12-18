@@ -39,7 +39,7 @@ const defaultConfigs = [
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
 
   // Webpack scope: only available in customConfigs here, not exposed to the UI
-  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
+  { name: 'API_PROXY', default: undefined, scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
@@ -47,7 +47,28 @@ const defaultConfigs = [
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
 ];
 
-module.exports = (inputConfigs) => {
+const proxy = (route, target) => {
+  const u = new URL(target);
+  return {
+    context: [route],
+    target,
+    secure: false,
+    router: (req) => {
+      req.headers.host = u.host;
+      req.headers.origin = u.origin;
+      req.headers.referer = u.href;
+    },
+  };
+};
+
+const fake = (route, bypass) => ({
+  context: [route],
+  target: {
+    bypass,
+  },
+});
+
+const webpackBase = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
 
@@ -105,7 +126,7 @@ module.exports = (inputConfigs) => {
         standalone: {
           api: {
             context: [customConfigs.API_BASE_PATH],
-            target: customConfigs.API_PROXY_TARGET,
+            target: customConfigs.API_PROXY,
           },
           rbac,
           ...defaultServices,
@@ -173,12 +194,7 @@ module.exports = (inputConfigs) => {
 
   if (customConfigs.WEBPACK_PROXY) {
     // array since webpack-dev-server 5
-    newWebpackConfig.devServer.proxy = Object.entries(
-      customConfigs.WEBPACK_PROXY,
-    ).map(([k, v]) => ({
-      context: [k],
-      target: v,
-    }));
+    newWebpackConfig.devServer.proxy = customConfigs.WEBPACK_PROXY;
   }
 
   if (customConfigs.WEBPACK_PUBLIC_PATH) {
@@ -234,4 +250,10 @@ module.exports = (inputConfigs) => {
     ...newWebpackConfig,
     plugins,
   };
+};
+
+module.exports = {
+  fake,
+  proxy,
+  webpackBase,
 };

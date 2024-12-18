@@ -54,8 +54,10 @@ Run:
 
 ```
 cd ansible-hub-ui
-API_PROXY_PORT=5001 npm run start-standalone
+API_PROXY=http://localhost:5001 npm run start-standalone
 ```
+
+(Or run `API_PROXY=https://my-server.example.com npm run start-standalone` to run with external backend.)
 
 This app can be developed in standalone, community, or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights). Standalone mode only requires a running instance of the galaxy API for the UI to connect to. Community mode is similar to standalone, with github login and roles.
 

@@ -1,7 +1,7 @@
-const webpackBase = require('./webpack.base.config');
+const { webpackBase } = require('./webpack.base.config');
 
-const proxyHost = process.env.API_PROXY_HOST || 'localhost';
-const proxyPort = process.env.API_PROXY_PORT || '55001';
+// Used for getting the correct host when running in a container
+const proxyTarget = process.env.API_PROXY || 'http://localhost:55001';
 
 const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 
@@ -13,7 +13,7 @@ module.exports = webpackBase({
   API_BASE_PATH: '/api/automation-hub/',
 
   // Value for standalone.api.target
-  API_PROXY_TARGET: `http://${proxyHost}:${proxyPort}`,
+  API_PROXY: proxyTarget,
 
   // Path on the host where the UI is found. EX: /apps/automation-hub
   UI_BASE_PATH:
