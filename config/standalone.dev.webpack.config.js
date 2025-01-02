@@ -1,8 +1,8 @@
-const webpackBase = require('./webpack.base.config');
+const { webpackBase, proxy } = require('./webpack.base.config');
 
 // Used for getting the correct host when running in a container
-const proxyHost = process.env.API_PROXY_HOST || 'localhost';
-const proxyPort = process.env.API_PROXY_PORT || '55001';
+const proxyTarget = process.env.API_PROXY || 'http://localhost:55001';
+
 const apiBasePath = process.env.API_BASE_PATH || '/api/galaxy/';
 const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login';
 
@@ -28,11 +28,11 @@ module.exports = webpackBase({
   // Value for webpack.devServer.proxy
   // https://webpack.js.org/configuration/dev-server/#devserverproxy
   // used to get around CORS requirements when running in dev mode
-  WEBPACK_PROXY: {
-    '/api/': `http://${proxyHost}:${proxyPort}`,
-    '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
-    '/v2/': `http://${proxyHost}:${proxyPort}`,
-    '/extensions/v2/': `http://${proxyHost}:${proxyPort}`,
-    '/static/rest_framework/': `http://${proxyHost}:${proxyPort}`,
-  },
+  WEBPACK_PROXY: [
+    proxy('/api/', proxyTarget),
+    proxy('/pulp/api/', proxyTarget),
+    proxy('/v2/', proxyTarget),
+    proxy('/extensions/v2/', proxyTarget),
+    proxy('/static/rest_framework/', proxyTarget),
+  ],
 });
