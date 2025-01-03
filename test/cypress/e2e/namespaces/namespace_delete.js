@@ -39,6 +39,7 @@ describe('Delete a namespace', () => {
 
     //upload a collection
     cy.galaxykit('-i collection upload ansible network');
+    cy.galaxykit(`-i collection move ansible network 1.0.0 staging published`);
 
     // wait for imports to finish successfully
 

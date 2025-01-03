@@ -98,6 +98,7 @@ describe('Container Signing', () => {
   it('cant see sign button when user has no rights', () => {
     cy.login(user, password);
     cy.visit(`${uiPrefix}containers/local1`);
+    cy.wait(2000);
     // this is now covered by alert that should not be here in the future
     cy.get('button[aria-label="Actions"]').click({ force: true });
     cy.contains('[role="menuitem"]', 'Use in Controller');

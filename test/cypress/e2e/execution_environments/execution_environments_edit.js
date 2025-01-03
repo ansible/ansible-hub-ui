@@ -10,7 +10,7 @@ function deleteContainersManual() {
   cy.visit(`${uiPrefix}containers`);
 
   cy.wait('@listLoad').then((result) => {
-    var data = result.response.body.data;
+    const data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
         `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
@@ -33,7 +33,7 @@ function deleteRegistriesManual() {
   cy.visit(`${uiPrefix}registries`);
 
   cy.wait('@registries').then((result) => {
-    var data = result.response.body.data;
+    const data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
         `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,

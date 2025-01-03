@@ -7,6 +7,12 @@ describe('Namespace detail screen', () => {
     cy.galaxykit('-i namespace create', 'namespace_detail_test');
     cy.galaxykit('-i collection upload namespace_detail_test collection1');
     cy.galaxykit('-i collection upload namespace_detail_test collection2');
+    cy.galaxykit(
+      `-i collection move namespace_detail_test collection1 1.0.0 staging published`,
+    );
+    cy.galaxykit(
+      `-i collection move namespace_detail_test collection2 1.0.0 staging published`,
+    );
   });
 
   after(() => {
@@ -29,10 +35,11 @@ describe('Namespace detail screen', () => {
       '[data-cy="CollectionListItem"]:first button[aria-label="Actions"]',
     ).click();
     cy.contains('.body ul a', 'Deprecate').click();
-
+    cy.contains('Collection "collection1" has been successfully deprecated.', {
+      timeout: 15000,
+    });
     // Reload the page
     cy.visit(`${uiPrefix}namespaces/namespace_detail_test`);
-
     cy.get('[data-cy="CollectionListItem"]:first').contains('DEPRECATED');
   });
 

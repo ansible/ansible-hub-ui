@@ -35,7 +35,7 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version in collection detail when user does not have permissions', () => {
     cy.login(userName, userPassword);
-    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
+    cy.visit(`${uiPrefix}repo/staging/testspace/testcollection`);
     cy.contains('testcollection');
     cy.openHeaderKebab();
     cy.contains('Upload new version').should('not.exist');
@@ -46,6 +46,7 @@ describe('Collection Upload Tests', () => {
     cy.visit(
       `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
     );
+    cy.wait(2000);
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
     cy.contains('New version of testspace.testcollection');
@@ -113,7 +114,9 @@ describe('Collection Upload Tests', () => {
     cy.login(userName, userPassword);
     cy.visit(`${uiPrefix}namespaces/testspace`);
 
-    cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
+    cy.get('[data-cy="CollectionList-name"]', { timeout: 3000 }).contains(
+      'testcollection',
+    );
     cy.contains('Upload new version').should('not.exist');
   });
 

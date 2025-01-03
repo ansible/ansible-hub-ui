@@ -1,4 +1,4 @@
-const { webpackBase } = require('./webpack.base.config');
+const webpackBase = require('./webpack.base.config');
 
 // Compile configuration for stnadalone mode
 module.exports = webpackBase({
