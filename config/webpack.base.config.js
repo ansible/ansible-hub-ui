@@ -96,12 +96,7 @@ const webpackBase = (inputConfigs) => {
                 }`,
               ),
             port: customConfigs.UI_PORT,
-            proxy: Object.entries(customConfigs.WEBPACK_PROXY).map(
-              ([k, v]) => ({
-                context: [k],
-                target: v,
-              }),
-            ),
+            proxy: customConfigs.WEBPACK_PROXY,
             server: { type: customConfigs.UI_USE_HTTPS ? 'https' : 'http' },
             static: { directory: resolve(__dirname, '../dist') },
           },
