@@ -41,7 +41,21 @@ const defaultConfigs = [
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
 ];
 
-module.exports = (inputConfigs) => {
+const proxy = (route, target) => {
+  const u = new URL(target);
+  return {
+    context: [route],
+    target,
+    secure: false,
+    router: (req) => {
+      req.headers.host = u.host;
+      req.headers.origin = u.origin;
+      req.headers.referer = u.href;
+    },
+  };
+};
+
+const webpackBase = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
 
@@ -82,12 +96,7 @@ module.exports = (inputConfigs) => {
                 }`,
               ),
             port: customConfigs.UI_PORT,
-            proxy: Object.entries(customConfigs.WEBPACK_PROXY).map(
-              ([k, v]) => ({
-                context: [k],
-                target: v,
-              }),
-            ),
+            proxy: customConfigs.WEBPACK_PROXY,
             server: { type: customConfigs.UI_USE_HTTPS ? 'https' : 'http' },
             static: { directory: resolve(__dirname, '../dist') },
           },
@@ -166,4 +175,9 @@ module.exports = (inputConfigs) => {
       ignored: ['**/.*.sw[po]'],
     },
   };
+};
+
+module.exports = {
+  proxy,
+  webpackBase,
 };

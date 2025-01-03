@@ -54,6 +54,8 @@ cd ansible-hub-ui
 npm run start-standalone
 ```
 
+(Or `API_PROXY=http://localhost:5001 npm run start-standalone`; run `API_PROXY=https://my-server.example.com npm run start-standalone` to run with external backend.)
+
 Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
 
