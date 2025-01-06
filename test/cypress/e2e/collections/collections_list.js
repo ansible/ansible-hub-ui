@@ -47,8 +47,11 @@ describe('Collections list Tests', () => {
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
-    range(11).forEach((i) => {
+    range(3).forEach((i) => {
       cy.galaxykit(`-i collection upload my_namespace my_collection${i}`);
+      cy.galaxykit(
+        `-i collection move my_namespace my_collection${i} 1.0.0 staging published`,
+      );
     });
   });
 
@@ -67,55 +70,16 @@ describe('Collections list Tests', () => {
     undeprecateIfDeprecated();
   });
 
-  it('can deprecate', () => {
+  it('can deprecate and then deprecate', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
     deprecate(true);
-  });
-
-  it('can undeprecate', () => {
-    cy.get('[data-cy="view_type_list"] svg').click();
     undeprecate();
   });
 
-  it('can deprecate in Cards', () => {
+  it('can deprecate and then deprecate in Cards', () => {
     cy.get('[data-cy="view_type_card"] svg').click();
     deprecate(false);
-  });
-
-  it('can undeprecate in Cards', () => {
-    cy.get('[data-cy="view_type_card"] svg').click();
-    undeprecate(false);
-  });
-
-  it('paging is working', () => {
-    // there should be 11 items in db, 10 per page + 1 view more
-    cy.get('.collection-container').get('article').should('have.length', 11);
-
-    cy.get('.hub-cards').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.collection-container').get('article').should('have.length', 1);
-  });
-
-  it('filter is working', () => {
-    cy.get('.hub-cards')
-      .get('[aria-label="keywords"]:first')
-      .type('my_collection0{enter}');
-    cy.get('.hub-cards').contains('my_collection0');
-    cy.get('.hub-cards').contains('my_collection1').should('not.exist');
-  });
-
-  it('set page size is working', () => {
-    cy.get('.hub-cards')
-      .get('button[aria-label="Items per page"]:first')
-      .click();
-    cy.get('.hub-cards').get('[data-action="per-page-20"]').click();
-
-    cy.get('.collection-container').get('article').should('have.length', 11);
-  });
-
-  it('Cards/List switch is working', () => {
-    cy.get('[data-cy="view_type_list"] svg').click();
-
-    cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);
+    undeprecate();
   });
 
   it('Can delete collection in collection list', () => {

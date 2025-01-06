@@ -284,8 +284,8 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i collection upload testspace2 testcollection2');
     cy.galaxykit('task wait all');
 
-    cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
-
+    cy.visit(`${uiPrefix}repo/staging/testspace2/testcollection2`);
+    cy.wait(2000);
     // can Delete collection
     cy.openHeaderKebab();
     cy.contains('Delete collection from system');

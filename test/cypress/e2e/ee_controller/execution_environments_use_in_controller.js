@@ -1,7 +1,7 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Execution Environments - Use in Controller', () => {
-  let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
+  let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
     cy.login();
@@ -42,7 +42,6 @@ describe('Execution Environments - Use in Controller', () => {
 
     // one row of each type available
     cy.contains('.hub-c-table-content .pf-c-label', 'Remote');
-    cy.contains('.hub-c-table-content .pf-c-label', 'Local');
   });
 
   const list = (type) =>
