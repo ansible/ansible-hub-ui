@@ -13,6 +13,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteTestUsers();
     cy.createUser(userName, userPassword);
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit(`-i collection move testspace testcollection`);
   });
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
@@ -35,7 +36,7 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version in collection detail when user does not have permissions', () => {
     cy.login(userName, userPassword);
-    cy.visit(`${uiPrefix}repo/staging/testspace/testcollection`);
+    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
     cy.contains('testcollection');
     cy.openHeaderKebab();
     cy.contains('Upload new version').should('not.exist');
@@ -77,8 +78,10 @@ describe('Collection Upload Tests', () => {
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-
-    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
     cy.contains('Upload collection').should('not.exist');
   });
 
@@ -91,7 +94,11 @@ describe('Collection Upload Tests', () => {
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
 
-    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
+
     cy.contains('Upload collection').click();
     cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)

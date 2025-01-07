@@ -26,7 +26,7 @@ describe('Documentation dropdown', () => {
     cy.get('[data-cy="docs-dropdown"]').click();
     cy.get('.pf-c-dropdown__menu').contains('About').click();
     cy.get('.pf-c-about-modal-box').should('be.visible');
-    cy.get('h1').contains('Galaxy NG');
+    cy.get('h1').contains('Automation Hub');
     cy.get('[aria-label="Close Dialog"]').click();
     cy.get('.pf-c-about-modal-box').should('not.exist');
   });
