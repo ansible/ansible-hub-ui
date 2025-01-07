@@ -37,11 +37,14 @@ describe('execution environments', () => {
   });
 
   it('checks the EE detail view', () => {
+    const url =
+      Cypress.config().baseUrl.contains('https') &&
+      Cypress.config().baseUrl.replace(/[`https` : /]/g, '');
     cy.contains('a', `remotepine${num}`).click();
     cy.get('.title-box').should('have.text', `remotepine${num}`);
     cy.get('.pf-c-form-control').should(
       'have.value',
-      `podman pull ${Cypress.config().baseUrl}/remotepine${num}`,
+      `podman pull ${url}/remotepine${num}`,
     );
   });
 

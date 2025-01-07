@@ -244,7 +244,9 @@ Cypress.Commands.add(
       console.log(arr);
       return Promise.reject(...arr);
     };
-    const server = Cypress.config().baseUrl;
+    const server =
+      Cypress.config().baseUrl.contains('https') &&
+      Cypress.config().baseUrl.replace(/[`https` : /]/g, '');
 
     return cy
       .exec(shell`podman pull ${registry + remoteName}`)

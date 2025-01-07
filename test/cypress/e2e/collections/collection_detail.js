@@ -105,11 +105,12 @@ describe('Collection detail', () => {
     cy.get('.body').contains('Install');
     cy.get('.body').contains('License');
     cy.get('.body').contains('Installation');
-    cy.scrollTo('bottom', { ensureScrollable: false });
-    cy.get('.body').contains(
-      `a[href="${uiPrefix}repo/staging/collection_detail_test_namespace/collection_detail_test_collection/docs/"]`,
-      'Go to documentation',
-    );
+    cy.get('.body')
+      .contains(
+        `a[href="${uiPrefix}repo/staging/collection_detail_test_namespace/collection_detail_test_collection/docs/"]`,
+        'Go to documentation',
+      )
+      .scrollIntoView();
 
     /*
      * This test needs some external library and custom command to test if the download had started.
