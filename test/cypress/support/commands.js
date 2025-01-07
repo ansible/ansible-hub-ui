@@ -2,6 +2,7 @@
 import { range } from 'lodash';
 import shell from 'shell-escape-tag';
 
+
 const apiPrefix = Cypress.env('apiPrefix');
 const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
@@ -243,7 +244,7 @@ Cypress.Commands.add(
       console.log(arr);
       return Promise.reject(...arr);
     };
-    const server = Cypress.env('containers');
+    const server = Cypress.config().baseUrl;
 
     return cy
       .exec(shell`podman pull ${registry + remoteName}`)

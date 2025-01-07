@@ -6,6 +6,7 @@ describe('My Profile Tests', () => {
 
   before(() => {
     cy.deleteTestUsers();
+    cy.galaxykit('task wait all');
     cy.galaxykit('user create', username, password);
   });
 
