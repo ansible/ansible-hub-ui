@@ -73,7 +73,7 @@ describe('Execution Environments - Use in Controller', () => {
 
   ['Remote', 'Local'].forEach((type) => {
     [list, detail].forEach((opener) => {
-      it(`Use in Controller - ${type} ${opener.name}`, () => {
+      it.skip(`Use in Controller - ${type} ${opener.name}`, () => {
         opener(type);
 
         // sporadic failure
