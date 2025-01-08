@@ -244,6 +244,8 @@ Cypress.Commands.add(
       return Promise.reject(...arr);
     };
     const server = Cypress.env('containers');
+    const username = Cypress.env('username');
+    const password = Cypress.env('password');
 
     return cy
       .exec(shell`podman pull ${registry + remoteName}`)
@@ -256,7 +258,7 @@ Cypress.Commands.add(
       .then(log, logFail)
       .then(() =>
         cy.exec(
-          shell`podman login ${server} --tls-verify=false --username=admin --password=admin`,
+          shell`podman login ${server} --tls-verify=false --username=${username} --password=${password}`,
           { failOnNonZeroExit: false },
         ),
       )
