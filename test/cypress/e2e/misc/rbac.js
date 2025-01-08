@@ -6,6 +6,9 @@ const userPassword = 'I am a complicated passw0rd';
 const groupName = 'testgroup';
 
 describe('RBAC test for user without permissions', () => {
+  const rand = Math.floor(Math.random() * 9999999);
+  const testContainer = `testcontainer${rand}`;
+
   before(() => {
     cy.login();
 
@@ -17,7 +20,7 @@ describe('RBAC test for user without permissions', () => {
 
     cy.galaxykit(
       '-i container create',
-      `testcontainer`,
+      `${testContainer}`,
       'library/alpine',
       `docker`,
     );
@@ -107,12 +110,12 @@ describe('RBAC test for user without permissions', () => {
 
     // cannot Change and Delete container
     cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
+      `[data-cy="ExecutionEnvironmentList-row-${testContainer}"] [data-cy="kebab-toggle"]`,
     ).click();
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
 
-    cy.visit(`${uiPrefix}containers/testcontainer`);
+    cy.visit(`${uiPrefix}containers/${testContainer}`);
     cy.contains('Edit').should('not.exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('not.exist');
@@ -147,6 +150,8 @@ describe('RBAC test for user without permissions', () => {
 });
 
 describe('RBAC test for user with permissions', () => {
+  const rand = Math.floor(Math.random() * 9999999);
+  const testContainer = `testcontainer${rand}`;
   const allPerms = [
     {
       group: 'namespaces',
@@ -223,7 +228,7 @@ describe('RBAC test for user with permissions', () => {
       'https://registry.hub.docker.com/',
     );
     cy.addRemoteContainer({
-      name: `testcontainer`,
+      name: `${testContainer}`,
       upstream_name: 'library/alpine',
       registry: `docker`,
       include_tags: 'latest',
@@ -277,7 +282,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Upload collection').should('exist');
   });
 
-  it.only('should let delete collection and modify ansible repo content when user has permissions', () => {
+  it('should let delete collection and modify ansible repo content when user has permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_collections');
     cy.login(userName, userPassword);
 
@@ -344,18 +349,18 @@ describe('RBAC test for user with permissions', () => {
 
     // can Change and Delete container
     cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
+      `[data-cy="ExecutionEnvironmentList-row-${testContainer}"] [data-cy="kebab-toggle"]`,
     ).click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
 
-    cy.visit(`${uiPrefix}containers/testcontainer`);
+    cy.visit(`${uiPrefix}containers/${testContainer}`);
     cy.contains('Edit').should('exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('exist');
     cy.contains('Sync from registry').click();
     cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
-      'Sync started for remote registry "testcontainer".',
+      `Sync started for remote registry "${testContainer}".`,
     );
   });
 
