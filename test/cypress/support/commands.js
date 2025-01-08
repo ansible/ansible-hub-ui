@@ -2,7 +2,6 @@
 import { range } from 'lodash';
 import shell from 'shell-escape-tag';
 
-
 const apiPrefix = Cypress.env('apiPrefix');
 const pulpPrefix = `${apiPrefix}pulp/api/v3/`;
 const uiPrefix = Cypress.env('uiPrefix');
@@ -244,9 +243,7 @@ Cypress.Commands.add(
       console.log(arr);
       return Promise.reject(...arr);
     };
-    const server =
-      Cypress.config().baseUrl.contains('https') &&
-      Cypress.config().baseUrl.replace(/[`https` : /]/g, '');
+    const server = Cypress.env('containers');
 
     return cy
       .exec(shell`podman pull ${registry + remoteName}`)
@@ -288,6 +285,7 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   );
   // wait for finish
   cy.contains('a', 'detail page').click();
+  cy.wait(1000);
   cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
 });
 

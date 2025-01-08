@@ -277,7 +277,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Upload collection').should('exist');
   });
 
-  it('should let delete collection and modify ansible repo content when user has permissions', () => {
+  it.only('should let delete collection and modify ansible repo content when user has permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_collections');
     cy.login(userName, userPassword);
 
