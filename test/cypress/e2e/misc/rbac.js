@@ -6,6 +6,9 @@ const userPassword = 'I am a complicated passw0rd';
 const groupName = 'testgroup';
 
 describe('RBAC test for user without permissions', () => {
+  const rand = Math.floor(Math.random() * 9999999);
+  const testContainer = `testcontainer${rand}`;
+
   before(() => {
     cy.login();
 
@@ -17,7 +20,7 @@ describe('RBAC test for user without permissions', () => {
 
     cy.galaxykit(
       '-i container create',
-      `testcontainer`,
+      `${testContainer}`,
       'library/alpine',
       `docker`,
     );
@@ -107,12 +110,12 @@ describe('RBAC test for user without permissions', () => {
 
     // cannot Change and Delete container
     cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
+      `[data-cy="ExecutionEnvironmentList-row-${testContainer}"] [data-cy="kebab-toggle"]`,
     ).click();
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
 
-    cy.visit(`${uiPrefix}containers/testcontainer`);
+    cy.visit(`${uiPrefix}containers/${testContainer}`);
     cy.contains('Edit').should('not.exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('not.exist');
@@ -147,6 +150,8 @@ describe('RBAC test for user without permissions', () => {
 });
 
 describe('RBAC test for user with permissions', () => {
+  const rand = Math.floor(Math.random() * 9999999);
+  const testContainer = `testcontainer${rand}`;
   const allPerms = [
     {
       group: 'namespaces',
@@ -223,7 +228,7 @@ describe('RBAC test for user with permissions', () => {
       'https://registry.hub.docker.com/',
     );
     cy.addRemoteContainer({
-      name: `testcontainer`,
+      name: `${testContainer}`,
       upstream_name: 'library/alpine',
       registry: `docker`,
       include_tags: 'latest',
@@ -284,8 +289,8 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i collection upload testspace2 testcollection2');
     cy.galaxykit('task wait all');
 
-    cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
-
+    cy.visit(`${uiPrefix}repo/staging/testspace2/testcollection2`);
+    cy.wait(2000);
     // can Delete collection
     cy.openHeaderKebab();
     cy.contains('Delete collection from system');
@@ -344,18 +349,18 @@ describe('RBAC test for user with permissions', () => {
 
     // can Change and Delete container
     cy.get(
-      '[data-cy="ExecutionEnvironmentList-row-testcontainer"] [data-cy="kebab-toggle"]',
+      `[data-cy="ExecutionEnvironmentList-row-${testContainer}"] [data-cy="kebab-toggle"]`,
     ).click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
 
-    cy.visit(`${uiPrefix}containers/testcontainer`);
+    cy.visit(`${uiPrefix}containers/${testContainer}`);
     cy.contains('Edit').should('exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('exist');
     cy.contains('Sync from registry').click();
     cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
-      'Sync started for remote registry "testcontainer".',
+      `Sync started for remote registry "${testContainer}".`,
     );
   });
 

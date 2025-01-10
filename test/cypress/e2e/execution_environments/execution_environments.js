@@ -37,18 +37,19 @@ describe('execution environments', () => {
   });
 
   it('checks the EE detail view', () => {
+    const url = Cypress.env('containers');
     cy.contains('a', `remotepine${num}`).click();
     cy.get('.title-box').should('have.text', `remotepine${num}`);
     cy.get('.pf-c-form-control').should(
       'have.value',
-      `podman pull localhost:8002/remotepine${num}`,
+      `podman pull ${url}/remotepine${num}`,
     );
   });
 
   it('adds a Readme', () => {
     cy.contains('a', `remotepine${num}`).click();
     cy.get('[data-cy=add-readme]').click();
-    cy.get('textarea').type('{del}This is the readme file.');
+    cy.get('textarea').type('{del}This is the readme file.', { delay: 500 });
     cy.get('[data-cy=save-readme]').click();
     cy.get('.markdown-editor').should(
       'have.text',

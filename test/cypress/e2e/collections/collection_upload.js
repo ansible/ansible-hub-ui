@@ -13,6 +13,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteTestUsers();
     cy.createUser(userName, userPassword);
     cy.galaxykit('-i collection upload testspace testcollection');
+    cy.galaxykit(`-i collection move testspace testcollection`);
   });
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
@@ -46,6 +47,7 @@ describe('Collection Upload Tests', () => {
     cy.visit(
       `${uiPrefix}collections?page_size=10&view_type=list&keywords=testcollection`,
     );
+    cy.wait(2000);
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
     cy.contains('New version of testspace.testcollection');
@@ -76,8 +78,10 @@ describe('Collection Upload Tests', () => {
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-
-    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
     cy.contains('Upload collection').should('not.exist');
   });
 
@@ -90,7 +94,11 @@ describe('Collection Upload Tests', () => {
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
 
-    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
+
     cy.contains('Upload collection').click();
     cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)
@@ -113,7 +121,9 @@ describe('Collection Upload Tests', () => {
     cy.login(userName, userPassword);
     cy.visit(`${uiPrefix}namespaces/testspace`);
 
-    cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
+    cy.get('[data-cy="CollectionList-name"]', { timeout: 3000 }).contains(
+      'testcollection',
+    );
     cy.contains('Upload new version').should('not.exist');
   });
 

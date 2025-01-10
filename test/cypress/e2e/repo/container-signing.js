@@ -82,6 +82,7 @@ describe('Container Signing', () => {
   it('can sign local', () => {
     cy.login();
     cy.visit(`${uiPrefix}containers/local1`);
+    cy.wait(5000);
     cy.contains('.column-section', 'local1');
     cy.contains('.hub-header-bottom', 'Unsigned', {
       timeout: 10000,

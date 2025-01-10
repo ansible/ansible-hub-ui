@@ -59,8 +59,10 @@ describe('Approval Dashboard process', () => {
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-
-    cy.get(`a[href="${uiPrefix}namespaces/ansible/"]`).click();
+    cy.contains('ansible')
+      .parents('.card-wrapper')
+      .contains('View collections')
+      .click();
     cy.contains('Upload collection').click();
     cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)

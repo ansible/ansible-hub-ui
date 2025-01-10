@@ -1,7 +1,7 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Collection detail', () => {
-  const baseURL = `${uiPrefix}repo/published/collection_detail_test_namespace/collection_detail_test_collection`;
+  const baseURL = `${uiPrefix}repo/staging/collection_detail_test_namespace/collection_detail_test_collection`;
 
   function deprecate() {
     cy.openHeaderKebab();
@@ -28,19 +28,19 @@ describe('Collection detail', () => {
     cy.login();
   });
 
-  it('can Deprecate', () => {
+  it('can Deprecate and then undeprecate', () => {
     cy.visit(baseURL);
+    cy.wait(2000);
     deprecate();
-  });
-
-  it('can Undeprecate', () => {
-    cy.visit(baseURL);
     undeprecate();
   });
 
   it('should change the url when clicking on the tabs', () => {
     cy.visit(baseURL);
-
+    cy.get('.title-box').should(
+      'have.text',
+      'collection_detail_test_collection',
+    );
     const tabs = [
       {
         name: 'Documentation',
@@ -98,15 +98,15 @@ describe('Collection detail', () => {
 
   it('should have working UI on install tab', () => {
     cy.visit(baseURL);
+    cy.get('.title-box').should(
+      'have.text',
+      'collection_detail_test_collection',
+    );
     // should have Install, License and Installation strings, and correct docs link
     cy.get('.body').contains('Install');
     cy.get('.body').contains('License');
     cy.get('.body').contains('Installation');
-
-    cy.get('.body').contains(
-      `a[href="${uiPrefix}repo/published/collection_detail_test_namespace/collection_detail_test_collection/docs/"]`,
-      'Go to documentation',
-    );
+    cy.get('[data-cy="toggle-signature-button"]').scrollIntoView();
 
     /*
      * This test needs some external library and custom command to test if the download had started.

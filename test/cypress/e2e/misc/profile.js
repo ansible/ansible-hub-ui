@@ -1,11 +1,14 @@
 const apiPrefix = Cypress.env('apiPrefix');
 
 describe('My Profile Tests', () => {
-  const username = 'nopermission';
+  const rand = Math.floor(Math.random() * 9999999);
+
+  const username = `nopermission_${rand}`;
   const password = 'n0permissi0n';
 
   before(() => {
     cy.deleteTestUsers();
+    cy.galaxykit('task wait all');
     cy.galaxykit('user create', username, password);
   });
 
