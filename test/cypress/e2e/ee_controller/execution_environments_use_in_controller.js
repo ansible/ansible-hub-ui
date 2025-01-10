@@ -73,6 +73,7 @@ describe('Execution Environments - Use in Controller', () => {
 
   ['Remote', 'Local'].forEach((type) => {
     [list, detail].forEach((opener) => {
+      //Skipping because PULP config is needed to add controllers
       it.skip(`Use in Controller - ${type} ${opener.name}`, () => {
         opener(type);
 

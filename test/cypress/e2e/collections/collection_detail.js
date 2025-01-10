@@ -28,21 +28,19 @@ describe('Collection detail', () => {
     cy.login();
   });
 
-  it('can Deprecate', () => {
+  it('can Deprecate and then undeprecate', () => {
     cy.visit(baseURL);
     cy.wait(2000);
     deprecate();
-  });
-
-  it('can Undeprecate', () => {
-    cy.visit(baseURL);
-    cy.wait(2000);
     undeprecate();
   });
 
   it('should change the url when clicking on the tabs', () => {
     cy.visit(baseURL);
-    cy.wait(1000);
+    cy.get('.title-box').should(
+      'have.text',
+      'collection_detail_test_collection',
+    );
     const tabs = [
       {
         name: 'Documentation',
@@ -100,7 +98,10 @@ describe('Collection detail', () => {
 
   it('should have working UI on install tab', () => {
     cy.visit(baseURL);
-    cy.wait(2000);
+    cy.get('.title-box').should(
+      'have.text',
+      'collection_detail_test_collection',
+    );
     // should have Install, License and Installation strings, and correct docs link
     cy.get('.body').contains('Install');
     cy.get('.body').contains('License');

@@ -70,13 +70,13 @@ describe('Collections list Tests', () => {
     undeprecateIfDeprecated();
   });
 
-  it('can deprecate and then deprecate', () => {
+  it('can deprecate and then undeprecate', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
     deprecate(true);
     undeprecate();
   });
 
-  it('can deprecate and then deprecate in Cards', () => {
+  it('can deprecate and then undeprecate in Cards', () => {
     cy.get('[data-cy="view_type_card"] svg').click();
     deprecate(false);
     undeprecate();
