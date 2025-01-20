@@ -40,7 +40,7 @@
     "@lingui/cli": "^5.0.0",
     "@ls-lint/ls-lint": "^2.2.3",
     "@redhat-cloud-services/frontend-components-config": "^6.2.9",
-    "@redhat-cloud-services/frontend-components-config-utilities": "^3.2.6",
+    "@redhat-cloud-services/frontend-components-config-utilities": "^4.0.6",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^4.0.0",
