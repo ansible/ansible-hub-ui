@@ -1,0 +1,1 @@
+Collection documentation: treat options of type `boolean` the same as options of type `bool`.

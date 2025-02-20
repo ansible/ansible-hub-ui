@@ -692,7 +692,7 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       defaultChoice,
       legends = {};
 
-    if (option['type'] === 'bool') {
+    if (option['type'] === 'bool' || option['type'] === 'boolean') {
       choices = ['true', 'false'];
 
       if (option['default'] === true) {
