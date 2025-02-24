@@ -21,7 +21,9 @@
   width: 100%;
 
   .spacer {
-    width: 20px;
+    // The !important is needed here to avoid the value being overridden
+    // by table.css injected by some dependencies.
+    width: 20px !important;
     border-top: 0;
     border-bottom: 0;
   }
