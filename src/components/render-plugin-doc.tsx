@@ -429,13 +429,15 @@ export class RenderPluginDoc extends Component<IProps, IState> {
 
         <div>
           <b>{t`Why:`}</b>{' '}
-          {deprecated.why ? doc.deprecated.why : t`No reason specified.`}
+          {deprecated.why
+            ? this.applyDocFormatters(doc.deprecated.why)
+            : t`No reason specified.`}
         </div>
 
         <div>
           <b>{t`Alternative:`}</b>{' '}
           {deprecated.alternative
-            ? doc.deprecated.alternative
+            ? this.applyDocFormatters(doc.deprecated.alternative)
             : t`No alternatives specified.`}
         </div>
       </>
