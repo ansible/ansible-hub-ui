@@ -24,6 +24,7 @@
     // The !important is needed here to avoid the value being overridden
     // by table.css injected by some dependencies.
     width: 20px !important;
+
     // In case of multiple indents, it seems that the first indent still
     // has width 0. Adding a min-width seems to fix it on Chrome and Firefox.
     min-width: 20px;
