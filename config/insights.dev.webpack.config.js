@@ -1,12 +1,12 @@
 const { webpackBase } = require('./webpack.base.config');
 
 // Used for getting the correct host when running in a container
-const proxyTarget = process.env.API_PROXY || 'http://localhost:55001';
+const proxyTarget = process.env.API_PROXY || 'http://localhost:5001';
 
 const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 
 module.exports = webpackBase({
-  // The host where the API lives. EX: https://localhost:55001
+  // The host where the API lives. EX: https://localhost:5001
   API_HOST: '',
 
   // Path to the API on the API host. EX: /api/automation-hub
