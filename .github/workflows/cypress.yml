@@ -85,23 +85,7 @@ jobs:
         ref: '${{ env.SHORT_BRANCH }}'
         path: 'galaxy_ng'
 
-    - name: "Checkout oci_env (main)"
-      uses: actions/checkout@v4
-      with:
-        repository: 'pulp/oci_env'
-        path: 'oci_env'
-
-    - name: "Configure oci_env"
-      working-directory: 'oci_env'
-      run: |
-        pip install --editable ./client/
-        # merge common, profile-specific and test matrix specific config
-        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
-          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$BACKEND_FLAVOR" \
-          ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
-          | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
-
-    # oci-env compose build: FileNotFoundError: [Errno 2] No such file or directory: 'docker-compose'
+    # docker compose build: FileNotFoundError: [Errno 2] No such file or directory: 'docker-compose'
     - name: "Provide docker-compose"
       run: |
         mkdir -p /home/runner/.local/bin/
@@ -109,13 +93,15 @@ jobs:
         ( echo '#!/bin/sh' ; echo 'docker compose "$@"' ) > docker-compose
         chmod +x docker-compose
 
-    - name: "oci-env compose build"
-      working-directory: 'oci_env'
-      run: 'oci-env compose build'
+    - name: "galaxy compose build"
+      run: |
+        cd galaxy_ng
+        DEV_SOURCE_PATH=galaxy_ng docker compose -f dev/compose/${{ env.BACKEND_FLAVOR }}.yaml build
 
-    - name: "oci-env compose up"
-      working-directory: 'oci_env'
-      run: 'oci-env compose up &'
+    - name: "galaxy compose up"
+      run: |
+        cd galaxy_ng
+        DEV_SOURCE_PATH=galaxy_ng docker compose -f dev/compose/${{ env.BACKEND_FLAVOR }}.yaml up &
 
     - name: "Install node 20"
       uses: actions/setup-node@v4
@@ -311,8 +297,20 @@ jobs:
 
     - name: "Kill container, show debug info"
       if: always()
-      working-directory: 'oci_env'
       run: |
-        oci-env exec bash -c "pip3 list && pip3 install pipdeptree && pipdeptree"
-        oci-env compose logs
-        oci-env compose kill
+        docker ps -a
+        echo ::group::MANAGER_LOGS
+        docker logs compose-manager-1
+        echo ::endgroup::
+        echo ::group::WORKER_LOGS
+        docker logs compose-worker-1
+        echo ::endgroup::
+        echo ::group::CONTENT_LOGS
+        docker logs compose-content-1
+        echo ::endgroup::
+        echo ::group::API_LOGS
+        docker logs compose-api-1
+        echo ::endgroup::
+        echo ::group::DEPENDENCIES
+        docker exec compose-manager-1 bash -c "pip list && pip install pipdeptree && pipdeptree"
+        echo ::endgroup::

@@ -11,27 +11,24 @@ The project is built on React & Patternfly, using components from [patternfly-re
 
 ### Backend
 
-The development version of the backend runs in a container, using the [pulp/oci\_env](https://github.com/pulp/oci_env) wrapper.
+The development version of the backend runs in a docker-compose.
 
 Set up:
 
 ```
-git clone https://github.com/pulp/oci_env
 git clone https://github.com/ansible/galaxy_ng
 
-pip install -e oci_env/client/
-oci-env # make sure oci-env is in PATH
 ```
 
 Run:
 
 ```
 cd galaxy_ng
-make oci/dab
+make compose/aap
 ```
 
-The backend can be run in multiple modes - `standalone`, `community`, `insights`, `keycloak`, `ldap` and `dab`.
-Depending on the mode, it will listen on http://localhost:5001 or http://localhost:55001, under `/api/galaxy/`, `/api/` or `/api/automation-hub/`.
+The backend can be run in multiple modes - `standalone`, `community`, `insights`, `certified-sync` and `aap`.
+Depending on the mode, it will listen on http://localhost:5001, under `/api/galaxy/`, `/api/` or `/api/automation-hub/`.
 
 Or, use the [simplified compose stack](https://github.com/ansible/galaxy_ng/tree/master/dev/compose#galaxy-simplified-compose-stack).
 
@@ -64,9 +61,9 @@ This app can be developed in standalone, community, or insights mode. Insights m
 
 #### Modes
 
-* `start-standalone`: assumes `oci/standalone` or `oci/dab`, http://localhost:8002/ui/ and http://localhost:55001/api/galaxy/
-* `start-community`: assumes `oci/community`, http://localhost:8002/ui/ and http://localhost:5001/api/
-* `start-insights`: assumes `oci/insights`,  http://localhost:8002/preview/ansible/automation-hub/ and http://localhost:55001/api/automation-hub/
+* `start-standalone`: assumes `compose/standalone` or `compose/dab`, http://localhost:8002/ui/ and http://localhost:5001/api/galaxy/
+* `start-community`: assumes `compose/community`, http://localhost:8002/ui/ and http://localhost:5001/api/
+* `start-insights`: assumes `compose/insights`,  http://localhost:8002/preview/ansible/automation-hub/ and http://localhost:5001/api/automation-hub/
   * **NOTE:** This option is only relevant to Red Hat employees.
 
 
