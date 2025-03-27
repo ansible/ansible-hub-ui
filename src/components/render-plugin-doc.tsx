@@ -223,7 +223,10 @@ export class RenderPluginDoc extends Component<IProps, IState> {
       return null;
     }
 
-    if (!plugin.doc_strings.return) {
+    if (
+      !plugin.doc_strings.return ||
+      !plugin.doc_strings.return[Symbol.iterator]
+    ) {
       return null;
     }
 
