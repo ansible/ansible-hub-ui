@@ -135,7 +135,7 @@ function standaloneMenu() {
       }),
     ]),
     menuItem(t`Documentation`, {
-      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide/',
+      url: 'https://ansible.readthedocs.io/projects/galaxy-ng/en/latest/community/userguide.html',
       external: true,
       condition: ({ settings, user }) =>
         IS_COMMUNITY &&
