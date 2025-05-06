@@ -6,8 +6,9 @@ metadata:
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "master"
-  creationTimestamp:
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
+      == "master"
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: automation-hub-master
     appstudio.openshift.io/component: automation-hub-frontend-master
@@ -81,11 +82,13 @@ spec:
       name: output-image
       type: string
     - default: .
-      description: Path to the source code of an application's component from where to build image.
+      description: Path to the source code of an application's component from where
+        to build image.
       name: path-context
       type: string
     - default: Dockerfile
-      description: Path to the Dockerfile inside the context specified by parameter path-context
+      description: Path to the Dockerfile inside the context specified by parameter
+        path-context
       name: dockerfile
       type: string
     - default: "false"
@@ -105,7 +108,8 @@ spec:
       name: prefetch-input
       type: string
     - default: ""
-      description: Image tag expiration time, time values could be something like 1h, 2d, 3w for hours, days, and weeks, respectively.
+      description: Image tag expiration time, time values could be something like
+        1h, 2d, 3w for hours, days, and weeks, respectively.
       name: image-expires-after
     - default: "false"
       description: Build a source image.
@@ -208,38 +212,25 @@ spec:
         workspace: git-auth
       - name: netrc
         workspace: netrc
-    # put this before the "build-container" task in your repository
     - name: parse-build-deploy-script
       params:
       - name: path-context
         value: $(params.path-context)
-      taskRef:
-        resolver: git
-        params:
-        - name: url
-          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
-        - name: revision
-          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
-        - name: pathInRepo
-          value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
-      workspaces:
-      - name: source
-        workspace: workspace
       runAfter:
       - clone-repository
-    - name: create-frontend-dockerfile
       taskRef:
-        resolver: git
         params:
         - name: url
           value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
         - name: revision
-          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
+          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a
         - name: pathInRepo
-          value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
+          value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
+        resolver: git
       workspaces:
       - name: source
         workspace: workspace
+    - name: create-frontend-dockerfile
       params:
       - name: path-context
         value: $(params.path-context)
@@ -269,7 +260,18 @@ spec:
         value: $(tasks.parse-build-deploy-script.results.dist-folder)
       runAfter:
       - parse-build-deploy-script
-    # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
+      taskRef:
+        params:
+        - name: url
+          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
+        - name: revision
+          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a
+        - name: pathInRepo
+          value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
+        resolver: git
+      workspaces:
+      - name: source
+        workspace: workspace
     - name: build-container
       params:
       - name: IMAGE
@@ -545,12 +547,13 @@ spec:
       optional: true
     - name: netrc
       optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-automation-hub-frontend-master
   workspaces:
   - name: workspace
     volumeClaimTemplate:
       metadata:
-        creationTimestamp:
+        creationTimestamp: null
       spec:
         accessModes:
         - ReadWriteOnce
