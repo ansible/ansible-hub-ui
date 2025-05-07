@@ -23,9 +23,12 @@ spec:
   - name: output-image
     value: quay.io/redhat-user-workloads/ansible-automationhu-tenant/automation-hub-master/automation-hub-frontend-master:{{revision}}
   - name: dockerfile
-    value: Dockerfile
+    value: build-tools/Dockerfile
   - name: path-context
     value: .
+  - name: build-args
+    value:
+    - NPM_BUILD_SCRIPT=build-insights
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
@@ -208,68 +211,6 @@ spec:
         workspace: git-auth
       - name: netrc
         workspace: netrc
-    # put this before the "build-container" task in your repository
-    - name: parse-build-deploy-script
-      params:
-      - name: path-context
-        value: $(params.path-context)
-      taskRef:
-        resolver: git
-        params:
-        - name: url
-          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
-        - name: revision
-          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
-        - name: pathInRepo
-          value: tasks/parse-build-deploy-script/parse-build-deploy-script.yaml
-      workspaces:
-      - name: source
-        workspace: workspace
-      runAfter:
-      - clone-repository
-    - name: create-frontend-dockerfile
-      taskRef:
-        resolver: git
-        params:
-        - name: url
-          value: https://github.com/RedHatInsights/konflux-consoledot-frontend-build
-        - name: revision
-          value: e0b400ca6433f1ff05722c412ab837c4bd49a45a  # replace with the latest commit from https://github.com/RedHatInsights/konflux-consoledot-frontend-build/commits
-        - name: pathInRepo
-          value: tasks/create-frontend-dockerfile/create-frontend-dockerfile.yaml
-      workspaces:
-      - name: source
-        workspace: workspace
-      params:
-      - name: path-context
-        value: $(params.path-context)
-      - name: component
-        value: $(tasks.parse-build-deploy-script.results.component)
-      - name: image
-        value: $(tasks.parse-build-deploy-script.results.image)
-      - name: node-build-version
-        value: $(tasks.parse-build-deploy-script.results.node-build-version)
-      - name: quay-expire-time
-        value: $(tasks.parse-build-deploy-script.results.quay-expire-time)
-      - name: npm-build-script
-        value: $(tasks.parse-build-deploy-script.results.npm-build-script)
-      - name: yarn-build-script
-        value: $(tasks.parse-build-deploy-script.results.yarn-build-script)
-      - name: route-path
-        value: $(tasks.parse-build-deploy-script.results.route-path)
-      - name: beta-route-path
-        value: $(tasks.parse-build-deploy-script.results.beta-route-path)
-      - name: preview-route-path
-        value: $(tasks.parse-build-deploy-script.results.preview-route-path)
-      - name: ci-root
-        value: $(tasks.parse-build-deploy-script.results.ci-root)
-      - name: server-name
-        value: $(tasks.parse-build-deploy-script.results.server-name)
-      - name: dist-folder
-        value: $(tasks.parse-build-deploy-script.results.dist-folder)
-      runAfter:
-      - parse-build-deploy-script
-    # update the build-container task so that the runAfter section includes "- create-frontend-dockerfile"
     - name: build-container
       params:
       - name: IMAGE
@@ -293,7 +234,6 @@ spec:
         value: $(params.build-args-file)
       runAfter:
       - prefetch-dependencies
-      - create-frontend-dockerfile
       taskRef:
         params:
         - name: name
@@ -445,6 +385,56 @@ spec:
           value: sast-snyk-check
         - name: bundle
           value: quay.io/konflux-ci/tekton-catalog/task-sast-snyk-check:0.4@sha256:0d22dbaa528c8edf59aafab3600a0537b5408b80a4f69dd9cb616620795ecdc8
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(params.skip-checks)
+        operator: in
+        values:
+        - "false"
+      workspaces:
+      - name: workspace
+        workspace: workspace
+    - name: sast-shell-check
+      params:
+      - name: image-digest
+        value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+      - name: image-url
+        value: $(tasks.build-image-index.results.IMAGE_URL)
+      runAfter:
+      - build-image-index
+      taskRef:
+        params:
+        - name: name
+          value: sast-shell-check
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-sast-shell-check:0.1@sha256:188a4f6a582ac43d4de46c3998ded3c2a8ee237fb0604d90559a3b6e0aa62b0f
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(params.skip-checks)
+        operator: in
+        values:
+        - "false"
+      workspaces:
+      - name: workspace
+        workspace: workspace
+    - name: sast-unicode-check
+      params:
+      - name: image-digest
+        value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+      - name: image-url
+        value: $(tasks.build-image-index.results.IMAGE_URL)
+      runAfter:
+      - build-image-index
+      taskRef:
+        params:
+        - name: name
+          value: sast-unicode-check
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-sast-unicode-check:0.2@sha256:e4a5215b45b1886a185a9db8ab392f8440c2b0848f76d719885637cf8d2628ed
         - name: kind
           value: task
         resolver: bundles
