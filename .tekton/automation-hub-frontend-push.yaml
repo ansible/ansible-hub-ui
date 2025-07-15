@@ -9,10 +9,10 @@ metadata:
     pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "master"
   creationTimestamp:
   labels:
-    appstudio.openshift.io/application: automation-hub-master
-    appstudio.openshift.io/component: automation-hub-frontend-master
+    appstudio.openshift.io/application: automation-hub-main
+    appstudio.openshift.io/component: automation-hub-frontend
     pipelines.appstudio.openshift.io/type: build
-  name: automation-hub-frontend-master-on-push
+  name: automation-hub-frontend-on-push
   namespace: ansible-automationhu-tenant
 spec:
   params:
@@ -21,7 +21,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/ansible-automationhu-tenant/automation-hub-master/automation-hub-frontend-master:{{revision}}
+    value: quay.io/redhat-user-workloads/ansible-automationhu-tenant/automation-hub-main/automation-hub-frontend:{{revision}}
   - name: dockerfile
     value: build-tools/Dockerfile
   - name: path-context
@@ -540,7 +540,7 @@ spec:
     - name: netrc
       optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-automation-hub-frontend-master
+    serviceAccountName: build-pipeline-automation-hub-frontend
   workspaces:
   - name: workspace
     volumeClaimTemplate:
