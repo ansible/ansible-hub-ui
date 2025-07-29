@@ -117,24 +117,9 @@ export class LandingPage extends Component<RouteProps, IState> {
                   <br />
                   <p>{t`Maybe you have automation for installing and configuring a popular software package, or for deploying software built by your company. Whatever it is, use Galaxy to share it with the community.`}</p>
                   <br />
-
-                  <p>
-                    <Trans>
-                      Red Hat is working on exciting new Ansible content
-                      development capabilities within the context of{' '}
-                      <ExternalLink href='https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed'>
-                        Ansible Lightspeed
-                      </ExternalLink>{' '}
-                      to help other automators build Ansible content. Your roles
-                      and collections may be used as training data for a machine
-                      learning model that provides Ansible automation content
-                      recommendations. If you have concerns, please contact the
-                      Ansible team at{' '}
-                      <a href='mailto:ansible-content-ai@redhat.com'>
-                        ansible-content-ai@redhat.com
-                      </a>
-                    </Trans>
-                  </p>
+                  <p>{t`Your roles and collections may be used as training data for a machine learning model that provides Ansible content recommendations. If you are a contributor and do not want your content to be used for model training, you may opt out.`}</p>
+                  <br />
+                  <p>{t`To opt out: Go to namespace settings > select Ansible Lightspeed settings > select opt out.`}</p>
                 </>
               }
             />
