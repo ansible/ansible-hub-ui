@@ -4515,8 +4515,8 @@ msgid "Red Hat is working on exciting new Ansible content development capabiliti
 msgstr ""
 
 #: src/containers/landing/landing-page.tsx
-msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
-msgstr ""
+#~ msgid "Red Hat is working on exciting new Ansible content development capabilities within the context of <0>Ansible Lightspeed</0> to help other automators build Ansible content. Your roles and collections may be used as training data for a machine learning model that provides Ansible automation content recommendations. If you have concerns, please contact the Ansible team at <1>ansible-content-ai@redhat.com</1>"
+#~ msgstr ""
 
 #: src/components/repository-form.tsx
 msgid "Registries list could not be displayed."
@@ -6094,6 +6094,10 @@ msgstr ""
 #~ msgid "To download this collection, configure your client to connect to one of this repositories <0>distributions</0>."
 #~ msgstr "이 컬렉션을 다운로드하려면 이 리포지토리 <0>배포판</0> 중 하나에 연결하도록 클라이언트를 구성합니다."
 
+#: src/containers/landing/landing-page.tsx
+msgid "To opt out: Go to namespace settings > select Ansible Lightspeed settings > select opt out."
+msgstr ""
+
 #: src/containers/token/token-insights.tsx
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
@@ -6854,6 +6858,10 @@ msgstr "tarball을 다운로드하려면 로그인해야 합니다."
 #: src/containers/edit-namespace/edit-namespace.tsx
 msgid "You have unsaved changes"
 msgstr "저장되지 않은 변경 사항이 있습니다"
+
+#: src/containers/landing/landing-page.tsx
+msgid "Your roles and collections may be used as training data for a machine learning model that provides Ansible content recommendations. If you are a contributor and do not want your content to be used for model training, you may opt out."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx
 msgid "Your token will expire <0/>."
