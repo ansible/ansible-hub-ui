@@ -109,11 +109,5 @@ List by branches:
 ## Version mapping
 
 Our branches, backport labels, releases and tags use AAH versions, but Jira uses AAP versions.
-To map between the two:
-
-|AAP version|AAH version|
-|-|-|
-|2.4|4.9|
-|2.5|4.10|
 
 [Table with component versions](https://github.com/ansible/galaxy_ng/wiki/Galaxy-NG-Version-Matrix)
