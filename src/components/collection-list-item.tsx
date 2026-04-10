@@ -45,6 +45,7 @@ export const CollectionListItem = ({
     repository,
     is_signed,
     is_deprecated,
+    updated_at,
   },
   displaySignatures,
   dropdownMenu,
@@ -146,7 +147,10 @@ export const CollectionListItem = ({
           <FlexItem>
             <div>
               <Trans>
-                Updated <DateComponent date={collection_version.pulp_created} />
+                Updated{' '}
+                <DateComponent
+                  date={updated_at || collection_version.pulp_created}
+                />
               </Trans>
             </div>
             <div>v{collection_version.version}</div>

@@ -71,6 +71,7 @@ export class CollectionVersionSearch {
   is_deprecated: boolean;
   is_highest: boolean;
   is_signed: boolean;
+  updated_at?: string;
   // TODO: ansible namespace metadata doesn't work yet
   // assuming fields from pulp_ansible/NamespaceSummarySerializer
   namespace_metadata?: {
