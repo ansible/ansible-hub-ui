@@ -493,6 +493,24 @@ export const CollectionHeader = ({
             })
           }
         />
+        {IS_COMMUNITY && (
+          <Alert
+            variant='info'
+            isInline
+            title={
+              <Trans>
+                A Red Hat certified version of this collection may be available
+                on{' '}
+                <ExternalLink
+                  href={`https://console.redhat.com/ansible/automation-hub/repo/published/${collection_version.namespace}/${collection_version.name}`}
+                >
+                  Red Hat Automation Hub
+                </ExternalLink>
+                .
+              </Trans>
+            }
+          />
+        )}
         <div className='hub-tab-link-container'>
           <div className='tabs'>{renderTabs(activeTab)}</div>
           <div className='links'>
