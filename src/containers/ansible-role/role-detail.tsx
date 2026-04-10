@@ -32,6 +32,7 @@ import {
   DownloadCount,
   EmptyStateNoData,
   ExternalLink,
+  HubPromoBanner,
   ImportConsole,
   LabelGroup,
   LoadingPage,
@@ -495,6 +496,7 @@ class AnsibleRoleDetail extends Component<RouteProps, RoleState> {
             })
           }
         />
+        <HubPromoBanner />
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           title={`${namespace.name}.${role.name}`}

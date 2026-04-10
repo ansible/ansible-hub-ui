@@ -4,6 +4,7 @@ import {
   AlertList,
   CollectionHeader,
   CollectionInfo,
+  HubPromoBanner,
   LoadingPage,
   Main,
   closeAlert,
@@ -85,6 +86,7 @@ class CollectionDetail extends Component<RouteProps, IBaseCollectionState> {
             })
           }
         />
+        <HubPromoBanner />
         <CollectionHeader
           activeTab='install'
           actuallyCollection={actuallyCollection}
