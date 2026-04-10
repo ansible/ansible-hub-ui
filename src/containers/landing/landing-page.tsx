@@ -58,7 +58,20 @@ export class LandingPage extends Component<RouteProps, IState> {
             })
           }
         />
-        <BaseHeader title={t`Welcome to Galaxy`} />
+        <BaseHeader
+          title={t`Welcome to Ansible Galaxy`}
+          subTitle={
+            <Trans>
+              The community hub for sharing Ansible roles and collections —
+              free, open source, community-maintained content. Looking for Red
+              Hat certified and supported content?{' '}
+              <ExternalLink href='https://console.redhat.com/ansible/automation-hub'>
+                Visit Red Hat Automation Hub
+              </ExternalLink>
+              .
+            </Trans>
+          }
+        />
         <Main>
           <MultiSearchSearch
             updateParams={({ keywords }) =>
