@@ -3,7 +3,7 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclam
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import { Component, type RefObject, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import { type CollectionVersionSearch } from 'src/api';
+import { CollectionAPI, type CollectionVersionSearch } from 'src/api';
 import {
   Alert,
   CollectionHeader,
@@ -312,14 +312,23 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
         content,
         collectionsCount,
         actuallyCollection,
-      ) =>
+      ) => {
         this.setState({
           collections,
           collection,
-          content,
           collectionsCount,
           actuallyCollection,
-        }),
+        });
+
+        CollectionAPI.getContent(
+          collection.collection_version.namespace,
+          collection.collection_version.name,
+          collection.collection_version.version,
+          'files,manifest,contents',
+        ).then(({ data: { results } }) => {
+          this.setState({ content: results[0] });
+        });
+      },
       stateParams: this.state.params,
     });
   }

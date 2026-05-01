@@ -24,6 +24,24 @@ export interface IBaseCollectionState {
   };
 }
 
+interface LoadCollectionParams {
+  forceReload: boolean;
+  matchParams: any;
+  navigate: any;
+  setCollection: (
+    collections: CollectionVersionSearch[],
+    collection: CollectionVersionSearch,
+    content: CollectionVersionContentType,
+    collectionsCount: number,
+    actuallyCollection: CollectionDetailType,
+  ) => void;
+  stateParams: {
+    version?: string;
+    showing?: string;
+    keywords?: string;
+  };
+}
+
 // Caches the collection data when matching, prevents redundant fetches between collection detail tabs
 const cache = {
   repository: null,
@@ -44,7 +62,7 @@ export function loadCollection({
   navigate,
   setCollection,
   stateParams,
-}) {
+}: LoadCollectionParams) {
   const { version } = stateParams;
   const { collection: name, namespace, repo } = matchParams;
 
