@@ -45,7 +45,7 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
       params,
     } = this.state;
 
-    if (collections.length <= 0) {
+    if (collections.length <= 0 || !content) {
       return <LoadingPage />;
     }
 
