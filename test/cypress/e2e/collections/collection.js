@@ -18,7 +18,7 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('collection upload test_namespace test_collection');
-    cy.galaxykit('collection approve test_namespace test_collection 1.0.0');
+    cy.approveCollection('test_namespace', 'test_collection', '1.0.0');
 
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
@@ -31,7 +31,7 @@ describe('collection tests', () => {
 
   it('deletes a collection version', () => {
     cy.galaxykit('collection upload my_namespace my_collection');
-    cy.galaxykit('collection approve my_namespace my_collection 1.0.0');
+    cy.approveCollection('my_namespace', 'my_collection', '1.0.0');
 
     cy.visit(`${uiPrefix}collections`);
 
@@ -59,7 +59,7 @@ describe('collection tests', () => {
     const namespace = `foo_${rand}`;
     const collection = `bar_${rand}`;
     cy.galaxykit(`collection upload ${namespace} ${collection}`);
-    cy.galaxykit('collection approve', namespace, collection, '1.0.0');
+    cy.approveCollection(namespace, collection, '1.0.0');
     cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
 
     cy.openHeaderKebab();
@@ -91,13 +91,15 @@ describe('collection tests', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteRepositories();
     cy.galaxykit('collection upload test_namespace test_repo_collection2');
-    cy.galaxykit(
-      'collection approve test_namespace test_repo_collection2 1.0.0',
-    );
+    cy.approveCollection('test_namespace', 'test_repo_collection2', '1.0.0');
     cy.galaxykit('repository create repo2 --pipeline approved');
     cy.galaxykit('distribution create repo2');
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection2 1.0.0 published repo2',
+    cy.copyCollection(
+      'test_namespace',
+      'test_repo_collection2',
+      '1.0.0',
+      'published',
+      'repo2',
     );
 
     cy.visit(`${uiPrefix}collections?view_type=list`);
@@ -105,9 +107,14 @@ describe('collection tests', () => {
     cy.contains('[data-cy="CollectionListItem"]', 'Published');
     cy.contains('[data-cy="CollectionListItem"]', 'repo2');
 
-    cy.get('.collection-container [aria-label="Actions"]:first').click({
-      force: true,
-    });
+    // Click the Actions menu on the Published collection item (to remove from published)
+    // Wait for the UI to stabilize before clicking the kebab menu
+    cy.wait(500);
+    cy.contains('[data-cy="CollectionListItem"]', 'Published')
+      .find('button[aria-label="Actions"]')
+      .click();
+    // Wait for the dropdown menu to appear
+    cy.get('.pf-v5-c-dropdown__menu', { timeout: 10000 }).should('be.visible');
     cy.contains('Remove collection from repository').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
@@ -132,21 +139,33 @@ describe('collection tests', () => {
     cy.galaxykit(
       'collection upload test_namespace test_repo_collection_version2 1.0.0',
     );
-    cy.galaxykit(
-      'collection approve test_namespace test_repo_collection_version2 1.0.0',
+    cy.approveCollection(
+      'test_namespace',
+      'test_repo_collection_version2',
+      '1.0.0',
     );
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection_version2 1.0.0 published repo2',
+    cy.copyCollection(
+      'test_namespace',
+      'test_repo_collection_version2',
+      '1.0.0',
+      'published',
+      'repo2',
     );
 
     cy.galaxykit(
       'collection upload test_namespace test_repo_collection_version2 1.0.1',
     );
-    cy.galaxykit(
-      'collection approve test_namespace test_repo_collection_version2 1.0.1',
+    cy.approveCollection(
+      'test_namespace',
+      'test_repo_collection_version2',
+      '1.0.1',
     );
-    cy.galaxykit(
-      'collection copy test_namespace test_repo_collection_version2 1.0.1 published repo2',
+    cy.copyCollection(
+      'test_namespace',
+      'test_repo_collection_version2',
+      '1.0.1',
+      'published',
+      'repo2',
     );
 
     cy.visit(`${uiPrefix}collections?view_type=list`);
