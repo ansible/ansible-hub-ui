@@ -1,3 +1,4 @@
+import { type NavigateFunction } from 'react-router-dom';
 import {
   CollectionAPI,
   type CollectionDetailType,
@@ -26,8 +27,8 @@ export interface IBaseCollectionState {
 
 interface LoadCollectionParams {
   forceReload: boolean;
-  matchParams: any;
-  navigate: any;
+  matchParams: Record<string, string>;
+  navigate: NavigateFunction;
   setCollection: (
     collections: CollectionVersionSearch[],
     collection: CollectionVersionSearch,
