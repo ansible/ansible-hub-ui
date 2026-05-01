@@ -162,12 +162,18 @@ export class API extends HubAPI {
     );
   }
 
-  getContent(namespace, name, version) {
+  getContent(
+    namespace,
+    name,
+    version,
+    exclude_fields = 'files,manifest,docs_blob,contents',
+  ) {
     return super.list(
       {
         namespace,
         name,
         version,
+        exclude_fields,
       },
       `pulp/api/v3/content/ansible/collection_versions/`,
     );

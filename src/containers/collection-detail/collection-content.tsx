@@ -1,5 +1,6 @@
 import { t } from '@lingui/core/macro';
 import { Component } from 'react';
+import { CollectionAPI } from 'src/api';
 import {
   CollectionContentList,
   CollectionHeader,
@@ -44,7 +45,7 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
       params,
     } = this.state;
 
-    if (collections.length <= 0) {
+    if (collections.length <= 0 || !content) {
       return <LoadingPage />;
     }
 
@@ -110,14 +111,23 @@ class CollectionContent extends Component<RouteProps, IBaseCollectionState> {
         content,
         collectionsCount,
         actuallyCollection,
-      ) =>
+      ) => {
         this.setState({
           collections,
           collection,
-          content,
           collectionsCount,
           actuallyCollection,
-        }),
+        });
+
+        CollectionAPI.getContent(
+          collection.collection_version.namespace,
+          collection.collection_version.name,
+          collection.collection_version.version,
+          'files,manifest,docs_blob',
+        ).then(({ data: { results } }) => {
+          this.setState({ content: results[0] });
+        });
+      },
       stateParams: this.state.params,
     });
   }
