@@ -168,6 +168,7 @@ export class API extends HubAPI {
         namespace,
         name,
         version,
+        exclude_fields: 'files,manifest',
       },
       `pulp/api/v3/content/ansible/collection_versions/`,
     );

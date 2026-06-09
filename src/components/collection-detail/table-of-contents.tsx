@@ -120,7 +120,7 @@ function parseLinks(docs_blob: DocsBlobType, props): Table {
     name: 'readme',
   });
 
-  if (docs_blob.documentation_files) {
+  if (docs_blob?.documentation_files) {
     for (const file of docs_blob.documentation_files) {
       const url = sanitizeDocsUrls(file.name);
       table.documentation.push({
@@ -136,7 +136,7 @@ function parseLinks(docs_blob: DocsBlobType, props): Table {
     }
   }
 
-  if (docs_blob.contents) {
+  if (docs_blob?.contents) {
     for (const content of docs_blob.contents) {
       switch (content.content_type) {
         case 'role':

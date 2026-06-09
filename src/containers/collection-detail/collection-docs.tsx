@@ -75,7 +75,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
     const contentName = urlFields['name'] || urlFields['page'] || null;
 
     if (contentType === 'docs' && contentName) {
-      if (content.docs_blob.documentation_files) {
+      if (content.docs_blob?.documentation_files) {
         const file = content.docs_blob.documentation_files.find(
           (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
         );
@@ -85,8 +85,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         }
       }
     } else if (contentName) {
-      // check if contents exists
-      if (content.docs_blob.contents) {
+      if (content.docs_blob?.contents) {
         const selectedContent = content.docs_blob.contents.find(
           (x) =>
             x.content_type === contentType && x.content_name === contentName,
@@ -101,7 +100,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
         }
       }
     } else {
-      if (content.docs_blob.collection_readme) {
+      if (content.docs_blob?.collection_readme) {
         displayHTML = content.docs_blob.collection_readme.html;
       }
     }
@@ -183,7 +182,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                         text ?? pluginName,
                         collection,
                         params,
-                        content.contents,
+                        content.contents ?? [],
                       )
                     }
                     renderDocLink={(name, href) =>
@@ -198,7 +197,7 @@ class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
                   />
                 )
               ) : collection.repository.name === 'community' &&
-                !content.docs_blob.contents ? (
+                !content.docs_blob?.contents ? (
                 this.renderCommunityWarningMessage()
               ) : (
                 this.renderNotFound(collection.collection_version.name)
