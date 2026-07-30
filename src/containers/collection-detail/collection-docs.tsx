@@ -183,7 +183,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
                         text ?? pluginName,
                         collection,
                         params,
-                        content.contents,
+                        content.docs_blob.contents ?? [],
                       )
                     }
                     renderDocLink={(name, href) =>
@@ -255,7 +255,7 @@ class CollectionDocs extends Component<RouteProps, IBaseCollectionState> {
     allContent,
   ) {
     const module = allContent.find(
-      (x) => x.content_type === pluginType && x.name === pluginName,
+      (x) => x.content_type === pluginType && x.content_name === pluginName,
     );
 
     if (module) {
