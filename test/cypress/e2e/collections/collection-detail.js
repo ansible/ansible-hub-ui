@@ -20,8 +20,10 @@ describe('Collection detail', () => {
     cy.galaxykit(
       'collection upload collection_detail_test_namespace collection_detail_test_collection',
     );
-    cy.galaxykit(
-      'collection approve collection_detail_test_namespace collection_detail_test_collection 1.0.0',
+    cy.approveCollection(
+      'collection_detail_test_namespace',
+      'collection_detail_test_collection',
+      '1.0.0',
     );
   });
 

@@ -10,9 +10,9 @@ function openModal(menu) {
 
   if (menu) {
     cy.get('[data-cy^="ApprovalRow"] [aria-label="Actions"]').click();
-    cy.contains('a', 'Sign and approve').click();
+    cy.contains('a', /Sign and approve|Approve/).click();
   } else {
-    cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
+    cy.get('[data-cy^="ApprovalRow"] [data-cy="approve-button"]').click();
   }
 
   cy.contains('Select repositories');

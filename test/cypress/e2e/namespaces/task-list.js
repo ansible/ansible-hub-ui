@@ -1,24 +1,13 @@
-const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Task table contains correct headers and filter', () => {
   before(() => {
-    cy.login();
-    cy.visit(`${uiPrefix}ansible/repositories`);
-
-    cy.contains('Repositories');
-
-    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
-      'sync',
-    );
-
-    cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
-
-    cy.get('[aria-label="Actions"]').eq(1).click();
-    cy.get('tr').eq(2).contains('Sync').click();
-    cy.get('.pf-v5-c-modal-box__footer .pf-m-primary').contains('Sync').click();
-
-    cy.get('.pf-v5-c-alert.pf-m-info');
+    // Use collection upload to generate a task, which is more reliable than sync
+    cy.deleteNamespacesAndCollections();
+    cy.galaxykit('-i namespace create', 'task_test_ns');
+    cy.galaxykit('collection upload', 'task_test_ns', 'task_test_col');
+    // Wait for tasks to be created
+    cy.galaxykit('task wait all');
   });
 
   it('table contains all columns and filter', () => {

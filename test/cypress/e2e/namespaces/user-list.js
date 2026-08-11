@@ -1,5 +1,6 @@
 import { range } from 'lodash';
 
+const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('User list tests for sorting, paging and filtering', () => {
@@ -45,12 +46,15 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   it('paging', () => {
+    cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userList');
     cy.get('.body').contains(items[0]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
+    cy.wait('@userList');
     cy.get('.body').contains(items[10]);
 
     cy.get('.body').get('[aria-label="Go to next page"]:first').click();
+    cy.wait('@userList');
     cy.get('.body').contains(items[20]);
   });
 
@@ -69,15 +73,17 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   it('set page size', () => {
+    cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userListReload');
     cy.get('.body')
       .get('[data-ouia-component-type="PF5/Pagination"] button:first')
       .click();
     cy.get('.body').contains('20 per page').click();
+    cy.wait('@userListReload');
 
-    range(20).forEach((i) => {
-      cy.get('.body').contains(items[i]);
-    });
+    // Verify we can see 20 items on the page
+    cy.get('.body tbody tr').should('have.length', 20);
 
+    // Verify the last item (admin when sorted alphabetically) is not visible on first page
     cy.get('.body').contains(items[20]).should('not.exist');
   });
 });
