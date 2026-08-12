@@ -1,14 +1,12 @@
 import { t } from '@lingui/core/macro';
-import { Button, DataList, Switch } from '@patternfly/react-core';
-import { Component, type ReactNode } from 'react';
+import { Button, DataList } from '@patternfly/react-core';
+import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   CollectionAPI,
   CollectionVersionAPI,
   type CollectionVersionSearch,
   MyNamespaceAPI,
-  MySyncListAPI,
-  type SyncListType,
 } from 'src/api';
 import {
   AlertList,
@@ -55,7 +53,6 @@ interface IState {
     namespace?: string;
   };
   loading: boolean;
-  synclist: SyncListType;
   alerts: AlertType[];
   updateCollection: CollectionVersionSearch;
   showImportModal: boolean;
@@ -99,7 +96,6 @@ class Search extends Component<RouteProps, IState> {
       params,
       count: 0,
       loading: true,
-      synclist: undefined,
       alerts: [],
       updateCollection: null,
       showImportModal: false,
@@ -118,10 +114,6 @@ class Search extends Component<RouteProps, IState> {
 
   private load() {
     this.queryCollections();
-
-    if (IS_INSIGHTS) {
-      this.getSynclist();
-    }
   }
 
   private addAlert(alert: AlertType) {
@@ -310,10 +302,6 @@ class Search extends Component<RouteProps, IState> {
             <CollectionCard
               key={i}
               {...c}
-              footer={this.renderSyncToogle(
-                c.collection_version.name,
-                c.collection_version.namespace,
-              )}
               menu={this.renderMenu(false, c)}
               displaySignatures={
                 (this.context as IAppContextType).featureFlags
@@ -426,24 +414,6 @@ class Search extends Component<RouteProps, IState> {
     return dropdownMenu;
   }
 
-  private renderSyncToogle(name: string, namespace: string): ReactNode {
-    const { synclist } = this.state;
-
-    if (!synclist) {
-      return null;
-    }
-
-    return (
-      <Switch
-        id={namespace + '.' + name}
-        className='sync-toggle'
-        label={t`Sync`}
-        isChecked={this.isCollectionSynced(name, namespace)}
-        onChange={() => this.toggleCollectionSync(name, namespace)}
-      />
-    );
-  }
-
   private checkUploadPrivilleges(collection) {
     const addAlert = () => {
       this.setState({
@@ -479,34 +449,6 @@ class Search extends Component<RouteProps, IState> {
       });
   }
 
-  private toggleCollectionSync(name: string, namespace: string) {
-    const synclist = { ...this.state.synclist };
-
-    const colIndex = synclist.collections.findIndex(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (colIndex < 0) {
-      synclist.collections.push({ name: name, namespace: namespace });
-    } else {
-      synclist.collections.splice(colIndex, 1);
-    }
-
-    MySyncListAPI.update(synclist.id, synclist).then((response) => {
-      this.setState({ synclist: response.data });
-      MySyncListAPI.curate(synclist.id).then(() => null);
-    });
-  }
-
-  private isCollectionSynced(name: string, namespace: string): boolean {
-    const { synclist } = this.state;
-    const found = synclist.collections.find(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    return synclist.policy === 'include' ? !!found : !found;
-  }
-
   private renderList(collections) {
     return (
       <div className='list-container'>
@@ -521,10 +463,6 @@ class Search extends Component<RouteProps, IState> {
                     .display_signatures
                 }
                 showNamespace
-                synclistSwitch={this.renderSyncToogle(
-                  c.collection_version.name,
-                  c.collection_version.namespace,
-                )}
                 {...this.renderMenu(true, c)}
               />
             ))}
@@ -532,20 +470,6 @@ class Search extends Component<RouteProps, IState> {
         </div>
       </div>
     );
-  }
-
-  private getSynclist() {
-    MySyncListAPI.list().then((result) => {
-      // ignore results if more than 1 is returned
-      // TODO: should we throw an error for this or just ignore it?
-      if (result.data.meta.count === 1) {
-        this.setState({ synclist: result.data.data[0] });
-      } else {
-        console.error(
-          `my-synclist returned ${result.data.meta.count} synclists`,
-        );
-      }
-    });
   }
 
   private queryCollections() {
