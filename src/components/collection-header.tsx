@@ -52,6 +52,7 @@ import {
   Spinner,
   UploadSignatureModal,
   closeAlert,
+  isTechnologyPreview,
 } from 'src/components';
 import { useHubContext } from 'src/loaders/app-context';
 import { Paths, formatPath } from 'src/paths';
@@ -482,6 +483,13 @@ export const CollectionHeader = ({
             variant='danger'
             isInline
             title={t`This collection has been deprecated.`}
+          />
+        )}
+        {isTechnologyPreview(collection.collection_version.tags) && (
+          <Alert
+            variant='info'
+            isInline
+            title={t`This collection is a Technology Preview. It may not be feature-complete and is not recommended for production use.`}
           />
         )}
         <AlertList
