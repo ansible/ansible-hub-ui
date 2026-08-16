@@ -45,7 +45,8 @@ export const collectionFilter = ({
   featureFlags: { display_signatures, display_repositories },
   ignoredParams: i,
 }) => {
-  const displayNamespaces = !i.includes('namespace');
+  const displayNamespaces =
+    !i.includes('namespace') && !i.includes('namespace__icontains');
   const displayRepos = display_repositories && !i.includes('repository_name');
   const displayTags = !i.includes('tags');
 
@@ -54,13 +55,17 @@ export const collectionFilter = ({
       id: 'keywords',
       title: t`Keywords`,
     },
+    {
+      id: 'name__icontains',
+      title: t`Collection name`,
+    },
     displayRepos && {
       id: 'repository_name',
       title: t`Repository`,
       inputType: 'typeahead' as const,
     },
     displayNamespaces && {
-      id: 'namespace',
+      id: 'namespace__icontains',
       title: t`Namespace`,
     },
     displayTags && {
