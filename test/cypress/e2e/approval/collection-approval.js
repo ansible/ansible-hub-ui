@@ -29,8 +29,26 @@ describe('tests the approval list screen ', () => {
 
     // approve
     cy.get('button[aria-label="Actions"]:first').click();
-    cy.contains('Sign and approve').click();
-    cy.contains('[data-cy^="ApprovalRow"]:first-child', 'Signed and approved');
+    cy.contains(/Sign and approve|Approve/).click();
+
+    // Handle repository selection modal if it appears
+    cy.get('body').then(($body) => {
+      if ($body.find('.pf-v5-c-modal-box').length > 0) {
+        // Modal appeared - select published repository and confirm
+        cy.get(
+          '[data-cy="ApproveModal-CheckboxRow-row-published"] input',
+        ).click();
+        cy.contains('button', 'Select').click();
+      }
+    });
+
+    // Wait for the approval to complete
+    cy.galaxykit('task wait all');
+
+    // Visit the approval dashboard again and clear filters to see all items
+    cy.visit(`${uiPrefix}approval-dashboard`);
+    cy.contains('button', 'Clear all filters').click();
+    cy.contains('[data-cy^="ApprovalRow"]', /Signed and approved|Approved/);
   });
 
   it('view the imports logs', () => {

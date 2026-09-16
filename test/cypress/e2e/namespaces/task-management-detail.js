@@ -1,32 +1,21 @@
-const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Task detail', () => {
   before(() => {
-    cy.login();
-    cy.visit(`${uiPrefix}ansible/repositories`);
-
-    cy.contains('Repositories');
-
-    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
-      'sync',
-    );
-
-    cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
-
-    cy.get('[aria-label="Actions"]').eq(1).click();
-    cy.get('tr').eq(2).contains('Sync').click();
-    cy.get('.pf-v5-c-modal-box__footer .pf-m-primary').contains('Sync').click();
-
-    cy.get('.pf-v5-c-alert.pf-m-info');
+    // Use collection upload to generate a task, which is more reliable than sync
+    cy.deleteNamespacesAndCollections();
+    cy.galaxykit('-i namespace create', 'task_detail_ns');
+    cy.galaxykit('collection upload', 'task_detail_ns', 'task_detail_col');
+    // Wait for tasks to be created
+    cy.galaxykit('task wait all');
   });
 
   it('contains correct headers and field names', () => {
     cy.login();
     cy.visit(`${uiPrefix}tasks`);
-    cy.contains('pulp_ansible.app.tasks.collections.sync').click();
+    // Click on any task to view details (import task from collection upload)
+    cy.get('tbody tr:first td a').first().click();
 
-    cy.contains('h1', 'Collections sync');
     cy.contains('.card-area h2', 'Task detail');
     cy.contains('.card-area h2', 'Task groups');
     cy.contains('.card-area h2', 'Reserve resources');

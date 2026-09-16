@@ -401,3 +401,91 @@ Cypress.Commands.add(
     );
   },
 );
+
+// Approve a collection by moving it from staging to published
+// This replaces the unavailable 'galaxykit collection approve' command
+Cypress.Commands.add(
+  'approveCollection',
+  {},
+  (namespace, collection, version) => {
+    return cy
+      .galaxykit(
+        'collection move',
+        namespace,
+        collection,
+        version,
+        'staging',
+        'published',
+      )
+      .then(() => {
+        return cy.galaxykit('task wait all');
+      });
+  },
+);
+
+// Click the approve button, handling both "Approve" and "Sign and approve" text
+Cypress.Commands.add('clickApproveButton', {}, (selector) => {
+  const sel = selector || '[data-cy="approve-button"]';
+  return cy.get(sel).click();
+});
+
+// Copy a collection from one repository to another
+// This replaces the unavailable 'galaxykit collection copy' command
+// Uses the API with CSRF token from existing session
+Cypress.Commands.add(
+  'copyCollection',
+  {},
+  (namespace, collection, version, sourceRepo, destRepo) => {
+    const baseUrl = Cypress.config('baseUrl');
+
+    // Get the CSRF token from the existing session cookie
+    return cy.getCookie('csrftoken').then((cookie) => {
+      const csrfToken = cookie?.value;
+
+      // Get the collection version href from the source repository
+      return cy
+        .request({
+          method: 'GET',
+          url: `${baseUrl}${apiPrefix}v3/plugin/ansible/search/collection-versions/?namespace=${namespace}&name=${collection}&version=${version}&repository_name=${sourceRepo}`,
+        })
+        .then((response) => {
+          const collectionVersion = response.body.data[0];
+          if (!collectionVersion) {
+            throw new Error(
+              `Collection ${namespace}.${collection} v${version} not found in ${sourceRepo}`,
+            );
+          }
+          const cvHref = collectionVersion.collection_version.pulp_href;
+
+          // Get the destination repository href
+          return cy
+            .request({
+              method: 'GET',
+              url: `${baseUrl}${apiPrefix}pulp/api/v3/repositories/ansible/ansible/?name=${destRepo}`,
+            })
+            .then((repoResponse) => {
+              const destRepoHref = repoResponse.body.results[0]?.pulp_href;
+              if (!destRepoHref) {
+                throw new Error(`Repository ${destRepo} not found`);
+              }
+
+              // Add the collection version to the destination repository
+              return cy
+                .request({
+                  method: 'POST',
+                  url: `${baseUrl}${destRepoHref}modify/`,
+                  headers: {
+                    'X-CSRFToken': csrfToken,
+                  },
+                  body: {
+                    add_content_units: [cvHref],
+                  },
+                })
+                .then(() => {
+                  return cy.galaxykit('task wait all');
+                });
+            });
+        });
+    });
+  },
+);

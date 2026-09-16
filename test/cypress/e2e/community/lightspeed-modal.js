@@ -12,7 +12,7 @@ function clickLightspeedSettings() {
   });
 }
 
-describe('Ansible Lightspeed Modal Test', () => {
+describe.community('Ansible Lightspeed Modal Test', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'testns1');

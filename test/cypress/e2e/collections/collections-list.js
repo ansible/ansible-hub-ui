@@ -49,7 +49,7 @@ describe('Collections list Tests', () => {
       cy.galaxykit(`collection upload my_namespace my_collection${i}`),
     );
     range(11).forEach((i) =>
-      cy.galaxykit(`collection approve my_namespace my_collection${i} 1.0.0`),
+      cy.approveCollection('my_namespace', `my_collection${i}`, '1.0.0'),
     );
   });
 

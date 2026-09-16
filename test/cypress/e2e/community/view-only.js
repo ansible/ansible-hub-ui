@@ -1,6 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
-describe('view-only mode - with download', () => {
+describe.community('view-only mode - with download', () => {
   before(() => {
     cy.galaxykit('collection upload');
   });
