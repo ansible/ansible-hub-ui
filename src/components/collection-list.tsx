@@ -12,7 +12,6 @@ import { ParamHelper } from 'src/utilities';
 interface IProps {
   collectionControls: (collection) => {
     dropdownMenu?: ReactNode | null;
-    synclistSwitch?: ReactNode | null;
     uploadButton?: ReactNode | null;
   };
   collections: CollectionVersionSearch[];

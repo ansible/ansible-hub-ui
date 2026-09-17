@@ -17,7 +17,6 @@ export const translateLockedRole = (name, description) =>
     'galaxy.execution_environment_namespace_owner': t`Create and update execution environments under existing container namespaces.`,
     'galaxy.execution_environment_publisher': t`Push and change execution environments.`,
     'galaxy.group_admin': t`View, add, remove and change groups.`,
-    'galaxy.synclist_owner': t`View, add, remove and change synclists.`,
     'galaxy.task_admin': t`View and cancel any task.`,
     'galaxy.user_admin': t`View, add, remove and change users.`,
   })[name] || description;

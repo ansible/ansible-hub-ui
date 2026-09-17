@@ -160,13 +160,6 @@ class TokenInsights extends Component<RouteProps, IState> {
                 </Trans>
               </p>
               <CopyURL url={getRepoURL('validated')} />
-              <p style={{ paddingTop: 'var(--pf-v5-global--spacer--md)' }}>
-                <Trans>
-                  Synclists are deprecated in AAP 2.4 and will be removed in a
-                  future release, use client-side <code>requirements.yml</code>{' '}
-                  instead.
-                </Trans>
-              </p>
             </section>
             <section className='body'>
               <h2>{t`SSO URL`}</h2>
