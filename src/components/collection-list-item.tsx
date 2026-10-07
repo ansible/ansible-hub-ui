@@ -24,6 +24,8 @@ import {
   RepositoryBadge,
   SignatureBadge,
   Tag,
+  TechnologyPreviewTag,
+  isTechnologyPreview,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { convertContentSummaryCounts, namespaceTitle } from 'src/utilities';
@@ -89,6 +91,9 @@ export const CollectionListItem = ({
           {collection_version.name}
         </Link>
         {is_deprecated && <DeprecatedTag />}
+        {isTechnologyPreview(collection_version.tags) && (
+          <TechnologyPreviewTag />
+        )}
         {showNamespace ? (
           <TextContent>
             <Text component={TextVariants.small}>

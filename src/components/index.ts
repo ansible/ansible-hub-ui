@@ -143,6 +143,10 @@ export { StatefulDropdown } from './stateful-dropdown';
 export { StatusIndicator } from './status-indicator';
 export { TableOfContents } from './table-of-contents';
 export { Tag } from './tag';
+export {
+  TechnologyPreviewTag,
+  isTechnologyPreview,
+} from './technology-preview-tag';
 export { TagLabel } from './tag-label';
 export { TagManifestModal } from './tag-manifest-modal';
 export { Typeahead } from './typeahead';
