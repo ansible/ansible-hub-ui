@@ -223,7 +223,15 @@ class Search extends Component<RouteProps, IState> {
               namespace={updateCollection.collection_version.namespace}
             />
           )}
-          <BaseHeader className='hub-header-bordered' title={t`Collections`} />
+          <BaseHeader
+            className='hub-header-bordered'
+            title={t`Collections`}
+            subTitle={
+              !IS_COMMUNITY
+                ? t`Red Hat certified and validated Ansible content — tested, Red Hat supported, and enterprise-ready.`
+                : undefined
+            }
+          />
           {!noData && (
             <HubListToolbar
               count={count}
