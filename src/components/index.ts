@@ -48,6 +48,7 @@ export { HelpButton } from './help-button';
 export { HubAboutModal } from './hub-about-modal';
 export { HubCopyButton } from './hub-copy-button';
 export { HubListToolbar } from './hub-list-toolbar';
+export { HubPromoBanner } from './hub-promo-banner';
 export { HubPagination } from './hub-pagination';
 export { ImportConsole } from './import-console';
 export { ImportList } from './import-list';
