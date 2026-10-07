@@ -152,10 +152,12 @@ class Search extends Component<RouteProps, IState> {
       collections.length === 0 &&
       !filterIsSet(params, [
         'keywords',
+        'name__icontains',
         'tags',
         'is_signed',
         'repository_name',
         'namespace',
+        'namespace__icontains',
       ]);
 
     const updateParams = (p) =>
