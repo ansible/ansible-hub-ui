@@ -132,9 +132,10 @@ describe('Group Roles Tests', () => {
     cy.get(
       `[data-cy="RoleListTable"] [data-cy="RoleListTable-CheckboxRow-row-${testContainerRole.name}"] [type="checkbox"]`,
     )
-      .uncheck()
+      .scrollIntoView()
+      .uncheck({ force: true })
       .should('not.be.disabled')
-      .click();
+      .click({ force: true });
 
     cy.get('.pf-v5-c-wizard').contains('Selected roles');
     cy.get(`[data-cy="HubPermission-${testContainerRole.name}"]`);

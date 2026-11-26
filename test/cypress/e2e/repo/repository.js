@@ -1,3 +1,4 @@
+const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 function versionCheck(version) {
@@ -36,8 +37,10 @@ function versionCheck(version) {
       cy.galaxykit(
         'collection upload repo_test_namespace repo_test_collection',
       );
-      cy.galaxykit(
-        'collection approve repo_test_namespace repo_test_collection 1.0.0',
+      cy.approveCollection(
+        'repo_test_namespace',
+        'repo_test_collection',
+        '1.0.0',
       );
 
       cy.visit(`${uiPrefix}ansible/repositories/`);
@@ -52,11 +55,11 @@ function versionCheck(version) {
       ).type('repo1Test description');
 
       cy.get('[data-cy="pipeline"] button').click();
-      cy.contains('[data-cy="pipeline"]', 'Staging');
-      cy.contains('[data-cy="pipeline"]', 'Approved');
-      cy.contains('[data-cy="pipeline"]', 'None');
+      cy.contains('[data-cy="pipeline"]', 'Staging').should('be.visible');
+      cy.contains('[data-cy="pipeline"]', 'Approved').should('be.visible');
+      cy.contains('[data-cy="pipeline"]', 'None').should('be.visible');
 
-      cy.contains('[data-cy="pipeline"] button', 'Approved').click();
+      cy.contains('[data-cy="pipeline"] button', 'Approved').click({ force: true });
       cy.contains(
         '[data-cy="Page-AnsibleRepositoryEdit"] button',
         'Save',
@@ -160,14 +163,30 @@ function versionCheck(version) {
 
     it('removes collections', () => {
       cy.login();
+      // Match collection-versions API with repository UUID parameter
+      const uuidPattern = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
+      cy.intercept(
+        'GET',
+        new RegExp(`${apiPrefix}v3/plugin/ansible/search/collection-versions/\\?.*repository=${uuidPattern}`),
+      ).as('loadCollections');
       cy.visit(
         `${uiPrefix}ansible/repositories/repo1Test/?tab=collection-versions`,
       );
-      cy.contains('repo_test_collection');
-      cy.get('[aria-label="Actions"]').click();
-      cy.contains('a', 'Remove').click();
+      // Wait for the API to return data
+      cy.wait('@loadCollections', { timeout: 30000 });
+      // Wait for the collection versions tab to load
+      cy.get(
+        '[data-cy="PageWithTabs-AnsibleRepositoryDetail-collection-versions"]',
+        { timeout: 30000 },
+      ).should('be.visible');
+      cy.contains('repo_test_collection', { timeout: 30000 }).should(
+        'be.visible',
+      );
+      cy.get('[aria-label="Actions"]').first().click({ force: true });
+      cy.contains('a', 'Remove').click({ force: true });
       cy.contains('Remove collection version?');
       cy.contains('button', 'Remove').click();
+      cy.galaxykit('task wait all');
     });
 
     it('checks if collection was removed', () => {

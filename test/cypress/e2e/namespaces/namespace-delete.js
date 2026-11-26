@@ -39,7 +39,7 @@ describe('Delete a namespace', () => {
 
     // upload a collection & approve
     cy.galaxykit('collection upload ansible network');
-    cy.galaxykit('collection approve ansible network 1.0.0');
+    cy.approveCollection('ansible', 'network', '1.0.0');
 
     // attempt deletion
     cy.intercept(

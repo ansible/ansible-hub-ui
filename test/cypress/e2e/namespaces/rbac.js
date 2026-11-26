@@ -28,7 +28,7 @@ describe('RBAC test for user without permissions', () => {
 
     cy.galaxykit('-i namespace create', 'testspace');
     cy.galaxykit('collection upload testspace testcollection');
-    cy.galaxykit('collection approve testspace testcollection 1.0.0');
+    cy.approveCollection('testspace', 'testcollection', '1.0.0');
   });
 
   after(() => {
@@ -281,7 +281,7 @@ describe.standalone('RBAC test for user with permissions', () => {
     cy.login(userName, userPassword);
 
     cy.galaxykit('collection upload testspace2 testcollection2');
-    cy.galaxykit('collection approve testspace2 testcollection2 1.0.0');
+    cy.approveCollection('testspace2', 'testcollection2', '1.0.0');
 
     cy.visit(`${uiPrefix}repo/published/testspace2/testcollection2`);
     cy.contains('Go to documentation');

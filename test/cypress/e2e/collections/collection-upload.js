@@ -11,7 +11,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteTestUsers();
 
     cy.galaxykit('collection upload testspace testcollection');
-    cy.galaxykit('collection approve testspace testcollection 1.0.0');
+    cy.approveCollection('testspace', 'testcollection', '1.0.0');
     cy.galaxykit('user create', userName, userPassword);
   });
 

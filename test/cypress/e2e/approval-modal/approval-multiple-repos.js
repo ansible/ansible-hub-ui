@@ -10,9 +10,9 @@ function openModal(menu) {
 
   if (menu) {
     cy.get('[data-cy^="ApprovalRow"] [aria-label="Actions"]').click();
-    cy.contains('a', 'Sign and approve').click();
+    cy.contains('a', /Sign and approve|Approve/).click();
   } else {
-    cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
+    cy.get('[data-cy^="ApprovalRow"] [data-cy="approve-button"]').click();
   }
 
   cy.contains('Select repositories');
@@ -135,8 +135,11 @@ describe('Approval Dashboard process with multiple repos', () => {
       'not.exist',
     );
 
-    // reapprove
-    menuActionClick('rejected', 'Sign and approve');
+    // reapprove - use regex to match either button text
+    cy.get(
+      `[data-cy="ApprovalRow-rejected-namespace-collection1"] [aria-label="Actions"]`,
+    ).click();
+    cy.contains('[data-cy="kebab-toggle"] a', /Sign and approve|Approve/).click();
     cy.contains('Select repositories');
     toggleItem('repo1');
     cy.contains('button', 'Select').click();

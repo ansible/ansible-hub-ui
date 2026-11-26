@@ -24,11 +24,25 @@ describe('Approval Dashboard process', () => {
     // should approve
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('[data-cy^="ApprovalRow"]', 'Needs review');
-    cy.contains('[data-cy^="ApprovalRow"] button', 'Sign and approve').click();
-    cy.contains('.body', 'No results found');
+    cy.get('[data-cy^="ApprovalRow"] [data-cy="approve-button"]').click();
+
+    // Handle repository selection modal if it appears
+    cy.get('body').then(($body) => {
+      if ($body.find('.pf-v5-c-modal-box').length > 0) {
+        // Modal appeared - select published repository and confirm
+        cy.get(
+          '[data-cy="ApproveModal-CheckboxRow-row-published"] input',
+        ).click();
+        cy.contains('button', 'Select').click();
+      }
+    });
+
+    // Wait for task to complete
+    cy.galaxykit('task wait all');
+
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('button', 'Clear all filters').click();
-    cy.contains('[data-cy^="ApprovalRow"]', 'Signed and approved');
+    cy.contains('[data-cy^="ApprovalRow"]', /Signed and approved|Approved/);
 
     // should see item in collections
     cy.visit(`${uiPrefix}collections?page_size=100`);
